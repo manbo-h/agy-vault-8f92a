@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>📚 私人深度投研数字书架</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+    }
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border-bottom: 1px solid #334155;
+      padding: 24px 20px 18px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+    }
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .title-row h1 {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 800;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-count {
+      background: #0284c7;
+      color: #fff;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .search-box {
+      flex: 1;
+      min-width: 220px;
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+    }
+    .search-box:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 2px rgba(56,189,248,0.25);
+    }
+    .tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid #334155;
+      padding: 8px 13px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: #0284c7;
+      color: #fff;
+      border-color: #38bdf8;
+    }
+    .offline-btn {
+      background: #059669;
+      color: #fff;
+      border: none;
+      padding: 8px 13px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .main {
+      padding: 22px 20px 60px 20px;
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #94a3b8;
+      margin: 20px 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 16px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .card:hover, .card:active {
+      transform: translateY(-2px);
+      border-color: #38bdf8;
+      box-shadow: 0 8px 24px rgba(2,132,199,0.22);
+    }
+    .card.leaderboard {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);
+      border-color: #6366f1;
+    }
+    .card.industry {
+      background: linear-gradient(135deg, #064e3b 0%, #1e293b 100%);
+      border-color: #10b981;
+    }
+    .card-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      width: fit-content;
+    }
+    .tag-lb { background: #4f46e5; color: #fff; }
+    .tag-ind { background: #059669; color: #fff; }
+    .tag-stock { background: #0284c7; color: #fff; }
+    .tag-h { background: #f59e0b; color: #0f172a; margin-left: 5px; }
+    .card-title {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .card-meta {
+      font-size: 12px;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed #334155;
+    }
+    #cache-status {
+      font-size: 12px;
+      color: #34d399;
+      margin-top: 8px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="container">
+      <div class="title-row">
+        <h1>📚 私人深度投研数字书架 <span class="badge-count">共 52 份精装报告</span></h1>
+        <button class="offline-btn" onclick="cacheAllReports()" id="btn-cache">📥 一键缓存全部到平板（无VPN/断网也能看）</button>
+      </div>
+      <div class="controls">
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 搜索公司名称、行业或关键词（如：茅台、宁德、有色、煤炭）..." oninput="filterCards()" />
+        <div class="tabs">
+          <button class="tab-btn active" onclick="setTab('all', this)">全部 (52)</button>
+          <button class="tab-btn" onclick="setTab('leaderboard', this)">👑 排行榜 (1)</button>
+          <button class="tab-btn" onclick="setTab('industry', this)">🌍 产业沙盘 (3)</button>
+          <button class="tab-btn" onclick="setTab('stock', this)">🏢 个股投研 (48)</button>
+        </div>
+      </div>
+      <div id="cache-status"></div>
+    </div>
+  </div>
+
+  <div class="main container">
+    <div class="grid" id="reportGrid">
+      <a class="card leaderboard" href="./企业深度投研性价比排行榜_最新全集.html" data-kind="leaderboard" data-title="企业深度投研性价比排行榜_最新全集"><div><span class="card-tag tag-lb">👑 全市场总榜</span><div class="card-title">企业深度投研性价比排行榜（最新全集）</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 276 KB</span></div></a>
+      <a class="card industry" href="./有色金属_全球产业全景沙盘.html" data-kind="industry" data-title="有色金属_全球产业全景沙盘"><div><span class="card-tag tag-ind">🌍 全球产业沙盘</span><div class="card-title">有色金属 · 全球产业全景沙盘</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 288 KB</span></div></a>
+      <a class="card industry" href="./医疗研发外包产业链_全球产业全景沙盘.html" data-kind="industry" data-title="医疗研发外包产业链_全球产业全景沙盘"><div><span class="card-tag tag-ind">🌍 全球产业沙盘</span><div class="card-title">医疗研发外包产业链 · 全球产业全景沙盘</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 246 KB</span></div></a>
+      <a class="card industry" href="./创新药产业_全球产业全景沙盘.html" data-kind="industry" data-title="创新药产业_全球产业全景沙盘"><div><span class="card-tag tag-ind">🌍 全球产业沙盘</span><div class="card-title">创新药产业 · 全球产业全景沙盘</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 269 KB</span></div></a>
+      <a class="card" href="./阳光电源_全模块深度投研全集.html" data-kind="stock" data-title="阳光电源_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">阳光电源 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 291 KB</span></div></a>
+      <a class="card" href="./赛轮轮胎_全模块深度投研全集.html" data-kind="stock" data-title="赛轮轮胎_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">赛轮轮胎 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 280 KB</span></div></a>
+      <a class="card" href="./赛分科技_全模块深度投研全集.html" data-kind="stock" data-title="赛分科技_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">赛分科技 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 287 KB</span></div></a>
+      <a class="card" href="./贵州茅台_全模块深度投研全集.html" data-kind="stock" data-title="贵州茅台_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">贵州茅台 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 277 KB</span></div></a>
+      <a class="card" href="./药明康德_全模块深度投研全集.html" data-kind="stock" data-title="药明康德_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">药明康德 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 293 KB</span></div></a>
+      <a class="card" href="./纳微科技_全模块深度投研全集.html" data-kind="stock" data-title="纳微科技_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">纳微科技 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 293 KB</span></div></a>
+      <a class="card" href="./紫金矿业_全模块深度投研全集.html" data-kind="stock" data-title="紫金矿业_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">紫金矿业 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 388 KB</span></div></a>
+      <a class="card" href="./立讯精密_全模块深度投研全集.html" data-kind="stock" data-title="立讯精密_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">立讯精密 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 382 KB</span></div></a>
+      <a class="card" href="./盛弘股份_全模块深度投研全集.html" data-kind="stock" data-title="盛弘股份_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">盛弘股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 292 KB</span></div></a>
+      <a class="card" href="./盐湖股份_全模块深度投研全集.html" data-kind="stock" data-title="盐湖股份_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">盐湖股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 375 KB</span></div></a>
+      <a class="card" href="./瑞丰新材_全模块深度投研全集.html" data-kind="stock" data-title="瑞丰新材_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">瑞丰新材 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 294 KB</span></div></a>
+      <a class="card" href="./特宝生物_全模块深度投研全集.html" data-kind="stock" data-title="特宝生物_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">特宝生物 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 199 KB</span></div></a>
+      <a class="card" href="./牧原股份_全模块深度投研全集.html" data-kind="stock" data-title="牧原股份_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">牧原股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 184 KB</span></div></a>
+      <a class="card" href="./爱旭股份_全模块深度投研全集.html" data-kind="stock" data-title="爱旭股份_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">爱旭股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 278 KB</span></div></a>
+      <a class="card" href="./淮北矿业_全模块深度投研全集.html" data-kind="stock" data-title="淮北矿业_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">淮北矿业 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 459 KB</span></div></a>
+      <a class="card" href="./海螺水泥_全模块深度投研全集.html" data-kind="stock" data-title="海螺水泥_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">海螺水泥 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 410 KB</span></div></a>
+      <a class="card" href="./海康威视_全模块深度投研全集.html" data-kind="stock" data-title="海康威视_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">海康威视 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 363 KB</span></div></a>
+      <a class="card" href="./海尔智家_全模块深度投研全集.html" data-kind="stock" data-title="海尔智家_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">海尔智家 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 362 KB</span></div></a>
+      <a class="card" href="./洛阳钼业_全模块深度投研全集.html" data-kind="stock" data-title="洛阳钼业_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">洛阳钼业 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 283 KB</span></div></a>
+      <a class="card" href="./法拉电子_全模块深度投研全集.html" data-kind="stock" data-title="法拉电子_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">法拉电子 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 300 KB</span></div></a>
+      <a class="card" href="./比亚迪_全模块深度投研全集.html" data-kind="stock" data-title="比亚迪_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">比亚迪 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 300 KB</span></div></a>
+      <a class="card" href="./柏楚电子_全模块深度投研全集.html" data-kind="stock" data-title="柏楚电子_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">柏楚电子 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 439 KB</span></div></a>
+      <a class="card" href="./新集能源_全模块深度投研全集.html" data-kind="stock" data-title="新集能源_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">新集能源 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 302 KB</span></div></a>
+      <a class="card" href="./恒瑞医药_全模块深度投研全集.html" data-kind="stock" data-title="恒瑞医药_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">恒瑞医药 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 337 KB</span></div></a>
+      <a class="card" href="./巨力索具_全模块深度投研全集.html" data-kind="stock" data-title="巨力索具_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">巨力索具 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 277 KB</span></div></a>
+      <a class="card" href="./安琪酵母_全模块深度投研全集.html" data-kind="stock" data-title="安琪酵母_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">安琪酵母 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 259 KB</span></div></a>
+      <a class="card" href="./安克创新_全模块深度投研全集.html" data-kind="stock" data-title="安克创新_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">安克创新 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 293 KB</span></div></a>
+      <a class="card" href="./宁德时代_全模块深度投研全集.html" data-kind="stock" data-title="宁德时代_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">宁德时代 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 414 KB</span></div></a>
+      <a class="card" href="./双汇发展_全模块深度投研全集.html" data-kind="stock" data-title="双汇发展_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">双汇发展 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 325 KB</span></div></a>
+      <a class="card" href="./华东医药_全模块深度投研全集.html" data-kind="stock" data-title="华东医药_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">华东医药 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 109 KB</span></div></a>
+      <a class="card" href="./北方华创_全模块深度投研全集.html" data-kind="stock" data-title="北方华创_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">北方华创 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 318 KB</span></div></a>
+      <a class="card" href="./凯莱英_全模块深度投研全集.html" data-kind="stock" data-title="凯莱英_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">凯莱英 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 276 KB</span></div></a>
+      <a class="card" href="./兖矿能源_全模块深度投研全集.html" data-kind="stock" data-title="兖矿能源_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">兖矿能源 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 289 KB</span></div></a>
+      <a class="card" href="./兆易创新_全模块深度投研全集.html" data-kind="stock" data-title="兆易创新_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">兆易创新 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 294 KB</span></div></a>
+      <a class="card" href="./伊之密_全模块深度投研全集.html" data-kind="stock" data-title="伊之密_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">伊之密 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 327 KB</span></div></a>
+      <a class="card" href="./亿纬锂能_全模块深度投研全集.html" data-kind="stock" data-title="亿纬锂能_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">亿纬锂能 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 300 KB</span></div></a>
+      <a class="card" href="./云铝股份_全模块深度投研全集.html" data-kind="stock" data-title="云铝股份_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">云铝股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 406 KB</span></div></a>
+      <a class="card" href="./中际旭创_全模块深度投研全集.html" data-kind="stock" data-title="中际旭创_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">中际旭创 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 259 KB</span></div></a>
+      <a class="card" href="./中远海控_全模块深度投研全集.html" data-kind="stock" data-title="中远海控_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">中远海控 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 295 KB</span></div></a>
+      <a class="card" href="./中芯国际_全模块深度投研全集.html" data-kind="stock" data-title="中芯国际_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">中芯国际 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 326 KB</span></div></a>
+      <a class="card" href="./中国神华_全模块深度投研全集.html" data-kind="stock" data-title="中国神华_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">中国神华 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 278 KB</span></div></a>
+      <a class="card" href="./中国石油_全模块深度投研全集.html" data-kind="stock" data-title="中国石油_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">中国石油 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 301 KB</span></div></a>
+      <a class="card" href="./中国海油_全模块深度投研全集.html" data-kind="stock" data-title="中国海油_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中国海油 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 432 KB</span></div></a>
+      <a class="card" href="./中国平安_全模块深度投研全集.html" data-kind="stock" data-title="中国平安_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中国平安 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 346 KB</span></div></a>
+      <a class="card" href="./中国中免_全模块深度投研全集.html" data-kind="stock" data-title="中国中免_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">中国中免 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 320 KB</span></div></a>
+      <a class="card" href="./东鹏饮料_全模块深度投研全集.html" data-kind="stock" data-title="东鹏饮料_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">东鹏饮料 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 452 KB</span></div></a>
+      <a class="card" href="./东山精密_全模块深度投研全集.html" data-kind="stock" data-title="东山精密_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">东山精密 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 302 KB</span></div></a>
+      <a class="card" href="./万华化学_全模块深度投研全集.html" data-kind="stock" data-title="万华化学_全模块深度投研全集"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">万华化学 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-16 20:56</span><span>📦 268 KB</span></div></a>
+    </div>
+  </div>
+
+  <script>
+    var currentTab = 'all';
+    var reportUrls = ["./index.html", "./企业深度投研性价比排行榜_最新全集.html", "./有色金属_全球产业全景沙盘.html", "./医疗研发外包产业链_全球产业全景沙盘.html", "./创新药产业_全球产业全景沙盘.html", "./阳光电源_全模块深度投研全集.html", "./赛轮轮胎_全模块深度投研全集.html", "./赛分科技_全模块深度投研全集.html", "./贵州茅台_全模块深度投研全集.html", "./药明康德_全模块深度投研全集.html", "./纳微科技_全模块深度投研全集.html", "./紫金矿业_全模块深度投研全集.html", "./立讯精密_全模块深度投研全集.html", "./盛弘股份_全模块深度投研全集.html", "./盐湖股份_全模块深度投研全集.html", "./瑞丰新材_全模块深度投研全集.html", "./特宝生物_全模块深度投研全集.html", "./牧原股份_全模块深度投研全集.html", "./爱旭股份_全模块深度投研全集.html", "./淮北矿业_全模块深度投研全集.html", "./海螺水泥_全模块深度投研全集.html", "./海康威视_全模块深度投研全集.html", "./海尔智家_全模块深度投研全集.html", "./洛阳钼业_全模块深度投研全集.html", "./法拉电子_全模块深度投研全集.html", "./比亚迪_全模块深度投研全集.html", "./柏楚电子_全模块深度投研全集.html", "./新集能源_全模块深度投研全集.html", "./恒瑞医药_全模块深度投研全集.html", "./巨力索具_全模块深度投研全集.html", "./安琪酵母_全模块深度投研全集.html", "./安克创新_全模块深度投研全集.html", "./宁德时代_全模块深度投研全集.html", "./双汇发展_全模块深度投研全集.html", "./华东医药_全模块深度投研全集.html", "./北方华创_全模块深度投研全集.html", "./凯莱英_全模块深度投研全集.html", "./兖矿能源_全模块深度投研全集.html", "./兆易创新_全模块深度投研全集.html", "./伊之密_全模块深度投研全集.html", "./亿纬锂能_全模块深度投研全集.html", "./云铝股份_全模块深度投研全集.html", "./中际旭创_全模块深度投研全集.html", "./中远海控_全模块深度投研全集.html", "./中芯国际_全模块深度投研全集.html", "./中国神华_全模块深度投研全集.html", "./中国石油_全模块深度投研全集.html", "./中国海油_全模块深度投研全集.html", "./中国平安_全模块深度投研全集.html", "./中国中免_全模块深度投研全集.html", "./东鹏饮料_全模块深度投研全集.html", "./东山精密_全模块深度投研全集.html", "./万华化学_全模块深度投研全集.html"];
+
+    function setTab(tab, btn) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      filterCards();
+    }
+
+    function filterCards() {
+      var q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+      document.querySelectorAll('.card').forEach(function(c){
+        var kind = c.getAttribute('data-kind');
+        var title = c.getAttribute('data-title').toLowerCase();
+        var matchTab = (currentTab === 'all' || kind === currentTab);
+        var matchQ = (!q || title.indexOf(q) !== -1);
+        c.style.display = (matchTab && matchQ) ? 'flex' : 'none';
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(function(){});
+    }
+
+    async function cacheAllReports() {
+      var st = document.getElementById('cache-status');
+      var btn = document.getElementById('btn-cache');
+      st.style.display = 'block';
+      btn.disabled = true;
+      try {
+        var cache = await caches.open('agy-reports-v1');
+        var done = 0;
+        for (var i = 0; i < reportUrls.length; i++) {
+          st.textContent = '⏳ 正在离线缓存到平板本地 (' + (i+1) + '/' + reportUrls.length + ')：' + decodeURIComponent(reportUrls[i]);
+          try { await cache.add(reportUrls[i]); done++; } catch(e) {}
+        }
+        st.textContent = '✅ 已成功将全部 ' + done + ' 份报告缓存到您的平板本地！现在去健身房哪怕不开 VPN、甚至断网也能秒开阅读！';
+        btn.textContent = '✅ 已全部离线缓存';
+      } catch(e) {
+        st.textContent = '⚠️ 当前浏览器环境使用自动阅读缓存（点开过的报告会自动保存）。';
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
