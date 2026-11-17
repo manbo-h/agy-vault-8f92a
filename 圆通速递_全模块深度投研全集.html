@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>圆通速递(600233.SH) 深度投研全集</title>
+<title>圆通速递_全模块深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -509,33 +509,62 @@
       display: none;
       box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
-    /* 左侧悬浮章节电梯导航栏 */
+    /* 左侧悬浮章节电梯导航栏（贴边微侧耳设计：收起时仅宽22px紧贴屏幕最左边缘留白区，绝不遮挡平板正文） */
     #agy-toc-sidebar {
       position: fixed;
-      left: 12px;
-      top: 70px;
+      left: 10px;
+      top: 64px;
       z-index: 99990;
-      width: 220px;
-      max-height: calc(100vh - 100px);
-      background: rgba(15, 23, 42, 0.94);
+      width: 245px;
+      max-height: calc(100vh - 96px);
+      background: rgba(15, 23, 42, 0.96);
       color: #f8fafc;
       border: 1px solid #334155;
       border-radius: 10px;
       padding: 10px 10px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
       font-size: 12px;
       display: flex;
       flex-direction: column;
-      transition: width 0.2s ease, opacity 0.2s ease;
+      transition: all 0.22s ease;
     }
     #agy-toc-sidebar.collapsed {
-      width: 74px;
-      padding: 8px 6px;
+      left: 0;
+      top: 36%;
+      width: 22px;
+      padding: 8px 2px;
+      border-radius: 0 10px 10px 0;
+      border-left: none;
+      background: rgba(15, 23, 42, 0.52);
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.12);
+      opacity: 0.55;
       overflow: hidden;
     }
+    #agy-toc-sidebar.collapsed.scrolling-hide {
+      transform: translateX(-10px);
+      opacity: 0.22;
+    }
+    #agy-toc-sidebar.collapsed:hover {
+      opacity: 0.95;
+      transform: translateX(0);
+    }
     #agy-toc-sidebar.collapsed #agy-toc-list,
-    #agy-toc-sidebar.collapsed #agy-toc-title-text {
-      display: none;
+    #agy-toc-sidebar.collapsed #agy-toc-title-text,
+    #agy-toc-sidebar.collapsed #agy-toc-book-btn {
+      display: none !important;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-toggle-btn {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      letter-spacing: 2px;
+      padding: 6px 1px !important;
+      background: transparent !important;
+      border: none !important;
+      font-size: 10.5px !important;
+      color: #e2e8f0 !important;
+      width: 100%;
+      text-align: center;
+      display: block;
     }
     #agy-toc-list {
       overflow-y: auto;
@@ -546,7 +575,7 @@
       display: block;
       color: #cbd5e1;
       text-decoration: none;
-      padding: 4px 6px;
+      padding: 5px 6px;
       border-radius: 5px;
       margin-bottom: 2px;
       line-height: 1.35;
@@ -570,7 +599,7 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">圆通速递(600233.SH) 深度投研全集</div>
+    <div class="report-title">圆通速递_全模块深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
@@ -3632,9 +3661,9 @@
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
-      <div style="display:flex;gap:4px;align-items:center;">
-        <a href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:2px 5px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回50家公司投研总书架">📚</a>
-        <span onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:2px 6px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
+        <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
+        <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3804,7 +3833,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《圆通速递(600233.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/圆通速递(600233.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《圆通速递_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/圆通速递_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3864,8 +3893,35 @@
       renderBasket();
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
+        sb.classList.remove('scrolling-hide');
         sb.classList.toggle('collapsed');
       };
+      // 向下滚动阅读时自动半透明贴边缩进，点击正文空白处或点击章节后自动收起目录
+      var lastScrollY = window.scrollY || 0;
+      var scrollIdleTimer = null;
+      window.addEventListener('scroll', function(){
+        var sb = document.getElementById('agy-toc-sidebar');
+        if (!sb) return;
+        var curY = window.scrollY || 0;
+        if (sb.classList.contains('collapsed')) {
+          if (curY > lastScrollY + 8) {
+            sb.classList.add('scrolling-hide');
+          } else if (curY < lastScrollY - 15) {
+            sb.classList.remove('scrolling-hide');
+          }
+          clearTimeout(scrollIdleTimer);
+          scrollIdleTimer = setTimeout(function(){
+            sb.classList.remove('scrolling-hide');
+          }, 1800);
+        }
+        lastScrollY = curY;
+      }, { passive: true });
+      document.addEventListener('click', function(ev){
+        var sb = document.getElementById('agy-toc-sidebar');
+        if (sb && !sb.classList.contains('collapsed') && !sb.contains(ev.target)) {
+          sb.classList.add('collapsed');
+        }
+      });
       // 自动构建章节电梯目录
       var tocList = document.getElementById('agy-toc-list');
       var headers = document.querySelectorAll('.report-content h2, .report-content h3');
@@ -3877,6 +3933,8 @@
         a.title = h.textContent.trim();
         a.onclick = function(ev){
           ev.preventDefault();
+          var sb = document.getElementById('agy-toc-sidebar');
+          if (sb) sb.classList.add('collapsed');
           h.scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
         tocList.appendChild(a);
