@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>中国神华_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>中国神华 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">中国神华_全模块深度投研全集</div>
+    <div class="report-title">中国神华 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -656,7 +941,7 @@
 <h2 id="_3">第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）</h2>
 <p>做资源与能源企业研究，绝不能只喊“龙头”口号，必须把底裤扒开，把中国神华拉到国内另外三大煤炭巨头——<strong>陕西煤业（601225.SH）</strong>、<strong>中煤能源（601898.SH）</strong>、<strong>兖矿能源（600188.SH）</strong>面前，对资源禀赋、吨煤完全成本、长协结构、运输壁垒与储量寿命做一场硬核对质。</p>
 <h3 id="1-2025-2026">1. 国内四大煤炭巨头硬核指标横向对比总表（基于 2025 年报及 2026 年三季报最新披露）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -724,7 +1009,7 @@
 <td style="text-align: left;"><strong>35%—40.1%（2026Q1-3）</strong>（煤价反弹期高现货占比带来高弹性）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>别被表面毛利率骗了！陕西煤业报表毛利率看着有 60%，是因为它主要在坑口交货而且很少干低毛利的贸易煤；神华把 8,450 万吨薄利多销的外购煤混在一起算，还有 31.9% 的毛利率，要是单拎出自产煤再把铁路港口的过路费加回来，神华每一铲子挖下去的真实钞票厚度，在全世界都是怪物级别的。</p></div></div>
 <h3 id="2-300-1575">2. 深度拆解神华的“成本极左端”密码：为什么别人挖一吨煤要 300 元，它只要 157.5 元？</h3>
 <p>在采掘工业里，<strong>地质禀赋决定生死，工程标准化决定上限</strong>。中国神华能够常年把自产煤单位生产成本死死按在 <strong>155—179 元/吨</strong>（2024 年 179.0 元/吨 <span class="math-inline"> → </span> 2025 年 171.6 元/吨 <span class="math-inline"> → </span> 2026 年前三季度进一步压降至 <strong>157.5 元/吨</strong>），靠的绝不是克扣工人工资，而是三张别人抄不走的底牌：</p>
@@ -855,7 +1140,7 @@
 </ul>
 <h3 id="3_2">3. 五年一期现金流硬账本与防合并报表幻觉穿透</h3>
 <p>以下为中国神华 <strong>2021—2025 年五个完整会计年度及 2026 年前三季度（Q1-Q3）</strong> 的标准现金流审计对照表（注：2021—2024 年为各年报原始披露口径，2025 年为 2025 年报口径，2026 年前三季度为完成 1,335.98 亿同一控制下资产重组后的 2026 三季报最新口径，单位：人民币亿元）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -932,7 +1217,7 @@
 <td style="text-align: center;"><strong>2.09 倍</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="_8">打破“合并报表幻觉”两项深度体检：</h4><ol>
 <li>
 <p><strong>少数股东损益 vs 少数股东权益匹配度核查（无纸面富贵，甚至少数股东ROE与母公司高度同频）</strong>：
@@ -1151,7 +1436,7 @@
 </ol>
 <hr/>
 <h4 id="a-1">📊 表 A-1：中国神华三大核心工程群与同行同类项目“单位经济账”及盈亏平衡全景对质表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">工程板块</th>
@@ -1228,7 +1513,7 @@
 <td style="text-align: left;"><strong>约 82.5%</strong><br/>（对应聚烯烃年产销 61.9 万吨方可覆盖高昂固定折旧与人工）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>盈亏平衡账本的底层拆解</strong>：</p><ul>
 <li>
 <p><strong>煤矿端（极厚安全垫）</strong>：虽然新街一井、二井静态基建投资高达 133.5 亿元/座，按 22 年综合折旧期（房屋建筑物 20—30 年、井巷工程按产量法、综采机电设备 10—15 年）测算，单矿每年固定资产折旧约 <strong>5.6 亿元</strong>（折合满产吨煤固定折旧约 <strong>70 元/吨</strong>），叠加上按产量计提的维简费、安全费及井下人工水电后，完全生产成本预计在 <strong>210—230 元/吨</strong>。由于鄂尔多斯优质高热值动力煤（5500 大卡以上）坑口长协与内供价格常年稳在 380—450 元/吨以上，只要稼动率达到 <strong>48%—49%</strong>（即单矿年产 390 万吨），就能轻松跨过盈亏平衡线。</p>
@@ -1395,7 +1680,7 @@
 <h3 id="3_5">3. 竞争终局推演与买方最终定性</h3>
 <p>把中国神华的两条远期新曲线放到全行业竞技场上，与各赛道的顶级掠食者做一场终局推演：</p>
 <h4 id="b-1">📊 表 B-1：现代煤化工与烯烃赛道三大流派终极竞争力对质表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">竞争维度</th>
@@ -1436,7 +1721,7 @@
 <td style="text-align: left;">靠“超短工艺流程 + 低碳高氢副产 + 高端精细化工延链（POE/α-烯烃）”统治高附加值材料金字塔尖</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li>
 <p><strong>在煤制烯烃赛道面对宝丰能源与卫星化学</strong>：
@@ -1474,7 +1759,7 @@
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
 <p>要看清中国神华在煤炭江湖里的真实统治力，绝对不能只听它自己财报里的自卖自夸。我们直接把国内最顶尖的另外三大煤企——<strong>陕西煤业（601225.SH，纯动力煤高毛利标杆）</strong>、<strong>中煤能源（601898.SH，同属央企的煤化机一体宿敌）</strong>、<strong>兖矿能源（600188.SH，海内外并购与煤化高弹性玩家）</strong>，连同中游运煤动脉 <strong>大秦铁路（601006.SH）</strong> 与下游火电巨头 <strong>华能国际（600011.SH）、国电电力（600795.SH）</strong> 一起押上审讯席，用 2025 年报与 2026 年三季报（Q1—Q3）的真金白银数据做一场不留情面的三方交叉对质。</p>
 <h3 id="_14">一、 四大煤企与上下游核心经营财务指标全景对质大表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对质维度与核心指标</th>
@@ -1607,7 +1892,7 @@
 <td style="text-align: left;">神华前三季度单日净流入现金超 <strong>3.38亿元</strong>，1,335.98亿资产并表后造血规模一骑绝尘</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_15">二、 景气度交叉审讯：煤炭需求到底是在回暖、分化，还是在向渠道压库？</h3>
 <div class="annotated-row"><div class="main-col"><p>把四大煤企的资产负债表与大秦铁路、华能国际、国电电力的经营台账放在同一张聚光灯下对账，2025 年至 2026 年前三季度的行业真相瞬间水落石出——<strong>绝非虚假压库，而是经历了“2025年价格寻底去库 <span class="math-inline"> → </span> 2026年非电化工与冬储强力补库 + 火电受绿电挤压的剧烈结构性分化”</strong>：</p><ol>
@@ -1716,7 +2001,7 @@
 <h2 id="e">【追问模块 E：会计成色与治理细节显微镜】</h2>
 <p>对于一家手握近万亿总资产、年经营现金流近千亿的重资产央企，买方机构最怕两件事：一是管理层利用折旧年限、维简安全费或减值计提玩“会计魔术”调节利润；二是大股东借着千亿级关联资产注入，把高溢价烂资产塞进上市公司掏空小股东。我们直接拿放大镜逐项拆解中国神华 2025 年报与 2026 年三季报的财务附注与治理底牌。</p>
 <h3 id="_17">一、 四大煤企核心会计政策与资产质量排雷横向对比表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -1785,7 +2070,7 @@
 <td style="text-align: left;">神华与陕煤应收款占营收比极低（3%—5%），无渠道烂账隐患</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_18">二、 资产质量与采掘特殊会计科目深度排雷：神华到底是在“美化报表”还是在“保守藏富”？</h3>
 <p>穿透上面这张会计政策对比表，我们可以从三个极其隐蔽的财务角落，给中国神华的会计成色做出定性裁决——<strong>极度严苛保守、甚至存在系统性的“被动藏富”</strong>：</p>
@@ -1949,7 +2234,7 @@
 &amp;= 600.00 + 259.00 - 131.00 - 20.00 = <strong>708.00 <span class="math-text"> 亿元/年</span></strong>
 \end{aligned}</div>
 <h4 id="owner-earnings">📊 中国神华（并表后稳态底座）常态真实股东盈余（Owner Earnings）分步还原表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与科目名称</th>
@@ -2026,7 +2311,7 @@
 <td style="text-align: left;"><strong>每年可自由支配用于分红、还债或再投资的真实现金造血中枢</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看清楚这笔账！报表上告诉你神华一年赚 600 亿归母净利润，但如果你把整家公司买下来，只要不再去修新煤矿和新电厂，它每年实际往你私人保险柜里塞的真金白银是 <strong>708 亿</strong>！那些只盯着市盈率看热闹的华尔街书呆子，永远算不明白这多出来的 108 亿“折旧金矿”是从哪儿冒出来的。</p></div></div>
 <hr/>
 <h3 id="2_7">2. 增量垫高测算：四大在建确定性王牌全部达产后，造血中枢还能往上垫高多少？</h3>
@@ -2140,7 +2425,7 @@
 </li>
 </ul>
 <h4 id="_20">🛡️ 中国神华“煤—电—路—港—航—化”双极限压力测试全息对比表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与运营指标</th>
@@ -2229,7 +2514,7 @@
 <td style="text-align: left;"><strong>无论寒冬多冷，每年保底分出三百多亿</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这就是为什么我常说“永远不要和一头自己有矿、有铁路、还有发电厂的北极熊比谁更能挨冻”。当煤价跌到 500 块钱、全行业 70% 的煤矿老板在天台上排队哭泣的时候，神华左手的煤矿少赚了 268 亿，右手的发电厂立马因为煤便宜多赚了 68 亿，中间的铁路照样收 150 亿过路费，年底还能笑眯眯地掏出 326 亿现金给股东发红包！</p></div></div>
 <hr/>
 <h2 id="f">【追问模块 F：解锁估值定价、隐含预期与击球区推演】</h2>
@@ -2291,7 +2576,7 @@
    - 为了确保估值分母与分子（归母 OE vs 合并无杠杆 OE）100% 同口径严密对齐，我们同时列出 <strong>【归母口径 True EV（普通股总市值 + 净有息负债 611.79 亿，直接对应归母 Owner Earnings 708.00 亿元）】</strong> 与 <strong>【全口径合并 True EV（普通股总市值 + 少数股东权益 969.25 亿 + 净有息负债 611.79 亿，直接对应全口径合并无杠杆 Owner Earnings 880.90 亿元）】</strong>：</li>
 </ol>
 <h4 id="a-vs-h-true-ev-2026-11-12">📊 中国神华 A 股 vs H 股真实企业价值（True EV）精算对照表（截至 2026 年 11 月 12 日）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值核算项</th>
@@ -2352,13 +2637,13 @@
 <td style="text-align: center;"><strong>11,900.67 亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>同一个中国神华，挖的是同一座神东煤矿，跑的是同一条朔黄铁路，分的是同一份每股两块多的人民币红利，结果在 A 股买下整家公司的归母真实标价要 <strong>11,239 亿</strong>，跨过深圳河到香港去买却只要 <strong>9,261 亿</strong>——整整便宜了将近 <strong>2,000 亿人民币</strong>！市场先生有时候在陆家嘴喝多了茅台，到了中环又吓得患上了低血糖。</p></div></div>
 <hr/>
 <h3 id="2-reverse-sotp-0">2. 隐含回报率与预期倒推（Reverse SOTP 拆骨估值）：哪块打了折，哪块是 0 元白送的免费期权？</h3>
 <h4 id="1oe-true-ev">（1）静态回本年限、隐含内生真实回报率（OE / True EV）与即期股息率对表</h4>
 <p>我们将模块 D 实算出的 <strong>常态归母 Owner Earnings（<code>708.00 亿元/年</code>）</strong>、<strong>四大在建工程达产后归母 Owner Earnings（<code>794.00 亿元/年</code>）</strong> 及 <strong>全口径合并无杠杆 Owner Earnings（<code>880.90 亿元/年</code>）</strong> 代入上述 A 股与 H 股的 True EV 分母中，这笔买卖的真实回报率立刻水落石出：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心买方回报率标尺</th>
@@ -2405,7 +2690,7 @@
 <td style="text-align: left;">对比中国10年期国债收益率 <strong>1.60%</strong>，利差丰厚</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2reverse-sotp">（2）Reverse SOTP（反向分类加总拆骨估值）：把神华帝国拆成四块称重</h4>
 <p>为什么市场愿意给神华 14—17 倍 PE，而给其他煤炭股只给 9—12 倍 PE？我们用华尔街困境并购猎手的 <strong>Reverse SOTP（拆骨估值法）</strong>，把中国神华的四大核心资产板块单独拎出来，按各自所在行业的公允市场标尺逐一称重（统一按归母权益口径核算）：</p>
 <ol>
@@ -2472,7 +2757,7 @@
 <ol start="2">
 <li><strong>横向四大煤炭巨头估值与性价比身位对比（截至 2026 年 11 月）</strong>：</li>
 </ol>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -2533,7 +2818,7 @@
 <td style="text-align: center;"><strong>高波动顺周期进攻筹码</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>横向对比核心裁决</strong>：如果你只能在 A 股买，当前的 <strong>陕西煤业（11.5—12.5 倍 PE，股息率 5.2%—6.0%）</strong> 在纯煤炭成本弹性与估值便宜度上略胜 A 股神华（49.00 元）半筹；但如果你拥有港股通或港股账户，<strong>打八折的中国神华 H 股（01088.HK @ 43.35 港元，14.4 倍 PE，7.64% 内生 OE 回报率，5.34% 税前股息率）</strong> 则是兼顾“天下第一防寒护城河 + 5.3% 高息收租 + 免费新街矿区期权”的绝佳买方标的！</li>
 </ul>
@@ -2677,7 +2962,7 @@
 
 <hr/>
 <h3 id="_22">📋 五、 四位投资大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名</th>
@@ -2724,7 +3009,7 @@
 <td style="text-align: left;"></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -2740,13 +3025,26 @@
 <p>神华是能收租六十年的印钞城堡，但绝不能在拥挤的山顶付高价。现在最诱人的机会在于A股和港股的定价剪刀差：同样一股神华、同样每年分两块多人民币现金、同样坐拥三百多亿吨煤矿和两千多公里铁路，在A股卖近四十九块，在港股折合人民币只卖四十块，直接打八折，港股股息率稳超五个点，内生回报率近七个点！因此操作底线只有一句话：<strong>弃高溢价A股，买八折高息港股</strong>。有港股通的直接买港股当永久收租底仓；若只能买A股，现价别凑热闹，耐心等风格切换或利率反弹把A股砸回四十到四十二元以内（股息率重回五个点以上）再重锤。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2916,7 +3214,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《中国神华_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国神华_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《中国神华 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国神华 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2974,6 +3272,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

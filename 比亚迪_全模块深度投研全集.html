@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>比亚迪_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>比亚迪 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">比亚迪_全模块深度投研全集</div>
+    <div class="report-title">比亚迪 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -729,7 +1014,7 @@
 </li>
 </ul>
 <h3 id="4">4. 核心产品与同行硬核比拼总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -790,7 +1075,7 @@
 <td style="text-align: left;">早期中东/中亚平行出口向直营探索过渡</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在技术竞赛里，最可怕的不是那个在实验室里造出百米冲刺世界纪录的偏科天才，而是那个先让你跑前五十米，然后用十倍的工程师和十倍的装车量把你的独门绝技变成大白菜赠品的规模狂魔。</p></div></div>
 <hr/>
 <h2 id="_5">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？】</h2>
@@ -885,7 +1170,7 @@
 </li>
 </ul>
 <h3 id="3-20212026q3">3. 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2026Q3）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -962,7 +1247,7 @@
 <td style="text-align: center;">待年报宣告</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>深度解读 2025—2026Q3 自由现金流转负的真实账本</strong>：</li>
 <li>
@@ -1153,7 +1438,7 @@
 <h3 id="_12">二、 算清单位经济账：海内外重点工程拆解与同行单位产能投资对比</h3>
 <h4 id="1_4">1. 海内外重点基地与同行单位产能投资硬核比对</h4>
 <p>为穿透这 791.81亿元在建工程与 2,441.87亿元资本开支的真实含金量，我们将比亚迪海内外核心在建/新建工程的<strong>“单车位（每万辆年产能）单位投资额”</strong>进行拆解，并与特斯拉、长城、奇瑞等海内外标杆工厂进行横向对齐：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目名称</th>
@@ -1286,7 +1571,7 @@
 <td style="text-align: left;">轻资产快速切入，但本土增加值率较低</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2_4">2. 偏省还是偏贵？底层工艺与垂直配套拆解</h4><p>从上表横向对比可以得出极其清晰的工程经济学结论——比亚迪的资本开支呈现出鲜明的<strong>“内极省、外极重”</strong>二元特征：</p><ul>
 <li>
 <p><strong>国内基地单位投资额比同行低 50%—60%（极致偏省）</strong>：合肥、郑州等国内基地单万辆整车投资仅 <strong>1.25亿—1.80亿元</strong>，不仅远低于蔚来、小米等新势力新建工厂（普遍在 3.5亿—5.0亿元/万辆），甚至不到特斯拉上海超级工厂（5.0亿元/万辆）的三分之一。其省钱密码在于<strong>全链路内生垂直整合</strong>：比亚迪旗下的弗迪精工与北京/深圳模具中心实现了全套大型冲压模具 100% 自制（仅此一项较外采日本荻原或德国舒勒模具节省 40% 成本且周期缩短一半），焊装夹具、涂装机器人系统集成及厂房钢结构大比例由内部工程院包揽，把传统主机厂付给外部总包商（EPC）的丰厚溢价全部留在了体系内。</p>
@@ -1386,7 +1671,7 @@
 <h2 id="b">追问模块 B：远期期权（新业务/新技术）证伪拆解</h2>
 <p>当国内 10万—20万元主流大众车市场进入存量博弈，资本市场对比亚迪的远期期权寄托在三大“第二/第三成长曲线”之上：<strong>① 百万级与30万+高端品牌矩阵（腾势/方程豹/仰望）</strong>、<strong>② “天神之眼”高阶智驾 + 1000V兆瓦闪充/全固态电池</strong>、<strong>③ 全球大储（魔方 MC Cube / 浩瀚系统）与比亚迪电子（00285.HK）AI算力服务器液冷/具身机器人</strong>。我们拒绝复述任何宣传口径，直接用冷酷的商业标尺对其进行证伪拆解。</p>
 <h3 id="_14">一、 三大新业务商业化刻度与证伪定性总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">新业务/新技术曲线</th>
@@ -1419,7 +1704,7 @@
 <td style="text-align: left;"><strong>【全球大储：已兑现的现金牛第二主业】</strong><br/><strong>【AI液冷与机器人：低成本高赔率的真实免费期权】</strong><br/>大储已与宁德时代、特斯拉、阳光电源形成全球四强寡头；AI服务器液冷与具身机器人依托比亚迪每年百亿级自用算力与全球数百座工厂实训内循环，具备极高协同赔率</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_15">二、 商业化刻度深度定位：谁在真赚钱，谁在赔本赚吆喝？</h3>
 <h4 id="1-41">1. 高端品牌矩阵：41万辆高增长背后的“结构性真相”</h4>
@@ -1533,7 +1818,7 @@
 <p>在新能源汽车行业经历 2025 年至 2026 年长达两年的铁血淘汰赛后，单纯看一家车企的独立财报极易陷入“盲人摸象”的误区。为了剥离会计噪音与公关话术，我们直接调取 <strong>比亚迪（002594.SZ）</strong> 最直接的三家海内外整车对手——<strong>吉利汽车（00175.HK，10万—20万元大众市场头号劲敌）</strong>、<strong>特斯拉（TSLA，全球纯电与成本控制标杆）</strong>、<strong>理想汽车（02015.HK，25万—50万元高端家用插混/增程标杆）</strong>，并拉上传统硬派车企 <strong>长城汽车（601633.SH）</strong> 与上游动力电池霸主 <strong>宁德时代（300750.SZ）</strong> 作为交叉验证坐标，围绕 2025 年报与 2026 年三季报（及前 10 月产销快报）的底层硬账展开三方交叉审讯。</p>
 <hr/>
 <h3 id="2025-2026">一、 六大巨头经营与财务硬账横向对质大表（2025年报 &amp; 2026年三季报）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对质维度</th>
@@ -1655,7 +1940,7 @@
 <td style="text-align: left;"><strong>2026Q3末：1,447.70 亿元</strong><br/><em>(较年初 945.26 亿增 <strong>+53.15%</strong>，发出商品高增)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把竞争对手的底裤扒下来排在一张表上，比听一百场管理层的路演都有用。当平均售价二十六万的同行在亏钱卖车，而卖十三万小车的家伙却拿走二十一个点的汽车毛利、手握九百三十亿预收款时，你不需要读哈佛商学院也知道谁手里握着真正的屠龙刀。</p></div></div>
 <hr/>
 <h3 id="9292216">二、 景气度与压库真相交叉对质：929亿合同负债与2,216亿存货的解剖刀</h3>
@@ -1848,7 +2133,7 @@
 <p>我们严格按照沃伦·巴菲特在 1986 年致股东信中定义的经典公式：</p>
 <div class="math-display"><span class="math-text">常态真实股东盈余 (Owner Earnings)</span> = <span class="math-text">常态归母净利润</span> + <span class="math-text">有效归母折旧摊销</span> - <span class="math-text">维持性防御 CapEx（含资本化研发还原）</span> - <span class="math-text">常态刚性营运资金占用</span></div>
 <p>以下为比亚迪存量业务常态真实股东盈余（Owner Earnings）的三档分步还原精算表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">精算还原步骤与财务科目</th>
@@ -1965,14 +2250,14 @@
 <td style="text-align: center;"><strong>170.0%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街那帮只会盯着 GAAP 表观每股收益（EPS）按计算器的书呆子，永远搞不懂王传福为什么敢把 720 亿的设备折旧直接往成本里砸——当一家公司用 3 年折旧期去核销能用 10 年的机器，而且把 634 亿研发里的 580 亿直接费用化时，它利润表上的数字不是利润，而是穿了防弹衣的地下金库；580 亿到 680 亿的真实股东盈余，才是这台工业印钞机真正的马力。</p></div></div>
 <hr/>
 <h3 id="79181">二、 在建工程增量垫高测算：791.81 亿元在建资产的盈利释放推演</h3>
 <p>截至 2026 年 9 月 30 日，比亚迪资产负债表上的<strong>在建工程余额依然高达 <code>791.81 亿元</code></strong>。与国内二三线车企“在建工程等于落后过剩产能”截然不同，比亚迪这 791.81 亿元在建工程中，超过 <strong>80%</strong> 是定向投往<strong>高毛利海外本地化制造基地（规避欧美与新兴市场关税壁垒）</strong>以及<strong>国内高溢价豪华/越野品牌（腾势、方程豹）与二代刀片电池专有产线</strong>。</p>
 <p>我们对这批已进入建设尾声、将在 <strong>2026 年底至 2027 年底全面投产消化</strong>的核心在建项目进行逐一盘点与增量盈利测算：</p>
 <h4 id="1-79181">1. 791.81 亿元在建工程核心资产包拆解与增量利润测算表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心在建工程项目群</th>
@@ -2049,7 +2334,7 @@
 <td style="text-align: center;"><strong>+110.0 亿 至 +150.0 亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2_5">2. 常态造血中枢垫高结论</h4>
 <ul>
 <li>
@@ -2075,7 +2360,7 @@
 <p><strong>静态死扛 vs 垂直一体化动态减震垫对冲推演表</strong>：</p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">压力传导与内部减震机制拆解</th>
@@ -2140,7 +2425,7 @@
 <td style="text-align: left;"><strong>715 亿元有效折旧安全垫纹丝不动</strong>，叠加主动削减扩张性 CapEx，现金流毫无失血可能！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>压力情景一结论</strong>：当整车净均价再暴跌 8%—10% 时，国内毛利率不足 12%、单靠外购宁德时代电池与博世零部件拼装的二三线车企将陷入每卖一辆车净亏 2 万—4 万元的现金流死局；而比亚迪凭借 <strong>75% 零部件自研自产（把供应链的毛利留在自己锅里）</strong> 与 <strong>715 亿元折旧池</strong>，不仅合并毛利率能稳守 <strong>16.8%—17.6%</strong>，每年更能继续产生 <strong>450 亿—510 亿元</strong> 的真实股东盈余，反而能趁机完成行业终极洗牌与清场！</li>
 </ul>
@@ -2177,7 +2462,7 @@
 <p><strong>500 万辆总盘子下的理论毛利冲击 vs 三重护城河对冲精算表</strong>：</p>
 </li>
 </ol>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">原材料暴涨冲击与对冲传导环节</th>
@@ -2238,7 +2523,7 @@
 <td style="text-align: left;"><strong>常态归母净利仍稳居 <code>310 亿—340 亿元</code>，Owner Earnings 稳超 <code>570 亿元</code>！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>市场里总有一群惊弓之鸟，一听到碳酸锂涨价就觉得电动车天要塌了，却连乘法口诀表都懒得掏出来算算：一辆混动车才装 20 度电、不到 14 公斤碳酸锂，就算锂价翻倍也不过多花一千多块钱；真正会在原材料暴涨里淹死的，是那些既没有矿山长协、又没有电池厂、更没有定价权的组装厂，而不是坐在上游牌桌上的庄家。</p></div></div>
 <hr/>
 <hr/>
@@ -2246,7 +2531,7 @@
 <p>在资本市场上，平庸的公司总是千方百计利用会计准则的弹性“寅吃卯粮”、粉饰当期利润；而真正具备统治力的企业，往往在财务报表附注里通过极其严苛的折旧与费用化政策“藏富于表”。我们拿起会计显微镜，逐项穿透比亚迪 2025 年报与 2026 年三季报的底层附注，并与五大同行做同口径还原审计。</p>
 <hr/>
 <h3 id="_19">一、 同行会计政策、折旧年限与研发资本化横向审计大表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计与治理审计维度</th>
@@ -2341,7 +2626,7 @@
 <td style="text-align: left;"><strong>美股极简审慎准则（零研发资本化）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看两家制造业公司的财报，我第一眼永远先看它们怎么处理研发支出和机器折旧。如果一家公司把四成的研发花销写成“无形资产”挂在账上慢慢摊，那是在给自己灌安慰剂；如果另一家公司把六百多亿研发和七百多亿折旧像倒垃圾一样全砸进当期成本里，还能剩下三百多亿纯利，那它的账面利润就是用纯金铸造的。</p></div></div>
 <hr/>
 <h3 id="_20">二、 资产质量与“暴利藏富”排雷（四大核心科目同业对标）</h3>
@@ -2527,7 +2812,7 @@
 </li>
 </ul>
 <h4 id="2-true-ev">2. 比亚迪真实企业价值（True EV）双口径完整精算表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">真实企业价值（True EV）核算科目</th>
@@ -2623,13 +2908,13 @@
 <td style="text-align: center;"><strong>1.02 倍</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>核算结论</strong>：在传统欧美日车企（如丰田、大众、通用、福特）的资产负债表上，往往背负着高达数千亿甚至上万亿元人民币的汽车金融与工业有息债务，导致其 True EV 通常是股票市值的 <strong>1.8—2.5 倍</strong>；而比亚迪凭借极致的现金流造血与对上游账期的议价权，已将有息负债压缩至仅 <strong>331.63 亿元</strong>。无论是按常规标准口径算出的 <strong><code>7,892.31 亿元</code>（区间 7,800 亿—7,900 亿元）</strong>，还是按全额冻结现金抵扣应付票据算出的极限保守口径 <strong><code>8,287.54 亿元</code></strong>，全款买下比亚迪的真实企业价值（True EV）几乎就等于它的股票市值！</p>
 <hr/>
 <h3 id="reverse-sotp">二、 隐含回报率与拆骨预期倒推（Reverse SOTP）</h3>
 <h4 id="1_7">1. 静态回本年限与隐含真实内生回报率（看穿高折旧假象的惊人赔率）</h4>
 <p>将模块 D 算出的 <strong>常态真实股东盈余（Owner Earnings：580 亿—680 亿元/年，核心中枢 600 亿—650 亿元/年，基准中值 640 亿元/年）</strong> 与当前 <strong>7,738.68 亿元总市值</strong> 及 <strong>True EV</strong> 进行正面对撞：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值与隐含回报维度</th>
@@ -2676,13 +2961,13 @@
 <td style="text-align: center;"><strong>仅需 <code>9.3 年—10.6 年</code> 即可全额回本</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="callout callout-tip"><div class="callout-title">🎯 实战提示 (TIP)</div><div class="callout-body"><p><strong>为什么说“一旦看穿高折旧假象，当前估值极其便宜”？</strong><br>
 表面上看，按 2026 年化表观归母净利润（约 330 亿—350 亿元）计算，比亚迪当前 7,738.68 亿元市值对应静态 PE 约为 <strong>22—23 倍</strong>，似乎处于不高不低的中庸水位。但一旦你看穿了它每年 <strong>720 亿元固定资产折旧 + 580 亿元全额费用化研发</strong> 的极度保守会计政策，算清它每年仅需 385 亿元维持性 CapEx 就能创造 <strong>600 亿—650 亿元真实股东盈余（Owner Earnings）</strong> 时，你会震惊地发现：<strong>市场当前给这台全球新能源霸主的真实自由现金流定价只有 `11.9—12.8 倍（P/OE）`，隐含每年 `7.8%—8.4%` 的内生现金回报率</strong>——这比中国 10 年期国债收益率（约 2.05%）足足高出 <strong>575—635 个基点</strong>！而且由于公司全口径有息负债仅 331.6 亿元、综合债务融资成本仅约 2.6%—3.0%，远低于其 20%+ 的净资产收益率（ROE），适度长债置换还在正向增厚股东回报。</br></p></div></div>
 <hr/>
 <h4 id="2-reverse-sotp773868">2. 拆骨预期倒推（Reverse SOTP）：7,738.68 亿元市值里，市场到底预支了多少期权？</h4>
 <p>为了彻底弄清当前 <strong>84.88 元/股（7,738.68 亿元总市值）</strong> 里包含了多少乐观预期或悲观折价，我们采用华尔街困境与分部估值中最犀利的<strong>“拆骨倒推法（Reverse Sum-of-the-Parts，简称 Reverse SOTP）”</strong>：把比亚迪拆成四块独立资产，先用最接地气的产业保守倍数给前三块已经每年赚大钱的“明牌存量与成长资产”称重，最后倒推市场给第四块“新业务远期期权”标了多少钱。</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">分部资产积木（SOTP 四大板块）</th>
@@ -2743,13 +3028,13 @@
 <td style="text-align: center;"><strong>-563.32（折价白送！）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这家公司大卸八块放在秤上一称，哪怕用买传统破烂钢铁厂的 10 倍市盈率去算它的国内卖车业务，再加上已经摆在明面上的海外赚钱机器和电池储能家底，就已经值 7,300 多亿到 8,300 亿了；这意味着市场先生今天不仅没收你半毛钱的“科技泡沫税”，反而把王传福手下 11 万名工程师每年烧掉近 600 亿研发费捣鼓出来的智驾、固态电池和高端品牌，像买菜搭赠一把小葱一样近乎 0 元白送给了你。</p></div></div>
 <hr/>
 <h3 id="_21">三、 赔率与行动锚点：全球同行对标、四档击球区与三条死刑证伪红线</h3>
 <h4 id="1_8">1. 历史估值分位与全球四大标杆横向定价对质</h4>
 <p>我们将当前 <strong>84.88 元/股（7,738.68 亿元市值）</strong> 的比亚迪，放入其自身历史估值区间（剔除 2020—2022 年净利基数极低、PE 高达 80—120 倍的不可比狂热期）以及全球三大参照标杆——<strong>特斯拉（TSLA）</strong>、<strong>丰田汽车（TM）</strong>、<strong>宁德时代（300750.SZ）</strong> 进行横向对标：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">跨国估值对标维度</th>
@@ -2803,13 +3088,13 @@
 <td style="text-align: center;">全球电池霸主，但纯B端属性缺乏C端整车生态溢价</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>当前估值水位定性</strong>：
 横看全球，比亚迪的表观 PE（22 倍）看似比丰田（10 倍）贵、与宁德时代（20 倍）相当，但一旦还原其高达 715 亿元的有效归母折旧，<strong>比亚迪的真实股东盈余倍数（P/OE 仅 11.9—12.8 倍）实际上已经跌到了与零增长的丰田汽车几乎同等的白菜价水位，甚至比宁德时代还要便宜 15%—20%</strong>！纵看历史，当前估值处于比亚迪近五年（2021—2026）估值分位数的 <strong>12% 极低水位</strong>，属于典型的<strong>“合理偏保守、下行有 8% 真实内生现金回报率铁底、上行享海外翻倍与智驾重估双击”的优质击球水位</strong>。</p>
 <hr/>
 <h4 id="2_6">2. 精确到股价与市值区间的“四档分步击球操作锚点”</h4>
 <p>按最新总股本 <strong><code>91.17 亿股</code></strong> 严格锁定，我们为长期价值投资者制定极具实操纪律的四档分批击球路线图：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位与操作定性</th>
@@ -2854,7 +3139,7 @@
 <td style="text-align: left;"><strong>【逢高分批收割：从容兑现筹码】</strong><br/>当市场因全固态电池突破、智驾概念狂热或海外业绩高光而给出超过 35 倍表观 PE（市值突破 1.3 万亿—1.5 万亿元），将未来 5 年的远期成长全部透支时，每上涨 10% 分批减持 25% 仓位。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>聪明的投资者从不试图去抓那个精确到几毛钱的最低点，但当市场以 12 倍真实股东盈余的价格，把一家资产负债表上几乎没有净债务、每年能多退回 300 多亿折旧现金的行业绝对霸主摆在你面前时，你该做的不是蹲在墙角画 K 线图，而是先把半袋子筹码装进麻袋，再留好大水桶等着市场发疯时接剩下的金子。</p></div></div>
 <hr/>
 <h4 id="3_4">3. 三条冷酷无情的“基本面死刑证伪红线”（一旦触发，无条件清仓离场）</h4>
@@ -2970,7 +3255,7 @@
 </ul>
 <hr/>
 <h3 id="_22">📋 五、 四位投资大师圆桌投票与终极裁决总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">投资大师</th>
@@ -3015,7 +3300,7 @@
 <td style="text-align: left;">“第一层思维的人被 2025 年负 976 亿自由现金流吓破了胆，第二层思维的人正在 2026Q3 资本开支收窄 24% 的拐点上捡走 12 倍 Owner Earnings 的皇冠。”</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="consensus-verdict">🏆 闭门圆桌终极合议裁决（Consensus Verdict）</h4>
 <blockquote>
 <p><strong>合议评级：3 票看多（1票直接重锤 + 2票分批建仓） vs 1 票审慎观察（等待高分红右侧）</strong></p>
@@ -3037,13 +3322,26 @@
 <p>千万别被它表观二十多倍市盈率骗了。用拆骨法把账面净现金、比亚迪电子股权和价值两千多亿的弗迪电池剥离后，市场留给它“年销四百多万辆整车加近两百万辆高毛利出口帝国”的隐含残值不到四千亿，按真实股东盈余算仅十二倍左右。实战打法很简单：在七十五到八十五元区间就是白菜价买全球工业寡头的黄金建仓区，逢海外关税鬼故事砸盘就分批吸筹；等明年全球建厂资本开支彻底回落、自由现金流井喷冲向五六百亿时坐享双击，同时死盯“预收车款必须与存货同步增长”这条验证底线。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3213,7 +3511,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《比亚迪_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/比亚迪_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《比亚迪 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/比亚迪 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3271,6 +3569,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

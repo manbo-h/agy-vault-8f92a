@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>海尔智家_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>海尔智家 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">海尔智家_全模块深度投研全集</div>
+    <div class="report-title">海尔智家 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -661,7 +946,7 @@
 <h3 id="_3">【第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）】</h3>
 <p>把海尔智家拉到国内白电双巨头——<strong>美的集团（000333.SZ）</strong>与<strong>格力电器（000651.SZ）</strong>，以及海外老牌劲旅<strong>惠而浦（Whirlpool）</strong>面前做刺刀见红的横向拆解，才能看清它真正的长板与短板。</p>
 <h4 id="1-2025-2026">1. 全球与中国白电三巨头核心产品力、渠道模式与财务成色横向对比表（基准：2025 全年经审计数据及 2026 前三季度最新趋势）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心比拼维度</th>
@@ -736,7 +1021,7 @@
 <td style="text-align: left;"><strong>海外本土化创牌深度海尔全球第一</strong>，代价是前期并购商誉重、海外运营费用高，但一旦跨过规模拐点，品牌壁垒不可复制。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2_1">2. 穿透产品力底层：海尔到底赢在哪、输在哪？</h4><ul>
 <li>
 <p><strong>硬核王牌一：冰箱的“平嵌/零嵌工艺 + 全空间保鲜”与卡萨帝心智垄断。</strong>
@@ -839,7 +1124,7 @@
 </li>
 </ul>
 <h4 id="3-20212025-2026">3. 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2025 年及 2026 年前三季度）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流指标（单位：亿元人民币）</th>
@@ -924,7 +1209,7 @@
 <td style="text-align: center;">承诺全年 ≥58%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><em>注：1. 重述口径说明：2023 年 CapEx 初披露为 <code>99.07亿元</code>，2024 年报同一控制下并表重述后为 <code>105.42亿元</code>（对应 2023 年初披露 FCF 为 <code>166.29亿元</code>、重述后为 <code>159.94亿元</code>）；2024 年 OCF 初披露为 <code>265.43亿元</code>、CapEx 初披露为 <code>100.72亿元</code>，2025 年报重述后分别为 <code>263.18亿元</code> 与 <code>100.80亿元</code>；2025 年报合并现金流量表当期实际 CapEx 已从百亿高峰回落至 <code>88.52亿元</code>（<code>8,851,563,940.89元</code>），驱动 2025 年真实 FCF 跃升至 <code>171.51亿元</code>（若按各年年报初披露口径加总，五年累计 CapEx 为 <code>444.07亿元</code>、累计 FCF 为 <code>778.39亿元</code>）。2. 跨权益层级注记：表内 OCF 与 FCF 均为合并报表全口径，而分红总额基于归母净利润计提（由于海尔智家少数股东损益占比仅 <code>4.01%</code>，合并口径与归母口径高度一致）。</em></p>
 </blockquote><p><strong>打破“合并报表幻觉”两项深度体检：</strong>
@@ -1100,7 +1385,7 @@
 <p>翻开海尔智家 2024—2025 年报附注的【重要在建工程项目变动情况】及重大非股权投资公告，海尔这三年百亿级 CapEx 的真实流向非常清晰——<strong>“国内死磕青岛上合示范区全产业链一体化与核心部件自制（补历史短板），海外猛砸东南亚制造枢纽、中东非区域工厂与北美本土产线技改（防关税围堵）”</strong>。</p>
 <p>为了看清海尔花钱的效率，我们把海尔近三年最具代表性的 6 个国内外重点工程拎出来，与美的集团同期同品类的海内外扩产项目放在同一把尺子下，做一次“单台年产能投资额（元/台）”与工艺路线的解剖对比：</p>
 <h4 id="a-1-vs">表 A-1：海尔智家 vs 美的集团 核心扩产工程单位经济账与工艺路线横向对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">工程项目名称</th>
@@ -1195,7 +1480,7 @@
 <td style="text-align: left;"><strong>高昂的北美建筑与自动化替代成本</strong>：美国路易斯维尔 Appliance Park 是上世纪 50 年代的老工业园，为了用机器人替代时薪超 30 美元的美国工会工人，单条产线的美标自动化集成造价是国内同规模产线的 <strong>2.5—3 倍</strong>。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="1-capex-break-even-utilization">深度拆解问题 1：海尔建厂花钱到底偏贵还是偏省？百亿 CapEx 转固后的折旧洪峰与盈亏平衡点（Break-even Utilization）怎么算？</h4>
 <p><strong>第一，关于“单台年产能投资额”的真实评价：海尔明显偏“重”、偏“贵”，平均单台产能 CapEx 比美的同类项目高出 35%—60%。</strong>
@@ -1239,7 +1524,7 @@
 </ul>
 <p>那么，需要多少新增营收、百分之几的产能利用率（稼动率）才能把这每年 15 亿元的新增折旧摊销填平？我们按三大典型新工厂做单点与全局的盈亏平衡（Break-even）测算：</p>
 <h4 id="a-2break-even-utilization">表 A-2：海尔重点新建工程转固后新增折旧与盈亏平衡稼动率（Break-even Utilization）推导账本</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">测算维度 / 工程项目</th>
@@ -1348,7 +1633,7 @@
 <td style="text-align: left;"><strong>64.5%（需贡献约 245 亿元营收）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>账本结论一针见血</strong>：
 1. 如果只看工厂车间层面的“会计不亏钱”（即边际贡献刚好覆盖 14.96 亿元折旧 + 7.88 亿元保底运维费），这批新产能只需要跑出 <strong>128.3 亿元营收（综合稼动率 33.8%）</strong> 就能保本。</p><ol start="2">
 <li><strong>但是！资本市场考核的不是车间保本，而是不能拖累海尔智家整体约 30% 的毛利率和 6.5% 左右的净利率！</strong> 要让这 175 亿元增量重资产跑出与存量资产相同的利润率水平（即不稀释 ROE 和净利率），这批新工厂必须贡献 <strong>至少 245 亿元的新增年营收，综合稼动率必须跨过 64.5% 的生死线</strong>（其中重资产密度最高的上合大冰箱项目需要 62.4% 稼动率，单价偏低的埃及生态园更是需要高达 <strong>82.0%</strong> 的稼动率）！</li>
@@ -1403,7 +1688,7 @@
 <h3 id="_15">一、 商业化刻度定位：谁在真金白银赚钱，谁在靠主业输血讲故事？</h3>
 <p>我们先用一张硬核体检表，把海尔智家这四大新业务的真实家底、2024—2026 年财务刻度与盈利真相彻底晒在阳光下：</p>
 <h4 id="b-1">表 B-1：海尔智家四大远期期权（新业务/新技术）商业化刻度与证伪对比总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">新业务 / 远期期权靶点</th>
@@ -1462,7 +1747,7 @@
 <td style="text-align: left;"><strong>【难以独立贡献高毛利的防御配套 / ESG 合规资产】</strong>（服务于欧盟碳关税合规与内销以旧换新闭环，无利润弹性）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="20">二、 跨越鸿沟的三道生死关卡：为什么它们至今没能撑起海尔 20% 的核心利润？</h3>
 <p>如果把海尔智家每年近 200 亿元的归母净利润摆在桌面上，要想让上述新业务真正成为“第二支柱”（比如合计贡献公司 15%—20% 以上、即 <strong>30 亿—40 亿元/年</strong> 的纯增量净利润），它们在现实商业世界里还死死卡在三道极难跨越的鸿沟上：</p>
@@ -1555,7 +1840,7 @@
 <p>下面我们直接掀开三家底牌，用2025年报与2026年三季报的财务附注硬数据逐一审讯。</p>
 <hr/>
 <h3 id="2025-2026">一、 三大白电巨头核心财务与蓄水池全景对质大表（2025年报 &amp; 2026年三季报）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与营运指标</th>
@@ -1686,7 +1971,7 @@
 <td style="text-align: left;">2026前三季度三家OCF同步大跌30%—47%，印证终端回款放缓与采购兑付刚性</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_19">二、 景气度与渠道蓄水池对质：真实需求降温下的“三张底牌”</h3>
 <p>把上面这张大表的数字串起来看，2025年至2026年三季度中国白电行业的真实图景可谓一目了然：<strong>2024下半年至2025年轰轰烈烈的“以旧换新国补”，本质上是把未来两年的更新需求集中拉到了2025年兑现；进入2026年尤其是二三季度，随着国补退坡与高基数效应显现，国内白电市场并非“崩盘”，而是进入了一场典型的存量消化与温和降温期。</strong></p>
@@ -1778,7 +2063,7 @@
 <p><strong>同口径还原</strong>：若加回2026Q3约5亿元海外战略重组费及3.64亿元汇兑损失，海尔Q3单季核心经营利润实则与去年同期高基数基本持平，在全球需求降温期展现了极强的经营韧性。</p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">净利率剪刀差拆解维度（海尔 6.47% vs 美的 9.58% / 格力 16.95%）</th>
@@ -1813,7 +2098,7 @@
 <td style="text-align: left;"><strong>真效率短板（内功空间）</strong>：海尔正通过合资建压缩机厂与数字化降费追赶</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多人天天念叨海尔净利率比美的低 3 个点、比格力低 10 个点，却懒得算算小学算术：光是『美格拿千亿人民币躺吃利息 vs 海尔背着海外并购外币债付利息』这一项，就差出了 2 到 3 个点！再扣掉海外自己养品牌和给别人代工的费用差，海尔真正因为内功不足漏掉的利润其实就 1 个多百分点——而这 1 个点，正是它现在建压缩机厂和裁撤欧洲冗员能抠出来的真肉。</p></div></div>
 <hr/>
 <h3 id="_21">四、 四大核心战场份额攻守结论：到底是谁在抢谁的碗？</h3>
@@ -1949,7 +2234,7 @@
 <hr/>
 <h4 id="owner-earnings_1">第四步：得出海尔智家常态 Owner Earnings 终极账本</h4>
 <p>将上述四步严苛推导汇总，我们得到海尔智家在现有产能与常态景气度下的《常态真实股东盈余（Owner Earnings）分步还原总表》（同时列示严苛广义维持口径与常规基础维护口径）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与科目明细</th>
@@ -2087,7 +2372,7 @@
 <td style="text-align: left;"><strong>全额扣减 <code>76.00亿</code> 广义维持与自动化技改后，核心稳态区间为 <code>165.00亿—180.00亿元/年</code>（基准中枢 <code>172.15亿元</code>）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="callout callout-important"><div class="callout-title">⚡ 核心结论 (IMPORTANT)</div><div class="callout-body"><p><strong>茶桌底账小结</strong>：哪怕我们用最挑剔的眼光——把每年十多亿的非经常性政府补助剔除、把近 18 亿元的使用权资产折旧当成刚性付现房租剔除、再预留每年高达 <strong>76.00 亿元</strong> 的归母广义维持性 CapEx（含 51 亿模具设备常规保命钱 + 25 亿美欧老基地持续自动化替人刚性技改）以及 5 亿元的营运资金沉淀，海尔智家在现有存量底盘上，每年依然能稳稳产出 <strong>`163.90亿—181.40亿元`（中枢 `172.15亿元`；若按 51 亿常规维护口径更达 `197.15亿元`）</strong> 的真实股东盈余（Owner Earnings）！这与公司 2025 年报随着 CapEx 回落至 88.52 亿元后实现的账面真实自由现金流（<strong>`171.51亿元`</strong>）几乎 1:1 严丝合缝印证！</p></div></div>
 <div class="munger-note"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街发明的 EBITDA 是个彻头彻尾的骗子指标，难道仓库房租、模具更新和美国老工厂换机器人不用付真金白银吗？我们把政府补贴全部扒光、把 18 亿房租折旧硬扣掉、再留足 76 亿换模具和改造老产线的保命钱，海尔每年还能往股东兜里净揣 172 亿真金白银！这才是巴菲特和我真正认账的『股东盈余』。</p></div></div>
 <hr/>
@@ -2140,7 +2425,7 @@
 </li>
 </ul>
 <h4 id="owner-earnings_2">【在建工程达产与重组消化后的 Owner Earnings 垫高汇总表】</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">增量造血来源项目</th>
@@ -2194,7 +2479,7 @@
 <td style="text-align: center;"><strong>183.30 ~ 204.00（新中枢 <code>193.00亿元</code>）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>一句话看懂这张表</strong>：一旦泰国、埃及、上合及压缩机自制产线在 2027—2028 年全面达产消化，海尔智家不仅每年的资本开支将从 <code>100亿元+</code> 的洪峰回落至 <code>65亿—75亿元</code> 的温和水位，其常态真实股东盈余（Owner Earnings）中枢更将被硬生生往上垫高 <strong><code>18.30亿—24.00亿元</code>（中枢 <code>+21.00亿元</code>）</strong>，一举跃升至 <strong><code>183.30亿—204.00亿元/年</code>（稳态新中枢约 <code>193.00亿元</code>）</strong> 的历史新台阶！</p>
 </blockquote></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>过去三年海尔像个苦行僧一样每年多掏 50 亿在泰国、埃及和郑州建厂，现在水泥干了、机器转起来了，等 2027 年建厂高峰过去、欧洲止住血，每年能自由支配的真金白银直接从 172 亿跳到 193 亿——在播种期结束、收获期刚开头的时候嫌弃它，那是短视投机客才干的蠢事。</p></div></div></div></div>
@@ -2249,7 +2534,7 @@
 </ul>
 <p>我们将上述两场极限风暴（情景一：终端均价跌 10%—15%；情景二：原材料暴涨 20% + 关税冲击下的“不提价硬扛” vs “温和提价 5% 顺价”）完整推演至下表：</p>
 <h4 id="_26">【海尔智家双极限压力测试全景推演账本】</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流指标</th>
@@ -2371,7 +2656,7 @@
 <td style="text-align: center;"><strong>顺价后守住148亿~168亿造血盘</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="callout callout-tip"><div class="callout-title">🎯 实战提示 (TIP)</div><div class="callout-body"><p><strong>抗压测试终极结论</strong>：<br>
 1. <strong>哪怕在最惨烈的“终端均价暴跌 15%”或“原材料暴涨 20% 叠加美国加征关税且海尔一分钱不提价硬扛”的极端地狱模式下</strong>，海尔智家的归母净利润底线依然能守住 <strong>`98.00亿—102.00亿元`</strong>（即利润最多腰斩，绝不会亏损），而每年真金白银的归母自由现金流（简化归母 OE）由于有 `68.15亿元` 非付现折旧摊销护体，哪怕全额扣除逆风期老基地自动化刚性技改，依然能稳稳维持在 <strong>`91.15亿—93.15亿元`</strong> 以上（常规基础维护口径下更达 <strong>`113.15亿—114.15亿元`</strong>）！<br>
 2. <strong>只要海尔动用其全球高端品牌（卡萨帝 + GE Profile）与美国本土 80% 产能的护城河，在原材料暴涨时向终端温和顺价 `5%`</strong>，其归母净利润就能迅速修复至 <strong>`156.00亿元`</strong>，严苛口径 Owner Earnings 恢复至 <strong>`148.15亿元`</strong>（常规维护口径 <strong>`168.15亿元`</strong>），展现出一流跨国消费制造巨头极其强悍的商业韧性！</br></br></p></div></div>
@@ -2382,7 +2667,7 @@
 <p>如果说模块 C 是站在产业竞技场上看三巨头的拳脚高低，那么模块 E 就是要把海尔智家的财务报表附注和公司治理章程放到高倍显微镜下，一寸一寸地排查：<strong>海尔账面上的195.53亿利润（2025年）和149.99亿利润（2026前三季度），到底是靠激进会计政策“美容”出来的，还是在严苛标准下“挤干水分”的真金？管理层给自己定的股权激励门槛，到底是真刀真枪的硬骨头，还是左手倒右手的自我发钱？</strong></p>
 <hr/>
 <h3 id="2025_1">一、 三大白电巨头会计政策与治理成色横向审讯表（基于2025年报附注）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计与治理核查维度</th>
@@ -2478,7 +2763,7 @@
 <td style="text-align: left;">海尔高管现金年薪极为克制（李华刚仅355万，不足方洪波的1/3），激励高度绑定ROE持股计划</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_27">二、 资产质量与会计政策松紧度排雷：四道关卡逐一验毒</h3>
 <h4 id="1_3">1. 应收账款与坏账准备：为什么海尔应收账款比格力高，但账龄却比格力干净得多？</h4>
@@ -2662,7 +2947,7 @@
 2. <strong>三千亿跨国帝国的刚性营运备付底仓（Working Cash）</strong>：海尔智家全球营收超 <code>3,000亿元</code>，业务横跨 200 个国家和地区、拥有 160 多座工厂和数万名海外员工，资金分散在数十种外币账户中。为了保障全球每月发薪、报关纳税、供应商周转不断裂，<strong>日常刚性营运备付底仓至少需要留存年营收的 <code>5.5%—6.0%</code>，即 <code>180.00亿元</code></strong>（绝不能动用），外加年报附注披露的不可随时支取的<strong>受限保证金及专户存款 <code>13.54亿元</code></strong>。</p>
 <p>据此，我们为您同时列出 <strong>【口径一：账面乐观口径】</strong>、<strong>【口径二：剔除 339.76 亿财务公司关联存款的审慎严苛口径】</strong> 以及 <strong>【口径三：以 2026Q3 账面货币资金 410.84 亿为基准且超额现金直接清零的极限严苛口径】</strong> 的完整对比拆解表：</p>
 <h4 id="true-ev_1">【海尔智家真实企业价值（True EV）多维审计拆解总表】</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">True EV 核算科目（单位：亿元人民币）</th>
@@ -2786,7 +3071,7 @@
 <td style="text-align: left;"><strong>以H股价格全盘买断的严苛真实总标价仅为 <code>2,155.40亿—2,376.89亿元</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="callout callout-warning"><div class="callout-title">⚠️ 风险预警 (WARNING)</div><div class="callout-body"><p><strong>True EV 审计惊雷与核心洞见</strong>：<br>
 看完这张表，你就明白为什么我们必须做严苛口径审计了！一旦我们将合并资产负债表的 `152.04亿元` 长期借款全额纳管，并把海尔集团财务公司那 <strong>`339.76亿元` 关联存款</strong>和 <strong>`180.00亿元` 全球刚性营运备付金</strong>全部扣掉，海尔智家实际上处于<strong>“严苛净负债 `337.45亿—558.94亿元`（其中纯金融及租赁严苛净债务 `267.22亿元` + 少数股东权益 `70.23亿元`）”</strong>的状态！<br>
 即便如此，在最严苛的审计口径下，全款买下海尔智家整家生意的真实总标价（True EV），按 A 股定价值也不过 <strong>`2,347.89亿—2,569.38亿元`</strong>，而如果按 H 股折价全盘买入，真实总标价更是低至 <strong>`2,155.40亿—2,376.89亿元`</strong>！</br></br></p></div></div>
@@ -2825,7 +3110,7 @@
 <li><strong>👉 最终桥接结论</strong>：与【口径二：审慎严苛 True EV】100% 同口径匹配的 <strong><code>Unlevered Firm OE</code> = <code>172.15 + 7.73 + 2.85 - 3.17 - 0.21 + 22.37 - 4.07 = 197.65亿元/年</code></strong>（达产新稳态 <code>+21.00亿</code> 后为 <strong><code>218.65亿元/年</code></strong>；与【口径三：极限清零 True EV】匹配的 <code>Unlevered Firm OE</code> 为 <strong><code>201.72亿元/年</code></strong>、达产后 <strong><code>222.72亿元/年</code></strong>）！</li>
 </ul>
 <p>同时，为严守“不跨会计年度混加分红与回购”的审计准则，我们将股东现金回报严格拆分为 <strong>①【2025 年度已宣告静态纯股息率（中期 <code>25.07亿</code> + 末期 <code>82.48亿</code> = 全年 <code>107.55亿元</code>，分红率 <code>55.0%</code>）】</strong>、<strong>②【2026 年内已执行股份回购收益率（A股回购 <code>23.36亿</code> + D股要约回购 <code>11.47亿</code> + H股回购约 <code>0.9亿</code> ≈ <code>35.7亿元</code>）】</strong> 与 <strong>③【2026 年度承诺分红（<code>≥58%</code>）+ 常态注销回购同年度综合现金回报率】</strong> 三把尺子：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">估值基准维度</th>
@@ -2902,7 +3187,7 @@
 <td style="text-align: left;"><em>假设账面现金 0 元可抵债的最极端压力底线</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>这组数字意味着什么？</strong>
 - 哪怕我们用<strong>最苛刻的“剔除 339.76 亿财务公司存款、补齐 152.04 亿合并长期借款”甚至“超额现金归零”的 True EV 口径</strong>去衡量，买下海尔智家依然能获得 <strong>同口径 <code>7.85%—9.17%</code>（严苛归母分子 ÷ 合并分母亦达 <code>6.70%—7.99%</code>）</strong> 的纯内生自由现金流回报率（Owner Earnings Yield），远超当前中国 10 年期国债收益率（约 <code>2.0%—2.1%</code>）近 <strong>500—700 个基点</strong>！
 - 如果直接按二级市场股票市值衡量，A 股隐含的归母 Owner Earnings Yield 高达 <strong><code>8.56%</code></strong>（静态 <code>11.68年</code> 回本），H 股更是高达 <strong><code>9.47%</code></strong>（静态仅需 <code>10.56年</code> 回本，在建工程达产后升至 <strong><code>10.62%</code></strong>）！
@@ -2956,7 +3241,7 @@
 </li>
 </ul>
 <p>让我们看看在【口径 A：普通股股权市值】与【口径 B：审慎严苛 True EV 同口径】两把尺子下，二级市场给这 <strong><code>720亿元+</code> 营收、潜在稳态利润超 <code>35亿—45亿元</code> 的四大海外与 B 端资产包</strong>标价多少钱：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">Reverse SOTP 拆骨倒推项目（情景估值残差分析）</th>
@@ -3049,7 +3334,7 @@
 <td style="text-align: left;"><strong>无论股权口径还是严苛扣债EV口径，海外增量全部0元白送且巨额倒贴！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="callout callout-important"><div class="callout-title">⚡ 核心结论 (IMPORTANT)</div><div class="callout-body"><p><strong>Reverse SOTP 拆骨结论（股权口径 vs 严苛扣债 EV 同口径双轨验证）</strong>：<br>
 这笔账算完，赔率已经一目了然！<br>
 - <strong>若按普通股股权市值口径（即认可公司账面 754.79 亿广义存款足以覆盖 558.94 亿有息债与少数股东权益）</strong>：在 <strong>A 股 `21.62元`（市值 `2,010.44亿元`）</strong> 位置，720 亿元营收的四大增量资产包仅标价 <strong>`+135.44亿元`</strong>；而在 <strong>H 股 `21.20港元`（折算总市值 `1,817.95亿元`）</strong> 位置，隐含标价直接变成 <strong>`-57.05亿元`</strong>（<strong>0 元白送 720 亿增量业务且倒贴 57 亿元</strong>）！<br>
@@ -3059,7 +3344,7 @@
 <h3 id="_28">三、 赔率定位、分档击球区与“三条基本面死刑证伪红线”</h3>
 <h4 id="1-vs-vs">1. 历史估值坐标与白电三巨头（海尔 vs 美的 vs 格力）横向定价裁定</h4>
 <p>为了锚定海尔智家当前在周期刻度尺上的位置，我们将它放在<strong>纵向历史估值带（2021 年景气泡沫高点 vs 2022—2026 年估值中枢）</strong>与<strong>横向三大白电巨头（美的集团、格力电器）</strong>的坐标系中直接对比：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度 / 标的公司</th>
@@ -3113,13 +3398,13 @@
 <td style="text-align: left;"><strong>海尔拥有中国家电唯一真正落地的全球本土化品牌矩阵，理应享有比纯内销/代工更高的终局估值韧性</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>【当前赔率定位裁定】</strong>：
 综合纵向历史分位（处于 2021 年以来估值底部 <code>15%</code> 分位）与横向同行比价（罕见地较美的集团折价 <code>15%—20%</code>），因市场对 2026Q3 国补退坡高基数、欧洲一次性重组费及单季汇兑损失的短期线性外推恐慌，<strong>海尔智家当前正处于“偏悲观折价区（A 股合理偏保守偏低、H 股与 D 股处于深度悲观折价区）”——向下有 <code>5.35%—6.11%</code> 的真金白银高股息与 <code>8.56%—9.47%</code> 的常态 Owner Earnings 托底，向上有在建工程达产与欧洲止血的戴维斯双击赔率！</strong></p>
 <hr/>
 <h4 id="2-a-h-vs">2. A 股与 H 股实战分档击球区推演（左侧收息底仓区 vs 右侧重锤击球区）</h4>
 <p>作为不预测短期 K 线、只看“赔率与基本面催化”的买方投资人，我们为 A 股（600690.SH）与 H 股（06690.HK）设定清晰可执行的<strong>两档实战击球坐标</strong>（以最新登记总股本 <code>92.99亿股</code> 及港币兑人民币汇率 <code>0.922</code> 为基准；并区分 H 股平价修复与保留 8%—10% AH 折价修复目标）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位与策略定位</th>
@@ -3160,7 +3445,7 @@
 <td style="text-align: left;">当市场完全为新兴市场增长与欧洲反转买单、估值修复至 <code>14—15.5倍 PE</code>（Owner Earnings Yield 降至 <code>6%</code> 左右）时，赔率回归平庸，可分批兑现超额收益。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_3">3. 铁血风控：一旦触发必须无条件认错离场的“三条基本面死刑证伪红线”</h4><p>真正的价值投资绝不是盲目死拿。我们在茶桌前买下海尔智家，买的是它<strong>“国内冰洗水+卡萨帝的绝对统治力”、“北美 GEA 本土化现金牛护城河”以及“治理改善后 55%+ 的真金白银分红承诺”</strong>。如果未来出现以下任何一条触及商业模式命门的量化恶化信号，说明我们的核心投资逻辑已被证伪，无论股价涨跌，必须无条件清仓认错离场：</p><ol>
 <li>
@@ -3272,7 +3557,7 @@
 <p><strong>我们的最终裁决很简单</strong>：这是一场典型的<strong>『正面我赢大钱（新兴市场放量 + 欧洲止血 + 估值修复戴维斯双击），反面我每年躺拿 5.4%—6.1% 真金白银股息且不伤本金』</strong>的高胜率、高赔率不对称击球！”</p>
 <hr/>
 <h3 id="_29">📋 五、 四位传奇投资大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">投资大师</th>
@@ -3312,7 +3597,7 @@
 <td style="text-align: left;"><strong>【重锤左侧价值击球（首选 H 股 06690.HK 与 D 股套利）】</strong><br/>极佳的不对称风险收益比（Asymmetric Risk/Reward）：向下有 <code>5.4%—6.1%</code> 股息与三座现金牛锁死底线，向上免费享有新兴市场与欧洲反转期权，目标修复区看至 A股 <code>28—31元</code> / H股 <code>27.3—33.6港元</code>。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h1 id="h-5">【模块 H：🎭 5分钟脱口秀复盘 &amp; 极简买方口袋卡（专治阅读疲劳的收尾彩蛋章）】</h1>
 <blockquote>
@@ -3460,13 +3745,26 @@
 <p>用拆骨法算账：光把国内冰洗霸主、卡萨帝、美国GEA和国内空厨按水电煤保守估值加起来，就已超过港股一千八百亿总市值！在港股买海尔（或打六六折的德国D股），不仅核心印钞机打折卖你，还把七百多亿营收的新兴市场、商用冷链和欧洲业务零元白送，甚至倒贴几十亿！打法上，在港股二十港元、A股二十一元附近建好六成左侧底仓拿近六个点股息；等明年一季报见欧洲重组费归零、内销现金流转正再把仓位打满，死守“财务公司存款不破三百八十亿”红线。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3636,7 +3934,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《海尔智家_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/海尔智家_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《海尔智家 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/海尔智家 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3694,6 +3992,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

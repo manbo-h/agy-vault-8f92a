@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>安克创新_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>安克创新 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">安克创新_全模块深度投研全集</div>
+    <div class="report-title">安克创新 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -723,7 +1008,7 @@
 <hr/>
 <h3 id="_8">二、 核心产品与国内外同行硬核横向对质表</h3>
 <p>为了直观展现安克在消费电子出海军团中的真实段位，我们调取 <strong>安克创新（300866.SZ）</strong> 与直接竞争对手 <strong>绿联科技（301606.SZ）</strong>、<strong>石头科技（688169.SH）</strong>、<strong>华宝新能（301327.SZ）</strong> 的最新财务与经营硬指标做同台对质：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -791,7 +1076,7 @@
 <td style="text-align: left;">便携电源先发品牌，但产品矩阵单一，在欧洲阳台光储新赛道被安克 SOLIX 反超</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>穿透对比结论</strong>：</p><ol>
 <li>
 <p><strong>对比绿联科技</strong>：两家都卖充电器，为什么安克 2026H1 充电储能毛利率高达 49.01%，而绿联整体毛利率只有 37.8%？核心差距在于<strong>研发密度（安克一年研发砸 28.93 亿，是绿联的 9.5 倍）与海外本土品牌定价权</strong>。绿联近四成收入在国内卷性价比，海外主打中端平替；安克 96.6% 收入在海外赚美元欧元，且把大量精力砸在了百美元以上的氮化镓桌面旗舰与千美元级的阳台光储上。</p>
@@ -920,7 +1205,7 @@
 <hr/>
 <h3 id="_16">三、 五年一期现金流硬账本与“经营现金流背离”深度穿透</h3>
 <p>我们调取安克创新 <strong>2021—2025 五个完整会计年度 + 2026 年前三季度（1—9 月）</strong> 的经审计及最新季报现金流账本：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务指标（单位：人民币亿元）</th>
@@ -995,7 +1280,7 @@
 <td style="text-align: center;"><strong>4.70</strong> (中期已派)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：2026H1 购建固定资产等支付现金阶段性统计为 5.02 亿元，三季报合并口径调整后前三季度购建长期资产现金流出约为 1.31—5.0 亿元区间，即便按较高的 5 亿元扣除，五年一期合计 CapEx 也极轻。)</em></p><p><strong>【核心财务侦探追问：为什么 2025 年归母净利 25.45 亿、2026 前三季度净利 22.61 亿，但经营现金流（OCF）却只有 4.81 亿和 3.78 亿？钱去哪儿了？】</strong>
 如果只看 2022—2024 年，安克的净现比常年超过 100%（2024 年净利 21.14 亿，OCF 高达 27.45 亿，FCF 高达 26.47 亿）。但 2025 年和 2026 年前三季度，OCF 明显低于净利润，穿透报表附注，吞噬当期经营现金流的“三头大象”水落石出：</p><ol>
 <li>
@@ -1198,7 +1483,7 @@
 </ul>
 <h4 id="3">3. 与可比同行“制造与资产模式”的横向单位经济账对标</h4>
 <p>将安克创新与同处跨境出海或智能硬件赛道的代表性龙头——<strong>绿联科技（301606.SZ）</strong>、<strong>石头科技（688169.SH）</strong>、<strong>华宝新能（301327.SZ）</strong>进行横向对质，可以清晰看清“100% 委外代工 + 自建总部研发实验室/智能仓储”模式的资本效率差异：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -1245,13 +1530,13 @@
 <td style="text-align: left;">自有产线在 2022 年欧洲户储爆发期具备交付弹性，但在 2023—2024 年行业去库存周期中承受了明显的产能闲置摊销压力</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把十几亿砸在深圳核心地段的研发大楼和实验室上，每年只多出几千万折旧，只要多卖一个多亿的高毛利充电器和储能就能轻松抹平，顺便还省下了给房东交的巨额租金；反观那些喜欢自己买地建厂、买满车间机床的老板，平时看着资产很雄厚，一旦遇到行业风向转变或者技术换代，满屋子的精密铁疙瘩连废铁价都卖不出去！</p></div></div>
 <hr/>
 <h3 id="_24">二、 审视募投项目消化能力：“雪中送炭解瓶颈”还是“盲目铺摊子”？</h3>
 <h4 id="1-1105-2026-ipo4523">1. “安克转债（11.05 亿）”与“2026 港股 IPO（45.23 亿港元）”资金去向全景穿透</h4>
 <p>2025 年至 2026 年中，安克创新先后完成了 A 股可转债（<strong>安克转债 123257.SZ，募资总额 11.05 亿元 / 110,482.00 万元</strong>）与 H 股主板 IPO（<strong>00668.HK，2026 年 7 月 2 日上市，募资净额 45.23 亿港元 / 约合人民币 41.60 亿元</strong>）两轮重磅融资，合计筹集资金约 <strong>52.65 亿元人民币</strong>。</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">融资批次与总额</th>
@@ -1305,7 +1590,7 @@
 <td style="text-align: left;"><strong>20%</strong> 产品迭代与拓品（储能/智能家居/创意打印）；<strong>20%</strong> 全球研发与顶尖人才引进；<strong>20%</strong> 升级全球供应链管理体系（海外仓与东南亚协同制造）；<strong>20%</strong> 强化全球 DTC 渠道；<strong>15%</strong> 品牌建设；<strong>5%</strong> 营运资金</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2-30-45-8390">2. 结合储能 30 亿→45 亿+ 放量与 83.90 亿存货痛点的消化能力审视</h4><p>针对市场关于“轻资产公司为何密集融资超 50 亿元”的疑问，将上述募投项目与安克 2024—2026Q3 的真实经营痛点逐一咬合验证，结论非常明确：<strong>这批项目高度聚焦于解决“大件重货化转型”与“跨国供应链周转梗阻”两大燃眉之急，属于典型的“雪中送炭解瓶颈”，而非盲目铺摊子</strong>：</p><ol>
 <li><strong>储能狂飙倒逼底层电力电子实验室升级（消化 2.01 亿转债 + 港股研发资金）</strong>：</li>
 </ol><ul>
@@ -1408,7 +1693,7 @@
 </li>
 </ul>
 <h4 id="_26">📊 《安克创新三大远期新曲线商业化刻度与证伪拆解总表》</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心评估维度</th>
@@ -1449,7 +1734,7 @@
 <td style="text-align: left;">扫地机面临石头/追觅/科沃斯内卷；通用具身受制于执行器成本与家庭非结构化长尾难题</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把三种完全不同发育阶段的业务混在一起吹牛是华尔街最爱干的事：德国人自己买回家插在阳台上就能省电费的储能电池，已经是哗哗吐钞票的摇钱树；众筹了四千多万美金的桌面 UV 打印机，刚从极客的玩具桌搬进小店主的账本里接受检验；至于那个几个月就换一任自动驾驶大佬的“具身人形机器人”，现在连怎么在家里不摔碎盘子都没搞明白，你最好别指望它近几年能给你赚一分钱毛利！</p></div></div>
 <hr/>
 <h3 id="_27">二、 跨越鸿沟的三道关卡：从“爆款单品”到“长牛现金牛”的硬仗</h3>
@@ -1529,7 +1814,7 @@
 <li><strong>终局推演</strong>：在未来 3—5 年的可见周期内，能够在财务报表上真金白银贡献规模营收与毛利的“机器人”，依然是 <strong>eufy 扫地机器人（C28/E20 等差异化清洁形态）</strong>与<strong>欧美刚需的无边界智能割草机</strong>。安克无需在激光雷达或机械臂噱头上与石头、追觅拼刺刀，而是利用强大的海外线下商超铺货能力与痛点微创新（如防毛发缠绕、三合一吸尘、草坪视觉边界识别）稳居出海第一梯队。至于真正的三维通用具身智能，在电池能量密度、低成本高扭矩执行器与物理世界大模型三大底层瓶颈被全行业突破之前，任何消费电子公司试图独立包揽全栈研发都是自杀式的财务无底洞。安克当前将其降格为前沿实验室的“瞭望哨”（控制在极低研发占比内跟踪底层技术，等待上游供应链成熟后再做消费级产品定义），完美保留了远期顺势切入的看涨期权，同时彻底排除了利润表被无底洞吞噬的风险。</li>
 </ul>
 <h4 id="_29">📋 《安克创新三大远期新曲线终局定性与商业模式含金量矩阵表》</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">新曲线名称</th>
@@ -1574,7 +1859,7 @@
 <td style="text-align: left;">仅作为技术雷达保留远期跨代门票，严防演变为侵蚀主业利润的黑洞</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>做投资最怕把“门票”当成“提款机”，把“无底洞”当成“金矿”。安克手里的这副牌其实很清楚：阳台储能已经是每天都在下金蛋的肥鹅；UV 打印机是众筹玩家替你付了本钱的刮刮乐，只要喷头别天天堵，后面卖高价墨水就能细水长流；至于那个换了几任主帅的通用机器人，幸亏老板及时捂住了钱包——在别人还没把造价从一辆汽车降到一台洗衣机之前，搬个小板凳在旁边看着别人烧钱，才是真正的商业老手！</p></div></div>
 <hr/>
 <h1 id="c-e">追问模块 C &amp; 模块 E：同行与上下游“三方交叉审讯”及会计治理显微镜</h1>
@@ -1582,7 +1867,7 @@
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
 <p>为了剥离出海消费电子企业财报中的“渠道压货幻觉”与“促销买量水分”，我们将<strong>安克创新（300866.SZ / 00668.HK）</strong>置于放大镜下，拉出三家在各自核心赛道与安克短兵相接的直接可比上市公司——数码充电与NAS对手<strong>绿联科技（301606.SZ）</strong>、智能清洁扫地机对手<strong>石头科技（688169.SH）</strong>、便携及户用储能对手<strong>华宝新能（301327.SZ）</strong>，并同步调取上游核心电源管理芯片商<strong>南芯科技（688484.SH）</strong>与锂电芯供应商<strong>蔚蓝锂芯（002245.SZ）</strong>及<strong>ATL（宁德新能源）</strong>的出货与排产数据，进行全维度的三方交叉审讯。</p>
 <h3 id="2025a-2026q1-q3">一、 四大出海硬件龙头横向对质全景表（2025A — 2026Q1-Q3）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心审讯维度</th>
@@ -1699,7 +1984,7 @@
 <td style="text-align: left;"><strong>0.17亿元</strong> / <strong>0.395亿元</strong> (+135.55%)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="8390">二、 景气度与存货对质：83.90亿存货背后，到底哪些是旺季备货，哪些是压库隐患？</h3>
 <div class="annotated-row"><div class="main-col"><p>2026年三季报披露后，市场对安克创新最大的质疑集中在其资产负债表端：<strong>期末存货由2024年末的32.34亿元、2025年末的49.97亿元（+54.53%），一路飙升至2026Q3末的83.90亿元（较年初再增+67.91%），导致2026年前三季度经营活动现金流净额（OCF）仅录得3.78亿元</strong>。将这一数据放入同行与上下游的“三方交叉审讯室”，我们可以拆解出三层真相：</p><ol>
@@ -1756,7 +2041,7 @@
 <h3 id="12">三、 盈利质量与费用拆解对质：为什么安克毛利率比绿联高12个百分点，净利率却曾跑输石头？</h3>
 <p>对比四家公司的利润表结构，有两个极其耐人寻味的财务剪刀差：<strong>第一，同样卖充电器、数据线和扩展坞，为什么安克创新2026H1毛利率高达49.82%（2025全年45.07%），而绿联科技只有39.18%（2025全年37.38%），两者相差整整10—12个百分点？第二，在毛利率接近50%的情况下，为什么安克创新的净利率常年维持在8%—9%左右，比巅峰期净利率动辄14%—16%的石头科技低了4—6个百分点，而在2025—2026年这一差距又为何发生了戏剧性逆转？</strong></p>
 <h4 id="1-vs-1012">1. 安克创新 vs 绿联科技：10—12个百分点毛利率鸿沟的同口径还原</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">拆解维度</th>
@@ -1803,7 +2088,7 @@
 <td style="text-align: left;">安克用高出绿联10个点的毛利率，支付了高出绿联近5个点的研发费和2.5个点的全球化品牌建设费</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>穿透结论</strong>：如果把绿联科技的境内低毛利业务（27.55%毛利率）剔除，仅对比双方在欧美亚马逊等海外渠道的同口径毛利率，绿联境外毛利率为 <strong>43.00%</strong>，而安克境外毛利率高达 <strong>46.5%—50.2%</strong>。这多出来的 <strong>4—7个百分点純海外毛利溢价</strong>，正是安克过去十年累计超百亿研发投入铸就的工业设计、快充温控协议与品牌心智溢价；而安克之所以没有把这10个点的毛利优势全部转化为当期净利率，是因为阳萌将多赚出来的毛利中的 <strong>~5个百分点</strong> 重新砸进了研发人员薪酬（3,549名研发工程师），用于孵化阳台光储、3D纹理UV打印机（eufyMake）与具身智能等高壁垒新品类。</li>
 </ul>
@@ -1863,7 +2148,7 @@
 <h2 id="e">【追问模块 E：会计成色与治理细节显微镜】</h2>
 <p>一家年营收突破300亿元、账面躺着81.76亿元货币资金、同时又背着83.90亿元存货并经历过235万台充电宝全球召回的跨国硬件巨头，其财报利润究竟是“真金白银的保守记账”，还是“藏污纳垢的财务洗澡”？我们调取安克创新及三家同行2025年报与2026三季报底层附注，用显微镜逐项过筛。</p>
 <h3 id="vs">一、 安克创新 vs 同行会计政策与资产质量对质总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计过筛科目</th>
@@ -1932,7 +2217,7 @@
 <td style="text-align: left;"><strong>穿透排雷完毕</strong>（召回损失在2025年损益与现金流中一次性出清）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_30">二、 资产质量排雷：四大敏感科目逐一过筛</h3>
 <h4 id="1-365">1. 存货跌价准备审计：3.65亿元减值计提是否严苛充分？</h4>
@@ -2007,7 +2292,7 @@
 <h3 id="10">三、 激励与薪酬审计：“10%考核门槛”是发福利，还是阳萌“分钱哲学”的阳谋？</h3>
 <p>对安克创新的治理审计，绝不能只看高管拿多少钱，必须穿透其独特的<strong>“低门槛广覆盖限制性股票 + 高弹性价值创造奖金包”</strong>双轨制激励体系。</p>
 <h4 id="1-20222025">1. 历次限制性股票激励计划（2022—2025）考核门槛审计</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">激励计划批次</th>
@@ -2047,7 +2332,7 @@
 <td style="text-align: left;"><strong>广覆盖留人工具</strong>：公司层面10%门槛偏宽松，实质是绑定超600名核心工程师的“金手铐”</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
 <p><strong>激励审计毒舌定性</strong>：必须实事求是地指出，安克从2023年至2025年连续三期限制性股票激励计划，将公司层面的业绩考核门槛设定为<strong>“年营业收入或扣非净利润增长率不低于10%（二选一）”</strong>，对于一家正处于储能与全球化高速扩张期、实际营收增速在23%—41%区间的成长型龙头而言，<strong>公司层面的10%行权门槛确实偏低，带有明显的“普惠式金手铐（Retention Bonus）”属性</strong>。</p>
@@ -2067,7 +2352,7 @@
 
 <h4 id="2-roi">2. 阳萌“价值创造奖金包分享制”与人力资本ROI穿透</h4>
 <p>如果说限制性股票是留住骨干的“底薪金手铐”，那么创始人阳萌亲手设计的<strong>“价值创造奖金包分享制（经营结果分享奖）”</strong>，才是驱动安克3,549名研发工程师拼命创新的真正核动力：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">人力资本与薪酬效率指标</th>
@@ -2120,7 +2405,7 @@
 <td style="text-align: left;">2024年年收入破百万员工达 <strong>494人</strong>，2025年百万年薪人数进一步突破 <strong>600人</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
 <p><strong>穿透阳萌的“分钱公式”与治理成色</strong>：</p>
@@ -2193,7 +2478,7 @@
 
 <hr/>
 <h3 id="2-2026-owner-earnings">2. 安克创新 2026 常态化真实股东盈余（Owner Earnings）分步还原总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤與核心科目</th>
@@ -2282,7 +2567,7 @@
 <td style="text-align: left;">极致微笑曲线轻资产模式，剔除囤货脉冲后盈利向真实自由现金流转化率超 90%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="owner-earnings">二、 增量垫高测算：募投项目与新曲线成熟消化后的中期稳态 Owner Earnings</h2>
 <p>当前的 <strong>27.50 亿元</strong> 常态 Owner Earnings，仅仅反映了安克创新“存量现金牛（数码充电 + eufy 安防清洁 + soundcore 影音）全面发力，而第二、第三曲线仍在高强度烧钱铺渠道、且 83.9 亿高点存货尚未释放”的截面状态。展望未来 <strong>2—3 年（2028E 中期稳态）</strong>，伴随三大核心经营拐点兑现，安克的内生造血底盘将迎来显著的台阶式垫高：</p>
@@ -2304,7 +2589,7 @@
 </li>
 </ol>
 <h3 id="2028e-owner-earnings">中期达产消化后（2028E 稳态）Owner Earnings 进阶测算表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">业务演进与造血维度</th>
@@ -2357,7 +2642,7 @@
 <td style="text-align: left;"><strong>中期稳态造血中枢跃升至 34.50 亿元（核心区间：33.00 亿—36.00 亿元）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>商业世界里最美妙的事情，就是你用老生意（卖充电头和耳机）赚来的钞票，去喂养一个刚开始需要砸钱、但一旦跑通就能躺着收过路费的新生意（家用储能和打印机墨水）。只要管理层别脑子发热去自己建重资产晶圆厂或电池厂，当新业务跨过固定成本分摊线时，多出来的每一分钱毛利几乎都能直接掉进自由现金流的口袋里。</p></div></div>
 <hr/>
 <h2 id="_31">三、 双极限压力测试：高毛利缓冲垫与“价值创造奖金池”减震器实算</h2>
@@ -2426,7 +2711,7 @@
 </ul>
 <hr/>
 <h3 id="2-335">2. 安克创新双极限压力测试量化推演总表（基于 335 亿营收基准，单位：亿元）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流传导指标</th>
@@ -2522,7 +2807,7 @@
 <td style="text-align: center;"><strong>死守 16.9 亿现金流铁底</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看这套“价值创造奖金池”的制度设计吧！好年景的时候，老板把大把钞票分给工程师和产品经理，让大家像饿狼一样去抢地盘；一旦遇上关税大棒或者存货跌价的灾年，奖金池自动缩水四五成，等于几千名高薪骨干自动替股东扛下了五六个亿的亏损冲击。这比华尔街投行那种“赚了归高管、亏了归股东”的流氓薪酬制度不知道高明到哪里去了！</p></div></div>
 <h2 id="-_2">---</h2>
 <h1 id="f">追问模块 F：解锁估值定价、隐含预期与击球区推演</h1>
@@ -2573,7 +2858,7 @@
 </ul>
 <hr/>
 <h3 id="2-true-ev">2. 安克创新真实企业价值（True EV）分步核算总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: center;">核算步骤</th>
@@ -2676,7 +2961,7 @@
 <td style="text-align: left;"><strong>全款买下安克创新整家生意的真实净标价：595.0 亿元人民币</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>当你花 635 亿买下这家公司的时候，保险柜里居然躺着将近 98 亿的现金和理财！就算你替它把 26.5 亿的债全还清，再给公司留足 25 亿的日常零花钱和 4 亿多的保函押金，你还能顺手从账上直接抽走 40 亿净现金揣进自己兜里。所以这笔买卖真正的净标价是 <strong>595 亿</strong>——买股票不看资产负债表上的净现金，就像去菜市场买带壳生鲜却不把冰块和绳子的重量刨掉一样愚蠢。</p></div></div>
 <hr/>
 <h2 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨定价）</h2>
@@ -2749,7 +3034,7 @@
 </ol>
 <hr/>
 <h3 id="3-reverse-sotp">3. 安克创新 Reverse SOTP（反向分部拆骨）估值全景表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务分部（四块骨头拆解）</th>
@@ -2824,13 +3109,13 @@
 <td style="text-align: left;"><strong>加回 68.5 亿超额净现金并扣减债务后 = 总市值 635.0 亿</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这只鸡拆开来称重，账就彻底清楚了：在 595 亿的净标价里，有 400 亿是靠卖充电头、家庭安防摄像头和蓝牙耳机实打实撑住的，这部分按 15.6 倍市盈率买一点都不贵；剩下的 196 亿，是你为了买它那块正在狂飙的家用储能业务（Anker SOLIX）和 3D 纹理打印机而额外掏的“成长门票钱”。结论很简单——现在的价格绝不是白捡便宜货的垃圾桶价，但也绝不是疯人院里的泡沫价，而是给好公司开出的一张“规规矩矩的公允账单”。</p></div></div>
 <hr/>
 <h2 id="_32">三、 赔率定性、分档击球行动锚点与三条基本面死刑证伪红线</h2>
 <h3 id="1_4">1. 历史估值走廊与跨境硬件同行横向坐标对比</h3>
 <p>为了精准定位当前 <strong>107.98 元/股（总市值 635.0 亿元，True EV 595.0 亿元）</strong> 在周期钟摆中的位置，我们将其放入安克创新过去 5 年的纵向估值走廊与 A 股出海硬件龙头的横向坐标系中进行对质：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对标维度与标的</th>
@@ -2877,7 +3162,7 @@
 <td style="text-align: left;"><strong>性价比跟随策略</strong>：毛利率比安克低约 12 个百分点，主要靠线上性价比与 NAS 新品扩张，品牌溢价与净现金厚度远逊安克</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>当下估值水位总定性</strong>：
   当前安克创新 <strong>107.98 元/股（总市值 635.0 亿元，True EV 595.0 亿元，对应 2026 常态 PE 21.5x、Ex-Cash PE 19.2x、常态 OE 内生回报率 4.62%）</strong>，处于历史估值走廊的 <strong>45%—50% 中枢分位</strong>，定性为 <strong>“合理偏温和溢价区（好公司的公允标价带，尚未出现恐慌错杀的黄金坑折价）”</strong>。在这个位置上，存量股东可安心持有享受每年约 15%—20% 的内生复利增长与 2.1% 的现金分红；但对于追求极致安全边际与暴利赔率的买方猎手而言，<strong>当下不宜重锤追高，而应手持现金等待市场因“83.9 亿存货恐慌”或“北美关税噪音”砸出黄金击球坑！</strong></li>
@@ -2885,7 +3170,7 @@
 <hr/>
 <h3 id="2-true-ev_1">2. 分档击球行动锚点（精确到股价、市值、True EV 与仓位指令）</h3>
 <p>我们以 <strong>5.88 亿股总股本</strong> 及 <strong>净负债与超额现金差额（-40.0 亿元，即 True EV = 总市值 - 40.0 亿元）</strong> 为恒定标尺，制定以下三档铁律击球水位：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位与行动定性</th>
@@ -2940,7 +3225,7 @@
 <td style="text-align: left;"><strong>重锤满仓（100% 满额配置）</strong>：不仅储能与新硬件 100% 白送，连年赚 25.5 亿的存量霸主底盘都打 9 折甩卖，闭眼重锤！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>投资成功的秘诀就是坐在那里一动不动，直到别人因为恐慌把黄金当成烂泥巴扔给你。现在 108 块钱的安克创新就像一家地段极好、生意兴隆但要价公允的糖果店；但如果哪天华尔街因为看到新闻里写着“关税大棒”或者“存货飙到 84 亿”就吓得尿裤子，把股价砸到 80 块钱甚至 70 块钱以下——那时候全公司净标价才 400 亿出头，整个年入三四十亿的储能业务和几千万美金众筹的打印机白送给你不要钱，你唯一该做的事就是拿上家里最大的麻袋去接货！</p></div></div>
 <hr/>
 <h3 id="3_3">3. 三条基本面死刑证伪红线（一旦触发，无论股价多便宜立即清仓）</h3>
@@ -3033,7 +3318,7 @@
 <p>因此，我们的纪律极其冷酷：<strong>绝不在钟摆处于中轴偏乐观、且资产负债表背着 83.9 亿历史最高存货的时候重仓挥棒。</strong> 如果你手里已经有低位筹码，拿着吃 2.1% 的分红并观察 Q4 现金流即可；如果你手里握着现金，请像猎豹一样趴在草丛里，耐心等待宏观关税恐慌或一季报存货噪音把股价砸回 <strong>78—85 元/股（对应 True EV 约 420—460 亿元，常态 Owner Earnings 收益率跨过 6.0%—6.5% 门槛）</strong>，到那时，才是属于价值投资者的‘不对称高赔率黄金坑’！”</p>
 <hr/>
 <h3 id="_33">📋 四位大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师席位</th>
@@ -3073,7 +3358,7 @@
 <td style="text-align: left;"><strong>【持币等待不对称黄金坑】</strong><br/>当前钟摆居中偏乐观、赔率对称偏弱；左侧黄金击球区锁定 <strong><code>78—85 元/股</code></strong>（达产 OE 回报率 <code>&gt; 7.5%</code>）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>🏆 圆桌终极合议裁决（投票结果：<code>1 票轻仓观察 / 3 票持币等黄金坑或去库验真</code>）</strong>：
 四位大师一致认定，安克创新是中国制造业出海浪潮中极少数真正跑通<strong>“100% 委外极轻资产 + VOC 微创新高毛利（49.82%） + 全球全渠道品牌溢价 + 50% 高派息股东回报”</strong>的皇冠级明珠，且创始人阳萌在 2022 年砍线纠偏与 2025 年 235 万台充电宝主动召回中展现出了极其珍贵的诚实品格与长远格局。
@@ -3094,13 +3379,26 @@
 <p>皇冠公司也要看赔率。当前一百零八元、六百三十多亿市值（扣净现金后对应常态股东盈余约二十一倍，内生回报率四个半点），高增长预期已打满，安全边际不足。买方必须守纪律：现在绝不重仓追高，最多拿半成仓位观察；重拳出击只等两条触发线——要么右侧看到四季度存货大幅降至六十亿以下、单季经营现金流回流超二十五亿；要么左侧等关税风波或情绪回落把股价砸入七十八到八十五元区间（真实回报率超六个点），再果断挥棒。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3270,7 +3568,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《安克创新_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/安克创新_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《安克创新 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/安克创新 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3328,6 +3626,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

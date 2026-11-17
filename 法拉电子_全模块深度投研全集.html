@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>法拉电子_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>法拉电子 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">法拉电子_全模块深度投研全集</div>
+    <div class="report-title">法拉电子 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -674,7 +959,7 @@
 </ul>
 <h4 id="2">2. 全球及本土竞争对手硬核横向对比表</h4>
 <p>为了直观展现法拉电子在全球产业坐标系中的真实身位，我们将截至2025—2026年全球第一梯队与本土主要对手的核心硬指标拉出对质：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -735,7 +1020,7 @@
 <td style="text-align: left;">集中于国内新能源车与风电光伏，海外AI服务器与特高压电网份额极少</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3-bopp">3. 敏锐区分“硬核王牌”与“战略取舍”：为什么法拉电子不做最上游的BOPP基膜拉膜？</h4><p>很多投资者研究到这里会提出一个尖锐疑问：<strong>既然上游BOPP电容基膜占了材料成本的近一半，而且2微米超薄基膜壁垒极高（日本东丽、德国Tervakoski、国内铜峰电子、东材科技、大东南等在做），法拉电子为什么只往上做到“金属化蒸镀膜”，而不干脆自己买德国布鲁克纳（Brückner）拉膜机去生产BOPP基膜？</strong></p><p>这就是法拉电子管理层算账极精明的地方——<strong>物理属性与商业模式的降维取舍</strong>：</p><ol>
 <li>
 <p><strong>重资产连续化工属性 vs 精密离散制造属性</strong>：BOPP拉膜产线一条动辄投资1.5亿—2.5亿元人民币，从德国订购设备交期长达2—3年，且一旦开机就必须24小时365天连续不停机拉同一种厚度的膜（停机清理一次聚丙烯切片熔体就要报废几十吨料）。如果法拉自己建拉膜线，面对自身上万种SKU对不同厚度（从1.8μm、2.0μm、2.5μm到8μm、12μm）、不同粗糙度基膜的需求，自建拉膜线要么产能结构严重错配，要么因为频繁换规格把良率亏到底裤都不剩。</p>
@@ -823,7 +1108,7 @@
 </ul>
 <h4 id="3-20212026">3. 五年一期现金流硬账本与防合并报表幻觉穿透（2021年—2026年前三季度）</h4>
 <p>我们调取公司2021—2025年经审计年报及2026年三季报（1—9月）的合并财务报表，逐项核算出最近五年一期的真实自由现金流账本：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -908,7 +1193,7 @@
 <td style="text-align: left;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：表中“资本开支 CapEx”严格取自合并现金流量表“购建固定资产、无形资产和其他长期资产支付的现金”科目：2021年3.00亿元、2022年5.83亿元、2023年4.72亿元、2024年3.91亿元、2025年5.45亿元、2026年前三季度3.78亿元。)</em></p><p><strong>打破“合并报表幻觉”两项深度穿透</strong>：</p><ol>
 <li>
 <p><strong>少数股东损益与权益核查（100%纯正归母成色）</strong>：2025年全年，公司合并净利润为11.928亿元，其中归母净利润11.922亿元，<strong>少数股东损益仅为64.18万元（占比仅0.05%）</strong>，且随着2025年内上海美星公司出表，公司核心利润几乎100%由全资制造主体贡献，不存在任何“靠合并低持股子公司做大营收、利润却被少数股东分走”的纸面富贵幻觉。</p>
@@ -1056,7 +1341,7 @@
 <h4 id="1-1">1. 算清单位经济账：为什么法拉电子“每投 1 块钱固定资产”换回的产值显著高于同行？</h4>
 <h5 id="1-capex_1">（1）法拉电子与国内三大同行核心扩产项目“单位产能投资额 / 单位产值 CapEx 投入比”硬核横向对质</h5>
 <p>在薄膜电容器产业链中，不同企业选择了截然不同的资本开支路径：有人选择重资产向上游买德国拉膜机造基膜（如铜峰电子），有人选择外购全套进口标准产线大举扩充多品类电容（如江海股份），有人选择募资新建车规组装基地（如鹰峰电子），而法拉电子始终坚持 <strong>“外购顶级超薄基膜 + 100% 自产核心真空蒸发金属化镀膜 + 核心分切/卷绕/赋能/灌封设备自主改制”</strong>。我们将四家公司近年最具代表性的扩产工程与募投项目拉出硬核对质表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -1110,7 +1395,7 @@
 <td style="text-align: left;">资金集中于新建绿地厂房、外购自动化卷绕组装线、注塑及叠层母排（Busbar）冲压焊接设备</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>为什么法拉电子在<strong>100%掌握核心“真空蒸发金属化镀膜”重器</strong>的前提下，其“每新增 1 亿元营收所需的固定资产投入（约 0.48—0.54 亿元）”依然显著低于同行，且固定资产周转率常年保持在同行的 <strong>1.5 倍—2.5 倍</strong>？穿透工程账本，核心归功于三大底层机制：</p><ol>
 <li>
 <p><strong>精准卡位微笑曲线最高产出段（拒绝为重资产 BOPP 拉膜线买单）</strong>：
@@ -1244,7 +1529,7 @@
 <hr/>
 <h4 id="1_4">1. 商业化刻度精准定位：到底谁在画饼，谁在送样，谁已经在数钞票？</h4>
 <p>截至 2026 年三季报，法拉电子在这三大新方向上的真实推进刻度绝非齐头并进，而是呈现出清晰的 <strong>“一主攻兑现、一局部放量、一早期卡位”</strong> 阶梯态势。我们将其真实工程进展与单点商业模型拉出明细表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心追问维度</th>
@@ -1279,7 +1564,7 @@
 <td style="text-align: left;">800V SiC 模组已占新能源汽车板块近半壁江山（占全公司总营收约 <strong>20%—25%</strong>），毛利率比普通 400V 车规电容高出 <strong>4—6 个百分点（达 34%—37%）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>别听股市里那些人瞎吹什么概念都明天暴富。把账本摊开看清楚：800V 碳化硅车规模组已经在流水线上哗哗印钞票了，甘肃到浙江的特高压柔直大电容也已经装进国家电网数钱了，至于 AI 数据中心的 800V 高压直流和固态变压器，那是刚把样品塞进台达和维谛实验室里的早苗——分得清碗里的肉和地里的苗，才不会饿死。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2-15">2. 跨越鸿沟的三道关卡：要贡献公司总毛利 15% 以上，还卡着哪几道最难跨的物理、认证与路线门槛？</h4><p>如果这三项新业务（尤其是尚未完全放量的 AI 算力 800V HVDC/SST 与 1.8μm 极薄耐 125°C 车规电容）要想在未来两三年真正扛起法拉电子 <strong>15%—25% 以上的增量核心毛利</strong>，绝不是靠销售员去跑客户就能解决的，中间还死死卡着三道极难跨越的科学与工程鸿沟：</p><h5 id="1_5">（1）第一道关卡：底层材料热力学极限与跨品类路线博弈关</h5><ul>
@@ -1393,7 +1678,7 @@
 <h4 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h4>
 <p>判断一家制造业龙头究竟是凭真本事吃肉、还是靠行业顺风局塞渠道做大报表，最残酷也最有效的方法，就是把它的直接竞争对手与上下游交易对手同时押上“交叉审讯席”。我们将<strong>法拉电子（600563.SH，全球薄膜电容绝对霸主）</strong>与国内最直接的两大竞争对手——<strong>江海股份（002484.SZ，铝电解电容龙头+薄膜电容第二梯队追赶者+超级电容）</strong>、<strong>铜峰电子（600237.SH，“电工基膜+金属化膜+薄膜电容器”垂直一体化老牌厂商）</strong>，以及高端被动元器件同行<strong>宏达电子（300726.SZ）</strong>、非上市车规竞争对手<strong>鹰峰电子</strong>和国际巨头<strong>TDK、尼吉康（Nichicon）</strong>的最新财报数据（2025年报及2026年三季报）摆在同一张解剖台上，并结合上游基膜商（<strong>东材科技、大东南</strong>）与下游大客户（<strong>比亚迪、阳光电源</strong>）的采购与存货口径展开三方对质。</p>
 <h4 id="2025-2026">一、 同业核心财务指标全景对质大表（2025年报 &amp; 2026年三季报）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务与经营维度</th>
@@ -1542,7 +1827,7 @@
 <td style="text-align: left;">2026前三季度江海OCF下滑25.9%、铜峰下滑11.0%，唯有法拉OCF稳增6.53%至11.38亿元（净现比高达122.4%）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_11">二、 景气度与库存真相审讯：真实放量还是渠道压库？</h4><p>把三家薄膜电容厂商与上下游放在一起对质，2025年至2026年前三季度行业的真实景气脉络与企业排产功底水落石出：</p><ol>
 <li><strong>为什么说行业需求是“结构性真实放量”，而非渠道压货？</strong>
@@ -1606,7 +1891,7 @@
 <p><strong>极简管理与丰沛现金流反哺</strong>：法拉电子从不搞跨界并购，总部行政人员仅50人、财务人员仅25人，2025年管理费用率仅<strong>3.35%</strong>（铜峰电子高达5.77%—7.11%）。同时，截至2026年9月末，法拉账面拥有货币资金4.31亿元 + 交易性金融资产（稳健型银行理财与结构性存款）14.14亿元 = <strong>18.45亿元广义现金</strong>，短期借款仅0.17亿元，长期有息负债为0。在常态汇率年份（如2025年），账上巨额现金产生的利息与理财收益使财务费用为<strong>-2,099万元</strong>，直接增厚利润。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">净利率差距拆解维度</th>
@@ -1659,7 +1944,7 @@
 <td style="text-align: left;"><strong>“材料自制+良率碾压+规模制造+极简直销”四重护城河叠加的必然结果</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看到没有？53亿营收的大公司，全天下只雇了65个销售员、50个行政人员，销售费用率不到0.7%！这说明什么？说明它的产品不是靠销售员在酒桌上灌白酒卖出去的，而是比亚迪和阳光电源的工程师自己追着法拉要货。当你的同行在薄膜电容上只有13.7%的毛利率、连塞牙缝都不够的时候，你却能舒舒服服拿走33%的毛利和22%的净利，这就是“规模经济+极致专一”印钞机的威力。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="20252026q3">四、 2025—2026Q3 市场份额攻守终极判决：到底是谁在抢谁的份额？</h4><p>复盘过去一年半（2025全年至2026年前三季度）全球薄膜电容器四大核心战场的份额迁移，我们可以得出极其清晰的攻守结论：</p><ol>
@@ -1691,7 +1976,7 @@
 <div class="math-display"><span class="math-text">Owner Earnings</span> = <span class="math-text">常态主业归母净利润</span> + <span class="math-text">有效归母折旧与摊销 (D\&amp;A)</span> - <span class="math-text">维持存量竞争力必需的防御性 CapEx</span> - <span class="math-text">常态刚性营运资金追加占用</span></div>
 <h5 id="1_7">1. 第一步：剥离非经常性损益，锚定常态主业归母净利润基准</h5>
 <p>我们先对法拉电子 2023—2026Q3 的利润表“含金量”与非经常性损益明细进行穿透拆解：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心利润与非经常性损益拆解科目</th>
@@ -1768,7 +2053,7 @@
 <td style="text-align: left;">2025年少数股东损益仅 <code>64.18万元</code>（占比 <code>0.05%</code>），几乎100%归母</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>【常态主业归母净利润锚定】</strong>：</p>
 <ul>
 <li>
@@ -1833,7 +2118,7 @@
 <h5 id="4-working-capital">4. 第四步：核算常态刚性营运资金追加占用（Working Capital）与最终汇总</h5>
 <p>在存量产能稳态运转（不假设营收规模暴增）的前提下，法拉电子凭借极强的产业链上下游议价权（下游比亚迪、汇川、阳光电源等头部客户以 6 个月银行承兑汇票刚性结算，坏账率极低；上游采购基膜与铜箔享有稳定信用账期），存量业务本身几乎不需要额外追加营运资金。但考虑到铜、锌、铝等大宗原材料价格正常波动带来的存货周转资金沉淀，以及车企客户供应链微幅拉长账期的摩擦成本，我们在稳态模型中依然审慎扣除 <strong><code>0.35亿元/年</code></strong>（区间 <code>0.20亿—0.50亿元/年</code>）的常态刚性营运资金占用。</p>
 <p>至此，法拉电子 <strong>存量常态真实股东盈余（Owner Earnings）分步还原明细表</strong> 如下：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">分步还原计算序号与核心科目</th>
@@ -1934,7 +2219,7 @@
 <td style="text-align: left;"><strong>存量产能每年稳态可自由支配的真实造血底盘</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>【核心结论一】</strong>：剥离所有扩产期表观 CapEx 的障眼法与非经常性噪音后，法拉电子在现有存量产能下，<strong>每年稳态可自由支配的真实股东盈余（Owner Earnings）中枢高达 <code>12.50亿元</code>（稳健区间 <code>11.94亿—13.08亿元</code>）</strong>，比其表观扣非归母净利润（<code>11.28亿元</code>）足足高出 <strong><code>1.22亿元</code></strong>！这就是为什么法拉电子过去五年累计派发超过 20 亿元现金分红、同时全款砸下逾 20 亿元扩建新厂房，不仅一分钱长期银行贷款没借，账上广义现金反而越滚越厚（膨胀至 <code>18.45亿元</code>）的终极财务真相。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>会计师总喜欢拿尺子把一台能用二十年的瑞士卷绕机硬生生按十年折旧切碎，然后告诉你这叫“成本”；而聪明的生意人只看每年年底把机器擦干净、换几个零件后，保险柜里到底多出了多少张可以随便花掉的钞票——法拉电子这台老印钞机每年真实吐出来的钞票是 12.5 个亿，比利润表上写的还要肥！</p></div></div></div></div>
 
 <hr/>
@@ -2041,7 +2326,7 @@
 <hr/>
 <h5 id="4">4. 双极限压力测试全景汇总对比表（含双杀叠加终极底线）</h5>
 <p>如果“极限情景一（下游降价 10%）”与“极限情景二（上游原材料暴涨 20%）”在同一年份同时发生（即人类工业史上罕见的“上下游双向极限夹击”），法拉电子的底线在哪里？请看下表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">压力测试情景维度</th>
@@ -2134,7 +2419,7 @@
 <td style="text-align: center;"><strong>+8.95亿元（照样覆盖5亿分红！）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>【压力测试终极定论】</strong>：</p><ol>
 <li>
 <p><strong>绝对不会出现现金流失血</strong>：即便在“下游全线降价 10% + 上游原材料全线暴涨 20% + 公司管理层装死不做任何技术减薄与顺价对冲”的<strong>静态死扛终极炼狱情景</strong>下，法拉电子依然能维持 <code>13.57%</code> 的正毛利率、实现 <code>2.85亿元</code> 归母净利润、产生 <strong><code>3.75亿元</code></strong> 的正向真实股东盈余（Owner Earnings）和约 <code>5.0亿元</code> 的经营性现金流！</p>
@@ -2150,7 +2435,7 @@
 <h4 id="e">【追问模块 E：会计成色与治理细节显微镜】</h4>
 <p>在A股制造业中，有一类公司平时声嘶力竭地讲故事、发期权、做市值管理，但翻开财报附注全是激进的坏账计提、拉长的设备折旧和高比例的研发资本化；而另一类公司常年沉默寡言，甚至连券商路演都懒得办，但当你拿显微镜逐行审视它的会计附注时，会发现它把每一分能藏的利润都用最严苛的准则压在了表下。法拉电子究竟属于哪一类？我们用最冷酷的审计标准逐项核查。</p>
 <h4 id="_13">一、 同业会计政策、资产减值与治理指标全维对比表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计与治理核查维度</th>
@@ -2253,7 +2538,7 @@
 <td style="text-align: left;">法拉通过“法拉发展职工集体股 + 高比例现金分红”实现了30年核心团队零流失</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_14">二、 资产质量与会计政策排雷：把利润往低里算的“藏富狂魔”</h4><p>拿放大镜逐项排查法拉电子2025年报与2026年三季报的财务附注，我们不仅没有发现任何粉饰报表的痕迹，反而挖出了三处极其罕见的<strong>“极端保守型会计藏富”</strong>证据：</p><h5 id="1-9715">1. 应收账款与票据排雷：97%以上账龄在1年以内，却按5%顶格计提坏账</h5><ul>
 <li>
@@ -2377,7 +2662,7 @@
 <div class="math-display"><span class="math-text">超额可自由支配现金 (Excess Cash)</span> = 18.45<span class="math-text"> 亿元</span> - 3.70<span class="math-text"> 亿元</span> = <strong>14.75<span class="math-text"> 亿元</span></strong></div>
 <p>再扣除公司账面仅有的 <strong><code>0.17亿元</code></strong> 全口径有息负债（短期借款 <code>17,224,212.97元</code>，长期借款、应付债券、一年内到期非流动负债全部为 <code>0元</code>），法拉电子的 <strong>真实超额净现金（Net Excess Cash）高达 <code>14.58亿元</code></strong>，相当于每股股票背后直接垫着 <strong><code>6.48元/股</code></strong> 的纯超额现金！</p>
 <h5 id="2-true-ev">2. 法拉电子真实企业价值（True EV）精确核算明细表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值核算核心步骤与资产负债表科目</th>
@@ -2442,7 +2727,7 @@
 <td style="text-align: left;"><strong>全款买下整家法拉电子生意的真实净成本（比表面总市值便宜 14.58 亿元！）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>如果你花 236.84 万买下一家小杂货铺，推门进去发现收银机暗格里整整齐齐码着 14.58 万没动过的现钞，而且老板一分钱外债都不欠，那你买这个铺子真正掏的钱其实是 222.26 万——连小作坊主都能一秒算清的账，华尔街那帮戴着名表看表观市盈率的分析师却总是算不明白。</p></div></div>
 <hr/>
 <h4 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值）</h4>
@@ -2525,7 +2810,7 @@
 </li>
 </ul>
 <h4 id="reverse-sotp-23684">法拉电子 Reverse SOTP 反向拆骨估值全景表（基准市值：236.84亿元）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">估值拆骨层级与核心资产包</th>
@@ -2618,7 +2903,7 @@
 <td style="text-align: left;"><strong>存量底盘提供了80%—90%的下行垫底保护，成长近乎半卖半送</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>【Reverse SOTP 核心结论】</strong>：在当前 <code>105.26元/股</code>（总市值 <code>236.84亿元</code>）的价格下，“超额净现金 + 存量零增长基本盘”就已经严严实实地托住了 <strong><code>189.58亿—214.58亿元</code>（即 <code>84.26元—95.37元/股</code>，占当前股价的 <code>80%—90.6%</code>）</strong> 的安全底盘！市场为“南海路 26 亿新基地投产 + 800V 高压升级 + 特高压柔直 + AI 服务器电源 + 马来西亚出海”这五大确定性极高的增量引擎，仅仅给出了 <strong><code>22.26亿—47.26亿元</code></strong> 的残值标价——甚至还没有把法拉电子过去三年已经在南海路新厂区砸下去的现金本金和在建工程账面价值溢价算够！换言之，<strong>当前的股价几乎是以“存量债券底价 + 1—2 折白送远期成长”的方式在进行定价</strong>。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这就好比你去买一栋每年稳收 125 万房租的黄金地段公寓楼，房东不仅把地下室锁着的 145 万现金送你，还指着旁边已经封顶、马上就能再收 50 万房租的新副楼说：“这栋新楼你随便再加个两三百万就归你了”——遇到这种把已经建好的新印钞厂当废砖头半卖半送的行情，你不需要高深的微积分，只需要带上一个足够大的麻袋。</p></div></div></div></div>
 
 <hr/>
@@ -2636,7 +2921,7 @@
 <p><strong>横向对比：国内外被动元器件龙头估值比照（截至2026年11月）</strong>：</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比公司名称与代码</th>
@@ -2695,14 +2980,14 @@
 <td style="text-align: left;">法拉保持11%+营收增速与21%+净利率，估值却已压缩至日本低增长巨头水平</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>【横纵向对比定性】</strong>：无论是对比 A 股同行江海股份（<code>37x—43x PE</code>）、宏达电子（<code>34x—36x PE</code>），还是对比净利率与增速只有法拉一半的日本被动元器件巨头（<code>16x—21x PE</code>），法拉电子当前 <strong><code>19.3x 表观 PE / 17.78x True EV 倍数</code></strong> 都呈现出极其明显的<strong>“高品质折价（Quality at a Discount）”</strong>特征。市场仅仅因为担心下游电动车与光伏的行业周期波动，就把一位毛利率逆势升至 <code>33.06%</code>、净现金 <code>18.45亿元</code> 的全球冠军按传统低壁垒汽配股的价格在甩卖。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>股市里总是充满了这种荒唐的幽默感——一家净利率只有百分之十几、还在拼命追赶的老二能卖到四十倍市盈率，而那个净利率超过百分之二十、把全行业最肥的肉吃干抹净的全球老大，却因为名字不够时髦只卖十七八倍，这简直就像赛马场把头号千里马按拉磨老驴的肉价在挂牌。</p></div></div></div></div>
 
 <hr/>
 <h5 id="2_5">2. 分档击球操作锚点：从“常态复利区”到“黄金重锤区”的精确标尺</h5>
 <p>基于法拉电子 <strong><code>12.50亿元/年</code></strong> 的存量常态 Owner Earnings 底盘、<strong><code>14.58亿元</code></strong>（<code>6.48元/股</code>）的超额净现金，以及南海路新厂区达产后向 <strong><code>16.50亿元+</code></strong> 迈进的造血潜力，我们拒绝模糊的定性口号，直接划定三档精确到总市值与股价的实战击球区间（总股本按 <code>2.25亿股</code> 锁定）：</p>
 <h4 id="_17">⚾ 分档击球与仓位操作决策矩阵</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球分档定性</th>
@@ -2739,7 +3024,7 @@
 <td style="text-align: left;"><strong>【南海路新产能已全部提前透支计价】</strong>：当股价突破 <code>140元/股</code>（总市值超315亿元）时，意味着市场不仅把存量底盘给到了20x+，还把南海路新基地未来三年达产后的增量利润提前按20x+全额变现；若突破 <code>168.90元</code>（市值380亿+，对应当前利润超30x PE），安全边际彻底消失，应分批止盈兑现，绝不恋战。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h5 id="3_4">3. 三条基本面死刑证伪红线（一旦触发，无条件认错清仓）</h5><p>真正的价值投资者从不盲目信仰“永远不卖”。如果法拉电子未来的实际经营数据触碰以下 <strong>三条量化基本面死刑证伪红线</strong> 中的任意一条，说明其隐形冠军护城河已经发生不可逆的结构性坍塌，届时无论股价跌了多少、表观估值看似多便宜，都必须<strong>无条件认错离场</strong>：</p><ol>
 <li><strong>【红线一：定价权与成本转嫁崩塌红线——扣非毛利率连续两个季度跌破 <code>25.0%</code>（或全年跌破 <code>26.0%</code>）且与同行拉开差距缩小】</strong>：</li>
@@ -2845,7 +3130,7 @@
 <p><strong>结论极其清晰</strong>：往下看，有18.45亿现金堡垒、43%+高分红与15倍Owner Earnings铁底托住，最差不过是拿着每年5%—6%的股东盈余收益率等待周期回暖；往上看，只要特高压、AI电源与800V SiC三张免费期权兑现任何一张，业绩与估值戴维斯双击将推动市值向 <strong>320亿—380亿元（+35%—+60%）</strong> 进发。这种 <strong>‘赢了赚大钱、输了只受皮外伤’</strong> 的不对称赔率，正是价值猎手扣动扳机的最佳时刻！”</p>
 <hr/>
 <h3 id="g5">G.5 📋 四位投资大师圆桌投票与核心判词总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名与流派</th>
@@ -2885,7 +3170,7 @@
 <td style="text-align: left;"><strong>【重仓击球（高胜率不对称赌局）】</strong><br/>当前约236—238.5亿市值（True EV约220亿）仅反映了存量车载与光储基本盘价值，<strong>特高压直流电容 + AI服务器800V电源电容 + 800V SiC高温模组三大期权估值近乎为0（白送）</strong>。下行极限铁底在175亿—185亿（回撤受限），上行双击空间320亿—380亿，赔率超 <strong>2.5 : 1</strong>，属于高确定性左侧击球区！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>🏛️ 圆桌闭门会诊终极联合公报</strong>：
 四位大师全票认定——<strong>法拉电子（600563.SH）绝非平庸的强周期电子元器件加工厂，而是中国制造业中极其罕见的、兼具“伊斯卡尔式高转换成本护城河 + 好市多式极致成本窒息力 + 皇冠瓶盖式专注同心圆裂变 + 24年零再融资13.47倍分红回报”的全球隐形冠军堡垒。</strong> 在2026年11月约 <strong>236亿—238.5亿元总市值（剔除超额净现金后 True EV 约220亿元，对应常态化股东盈余仅 15x—16x）</strong> 的刻度上，第一层思维者看到的“南海路新厂转固折旧压制表观净利增速（+4.77%）”，恰恰为第二层思维的长期主义者提供了“用存量现金牛的公允价格，免费获赠特高压、AI算力电源与800V SiC模组三张看涨期权”的黄金击球窗口。</p>
@@ -2905,13 +3190,26 @@
 <p>现在法拉总市值两百三十多亿，扣掉超额净现金后真实企业价值仅两百二十亿左右，对应常态真实股东盈余仅十五六倍。这价格只给存量电动车和光储基本盘打了公允价，等于把“特高压柔直国产替代”、“AI服务器八百伏高压电源电容”和“碳化硅耐高温模组”三张王牌期权零元白送！打法上，在一百元出头直接分批建好核心底仓，遇单季折旧波动错杀跌破两百亿市值时果断重锤加满，锁仓收息静待新产能爬坡与三大新赛道双击。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3081,7 +3379,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《法拉电子_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/法拉电子_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《法拉电子 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/法拉电子 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3139,6 +3437,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

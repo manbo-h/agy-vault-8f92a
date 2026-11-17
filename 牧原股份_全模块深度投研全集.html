@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>牧原股份_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>牧原股份 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">牧原股份_全模块深度投研全集</div>
+    <div class="report-title">牧原股份 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -653,7 +938,7 @@
 <h2 id="_4">【第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）】</h2>
 <p>在生猪这个没有品牌溢价的大宗赛道里，“产品硬实力”的唯一终极度量衡就是<strong>完全成本分位、生物安全底盘与资产负债表抗揍能力</strong>。我们调取国内四大核心上市猪企——<strong>牧原股份（002714.SZ）、温氏股份（300498.SZ）、新希望（000876.SZ）、神农集团（605296.SH）</strong>截至2026年三季报的最新经营与财务硬数据，拉到同一张桌面上做正面硬核比拼：</p>
 <h3 id="20252026">核心同行横向硬核对比表（2025全年及2026年三季报最新口径）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心比拼维度</th>
@@ -721,7 +1006,7 @@
 <td style="text-align: left;"><strong>69.71%</strong>（负债总额823.66亿元，利息包袱最重）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="0510">深度拆解：牧原那0.5—1.0元/公斤的极限成本优势到底是从哪抠出来的？</h3>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
@@ -801,7 +1086,7 @@
 </li>
 </ul>
 <h3 id="3-20212025-202619">3. 五年一期现金流硬账本（2021—2025年 + 2026年1—9月标准对照表）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -878,7 +1163,7 @@
 <td style="text-align: left;"><strong>极寒测试：净利亏93亿但OCF仍净流入近30亿</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="4">4. 打破“合并报表幻觉”体检</h3>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
@@ -973,7 +1258,7 @@
 <h5 id="2_2">（2）生猪屠宰端：高配自动化分割线与“养殖主产区贴身建厂”</h5>
 <p>再看屠宰肉食板块。根据牧原转债披露的4个标杆屠宰项目（商水年屠宰400万头、宁陵年屠宰400万头、铁岭年屠宰200万头、林甸年屠宰300万头），合计新增 <strong>1,300万头/年</strong> 屠宰产能，计划总投资 <strong>22.87亿元</strong>，折合<strong>单头生猪年屠宰产能投资额约为 176元/头</strong>。拉通牧原截至2025年末建成的2,900万头屠宰产能（2026年中期随滑县等新厂投产微增至单班3,100万头/年），板块累计固定资产投资约52亿~55亿元，<strong>全口径单头屠宰产能投资额稳定在 175~190元/头</strong>。</p>
 <p>这一造价水平与屠宰龙头<strong>双汇发展（000895.SZ）</strong>近年新建的现代化生猪屠宰项目（约180~220元/头）基本持平，但显著高于国内传统中小型定点屠宰场（简配版仅80~120元/头）。牧原屠宰厂之所以单头投资近180元，是因为其拒绝建设只能卖热鲜白条肉的粗放作坊，而是全线标配了进口级二氧化碳致晕机、全自动机械臂劈半、24小时分级预冷排酸库、智能精细分割流水线以及立体速冻冷库。更重要的是，牧原所有屠宰厂100%紧贴自身年出栏百万头以上的核心养殖大县布局，活猪从自有猪场到屠宰厂的运输半径控制在50~100公里以内，从源头上消灭了同行外购活猪高达1%~1.5%的途亡掉膘损耗与生猪经纪人加价。</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -1027,7 +1312,7 @@
 <td style="text-align: left;">新希望受前期高造价折旧与闲置减值拖累较重；双汇屠宰折旧已大半提完，单头折旧极轻</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看懂这张表你就明白了：牧原在资产负债表里背了最重的铁坨子（单头表内投资1,100—1,350元），但穿透全产业链来看，它比外包抢建的新希望（1,500—1,800元/头）省了近三成冤枉钱！重资产不可怕，可怕的是花高价买了劣质重资产。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_3">2. 建成转固后的折旧摊销底盘与盈亏平衡点精算</h4><p>截至2026年三季度末，牧原股份固定资产账面价值高达 <strong>946.04亿元</strong>，在建工程仅余 <strong>19.73亿元</strong>。这意味着过去数年规划的猪舍、饲料厂与屠宰厂已接近100%完成转固。</p><p>我们来算一笔精确的折旧摊销账：</p><ul>
@@ -1104,7 +1389,7 @@
 <p><strong>屠宰板块盈亏平衡点定锚</strong>：假设稳态头均毛利为65元/头、单头可变成本为35元/头，则每头猪可贡献边际贡献为 <code>65 - 35 = 30元/头</code>。要覆盖每年8.2亿元的刚性固定成本，需要的保本屠宰量为 <code>8.2亿元 / 30元/头 ≈ 2,733万头</code>（若头均毛利通过精细分割提升至68元/头，则保本屠宰量约为 <strong>2,300万~2,400万头</strong>，对应2,900万~3,100万头总产能的 <strong>盈亏平衡稼动率约为 78% ~ 82%</strong>）。</p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">经营与财务精算指标</th>
@@ -1207,7 +1492,7 @@
 <td style="text-align: left;"><strong>头均净利 0元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>从43.2%稼动率杀一头猪亏50块，到98.8%以上稼动率杀一头猪赚10块，这就是工业经济学里最朴素的“固定成本摊薄魔术”。单头固定成本从65.5元直接砸到24.0元，省出来的41.5元全是纯利润！</p></div></div>
 <hr/>
 <h3 id="capex">二、 审视消化能力：当前CapEx投向究竟是“雪中送炭解瓶颈”，还是存在局部冗余风险？</h3>
@@ -1283,7 +1568,7 @@
 <p><strong>国内屠宰深加工（ToB分割/ToC鲜品）</strong>：处于 <strong>【阶段三初期：B端白条与初级分割已跑通单点盈利（2026前三季度头均赚10元），但高毛利C端品牌肉与调理品仍处探索期】</strong>。</p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">新业务 / 远期期权维度</th>
@@ -1324,7 +1609,7 @@
 <td style="text-align: left;"><strong>最好的防守反击垫子</strong>（满产下每年贡献3~5亿元稳定利润与数百亿现金流周转，但难获食品股高溢价）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_14">二、 跨越鸿沟的三道关卡：底层物理转换率、跨国疫病风控与标准准入壁垒</h3>
 <ol>
@@ -1340,7 +1625,7 @@
 </ol>
 <hr/>
 <h3 id="_15">三、 竞争终局推演与冷峻定性</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">竞争维度</th>
@@ -1375,7 +1660,7 @@
 <td style="text-align: left;"><strong>背靠全球最大单一买家（牧原年产2,400万吨自用饲料）</strong>，零销售费用、零坏账、100%内部包销消化</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>最终定性裁决</strong>：</li>
 </ul><ol>
@@ -1396,7 +1681,7 @@
 <p>如果只盯着牧原股份一家公司的财报看，你很容易陷入两个极端：要么被它2025年狂赚154.87亿元归母净利润、2026年9月把完全成本砸穿11.5元/公斤的工业化奇迹折服；要么被它2026年前三季度巨亏93.19亿元（其中Q3单季亏损32.41亿元）的账面赤字吓出一身冷汗。</p>
 <p>在生猪养殖这个高度同质化、没有任何终端品牌信仰可言的残酷修罗场里，检验一家龙头成色的唯一办法，就是把同桌吃饭的直接对手——<strong>温氏股份（300498.SZ）、新希望（000876.SZ）、神农集团（605296.SH）</strong>，再拉上上游卖饲料的<strong>海大集团（002311.SZ）</strong>和下游杀猪做火腿肠的<strong>双汇发展（000895.SZ）</strong>，把六家公司2025年报与2026年三季报的底牌全部掀开，放在同一张茶桌上做一场“三方交叉审讯”。</p>
 <h3 id="c-1-2025-2026">表 C-1：四大上市猪企 2025年报及 2026年三季报核心财务与经营指标全景对质表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心审讯维度</th>
@@ -1529,7 +1814,7 @@
 <td style="text-align: left;">牧原在巨亏93亿下仍录得+29.83亿经营现金流，负债率极其稳健</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把四家猪企扒掉外衣站成一排，谁在裸泳一目了然：新希望背着69.71%的负债率在生死线上砍产能计提12亿减值；神农顶着寒冬加杠杆扩产结果亏掉近四分之一营收；只有牧原在巨亏93亿的同时，经营现金流还能净赚近30亿，负债率稳如泰山。</p></div></div>
 <hr/>
 <h3 id="1-10">1. 景气度与产能去化对质：10元/公斤寒冬里，谁在真砍母猪，谁在逆势赌周期？</h3>
@@ -1651,7 +1936,7 @@
 </li>
 </ul>
 <h3 id="d-1owner-earnings">表 D-1：牧原股份跨周期常态真实股东盈余（Owner Earnings）分步还原测算表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">还原步骤与财务科目</th>
@@ -1747,7 +2032,7 @@
 <td style="text-align: left;"><strong>257.20 ~ 270.80</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这张表框起来挂在墙上！只会看表面市盈率的蠢货永远算不明白：当一家重资产公司建完了全部猪场，每年145亿折旧加上150亿常态净利就是近300亿现金流，而维持猪场运转只要花掉70—85亿——剩下的207亿到223亿，全是能真金白银装进兜里去削债和分红的股东盈余！</p></div></div>
 <hr/>
 <h3 id="_16">二、 增量垫高测算：三大高确定性内功落地后，能把造血中枢再往上垫高多少？</h3>
@@ -1767,7 +2052,7 @@
 </ul>
 <hr/>
 <h3 id="780020070">三、 双极限抗压测试（基于7,800万头出栏基数与200.70亿非受限现金）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">压力测试情景与传导机制</th>
@@ -1826,12 +2111,12 @@
 <td style="text-align: left;"><strong>OCF保持42亿+正流入，稳守底线</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>哪怕老天爷发疯让猪价再跌10%到9.1元/公斤的地狱模式连冻三年，牧原靠多卖断奶仔猪、降出栏体重、砍资本开支和账上200.7亿非受限现金，照样能硬撑9到14个季度——到时候全中国的竞争对手早就死绝了！</p></div></div>
 <hr/>
 <h2 id="e">追问模块 E：会计成色与治理细节显微镜</h2>
 <h3 id="e-1">表 E-1：四大上市猪企核心会计政策与减值计提审慎度横向对比表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -1908,7 +2193,7 @@
 <td style="text-align: left;">牧原近千亿营收几乎没有应收账款风险，商业回款极其干净</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="1_4">1. 资产质量与会计政策排雷：四大焦点结论</h3>
 <ol>
@@ -1927,7 +2212,7 @@
 </ol>
 <hr/>
 <h3 id="2-30">2. 激励与薪酬审计：30亿真金白银回购与十万产业工人的利益共同体</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计要素</th>
@@ -1962,7 +2247,7 @@
 <td style="text-align: left;">个人考核分 A、B+、B、C、D 五档，仅A/B+可100%解锁，未解锁份额仅按原始出资额加银行同期存款利息孰低值退还</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>员工结构与高管薪酬（2025年报）</strong>：总员工 <strong>127,550人</strong> 中，一线生产人员 <strong>103,736人（81.33%）</strong>、技术人员 <strong>8,568人（6.72%）</strong>，后台行政与财务合计仅占 <strong>6.91%</strong>，人均创收 <strong>113.01万元</strong>；全体董监高税前报酬总额 <strong>4,203.93万元</strong>（占归母净利仅 <strong>0.27%</strong>，董事长秦英林薪酬 <strong>415.81万元</strong>）。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>会计上最见人品的地方就在这儿：同行给每头老母猪留1,000块钱高残值来少提折旧粉饰利润，牧原只留30%残值（400多块）每月往死里提折旧；16.48亿研发费一分钱不资本化全进当期费用；再掏30亿真金白银按47.76元均价买回股票分给3,338名一线场长——账算得越狠，底子越厚！</p></div></div></div></div>
@@ -1975,7 +2260,7 @@
 <hr/>
 <h3 id="true-ev202611-2026q3">一、 真实企业价值（True EV）精算（截至2026年11月上旬 / 2026Q3末报表）</h3>
 <h3 id="f-1true-ev">表 F-1：牧原股份真实企业价值（True EV）与头均标价分步精算表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算项目</th>
@@ -2076,7 +2361,7 @@
 <td style="text-align: left;"><strong>还原净债务后的真实单头生猪产能收购标价</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>永远记住：当你买下一家重资产公司的股票时，你不仅买下了它的猪圈，还替它背上了那612亿净有息债务！只看2,537亿表观市值（头均3,253元）是自欺欺人，加上净债务后的3,170亿真实企业价值（头均4,060元）才是你真正掏出的价钱。</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP）</h3>
@@ -2108,7 +2393,7 @@
 <hr/>
 <h3 id="_17">三、 横向估值对标、分档击球锚点与“三条死刑证伪红线”</h3>
 <h3 id="f-2-202611">表 F-2：三大头部猪企 2026年11月估值定价与历史分位横向对标表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值对比维度</th>
@@ -2162,7 +2447,7 @@
 <td style="text-align: left;">牧原常态内生现金回报率全场最高</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="1-vs_1">1. 分档击球条件（左侧底仓区 vs 右侧黄金重锤区）</h4>
 <ul>
 <li>
@@ -2257,7 +2542,7 @@
 <p><strong>我们的最终安全边际裁决</strong>：牧原在生存端具备极强的反脆弱底线（死不了，且能熬死所有高杠杆对手）；但在定价端，A股44.40元（3.24倍PB、True EV口径回报率7.2%—7.8%）的安全边际只能算‘合理偏温和’，尚未提供让人闭眼重仓的暴利折价。真正的<strong>黄金安全边际击球区</strong>有两个：一是直接买入折价19%、PB仅2.65倍的<strong>H股（02714.HK，39港元以下越跌越买）</strong>；二是耐心等待A股随猪价二次探底回撤至<strong>36.00—39.50元/股（PB跌至2.65—2.85倍，常态股权OE回报率突破9.5%—10%）</strong>时，再挥出重锤！”</p>
 <hr/>
 <h3 id="5">5. 《四位投资大师圆桌投票与核心判词总表》</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">投资大师</th>
@@ -2302,7 +2587,7 @@
 <td style="text-align: left;"><strong>首选H股（02714.HK，PB 2.65倍，33—39港元区间）</strong>；A股耐心等待二次探底回撤至 <strong>36.00—39.50元/股（PB 2.65—2.85倍）</strong> 黄金击球区</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -2328,13 +2613,26 @@
 <p>周期股铁律是“在账面巨亏无人问津时买进，在暴利低市盈率时兑现”。当下首选比A股折价近两成、市净率仅两倍出头的港股（三十九港元以下越跌越买）；若买A股，四十多块钱已含部分幸存者溢价，先拿底仓，等猪价二次探底把A股砸回三十六到三十九块半黄金坑再重锤，盯紧年度资本开支不超百亿红线即可。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2504,7 +2802,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《牧原股份_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/牧原股份_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《牧原股份 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/牧原股份 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2562,6 +2860,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

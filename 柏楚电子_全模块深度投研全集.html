@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>柏楚电子_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>柏楚电子 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">柏楚电子_全模块深度投研全集</div>
+    <div class="report-title">柏楚电子 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -622,7 +907,7 @@
 <h4 id="1">1. 业务结构与利益链条：从“单卖软件板卡”到“四大场景解决方案”的账本重构</h4>
 <p>要看懂柏楚电子的账本，首先必须理解它在2024—2025年完成的披露口径大切换：过去公司按单一零部件拆分为“随动系统、板卡系统、总线系统、其他硬件”；而随着“控制系统 + 智能切割头 + 传感器”打包成套销售成为主流，公司自2024年起全面改按下游应用工艺场景拆分为<strong>平面解决方案、管材解决方案、三维解决方案与其他业务（含智能焊接、精密微加工及配件）</strong>。</p>
 <p>让我们把这套利益链条还原成一张清晰的商业解剖表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块</th>
@@ -687,7 +972,7 @@
 <td style="text-align: left;"><strong>全产业链利润抽水机</strong>：2026Q3（1-9月）营收18.80亿元（+16.05%），综合毛利率72.92%，归母净利率高达58.55%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>这里藏着一个极其精妙的利益错位机制：<strong>买单的人（直接客户）是国内数百家激光切割设备整机集成商（如宏山激光、邦德激光、奔腾激光、迅镭激光等），而真正决定用不用柏楚的人（终端使用者）是全球各地数十万家钣金加工厂、工程机械厂、钢结构厂的一线调机师傅和操作工。</strong> 一台售价20万—100万元的高功率激光切割机，柏楚的一套“板卡/总线控制系统 + 随动传感器”售价仅在 <strong>1.5万—5万元</strong> 之间（即便加上智能切割头全套打包也仅占整机BOM成本的 <strong>8%—15%</strong>），但整机加工出来的零件切面光不光滑、尖角烧不烧穿、厚板穿孔炸不炸镜片、一卷钢板排版能省下百分之几的边角料，<strong>80%取决于柏楚的底层控制算法与切割头光路闭环</strong>。整机厂为了省几千块钱如果敢偷偷把柏楚换成二三线杂牌系统，终端加工厂的老师傅马上罢工拒收设备。这种<strong>“占整机成本极低、对加工良率生死攸关、且操作习惯被终端蓝领工人深度锁定”</strong>的三角博弈结构，正是柏楚能够对下游整机厂实行苛刻的“先款后货（2026Q3末合同负债高达1.51亿元）”并常年赚取50%以上净利率的商业底牌。</p>
 <h4 id="2">2. 产业周期时钟与“寒冬博弈身位”</h4>
 <p>国内通用机床与激光加工装备行业在2022年经历过一次硬着陆，2023—2025年则呈现典型的<strong>“国内中低功率存量内卷、万瓦级超高功率替代传统火焰/等离子切割、以及中国激光整机厂借性价比优势席卷东南亚/中东/南美/欧洲市场”</strong>的结构性分化周期。</p>
@@ -725,7 +1010,7 @@
 <p>在工业自动化与激光运动控制赛道，柏楚电子绝非没有对手。在中低功率控制系统端，有老牌劲旅<strong>维宏股份（300508.SZ）</strong>与激光振镜打标龙头<strong>金橙子（688291.SH）</strong>；在切割头硬件端，有国内出货量极大的<strong>嘉强智能（上海嘉强）</strong>、<strong>万顺兴</strong>以及全球高端霸主<strong>德国普雷茨特（Precitec）</strong>；在超高功率与三维五轴控制系统端，则直接面对<strong>德国倍福（Beckhoff）</strong>与<strong>西门子（Siemens）</strong>。</p>
 <p>我们将柏楚电子的核心王牌产品拉到国内外直接竞争对手面前，做一场刺刀见红的硬参数与财务效率比拼：</p>
 <h4 id="2-1">📊 表 2-1：激光切割运动控制与智能切割头核心玩家横向硬核比拼表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -794,7 +1079,7 @@
 <td style="text-align: left;">未公开披露（欧洲高昂人力拉低净利率）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="50141635">🔬 深度剖析：为什么柏楚电子的净利率（50%+）能甩开国内同行（14%—16%）整整35个百分点以上？</h4><p>很多投资者看着维宏股份、金橙子同样有54%—59%的毛利率，却想不通为什么到了净利率端，柏楚能维持在惊人的 <strong>50.67%（2025年）乃至58.55%（2026Q3）</strong>，而同行常态主业净利率只能赚12%—16%的辛苦钱。穿透产品与费用底层，核心胜负手在于以下三点：</p><ol>
 <li>
 <p><strong>“工业套料软件（CAD/CAM）”构筑的隐形印钞壁垒</strong>：普通运动控制公司（包括早期的维宏）主要做的是最末端的 <strong>NC（数控运动插补，即让电机按既定轨迹走得准）</strong>；而柏楚从创业第一天起就死磕前端的 <strong>CAD/CAM（计算机辅助设计与智能套料排样）</strong>。在厚板与异型管材切割中，一吨钢材动辄四五千元，柏楚的 <code>CypNest</code>（平面套料）和 <code>TubesT</code>（管材套料）采用独家启发式几何排样与共边切割算法，能把钢板利用率硬生生提高 <strong>2%—5%</strong>。对一家年消耗5,000吨钢材的中型加工厂而言，每年光省下的废钢边角料就高达 <strong>50万—100万元</strong>，一年就能把整台激光切割机的钱省回来！因此，柏楚的高阶管材与三维系统卖的根本不是硬件成本，而是按“帮客户省下的钢材价值”进行价值定价。</p>
@@ -914,7 +1199,7 @@
 </ul>
 <h4 id="3_1">3. 五年一期现金流硬账本与防合并报表幻觉穿透</h4>
 <h5 id="5-120212026q3">📊 表 5-1：柏楚电子最近五年一期（2021—2026Q3）现金流与自由造血硬账本（单位：亿元，括号内为精确元）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -991,7 +1276,7 @@
 <td style="text-align: center;">76.64% <em>(注：Q3备货及季节性回款)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>打破“合并报表幻觉”双项体检</strong>：</li>
 </ul><ol>
@@ -1107,7 +1392,7 @@
 </ol>
 <hr/>
 <h2 id="ag-100">🔒 【全局统一财务基准锁定清单（供后续模块 A—G 100% 强制对齐）】</h2>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心基准维度</th>
@@ -1162,7 +1447,7 @@
 <td style="text-align: left;">2026三季报及2025年10月公告</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <hr/>
 <h2 id="afg">【阶段二：六大单点微创追问模块（A—F）与终章大师圆桌会（G）】</h2>
@@ -1207,7 +1492,7 @@
 </li>
 </ul>
 <p>📊 <strong>表 A-1：柏楚电子 2023年末—2026Q3末 固定资产、在建工程与转固勾稽全明细表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">报告期截止日</th>
@@ -1262,14 +1547,14 @@
 <td style="text-align: left;">存量产线满负荷运转；二期新项目处前期筹备</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h5 id="220261-3949">（2）2026年1月三大募投项目结项大审计：为什么只花掉 39.49% 的募集资金就能圆满收官？</h5>
 <p>2026年1月1日，柏楚电子发布重磅公告《关于变更募集资金投资项目投资规模并结项暨新增募集资金投资项目和永久补充流动资金的公告》（公告编号：<strong>2026-001</strong>），对由 <strong>2019年IPO超募资金</strong> 与 <strong>2022年4月定增募集资金（募资总额 <code>9.77亿元</code> / 净额 <code>9.58亿元</code> [<code>95,839.52万元</code>]）</strong> 共同投资的三大核心项目——<strong>《智能切割头扩产项目》</strong>、<strong>《智能焊接机器人及控制系统产业化项目》</strong>、<strong>《超高精密驱控一体研发项目》</strong> 实施全面结项。</p>
 <p>很多只扫一眼公告标题的投资者会困惑：为什么这三个规划总投资高达 <strong><code>14.29亿元</code>（<code>142,942.47万元</code>）</strong>、调整后拟投入募集资金 <strong><code>13.88亿元</code>（<code>138,781.98万元</code>）</strong> 的项目，最终只累计投入了 <strong><code>5.48亿元</code>（<code>54,799.36万元</code>）</strong> 募集资金（整体募集资金投入率 <strong><code>39.49%</code></strong>，其中 2022 年定增募集资金净额 <code>95,839.51万元</code> 中实际投入 <strong><code>41,706.05万元</code></strong>、投入率 <strong><code>43.52%</code></strong>）就宣布结项，并腾出高達 <strong><code>8.40亿元</code>（<code>83,982.62万元</code>）</strong> 的募集资金本金差额节余（连同四年期闲置募集资金理财收益与利息净额合计节余约 <strong><code>9.5亿—10亿元</code></strong>）？</p>
 <p>我们将三大项目的双资金来源（IPO超募 + 2022定增）账本彻底掀开，真相一目了然：</p>
 <p>📊 <strong>表 A-2：柏楚电子三大募投项目（2026年1月结项公告 2026-001）预算 vs 实际投入 vs 节余流向全口径拆解表（单位：万元）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">募投项目名称</th>
@@ -1319,7 +1604,7 @@
 <td style="text-align: left;"><strong>节余本金 8.40 亿元 + 利息理财收益 <span class="math-inline"> → </span> 转投三大新项目（合计 90,085.49 万元）及永久补流</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>穿透这张表格，我们可以提炼出两条极具含金量的产业真相：</p>
 <ol>
 <li>
@@ -1382,7 +1667,7 @@
 <li><strong>折旧盈亏平衡点新增营收与稼动率矩阵（Python 验算结果）</strong>：</li>
 </ol>
 <p>📊 <strong>表 A-3：柏楚电子 4.36亿—4.46亿固定资产折旧摊销与盈亏平衡点 Python 精算矩阵表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">折旧核算标尺维度</th>
@@ -1432,7 +1717,7 @@
 <td style="text-align: center;"><strong>2.30% — 2.45%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注1：波刺《智能切割头扩产项目》设计产能为 <code>14,800台/年</code>，按单台智能切割头保守出厂均价 <code>3.00万元/台</code> 测算，设计满产年产值为 <code>44,400.00万元</code> [4.44亿元]；注2：<strong>全集团合并口径 vs 归母口径边界说明</strong>——闵行紫竹研发生产中心大楼产权归属母公司柏楚电子及全资子公司柏楚数控 [持股100%]，故房屋折旧100%归属母公司股东；仅控股子公司波刺自动化 [2025年10月起柏楚持股92.75%、少数股东占7.25%] 及波锋/波斩的产线设备折旧存在少数股东分摊。结合合并报表归母净利润占比 [2025年为 <code>98.40%</code>，2026Q3为 <code>99.21%</code>]，归母口径折旧与全集团合并口径折旧差异不足 <code>1.6%</code>！)</em></p><p><strong>算账结论令人震撼</strong>：柏楚电子花四年时间建起紫竹研发与产业化基地、将固定资产推升至 <code>4.36亿—4.46亿元</code>，结果 2025 年全集团新增的固定资产折旧仅仅只有 <strong><code>615.34万元</code></strong>！在 <code>72.92%—77.68%</code> 的高毛利率护体下，<strong>只需要新增 <code>792.14万—843.85万元</code> 的营业收入（相当于波刺扩产产线 <code>1.78%—1.90%</code> 的极低稼动率，或者全公司印钞机多转 </strong>1.4 天<strong>）就能 100% 覆盖新大楼带来的增量折旧</strong>！即便把全公司 <code>4.46亿元</code> 固定资产的全年总折旧（<code>3,200.57万元</code>）全部算上，也仅需 <strong><code>4,120.20万—4,389.15万元</code></strong> 营收（不到切割头产线 <strong><code>10%</code></strong> 的稼动率、占公司总营收不足 <strong><code>2.00%</code></strong>）即可打平！</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>老天爷，看看这笔折旧账吧！重工业老板花4.5个亿盖完新厂房，第二天一睁眼就得为几千万的机器折旧和银行利息愁白了头；而柏楚花4.46亿盖好紫竹基地大楼，全年只多出了615万折旧，按它73%到78%的暴利毛利率，车间里只要多卖出280个切割头、或者全公司多干一天半的活，整栋大楼的折旧就全赚回来了！更绝的是，定增原本批了13.88亿预算，这帮交大理工男愣是只花了5.48亿就把活干完了，还连本带利省下近10个亿转头去研发新项目——在A股，这种不乱花冤枉钱的管理层简直比大熊猫还稀有！</p></div></div></div></div>
 
 
@@ -1598,7 +1883,7 @@
 <h5 id="roi-140-vs-386">关卡二：下游钢构厂与船厂的残酷 ROI 算账——理想工况 <code>1.40年</code> 回本 vs 非标返工 <code>3.86年</code> 回本的生死剪刀差</h5>
 <p>下游钢结构厂（如鸿路钢构，吨钢加工净利仅百余元）和造船厂老板都是极其精明的算账高手。他们买不买智能焊接机器人，完全取决于跟“雇佣成熟人工焊工”相比的投资回报期（ROI Payback）。我们用 Python 严密还原一家中型钢构厂采购单套免示教智能焊接工作站的真实单位经济账：</p>
 <p>📊 <strong>表 B-1：下游钢构厂采购“免示教智能焊接机器人工作站” vs 人工成熟焊工 ROI 盈亏平衡精算表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算维度与核心参数</th>
@@ -1651,7 +1936,7 @@
 <td style="text-align: left;"><strong>3.86 年（约 46.3 个月）</strong><br/>❌ <strong>远超老板2年容忍极限，沦为车间摆设！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>算账结论直击要害</strong>：
 * 在钢构厂老板眼里，<strong><code>1.5年（18个月）</code> 是决定是否掏钱大批量采购智能焊接机器人的铁律分水岭</strong>。
 * 在标准 H 型钢梁柱加劲肋场景下，由于构件规整、柏楚系统实现了“1 名普工看管 2—3 台机器 + 两班倒日均起弧 11 小时”，单台工作站一年能替老板净省 <strong><code>15.66万元</code></strong> 真金白银，<strong><code>1.40年</code>（不到 17 个月）即可收回全部 <code>22.00万元</code> 投资</strong>，这也是鸿路钢构愿意成百上千台采购的根本原因；
@@ -1671,7 +1956,7 @@
 <h5 id="1_7">（1）免示教智能焊接赛道的“四方势力大混战”终局推演</h5>
 <p>在非标重工免示教智能焊接这片百亿级新战场上，目前共有四路人马同台竞技，我们逐一推演其核心筹码与终局胜算：</p>
 <p>📊 <strong>表 B-2：免示教智能焊接赛道四方玩家核心筹码与终局胜负手对比表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">竞争阵营</th>
@@ -1711,7 +1996,7 @@
 <td style="text-align: left;"><strong>“自研+外采柏楚”双轨并行</strong>：用自研团队压低外采价格并解决简单工位，复杂工位与迭代升级继续依赖柏楚赋能</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>为什么柏楚电子能在这场混战中切走最肥的一块肉？</strong>
 核心胜负手只有一句话：<strong>非标免示教焊接的真正壁垒，不在机械臂的电机和减速器（那早已沦为大宗工业品），而在于“如何把一张复杂的三维建筑/船体 CAD 图纸，在 10 秒钟内自动解析成几百条不会撞枪、且能根据 3D 相机点云实时修正热变形的空间焊接轨迹”！</strong> 这套结合了<strong>计算几何学（CAD/CAM）、3D 机器视觉与多轴运动规划</strong>的底层算法，恰恰是柏楚电子过去 19 年在平面套料、异型管材切割和三维五轴切割上打遍天下无敌手的看家本领！外资四大家族太傲慢且不懂中国钢构车间的脏活，国产本体厂忙着卷铁疙瘩价格没钱养几百个顶尖数学与图形学博士，而下游钢构厂自研无法向全行业分摊研发成本——这让柏楚再次站上了类似当年激光切割控制系统的“生态公约数”位置。</p><h5 id="2_6">（2）最终定性裁决：低成本、高赔率、零资产减值风险的“顶级真实免费期权”！</h5><p>综合模块 A 的募投结项账本与模块 B 的商业证伪，我们对柏楚电子的第二曲线（免示教智能焊接）与第三曲线（超高精密驱控一体与超快微加工）给出最终买方定性：</p><ul>
 <li><strong>为什么它绝不是“资本消耗陷阱”？</strong>
@@ -1748,7 +2033,7 @@
 <p>在激光加工装备产业链中，下游整机集成商（宏山、邦德、奔腾、大族等）夹在终端钣金/重工加工厂与上游核心部件商之间。一家上游供应商在产业链里到底有没有统治力，不需要听管理层路演吹牛，直接查验资产负债表上的三个生死指标：<strong>纯应收账款、三项广义应收款项总额（应收账款 + 应收票据 + 应收款项融资）、合同负债（预收货款）与存货变动</strong>。</p>
 <p>我们将柏楚电子与维宏股份、金橙子、锐科激光截至 <strong>2025年末</strong> 与 <strong>2026年三季报末（2026年9月30日）</strong> 的营运资产及话语权指标进行全口径拉通比对：</p>
 <h4 id="c-1">📊 表 C-1：激光产业链核心玩家景气度、广义应收敞口与合同负债覆盖率对质大表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心审讯指标</th>
@@ -1830,7 +2115,7 @@
 <td style="text-align: center;"><strong>6.57亿元 → 7.75亿元</strong><br/><strong><code>(+17.98%)</code></strong><br/><code>(774,978,326.71元)</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="_16">🔬 交叉审讯核心结论：</h4><ol>
 <li><strong>产业链话语权的云泥之别（<code>86.40%</code> 预收覆盖率 vs 同行 <code>&lt;8%</code>）</strong>：</li>
 </ol><ul>
@@ -1855,7 +2140,7 @@
 <h3 id="30">二、 盈利质量与单套经济账对质：高出同行30多个百分点的净利率到底从哪来的？</h3>
 <p>为了彻底弄清柏楚电子常年 <strong>50%—58%</strong> 的归母净利率为何能甩开维宏股份、金橙子 <strong>35—45个百分点</strong>，我们将三家激光运动控制可比公司 <strong>2025年报（经审计）</strong> 与 <strong>2026年三季报（1—9月）</strong> 的利润表结构与单套物理经济账拆解到骨头里：</p>
 <h4 id="c-2-vs-vs">📊 表 C-2：柏楚电子 vs 维宏股份 vs 金橙子 盈利质量与四项费用率横向对质表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">利润表与费用率核心指标</th>
@@ -1937,11 +2222,11 @@
 <td style="text-align: center;"><strong>常态主业净利率高出同行 <code>35—45个百分点</code>！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：金橙子2026Q3表观归母净利润6,951.99万元、表观净利率34.98%，系当期处置苏州卡门哈斯股权产生非经常性大额投资收益所致，其2026Q3扣非归母净利润仅2,339.95万元，真实主业扣非净利率为 <code>11.77%</code>；维宏股份2026Q3因证券投资处置损失、补缴税款及股份支付增加导致归母净利率跌至 <code>2.61%</code>、扣非净利率 <code>4.41%</code>。)</em></p>
 <h4 id="c-3asp2025">📊 表 C-3：单套系统/硬件平均售价（ASP）与单位直接成本拆解（2025年报真实产销口径）</h4>
 <p>按照年报真实披露的“主营业务销售收入 ÷ 销售量”与“主营业务销售成本 ÷ 销售量”口径（严禁用成本÷(1-毛利率)循环倒推），我们将三家公司的单套物理经济账还原如下：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司与产品统计口径（2025年报经审计）</th>
@@ -1996,7 +2281,7 @@
 <td style="text-align: center;"><strong>70.26%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(补充柏楚电子2025年报四大场景解决方案真实收入与成本明细：① <strong>平面解决方案</strong>：收入 <code>1,292,909,787.48元</code>，成本 <code>238,589,506.50元</code>，毛利率 <strong><code>81.55%</code></strong>；② <strong>管材解决方案</strong>：收入 <code>487,449,750.00元</code>，成本 <code>76,018,471.33元</code>，毛利率 <strong><code>84.40%</code></strong>；③ <strong>三维解决方案</strong>：收入 <code>63,892,666.55元</code>，成本 <code>11,084,962.89元</code>，毛利率 <strong><code>82.65%</code></strong>；④ <strong>其他主营业务（含智能焊接、精密微加工及单独配件）</strong>：收入 <code>322,392,556.21元</code>，成本 <code>152,697,820.74元</code>，毛利率 <strong><code>52.64%</code></strong>；四项合计主营业务收入 <code>2,166,644,760.24元</code>，主营业务成本 <code>478,390,761.46元</code>，主营业务毛利率 <strong><code>77.92%</code></strong>。)</em></p>
 <div class="annotated-row"><div class="main-col"><h4 id="3545">🔬 深度归因：柏楚高出同行 35—45 个百分点的净利率，究竟来自哪里？</h4><p>通过表 C-2 与表 C-3 的精密拆解，我们可以用严密的数学归因回答这个核心问题——以2025年报为例，柏楚电子归母净利率（<code>50.67%</code>）比维宏股份（<code>16.09%</code>）高出 <strong><code>34.58个百分点</code></strong>，比金橙子（<code>14.55%</code>）高出 <strong><code>36.12个百分点</code></strong>；到了2026年三季报，柏楚净利率（<code>58.55%</code>）更是比维宏扣非净利率（<code>4.41%</code>）和金橙子扣非净利率（<code>11.77%</code>）高出 <strong><code>46—54个百分点</code></strong>！这35个百分点以上的超额净利率由三级火箭共同铸就：</p><ol>
 <li><strong>第一级火箭（贡献约 <code>18—22个百分点</code>）：纯正的“CAD/CAM工业套料算法溢价 + 软硬捆绑客单价升维”</strong>
@@ -2123,7 +2408,7 @@
 <h5 id="2-owner-earnings">2. 真实股东盈余（Owner Earnings）分步还原与七项并表桥接总表</h5>
 <p>基于上述穿透逻辑，我们严格遵循中国企业会计准则（CAS），明确标注维持性资本开支（Maintenance CapEx，结合2025年实际CapEx仅 <code>0.12亿元</code>、2026Q3实际CapEx <code>0.22亿元</code> 的零基建收获期特征，买方模型审慎设定常态合并维持性CapEx为 <strong><code>0.20亿元/年</code></strong>，高于2025年全部实际资本开支）与常态刚性营运资金占用（买方模型参数设定稳态中枢为 <strong><code>0.25亿元/年</code></strong>），拉出横跨5个维度的分步还原与七项并表桥接大表：</p>
 <h6 id="d-1owner-earningsunlevered-firm-oe">📊 表 D-1：柏楚电子真实股东盈余（Owner Earnings）分步还原与无杠杆企业盈余（Unlevered Firm OE）七项并表桥接表（单位：亿元）</h6>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">分步精算与桥接步骤（严守归母 vs 合并口径边界）</th>
@@ -2326,7 +2611,7 @@
 <td style="text-align: center;"><strong>8.20</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>📌 表 D-1 精算勾稽与实绩对表注释</strong>：
 1. <strong>2025年实际自由现金流（FCF）对表验证</strong>：2025年公司合并报表实际 OCF 为 <code>11.04亿元</code>（<code>1,104,320,726.22元</code>），实际发生的总 CapEx 仅为 <code>0.12亿元</code>（<code>12,387,051.96元</code>），实际报表 FCF 高达 <strong><code>10.92亿元</code></strong>；而在表 D-1 中，我们将维持性 CapEx 按更为严苛的 <code>0.20亿元</code> 扣减后，算出的2025年【口径①：含理财与利息的常态归母 OE】为 <strong><code>10.89亿元</code></strong>（若按实际CapEx <code>0.12亿元</code> 还原，则为 <code>10.97亿元</code>），与报表真金白银 FCF（<code>10.92亿元</code>）误差不足0.5%，印证了公司“零应收泡沫、所赚即所得”的顶级现金流纯度。
@@ -2351,7 +2636,7 @@
 <div class="math-display">\Delta <span class="math-text">归母 OE</span><sub><span class="math-text">毛利率弹性</span></sub> = <span class="math-text">基准营收</span>  ×  \Delta <span class="math-text">毛利率</span>  ×  (1 - <span class="math-text">边际所得税率 </span> 10\%)  ×  <span class="math-text">归母折算率 </span> 99\%</div>
 <div class="math-display">\Delta <span class="math-text">归母 OE</span><sub><span class="math-text">高功率套餐销量</span></sub> =  ≤ ft(<span class="math-text">高功率套餐基准毛利 </span> 10.44<span class="math-text">亿</span>  ×  <span class="math-frac"><span class="frac-num"><span class="math-inline">\Delta Q</span></span><span class="frac-den"><span class="math-inline">Q</span></span></span> - \Delta <span class="math-text">变动税费与售后</span>)  ×  (1 - 10\%)  ×  96\% - \Delta <span class="math-text">营运资金</span></div>
 <h6 id="d-2-owner-earnings">📊 表 D-2：柏楚电子核心经营变量对归母 Owner Earnings 的税后敏感度速算表</h6>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">敏感度测试维度（基于标尺二稳态基准：营收23.50亿、毛利17.39亿、成本6.11亿）</th>
@@ -2401,7 +2686,7 @@
 <td style="text-align: left;">因74%超高毛利率护体，上游芯片与镜片哪怕暴涨10%，对归母OE冲击也仅3.5%！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>仔细看表 D-2 的第④行！这就是为什么我一辈子痴迷于高毛利垄断生意——当你的毛利率高达74%的时候，营业成本只占营收的26%，里面原材料又只占营业成本的80%。算下来就算上游卖芯片和光学镜片的供应商集体发疯涨价10%，你的毛利率也只掉区区2.08个百分点，股东盈余才少掉4300万，随便升级一个管材套料软件补丁就能赚回来。相比之下，那些毛利率只有15%的下游整机厂，原材料涨10%就得直接进ICU抢救了。</p></div></div>
 <hr/>
 <h4 id="_18">三、 三档产业景气标尺矩阵 &amp; 三大增量引擎成熟消化垫高测算</h4>
@@ -2443,7 +2728,7 @@
 <h5 id="2-owner-earnings_1">2. 《三档产业景气与产品配比标尺 Owner Earnings 矩阵总表》</h5>
 <p>将存量基本盘与上述三大增量项目汇总，即可锁定柏楚电子在三种产业气候下的完整造血坐标：</p>
 <h6 id="d-3-owner-earnings">📊 表 D-3：柏楚电子三档产业景气与产品配比标尺 Owner Earnings 矩阵总表（单位：亿元）</h6>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">造血层级与业务模块</th>
@@ -2546,7 +2831,7 @@
 <td style="text-align: center;"><strong>9.75</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>算新业务增量的时候，千万别信投资银行家PPT里那种“焊接市场几百亿、我们随便拿30%就能多赚30亿”的鬼话。我们在表 D-3 里专门给智能焊接打了狠折——毛利率按68%算、扣掉驻场工程师的差旅工资、再扣掉钢构厂拖欠账款的营运资金，即便这样一步步扒掉水分，切割头耗材、三维五轴和智能焊接三驾马车在稳态标尺下依然能实打实地把股东盈余再往上垫高 <strong>3.10个亿</strong>（从12.27亿推升到15.37亿），而且几乎不需要再投一分钱盖新厂房！</p></div></div>
 <hr/>
 <h4 id="5-20-20">四、 5 情景双极限压力测试：均价暴跌 20% + 原材料暴涨 20% 下的生死底线与同行出清推演</h4>
@@ -2571,7 +2856,7 @@
 </li>
 </ul>
 <h6 id="d-4-5">📊 表 D-4：柏楚电子 5 情景双极限压力测试精算大表（单位：亿元，买方模型情景参数）</h6>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">利润与内生现金流精算科目（严守口径命名规范）</th>
@@ -2832,7 +3117,7 @@
 <td style="text-align: center;"><strong>8.07</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>📌 表 D-4 精算口径严正说明</strong>：表中第8—9行由 <code>归母净利润 + 有效归母折旧摊销 + 归母营运资金释放（或减占用）</code> 构成的指标严格定义为 <strong>“模型简化归母内生现金流”</strong>，扣除维持性归母 CapEx 后严格定义为 <strong>“模型简化归母 Owner Earnings”</strong>（并非会计准则下的合并现金流量表 OCF）；第12行 <strong>口径③ <code>Unlevered Firm OE</code></strong> 严格执行表 D-1 的七项并表桥接公式（即 <code>口径②归母OE + 扣非少数股东损益 + 少数股东折旧0.01亿 - 超额现金表内税后净利息0.85亿</code>），确保与表 D-1 基准100%闭环对齐。</p>
 </blockquote>
@@ -2874,7 +3159,7 @@
 <p>⚠️ <strong>会计铁律前置声明</strong>：资产负债表附注中的“期末坏账准备余额”系历年累计计提尚未核销的<strong>存量（Stock）</strong>，而合并利润表中的“信用减值损失”系报告期当年新增计提或转回的<strong>流量（Flow）</strong>，两者分属不同报表维度，严禁直接相加。</p>
 </blockquote>
 <h5 id="e-1-vs-vs-20251231">📊 表 E-1：柏楚电子 vs 维宏股份 vs 金橙子 应收账款账龄结构与坏账准备计提政策对比表（截至2025年12月31日经审计口径）</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -2935,7 +3220,7 @@
 <td style="text-align: left;">柏楚当期信用减值损失仅占归母净利润的 <strong>0.35%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>穿透排雷解读</strong>：</li>
 </ul>
@@ -2949,7 +3234,7 @@
 </ol>
 <h4 id="2_8">2. 存货构成解剖与存货跌价准备计提充分度审计</h4>
 <h5 id="e-2-vs-vs-2025">📊 表 E-2：柏楚电子 vs 维宏股份 vs 金橙子 2025年末存货构成明细与跌价准备对比表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">存货明细与减值指标（2025年末经审计）</th>
@@ -3014,7 +3299,7 @@
 <td style="text-align: center;"><strong><code>76,323,950.21 元</code></strong> <code>(0.76亿元，+63.22%)</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>🔬 硬核审讯：为什么金橙子存货跌价计提率达 <code>13.62%</code>、维宏股份为 <code>3.34%</code>，而柏楚电子2025年末存货跌价准备为 <code>0元</code>？这是否构成少提减值美化利润？</strong></li>
 <li>
@@ -3029,7 +3314,7 @@
 </ul>
 <h4 id="3_8">3. 固定资产折旧年限与残值率横向对质</h4>
 <h5 id="e-3">📊 表 E-3：三家公司固定资产折旧年限与残值率对比表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">固定资产类别</th>
@@ -3076,7 +3361,7 @@
 <td style="text-align: left;">完全符合行业稳健惯例</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="4">4. 研发支出资本化率对比（终极试金石）</h4><ul>
 <li>
 <p><strong>柏楚电子</strong>：2025年研发投入高达 <strong><code>3.41亿元</code></strong>（占营业收入 <strong><code>15.55%</code></strong>），2026年前三季度研发费用 <strong><code>2.04亿元</code></strong>（<code>203,881,478.84元</code>，占营收 <strong><code>10.85%</code></strong>）。<strong>历年研发支出资本化金额均为 <code>0.00元</code>，研发支出资本化率为 <code>0.00%</code>（100%全额费用化直冲当期利润表）</strong>，资产负债表上“开发支出”科目常年为 <strong><code>0元</code></strong>！</p>
@@ -3095,7 +3380,7 @@
 <h4 id="1-20222024">1. 2022年与2024年限制性股票激励计划考核门槛穿透审计</h4>
 <p>为了留住上海交大、浙大等顶尖高校出身的算法与光学工程极客，柏楚电子近年来连续推出了多期第二类限制性股票激励计划。我们将其核心考核指标拆解如下：</p>
 <h5 id="e-4-2022-2024">📊 表 E-4：柏楚电子 2022年 &amp; 2024年 限制性股票激励计划业绩考核门槛与实际兑现对表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">激励计划批次</th>
@@ -3145,7 +3430,7 @@
 <td style="text-align: left;"><strong>三年累计+80%底线、+150%满分</strong>：倒逼团队在2026年全力冲刺高功率出海与智能焊接放量</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li>
 <p><strong>审计官客观评判（不吹不黑）</strong>：</p>
@@ -3276,7 +3561,7 @@
 </li>
 </ul>
 <h5 id="f-1688188shtrue-ev">📊 表 F-1：柏楚电子（688188.SH）真实企业价值（True EV）双口径严密核算表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与项目</th>
@@ -3347,7 +3632,7 @@
 <td style="text-align: left;"><em>仅作普通股视角辅助参考，下文核心估值比率统一采用更严密的【合并 True EV】为主分母</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把一家账上趴着57.31亿真金白银、没有一分钱银行长期贷款的公司，跟那些借了五十亿高利贷买破铜烂铁的重资产工厂用同一个表观市盈率去比，简直就像把一个兜里揣着五万块金条的富翁和一个背着五万块赌债的赌徒按体重论身价一样荒唐！你花388.93亿把柏楚买下来，第二天就能从它保险柜里合法提走53.51亿闲钱，你真正为这台激光控制印钞机掏出的净本金只有336.19亿——做投资要是连这第一步剥皮算账都懒得算，你在华尔街就只能当别人餐桌上的火鸡。</p></div></div>
 <hr/>
 <h3 id="_21">二、 七项并表桥接公式与隐含回报率精算：剥离“现金利息幻觉”后的纯实业造血率</h3>
@@ -3370,7 +3655,7 @@
 \end{aligned}</div>
 <p>让我们将这七项桥接参数逐一代入 <strong>标尺二（新常态中枢主锚）</strong>、<strong>标尺一（2026即期高景气）</strong> 与 <strong>远期达产稳态（智能焊接+三维五轴放量后）</strong> 三大标尺，拉出零尾差精算矩阵：</p>
 <h5 id="f-2oe-yield">📊 表 F-2：柏楚电子七项并表桥接公式与三档标尺隐含内生回报率（OE Yield）精算表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">桥接步骤与核心估值指标</th>
@@ -3473,7 +3758,7 @@
 <td style="text-align: left;"><em>严苛压力口径：<code>⑧ Unlevered Firm OE ÷ 340.35亿元</code></em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>🔗 【与模块 D 分步精算底表（表 D-1 / 表 D-3）的精确咬合对账注记】</strong>：
 为方便机构投资者在“模块 D 逐项底表精确值”与“模块 F 买方取整估值主锚”之间无缝切换，特将两套同源口径的精确回报率与静态回本年限对账如下（两者隐含回报率差异仅 <code>0.05—0.07 个百分点</code>，100% 同源闭环）：
@@ -3491,7 +3776,7 @@
 <h4 id="2_10">2. 跨期分红与股东现金回报率严格拆分（彻底杜绝跨期混加幻觉）</h4>
 <p>柏楚电子是科创板罕见的“现金奶牛型分红标兵”（上市 7 年累计分红 <code>25.04 亿元</code>，几乎 100% 退还 IPO 与定增全部融资本金，且无注销式回购粉饰，全靠真金白银派息）。但在核算即期股息率时，由于公司在 2025 年与 2026 年连续实施了“半年度中期分红 + 年度末期分红”，<strong>我们必须严格按会计所属年度将分红收益率拆分为三个独立口径，严禁将跨会计年度的分红直接相加冒充单年经常性股息率</strong>：</p>
 <h5 id="f-3">📊 表 F-3：柏楚电子跨期现金分红收益率严格拆分核验表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">分红口径分类</th>
@@ -3536,7 +3821,7 @@
 <td style="text-align: left;">远期智能焊接与三维五轴达产后（对应归母OE 15.50亿 / 归母净利约16.0亿—16.5亿元），维持67%分红率下的稳态现金回报</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>注意看我们的“七项桥接公式”第七条——为什么要把那1个亿的税后利息和理财收益从分子里硬生生抠出去？因为很多粗心的分析师在算企业价值（EV）的时候，高高兴兴把人家账上的53.51亿超额现金扣掉了，转头算利润的时候却把这53.51亿存银行产生的1个亿利息算进了实业回报里，这就好比你买一套带租约的车库，既把车库里的存款拿走了，还指望那笔存款继续给你付房租！抠掉这1个亿利息之后，柏楚纯实业每年稳稳赚11.10亿到11.90亿真金白银，对应336.19亿的合并True EV，纯实业静态回本年限在28.3年到30.3年之间，同时每年还能拿到2.3%左右（占True EV约2.66%）且每年随业绩增长15%—20%的纯现金分红。</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">三、 Reverse SOTP（逆向拆骨定价——双轨并列）：市场到底给“智能焊接+驱控一体”预支了多少期权费？</h3>
@@ -3576,7 +3861,7 @@
    * 用当前二级市场总标价减去上述三大确定性模块，即可精准倒推出市场当前为柏楚电子第二、第三增长曲线支付的隐含期权价格：</li>
 </ol>
 <h5 id="f-4-reverse-sotp">📊 表 F-4：柏楚电子 Reverse SOTP（逆向拆骨定价）双轨并列精算总表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务与资产拆骨模块</th>
@@ -3629,7 +3914,7 @@
 <td style="text-align: left;"><strong>占合并 True EV 仅 <code>12.25%—22.51%</code>（占总市值 <code>11.76%—20.49%</code>）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>🔬 拆骨结论与买方方法论严正声明</strong>：</li>
 </ul><ol>
@@ -3647,7 +3932,7 @@
 <h4 id="1_11">1. 全球与国内可比同行估值横向比拼及历史分位坐标</h4>
 <p>我们将柏楚电子与全球工厂自动化及机器视觉巅峰标杆 <strong>日本基恩士（Keyence, 6861.T）</strong>、全球 CNC 数控与机器人霸主 <strong>日本发那科（Fanuc, 6954.T）</strong>、中国工控绝对龙头 <strong>汇川技术（300124.SZ）</strong>，以及国内激光运动控制直接同行 <strong>维宏股份（300508.SZ）</strong>、<strong>金橙子（688291.SH）</strong> 放在同一张买方估值天平上对比：</p>
 <h5 id="f-5-202611">📊 表 F-5：柏楚电子与国内外工业自动化/激光控制同行估值及盈利硬指标对比表（截至 2026年11月）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称与代码</th>
@@ -3722,7 +4007,7 @@
 <td style="text-align: left;"><strong>科创板次新成长股中高估值区间</strong><br/><em>(激光振镜打标控制龙头，正切入精密微加工，盈利体量尚在数千万元级，估值显著贵于柏楚电子)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>纵向与横向估值坐标定性结论</strong>：</li>
 </ul>
@@ -3740,7 +4025,7 @@
 <h4 id="2_11">2. 买方实战分档击球区（精确到具体股价、市值与隐含回报率）</h4>
 <p>为了不在模糊的口号里打转，我们将柏楚电子的实战操作纪律拆解为四档精确到“元/股”与“亿元市值”的买方击球网格（统一以当前总股本 <code>4.0598 亿股</code> 及常规超额现金 <code>53.51 亿元</code> 为折算标尺）：</p>
 <div class="callout callout-important"><div class="callout-title">⚡ 核心结论 (IMPORTANT)</div><div class="callout-body"><h3>🎯 柏楚电子（688188.SH）买方四档实战击球网格与仓位法则</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位与操作定性</th>
@@ -3799,7 +4084,7 @@
 <td style="text-align: left;">当股价突破 125 元（市值超 500 亿）、而在手焊接与新业务订单尚未兑现至 5 亿+ 利润体量时，说明市场再次透支未来 3—5 年乐观预期，纯实业隐含回报率跌破无风险国债安全垫，应分批止盈兑现。</td>
 </tr>
 </tbody>
-</table></div></div>
+</table></div></div></div>
 <h4 id="3_9">3. 🚨 三条无条件认错清仓的「基本面死刑证伪红线」</h4>
 <p>作为纪律严明的买方，我们绝不与股票谈恋爱。在持有柏楚电子期间，一旦定期报告或产业草根调研出现以下 <strong>任意一条基本面逻辑崩塌信号</strong>，无论当时股价盈亏如何，必须立即无条件清仓离场：</p>
 <div class="callout callout-caution"><div class="callout-title">🚨 死刑红线 / 高危警示 (CAUTION)</div><div class="callout-body"><h3>🚨 柏楚电子（688188.SH）三条无条件清仓的基本面死刑证伪红线</h3>
@@ -3856,7 +4141,7 @@
 只要这两发右侧信号弹有一发升空，哪怕到时候股价已经涨到 <strong><code>100 元</code></strong>，我也会像 2022 年底买英伟达一样，毫不犹豫地扣动扳机推上重仓，吃尽它从 <strong><code>30 倍</code></strong> 迈向 <strong><code>45 倍</code></strong>、利润从 <strong><code>12 亿</code></strong> 奔向 <strong><code>16 亿+</code></strong> 的主升浪肥肉！”</p>
 <hr/>
 <h3 id="g-1">📋 表 G-1：四位投资大师圆桌投票与核心判词总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">投资大师与流派</th>
@@ -3901,7 +4186,7 @@
 <td style="text-align: left;">“别在业绩换挡减速的时候跟股票谈恋爱！等单季毛利率在72%企稳、或者船厂百台级焊接大单落地的那天，我会第一个推上重仓！”</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -3917,13 +4202,26 @@
 <p>好公司不等于任何价格都能无脑追。目前它处于传统切割增速换挡、智能焊接尚未起舞的过渡期。最聪明的打法是“左侧看免单底线、右侧看两颗信号弹”：若市场因短期降速把股价砸到八十多块钱以下（扣除满手现金后等于存量切割业务平价卖、智能焊接百亿期权零元白送），直接闭眼分批建底仓；若想右侧重仓吃主升浪，就死盯两个扳机——单季毛利率在七成以上企稳且营收增速重回两成五以上，或造船厂与大型钢构厂爆出百台级免示教焊接批量集采大单，见信号再重锤推满。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -4093,7 +4391,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《柏楚电子_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/柏楚电子_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《柏楚电子 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/柏楚电子 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4151,6 +4449,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

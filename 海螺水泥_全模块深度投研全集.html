@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>海螺水泥_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>海螺水泥 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">海螺水泥_全模块深度投研全集</div>
+    <div class="report-title">海螺水泥 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -669,7 +954,7 @@
 <p>大宗资源与建材生意的终极裁判只有一条：<strong>你站在全国成本曲线的哪个分位？你的海外与非水泥第二曲线能不能对冲国内内卷？</strong></p>
 <p>我们将<strong>海螺水泥（600585.SH）</strong>拉到国内产能规模第一的<strong>天山股份（000877.SZ，中国建材核心平台）</strong>、海外与骨料转型最成功的<strong>华新水泥/华新建材（600801.SH）</strong>，以及华南区域成本精细化代表<strong>塔牌集团（002233.SZ）</strong>面前，基于 <strong>2025 年报</strong>与 <strong>2026 年三季报</strong>做硬核拆骨对比：</p>
 <h3 id="1_1">1. 四大水泥龙头硬核财务与经营指标横向对比表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心对比维度</th>
@@ -758,7 +1043,7 @@
 <td style="text-align: left;">约 12%，无有息债负担，持有大量理财股票</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这四张底牌摊在桌上一比，高下立判：天山股份是典型的“借新债吞大象、最后被千亿债务和几十亿商誉反噬”的悲剧；华新水泥是敢去非洲中亚刀口舔血、赚取 45% 暴利的探险家；而海螺则是账上趴着 600 亿现金、把吨成本压到 166 块极限的“内陆重装铁王座”。</p></div></div>
 <h3 id="2-16642">2. 穿透海螺 166.42 元/吨“极致成本曲线最左端”的四大物理底座</h3>
 <div class="annotated-row"><div class="main-col"><p>为什么在 2025 年同样卖一吨水泥熟料，海螺的自产品吨成本能压到令人发指的 <strong>166.42 元/吨</strong>（较 2024 年的 187.25 元/吨再降 20.83 元/吨），比天山股份等同行整整低出 <strong>30—40 元/吨</strong>？拆开海螺 2025 年报的吨成本账本，每一分钱优势都长在物理资产上：</p><ol>
@@ -812,7 +1097,7 @@
 杨军与虞水团队上任三年半以来，展现出了极强的<strong>纠偏能力与务实作风</strong>：果断叫停二级市场“炒同行股票”行为，将年度资本开支从 2022 年的 266.46 亿元一路压降至 2025 年的 96.36 亿元（现金流口径），并在 2025—2026 年推出高分红承诺与真金白银的回购注销。</p>
 <h3 id="2-20212022-vs-20252026">2. “翻旧账对表”言行一致性审计（2021—2022 年报规划 vs 2025—2026 实际落地）</h3>
 <p>我们调取海螺水泥 <strong>2021 年报、2022 年报</strong>中写下的经营计划与战略目标，与截至 <strong>2026 年中报/三季报</strong>的实际结果逐一硬核对表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">旧账来源与当年承诺目标</th>
@@ -842,7 +1127,7 @@
 <td style="text-align: left;"><strong>交了周期高点学费</strong>：属于上一任期尾声在景气顶点的资本配置失误，现已彻底停止此类操作。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="3_1">3. 常规治理与关联交易排查</h3>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
@@ -889,7 +1174,7 @@
 <h3 id="3_2">3. 五年一期现金流硬账本与防合并报表幻觉穿透</h3>
 <h4 id="20212026q3">📊 海螺水泥最近五年一期（2021—2026Q3）自由现金流硬核审计表</h4>
 <p><em>(数据来源：海螺水泥各期中国准则年报及2026年三季报合并现金流量表，单位：亿元人民币)</em></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -966,7 +1251,7 @@
 <td style="text-align: center;"><strong>279.3%</strong> <em>(非同口径比值)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(口径与重述桥接说明：① 2023 年行统一采用《2024年年度报告》（中国准则）重述比较列数据：重述营业收入 <code>141,157,206,613 元</code>[<code>1,411.57 亿元</code>，2023年报原列为 <code>1,409.99 亿元</code>]、重述归母净利润 <code>10,427,551,650 元</code>[<code>104.28 亿元</code>，原列 <code>104.30 亿元</code>]、重述合并 OCF <code>20,074,155,896 元</code>[<code>200.74 亿元</code>，见2024审计报告附注58，原列为 <code>201.06 亿元</code>]；2023 年购建长期资产付现 <code>141.67 亿元</code> 取自 2023 年报原表，故五年合计 FCF <code>+217.77 亿元</code> 标明为混合披露展示数差额。② 表中 <code>OCF</code> 与 <code>CapEx</code> 均为合并现金流量表口径，而 <code>归母净利润</code> 为归属于母公司股东口径，故末列比值仅作非同口径辅助观察，合并 <code>OCF - CapEx</code> 亦不直接等同于归母股东可自由分配现金。)</em></p>
 <div class="annotated-row"><div class="main-col"><h4 id="_7">🔍 打破“合并报表幻觉”两项体检：</h4><ol>
 <li>
@@ -1210,7 +1495,7 @@
 
 <hr/>
 <h4 id="a-1">📊 表 A-1：海螺水泥核心在建/新投工程与同行同类项目单位经济账横向对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目分类</th>
@@ -1305,7 +1590,7 @@
 <td style="text-align: left;"><strong>明显偏贵且踩中周期底部</strong>：跨界缺乏规模效应，清远项目已实质放缓</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="4-breakeven">4. 转固折旧摊销洪峰测算与盈亏平衡点（Breakeven）推演</h4><p>根据现金流量表补充资料，海螺水泥 2024 年固定资产折旧为 <strong>73.18 亿元</strong>、无形资产摊销为 <strong>11.00 亿元</strong>（两项合计 <strong>84.18 亿元</strong>）；2025 年固定资产折旧为 <strong>72.11 亿元</strong>（<code>7,210,685,487 元</code>）、无形资产摊销攀升至 <strong>11.66 亿元</strong>（<code>1,165,612,463 元</code>，两项合计 <strong>83.77 亿元</strong>，另加使用权资产折旧 0.84 亿元及投房折旧 0.04 亿元，四项合计 <strong>84.63 亿元</strong>）。
 随着 2025—2027 年重点在建工程陆续转固（在建工程余额从 2024 年末的 93.56 亿元变化至 2025 年末的 61.72 亿元、2026H1 末的 65.93 亿元及 2026Q3 末的 60.61 亿元；结合重要在建工程项目明细表中的当期转固额及封开古利山、肇庆石人顶、海门新材料等项目预算，预计本轮重点项目群跨期累计转固总规模约 <strong>95—110 亿元</strong>）以及配套高价采矿权启用摊销，我们按项目级工程模型推演其新增刚性固定成本：</p><ol>
@@ -1546,7 +1831,7 @@
 </ul>
 <hr/>
 <h4 id="b-1">📊 表 B-1：海螺水泥“新业务与绿色低碳技术”商业证伪评估总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">新业务 / 技术模块</th>
@@ -1607,7 +1892,7 @@
 <td style="text-align: left;"><strong>【极大概率打水漂的资本消耗陷阱】</strong><br/>在光伏景气顶点立项、周期冰点投产的典型跨界败笔，持续消耗主业现金流</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2-1">2. 专员 1 终局裁定：把“省钱的刀”与“烧钱的坑”彻底分开看！</h4><p>站在产业投资者的茶桌前，我们对海螺水泥在“水泥+”之外的新曲线给出三句最干脆的定论：</p><ol>
 <li>
@@ -1630,7 +1915,7 @@
 <p>然而，同样面对内需退潮，四家代表性水泥企业的财报却跑出了截然相反的生死轨迹——<strong>海螺水泥（600585.SH）</strong>在国内泥潭中死守份额与现金流底线，2026年前三季度归母净利缩水逾五成至27.43亿元（其中Q3单季仅微利2.16亿元）；体量庞大的中国建材水泥旗舰<strong>天山股份（000877.SZ）</strong>在2025年巨亏72.91亿元后，2026年前三季度继续深亏48.44亿元；华南精细化标杆<strong>塔牌集团（002233.SZ）</strong>在2026年前三季度同样遭遇净利腰斩（-55.80%）；唯独更名后的<strong>华新建材（原华新水泥，600801.SH）</strong>逆势狂飙，2026年前三季度斩获归母净利润 <strong>28.26亿元</strong>（同比增长41.05%），历史上首次在前三季度归母净利润绝对值上反超海螺水泥！</p>
 <p>为了还原这四家企业分化背后的产业真相，我们调取四家公司《2025年年度报告》《2026年半年度报告》及《2026年第三季度报告》原始财务科目，先立起这张核心交叉对质大表：</p>
 <h3 id="c-1-2025-2026q1-q3">表 C-1：四大水泥龙头 2025全年及 2026Q1-Q3 经营与资产负债核心指标交叉对质表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审讯维度</th>
@@ -1824,7 +2109,7 @@
 <td style="text-align: left;">天山前三季度期间费率飙至18.23%，远超11.81%的综合毛利率</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="1_7">1. 景气度与渠道话语权对质：谁在坚守“先款后货”，谁在靠垫资续命？</h3>
 <p>把四家公司的营运资本科目摊开对质，两个最尖锐的产业问题立刻水落石出：</p>
@@ -1866,7 +2151,7 @@
 <p>很多投资者疑惑：大家都卖42.5级和32.5级水泥，用的都是石灰石和动力煤，为什么2025年海螺能赚81.13亿元、2026年前三季度国内水泥惨烈杀价下还能赚27.43亿元，而天山股份两年不到却亏掉 <strong>121.35亿元</strong>（2025年亏72.91亿 + 2026前三季度亏48.44亿），华新建材却能逆势大赚 <strong>28.26亿元</strong> 反超海螺？</p>
 <p>光看综合毛利率（2026Q1-Q3：华新31.77% &gt; 塔牌21.64% &gt; 海螺17.69% &gt; 天山11.81%）还不够直观。我们必须拿起手术刀，将四家公司的财务数据还原到<strong>同口径的“吨水泥熟料单位经济账”</strong>（以数据披露最完备的2025全年审计数据为基准，并延展至2026H1/Q1-Q3最新演变），一分钱一分钱地算清楚差额：</p>
 <h3 id="c-22025-2026">表 C-2：四大水泥龙头“吨水泥熟料经济账”拆骨还原表（2025全年基准 + 2026最新穿透）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">吨经济账拆解维度（单位：元/吨）</th>
@@ -2024,7 +2309,7 @@
 <td style="text-align: left;"><strong>华新非洲及中亚高景气彻底拉开差距</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(口径与分摊公式透明披露：① <strong>销售口径 vs 生产成本口径</strong>：海螺水泥 2025 年报第 15—16 页披露自产品销售收入 <code>683.78 亿元</code>、自产品营业成本 <code>493.96 亿元</code>、自产品销量 <code>2.65 亿吨</code>，对应销售口径吨收入 <strong><code>258.03 元/吨</code></strong>、销售口径吨成本 <strong><code>186.40 元/吨</code></strong>、销售口径吨毛利 <strong><code>71.63 元/吨</code></strong>[毛利率 <code>27.76%</code>]；同时年报第 16 页成本构成表单独披露自产品综合<strong>生产成本为 <code>166.42 元/吨</code></strong>[燃料动力 <code>87.47</code> + 原材料 <code>32.53</code> + 折旧 <code>16.08</code> + 人工及其他 <code>30.34 = 166.42 元/吨</code>]。由于定期报告未披露产销量差额及合同履约运费调节明细，本表严格保留销售口径 <code>258.03 / 186.40 / 71.63 元/吨</code> 并将 <code>166.42 元/吨</code> 单列为生产成本，不作未经披露的出厂净价反推。2026H1 同理：自产销售口径吨成本为 <code>222.02 亿元 ÷ 1.21 亿吨 = 183.49 元/吨</code>，披露生产成本为 <code>163.12 元/吨</code>。② <strong>期间费用与减值分摊说明</strong>：海螺 2025 年合并利润表四项期间费用原值为销售费用 <code>35.01 亿元</code>[<code>3,500,998,769 元</code>]、管理费用 <code>60.00 亿元</code>[<code>6,000,090,919 元</code>]、研发费用 <code>8.47 亿元</code>[<code>847,445,108 元</code>]、财务费用 <code>-9.13 亿元</code>[<code>-913,433,686 元</code>]，<strong>合并四费合计 <code>94.35 亿元</code>[<code>9,435,101,110 元</code>]</strong>；合并减值损失合计 <strong><code>9.07 亿元</code></strong>[资产减值 <code>8.20 亿</code> + 信用减值 <code>0.87 亿</code>]。若直接除以 <code>2.65 亿吨</code> 自产销量，合并直除吨四费为 <strong><code>35.60 元/吨</code></strong>、吨减值为 <strong><code>3.42 元/吨</code></strong>；表中 <code>29.16 元/吨</code>[<code>10.82 + 18.54 + 2.62 - 2.82</code>] 与 <code>2.80 元/吨</code> 系按自产水泥熟料占扣除低毛利贸易后主营收入比例约 <code>81.91%</code>[即等效水泥当量分母 <code>2.65 ÷ 0.8191 ≈ 3.235 亿吨</code>] 折算的分析模型估计值。因财报未披露分部期间费用法定分摊表，上述吨费用对比仅作数量级趋势参考。)</em></p>
 <p>透过这张“吨经济账”对比表，我们可以把三家巨头在2026年前三季度的命运分野讲得一清二楚：</p>
 <h4 id="vs-4844">剖面一：海螺水泥 vs 天山股份 —— 为什么海螺还能微利造血，天山却巨亏48.44亿？</h4>
@@ -2169,7 +2454,7 @@
 <p>考虑到海螺拓展商品混凝土（8,435 万方产能）及重点工程直供会产生一定的应收款项沉淀，模型中每年额外扣减 <strong><code>3.50—5.00 亿元</code></strong> 作为归母营运资金追加假设。</p>
 <h4 id="d-1owner-earnings">📊 表 D-1：海螺水泥归母股东盈余（Owner Earnings）分步还原情景测算表</h4>
 <p><em>(单位：亿元人民币；严格区分法定财报已实现数与买方模型情景估算值)</em></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">分步还原计算科目</th>
@@ -2294,7 +2579,7 @@
 <td style="text-align: left;"><em>合并现金流口径，已含扩张性CapEx及少数股东现金流</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>情景测算结论</strong>：</p><ol>
 <li>
 <p><strong>在“2026 极寒底部态”情景下</strong>：即便全年扣非归母净利润压降至 <strong>36.00 亿元</strong>（对应表观归母净利约 43.50 亿元，含已实现 7.34 亿元非经常损益），在模型假定的归母折旧摊销（<code>+79.30 亿元</code>）、维持性 CapEx（<code>-42.00 亿元</code>）及营运资金占用（<code>-5.00 亿元</code>）下，<strong>归母股东盈余（Owner Earnings）情景估算值约为 <code>68.30 亿元</code>（区间 <code>65.0—73.0 亿元</code>）</strong>。</p>
@@ -2375,7 +2660,7 @@
 
 <h4 id="d-2072">📊 表 D-2：海螺水泥双极限压力测试假设参数下简化盈余对质表（0.72 系数精确复算版）</h4>
 <p><em>(模型场景输入：基准销量 2.50亿吨/年；基准全口径吨成本 183.50元/吨；极寒基准吨售价 215.50元/吨；税后归母传导系数 0.72；单位：亿元)</em></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">压力测试模型情景设定</th>
@@ -2460,7 +2745,7 @@
 <td style="text-align: left;">吨成本升8.80元×2.5亿×0.72=-15.84亿</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(🔒 模块 D 边界收束：以上全部测算严格基于物理产能、单位成本与经审计折旧摊销账本，未做任何未来营收数字拍脑袋预测。接下来进入模块 F，正式全面解锁二级市场估值定价！)</em></p>
 <h2 id="-_2">---</h2>
 <hr/>
@@ -2469,7 +2754,7 @@
 <p>更极具警示意义的是，就在本报告截稿前夕的 <strong>2026年11月4日</strong>，行业产能第一大户<strong>天山股份（000877.SZ）</strong>突发重磅公告：<strong>因涉嫌信息披露违法违规被中国证监会正式立案调查！</strong> 同日，新疆证监局下发行政监管措施决定书，直指天山股份两大财务核算硬伤——一是 <strong>2023年至2025年商誉减值测试关键假设与历史数据差异巨大且缺乏合理依据</strong>；二是其核心子公司 <strong>湖南南方水泥在更新测算2025年应收账款预期信用损失率时，竟因Excel计算表单元格数据引用错误，导致少计提坏账准备2,109.15万元，且迁徙率考虑不充分</strong>！</p>
 <p>天山股份的立案爆雷，为整个水泥行业的财报审计敲响了警钟。我们立刻拿起最高倍数的会计与治理显微镜，将海螺水泥与华新建材、天山股份、塔牌集团的2025年报及2026三季报附注逐项对质，排查海螺水泥账面是否存在任何潜藏水分或治理暗礁。</p>
 <h3 id="e-1">表 E-1：四大水泥龙头会计政策松紧度、资产减值与公司治理核心指标横向对比表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计与治理维度</th>
@@ -2609,7 +2894,7 @@
 <td style="text-align: left;"><strong>海螺2025年支付给职工及为职工支付的现金总额同比增长5.42%至95.37亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="1_8">1. 资产质量排雷与会计政策松紧度对质</h3>
 <p>我们围绕投资者最担心的四个财务暗角，对海螺水泥的报表附注进行穿透式审计：</p>
@@ -2837,7 +3122,7 @@
 </ul>
 <h4 id="f-1consolidated-ev2026-11-13">📊 表 F-1：海螺水泥合并企业价值（Consolidated EV）情景核算表（2026-11-13 收盘基准）</h4>
 <p><em>(单位：亿元人民币；统一采用合并口径 EV，少数股东权益按账面值 106.64 亿元代理；括号内并列剔除 5.47 亿股票及 0.85 亿季后回购之严苛校准值)</em></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">合并企业价值 (Consolidated EV) 核算科目</th>
@@ -2898,7 +3183,7 @@
 <td style="text-align: left;">相当于新建参考重置成本(<code>450—550元/吨</code>)的 <strong><code>45.9%—56.1%</code></strong>（不代表清算底价或其它业务免费）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="_26">💡 企业价值核算的核心发现与边界说明：</h4><ol>
 <li>
 <p><strong>合并口径 EV 情景区间为 <code>590.90—597.22 亿元</code>（H股同价假设）至 <code>767.05—773.37 亿元</code>（A股同价假设）</strong>：
@@ -2918,7 +3203,7 @@
 <div class="math-display"><span class="math-text">Unlevered Firm OE</span> = <span class="math-text">归母 OE</span> + <span class="math-text">少数股东损益</span> + <span class="math-text">少数股东折旧摊销</span> - <span class="math-text">少数股东维持性 CapEx</span> - <span class="math-text">少数股东营运资金变动</span> + <span class="math-text">税后有息债务利息费用</span> - <span class="math-text">超额现金及定期存款税后利息收益</span></div>
 <p><em>(注：据海螺 2025 年报 p.94 财务费用附注，2025 年利息收入为 <code>19.17 亿元</code>、利息支出为 <code>6.51 亿元</code>；随着 2024—2026 年三年期高息定存陆续到期重定价，基准情景下超额资金税后利息收益按 <code>9.00—9.50 亿元/年</code>、有息债务税后利息费用按 <code>4.50 亿元/年</code> 计，净利息调整项为 <code>-4.50 ~ -5.00 亿元/年</code>；同时必须补扣少数股东对应的维持性 CapEx <code>-2.65 ~ -2.70 亿元/年</code> 与营运资金变动 <code>-0.25 ~ -0.30 亿元/年</code>，不可只加少数股东折旧而不扣少数股东维持性资本开支！)</em></p>
 <p>我们同时并列展示<strong>【完整扣减少数股东维持 CapEx 后的合并无杠杆 Firm OE vs 合并 EV】</strong>、<strong>【仅加少数股东折旧未扣其 CapEx 的简化口径】</strong>以及<strong>【普通股市值 vs 含息归母 OE】</strong>，三把尺子全部严丝合缝：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">盈利状态档位</th>
@@ -2959,7 +3244,7 @@
 <td style="text-align: center;"><strong>13.75%</strong> (7.3 年)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：若按辅助参考的归母净现金减项指标 <code>H 484.26亿 / A 660.41亿</code> 对比扣息归母 OE <code>63.80 / 106.30 / 123.10 亿</code>，粗算比率分别为 H 股 <code>13.17% -&gt; 21.95% -&gt; 25.42%</code>、A 股 <code>9.66% -&gt; 16.10% -&gt; 18.64%</code>，因未剔除少数股东名下现金债务，仅作辅助参考。)</em></p>
 <ul>
 <li>
@@ -2992,7 +3277,7 @@
 </li>
 </ol>
 <h4 id="reverse-sotp-ev">📊 Reverse SOTP（合并分部 EV 主口径 + 归母纯股权交叉校验）情景推演表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">资产包拆骨维度 <em>(统一基于 2026-11-13 有效市值，情景估值假设)</em></th>
@@ -3053,7 +3338,7 @@
 <td style="text-align: left;"><strong>纯股权同口径残值</strong>：<code>755.60 - 575.00 = 180.60 亿元</code> (<strong><code>82.8 元/吨</code>熟料</strong>；简单合并相减口径为 <code>89.26 亿元 / 40.9 元/吨</code>)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>拆骨情景推演结论</strong>：
 在 <strong>2026 年 11 月 13 日收盘</strong> 的价格台上，当你以 <strong>17.02 港元（H 股）</strong> 买下海螺水泥时：站在全表承担全部有息负债并计入 <code>106.64 亿元</code> 少数股东权益的合并企业价值口径下，扣除骨料、海外与绿电战略股权的分部 EV 情景估值（<code>395.00 亿元</code>）后，市场给海螺<strong>重置参考造价约 1,000—1,200 亿元、极寒年仍能产出充沛折旧与自由现金流的“国内 2.18 亿吨沿江熟料 + 3.69 亿吨水泥 + 石灰石矿山 + 长江专用深水码头主业”</strong>的隐含合并企业价值残差，仅为 <strong><code>195.90 亿元</code>（折合 <code>89.9 元/吨熟料</code>，严苛剔除交易性股票为 <code>202.22 亿元 / 92.8 元/吨</code>，A 股亦仅 <code>170.7 元/吨</code>）</strong>；即便在纯股权视角下扣除估算归母分部股权（<code>332 亿元</code>）与估算归母净现金（<code>~243 亿元</code>，合计 <code>575 亿元</code>，覆盖 H 股市值 <strong><code>76.1%</code></strong>；若按合并净现金与分部估值简单对减则为 <code>666.34 亿元 / 88.2%</code>），国内水泥主业的隐含股权标价也仅在 <strong><code>180.60 亿元</code>（<code>82.8 元/吨</code>）至 <code>89.26 亿元</code>（<code>40.9 元/吨</code>）</strong> 之间——这充分说明市场对国内水泥周期底部给予了极高折价，供给侧出清期权近乎处于极低成本附赠状态！</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>做完这道同口径减法，不管你是按最严苛的合并分部 EV 算（国内 2.18 亿吨熟料隐含价值 195.9 亿，每吨 89.9 块），还是把少数股东权益和分部债务老老实实剔干净按归母纯股权算（每吨 82.8 块），结论都指向同一个事实：市场先生在周期底部把中国成本最低的沿江熟料主业打到了重置参考造价的两成左右。我们不需要把这 89.9 块钱当成明天就能拆卖变现的清算支票，但用这个价格买下每年能产几十亿自由现金流的印钞机，赔率完全站在耐心者这一边。</p></div></div></div></div>
 
@@ -3061,7 +3346,7 @@
 <h3 id="_27">三、 赔率定位、分档击球区与“三条基本面死刑证伪红线”</h3>
 <h4 id="1-2026-11-13">1. 历史估值分位与国内外同行横向定性（2026-11-13 最新实时行情校准）</h4>
 <p>我们拉通海螺水泥过去 20 年估值带，并与国内外五大直接标杆同行截至 2026 年 11 月中旬的最新市场交易定价逐一横向对表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比标的</th>
@@ -3130,7 +3415,7 @@
 <td style="text-align: left;">证明传统水泥剥离包袱、深耕低碳建材与骨料可获高倍数资本重塑</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>客观估值定性</strong>：
   截至 2026 年 11 月 13 日收盘，海螺水泥 A 股（<code>0.49x PB</code>）与 H 股（<code>0.40x PB</code>）处于 <strong>“极端悲观折价（深度破净区）”</strong>。市场犯了两个严重的定价谬误：一是将 2026Q3 极寒价格战下的单季会计微利线性外推为永久失血，无视海螺每年近 <code>80 亿元</code> 归母折旧带来的现金洪流；二是将账上躺着 <code>271.3 亿</code> 超额净现金（严苛剔除交易性股票为 <code>265.0 亿</code>、<code>352.6 亿</code> 广义净现金）的海螺，与背负千亿巨债且被证监会立案调查的天山股份混为一谈。参照海外寡头出清后的估值归位路径，海螺当前具备典型的<strong>“向下有净现金、80 亿折旧盾与回购分红焊死地板，向上有供给侧出清与估值修复戴维斯双击”</strong>特征。</li>
@@ -3261,7 +3546,7 @@
 <p><strong>我的仓位裁决</strong>：现在把 100% 仓位一次打满，若 2026Q4—2027Q1 淡季水泥价格再度探底，会损耗时间效率；但空仓等待又会错失底部筹码！因此我投<strong>【左侧先配置 30%—40% H 股收息底仓（拿 3.9%—5.9% 现金回报打底）+ 紧盯两大右侧加仓信号（华东旺季熟料库容比连续四周跌破 55%、或单季综合毛利率回升突破 20%—24%）再右侧加满重仓】</strong>！”</p>
 <hr/>
 <h3 id="g-12026-11-13">📋 表 G-1：四位传奇投资大师闭门圆桌模拟推演裁决总表（2026-11-13 审计校准版）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">投资大师 <em>(视角模拟)</em></th>
@@ -3306,7 +3591,7 @@
 <td style="text-align: left;"><strong>【左侧先建30%—40% H股底仓，等二阶导数催化拐点加满重仓】</strong><br/>待华东熟料库容比跌破55%且两轮推价落地时右侧扣满扳机</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>圆桌上的结论再清晰不过——三位价值派把 <strong>H 股 0.40 倍 PB、590.9 亿合并 EV、每吨熟料 89.9 块合并隐含残差（归母纯股权 82.8 块）</strong>的底牌算得明明白白，赞成重仓配置；而最讲究资金时间效率的德鲁肯米勒提醒大家一句大实话：<strong>别因为便宜就把子弹在淡季第一天打光，先用 30%—40% 仓位拿着 3.9%—5.9% 的现金回报卡住身位，等限制超产落地、华东熟料库容比拐头往下那一刻再把仓位加满！</strong></p></div></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
@@ -3323,13 +3608,26 @@
 <p>算笔拆骨账：在港股零点四倍市净率买海螺，扣掉净现金和骨料商混资产后，市场给它两亿多吨顶级熟料产能标出的残值仅每吨八十多块钱，不到新建造价的四分之一！操作上，首选比A股折价近两成的港股（H股），讲究“左侧收租卡位、右侧见信号加满”：先用三四成仓位建底仓拿四到六个点股息；等看到“华东旺季熟料库容比连续跌破五成五”或“限制超产带动单季毛利率重回两成以上”两个右侧信号，再把子弹一把加满，吃尽市净率修复翻倍行情，同时盯死年度资本开支不破百亿红线。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3499,7 +3797,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《海螺水泥_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/海螺水泥_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《海螺水泥 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/海螺水泥 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3557,6 +3855,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

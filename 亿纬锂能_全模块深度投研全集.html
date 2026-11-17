@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>亿纬锂能_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>亿纬锂能 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">亿纬锂能_全模块深度投研全集</div>
+    <div class="report-title">亿纬锂能 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -715,7 +1000,7 @@
 </li>
 </ul>
 <h4 id="_5">📊 核心产品、成本身位与国内外同行横向硬核比拼总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -784,7 +1069,7 @@
 <td style="text-align: left;">大储净利率薄，鹏辉2026靠户储与AIDC修复至 <strong>6.59%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>跟宁德时代这个手握上千亿净现金、在成本曲线最左端当教父的巨无霸比，亿纬锂能当然还得交不少利息和学费；但要是往下看那群只会卷标准件、连账期都快扛不住的二三线同行，亿纬靠“大圆柱+超大叠片储能+特种消费电池”三把匕首，已经把护城河挖到了二线对手够不着的深水区。</p></div></div>
 <hr/>
 <h3 id="_6">第三部分：成长历史与生死转折——今天的本事是怎么练出来的？（高度精炼，直奔基因）</h3>
@@ -877,7 +1162,7 @@
 </li>
 </ul>
 <h4 id="3_1">3. 五年一期现金流硬账本与防合并报表幻觉穿透</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务指标（单位：亿元）</th>
@@ -952,7 +1237,7 @@
 <td style="text-align: left;"><strong>-65.21</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="4">4. 打破“合并报表幻觉”两项深度体检</h4><ul>
 <li><strong>① 少数股东损益 vs 少数股东权益核查（无纸面富贵幻觉，核心利润高度归属母公司）</strong>：</li>
 <li>2025 年末，公司少数股东权益为 <strong>26.52 亿元</strong>，占合并所有者权益总额（449.71 亿元）的 <strong>5.90%</strong>；2025 年全年少数股东损益为 <strong>1.68 亿元</strong>，占合并净利润（43.02 亿元）的 <strong>3.90%</strong>。</li>
@@ -1110,7 +1395,7 @@
 <h4 id="1-gwh">1. 算清单位经济账：单 GWh 投资强度拆解与转固折旧盈亏平衡测算</h4>
 <h5 id="1-gwh_1">（1）海内外重点项目与同行单 GWh 投资强度横向解剖</h5>
 <p>锂电产线的“单位产能投资额（亿元/GWh）”直接决定了单 Wh 产品背负的先天折旧包袱。我们调取亿纬锂能 2025 年 3 月发行的 50 亿元“亿纬转债”（已于 2026 年 4 月完成强赎转股）两大募投项目、湖北荆门 60GWh 超级储能工厂、马来西亚吉打州二期储能基地、匈牙利德布勒森 30GWh 大圆柱基地以及美国 ACT 合资项目，并与宁德时代、海辰储能、中创新航等国内外同行同期的扩产预算进行全维度对标：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目名称 / 对标企业</th>
@@ -1205,7 +1490,7 @@
 <td style="text-align: left;">常规 100Ah—314Ah 产线单线产能多在 3—5GWh，单位设备与公辅分摊高于亿纬 628Ah 超大电芯超级产线</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>从上述硬核工程数据对质中，我们可以提炼出三条极其关键的产业工程逻辑：</p><ul>
 <li>
 <p><strong>第一，为什么国内荆门 60GWh 超级工厂能把单 GWh 投资额极限压低至 1.80 亿元，比常规产线省出 25%—30%？</strong>
@@ -1349,7 +1634,7 @@
 <hr/>
 <h4 id="1_3">1. 商业化刻度定位：谁在真金白银出货，谁还在实验室烧钱？</h4>
 <p>我们先用一张冷峻的全局透视表，锚定这三大新曲线截至 2026 年 11 月的真实产业化位置：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">新业务 / 新技术方向</th>
@@ -1390,7 +1675,7 @@
 <td style="text-align: left;">100MWh 仅为 0.1GWh（不足公司动储年出货量的千分之一），现阶段完全处于纯研发投入期，距离车规级低成本规模化盈利至少还有 3—5 年</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把“已经装上几十万辆宝马和国产车的 46 大圆柱”跟“年底才凑够零点一吉瓦时的全固态电池”混在一起吹嘘，就像把家里正在下蛋的老母鸡和孩子画在纸上的凤凰算成同一笔家产。老母鸡今晚就能炖汤，纸上的凤凰除了费墨水，未来五年里连根鸡毛都拔不下来。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2-10">2. 跨越鸿沟的三道关卡：要贡献 10 亿元以上核心净利，各自卡在哪些死穴上？</h4><p>如果要求这三大新曲线不只是停留在财报的“亮点展示页”上，而是实打实每年为亿纬锂能贡献 <strong>10 亿元以上的可持续核心净利润</strong>，它们在 <strong>底层物理与制造工艺、下游客户认证替换周期、地缘政治与行业准入规则</strong> 上，还必须跨过以下几道极其凶险的门槛：</p><h5 id="146">（1）46 系列全极耳大圆柱电池：跨过了“良率鬼门关”，还要过“硅碳寿命与铁锂成本夹击关”</h5><ul>
@@ -1496,7 +1781,7 @@
 </li>
 </ul>
 <h5 id="_12">📋 三大新曲线商业化刻度与证伪定性总表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">评估维度</th>
@@ -1549,14 +1834,14 @@
 <td style="text-align: left;"><strong>🟡 BBU 为“存量产线高毛利甜点”；机器人/全固态为“远期技术防御卡位”</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>最好的新业务，是拿老车间里现成的机器稍微改一改，就能卖给新暴发户（比如给 AI 机房做备用电池），这叫白捡的便宜；其次是把你脑子里的手艺租给外国人收过路费（CLS 模式），不用自己掏钱买砖头；最让人提心吊胆的，是为了迎合某个德国贵族车企的口味，跑到多瑙河畔花一百亿盖一座只能做一种型号电池的新城堡——它最好能按时满负荷运转，否则城堡里的鬼魂全都是折旧费变的。</p></div></div>
 <hr/>
 <h3 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h3>
 <p>在锂电这样一个资本开支以百亿计、技术迭代以月计、价格战刀刀见血的重资产制造业里，单看一家公司的财报极易陷入管理层精心编织的“出货量狂欢叙事”。为了撕开亿纬锂能（300014.SZ）高增长表象下的真实肌肉成色，我们将其置于行业残酷的聚光灯下，与国内最核心的五家直接竞争对手——<strong>① 宁德时代（300750.SZ，全球链主与绝对一哥标杆）、② 国轩高科（002074.SZ，大众加持的二线动储直接对手）、③ 中创新航（03931.HK，乘用车二供与储能死敌）、④ 欣旺达（300207.SZ，“消费底盘+动储追赶”同构镜像对手）、⑤ 鹏辉能源（300438.SZ，纯储能高弹性对标）</strong>，外加核心上游正极材料龙头 <strong>湖南裕能（301358.SZ，磷酸铁锂排产晴雨表）</strong>，基于 2025 年年度报告及 2026 年半年报/三季报数据，展开一场全维度的“三方交叉审讯”。</p>
 <hr/>
 <h4 id="20252026q3">一、 核心同行 2025—2026Q3 经营与盈利质量交叉审讯总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审讯维度 / 核心指标</th>
@@ -1711,7 +1996,7 @@
 <td style="text-align: left;"><strong>~42.0 亿</strong> → <strong>~76.0 亿</strong>（周转极快，约28-35天）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2026">二、 景气度对质：2026 年的锂电狂飙，到底是真实需求爆发，还是“抢出口”与渠道压库？</h4><p>翻开上表，最令人震撼的莫过于 2026 年前三季度全行业整齐划一的营收与出货量暴增：亿纬锂能营收同比大增 <strong>63.08%</strong>（动储出货 133.69 GWh，同比 +61.07%）、宁德时代营收同比大增 <strong>56.19%</strong>、国轩高科同比 <strong>+53.98%</strong>、中创新航同比 <strong>+61.01%</strong>、鹏辉能源同比暴增 <strong>135.67%</strong>。与此同时，各家的期末存货也在急剧膨胀——亿纬锂能存货从 2024 年末的 52.51 亿元、2025 年末的 82.40 亿元，一路飙升至 2026H1 末的 154.22 亿元和 2026Q3 末的 <strong>177.35 亿元</strong>（9个月内翻了一倍以上）；宁德时代存货也从 2025 年末的 945.26 亿元猛增至 2026Q3 末的 <strong>1,447.70 亿元</strong>。</p><p>这种量级的存货与营收齐飞，必须接受买方视角的冷酷审讯：<strong>这究竟是终端需求的真实井喷，还是电池厂向集成商/渠道压库、甚至是为了规避出口退税下调而透支未来的“虚假繁荣”？</strong></p><p>通过上下游三方数据的交叉核验，我们可以将 2026 年前三季度的行业景气度精准剥离为 <strong>“三成政策抢跑透支 + 七成真实内生爆发”</strong>：</p><ol>
 <li><strong>不可否认的短期扰动：“出口退税下调”催生的海外抢出口与在途发出商品激增</strong></li>
@@ -1915,7 +2200,7 @@
 <li>但在测算<strong>“存量资产常态 Owner Earnings”</strong>（即假设公司不再追求 60% 的脉冲式暴增，而是在 900 亿—1,000 亿元营收规模上保持 8%—10% 的稳态温和增长）时，由于公司对上游正负极、电解液、结构件供应商同样拥有极强的应付账款与应付票据占款能力（应付账款+应付票据常年维持在 350 亿—420 亿元量级，基本对冲应收端），存量业务每年的<strong>常态刚性营运资金净占用（<span class="math-inline">\Delta<span class="math-text">WC</span></span>）约为 10.0 亿—12.0 亿元/年（中枢 11.0 亿元/年）</strong>。</li>
 </ul>
 <p>📊 <strong>《亿纬锂能常态 Owner Earnings 分步还原测算表（2025基准 vs 2026年化常态基准）》</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">测算步骤与核心财务科目</th>
@@ -2004,7 +2289,7 @@
 <td style="text-align: left;"><em>因约 80 亿元属于新建绿地扩张性 CapEx，导致扩产期表观自由现金流（FCF）为负</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="5-fcf-owner-earnings">5. 核心财务洞察：为什么重资产锂电在扩产期 FCF 极度干瘪，而进入稳态期后 Owner Earnings 反而高于表观净利？</h5><ul>
 <li>
 <p><strong>当前常态 Owner Earnings 结论</strong>：以 2026 年化常态基准衡量，亿纬锂能当前存量资产的<strong>常态真实股东盈余（Owner Earnings）中枢为 64.0 亿元/年（区间 62.0 亿—68.0 亿元/年）</strong>。</p>
@@ -2151,7 +2436,7 @@
 </li>
 </ul>
 <p>📊 <strong>《亿纬锂能双极限压力测试损益与现金流冲击推演表（以 2026 年化常态为基准）》</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与抗压指标</th>
@@ -2233,14 +2518,14 @@
 <td style="text-align: left;"><strong>有息负债付息覆盖倍数 &gt; 6.5倍，无违约风险</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>做压力测试不是为了装神弄鬼吓唬自己，而是为了搞清楚当暴风雨把泳池抽干时，谁还在穿着裤衩。亿纬锂能最聪明的一点，是它手里还攥着年赚十几个亿的消费小圆柱和锂原电池，外加思摩尔每年雷打不动的买路钱——哪怕动力和储能电池在外面杀得头破血流、利润砍掉六成，靠着四十多亿不用付现的折旧费，这台机器一年照样能往外吐三四十亿现金，银行行长根本没机会上门收厂房。</p></div></div>
 <hr/>
 <h3 id="e">【追问模块 E：会计成色与治理细节显微镜】</h3>
 <p>如果说模块 C 审视的是亿纬锂能在产业丛林里的肉搏战绩，那么模块 E 则是拿起买方审计师的放大镜，对亿纬锂能 2024—2025 年报及 2026 年半年报/三季报的财务报表附注、会计估计尺度与公司治理暗礁进行一次“不留情面的排雷体检”。</p>
 <hr/>
 <h4 id="_15">一、 亿纬锂能与同行核心会计政策与报表附注审慎度对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计科目 / 治理维度</th>
@@ -2309,7 +2594,7 @@
 <td style="text-align: left;"><strong>治理减分项明显</strong>：改规则式“稳拿红包”激励 + 实控人百亿体外帝国引致的减持与 40.37% 高质押率</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_16">二、 资产质量与会计政策排雷：把亿纬锂能的报表放进“宁德时代同款标尺”里重算一遍</h4><p>在制造业财务分析中，<strong>“会计估计的松紧度”可以直接决定一家重资产企业账面利润的生死</strong>。我们逐项拆解亿纬锂能四大核心资产与负债科目的成色：</p><ol>
 <li><strong>应收账款与坏账计提：1 年以内账龄占 95.25%，暴雷车企风险已做“外科手术式单项隔离”</strong></li>
@@ -2450,7 +2735,7 @@
 </ul>
 <div class="math-display"><span class="math-text">True EV</span> = 1,063.4<span class="math-text"> 亿元</span> + 27.0<span class="math-text"> 亿元</span> + 351.0<span class="math-text"> 亿元</span> - 81.5<span class="math-text"> 亿元</span> = <strong>1,359.9<span class="math-text"> 亿元（约 1,360.0 亿元）</span></strong></div>
 <p>📊 <strong>《亿纬锂能真实企业价值（True EV）精确核算表（2026年11月11日基准）》</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心构成维度</th>
@@ -2553,7 +2838,7 @@
 <td style="text-align: left;"><strong>全款买断整家亿纬锂能生意的真实总标价（约 1,360.0 亿元）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>一针见血的买方结论</strong>：</li>
 <li>散户看亿纬锂能，以为自己是在按 <strong>1,063.4 亿元</strong> 的估值买一家年赚 68 亿账面净利的电池龙头（以为表观 PE 只有 <code>15.6 倍</code>）；</li>
@@ -2618,7 +2903,7 @@
 </li>
 </ol>
 <p>📊 <strong>《亿纬锂能 Reverse SOTP 拆骨估值倒推表（2026年11月11日收盘基准：48.93元/股）》</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">拆骨资产模块</th>
@@ -2679,7 +2964,7 @@
 <td style="text-align: center;"><strong>0.00%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>拆骨倒推的惊人发现：市场不仅没有预支大圆柱与 CLS 的泡沫，反而给出了折价！</strong></li>
 <li>当我们把思摩尔股权（150 亿）和消费/锂原电池（255 亿）摘除后，市场给亿纬锂能庞大的<strong>“动储核心大主业”在股权市值端只出了 658.4 亿元（加上承接的 270 亿净债务和 27 亿少数股东权益后，隐含 True EV 为 955.0 亿元）</strong>。</li>
@@ -2740,7 +3025,7 @@
 <li><strong>实战操作策略</strong>：一旦因宏观系统性熊市、地缘关税恐慌或行业极端情绪错杀跌入 <strong>38.00 元/股（市值 826 亿元）以下</strong>，属于赔率与胜率极度不对称的“黄金坑”，买方应无视短期噪音，果断重锤提升至核心重仓水位。</li>
 </ul>
 <p>📊 <strong>《亿纬锂能三档实战击球区与估值赔率全景对照表》</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球分档定位</th>
@@ -2795,7 +3080,7 @@
 <td style="text-align: left;"><strong>黄金坑重锤（12%~15%）</strong>，动储主业形同半卖半送，安全边际极厚</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="3_5">3. 三条“基本面死刑证伪红线”（一旦触发无条件清仓离场）</h5><p>为了防止在重资产制造业中陷入“越跌越买、最终跌入价值毁灭陷阱”的泥潭，我们为亿纬锂能设定三条不可妥协的<strong>基本面死刑证伪红线</strong>。无论当时股价看起来多么便宜，只要以下任一红线被实质性击穿，必须无条件执行清仓纪律：</p><ul>
 <li>🚨 <strong>第一条死刑红线（资本配置失控红线）：2027 年在建工程转固后，管理层违背“收缩绿地 CapEx、进入现金流收获期”的承诺，再次宣布启动新一轮 ≥ 150 亿元的巨额重资产绿地扩产计划，导致公司全口径净债务突破 350 亿元（有息负债突破 450 亿元）且自由现金流（FCF）在 2027 全年依然无法转正！</strong></li>
 <li><em>证伪逻辑</em>：如果一家制造业企业在建成近 300GWh 产能后依然停不下借钱建厂的脚步，说明这门生意的商业模式本质是“永远需要把赚来的每一分钱再砸进新机器里才能维持生存的西西弗斯苦役”，我们前面算出的 90 亿元稳态 Owner Earnings 将永远只是画在纸上的大饼。</li>
@@ -2886,7 +3171,7 @@
 </ul>
 <hr/>
 <h3 id="5">📋 5. 四位投资大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">投资大师与核心流派</th>
@@ -2926,7 +3211,7 @@
 <td style="text-align: left;"><strong>【左侧底仓观察 / 严守击球纪律】</strong><br/><strong>触发条件</strong>：现价 <strong>48.93 元</strong>处于钟摆中位，仅留底仓观察；等待 <strong>42—46 元（右侧/标准建仓区）</strong> 与 <strong>≤ 36—38 元（黄金坑：动储主业低于重置成本 4 折）</strong> 分批重锤，或右侧等待 <strong>单季 FCF 连续转正</strong>。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>💡 闭门圆桌会终极共识裁决（3 票“等待 FCF 拐点或黄金坑更佳赔率” vs 1 票“GARP 成长配置”）</strong>：
 四位大师虽然操作节奏各异，但对亿纬锂能的底层商业本质达成了高度共识——<strong>这是一家具备顶级电化学工程基因、手握 405 亿“消费锂原+思摩尔”黄金安全垫、且在 46 大圆柱与 628Ah 大储赛道已完成全球卡位的准寡头；但同时，它也是一家正处于重资产扩产洪峰尾声、背负 351 亿有息负债、自由现金流尚未转正、且大股东刚刚高位套现近 30 亿的“负重奔跑者”。</strong>
@@ -2961,13 +3246,26 @@ ightarrow$ 【需要在估值上扣分的治理瑕疵】</strong>：实控人家
 <p>对着这样一家“业务极其能打、但负债表还在还债转固”的公司，咱们的实战策略就是八个字：<strong>不见兔子，绝不撒鹰</strong>。它手里的消费电池和思摩尔股权加起来就值四百个亿，这是它跌不破的铁底。在平时股价处于合理中位的时候，最多只拿小仓位跟着享受它的出货高增长，绝不盲目满仓；什么时候才能真正重锤出击？只有两个信号：要么是左侧信号——市场因为担心出口退税归零或港股发股摊薄而恐慌砸盘，把总市值砸到七八百亿以下（相当于扣掉四百亿消费电池和电子烟底盘后，按重置成本的四折甩卖它全球第二的储能和大圆柱帝国）；要么是右侧信号——亲眼看到它连续两个季度自由现金流彻底由负转正、匈牙利工厂顺利向宝马交付赚钱，确认扩产苦日子翻篇的那一刻再大步进场。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3137,7 +3435,7 @@ ightarrow$ 【需要在估值上扣分的治理瑕疵】</strong>：实控人家
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《亿纬锂能_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/亿纬锂能_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《亿纬锂能 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/亿纬锂能 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3195,6 +3493,97 @@ ightarrow$ 【需要在估值上扣分的治理瑕疵】</strong>：实控人家
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>汇川技术(300124.SZ) 深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>汇川技术 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">汇川技术(300124.SZ) 深度投研全集</div>
+    <div class="report-title">汇川技术 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -619,7 +904,7 @@
 <h4 id="11-4970">1.1 业务结构与真实利润链条：49%的营收如何挑起70%的利润大梁？</h4>
 <p>要读懂汇川技术的财务报表，第一步必须做一场外科手术式的“分部剥离”。自2025年报起，公司将业务口径正式重构为四大核心板块：<strong>① 工业自动化与数字化</strong>（含通用自动化、智慧电梯、工业数字化与轨交牵引）、<strong>② 新能源汽车动力系统</strong>（主要由控股子公司联合动力承载）、<strong>③ 新兴产业</strong>（含工业机器人、人形机器人零部件、储能及数字能源）、<strong>④ 其他配套业务</strong>。</p>
 <p>如果只看营业收入比重，工业自动化与数字化（2025年占49.32%，2026Q1-Q3占52.43%）与新能源汽车动力系统（2025年占45.06%，2026Q1-Q3占40.84%）看似平分秋色；但一旦穿透到<strong>毛利额与真实营业利润贡献</strong>，两者的角色分工截然不同：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块及细分单元</th>
@@ -712,10 +997,10 @@
 <td style="text-align: center;"><strong>+19.88%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：2025年报公司对部分产品分类口径进行了重述调整，通用自动化同口径增速约23%，新能源汽车动力系统在联合动力单体口径下2025年营收为206.97亿元、2026Q1-Q3为156.81亿元，集团合并层面扣除内部关联采购后列报约203.23亿元与155.00亿元。)</em></p>
 <p>为了彻底看清“谁是真正的利润奶牛”，我们将2025年全年与2026年上半年的毛利额与真实净利贡献拆开算一笔硬账：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块拆解</th>
@@ -783,7 +1068,7 @@
 <td style="text-align: left;"><strong>双核驱动 + 梯队孵化闭环</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>这组对比数据揭示了汇川技术生意模式的三个核心秘密：</p>
 <ul>
 <li>
@@ -796,7 +1081,7 @@
 <p><strong>第三，“经销分销 + 行业大客户TVO直营”的双轨渠道闭环</strong>。与外资巨头单纯把标准化硬件卖给代理商不同，汇川独创了<strong>“行业线（SBU）端到端直击TOP客户工艺痛点 + 区域线扶持数百家核心分销商覆盖长尾OEM”</strong>的双轮打法：</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块</th>
@@ -841,11 +1126,11 @@
 <td style="text-align: left;">60-90天账期为主，储能项目含10%质保金尾款</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="12">1.2 产业周期时钟与“寒冬博弈身位”：工控走出三年谷底，车规电驱正在经历残酷出清</h4>
 <p>站在2026年11月的产业坐标上审视，汇川技术所处的三大核心赛道正处于完全错位的周期时钟刻度：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">细分赛道</th>
@@ -886,11 +1171,11 @@
 <td style="text-align: left;"><strong>熬死对手的剩者为王</strong>：联合动力虽在2026H1短暂微亏0.88亿，但Q3即扭亏（+0.41亿），且手握IPO募资35.32亿净现金与年超250万台出货规模，正借寒冬清洗中小对手并切入海外车企定点</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="13">1.3 成本顺价权与客户转换代价测试：为什么工控能抗住涨价，而产线工程师根本换不掉汇川？</h4>
 <p>2026年上半年至11月，全球工业金属与稀土经历了一轮凌厉涨势：<strong>沪铜主力合约飙升至10.4万—10.8万元/吨（长江现货铜突破10.9万元/吨），A00现货铝站上2.28万—2.31万元/吨，镨钕金属突破87.5万元/吨</strong>。这场原材料风暴，恰好成为检验汇川技术不同业务板块<strong>成本顺价权（Pricing Power）与客户粘性</strong>的最佳试金石：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">考核维度</th>
@@ -920,14 +1205,14 @@
 <td style="text-align: left;"><strong>中高（车规认证与模具锁定）</strong>：电驱总成需历经整车厂18—24个月的冬标、夏标、台架耐久与EMC电磁兼容测试，生命周期内（3—5年）极少中途更换单一项目定点供应商；但在下一代新车型招标时，整车厂会引入AB角比价</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>为什么我一生偏爱那些“占客户总成本比例极小、但一旦出故障客户就会倾家荡产”的生意？看看汇川的伺服和PLC就明白了！一台五百万的锂电涂布机或半导体晶圆切割机，里面的控制器和伺服电机才值几个钱？但它的算法要是抖动0.01毫米，整卷极片和晶圆就全废了，更别提全国几十万电气工程师脑子里背熟的都是汇川的编程指令。这种把客户绑在代码和工艺包上的生意，哪怕外面的铜价涨上天，它也能翘着二郎腿赚41%的毛利。</p></div></div>
 <hr/>
 <h3 id="_4">【第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）】</h3>
 <h4 id="21">2.1 工控与机器人四大王牌赛道：把西门子、安川、三菱拉到同一张桌子上硬碰硬</h4>
 <p>研究工业自动化企业，绝不能停留在“国产替代空间广阔”的宏大叙事里，必须把汇川技术的每一款当家产品拉出来，与德国西门子（Siemens）、瑞士ABB、日本安川电机（Yaskawa）、三菱电机（Mitsubishi）、台湾台达（Delta）以及国内同行（信捷电气、雷赛智能、伟创电气、禾川科技、埃斯顿）做真刀真枪的市场份额与技术参数对决。</p>
 <p>根据权威行业机构 <strong>MIR睿工业（MIR DATABANK）</strong> 2024—2026年最新统计数据及各公司财报披露，汇川技术在五大核心工控与机器人单品上的竞争身位如下：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心产品赛道</th>
@@ -986,9 +1271,9 @@
 <td style="text-align: left;"><strong>细分霸主+全品类跃升</strong>：SCARA连续多年稳居全国榜首，六关节机器人年出货突破2万台大关杀入第一梯队</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为什么在通用伺服和低压变频器这种曾经被日本安川、松下和欧洲西门子、ABB视为“禁脔”的高精密赛道上，汇川技术能打出 <strong>32% vs 10%</strong> 的悬殊比分？我们直接拉出核心主力机型的底层硬指标与全生命周期成本（TCO）对比表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -1042,11 +1327,11 @@
 <td style="text-align: left;"><strong>85% — 95%</strong>（硬件裸价虽比汇川便宜5%—15%，但缺全套方案，故障停机隐性成本高）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="22">2.2 同行财务硬指标对决：为什么汇川的研发费用是国内同行的十倍，净利率却依然领跑？</h4>
 <p>很多投资者疑惑：国内做PLC的信捷电气、做步进与伺服的雷赛智能、做变频器的伟创电气、做机器人的埃斯顿，它们的裸机价格比汇川还便宜10%，为什么抢不走汇川的王座？我们调取截至 <strong>2026年三季报（及2025年报）</strong> 国内外核心工控与机器人上市公司的真实财务账本做横向对决：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称（代码）</th>
@@ -1159,7 +1444,7 @@
 <td style="text-align: center;">&lt; 2%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>从这张残酷的同行对质表中，我们可以一眼看穿三个本质差异：</p>
 <ol>
 <li>
@@ -1175,7 +1460,7 @@
 <hr/>
 <h4 id="23">2.3 新能源汽车电驱与智慧电梯的身位：独立第三方霸主的规模临界点</h4>
 <p>再看另外两块业务在各自赛道里的真实坐标：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比企业（代码）</th>
@@ -1234,14 +1519,14 @@
 <td style="text-align: left;">奇瑞等车企配套，电驱单体规模远小于联合动力</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>通过对比一目了然：在除比亚迪（弗迪动力，纯自供）、华为数字能源（智选车体系）之外的<strong>独立第三方新能源车电驱市场</strong>，联合动力（301656.SZ）是国内<strong>唯一一家年营收突破200亿元、跨越了150万—200万台套规模盈亏平衡生死线</strong>的超级巨头，营收体量是第二梯队（英搏尔、欣锐、精进电动）的 <strong>8—14倍</strong>！虽然2026年上半年铜铝稀土暴涨让联合动力出现了8,809万元的短暂亏损，但到了2026Q3单季，联合动力立刻凭借规模效应与调价传导实现了 <strong>4,074.77万元</strong> 的单季盈利；而同期二三线独立电驱厂仍在泥潭中持续失血。</p><p>而在<strong>智慧电梯电气板块</strong>，汇川通过2019年全资并购上海贝思特（BST），将自身的“电梯一体化控制器/变频器（大脑）”与贝思特的“人机界面、按钮盒、门系统、随行电缆（五官与四肢）”融合成全球独一无二的<strong>电梯电气大配套超市</strong>，国内电梯控制器市占率高达 <strong>35%以上</strong>，并直接打入了奥的斯（Otis）、通力（Kone）、迅达（Schindler）、蒂升（TK Elevator）四大跨国电梯巨头的全球采购名录，每年稳稳贡献 <strong>52亿元营收与约14亿元毛利</strong>。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在商业世界里，规模优势有时候是假的，但当你一个人的研发预算（42.56亿）顶得上国内后面三家竞争对手的全年总营收，当你一个人的伺服市占率（32%）比西门子、安川、松下三家外资老牌贵族加起来还多的时候，这种规模优势就是一把擦得雪亮的屠龙刀。至于汽车电驱业务，第三方同行体量连它的零头都不到、年年亏得找不着北，联合动力哪怕在铜价十万八千元的极端大年里也就是上半年打个喷嚏，三季度立马又赚回来四千多万——寒冬不是用来冻死北极熊的，寒冬是帮北极熊清理冰面上的杂鱼的。</p></div></div></div></div>
 
 
 <hr/>
 <h3 id="_5">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？（高度精炼）】</h3>
 <p>回望汇川技术自2003年创立至今的23年历史，它之所以没有像无数深圳华强北起家的电子厂那样沦为短命的组装作坊，核心在于创始人朱兴明带领这群出自<strong>“华为电气—艾默生网络能源”</strong>的创业铁军，在三次生死攸关的产业十字路口做对了三个重注：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">历史转折阶段</th>
@@ -1270,7 +1555,7 @@
 <td style="text-align: left;">交了早期跨界乘用车底盘与部分小众并购的学费，但成功验证了<strong>“用成熟高毛利业务孵化高壁垒新曲线，直至独立成王”</strong>的跨周期复制能力</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>一句话收口定性</strong>：汇川技术过去的成功，绝非撞上了某一次不可复制的单一行业风口，而是把源自华为电气与艾默生的<strong>“底层功率控制技术同源裂变 + IPD端到端矩阵组织 + 行业工艺TVO定制深耕”</strong>沉淀为了可跨周期迁移的组织算法——从电梯到注塑机、从纺织到锂电光伏、从3C半导体到新能源汽车与工业机器人，下游风口每五年换一茬，但站在风口卖“铲子与动力心脏”的永远是汇川。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多公司赶上一次煤老板或光伏老板撒钱的风口，就把自己当成了商业奇才，等风停了摔得粉身碎骨。汇川最让我高看一眼的地方，是在2016到2022年那整整七年里，明明知道乘用车电驱是个烧钱无底洞、年年挨华尔街和股民骂，朱兴明硬是咬碎牙齿往里砸了几十个亿，把它从亏损泥潭里拖出来养成两百亿的创业板上市公司。能熬得住七年冷板凳不改初心的管理层，骨子里是有狼性的。</p></div></div></div></div>
 
 <hr/>
@@ -1281,7 +1566,7 @@
 <hr/>
 <h4 id="42-35">4.2 “翻旧账对表”言行一致性审计：3—5年前吹过的牛，今天兑现了几成？</h4>
 <p>检验管理层品行最硬的标尺，不是听他今天讲什么新故事，而是翻开 <strong>2021年报与2022年报</strong> 中白纸黑字写下的经营战略与募投承诺，与 <strong>2025年报及2026年三季报</strong> 的实际结果逐条对表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">回溯报告期及当年立下的战略/工程军令状</th>
@@ -1322,11 +1607,11 @@
 <td style="text-align: left;"><strong>⚖️ 战略方向正确，海外攻坚仍在爬坡期</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="43-2096">4.3 质押、减持、20.96亿商誉成色与关联交易治理排查</h4>
 <p>用放大镜对公司治理的四个敏感角落做一次彻底排查：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">治理排查维度</th>
@@ -1356,13 +1641,13 @@
 <td style="text-align: left;"><strong>🟢 治理透明规范</strong>：联合动力分拆后汇川仍享81.91%权益，不存在掏空母公司股东利益的“金蝉脱壳”隐患</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>查一个管理层老不老实，最简单的办法就是翻出他四年前写的年报，看看他是兑现了承诺，还是把旧账撕掉假装无事发生。2022年汇川定下第六期股权激励，要求四年里营收增长115%，结果中间碰上三年制造业去库存寒冬，他们硬是在2025年干出了151%的增长！至于账上那20.96亿商誉，只占净资产的5.4%，而且主力贝思特每年都在实打实吐钞票——比起那些商誉占净资产一半、天天靠讲故事续命的骗子公司，这本账干净得像刚洗过的衬衫。</p></div></div>
 <hr/>
 <h3 id="_7">【第五部分：资本创造还是资本消耗？融资、分红与自由现金流硬核审计（三大核心支柱之二）】</h3>
 <h4 id="51">5.1 上市以来累计向市场要了多少钱？（严苛全口径股权融资审计）</h4>
 <p>判断一家高速成长的制造企业究竟是“靠内生造血长大的真贵族”，还是“靠不断向二级市场伸手要钱堆砌规模的吞金兽”，必须拉出其自2010年9月创业板上市以来长达16年的<strong>全口径股权融资账本</strong>（严格涵盖母公司IPO、历次定增、发行股份购买资产，以及控股子公司分拆上市募集的权益资金）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">融资时间</th>
@@ -1439,12 +1724,12 @@
 <td style="text-align: left;"><strong>母公司16年仅向A股市场直接现金募资约42.6亿元（IPO+2021定增+配套），融资极其克制！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>算完这笔总账，结论极其清晰：上市整整16年，汇川技术母公司<strong>从未搞过配股，从未发过可转债摊薄股本，仅在2021年做过一次21.06亿元的市场化现金定增</strong>！即便把2010年IPO（18.58亿元）和2019年并购贝思特换股（15.10亿元）全部算进去，母公司口径16年累计外部股权融资净额也仅为 <strong>56.19亿元</strong>；如果连同2025年9月子公司联合动力在创业板独立IPO募资的 <strong>35.32亿元</strong> 一并纳入严苛的全口径统计，集团合并层面16年累计权益融资净额为 <strong>91.51亿元</strong>。</p>
 <hr/>
 <h4 id="52">5.2 上市以来实际向股东回报了多少钱？（分红与回购注销穿透）</h4>
 <p>再看汇川技术给股东发了多少真金白银。根据巨潮资讯网历年分红实施公告及2026年中报/三季报统计，<strong>汇川技术自2010年上市以来累计实施现金分红已高达约 93.20亿元</strong>！我们拉出最近五个完整会计年度（2021—2025年）及2026年的分红与股份回购明细表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">年度</th>
@@ -1513,7 +1798,7 @@
 <td style="text-align: left;"><strong>分红融资比（母公司口径）= 93.20 / 56.19 = 165.87%；全口径（含联合动力IPO）= 93.20 / 91.51 = 101.85%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>这里有两个极值得买方重视的细节：</p>
 <ol>
 <li>
@@ -1526,7 +1811,7 @@
 <hr/>
 <h4 id="53-2026q1-q377">5.3 五年一期现金流硬账本与“2026Q1-Q3经营现金流大降77%”的真相解剖</h4>
 <p>我们将汇川技术 <strong>2021年—2025年五个完整会计年度 + 2026年前三季度（2026Q1-Q3）</strong> 的营收、归母净利、经营活动现金流净额（OCF）、资本开支（CapEx，购建固定资产、无形资产和其他长期资产支付的现金）与自由现金流（FCF = OCF - CapEx）拉成一张硬核标准对照表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流指标（亿元）</th>
@@ -1611,7 +1896,7 @@
 <td style="text-align: center;">20.35%（前三季季节性低谷）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>看完整张五年一期大表，两个极具冲击力的事实跃然纸上：</p>
 <ul>
 <li>
@@ -1623,7 +1908,7 @@
   我们直接调取 <strong>2025年末（期初）与2026年9月30日（三季报期末）</strong> 的合并资产负债表营运资金科目做逐项核验：</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">营运资金与减值核心科目</th>
@@ -1684,12 +1969,12 @@
 <td style="text-align: left;">针对部分销量不及预期的新能源合作车型专用存货及长库龄物料，严苛计提存货跌价准备</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>真相水落石出：2026年前三季度OCF阶段性降至8.95亿元，<strong>绝非回款崩盘（应收账款增速15.75%还慢于营收增速19.88%，合同负债反而大增35.81%），而是因为“存货单季净增43.79亿元”的战略性主动备货，加上前三季度尚未进入Q4年底整车厂与经销商集中兑付回款高峰期</strong>！在铜价突破10.8万元/吨、稀土与芯片涨价的窗口期，账上躺着上百亿现金的汇川选择把低息现金换成高周转的核心元器件与战略库存，是典型的行业龙头反周期操作。</p>
 <hr/>
 <h4 id="54">5.4 打破“合并报表幻觉”体检：少数股东损益异动与净现金真实家底</h4>
 <p>我们再对汇川技术的合并资产负债表做两项防幻觉穿透体检：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">防合并报表幻觉核验项目</th>
@@ -1778,7 +2063,7 @@
 <td style="text-align: left;"><strong>🔍 极佳印证</strong>：2026Q1-Q3联合动力亏损4,735万元，其18.09%少数股东按比例分担了约856万元亏损，抵消了其他非全资子公司的小额盈利，使得合并报表少数股东损益同比大降97.19%至178万元，100%严丝合缝！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>第五部分定性收口</strong>：从16年历史总账与五年一期现金流穿透来看，汇川技术是A股罕见的<strong>“已完成重资产孵化闭环、正处于强劲内生造血期的资本创造者”</strong>——它不仅用五年222.18亿元的经营现金流自己喂饱了90.86亿元的产能扩张并净攒下131.32亿元自由现金流，更在2025年9月通过联合动力分拆上市让最烧钱的汽车业务实现了自负盈亏。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多会计门外汉一看到2026年前三季度经营现金流掉了77%，吓得魂都飞了，以为公司快断气了。你把资产负债表打开一看：账上躺着90亿真金白银，短期借款还掉了近60%，之所以现金流少，是因为朱兴明趁着铜铝芯片涨价、手里订单爆满，掏出43.8亿现金去囤了满仓库的原材料和在产品！更妙的是，联合动力上半年亏那点钱，创业板那18.09%的少数股东还老老实实替汇川分担了将近两成。这哪是什么财务危机，这是财大气粗的庄家在牌桌上主动加注备货呢。</p></div></div></div></div>
 
 <hr/>
@@ -1786,7 +2071,7 @@
 <h4 id="61-capex">6.1 资本开支（CapEx）、在建工程与海内外基地真实流向全景拆解</h4>
 <p>2024年、2025年及2026年前三季度，汇川技术购建固定资产、无形资产和其他长期资产支付的现金分别为 <strong>21.12亿元、30.24亿元、23.97亿元</strong>；截至2026年三季报末，公司固定资产账面净值已达 <strong>104.95亿元</strong>（较2025年初的70.41亿元增长近50%），在建工程余额从2025年末的 <strong>11.19亿元</strong> 激增 <strong>73.61%</strong> 至 <strong>19.42亿元</strong>。</p>
 <p>这些真金白银到底砸向了哪些具体的土地、厂房和产线？我们穿透2025年报与2026半年报/三季报附注，拉出核心在建与新转固工程的全景清单：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">基地与项目名称</th>
@@ -1847,9 +2132,9 @@
 <td style="text-align: left;">突破欧盟原产地壁垒，直接就近配套欧洲整车厂（沃尔沃/奥迪等）及欧洲跨国OEM设备商</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>如果按买方最关心的<strong>经济性质（防御维持 vs 纵深降本 vs 进攻成长）</strong>对近三年（2024—2026年，年均约28亿—32亿元）的资本开支做定性切分：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">资本开支经济性质分类</th>
@@ -1882,11 +2167,11 @@
 <td style="text-align: left;">通用自动化与机器人新产线在2026Q1-Q3（营收+33%/+88%）处于高负荷满产状态；车规电驱与海外基地预留未来2—3年增量空间</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="62-4256">6.2 研发真实投向（年砸42.56亿元）与技术/商业模式的动态跃迁</h4>
 <p>绝对不能把汇川技术看作一个静止的硬件制造厂！纵向对比2021年至2026年，公司将每年营业收入的 <strong>9%—10%</strong>（2025年研发费用 <strong>42.56亿元</strong>，同比增长35.23%；2026年前三季度研发费用 <strong>34.26亿元</strong>）死死钉在四个底层进化方向上，正在完成一场从<strong>“卖高性价比国产替代单机”向“全栈软硬一体数字化平台 + 具身智能核心执行器霸主”</strong>的惊险一跃：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">动态进化维度</th>
@@ -1921,11 +2206,11 @@
 <td style="text-align: left;">将工控同源的IGBT双向变流技术平移复用至储能PCS与工厂微电网管理，打开“工业自动化+工厂能源管理（FEMS）”交叉销售空间</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="63">6.3 未来成长蓝图梯度审视与全球产业史正反双镜鉴</h4>
 <p>我们将汇川技术未来的成长引擎按商业化成熟度严格划分为三个梯度，并拉出全球工业自动化历史上的<strong>正面进化参照系（德国西门子、日本发那科/基恩士）</strong>与<strong>反面踩坑案例（通用电气GE盲目金融化与高杠杆并购、国内二线工控单品内卷陷阱）</strong>做客观对表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">成长梯度分层</th>
@@ -1958,7 +2243,7 @@
 <td style="text-align: left;"><strong>正面镜鉴：日本发那科（FANUC）/ 基恩士（Keyence）</strong>（掌握核心部件与软件算法，赚取超40%—50%高毛利）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看汇川砸钱的姿势，你就知道什么叫“同源裂变”，什么叫瞎胡闹的“多元恶化”。无论是工业变频器、伺服电机、新能源汽车电驱、储能PCS，还是人形机器人的无框力矩电机和行星滚柱丝杠，扒掉外壳看里面，全都是“电力电子功率变换+电机磁路设计+运动控制算法+精密丝杠传动”这同一棵技术树上结出来的果子！而且最让我放心的是，那一年42.56亿的研发投入，超过90%在当年利润表里直接费用化扣掉了，这就意味着你在买汇川工控印钞机的时候，人形机器人和大型PLC这些远期期权，它已经在成本里替你买好单了。</p></div></div>
 <hr/>
 <h3 id="_9">【第七部分：穿透报表之外的真暗礁与周期博弈——去套路化严选，区分“结构性死穴”与“危中之机”】</h3>
@@ -1996,7 +2281,7 @@
 <hr/>
 <h4 id="73-20261282">7.3 周期阵痛与“危中之机”辩证：如何看透2026年新能源汽车电驱毛利率跌至12.82%与存货激增？</h4>
 <p>当前二级市场对汇川技术最大的焦虑点有两个：一是控股子公司<strong>联合动力（301656.SZ）2026H1毛利率跌至12.82%并亏损8,809万元（前三季度累计微亏4,735万元）</strong>；二是合并报表<strong>存货飙升54.20%至124.58亿元、前三季度资产减值计提5.42亿元</strong>。这究竟是结构性崩溃的开始，还是周期洗牌的“危中之机”？我们同台算清双向博弈账：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">博弈审视维度</th>
@@ -2021,7 +2306,7 @@
 <td style="text-align: left;"><strong>主动洗澡出清+低价锁成本</strong>：工控通用件（伺服/变频/芯片）标准化程度高、无过期报废风险；而针对尾部车型的专用存货一次性严苛计提减值后，轻装上阵迎接Q4及2027年交付高峰</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_10">【第八部分：总结定性与长期跟踪的“硬核验证路标”】</h3>
 <h4 id="81">8.1 一段话穿透定性</h4>
@@ -2029,7 +2314,7 @@
 <hr/>
 <h4 id="82-23">8.2 未来 2—3 年定期报告与产业追踪必看的“四大硬核验证路标”</h4>
 <p>剥离短期股价波动与市场情绪噪音，买方投资者在未来两到三年翻开每一份季报与年报时，只需死死盯住以下四个可量化、可证伪的硬核验证指标：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">验证维度</th>
@@ -2069,11 +2354,11 @@
 <td style="text-align: left;">H股在极低估值下大幅折价超额增发严重摊薄A股ROE，或欧美出台针对中国工控系统的严厉禁令</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_11">📋 阶段一全局统一经营与财务事实锚定表（全模块跨表校验基准）</h3>
 <p>为确保全集各模块数据100%严丝合缝，以下锁定截至 <strong>2026年11月17日</strong> 最新披露的《2025年年度报告》与《2026年第三季度报告》核心经营与会计事实基准：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">基准类别</th>
@@ -2169,8 +2454,11 @@
 <td style="text-align: left;">用于成本弹性与跨国业务折算</td>
 </tr>
 </tbody>
-</table>
-<hr class="module-sep"/>
+</table></div>
+<hr/>
+<hr/>
+<h2 id="_12">阶段二：深度追问模块（产业工程穿透与远期期权证伪）</h2>
+<hr/>
 <h3 id="a">【追问模块 A：资本开支与重点工程解剖——百亿重资产扩张背后的单位经济账与折旧压力测试】</h3>
 <h4 id="a1-20212026q3">A.1 资产负债表重资产跃迁与在建工程全景穿透（2021—2026Q3）</h4>
 <p>在许多二级市场投资者的刻板印象里，工业自动化（工控）是一门“几条SMT贴片线加几百名算法工程师”的轻资产软件芯片生意。然而翻开汇川技术 <strong>2021年至2026年三季报</strong> 的合并资产负债表与现金流量表，一组极具视觉冲击力的数字揭示了公司过去五年正在经历一场深刻的<strong>“重资产制造底盘大跃迁”</strong>：</p>
@@ -2186,7 +2474,7 @@
 </li>
 </ul>
 <p>为了看清这场百亿级资本开支洪峰的来龙去脉，我们首先拉出 <strong>2021—2026Q3 长期资产、资本开支与折旧摊销的全景演进总表（表 A-1）</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心重资产与现金流指标（单位：亿元）</th>
@@ -2281,12 +2569,12 @@
 <td style="text-align: left;">受新能源汽车重资产产线及自建厂房占比上升影响，周转率从7次温和回落至5次左右，但仍居高端制造前列</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多华尔街书呆子一看到固定资产从26亿涨到105亿，就开始大喊“公司变重了、要完蛋了”。你得动动脑子看看比例！一年451亿营收的公司，花30亿建厂买设备，资本开支只占营业收入的6.7%，而且一年66.8亿的经营现金流随便掏出一半就付清了，连银行贷款都不用借。用自己印出来的钞票把上游电机厂、丝杠厂和车规无尘车间全修成钢筋混凝土的堡垒，让那些一年总共只有十几个亿营收的二线对手连买门票的钱都没有——这叫用重资产修护城河，蠢货才把它当成包袱。</p></div></div>
-<h5 id="_12">🔍 穿透财务附注：重要在建工程单体项目变动明细还原（严防会计概念混淆）</h5>
+<h5 id="_13">🔍 穿透财务附注：重要在建工程单体项目变动明细还原（严防会计概念混淆）</h5>
 <p>在阅读上市公司在建工程附注时，最容易踩中的两个会计盲区是：① 混淆<strong>“期末在建工程账面余额”</strong>与<strong>“本期已完工转入固定资产金额”</strong>（许多当年建成投产的大项目，因为年底已经100%转入固定资产，其在建工程期末余额反而显示为0或极小值）；② 混淆<strong>“工程累计投入占预算比例”</strong>与<strong>“工程形象进度”</strong>（由于精细化施工管理、设备国产化招标降本以及尾款质保金尚未支付，许多工程进度已达100%并投产的项目，其累计账面资金投入占最初立项预算的比例往往只有73%—85%，这恰恰体现了工程造价控制的节约，而非烂尾未完工）。</p>
 <p>我们直接穿透汇川技术 <strong>2025年年度报告</strong>、<strong>2026年半年度/第三季度报告</strong> 及子公司 <strong>联合动力（301656.SZ）招股说明书</strong> 财务报表附注，将核心在建与新转固工程的逐项账本完整还原如下（<strong>表 A-2</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">重要在建工程项目名称（含母子公司单体）</th>
@@ -2473,11 +2761,11 @@
 <td style="text-align: center;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：表A-2中“本期其他减少”主要系在建工程完工验收时，将随工程一并购置的软件系统转入“无形资产”、将厂房装修改造部分转入“长期待摊费用”之规范会计重分类；2025年公司固定资产原值增加额中由在建工程转入约28.39亿元，连同直接外购无需安装的检测/办公设备，共同推动固定资产净值由70.41亿元跃升至98.93亿元。)</em></p>
 <h5 id="301656szipo3532">🔍 穿透子公司联合动力（301656.SZ）IPO募投账本：35.32亿元净募资如何分摊重资产压力？</h5>
 <p>过去市场对汇川技术资本开支最大的担忧，是新能源汽车电驱业务每年动辄十几个亿的厂房与产线投入会持续吸干母公司工控主业的自由现金流。<strong>2025年9月25日，控股子公司联合动力（301656.SZ，汇川持股81.91%）在深交所创业板成功挂牌上市，发行2.89亿股新股募集资金总额36.01亿元、扣除发行费用后募集资金净额 35.32亿元</strong>。由于实际募资净额（35.32亿元）低于招股书最初拟募资额（48.57亿元），联合动力董事会对四大募投项目的资金分配进行了精准调减，但<strong>项目总投资规模（66.81亿元）与新增产能目标分毫未减</strong>（<strong>表 A-3</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">联合动力（301656.SZ）IPO募投项目名称</th>
@@ -2536,10 +2824,10 @@
 <td style="text-align: left;"><strong>将联合动力车规总成综合年产能推升至500万—600万台套级全球前三规模</strong></td>
 </tr>
 </tbody>
-</table>
-<h5 id="_13">🔍 汇川技术“国内八大基地 + 海外双支点”全球制造版图全景图</h5>
+</table></div>
+<h5 id="_14">🔍 汇川技术“国内八大基地 + 海外双支点”全球制造版图全景图</h5>
 <p>经过2021—2026年连续六年的高强度基建与产线布局，汇川技术已经彻底告别了早期集中在深圳宝安和苏州吴中老厂区的局促局面，构建起一張<strong>“按电压等级、功率密度与供应链半径精准分工”</strong>的全球制造网络（<strong>表 A-4</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">基地名称与区域坐标</th>
@@ -2632,14 +2920,14 @@
 <td style="text-align: left;"><strong>2024年7月量产下线，2025—2026年持续满产扩充</strong>：就近配套长城、长安、奇瑞、广汽等中国车企东南亚工厂</td>
 </tr>
 </tbody>
-</table>
-<hr>
+</table></div>
+<hr/>
 <h4 id="a2">A.2 算清单位经济账与同行扩产横向对决：谁在高效造血，谁在低效堆砖头？</h4>
 <p>资本开支的绝对金额大小并不足以评判优劣，买方真正需要拿着显微镜核算的，是<strong>“每一分钱砸下去，换回了多少有效产能？单位产能的投资强度（元/台套）比同行是贵还是便宜？设备国产化率与单线产出效率处于什么水平？”</strong>。</p>
 <p>我们将汇川技术在 <strong>车规电驱（联合动力）</strong>、<strong>工业自动化（岳阳/济南/大连）</strong> 与 <strong>机器人及精密丝杠（南京一/二期）</strong> 三大领域的扩产项目，与A股同赛道可比公司的IPO/再融资募投项目拉到同一张手术台上做逐项对决：</p>
 <h5 id="vs">⚔️ 对决一：新能源汽车电驱与电源扩产单位经济账（联合动力 vs 英搏尔 / 精进电动 / 巨一科技）</h5>
 <p>我们直接提取联合动力IPO核心募投项目《新能源汽车核心零部件生产建设项目》（总投资37.99亿元，新增驱动总成、电机、电控、电源合计416.42万台套产能）以及常州基地一二期总规划（总投资约32亿元，年产430万套、产值超100亿元），与同行公开募投项目对比（<strong>表 A-5</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -2700,10 +2988,10 @@
 <td style="text-align: left;">单条产线年产出能力比二线厂商高出 <strong>40%—60%</strong>，大幅摊薄单台设备折旧与人工</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="vs_1">⚔️ 对决二：工业自动化与电机/储能扩产单位经济账（岳阳/济南/西安 vs 伟创电气 / 雷赛智能 / 信捷电气）</h5>
 <p>再看工控与数字能源板块。为什么汇川在岳阳建700万台伺服电机基地、在济南建6,000台工程变频器基地、在西安建50GW储能PCS基地，其单位投资回报率（ROIC）能远超二线工控同行？我们拉出对比账单（<strong>表 A-6</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -2748,10 +3036,10 @@
 <td style="text-align: left;">岳阳基地每年700万台电机自产，直接帮汇川伺服系统比外购电机方案降低 <strong>8%—12%</strong> 的硬件BOM成本</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="vs_2">⚔️ 对决三：工业机器人与精密丝杠扩产单位经济账（南京汇川一/二期 vs 埃斯顿 / 五洲新春 / 贝斯特 / 秦川机床）</h5>
 <p>在机器人与精密传动赛道，南京汇川一期（已于2025年4月全面竣工转固，决算投入约10.4亿元，形成年产12万台工业机器人+28万套精密滚珠丝杠产能）与南京二期（2025年11月签约、2026年开工，首期立项约12亿元，主攻精密直线导轨、行星滚柱丝杠与人形关节部件），与国内机器人及丝杠专精厂商的扩产对比如下（<strong>表 A-7</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -2804,10 +3092,10 @@
 <td style="text-align: left;">部分配套自家数控机床，人形丝杠完全依赖外部送样开拓</td>
 </tr>
 </tbody>
-</table>
-<h5 id="_14">🔍 固定资产投资结构拆解：钱到底花在了“砖头水泥”还是“高精尖生产力”上？</h5>
+</table></div>
+<h5 id="_15">🔍 固定资产投资结构拆解：钱到底花在了“砖头水泥”还是“高精尖生产力”上？</h5>
 <p>很多制造企业在扩产时喜欢大修豪华总部大楼和员工公寓，导致“房屋及建筑物”占固定资产比重高达60%以上，真正产生附加值的机器设备占比不足30%。我们穿透汇川技术 <strong>2025年末（98.93亿元固定资产净值）与2026Q3末（104.95亿元固定资产净值）</strong> 的资产分类结构与造价指标，与行业均值做一次硬核对账（<strong>表 A-8</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">固定资产明细类别与造价指标</th>
@@ -2860,7 +3148,7 @@
 <td style="text-align: left;">综合有效折旧率约9.1%，会计折旧政策严苛规范，无通过拉长设备折旧年限虚增利润之嫌</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>算单位经济账的时候，千万别漏掉了汇川身上那个最让人眼红的“作弊器”——别的汽车电驱厂或者丝杠厂建一条自动化产线，得花大价钱去买发那科的机器人、西门子的PLC、安川的伺服电机，还要给系统集成商交30%的买路钱；汇川建常州电驱厂和岳阳电机厂的时候，产线上的SCARA机器人、六关节机械臂、伺服压机、PLC控制器甚至工厂楼顶的光伏储能PCS，全是从自家隔壁车间直接拉过来的！左手倒右手把集成商的暴利全省下来了，难怪它济南基地和西安基地盖完一算账，实际花掉的钱比预算还省了四分之一。</p></div></div>
 <hr/>
 <h4 id="a3-breakeven-utilization">A.3 新增折旧摊销洪峰压力测试与保底盈亏平衡稼动率（Breakeven Utilization）精算</h4>
@@ -2871,7 +3159,7 @@
 <p>根据现金流量表补充资料基准，2025年汇川技术全口径折旧与摊销合计为 <strong>11.17亿元</strong>（其中固定资产折旧 <strong>7.70亿元</strong>、使用权资产折旧 <strong>1.05亿元</strong>、无形资产摊销 <strong>1.16亿元</strong>、长期待摊费用摊销 <strong>1.25亿元</strong>）。由于2025年转固的28.39亿元在建工程大多在2025年年中至下半年（如济南基地2025年中、西安基地2025年11月、南京一期2025年4月、常州/苏州分批）才达到预定可使用状态，2025年利润表仅承受了约半年的折旧；而2026年至2027年，随着2025年转固资产计提全年满额折旧，叠加2026—2027年新一批在建工程（2026Q3末19.42亿元及后续追加投入，预计2026—2027年合计再转固约 <strong>32.00亿元</strong>）陆续转固，其新增折旧摊销推演如下：</p>
 <div class="math-display">\Delta <span class="math-text">Depreciation</span><sub><span class="math-text">Annual</span></sub> = \sum<sub>i</sub>  ≤ ft( <span class="math-text">CapEx</span><sub><span class="math-text">Transferred</span>, i</sub>  ×  (1 - <span class="math-text">Salvage Rate</span><sub>i</sub>)  ×  <span class="math-frac"><span class="frac-num"><span class="math-inline">1</span></span><span class="frac-den"><span class="math-inline"><span class="math-text">Useful Life</span><sub>i</sub></span></span></span> )</div>
 <p>我们将 <strong>2025年已转固资产（原值增量约36.2亿元，净值增量28.52亿元）在2026年释放的翘尾折旧</strong>，以及 <strong>2026—2027年预计新转固资产（约32.0亿元）带来的新增折旧</strong>，按三大业务板块与资产类别精确拆分（<strong>表 A-9</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">归属业务板块与转固基地明细</th>
@@ -2921,14 +3209,14 @@
 <td style="text-align: center;"><strong>+6.39亿元 / 年</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：加权平均综合年折旧率测算基准：房屋建筑物按25年/残值率5%计提，年折旧率3.80%；机器设备按8年/残值率5%计提，年折旧率11.88%；电子检测设备与软件按4年/残值率5%计提，年折旧/摊销率23.75%。两阶段合计68.20亿元新增长期资产全部转固后，集团每年折旧摊销总额将从2024年的9.15亿元、2025年的11.17亿元，阶梯式上升至2027年满额状态的 <strong>约15.54亿元/年</strong>，较2024年基准累计新增约6.39亿元/年，较2025年基准净增约4.37亿元/年。)</em></p>
 <h5 id="breakeven-utilization">📐 第二步：盈亏平衡稼动率（Breakeven Utilization）与保底新增营收反推测试</h5>
 <p>每年新增 <strong>6.39亿元</strong>（较2024年基准）或 <strong>4.37亿元</strong>（较2025年基准）的刚性折旧摊销，听起来似乎不少；但当我们把它放进各基地建成后的<strong>设计满产产值（Design Capacity Revenue）</strong>与<strong>毛利率（Gross Margin）</strong>池子里做除法时，真相立刻水落石出：</p>
 <div class="math-display"><span class="math-text">保底盈亏平衡营收 </span> (\Delta <span class="math-text">Rev</span><sub><span class="math-text">BE</span></sub>) = \frac{\Delta D\&amp;A}{<span class="math-text">毛利率 </span> (GM) - <span class="math-text">变动期间费用率 </span> (V<sub><span class="math-text">OpEx</span></sub>)}</div>
 <div class="math-display"><span class="math-text">盈亏平衡稼动率 </span> (U<sub><span class="math-text">BE</span></sub>) = \frac{\Delta <span class="math-text">Rev</span><sub><span class="math-text">BE</span></sub>}{<span class="math-text">新建基地设计满产新增总产值 </span> (<span class="math-text">Capacity</span><sub><span class="math-text">Rev</span></sub>)}</div>
 <p>我们代入2026H1/2025年报实测毛利率数据，对三大板块及具体工程基地做严苛的盈亏平衡压力测试（<strong>表 A-10</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块及对应新建产能池</th>
@@ -2988,7 +3276,7 @@
 <td style="text-align: left;"><strong>2025全年营收净增80.58亿、2026Q1-Q3净增62.95亿，新增折旧占新增营收比例不足 8%！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：边际贡献率计算中，已将制造端固定资产折旧从营业成本中单列剔除还原，仅扣除随销量线性变动的直接材料、直接计件人工、包装运输及变动销售佣金。)</em></p><p>看懂 <strong>表 A-10</strong> 的推演结果，就能彻底粉碎所谓“折旧压垮利润”的空头鬼故事：</p><ol>
 <li>
 <p><strong>在工业自动化板块（41.37%高毛利率）与机器人/储能板块（28.38%毛利率）</strong>，由于边际贡献率高达23.5%—36.5%，且单位投资产出比超过3倍，岳阳电机基地、济南工程变频器基地、南京机器人一期和西安储能基地<strong>只要开工率（稼动率）达到 7.4% — 8.3%，赚取的边际毛利就足以100%覆盖全部新增厂房和机器设备的折旧</strong>！而在2026年前三季度，通用自动化营收暴增33%、新兴业务暴增88%，这些基地的实际稼动率普遍在 <strong>80%—95%以上</strong>，早已进入纯利润释放区。</p>
@@ -3004,7 +3292,7 @@
 <h4 id="a4">A.4 冰火分化下的产能消化率排查与海内外工程落地“硬骨头”清单</h4>
 <p>站在2026年11月的经营时点上，汇川技术正面对着下游需求极度分化的真实世界：<strong>通用自动化同比增长33%、智能机器人与数字能源同比增长88%，而新能源汽车电驱受行业增速换挡及客户结构调整影响同比增速放缓至8%，智慧电梯微增6%</strong>。</p>
 <p>这种剧烈的“冰火分化”，投射到公司遍布全球的十大制造基地上，必然带来截然不同的产能消化景气度。我们逐一排查各大基地截至2026Q3的真实稼动率与消化前景（<strong>表 A-11</strong>）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">制造基地名称</th>
@@ -3065,10 +3353,10 @@
 <td style="text-align: left;">南京二期瞄准人形机器人丝杠导轨量产奇点；大连基地瞄准东北/华北重工高压永磁直驱替代</td>
 </tr>
 </tbody>
-</table>
-<h5 id="_15">⚠️ 穿透工程现场：海内外重点基地落地的“四大硬骨头”与排雷审计</h5>
+</table></div>
+<h5 id="_16">⚠️ 穿透工程现场：海内外重点基地落地的“四大硬骨头”与排雷审计</h5>
 <p>不报喜不报忧。作为严谨的产业工程组，我们必须把汇川技术在 <strong>匈牙利、泰国、南京二期、苏州三基地二期</strong> 建设与爬坡过程中正在遭遇的<strong>四块工程与供应链硬骨头</strong>摆在明面上解剖（<strong>表 A-12</strong>）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">工程落地硬骨头维度</th>
@@ -3108,13 +3396,13 @@
 <td style="text-align: left;">新建的苏州三基地二期全面采用<strong>模块化柔性平台产线</strong>（兼容400V/800V及多种定子外径），将单一车型销量波动的专用夹具损耗降至最低</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>去欧洲和东南亚建厂，从来就不是请客吃饭那么浪漫。在匈牙利，当地工人到点下班绝不加班，欧洲车企审一个车间要磨蹭足足两年；在南京二期磨行星滚柱丝杠，一台瑞士或德国的顶尖螺纹磨床要排队等一年半。这就是为什么我总说，工程落地能力才是检验真假龙头的照妖镜！汇川聪明就聪明在，去匈牙利建厂时先把奥的斯、通力的电梯订单装进去养活工人工资，再把自己造的工业机器人搬进欧洲车间少雇当地人；在南京磨丝杠时，先用一年28万套注塑机和机床用的工业滚珠丝杠把磨床师傅的手艺喂饱。步步为营、先立于不败之地，这才是老练的工程师干活的路数。</p></div></div>
 <hr/>
 <h3 id="b">【追问模块 B：远期期权（新业务/新技术）证伪拆解——撕掉概念光环，三大战略新曲线的跨越鸿沟三问】</h3>
 <h4 id="b1-ppt">B.1 远期期权全景坐标与商业化刻度冷峻定性（拒绝“PPT概念炒作”）</h4>
 <p>在A股市场，每当人形机器人、工业母机软件或新型储能掀起概念热潮时，总有大量缺乏底层制造能力的小市值公司靠一纸PPT或几台实验室拼装样机炒作预期。作为买方深度投研，我们审视汇川技术正在重金押注的<strong>三大远期战略新业务——① 人形机器人核心执行器（行星滚柱丝杠+无框力矩电机+关节模组）、② 高端控制大脑与全栈工业软件（功能安全大型PLC+CNC+iFA平台）、③ Globalocal海外本地化与大功率数字能源（50GW储能PCS+源网荷储FEMS）</strong>，第一步就是彻底剥离情绪渲染，将它们死死钉在<strong>“当前真实商业化刻度、当期营收利润贡献与研发会计处理”</strong>的客观标尺上（<strong>表 B-1</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">远期战略期权名称</th>
@@ -3164,14 +3452,14 @@
 <td style="text-align: left;"><strong>攻守兼备的协同抓手</strong>：单纯拼国内大储PCS硬件易陷价格战，但结合工控客户的“工厂微电网FEMS+屋顶光储”具有独家粘性</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我最讨厌那些把八竿子打不着的研发费用全部“资本化”塞进无形资产里、靠做假账吹嘘新业务的骗子。你看汇川的账本：一年砸下去42.56亿研发费，2026年前三季度又砸了34.26亿，不管是磨人形机器人的丝杠，还是写了五年的iFA工业软件，全都老老实实在当年利润表里一分不少地扣掉了！这意味着什么？意味着如果人形机器人明天突然泡汤了，汇川的资产负债表连一分钱减值都不用提；但如果它成了，那就是白送给股东的一座金矿。这种“亏损有限、赔率无上限”的不对称赌局，才是聪明人最爱的免费期权。</p></div></div>
 <hr/>
 <h4 id="b2">B.2 第一大期权证伪拆解：人形机器人核心执行器（行星滚柱丝杠 + 无框力矩电机 + 旋转/直线关节模组）</h4>
 <h5 id="1-bom">1. 穿透技术家底与BOM覆盖度：为什么汇川不是“临时凑热闹的外行”？</h5>
 <p>当特斯拉Optimus将人形机器人全身约28—40个身体关节收敛为<strong>“14个旋转执行器（无框力矩电机 + 谐波/行星减速器 + 扭矩/位置传感器 + 驱动器）+ 14个线性/直线执行器（无框力矩电机 + 反向式行星滚柱丝杠 + 传感器 + 驱动器）”</strong>的经典构型时，整个中国制造业突然发现：在占人形机器人整机硬件BOM成本高达 <strong>55%—65%</strong> 的执行器总成里，绝大多数竞争者都只是“偏科生”——做轴承和丝杠的（五洲新春、贝斯特）不懂电机电磁设计和驱动算法；做汽车热管理阀件的（三花智控）和做汽车底盘橡胶减震的（拓普集团）长于机械制造与车规客户关系，但底层电机控制与高精度编码器需要外协或从头补课；做谐波减速器的（绿的谐波）没有直驱电机和驱动器基因。</p>
 <p>而当我们拆开汇川技术的人形机器人技术树时，会发现它是国内极少数在<strong>“电、磁、机、感、算”五个维度同时拥有十余年工业级量产底座</strong>的全栈玩家（<strong>表 B-2</strong>）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">人形机器人核心硬件模块</th>
@@ -3218,12 +3506,12 @@
 <td style="text-align: left;"><strong>🟡 持续迭代中</strong>：小脑运控算法强悍，灵巧手微型传动件正随客户方案同步演进</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="2">2. 跨越商业化鸿沟的“三道生死关卡”冷峻证伪</h5>
 <p>尽管技术同源度极高，但买方绝不能因此陷入盲目乐观。从“工博会展出高水平样机、向客户送样测试”到“在财务报表上贡献数十亿高毛利营收”，汇川技术的人形机器人业务必须正面跨过以下三道冷酷的物理与商业生死关：</p>
-<h6 id="_16">🚧 第一关：底层物理极限与精密制造工艺卡点——如何把单根丝杠成本从“万元级”砍到“千元内”？</h6>
+<h6 id="_17">🚧 第一关：底层物理极限与精密制造工艺卡点——如何把单根丝杠成本从“万元级”砍到“千元内”？</h6>
 <p>人形机器人下肢（大腿髋、膝、踝）承受着整机自重与动态跳跃冲击，必须采用<strong>反向式行星滚柱丝杠（Inverted Planetary Roller Screw）</strong>——将螺母作为主动旋转件并与无框力矩电机转子集成为一体，将丝杠轴作为直线推杆，从而把体积压缩40%以上。但这带来了机械加工领域的噩梦级挑战（<strong>表 B-3</strong>）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心部件物理/制造卡点</th>
@@ -3258,7 +3546,7 @@
 <td style="text-align: left;"><strong>🟢 汇川最强优势项</strong>：MX系列无框电机直接复用工业伺服的<strong>拼块式定子高槽满率绕线工艺 + 高导热环氧树脂真空灌封技术</strong>，功率密度已达4.5kW/kg级，散热表现领跑行业</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h6 id="vs_3">🚧 第二关：下游主机厂供应链认证与“自研 vs 外采”博弈——谁会真正给汇川下大单？</h6>
 <p>目前全球人形机器人主机厂裂变为三大阵营：<strong>① 海外科技巨头（以特斯拉Optimus、Figure AI、波士顿动力为代表）</strong>；<strong>② 国内车企跨界系（小米、小鹏、广汽、奇瑞、长安等）</strong>；<strong>③ 国内具身智能原生本体厂与大厂系（宇树科技Unitree、智元机器人Agibot、银河通用、傅利叶、优必选、华为具身生态链等）</strong>。</p>
 <p>冷静剖析汇川在这三大阵营中的真实切入胜算：</p>
@@ -3272,7 +3560,7 @@
 </ul>
 <h6 id="15">🚧 第三关：跨界群狼环伺下的八强贴身肉搏战——终局毛利率会沦为15%的汽零苦力活吗？</h6>
 <p>我们将当前A股人形机器人执行器与核心部件赛道的八大主力玩家拉在一张表里做终局实力对决（<strong>表 B-4</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">竞争对手名称</th>
@@ -3349,7 +3637,7 @@
 <td style="text-align: left;"><strong>中小型协作与移动机器人特色动力部件商</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>当淘金热来的时候，有的人去山上盲目挖坑，有的人在山下开铁匠铺。你看汇川在人形机器人上的打法有多老辣：它没有去跟几十家烧风险投资的初创公司抢着造那台还不知道什么时候能卖进家庭的双足机器人整机，而是直接把人形机器人肚子里的“心脏（无框电机）”、“骨头（行星滚柱丝杠）”和“神经（低压驱动器+编码器）”全造出来了！而且更绝的是，南京基地那28万套丝杠和几百万台电机，平时就装在自家的工业机器人和注塑机上赚钱养家；哪天人形机器人真的迎来年产百万台的奇点，它只要把车间阀门一拧就能满世界供货。这种进可攻、退可守的买卖，才叫立于不败之地。</p></div></div>
 <hr/>
 <h4 id="b3-plc-cnc-ifa">B.3 第二大期权证伪拆解：高端控制大脑与全栈工业软件生态（功能安全大型PLC + CNC + iFA平台）</h4>
@@ -3369,7 +3657,7 @@
 </li>
 </ol>
 <p>我们将汇川这套最新“大脑+软件”组合，与全球行业霸主西门子、罗克韦尔、欧姆龙的当家旗舰拉到同一张桌子上硬核对标（<strong>表 B-5</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心技术与生态对比维度</th>
@@ -3422,7 +3710,7 @@
 <td style="text-align: left;"><strong>极致的商业杀伤力</strong>：帮大型业主与OEM砍掉一半以上的控制层硬件与软件授权成本</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="2_1">2. 跨越“西门子生态铁幕”的三道生死关证伪</h5>
 <p>为什么汇川的大型PLC硬件参数已经追平西门子、价格只有西门子的三分之一到一半，市占率却还在6.5%向10%爬坡，而没能像伺服电机那样迅速拿下30%份额？我们必须冷酷地指出横亘在汇川面前的<strong>三道非单纯技术性生死关</strong>：</p>
 <ol>
@@ -3441,7 +3729,7 @@
 </ol>
 <h5 id="3">3. 汇川如何撕开铁幕？分行业破局路径与胜算评估</h5>
 <p>面对这三道铁幕，汇川技术并没有采取盲目硬碰硬的自杀式冲锋，而是制定了一套极具智慧的<strong>“农村包围城市 + 顶层政策借力 + 代码一键迁移”</strong>破冰战术（<strong>表 B-6</strong>）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">下游细分行业阵地</th>
@@ -3481,7 +3769,7 @@
 <td style="text-align: left;"><strong>⭐⭐（战略性克制）</strong>：严守工厂自动化（FA）与传动边界，不在非核心的纯重化工DCS泥潭恋战</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(此外，在高校与工程师生态端，汇川已联合全国超200所理工科高校共建“汇川自动化实验室”并赞助全国大学生智能制造大赛，同时在 <code>iFA Evolution</code> 平台内开发了<strong>“西门子/三菱工程文件一键解析迁移工具”</strong>，将工程师代码移植工作量砍掉70%以上！)</em></p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>想把西门子从大型工厂总工程师的脑子里赶出去，光靠硬件便宜一半是没用的，因为总工程师花的是公司的钱，保的是自己的乌纱帽！汇川看透了这层人性，所以它用了两招极其高明的“阳谋”：在民营设备厂里，它派自己的工程师驻场免费帮老板把整套PLC和伺服代码写好调通，让老板省掉一半研发费；在央国企矿山和港口里，它借着国家“核心工业控制安全自主可控”的尚方宝剑，让总工程师名正言顺地换上汇川刚拿到德国TÜV最高安全认证的SIL3大型安全PLC。一边用代码绑住年轻人，一边用政策解开老总工的心结，西门子那道铁幕就是这么被一点点撬开裂缝的。</p></div></div></div></div>
 
 <hr/>
@@ -3490,7 +3778,7 @@
 <p>国内通用伺服（32%份额）、低压变频器（21.5%份额）与电梯控制器（35%+份额）的高市占率事实告诉我们：汇川技术若想在未来十年跨越千亿营收门槛，<strong>海外市场（全球工控+车规电驱市场规模是中国的3倍以上）是绝对的主战场</strong>。</p>
 <p>穿透 <strong>2025年报与2026年半年度报告</strong> 分地区数据：2025年公司境外收入约 <strong>28.0亿元</strong>（占总营收约6.6%）；<strong>2026年上半年（2026H1）境外营业收入达 16.39亿元（1,638,520,185.49元，同比增长 +24.18%，占总营收6.64%），境外营业成本10.85亿元，境外毛利率高达 33.79%</strong>——比中国内地市场毛利率（29.45%）足足高出 <strong>4.34个百分点</strong>！同时，公司已于 <strong>2026年4月28日正式向香港联交所递交H股主板上市申请</strong>，旨在搭建国际化资本与品牌平台。</p>
 <p>汇川的出海绝不是简单的“外贸卖货”，而是构建了一套层层递进的<strong>“Globalocal三步走战略”</strong>。我们逐层拆解其收入结构、真实盈利能力与落地阻力（<strong>表 B-7</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">出海战略梯队（三步走）</th>
@@ -3527,9 +3815,9 @@
 <td style="text-align: left;"><strong>🟡 壁垒最高、周期最长</strong>：① 欧美本土中小型OEM对西门子/罗克韦尔有深厚品牌路径依赖；② 需在海外从零招募培训数百家本土分销商（Channel Partners）与应用工程师</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为了看清汇川在全球四大海外战区的真实作战态势，我们拉出区域穿透排查表（<strong>表 B-8</strong>）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">海外核心战区</th>
@@ -3569,12 +3857,12 @@
 <td style="text-align: left;"><strong>⚖️ 审慎稳健推进</strong>：以不受地缘敏感限制的电梯配套与通用暖通变频器为主，规避北美敏感基础设施直接敞口</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="2-50gwpcs">2. 大功率数字能源（西安50GW储能PCS + 源网荷储）：是“低毛利红海鸡肋”还是“工厂微网点金石”？</h5>
 <p>2025年11月，汇川技术总投资约10亿元、年设计产能高达 <strong>50GW</strong> 的 <strong>西安储能及电源系统制造基地（位于西咸新区沣东新城）</strong> 正式投产转固，并在短短两年内凭一己之力杀入 <strong>中国储能变流器（PCS）国内出货量前三强</strong>！</p>
 <p>然而，任何熟悉新能源产业链的买方都清楚一个残酷事实：2024—2026年，国内发电侧与电网侧大型储能（大储）经历了惨烈的价格战，国内大储PCS集采中标均价一度跌破0.08—0.10元/W，二三线厂商全面亏损。<strong>汇川技术为什么要把宝贵的工程资源砸向看似拥挤的储能PCS赛道？它会沦为拖累毛利率的鸡肋吗？</strong></p>
 <p>我们将汇川的数字能源业务与阳光电源、科华数据（科华数能）、上能电气等头部玩家做深度对比拆解（<strong>表 B-9</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -3619,9 +3907,9 @@
 <td style="text-align: left;"><strong>这才是汇川做储能的真正醉翁之意</strong>：阳光电源管的是“围墙外的电网”，汇川管的是“围墙内的整座耗电工厂”！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为了直观展示汇川<strong>“工业自动化（OT）+ 数字能源（FEMS + PCS）”</strong>在工业客户端产生的奇妙化学反应，我们测算一个典型年耗电量1亿度的中型制造工厂（如锂电材料厂、大型纺织印染厂或特钢厂）的交叉销售单客价值放大模型（<strong>表 B-10</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">工厂客户合作阶段</th>
@@ -3666,12 +3954,12 @@
 <td style="text-align: left;"><strong>OT（操作技术）+ IT（数字化）+ ET（能源技术）三网合一</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>如果汇川去跟阳光电源在沙漠里拼谁的集装箱储能电池卖得更便宜，那我第一个骂它犯蠢；但你仔细看朱兴明是怎么下这盘棋的：汇川手里本来就攥着全国几万家最费电的矿山、钢厂、化工厂、锂电厂和纺织厂的车间钥匙，车间里每一台电机什么时候启动、消耗多少度电，全在汇川的PLC和变频器肚子里记着呢！这时候它顺手把西安基地造出来的储能变流器（PCS）和FEMS能量管理软件卖给同一个厂长，帮厂长削峰填谷省电费，顺便把单家工厂的合同额从三百万放大到三千万。用现成的渠道、现成的IGBT芯片集采、现成的工业客户卖新产品——这不叫红海内卷，这叫顺手牵羊的降维打击！</p></div></div>
 <hr/>
 <h4 id="b5">B.5 买方终局定性裁决：三大远期期权的“含金量、胜率与赔率”审判台</h4>
 <p>综合模块 A 的工程造价穿透与模块 B 的冷峻技术/商业证伪，我们拒绝任何模棱两可的骑墙话术，直接站在买方投资决策委员会（IC）的终局视角，对汇川技术三大远期期权（细分为6个具体战略子方向）给出最终的<strong>买方定性裁决总表（表 B-11）</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">远期战略期权子方向</th>
@@ -3739,12 +4027,12 @@
 <td style="text-align: left;"><strong>⚠️【需严守毛利底线、警惕沦为红海鸡肋的规模补充项】</strong><br/>国内纯大储PCS裸机招投标价格战惨烈，其核心价值在于<strong>分摊西安50GW基地固定折旧与放大IGBT采购体量</strong>，管理层必须严守“不接亏损标、聚焦构网型与海外高毛利PCS”的纪律边界！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>模块 A 与模块 B 联合穿透总结</strong>：
 通过对汇川技术百亿级重资产扩产工程的逐项审计与三大远期期权的冷峻证伪，我们可以给出一个极具底气的产业工程定论：<strong>汇川技术的重资产扩张（2025年末固定资产98.93亿元 <span class="math-inline"> → </span> 2026Q3末104.95亿元、在建工程19.42亿元）绝非盲目铺摊子的资本消耗，而是建立在“自家机器人/PLC装备自家工厂极致省钱、工控与机器人板块仅需7.4%—8.3%稼动率即可覆盖全部新增折旧、汽车电驱业务已通过联合动力IPO募资35.32亿元实现独立造血”基础上的深沟高垒；而其每年高达42.56亿元的全额费用化研发投入，更是在不增加资产负债表任何商誉或开发支出水分的前提下，为股东免费孵化出了“iFA全栈工业软件与SIL3大型安全PLC”、“Globalocal高毛利出海”与“人形机器人机电丝杠全栈执行器”三张极具爆发力的王牌期权。</strong></p>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="c">追问模块 C：同行与上下游“三方交叉审讯”（景气度、超额毛利归因与份额攻守终局）</h2>
-<hr>
+<hr/>
 <h3 id="13_1">【开篇审讯导言：为什么要把国内外13家同行拉上同一座审判席？】</h3>
 <p>如果只盯着汇川技术（300124.SZ）一家公司的财报看，投资者极易在两个看似矛盾的财务异象前陷入迷茫：</p>
 <ul>
@@ -3761,7 +4049,7 @@
 <h4 id="c11">C.1.1 跨国工控三巨头对质：全球制造业复苏分化与中国区“冰火换防”</h4>
 <p>我们先调取全球工业自动化三大风向标——<strong>德国西门子（Siemens，聚焦数字化工业集团 Digital Industries，财年截至9月30日）</strong>、<strong>日本安川电机（Yaskawa Electric，6506.T，财年截至2月底）</strong>与<strong>中国台湾台达电子（Delta Electronics，2308.TW，日历年）</strong>在2024—2026财年的核心经营数据，与汇川技术做第一轮宏观景气度对表：</p>
 <p><strong>表 C-1：汇川技术与国际工控三大巨头（西门子DI、安川电机、台达电子）2024—2026年经营景气度对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称（代码/部门）</th>
@@ -3811,13 +4099,13 @@
 <td style="text-align: left;">战略重心全面向全球AI服务器电源倾斜；在大陆传统PLC与通用变频器市场处于战略收缩与守势</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>从跨国巨头的账本中可以清晰看到：<strong>2026年全球工业自动化已彻底走出2023—2024年的去库存寒冬</strong>。西门子DI中国区在经历了长达一年半的渠道去库后，于2026财年四季度重回增长（收入+14%），安川电机也因半导体与3C复苏上调了全年指引；但与此同时，<strong>汇川技术通用自动化板块在2026年前三季度轰出了高达 +33.00% 的狂暴增速</strong>——这意味着在中国本土制造业设备升级与出海浪潮中，汇川的增速是西门子中国区、安川电机与台达工控部门的 <strong>2倍以上</strong>！</p>
 <hr/>
 <h4 id="c12">C.1.2 国内工控与机器人六大同行对质：合同负债与存货的“测谎仪”</h4>
 <p>既然跨国巨头印证了行业回暖，那么国内同行在2026年前三季度的冷暖如何？为什么汇川的存货会在前三季度大增54.20%？我们调取国内6家核心工控与机器人上市公司——<strong>信捷电气（603416.SH，小型PLC与伺服）</strong>、<strong>雷赛智能（002979.SZ，步进与伺服运动控制）</strong>、<strong>伟创电气（688698.SH，变频器与伺服）</strong>、<strong>禾川科技（688320.SH，光伏/通用伺服与PLC）</strong>、<strong>埃斯顿（002747.SZ，六关节工业机器人）</strong>与<strong>麦格米特（002851.SZ，工业电源与电控）</strong>截至2026年9月30日的三季报真账本，进行交叉审讯：</p>
 <p><strong>表 C-2：国内工控与机器人核心同行 2024—2026Q3 营业收入与归母净利润增速横向对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称（股票代码）</th>
@@ -3910,10 +4198,10 @@
 <td style="text-align: center;"><strong>+117.32%</strong>（扣非1.04亿，Q3扣非-0.14亿）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>紧接着，我们拉出最关键的<strong>资产负债表先行指标——合同负债（预收货款）与存货增减变动表</strong>，来审讯“存货高增54.20%”的底层真相：</p>
 <p><strong>表 C-3：国内工控与机器人同行 2025年末 vs 2026Q3末 合同负债与存货变动及周转效率三方审讯表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称</th>
@@ -4006,7 +4294,7 @@
 <td style="text-align: left;"><strong>🟢 AI电源与工控订单驱动备货</strong>：合同负债+46.96%、存货+62.72%，主要系海外AI服务器电源及工业大客户排产备料激增</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>【第一轮三方审讯铁证结论】</strong>：
 把7家工控同行的资产负债表放在一起，真相不辩自明！<strong>2026年前三季度绝非汇川技术一家存货高增，而是全行业景气度最高、订单最饱满的头部工控与电源厂商集体发起了“锁价战略备货”</strong>：</p>
 <ol>
@@ -4017,7 +4305,7 @@
 <h4 id="c13-12458">C.1.3 车规电驱同行对质与124.58亿存货内部结构解剖</h4>
 <p>那么，在汇川技术新增的 <strong>43.79亿元</strong> 存货（从80.79亿增至124.58亿）中，工控、机器人与新能源汽车各自占了多少？新能源汽车电驱同行（对比汇川控股81.91%的子公司<strong>联合动力 301656.SZ</strong>）在2026年经历了怎样的库存与经营周期？我们拉出5家车规电驱企业的三季报对比表：</p>
 <p><strong>表 C-4：新能源汽车第三方电驱同行（联合动力 vs 英搏尔、精进电动、欣锐科技、巨一科技）2024—2026Q3 经营与存货对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称（代码）</th>
@@ -4088,10 +4376,10 @@
 <td style="text-align: left;"><strong>🟡 智能装备占大头</strong>：电驱单体规模较小，长周期智能装备发出商品占用了超35亿高额存货</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>结合母子公司财报拆分，我们将汇川技术合并报表下 <strong>2026Q3末 124.58亿元存货（较年初80.79亿元净增43.79亿元）</strong> 的真实构成与备货动因拆解如下：</p>
 <p><strong>表 C-5：汇川技术 2026Q3末 124.58亿元存货分业务板块归属与新增43.79亿元动因拆解表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">存货归属业务板块</th>
@@ -4141,10 +4429,10 @@
 <td style="text-align: left;"><strong>随着Q4汽车与工控交付回款高峰到来，年末存货预计自然回落15亿—20亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为了进一步完成上下游三方闭环验证，我们再检查汇川技术对上游供应商的采购结算与下游客户的集中度指标：</p>
 <p><strong>表 C-6：汇川技术上下游集中度与营运资金链条（预收/应付/采购付款）三方交叉验证表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">供应链交叉审讯指标</th>
@@ -4184,7 +4472,7 @@
 <td style="text-align: left;">对上游供应商无息占款超220亿元，完全覆盖了124.58亿元存货；2026Q1-Q3购买商品支付现金增加系主动现汇锁价所致</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把汇川和那十几家同行放在同一张桌子上审讯，真假立判！要是只有汇川一家存货涨了54%，而合同负债在往下掉，那你得怀疑朱兴明是不是生产了一堆卖不掉的废铁；可事实是，汇川的预收合同负债暴涨了35.8%，同行的信捷存货涨了75.6%、伟创涨了82.9%、麦格米特涨了62.7%、雷赛涨了49.8%！为什么大家都在2026年抢着囤货？因为铜价冲到了十万八千块一吨，AI和工控的功率芯片又在涨价，谁手里有上百亿现金能先把低价元器件锁进仓库，谁就能在接下来的旺季里边赚涨价的钱、边抢断货对手的订单。这叫“深挖洞、广积粮”，可不是什么滞销压库！</p></div></div>
 <hr/>
 <h3 id="c2-28">C.2 盈利质量与超额毛利归因对质：汇川工控高出同行2—8个百分点的超额毛利从何而来？</h3>
@@ -4192,7 +4480,7 @@
 <p>外行看汇川技术，最常被其 <strong>28.95%（2025年）/ 29.74%（2026H1）</strong> 的合并综合毛利率误导，误以为汇川的盈利能力不如信捷电气（35.24%）、雷赛智能（39.21%）或台达电子（34.30%）。这种对比犯了最初级的“苹果比西瓜”错误——因为信捷和雷赛几乎100%是轻资产工控小单品，而汇川合并报表里装进了年营收超200亿元、行业属性完全属于汽车Tier-1制造的<strong>联合动力（毛利率12.82%—14.50%）</strong>！</p>
 <p>一旦我们将汇川技术的<strong>工业自动化与数字化板块（2025年营收222.45亿元、毛利率~40.80%；2026H1营收135.01亿元、毛利率41.37%）</strong>，尤其是<strong>纯通用自动化业务（变频器+伺服+PLC，毛利率高达44.50%—44.80%）</strong>单独拎出来，与国内外同行拉到同一起跑线对比，画风瞬间逆转：</p>
 <p><strong>表 C-7：汇川技术工业自动化分部与国内外同行（2024—2026Q3）同口径毛利率对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比企业（股票代码）</th>
@@ -4314,13 +4602,13 @@
 <td style="text-align: center;"><strong>汇川工控高出 +20.55 pct</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>这张表揭示了一个极其震撼的事实：<strong>在2026年铜、铝等原材料大幅涨价的背景下，国内二线工控同行信捷电气的毛利率从37.50%跌至35.24%（Q3单季跌至33.43%），伟创电气的毛利率从37.59%大跌4.84个百分点至32.75%，禾川科技更是只有24.25%；唯独体量是它们10—20倍的汇川技术，其工业自动化板块毛利率不仅没有跌，反而从2025年的40.80%逆势微升0.57个百分点至 41.37%（纯通用自动化高达44.80%）！</strong></p>
 <hr/>
 <h4 id="c22">C.2.2 超额毛利四大来源量化归因：产品溢价、制造自给、集采霸权还是会计口径？</h4>
 <p>为什么汇川的通用工控卖着比信捷、伟创、禾川还要大十倍的规模，毛利率却能高出 <strong>6—20个百分点</strong>？是因为会计折旧或研发资本化做手脚了吗？我们做一次严苛的<strong>四维量化拆解归因</strong>：</p>
 <p><strong>表 C-8：汇川技术工控业务高出国内同行（均值~33.5%）约 8—11 个百分点“超额毛利率”的四大来源归因拆解表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">超额毛利归因维度</th>
@@ -4367,13 +4655,13 @@
 <td style="text-align: left;">单品规模小、缺高端行业工艺包、抗大宗涨价能力弱</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看到这张超额毛利拆解表，你就明白什么叫“把几种优势拧成一股绳（Lollapalooza效应）”了！国内那些年营收十几个亿的工控小同行，卖伺服毛利率只有22%到25%，为什么汇川能卖到44%以上？第一，小厂卖的是光秃秃的硬件，客户买回去还得自己请工程师写代码调参数；汇川卖的是带了200多个工艺算法的整套方案，帮客户省了大把人工；第二，汇川靠着联合动力两百多亿的汽车电驱体量，去跟芯片厂和铜线厂砍价，拿货成本天生比小厂便宜一截；第三，连电机和编码器芯片都是自己岳阳基地造的。三重优势叠在一起，对手哪怕把价格降到亏本，也抢不走汇川的碗里肉。</p></div></div>
 <hr/>
 <h4 id="c23">C.2.3 期间费用率与车规电驱成本风暴抗压测试：谁在裸泳，谁是真金？</h4>
 <p>看完了毛利率，我们再把手术刀切向<strong>期间费用率（销售、管理、研发、财务）</strong>与<strong>2026年新能源汽车电驱原材料涨价风暴抗压测试</strong>。</p>
 <p><strong>表 C-9：汇川技术与国内工控及机器人同行 2025—2026Q3 期间费用率与扣非净利率横向对决表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称（代码）</th>
@@ -4477,10 +4765,10 @@
 <td style="text-align: left;">2026Q3单季扣非净利为 <strong>-1,388.55万元</strong>，高研发与低毛利挤压主业利润</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>再看<strong>新能源汽车电驱战场</strong>：2026年上半年至三季度，全球大宗商品市场掀起惊涛骇浪——<strong>沪铜主力突破10.65万—10.80万元/吨（长江现货铜达10.98万元/吨）、A00现货铝站上2.29万元/吨、稀土镨钕金属飙升至87.50万元/吨</strong>。由于汽车电驱总成（电机+电控+减速器）的BOM成本中，电磁铜线、铝压铸壳体与钕铁硼永磁体合计占比高达 <strong>46%</strong>，这场涨价风暴把所有第三方电驱厂推进了残酷的炼丹炉：</p>
 <p><strong>表 C-10：2026年铜铝稀土暴涨风暴下 第三方车规电驱同行（联合动力 vs 四家同行）盈利抗压测试表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">考核企业（代码）</th>
@@ -4551,13 +4839,13 @@
 <td style="text-align: left;"><strong>🟡 靠装备业务补贴电驱</strong>：电驱业务体量较小，主要靠汽车焊装智能装备业务（毛利率&gt;20%）拉高整体毛利率</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看2026年三季报这张车规电驱生死簿吧！当铜价涨到十万八千块、稀土涨到八十七万五的时候，精进电动三季度的毛利率直接摔到了可怜的4.98%，三个季度亏掉2.48亿；欣锐科技三季度单季又亏了2,500万；连做电源的麦格米特三季度单季扣非都亏了1,389万！反观汇川控股81.91%的联合动力，上半年刚因为铜价暴涨和严苛计提减值亏了8,809万，到了三季度单季立马就触发大客户调价机制、扭亏为盈净赚4,075万！更重要的是，联合动力在2025年9月刚从创业板IPO拿了35.32亿净现金在账上。这就好比大冬天大家一起掉进冰窟窿，小同行穿着单衣在里面冻得瑟瑟发抖，而联合动力穿着貂皮大衣、揣着暖手宝，喝口热茶就爬上岸了。</p></div></div>
 <hr/>
 <h4 id="c24-1333321913">C.2.4 严守会计防呆铁律：纯应收账款（133.33亿）与广义应收（219.13亿）同行回款审讯</h4>
 <p>按照严格会计审计防呆铁律，在对比汇川技术与同行的营运资金占用时，<strong>绝不能只看“纯应收账款”，必须将“纯应收账款（133.33亿元）+ 应收票据（53.29亿元，主要为商业承兑汇票及6个月以上银行承兑汇票）+ 应收款项融资（32.51亿元，高信用等级银行承兑汇票）”合并为“广义应收款项（219.13亿元）”</strong>进行穿透对质，以彻底拆清工控经销回款与整车厂票据账期的结构差异：</p>
 <p><strong>表 C-11：汇川技术与可比同行 2026Q3末 纯应收账款 vs 广义应收款项及回款质量（净现比）交叉审讯表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称（代码）</th>
@@ -4658,7 +4946,7 @@
 <td style="text-align: left;">100%整车厂客户，广义应收占年化营收近50%，受车企票据拉长影响显著</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>【广义应收穿透审计结论】</strong>：</p>
 <ol>
 <li><strong>即使装进了200亿体量的汽车电驱业务，汇川技术的纯应收账款占年化营收比重（26.35%）依然显著优于雷赛智能（32.61%）、伟创电气（38.56%）、埃斯顿（42.76%）与英搏尔（31.36%）！</strong></li>
@@ -4669,7 +4957,7 @@
 <p>为了给“同行交叉审讯”画上最硬核的句号，我们调取权威工业咨询机构 <strong>MIR睿工业（MIR DATABANK）</strong> 与 <strong>NE时代（新能源汽车电驱统计）</strong> 2023—2026年的连续四年市场份额追踪台账，用精确的<strong>“市占率净增减百分点（pct）”</strong>算清一笔总账：过去三年里，汇川技术在五大核心战场暴涨的份额，到底是从谁的嘴里硬生生夺下来的？</p>
 <h4 id="c31">C.3.1 战场一：中国通用伺服系统——汇川一家鲸吞日系三强（安川+松下+三菱）</h4>
 <p><strong>表 C-12：中国通用伺服系统市场（2023—2026年）TOP 8 厂商市占率演变与份额得失净值表（MIR睿工业口径）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">排名（2026）</th>
@@ -4764,11 +5052,11 @@
 <td style="text-align: left;">禾川在2024—2025光伏退潮中份额受损，2026年靠低价修复；大量无自研电机能力的小厂出局</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="c32-plc">C.3.2 战场二与三：低压变频器与PLC（小型+中大型）——正面撬动欧美日铁幕</h4>
 <p><strong>表 C-13：中国低压变频器市场（2023—2026年）TOP 7 厂商市占率演变与份额得失净值表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">排名（2026）</th>
@@ -4845,9 +5133,9 @@
 <td style="text-align: left;">老牌二线内资在低端通用市场分食外资退出的长尾空间</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 C-14：中国小型 PLC 与中大型 PLC 市场（2023—2026年）内外资份额攻防转换表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">PLC 细分赛道</th>
@@ -4933,11 +5221,11 @@
 <td style="text-align: left;">AC800/AM800及功能安全大型PLC在锂电、光伏、港口、矿山、冶金实现历史性破冰</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="c33">C.3.3 战场四与五：工业机器人与第三方车规电驱——剩者为王的洗牌终局</h4>
 <p><strong>表 C-15：中国工业机器人（SCARA 与整体市场）2023—2026年份额攻守与盈利对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">机器人赛道口径</th>
@@ -5005,9 +5293,9 @@
 <td style="text-align: left;">从SCARA向中大负载六关节机器人成功跨越（年产能达12万台），且依托自产伺服+丝杠实现内生高盈利</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 C-16：中国新能源汽车第三方电控与电驱总成市场（2023—2026年）份额集中度与出清终局表（不含车企纯自供）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">第三方独立供应商排名</th>
@@ -5066,12 +5354,12 @@
 <td style="text-align: left;">2026年铜铝暴涨成为压垮年销30万套以下中小电驱厂的最后一根稻草，订单加速向联合动力集中</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这五张市场份额增减净值表钉在墙上，你就看懂了过去三年中国高端制造业发生的静悄悄的革命！汇川在通用伺服上涨的3.8个百分点、在SCARA机器人上涨的6.1个百分点、在低压变频器上涨的2.9个百分点，几乎一分不差地对应着日本安川、松下、三菱、爱普生和瑞士ABB掉下去的肉！它不是靠跟国内小作坊打泥巴仗长大的，它是直接拿着刺刀冲进日系和欧系老贵族的庄园里，把人家的王冠摘下来戴在自己头上。</p></div></div>
 <hr/>
 <h3 id="c4-c-scorecard">C.4 模块 C 三方交叉审讯核心结论 Scorecard 总表</h3>
 <p><strong>表 C-17：追问模块 C（同行与上下游三方交叉审讯）核心结论汇总 Scorecard</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审讯维度</th>
@@ -5106,13 +5394,19 @@
 <td style="text-align: left;"><strong>🟢 对内形成十倍级研发降维打击，对外持续收割日欧巨头份额</strong></td>
 </tr>
 </tbody>
-</table>
-<hr class="module-sep"/>
+</table></div>
+<hr/>
+<hr/>
+<h2 id="downer-earnings">阶段二·模块 D：真实造血底盘（Owner Earnings）三标尺精算、原材料成本弹性与极限抗压测试</h2>
+<blockquote>
+<p><strong>模块核心使命</strong>：彻底撕开会计准则编织的“表观净利润”与“阶段性现金流异动”面纱，严格站在巴菲特与芒格的<strong>买方全资收购者视角</strong>，用外科手术刀逐项剥离非经常性损益、一次性减值洗澡、股份支付摊销与战略备货营运资金噪音；打通“合并报表全口径”与“剔除联合动力（301656.SZ）18.09%少数股东权益后的归母口径”桥接账本；锚定 <strong>2026年11月17日</strong> 最新大宗商品现货价格与成本传导公式，精确算清汇川技术在<strong>「今日实时高压现货（标尺一）」、「新常态周期中枢（标尺二·核心主锚）」与「苛刻历史寒冬底线（标尺三）」</strong>三把标尺下的真实股东盈余（Owner Earnings），并完成在建工程达产增量造血垫高与多维极限压力测试。</p>
+</blockquote>
+<hr/>
 <h3 id="capex">【第一部分：剥离会计噪音与折旧/CapEx/营运资金的显微镜还原】</h3>
 <h4 id="11-20252026q1-q3">1.1 损益表第一刀：2025年报与2026Q1-Q3非经常性损益的逐项解剖</h4>
 <p>在买方精算师眼中，权责发生制下的“归母净利润”往往混杂着政府红包、金融资产股价波动、股权处置溢价等与核心经营无关的会计噪音。我们直接调取汇川技术 <strong>《2025年年度报告》</strong> 与 <strong>《2026年第三季度报告》</strong> 财务附注中的非经常性损益明细表，进行穿透式对质：</p>
 <h5 id="d-1-2025-vs-2026q1-q3">表 D-1：汇川技术 2025全年 vs 2026Q1-Q3 非经常性损益逐项拆解与成色审计表（单位：亿元）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">非经常性损益明细项目</th>
@@ -5234,7 +5528,7 @@
 <td style="text-align: center;"><strong>作为 Owner Earnings 推演基准起点</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>穿透表 D-1 可以发现一个极易误导粗心投资者的会计陷阱：</p>
 <ul>
 <li>
@@ -5244,7 +5538,7 @@
 <p><strong>2026年第三季度（2026Q3）则出现了剧烈的反向剪刀差</strong>：2026Q3单季表观归母净利润高达 <strong>15.89亿元</strong>（同比大增23.55%），看似业绩井喷；但剥开附注一看，Q3单季由于半导体与机器人产业链参股标的估值飙升，确认了高达 <strong>+4.19亿元</strong> 的金融资产公允价值变动收益，单季非经常性损益达 <strong>+4.37亿元</strong>！剔除这笔“炒股/参股纸面富贵”后，2026Q3单季扣非归母净利润实为 <strong>11.51亿元</strong>（前三季度累计扣非归母净利 <strong>39.07亿元</strong>，同比微增0.49%）。因此，我们的真实造血精算必须毫不手软地砍掉这4.91亿元非经常性浮盈，死死锚定扣非归母净利润！</p>
 </li>
 </ul>
-<hr>
+<hr/>
 <h4 id="12_1">1.2 损益表第二刀：增值税软件退税、存货跌价“洗澡”与股份支付费用的常态化校准</h4>
 <p>即便拿到了扣非归母净利润（2025年49.51亿元、2026Q1-Q3为39.07亿元），里面依然包含三项计入“经常性损益”但对真实永续现金流有重大扭曲的特殊项目，必须逐一进行买方校准：</p>
 <ol>
@@ -5281,7 +5575,7 @@
 </li>
 </ul>
 <h5 id="d-2-20242026">表 D-2：汇川技术 2024—2026年化“表观归母净利 → 常态化核心扣非归母净利”校准还原桥接表（单位：亿元）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">校准还原步骤与具体项目</th>
@@ -5350,14 +5644,14 @@
 <td style="text-align: left;"><strong>代表在2026年11月铜铝高价现货、联合动力盈亏平衡态下的即期真实净利底盘</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街那帮投资银行家发明了“经调整EBITDA”这个词，把发给工程师的股票期权当成空气加回去，简直是会计界最大的骗局！如果给员工发股票不算成本，那到底是哪位圣诞老人在替股东买单？在汇川这本账上，我们一分钱的股份支付费用都不准加回，还得把2026年三季度炒股权赚来的4.19亿公允价值浮盈砍得干干净净。砍完所有泡沫之后还能稳稳剩下51.5亿真利润，这才是经得起敲打的硬骨头。</p></div></div>
 <hr/>
 <h4 id="13-da-2026">1.3 现金流第一刀：折旧与摊销（D&amp;A）四项明细拆解与 2026 年现存产能年化锚定</h4>
 <p>从“常态化扣非净利润”走向“真实股东盈余（Owner Earnings）”的核心枢纽，是搞清楚<strong>每年账面计提的折旧与摊销（D&amp;A）究竟是多少，以及其中有多少属于少数股东、有多少真正属于母公司股东</strong>。</p>
 <p>我们直接调取《2025年年度报告》合并财务报表附注“现金流量表补充资料”中的法定审计原值，并结合2025年初至2026Q3末固定资产、使用权资产、无形资产与长期待摊费用的账面扩张斜率，进行精确年化推算：</p>
 <h5 id="d-3-20242026da">表 D-3：汇川技术 2024—2026年现存产能全口径折旧与摊销（D&amp;A）四项明细核验表（单位：亿元）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">折旧与摊销法定四项明细</th>
@@ -5428,7 +5722,7 @@
 <td style="text-align: left;"><strong>随着2025—2026H1济南、南京一期、吴中一期陆续转固，年化D&amp;A稳站13.50亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>这里有一个至关重要的<strong>“母子报表穿透细节”</strong>：</p>
 <ul>
 <li>在2025年全集团 <strong>7.70亿元</strong> 的固定资产折旧中，控股子公司<strong>联合动力（301656.SZ，汇川持股81.91%，少数股东持股18.09%）</strong>单家就占了 <strong>4.44亿元</strong>（443,929,481.32元，占全集团固定资产折旧的 <strong>57.65%</strong>）！如果连同联合动力的无形资产摊销、使用权资产折旧与车规产线装修改造摊销一并计算，2025年联合动力全口径折旧摊销约为 <strong>6.10亿元</strong>，2026年随着苏州吴中三基地一期及常州二期转固，联合动力单家年化折旧摊销已达 <strong>7.74亿元</strong>！</li>
@@ -5443,7 +5737,7 @@
 <p>如果一家公司每年计提12.10亿元归母折旧摊销，却必须每年花掉15亿元去更换老旧机器才能维持原有产量，那么它的折旧就不是真正的自由现金流来源。反之，如果它的存量设备极其耐用、日常更新维护只需很少的钱，而账面上高达30.24亿元（2025年）和23.97亿元（2026Q1-Q3）的资本开支绝大部分是在买新地、盖新厂、扩建未来五年的新产能，那么<strong>将全部CapEx从当期OCF中减掉就会严重低估存量印钞机的真实造血能力</strong>！</p>
 <p>我们把汇川技术近年的资本开支账本拆解到具体的工程项目、设备寿命周期与业务板块：</p>
 <h5 id="d-4capex-capex">表 D-4：汇川技术资本开支（CapEx）三层经济性质拆解与“维持存量防御性 CapEx”核定表（单位：亿元/年）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">资本开支（CapEx）层级划分</th>
@@ -5528,7 +5822,7 @@
 <td style="text-align: center;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>表 D-4 算清了一笔颠覆市场刻板印象的硬账：</p><ul>
 <li>2025年汇川技术合并报表高达 <strong>30.24亿元</strong> 的资本开支中，有 <strong>19.42亿元（占64.22%！）</strong> 发生在子公司联合动力（301656.SZ）身上，用于新建苏州吴中三基地、常州二期与匈牙利车规工厂；另有约 <strong>6亿元</strong> 投向了南京机器人基地、岳阳电机与济南储能基地。</li>
 <li>真正用于维持当前存量工业自动化、智慧电梯及已建成车规产线正常运转、设备更新与IT升级的 <strong>防御性维持 CapEx，全合并口径仅为 5.50 亿元/年，剔除联合动力少数股东分摊后的归母口径仅为 5.00 亿元/年</strong>！</li>
@@ -5549,7 +5843,7 @@
 <p>在巴菲特的 Owner Earnings 公式中，除了扣除防御性 CapEx，还必须扣除<strong>“维持业务正常运转所需的追加营运资金（Additional Working Capital）”</strong>。很多制造业公司账面有利润，但赚来的钱全部变成了收不回来的应收账款和烂在仓库里的存货，这种“纸面利润”一文不值。</p>
 <p>汇川技术的真实营运资金占用特征到底如何？我们拉出 <strong>2021—2025年五个完整年度 + 2026Q1-Q3</strong> 的营运资金周转与现金转化全周期数据：</p>
 <h5 id="d-5-20212026q3-deltawc">表 D-5：汇川技术 2021—2026Q3 营运资金结构、周转效率与“常态刚性营运资金占用（<span class="math-inline">\Delta<span class="math-text">WC</span></span>）”核定表（单位：亿元）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">营运资金与现金流核心指标</th>
@@ -5675,7 +5969,7 @@
 <td style="text-align: center;"><strong>全合并 4.00亿 / 归母 3.50亿</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>从表 D-5 的五年长周期数据中，我们可以提炼出两条铁一样的商业规律：</p>
 <ol>
 <li>
@@ -5695,7 +5989,7 @@
 <p>2025年9月25日，控股子公司<strong>联合动力（301656.SZ）</strong>在深交所创业板独立分拆上市，公开发行12%新股募资净额35.32亿元，汇川技术对其直接持股比例由分拆前的94.51%稀释至 <strong>81.91%</strong>，外部公众及员工持股平台等少数股东合计持有联合动力 <strong>18.09%</strong> 的股份（此外集团旗下江苏经纬、伊诺威等极小体量子公司有少量少数股东权益，合并层面少数股东权益占总权益的4.72%）。</p>
 <p>为了彻底杜绝“把属于联合动力18.09%少数股东的折旧、现金流和利润错当成汇川母公司股东财富”的合并报表幻觉，我们建立一张严丝合缝的<strong>全合并口径 vs 归母口径非现金缓冲垫（Non-Cash Cushion）桥接表</strong>：</p>
 <h5 id="d-6-vs-capex">表 D-6：汇川技术“全合并口径 vs 归母口径”折旧摊销、防御性 CapEx 与刚性营运资金桥接表（单位：亿元/年）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">现金流调整核心要素</th>
@@ -5745,7 +6039,7 @@
 <td style="text-align: left;"><strong>核心恒等式：归母 Owner Earnings = 常态化扣非归母净利润 + 3.60 亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>这张桥接表给出了模块 D 与模块 F 最核心的底层算式底座：</p><div class="math-display">\begin{aligned}
 <span class="math-text">归母 Owner Earnings</span> &amp;= <span class="math-text">常态化扣非归母净利润</span> + <span class="math-text">有效归母折旧摊销</span>(12.10<span class="math-text">亿</span>) - <span class="math-text">归母防御性 CapEx</span>(5.00<span class="math-text">亿</span>) - <span class="math-text">常态刚性 </span>\Delta<span class="math-text">WC</span>(3.50<span class="math-text">亿</span>) \\
 &amp;= <strong><span class="math-text">常态化扣非归母净利润</span> + 3.60<span class="math-text"> 亿元/年</span></strong>
@@ -5757,7 +6051,7 @@
 <h4 id="21-85">2.1 两大核心板块营业成本基因解剖：85% 直接材料占比下的金属与芯片权重</h4>
 <p>为什么2026年铜、铝、稀土价格的大幅波动，会让工业自动化板块毛利率稳守 <strong>41.37%</strong>（逆势微增0.03pct），却让新能源汽车动力系统毛利率从14.50%滑落至 <strong>12.82%</strong>？要算清原材料价格对汇川真实造血能力的冲击，首先必须调取《2025年年度报告》披露的两大业务板块<strong>法定营业成本构成</strong>，并穿透拆解其底层 BOM（物料清单）结构：</p>
 <h5 id="d-7bom">表 D-7：汇川技术两大核心板块法定营业成本结构与底层直接材料（BOM）权重穿透表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">成本层级与核心物料拆解</th>
@@ -5839,12 +6133,12 @@
 <td style="text-align: left;">TI/ADI/国产MCU、薄膜电容（法拉电子）、硅钢片（宝钢）、精密轴承等</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="22-20261117">2.2 2026年11月17日实时大宗商品现货坐标与成本弹性传导公式</h4>
 <p>我们锚定截至 <strong>2026年11月17日</strong> 国内权威现货平台（长江有色金属网、上海期货交易所、百川盈孚稀土报价）的实时价格坐标，并与2024—2025年历史常态均值及未来新常态中枢进行对照：</p>
 <h5 id="d-820261117-vs">表 D-8：2026年11月17日上游核心原材料实时现货价格 vs 历史均值与新常态中枢对照表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心原材料品种</th>
@@ -5894,14 +6188,14 @@
 <td style="text-align: center;">国产替代锁定，价格持平或微降3%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>基于表 D-7 的物理金属耗用量（年化耗铜约 <strong>3.85万吨</strong>、耗铝约 <strong>12.40万吨</strong>、耗镨钕金属约 <strong>1,915吨</strong>、功率半导体采购额约 <strong>72.84亿元</strong>）与表 D-8 的价格坐标，我们运用 Python 精算模型，推导出<strong>在不考虑下游顺价与技术降本对冲的纯静态（Static Unmitigated）条件下</strong>，四大核心物料单位价格变动对两大板块毛利率及汇川归母 Owner Earnings（按有效高新税率12%、联合动力归母权益81.91%折算）的精确数学弹性公式：</p>
 <div class="math-display">\begin{aligned}
 \Delta<span class="math-text">归母 OE</span><sub><span class="math-text">静态</span></sub> &amp;= \Delta<span class="math-text">成本</span><sub><span class="math-text">工控</span></sub>  ×  (1 - 12\%)  ×  100\% + \Delta<span class="math-text">成本</span><sub><span class="math-text">车规</span></sub>  ×  (1 - 12\%)  ×  81.91\% \\
 &amp;= 0.88  ×  \Delta<span class="math-text">成本</span><sub><span class="math-text">工控</span></sub> + 0.7208  ×  \Delta<span class="math-text">成本</span><sub><span class="math-text">车规</span></sub>
 \end{aligned}</div>
 <h5 id="d-9-owner-earnings-vs">表 D-9：上游核心原材料价格波动对分部毛利率及税后归母 Owner Earnings 静态 vs 动态弹性矩阵表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">原材料价格单因子变动幅度</th>
@@ -5966,7 +6260,7 @@
 <td style="text-align: left;"><strong>汇川隐形防弹衣</strong>：中车时代、斯达、士兰微、晶川电子国产替代及8英寸SiC放量，每年对冲掉近一半的金属涨价！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>表 D-9 的精算结果极具洞见：</p><ul>
 <li>如果没有功率半导体（IGBT/SiC）和控制芯片、PCB的国产化降本，2026年电解铜从7.65万涨到10.98万（+3.3万元/吨）、铝涨0.31万元/吨、镨钕金属从49.5万涨到87.5万（+38万元/吨），静态算下来仅金属涨价一项就会吞噬汇川超过 <strong>18亿元</strong> 的税前利润！</li>
 <li>但为什么2026年上半年工业自动化毛利率不仅没跌，反而从41.34%微升至 <strong>41.37%</strong>？因为<strong>在工控板块中，功率半导体+控制芯片+PCB占了直接材料的47%（高于铜铝稀土合计的38%）</strong>，国产芯片替代带来的5%—10%成本下降，叠加高毛利中大型PLC、多机传动MD810出货占比提升，以及岳阳电机基地自制率上升，<strong>100%抵消了工控端的铜铝磁钢涨价</strong>！</li>
@@ -6014,7 +6308,7 @@
 </li>
 </ul>
 <h5 id="d-10-owner-earnings">表 D-10：汇川技术《三档标尺下的 Owner Earnings（真实股东盈余）分板块分步精算总表》（单位：亿元/年）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">精算推导步骤与业务分部拆解</th>
@@ -6154,10 +6448,10 @@
 <td style="text-align: left;">用于全企业价值维度交叉核验</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把表 D-10 钉在墙上仔细看！哪怕今天铜价涨到将近11万一吨、联合动力一分钱不赚只打个平手（标尺一），光靠通用自动化、电梯和机器人这三台印钞机，汇川一年也能给母公司股东吐出 <strong>55.10亿元</strong> 的真金白银（Owner Earnings）！只要铜铝调价公式顺畅传导、联合动力回到区区4.5%的正常净利率（标尺二），归母真实股东盈余立刻跳到 <strong>62.10亿元/年</strong>；要是再把朱兴明藏在费用表里替未来五年买单的那8亿税后人形机器人和大型PLC研发费加回来，这台机器现在的真实内生造血力高达 <strong>70.10亿元/年</strong>！哪怕天塌下来、制造业二次探底加上联合动力倒亏2个亿（标尺三），它照样能守住 <strong>45.60亿元/年</strong> 的现金流铁底——这就是顶级商业帝国的造血底盘。</p></div></div>
 <hr/>
-<h3 id="_17">【第三部分：研发费用化隐藏利润垫还原与在建项目达产后的增量造血垫高测算（双标尺）】</h3>
+<h3 id="_18">【第三部分：研发费用化隐藏利润垫还原与在建项目达产后的增量造血垫高测算（双标尺）】</h3>
 <h4 id="31-4256-45">3.1 利润表里的“隐形重资产投资”：42.56 亿—45 亿元全额费用化研发的三层解剖</h4>
 <p>在评估科技制造龙头的真实造血能力时，格雷厄姆式的传统会计视角有一个巨大的盲区：<strong>把盖厂房买机器的钱（CapEx）算作资产分10—20年折旧，却把同样用于创造未来5—10年新现金流的底层软件架构与前沿新产品研发投入（R&amp;D）100%算作当期费用一次性扣光</strong>。</p>
 <p>根据《2025年年度报告》与《2026年第三季度报告》：</p>
@@ -6167,7 +6461,7 @@
 </ul>
 <p>如果将汇川技术年化约 <strong>44.00亿—45.00亿元</strong> 的研发费用打开，按商业化周期与对应业务的收入贡献度进行三层穿透切分，真相令人震撼：</p>
 <h5 id="d-11-4450-100">表 D-11：汇川技术年化 44.50 亿元研发费用（100%费用化）三层经济性质切分与隐藏利润垫还原表（单位：亿元/年）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">研发投入经济性质分层</th>
@@ -6217,7 +6511,7 @@
 <td style="text-align: center;"><strong>还原后标尺二归母 OE = 62.10 + 8.00 = 70.10 亿元/年</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>表 D-11 揭示了汇川技术利润表里最深的一道“安全暗门”：</p><ul>
 <li>当外行批评汇川技术“净利率为什么从早年的20%降到了11.2%”时，他们不仅忽略了新能源汽车业务的分母效应，更忽略了朱兴明在母公司利润表里每年悄悄塞进了 <strong>9.50亿元（税后归母约8.00亿元）</strong> 投向人形机器人行星滚柱丝杠、无框力矩电机、iFA全栈工业软件与功能安全大型PLC的“纯远期期权研发费”！</li>
 <li>换言之，如果按照巴菲特收购一家成熟企业的逻辑，把“维持存量印钞机运转的账本”与“风险投资孵化新物种的账本”分开核算，汇川技术存量业务在新常态中枢下的真实内生归母 Owner Earnings 高达 <strong>70.10 亿元/年</strong>（<code>62.10 + 8.00</code>）！为了与全集跨模块对表保持最严苛的审慎性，我们在主锚定值中依然采用未加回这8.00亿元的 <strong>62.10 亿元/年</strong>，但买方心里必须清楚这8.00亿元“隐藏利润垫”的存在。</li>
@@ -6229,7 +6523,7 @@
 <p>在算清存量产能的 62.10 亿元（标尺二）/ 55.10 亿元（标尺一）Owner Earnings 之后，我们必须回答买方最关心的动态问题：<strong>过去两年汇川每年砸下 25 亿—30 亿元进攻型 CapEx、推动在建工程从 2025 年末的 11.19 亿元激增 73.61% 至 2026Q3 末的 19.42 亿元（同时固定资产增至 104.95 亿元），这些刚刚转固尚未满产、或正在建设中的六大核心基地，在未来 2—3 年全部达产消化后，能为母公司股东额外垫高多少亿元的真实股东盈余（Incremental Owner Earnings）？</strong></p>
 <p>我们首先穿透《2025年年度报告》与《2026年第三季度报告》在建工程附注及官方产线公告，建立六大增量基地的工程与经济参数台账：</p>
 <h5 id="d-12">表 D-12：汇川技术六大核心在建/新转固爬坡基地工程投资、股权归属与产能释放台账</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">序号</th>
@@ -6306,7 +6600,7 @@
 <td style="text-align: left;"><strong>2026Q4—2028年全面达产进入稳态</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="33-owner-earnings">3.3 双标尺下在建项目全面达产后的“增量归母 Owner Earnings”垫高账本</h4>
 <p>为了严防拍脑袋乐观预测，我们对上述六大基地全面达产后的增量造血贡献，严格按照以下四条铁律进行双标尺（<strong>标尺二：新常态中枢</strong> vs <strong>标尺一：今日实时高压现货</strong>）测算：</p>
@@ -6322,7 +6616,7 @@
 </li>
 </ol>
 <h5 id="d-13-owner-earnings-vs">表 D-13：汇川技术六大在建/爬坡基地全面达产后【增量 Owner Earnings 垫高账本（标尺二 vs 标尺一双标尺精算表）】（单位：亿元/年）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">增量基地项目名称</th>
@@ -6431,10 +6725,10 @@
 <td style="text-align: center;"><strong>⚡ +14.50 亿元/年</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>我们将表 D-13 的增量测算与表 D-10 的存量基准进行全景叠加，得出汇川技术<strong>“现有存量底盘 vs 在建达产稳态底盘”</strong>的造血跃升阶梯表：</p>
 <h5 id="d-14-owner-earnings">表 D-14：汇川技术“存量底盘 → 在建项目全面达产稳态”归母 Owner Earnings 跃升全景对照表（单位：亿元/年）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">造血能力演进阶段</th>
@@ -6479,7 +6773,7 @@
 <td style="text-align: left;">含联合动力18.09%少数股东享有的增量现金流</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>表 D-13 与表 D-14 揭示了一个极高含金量的买方结论：</p><ul>
 <li>即便只看这六大在建项目的增量贡献，<strong>汇川100%全资持有的三大智能制造与能源基地——南京机器人及丝杠导轨基地（+5.00亿元/年）、岳阳工业电机自制基地（+4.20亿元/年）、济南工程变频与储能基地（+3.05亿元/年）——三者合计就能贡献 +12.25 亿元/年的增量归母 Owner Earnings，占全部增量造血（+18.80亿元）的 65.16%</strong>！</li>
 <li>这意味着汇川未来2—3年的造血跃升，绝非单纯押注在竞争激烈的汽车电驱上，而是由高毛利、100%归属母公司股东的<strong>“精密丝杠/工业机器人 + 电机垂直自制降本 + 高压工程传动与海外属地化”</strong>担当主力！当这批在建工程在2027—2028年全面达产后，公司的总资本开支（CapEx）将从高峰期的30亿元/年回落至10亿—12亿元/年的常态水平，而归母 Owner Earnings 将从 <strong>62.10 亿元/年</strong> 稳步垫高 <strong>+14.50亿—+18.80亿元</strong>，跨入 <strong>76.60 亿—80.90 亿元/年</strong>（若还原远期期权研发则高達 <strong>84.60 亿—88.90 亿元/年</strong>）的超级印钞平台！</li>
@@ -6492,7 +6786,7 @@
 <p>买方投资的最高境界，不是在顺风顺水时算公司能赚多少钱，而是用最严酷的“魔鬼压力测试”逼问：<strong>如果未来 1—2 年同时爆发“西门子/安川携国内二线同行发起工控恶性价格战 + 新能源整车厂残酷压价年降 + 全球铜铝稀土在 2026 年 11 月历史高位上再暴涨 20%”的极端三杀风暴，汇川技术的利润表和现金流会不会被打穿？会不会陷入借钱度日的失血绝境？</strong></p>
 <p>我们首先设定这场<strong>百年一遇级“三杀风暴”</strong>的定量冲击参数，并在<strong>假设管理层双手抱头、不做任何动态反制（纯静态死扛 Static Unmitigated）</strong>的前提下，测算其对 <strong>标尺二核心主锚（归母 Owner Earnings 62.10 亿元/年，对应智能制造年化营收 275 亿元、新能源汽车年化营收 220 亿元）</strong> 的破坏力：</p>
 <h5 id="d-15-20">表 D-15：汇川技术“下游全线降价 + 上游金属再暴涨 20%”极端三杀风暴【纯静态死扛冲击测算表】（单位：亿元/年）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">极端压力因子设定</th>
@@ -6557,13 +6851,13 @@
 <td style="text-align: left;"><strong>即便在完全不反抗的死扛假设下，归母OE依然为正，绝不亏现金！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="42-dynamic-shock-absorbers">4.2 六大动态减震垫（Dynamic Shock-Absorbers）：为什么现实中汇川绝不会“静态死扛”？</h4>
 <p>表 D-15 的纯静态死扛测算（归母 Owner Earnings 跌至 24.35 亿元或 11.49 亿元）在现实商业世界中<strong>绝不可能发生</strong>。原因在于，作为在通用伺服（32%份额）、低压变频（21.5%份额）、SCARA机器人（27.3%份额）与第三方车规电驱（超200亿规模）具备绝对统治力的链主企业，汇川技术手握 <strong>六大层层递进的动态减震垫（Dynamic Shock-Absorbers）</strong>。</p>
 <p>我们逐一定量验算这六道减震垫在“中度三杀”与“毁灭级三杀”下的真实缓冲金额：</p>
 <h5 id="d-16">表 D-16：汇川技术应对极端价格战与原料风暴的【六大动态减震垫】定量对冲拆解表（单位：亿元/年）</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">动态减震垫序号与名称</th>
@@ -6631,12 +6925,12 @@
 <td style="text-align: left;"><strong>证毕：即便遭遇毁灭级三杀，汇川依然稳守 45 亿元+ 真实正现金流！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="43-9">4.3 多情景双因子极限压力测试总矩阵（9 种残酷组合全景推演）</h4>
 <p>为了给买方提供一张可随时查表对质的动态沙盘，我们将<strong>横轴设定为“下游全产品线（工控+车规）综合降价幅度（0% / -5% / -8%~-10%）”</strong>，<strong>纵轴设定为“上游铜铝稀土大宗金属价格变动幅度（回落-10% / 维持11月高价0% / 再暴涨+20%）”</strong>，构建包含 <strong>静态死扛值 vs 动态减震后实际值</strong> 的 9 宫格极限压力测试总矩阵：</p>
 <h5 id="d-17-owner-earnings">表 D-17：汇川技术“下游产品降价 × 上游铜铝稀土涨跌”九宫格极限压力测试归母 Owner Earnings 矩阵表（单位：亿元/年）</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">上游铜铝稀土价格情景 \ 下游综合价格战情景</th>
@@ -6669,12 +6963,12 @@
 <td style="text-align: left;"><strong>在最右下角的毁灭级三杀象限，动态归母OE依然死守 45.60 亿元铁底！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="44">4.4 资产负债表“防弹衣”终极核验：为什么在最残酷的寒冬里，死掉的只能是对手？</h4>
 <p>最后，我们将压力测试的结论放回汇川技术截至 <strong>2026年9月30日（三季报）</strong> 的合并资产负债表与行业竞争格局中，算一笔令所有空头绝望的<strong>“资产负债表生存极限账”</strong>：</p>
 <h5 id="d-18-vs">表 D-18：汇川技术 vs 二三线工控/电驱同行在极端寒冬（标尺三）下的生存底线与清场反身性对照表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">极限抗压与生存能力核验指标</th>
@@ -6721,7 +7015,7 @@
 <td style="text-align: left;">哪怕车规电驱打三年持久战，联合动力靠自身35亿募资款即可轻松熬死全场</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>第四部分定性收口</strong>：
 穿透表 D-15 至表 D-18 的全套极限压力测试，我们用严密的数学逻辑与财务事实证明：<strong>汇川技术的造血底盘具备名副其实的“核掩体级抗压韧性”</strong>。</p><ul>
 <li>在工业自动化与数字化主业（贡献76%毛利、毛利率41.37%）的强力护航下，即便遭遇“工控降价10% + 车规年降8% + 铜铝稀土再暴涨20%”的毁灭级三杀风暴，凭借<strong>铜铝联动调价公式、第四代/第五代平台VAVE减重降本、岳阳电机与南京丝杠上游自制、72亿级功率半导体国产替代压价、华为式IFS奖金弹性与124.58亿战略库存去化</strong>这六大动态减震垫，汇川技术依然能死死守住 <strong>45.60 亿元/年</strong> 的归母真实股东盈余（Owner Earnings）铁底！</li>
@@ -6733,7 +7027,7 @@
 <h4 id="45-ccc">4.5 营运资金与母子现金流防火墙三张专项穿透表（存货去化、CCC自平衡与分拆独立性）</h4>
 <p>为彻底消除买方对“2026Q3末124.58亿元高存货能否顺利变现”、“四大业务板块现金转换周期（CCC）谁在造血”以及“联合动力独立上市后母子公司现金流防火墙”的最后一丝疑虑，我们追加三张微观审计表：</p>
 <h5 id="d-19-2026q3-12458-2026q42027">表 D-19：汇川技术截至 2026Q3 末 124.58 亿元存货五维结构拆解与 2026Q4—2027 年现金回流沙盘表（单位：亿元）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">存货明细类别</th>
@@ -6808,9 +7102,9 @@
 <td style="text-align: left;"><strong>去库回归常态水位后，可一次性回笼 +34.50 亿元经营现金流！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="d-20ccc-dio-dso-dpo">表 D-20：汇川技术四大业务板块现金转换周期（CCC = DIO + DSO - DPO）与票据池自平衡解剖表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块单元</th>
@@ -6869,9 +7163,9 @@
 <td style="text-align: left;"><strong>印证为何五年累计净现比达 101.13%，稳态归母刚性 <span class="math-inline">\Delta<span class="math-text">WC</span></span> 仅需 3.50 亿元/年</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="d-21vs-301656sz">表 D-21：汇川母公司（工控+电梯+机器人）vs 控股子公司联合动力（301656.SZ）双层现金流防火墙与分红能力对账表（单位：亿元）</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计对账维度</th>
@@ -6912,13 +7206,13 @@
 <td style="text-align: left;"><strong>完美闭环</strong>：<code>52.27 + 9.83 = 62.10 亿元/年</code>！仅靠母公司工控体系（52.27亿OE）即可轻松覆盖全集团13.53亿+分红并留存近40亿现金！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>表 D-21 把汇川技术最隐秘的一层窗户纸捅破了！以前很多人嫌汇川资本开支太大（一年30.24亿），结果你把联合动力（301656）的年报单独拎出来一对账：原来30.24亿资本开支里，有整整19.42亿（占了64%）都是联合动力花掉的，而且人家联合动力自己在2025年9月去创业板融了35.32亿现金，自己的经营现金流（29.29亿）也完全够付自己的买机器钱！反观汇川母公司自己的工控、电梯和机器人本部，一年维持性资本开支才2.75亿，一年光母公司全资体系就能创造 <strong>52.27亿元</strong> 的真实股东盈余（Owner Earnings）！加上联合动力归母的9.83亿，正好严丝合缝凑成 <strong>62.10亿元/年</strong>。这叫什么？这叫“儿子已经考上大学自己挣奖学金买房了，老爸口袋里的工控印钞机以后赚的每一分钱，全都是母公司股东的纯富裕钱”！</p></div></div>
 <hr/>
 <h3 id="d-f-100">📋 模块 D 终极审计收口总表（与模块 F 估值主锚 100% 锁死对齐）</h3>
 <p>为确保全集后续模块（尤其是模块 F 估值防线与击球区推演）引用数据时零误差、零幻觉，现将模块 D 经 Python 验算锁定的全部核心精算参数汇总如下：</p>
 <h5 id="d-22-downer-earnings">表 D-22：模块 D《汇川技术真实造血底盘（Owner Earnings）与抗压精算核心锁定参数总表》</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心精算指标维度</th>
@@ -7007,10 +7301,10 @@
 <td style="text-align: left;">证明当前高强度进攻型CapEx消化完毕后，真实造血底盘将跨入80亿级稳态平台</td>
 </tr>
 </tbody>
-</table>
-<hr class="module-sep"/>
+</table></div>
+<hr/>
 <h2 id="e">追问模块 E：会计成色与治理细节显微镜（四大资产排雷与激励薪酬审计）</h2>
-<hr>
+<hr/>
 <h3 id="zero-trust">【开篇导言：用零信任（Zero-Trust）审计师视角扒开汇川的财务附注底裤】</h3>
 <p>一家年营收突破450亿元、合并总资产高达 <strong>770.66亿元</strong>（2026Q3末）、横跨工业自动化、智慧电梯、新能源汽车电驱与智能机器人四大领域的产业巨头，其合并财务报表天然具有极高的复杂度。对于严苛的买方机构而言，仅仅看懂利润表上的营业收入（2025年451.05亿元、2026Q1-Q3为379.56亿元）和归母净利润（2025年50.50亿元、2026Q1-Q3为43.98亿元）是远远不够的，必须拿着放大镜钻进<strong>《2025年年度报告》、《2026年半年度报告》与《2026年第三季度报告》的会计报表附注深处</strong>，对五个最容易藏污纳垢或埋藏暗雷的角落进行“零信任”排雷：</p>
 <ol>
@@ -7036,7 +7330,7 @@
 <h4 id="e11">E.1.1 纯应收与广义应收三期全景拆解（严守会计防呆铁律）</h4>
 <p>在分析制造业与汽车供应链企业的应收端风险时，必须同时列示<strong>“纯应收账款”</strong>与<strong>“包含应收票据及应收款项融资的广义应收款项合计”</strong>。因为在中国工业与整车结算生态中，当客户账期届满时，往往不是直接打现汇，而是开具6个月期的银行承兑汇票或商业承兑汇票——此时财务报表上的“应收账款”变成了“应收票据”或“应收款项融资”，但信用风险或资金占用并未完全终结。</p>
 <p><strong>表 E-1：汇川技术 2024年末、2025年末、2026Q3末 纯应收账款与广义应收款项全景结构拆分表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">应收款项细分科目</th>
@@ -7104,12 +7398,12 @@
 <td style="text-align: left;"><strong>广义应收较年初仅增长13.83%，远低于前三季度营收增速（+19.88%）！证明回款链条极其健康</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="e12-2025">E.1.2 穿透2025年报附注：精确到元的应收账款账龄结构与坏账计提矩阵</h4>
 <p>为了检验汇川技术133.33亿元（2025年末为115.19亿元）纯应收账款里有没有沉淀多年的死账烂账，我们直接调取《2025年年度报告》“第十节 财务报告—七、合并财务报表项目注释—4、应收账款”披露的<strong>精确到元</strong>的账龄结构与坏账计提原始台账：</p>
 <p><strong>表 E-2：汇川技术 2025年报附注披露——应收账款按账龄结构与坏账准备计提明细表（精确到元）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">应收账款账龄区间 / 计提分类</th>
@@ -7214,12 +7508,12 @@
 <td style="text-align: left;"><strong>1年以内占比高达95.61%，3年以上占比仅0.50%且基本全额计提！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="e13-vs">E.1.3 同行坏账计提比例严苛度对质与“存量vs流量”勾稽核验</h4>
 <p>汇川技术的这套坏账计提标准（1年以内5%、1-2年~10.48%、2-3年~48.40%、3-4年~89.43%、4年以上100%）在行业内究竟处于什么水平？我们拉出6家可比同行做横向对比：</p>
 <p><strong>表 E-3：汇川技术与6家可比同行应收账款按账龄坏账计提比例（预期信用损失率）严苛度横向对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">账龄阶段</th>
@@ -7312,10 +7606,10 @@
 <td style="text-align: left;"><strong>汇川在中长账龄（2年以上）采取了惩罚性极严计提，绝无坏账隐藏空间</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>同时，严格执行会计防呆准则，我们将资产负债表上的“坏账准备存量余额”与利润表上的“信用减值损失当期流量”做清晰勾稽，杜绝任何将两者直接相加的外行错误：</p>
 <p><strong>表 E-4：汇川技术 2025年及2026Q1-Q3 应收款项坏账准备（存量余额）与信用减值损失（当期流量）勾稽对账表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -7347,14 +7641,14 @@
 <td style="text-align: left;">2026Q1-Q3因纯应收原值较年初增加约19亿（按5%计提即需约0.95亿），故当期计提1.09亿完全系规模自然扩张所致！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我最喜欢看企业怎么对待两年以上没收回来的账款。有些公司账款拖了三年还舍不得计提，只提个20%骗自己说“客户总会还的”；你看看汇川的规矩：1年以内的账占了95.61%，老老实实先提5%；只要敢拖到2到3年，立马砍掉48.4%；拖到3到4年，直接砍掉89.4%；超过4年一分钱不留，100%计提清零！这种近乎残酷的财务洁癖，确保了资产负债表上那133.33亿应收账款里没有一滴脏水。</p></div></div>
 <hr/>
 <h3 id="e2-12458542">E.2 排雷二：124.58亿存货内部结构穿透与5.42亿减值损失“洗澡出清度”审计</h3>
 <h4 id="e21-20252026">E.2.1 穿透2025年报与2026半年报附注：存货分类与跌价准备逐笔台账</h4>
 <p>在模块 C 中，我们已经通过同行与合同负债对质，证实了2026Q3末 <strong>124.58亿元存货（较年初80.79亿元增长54.20%）</strong> 主要是为了应对通用自动化（+33%）、智能机器人（+88%）订单爆发以及铜铝芯片涨价而进行的战略锁价备货。现在，我们用会计显微镜切开存货的内部解剖结构，并核查 <strong>2026Q1-Q3高达5.42亿元资产减值损失（同比多提133.12%）</strong> 的真实去向：</p>
 <p><strong>表 E-5：汇川技术 2025年末、2026H1末与2026Q3末 存货内部细分类别（原材料/在产品/库存商品/发出商品）穿透表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">存货细分类别</th>
@@ -7419,10 +7713,10 @@
 <td style="text-align: left;"><strong>原材料（占38.9%）+ 库存商品（占30.2%）+ 发出商品（占19.5%）结构极其扎实</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为了展示公司对存货跌价准备的动态滚动管理，我们进一步调取《2025年年度报告》与《2026年半年度报告》附注中披露的<strong>精确到分</strong>的核心类别跌价准备变动表：</p>
 <p><strong>表 E-6：汇川技术 2025年报与2026半年报附注披露——核心存货类别跌价准备滚动计提与转销台账（单位：人民币元）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">报告期间与存货核心类别</th>
@@ -7508,12 +7802,12 @@
 <td style="text-align: left;">2026H1新增计提6,903万元，期末库存商品跌价准备升至1.29亿元</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="e22-2026q1-q3-542">E.2.2 拷问 2026Q1-Q3 利润表“-5.42亿元资产减值损失”：是不是已经把雷炸干净了？</h4>
 <p>2026年三季报利润表上最刺眼的一个数字，是前三季度<strong>资产减值损失高达 -5.42亿元（同比暴增133.12%，比2025年全年的-4.66亿元还要多出7,600万元！）</strong>。这5.42亿元到底减在了哪里？我们将其拆解并与同行对比：</p>
 <p><strong>表 E-7：汇川技术 2026Q1-Q3 资产减值损失（-5.42亿元）构成拆解及同行存货跌价计提力度对比表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">减值项目 / 对比企业</th>
@@ -7581,14 +7875,14 @@
 <td style="text-align: left;">⭐⭐⭐⭐（正常工控水平）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多投资者看到汇川2026年前三季度归母净利润只增长了3.38%（43.98亿），就垂头丧气；但只要你把利润表往下看两行，就会发现管理层在前三季度一口气计提了 <strong>5.42亿</strong> 的资产减值损失（比去年同期多提了3.1个亿），再加上信用减值1.09亿，光减值就扣掉了6.51亿利润！如果不算这笔多提的3.1亿存货跌价“大洗澡”，汇川前三季度的真实经营利润增速其实是超过11%的。碰到下游个别车型卖不动或者铜价涨太猛，不藏着掖着、当场拿刀把烂肉割掉计提进当期损益，这才是最让人放心的老实账本。</p></div></div>
 <hr/>
 <h3 id="e3-1049542560">E.3 排雷三：104.95亿固定资产折旧年限严苛度与42.56亿研发投入“0%资本化率”审计</h3>
 <h4 id="e31-10495">E.3.1 104.95亿固定资产折旧年限与残值率横向对质</h4>
 <p>截至2026年9月30日，随着苏州吴中新能源基地、常州基地、岳阳电机基地、济南工程变频基地及南京机器人一期基地陆续完工转固，汇川技术合并资产负债表上的<strong>固定资产账面净值已高达 104.95亿元</strong>（2025年末为98.93亿元），<strong>在建工程为 19.42亿元</strong>（较年初11.19亿元增长73.61%）。对于重资产庞大的企业，只要把厂房折旧年限从20年拉长到40年、或者把机器设备从8年拉长到12年，就能轻松虚增数亿元净利润。汇川技术干过这种事吗？我们直接查附注对表：</p>
 <p><strong>表 E-8：汇川技术与7家可比同行固定资产分类折旧年限（直线法）与预计净残值率横向对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">固定资产类别</th>
@@ -7648,10 +7942,10 @@
 <td style="text-align: left;">行业高标准（研发服务器与测试仪器3年即提完）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>我们结合《2025年年度报告》现金流量表补充资料披露的<strong>全口径折旧与摊销明细（合计11.166亿元）</strong>，测算一下汇川这套严苛折旧政策对利润表的“隐性藏富”效应：</p>
 <p><strong>表 E-9：汇川技术 2025年全口径折旧摊销明细拆解及折旧年限同口径还原敏感性测试表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">折旧与摊销细分科目</th>
@@ -7704,13 +7998,13 @@
 <td style="text-align: center;"><strong>每年隐性多提折旧约 1.85亿 — 2.20亿元！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="e32-4256000">E.3.2 42.56亿研发投入“0.00%资本化率”审计：最硬核的利润含金量试金石</h4>
 <p>在A股高端制造、机器人与新能源汽车行业里，最常见的财务粉饰手段就是<strong>“研发支出资本化”</strong>——把本该计入当期损益的工程师工资和样机试制费，以“进入开发阶段”为名塞进资产负债表的“开发支出”和“无形资产”里，从而凭空增厚当期几亿元净利润。</p>
 <p>那么，一年砸下 <strong>42.56亿元</strong>（2025年，占营收9.44%）、2026年前三季度又砸下 <strong>34.26亿元</strong> 研发费用的汇川技术，它的研发资本化率是多少？我们调取《2024年年度报告》与《2025年年度报告》“研发投入”章节的官方审计表：</p>
 <p><strong>表 E-10：汇川技术与可比同行 2024—2025年 研发投入、资本化金额与“研发资本化率”对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称（代码）</th>
@@ -7815,7 +8109,7 @@
 <td style="text-align: left;">国际准则（IFRS）下车规定点开发普遍资本化</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>【排雷三震撼结论】</strong>：
 要知道，汇川技术旗下的联合动力正在开发周期长达24个月的第四代800V SiC车规电驱平台，本部正在开发长周期的iFA全栈工业软件、大型功能安全PLC以及人形机器人行星滚柱丝杠与无框力矩电机——按照《企业会计准则》，这些进入样机验证与客户定点开发阶段的项目，完全有充足理由将10%—20%的支出（即 <strong>4.25亿—8.50亿元/年</strong>）予以资本化挂账！但朱兴明与财务总监刘迎新选择了最硬骨头的做法：<strong>连续多年将几十亿研发支出（2024年31.47亿、2025年42.56亿、2026Q1-Q3为34.26亿）100%全额费用化计入当期损益，资本化率死死釘在 0.00%！</strong> 再加上厂房一律按20年折旧（比同行30—40年每年多提近2亿折旧），这意味着汇川技术表观50.50亿元（2025年）的归母净利润里，实际上<strong>隐性“藏富”了至少 6亿—8亿元 的远期研发与固定资产价值</strong>！</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我常说，看一家高科技公司诚不诚实，第一眼就去看它的“开发支出资本化率”。很多搞软件、搞汽车零部件的公司，每年把两三成的研发费塞进无形资产里，报表利润看着光鲜亮丽，实际上全是自己画出来的空气饼。汇川在2025年砸了42.56亿搞研发，2026年前三季度又砸了34.26亿，里面包含了人形机器人丝杠、800V碳化硅电驱、大型PLC软件这些完全可以找理由资本化的长线大工程，结果人家资本化金额写的是：<strong>零元（0.00%）</strong>！连钢筋水泥建的新厂房都按20年顶格折旧（同行全按30到40年）。这种把未来十年的买路钱全在今天利润表里硬扣掉的会计作风，比任何华丽的公关辞令都值钱。</p></div></div></div></div>
 
@@ -7825,7 +8119,7 @@
 <p>截至2026年9月30日，汇川技术合并资产负债表上的商誉账面价值为 <strong>20.96亿元</strong>（2025年12月31日为 <strong>2,094,586,192.49元</strong>，约20.95亿元；二者之间约140万元的微幅差异系外币报表折算瑞士SBC等境外商誉的汇率变动所致），仅占2026Q3末归母净资产（384.73亿元）的 <strong>5.45%</strong>。</p>
 <p>为了彻底看清这20.95亿—20.96亿元商誉里到底装了哪些资产组、过去有没有计提过减值、2025年计提的 <strong>5,792.38万元（57,923,826.89元）</strong> 商誉减值到底落在了谁头上，我们直接调取《2025年年度报告》财务附注“商誉”科目的<strong>精确到分</strong>原始明细表：</p>
 <p><strong>表 E-11：汇川技术 2025年报附注披露——11项并购资产组商誉原值、累计减值与账面净值逐笔清查表（单位：人民币元）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">序号</th>
@@ -7920,12 +8214,12 @@
 <td style="text-align: left;"><strong>2026Q3末账面净值20.96亿，占净资产仅5.45%，结构极度清晰！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="e42-wacc">E.4.2 商誉减值测试关键参数（WACC折现率、增长率）压力测试</h4>
 <p>在20.95亿—20.96亿元商誉净值中，<strong>上海贝思特（14.85亿元）与江苏经纬（2.21亿元）两家就占了 81.43%</strong>。评估机构在对这些资产组采用“预计未来现金流量现值法（DCF）”进行减值测试时，所使用的折现率与增长率参数是否严谨？</p>
 <p><strong>表 E-12：汇川技术核心商誉资产组减值测试关键评估参数（折现率/增长率）与抗风险安全垫核验表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心商誉资产组</th>
@@ -7970,13 +8264,13 @@
 <td style="text-align: left;"><strong>🟢 已动态出清</strong>：对未达预期的伊士通早已100%计提归零，2025年末又对部分中小标的计提5,792.38万元减值，绝不拖延</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="e43-190617806">E.4.3 合并报表少数股东权益（19.06亿）与少数股东损益（178.06万）铁证对账</h4>
 <p>2025年9月25日，汇川技术控股子公司<strong>苏州汇川联合动力系统股份有限公司（301656.SZ）</strong>在深交所创业板独立IPO上市（公开发行新股募集净额35.32亿元），汇川技术对联合动力的持股比例由上市前的94.51%被动稀释至 <strong>81.91%</strong>（外部公众及战投少数股东持股 <strong>18.09%</strong>）。</p>
 <p>许多投资者在看汇川技术2026年三季报时发现一个奇怪的现象：合并资产负债表上的<strong>少数股东权益高达 19.06亿元</strong>（占总权益403.79亿元的4.72%），但合并利润表上的<strong>2026Q1-Q3少数股东损益却只有区区 178.06万元（0.0178亿元，同比暴降97.19%）</strong>！这难道是母公司跟少数股东之间存在利益输送猫腻吗？我们用算术公式现场对账，一秒钟揭开真相：</p>
 <p><strong>表 E-13：汇川技术合并报表“少数股东权益（19.06亿）”与“少数股东损益（178.06万）”跨表精确勾稽验证表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对账勾稽项目</th>
@@ -8021,14 +8315,14 @@
 <td style="text-align: left;"><strong>🔥 完美破案！因联合动力前三季微亏4,735万，外部18.09%股东替汇川分担了856.5万亏损，与盈利子公司正负抵销后恰好剩178万元！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这就是为什么我要求你们一定要做交叉算数！外行看到少数股东权益有19个亿、而前三季度少数股东损益只有178万，还以为发现了什么财务造假大案。结果你把联合动力（301656）的三季报拿过来一乘：联合动力前三季度因为铜价暴涨和计提减值微亏了4,734.64万，创业板那18.09%的少数股东按规矩分担了-856.5万的亏损，刚好把其他小子公司赚的+1,034.6万少数股东利润给抵消掉了，加起来不就正好是+178.06万吗！一分一毫都对得上，这本合并报表简直像瑞士钟表一样精密。</p></div></div>
 <hr/>
 <h3 id="e5">E.5 治理细节显微镜：第六/七期股权激励硬门槛、高管薪酬与人均效能审计</h3>
 <h4 id="e51">E.5.1 第六期（已通关）与第七期（执行中）股权激励行权考核硬门槛审计</h4>
 <p>许多A股公司的股权激励沦为管理层“1元购半价发股票、考核门槛形同虚设”的自肥工具。汇川技术的股权激励成色如何？我们调取公司 <strong>2022年推出的《第六期股权激励计划》</strong> 与 <strong>2024年8月推出（2025年8月授预留）的《第七期股权激励计划》</strong> 官方公告，逐项核查其考核基数、行权门槛、股份支付费用摊销及动态淘汰记录：</p>
 <p><strong>表 E-14：汇川技术第六期（2022—2025年）与第七期（2024—2027年）股权激励业绩考核硬门槛与实际达成审计表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">激励期次与考核期</th>
@@ -8097,10 +8391,10 @@
 <td style="text-align: left;"><strong>🎯 清晰的成长底线锚定</strong>：且对个人绩效为B/C或离职人员严格执行打折或注销（2026年9月刚注销一批未达标個人期权）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>我们同时核算历期股权激励产生的<strong>股份支付费用（Share-based Payment Expense）</strong>对汇川技术利润表的真实摊销影响：</p>
 <p><strong>表 E-15：汇川技术股权激励“股份支付费用”摊销规模及对表观扣非净利润的还原测算表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">年度 / 期间</th>
@@ -8145,12 +8439,12 @@
 <td style="text-align: left;">激励费用全部在经常性损益（管理/研发费用）中实打实扣除，未做非经常性粉饰</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="e52-27239927292">E.5.2 董事高管薪酬（2,723.99万元）与27,292名员工人均效能匹配度审计</h4>
 <p>最后，我们翻开《2025年年度报告》“董事、监事、高级管理人员和员工情况”章节，核查管理层有没有在公司局部业务承压时给自己大幅涨薪，以及公司 <strong>27,292名在职员工（含7,670名研发人员）</strong> 的人均创收、人均创利是否在持续进化：</p>
 <p><strong>表 E-16：汇川技术 2025年报核心董事及高级管理人员税前报酬与持股对齐度明细表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">姓名</th>
@@ -8203,9 +8497,9 @@
 <td style="text-align: left;"><strong>🏆 高管薪酬占净利比（0.54%）远低于国内同行（信捷/雷赛/伟创/埃斯顿普遍在2.5%—8.0%之间）！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 E-17：汇川技术 2021—2025年及2026Q3 员工规模、研发军团扩张与人均创收/人均创利效能演进表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心人力与效能指标</th>
@@ -8270,12 +8564,12 @@
 <td style="text-align: left;">西安、大连研发中心启用有效平抑了深圳/苏州高薪研发人力成本通胀</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把最后这两张人力账本合在一起看，你就知道汇川这家公司的底子有多厚了：第一，朱兴明带着全公司十几个核心高管，一年管着451亿营收、赚回50.5亿真金白银，全套高管班子领的税前工资加起来才2,724万，只占公司净利润的千分之五点四（0.54%）！第二，2025年公司一口气新招了2,132名研发工程师，把研发大军扩充到7,670人（增长38.5%），而且所有人的工资100%在当年利润表里费用化扣掉，哪怕这样，全公司的人均创收还从五年前的106万涨到了165万以上。高管不贪、研发舍得下死本、一线效率年年涨——这才是能穿越十年周期的顶级组织机器。</p></div></div>
 <hr/>
 <h3 id="e6-e-scorecard">E.6 模块 E 会计成色与治理细节显微镜终极 Scorecard 总表</h3>
 <p><strong>表 E-18：追问模块 E（会计成色与治理细节显微镜）五大排雷审计终极 Scorecard</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">排雷与治理审计模块</th>
@@ -8316,10 +8610,10 @@
 <td style="text-align: left;"><strong>🟢 A+（激励硬核不放水，高管薪酬极度克制）</strong></td>
 </tr>
 </tbody>
-</table>
-<hr class="module-sep"/>
+</table></div>
+<hr/>
 <h2 id="f">阶段二·模块 F：价格、隐含预期与底线检验（买方估值与拆骨定价报告）</h2>
-<hr>
+<hr/>
 <h3 id="35pe-1431">【开篇立论：拒绝卖方“拍脑袋给35倍PE”的线性算命，用买方手术刀对 1,431 亿市值做一次彻底的拆骨称重】</h3>
 <div class="annotated-row"><div class="main-col"><p>在二级市场投研中，最廉价也最危险的做法，是顺着卖方研报的惯性思维——“预计明年净利润增长25%，给予行业龙头35倍PE，目标价XX元”。这种把复杂商业机器简化为单一乘法的线性外推，既掩盖了汇川技术合并资产负债表底下高达 <strong>90.06亿元</strong> 广义现金储备与控股子公司 <strong>联合动力（301656.SZ）</strong> 独立分拆上市后的双层股权结构，更无法回答一个买方投资委员会最关心的灵魂拷问：<strong>在2026年11月17日收盘价 52.80 元/股、对应普通股总市值 1,431.44 亿元的当下，如果我以全现金买下整家汇川技术并承担其全部债务，我实际掏出的真实企业价值（True EV）究竟是多少？存量已经跑通的“通用自动化印钞机 + 智慧电梯现金牛 + 联合动力81.91%上市股权 + SCARA工业机器人霸主”到底能兜住多少市值底线？市场在 52.80 元的价格里，究竟让我们为“人形机器人行星滚柱丝杠/无框电机 + 大型PLC与iFA工业软件 + 欧洲/东南亚出海”这三大远期期权支付了多贵的门票？</strong></p><p>本模块严格锚定截至 <strong>2026年11月17日</strong> 的最新市场交易数据、公司《2025年年度报告》与《2026年第三季度报告》经核验的底层科目，并与【模块 D：真实股东盈余（Owner Earnings）与内生资本回报重构】锁定的三档盈利标尺实现 100% 严丝合缝的跨模块对齐。我们将依次通过 <strong>真实企业价值（True EV）显微镜核算、三档标尺下的隐含内生回报率与静态回本年限、跨期分红与注销回购真实股东回报率、五大积木块逆向分部拆骨定价（Reverse SOTP）、十年历史估值分位与全球12家同行估值矩阵对决、以及买方三档实战击球区与三条基本面死刑证伪红线</strong>，为这项资产打上经得起周期风暴检验的买方定价钢印。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街那些拿着高薪的分析师最喜欢干的蠢事，就是把一只既有印钞机、又有吞金兽、口袋里还揣着几十亿净现金的复杂工业怪兽，直接塞进一个名叫“市盈率”的搅拌机里搅成糊糊。你要是连自己买下这家公司真正掏了多少净本金（True EV）、里面每块肉分别值几斤几两都没算清楚，就敢听信什么“35倍目标价”往里冲，那你不是在投资，你是在给赌场捐款。</p></div></div></div></div>
 
@@ -8336,7 +8630,7 @@
 <p><strong>控股子公司联合动力（301656.SZ）分拆上市与市值穿透</strong>：承载集团新能源汽车电驱与电源核心业务的控股子公司——苏州汇川联合动力系统股份有限公司（简称“联合动力”，代码 <strong>301656.SZ</strong>），已于 <strong>2025年9月25日</strong> 在深交所创业板独立挂牌上市（首发价格 12.48 元/股，公开发行新股约2.89亿股，募集资金净额 <strong>35.32亿元</strong>）。经上市摊薄及后续资本运作后，截至2026年11月17日，联合动力总股本约为 <strong>24.42亿股</strong>，二级市场最新收盘价约为 <strong>13.50 元/股</strong>，对应 <strong>创业板独立总市值 = 329.67 亿元（约 330.00 亿元）</strong>。汇川技术直接持有联合动力 <strong>81.91%</strong> 的绝对控股权，对应 <strong>汇川持股市值 = 270.03 亿元（约 270.00 亿元）</strong>；其余 <strong>18.09%</strong> 为创业板社会公众及战略投资者等少数股东持有，对应 <strong>少数股东公开市值 = 59.64 亿元</strong>。</p>
 </li>
 </ol>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">上市主体名称（股票代码）</th>
@@ -8381,7 +8675,7 @@
 <td style="text-align: center;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="12_2">1.2 广义现金储备、受限资金与日常刚性营运备付底仓的严苛剥离</h4>
 <p>在传统教科书的 EV（企业价值）公式中，人们习惯将资产负债表上的“货币资金 + 交易性金融资产”全额从市值中扣减。但在严苛的买方并购视角下，<strong>账面上的钱绝不等于买方口袋里可以随时分走的超额现金</strong>——如果把公司维持日常运转所需的最低流动资金也当成超额现金扣掉，工厂第二天就会因为发不出工资、付不起供应商到期货款而停摆。</p>
@@ -8403,7 +8697,7 @@
 </br></p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">现金家底穿透核算科目</th>
@@ -8457,13 +8751,13 @@
 <td style="text-align: left;"><strong>即使经过严苛双扣减，账上仍躺着 58.56 亿元可随时自由支配的真金白银！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>商学院教授教出来的呆子在算企业价值（EV）的时候，总是闭着眼睛把账面上的货币资金一股脑儿全扣掉，好像一家年营收近五百亿的跨国大工厂连一分钱买菜付电费的零花钱都不用留似的！我们先把6.50亿受限保证金扒掉，再硬生生留出25.00亿作为工厂运转的铁底备付粮草，即便用这么苛刻的尺子量完，汇川账上居然还躺着58.56亿随时能拿走的超额真金白银——这才叫不自欺欺人的买方底线思维。</p></div></div>
 <hr/>
 <h4 id="13-vs">1.3 全口径有息负债五项明细与少数股东权益的“账面 vs 市价”双轨体检</h4>
 <p>接下来审视买方接手公司时必须替原股东偿还的 <strong>全口径有息负债（Total Interest-Bearing Debt）</strong>。必须强调的是，像应付票据（97.70亿元）、应付账款（113.56亿元）和合同负债（10.53亿元）属于公司凭借行业龙头地位无偿占用上下游产业链的 <strong>无息经营性负债（OPM，Other People's Money）</strong>，已在营运资金（Working Capital）变动中核算，绝不计入有息债务。</p>
 <p>真正需要支付利息或具有刚性偿付义务的 <strong>五项全口径有息负债</strong>（截至2026Q3末）逐项清点如下：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">全口径有息负债明细科目</th>
@@ -8524,10 +8818,10 @@
 <td style="text-align: left;"><strong><code>58.56亿（超额现金） - 31.21亿（全部有息负债） = +27.35亿元</code>（广义净现金为+58.85亿）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>在算出 <strong>+27.35亿元</strong> 的严苛口径超额净现金后，我们还必须处理一个极为关键的会计与估值衔接问题——<strong>少数股东权益（Minority Interest）</strong>。截至2026Q3末，汇川技术合并资产负债表上的 <strong>少数股东权益账面值为 19.06 亿元</strong>（占合并净资产403.79亿元的4.72%），其中超过91%来自于控股子公司 <strong>联合动力（301656.SZ）</strong> 的 <strong>18.09%</strong> 少数股东权益（联合动力2026Q3末净资产为96.22亿元，<code>96.22 × 18.09% = 17.41亿元</code>，其余约1.65亿元为其他非全资小子公司少数股东权益）。然而在创业板二级市场上，联合动力整体市值高达329.67亿元（约330亿元），那18.09%的少数股东股权对应的 <strong>公开市场价值为 59.64 亿元</strong>！</p>
 <p>为了做到买方逻辑的无懈可击，我们建立 <strong>“合并全口径 True EV”</strong> 与 <strong>“归母口径 True EV”</strong> 双轨对账体系，确保分子（Owner Earnings）与分母（True EV）在口径上 100% 严丝合缝匹配：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">少数股东权益与True EV口径穿透维度</th>
@@ -8556,7 +8850,7 @@
 <td style="text-align: left;">若用<strong>全合并Owner Earnings</strong>作分子，分母必须加回少数股东权益；若用<strong>归母Owner Earnings</strong>作分子，分母应采用剔除少数股东权益后的<strong>归母True EV</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="14-true-ev142315-140409">1.4 真实企业价值（True EV）终极锁定：1,423.15 亿元（合并口径）与 1,404.09 亿元（归母口径）</h4>
 <p>基于上述逐项审计，我们将汇川技术截至2026年11月17日的 <strong>真实企业价值（True EV）</strong> 推导公式与最终锁定数值完整呈现如下：</p>
@@ -8580,7 +8874,7 @@
    \end{aligned}</div>
 </br></li>
 </ol>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">True EV 核算步骤与构成项</th>
@@ -8627,13 +8921,13 @@
 <td style="text-align: center;"><strong>98.09%（归母） / 99.42%（合并）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看到没有？当你把汇川技术账上那90.06亿现金先扒掉6.5亿受限保证金、再留足25亿日常买铜买芯片发工资的过冬粮草之后，它手里居然还剩58.56亿可以随时拿来分掉的闲钱，把31.21亿有息债全还清之后还倒找你27.35亿净现金！这意味着你花1,431.44亿市值买下汇川母公司股東权益，实际掏出的归母真实企业价值（True EV）只有1,404.09亿元。很多表面看起来PE只有15倍的重资产烂公司，背着一屁股高息债和表外窟窿，算完True EV比市值贵出一大截；而汇川这种净现金体质，才是真正经得起推敲的硬骨头。</p></div></div>
 <hr/>
-<h3 id="_18">【第二部分：隐含内生回报率、跨期分红回购率与债务杠杆效应】</h3>
+<h3 id="_19">【第二部分：隐含内生回报率、跨期分红回购率与债务杠杆效应】</h3>
 <h4 id="21-d-1404-true-ev-1423-true-ev">2.1 对齐模块 D 三档标尺：1,404 亿归母 True EV 与 1,423 亿合并 True EV 的真实回报率大考</h4>
 <p>在锁定了分母 <strong>True EV（归母口径 1,404.09亿元 / 合并口径 1,423.15亿元）</strong> 之后，我们直接调取【模块 D】通过铜铝现货压力测试与研发费用资本化还原推导出的 <strong>三档常态 Owner Earnings（真实股东盈余）</strong> 作为分子，检验当前价格隐含的真实内生回报率（Owner Earnings Yield = Owner Earnings / True EV）与静态回本年限（Payback Period = True EV / Owner Earnings）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">盈利标尺档位（与模块 D 100% 锁死对齐）</th>
@@ -8698,9 +8992,9 @@
 <td style="text-align: center;"><strong>46.14</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>将这五组分子分别除以 <strong>归母 True EV（1,404.09亿元）</strong>、<strong>标准合并 True EV（1,423.15亿元）</strong> 与 <strong>普通股总市值（1,431.44亿元）</strong>，得出汇川技术截至2026年11月17日的 <strong>全方位内生回报率与估值倍数矩阵表</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">考核标尺与口径维度</th>
@@ -8785,13 +9079,13 @@
 <td style="text-align: left;">哪怕天塌下来遭遇全行业萧条，底线回报率仍有 <strong>3.25%</strong>，高于10年期国债（~2.10%）115个基点</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>为什么我总说会计报表只是理解生意的起点，而不是终点？你看汇川的利润表，会计师不仅把每年12.10亿的折旧全扣了（实际上维持老产线每年只需要5亿），还把投给未来五年人形机器人和大型PLC的十几个亿研发费也全当成今年的费用扣掉了！一旦你把这层会计面纱掀开，哪怕在最严苛的口径下它每年也能给你吐出62.10亿真金白银（4.42%回报率），还原远期研发后更是高达70.10亿（5.0%回报率）。用20倍的真实盈余倍数买下中国工控头号霸主，这买卖怎么算都不亏。</p></div></div>
 <hr/>
 <h4 id="22-442499">2.2 为什么 4.42%—4.99% 的起点内生回报率在汇川身上意味着极高的安全边际？</h4>
 <p>单看 <strong>4.42%（严苛会计主锚）</strong> 或 <strong>4.99%（经济实质还原口径）</strong> 的静态数字，习惯了煤炭、银行等高股息夕阳行业（静态回报率7%—9%、但长期零增长甚至负增长）的投资者可能会问：“静态回本年限 20.0—22.6 年算不算长？”</p>
 <p>用查理·芒格与巴菲特的“复利现金流折现标尺”一算便知，对于汇川技术这样处于产业扩张中段、ROE高达16%—22%的工业自动化霸主，<strong>4.42%—4.99% 的起点 Owner Earnings Yield 叠加 15%—18% 的内生复利增长，在动态 5 年维度上是一台极具爆发力的复利机器</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">跨期复利推演年份</th>
@@ -8844,7 +9138,7 @@
 <td style="text-align: center;"><strong>418.95 / 472.92</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>算完这笔五年动态账，买方逻辑豁然开朗：</p>
 <ol>
 <li>
@@ -8857,7 +9151,7 @@
 <hr/>
 <h4 id="23-1022">2.3 跨期分红与注销回购真实股东回报率拆解：从“成长期1.0%即期股息”到“现金牛期2.2%+分红跃迁”</h4>
 <p>买方评估股东回报，不仅要看公司赚了多少 Owner Earnings，还要看管理层愿意把多少真金白银通过 <strong>现金分红</strong> 和 <strong>注销式股份回购</strong> 装进小股东的口袋。我们先拉出汇川技术 <strong>2016—2025年十年历史分红长卷</strong> 与 <strong>2021—2026年股份回购去向审计表</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">分红会计年度</th>
@@ -8970,9 +9264,9 @@
 <td style="text-align: left;"><strong>完美展现“轻资产期43%高派息、扩产期20%蓄力、收获期重新回升”的理性资本配置轨迹！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>再对公司 <strong>2021—2026年股份回购记录</strong> 执行零容忍的买方准则审计——<strong>凡是用于员工持股计划或股权激励的回购，一律视为职工薪酬成本，严禁计入股东回报；唯有永久注销减少注册资本的回购，才等同于现金分红</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">回购实施期/决议节点</th>
@@ -9022,10 +9316,10 @@
 <td style="text-align: left;"><strong>对应当前总市值1,431.44亿元的即期真实股东现金回报率 = <code>13.93 / 1,431.44 = 0.97%</code>（约 1.00%）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为什么在2025年汇川的即期分红+注销回购收益率为 <strong>0.97%（约1.00%）</strong>？回看上表2016—2018年的数据就能找到答案：<strong>在2016—2018年无需大规模建厂时，汇川技术的现金分红支付率曾连续三年高达 42.76%—43.21%</strong>！2020—2025年分红率阶段性保持在20%—26.79%，完全是因为公司处于苏州吴中三基地、常州新能源基地、南京江宁机器人基地、岳阳电机与济南储能基地的建设高峰期（2025年CapEx达30.24亿元峰值），且当年留存利润投向这些项目所创造的边际ROIC高达18%—22%。</p>
 <p>如今，随着 <strong>2025年9月控股子公司联合动力（301656.SZ）在创业板独立IPO募资35.32亿元（彻底切断对母公司现金流的占用）</strong>，以及国内五大制造基地主体厂房在2025—2026年陆续竣工转固，汇川技术正站在 <strong>资本开支强度从峰值回落、分红支付率向历史中枢（35%—45%）自然回归</strong> 的拐点上：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">分红回报率跨期跃迁推演阶段</th>
@@ -9075,12 +9369,12 @@
 <td style="text-align: center;"><strong>2.83% — 3.67%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>别被那些打着“市值管理”幌子、回购几千万股票转手就半价送给高管当奖金的把戏糊弄了！在我们的账本里，用于发奖金的1.62亿回购一分钱都不能算作股东回报，只有2026年10月股东会白纸黑字砸碎注销掉的那73.99万股（约0.40亿），外加实打实派到账上的13.53亿现金红利，才算是给老股东的真金白银。虽然眼下即期股息率只有1%，但别忘了2016到2018年汇川不用猛建厂的时候分红率可是超过43%的！现在最烧钱的联合动力已经独立上市断奶了，国内五大基地也快建完了，等未来两年资本开支一收口，这头现金奶牛吐起分红来会让你大吃一惊。</p></div></div>
 <hr/>
 <h4 id="24-erp-24-16-roe">2.4 债务杠杆套利与跨资产风险溢价（ERP）：借 2.4% 的低息钱，干 16%+ ROE 的买卖</h4>
 <p>在评估汇川技术的资产负债表质量时，有一组极其迷人的数字对比：<strong>公司全口径有息负债（31.21亿元）的加权平均融资成本仅为 ~2.40%，而公司常年加权平均净资产收益率（ROE）高达 16.34%—27.35%，投入资本回报率（ROIC）高达 15%—20%</strong>！</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">资本成本与回报率对比维度</th>
@@ -9115,9 +9409,9 @@
 <td style="text-align: left;"><strong>ROIC - 税后Kd 净利差高达 +13.5% ~ +18.0%</strong>，每一分低息债务都在为普通股股东创造超额正杠杆价值</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>最后，我们将汇川技术的隐含内生回报率放在2026年11月中国宏观低利率坐标（<strong>10年期国债到期收益率约 2.10%</strong>，国有大行3年期定期存款利率约1.50%—1.75%）下进行跨资产横向比价：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">跨资产类别对标（2026年11月中国市场）</th>
@@ -9162,7 +9456,7 @@
 <td style="text-align: left;"><strong>静态内生回报率已反超水电/国债逾230个基点，同时白送15%+高成长与三大远期科技期权！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>当10年期国债收益率只有2.10%的时候，你居然能以4.42%到4.99%的起点真实内生回报率（Owner Earnings Yield），买到全中国工业自动化市占率第一、还在以每年15%以上速度奔跑的绝对霸主！更滑稽的是，这家公司向银行借钱的利息只要2.4%，转手投进自己的工控和电机产线就能赚出16%以上的ROE。你只要坐在椅子上拿住它的股权，低息债权人和上下游两百多亿无息应付账款天天都在免费替你打工。</p></div></div>
 <hr/>
 <h3 id="reverse-sotp1431">【第三部分：逆向分部拆骨估值（Reverse SOTP）——1,431 亿市值里到底装了什么？期权是不是白送？】</h3>
@@ -9187,7 +9481,7 @@
 <p><strong>保守估值锚定（913亿 — 996亿元，中枢取 950.00亿元）</strong>：放眼全球资本市场，拥有32%伺服市占率（中国第1，超西门子+安川+松下之和）与21.5%低压变频市占率（中国第1）的工业自动化绝对霸主，日本发那科（FANUC）、安川电机（Yaskawa）、德国西门子数字化工业（DI）及中国台湾台达电子（Delta）的十年历史PE估值中枢普遍在 <strong>24x — 30x</strong> 之间，国内二线同行信捷电气、伟创电气、雷赛智能2026年PE也在 <strong>24x — 48x</strong>。我们秉持买方审慎原则，既不加回远期研发，也不给龙头溢价，仅按 <strong>41.50亿元常态净利 × 22x — 24x 保守PE</strong> 定价，该核心印钞机单独价值即达 <strong>913.00亿 — 996.00亿元（取保守中枢 950.00亿元）</strong>。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">通用自动化积木块核算指标</th>
@@ -9228,7 +9522,7 @@
 <td style="text-align: center;"><strong>913.00 — 996.00（中枢 950.00）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="bst">🧱 积木二：【智慧电梯电气大配套现金牛（上海贝思特 BST + 汇川电梯本部）】</h5>
 <ul>
 <li>
@@ -9238,7 +9532,7 @@
 <p><strong>保守估值锚定（90.00亿元）</strong>：参照成熟期工业配套与高股息现金牛资产定价标准，按 <strong>6.00亿元稳态净利 × 15x PE</strong>（对应隐含自由现金流回报率6.67%）保守作价，独立价值为 <strong>90.00亿元</strong>。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">智慧电梯积木块核算指标</th>
@@ -9267,7 +9561,7 @@
 <td style="text-align: center;"><strong>90.00</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="8191-301656sz">🧱 积木三：【控股 81.91% 的子公司联合动力（301656.SZ）上市股权价值】</h5>
 <ul>
 <li><strong>公开市场锚点与三重交叉验证</strong>：联合动力（301656.SZ）作为中国第三方新能源汽车电驱与电源系统的绝对霸主（2025年营收206.97亿元、归母净利11.33亿元；2026Q1-Q3营收156.81亿元，虽受H1铜铝暴涨冲击短暂微亏，但2026Q3单季营收已达61.69亿元并迅速扭亏盈利+4,074.77万元，2027年随铜铝联动调价公式全面生效及800V SiC总成放量，常态净利中枢稳居 <strong>9.80亿—12.00亿元</strong>），已在创业板拥有每日连续竞价的公开市值：</li>
@@ -9283,7 +9577,7 @@
 <p><strong>按常态化基本面盈利（PE/PS）独立重估验证</strong>：即便完全抛开二级市场股价，按联合动力常态温和修复后的归母净利 <strong>9.80亿—11.33亿元</strong> 计算，汇川享有的81.91%归母净利为 <strong>8.03亿—9.28亿元</strong>；给予第三方车规电驱绝对龙头 <strong>22x — 24x PE</strong>（仅相当于2026年化215亿营收的 <strong>1.0x — 1.2x PS</strong>，远低于拓普集团、三花智控及英搏尔的估值），对应汇川所持股权的基本面基石价值同样落在 <strong>176.60亿 — 222.70亿元</strong> 区间！</p>
 </li>
 </ol>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">联合动力（301656.SZ）81.91%股权称重方法</th>
@@ -9320,7 +9614,7 @@
 <td style="text-align: left;">极端保守清算底线（仅1倍PS，重置成本法亦高于此值）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="scara1">🧱 积木四：【已盈利的工业机器人（SCARA全国第1 + 六关节）与数字能源存量业务】</h5>
 <ul>
 <li>
@@ -9330,7 +9624,7 @@
 <p><strong>保守估值锚定（75.00亿元）</strong>：对照A股工业机器人同行埃斯顿（总市值约280亿元，PE超130倍，净利率不足2%），汇川工业机器人不仅市占率更高、盈利质量远超同行，且保持50%+的高速增长。我们仅按极其克制的 <strong>3.00亿元存量净利 × 25x PE</strong>（或按30亿营收 × 2.5x PS）保守定价，该存量业务价值为 <strong>75.00亿元</strong>（仅为埃斯顿市值的四分之一！）。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">工业机器人与数字能源存量积木块指标</th>
@@ -9359,8 +9653,8 @@
 <td style="text-align: center;"><strong>75.00</strong></td>
 </tr>
 </tbody>
-</table>
-<div class="annotated-row"><div class="main-col"><h5 id="_19">🧱 积木五：【账面超额可自由支配净现金（扣除全部有息负债与营运底仓后）】</h5><ul>
+</table></div>
+<div class="annotated-row"><div class="main-col"><h5 id="_20">🧱 积木五：【账面超额可自由支配净现金（扣除全部有息负债与营运底仓后）】</h5><ul>
 <li>如第一部分表 F-2 与表 F-3 严苛审计所示，截至2026Q3末，公司账面广义现金90.06亿元，扣除6.50亿元受限资金与25.00亿元日常刚性营运备付底仓后，超额可自由支配现金为 <strong>58.56亿元</strong>；再全额清偿 <strong>31.21亿元</strong> 全口径有息负债后，买方股东可直接分走的 <strong>超额净现金 = <code>58.56 - 31.21 = +27.35 亿元</code></strong>，按 1.0x 现金面值等额计入 <strong>27.35亿元</strong>。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把大象切成五块来称重，你就再也不会被障眼法迷住眼睛了！光那台毛利率44.6%、一年净赚41.5亿的通用自动化印钞机，按老牌外资同行最低的23倍市盈率算就值950个亿；加上每年白捡6个亿现金流的贝思特电梯（90亿）、已经在创业板挂牌交易的联合动力81.91%股权（哪怕狠心打八折也值216亿，市价更是270亿）、全国第一的SCARA工业机器人存量（75亿）和口袋里多出来的27.35亿净现金——这五样现成的宝贝加起来就已经顶到1,358亿到1,412亿了！</p></div></div></div></div>
 
@@ -9368,7 +9662,7 @@
 <hr/>
 <h4 id="33-reverse-sotp-1358-1412-0">3.3 Reverse SOTP 拆骨总账：1,358 亿—1,412 亿存量铁底，三大高赔率期权近乎“0元白送”！</h4>
 <p>现在，我们将上述五大存量积木块的保守公允价值汇总拼装，并与截至2026年11月17日收盘的 <strong>1,431.44亿元</strong> 普通股总市值（52.80元/股）进行正面对决：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">Reverse SOTP 估值积木块名称</th>
@@ -9454,12 +9748,12 @@
 <td style="text-align: center;"><strong>仅占总市值 1.33% — 5.11%！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>🔥 拆骨倒推的震撼买方结论</strong>：
 哪怕我们用最挑剔的眼光，把通用自动化按22.9倍PE算作 <strong>950亿元</strong>、把智慧电梯按15倍PE算作 <strong>90亿元</strong>、把工业机器人存量按25倍PE算作 <strong>75亿元</strong>、把账面超额净现金算作 <strong>27.35亿元</strong>，并且对已经在创业板拥有270亿元公开市值的联合动力股权狠狠砍一刀打8折（算作 <strong>216亿元</strong>），这五块早已在报表上实打实赚钱的存量资产加起来也已经值 <strong>1,358.35亿元（对应每股存量底线价值 50.10 元/股）</strong>；如果联合动力股权直接按创业板公开市价270亿元计入，存量资产价值更是高达 <strong>1,412.35亿元（对应每股存量价值 52.10 元/股）</strong>！</p>
 <p>这意味着，在今天 <strong>52.80 元/股（总市值 1,431.44 亿元）</strong> 的牌桌上，二级市场给汇川技术苦心孤诣布局的 <strong>【三大高赔率远期战略期权】</strong> 合计只收了你 <strong>19.09 亿 — 73.09 亿元（折合每股仅 0.70 元 — 2.70 元，占总市值比重仅 1.33% — 5.11%）</strong> 的门票钱！</p>
 <p>我们来看看这三大被市场以“19亿—73亿元白菜价”近乎 <strong>0元白送</strong> 的远期期权，如果单独拉到一级半或二级市场上到底值多少分量：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">三大高赔率远期期权资产包</th>
@@ -9492,9 +9786,9 @@
 <td style="text-align: center;"><strong>近乎 0 元白送</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为了直观展示不同股价水位下“存量资产安全垫”与“免费期权厚度”的动态变化，我们拉出 <strong>40元—75元股价区间的 Reverse SOTP 敏感性沙盘表</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">股价刻度（元/股）</th>
@@ -9555,13 +9849,13 @@
 <td style="text-align: left;">三大期权被市场充分甚至乐观定价，进入右侧兑现止盈区</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这才叫真正的买方算账！现在A股市场上随便找一家只做谐波减速器或者步进电机的小公司（比如绿的谐波、鸣志电器），一年利润才一两个亿，只因为沾了“人形机器人”四个字，市值就被炒到250亿甚至500亿，市盈率高达两三百倍！反观汇川技术，自己有年产千万台伺服电机的底层功力、有上海莱恩的丝杠磨削老底子、南京二期基地正在建、行星滚柱丝杠和无框力矩电机都已经送样了，外加大型PLC和欧洲匈牙利工厂，这三样东西加在一起，在今天52.80元的股价里市场居然只收你19亿到73亿元！为什么？因为汇川块头太大、业务太扎实，炒概念的游资嫌它不够妖，而看传统PE的机构又被上半年联合动力亏的那八千多万吓破了胆。这种“买一头健壮的现金奶牛，免费附赠三张高赔率科技头奖彩票”的错杀局，正是聪明人最喜欢的击球甜区。</p></div></div>
 <hr/>
-<h3 id="_20">【第四部分：历史估值分位、全球同行估值对比、分档击球区与“三条基本面死刑证伪红线”】</h3>
+<h3 id="_21">【第四部分：历史估值分位、全球同行估值对比、分档击球区与“三条基本面死刑证伪红线”】</h3>
 <h4 id="41-20162026-45-24">4.1 汇川技术近十年（2016—2026年）历史估值分位长卷：从 45 倍成长溢价到 24 倍历史低位</h4>
 <p>为了看清当前 <strong>28.35倍（2025静态PE） / 24.47倍（2026常态PE） / 22.6倍（归母 True EV / 常态 Owner Earnings）</strong> 在汇川技术自身历史长河中的位置，我们拉出公司 <strong>2016年至2026年11月整整十一个年度的业绩、ROE、PE-TTM区间、PB区间与EV/EBITDA历史分位全景表</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">年份</th>
@@ -9709,7 +10003,7 @@
 <td style="text-align: left;"><strong>当前24.47x常态PE较十年历史中枢（40.5x）折价近 40%！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>从这张跨越十年的历史估值长卷中，我们可以提炼出两条铁律：</p>
 <ol>
 <li>
@@ -9723,7 +10017,7 @@
 <h4 id="42-12">4.2 全球与国内 12 家同行估值矩阵大对决：为什么汇川是性价比最高的“六边形战士”？</h4>
 <p>为了彻底打破“大市值公司估值必须比小公司低”或“外资巨头估值才合理”的思维误区，我们拉出截至 <strong>2026年11月17日</strong> 全球工业自动化五巨头（<strong>西门子、安川电机、发那科、基恩士、台达电子</strong>）、国内工业自动化与机器人五同行（<strong>信捷电气、雷赛智能、伟创电气、麦格米特、埃斯顿</strong>）以及新能源汽车与机器人执行器跨界双雄（<strong>三花智控、拓普集团、英搏尔</strong>）共 <strong>13 家核心可比公司</strong> 的最新估值与基本面硬指标进行全方位横向对标：</p>
 <h5 id="vs-202611">🌍 矩阵一：汇川技术 vs 全球跨国工业自动化与机器人五巨头（2026年11月最新基准）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称（代码/市场）</th>
@@ -9805,9 +10099,9 @@
 <td style="text-align: left;">电力电子与工控同源鼻祖，乘AI服务器电源东风，PE达32x、PB高达8.8x</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="vs-202611_1">🇨🇳 矩阵二：汇川技术 vs 国内工控、机器人及汽车执行器同行（2026年11月最新基准）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称（代码）</th>
@@ -9922,7 +10216,7 @@
 <td style="text-align: left;">独立电驱二线厂商，盈利微薄仍享26x PE，反证联合动力（301656）330亿市值定价扎实</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>横向比价的铁血判词</strong>：
 把上面两张矩阵表放在一起看，汇川技术（300124.SZ）在当前 <strong>52.80元/股（常态PE 24.47x，归母P/OE 22.6x，PB 3.72x）</strong> 的定价出现了一个极其显著的 <strong>“跨市场双重错配折价”</strong>：</p><ul>
 <li>
@@ -9937,7 +10231,7 @@
 <hr/>
 <h4 id="43">4.3 买方实战三档击球区操作手册与右侧加仓信号</h4>
 <p>遵循查理·芒格与霍华德·马克斯的买方纪律，我们绝不用单一目标价去赌明天涨跌，而是以 <strong>存量拆骨底线价值（50.10元—52.10元/股）</strong> 和 <strong>常态 Owner Earnings（62.10亿—70.10亿元/年）</strong> 为标尺，划定清晰的 <strong>买方三档实战击球区</strong> 与 <strong>右侧主升浪确认加仓信号</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">买方实战击球区档位</th>
@@ -9992,7 +10286,7 @@
 <td style="text-align: left;"><strong>左侧分批兑现止盈</strong>：当市场因机器人狂热或制造业过热将PE推升至35倍以上、隐含回报率跌破3%时，逢高将筹码让给趋势追高者</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>⚡ 德鲁肯米勒式“右侧主升浪确认加仓信号”（触发任意两项即可从底仓切换至重仓进攻）</strong>：</p>
 <ol>
 <li>
@@ -10008,7 +10302,7 @@
 <hr/>
 <h4 id="44_1">4.4 查理·芒格“逆向证伪”铁律：一旦触发必须无条件认错清仓的“三条基本面死刑红线”</h4>
 <p>买方投资最大的风控，不是设一个“跌10%就止损”的机械价格止损线（在44—46元的黄金坑止损是最大的愚蠢），而是预先写好 <strong>“基本面逻辑彻底坍塌的死刑判决书”</strong>。在未来持有汇川技术的过程中，哪怕股价没有跌，只要定期报告或产业调研中出现以下 <strong>三条基本面死刑证伪红线中的任意一条</strong>，说明我们对公司护城河的底层假设已被证伪，必须无条件认错清仓离场：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">死刑证伪红线编号</th>
@@ -10037,11 +10331,11 @@
 <td style="text-align: left;">汇川过去23年战无不胜的秘诀是“克制融资 + 同源技术裂变 + 高ROIC内生造血”。一旦管理层染上帝国扩张综合征，用低价贱卖股权去搞盲目跨界豪赌，长期复利引擎将从内部瓦解。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我常说：“告诉我我会死在哪里，我就永远不去那个地方。”买汇川技术最怕的不是某一个季度铜价涨到十万八、也不是某一个季度联合动力少赚了几个亿，最怕的是那台毛利率41.37%的工控印钞机突然失去了让全国几十万电气工程师乖乖写代码的魔力，或者朱兴明团队突然发疯去搞毫不相干的跨界豪赌。只要这两条命根子稳如泰山，在52.80元这个把三大远期科技期权几乎白送给你的价格上，耐心坐稳你的屁股，时间自然会替你把复利的果实酿成美酒。</p></div></div>
 <hr/>
 <h3 id="f_1">📋 模块 F 买方估值与拆骨定价终极档案卡（全市场性价比排行榜标准录入接口）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心排行榜录入维度</th>
@@ -10081,8 +10375,17 @@
 <td style="text-align: left;">右侧加仓紧盯：联合动力单季毛利率回升至15%+、单季OCF恢复至25亿+、人形执行器批量定点</td>
 </tr>
 </tbody>
-</table>
-<hr class="module-sep"/>
+</table></div>
+<hr/>
+<hr/>
+<h2 id="g">阶段三·终章模块 G：投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）</h2>
+<blockquote>
+<p><strong>闭门会诊时间</strong>：2026年11月17日深夜<br>
+<strong>会诊标的</strong>：汇川技术（300124.SZ，最新收盘价 <strong>52.80元/股</strong>，有效总股本 <strong>27.11亿股</strong>，普通股总市值 <strong>1,431.44亿元</strong>，归母口径真实企业价值 <strong>True EV = 1,404.09亿元</strong>，合并标准口径 <strong>True EV = 1,423.15亿元</strong>）<br>
+<strong>案头呈交卷宗</strong>：刚完成零信任交叉审计的《汇川技术深度投研底稿（模块 A—F）》——涵盖2025年报（营收451.05亿、归母净利50.50亿、OCF 66.81亿、研发42.56亿且0%资本化）与2026年三季报（营收379.56亿/+19.88%、归母净利43.98亿/+3.38%、通用自动化~159亿/+33%、新兴业务~21亿/+88%、存货124.58亿、广义现金90.06亿、超额净现金+27.35亿），以及控股81.91%的子公司联合动力（301656.SZ，2025年9月25日创业板独立IPO募资净额35.32亿元，2026H1短暂微亏-8,809.42万元后于2026Q3单季迅速扭亏实现+4,074.77万元）的全套微观穿透账本。</br></br></p>
+</blockquote>
+<p>在帕萨迪纳与纽约、波士顿全息连线的买方最高投资决策委员会（IC）闭门会议室里，四位横跨价值投资、成长猎手、困境残值拆骨与宏观趋势交易领域的传奇大师——<strong>查理·芒格（Charlie Munger）</strong>、<strong>彼得·林奇（Peter Lynch）</strong>、<strong>霍华德·马克斯 &amp; 塞思·卡拉曼（Howard Marks &amp; Seth Klarman 联合席位）</strong>与<strong>斯坦利·德鲁肯米勒（Stanley Druckenmiller）</strong>围坐在长桌旁。他们推开卖方机构千篇一律的“给35倍PE算目标价”的肤浅报告，直接拿着模块 A 至模块 F 挖出的工程决算单、存货库龄表、坏账计提矩阵与拆骨底稿，展开了一场针锋相对、直击商业灵魂的终极会诊。</p>
+<hr/>
 <h3 id="owner-earnings-inversion">👴🏻 第一席发言：查理·芒格（商业模式寿命、Owner Earnings 算盘、逆向思维 Inversion 与死穴排雷）</h3>
 <p><strong>“如果你们只盯着汇川技术合并利润表上那 28.95% 的综合毛利率和 2026 年前三季度 0.49% 的扣非利润增速看，你们就像把一匹纯血赛马和一头正在犁地的重装铁牛关在同一个笼子里称体重一样愚蠢！”</strong></p>
 <p>查理·芒格敲了敲桌面上模块 D 的分部现金流桥接表（表 D-21）和模块 E 的折旧研发审计表（表 E-8、表 E-10），透过厚厚的镜片说道：</p>
@@ -10114,7 +10417,7 @@
 </ul>
 <p>更让我这个老会计迷恋的，是财务总监刘迎新那本<strong>‘清教徒式隐性藏富账本’</strong>。你们看看表 G-1 我给你们列出的三道隐性利润暗门：2025年汇川砸了 <strong>42.56亿元</strong>（2026Q1-Q3又砸了34.26亿）搞研发，研发人员扩编38.5%到 <strong>7,670人</strong>，其中至少有 <strong>9.50亿元（税后归母约8.00亿元）</strong> 是砸在今天几乎不产生收入的人形机器人行星滚柱丝杠、无框力矩电机、iFA全栈软件和SIL3功能安全大型PLC上的。换作别的公司早就按15%资本化塞进无形资产里粉饰利润了，汇川呢？<strong>连续多年研发资本化率 0.00%（零元）</strong>，100%在当期利润表里硬扣！连新建的现代化钢筋水泥厂房也一律按 <strong>20年</strong> 折旧（同行全按30—40年，每年又多提近2亿折旧）！一旦你把这8.00亿替未来五年买单的远期期权研发费还原加回，汇川在新常态下的真实归母股东盈余（Owner Earnings）直接从严苛主锚的 <strong>62.10亿元/年（对应1,404.09亿归母True EV回报率 4.42%）</strong> 跃升至 <strong>70.10亿元/年（真实内生回报率高达 4.99%，约 5.00%，静态回本仅 20.0 年）</strong>！等南京机器人二期、岳阳电机二期、济南与海外等六大在建基地全面达产，稳态归母 Owner Earnings 更是将垫高至 <strong>76.60亿—80.90亿元/年（中枢 78.50亿元/年，远期稳态回报率 5.59%）</strong>！</p>
 <h5 id="g-1-vs">表 G-1：查理·芒格“喜诗糖果 vs 伯克希尔纺织厂”标尺下的汇川技术双层基因与隐性藏富解剖表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">芒格买方核心审视标尺</th>
@@ -10161,7 +10464,7 @@
 <td style="text-align: left;">在10年期国债仅2.10%的时代，以近5%的真实起点回报率买入15%+增长的行业统帅，简直是捡钱</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>最后，按我一贯的<strong>逆向思维（Inversion）</strong>规矩——在掏钱之前，先问自己：<strong>‘如果五年后我们在52.80元买的汇川技术亏了大钱，最可能是死在哪条阴沟里？’</strong>
 我给你们划了三条生死红线：</p>
 <ol>
@@ -10176,7 +10479,7 @@
 </li>
 </ol>
 <p>只要这三条死刑红线没触发，在52.80元这个连存量业务都没算满、三大远期科技期权几乎白送的价位上，我会像抱住好市多一样紧紧抱住它！”</p>
-<hr>
+<hr/>
 <h3 id="diworsification">🛒 第二席发言：彼得·林奇（六类股票归类法、草根存货验证与痛斥“多元恶化 Diworsification”）</h3>
 <p><strong>“听完查理的算盘，我只想对华尔街和陆家嘴那些因为看到‘2026年前三季度存货涨到124.58亿、经营现金流降到8.95亿’就吓得丢盔弃甲的基金经理说一句话：你们要是愿意离开恒温空调办公室，去苏州吴中、湖南岳阳的发货月台数一数排队拉货的卡车，或者翻一翻其他六家工控同行的三季报，就不会干出在52.80元把皇冠明珠当破铜烂铁甩卖的蠢事了！”</strong></p>
 <p>彼得·林奇笑着翻开他标志性的黄色记事本，指着模块 C 的同行三方交叉审讯表（表 C-2、表 C-3、表 C-12）说道：</p>
@@ -10217,7 +10520,7 @@
 <li>再看西安基地的储能PCS：汇川不是去沙漠里跟阳光电源拼低价电池柜，而是靠着车间里几十万台PLC和变频器掌握的<strong>实时排产耗电数据</strong>，顺手把 <strong>FEMS厂级能量管理软件 + 储能PCS + IE5超高效电机节能改造</strong> 卖给同一个高耗能工厂厂长，直接把单家工厂的客单价从300万放大到 <strong>3,000万—6,000万元（放大6—10倍）</strong>！</li>
 </ol>
 <h5 id="g-2">表 G-2：彼得·林奇“六类股票归类与存货/同源裂变测谎仪”下的汇川技术基本面解剖表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">林奇实战审视维度</th>
@@ -10257,7 +10560,7 @@
 <td style="text-align: left;">当全赛道统帅的PE比二线跟随者便宜一半、比人形概念股便宜80%时，这就是确定性最高的十倍股温床</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>用我最熟悉的 <strong>PEG 标尺</strong> 来收个尾：一家核心工控增速33%、未来三年整体内生盈利复合增速稳居16%—20%、还附带1%—2%现金回报的绝对龙头，按当前还原远期研发后的20倍真实盈余（或22.6倍严苛P/OE）计算，<strong>PEG 只有 1.0 左右</strong>！当市场让你用1倍PEG的价格买下中国工业自动化的头号霸主，还把价值连城的人形机器人丝杠和无框电机当赠品塞进你购物袋的时候，别犹豫，赶紧去收银台结账！”</p>
 <hr/>
 <h3 id="stub-value">🕰️ 第三席发言：霍华德·马克斯 &amp; 塞思·卡拉曼（周期钟摆刻度、剥离现金残值 Stub Value 与赔率不对称性）</h3>
@@ -10305,7 +10608,7 @@
 </li>
 </ul>
 <h5 id="g-3-stub-value">表 G-3：霍华德·马克斯 &amp; 塞思·卡拉曼“第二层思维、拆骨残值（Stub Value）与极限抗压”称重表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">卡拉曼剥离残值（Stub Value）与抗压步骤</th>
@@ -10382,18 +10685,18 @@
 <td style="text-align: center;"><strong>仅占总市值 1.33% — 5.11%！（近乎0元白送）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>你们看清楚这张表的最后一行了吗？
 五大已经每天在报表上吐钞票的存量成熟业务，按最保守的尺子加起来就值 <strong>1,358.35亿—1,412.35亿元（折合每股 50.10元—52.10元/股，占当前52.80元市值的 94.89%—98.67%）</strong>！这意味着你在52.80元买进汇川技术，为那三张在A股市场上随便单拎一张出来都能炒到两三百亿市值（看看绿的谐波500亿市值、鸣志电器245亿市值、中控技术380亿市值！）的顶级科技期权——<strong>人形机器人机电丝杠全栈执行器、SIL3功能安全大型PLC与iFA软件、欧洲/东南亚属地化出海</strong>——合计只付了 <strong>19.09亿—73.09亿元（每股仅0.70元—2.70元，占总市值仅1.33%—5.11%）</strong> 的门票钱！如果股价因为市场情绪波动回调到50.10元以下（比如44—46元的黄金重锤区），市场不仅把这三大期权0元白送给你，还把存量工控印钞机打8.5折倒贴百亿卖给你！</p>
 <p>这就是价值投资中最迷人的<strong>‘正面我赢大钱，反面我不亏钱（Heads I win, tails I don't lose much）’</strong>的不对称契约。在52.80元这个十年PB最低点上，钟摆已经摆到了悲观与折价的一端，买方没有任何理由缺席。”</p>
 <hr/>
-<h3 id="_21">⚡ 第四席发言：斯坦利·德鲁肯米勒（宏观产业主升浪、盈利加速度“二阶导数”与扣扳机下重注时机）</h3>
+<h3 id="_22">⚡ 第四席发言：斯坦利·德鲁肯米勒（宏观产业主升浪、盈利加速度“二阶导数”与扣扳机下重注时机）</h3>
 <p><strong>“查理、彼得、霍华德已经把这家公司的底裤和存量家底算得比瑞士银行的金库还要清楚了。但作为坐在交易台前扣扳机的人，我必须提醒各位：好公司加上便宜的价格，如果不叠加‘基本面边际变化率的拐点（Second Derivative Inflection）’，你可能要在里面坐上两年冷板凳；而一旦‘绝对低估的安全垫’撞上了‘盈利加速度由负转正的奇点’，那就是我当年在1992年狙击英镑、以及2022年底第一时间重仓杀入英伟达（NVIDIA）时最喜欢的‘直接扑向咽喉（Go for the jugular）’的重注时刻！”</strong></p>
 <p>传奇宏观与趋势交易大师斯坦利·德鲁肯米勒（Stanley Druckenmiller）站起身，走到全息战术屏前，将汇川技术2025Q1至2027E的分季度分板块边际斜率图调了出来：</p>
 <p>“我这辈子在华尔街赚大钱的秘密，从来不是看今天静态的市盈率是24倍还是28倍，而是紧盯未来12到18个月驱动股价主升浪的<strong>‘二阶导数（Second Derivative，即增长率的变化率 / 加速度）’</strong>！</p>
 <p>为什么今天市场上90%的庸俗交易员看不懂汇川技术在2026年三季报里释放的强烈做多信号？因为他们只看合并利润表上那个冰冷的‘一阶导数’——<em>2026Q1-Q3营收增长19.88%，归母净利增长3.38%，扣非净利增长0.49%</em>。他们一看0.49%的扣非增速，就觉得这列火车停下来了。</p>
 <p>但如果你像我一样，把合并报表的引擎盖掀开，你会看到水面下正在发生一场极具爆发力的<strong>‘三重二阶导数反转与利润剪刀差合拢’</strong>！</p>
-<h4 id="_22">🔥 第一重二阶导数拐点（已率先点火加速）：工业自动化与机器人主引擎正处于三年周期最凌厉的向上加速段！</h4>
+<h4 id="_23">🔥 第一重二阶导数拐点（已率先点火加速）：工业自动化与机器人主引擎正处于三年周期最凌厉的向上加速段！</h4>
 <p>你们看模块 C 的分部与同行数据：经历了2022下半年到2024年的制造业去库存寒冬后，汇川的通用自动化在2025年同口径增速是+23.0%；而进入2026年前三季度，在3C算力硬件设备、传统制造更新改造与锂电设备出海的三重拉动下，<strong>通用自动化营收增速直接跳升到了 +33.00%（前三季狂揽约159亿元）</strong>！与此同时，<strong>智能机器人与数字能源等新兴业务增速更是从2025年的+16.03%垂直起飞到了2026Q1-Q3的 +88.00%（前三季达21亿元）</strong>！
 更重要的是看模块 A 表 A-10 算出来的那个<strong>‘经营杠杆（Operating Leverage）放大器’</strong>：岳阳700万台电机基地、济南工程变频器基地和南京一期12万台机器人基地在2025年至2026H1刚刚完成转固，它们只需要 <strong>7.37%—8.31%</strong> 的极低稼动率就能100%覆盖全部新增折旧；而现在这几个基地的稼动率已经冲上了 <strong>85%—95%以上</strong>！这意味着从2026Q4开始，工控与机器人每多卖1块钱收入，不再需要分摊额外的固定折旧，<strong>高达23.5%—36.5%的边际贡献率将直接转化为纯营业利润</strong>！主引擎的二阶导数不仅早已转正，而且正在进入斜率最陡峭的经营杠杆释放期！</p>
 <h4 id="301656sz2026q35422027">🔥 第二重二阶导数拐点（此时此刻正在跨越零轴！全场最大的预期差）：联合动力（301656.SZ）的“利润拖累黑洞”已在2026Q3单季正式扭亏反转，叠加5.42亿减值洗澡完毕，2027年合并利润弹簧将剧烈弹起！</h4>
@@ -10429,7 +10732,7 @@
 </li>
 </ol>
 <h5 id="g-4">表 G-4：斯坦利·德鲁肯米勒“盈利加速度（二阶导数）拐点、剪刀差合拢与仓位扣扳机”作战沙盘表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">德鲁肯米勒交易雷达维度</th>
@@ -10469,7 +10772,7 @@
 <td style="text-align: left;">催化常态PE从 <strong>24.47x（15%历史分位）</strong> 向 <strong>32x—35x（历史中枢偏下）</strong> 戴维斯双击</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>基于这套‘二阶导数反转 + 极高安全垫’的赔率结构，我给出明确的分步扣扳机指令：</p>
 <ul>
 <li>
@@ -10480,10 +10783,10 @@
 </li>
 </ul>
 <hr/>
-<h3 id="_23">📋 四位投资大师闭门圆桌投票与终极裁决总表</h3>
+<h3 id="_24">📋 四位投资大师闭门圆桌投票与终极裁决总表</h3>
 <p>经过四个小时的深度质询与交叉验算，四位传奇大师在《汇川技术（300124.SZ）买方终极表决书》上签下了各自的投票结果与操作判词：</p>
 <h5 id="g-5300124sz-5280">表 G-5：四位投资大师对汇川技术（300124.SZ @ 52.80元/股）的闭门圆桌投票与核心判词总表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">投资大师席位</th>
@@ -10528,17 +10831,17 @@
 <td style="text-align: left;"><strong>🟢【左侧建主力底仓 70% + 右侧突破满仓追击】</strong><br/>在46—55元（当前52.80元）果断建70%底仓；一旦触发“联合动力毛利率回15%+”或“单季OCF破25亿+”或“人形定点”，在55—62元右侧打满100%仓位！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">模块 H：💼 专属买方研究员的 1 分钟闭门交底（去数字轰炸 · 直击商业灵魂与软肋真伪辩证）</h2>
 <blockquote>
 <p><strong>“前面那十万字的财报细节和模型我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【汇川技术】这家企业，你只需要在脑子里记住这四件事：”</strong></p>
 </blockquote>
-<h3 id="_24">第一件事：它到底靠什么在行业里立身？（看家饭碗与真护城河）</h3>
+<h3 id="_25">第一件事：它到底靠什么在行业里立身？（看家饭碗与真护城河）</h3>
 <p>千万别被它合并报表上不到三成的表面综合毛利率骗了，以为它是个拼价格的普通硬件组装厂。汇川真正的命根子，是藏在水面下那台毛利率超过四成、国内市占率断层第一的<strong>工业自动化印钞机</strong>（涵盖工厂产线上的伺服电机、变频器、PLC控制器和工业机器人）。它之所以能把德国西门子、日本安川电机和国内一众同行全都压在身下，靠的不是单卖便宜零件，而是<strong>“底层代码与行业工艺包死锁”</strong>。一台几百万的锂电池涂布机或半导体设备，里面的工控部件成本只占不到百分之五，可一旦控制算法抖动一丝一毫，整卷昂贵的材料就会报废、停机一天损失上百万。汇川把两百多个本土行业的独门工艺算法写进了自己的软件平台，还派上千名工程师驻场帮设备厂老板把底层程序调通。全国几十万电气工程师脑子里背熟的都是汇川的编程逻辑，下游客户想换掉它，等于把整台机器的代码推倒重写。再加上它用自家湖南岳阳基地一年几百万台的自产电机、自研编码器芯片，甚至用自家造的机器人和控制器去装备自己的新工厂，把制造成本压到了同行根本活不下去的极限。</p>
-<h3 id="_25">第二件事：它的财务家底和经营周期现在发生了什么本质变化？（为什么它是真印钞机还是苦力）</h3>
+<h3 id="_26">第二件事：它的财务家底和经营周期现在发生了什么本质变化？（为什么它是真印钞机还是苦力）</h3>
 <p>过去市场最担心汇川的一件事，是它跨界干新能源汽车电驱系统（子公司联合动力），怕这个重资产、毛利薄的苦力活会像无底洞一样把工控印钞机赚来的钱全吸干。但现在，<strong>这个最大的资金包袱已经被彻底切开了</strong>。就在去年九月底，汇川把控股八成以上的联合动力单独推上创业板挂牌上市，一把从资本市场融回了三十五个亿的净现金，加上联合动力自己每年近三十亿的经营现金流，汽车业务已经完全实现了自我造血断奶，再也不用母公司贴一分钱。而留在母公司手里的工控、电梯和工业机器人业务，因为核心产线用十年都不容易坏，每年只需要花极少的维护费，赚来的六十多亿常态真金白银（如果把当年全额费用化扣掉的远期研发加回来更是接近七十亿）几乎全是自由现金流。更难得的是这家公司的财务洁癖：一年砸四十多亿搞研发，一分钱都不做资本化粉饰；新建的现代化钢筋水泥厂房一律按二十年顶格快速折旧；账上躺着九十亿广义现金，还清所有低息借款后还净剩近三十亿超额净现金，家底厚实得像座铁桶。</p>
-<h3 id="_26">第三件事：它身上有哪些表面软肋？哪些是已经被化解的“纸老虎/危中之机”，哪个才是真软肋？</h3>
+<h3 id="_27">第三件事：它身上有哪些表面软肋？哪些是已经被化解的“纸老虎/危中之机”，哪个才是真软肋？</h3>
 <p>眼下市场先生之所以把它砸到十年历史估值最便宜的角落，是因为被三个表面利空吓坏了。我替你挨个扒开底牌看清楚，这里面有两个是已经被化解的<strong>“纸老虎与危中之机”</strong>，只有一个才是需要耐心死磕的<strong>“真软肋”</strong>：</p>
 <ul>
 <li>
@@ -10551,17 +10854,30 @@
 <p><strong>真正需要咱们紧盯的【真软肋（真硬骨头）】，其实是“大型流程工业的西门子软件铁幕”与“海外本土化攻坚”</strong>。在百亿投资的大型化工厂或汽车主焊装线上，央国企总工程师为了保乌纱帽，对德国西门子的大型PLC和博途软件有着极深的免责依赖，汇川虽然已经造出了全自研的iFA工业软件和通过德国最高安全认证的大型安全PLC，但要彻底改变全国设计院和老工程师几十年的肌肉记忆，还得花三到五年一寸寸啃下来；同时，汇川在国内伺服和变频器的份额已经到了三成左右的高位，未来想从四百多亿迈向千亿级跨国巨头，必须靠欧洲匈牙利和东南亚泰国基地打开海外市场，而海外本土分销渠道的搭建以及欧美对关键基础设施的地缘审查，才是真正考验管理层手腕的硬骨头。</p>
 </li>
 </ul>
-<h3 id="_27">第四件事：咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
-<p>账算到这里，操作底线就非常清晰了：在眼下五十出头（总市值一千四百多亿）的价格上，光把通用自动化印钞机、智慧电梯现金牛、已经上市的八成联合动力股权、赚钱的工业机器人和账面超额净现金这五块现成的熟肉按保守价格加起来，就已经兜住了当前市值的九成五到九成八。换句话说，<strong>你是用十年最低谷的公允价格买下了中国工业自动化的头号印钞机，同时市场把“人形机器人行星滚柱丝杠与无框电机”、“大型安全PLC与工业软件”、“全球化出海”这三张随便单拎一张出来都能值几百亿的远期王牌彩票，几乎零元白送给了你</strong>。因此，在四十六到五十五元这个区间，完全可以安心建好六到七成的主力底仓（万一遇到极端市场恐慌砸到四十六元以下，那就是闭眼满仓的黄金坑）；等接下来看到汽车电驱毛利率重新站稳十五个点以上、或者单季现金流随着去库存重新井喷、又或者人形机器人零部件拿到大厂批量定点的右侧信号时，再顺势把剩下的仓位加满，安心陪这台特种复利机器走完下一轮产业主升浪；反之，未来只有当它的核心工控毛利率莫名其妙连续跌破三十六个半百分点、或者管理层发疯去搞毫不相干的跨界豪赌时，咱们才需要认错离场。</p></hr></hr></hr></hr></hr></hr>
+<h3 id="_28">第四件事：咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
+<p>账算到这里，操作底线就非常清晰了：在眼下五十出头（总市值一千四百多亿）的价格上，光把通用自动化印钞机、智慧电梯现金牛、已经上市的八成联合动力股权、赚钱的工业机器人和账面超额净现金这五块现成的熟肉按保守价格加起来，就已经兜住了当前市值的九成五到九成八。换句话说，<strong>你是用十年最低谷的公允价格买下了中国工业自动化的头号印钞机，同时市场把“人形机器人行星滚柱丝杠与无框电机”、“大型安全PLC与工业软件”、“全球化出海”这三张随便单拎一张出来都能值几百亿的远期王牌彩票，几乎零元白送给了你</strong>。因此，在四十六到五十五元这个区间，完全可以安心建好六到七成的主力底仓（万一遇到极端市场恐慌砸到四十六元以下，那就是闭眼满仓的黄金坑）；等接下来看到汽车电驱毛利率重新站稳十五个点以上、或者单季现金流随着去库存重新井喷、又或者人形机器人零部件拿到大厂批量定点的右侧信号时，再顺势把剩下的仓位加满，安心陪这台特种复利机器走完下一轮产业主升浪；反之，未来只有当它的核心工控毛利率莫名其妙连续跌破三十六个半百分点、或者管理层发疯去搞毫不相干的跨界豪赌时，咱们才需要认错离场。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -10731,7 +11047,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《汇川技术(300124.SZ) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/汇川技术(300124.SZ) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《汇川技术 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/汇川技术 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -10789,6 +11105,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

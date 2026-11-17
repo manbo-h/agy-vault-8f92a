@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>凯莱英_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>凯莱英 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">凯莱英_全模块深度投研全集</div>
+    <div class="report-title">凯莱英 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -719,7 +1004,7 @@
 <li>在ADC（抗体偶联药物）浪潮中，真正技术壁垒最高、毛利率最肥的环节往往不是单抗裸抗，而是剧毒的化学毒素小分子与连接子（Payload-Linker，毒性高达纳克级 OEB5 最高防护等级）。凯莱英凭借顶尖的高活小分子合成与密闭连续流工程能力，在全球ADC毒素连接体CDMO市场占据了极高份额，并以此为跳板向ADC整包偶联延伸。</li>
 </ul>
 <h4 id="2_1">2. 国内外直接竞争对手横向硬核对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对标维度</th>
@@ -772,7 +1057,7 @@
 <td style="text-align: left;">欧美本土免受地缘审查，是MNC“供应链备份（China+1）”受益者，但产能扩不出、成本贵一倍</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看这张比武表，整个牌局一清二楚！药明康德是那个从幼儿园（药物发现）一路包办到大学毕业（商业化大生产）的超级巨无霸，多肽大锅直接架到了10万升，但它树大招风，被华盛顿政客贴上了1260H的标签；欧洲的龙沙和巴亨虽然根正苗红，但瑞士工人下午四点就要喝咖啡下班，建个新厂要磨蹭四年，礼来和诺和诺德等米下锅根本指望不上；凯莱英就像那个不声不响、专攻特种外科手术的顶尖专家——论总块头不如药明，但单拎出小分子毛利率（47.8%）和连续流化学的手艺，连药明都要敬它三分，而且它还没上华盛顿的黑名单！</p></div></div>
 <hr/>
 <h3 id="_5">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？（高度精炼）】</h3>
@@ -854,7 +1139,7 @@
 </ul>
 <h4 id="3_1">3. 五年一期现金流硬账本与防合并报表幻觉穿透</h4>
 <p>以下为凯莱英 <strong>2021—2025年五个完整会计年度及2026年前三季度</strong> 经审计合并报表核心现金流硬账本（单位：人民币亿元）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流指标</th>
@@ -949,7 +1234,7 @@
 <td style="text-align: center;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="4">4. 打破“合并报表幻觉”双项体检</h4><ol>
 <li>
 <p><strong>少数股东损益 vs 少数股东权益核查</strong>：2025年公司少数股东损益为 <strong>-592.77万元</strong>（亏损），2026年前三季度少数股东损益亦处于微幅亏损状态，主要系非全资子公司上海凯莱英生物（母公司持股约83.5%）尚处研发与折旧爬坡期所致。公司核心盈利100%装在全资控股的天津、吉林、辽宁阜新、常州、泰兴等小分子与化学大分子主体内，<strong>完全不存在“把利润分给少数股东、把亏损留给母公司”的合并报表幻觉</strong>。</p>
@@ -1098,7 +1383,7 @@
 <h4 id="1_6">（1）在建工程与核心募投项目资金流向全景穿透</h4>
 <p>不同于2021年行业狂热期各家CXO“撒胡椒面式”的拿地盖楼，凯莱英在2024—2026年对在建工程与募投资金（源自2020年A股定增22.75亿元净额及2021年底H股IPO约56.25亿元人民币净额）进行了大刀阔斧的“削峰填谷”——果断砍掉或延缓传统间歇式小分子冗余规划，将超过70%的增量资本开支集中砸向天津、泰兴的化学大分子（多肽、寡核苷酸、毒素连接体）及海外欧洲支点。</p>
 <p>以下为穿透公司2025年报在建工程附注、募集资金专项报告及2026年最新工程进展整理的核心工程台账：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">项目/基地名称</th>
@@ -1145,7 +1430,7 @@
 <td style="text-align: left;">接管原辉瑞API中试车间（Pilot Plant）及研发实验室，具备千克级至百公斤级cGMP交付能力，构建欧洲本土合规安全岛</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2_5">（2）多肽与小分子“单位产能投资额”拆解：凯莱英比同行到底省在哪？</h4>
 <p>很多外行投资者看多肽扩产，只知道数“几万升反应釜”，却不知道同样扩建1万升（10,000L）cGMP商业化多肽固相合成产能，不同企业的真实资本开支能差出一倍以上。我们来算一笔极其硬核的工业工程账：</p>
 <ul>
@@ -1165,7 +1450,7 @@
 </li>
 </ol>
 <p>为了直观对比，我们将凯莱英与国内外核心多肽/小分子竞争对手的扩产单位经济账拉通对表如下：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -1210,7 +1495,7 @@
 <td style="text-align: left;"><strong>偏低</strong>：受欧洲三班倒劳工法限制，设备全年有效运转小时数比中国工厂低25%—30%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3break-even">（3）转固折旧洪峰测算与盈亏平衡点（Break-even）硬核推导</h4><p>当这批在建工程在2026年底至2027年全面完工转入固定资产后，每年会给利润表增加多少刚性折旧负担？需要多少营收和稼动率才能打平？我们严格按照凯莱英年报会计政策进行公式推导：</p><ul>
 <li><strong>第一步：核算存量折旧基准与会计政策参数</strong></li>
 <li>根据凯莱英2025年报现金流量表补充资料，公司2025年全年计提的固定资产折旧总额为 <strong>4.78亿元</strong>（精确值为47,843.59万元，较2024年的4.38亿元增加0.40亿元）。</li>
@@ -1401,7 +1686,7 @@
 </li>
 </ul>
 <h4 id="3_5">（3）凯莱英四大新业务/新技术远期期权终局定性总表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">新业务 / 新技术方向</th>
@@ -1441,14 +1726,14 @@
 <td style="text-align: left;">🔧 <strong>【极致的内部降本增效铲子 + 免费远期彩票】</strong>：把它当成维持小分子和多肽45%+高毛利的秘密武器即可，切忌按合成生物学概念股去给独立高估值</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这四张牌翻开，什么叫“真金白银的硬菜”、什么叫“赔钱撑场面的配菜”一目了然！多肽和寡核苷酸那是洪浩博士在自己最拿手的化学工程厨房里端出来的招牌烤肉，一年十几个亿营收、40%的毛利，已经香得让跨国药企排着队买单了；而上海那个生物大分子基地，对面坐着一年赚15亿净利润、占了全球四分之一江山的药明合联，你非要拿几口2000升的发酵罐去跟人家拼刺刀，那就是拿鸡蛋碰石头！聪明的主厨应该把90%的精力放在把多肽烤肉店开成全球连锁，至于那个西餐包厢（凯莱英生物），只要别再往里砸钱装修、顺手帮买毒药（Payload）的老客做点偶联加工把房租挣回来，就算阿弥陀佛了！</p></div></div>
 <hr/>
 <hr/>
 <h2 id="ccdmo">追问模块 C：同行与上下游“三方交叉审讯”——在CDMO牌桌上，谁在真备货吃肉，谁在赔本清库存？】</h2>
 <p>看一家处于周期拐点的CDMO公司，最忌讳只听管理层在业绩会上的单方面报喜。要验明凯莱英2025年至2026年三季报的复苏成色，最残酷也最有效的办法，就是把它的账本和国内最直接的五家竞争对手——全产业链霸主<strong>药明康德（603259.SH，重点对标WuXi Chemistry与WuXi TIDES）</strong>、老牌小分子CDMO劲旅<strong>博腾股份（300363.SZ）</strong>与<strong>九洲药业（603456.SH）</strong>、一体化CXO巨头<strong>康龙化成（300759.SZ，重点对标CMC小分子CDMO板块）</strong>以及多肽原料药与CDMO黑马<strong>诺泰生物（688076.SH）</strong>摆在同一张审讯桌上，用截至2025年报及2026年三季报的真实经营数据做一场针锋相对的“三方交叉审讯”。</p>
 <h4 id="cdmocxo-20252026">一、 六大CDMO/CXO玩家 2025年报及2026年三季报核心财务与运营指标横向对质大表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心审讯维度</th>
@@ -1552,7 +1837,7 @@
 <td style="text-align: left;"><strong>销售</strong>：约4.5%<br/><strong>管理</strong>：约11.0%<br/><strong>研发</strong>：<strong>2025年高达23.37%</strong>（自研多肽制剂与仿制药批文投入巨大）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_11">二、 三大核心命题深度交叉审讯</h4><h5 id="1-2026q36520ocf605mnc">1. 景气度与备货对质：凯莱英2026Q3存货暴增65.20%与OCF阶段性回落至6.05亿元，究竟是“MNC大单交付前夕的火热备料”，还是“滞销压库”？</h5><p>初看凯莱英2026年三季报的投资者，往往会被两组看似矛盾的数据惊出一身冷汗：一边是2026年前三季度经营活动现金流净额（OCF）同比下降47.10%至 <strong>6.05亿元</strong>，另一边是账面存货从2025年末的 <strong>14.71亿元</strong> 飙升至2026年三季度末的 <strong>24.30亿元</strong>（净增9.59亿元，增幅高达 <strong>65.20%</strong>）。如果这是一般消费品或标准化工原料药企业，存货暴增叠加经营现金流减半，几乎是“产品卖不动、渠道压货滞销”的标准前兆。</p><p>但只要把凯莱英的资产负债表附注与同行数据拉出来做三道交叉查验，真相立马水落石出——<strong>这不仅不是滞销压库，反而是2026Q4至2027年商业化与多肽超级大单集中交付前最硬核的“春江水暖信号”</strong>：</p><ul>
 <li>
@@ -1691,7 +1976,7 @@
 <li>凯莱英客户以欧美MNC为主，信用期普遍为60—90天，回款纪律极佳（2021—2025年五年累计OCF达96.12亿元，是同期累计归母净利润87.22亿元的110.2%）。但在常态每年10%—15%的温和内生增长下，随着商业化批次扩大，每年仍需为新增应收账款及定制化起始物料备货留出约 <strong>1.00亿—1.50亿元</strong> 的刚性营运资金垫付（取中枢 <strong>1.20亿元/年</strong>；2026年前三季度OCF阶段性偏低主要是为了年末16.73亿美元在手订单突击备料所致，不代表常态每年吞噬现金）。</li>
 </ul>
 <p>将上述四步参数汇总，凯莱英当前存量资产的常态 Owner Earnings 分步还原计算表如下：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">分步还原计算科目</th>
@@ -1738,7 +2023,7 @@
 <td style="text-align: left;"><strong>在不影响存量业务竞争力的前提下，每年可自由拿来分红、回购或再投资的真实自由现金流底盘</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>只看会计利润表的笨蛋会被2026年前三季度“-8.04亿自由现金流”吓得尿裤子，因为他们分不清“为了把旧机器修好不得不花的冤枉钱”和“手握16.7亿美金订单、连夜买6.9万升多肽大锅去印钞票的投资款”！当你把那7到10个亿专门用来扩建多肽新厂的扩张性开支剥开，再把6.8个亿不用付现金的折旧加回来，你会发现凯莱英现有的这副家底，每年轻轻松松就能往老板兜里揣进 <strong>15个亿</strong> 实打实的真金白银！</p></div></div>
 <hr/>
 <h4 id="2-69-owner-earnings">2. 增量垫高测算：6.9万升多肽与新基地达产后的稳态 Owner Earnings</h4>
@@ -1801,7 +2086,7 @@
 </li>
 </ol>
 <p>以下为 <strong>双极限压力测试及复合极端风暴下的量化财务底线推演表</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与抗压指标</th>
@@ -1876,7 +2161,7 @@
 <td style="text-align: center;"><strong>绝对安全（仍净造血超 10亿，分红4.7亿绰绰有余）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>抗压测试硬核结论</strong>：</p><ol>
 <li>
 <p><strong>对上游原材料涨价具备极强的免疫力（情景二）</strong>：由于凯莱英卖的是高達47.8%毛利率的“化学工程工艺溢价”而非低毛利大宗原料药，直接原材料仅占营收的约22.5%（占成本40%）。即便上游化工原料暴涨20%，扣除长协顺价与连续流降耗后，公司常态归母净利润仅小幅回落约9%至12.0亿元，常态 Owner Earnings 仍高达 <strong>14.0亿元</strong>，几乎毫发无伤。</p>
@@ -1893,7 +2178,7 @@
 <p>在医药外包行业，两家表面净利润一模一样的公司，如果一家靠拉长30年厂房折旧、把研发支出打包塞进无形资产、对逾期两年的国内小药企烂账只提5%坏账，而另一家按10—20年激进计提折旧、研发100%费用化、账上躺着60多亿纯现金，那么前者的利润是随时会爆雷的纸面富贵，后者的利润则是被极端保守的会计政策“刻意压低”的真金白银。</p>
 <p>我们直接调取凯莱英2025年报及2026年三季报的财务报表附注，与药明康德、博腾股份、九洲药业、康龙化成进行同台显微镜式比对。</p>
 <h4 id="cdmocxo">一、 五大CDMO/CXO同行会计政策、资产质量与人均效能全景对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计审计与治理维度</th>
@@ -1970,7 +2255,7 @@
 <td style="text-align: left;">人均创收：<strong>56.18万元</strong>（劳动密集型实验及临床人员多）<br/>人均经调整净利：<strong>7.24万元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_12">二、 四大敏感科目逐一验毒（资产质量排雷）</h4><h5 id="1-2026q31652694">1. 应收账款与坏账计提排雷：为什么2026Q3营收增长16.52%，应收账款却只涨了6.94%？</h5><ul>
 <li>
@@ -2138,7 +2423,7 @@
 <li>若进一步用这54.93亿元超额现金先把6.90亿元全口径有息负债和0.03亿元少数股东权益全部还清，买下这家公司还能直接白得 <strong>48.00亿元（<code>54.93 - 6.90 - 0.03</code>）</strong> 的净现金红包！</li>
 </ul>
 <p>以下为凯莱英 <strong>真实企业价值（True EV）与隐含回报率全景拆解表（截至 2026年11月11日 收盘）</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">真实企业价值 (True EV) 与回报率拆解维度</th>
@@ -2227,7 +2512,7 @@
 <td style="text-align: center;"><strong>1.71%</strong> <em>(含全额回购为 2.58%，按True EV计达 2.92%)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看同一家公司、同一口多肽大锅，在深交所和港交所竟然标出了两个完全不同的价码！如果你在A股花152块3去买，扣掉账上那48亿净现金红包后，你实际掏了大约500个亿（True EV）去买一台现在一年赚15亿、达产后一年赚21亿的印钞机，静态回本要33年；但如果你跑去香港花124块5港币买完全一样的股票，扣掉净现金后，整家工厂的净买断价（True EV）瞬间缩水到了 <strong>366.6个亿</strong>！一旦明后年6.9万升多肽产能跑满赚到21个亿，你在港股的真实内生回报率高达 <strong>5.73%</strong>（回本年限仅17.5年），每年还能白拿近2%—3%的分红加回购——这就是市场先生精神分裂时给耐心投资者留出的套利后门。</p></div></div>
 <hr/>
 <h4 id="2-reverse-sotp">2. 隐含预期倒推：Reverse SOTP（反向拆骨估值法）看看市场到底预支了多少未来？</h4>
@@ -2247,7 +2532,7 @@
 </li>
 </ol>
 <p>以下为 <strong>凯莱英 Reverse SOTP 反向拆骨估值对质表</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">资产包拆解模块</th>
@@ -2308,7 +2593,7 @@
 <td style="text-align: center;">市场额外预支了约 <strong>78亿—88亿元</strong> 的远期成长溢价</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>Reverse SOTP 拆骨核心洞察</strong>：</p><ul>
 <li>
 <p><strong>在 H股（124.50港元 / 隐含总市值414.58亿人民币）</strong>：市场先生处于极度保守的“只看眼下、不给远期溢价”状态。扣除48亿元净现金和210亿元小分子压舱石后，剩下的 <strong>156.58亿元</strong> 市值，甚至还不够单独买下那座正在以每年80%—100%速度狂飙、年底即将建成6.9万升固相合成产能的“多肽+寡核苷酸第二曲线”（独立公允价值160亿—190亿元）！至于<strong>高端制剂、剧毒ADC连接体、刚融完12.4亿元的上海凯莱英生物以及英国Sandwich海外基地（合计重置价值60亿—80亿元），在H股价格里完完全全是零元白送的免费期权（Free Option）</strong>！</p>
@@ -2348,7 +2633,7 @@
 </ul>
 <h5 id="2-ah">（2）四档实战分档击球操作锚点（精确到总市值与 A/H 股价区间）</h5>
 <p>为彻底杜绝“凭感觉追涨杀跌”，我们以 <strong>当前常态 Owner Earnings（15.0亿元）</strong> 与 <strong>达产稳态 Owner Earnings（21.0亿元）</strong> 为价值铁锚，设定以下四档硬核操作击球区（按总股本 <strong>3.6195亿股</strong>、超额净现金 <strong>48.0亿元</strong> 换算）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球分档梯度</th>
@@ -2398,7 +2683,7 @@
 <td style="text-align: left;"><strong>右侧分批止盈兑现</strong>：此时市场不仅把6.9万升多肽产能的利润按35倍以上PE打满，还开始为下一轮尚未落地的宏大叙事泡沫买单，真实内生回报率跌破3%，应克服贪婪分批锁定利润。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="3_9">（3）三条不可妥协的“基本面死刑证伪红线”（触发任一即无条件清仓认错）</h5><p>真正的买方纪律，是在买入第一股之前就写好“遗嘱”。无论股价跌得多便宜，一旦未来跟踪中出现以下三条可量化红线中的任何一条，说明凯莱英的核心投资逻辑已被证伪，必须无条件砍仓离场，绝不死扛摊平：</p><ol>
 <li>
 <p><strong>【红线一：地缘政治黑名单实质引爆红线】</strong>：美国白宫管理和预算办公室（OMB）或美国国防部在后续年度动态更新中，<strong>正式将凯莱英医药集团（Asymchem）列入 NDAA FY2026 第851节项下的“受关注生物技术公司（BCC）”正式黑名单或 1260H 清单，且导致公司连续两个季度新签欧美订单金额同比萎缩超 20%</strong>。一旦触发，说明“非1260H合规避风港”的核心逻辑破产，海外MNC长逻辑受损，必须果断离场。</p>
@@ -2513,7 +2798,7 @@
 <p><strong>我们的终极行动判词</strong>：绝不在 A 股脉冲大涨后追高付溢价；<strong>优先拿住折价近 25%、True EV 仅 17 倍远期稳态盈余的 H 股（06821.HK）作为左侧高赔率主战场</strong>，若 A 股随市场情绪回踩 <strong>120—130 元（对应总市值 430 亿—470 亿元）</strong> 击球区再行重锤加码！”</p>
 <hr/>
 <h3 id="_13">📋 四位投资大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名</th>
@@ -2553,7 +2838,7 @@
 <td style="text-align: left;"><strong>H 股：高赔率重锤击球区</strong><br/><em>(100—110港元为黄金满仓坑)</em><br/><strong>A 股：暂缓追涨，等待右侧缩量回踩 120—130 元区间</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>🏛️ <strong>【四位大师闭门圆桌终极裁决：3 票“H 股立即击球 / A 股等回踩”，1 票“H 股底仓收息排雷”】</strong>
 - <strong>生意定性共识</strong>：凯莱英绝非靠疫情彩票吃饭的普通化工代工厂，而是凭 <strong>“连续流化学 + 生物酶催化 + FDA 商业化批件锁死”</strong> 构建了近 48% 毛利率壁垒、手握 <strong>62.44 亿元净现金</strong>、且已凭 <strong>6.9 万升多肽产能与 16.73 亿美元在手订单</strong> 走出深 V 反转的全球顶尖技术型 CDMO 龙头。
@@ -2588,13 +2873,26 @@ ightarrow$ 【唯一需要严防的真软肋】</strong>：公司跨界搞的生
 <p>用买方最冷酷的拆骨算盘一敲：凯莱英账上躺着五十多亿随时可支配的超额现金，加上那个每年稳赚十几个亿、毛利率近五成的传统小分子印钞机（保守值两百五十亿以上），光这两样保底家底加起来就值三百亿人民币！现在看两地价格：A股刚因为回购利好急涨了一波到五百多亿市值，已经给多肽新业务预支了两百多亿估值；而<strong>比A股便宜四分之一、隐含总市值只有四百亿出头的港股（H股，06821.HK）</strong>，扣掉三百亿保底家底后，市场对它翻倍狂飙的多肽帝国、英国基地和大分子业务合在一起才要价不到一百亿！所以打法极其清晰：别去追急涨后的A股，直接把打折的港股作为主战场左侧建仓，拿着四个点以上的分红加回购护垫，白捡全球GLP-1减肥药商业化放量的大礼包。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2764,7 +3062,7 @@ ightarrow$ 【唯一需要严防的真软肋】</strong>：公司跨界搞的生
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《凯莱英_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/凯莱英_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《凯莱英 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/凯莱英 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2822,6 +3120,97 @@ ightarrow$ 【唯一需要严防的真软肋】</strong>：公司跨界搞的生
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

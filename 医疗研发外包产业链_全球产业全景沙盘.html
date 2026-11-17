@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
 <title>医疗研发外包产业链_全球产业全景沙盘</title>
 <style>
   @page {
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -603,7 +871,24 @@
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -617,7 +902,7 @@
 <h3 id="_3">【第一部分：产业链全景拆解与细分图谱——从“一个分子脑洞”到“药店里的救命药”是怎么一步步变成钱的？】</h3>
 <p>一款创新药从科学家脑子里的一个念头，到真正摆上医院药房货架，通常要经历 <strong>“药物发现（约 2—3 年） <span class="math-inline"> → </span> 临床前研究（约 1—2 年） <span class="math-inline"> → </span> 临床试验 I/II/III 期（约 3—7 年） <span class="math-inline"> → </span> 商业化大规模生产与销售（10—20 年专利收割期）”</strong> 四个漫长阶段。由于现代医药分工极细，没有哪家药企能自己养活全套人马，于是整条研发生产流水线被拆成了四大核心子赛道，并向上游延伸至“科研试剂、耗材、设备与实验动物”，向下游对接“创新药企（Biotech）与跨国大药厂（MNC）”。</p>
 <p>我们先用一张表，把医疗研发外包大板块下的<strong>五大核心子赛道版图</strong>与底层赚钱逻辑拆个底朝天：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">细分赛道名称</th>
@@ -664,7 +949,7 @@
 <td style="text-align: left;">看新药获批上市数量、医保谈判放量节奏与合规营销门槛</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>接下来，我们顺着<strong>“上游原料工具 <span class="math-inline"> → </span> 中游早期 CRO <span class="math-inline"> → </span> 中游临床 CRO <span class="math-inline"> → </span> 中后端 CDMO <span class="math-inline"> → </span> 下游药企客户”</strong>的物理流水线，用最接地气的大白话把每个环节的硬核工艺和行话彻底扒开：</p>
 <h4 id="1-nhp">1. 最上游：分子砌块、生物试剂、色谱填料与“实验猴（NHP）”——巧妇难为无米之炊</h4>
 <ul>
@@ -753,7 +1038,7 @@
 <h3 id="_4">【第二部分：全链条“利润池与定价权”分配表——谁在吃肉、谁在喝汤、谁在挨打？】</h3>
 <p>一条医疗研发外包产业链上下游有上百家上市公司，为什么有的公司常年毛利率超过 45%、净利率接近 30%、自由现金流哗哗流入，而有的公司干得最累，毛利率却跌破 20%、还要替困难药企背一屁股坏账？</p>
 <p>我们直接拉出<strong>《医疗研发外包全产业链各环节商业模式、利润池与话语权横评总表》</strong>，把四个维度的底裤一次性扒清：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">产业链环节与细分赛道</th>
@@ -806,7 +1091,7 @@
 <td style="text-align: left;">🦴 <strong>挨打苦力局（纯卖人头与垫资）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>从这张利润切分表里，我们能读出三条价值千金的买方铁律</strong>：</p><ol>
 <li>
 <p><strong>“CRDMO 漏斗模式（从 R 端早期发现一路喂养到 D 端工艺开发、再到 M 端商业化大生产）”是地球上最可怕的商业阳谋</strong>：为什么药明康德、药明生物和康龙化成要把看起来苦哈哈的早期化学合成（R 端，几千名博士硕士在通风橱前摇瓶子）做到全球第一？因为<strong>所有的参天大树都是从一粒种子长出来的！</strong> 当全球 60% 的早期新药分子从诞生的第一天起就在你的实验室里合成、测试，等它三年后进临床、八年后获批上市变成年销 50 亿美元的重磅药时，药企为了赶时间根本不会把生产转移给别人，而是顺理成章把几十亿元的商业化代工大单（M 端）直接留在你家里！这就叫<strong>“用前端海量小项目撒网蓄水，在后端商业化大池子里捕捞鲸鱼”</strong>。</p>
@@ -824,7 +1109,7 @@
 <h3 id="a">【第三部分：全球（A股 + 港股 + 海外巨头 + 未上市独角兽）四维玩家全景坐标图】</h3>
 <p>看医疗研发外包，如果只盯着 A 股那几家公司比市盈率，就像坐在井底看月亮。在这个年规模超过 <strong>2500 亿美元（其中全球 CRO 约 1300 亿美元、全球 CDMO 约 1200 亿美元）</strong> 的全球竞技场上，牌桌被清晰地划分为四大阵营。</p>
 <p>我们先拉出<strong>《全球医疗研发外包（CXO）四维玩家全景坐标速览表》</strong>，把海内外霸主、A/H 股核心力量与未上市独角兽一次性归位：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">产业链核心环节</th>
@@ -878,7 +1163,7 @@
 <td style="text-align: left;">• <strong>博格隆（Bio-Link）</strong>：国内生物制药层析介质与耗材隐形冠军<br/>• <strong>多宁生物</strong>：生物工艺一次性耗材与培养基准 IPO 巨头（药明系参股）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>盯着这张全球四维坐标图，任何买方投资者必须瞬间清醒地认识到三件大事</strong>：</p><ol>
 <li>
 <p><strong>千万别只看 A 股而漏掉港股的“两尊大神”</strong>：在中国 CXO 军团里，代表生物大分子最高制造水平的<strong>药明生物（2269.HK）</strong>和代表全球 ADC 偶联代工最高增速的<strong>药明合联（2268.HK）</strong>，以及代表 AI+机器人湿实验革命的<strong>晶泰科技（2228.HK）</strong>，全都<strong>不在 A 股上市，而在港股主板</strong>！如果只在 A 股里找生物药和 ADC 代工标的，你会错失真正的全球前二霸主，误把二三线跟风者当龙头。</p>
@@ -1010,7 +1295,7 @@
 <li><strong>大白话翻译【Dual Sourcing（双厂/双源供应链备份）】</strong>：就像苹果公司为了防止单一工厂断供，要求核心供应商既在中国大陆保留主力大厂，又在越南或印度建一个备用分厂。在医药代工里，跨国药企为了给董事会和美国监管层一个交代，与药明康德、药明生物签合同时会约定：前期高难度的工艺研发和主力原料药生产放在效率最高、成本最低的中国基地（如常州、无锡），同时把最后一步商业化原液或制剂灌装同步在同一个供应商的新加坡或爱尔兰基地做技术转移备案。<strong>这样订单既没有流出药明体系，又在法律产地标签上变成了“新加坡制造”或“欧盟制造”，完美化解地缘合规风险。</strong></li>
 </ul>
 <p>以下为 <strong>《2025—2027 年全球 CXO 重点新增/并购/剥离产能项目明细表》</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">国家/地区</th>
@@ -1095,7 +1380,7 @@
 <td style="text-align: left;"><strong>“China+1”声量大于实质</strong>：虽承接了部分早期化学 CRO 询单与传统仿制药 API，但<strong>受困于 FDA 数据完整性警告信频发、缺乏万升级多肽釜及基础精细化工原料高度依赖中国进口，无法承接核心新分子大单</strong>。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="vs_1">二、 全球与中国需求端真伪拆解：“新分子缺口 vs 传统产能出清”实算</h3>
 <p>为什么 2025—2026 年有的 CXO 企业（如通用型小分子仿制药 CRO、同质化细胞基因治疗 CDMO）还在亏损裁员、打五折价格战，而药明康德（2026 年前三季度营收 455.37亿元，+38.59%；归母净利润 193.98亿元，+60.64%；在手订单突破 767.4亿元）、药明合联（2026H1 服务订单同比暴增 50.4%）却创下历史新高？</p>
@@ -1205,7 +1490,7 @@
 </li>
 </ul>
 <p>我们来拉出 <strong>《跨国药企单品种跨国转厂（Tech Transfer）时间与资金真实损耗账本》</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">转厂核心阶段</th>
@@ -1252,7 +1537,7 @@
 <td style="text-align: left;"><strong>转厂完成后，欧美新厂的日常生产单价还要比中国永久性贵出 30%—60%，长年累月侵蚀药企毛利率。</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这张转厂账单拍在跨国药企 CEO 脸上，你就知道为什么没人真去干“存量管线硬脱钩”这种蠢事了——为了一张政治正确的选票支票，去花两三年时间、烧掉几千万美金做 PPQ 和 PAS 审批，还得冒着新药晚上市两年、少赚几十亿美金专利期暴利的风险？华尔街和医药巨头的精算师比猴子都精明，他们的真实策略早就明牌了：存量摇钱树管线死死抱紧中国药明们的常州和无锡大厂绝不折腾，新开立的管线则顺水推舟签给药明在新加坡和爱尔兰的新基地。政客赢了嘴炮，跨国药企保住了利润，中国 CXO 龙头顺势完成了全球化涨价扩产，只有被鬼故事吓得在地板价割肉的散户买单了所有的恐惧。</p></div></div>
 <hr/>
 <h2 id="i-b">阶段二·模块 I-B：中外技术/工艺代差显微镜 &amp; 全球成本曲线硬参数横评</h2>
@@ -1294,7 +1579,7 @@
 <hr/>
 <h3 id="cxo_1">二、 《中外 CXO 五大黄金环节硬参数与真实代差横评总表》</h3>
 <p>以下将全球各赛道<strong>海外天花板霸主</strong>（Lonza、Samsung Biologics、Bachem、IQVIA、Charles River、Schrödinger）与<strong>中国第一梯队领军者</strong>（药明康德、药明生物、药明合联、康龙化成、凯莱英、泰格医药、昭衍新药、晶泰科技）拉到同一张工程显微镜下逐项硬核对标（数据锚定 2026 年 Q3 最新工业界实测口径）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">黄金赛道与核心环节</th>
@@ -1363,7 +1648,7 @@
 <td style="text-align: left;"><strong>技术合规已追平，猴源成本中国具备战略护城河</strong><br/>中国头部安评中心在基因毒理、生殖毒理、CNS（中枢神经）给药技术上已追平 Charles River，且凭借广西/云南/广东自有猴场实现猴源自主可控。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把上面这张大表翻译成人话就是——<strong>做药的“铁匠活”和“精密总装活”（化学合成、多肽串珠子、ADC 挂弹头、养细胞吐蛋白），中国人靠着几万名不怕加班的化学博士和全套国产反应釜，已经把瑞士和美国同行卷得找不着北了；但做药的“总导演活”和“卖药情报网”（去美国医院找病人做三期临床、跟 FDA 官员吵架改方案、握着十几亿欧美病人的病历本），依然死死攥在艾昆纬（IQVIA）这种美国老钱手里。</strong> 按我和彼得·林奇的选股铁律，千万别去买那种还在讲“要在美国打败 IQVIA”故事的临床公司，要去买像药明康德 TIDES、药明合联、凯莱英这样，全球跨国药企就算咬碎牙齿也找不到替代产能的“超级卖铲人”！</p></div></div>
 <hr/>
 <h3 id="_8">三、 五大黄金环节底层代差深度解剖：谁在真领跑？谁在被卡脖子？</h3>
@@ -1412,7 +1697,7 @@
 <p>为什么美国国会部分政客吵了几年的《生物安全法案》，到了 2026 年全球 5000 多家 Biotech 和 Top 20 跨国药企依然排队把订单塞给药明康德、药明生物、药明合联和康龙化成？因为商业世界的终极铁律是<strong>物理学与经济学成本曲线</strong>。</p>
 <p>我们以国际新药研发最标准的 <strong>3 个核心交付包</strong> 为基准，将 <strong>中国头部 CXO</strong>、<strong>欧美本土 CXO（瑞士/美国）</strong>、<strong>韩国三星生物</strong> 与 <strong>印度头部 CXO（Syngene / Divi's / Sai Life）</strong> 的完全成本结构与隐性代价扒到底裤：</p>
 <h4 id="1-cxo">1. 全球四大 CXO 制造中心：三大标准研发/生产交付包硬成本与周期对标</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">标准交付包类型</th>
@@ -1449,11 +1734,11 @@
 <td style="text-align: left;"><strong>完全成本：100 万—150 万美元/批</strong><br/><strong>单克抗体成本：80—130 美元/克</strong><br/>（滴度偏低 3—5g/L，耗材全进口且电力不稳）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2-100-30">2. 完全成本结构 100% 拆解表：为什么印度人工比中国便宜 30%，综合成本反而输给中国？</h4>
 <p>若将欧美本土 CXO 的综合交付成本设定为基准值 <strong><code>100</code></strong>，四大区域在四大核心成本维度的真实权重拆解如下：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">成本构成维度</th>
@@ -1506,7 +1791,7 @@
 <td style="text-align: left;"><strong>结论：中国 = 德国的工程师质量 + 深圳的供应链速度 + 欧美一半的价格</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3-cxo">3. 深度算清两笔真账：为什么印度抢不走高端局？为什么中国 CXO 能同时做到“又快、又好、又便宜”？</h4><h5 id="30-cdmo">第一笔账：撕开“印度替代论”的皇帝新装——为什么工资比中国便宜 30% 的印度同行，在高端新药 CDMO 上屡屡折戟？</h5><p>2024—2025 年地缘政治升温期间，不少欧美 Biotech 曾试图把复杂小分子、ADC 和多肽订单转往印度的 <strong>Syngene、Sai Life Sciences、Divi's Laboratories</strong> 或 <strong>Piramal</strong>，但到了 2025 下半年至 2026 年，大量订单又悄悄回流药明康德、康龙化成与凯莱英。核心原因在于印度撞上了<strong>三道无解的产业铁墙</strong>：</p><ol>
 <li>
@@ -1545,7 +1830,7 @@
 <hr/>
 <h3 id="16">一、 《全球医疗研发外包 16 大核心玩家全景矩阵总表》</h3>
 <p>以下 16 家核心标杆企业（外加关键对标副牌）构成了 2026 年全球新药研发与生产外包产业链的骨架。看表时请重点盯住两个指标：<strong>一是“海外美元/欧元订单纯度”</strong>（决定了它是赚跨国药企的高毛利硬通货，还是在国内红海里卷低价）；<strong>二是“新分子（多肽 TIDES / 偶联药 ADC）产能占比”</strong>（决定了它未来三年的引擎转速）。</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">阵营分类</th>
@@ -1712,7 +1997,7 @@
 <td style="text-align: left;">本质上更偏向“用 AI 武装的超级 Biotech（靠卖管线收首付款和里程碑赚钱）”，而非旱涝保收的传统卖铲人 CXO；一旦核心自研临床管线二三期读出不及预期，估值逻辑会遭遇剧烈重估</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看着上面这张 16 强生死簿，普通散户最容易犯的傻病就是觉得“名字里带医药外包的都是一家人”。用大白话给你翻译一下：药明康德、药明合联和三星生物干的是<strong>“给跨国军火商造洲际导弹核心部件”</strong>的垄断买卖，客户转换成本高得像换心脏；而那些没海外 GMP 牌照、全靠给国内快断粮的小药企垫资做实验的二三线 CRO，干的根本是<strong>“借钱给赌徒买彩票”</strong>的苦差事！查理·芒格早就警告过：永远要买那个在淘金热里垄断了防爆铁锹专利、而且只收美元现钞的杂货铺老板，千万别去碰那个满手白条、还跟客户对赌矿井能不能挖出金子的苦力包工头！</p></div></div>
 <hr/>
 <h3 id="_9">二、 四维市场深度拆解与“房间里的大象”盘点</h3>
@@ -1971,7 +2256,7 @@
 </ol>
 <h4 id="3-50-ah">3. 第三层筛网：看赔率与跨市场错配——全球同业 50% 折价与 A/H 套利金矿</h4>
 <p>哪怕找到了全世界最优秀的公司，如果买在 2021 年 100 倍市盈率（PE）的泡沫之巅，依然难逃惨烈亏损。而在 2026 年 11 月的今天，第三层筛网为我们揭示了全球医药资本市场最罕见的<strong>“三维估值错配”</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -2012,7 +2297,7 @@
 <td style="text-align: left;"><strong>港股通与外资回流背景下，H 股具备更高安全边际与弹性</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把全世界的生意摆在一起看，瑞士的龙沙（Lonza）每年增长百分之十几，华尔街心甘情愿给它 35 倍市盈率；而中国的药明康德拿着全球最顶尖的多肽和化学漏斗，2026 年前三季度利润暴涨 60%，手握 767 亿订单，市场先生却因为两年前被政客的麦克风吓破了胆，只给它 15 倍出头的市盈率！这就好比两家紧挨着的顶级印钞厂，东边那家印钞速度比西边快两倍、机器更新、工人更勤奋，结果东边印钞厂的股权卖得比西边便宜一半还多。当恐惧的迷雾散去而现金流像瀑布一样砸下来时，你不去捡这种明摆着的错配筹码，难道还要等它重回 80 倍市盈率再去跟风当傻瓜吗？</p></div></div>
 <hr/>
 <h3 id="2026-cxo">🎙️ 二、四位传奇大师产业闭门圆桌会：2026 年底，我们该如何给全球 CXO 资产定价？</h3>
@@ -2053,7 +2338,7 @@
 <h3 id="deep-stock-research-3">🚀 三、【无缝接力清单】：下一步最值得送入 <code>deep-stock-research</code> 做单公司深度解剖的 3 家皇冠标的</h3>
 <p>经过买方三层选股漏斗的严苛过滤与四位大师的闭门圆桌票决，我们从全球及 A/H 股上百家医药外包企业中，为您精选出<strong>当下基本面最硬核、护城河最深厚、赔率最诱人的 TOP 3 皇冠级标的</strong>（并在第二、第三席位提供同梯队黄金备选对标）。您可以随时点名其中任意一家，无缝唤醒 <strong><code>deep-stock-research</code>（上市公司全模块深度投研技能）</strong> 进行单公司拆骨级精算：</p>
 <h4 id="cxo_3">《医疗研发外包（CXO）产业皇冠标的 &amp; 下一步个股深挖推荐表》</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: center;">推荐顺位</th>
@@ -2086,7 +2371,7 @@
 <td style="text-align: left;"><strong>拷问 1（前期重资产投入的利润率释放弹性）</strong>：过去三年大举并购英美基地及投入大分子、细胞基因治疗（CGT）与国内商业化工厂所产生的高额折旧与亏损包袱，在 2026—2028 年随着 CDMO 新签订单（+40%）交付，能否推动集团净利率重回 20% 以上的历史巅峰？<br><strong>拷问 2（实验室服务护城河与真实自由现金流）</strong>：在生物科学（Bioscience）与药物发现环节与药明康德贴身肉搏的过程中，其人均创收与实验猴/安评资产减值风险是否已彻底出清？扣除维护性资本开支后的真实股东盈余（Owner Earnings）对应当前 A/H 股市值的真实回报率是多少？</br></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <blockquote>
 <p>💡 <strong>【下一步行动·无缝接力指南】</strong>
@@ -2112,13 +2397,26 @@
 <p>买方打法严守“买大不买小、买后不买前、买新分子不买老砌块”铁律，拉黑无海外牌照和多肽偶联产能的小票，只盯三张王牌：拿药明康德当压舱石（十五倍出头市盈率配高增长与百亿分红回购），拿药明合联或药明生物当进攻矛（吃透ADC与大分子主升浪），拿康龙化成或凯莱英做反转配置。当前寡头基本面已创历史新高，估值却停在十五到十八倍半山腰，正是下行有订单分红封底、上行享戴维斯双击的黄金击球区。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2346,6 +2644,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>中国海油_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>中国海油 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">中国海油_全模块深度投研全集</div>
+    <div class="report-title">中国海油 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -664,7 +949,7 @@
 <p>研究采掘资源型企业，一切花哨的故事都得让位于三条生死硬指标：<strong>① 桶油完全成本与现金作业成本（决定寒冬谁先死）；② 证实储量寿命 R/P（决定家里还有多少粮）；③ 储量替代率 RRR（决定每年新找的油能不能补上挖掉的油）。</strong></p>
 <p>我们把中国海油拉到国内两大巨头（中国石油、中国石化）以及国际四大参照系（全球深水低成本标杆巴西国油 Petrobras、圭亚那合伙人埃克森美孚 ExxonMobil、纯上游标杆康菲石油 ConocoPhillips、雪佛龙 Chevron）面前，基于<strong>2025年经审计年报与2026年三季报最新法定数据</strong>做一场真刀真枪的硬核比拼：</p>
 <h3 id="2025-2026q3">核心经营指标与成本结构全球同行横向对质表（2025年报完整基准 + 2026Q3最新实绩）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心比拼维度</th>
@@ -789,7 +1074,7 @@
 <td style="text-align: left;">净利率约9% / ROE约11.5%（受并购商誉摊销及下游拖累）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>仔细看这张表里的最后一行数字：中石化卖2.2万亿营收才赚390亿（净利率1.8%），中海油卖3,556亿营收就净赚1,191亿（净利率33.52%）！更滑稽的是，雪佛龙和埃克森美孚为了补储量，不得不掏五六百亿美元去高溢价买同行，而中海油分文不花搞外延并购，纯靠自己在海底打井就把证实储量干到了77.7亿桶历史新高。好生意和苦命生意摆在一张表上，连瞎子都能摸出高低。</p></div></div>
 <hr/>
 <h3 id="_4">深度拆解：为什么海里采油明明工程难度极高，中国海油的成本反而比陆地采油低得多？</h3>
@@ -856,7 +1141,7 @@
 </ul>
 <h3 id="2-20192022-vs-20252026">2. “翻旧账对表”言行一致性审计（2019—2022年军令状 vs 2025年报/2026三季报实际交卷）</h3>
 <p>我们直接翻出公司<strong>2019年“七年行动计划”、2022年A股招股书及历年战略指引</strong>中白纸黑字写下的目标，与2025年报及2026年三季报的真实答卷逐一对质：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">3—6年前年报/招股书承诺事项</th>
@@ -897,7 +1182,7 @@
 <td style="text-align: left;"><strong>诚意拉满</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="3_1">3. 常规治理体检与关联交易排查</h3>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
@@ -948,7 +1233,7 @@
 </ul>
 <h3 id="3-20212025-2026">3. 五年一期（2021—2025年报 + 2026三季报）现金流硬账本与“防合并报表幻觉”穿透</h3>
 <p>我们严格调取中国海油 <strong>2021—2025年五个完整会计年度经审计年报 + 2026年1—9月三季报</strong>（中国企业会计准则合并现金流量表口径，单位统一为<strong>人民币亿元</strong>）列示如下：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -1043,7 +1328,7 @@
 <td style="text-align: center;"><strong>1.70倍</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注1：上表CapEx严格采用合并现金流量表“购建固定资产、无形资产和其他长期资产支付的现金”口径；2025年权责发生制油气资本支出为1,188.29亿元，按此扣减2025年自由现金流亦高达+902.13亿元。注2：2026年1—9月权责发生制资本支出合计为898.99亿元，按此扣减2026年前三季度自由现金流亦高达+1,096.87亿元。此外，即便回溯2020年41.8美元负油价寒冬，公司当年OCF 823.38亿元减去CapEx 730.88亿元后仍录得+92.50亿元正自由现金流。)</em></p><p>这张跨越2021—2026Q3的现金流硬账本揭示了三个震撼的事实：</p><ol>
 <li>
 <p><strong>油价跌14.6%而自由现金流分毫未损的“成本护城河”</strong>：对比2024年与2025年——2025年布伦特油价同比下跌14.6%，归母净利润虽同比回落11.5%至1,220.82亿元，但由于新项目陆续建成使资本性投资支付现金同比下降9.6%至1,115.55亿元，<strong>2025年全年自由现金流高达974.87亿元，与2024年的975.32亿元几乎完全持平</strong>！</p>
@@ -1271,7 +1556,7 @@
 <h3 id="_12">一、 算清单位经济账：四大标杆工程微创解剖与同行横向对比</h3>
 <h4 id="1_2">1. 核心扩产项目单位产能投资与经济账横向对比总表</h4>
 <p>为直观呈现中国海油海内外重点工程与全球同行同类项目的成本身位，我们将核心参数统一换算为国际通用的工程经济指标（汇率按 1 美元兑 7.15 元人民币折算，天然气按 6,000 立方英尺或约 170 立方米折算 1 桶油当量 BOE）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目集群 / 对标参照</th>
@@ -1397,7 +1682,7 @@
 <td style="text-align: left;"><strong>40—50 美元/桶</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看懂这张表你就明白什么叫“老天爷赏饭吃”——陆上衰老油田抽十桶水才出一桶油，北美页岩油商更是像踩着永不停歇的跑步机，每年打几百口井、次年产量腰斩，油价没个60美元连本都回不来；而中海油在圭亚那和巴西海底插十几根管子，油自己噗噗往外冒，28美元就能赚钱。跟地质条件作对的人最后都破产了，聪明人只去鱼最多的池塘下网。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_3">2. 四大核心工程单点微创解剖：为什么中国海油的钱花得比同行“省”？</h4><p>从上表可以清晰看出，中国海油在建及 2025—2026 年新投产项目的单位日产能投资普遍控制在 <strong>28,000—55,000 美元/桶日产能</strong>，单桶开发 F&amp;D 折耗控制在 <strong>9.5—16.5 美元/桶</strong>，完全成本盈亏平衡油价锁死在 <strong>25—35 美元/桶</strong>，显著优于陆上超深层油气、北美页岩油及欧美传统深水项目。这背后的工程与地质账本逻辑如下：</p><h5 id="1-stabroek-fpso">（1）圭亚那 Stabroek 区块与巴西盐下超深水：卡位全球地质禀赋最顶尖的“超级甜点”与 FPSO 标准化复制</h5><ul>
@@ -1579,7 +1864,7 @@
 <hr/>
 <h3 id="_15">一、 商业化刻度定位：剥离宣传光环，拿真实装机、产量与单位经济账说话</h3>
 <h4 id="1-2026q3">1. 中国海油新业务商业化刻度与经济账证伪对比总表（更新至 2026Q3）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">新业务细分赛道</th>
@@ -1638,7 +1923,7 @@
 <td style="text-align: left;">井口完全成本约 1.15—1.35元/方，销售实现气价 1.90—2.25元/方，叠加财政奖补（约0.2—0.35元/方），<strong>项目 IRR 达 12%—16%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把宣传册上的漂亮形容词全撕掉，拉张Excel表一算就原形毕露了：花150多亿建个1.5GW的巨型海上风电场，吭哧吭哧吹一年海风赚到的4亿利润，还不够中海油的抽油机转一天赚得多！好管理层心里门儿清，哪些是给市长和环保局看的“门票工程”，哪些才是真正往股东口袋里塞钱的硬家伙。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_4">2. 逐项剥皮：为什么说有些是“赔本赚吆喝”，有些是“隐形印钞机”？</h4><h5 id="1725mw-2026-8-16mw">（1）从“海油观澜号（7.25MW 半潜式）”到 2026 年 8 月并网的“海油安澜号（16MW 张力腿型）”：算清浮式风电的真实账本</h5><ul>
@@ -1764,7 +2049,7 @@
 <p>我们直接调取各家经审计的 <strong>《2024年年度报告》</strong>、<strong>《2025年年度报告》（经安永等审计）</strong> 以及最新发布的 <strong>《2026年第三季度报告》（截至2026年9月30日）</strong> 底层官方财务与附注数据做三方对质。横跨 <strong>“2025年油价下跌逆风期（布伦特均价68.2美元/桶，同比-14.6%）”</strong> 与 <strong>“2026年前三季度油价冲高顺风期（布伦特均价88.86美元/桶，同比+27.1%）”</strong> 一整轮完整牛熊周期，油气产业链上真实的量价弹性、成本底牌与上下游利润分配格局一目了然。</p>
 <hr/>
 <h3 id="20242025-202619">一、 同行与上下游核心经营及财务对质大表（2024—2025全年 + 2026年1—9月三季报 + 最新估值对标）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对质维度</th>
@@ -1886,7 +2171,7 @@
 <td style="text-align: left;">总资产 <code>493.03亿元</code>，归母净资产 <code>294.40亿元</code>；轻有息负债、场地与海工船舶运营</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看这张表吧，中石化和中石油脖子底下挂着几万座加油站和重资产炼化厂，就像穿着铅鞋在泥潭里游泳——中石化2.2万亿营收才赚出1.8%的净利率；而中国海油只干“从海底抽油收钞票”这一件事，净利率高达33.52%，账上现金比全部有息负债还多出2,696亿元，这简直是把印钞机建在了防弹金库里！</p></div></div>
 <hr/>
 <h3 id="20252026">二、 景气度与量价交叉审讯：横跨2025跌价逆风与2026涨价顺风，为什么中国海油永远是基本面阿尔法之王？</h3>
@@ -2058,7 +2343,7 @@
 <p>我们拿放大镜直接钻进安永审计的 <strong>《2025年年度报告》</strong> 与最新发布的 <strong>《2026年第三季度报告》（截至2026年9月30日）</strong> 财务报表及专项审计说明深处，并与中国石油、中国石化做逐项会计政策与治理细节对质。</p>
 <hr/>
 <h3 id="2025-2026">一、 同行核心会计政策、关键估计与治理细节横向对质大表（基于2025年报 &amp; 2026年三季报）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计与治理维度</th>
@@ -2133,7 +2418,7 @@
 <td style="text-align: left;"><strong>中海油人均创利是中石油的 13.0倍、中石化的 62.9倍！</strong> 全球油气工业史上人效最高、组织最精悍的现金流机器</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我这辈子见过太多用“完全成本法”把打废了的枯井当宝贝挂在账上骗人的油气骗子；而中海油不仅把153.65亿勘探干井费当期一笔勾销，连A股和港股两套准则编出来的报表都一分钱不差，这种会计上的强迫症，才配得上我们把身家性命托付给它。</p></div></div>
 <hr/>
 <h3 id="_19">二、 资产质量与核心会计估计排雷（五大敏感科目逐一穿透）</h3>
@@ -2299,7 +2584,7 @@
 <p>从2025年报与2026年三季报的实际执行结果看，新老核心管理层交接期间，公司“增储上产、严控桶油成本、兑现45%以上高分红”的三大铁律零摇摆——2025年全年股息支付率精准兑现 <strong>45.0%</strong>（每股派息1.28港元），2026年中期股息更是同比大增 <strong>+28.8%</strong> 至 <strong>每股0.94港元</strong>（折合A股每股0.81324元人民币，总额385.58亿元已于2026年10月派发完毕）。</p>
 <h4 id="2-5120212025-2026-ttm">2. 完整“5+1期”（2021—2025经审计年报 + 2026三季报 + 滚动TTM）现金流与分红闭环总表</h4>
 <p>我们严格调取中国海油 <strong>2021—2025年五个完整会计年度经安永审计年报 + 2026年1—9月三季报 + 滚动TTM（2025Q4+2026Q1-Q3）</strong> 合并报表硬数据（单位：<strong>人民币亿元</strong>）列示如下：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -2412,7 +2697,7 @@
 <td style="text-align: center;"><strong>承诺25-27年派息率≥45%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：上表2021—2025年OCF及现金流口径CapEx严格统一采用2022—2025年报经重述后的中国企业会计准则合并现金流量表法定终值，与前文【第五部分】100%对齐；其中2021年准则重述前原始值为营收2,461.12亿元、OCF 1,439.92亿元、现金流CapEx 831.71亿元、FCF +608.21亿元；2022年港股摘要简表近似值为OCF 2,056.06亿元、工程支付口径927.32亿元。五年一期（2021—2026Q3）累计创造合并自由现金流达 <code>4,601.63 + 1,178.87 = 5,780.50亿元</code>，因公司归母股东权益占比高达99.71%、少数股东损益占比仅0.075%，合并FCF与归母FCF近乎完全等价。)</em></p><p>这张“5+1期”闭环硬账本直接揭示了三个铁一般的事实：</p><ol>
 <li>
 <p><strong>2025年“68美元油价实战大考”证明了极致的盈利韧性</strong>：2025年国际布伦特均价同比下跌14.6%至 <strong>68.2美元/桶</strong>（实现油价66.47美元/桶），但中国海油靠着净产量逆势增长7.0%至 <strong>777.3百万桶油当量</strong>、桶油主要成本压降至 <strong>27.90美元/桶</strong>（其中桶油作业费降至 <strong>7.46美元/桶</strong>，国内低至 <strong>6.75美元/桶</strong>），全年依然稳稳赚取 <strong>1,220.82亿元归母净利润（扣非1,203.79亿元，ROE达15.64%）</strong>，经营现金流净额高达 <strong>2,090.42亿元</strong>，扣除1,115.55亿元现金资本开支后，<strong>自由现金流净额达 +974.87亿元</strong>，与2024年80美元油价时的自由现金流（975.32亿元）分毫不差！</p>
@@ -2531,7 +2816,7 @@
 <hr/>
 <h3 id="600938sh-00883hkowner-earnings">中国海油（600938.SH / 00883.HK）常态真实所有者盈余（Owner Earnings）三档标尺完整还原表</h3>
 <p>我们将 <strong>标尺一：当期高景气实绩（2026滚动TTM / 26Q1-Q3 布伦特88.86美元）</strong>、<strong>标尺二：85折新常态主锚（布伦特75美元，区间70—80美元，模块F核心估值锚）</strong> 与 <strong>标尺三：低油价实测及苛刻寒冬底线（2025年报68.2美元实绩 / 55美元寒冬）</strong> 并列还原如下（单位：<strong>人民币亿元</strong>）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">还原步骤与核心科目</th>
@@ -2632,14 +2917,14 @@
 <td style="text-align: left;"><strong>Owner Earnings比账面FCF高出约350亿元，源于主动扩产投入</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：即便我们将油价假设压低到 <strong>65—70美元/桶的2025年报实景水平</strong>，公司经审计OCF为2,090.42亿元，扣除735亿元维持性CapEx与45亿元弃置流出后，<strong>保守底线下的真实所有者盈余 Owner Earnings 依然高达 1,310.42 亿元/年</strong>；若按 <strong>标尺三（55美元中度寒冬 / 45美元极端冰河期）</strong> 测算，常态归母 Owner Earnings 亦高达 <strong>870.00亿元 / 560.00亿元</strong>！而在 <strong>标尺二（75美元85折新常态主锚，70—80美元区间）</strong> 下，<strong>常态归母所有者盈余高达 1,350亿—1,550亿元/年（中枢 1,450.00亿元/年；模块F完整桥接合并无杠杆 Firm OE 为 1,440.00亿元/年）</strong>！)</em></p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街那帮只会按计算器的书呆子，总把“维持饭碗不得不花的保命钱”和“多打新井抢地盘的扩张钱”混为一谈。中海油每年只花750亿就能让7.8亿桶产量和10年储量万年长青，剩下多砸出去的400多亿是在给你买明天的印钞机——把这笔钱当成费用扣掉，就像把买新金矿的钱算成当期亏损一样愚蠢！</p></div></div></div></div>
 
 <hr/>
 <h3 id="20262027">三、 增量垫高测算：2026—2027 在建工程转固后，稳态造血底盘还将如何跃升？</h3>
 <p>翻开《2026年第三季度报告》资产负债表，截至2026年9月30日，中国海油账面<strong>在建工程余额进一步攀升至 <code>1,687.56亿元</code></strong>（较2025年末的1,509.13亿元再增178.43亿元），同时<strong>油气资产净值达 <code>5,010.55亿元</code></strong>。</p>
 <p>在2025年顺利投产16个新项目、2026年前三季度又投产9个新项目（包括第三季度刚投产的<strong>渤中26-6油田开发项目二期</strong>、<strong>番禺10-4油田开发项目</strong>等）的基础上，2026年底至2027年还有四大高毛利王牌增量正在集中释放：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心在建与爬坡增量集群</th>
@@ -2686,7 +2971,7 @@
 <td style="text-align: center;"><strong>+115.0 ~ +155.0亿元/年</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>增量垫高结论</strong>：随着账上1,687.56亿元在建工程在2026—2027年全面转固达产，一方面公司稳态年净产量将迈上 <strong>8.3亿—8.5亿桶油当量</strong> 新台阶，将常态 Owner Earnings 从1,450亿元再往上垫高 <strong>115亿—155亿元/年（达产稳态中枢 <code>1,580亿元/年</code>）</strong>；另一方面，当这一轮产能跃升完成后，每年400亿—450亿元的扩张性CapEx将自然回落，<strong>账面自由现金流（FCF）将全面向 1,500亿—1,650亿元/年 的真实所有者盈余收敛爆发</strong>！</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>躺在账上的1,688亿在建工程可不是什么需要烧钱研发的PPT概念，而是圭亚那和渤海海底已经打好孔、正等着拧开阀门喷油的现成油井。等明后年这批大工程全部转固收钱、资本开支峰值一过，账面自由现金流就会像解开绳子的猎犬一样直接冲向1,500亿以上。</p></div></div></div></div>
 
 <hr/>
@@ -2716,7 +3001,7 @@
 </ol>
 <p>我们基于当前 <strong>7.80亿—7.90亿桶油当量</strong> 产能底盘，列示从 <strong>标尺一（88.86美元高景气实绩） → 标尺二（75美元85折新常态主锚） → 2025年报实绩（68.2美元） → 标尺三（55美元中度寒冬 &amp; 45美元极端冰河期）</strong> 的五档全景压力测试表：</p>
 <h4 id="785">中国海油五档油价情景下的成本、利润、现金流与分红覆盖全景压力测试表（7.85亿桶产能基准）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心压力测试指标</th>
@@ -2838,7 +3123,7 @@
 <td style="text-align: left;"><strong>当期FCF 100%覆盖分红（归母权益占比99.71%无跨层级漏损）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>压力测试终极定论</strong>：</p><ul>
 <li>
 <p><strong>在55美元/桶中度寒冬下</strong>：特别收益金归零+资源税与油服降价将桶油主要成本压至 <strong>25.85美元/桶（当期付现成本仅11.65美元/桶）</strong>，公司全年仍赚 <strong>840亿元归母净利</strong>、产生 <strong>1,630亿元模型内生经营现金流（净利840亿+归母DD&amp;A 790亿）</strong>，扣减710亿元维持性CapEx与50亿元弃置调节后<strong>归母 Owner Earnings 仍达 870亿元</strong>；哪怕照常投入1,120亿元全额资本开支，<strong>账面自由现金流仍净剩 +510亿元</strong>，轻松覆盖45%承诺派息率所需的 <strong>378亿元分红</strong>（覆盖率达1.35倍）！</p>
@@ -2980,7 +3265,7 @@
 <hr/>
 <h3 id="600938sh-00883hk2026q3-true-ev">中国海油（600938.SH / 00883.HK）2026Q3 真实企业价值（True EV）三维双口径重构总表</h3>
 <p>（数据基准：2026年9月30日三季报资产负债表 + 2026年11月9日收盘市值，单位：<strong>人民币亿元</strong>）</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">资产负债表重构项与核心估值倍数</th>
@@ -3076,7 +3361,7 @@
 <td style="text-align: left;"><strong>连未来三十年海底拆平台费都全额预扣后的终极买断总价</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我这辈子见过不少现金奶牛，但像这样账上趴着3,363亿现金、先把刚宣告的386亿中期分红扣掉、再把667亿有息债全还清、甚至把未来三十年后才要花的1,210亿海底拆平台费今天一分不少全预扣光，口袋里居然还能多出627亿纯现金的公司，简直硬得像块防弹钢板！你去买它的股票，还没进门老板先倒贴你几百亿净现金。</p></div></div>
 <hr/>
 <h3 id="firm-oe-reverse-sotp">二、 巴菲特所有者盈余回报率（含合并无杠杆 Firm OE 完整桥接）、股息率验算与 Reverse SOTP（逆向拆骨定价）</h3>
@@ -3112,7 +3397,7 @@
 <hr/>
 <h4 id="2-true-ev">2. 严苛/常规 True EV 倍数、真实内生现金流回报率与即期/前瞻股息率全景对表</h4>
 <p>我们将 <strong>合并无杠杆 Unlevered Firm OE（主口径 <code>1,440.00亿元/年</code>，区间 <code>1,340~1,540亿元</code>）</strong> 与 <strong>归母含息 Equity OE（对照口径 <code>1,450.00亿元/年</code>，区间 <code>1,350~1,550亿元</code>）</strong> 双轨并列，同时严格按同一汇率基准（<code>1港元 = 0.916元人民币</code>，475.30亿股）核算 <strong>2025年静态已兑现股息率</strong>、<strong>2026年已执行注销回购率</strong> 与 <strong>2026E前瞻股息率</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心估值与内生回报率指标</th>
@@ -3194,7 +3479,7 @@
 <td style="text-align: left;">已派中期0.94港元+预期末期0.66~0.81港元（按同一0.916汇率严密折算）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>哪怕用最苛刻的尺子把未来三十年的拆平台费全算作今天的债、再把账上2,558亿超额现金躺赚的27亿存款利息从分子里扣干净，买A股也只要9.8年回本、每年稳拿10.18%的真实自由现金流回报；要是去港股买，更是只要6.63年就回本、内生回报率高达15.09%、每年收着7%左右的现金股息！在低利率时代放着年化15%现金回报的深水印钞机不买，跑去追50倍市盈率的题材垃圾，简直是金融界的集体自杀。</p></div></div>
 <hr/>
 <h4 id="3-reverse-sotp-ev">3. Reverse SOTP（逆向分部拆骨定价）：在合并分部 EV 与归母股权双口径下，市场给“圭亚那+巴西世纪深水资产”出了多少钱？</h4>
@@ -3230,7 +3515,7 @@
 </li>
 </ol>
 <h4 id="reverse-sotp-ev">Reverse SOTP 逆向拆骨定价双口径对比总表（合并分部 EV 主口径 &amp; 归母股权市值对照口径）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">资产包拆解与残差倒推 (单位：人民币亿元)</th>
@@ -3291,7 +3576,7 @@
 <td style="text-align: center;"><strong>隐含长期油价仅 51~53美元/桶</strong> <em>(深度错杀)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>拆骨倒推的核心结论</strong>：</p><ul>
 <li>
 <p><strong>在港股（00883.HK @ 23.36港元，严苛合并 True EV 9,543.64亿元 / 常规合并 True EV 8,304.67亿元）与 A+H 实际合并口径下</strong>：</p>
@@ -3312,7 +3597,7 @@
 <hr/>
 <h3 id="_23">三、 全球同行估值坐标、分档击球区与“三条基本面死刑证伪红线”</h3>
 <h4 id="1-202611">1. 全球油气巨头估值与回报率横向对质表（截至2026年11月最新基准）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">全球油气巨头对标</th>
@@ -3425,7 +3710,7 @@
 <td style="text-align: left;">净负债约 160 亿美元</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>横向估值定性判断</strong>：
 对比埃克森美孚、雪佛龙、康菲石油（PE普遍在12.5—14.6倍，PB在1.8—2.1倍，股息率仅3.2%—4.2%，且背负百亿美元净债务），中国海油拥有更低的桶油成本、更高的内生储量替代率（77.7亿桶证实储量）、更高的ROE（15.6%—18.5%）和高达1,865.68亿元的常规净现金，但 <strong>A股（31.07元）动态PE仅 9.85倍、PB 1.74倍、严苛合并EV/Firm OE 9.82倍、预期股息率达 4.72%—5.16%，处于“合理偏保守（具备坚实配置价值）”区间</strong>；而 <strong>港股（23.36港元）动态PE仅 6.78倍、PB 1.20倍、严苛合并EV/Firm OE 6.63倍、预期股息率高达 6.85%—7.49%，处于“极端低估折价（黄金击球区）”</strong>！</p>
 <hr/>
@@ -3591,7 +3876,7 @@
 </ol>
 <hr/>
 <h2 id="_24">📋 五、 四大买方流派闭门投票与终极裁决总表</h2>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">买方投资流派代表</th>
@@ -3631,7 +3916,7 @@
 <td style="text-align: left;"><strong>【港股：直接重仓做多主升浪（吃 15% 内生回报 + 7% 股息 + 估值修复）】</strong><br/><strong>【A股：右侧趋势底仓持有，回调至 28—29 元果断加码】</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>四拨人吵了一下午，结论其实用脚趾头都能想明白：同一头每天产 217 万桶奶、兜里还揣着 3,363 亿现金的超级奶牛，在陆家嘴卖 31 块钱人民币，在香港中环只卖 23 块多港币（折合 21 块 4 毛人民币）。要是你有港股通账户却偏要去买贵了 45% 的那一份，那你一定是在跟自己的钱包赌气；要是你只能买 A 股，那就趁每次华尔街原油交易员哭爹喊娘砸油价的时候，笑眯眯地把带血的筹码捡进篮子里！</p></div></div>
 <hr/>
 <h1 id="h-5">【模块 H：🎭 5分钟脱口秀复盘 &amp; 极简买方口袋卡（专治阅读疲劳的收尾彩蛋章）】</h1>
@@ -3777,13 +4062,26 @@
 <p>中海油在港股的定价是价值投资的教科书。用拆骨法算账：在港股扣掉净现金后，买下整家中海油只要八九千亿人民币，光靠国内渤海、南海存量油田和常规海外油田就完全值回票价，这意味着在国际并购市场上价值三千两百多亿人民币的圭亚那和巴西世纪深水油田，香港市场是按“零元到一折”白送给你的，同时每年发六个点以上股息！实战底线极其干脆：首选折价近三成、回本年限仅六个多年的港股（二十三港元左右）重锤建仓锁仓收租；A股（三十一元左右）作为稳健底仓拿着，一旦油价阶段性跌破七十美元把A股带回二十六到二十八元区间，就是闭眼加满的黄金坑。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3953,7 +4251,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《中国海油_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国海油_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《中国海油 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国海油 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4011,6 +4309,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>淮北矿业_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>淮北矿业 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">淮北矿业_全模块深度投研全集</div>
+    <div class="report-title">淮北矿业 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -686,7 +971,7 @@
 <h3 id="_4">【第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）】</h3>
 <p>在A股炼焦煤赛道中，真正的全国性巨头共有三家：<strong>山西焦煤（000983.SZ，全国最大主焦煤基地）</strong>、<strong>平煤股份（601666.SH，中南地区焦煤龙头，主产1/3焦煤与主焦煤）</strong>与<strong>淮北矿业（600985.SH，华东焦煤与煤化一体化龙头）</strong>。我们将三家公司截至<strong>2025年年报及2026年三季报</strong>的真实经营底牌拉到同一张桌面上做硬核比拼：</p>
 <h4 id="1-2025-2026">1. 国内三大炼焦煤龙头核心硬指标横向对质表（2025年报 &amp; 2026年三季报）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心对比维度</th>
@@ -761,7 +1046,7 @@
 <td style="text-align: left;">淮北矿业凭借信湖复产+长协提涨，展现出全行业最强的盈利修复斜率</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2_1">2. 成本曲线分位与工艺壁垒拆解：为什么淮北矿业能在华东深井开采中压住成本？</h4><p>懂煤炭产业的人都知道，安徽两淮矿区（淮北、淮南）地质构造极其复杂，断层多、瓦斯压力大、奥陶系灰岩承压水害严重（信湖煤矿2023年底出水即是典型案例），天然开采难度远高于山西近水平中厚煤层和陕蒙露天/浅埋深矿井。那么，为什么同为深井高瓦斯矿区，<strong>淮北矿业2026年前三季度的吨煤销售成本（<code>505.47元/吨</code>）能比河南平煤股份（<code>707.00元/吨</code>）整整低出<code>201.53元/吨</code>（2026Q3单季更是以<code>540元/吨</code>成本斩获<code>562元/吨</code>毛利）？</strong></p><p>核心壁垒来自三道硬功夫：</p><ol>
 <li>
 <p><strong>地面超前区域瓦斯与水害治理工程标准化</strong>：淮北矿业在行业内率先大规模应用“地面L型水平定向长钻孔压裂抽采瓦斯 + 底板超前高压注浆加固改造含水层”工艺，在工作面掘进前1—2年就在地面把煤层瓦斯抽采利用发电、把底板奥灰水通道注浆封死，使得井下综采工作面一旦安装推进，就很少因瓦斯超限频繁停机，单工作面月均推进度提升30%以上，大幅摊薄了巷道折旧与人工固定成本。</p>
@@ -798,7 +1083,7 @@
 <p>公司管理层均成长于淮北矿业生产、技术与财务一线，风格极度务实稳健。前任董事长<strong>孙方</strong>（曾长期任股份公司总经理、董事长，后升任集团主要领导）与现任董事长<strong>李志红</strong>、总经理及长期担任副总兼财务负责人、董秘的<strong>邱丹</strong>等核心班子，全部是深耕两淮煤田与煤化工二三十年的专家型老兵，新旧交接平稳，战略延续性极强。</p>
 <h4 id="2-20212023-vs-20252026">2. “翻旧账对表”言行一致性硬核审计（2021—2023年报承诺 vs 2025—2026年实际落地）</h4>
 <p>我们调取公司3—5年前（2021—2023年年报及可转债募集说明书）写下的四大核心承诺，逐一与2026年11月的现实结果对表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">历史年报承诺事项（2021—2023年立据）</th>
@@ -833,7 +1118,7 @@
 <td style="text-align: left;">✅ <strong>战略执行果决、不恋虚荣规模</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3_1">3. 质押、商誉与集团财务公司关联交易排查</h4><ul>
 <li>
 <p><strong>质押与减持排查</strong>：截至2026年三季报，控股股东淮北矿业（集团）有限责任公司持股<code>16.29亿股</code>（占比<code>60.47%</code>，连同一致行动人约<code>61.45%</code>），质押率低于<code>0.5%</code>（近乎零质押），且在股价低谷期不仅零减持，反而积极利用增持专项贷款工具增持护盘。</p>
@@ -890,7 +1175,7 @@
 </ul>
 <h4 id="3-20212025-2026">3. 五年一期（2021—2025年 + 2026年前三季度）现金流硬账本与防合并报表幻觉穿透</h4>
 <p>我们拉出2021年至2025年五个完整会计年度及2026年前三季度（1—9月）的经审计/季报标准现金流对照表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">报告期</th>
@@ -975,7 +1260,7 @@
 <td style="text-align: center;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：2023年营收在2024年报中重述为733.87亿元，2024年OCF在2025年报中重述为90.57亿元，尾差仅0.06亿元；CapEx统一取自现金流量表“购建固定资产、无形资产和其他长期资产支付的现金”。)</em></p>
 <div class="annotated-row"><div class="main-col"><h4 id="4">4. 打破“合并报表幻觉”双项深度体检</h4><ol>
 <li><strong>少数股东损益 vs 少数股东权益倒挂核查（毫无“纸面合并富贵”，反而是少数股东替母公司扛亏损！）</strong>：
@@ -1166,7 +1451,7 @@
 </li>
 </ul>
 <p>我们将公司当前及近两年最核心的四大重点资本开支工程及延链项目拉出完整台账，严格区分<strong>“工程预算口径”</strong>、<strong>“累计资金投入占预算比例”</strong>与<strong>“物理工程形象进度”</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">重点工程项目名称</th>
@@ -1216,7 +1501,7 @@
 <td style="text-align: left;">60万吨乙醇<strong>2025年已满产（产量54.68万吨/销量52.10万吨）</strong>；延链项目处于产能爬坡期</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>外行看财报最容易犯的傻，就是把“工程花掉了百分之多少的预算钞票”当成“工地干完了百分之多少的活”。建一座大型煤矿和电厂，施工队往往先把井筒挖通、把锅炉架起来（物理进度干到了85%以上），但设备尾款和10%的质保金要等联合试运转验收后才付清。你看2026年三季报在建工程一下子从79.75亿掉到57.59亿，那就是聚能电厂两台大机组剪彩发电、从“吞金兽”变成“印钞机”的铁证！</p></div></div>
 <hr/>
 <h4 id="2_5">2. 算清单位经济账：陶忽图煤矿三层投资口径拆解、同行横向比拼与折旧摊销盈亏平衡点验算</h4>
@@ -1237,7 +1522,7 @@
 </li>
 </ol>
 <p><strong>横向对标同行新建同类现代化矿井，陶忽图的单位投资到底偏省还是偏贵？</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比矿井项目</th>
@@ -1296,7 +1581,7 @@
 <td style="text-align: left;">深井（-800米至-1,000米）冻结凿井、高瓦斯治理与村庄搬迁费用极高，单位投资比陶忽图贵出35%—70%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>结论一针见血</strong>：与中东部动辄 <code>1,500—2,000元/吨</code> 的深部新建/技改矿井相比，陶忽图煤矿 <strong><code>1,071.88元/吨</code>（纯工程）</strong> 的单位产能投资额<strong>显著偏省（省出30%—45%）</strong>；与陕北2,000万吨级超巨型矿井（大海则、小保当）相比，因陶忽图单井核定规模为800万吨且穿过纳林河白垩系含水层需采用冻结法施工，单吨工程造价略高约 <code>200—300元/吨</code>，但其产出的 <code>&gt;6,000大卡/千克</code> 特低硫优质煤在蒙西坑口即可卖出 <code>380—480元/吨</code>（含税坑口价约 <code>430—540元/吨</code>）的高溢价，单位投资回报率（ROIC）稳居全国新建煤矿第一梯队！</p>
 <hr/>
 <h5 id="22660mwpython">（2）陶忽图煤矿与聚能发电2×660MW转固后新增折旧摊销、盈亏平衡营收与稼动率精算（Python 核验双口径）</h5>
@@ -1414,7 +1699,7 @@
 <p>拒绝复述任何宣传通稿中的“高端化、绿色化、新材料转型”套话，我们将淮北矿业在煤炭与传统焦炭之外重金打造的三大非煤新业务——<strong>① 碳鑫科技 60万吨/年煤制无水乙醇（DMTE工艺）</strong>、<strong>② 煤基精细化工延伸链（10万吨/年碳酸二甲酯 DMC + 3万吨/年电子级碳酸酯 EMC/DEC + 3万吨/年乙基胺 + 规划中的乙醇脱水制乙烯/PGA可降解塑料）</strong>，以及 <strong>③ 雷鸣科化“民爆 + 非煤矿山砂石骨料（超7亿吨储量）”一体化业务</strong>，放在产业周期与残酷的价格战放大镜下做冷峻的商业证伪。</p>
 <h4 id="1_6">1. 商业化刻度精确定位：谁已跑通印钞，谁还在红海爬坡，谁只是图纸概念？</h4>
 <p>我们首先拉出淮北矿业全部新业务的商业化刻度与底层参数全景表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">新业务 / 新技术板块</th>
@@ -1475,13 +1760,13 @@
 <td style="text-align: left;"><strong>2025年生产砂石骨料1,417万吨</strong>，在安徽、湖南、河南、四川等地持续竞拍收储优质大型石料矿</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2-dmc">2. 跨越鸿沟的三道生死关卡：乙醇三条路线完全成本大比拼与 DMC/砂石骨料的行业逆风测试</h4>
 <h5 id="dmte-vs-vs">第一关：煤制无水乙醇（DMTE） vs 玉米生物发酵法 vs 石油乙烯水合法——底层物料消耗与完全成本硬核拆解</h5>
 <p>为什么全市场大宗煤化工（如普通煤制甲醇、煤制乙二醇、传统焦炭）在2024—2025年普遍陷入亏损泥潭，唯独淮北矿业碳鑫科技的 <strong>60万吨/年煤制无水乙醇</strong> 能够一投产就满负荷产销（2025年产54.68万吨、销52.10万吨），并将公司煤化工板块整体毛利率逆势托举在 <strong><code>20.43%</code></strong>？</p>
 <p>答案藏在<strong>“焦炉煤气废气利用 + DMTE 二代催化剂”对传统粮食发酵法与石油乙烯法的降维成本打击</strong>里。我们调用 Python 化工物料平衡模型，将国内无水乙醇三大主流工艺路线的<strong>单吨物料消耗与不含税完全成本</strong>拆解到极致：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">成本拆解维度 (生产 1 吨 99.7% 无水乙醇)</th>
@@ -1556,7 +1841,7 @@
 <td style="text-align: center;">比碳鑫科技高 <strong><code>+2,121 元/吨</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>极限压力测试：当国际油价暴跌、玉米价格下跌或燃料乙醇推广不及预期时，碳鑫科技的煤制乙醇还能赚钱吗？</strong></p>
 <ol>
 <li>
@@ -1609,7 +1894,7 @@
 <h4 id="3_4">3. 竞争终局推演与新业务最终定性（三大赛道硬核对位）</h4>
 <p>我们将淮北矿业的三大非煤曲线放进各自赛道的全国竞争终局版图中，与顶级玩家正面对位，并给出毫无含糊的最终商业定性：</p>
 <h5 id="1_7">（1）赛道竞争终局对位表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">业务赛道</th>
@@ -1638,7 +1923,7 @@
 <td style="text-align: left;"><strong>区域诸侯级利基赢家</strong>：避开海螺水泥在长江干流的正面锋芒，卡位淮河水系、皖北基建及西南玄武岩特种骨料，凭借“自备炸药爆破”把毛利率稳在40%以上</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="2_6">（2）三大新业务最终商业定性（一锤定音）</h5><ol>
 <li>
 <p><strong>碳鑫科技 60万吨/年煤制无水乙醇（及配套3万吨/年乙基胺）</strong> <span class="math-inline">\longrightarrow</span> <strong>🏆【已兑现的成本壁垒型现金牛】</strong>
@@ -1662,7 +1947,7 @@
 <p>为了彻底剥离单家公司财报的“自说自话”，我们将 <strong>淮北矿业（600985.SH，华东炼焦煤与煤化一体化龙头）</strong> 与其最直接的两家A股炼焦煤核心竞争对手——<strong>山西焦煤（000983.SZ，全国最大主焦煤基地）</strong>、<strong>平煤股份（601666.SH，华中/中南地区主焦煤与1/3焦煤龙头）</strong> 拉到同一张审讯桌上，全面调取三家公司截至 <strong>2025年年度报告（经审计）</strong> 与 <strong>2026年第三季度报告（截至2026年9月30日）</strong> 的底层资产负债表、利润表、分部经营数据，并结合下游华东钢厂（宝武马钢、南钢、沙钢）及独立焦化厂的采购库存数据进行残酷的“三方交叉对质”。</p>
 <hr/>
 <h4 id="1-2025-2026_1">1. 三大炼焦煤龙头全维度财务与经营硬指标横向对质大表（2025年报 &amp; 2026年三季报）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心审讯维度</th>
@@ -1870,7 +2155,7 @@
 <td style="text-align: left;">淮北矿业因少数股东承担焦化亏损（<code>-2.03亿元</code>），归母净利率（6.13%）反超合并净利率</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：上表2025年末数据均为2025年报经审计期末原列数，且与2026年三季报期初上年末数完全一致，期间三家公司均未发生重大同一控制下并表重述差异；平煤股份2026Q3末应收票据按期初1.78亿元及三季报披露降幅-53.68%精确折算为0.83亿元，合同负债按三季报披露增幅+168.22%对应期初约4.16亿元；山西焦煤三季报披露存货247,967万元较期初181,055万元算术增幅为+36.96%，三季报文字摘要简写为+35.30%。)</em></p>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2-22762-674">2. 景气度与议价权对质：为什么淮北矿业合同负债暴增 227.62%，存货反而下降 6.74%？</h4><p>将三家炼焦煤龙头与下游华东钢铁、焦化企业的资产负债表放在一起交叉审视，两组极具反差的数据直接撕开了2026年下半年焦煤产业链的真实供需底牌：</p><ul>
@@ -2069,7 +2354,7 @@
 <h5 id="3-owner-earnings-2025-vs-2026">3. 《三档价格标尺 Owner Earnings 矩阵表》（2025实际还原 vs 2026三档标尺存量与达产全口径）</h5>
 <p>我们将 <strong>2025年报实际经审计数据还原</strong> 与 <strong>2026年三档价格标尺（标尺一：今日实时现货/2026Q3即期长协标尺 <code>1,102元/吨</code>；标尺二：85折新常态中枢标尺 <code>937元/吨</code>【买方核心主锚】；标尺三：苛刻历史边际成本底线标尺 <code>780元/吨</code>）</strong> 置于同一张精算矩阵中，所有加减项均经 Python <code>Decimal</code> 严密核验零尾差：</p>
 <p><strong>表 D-1：淮北矿业 2025年实际还原 vs 三档价格标尺 Owner Earnings 分步精算矩阵表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与核心指标 (单位：亿元，煤价/成本：元/吨)</th>
@@ -2266,7 +2551,7 @@
 <td style="text-align: center;"><strong>46.00</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：上表中2025年报数据取自经审计财报，2026年三季报实际已实现非经常性损益为 <code>+0.30亿元</code>；三档标尺下的归母有效折旧摊销 <code>38.50亿元</code>、合并折旧摊销 <code>43.00亿元</code>、归母维持性 CapEx <code>24.50亿元</code>、合并维持性 CapEx <code>26.00亿元</code> 及陶忽图增量贡献均为买方模型情景假设参数；“模型简化归母内生现金流”与“模型简化归母 Owner Earnings”系买方模型测算指标，不等同于会计报表之合并经营活动现金流量净额 OCF。)</em></p><p><strong>三档价格标尺核心洞察</strong>：</p><ol>
 <li>
 <p><strong>标尺二（85折新常态中枢 <code>937元/吨</code>）为何是最客观的买方主锚？</strong> 将2026Q3即期商品煤均价（<code>1,102元/吨</code>）直接打85折后为 <strong><code>937.00元/吨</code></strong>，这一水位不仅预留了15%的价格回撤安全垫，而且与公司 <strong>2026年前三季度实际已实现的商品煤均价（<code>947.15元/吨</code>）及吨煤成本（<code>505.47元/吨</code>）几乎100%重合</strong>！在此极其扎实的新常态中枢下，公司仅靠现有存量资产每年即可创造 <strong><code>42.30亿元</code> 归母 Owner Earnings</strong>（合并 Unlevered Firm OE <strong><code>48.60亿元</code></strong>）；待陶忽图煤矿达产后，常态归母 Owner Earnings 将跃升至 <strong><code>52.10亿元/年</code></strong>（合并 Unlevered Firm OE <strong><code>68.20亿元/年</code></strong>）。</p>
@@ -2286,7 +2571,7 @@
 <p>公司过去四年累计投入超300亿元资本开支孵化的三大核心工程——<strong>① 内蒙古陶忽图煤矿（800万吨/年，在建冲刺）</strong>、<strong>② 信湖煤矿（300万吨/年，2026年4月16日复产爬坡）</strong>、<strong>③ 碳鑫科技60万吨/年无水乙醇满负荷 + 聚能发电2×660MW超超临界机组商业运营</strong>，正在将公司的常态造血中枢推向全新台阶。</p>
 <p>需要特别说明口径边界：<strong>后两项（信湖煤矿复产、碳鑫乙醇与聚能煤电转固运营）已包含在上述2026年“存量常态底盘（归母OE <code>42.30亿元</code> / <code>54.00亿元</code>）”之中</strong>，它们解释了为何公司2026年存量常态归母OE能较2025年谷底（<code>25.42亿元</code>）实现跨越式跃升；而 <strong>第一项（内蒙古陶忽图800万吨煤矿）完全未包含在存量基准内</strong>，属于2027—2028年纯正的“表外增量垫高项”。我们在下表中对三大引擎在「标尺一：今日实时现货」与「标尺二：85折新常态中枢」双标尺下的独立造血账本做微创解剖：</p>
 <p><strong>表 D-2：三大核心增量/复产项目在双标尺下的 Owner Earnings 贡献拆解表（买方模型假设参数）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">增量项目名称与股权/产能属性</th>
@@ -2323,7 +2608,7 @@
 <td style="text-align: left;"><strong>【已纳入2026存量常态底盘】</strong><br/>充当存量底盘中的“非煤稳定器”，在煤价下行期展现逆周期毛利扩张属性</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>增量垫高核心机制拆解</strong>：</p><ul>
 <li><strong>陶忽图煤矿（800万吨/年）的“高折旧加回 + 低维持CapEx”现金牛特征</strong>：由于陶忽图煤矿采矿权价款与现代化井巷工程前期投入近百亿元（已于基建期支付完毕），建成转固后每年计提的矿井折旧、采矿权摊销（<code>4.20亿元</code>）及吨煤安全维简井巷费非付现计提（<code>3.60亿元</code>）合计高达 <strong><code>7.80亿元</code></strong>（均已包含在 <code>240元/吨</code> 的完全成本中枢内），而作为全新的现代化浅埋深特厚煤层矿井，其投产前十年的设备大修与维持性 CapEx 极低（每年仅需约 <strong><code>2.50亿元</code></strong>）。这意味着陶忽图煤矿每一年的 <strong>Owner Earnings 比账面净利润还要高出 <code>+4.80亿元</code>（合并口径）/ <code>+2.40亿元</code>（50%归母口径）</strong>！在85折新常态标尺下，仅陶忽图一矿即可将公司归母 Owner Earnings 从 <code>42.30亿元</code> 向上垫高 <strong><code>+9.80亿元</code>（增幅 <code>+23.17%</code>）</strong> 至 <strong><code>52.10亿元/年</code></strong>；在今日实时现货标尺下，更是向上垫高 <strong><code>+10.80亿元</code></strong> 至 <strong><code>64.80亿元/年</code></strong>。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>陶忽图这座矿最迷人的地方在于：那近百亿买矿权和挖井筒的冤枉钱，前几年已经从账上掏出去了；等它2027年一出煤，成本只有240块钱一吨，账面上每年要扣掉7.8亿折旧费，但实际上新矿井根本花不了多少维修费。这就像你花巨资修好了一座水电站，大坝折旧记在纸上替你挡税，流出来的每一度电却全是哗哗作响的现钞。</p></div></div></div></div>
@@ -2352,7 +2637,7 @@
 </ol>
 <h5 id="2-s0s4">2. 五情景双极限压力测试精算矩阵表（S0—S4）</h5>
 <p><strong>表 D-3：淮北矿业 5 情景双极限压力测试与内生现金流底线矩阵表（买方模型情景假设参数）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">压力测试核心维度与核算指标</th>
@@ -2519,7 +2804,7 @@
 <td style="text-align: center;"><strong>29.00</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(口径防呆特别声明：① 上表中“模型简化归母内生现金流 = 归母净利润 + 归母有效折旧摊销 + 营运资金释放/(占用)”，扣除“归母防御性维持性 CapEx”后得“模型简化归母 Owner Earnings”，两者均为买方模型归母口径精算指标，严禁与会计报表之合并经营活动现金流量净额 OCF 混同；② 主表第3行统一维持 <code>-1.50亿元</code> 常态刚性营运资金占用，以确保 S0 与标尺一 <code>54.00亿元</code>、S4 与标尺三 <code>25.70亿元</code> 100% 严丝合缝对齐；底部备查行额外展示了下行期应收票据与存货占用自然收缩带来的营运资金释放效应。)</em></p>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h5 id="3-s3s4-ocf">3. 行业残酷洗牌推演：当煤价跌至 S3/S4 极端水位，同行处境如何？（客观审视同行账面折旧与 OCF 韧性）</h5><p>将压力测试推向最严酷的 <strong>S3（商品煤均价跌25%至 <code>826.50元/吨</code>）</strong> 与 <strong>S4（商品煤均价跌近30%至 <code>780.00元/吨</code>）</strong> 时，行业供需格局将发生什么？</p><ul>
@@ -2550,7 +2835,7 @@
 <p>在周期性大宗商品行业中，平滑甚至虚增当期利润的常见财技无非四招：放宽应收坏账计提、少提存货跌价准备、拉长固定资产与井巷工程折旧年限（或将研发支出大比例资本化）、以及少提或挪用煤炭特种准备金（安全生产费与维简费）。我们拿放大镜逐项审视 <strong>淮北矿业（600985.SH）</strong> 2025年年度报告附注与2026年第三季度报告，并拉上 <strong>山西焦煤（000983.SZ）</strong> 与 <strong>平煤股份（601666.SH）</strong> 进行同维度会计政策与治理细节对质。</p>
 <hr/>
 <h4 id="1_8">1. 三大炼焦煤龙头会计政策、特种准备金与治理成色横向对质表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心审计维度</th>
@@ -2674,7 +2959,7 @@
 <td style="text-align: left;">淮北矿业0商誉、近乎0质押，资产负债表洁净度在三家中最高</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_7">2. 资产质量与特种准备金排雷：保守藏富还是激进美化？</h4><h5 id="1_9">（1）应收账款账龄结构、坏账准备（严分存量与流量）与票据成色拆解</h5><p>穿透淮北矿业2025年年度报告财务报表附注【应收账款】章节与2026年三季报，公司的应收款项管理展现出极高的防御标准：</p><ul>
 <li><strong>账龄结构与高达 <code>21.87%</code> 的综合坏账准备计提率（期末存量口径）</strong>：</li>
@@ -2856,7 +3141,7 @@
 </ul>
 <p>我们将<strong>【主标尺：严苛全口径合并 True EV】</strong>与<strong>【辅标尺：常规合并 True EV】</strong>并列汇总于表 F-1：</p>
 <h5 id="f-1600985shtrue-ev202611">表 F-1：淮北矿业（600985.SH）真实企业价值（True EV）双轨标尺精算表（截至2026年11月）</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算层级与核心科目</th>
@@ -2963,7 +3248,7 @@
 <td style="text-align: left;"><strong>买方核心主标尺锁定 <code>525.32 亿元</code>；常规辅标尺为 <code>491.77 亿元</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><div class="math-display"><span class="math-text">True EV</span><sub><span class="math-text">严苛主标尺</span></sub> = 385.67<span class="math-text">（总市值）</span> + 41.65<span class="math-text">（少数股东权益）</span> + 151.75<span class="math-text">（全口径有息负债）</span> - 53.75<span class="math-text">（超额可支配现金）</span> = <strong>525.32<span class="math-text"> 亿元</span></strong></div><div class="math-display"><span class="math-text">True EV</span><sub><span class="math-text">常规辅标尺</span></sub> = 385.67<span class="math-text">（总市值）</span> + 41.65<span class="math-text">（少数股东权益）</span> + 138.20<span class="math-text">（传统五项有息负债）</span> - 73.75<span class="math-text">（可动用现金）</span> = <strong>491.77<span class="math-text"> 亿元</span></strong></div></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把租赁负债算成真债、从账上82亿现金里先扣掉8.5亿保证金再死死按住20亿过日子底仓不准动——这么百般刁难算出来的全款买断价是525.32亿。要知道，这525亿买的不是PPT上的互联网泡沫，而是华东腹地17座正在哗哗出焦煤的矿井、60万吨满产的无水乙醇工厂、两台660兆瓦超超临界大电厂，外加内蒙那座已经砸进去几十亿、马上就要出煤的800万吨特大煤矿！</p></div></div></div></div>
 
 
@@ -2993,7 +3278,7 @@
 <h5 id="2_10">（2）三档价格标尺 × 双产能状态下的隐含回报率矩阵与债务杠杆正增厚效应</h5>
 <p>我们将模块 D 锁定的三档商品煤价格标尺（标尺一：今日实时现货/2026Q3即期长协 <code>1,102元/吨</code>；标尺二：85折新常态主锚 <code>937元/吨</code>；标尺三：苛刻历史边际成本底线 <code>780元/吨</code>）在<strong>“存量常态”</strong>与<strong>“陶忽图800万吨达产后（2027—2028年稳态）”</strong>下的估值倍数与真实内生回报率完整列示于表 F-2：</p>
 <h5 id="f-2-poeevfirm-oe">表 F-2：淮北矿业三档价格标尺下的 P/OE、EV/Firm OE 与真实内生回报率矩阵表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">价格标尺与产能状态</th>
@@ -3058,7 +3343,7 @@
 <td style="text-align: center;"><strong>6.30%</strong> (<code>15.86x</code>)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>三大买方核心发现</strong>：</li>
 </ul>
@@ -3076,7 +3361,7 @@
 <h5 id="3_8">（3）分红与回购收益率核算（严格按会计归属期拆分，严禁跨期混加）</h5>
 <p>为杜绝卖方研报常见的“拿2024年高景气分红冒充当期股息”或“将跨年度分红与回购混加”的误导手法，我们将淮北矿业四个维度的现金分红与回购回报率严格按会计归属期独立拆解于表 F-3：</p>
 <h5 id="f-31432">表 F-3：淮北矿业分红与回购收益率跨期严格拆分表（基准股价：14.32 元/股）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">指标所属会计期间与性质</th>
@@ -3129,7 +3414,7 @@
 <td style="text-align: left;">随着百亿CapEx尾声到来，分红率具备向50%+跃升的巨大潜力（若60%分红则达 <code>6.22%</code>）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>千万别被后视镜里的数字骗了！只看2025年谷底那1.75%的股息率，你会以为它是个铁公鸡，却忘了那是在信湖煤矿泡水停产、煤价跌穿地板、同时还要掏71亿修内蒙大煤矿的最惨年份里，管理层咬着牙把44.71%的利润分了出来；如今信湖矿已经抽干水满血出煤，前三季度就已经赚了21.46亿，今年前瞻股息率立马回到3.5%左右，等明年陶忽图煤矿一剪彩，光是45%的常规分红就能给你近4.7%的年化真金白银！</p></div></div>
 <hr/>
 <h4 id="3-reverse-sotp">3. 逆向拆骨估值（Reverse SOTP）：市场究竟白送了多少免费期权？</h4>
@@ -3173,7 +3458,7 @@
 <li><strong>真实商业价值对质</strong>：要知道，内蒙古陶忽图煤矿（800万吨/年高热值特低硫煤，可采储量 <code>7.28 亿吨</code>）前期已砸入数十亿元真金白银，主副风井早已到底贯通，即将在 <strong>2026年底至2027年初联合试运转</strong>！达产后在85折新常态下，陶忽图单矿每年可新增合并 <code>Firm OE</code> <strong><code>19.60 亿元/年</code></strong>、新增50%权益 <code>归母 OE</code> <strong><code>9.80 亿元/年</code></strong>。即便对远期兵能煤业（1,000万吨/年）注入期权和DMC新材料全部按 <code>0 元</code> 计，仅给陶忽图煤矿保守 <code>7.50 倍 EV/Firm OE</code>（归母 <code>8.00 倍 P/OE</code>），其合理分部合并 EV 也高达 <strong><code>147.00 亿元</code></strong>，合理归母纯股权价值高达 <strong><code>78.40 亿元</code></strong>！</li>
 </ul>
 <h5 id="f-4reverse-sotp">表 F-4：淮北矿业双轨逆向拆骨估值（Reverse SOTP）与免费期权厚度精算表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务分部拆解</th>
@@ -3250,7 +3535,7 @@
 <td style="text-align: center;"><strong>较当前市值溢价 +18.34%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(⚠️ 买方审慎声明：上述 Reverse SOTP 分部估值属于买方基于85折新常态盈利假设的情景推演，旨在衡量市场隐含预期与免费期权安全垫厚度，各分部隐含残差不等于经审计的破产清算底价。)</em></p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把账算到这里，连瞎子都能看明白这笔买卖有多划算了！你掏385.67亿买下淮北矿业的股票，光是安徽老家那17座炼焦煤矿、60万吨乙醇工厂、两台大电厂、7亿吨砂石骨料和半家财务公司，按最抠门的8.5倍真实股东盈余（P/OE）打折称重就已经值378亿了！这意味着市场只收了你7.67亿（每股不到3毛钱），就把内蒙鄂尔多斯那座马上要在年底试运转、每年能替归母股东净赚近10个亿的陶忽图800万吨特大煤矿白送给了你！这不叫买股票，这叫买一箱金条顺手白送了一座金矿。</p></div></div></div></div>
 
 <hr/>
@@ -3261,7 +3546,7 @@
 <h5 id="2a202611">（2）A股四大煤炭同行最新估值硬核对质（截至2026年11月中旬）</h5>
 <p>我们将淮北矿业与A股两大直接炼焦煤对手——<strong>山西焦煤（000983.SZ）</strong>、<strong>平煤股份（601666.SH）</strong>，以及两大动力煤/一体化标杆龙头——<strong>中国神华（601088.SH）</strong>、<strong>陕西煤业（601225.SH）</strong>截至2026年11月中旬的最新二级市场估值与2026年三季报成色拉通对比于表 F-5：</p>
 <h5 id="f-5a202611">表 F-5：淮北矿业与A股四大可比煤炭龙头估值及成长弹性横向对质表（截至2026年11月中旬）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -3338,7 +3623,7 @@
 <td style="text-align: center;">险资债券替代品，2.44倍PB无赔率空间</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
 <p><strong>横向对质结论（极致的定价错配）</strong>：</p>
@@ -3356,7 +3641,7 @@
 <h5 id="1-f-6">（1）买方三档分档击球区与目标价推演（表 F-6）</h5>
 <p>结合公司每股净资产（<code>16.06 元/股</code>）、标尺二（85折新常态）下的存量与达产后真实股东盈余（<code>42.30 亿元</code> / <code>52.10 亿元</code>）及 Reverse SOTP 保守拆骨价值（<code>16.95 元/股</code>），我们制定如下三档实战击球纪律：</p>
 <h5 id="f-6600985sh">表 F-6：淮北矿业（600985.SH）买方三档击球区与隐含估值锚点推演表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球分档区间</th>
@@ -3411,7 +3696,7 @@
 <td style="text-align: left;">若焦煤现货暴涨引发市场情绪亢奋、PB突破 <code>1.4倍</code> 历史上沿，安全边际耗尽，坚决分批清仓离场</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="2_11">（2）一旦触发必须无条件认错离场的“三条基本面死刑证伪红线”</h5><p>买方投资永远把风控底线放在第一位。无论我们对淮北矿业的拆骨安全垫多么有信心，一旦未来跟踪期内出现以下任何一条<strong>“基本面死刑证伪信号”</strong>，意味着底层商业逻辑发生不可逆破坏，必须无条件止损认错离场：</p><ol>
 <li>
 <p><strong>【死刑红线一·地质水害连环失控】：省内主力焦煤矿井再次发生重大透水/瓦斯安全事故，导致单矿停产超 12 个月或全公司核定在产焦煤产能受损超 15% 以上</strong>
@@ -3490,7 +3775,7 @@
 <p>一边是Q3单季净利暴增22倍、前三季度净利翻倍反超山西焦煤、合同负债暴增227%、陶忽图大矿点火在即；另一边却是二级市场因为惯性偏见，还给它标着 <code>0.89倍 PB</code> 的破净价。这绝不是死钱，这是<strong>‘基本面右侧加速度已经全面确立，而股价还留在左侧黄金坑底’</strong>的完美错配窗口！我的建议非常干脆：在当前 <code>14.32元/股</code>（处于 <code>12.50—14.80元</code> 左/右侧共振甜点区）立即扣动扳机建立主力核心仓位，紧盯信湖满产与陶忽图年底试运转两大催化路标，顺着盈利与分红双重重估的主升浪一直拿到 <code>17.50—20.00元</code>（<code>1.1x—1.25x PB</code>）以上！”</p>
 <hr/>
 <h3 id="g-1">📋 五、 四位大师闭门投票与终极裁决总表（表 G-1）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">投资大师角色</th>
@@ -3535,7 +3820,7 @@
 <td style="text-align: left;"><strong>“单季净利暴增22倍、前三季度利润反超山西焦煤、800万吨新矿点火在即，业绩二阶导数已经起飞而股价还在0.89倍PB装睡，此时不扣扳机更待何时！”</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -3586,7 +3871,7 @@
 </li>
 </ol>
 <p>为了烤出又硬、又耐磨、孔隙又均匀的冶金焦炭，焦化厂不能只用一种煤，而必须像“调鸡尾酒”或“配混凝土”一样，把 <strong>主焦煤、肥煤、1/3 焦煤、瘦煤、气煤</strong> 按比例混合配煤。其中最核心的“三剑客”区别如下（核心取决于两个理化指标：<strong>挥发分 <span class="math-inline">V<sub>daf</sub></span></strong> 代表加热跑出的气体多少；<strong>胶质层最大厚度 <span class="math-inline">Y</span> 值 / 粘结指数 <span class="math-inline">G</span> 值</strong> 代表加热熔化后像胶水一样把煤粒粘在一起的能力）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">炼焦煤细分品种</th>
@@ -3619,7 +3904,7 @@
 <td style="text-align: left;">兼具不错的粘结强度与较高的挥发分，既能当配煤基础大梁降低配煤总成本，又能在干馏时释放大量<strong>焦炉煤气</strong>（淮北矿业用来造甲醇和 60 万吨无水乙醇的煤气很大一部分就源于此）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="_13">第二层：淮北矿业挖的煤，与中国神华、新集能源、陕西煤业/山西焦煤、兖矿能源挖的煤有啥区别？</h5>
 <p>中国的煤炭版图被一道天然的物理分水岭切成了两个世界：</p>
 <ul>
@@ -3631,7 +3916,7 @@
 </li>
 </ul>
 <p>把您点名的几家巨头拉出来逐一对号入座，差异一目了然：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">上市煤企名称</th>
@@ -3685,7 +3970,7 @@
 <td style="text-align: left;">兖矿是国际化动力煤与煤化工巨头，其少部分炼焦煤属于高挥发分“气煤/配煤”（调料配角），缺乏淮北矿业那种能当大高炉主骨架的强肥煤与主焦煤</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把煤都当成一种东西，就像把“用来盖摩天大楼的特种承重钢梁”和“用来烧炕取暖的劈柴”混为一谈。中国神华和新集能源卖的是烧锅炉发电的优质劈柴，而淮北矿业在安徽老家挖出来的是江南钢厂高炉里绝对不能断供的“特种粘合剂（低硫肥煤与主焦煤）”——更绝的是，它今年底又要在内蒙陶忽图挖出800万吨顶级的发电劈柴，两手抓两手硬！</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="q2-60">Q2：碳鑫科技 60 万吨无水乙醇的下游应用场景是什么？淮北处于的是生产上游原材料吧？这块和万华化学的业务有相关性吗？乙醇是用来干嘛的，为啥淮北矿业会开发这块的业务，属于煤化工吗？</h4><blockquote>
@@ -3768,7 +4053,7 @@
 - 在当前全国高热值煤结构性稀缺的背景下，这种 6,000 大卡以上的特低硫煤，既是大型火电厂掺烧提效的抢手硬通货，更是周边巨型煤化工基地（如中天合创、宝丰能源水煤浆气化炉）愿意加价抢购的顶级化工原料煤。</p>
 <h5 id="2_13">2. 从【成本、产量规模、可开采持续性】三个维度评估，淮北矿业在国内到底属于第几梯队？</h5>
 <p>我们必须将淮北矿业放在 <strong>“细分炼焦煤赛道”</strong> 与 <strong>“全国全煤种（含动力煤巨无霸）大盘子”</strong> 两个坐标系里精准定位：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">评估维度</th>
@@ -3797,7 +4082,7 @@
 <td style="text-align: left;">• <strong>安徽省内本部</strong>：资源量 <code>44.89亿吨</code>、可采储量 <strong><code>20.29亿吨</code></strong>（静态可采约 <code>45—50年</code>）；<br/>• <strong>内蒙陶忽图煤矿</strong>：单井资源量 <strong><code>14.29亿吨</code></strong>、可采储量 <strong><code>7.28亿吨</code></strong>，按 <code>800万吨/年</code> 计算<strong>单矿服务年限超 65 年（静态达 91 年）</strong>！外加集团承诺注入的新疆兵能煤业（<code>1,000万吨/年</code>），彻底摆脱了中东部煤企“老矿越挖越深、坐吃山空”的宿命。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="q4">Q4：煤制无水乙醇的盈利和国际油价有啥关系？</h4>
 <blockquote>
@@ -3925,7 +4210,7 @@
 <p><strong>💡 深度解答</strong>：</p>
 <p><strong>一锤定音的结论：绝非处于周期高位！截至 2026 年 11 月中旬，国内炼焦煤、焦炭及煤化工产品价格正处于“刚刚从 2025 年极端寒冬谷底爬出、位于过去十年（2016—2026 年）历史价格区间 20%—45% 分位数的【中枢偏下 / 温和复苏初期】水位”，距离历史周期泡沫高点仍有 40%—60% 的巨大空间！</strong></p>
 <p>为了杜绝主观臆测，我们将四大核心品种在过去十年周期中的<strong>“极端底部、狂热顶部、2025 寒冬谷底、2026 年 11 月实时现价”</strong>拉出一张硬核坐标表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心商品 / 指标名称</th>
@@ -3993,7 +4278,7 @@
 <td style="text-align: left;"><strong>低于 10% 分位（历史绝对谷底）</strong>：处于全行业产能过剩洗牌期，仅有向上修复期权而无下跌空间</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>两大买方关键认知补充</strong>：</p>
 <ol>
 <li>
@@ -4030,7 +4315,7 @@
 <h5 id="2-unlevered-firm-oe-6820">2. 硬核验算：陶忽图达产后合并 <code>Unlevered Firm OE = 68.20 亿元/年</code> 到底是怎么算出来的？具备合理性吗？</h5>
 <p><strong>结论：<code>68.20 亿元/年</code> 不仅在数学勾稽上 100% 严丝合缝，而且与公司过去五年的真实历史现金流相比，是一个相当审慎保守的数字！</strong></p>
 <p>我们把 <strong><code>68.20 亿元/年</code></strong> 拆成 <strong>【第一块：现有存量资产底盘 <code>48.60 亿元/年</code>】</strong> + <strong>【第二块：陶忽图 800 万吨新矿达产新增 <code>+19.60 亿元/年</code>】</strong> 来做零信任（Zero-Trust）合理性核验：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">构成模块与核验维度</th>
@@ -4059,20 +4344,33 @@
 <td style="text-align: left;"><strong>双轨估值回报率完美闭合印证</strong>：<br/>• <strong>轨道一（合并视角）</strong>：<code>68.20亿 Firm OE ÷ 525.32亿 严苛True EV</code> = <strong><code>12.98%</code> 真实内生回报率</strong>（<code>7.70倍 EV/OE</code>）；<br/>• <strong>轨道二（归母视角）</strong>：<code>52.10亿 归母OE ÷ 385.67亿 普通股市值</code> = <strong><code>13.51%</code> 股权隐含回报率</strong>（<code>7.40倍 P/OE</code>）！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>一句话买方防呆总结</strong>：
 - 当您站在<strong>“二级市场买股票的小股东”</strong>视角看问题时，请紧盯 <strong><code>52.10 亿元/年</code>（归母 OE，已经把奇瑞分走的一半陶忽图利润和银行利息全扣掉了）</strong>，对比当前 <strong><code>385.67 亿元</code> 市值</strong>，您的静态回本年限是 <strong><code>7.40 年</code>（年化回报率 <code>13.51%</code>）</strong>；
 - 当您站在<strong>“全资私有化买断整家集团并替它还清所有债”</strong>的产业并购视角看问题时，请紧盯 <strong><code>68.20 亿元/年</code>（合并 Unlevered Firm OE）</strong>，对比 <strong><code>525.32 亿元</code> 严苛真实企业价值（True EV）</strong>，整座矿业帝国的无杠杆真实内生回报率是 <strong><code>12.98%</code>（<code>7.70 倍 EV/OE</code>）</strong>。两把尺子量出来的结果高度一致，没有任何合并报表水分！</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>会计里最怕的就是“拿着全款买楼的账单，却只算扣掉房贷和合伙人分红之后的零花钱”。你要么拿385.67亿普通股市值去对比归属母公司股东的52.10亿净盈余（回报率13.51%），要么拿包含全部债务和少数股东权益的525.32亿真实企业价值去对比整座矿山机器吐出来的68.20亿无杠杆总盈余（回报率12.98%）——不管你用左手算盘还是右手算盘，这都是一笔年化13%以上的一流买卖！</p></div></div></div></div>
 
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -4242,7 +4540,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《淮北矿业_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/淮北矿业_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《淮北矿业 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/淮北矿业 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4300,6 +4598,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

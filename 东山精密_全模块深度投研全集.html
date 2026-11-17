@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>东山精密_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>东山精密 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">东山精密_全模块深度投研全集</div>
+    <div class="report-title">东山精密 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -622,7 +907,7 @@
 <h2 id="_2">【第一部分：拆解业务账本、周期时钟与顺价能力——谁在挑大梁，谁在凑规模，谁在拖后腿？】</h2>
 <h3 id="_3">一、 五大板块收入与真实利润结构拆解：谁是现金牛，谁是印钞机，谁是包袱？</h3>
 <p>把东山精密2024年、2025年及2026年上半年的分部账本摊开，五个业务板块的角色分工与盈利温差极大，绝不能混为一谈：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块</th>
@@ -697,7 +982,7 @@
 <td style="text-align: left;"><strong>2026年前三季度总营收453.79亿元，归母净利52.89亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>从这张账本里，可以一眼看穿东山精密的赚钱逻辑：</p><ol>
 <li>
 <p><strong>电子电路（PCB）是守住基本盘的“老大哥”</strong>：
@@ -831,7 +1116,7 @@
 </ul>
 <hr/>
 <h3 id="_7">四、 核心产品线与国内外直接竞争对手横向硬核对比总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心战场与维度</th>
@@ -885,7 +1170,7 @@
 <td style="text-align: left;">垂直赛道成本与利润率明显优于东山精密汽车组件分部</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="_8">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？】</h2>
 <p>东山精密从1980年袁富根创办的苏州东山镇一家小小钣金冲压厂，长成今天年营收超500亿规模的跨国制造巨头，绝非平步青云，而是靠<strong>三次赌上身家的生死跃迁</strong>与<strong>一次惨痛的产能扩张教训</strong>淬炼出来的：</p>
@@ -917,7 +1202,7 @@
 <p>创始人袁富根打下精密金属加工家底，长子<strong>袁永峰（总经理，1977年生）</strong>长年扎根工厂一线抓生产、良率与大客户交付，次子<strong>袁永刚（董事长，1979年生）</strong>主抓战略并购、资本运作与新赛道卡位。这种“哥哥管车间算微米、弟弟看全局买资产”的兄弟双核驱动模式高度稳定，父子三人通过一致行动关系合计控制公司约33%—38%表决权（H股发行摊薄后仍稳居绝对控股地位）。</p>
 <h3 id="4683">二、 四项治理硬核体检（重锤“翻旧账对表”与46.83亿商誉排查）</h3>
 <h4 id="1-20202023-vs-20252026">1. “翻旧账对表”言行一致性审计（回溯2020—2023年报及募投承诺 vs 2025—2026年实际落地）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">历史承诺时点与载体</th>
@@ -952,7 +1237,7 @@
 <td style="text-align: left;"><strong>极高加分项！在底部用真金白银与中小股东利益深度绑定</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2">2. 质押、杠杆与高点套现排查</h4>
 <ul>
 <li>历史上袁永刚、袁永峰因参与产业投资及认购自家定增，股票质押率曾一度偏高；但根据2025—2026年最新披露，实控人家族整体质押比例已降至<strong>8%—15%的安全低位区间</strong>，且2024—2025年实控人不仅未减持，反而斥资14.04亿元包圆定增。</li>
@@ -1024,7 +1309,7 @@
 <hr/>
 <h3 id="20212025-2026q1-q3">三、 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2025年 + 2026Q1-Q3）</h3>
 <p>我们调取东山精密2021—2025年五个完整会计年度及2026年前三季度（1—9月）的法定审计/季报数据，算清自由现金流硬账：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">会计期间</th>
@@ -1109,7 +1394,7 @@
 <td style="text-align: left;"><strong>AI光模块+PCB超级扩产期，9个月狂砸88.18亿CapEx导致阶段性FCF缺口</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="_14">穿透合并报表幻觉的三道体检：</h4><ol>
 <li>
 <p><strong>为什么2021—2025年每年经营现金流（OCF，32亿—53亿元）都远高于归母净利润（10.86亿—23.68亿元）？</strong>
@@ -1371,7 +1656,7 @@
 </li>
 </ul>
 <h4 id="2_1">2. 行业扩产单位经济账全景对标表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对标维度</th>
@@ -1418,7 +1703,7 @@
 <td style="text-align: left;">与东山Multek一致，泰国厂初期均面临大陆外派工程师高昂津贴拖累</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3-breakeven">3. 转固折旧精算与盈亏平衡点（Breakeven）压力测试</h4><p>按照东山精密的会计政策（机器设备折旧年限5—10年、残值率5%；房屋及建筑物折旧年限20年、残值率5%），我们对公司<strong>已发生并即将转固的近期刚性资产池（约120亿元）</strong>与<strong>2026—2028年全口径规划转固资产池（约190亿元）</strong>进行两阶段微创压力测试：</p><ul>
 <li><strong>第一阶段：近期刚性转固池（120亿元，对应当前54.67亿元在建工程及2025—2026年已投产陆陆续续转固的CapEx）</strong></li>
 <li>
@@ -1541,7 +1826,7 @@
 <h3 id="_25">一、 商业化刻度定位：谁已跑通印钞机，谁还在画饼？</h3>
 <p>我们以最严苛的工程与财务标尺（实验室样机 → 头部客户送样认证 → 小批量试产 → 规模化量产且跑通单点盈利模型），对两大曲线旗下的8个具体业务/技术子项进行精确刻度定位：</p>
 <h4 id="_26">两大新成长曲线商业化刻度定位全景表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">曲线归属</th>
@@ -1618,7 +1903,7 @@
 <td style="text-align: left;">欧洲汽车电动化转型迟缓+法国工会高刚性人工，短期内是拉低集团ROE的包袱</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这八项业务放在同一张桌子上看，真相就一目了然了：索尔思的100G/200G光芯片和维信的汽车软板是正在哗哗吐金币的摇钱树；而法国买来的冲压厂和日本买来的车载屏幕厂，更像是为了把营业收入数字吹得像气球一样大而捡回来的笨重铁疙瘩——要知道，在商业世界里，“做大”和“赚大钱”往往是截然相反的两件事。</p></div></div>
 <hr/>
 <h3 id="_27">二、 跨越鸿沟的三道关卡：技术路线替代与毛利率天花板拷问</h3>
@@ -1706,7 +1991,7 @@
 </li>
 </ul>
 <h4 id="_29">两大新曲线终局定性全景对比总结表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">评估维度</th>
@@ -1747,7 +2032,7 @@
 <td style="text-align: left;">⚠️ <strong>【伪协同鸡肋资产 / 潜在跨国资本消耗陷阱】</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>如果把东山精密比作一艘正在全速航行的巨轮，索尔思的光芯片和光模块就是刚刚换上的核动力引擎，维信的软板是坚固的压舱石，而管理层花大价钱从法国和日本买回来的那些老旧汽车冲压厂和液晶屏厂，则是挂在船尾一起拖着走的破渔网。聪明的船长应该专心给核动力引擎添燃料，而不是指望船尾的破渔网能帮船跑得更快。</p></div></div>
 <hr/>
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
@@ -1858,7 +2143,7 @@
 </ul>
 <hr/>
 <h3 id="2025-2026">三、 四大巨头（2025年报 &amp; 2026三季报）全维度交叉审讯总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审讯维度与核心指标</th>
@@ -1968,7 +2253,7 @@
 <td style="text-align: center;">0.66亿 <span class="math-inline"> → </span> <strong>1.03亿（+56.21%）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>鹏鼎控股就像一个严守清规戒律、不肯借一分钱外债的优等生，把苹果软板生意做出了25%的毛利，却因为自己蹲在实验室里一年花掉30多亿搞研发，被胆大包天、直接花60亿把别人现成的光芯片摇钱树买回家的东山精密在利润上超了车。在商业世界里，有时候按部就班练内功的少林寺高僧，短期内还真打不过直接掏钱买了一把加特林机枪的猎人。</p></div></div>
 <hr/>
 <h3 id="_30">四、 份额攻守结论：过去一年半里，三大战场到底是谁在抢谁的碗里肉？</h3>
@@ -2062,7 +2347,7 @@
 <hr/>
 <h4 id="3-owner-earnings">3. 东山精密“双口径”常态股东盈余（Owner Earnings）分步还原总表</h4>
 <p>我们将上述严密推导浓缩为一张一目了然的实业造血还原表（单位：亿元人民币）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与造血还原指标</th>
@@ -2151,7 +2436,7 @@
 <td style="text-align: left;"><strong>新东山精密当前常态真实造血底盘锚定为 60亿元/年（55—65亿）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街那帮拿提成的投资银行家最喜欢用“EBITDA（息税折旧摊销前利润）”这种狗屎指标来糊弄傻瓜，仿佛机器设备是永远不会报废的永动机。在光模块和电路板这行当里，每隔三年客户就会拿着新图纸逼你把旧机器扔进废铁堆——如果你敢把那36.5亿的折旧钱当成利润分掉，三年后你的工厂就只配生产苍蝇拍了！只有老老实实扣掉那32.5亿用来保命换设备的买路钱，剩下的60亿才是你真正能揣进兜里的自由钞票。</p></div></div>
 <hr/>
 <h3 id="5467">二、 54.67亿元在建工程达产后的“增量造血垫高测算”</h3>
@@ -2240,7 +2525,7 @@
 </ul>
 <hr/>
 <h4 id="2_2">2. 双极限压力测试定量算账总表（单位：亿元人民币）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心损益、现金流与偿债安全指标</th>
@@ -2365,7 +2650,7 @@
 <td style="text-align: left;">65.5亿OCF覆盖10.5亿利息绰绰有余，<strong>债务违约概率无限趋近于 0%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3-96">3. 压力测试核心结论：为什么账面利润会暴跌96%，但现金流绝不会断裂？</h4><p>从上表严密的定量推演中，我们得出了关于东山精密商业模式抗压力的三条硬核结论：</p><ol>
 <li>
@@ -2451,7 +2736,7 @@
 </ul>
 <hr/>
 <h3 id="_33">二、 东山精密与三大同行核心会计政策及减值计提严苛度横向对比表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计政策与减值审计维度</th>
@@ -2512,7 +2797,7 @@
 <td style="text-align: left;"><strong>全表头号风险点</strong>：无业绩对赌的跨国并购商誉高悬，高度依赖索尔思持续高景气</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看到那12.5个亿、占了存货原值12.28%的跌价准备没有？这就像一个聪明的主妇在年底盘点冰柜，把所有看着不太新鲜的冻肉一次性全当垃圾记了损失——虽然当年看着肉疼（2024—2025年利润被砸出大坑），但等第二年开春把里面还能用的肉拿出来炖汤卖掉时，成本直接归零，利润表好看得像变魔术一样。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="5-4683">5. 46.83亿元商誉的减值测试假设审视：整张资产负债表上唯一的“达摩克利斯之剑”</h4><p>如果说东山精密在应收账款、存货跌价、固定资产折旧和研发费用化四项上都拿到了高分，那么<strong>商誉科目就是必须拿十倍显微镜盯防的脆弱软肋</strong>：</p><ul>
@@ -2573,7 +2858,7 @@
 <hr/>
 <h4 id="2_3">2. 高管薪酬、员工大扩军与人均创收/人均创利/人均薪酬匹配度硬核审计</h4>
 <p>我们将东山精密2024年、2025年及2026年前三季度的员工结构、现金流量表人工支出与高管报酬拉出明细账单，做一场投入产出比（ROI）核算：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计维度与核心指标</th>
@@ -2648,7 +2933,7 @@
 <td style="text-align: left;">全体董监高年薪总额约2,235万—2,500万元，占2026Q1-Q3净利不到 <strong>0.5%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：2025年索尔思光电于10月并表、法国GMD于11月并表，其近1.5万名新增员工100%计入了2025年末总人数分母，但2025年利润表仅合并了其最后2—3个月的收入与利润，导致2025年表观人均创收与人均薪酬加权口径出现阶段性错配；按全年同口径加权平均人数3.13万人还原，2025年真实人均薪酬成本约为18.01万元，真实人均创收约为128.0万元。)</em></p><p>从这张硬核人力审计表中，可以得出三条极具价值的治理结论：</p><ol>
 <li>
 <p><strong>组织肌肉极度精悍，毫无大企业病（后台行政人员占比从8.85%压降至6.30%）</strong>：
@@ -2698,7 +2983,7 @@
 </ul>
 <hr/>
 <h4 id="true-ev">真实企业价值（True EV）双口径精确核算总表（单位：亿元人民币）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心估值构成科目</th>
@@ -2801,7 +3086,7 @@
 <td style="text-align: left;"><strong>公式：<span class="math-inline">M + MI + D - C<sub><span class="math-text">excess</span></sub></span>（若含租赁负债则达1,805亿—1,876亿）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看到没有？那些只看市值的懒汉以为自己花1,628亿就买下了这家公司，却没注意地下室里还藏着249亿的银行借条！就算把刚从香港股市融来的85亿钞票全算上，再扣掉工厂每天开门买米下锅绝不能动的75亿保命底仓钱，你买下这家公司的真实总代价（True EV）高达1,786亿到1,858亿！更别提香港融来的钱里头有85%早就写好了名字要去买新机器，根本不是拿来替你付旧账的！</p></div></div>
 <hr/>
 <h3 id="reverse-sotp-ai">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨法）：AI 算力资产到底被定了什么价？</h3>
@@ -2860,7 +3145,7 @@
 </ul>
 <hr/>
 <h4 id="3-reverse-sotp">3. Reverse SOTP 拆骨倒推与隐含估值对照表（单位：亿元人民币）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务分部 / 资本结构调整项</th>
@@ -2937,7 +3222,7 @@
 <td style="text-align: left;">若光模块毛利率回落至33%常态，当前AI资产隐含PE接近 <strong>39倍</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="4-ai2027">4. 一针见血的拆骨真相：哪有什么“白送AI期权”，分明已预支2027年乐观溢价！</h4><p>这张 Reverse SOTP 拆骨表彻底粉碎了市场上流行的一种懒人话术（所谓“东山精密传统主业就值1,000亿，索尔思光模块只花59亿买来，等于低估值白送AI算力龙头”）：</p><ol>
 <li>
 <p><strong>老东山精密扣除净债务后仅值 308亿元，高达 1,320亿元市值全部押注在 AI 算力上</strong>：
@@ -2961,7 +3246,7 @@
 <h3 id="_35">三、 同业估值横向比对、分档击球锚点与“三条基本面死刑证伪红线”</h3>
 <h4 id="1-a202611">1. A股五大算力与精密制造龙头横向估值坐标表（2026年11月基准）</h4>
 <p>为了精确定位东山精密当前的赔率位置，我们将它与光模块双雄（中际旭创、新易盛）及PCB双雄（沪电股份、鹏鼎控股）放在同一张2026年11月实盘估值表上进行全方位比对：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称与代码</th>
@@ -3026,12 +3311,12 @@
 <td style="text-align: left;"><strong>合理偏乐观 / 景气高点博弈区</strong>：表观PE似不高，但扣除净债后AI分部隐含30倍PE，已预支2027年增长</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>定性坐标裁决</strong>：当前东山精密（83.69元/股，总市值1,627.8亿元，备考True EV 1,786.3亿元）处于典型的<strong>“合理偏乐观 / 景气高点博弈区”</strong>。在经历2026年7月突破2,000亿市值后的回调，其狂热泡沫虽已挤去约20%，但相比于只有17—19倍PE且资产负债表极其干净的中际旭创、新易盛和沪电股份，东山精密由于背负157亿—228亿净债务且AI业务隐含30倍PE，<strong>当前位置的安全边际尚不足以支撑价值投资者“闭眼重仓满挥杆”</strong>。</p>
 <hr/>
 <h4 id="2-true-ev">2. 赔率测算与左侧/右侧分档击球区（精确到市值、股价与 True EV 倍数）</h4>
 <p>作为谨守安全边际的实业投资者，我们绝不在市场情绪亢奋、把周期紧缺毛利率当永续稳态的时候高价接盘。结合前文算出的 <strong>60.00亿元常态 Owner Earnings 底盘</strong>（以及达产后76.00亿元远期底盘）和 <strong>157.00亿元备考净有息负债</strong>（总股本19.45亿股），我们制定如下铁血分档击球纪律：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位与仓位动作</th>
@@ -3081,7 +3366,7 @@
 <td style="text-align: left;">市场因短期季报波动陷入非理性恐慌，仅传统果链+汽零+光模块残值即可提供铁底保护</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>⚡ 右侧动量重锤条件（若股价未跌入左侧区间，何种基本面质变允许在现价右侧加仓？）</strong>：</li>
 <li>如果股价始终维持在75元—85元区间震荡而未给出左侧低吸机会，唯有当以下<strong>两项右侧硬核催化同时被财报与产业订单证实</strong>时，方可将合理估值锚上调至 <strong>2,000亿—2,200亿元（对应股价102.80元—113.10元）</strong> 并执行右侧顺势加仓：</li>
@@ -3182,7 +3467,7 @@
 <p>在钟摆的狂热端为强周期重资产支付峰值溢价，绝不是安全边际信徒该干的事。我们会把东山精密放进观察名单，直到下一次AI算力去库存周期把它的市值重新砸回 <strong>900亿—1,000亿元（对应A股股价46—52元）</strong> 以下的黄金坑，再去扣动扳机。</p>
 <hr/>
 <h3 id="_36">📋 五、 《四位投资大师圆桌投票与核心判词总表》</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名</th>
@@ -3222,7 +3507,7 @@
 <td style="text-align: left;"><strong>【等更低黄金坑（左侧猎手耐心潜伏）】</strong><br/>当前83.69元处于情绪钟摆右端，安全边际不足；耐心等待AI光模块行业经历一轮去库存或价格战洗礼，市值回落至 <strong>900亿—1,000亿元（股价46—52元，隐含常态回报率&gt;6.5%）</strong> 时重锤建仓。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>💡 闭门圆桌会终极共识裁决</strong>：<br>
 四位大师一致承认，<strong>东山精密是中国制造业里极为罕见的“狼性并购整合者”</strong>——袁氏兄弟用2016年的MFLX和2025年的索尔思光电两次豪赌，硬生生把一家苏州乡镇钣金厂推上了全球果链与AI光互联的牌桌中央，6英寸InP光芯片99%自给率是实打实的硬核资产。<br>
@@ -3243,13 +3528,26 @@
 <p>对这种“狼性庄家加高杠杆强周期”股票，买方铁律只有八个字：<strong>底部重锤，顶部克制</strong>。前年十来块钱袁氏兄弟掏十几个亿包圆定增时是绝佳买点；但涨到如今八十多块钱、一千六百多亿市值后，扣掉值四百亿的传统果链和汽零业务，市场已给它的AI光模块和算力板预支了一千两百多亿巅峰估值，把未来几年的好日子全透支了，没有半毛钱免费期权。因此现价绝不追高接盘，持仓者应趁狂热分批兑现；想重新击球，必须耐心等下一轮AI硬件去库存把总市值砸回九百亿至一千亿以下（A股五十元以内）的黄金坑再出手。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3419,7 +3717,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《东山精密_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/东山精密_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《东山精密 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/东山精密 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3477,6 +3775,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

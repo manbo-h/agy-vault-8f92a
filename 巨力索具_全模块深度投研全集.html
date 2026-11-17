@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>巨力索具_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>巨力索具 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">巨力索具_全模块深度投研全集</div>
+    <div class="report-title">巨力索具 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -723,7 +1008,7 @@
 </ol>
 <h3 id="_8">二、 国内外同行全方位横向硬核比拼表</h3>
 <p>我们将巨力索具与国内两家直接上市同行——<strong>贵绳股份（600992.SH，老牌国企钢丝绳龙头）</strong>、<strong>赛福天（603028.SH，特种电梯/起重钢丝绳+光伏双主业）</strong>，以及全球行业天花板 <strong>布顿-贝卡尔特（Bridon-Bekaert Ropes Group）</strong> 拉到同一张桌面上做硬核对质：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -784,7 +1069,7 @@
 <td style="text-align: left;">专注高壁垒深海采矿与售后替换市场，不做低毛利基建垫资总包</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这四家公司的账本摆在一起，简直是一堂生动的工业防坑课：贵绳股份展示了“没有差异化产品、纯卖大路货钢丝绳”在产能过剩期是怎么把毛利率干到 0.47% 的；赛福天展示了“守不住老本行去跨界追热门光伏”是怎么赔了夫人又折兵的；而巨力索具虽然靠着 32% 毛利的化纤吊装带和定制大工程把毛利率守在了 17.5%，却把赚来的毛利全喂给了银行行长（一年 6,425 万财务费用）和欠钱不还的工程甲方（累计 2.58 亿坏账准备）。至于欧洲老大哥布顿-贝卡尔特为什么能舒舒服服赚走 8% 以上的利润率？因为人家只卖“深井矿山断一根绳子就死人停产”的必换耗材，绝不傻乎乎去给基建工地垫资当苦力。</p></div></div>
 <hr/>
 <h2 id="_9">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？（高度精炼，不写流水账）】</h2>
@@ -867,7 +1152,7 @@
 </ul>
 <h3 id="202120252026">二、 五年一期现金流硬账本（2021—2025年及2026前三季度标准对照表）</h3>
 <p>我们调取巨力索具 2021—2025 年经审计年报（含追溯调整后口径）及 2026 年三季报，拉出五年一期的真实造血与资本消耗总账：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -944,7 +1229,7 @@
 <td style="text-align: left;"><strong>较2021末净增4.25亿</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="_14">三、 穿透“合并报表幻觉”与资产负债表排雷</h3>
 <div class="annotated-row"><div class="main-col"><p>仔细审视上面这张五年一期总表，三个触目惊心的财务真相跃然纸上：</p><ol>
 <li>
@@ -1143,7 +1428,7 @@
 <hr/>
 <h4 id="2">2. 同行同类钢丝绳/索具扩产项目横向对比：巨力的钱花得偏省还是偏贵？</h4>
 <p>为了客观评判巨力索具在孟州和天津的投资效率，我们将国内四家代表性同行——<strong>贵绳股份（600992.SH）</strong>、<strong>赛福天（603028.SH）</strong>、<strong>咸阳宝石（中石油宝鸡石机旗下）</strong>、<strong>恒星科技（002132.SZ）</strong> 以及沿海海工锚链/系泊同行 <strong>亚星锚链（601890.SH）</strong> 的扩产/搬迁项目拉出硬账本进行横向对比：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目/企业名称</th>
@@ -1220,7 +1505,7 @@
 <td style="text-align: left;"><strong>不可简单类比</strong>（解释为何巨力投资远高于普通线材厂）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>横向比对核心结论</strong>：</p>
 <ol>
 <li>
@@ -1277,7 +1562,7 @@
 </li>
 </ol>
 <p>为了让买方一眼看清不同稼动率下的利润敏感度，我们构建 <strong>《孟州二期 + 天津海工基地（合计新增产值上限 17.5 亿元）转固后盈亏平衡敏感度矩阵》</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">综合稼动率 (产能利用率)</th>
@@ -1336,7 +1621,7 @@
 <td style="text-align: left;"><strong>释放规模效应（净利率 6.71%）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>工程师和老板在申请 6 个亿建新厂房的时候，PPT 上的算术题永远是按 100% 满负荷运转算的；但现实世界里的重资产制造业，一旦开工率掉到 40% 以下，那些每天都在生锈贬值的机器设备就会变成吸干股东鲜血的吸血鬼。看看上面这张表吧：如果新基地不能迅速拿到 7 个亿以上的新增订单把机器喂饱，光每年新增的六千多万折旧，就能把巨力索具现在那点可怜的一千多万净利润啃得连骨头渣都不剩。</p></div></div>
 <hr/>
 <h3 id="374">二、 审视消化能力：3.74 亿元在建工程转固后是“雪中送炭”还是“投产即微利过剩”？</h3>
@@ -1414,7 +1699,7 @@
 <hr/>
 <h3 id="_25">一、 两大新故事全维度商业证伪对比总表</h3>
 <p>在展开逐项深度推演前，我们先将两大新业务的真实家底、商业化刻度与终局定性浓缩于一张买方证伪总表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">证伪审计维度</th>
@@ -1464,7 +1749,7 @@
 <td style="text-align: left;"><strong>【具备真实工程资质、但受制于下游降本周期的慢变量远期期权（远水难救近火）】</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="99651">二、 商业化刻度定位：剥开宣传画皮，看清 996.51 万元与示范工程背后的真实成色</h3>
 <h4 id="1-99651">1. 商业航天索具：996.51 万元订单里到底卖的是什么？全球火箭回收为什么不需要“海量钢丝绳”？</h4>
@@ -1590,7 +1875,7 @@
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
 <p>在重工业制造领域，单看一家公司的财报很容易被管理层精心挑选的“营收逆势增长”叙事所迷惑。要看穿巨力索具（002342.SZ）在 2025 年及 2026 年前三季度交出的“营收连续增长 16%—17%、净利润却在盈亏线边缘挣扎”的真实底牌，最残酷也最有效的方法，就是把它的直接竞争对手——老牌钢丝绳国企龙头 <strong>贵绳股份（600992.SH）</strong>、特种钢丝绳与光伏双主业同行 <strong>赛福天（603028.SH）</strong>，以及同样服务于风电高空吊装安全领域的优等生 <strong>中际联合（605305.SH）</strong> 拉到同一间审讯室里，用 2025 年报与 2026 年三季报的资产负债表和利润表附注做一场逐项对质。</p>
 <h3 id="2025-2026">一、 同行全方位横向交叉对质大表（2025年报 &amp; 2026三季报硬账本）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心对质维度</th>
@@ -1679,7 +1964,7 @@
 <td style="text-align: left;">账面趴着超 10 亿元净现金及理财</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="1617">二、 景气度对质：连续 16%—17% 的逆势增长，是真景气还是“赊销催熟”？</h3>
 <div class="annotated-row"><div class="main-col"><p>把巨力索具、贵绳股份和赛福天三家公司的增长曲线叠在一起，第一个极其尖锐的矛盾立刻浮出水面：<strong>在传统地产基建退潮、普通钢丝绳产能严重过剩的 2025—2026 年，为什么贵绳股份营收连续萎缩（2025 年 -2.69%、2026 前三季度 -7.91%）、毛利率跌至 0.47%，而巨力索具却能连续交出 2025 年 +16.08%（25.70 亿元）、2026 前三季度 +17.41%（20.47 亿元，Q3 单季 +22.35%）的靓丽营收增速？</strong></p><p>通过交叉比对资产负债表两端的 <strong>合同负债（预收货款）</strong>、<strong>应收账款</strong> 与 <strong>应付票据</strong>，我们可以将这 16%—17% 的增长拆解为“三成真本事、七成赊销杠杆”：</p><ol>
@@ -1769,7 +2054,7 @@
 <h2 id="e">【追问模块 E：会计成色与治理细节显微镜】</h2>
 <p>如果说模块 C 审讯的是巨力索具的“生意效率”，那么模块 E 则是拿着买方法务与注册会计师的显微镜，对巨力索具 2025 年报及 2026 年三季报附注中的 <strong>会计政策保守度、资产减值水分、薪酬激励机制与家族治理前科</strong> 进行一次不留情面的排雷大体检。</p>
 <h3 id="_28">一、 同行会计政策与治理细节硬核对比表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计与治理维度</th>
@@ -1837,7 +2122,7 @@
 <td style="text-align: left;">🚨 <strong>治理红灯</strong>：信披违规顶格重罚 + 概念高潮期大股东精准套现，治理可靠度极低！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="244">二、 资产质量排雷（重中之重）：撕开“暂估应收洗账龄”与 24.4 亿营运资产的减值遮羞布</h3>
 <p>通过上表对比可以清晰看出：巨力索具在固定资产折旧年限（房屋 25—35 年、机器 10—15 年）和研发费用资本化率（0%）上并未耍花招；<strong>它真正的财务水分与利润调节蓄水池，100% 藏在合计高达 24.40 亿元（占总资产 44.5%）的“应收账款”与“存货”两大科目之中！</strong></p>
@@ -2029,7 +2314,7 @@
 </ol>
 <h4 id="2-vs-owner-earnings">2. “账面表观现金流” vs “真实可支配 Owner Earnings”分步还原表</h4>
 <p>我们将上述硬核数据放入同一张还原表中，对比会计表象与买方真相：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与财务指标</th>
@@ -2122,7 +2407,7 @@
 <td style="text-align: left;"><code>④ 1.32亿 - ⑨ 0.60亿 - ⑤常态垫资 0.45亿 = 0.27亿</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街和A股的推销员最喜欢拿第④行那个“净利润加折旧等于 1.32 亿（所谓 EBITDA 口径）”去忽悠散户，仿佛那 1.22 亿的折旧费是天上掉下来可以随便分给股东买游艇的零花钱。但在重工业车间里，酸洗槽会被腐蚀穿孔、拉丝机轴承会磨平报废，每年不往里头砸回 6,000 万更新设备，工厂不出三年就会变成一堆废铁；再扣掉每年被工程大爷们新欠下的 4,500 万白条，这台年营收 26 亿的庞大机器，真正能剩在桌面上供股东自由支配的真金白银（Owner Earnings）只有可怜的 2,700 万——连给银行行长交 6,425 万利息的一半都不够！</p></div></div>
 <hr/>
 <h4 id="3-owner-earnings">3. 《三档经营与成本标尺下的 Owner Earnings 矩阵表》</h4>
@@ -2130,7 +2415,7 @@
 <ul>
 <li><strong>原材料成本与现货基准（2026年11月最新行情）</strong>：国内 45# 碳结钢/高碳拉丝盘条主流含税价处于 <strong>3,400—3,780 元/吨</strong> 底部震荡区间（中枢约 3,550 元/吨），涤纶工业丝均价维持在 <strong>12,100 元/吨</strong> 左右。</li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心维度与算账公式</th>
@@ -2201,7 +2486,7 @@
 <td style="text-align: left;"><strong>-0.30 亿元 / 年</strong><br/><em>(-3,000 万元，新产线折旧反成包袱)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="374-eva">二、 增量垫高测算：3.74 亿元在建工程投产后的真实造血与 EVA（经济增加值）审计</h3>
 <div class="annotated-row"><div class="main-col"><p>截至 2026 年三季末，巨力索具资产负债表上的“在建工程”高达 <strong>3.74 亿元</strong>（2025 年末合并注释口径为 3.62 亿元），核心对应两大重资产扩建项目：<strong>① 河南孟州基地二期（年产 5 万吨粗直径高端钢丝绳及配套索具深加工项目）</strong> 与 <strong>② 天津临港海洋工程装备索具配套基地</strong>。</p><p>如果这两大项目在未来 1—2 年内全部竣工转固并消化产能，究竟能把公司的 Owner Earnings 中枢往上垫高多少？扣除新增折旧与资金成本后，这笔投资到底是在创造价值还是毁灭价值？我们用最冷酷的工业算盘算一笔硬账：</p><ol>
@@ -2259,7 +2544,7 @@
 </li>
 </ol>
 <p>我们以 2025 年经审计实绩（<strong>营收 25.70 亿元、营业成本 21.21 亿元、毛利额 4.49 亿元、综合毛利率 17.46%、刚性期间费用 3.83 亿元</strong>）为压力测试基准盘，推演三档极端冲击下的毛利与自由现金流底线：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">压力测试情景设定</th>
@@ -2324,7 +2609,7 @@
 <td style="text-align: left;"><strong>-4.72 亿元 / 年</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>压力测试核心洞察</strong>：</p>
 <ol>
 <li>
@@ -2343,7 +2628,7 @@
 <p>我们以截至 2026 年 11 月上旬的最新交易数据（基准收盘价 <strong>6.83 元/股</strong>，近期于 6.83—7.04 元/股窄幅波动）及 2026 年三季报（截至 2026 年 9 月 30 日）资产负债表硬数据，核算全款并购巨力索具的<strong>真实企业价值（True Enterprise Value，简称 True EV）</strong>：</p>
 <div class="math-display"><span class="math-text">True EV</span> = <span class="math-text">普通股总市值</span> + <span class="math-text">少数股东权益</span> + <span class="math-text">全口径有息负债</span> - <span class="math-text">可自由支配超额现金</span></div>
 <h4 id="true-ev_1">《巨力索具真实企业价值（True EV）买方精算审计表》</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值核算科目</th>
@@ -2444,13 +2729,13 @@
 <td style="text-align: left;">若将 5.00 亿元无现金覆盖的应付票据净敞口视同准债务，真实并购标价高达 <strong>83.87 亿元</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>股票软件最害人的地方，就是只把 65.57 亿的总市值标在显眼的位置，却把那 13.30 亿催命的银行贷款和 7.75 亿马上要兑付的承兑汇票藏在财务报表第三十页的角落里。更滑稽的是，外行看到账上有 3.94 亿货币资金还以为公司手里有余粮，殊不知里头大半是银行开票锁死的保证金，剩下的活钱连发两个月工资和付钢厂货款都不够（超额自由现金实实在在是零！）。你今天在股市里按 6.83 元买巨力索具，等于在按 <strong>78.87 亿（甚至 83.87 亿）</strong> 的总标价盘下这家工厂！</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值）</h3>
 <h4 id="1-oe-true-ev">1. 静态回本年限与隐含真实内生回报率（<code>OE / True EV</code>）对表</h4>
 <p>现在，我们把模块 D 算出的三把标尺下的真实股东盈余（Owner Earnings），放到 <strong>78.87 亿元 True EV</strong>（及 <strong>65.57 亿元总市值</strong>）的天平上称重，看看以当前价格买入巨力索具的投资者，究竟在承受怎样荒诞的赔率：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值回报率核心指标</th>
@@ -2503,7 +2788,7 @@
 <td style="text-align: center;"><strong>0.00%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>一组让人脊背发凉的买方对比</strong>：
 * 巨力索具自己向银行贷款的加权平均利息成本约为 <strong>4.83%</strong>（2025 年财务费用 6,424.69 万元 / 13.30 亿元有息负债）；
 * 十年期中国国债无风险收益率约为 <strong>2.1%—2.2%</strong>；
@@ -2611,7 +2896,7 @@
 <hr/>
 <h4 id="2_5">2. 苛刻买方分档击球表（不进击球区绝不挥棒）</h4>
 <p>遵循巴菲特与霍华德·马克斯“在烂资产/苦生意上必须要求极端清算折价”的买方纪律，我们为巨力索具划定四档严苛的价格与基本面双重击球标尺：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位定性</th>
@@ -2661,7 +2946,7 @@
 <td style="text-align: left;"><strong>【困境反转重锤击球点】</strong><br/>全公司股权市值（≤13.9亿）仅相当于单独买下“32%毛利化纤吊装带（7亿）+ 特种密闭索（3.3亿）”再加一点厂房废铁残值，白送全部通用钢丝绳产能与海工期权，具备极高困境反转赔率。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_1">3. 三条无条件离场/拉黑的“基本面死刑证伪红线”</h4><p>对于巨力索具这类兼具“重资产高负债”与“家族治理前科”的公司，哪怕未来某一天股价真的跌进 <code>1.80—2.10 元</code> 的左侧建仓区甚至 <code>1.45 元</code> 的重锤区，只要监控到以下任意一条<strong>基本面死刑证伪红线</strong>被触发，买方必须无条件一票否决、永久拉黑或立即止损离场：</p><ul>
 <li><strong>🚨 死刑红线一：【应收账款失控与经营现金流连续失血红线（商业模式崩塌）】</strong></li>
@@ -2749,7 +3034,7 @@
 <p>看懂这笔账，你就明白现在的赔率有多么荒谬：在 <strong>7.02 元/股（总市值 67.39 亿元，True EV 约 76.5 亿元）</strong> 的位置上，市场不仅没有因为证监会 950 万信披违法罚单和 14.93 亿应收账款风险给你任何‘困境折价’，反而还在为早已证伪的‘商业航天/深海概念残余泡沫’支付着 <strong>近 50 亿元的纯空气溢价</strong>！这是一场典型的 <strong>‘上行空间全靠博傻、下行回撤深不见底（潜在价值回归跌幅超 60%—70%）’</strong> 的负期望值赌局。在钟摆没有彻底摆向‘无人问津的破净深度折价区（总市值跌破 20 亿元、且应收账款停止流血）’之前，困境猎手的唯一动作就是：<strong>把双手插进兜里，冷眼旁观</strong>。”</p>
 <hr/>
 <h3 id="5">📋 5. 四位投资大师闭门投票与终极裁决总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名</th>
@@ -2794,7 +3079,7 @@
 <td style="text-align: left;">股民虚假陈述诉讼赔偿全部计提落地，且总市值回落至 <strong>18 亿—22 亿元（约 0.8x PB 以内、股价 2.0 元附近）</strong> 的极端恐慌折价区。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>⚖️ <strong>【闭门圆桌会终极合议裁决：4 票全票「坚决回避」（0 买入 / 0 观察 / 4 回避）】</strong>
 四位大师罕见地达成 <strong>100% 零分歧共识</strong>：巨力索具（002342.SZ）是一座 <strong>“工程产品局部有亮点（32%毛利的化纤吊装带与高钒密闭索），但整体商业模式陷入伯克希尔纺织厂式重资产垫资泥潭、且叠加信披违法重罚与大股东高位套现双重治理折价”</strong> 的典型资本消耗型企业。在当前 <strong>~7.02 元/股（总市值 67.39 亿元、True EV 约 76.5 亿元）</strong> 的估值水位下，题材退潮尚未走完，真正的买方安全边际远未出现。</p>
@@ -2814,13 +3099,26 @@
 <p>四位大师闭门投票给出了罕见的“四票全票坚决回避”。从二十四元疯人院泡沫跌到七元（总市值仍达六十七亿），只说明从极度癫狂回到依然昂贵，市值里还揣着近五十亿空气溢价。买方铁律极干脆：把手插进兜里，绝不抄底接飞刀！只有未来同时满足三个苛刻条件——股民索赔全部赔付落地、应收款压降到十亿以内且自由现金流转正、总市值跌破二十亿元（股价两元附近深度破净区），才值得重看一眼。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2990,7 +3288,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《巨力索具_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/巨力索具_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《巨力索具 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/巨力索具 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3048,6 +3346,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

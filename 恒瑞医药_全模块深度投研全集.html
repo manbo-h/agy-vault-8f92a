@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>恒瑞医药_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>恒瑞医药 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">恒瑞医药_全模块深度投研全集</div>
+    <div class="report-title">恒瑞医药 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -685,7 +970,7 @@
 <h2 id="_3">【第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）】</h2>
 <p>拒绝把几十个管线名字当报菜名罗列！我们直接把恒瑞决定未来十年胜负的<strong>三大核心疆域（肿瘤 ADC 与免疫王牌、慢病代谢 GLP-1 双靶点、手术室麻醉镇痛矩阵）</strong>拉到阿斯利康/第一三共、礼来、信达生物、科伦博泰、人福医药等国内外最强的直接竞争对手面前，用真实的临床终点硬数据做一场刺刀见红的横向比拼。</p>
 <h3 id="_4">一、 核心产品与国内外竞品硬核临床数据横向对质总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">赛道与核心维度</th>
@@ -735,7 +1020,7 @@
 <td style="text-align: left;"><strong>【高龄危重手术与无痛诊疗的黄金替代方案】</strong><br/>经过严格头对头验证！虽然几块钱一支的集采丙泊酚仍占基层普通手术大头，但在老年心血管高危手术、高端无痛胃肠镜及 ICU 镇静中，瑞马唑仑+艾司氯胺酮凭借“不降血压+有后悔药（氟马西尼）”成为三甲麻醉科主任首选</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>外行看医药只喜欢听“全球首创”的故事，内行看的是临床医生的处方账本。你看恒瑞的 `SHR-A1811`（艾维达），第一三共的 `DS-8201` 固然是开山鼻祖，但每个抗体挂 8 个毒素分子，把 10%—15% 的病人搞出间质性肺炎；恒瑞聪明地把偶联比降到 6、加固了连接子锁扣，疗效不打折，肺毒性砍掉一半以上。再看麻醉药瑞马唑仑，丙泊酚虽然便宜好用，但没有解药、一打血压就掉，给八十岁老大爷做胃镜时麻醉医生手心都冒汗，而瑞马唑仑既不伤心肺还自带“一键撤回解药（氟马西尼）”。帮医生少担医疗事故风险的药，就是最好的印钞机！</p></div></div>
 <h3 id="vs">二、 跨国巨头拿真金白银投票的“硬核王牌” vs “边缘品种”辨析</h3>
 <p>除了上述已上市或准上市品种，检验恒瑞研发平台成色最硬的试金石，是<strong>全球顶级跨国药企（MNC）尽调团队用数亿美元现金首付款投出的选票</strong>：</p>
@@ -835,7 +1120,7 @@
 </li>
 </ul>
 <h3 id="3-20212026q3">3. 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2026Q3）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务与现金流核心指标（单位：亿元人民币）</th>
@@ -940,7 +1225,7 @@
 <td style="text-align: center;"><strong>434.47</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>打破“合并报表幻觉”两项深度体检</strong>：</p><ol>
 <li>
 <p><strong>少数股东损益与权益核查（极度纯净）</strong>：2025 年全年恒瑞合并净利润中，少数股东损益仅为 <strong><code>594.74万元</code></strong>（<code>0.059亿元</code>），占总净利润比重仅为 <strong><code>0.077%</code></strong>！且公司还在持续回购成都盛迪医药等子公司剩余少数股权。这意味着合并报表里的每一分利润和每一分现金，几乎 <strong>100% 归属于上市公司全体股东</strong>，毫无“母公司空心化”或“少数股东分走肥肉”的纸面富贵幻觉。</p>
@@ -1113,7 +1398,7 @@
 </li>
 </ol>
 <p>我们将恒瑞的核心大分子/ADC 及多肽扩产项目，拉到百济神州、信达生物、药明合联、诺泰生物等同行面前，算一算最硬核的<strong>“单位产能投资额”</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比企业与核心扩产项目</th>
@@ -1166,7 +1451,7 @@
 <td style="text-align: left;"><strong>【棕地改扩建省钱典范】</strong><br/>相比从零拿地的纯多肽新厂节省约 <strong>25%—30%</strong> 公辅基建投资，且实现“原料药—制剂注射笔”厂内零距离咬合</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3-bep">（3）转固折旧 + 无形资产摊销增量测算与盈亏平衡稼动率（BEP）推导</h4><p>这批在建工程与资本化开发支出陆续转固/结转后，会不会压垮恒瑞的利润表？我们用严密的财务公式算一笔硬账：</p><ol>
 <li>
 <p><strong>新增固定资产折旧测算</strong>：截至 2025 年末公司在建工程余额为 <code>20.06亿元</code>，叠加 2026 年实体基建投入，假设未来 1—2 年内共有 <strong><code>20.00亿元</code></strong> 实体工程（苏州盛迪亚 ADC 二期、连云港多肽车间、广东知识城、上海研发中心等）达到预定可使用状态转入固定资产。参照恒瑞年报会计政策（房屋及建筑物折旧年限 <code>20年</code>、残值率 <code>5%</code>，年折旧率 <code>4.75%</code>；高精密专用制药及检测设备折旧年限 <code>5—10年</code>、残值率 <code>5%</code>，年折旧率 <code>9.50%—19.00%</code>），按土建厂房占 <code>45%</code>、工艺设备占 <code>55%</code> 加权计算，综合年折旧率约为 <strong><code>8.0%</code></strong>。则 <code>20.00亿元</code> 实体工程全面转固后，<strong>每年新增固定资产折旧仅为 <code>1.60亿元</code></strong>（<span class="math-inline"><span class="math-text">20.00亿元</span>  ×  8.0\% = 1.60<span class="math-text">亿元</span></span>）。</p>
@@ -1259,7 +1544,7 @@
 <hr/>
 <h3 id="1-b2b">1. 商业化刻度定位：谁在冲刺国内收银台，谁已跑通“B2B 跨国研发变现闭环”？</h3>
 <p>很多投资者习惯用传统药企“十年磨一剑、熬到上市卖药才能回本”的线性刻度去衡量恒瑞的新业务，却忽略了恒瑞在非肿瘤慢病赛道已经完成了一场<strong>“国内冲刺 C 端商业化 + 海外通过 MNC 买断与 NewCo 纳斯达克上市提前锁定百亿现金”</strong>的双轨商业进化：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">新业务成长曲线与核心代表资产</th>
@@ -1313,7 +1598,7 @@
 <td style="text-align: left;"><strong>【实验室向临床转化早期】</strong><br/>纯研发投入阶段，距离国内商业化收银台尚有 3—5 年距离</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>刻度定位核心结论</strong>：恒瑞的新业务绝不是铁板一块的“早期烧钱概念”——其中<strong>慢病代谢与心血管/呼吸管线（<code>HRS9531</code>、<code>HRS-5346</code>、<code>HRS-1893</code>、<code>HRS-9821</code>）已经通过“B2B 跨国首付款 + 美股 NewCo 股权上市”提前跑通了暴利变现闭环</strong>，仅已落袋或锁定的外币首付款及近期款就高达 <strong><code>17.6亿美元</code>（折合人民币超 <code>125亿元</code>）</strong>；而国内 C 端市场方面，<code>HRS9531</code> 已站在 NMPA 批准上市的临门一脚；唯有<strong>小核酸、核药 RLT 与 PROTAC</strong> 仍处于纯粹的临床转化早期。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>大多数生物科技公司搞新药，就像在沙漠里闭着眼睛打井，十口井有九口不出油，最后把自己渴死在半路上。恒瑞在慢病新赛道上干了一件极其狡猾的事：它的减肥药 `HRS9531` 和降脂药 `HRS-5346` 在中国还没正式开卖呢，转身先把海外经营权切下来，从默沙东、GSK、BMS 和华尔街基金手里收了十几亿美元的不退还定金，还顺手白拿了两家纳斯达克上市公司（Kailera 和 Braveheart）的大把原始股！这就好比你刚把果园的树苗种下去，隔壁的外国富豪就已经把你买地、买化肥和雇农夫的钱全报销了，还倒贴你几十个亿。往后这棵树在中国结出来的每一个果子，成本全都是零！</p></div></div></div></div>
 
 <hr/>
@@ -1357,7 +1642,7 @@
 <hr/>
 <h3 id="3_2">3. 竞争终局推演与最终定性：面对礼来、诺和诺德与信达围剿，恒瑞凭什么分一杯羹？</h3>
 <h4 id="1glp-1">（1）中国及全球代谢减重（GLP-1）赛道四大主力玩家竞争终局推演表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">竞争维度</th>
@@ -1410,7 +1695,7 @@
 <td style="text-align: left;"><strong>【低端长尾混战】</strong><br/>十余家瓜分底层单靶点集采市场，单家利润率极薄</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2_5">（2）面对外资双雄与本土对手挤压，恒瑞凭什么能切下百亿蛋糕？（四大非对称胜手）</h4>
 <ol>
 <li>
@@ -1445,7 +1730,7 @@
 <hr/>
 <h3 id="bd">一、 景气度与出海成色对质：国内院内复苏与全球BD浪潮中谁在领跑？</h3>
 <h4 id="1-2025-2026">1. 中国头部创新药企与综合大药企横向对质总表（2025年报 &amp; 2026年最新季报/中报）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对质维度</th>
@@ -1554,7 +1839,7 @@
 <td style="text-align: left;">再生元、罗氏等大额BD首付款入账带动合约负债及递延收益高增</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2_6">2. 景气度与出海成色深度剖析</h4><p>从上述五强对质大表中，我们可以清晰地剥离出当前中国医药工业的两条分化主线与三大事实：</p><ul>
 <li>
 <p><strong>第一，营收表观增速的温差，本质是“存量集采包袱厚度”的温差</strong>：百济神州（2025年营收 <code>+40.46%</code>、2026前三季度 <code>+26.80%</code>）与信达生物（2025年 <code>+38.40%</code>、2026上半年 <code>+44.80%</code>）之所以能跑出 30%—45% 的极高表观增速，核心原因在于它们是“零仿制药历史包袱”的纯粹创新药企，每一分新增收入都是纯增量。反观恒瑞医药（2025年 <code>+13.02%</code>，2026前三季度 <code>+5.26%</code> 但单Q3已强劲反弹至 <code>+20.55%</code>）与中国生物制药（2025年 <code>+10.30%</code>，2026上半年 <code>+10.60%</code>），两者仍背负着 120 亿—160 亿元体量的传统仿制药基数（如恒瑞的造影剂 <code>29.93亿元</code> 及部分老品种），第九批、第十批国家集采及地方集采续标仍在持续挤压仿制药存量水分。若单拎出恒瑞的<strong>创新药销售收入（2025年达 <code>163.42亿元</code>，占药品销售比重突破 <code>58.34%</code>）</strong>加上<strong>BD授权收入（<code>33.92亿元</code>）</strong>，恒瑞的“创新引擎总盘子”在 2025 年已近 <code>200亿元</code>，体量不仅全面超越信达生物（<code>130.42亿元</code>）、翰森制药（<code>123.54亿元</code>）和中国生物制药（<code>152.20亿元</code>），且同样保持着 25%—30% 以上的强劲内生扩张。</p>
@@ -1580,7 +1865,7 @@
 <div class="math-display"><span class="math-text">还原后归母净利润（考虑15\%基础所得税盾）</span> = <span class="math-text">Net Profit</span><sub><span class="math-text">reported</span></sub> - \Delta R<sub><span class="math-text">cap</span></sub>  ×  (1 - 15\%)</div>
 <div class="math-display"><span class="math-text">还原后极限归母净利润（极端严苛假设：零税盾100\%硬扣净利润）</span> = <span class="math-text">Net Profit</span><sub><span class="math-text">reported</span></sub> - \Delta R<sub><span class="math-text">cap</span></sub></div>
 <p>我们将 2025 年全年及 2026 年前三季度的锁定基准数据代入上述公式，并与百济神州、信达生物、中国生物制药进行同口径对质：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务指标（同口径100%研发费用化还原）</th>
@@ -1666,7 +1951,7 @@
 <td style="text-align: left;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2-515">2. 为什么砸回全部资本化研发后，恒瑞净利率依然高出同行 5—15 个百分点？</h4><p>测试结果令人震撼：<strong>哪怕我们用最严苛的“零税盾 100% 研发费用化”把 2025 年的 <code>17.63亿元</code> 资本化研发支出全部从净利润里硬生生刨去，恒瑞医药 2025 年依然能稳稳赚取 <code>59.48亿—62.12亿元</code> 的真金白银净利润，真实净利率高达 <code>18.81%—19.64%</code>；2026 年前三季度在 100% 费用化还原（研发费用率高达 <code>29.28%</code>）后，真实净利率更是达到惊人的 <code>21.30%—22.36%</code>！</strong></p><p>在真实研发强度（2025年 <code>27.58%</code>、2026前三季度 <code>29.28%</code>）显著高于信达生物（<code>20.12%</code>）、中国生物制药（<code>18.44%</code>）和翰森制药（<code>22.35%</code>）的前提下，恒瑞还原后的真实净利率依然比百济神州高出 <strong>5—15 个百分点</strong>、比信达生物高出 <strong>6—13 个百分点</strong>、比中国生物制药高出 <strong>7—9 个百分点</strong>。这近十个百分点的超额利润护城河，绝非来自会计技巧，而是源于以下三大硬核工业底座：</p><ol>
 <li>
 <p><strong>临床研发的“本土工程师红利与去CRO化内生铁军”（省下 10—12 个百分点的研发费用率）</strong>：
@@ -1735,7 +2020,7 @@
 <h4 id="1-20212026q3">1. 研发资本化显微镜：2021—2026Q3 六年完整账本与闭环追踪</h4>
 <p>历史上（2021年11月之前），恒瑞医药曾以“100% 研发费用化”著称于 A 股。2021 年 11 月，面对集采阵痛期与创新药管线大规模进入 III 期临床的双重客观现实，恒瑞发布《关于会计估计变更的公告》，对内部研发支出资本化时点进行了明确规范：<strong>对于需要临床试验的研发项目，在进入 III 期临床试验（或关键性注册临床试验）阶段、且同时满足《企业会计准则第 6 号——无形资产》规定的五项条件时，开始将相关开发支出予以资本化计入“开发支出”科目；待取得国家药监局（NMPA）或海外同类监管机构颁发的正式药品注册批件（不含附条件批准上市）并投入商业生产之日起，结转为“无形资产”，并在不超过 10 年的商业寿命内按直线法摊销。</strong></p>
 <p>我们为您拉出恒瑞医药自 2021 年开启研发资本化以来直至 2026 年三季报的<strong>完整六年铁账本</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">年份 / 报告期</th>
@@ -1817,7 +2102,7 @@
 <td style="text-align: left;">持续按10年以内直线摊销</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>透过这张六年完整账本，我们可以得出三个极具穿透力的排雷结论：</p><ul>
 <li>
 <p><strong>第一，资本化时点卡在“关键 III 期临床”，且剔除“附条件上市”，标准在 A 股医药行业属于中等偏严</strong>：部分激进的 A 股药企在获得 I 期/II 期临床批件或仿制药 BE（生物等效性）备案时就开始资本化；而恒瑞严格要求自主创新药必须进入<strong>关键性 III 期临床（此时临床成功率已大幅提升至 60%—70% 以上）</strong>才允许资本化，且明确规定在结转无形资产时“不包括有条件上市的药品注册批件”（即附条件批准期间仍需审慎评估，直至获得完全正式批准）。</p>
@@ -1835,7 +2120,7 @@
 <h4 id="2_7">2. 应收账款、存货与固定资产折旧的“同行会计政策大对质”</h4>
 <p>如果说恒瑞在研发支出上采用了“约 80% 费用化 + 20% 资本化”的行业折中稳健策略，那么当我们将显微镜移向它的<strong>应收账款、存货跌价与固定资产折旧政策</strong>时，会惊讶地发现：恒瑞在这些传统科目上奉行着近乎“洁癖级”的严苛保守主义！</p>
 <h5 id="a_1">A股与港股代表性药企核心会计政策对比表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计政策与资产质量维度</th>
@@ -1896,7 +2181,7 @@
 <td style="text-align: left;">翰森商誉为0；中生制药因收购礼新等形成一定并购无形资产与商誉</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>让我们把聚光灯打在恒瑞财报附注里最容易被普通投资者忽略的<strong>三个硬核细节</strong>上：</p><ol>
 <li>
 <p><strong>极其罕见的机器设备“年数总和法”加速折旧（隐蔽的利润含金量加分项）</strong>：
@@ -1919,7 +2204,7 @@
 <p>为了留住顶尖科学家与商业化骨干，恒瑞医药在 2024 年、2025 年、2026 年连续三年推出常态化的 <strong>A 股员工持股计划</strong>，并配套以每年 <strong><code>10亿—20亿元</code></strong> 的真金白银二级市场股份回购（如 2026 年新一轮回购方案资金总额为 10 亿—20 亿元，全部用于员工持股计划，未使用部分依法注销）。</p>
 <p>市场最核心的拷问是：<strong>员工持股计划受让价格约为市价的 50%（如 2026 年草案受让价为 <code>26.21元/股</code>，覆盖不超过 1,269 名核心骨干），这到底是激发战斗力的硬核激励，还是管理层给自己发半价福利？</strong></p>
 <p>我们直接将恒瑞 2024 年、2025 年、2026 年三期员工持股计划的<strong>公司层面解锁考核指标</strong>拉出来逐条审计：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">员工持股计划期次</th>
@@ -1972,7 +2257,7 @@
 <td style="text-align: left;">隐含2027年创新药收入需达240亿元、2028年需达300亿元，复合增速要求高达 <strong>20%—25%+</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>激励审计定性结论——“真金白银买股 + 三维木桶硬熔断”，含金量极高</strong>：</p>
 <ol>
 <li>
@@ -1989,7 +2274,7 @@
 <h4 id="2-20212025">2. 2021—2025 组织大换血、人效翻倍跃迁与高管薪酬匹配度审计</h4>
 <p>2021 年至 2025 年，恒瑞医药经历了一场中国医药工业史上最壮烈、也最成功的“刮骨疗毒式”组织大换血。我们通过历年年报披露的员工专业构成与财务数据，为您完整还原这场大换血前后的人效跃迁轨迹：</p>
 <h5 id="20212025">恒瑞医药 2021—2025 年员工结构大换血与人均创收/创利跃迁表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">年份</th>
@@ -2090,9 +2375,9 @@
 <td style="text-align: left;"><strong>人均净利翻倍（+102.32%）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="2025">核心高管团队画像与 2025 年度薪酬审计表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">高管姓名</th>
@@ -2132,7 +2417,7 @@
 <td style="text-align: left;">率领5,684名研发铁军打造出全球领先的ADC、GLP-1、双抗管线矩阵，403万薪酬在头部创新药企研发一号位中堪称“物美价廉”（同行Biotech研发总裁年薪普遍超1,500万—3,000万元）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>组织与薪酬审计终极结论</strong>：</p><ul>
 <li>
 <p><strong>销售削藩近半、营收反创历史新高的“人效奇迹”</strong>：从 2021 年初的 <code>17,138名</code> 销售人员铁腕精简至 2025 年末的 <code>8,953人</code>（砍掉近一半冗余的县域及普药代表），但人均创收却从 <code>105.78万元</code> 飙升至 <strong><code>153.52万元</code></strong>（<code>+45.13%</code>），单名销售人员平均背负的营业收入从 2021 年的 <code>196.14万元</code> 暴增至 2025 年的 <strong><code>353.28万元</code></strong>（增幅高达 <strong><code>+80.12%</code></strong>），全员人均创造归母净利润更是从 <code>18.50万元</code> 翻倍跃升至 <strong><code>37.43万元</code></strong>（<code>+102.32%</code>）！这铁证如山地说明，恒瑞已经彻底告别了昔日“人海战术+带金销售”的旧时代，全面进化为以临床循证医学证据（如新英格兰医学杂志 NEJM、柳叶刀 Lancet、JAMA 发表的重磅论文）驱动的专业化学术推广体系。</p>
@@ -2212,7 +2497,7 @@
 <li>2026 年前三季度实现 OCF <code>78.44亿元</code>、FCF <code>51.73亿元</code>，结合 Q4 传统医保结算回款高峰及海外里程碑到账，2025—2026 年报表实绩口径下的<strong>常态可自由支配现金流中枢稳居 <code>75.00亿—85.00亿元/年</code></strong>（基准中位数 <strong><code>80.00亿元/年</code></strong>）。</li>
 </ul>
 <h4 id="3-owner-earnings">3. 恒瑞医药双口径常态 Owner Earnings 分步还原对照表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务还原步骤与核心科目</th>
@@ -2325,7 +2610,7 @@
 <td style="text-align: left;"><strong>最严苛保守底盘 66 亿元/年；报表实绩中枢 80 亿元/年</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>许多华尔街和陆家嘴的医药分析师喜欢发明各种叫“经调整 EBITDA”或者“扣除研发前利润”的荒唐词汇，那跟把狗屎称为“有机植物营养素”没什么两样。对恒瑞来说，每年那 17.5 亿元被会计师塞进资产负债表里的“资本化研发支出”，本质上就是你留在牌桌上继续下注必须交的台面费！我们把它一分不剩地从利润里扒掉，再把海外药企给的定金按三年摊平，剩下的这 66 亿到 70 亿元真金白银，才是哪怕明天太阳从西边出来、股东也能放心揣进兜里买喜诗糖果的真钱。</p></div></div>
 <hr/>
 <h3 id="20272028-bd">二、 2027—2028 年核心管线爬坡与 BD 里程碑兑现的造血中枢垫高测算</h3>
@@ -2428,7 +2713,7 @@
 </li>
 </ul>
 <h4 id="3_4">3. 双极限压力测试全景汇总表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">压力测试维度</th>
@@ -2496,7 +2781,7 @@
 <td style="text-align: center;"><strong>净造血 +32~40亿（零失血+434亿现金躺赢）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看最后那一栏吧！哪怕国内医保局把所有药价狠砍一刀、大洋彼岸的政客把海外授权大门关掉七成，而且公司还不解雇一个科学家、每年照样烧掉八十五亿研发费，恒瑞一年下来居然还能净剩三四十亿的自由现金流，更别提账上还趴着四百三十多亿现金！这就好比你开着一辆装甲车去和一群骑纸糊自行车的 Biotech 公司比赛穿越沙漠——当沙尘暴来临时，别人都在找水喝，而你正在车厢里用多余的矿泉水洗脚。</p></div></div>
 <hr/>
 <h2 id="f">追问模块 F：解锁估值定价、隐含预期与击球区推演</h2>
@@ -2546,7 +2831,7 @@
 </li>
 </ol>
 <h4 id="true-ev-202611">恒瑞医药真实企业价值（True EV）核算一览表（截至 2026年11月）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值核算维度</th>
@@ -2614,7 +2899,7 @@
 <td style="text-align: left;"><strong>按总市值直接减400亿超额净现金：A股 2,800亿 / H股 2,473亿</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>如果你花 3,200 亿元买下整家恒瑞医药，交割完钥匙打开公司的地下金库，发现里面整整齐齐码着 434 亿元的现钞，连一张银行催债单都没有。你把其中 400 亿元现金直接装进自己的口袋拿去买国债，实际上你掏出兜里买下整个恒瑞医药王国（包括那九千名销售铁军、五千名科学家和上百个新药专利）的净成本只有 2,800 亿元；如果你聪明一点跑去香港市场买它的 H 股，这个净成本更是直接掉到了 2,473 亿元！不看 True EV 只看表面市盈率的人，就像买带金库的房子却从来不打开保险箱看看一样愚蠢。</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值法）</h3>
@@ -2710,7 +2995,7 @@
 </li>
 </ul>
 <h4 id="reverse-sotp_1">恒瑞医药 Reverse SOTP 逆向拆骨估值全景表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务与资产拆骨模块</th>
@@ -2769,7 +3054,7 @@
 <td style="text-align: left;"><strong>仅需海外BD里程碑兑现 15% + 国内减重药上市即可完全收回该残值定价！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
 <p><strong>拆骨结论与商业化兑现门槛倒推</strong>：
@@ -2785,7 +3070,7 @@
 <h4 id="1-ah">1. 历史估值分位与国内外龙头药企横向比价（附 A/H 折价套利分析）</h4>
 <p>在 2018—2020 年的医药泡沫巅峰期，恒瑞医药的静态市盈率（PE-TTM）曾高达 <code>80倍—105倍</code>（当时市值突破 <code>6,000亿元</code>，而彼时净利润仅 <code>50余亿元</code>、且 80% 收入来自即将遭遇集采的仿制药，泡沫极其严重）。而经过五年残酷的集采刮骨疗毒与创新转型，如今恒瑞的归母净利润已创出 <strong><code>77亿—85亿元</code></strong> 的历史新高，创新药与海外 BD 收入占比突破 <strong><code>62%</code></strong>，但总市值却只有巅峰期的约一半（<code>3,200亿元</code>），当前静态 PE 约 <strong><code>38倍—40倍</code></strong>（剔除 400 亿超额现金后的 <strong>True EV / 2026E 归母净利仅约 <code>32.9倍</code>，H 股更是低至 <code>29.1倍</code></strong>），处于过去十年历史估值分位的 <strong><code>20%—25%</code> 偏低区间</strong>。</p>
 <h4 id="202611">全球与中国核心创新药企估值与造血能力横向对比表（2026年11月基准）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">可比药企名称与代码</th>
@@ -2862,7 +3147,7 @@
 <td style="text-align: left;">恒瑞未来5—10年走向全球MNC成熟态后的终局估值锚</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>A/H 跨市场比价核心结论</strong>：
   自 2025 年 5 月恒瑞医药成功登陆港交所（<code>01276.HK</code>）以来，由于港股机构投资者对全球可比 Big Pharma 的现金流折现（DCF）要求更为严苛，目前 <strong>H 股（<code>50.55港元</code>，折合人民币 <code>43.29元</code>）较 A 股（<code>48.22元</code>）保持着约 <code>10.22%</code> 的折价优势</strong>。对于拥有港股通或海外账户的买方资金而言，<strong>每一股恒瑞 H 股背后同样包含着 <code>6.03元人民币</code>（<code>400亿元 / 66.37亿股</code>）的超额净现金</strong>，在 H 股买入相当于以 <strong><code>8.98折</code></strong> 的价格打包买走了同一批科学家、同一批 ADC 与减重神药专利！</li>
@@ -2913,7 +3198,7 @@
 </li>
 </ul>
 <h4 id="_15">恒瑞医药三档估值击球区与隐含回报率速查表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位划分</th>
@@ -2954,7 +3239,7 @@
 <td style="text-align: left;"><strong>果断减仓兑现</strong>：远期BD里程碑被过度透支，让渡给趋势交易者</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_5">3. 三条基本面死刑证伪红线（一旦触发无条件认错离场）</h4><p>优秀的买方不仅要知道何时挥棒，更要事先写好“遗嘱”——如果出现以下任何一条触及商业模式根基的证伪信号，无论股价跌了多少，必须无条件清仓离场，绝不陷入价值陷阱：</p><ol>
 <li>
@@ -3158,7 +3443,7 @@
 换句话说：<strong>当前 H 股（<code>3,068亿元</code> 折算市值）处于‘存量底盘扎实 + 增量期权按公允偏保守的八折计价’的温和安全区；而 A 股（<code>3,239亿元</code>）则基本反映了公允价值，赔率呈现对称状态。</strong> 作为严守安全边际的猎手，我们绝不会在 3,200 亿以上去激进追高 A 股，但如果在 H 股出现因大盘流动性或单一管线噪音引发的 <strong>10%—15% 回调（即总市值回落至 <code>2,600亿—2,750亿元</code> 区间，此时 290 亿美元海外 BD 期权相当于半价甩卖）</strong>，那就是赔率极佳、下行锁死而上行敞开的黄金重锤击球区！”</p>
 <hr/>
 <h3 id="_17">📋 五、 四位投资大师圆桌投票与核心判词总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名</th>
@@ -3203,7 +3488,7 @@
 <td style="text-align: left;">“<code>1,900亿</code> 的存量拆骨铁底锁死了下行深渊，但当前价格已为海外 BD 期权付了八折公允价；好公司也要算赔率，首选折价 H 股，留足子弹等钟摆回摆时重锤！”</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -3219,13 +3504,26 @@
 <p>用拆骨法算底牌，四百亿超额现金、四百八十亿麻精造影老底盘，加国内已上市十七款创新药（值一千亿出头），三块存量家底焊死了一千九百亿极端熊市铁底！当前三千亿出头市值里，等于掏一千二百亿去买“双靶减肥药等九十多个在研管线 + 近两百九十亿美元海外里程碑池 + 海外合资股权”，约合公允价值八折。打法很明确：优先买折价港股（01276.HK）建底仓，绝不在BD高潮日追高A股；留四成子弹，等大盘波动或FDA审评噪音把总市值砸回两千六百亿到两千七百五十亿区间，果断满仓重锤。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3395,7 +3693,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《恒瑞医药_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/恒瑞医药_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《恒瑞医药 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/恒瑞医药 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3453,6 +3751,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

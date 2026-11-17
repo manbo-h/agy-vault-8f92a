@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>洛阳钼业_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>洛阳钼业 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">洛阳钼业_全模块深度投研全集</div>
+    <div class="report-title">洛阳钼业 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -691,7 +976,7 @@
 <li>巴西卡塔朗（Catalão）铌矿与奥维多（Ouvidor）磷矿：洛钼通过技改在磷矿浮选尾矿中进一步回收伴生铌（尾矿提铌技术），使2025年铌产量突破10,348吨历史极值，毛利率升至44.43%；磷肥（高浓度MAP/GTSP等）年产121.35万吨，虽矿石品位（约11%—13% <span class="math-inline"><span class="math-text">P</span><sub>2</sub><span class="math-text">O</span><sub>5</sub></span>）不及摩洛哥OCP，但凭借矿山直接坐落在巴西大豆玉米主产区戈亚斯州心脏地带，相比进口化肥从桑托斯港走铁路公路运进内陆每吨节省近80—100美元运费，形成了天然的区域地理护城河。</li>
 </ul>
 <h4 id="4">4. 核心产品与国内外同行硬核横向对质总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度 / 核心指标</th>
@@ -768,7 +1053,7 @@
 <td style="text-align: left;">单一钼产业链上下游垂直一体化（深加工占比高）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看这张表你就明白为什么老外当年把TFM和KFM卖给洛阳钼业肠子都悔青了。美国人算账用的是华尔街外包工程队的价格表，中国人算账用的是自家能吃苦、能模块化抢工期的基建铁军成本表。同一块石头，在自由港手里是啃不动的鸡肋，到了洛钼手里就成了C1成本不到1美元每磅、还把嘉能可从世界第一钴王宝座上踹下去的核武器。</p></div></div>
 <hr/>
 <h3 id="_5">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？】</h3>
@@ -845,7 +1130,7 @@
 </li>
 </ul>
 <h4 id="3_2">3. 五年一期现金流硬账本与防合并报表幻觉穿透</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流指标（单位：人民币亿元）</th>
@@ -940,7 +1225,7 @@
 <td style="text-align: center;"><em>(待年报宣告)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="4_1">4. 打破“合并报表幻觉”三大深度体检</h4><ol>
 <li>
 <p><strong>体检一：少数股东损益占比明显高于少数股东权益占比——这是暴雷还是顶级富矿的真实分成？</strong>
@@ -1093,7 +1378,7 @@
 <h5 id="1_4">1. 核心扩建与并购项目的“单位产能投资强度”全球横向对标</h5>
 <p>在矿业工程界，衡量一项资本开支含金量的黄金标尺是<strong>单位年产能资本开支强度（Capital Intensity，即每形成1吨/年铜产能或每形成1盎司/年黄金产能所需投入的美元成本）</strong>。由于全球高品位浅层斑岩铜矿日趋枯竭、社区征地与高海拔给排水基建成本飙升，当前全球绿地（Greenfield）新建铜矿项目的平均资本开支强度已从十年前的1.3万至1.5万美元/吨铜，暴涨至<strong>2.2万至2.8万美元/吨铜</strong>（折合每万吨铜产能需耗资2.2亿至2.8亿美元）。</p>
 <p>我们将洛阳钼业已投产及正在推进的四大核心工程拉出清单，与全球标杆矿企同类项目做硬核横向对比：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目名称与所属主体</th>
@@ -1179,7 +1464,7 @@
 <td style="text-align: left;">2025年6月交割，<strong>预计2028—2029年投产</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="2-kfm-1084">2. 深度拆解：为什么 KFM 二期能做到 1.084 万美元/吨铜的极致低成本？</h5><p>对比上表可以清晰看出，KFM二期（10.84亿美元新增10万吨铜，单位投资1.084万美元/吨铜）不仅远低于国际绿地项目平均线（2.2万至2.8万美元/吨铜），甚至比国内矿企引以为傲的高海拔扩建项目还要便宜30%以上。这背后的工程密码在于<strong>“棕地扩建（Brownfield）对公用工程与固定基础设施的极致复用”</strong>以及<strong>“中资模块化EPC管理体系”</strong>：</p><ul>
 <li>
 <p><strong>第一，公辅设施与总图工程的“零重复建设”</strong>：在一期绿地建矿时，企业往往需要将总投资的35%至45%砸在“不直接产出矿石”的外围基建上（如业主营地、炸药库、总降压变电站、外围排洪沟、尾矿库一期坝体、跨境进场道路及社区医疗学校）。而在KFM二期10.84亿美元预算中，<strong>工程费用为8.59亿美元（占比79.2%）</strong>，工程建设其他费用仅1.09亿美元（占比10.1%），预备费1.16亿美元（占比10.7%）。因为营地、路网、总变电接口、行政后勤体系已在一期全部落成，二期的8.59亿美元几乎是“刀刀见肉”地花在核心生产设备上——即<strong>新增726万吨/年硫化矿采选系统、一期选厂增设混合矿浮选回路改造、以及湿法冶炼车间浸出与电积（SX-EW）槽位扩建</strong>。</p>
@@ -1366,7 +1651,7 @@
 <hr/>
 <h4 id="_16">三、 竞争终局推演与最终定性：谁是第二支柱，谁是长周期期权？</h4>
 <p>通过上述冷峻拆解，我们将洛阳钼业的三大新增长曲线（及存量基本盘对比）汇总于下表，并给出买方终极定性：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">评估维度</th>
@@ -1413,7 +1698,7 @@
 <td style="text-align: left;"><strong>【低成本长周期战略看涨期权】</strong>：由宁德时代扛大旗、洛钼小比例跟投的防守型卡位，进可蹭盐湖工业化红利，退则资金敞口极小，<strong>绝非资本消耗陷阱</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="_17">最终定性结论：</h5><ol>
 <li>
 <p><strong>“南美黄金双子星（巴西4矿+厄瓜多尔凯歌豪斯）”是洛阳钼业极具战略眼光、真正能扛起“铜+金”双轮驱动的第二主业支柱</strong>。公司采取了极其聪明的<strong>“长短结合、高低搭配”</strong>战术：先在2025年6月用仅4.21亿美元的白菜价抄底了拥有659吨黄金的厄瓜多尔凯歌豪斯绿地巨矿（锁定远期20吨/年低成本王牌）；紧接着在2026年1月用10.15亿美元闪电吃下急于卖矿还债的Equinox旗下巴西4座在产金矿（即刻拿到6—8吨/年黄金产量与现成现金流）。至此，洛阳钼业黄金板块已形成<strong>“当下年产6—8吨金（巴西） ➔ 2029年跃升至26—28吨金（巴西+厄瓜多尔）”</strong>的清晰阶梯，不仅完美对冲了工业金属周期波动，更将在三年内跻身中国一线黄金矿业巨头行列！</p>
@@ -1428,7 +1713,7 @@
 <h3 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h3>
 <p>在矿业与有色金属的世界里，单看一家公司的利润表很容易被大宗商品beta行情制造的“繁荣幻觉”所蒙蔽。为了穿透洛阳钼业（603993.SH / 03993.HK）真实的产业卡位与盈利成色，我们将其置于全产业链的“十字审讯室”中，调取其最核心的三家直接竞争对手——<strong>紫金矿业（601899.SH，全球铜金矿山双雄标杆）</strong>、<strong>华友钴业（603799.SH，刚果金与印尼钴镍湿法冶炼及锂电材料直接对手）</strong>、<strong>金钼股份（601958.SH，国内原生钼矿与深加工绝对龙头）</strong>，并辅以高资源自给率的<strong>西部矿业（601168.SH）</strong>、下游铜冶炼巨头<strong>江西铜业（600362.SH）</strong>以及下游动力电池霸主<strong>宁德时代（300750.SZ / 邦普循环）</strong>，基于各方已披露的2025年年度报告与2026年第三季度报告进行三方交叉对质。</p>
 <h4 id="20252026q3-vs">一、 2025—2026Q3 洛阳钼业 vs 核心同行经营与盈利质量横向对质大表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对质维度</th>
@@ -1537,7 +1822,7 @@
 <td style="text-align: left;">西矿玉龙铜矿等合资矿少数股东损益占比约25%—30%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_18">二、 景气度与存货真相交叉对质：谁在战略囤宝，谁在缺矿断炊？</h4><p>审视上表及上下游三季报数据，市场最容易对洛阳钼业产生两大核心疑问：<strong>第一，为什么2025年公司营收同比微降2.98%（2,066.84亿元），但归母净利却暴增50.30%（203.39亿元），且2026年前三季度营收（2,072.90亿元，+42.48%）与归母净利（240.20亿元，+68.21%）双双创出历史天量？第二，为什么洛阳钼业账面存货从2025年末的406.01亿元一路攀升至2026年三季度末的539.96亿元（较年初激增133.95亿元，增幅32.99%），甚至超过紫金矿业的427.54亿元？这到底是卖不掉的滞销压库，还是另有玄机？</strong></p><p>通过与上下游及同行交叉审讯，存货与景气度的三大真相水落石出：</p><ol>
 <li><strong>解剖洛钼539.96亿元存货的“双核肌理”——准现金贸易金属（RMI）与刚果（金）配额锁定的“液态钴金库”</strong>：
@@ -1641,7 +1926,7 @@
 <h3 id="e">【追问模块 E：会计成色与治理细节显微镜】</h3>
 <p>对于一家资产总计高达<strong>2,460.10亿元</strong>（2026年三季度末）、业务横跨刚果（金）、巴西、瑞士、厄瓜多尔与中国洛阳，且同时运转“重资产矿山采选 + 高杠杆期现贸易”两套商业模式的跨国巨头而言，财务报表的会计成色与公司治理细节，直接决定了账面利润究竟是“真金白银”还是“纸面富贵”。我们拿起审计显微镜，对洛阳钼业2025年报与2026年三季报附注进行逐项排雷，并与紫金矿业、华友钴业、金钼股份进行横向对质。</p>
 <h4 id="vs">一、 洛阳钼业 vs 同行核心会计政策与报表附注排雷对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心审计与治理维度</th>
@@ -1710,7 +1995,7 @@
 <td style="text-align: left;"><strong>表内负债透明彻查</strong>：历史最敏感的刚果金权益金争议已彻底和解并全额折现入表，无表外暗雷</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_20">二、 资产质量与特种会计科目深度排雷</h4><h5 id="1_5">1. 存货与衍生金融工具（套期保值）审计：穿透“公允价值套保闭环”与“百亿级钴库存潜盈”</h5><p>外行投资者翻开洛阳钼业2026年三季报资产负债表，往往会被两组数字吓一跳：一是<strong>存货高达539.96亿元</strong>（2025年末为406.01亿元）；二是流动负债中躺着<strong>81.81亿元的衍生金融负债</strong>（2025年末更高达104.26亿元），流动资产中则有<strong>43.57亿元的衍生金融资产</strong>（较2025年末的18.46亿元大增136.00%）。有人因此质疑：洛阳钼业是不是在期货市场上做空亏了八十多亿？存货是不是有巨额跌价风险？</p><p>我们对2025年报附注“重要会计政策及衍生金融工具”进行交叉穿刺后，给出明确的排雷结论：<strong>这非但不是财务暴雷，反而是国际顶级商品贸易商最标准的“期现对锁（Fair Value Hedge）”会计镜像，且矿山端存货暗藏着巨额未实现利润！</strong></p><ul>
 <li>
@@ -1858,7 +2143,7 @@
 
 <hr/>
 <h4 id="owner-earnings-vs-2026">📊 洛阳钼业常态 Owner Earnings 分步还原测算表（中枢常态口径 vs 2026当期高景气口径）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">测算步骤与核心科目</th>
@@ -1935,7 +2220,7 @@
 <td style="text-align: left;"><em>供模块F中与“含少数股东权益的全口径True EV”做交叉验证</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看到那个“+60亿折旧加回”和“-37.5亿维持性开支”的剪刀差了吗？这就是重资产矿业最迷人的时刻——前人栽树（百亿建矿）的苦已经吃完了，未来十年哪怕一分钱新矿都不扩，这台机器每年也能净吐出240多亿真金白银。</p></div></div>
 <hr/>
 <h4 id="20272029">二、 增量垫高测算：2027—2029在建明牌项目达产后的远期造血中枢</h4>
@@ -1984,7 +2269,7 @@
 </li>
 </ul>
 <h5 id="owner-earnings_1">📊 洛阳钼业「三档铜金价格标尺」归母 Owner Earnings 矩阵表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">造血测算维度</th>
@@ -2013,7 +2298,7 @@
 <td style="text-align: center;"><strong><code>495.00 亿元/年</code></strong> <em>(区间 485—510亿)</em><br/><em>(其中凯歌豪斯20吨金狂赚 <strong>84亿元/年</strong>！)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多矿老板赚了钱就去买私人飞机或者在周期顶点天价买烂矿，而洛钼用30亿人民币买下638吨黄金储备——按2,500美元金价算一年赚41亿已经是笔好买卖，按今天3,800美元金价算一年居然能狂赚84亿！这就叫“用买白菜的钱买下了一座金山，而且刚好赶上全世界都在抢金子”。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_22">三、 双极限压力测试：当“全球衰退大暴跌”撞上“非洲成本刚性暴涨”</h4><p>买方投研的底线思维是：永远不要只看顺风局的利润表，必须把企业扔进最残酷的“炼狱剧本”里称重。对于洛阳钼业而言，投资者最恐惧的噩梦无非是两件事同时发生：<strong>宏观端全球经济硬着陆导致铜钴价格大崩盘，同时微观端刚果（金）地方政府与物流供应链出现极端成本勒索</strong>。</p><p>我们直接设定一套极度严苛的<strong>“双极限共振压力测试模型”</strong>：</p><ul>
@@ -2081,7 +2366,7 @@
 </ul>
 <hr/>
 <h4 id="true-ev-20261112">📊 洛阳钼业真实企业价值（True EV）双市场 × 双口径精密核算表（截至2026年11月12日）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值核算维度与核心科目</th>
@@ -2163,14 +2448,14 @@
 <td style="text-align: left;"><em>对标全口径合并 Owner Earnings（常态305.5亿 / 景气391.0亿）</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把贸易行手里随时能换成美金的铜板质押贷款当成矿山的亏空，就像把赌场贵宾厅里客人还没兑现的筹码算成赌场老板的破产债务一样愚蠢；当你把这层障眼法扒掉，你会发现用2,800亿人民币（H股口径）就能把这座横跨四大洲的超级矿山帝国连债带肉整锅端走。</p></div></div>
 <hr/>
 <h4 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值）</h4>
 <p>算清了分母 <strong>True EV（A股基准 3,350亿元 / H股基准 2,800亿元）</strong> 与分子 <strong>归母 Owner Earnings</strong>，我们直接用买方最冷酷的标尺——<strong>真实内生现金回报率（Owner Earnings Yield = 归母 Owner Earnings / 归母 True EV）</strong> 与 <strong>Reverse SOTP（分类加总逆向拆骨估值）</strong>，看看13.71元的A股和12.11港元的H股里到底隐含了怎样荒诞的悲观预期：</p>
 <h5 id="1-owner-earnings-true-ev">1. 三档价格标尺 × 双市场真实内生现金回报率（Owner Earnings / True EV）与即期分红回购率全景测算</h5>
 <p>我们将模块 D 算出的<strong>「三档铜金价格标尺」</strong>（① 铜9,200美元+金2,500美元苛刻成本底线、② 铜11,200美元+金3,200美元的85折新常态中枢、③ <strong>今日实时现货铜13,200—13,600美元+金3,800美元的 Mark-to-Market 标尺</strong>）直接对齐 <strong>A股（归母 True EV 3,350亿元 / 市值 2,933亿元）</strong> 与 <strong>H股（归母 True EV 2,800亿元 / 市值 2,383亿元）</strong>，得到如下极具冲击力的买方回报率全景矩阵：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值标尺与产能阶段</th>
@@ -2224,7 +2509,7 @@
 <td style="text-align: left;">若铜金维持当前景气平台，达产后年印钞近500亿，H股远期PE低至惊人的 <strong>4.8倍</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>即期股东现金回报率（现金分红 + 专项注销/激励回购）</strong>：</li>
 <li>2024年公司分红54.56亿元（分红率40.32%），2025年分红61.19亿元（每10股派2.86元，分红率30.08%）。2026年前三季度归母净利已达240.20亿元，全年表观归母净利预计达 <strong>290亿—320亿元</strong>；随着TFM与KFM一期高峰资本开支彻底结束，按公司章程及过往33%—35%的中枢分红率测算，2026年度预计派发现金红利约 <strong>95亿—105亿元人民币</strong>（中枢 <strong>100亿元</strong>，折合每股派息约0.46—0.49元）。</li>
@@ -2235,7 +2520,7 @@
 <hr/>
 <h5 id="2-reverse-sotp">2. Reverse SOTP（分类加总逆向拆骨估值）：看看市场白送了多少“免费皇冠”？</h5>
 <p>如果我们像私募股权大鳄（PE Buyout Fund）一样，把洛阳钼业现有的成熟存量资产按行业极度保守的重置成本或收息倍数（8—12倍常态现金流）一块块拆开称重，再从当前的 <strong>2,933.16亿元 A股市值（2,383.29亿元 H股市值）</strong> 中逐一减去，就会看到一幅令人瞠目结舌的画面：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">资产模块与权益比例</th>
@@ -2296,7 +2581,7 @@
 <td style="text-align: center;"><strong>A股仅占 2.39%</strong><br/><strong>H股为 -20.13%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>Reverse SOTP 拆骨终极判词</strong>：
   这笔账算完，真相已经无需多言：今天在 <strong>13.71元的A股（总市值2,933亿元）</strong> 买入洛阳钼业，你付出的钞票（2,863亿元）仅仅是为它现有的80万吨铜、11万吨钴、中国钼钨、巴西铌磷金矿、IXM贸易行以及仓库里那10.88万吨现成的钴库存买了个保守平价单；而<strong>即将在2027年投产的KFM二期10万吨低成本铜矿 + 坐拥638吨黄金储量、年产20吨金的厄瓜多尔凯歌豪斯世界级大金矿 + 200MW自备水电站 + 冲击全球前五百万吨铜企的TFM西区期权（合计保守公允价值超550亿元）</strong>，在A股基本等于<strong>1.3折白菜价挥泪大甩卖</strong>；而在 <strong>12.11港元的H股（折合人民币市值2,383亿元）</strong>，市场先生不仅把这四大远期王牌<strong>0元白送</strong>给你，甚至还把存量成熟矿山打了 <strong>8.3折（倒贴近480亿元安全边际）</strong> 塞进你的口袋！</li>
@@ -2306,7 +2591,7 @@
 <h4 id="_23">三、 全球同行估值比对、分档击球区与“三条基本面死刑证伪红线”</h4>
 <h5 id="1_6">1. 全球铜金矿业巨头横向估值比对與当前水位定性</h5>
 <p>我们将洛阳钼业（603993.SH / 03993.HK）放入全球顶级铜金矿业巨头的坐标系中进行横向对齐（截至2026年11月数据）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">全球核心铜金巨头</th>
@@ -2365,7 +2650,7 @@
 <td style="text-align: left;"><strong>C1成本比肩南方铜业，增速领跑全球，估值却全场垫底</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>当前水位精准定性</strong>：
   受2026年下半年宏观大宗商品多头获利回吐及市场对刚果（金）钴出口配额短期扰动经营现金流的过度恐慌影响，洛阳钼业A股股价已从年内高点显著回撤（当前 <strong>13.71元/股</strong> 较公司刚刚公告的 <strong>22.78元/股回购上限</strong> 折价高达 <strong>39.8%</strong>！），H股更是跌至 <strong>12.11港元/股（折合人民币11.14元/股）</strong>。
@@ -2493,7 +2778,7 @@
 <p>1,100亿元买每年净赚近200亿自由现金流的全球顶级露天富矿，相当于<strong>隐含清算市盈率只有 5.5倍</strong>！哪怕刚果（金）未来发生极端赋税上调、把矿山利润强行砍掉三分之一，这笔交易依然能在7到8年内靠纯现金流收回全部本金；而如果一切正常推进，2027年KFM二期和2029年南美金矿达产将把常态 Owner Earnings 推高到 <strong>315亿元/年</strong>。<strong>向下有现金、钴现货金库和5.5倍残值PE铁底托住，向上有产能释放、金铜双击与估值修复的三重免费看涨期权——这就是我们苦苦寻找的‘正面我大赢、反面我不输’的终极非对称赔率！</strong>”</p>
 <hr/>
 <h3 id="_24">📋 五、《四位投资大师圆桌投票与核心判词总表》</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名</th>
@@ -2538,7 +2823,7 @@
 <td style="text-align: center;"><strong>🟢 买入</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="4-h-1211-a-1371">🏆 六、圆桌最终合议结论（4 票全票买入｜H 股 12.11 港元为皇冠级首选，A 股 13.71 元为回购托底核心仓）</h3>
 <p>经过四位投资大师从<strong>成本曲线寿命（巴菲特）</strong>、<strong>逆向死穴排雷（芒格）</strong>、<strong>隐蔽资产与成长共振（林奇）</strong>以及<strong>剥离残值与周期钟摆（马克斯 &amp; 卡拉曼）</strong>四个维度的交叉审讯，闭门圆桌会以 <strong>4 票全票买入（3 票买入 + 1 票强烈买入）</strong> 达成终极裁决：</p>
@@ -2587,13 +2872,26 @@
 <p>算清拆骨账就知道多划算：把净现金、贸易仓单、价值两百亿的十万吨钴现货，及国内钨钼矿和南美金矿剥离后，港股给刚果（金）那两座年赚近两百亿的世界级铜矿标出的残值市盈率仅五倍半！操作上，优先重仓买比A股折价近两成、且刚下调每手门槛的港股（H股），或买有近二十亿贷款回购护盘的A股。只要守住“单票仓位不超过总账户一成五”的风控铁律对冲非洲敞口，遇非洲政策传闻回调就是闭眼捡金条的时刻。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2763,7 +3061,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《洛阳钼业_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/洛阳钼业_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《洛阳钼业 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/洛阳钼业 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2821,6 +3119,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

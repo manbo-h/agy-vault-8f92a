@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>中国中免_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>中国中免 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">中国中免_全模块深度投研全集</div>
+    <div class="report-title">中国中免 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -684,7 +969,7 @@
 <h2 id="_5">【第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）】</h2>
 <p>在旅游零售行业，“核心产品”绝不是单指柜台上摆着的那瓶雅诗兰黛小棕瓶或那条卡地亚项链，而是<strong>“核心门店渠道矩阵 + 品牌供应链深度 + 采购与渠道成本分位”三位一体的商业机器</strong>。我们直接把中国中免拉到国际头号巨头<strong>杜福睿（Dufry，现整合更名为Avolta）</strong>、韩国免税双雄（<strong>新罗免税店 Shilla、乐天免税店 Lotte</strong>）以及国内主要持牌竞争对手（<strong>王府井、海旅免税/海控免税、珠免集团</strong>）面前，做一场刺刀见红的横向比拼。</p>
 <h3 id="_6">一、 国内外主要免税与旅游零售运营商硬核指标横向对比表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心比拼维度</th>
@@ -745,7 +1030,7 @@
 <td style="text-align: left;">采购体量小、尾货周转慢，会员体量仅为中免的零头</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="_7">二、 穿透表象看胜负手：为什么同行抄不走中免的“三道铁闸”？</h3>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
@@ -803,7 +1088,7 @@
 <ol>
 <li><strong>“翻旧账对表”言行一致性审计（回溯2021—2022年报及H股招股书承诺 vs 2026年实际落地）</strong>：</li>
 </ol>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">3—5年前（2021—2022年）年报/募投核心承诺</th>
@@ -833,7 +1118,7 @@
 <td style="text-align: left;">✅ <strong>趁行业低谷低价抄底DFS，超预期兑现</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ol start="2">
 <li>
 <p><strong>质押、杠杆与高点套现排查（无异常）</strong>：
@@ -904,7 +1189,7 @@
 </ol>
 <h3 id="20212026q1-q3">三、 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2026Q1-Q3）</h3>
 <p>下面列示中国中免最近五个完整会计年度（2021—2025年）及最新一期（2026年1—9月）的现金流硬核审计对照表（数据全部源自上交所与港交所法定财报合并报表，单位：亿元人民币）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -989,7 +1274,7 @@
 <td style="text-align: left;">拟中期派现8.31亿</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注1：2022年OCF为-34.15亿元，系当年疫情封控导致线下销售收款骤减，同时为迎接海口国际免税城2022年10月开业集中备货，存货从197亿飙升至279亿元占用近百亿营运资金所致；2023年去库存回款后OCF立即暴增至151.26亿元。注2：2024年度购建固定资产无形资产和其他长期资产支付的现金为11.19亿元，2025年度为12.73亿元。注3：2026年1-9月OCF为20.67亿元，主要系三季度末为迎接海南全岛封关后首个四季度旅游旺季及新并表门店主动备货，存货较年初增加37.71亿元至190.73亿元所致，四季度旺季销售回款后全年OCF将照例显著高于前三季度。)</em></p>
 <p><strong>五年一期现金流铁账的核心洞察</strong>：</p>
 <ul>
@@ -1217,7 +1502,7 @@
 <p><strong>对比国内一线重奢商业地产标杆（华润万象城、太古里）——海口店与三亚太古里处于合理中枢，但三亚一期2号地明显“超配偏贵”</strong>：华润置地新建的海口万象城（商业建面11.35万㎡）及内地一线城市重奢万象城/太古里项目，新建商业单方造价普遍在 <strong>16,000—22,000元/㎡</strong> 区间。中免的海口店地块五（17,710元/㎡）和三亚中免太古里（17,500—20,000元/㎡）与顶级重奢商业地产商的造价控制完全处于同一水位；但<strong>三亚一期2号地（追加后27,594元/㎡，酒店部分超3.1万元/㎡）则明显偏贵</strong>——这本质上是中免用免税主业赚取的丰厚现金流，去补贴建造了一座造价极其高昂、回收期极漫长的超五星级地标酒店。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目名称</th>
@@ -1321,7 +1606,7 @@
 <td style="text-align: left;">2.42</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="3-3666">3. 转固折旧摊销精算与海口免税城“36.66亿扭亏”的真实盈亏平衡实证</h3>
 <div class="annotated-row"><div class="main-col"><p>商业地产与重资产免税店的盈利模型本质是一场<strong>“有效毛利额 vs 刚性固定成本（折旧摊销+基础运维）”</strong>的跨栏赛。2026年半年报披露的一组关键数据，为我们提供了极其珍贵的真实世界实证标尺：</p><ul>
 <li><strong>实证锚点：海口国际免税城跨过盈亏平衡点的精确刻度</strong></li>
@@ -1470,7 +1755,7 @@
 <p><strong>刻度定位</strong>：这一子板块采取“小步快跑、单点专柜与局部特许经营”策略，目前处于<strong>局部单点跑通盈亏平衡、但整体体量尚小（合计年营收十余亿元级别）的战略探路期</strong>。</p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">评估维度</th>
@@ -1517,7 +1802,7 @@
 <td style="text-align: left;"><strong>【低成本品牌出海探路前哨】</strong>（消化国潮供应链溢价，积累跨国运营经验，暂不具备大额利润弹性）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>用2.94亿美元买下DFS港澳最肥的八家店，顺手把香港广东道那个每年给房东白打工的亏损大坑退回去，再让LVMH掏6.9亿港元买自家的股票——这简直就像去肉铺买顶级牛排，不仅把最重的那块骨头剔还给老板，出门时老板还塞给你一张代金券；反观国内那些必须拿着出境机票才能买、买完还得去机场排队领货的市内免税店，那叫穿着棉袄洗淋浴，浑身上下都透着别扭。</p></div></div>
 <hr/>
 <h2 id="_25">二、 跨越鸿沟的三道关卡：政策紧箍咒、高昂商圈租金与残酷价格博弈</h2>
@@ -1637,7 +1922,7 @@
 <h1 id="c">追问模块 C：同行与上下游“三方交叉审讯”</h1>
 <p>要看清中国中免（601888.SH / 01880.HK）在2025年至2026年前三季度的经营成色，绝不能只听公司管理层在业绩说明会上的单方面陈词。我们直接把全球旅游零售霸主<strong>杜福睿（Avolta，原名 Dufry）</strong>、亚洲宿敌<strong>韩国新罗免税店（Hotel Shilla）</strong>、国内全牌照挑战者<strong>王府井（600859.SH）</strong>、海南本土二线对手<strong>海旅免税与海控免税</strong>，以及掌握流量咽喉的<strong>上海机场（600009.SH）</strong>和掌握全岛底牌的<strong>海口海关统计大盘</strong>同时拉上审讯席，用真金白银的财务与监管流水做一场“三方交叉对质”。</p>
 <h3 id="20252026q3">一、 2025—2026Q3中国中免与国内外同行及上下游核心经营指标交叉对质总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对质主体与定位</th>
@@ -1722,7 +2007,7 @@
 <td style="text-align: left;">2025年11月1日第十次离岛免税新政落地满一周年（25.11—26.10）购物金额 <strong>334.5亿元</strong>（<strong>+13.8%</strong>），其中岛内居民“即购即提”4.1亿元、离境旅客免税1.6亿元</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把全世界的免税店账本摊在桌上一比，你就明白谁在穿泳裤、谁在替机场地主打工了。欧洲的杜福睿（Avolta）毛利率高达62.6%，最后到手净利率只有可怜的2%到4%；韩国新罗免税店干脆倒贴1800亿韩元给仁川机场交房租，最后不得不壮士断腕违约退租——在商业世界里，如果你租了别人的独木桥做生意，桥主迟早会把你碗里的肉全刮走，只给你留一口保命的清汤。</p></div></div>
 <hr/>
 <h3 id="2344">二、 景气度对质：真实复苏还是渠道压库？为什么中免海南大涨23.44%远抛全岛大盘？</h3>
@@ -1807,7 +2092,7 @@
 <h1 id="e">追问模块 E：会计成色与治理细节显微镜</h1>
 <p>在剥离了行业景气度与竞争格局之后，我们必须拿最严苛的法务会计放大镜，逐项审视中国中免2025年报与2026年三季报财务附注中的每一个角落：高达190.73亿元的存货里有没有快过期的香水地雷？非流动租赁负债一夜暴增35亿元背后藏着什么会计机关？3.38亿元商誉减值与7.84亿元新增商誉是否审慎？央企高管拿着两千多万薪酬有没有跟股东利益真正绑定？</p>
 <h3 id="_28">一、 中国中免与同行关键会计政策及资产质量排雷对比表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计维度与核心科目</th>
@@ -1868,7 +2153,7 @@
 <td style="text-align: left;"><strong>控费瘦身成效显著</strong>：中免2025年果断减员9.62%，同时2026Q1—Q3研发费用逆势增长16.29%至0.79亿元，组织数字化瘦身带动人均创利在2026年强劲反弹</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_29">二、 资产质量排雷：四大核心会计科目深挖</h3>
 <div class="annotated-row"><div class="main-col"><h4 id="1-15319073">1. 存货跌价准备排雷：153亿—190.73亿存货背后，临期香化是“少提藏雷”还是“严苛藏富”？</h4><p>对于任何一家手握近两百亿存货的零售企业，买方投资者最恐惧的噩梦就是“仓库里堆满了快过期的护肤品，管理层为了保利润迟迟不提减值”。我们直接穿透中国中免年报附注与审计师（安永华明会计师事务所）的“关键审计事项”底稿，进行三层交叉验算：</p><ul>
@@ -2058,7 +2343,7 @@
 </ol>
 <hr/>
 <h4 id="3-owner-earnings">3. 中国中免常态 Owner Earnings 分步精算还原表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与财务科目（单位：亿元人民币）</th>
@@ -2231,7 +2516,7 @@
 <td style="text-align: left;"><em>历史两年FCF均值高达58.03亿元，充分印证Owner Earnings测算的保守性</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>核心审计结论</strong>：
 即便在2025年那样的消费极寒之年，中国中免剔除一次性商誉减值后的<strong>底线态 Owner Earnings 依然高达 45.37亿元</strong>；而在2026年毛利率回升至 <code>33.90%</code>、三亚主馆利润强力反弹的修复常态下，公司无需依赖任何宏大叙事，仅凭存量门店即可每年稳态产生 <strong>52.0亿—58.0亿元（基准中枢 53.00亿元）</strong> 的真实股东盈余。由于百亿级重资产免税城已建设完毕，每年 <code>11.20亿元</code> 的归母自有资产折旧只需要 <code>4.30亿元</code> 的防御性翻新维护支出即可维持运转，中间近 <strong>7亿元的“折旧—维持性CapEx剪刀差”</strong> 构成了典型的现金牛超额造血溢价。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>会计师总喜欢把已经花掉的百亿水泥钱按四十年切成碎片扣掉你的利润，又把每年必须付给机场房东的租金包装成“使用权资产折旧”加回现金流。只有当你把假折旧踢出去、把真大楼留下来，才会发现这台机器哪怕在寒冬里每年也能往股东兜里吐出五十多亿真金白银——这可比华尔街那些靠调整EBITDA变魔术的骗子老实多了。</p></div></div></div></div>
 
@@ -2277,7 +2562,7 @@
 </ul>
 <hr/>
 <h4 id="4-owner-earnings">4. 常态 Owner Earnings 增量垫高汇总拆解表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">增量引擎与造血资产模块</th>
@@ -2354,7 +2639,7 @@
 <td style="text-align: center;"><strong>稳态区间：65亿—72亿元+</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>最美妙的生意就是你已经替未来的增长买完了单。海口那座全球最大的免税城和三亚太古里的百亿钢筋水泥钱已经付清了，港澳DFS的二十七亿买断费也已经从账上划走了——接下来自来水管道拧开流出来的每一分钱，都不需要再喂给建筑承包商，而是直接流进股东的保险柜。</p></div></div>
 <hr/>
 <h3 id="_30">三、 双极限压力测试：极端黑天鹅下的毛利、净利与自由现金流生存底线</h3>
@@ -2399,7 +2684,7 @@
 </ul>
 <hr/>
 <h4 id="3_2">3. 双极限压力测试全景量化推演表（单位：亿元人民币）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与造血指标</th>
@@ -2530,7 +2815,7 @@
 <td style="text-align: center;"><strong>不失血（FCF反而逼近50亿）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>双极限抗压核心结论</strong>：
 通过上述残酷的压力测试可以清晰看到，得益于 <strong>“自有地标免税城零租金 + 京沪机场低保底低扣点减震垫 + 全球免税同币种比价传导机制 + 逆周期去库存回笼现金特征”</strong>，哪怕在综合毛利率再暴跌 <code>3.5—5.0个百分点</code>、或者进口采购成本飙升 <code>10%</code>、或者海南离岛客流突发萎缩 <code>15%</code> 的极端黑天鹅冲击下，中国中免的归母净利润底线依然稳守在 <strong>27.6亿—36.4亿元</strong> 以上，真实股东盈余（Owner Earnings）始终保持在 <strong>36.0亿—44.2亿元</strong> 的正现金流入区间，<strong>在任何可预见的极端情景下均不存在失血亏损风险</strong>！</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>衡量一艘船好不好，不是看它在风平浪静的游泳池里能开多快，而是看台风天里它的船底会不会漏水。当一家免税店不再给机场房东签那种“旱涝保收割自己肉”的傻瓜保底合同，而且大楼又是自己全款盖的，就算外面下刀子，它顶多就是少赚几个亿，根本不可能淹死。</p></div></div></div></div>
 
@@ -2608,7 +2893,7 @@
 <p>为了让买方决策毫无死角，我们在下表中同时给出 <strong>“归母净现金买断口径 True EV（最契合模块D归母Owner Earnings分母）”</strong>、<strong>“合并刚性口径 True EV（加回一年内到期非流动负债25.69亿及少数股东权益58.22亿）”</strong> 与 <strong>“广义含长期租赁负债全口径 True EV（再加回46.82亿非流动租赁负债）”</strong> 三种精确核算结果：</p>
 <hr/>
 <h4 id="3-true-ev">3. 中国中免真实企业价值（True EV）三维度精确核算表（单位：亿元人民币）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">True EV 核算科目与阶梯穿透步骤</th>
@@ -2697,7 +2982,7 @@
 <td style="text-align: left;"><em>对应广义经营现金流（EBITDAR口径）估值对比</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>True EV 穿透真相</strong>：
 看懂这张表，就能瞬间明白为什么只看表面市盈率（PE）会严重误判中国中免的真实便宜程度：</p><ul>
 <li>如果按 <strong>A股 53.30元（表面市值 1,109.08亿元）</strong> 买下整家公司，扣除全部银行刚性借款（<code>31.98亿元</code>）并留足 <code>35.00亿元</code> 日常门店备付底仓后，你当天就能从公司账上直接提走 <strong>167.10亿元净超额现金</strong>（若按一年内到期非流动负债中约 <code>7.1亿元</code> 银行贷款部分一并扣除，净超额现金仍高达 <strong>160.00亿元</strong>），因此<strong>全款买下整家中国中免归母生意的真实总标价（归母 True EV）其实只有 941.98亿元</strong>（按A+H实际混合市值算仅为 <strong>927.01亿元</strong>）！</li>
@@ -2709,7 +2994,7 @@
 <h3 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值表）</h3>
 <h4 id="1-owner-earnings-yield">1. 静态回本年限、真实内生回报率（Owner Earnings Yield）与即期股息率对决</h4>
 <p>我们将模块 D 精算出的 <strong>“2026修复常态 Owner Earnings（53.00亿元，区间52亿—58亿元）”</strong> 与 <strong>“2027—2028达产稳态 Owner Earnings（70.00亿元，区间65亿—72亿元+）”</strong>，直接除以当前 A股与 H股的真实企业价值（True EV），算清这笔买方生意的真实内生复利回报率：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心买方估值与回报率指标</th>
@@ -2819,7 +3104,7 @@
 <td style="text-align: left;">32.8亿分红仅占53亿Owner Earnings的62%，留存20亿现金仍绰绰有余</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2-reverse-sotp">2. Reverse SOTP（反向分部拆骨法）倒推：当前市值到底白送了多少顶级资产？</h4>
 <p>为了彻底扒开市场先生在恐慌与偏见中给出的荒谬定价，我们采用 <strong>Reverse SOTP（反向拆骨倒推法）</strong>——从当前二级市场总市值（A股 <code>1,109.08亿元</code> / H股隐含 <code>866.46亿元</code>）中，依次剥离出 <strong>① 账面净超额现金</strong> 与 <strong>② 仅三亚国际免税城一/二期单店价值</strong>，看看市场给中国中免麾下其余所有万亿级垄断牌照与重资产地标合计标了多少钱：</p>
@@ -2845,7 +3130,7 @@
 </ul>
 <hr/>
 <h4 id="3-reverse-sotp">3. 中国中免 Reverse SOTP（反向拆骨估值）全景对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">资产包拆解层级</th>
@@ -2950,7 +3235,7 @@
 <td style="text-align: left;"><strong>A股处于折价安全区，H股处于深度倒贴重锤区</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>拆骨倒推震撼结论</strong>：
 把账算到这一步，所谓的“免税估值贵不贵”已经不攻自破：</p><ul>
 <li>光是 <strong>③ 海口国际免税城（已耗资超100亿元建成并扭亏）+ ⑤ DFS港澳资产包（2026年3月刚花27.5亿元现金买下）+ ⑥ 三亚三期太古里50%股权及一期2号地（累计投入超50亿元）</strong> 这三项看得见、摸得着的实体重资产，中免真金白银砸进去的<strong>历史硬成本就已经超过 180亿元</strong>！</li>
@@ -2963,7 +3248,7 @@
 <h3 id="ah">三、 赔率、A/H股跨市场对比与分档击球锚点</h3>
 <h4 id="1-avoltadufrylvmhcostco">1. 历史估值区间与国际同行（Avolta/Dufry、LVMH、Costco）横向坐标对比</h4>
 <p>我们将中国中免当前的估值水位，放入自身10年历史周期与全球顶级旅游零售及消费垄断巨头的坐标系中进行横向校准：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度 / 标的公司</th>
@@ -3031,7 +3316,7 @@
 <td style="text-align: left;"><strong>当前市值较8,000亿历史最高点已回撤超 86%，泡沫已被彻底挤干</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>跨市场与国际对标核心洞察</strong>：
 为什么国际免税同行 Avolta（原 Dufry）常年交易在 <code>14—16倍</code> 表观 PE，而中国中免理应享有更高的内在价值倍数，且在当前 H股 <code>13.2倍 EV/OE（达产10.0倍）</code>、A股 <code>17.8倍 EV/OE（达产13.5倍）</code> 下显得极具性价比？</p>
 <ol>
@@ -3045,7 +3330,7 @@
 <hr/>
 <h4 id="2-a-601888-h-01880">2. 四档实战击球区锚点（明确对应 A股 601888 与 H股 01880 股价及市值）</h4>
 <p>基于 <code>20.8083亿股</code> 最新总股本、<code>167.10亿元</code> 净超额现金、<code>53.00亿元</code> 修复常态 Owner Earnings 与 <code>70.00亿元</code> 达产稳态 Owner Earnings，我们为买方实战配置划定四档精确击球水位（港币兑人民币汇率按 <code>0.920</code> 折算，H股维持约 <code>15%—22%</code> 常态流动性折价）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">实战击球分档</th>
@@ -3105,7 +3390,7 @@
 <td style="text-align: left;"><strong>分批兑现离场</strong>。当达产稳态EV/OE突破25倍—30倍、市场重新鼓吹“万亿消费回流神话”时，果断把筹码交还给狂热的趋势交易者。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_3">3. 无条件认错离场的“三条基本面死刑证伪红线”</h4><p>真正的价值投资者从不死扛基本面已经变质的股票。一旦未来跟踪过程中出现以下 <strong>任意一条“基本面死刑证伪信号”</strong>，无论当时股价跌到多便宜，必须无条件推翻本报告的多头逻辑，立刻清仓认错离场：</p><ol>
 <li>
@@ -3220,7 +3505,7 @@
 <p>这就是卡拉曼一生追求的 <strong>‘免费看涨期权（Free Call Option）’</strong>：哪怕未来三年宏观消费没有任何起色，仅靠账上 200 亿净现金 + 三亚一期二期每年 30 多亿的笃定利润 + 50% 分红率（外加常态化中期分红），你的本金下行空间已经被焊死在铁板上了；而一旦出入境客流、海南封关新增客流、三亚太古里重奢开业或港澳免税复苏中的任何一项兑现，业绩与估值的戴维斯双击将带来极其丰厚的非线性赔率。而在 A 股与 H 股之间，<strong>折价 26%、真实企业价值仅 620 亿人民币、比 LVMH 老板认购价还便宜 41% 的 H 股（<code>01880.HK</code>），无疑是眼下安全边际最令人流口水的黄金击球区！</strong>”</p>
 <hr/>
 <h3 id="_31">📋 五、 四位投资大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名</th>
@@ -3260,7 +3545,7 @@
 <td style="text-align: left;"><strong>【H 股：直接重锤（极具吸引力的不对称赌局） / A 股：左侧分批建仓】</strong><br/>下行底线被 200 亿净现金与三亚店焊死，上行拥有四大免费看涨期权，<strong>优先买入折价 26% 的 H 股（<code>01880.HK</code>）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>🔨 圆桌闭门终极定槌共识（4 票全票通过“极具长期配置价值”，H 股获 4 票全票“直接重锤”）</strong>：
 中国中免已经彻底告别了 2021 年靠代购泡沫吹起的“伪高成长狂热”，并在 2025—2026 年的暴风雪中完成了三场教科书级的自救与进化——<strong>砍掉低毛利虚胖流水、拔掉机场高保底租金毒刺、联手 LVMH/米勒家族与太古地产重构重奢生态</strong>。站在 2026 年三季报净利逆势大涨 20.25%、账卧 200 亿净现金、海南封关鬼故事被证伪的当下，市场仍在用后视镜里的悲观情绪为其定价。对于耐心的买方资本而言，<strong>当前约 45.5 港元的中国中免 H 股（<code>01880.HK</code>，隐含 True EV 仅约 620 亿人民币）与约 53.5 元的 A 股（<code>601888.SH</code>，隐含 True EV 约 910 亿人民币），正是典型的“下行有 200 亿真金白银与三亚印钞机托底、上行享海南封关红利与重奢升级免费期权”的黄金击球区。</strong></p>
@@ -3281,13 +3566,26 @@
 <p>五年跌去八成多后，中免的情绪钟摆已甩到极度厌恶的冰点。用拆骨法算底线账：拿走账上两百亿净现金，再把每年稳赚三十亿的三亚一期二期按保守估值算五百八十亿，在港股花六百二十亿人民币企业价值买下整家中免，剩下的海口免税城、京沪机场八年专营权、DFS港澳门店和即将开业的三亚太古里，市场一共只收你四十亿，几乎等于零元白送，且港股现价（约四十五港元）比LVMH老板入股成本还便宜四成！实战上优先在折价近三成的港股果断重锤，A股（五十多元）做左侧收息配置，拿五成分红率安心等封关旺季与三亚太古里开业的戴维斯双击。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3457,7 +3755,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《中国中免_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国中免_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《中国中免 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国中免 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3515,6 +3813,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>鼎龙股份_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>鼎龙股份 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">鼎龙股份_全模块深度投研全集</div>
+    <div class="report-title">鼎龙股份 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -650,7 +935,7 @@
 <ul>
 <li><strong>商业模式与账本贡献</strong>：2025年传统打印耗材（不含芯片）收入 <code>15.59亿元</code>（同比下滑 <code>12.97%</code>）。2026年4月剥离下游终端硒鼓厂珠海名图和再生墨盒厂北海绩迅后，公司只保留了技术壁垒较高、盈利能力良好的<strong>上游核心耗材原材料（彩色化学碳粉、精密显影辊及耗材芯片）</strong>。这一“砍终端、留上游”的减法动作，虽然让合并营收少了几亿元的微利流水，却彻底甩掉了低毛利、高应收、重人工的终端组装包袱。</li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块分类</th>
@@ -703,7 +988,7 @@
 <td style="text-align: left;"><strong>瘦身版老现金牛</strong>：2026年4月剥离终端硒鼓/墨盒厂后，仅保留高毛利上游材料</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>最让人舒服的商业模式就是吉列剃须刀——客户花几十亿美元买来光刻机和CMP抛光机，只要晶圆厂的机器一通电转起来，每隔两三天就得把磨平的抛光垫撕下来扔进垃圾桶，换上鼎龙的新垫子、浇上鼎龙的抛光液。不管芯片价格怎么波动，只要晶圆厂不敢停机，这台耗材收银机就24小时叮当作响！</p></div></div>
 <hr/>
 <h3 id="_4">二、 产业周期时钟与“寒冬博弈身位”</h3>
@@ -789,7 +1074,7 @@
 </ul>
 <hr/>
 <h3 id="_7">五、 国内外核心竞争对手横向硬核对比总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -866,7 +1151,7 @@
 <td style="text-align: left;">强于化学合成与医药/显示中间体，终端配方型电子材料穿透力弱于鼎龙</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看这张表你就明白什么叫“把一门底层手艺吃干抹净”！别人做材料是东一榔头西一棒子，鼎龙从当年搓打印机彩色碳粉微球开始，练出了两项看家绝活——“高分子精密聚合”和“纳米颗粒均匀分散”。用高分子聚合做出了抛光垫微球、YPI、PSPI和光刻胶树脂；用纳米分散做出了碳粉、抛光液、封装墨水和锂电分散剂。这叫“一棵老树根上长出五六个金果子”，比那些靠PPT跨界的骗子强太多了！</p></div></div>
 <hr/>
 <h2 id="_8">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？】</h2>
@@ -895,7 +1180,7 @@
 <ol>
 <li><strong>“翻旧账对表”言行一致性审计（2021—2023年报承诺 vs 2026年实际落地）</strong>：</li>
 </ol>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">历史年报承诺出处与时间</th>
@@ -930,7 +1215,7 @@
 <td style="text-align: left;"><strong>⭐⭐⭐⭐⭐ 纠偏果断、对母公司股东极有利</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ol start="2">
 <li>
 <p><strong>质押、杠杆与高点套现排查</strong>：截至2026年11月，两位实控人朱双全、朱顺全的股权质押率处于极低水平（累计质押占公司总股本比例仅约 <code>1%</code> 左右），无任何平仓或高杠杆风险；近年来实控人未发生恶性清仓式减持，且公司在2026年8月至10月刚刚真金白银掏出 <strong><code>1.20亿元</code></strong> 完成了第五期股份回购（累计回购 <code>177.87万股</code>）。</p>
@@ -993,7 +1278,7 @@
 <hr/>
 <h3 id="20212026q3">三、 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2026Q3）</h3>
 <p>下面拉出鼎龙股份最近五个完整会计年度（2021—2025年）及最新一期（2026年前三季度）的硬核现金流审计表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务指标（单位：亿元人民币）</th>
@@ -1088,7 +1373,7 @@
 <td style="text-align: left;"><strong><code>110.3%</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>穿透这张五年一期现金流总表，三大铁证跃然纸上</strong>：</p><ol>
 <li>
 <p><strong>自由现金流（FCF）已在2024—2026年迎来历史性黄金拐点</strong>：
@@ -1386,7 +1671,7 @@
 </ul>
 <h4 id="2">2. 重大在建工程项目变动明细表与“防串列、分进度”硬核审计</h4>
 <p>查阅《2025年年度报告》与《2026年半年度报告》合并财务报表附注“重要的在建工程项目本期变动情况”，公司最核心的两大重资产工程——<strong>潜江二期“年产300吨KrF/ArF光刻胶产业化项目”</strong>与<strong>“仙桃光电半导体材料产业园项目（鼎龙仙桃）”</strong>——占据了在建工程总额的 <code>76.5%—84.0%</code>。以下为严格对齐财报原表列位（严防将“本期转入固定资产金额”与“期末在建工程余额”填串列，并严格区分“工程累计资金投入占预算比例”与“物理工程形象进度”）的完整穿透表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">报告期与项目名称</th>
@@ -1559,7 +1844,7 @@
 <td style="text-align: left;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3">3. 四大核心工程与“鼎龙转债”募投版图解剖</h4><p>将上述在建工程附注与2025年4月发行的 <strong><code>9.10亿元</code>“鼎龙转债”（123255）</strong>《募集说明书》对照，鼎龙股份当前正在推进的四大核心工程版图清晰浮现：</p><ul>
 <li><strong>核心工程一：潜江二期“年产300吨KrF/ArF高端晶圆光刻胶产业化项目”（鼎龙转债第一大募投项目）</strong></li>
 <li>
@@ -1643,7 +1928,7 @@
 </ul>
 <h4 id="2-capexpython">2. 重点工程转固后新增折旧摊销、维持性CapEx与盈亏平衡稼动率（Python 精确核验）</h4>
 <p>严格依据公司《2025年年度报告》披露的固定资产折旧会计政策——<strong>房屋及建筑物采用年限平均法（折旧年限 <code>25—40年</code>，取审慎中枢 <code>30年</code>，残值率 <code>5%</code>，年折旧率 <code>3.1667%</code>）；机器设备采用年限平均法（折旧年限 <code>5—15年</code>，半导体精密设备取审慎中枢 <code>10年</code>，残值率 <code>5%</code>，年折旧率 <code>9.50%</code>；并设 <code>8年</code> 折旧期即年折旧率 <code>11.875%</code> 作为严苛压力标尺）</strong>——我们通过 Python 脚本对重点在建工程全面转固后的新增折旧、保本营收及盈亏平衡稼动率（Breakeven Utilization Rate）进行逐项精算，并严格区分<strong>【全集团合并口径】</strong>与<strong>【归母股东口径】</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心工程项目名称</th>
@@ -1725,7 +2010,7 @@
 <td style="text-align: left;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
 <p><strong>全集团存量折旧摊销与防御性维持性 CapEx（Maintenance CapEx）边界核定</strong>：</p>
@@ -1885,7 +2170,7 @@
 <hr/>
 <h3 id="_25">四、 三大远期期权终极商业证伪与竞争终局对比总表</h3>
 <p>为方便买方一图锁定三大新曲线的真实含金量，我们将各项硬指标汇总对质如下：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">证伪拆解维度</th>
@@ -1932,7 +2217,7 @@
 <td style="text-align: left;"><strong>⚖️【短期增厚利润、远期需防商誉暗雷的双刃剑】</strong><br/>不宜给予半导体级高估值溢价，核心看仙桃产能协同降本能否对冲锂电行业降价</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="c">追问模块 C：同行与上下游“三方交叉审讯”（行业坐标系下的真相还原）</h2>
 <blockquote>
@@ -1941,7 +2226,7 @@
 <hr/>
 <h3 id="2025-2026q1-q3">一、 四大半导体/光电材料龙头 2025 全年及 2026Q1-Q3 财务全景对质大表</h3>
 <p>为确保横向可比性与审计严谨性，以下对质大表严格提取四家公司 2025 年年度报告及 2026 年第三季度报告（截至 2026 年 9 月 30 日）法定披露数据，并在营运资本端强制并列<strong>“纯应收账款”</strong>与<strong>“三项广义应收款（应收账款 + 应收票据 + 应收款项融资）”</strong>双口径：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心审计维度</th>
@@ -2074,7 +2359,7 @@
 <td style="text-align: left;">晶圆厂与面板厂对耗材普遍采用月结/票据账期，除定制靶材/零部件预收外，材料厂合同负债普遍偏低</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_26">二、 景气度与存货/应收交叉对质：表观增速“障眼法”与下游晶圆厂真实稼动率还原</h3>
 <p>在审视 2026 年三季报时，初看财务摘要的投资者极易产生两个困惑：<strong>第一，为什么安集科技（+35.45%）、江丰电子（+35.67%）、彤程新材（+29.37%）营收都在狂飙，而鼎龙股份 2026Q1-Q3 表观营收增速却只有区区 <code>7.97%</code>（<code>29.13亿元</code>）？第二，下游晶圆厂和面板厂究竟是在真实扩产消耗，还是在向材料厂转移库存压力？</strong></p>
@@ -2267,7 +2552,7 @@
 <hr/>
 <h4 id="2-owner-earnings">2. 存量常态真实股东盈余（Owner Earnings）分步还原精算表</h4>
 <p>遵循巴菲特经典的股东盈余公式（<code>归母常态化扣非净利润 + 归母有效折旧与摊销 - 维持存量竞争力必需的防御性 CapEx - 常态刚性营运资金占用 = 存量常态归母 Owner Earnings</code>），我们将 2025 经审计基准、2026 前三季度实绩与 <strong>2026 全年剥离低毛利终端耗材后的新常态稳态基准（标尺二主锚）</strong> 进行全维对标还原：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">精算步骤与财务/买方模型指标</th>
@@ -2405,7 +2690,7 @@
 <td style="text-align: left;"><strong>合并扣非净利 <code>11.60</code> + 合并有效折旧摊销 <code>2.84</code> - 合并维持性CapEx <code>1.10</code> - 合并刚性ΔNWC <code>0.44</code> = <code>12.90亿元</code>（供模块 F 桥接 Unlevered Firm OE）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="owner-earnings_1">二、 单位价格/稼动率弹性公式与《三档产业景气/价格标尺 Owner Earnings 矩阵表》</h3>
 <div class="annotated-row"><div class="main-col"><h4 id="1-oe">1. 核心产品价格、销量（稼动率）与上游原料波动的微观 OE 弹性公式</h4><p>以 <strong>标尺二（2026全年新常态稳态基准，总营收 <code>39.50亿元</code>）</strong> 为微观解剖切面，公司六大业务板块的稳态营收结构与归母权益/税率参数分别为：① <strong>CMP抛光垫</strong> <code>15.30亿元</code>（2026前三季度 <code>11.36亿元</code>，Q3单季 <code>3.91亿元</code>；年化销量约 <code>47.81万片</code>，综合含税外均价约 <code>3,200元/片</code>，鼎汇微电子穿透归母比例 <code>91.35%</code>，高新技术企业所得税率 <code>15.00%</code>）；② <strong>CMP抛光液及清洗液</strong> <code>4.75亿元</code>（前三季度 <code>3.33亿元</code>，Q3单季 <code>1.39亿元</code>；鼎泽新材持股 <code>70.00%</code> 叠加仙桃全资基地，加权归母比例 <code>78.00%</code>，所得税率 <code>15.00%</code>）；③ <strong>半导体显示材料（YPI/PSPI/INK）</strong> <code>4.75亿元</code>（前三季度 <code>3.43亿元</code>；柔显科技归母比例 <code>88.59%</code>，所得税率 <code>15.00%</code>）；④ <strong>高端晶圆光刻胶及先进封装材料</strong> <code>0.30亿元</code>（前三季度光刻胶 <code>1,024万元</code>）；⑤ <strong>锂电功能性辅材（皓飞新材）</strong> <code>3.20亿元</code>（持股 <code>70.00%</code>）；⑥ <strong>传统打印耗材上游核心材料（不含已剥离终端厂）</strong> <code>11.20亿元</code>（综合归母比例 <code>98.00%</code>）。据此推导四大买方敏感度弹性公式：</p><ul>
@@ -2444,7 +2729,7 @@
 <hr/>
 <h4 id="2-owner-earnings_1">2. 《三档产业景气与价格标尺 Owner Earnings 矩阵表》</h4>
 <p>为避免把单一季度的峰值景气误判为永久稳态，同时测试行业周期下行的安全底线，我们构建以下三档标尺矩阵：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">精算维度与核心指标</th>
@@ -2547,7 +2832,7 @@
 <td style="text-align: left;"><strong>标尺一 <code>13.18+2.84-1.10-0.50=14.42</code>；标尺二 <code>11.60+2.84-1.10-0.44=12.90</code>；标尺三 <code>8.18+2.84-1.02-0.20=9.80</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="oe">三、 在建工程达产后的增量造血垫高测算（存量 + 增量稳态 OE）</h3>
 <p>截至2026年三季报末，鼎龙股份账面在建工程高达 <strong><code>7.08亿元</code></strong>（<code>708,471,060.64元</code>，2025年末为 <code>6.61亿元</code>，2026H1末一度达 <code>7.31亿元</code>），且前期已转固的部分新建园区产线尚处于产能爬坡早期。根据2025年报及2026半年报附注披露的在建工程明细，当前正在推进并将于 <strong>2027—2028年</strong> 陆续释放业绩的三大确定性增量工程参数如下：</p>
@@ -2573,7 +2858,7 @@
 <li><strong>2027—2028达产增量（买方保守消化率假设）</strong>：考虑到晶圆厂光刻胶验证周期长、切换谨慎，我们在「标尺二：新常态中枢」下<strong>仅按 <code>50.00%</code> 的保守产能消化率（即年化消化约150吨 KrF/ArF 光刻胶及部分先进封装胶）</strong>进行审慎测算：贡献增量营收 <strong><code>+4.80亿元</code></strong>，全面转固后每年新增合并折旧摊销约 <code>0.64亿元</code>（归母有效折旧摊销 <strong><code>+0.58亿元</code></strong>），扣除折旧与高研发摊销后贡献增量合并扣非净利 <strong><code>+1.12亿元</code></strong>、增量归母扣非净利 <strong><code>+1.00亿元</code></strong>；因6.5亿级高规格洁净厂房与合成纯化设备极新，日常增量维持性 CapEx 仅需 <strong><code>-0.14亿元</code></strong>，扣除增量营运资金 <code>-0.19亿元</code> 后，<strong>贡献增量归母 Owner Earnings <code>+1.25亿元</code></strong>（增量合并全口径现金盈余 <code>+1.40亿元</code>）。若在「标尺一：即期高景气（按 <code>70.00%</code> 消化率即210吨级）」下，增量营收达 <strong><code>+6.80亿元</code></strong>，<strong>贡献增量归母 Owner Earnings <code>+1.84亿元</code></strong>（增量合并全口径 <code>+2.05亿元</code>）。</li>
 </ul>
 <h4 id="20272028-owner-earnings">《2027—2028 在建增量工程消化达产后“存量 + 增量”完全体 Owner Earnings 汇总表》</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务层级与在建增量项目（买方模型情景参数）</th>
@@ -2746,7 +3031,7 @@
 <td style="text-align: center;"><strong><code>21.78</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>注意看潜江那条耗资 `8.04亿元` 的 300 吨高端光刻胶产线——就算我们用极其保守的眼光，假设它到 2028 年只消化了一半产能（150吨），账面净利润看起来因为每年要背负 `0.58亿元` 的归母新增折旧而只有 `1.00亿元`，但它的真实归母股东盈余（Owner Earnings）却高达 `1.25亿元`！为什么？因为钱已经在 2024—2026 年花完了，未来十年它只需要每年 `0.14亿元` 的维护费就能一直印钞。把已经沉没的资本开支和新产生的现金流区分开，是买方算清增量价值的第一课。</p></div></div>
 <hr/>
 <h3 id="_28">四、 五情景双极限压力测试（价格年降 × 上游化工原料暴涨 × 商誉减值冲击）</h3>
@@ -2779,7 +3064,7 @@
 </ol></div></div>
 <hr/>
 <h4 id="2_5">2. 《鼎龙股份五情景双极限压力测试全维精算对比表》（单位：亿元）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">压力测试情景与冲击参数设定</th>
@@ -2924,7 +3209,7 @@
 <td style="text-align: center;"><code>7.03</code> / <strong><code>8.88</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：在 S4 情景中，潜江二期年产300吨高端光刻胶项目全面转固但假设遭遇极端验证阻滞实现 <code>0.00元</code> 收入，导致归母有效折旧摊销由 <code>2.62亿元</code> 刚性增加 <code>+0.58亿元</code> 至 <strong><code>3.20亿元</code></strong>，同时扣减税前空转折旧及洁净室底盘能耗后经营归母扣非净利减少 <code>-0.49亿元</code>；叠加归母商誉减值 <code>-1.85亿元</code> 后，模式 A 报表归母扣非净利降至 <code>3.01亿元</code>、模式 B 降至 <code>4.48亿元</code>。在计算现金流时，斜杠前 <code>5.19亿元</code> / <code>7.03亿元</code> 为未加回商誉减值的狭义公式结果，斜杠后 <strong><code>7.04亿元</code> / <code>8.88亿元</code></strong> 为还原 <code>1.85亿元</code> 非付现商誉减值后的真实归母 Owner Earnings！)</em></p>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_2">3. 极限抗压底线结论：为什么鼎龙股份具备“打不死的现金流铁底”？</h4><ol>
@@ -2946,7 +3231,7 @@
 <h3 id="_29">一、 资产质量排雷与同行会计政策横向对质</h3>
 <p>为直观检验鼎龙股份财务报表的“含金量”与会计估计审慎度，我们将<strong>鼎龙股份（300054.SZ）</strong>与<strong>安集科技（688019.SH）</strong>、<strong>彤程新材（603650.SH）</strong>、<strong>江丰电子（300666.SZ）</strong>四大核心会计政策及资产质量指标并列穿透对比：</p>
 <h4 id="1_5">1. 四大半导体材料企业核心会计政策与资产成色对比大表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -3023,7 +3308,7 @@
 <td style="text-align: left;">商誉是鼎龙财报唯一需重点盯防的资产科目，需穿透核查皓飞新材与旗捷科技</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_6">2. 五大资产科目逐项穿透排雷</h4><h5 id="1_6">① 应收款项与坏账准备排雷（严守“广义应收并列”与“存量流量分离”两大红线）</h5><ul>
 <li><strong>纯应收账款 vs 三项广义应收款全景穿透</strong>：</li>
@@ -3117,7 +3402,7 @@
 <p>鼎龙股份之所以能在短短六七年间从一家传统碳粉耗材厂蜕变为横跨 CMP 抛光垫、抛光液、OLED 显示材料、高端光刻胶四大高壁垒赛道的“平台型新材料巨头”，除了朱双全、朱顺全兄弟的战略魄力外，最核心的组织密码就藏在它独特的<strong>“体内创业孵化（员工持股平台）+ 成熟期收回少数股权 + 集团股票期权激励”</strong>三级火箭机制中。</p>
 <h4 id="1_7">1. 核心子公司员工持股平台与“孵化—回购”资本闭环穿透</h4>
 <p>在半导体材料研发初期，单一品类面临极高的技术失败风险与漫长的晶圆厂验证周期。如果纯粹靠母公司发死工资，极难吸引并留住海外归国顶尖高分子/微电子化学科学家。为此，鼎龙股份设计了一套极具实战威力的子公司股权绑定架构：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心半导体/光电材料子公司</th>
@@ -3150,7 +3435,7 @@
 <td style="text-align: left;">待抛光液营收跨过5-10亿稳态盈利规模后，预计将复制鼎汇与柔显的少数股权收回路径</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>少数股东损益（<code>0.59亿元</code>）的审计对质印证</strong>：</li>
 <li>2025 年全年，鼎龙股份合并净利润为 <code>7.95亿元</code>，其中归母净利润 <strong><code>7.20亿元</code></strong>（<code>720,204,539.60元</code>），<strong>少数股东损益为 <code>0.75亿元</code></strong>（<code>75,426,261.70元</code>，占合并净利润比例为 <strong><code>9.48%</code></strong>）；</li>
@@ -3266,7 +3551,7 @@
 </ul>
 <hr/>
 <h4 id="3-true-ev">3. 鼎龙股份真实企业价值（True EV）三口径精算总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">估值核算科目（单位：亿元人民币）</th>
@@ -3343,7 +3628,7 @@
 <td style="text-align: left;"><strong>主锚锁定口径 A（<code>547.02亿元</code>），同时以口径 B/C 校验买方严苛底线</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：由于公司在定期报告中未逐家披露各非全资子公司独立的货币资金与银行借款明细，上述 True EV 严格以<strong>合并报表全口径 EV</strong> 为主标尺，并通过下方七项并表桥接公式将分子调整为同口径的合并无杠杆企业自由盈余 <code>Unlevered Firm OE</code>，坚决杜绝“拿归母利润除合并 EV”或“拿市值简单减合并净现金冒充归母 EV”的业余错配。)</em></p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>别被资产负债表上那 `24.36亿` 的有息负债吓唬住了！仔细看附注，里头有 `9.16亿` 是转股价只有 `28.38元` 的可转债，现在股价 `55.72元`，持债的人除非脑子进水才会要公司还钱，眼看就要全变成股票了！转完股之后，剩下的银行贷款跟账上 `14.40亿` 现金一抵消，这公司基本就是零净负债裸奔上阵。但作为买方，你得把转债变成 `3,206万股` 新股票吃掉的 `8.71亿` 隐性期权差价算进成本里——天下没有白吃的午餐！</p></div></div></div></div>
 
 <hr/>
@@ -3384,7 +3669,7 @@
 </ul>
 <hr/>
 <h4 id="2-unlevered-firm-oe">2. 三档标尺下 Unlevered Firm OE 七项桥接与隐含内生回报率总表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">桥接步骤与估值回报率指标</th>
@@ -3501,7 +3786,7 @@
 <td style="text-align: left;">模拟“鼎龙转债”100%强赎转股（总股本 <code>9.8685亿股</code>）后的全面摊薄回报率</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(💡 <strong>买方资本结构与财务杠杆效应洞察</strong>：对比上表可以发现，在存量常态主锚下，公司无杠杆企业内生回报率 <code>Unlevered Firm OE / True EV</code> 为 <strong><code>2.43%</code></strong>，略高于纯股权口径的 <code>归母 OE / 总市值</code>（<strong><code>2.26%</code></strong>）。原因在于：公司综合税后债务融资成本仅约 <strong><code>1.85%</code></strong> [<code>0.45亿元 ÷ 24.36亿元</code>，其中可转债票面利率极低且享有15%高新税盾]，低于无杠杆资产内生收益率，债务杠杆在账面上起到了轻微的正向增厚作用；但与此同时，由于当前二级市场给予普通股高达 <code>44.33倍</code> 的高市盈率/OE估值溢价，按 <code>1.0倍 PB</code> 计入的少数股东权益与债务拉低了整体 EV 倍数至 <code>41.10倍</code>。)</em></p>
 <hr/>
 <h4 id="3_3">3. 跨期分红与回购收益率严禁混加：三张独立时间轴账单拆解</h4>
@@ -3527,7 +3812,7 @@
 <ul>
 <li><strong>前瞻股息率测算</strong>：假设2026年报分红率恢复至成长股常规的 <code>20%—30%</code> 区间，则预计2026年度现金分红总额约为 <strong><code>2.24亿元—3.36亿元</code></strong>（约合每10股派 <code>2.30元—3.50元</code>），对应当前市值的 <strong>2026E前瞻纯股息率 = <code>0.42%—0.63%</code></strong>；若进一步展望在建工程全面达产后的稳态期（稳态归母 OE <code>16.90亿元</code>，资本开支大幅回落，稳态分红率提升至 <code>40%—50%</code>，年分红 <code>6.76—8.45亿元</code>），对应当前买入成本的 <strong>远期稳态股息率约为 <code>1.27%—1.59%</code></strong>。</li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">股东现金回报口径分类</th>
@@ -3567,7 +3852,7 @@
 <td style="text-align: left;">重大扩产周期结束后的稳态现金奶牛分红回报率</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>如果你是奔着每年收 `5%` 股息养老来的，趁早别碰这只票——它现在的静态股息率只有可怜的 `0.18%`，连塞牙缝都不够！在 `532亿` 市值买鼎龙，你买的根本不是当下的分红支票，而是它把传统烂生意剥离后，靠CMP抛光垫和抛光液每年复利滚雪球的高ROIC再投资机器。不过有一说一，朱家兄弟前几年把回购回来的5,000多万股股票真刀真枪全注销了，这一点比那些光打雷不下雨的铁公鸡强得多！</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">三、 预期倒推（Reverse SOTP 拆骨定价双轨制）：市场给“光刻胶+先进封装”预支了多少溢价？</h3>
@@ -3609,7 +3894,7 @@
 </ol>
 <hr/>
 <h4 id="2-reverse-sotp">2. 双轨制 Reverse SOTP 拆骨定价与隐含期权残差总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务分部 / 估值调整项</th>
@@ -3735,7 +4020,7 @@
 <td style="text-align: center;"><strong><code>55.72元/股</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="callout callout-note"><div class="callout-title">💡 投研注记 (NOTE)</div><div class="callout-body"><p><strong>【买方估值严谨性声明】</strong>：上述双轨制 Reverse SOTP 分部估值及对应的利润还原、合理倍数设定均属于<strong>买方研究情景假设（Scenario Assumptions）</strong>；表中倒推得出的隐含远期期权残差（合并口径 `227.12亿元` / 归母股权口径 `241.48亿元`）系二级市场当前交易价格对未来成长预期的映射，确定性存量业务保底净价值（`290.53亿元` / `30.43元/股`）亦不等于经审计的破产清算底价。</p></div></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3-24148-2529">3. 拆骨结论深度解读：这 <code>241.48亿元</code>（每股 <code>25.29元</code>）的期权溢价到底贵不贵？</h4><p>看着上面这张双轨拆骨表，真相可谓一目了然：</p><ol>
 <li><strong>第一，绝对不是“零元白送免费期权”，市场已经预支了相当可观的成功预期！</strong>
@@ -3761,7 +4046,7 @@
 <h3 id="_31">四、 国内外同行估值对标、历史分位与买方分档击球区推演</h3>
 <h4 id="1-202611">1. 国内外半导体材料核心同行估值横向对标总表（截至2026年11月）</h4>
 <p>为了客观评估鼎龙股份当前估值在行业内的相对位置，我们调取A股三大半导体材料直接同行（<strong>安集科技、彤程新材、江丰电子</strong>）、精细化工平台同行（<strong>万润股份</strong>）以及全球半导体耗材标杆（<strong>美股 Entegris 恩特格里斯、杜邦分拆电子材料巨头 Qnity</strong>）截至2026年11月中旬的最新估值数据：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司简称与代码</th>
@@ -3846,7 +4131,7 @@
 <td style="text-align: left;">鼎龙最直接的国际宿敌，在中国大陆市场份额正被鼎龙持续蚕食，海外成熟市场增速平缓</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2_8">2. 估值温度计定性：当前处于什么水位？</h4>
 <p>综合纵向历史估值分位（剔除2020年以前传统耗材占比超70%的不可比阶段，仅对比2021—2026年半导体平台转型期：历史 PE-TTM 中枢约 <code>45x—65x</code>，2024年初熊市极端底部曾触及约 <code>180亿—200亿元</code> 市值 / 约 <code>25x Forward PE</code>）与横向同行定价，鼎龙股份当前 <strong><code>55.72元/股</code>（总市值 <code>532.01亿元</code> / True EV <code>547.02亿元</code>）</strong> 的估值定性为：</p>
 <blockquote>
@@ -3857,7 +4142,7 @@
 <hr/>
 <h4 id="3_4">3. 买方实战分档击球区与行动锚点（精确到元/股）</h4>
 <p>基于总股本 <strong><code>9.5479亿股</code></strong>（同时括注“鼎龙转债”100%转股摊薄至 <strong><code>9.8685亿股</code></strong> 后的对应价格），我们为不同风险偏好的买方资金划定四档精确操作击球区：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">买方分档击球区</th>
@@ -3902,7 +4187,7 @@
 <td style="text-align: left;"><strong>【分批止盈兑现】</strong>：此时市场已将潜江300吨光刻胶满产及全部远期乐观预期透支完毕，坚决分批逢高锁定利润</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>⚡ 右侧主升浪扣扳机的两大“二阶导数”确认信号（供趋势/成长资金盯盘）</strong>：</li>
 </ul>
@@ -3955,7 +4240,7 @@
 <p>我的交易策略从来不是在模糊的半山腰跟市场赌气：<strong>在当前 <code>55.72元/股</code> 的位置，我不建议左侧重仓硬追；但我会把枪口死死对准两个扳机——要么股价顺着大盘回调落入 <code>44元—48元</code> 的高胜率击球区让我低吸建仓；要么在季报或产业跟踪中看到‘光刻胶单季营收破 2,500 万 + 抛光液单季破 1.8 亿’的右侧二阶加速信号确立，那一刻我会毫不犹豫地右侧重锤满上！</strong>”</p>
 <hr/>
 <h3 id="g-1">📊 五、 《表 G-1：四位投资大师圆桌投票与核心判词总表》</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师流派与代表人物</th>
@@ -3995,7 +4280,7 @@
 <td style="text-align: left;"><strong>右侧加仓双扳机</strong>：① 光刻胶单季收入突破 <code>2,000—3,000万元</code>；② 抛光液单季收入突破 <code>1.80—2.00亿元</code> 且8.6代OLED招标放量</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
@@ -4066,7 +4351,7 @@
 <h5 id="10-35-1024">二、 第二问：既然已经有 10 款光刻胶通过了晶圆厂认证，为什么年销售量才不过 3—5 吨（前三季度收入 <code>1,024 万元</code>）？</h5>
 <p>用一句话解开您的疑惑：<strong>因为晶圆光刻胶不是论车拉的大宗化工品，而是“每次只往晶圆上滴 2 毫升、单价高达 300 万元/吨的液体黄金”，全中国所有 12 英寸晶圆厂一年加起来总共也才消耗 <code>1,500—2,000 吨</code>！而且晶圆厂对刚过审的 10 款料号必须执行严苛的“5% 份额起步安全锁”！</strong></p>
 <p>具体有三大物理与产业铁律：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">认知维度</th>
@@ -4091,7 +4376,7 @@
 <td style="text-align: left;">• <strong>严酷的“阶梯放量安全锁（Ramp-up Protocol）”</strong>：光刻胶一旦出微粒缺陷，整批25片晶圆（价值上百万元）直接报废！因此哪怕拿到了 POR 认证并开始批量下单，晶圆厂在<strong>第 1 年（2026年正处此阶段）</strong>只敢先切给你该料号 <strong><code>5%—10%</code> 的产线份额</strong>（每款料号下几百公斤订单，10款合计就是 <code>3—5 吨</code> / <code>1,024万元</code>）；<br/>• 只有连续跑完半年至一年、上万片晶圆<strong>零事故</strong>，且潜江二期300吨量产线拿到危化品安全生产许可证后，晶圆厂才会在 <strong>2027—2028年</strong> 将份额阶梯式拉升至 <strong><code>20% → 35% → 50%+</code></strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>💡 买方算账彩蛋（300 吨产线到底需要卖多少吨就能赚钱？）</strong>：
 正因为光刻胶单吨售价高达 <strong><code>300 万元/吨</code></strong>、毛利率高达 <strong><code>70%+</code></strong>，我们在【模块 A】（表第 472 行）用 Python 精确验算过：鼎龙在潜江投资 <code>8.04 亿元</code> 建设的二期 300 吨光刻胶工厂，<strong>根本不需要卖满 300 吨——只要全年卖出 <code>38.32 吨</code>（稼动率仅 <code>12.77%</code>，对应营收 <code>1.15 亿元</code>），就能把整个新工厂每年 <code>5,548 万元</code> 的新增折旧和车间水电人工 100% 覆盖实现盈亏平衡！等到 2028 年消化到 <code>150 吨</code>（50% 稼动率，营收 <code>4.80 亿元</code>），每年就能为股东净赚 <code>+1.25 亿元</code> 的归母真实股东盈余（Owner Earnings）！</strong></p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>千万别用卖水泥或者卖汽水的吨数去衡量晶圆光刻胶！那玩意儿一公斤卖三千块，往价值五万块的硅片上滴两滴就能画出一百亿个晶体管。现在卖出的这三五吨（1,024万收入），就像是先头部队已经在日本人的铁桶阵里撕开了十个突破口、插上了十面红旗——只要这十面红旗在晶圆厂机台上稳稳飘扬一年不出事故，后面那300吨大炮的炮弹就会源源不断地运上去！</p></div></div></div></div>
 
@@ -4131,7 +4416,7 @@
 <hr/>
 <h5 id="2-630-70-379">2. 第二步：手把手算账——鼎龙花 <code>6.30 亿元</code> 买皓飞新材 <code>70%</code> 股权，那 <code>3.79 亿元</code> 商誉是怎么算出来的？</h5>
 <p>很多朋友看到原文里同时出现 <em>“整体估值 <code>9.00 亿</code>、买 70% 花 <code>6.30 亿</code>、总资产 <code>3.90 亿</code>、账面净资产 <code>1.6 亿</code>、新增商誉 <code>3.79 亿</code>”</em> 会觉得眼花缭乱。其实只要按上面奶茶店的公式走三步，小学生都能算明白：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤</th>
@@ -4156,7 +4441,7 @@
 <td style="text-align: left;">鼎龙掏了 <code>6.30 亿</code>，只拿到 <code>2.51 亿</code> 净家当，多付的 <strong><code>3.79 亿元</code> 溢价差额</strong> 就记成了资产负债表上的【商誉】！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>再看 2026 年三季报末那 <code>7.38 亿元</code> 总商誉的加减法来历</strong>：</p>
 <ul>
 <li>
@@ -4193,13 +4478,26 @@
 
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -4369,7 +4667,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《鼎龙股份_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/鼎龙股份_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《鼎龙股份 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/鼎龙股份 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4427,6 +4725,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

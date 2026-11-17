@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>盛弘股份_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>盛弘股份 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">盛弘股份_全模块深度投研全集</div>
+    <div class="report-title">盛弘股份 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -682,7 +967,7 @@
 </li>
 </ul>
 <h4 id="2026">核心产品与国内外直接竞争对手硬核横向对比表（截至2026年三季报客观披露）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比企业</th>
@@ -768,7 +1053,7 @@
 <td style="text-align: left;">印证了“单卖标准模块无整机生态护城河”在行业过剩期的残酷失血处境</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：上表财务数据均取自各公司已披露的2025年报及2026年三季报合并口径，归母净利率按归母净利润÷营业收入同口径核算；通合科技2026前三季度毛利率19.34%、净利率0.89%，与优优绿能处境高度一致。)</em></p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看这张同行生死簿吧：单卖标准充电模块的优优绿能和外采组装的绿能慧充全在亏钱裸泳，而盛弘毛利率40.43%、净利率13.21%稳如泰山。在制造业里，没有纵向闭环和高毛利副业护体的纯零件苦工，迟早沦为价格战的炮灰。</p></div></div></div></div>
 
 <hr/>
@@ -825,7 +1110,7 @@
 </li>
 </ul>
 <h4 id="3_1">3. 五年一期现金流硬账本与防合并报表幻觉穿透</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -902,7 +1187,7 @@
 <td style="text-align: center;"><strong>138.0%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：CapEx严格采用合并现金流量表“购建固定资产、无形资产和其他长期资产支付的现金”精确核算；FCF = OCF - CapEx，尾差系四舍五入所致。)</em></p><p>这张硬账本揭示了三个极具穿透力的真相：</p><ul>
 <li>
 <p><strong>惊人的自由现金流转化率</strong>：2021—2025五个完整年度里，公司累计赚取归母净利润 <strong>16.45亿元</strong>，收回经营现金流净额 <strong>18.12亿元</strong>（五年综合净现比 <strong>110.2%</strong>），而五年全部资本开支加起来仅仅花了 <strong>4.83亿元</strong>（只占经营现金流的26.6%），沉淀出 <strong>13.29亿元</strong> 纯正自由现金流；2026年前三季度单期再添 <strong>3.74亿元</strong> 自由现金流。哪怕每年分掉一两亿现金红利，账面现金池仍在不断变厚。</p>
@@ -1078,7 +1363,7 @@
 </ul>
 <p>把盛弘的扩产经济账拉出来，跟直接交锋的五大同行（<strong>上能电气、科华数据、优优绿能、通合科技、绿能慧充</strong>）近年披露的募投及扩产项目做一场硬核对标：</p>
 <h4 id="_12">核心扩产项目与同行单位产能投资及回本经济账对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">企业与扩产项目名称</th>
@@ -1155,7 +1440,7 @@
 <td style="text-align: left;"><strong>重资产摊大饼</strong>：涉足低毛利电池Pack组装与大基建，已陷入产能闲置与亏损泥潭</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>横向对比结论一目了然</strong>：</p><ol>
 <li>
 <p><strong>跟储能同行比“含金量”</strong>：上能电气15GW储能PCS项目每瓦投资约 <code>0.041元/W</code>，表面看比盛弘苏州项目（纯固投 <code>0.079元/W</code>）便宜，但上能做的是国内发电侧2.5MW—5MW集中式大机，单瓦售价早已杀到 <code>0.12—0.15元/W</code>、毛利率仅25%；而盛弘做的是高溢价海外工商业模块化PCS（单瓦售价高达 <code>0.30—0.45元/W</code>、2026H1毛利率高达 <strong>38.08%</strong>）。如果统一换算成 <strong>“每创造1亿元营业收入需要砸多少固定资产”</strong>，盛弘仅需 <strong>1,500万—2,369万元</strong>，不仅显著优于上能电气，更是只有科华数据（5,052万元/亿元产值）、通合科技和绿能慧充（动辄4,500万—5,000万元/亿元产值）的 <strong>三分之一到一半</strong>！</p>
@@ -1265,7 +1550,7 @@
 <p>当下资本市场给盛弘股份贴得最火热的标签，莫过于 <strong>“英伟达AIDC 800V HVDC与固态变压器（SST）核心受益股”</strong> 以及 <strong>“重卡兆瓦超充先锋”</strong>。作为拿真金白银下注的产业投资人，我们最忌讳被宣传口号带节奏——必须像外科医生一样拿手术刀把盛弘正在布局的新业务切开，逐一放到显微镜下做冷峻的商业证伪：<strong>到底哪块已经真金白银赚大钱？哪块还在实验室或送样苦熬？哪块干脆是食之无味的小鸡肋？</strong></p>
 <p>我们先用一张全景定性表锚定坐标，随后展开深度拆解：</p>
 <h4 id="202611">新业务商业化刻度与终局证伪定性一览表（截至2026年11月）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">新业务/新技术细分方向</th>
@@ -1318,7 +1603,7 @@
 <td style="text-align: left;"><strong>【平庸鸡肋资产（好在投入极小）】</strong><br/>基因错配（To-B工程师打To-C渠道战），非核心看点</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="apf-800v-hvdcsst">一、商业化刻度定位：彻底拧干“APF放量 = 800V HVDC/SST已大批量供货英伟达”的市场宣传水分！</h3>
 <div class="annotated-row"><div class="main-col"><p>在二级市场路演和股吧传闻里，最常见的偷换概念逻辑是：<em>“看到盛弘2026年上半年工业配套电源营收暴增57.81%达到4.41亿元、毛利率高达61.94%，就宣称盛弘的800V HVDC和SST固态变压器已经大批量给英伟达GB200/GB300供货了！”</em></p><p><strong>这是对数据中心物理供电架构的典型外行误读，必须用产业事实把水分彻底拧干：</strong></p><ol>
@@ -1437,7 +1722,7 @@
 <p>在电力电子与新能源设备这个高度内卷的江湖里，单看一家公司的财报很容易被管理层的叙事带偏。唯有把<strong>盛弘股份（300693.SZ）</strong>拉进审讯室，与它在三条核心战线上的直接对手——<strong>储能PCS与AIDC数据中心电源战线的上能电气（300827.SZ）、科华数据（002335.SZ）、麦格米特（002851.SZ）</strong>，以及<strong>充换电模块与整桩战线的道通科技（688208.SH）、优优绿能（301590.SZ）、绿能慧充（600212.SH）、通合科技（300491.SZ）</strong>——把截至 <strong>2026年三季报（2026Q1—Q3）与2025年报</strong> 的底牌全部掀开对质，再拉上上游IGBT/SiC功率芯片与下游算力/重卡场站交叉验真，才能看清谁在裸泳、谁在真正收割份额。</p>
 <hr/>
 <h3 id="2026-2025">一、 八大电力电子与充换电企业核心经营与财务底牌横向对质大表（截至2026年三季报 &amp; 2025年报）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对质企业</th>
@@ -1532,7 +1817,7 @@
 <td style="text-align: center;"><strong>~9.30亿元</strong><br/>(随重卡模块备货扩张)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：上表财务数据严格取自各公司2025年年度报告及2026年第三季度报告合并口径；期间费用率均按各分项费用÷2026Q1-Q3营业总收入同口径精算。)</em></p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把八家对手拉到同一张审讯桌上，谁穿了底裤一目了然：盛弘40.43%的毛利率比国内同行整整高出15到23个百分点，而且是0研发资本化、足额计提减值后的真毛利！</p></div></div></div></div>
 
 <hr/>
@@ -1719,7 +2004,7 @@
 </ul>
 <hr/>
 <h4 id="owner-earnings_1">📊 《盛弘股份常态真实股东盈余（Owner Earnings）分步还原测算表》</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">还原步骤与财务科目</th>
@@ -1836,7 +2121,7 @@
 <td style="text-align: left;"><strong>锁定存量常态造血底盘：4.4亿—4.6亿元/年（中枢 4.50亿元）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>核心结论一</strong>：哪怕一分钱不靠外部新增扩产、把AIDC短期暴利水分拧干、把政府专项补贴扣掉、把设备更新涨价和营运资金垫资全算足，盛弘股份仅凭现有 <strong>深圳+惠州+苏州</strong> 存量基地，每年稳态可装进股东口袋的 <strong>真实股东盈余（Owner Earnings）底盘也高达 <code>4.42亿—4.60亿元</code>（核心中枢锚定 <code>4.50亿元/年</code>）</strong>，占表观归母净利润的比例超过 <strong>93%</strong>！这就是轻资产电力电子平台最迷人的造血成色。</p>
 </blockquote></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把政府补贴、理财噪音和AIDC短期峰值暴利全拧干，再扣掉设备翻新和营运垫资，存量老产线一年还能稳稳往股东兜里揣4.50亿真金白银（占表观净利93%以上）！不用拿利润去填机器折旧无底洞的生意，才是真印钞机。</p></div></div></div></div>
@@ -1957,7 +2242,7 @@
 </ul>
 <hr/>
 <h4 id="2026_1">📊 《盛弘股份双极限压力测试损益与现金流冲击测算表》（以2026年存量年化运行为基准锚）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流指标</th>
@@ -2061,7 +2346,7 @@
 <td style="text-align: center;"><strong>极端双杀下仍净赚2.2亿真金白银</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>核心结论二（抗压测试定心丸）</strong>：这张表把盛弘股份最硬的底牌扒得一干二净——即便遭遇<strong>“充换电与PCS再降价12.5% + 核心功率芯片与铜材暴涨20% + 海外关税额外侵蚀”同时砸下来的地狱级双杀</strong>，盛弘的综合毛利率依然能守在 <strong>31.7%以上</strong>，全年真实自由现金流（Owner Earnings）依然能净赚 <strong><code>2.24亿元</code></strong>（静态死扛单边15%降价也净赚 <strong><code>1.31亿元</code></strong>），距离亏损失血线隔着整整两道防火墙！原因只有一个：<strong>60%毛利率的工业电能质量（APF/SVG）业务就像反应堆的冷却水系统，叠加公司0长期借款、8.7倍固定资产周转率的极低固定折旧包袱，让它在行业寒冬里拥有了同行望尘莫及的“不死之身”。</strong></p>
 </blockquote></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>就算天塌下来——充电桩和储能再暴跌15%、同时芯片铜材暴涨20%，这家公司一年还能净赚2.24亿真现金！为什么？因为60%毛利的工业电源和零长债底盘就是它的核潜艇耐压壳，同行早被水压挤扁了，它还在水下悠闲地喝茶呢。</p></div></div></div></div>
@@ -2073,7 +2358,7 @@
 <hr/>
 <h3 id="_16">一、 资产质量排雷：应收账款、存货跌价、折旧年限与研发资本化全维度体检</h3>
 <h4 id="1-2025">1. 盛弘股份与同行核心会计政策及减值计提标准横向对比表（2025年报审计附注口径）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -2168,7 +2453,7 @@
 <td style="text-align: left;">稳健合规</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2_5">2. 应收账款与信用减值显微镜：账龄结构到底健不健康？有没有放水冲收入？</h4>
 <p>我们先对齐口径并掀开盛弘股份2025年报附注的<strong>应收账款明细底账</strong>：</p>
@@ -2176,7 +2461,7 @@
 <li><strong>基准口径与全口径对账说明</strong>：在公司基准核心财务指标中，2025年末应收账款基准账面价值锚定为 <strong>8.81亿元（880,503,574.28元，对应半年度基准及核心经营口径，占总资产23.70%）</strong>；而在2025年年度报告审计附注期末全口径合并表中，随着四季度旺季集中交付确收，期末应收账款账面原值合计为 <strong>10.25亿元（1,025,415,424.55元）</strong>，坏账准备期末余额合计 <strong>6,460.55万元（64,605,545.50元，综合坏账计提率 6.30%）</strong>，期末全口径摊余账面价值为 <strong>9.61亿元（960,809,879.05元）</strong>。进入 <strong>2026年三季度末（2026Q3）</strong>，公司应收账款账面价值为 <strong>10.36亿元（1,036,365,271.19元）</strong>，应收票据 <strong>1.93亿元（192,765,854.18元）</strong>，代表高信用银行承兑汇票的应收款项融资 <strong>1.24亿元（124,097,884.88元）</strong>。</li>
 </ul>
 <p>让我们把2025年报附注中 <strong>按账龄组合计提坏账准备（占应收账款总原值98.69%）与单项计提坏账准备</strong> 的精确结构拉出来逐行审视：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">应收账款分类 / 账龄段</th>
@@ -2261,7 +2546,7 @@
 <td style="text-align: left;"><strong>1年以内高流动款项占绝对主力，长账龄水分已被拧干</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>三点硬核排雷结论</strong>：</p><ol>
 <li>
 <p><strong>账龄结构极其健康，87%以上集中在1年以内</strong>：在按账龄组合计提的应收款中，<strong>1年以内账龄高达8.82亿元（占比87.14%），1—2年占8.74%，2年以上全部加起来仅占4.12%（原值仅4,171.40万元，且已计提坏账1,659.94万元，账面净敞口仅2,511万元）</strong>！这证明盛弘早年经历2018年行业坏账洗礼后，对下游客户信用准入卡得极死——国网、南网、中石化、中石油及维谛等优质大B端虽然审批流程长一点，但极少拖欠超过2年。</p>
@@ -2320,7 +2605,7 @@
 <p>看清了财务账本，最后我们把手术刀对准公司的“人”与“分钱机制”——核查最近两期限制性股票激励计划（2022年计划与2026年最新计划）、2026年10月30日刚推出的股份回购方案，以及2,669名员工与高管团队的薪酬账本。</p>
 <h4 id="1_6">1. 两期股权激励与最新回购方案穿透审计：从“考营收”进化为“死磕扣非净利高增长”</h4>
 <p>我们将盛弘最近两期核心激励计划与最新回购方案拉出明细表对质：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">激励 / 回购批次</th>
@@ -2357,7 +2642,7 @@
 <td style="text-align: left;">用自有充沛现金在二级市场买股储备人才弹药，避免定增发新股稀释老股东权益，但<strong>不作注销减资</strong>。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>穿透算清《2026年限制性股票激励计划》这笔军令状的成色</strong>：</p>
 <ol>
 <li>
@@ -2494,7 +2779,7 @@
 </ul>
 <hr/>
 <h4 id="300693sztrue-ev-2026116">📊 《盛弘股份（300693.SZ）True EV 全口径拆解核算表》（截至2026年11月6日收盘）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核算项目</th>
@@ -2616,7 +2901,7 @@
 <td style="text-align: left;"><strong>True EV 较总市值折价约 2.7%，净超额现金垫厚实</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>全款买下这家公司（True EV 101.93亿）比它的股票总市值（104.69亿）还便宜近3个亿！因为在扣掉保证金、留足2个亿开门备付金、再替它还清全部有息债务之后，账上还白送你2.76亿净超额现金。</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">二、隐含回报率与拆骨倒推（Reverse SOTP）：市场给新业务期权预支了多少溢价？</h3>
@@ -2689,7 +2974,7 @@
 </ol>
 <hr/>
 <h4 id="reverse-sotp-10469-true-ev-10193">📊 《盛弘股份 Reverse SOTP 隐含市值拆骨倒推表》（锚定总市值 104.69亿元 / True EV 101.93亿元）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务分部 / 资产模块</th>
@@ -2784,7 +3069,7 @@
 <td style="text-align: left;"><strong>为「AIDC 800V HVDC/SST机柜主供电突破 + 全球构网型PCS与兆瓦超充远期高增」支付的门票钱</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>拆骨倒推（Reverse SOTP）一针见血的结论</strong>：
 1. <strong>存量铁底有多厚？</strong> 哪怕未来三年盛弘的新业务期权全部颗粒无收，仅靠现有的低压APF/SVG现金牛、充换电与存量PCS基本盘加上账面净现金，这家公司的<strong>存量保底价值也高达 <code>79.06亿元</code>（对应股价 <code>25.28元/股</code>，占当前总市值的 <code>75.5%</code>）</strong>；如果算上已经在建、确定性极高的西安一期与技改扩产（打七折算13.65亿元），<strong>确定性内生价值已达 <code>92.71亿元</code>（对应股价 <code>29.64元/股</code>，占当前总市值的 <code>88.6%</code>）</strong>！
@@ -2803,7 +3088,7 @@
 <p><strong>横向看国内外同行当前定价（截至2026年11月上旬）</strong>：</p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">可比上市公司</th>
@@ -2864,7 +3149,7 @@
 <td style="text-align: left;">重资产充电网运营龙头+箱变设备，背负较大折旧与有息负债，PE高于盛弘</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>客观定价身位判定</strong>：
   把这张表摊开对比，结论极其清晰：<strong>盛弘股份拥有全表仅次于道通科技的超高毛利率（40.43%）、并列第一梯队的净利率（13.21%）、全行业最干净的资产负债表（0长期借款、五年净现比110.2%），但其约 19倍 的PE-TTM不仅远低于同沾AIDC概念的麦格米特（&gt;100倍）和科华数据（34.8倍），甚至比毛利率只有25%的上能电气（26倍）和重资产运营的特锐德（23.5倍）还要便宜！</strong>
@@ -2961,7 +3246,7 @@
 <p>所以，当前盛弘股份的周期钟摆正停留在 <strong>‘从极度悲观修复至合理偏保守（理性折价区）’</strong> 的位置。作为困境与安全边际猎手，如果市场先生因为某天大盘暴跌或地缘噪音，赏赐给我们一个 <strong>88亿元市值（28.15元/股）以下</strong> 的价格——也就是把西安在建增量和全部AIDC期权100%零元白送的时候，那就是毫无疑问的黄金重锤区；而在今天33.47元的位置上，它是一笔 <strong>‘下行有厚实自由现金流与净现金托底、上行自带高赔率AIDC看涨期权’</strong> 的优质不对称赌注。”</p>
 <hr/>
 <h3 id="_19">📋 五、四位投资大师闭门投票与终极裁决总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">参会大师</th>
@@ -3006,7 +3291,7 @@
 <td style="text-align: left;"><strong>【底仓持有 + 锁定两档击球锚点】</strong><br/>期权溢价仅占市值11.4%（对比麦格米特极度克制），<strong>25.0—28.15元为左侧铁底重锤区</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -3032,13 +3317,26 @@
 <p>把今天一百零四亿市值（三十三块多）拆骨算账：光纯现金、工业电源现金牛、充换电储能基本盘及即将投产的西安基地，确定性保底价值就占总市值的近九成（约二十九块六），等于只花一成市值的零花钱就买到了跟麦格米特同源的AI智算中心电源期权。当前十九倍市盈率配二十个点以上增长非常公允，可直接建标准底仓；若回调到二十五至二十八元铁底区就是黄金重锤点，盯紧“不造电芯不建电站”和工业电源毛利率四十八个点两条底线即可。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3208,7 +3506,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《盛弘股份_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/盛弘股份_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《盛弘股份 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/盛弘股份 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3266,6 +3564,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

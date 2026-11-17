@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>东鹏饮料_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>东鹏饮料 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">东鹏饮料_全模块深度投研全集</div>
+    <div class="report-title">东鹏饮料 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -643,7 +928,7 @@
 <p><strong>盈利定位</strong>：2025年其他饮料综合毛利率仅约 <strong>14.7%—20%</strong> 左右。这块业务目前的核心使命不是赚净利，而是<strong>“填满全国新建生产基地的淡季富余产能 + 抢占终端冰柜陈列排面 + 分摊业务员单店拜访费用”</strong>。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">产品板块</th>
@@ -720,7 +1005,7 @@
 <td style="text-align: left;"><strong>毛利率47.47%（2026Q1-Q3）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="2">2. 结算账期与渠道利益分配：极度强势的“先款后货”</h3>
 <p>东鹏饮料采用以<strong>经销模式为主（占比超97%）、直营与线上为辅</strong>的渠道架构，截至2025年末拥有超3,000家成熟经销商、覆盖全国超400万家终端活跃网点。在产业链上下游博弈中，东鹏展现出了近乎霸道的资金占用能力：</p>
 <ul>
@@ -752,7 +1037,7 @@
 <h2 id="_3">第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）</h2>
 <p>要看清东鹏饮料在软饮料丛林里的真实战力，绝不能只听公司自夸“销量第一”，必须把它的两大主力武器——<strong>东鹏特饮</strong>与<strong>东鹏补水啦（及果之茶）</strong>，拉到天丝红牛、华彬红牛、农夫山泉、元气森林、达利（乐虎）面前，逐项拆解配方、单价、渠道推力与成本曲线。</p>
 <h3 id="1_1">1. 王牌对王牌：能量饮料与电解质水同行硬核比拼表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -821,7 +1106,7 @@
 <td style="text-align: left;">达利已私有化退市（饮料板块毛利率约45%，净利率约15%—18%）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="2_1">2. 穿透产品与成本曲线的三大残酷真相</h3>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
@@ -862,7 +1147,7 @@
 <p>董事长兼总裁<strong>林木勤</strong>（1964年生）是典型的潮商实干家：技术与代工出身，极度节俭务实，常年盯在销售一线与供应链采购台账上。截至2026年9月30日（三季报），林木勤直接持有公司A股33,625.49万股（占总股本45.80%），加上通过港股通持有的44.39万股H股，以及其胞弟林木港、侄子林戴钦、儿子林煜鹏及家族关联员工持股平台（鲲鹏投资等），<strong>林木勤家族及一致行动人合计控制公司约60.49%的表决权</strong>，控制权极度稳固。</p>
 <h3 id="2-20212026">2. “翻旧账对表”言行一致性审计（2021—2026五年硬核对表）</h3>
 <p>我们调取公司2021年A股IPO招股书及2021—2022年报中写下的战略承诺与募投基地投产计划，与截至2026年11月的实际落地结果逐一比对：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">3—5年前（2021—2022）公开承诺目标</th>
@@ -902,7 +1187,7 @@
 <td style="text-align: left;">✅ <strong>战略转型兑现度在快消品行业属顶级水平</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="3_1">3. 四项治理体检与市场争议焦点直击</h3>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
@@ -968,7 +1253,7 @@
 </li>
 </ul>
 <h3 id="3-20212025-20261-9">3. 五年一期现金流硬账本（2021—2025完整年度 + 2026年1-9月）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -1053,7 +1338,7 @@
 <td style="text-align: center;"><strong>21.81 (中报)</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：2022年CapEx经年报现金流量表核对为约6.57亿元，五年累计OCF达193.47亿元，五年累计CapEx为60.15亿元，五年累计创造真实自由现金流高达 <strong>133.32亿元</strong>！2026年1-9月OCF净现比阶段性回落至85.5%，主要系三季度末合同负债较年初高点季节性消化8.84亿元所致。)</em></p>
 <h3 id="4-225-vs-63">4. 打破“合并报表幻觉”体检：深度扒皮“225亿现金 vs 63亿短债”的存贷双高之谜！</h3>
 <div class="annotated-row"><div class="main-col"><p>翻开东鹏饮料2026年三季报（截至2026年9月30日），任何一个懂财务的投资人都会立刻盯上一组极其诡异的数字：</p><ul>
@@ -1232,7 +1517,7 @@
 <blockquote>
 <p><strong>【跨模块数据一致性铁律】</strong>：以下数据均经2025年年度报告、2026年第三季度报告、港交所《FF305证券变动月报表》及2026年11月实时行情交叉核验锁死，后续模块 A—G 必须 100% 严守同一口径，严禁出现任何数字打架！</p>
 </blockquote>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">基准维度</th>
@@ -1321,7 +1606,7 @@
 <td style="text-align: left;">2021—2025五年累计分红 <code>80.12亿元</code>，含2026中报累计分红 <code>101.93亿元</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="a">【追问模块 A：资本开支与重点工程解剖】</h2>
 <h3 id="3698">一、 36.98 亿资本洪流全景还原：从存量十大基地到“北伐、西进、下南洋”工程台账</h3>
@@ -1336,7 +1621,7 @@
 </li>
 </ul>
 <p>为了杜绝将“政府招商引资协议总投资额（常含流动资金、总部办公及远期二期规划）”与“财报附注在建工程项目预算数（纯一期/当前立项土建与设备预算）”、以及“本期转入固定资产金额”与“期末在建工程账面余额”混为一谈，下表将东鹏饮料核心新建/扩建生产基地的双口径投资预算、2025 年报附注精确账面流转及物理形象进度做一次性穿透对齐：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">生产基地项目名称</th>
@@ -1451,7 +1736,7 @@
 <td style="text-align: left;">携手印尼华商巨头 <strong>三林集团（Salim Group）</strong> 合资设立印度尼西亚东鹏维生素饮料公司，推进本土产能建设与全渠道网络，匹配H股募资中 <code>12%</code>（约<code>13.13亿港元</code>）的海外拓展专项资金。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="python">二、 单位经济账与 Python 硬核实算：万吨产能造价横评、新增折旧与盈亏平衡稼动率</h3>
 <h4 id="1_5">1. 同行单位产能造价显微镜：东鹏的新基地到底建贵了还是建省了？</h4>
@@ -1469,7 +1754,7 @@
 </li>
 </ul>
 <p>我们将东鹏核心扩产项目与农夫山泉、康统、李子园、欢乐家同类项目置于同一工程标尺下横向比对：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比企业与典型扩产基地</th>
@@ -1537,7 +1822,7 @@
 <td style="text-align: left;">传统热灌装线造价比无菌线低30%—50%，但无法做无防腐剂低糖/无糖茶与中性植物蛋白；东鹏海岛椰与无糖茶产线造价介于普通热灌装与进口双线无菌之间。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把热灌装换成无菌冷灌装、再修几座全自动立体仓库，工程账本上看东鹏管理层花钱并不算冤大头——用达意隆的国产高速无菌线替代两亿一条的纯进口线，这叫精明的广东算盘。但真正要命的从来不是“建厂时省了几个铜板”，而是当你把几百亩钢筋水泥和每小时五万四千瓶的吞金机器立在地上之后，如果卖出去的不再是毛利过半的“金瓶印钞水”，而是两块钱一升的果茶糖水，那折旧钟摆每一次滴答作响，都是在给股东剃头。</p></div></div>
 <hr/>
 <h4 id="2-python-20-capex">2. Python 实算验证：新增 20 亿+转固资产的年化折旧冲击、盈亏平衡点与维持性 CapEx 边界</h4>
@@ -1809,7 +2094,7 @@
 <hr/>
 <h3 id="_15">三、 新业务全维度证伪对比表与竞争终局定性</h3>
 <p>我们将东鹏饮料三大新业务方向与四大维度（商业刻度、财务含金量、核心卡点、巨头围剿与终局定性）浓缩于下表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">新业务板块 / 代表单品</th>
@@ -1868,7 +2153,7 @@
 <td style="text-align: left;"><strong>【3—5年维度的长周期免费期权（短期纯烧钱项）】</strong><br/>绑上印尼首富三林集团（掌握Indomaret便利店帝国）让这张期权脱离了“盲目出海送死”，具备一定战略想象力，但2027年前基本只贡献CapEx和费用，不贡献核心净利。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街和陆家嘴最喜欢听“第二曲线暴涨 `182.99%`”的故事，但如果你花两分钟打开计算器就会发现：东鹏特饮每卖一吨能挣 `2,155元` 毛利，而一升装的“果之茶”和其他饮料每卖一吨只能挣 `350到550元` 毛利——这意味着业务员必须吭哧吭哧多搬五箱果茶上货架，才能补上少卖一箱金瓶特饮留下的利润窟窿！把“为了填满新建无菌线而卖的五块钱大碗糖水”当成“能替代印钞机的新印钞机”，这是消费股投资里最昂贵的幻觉。</p></div></div>
 <hr/>
 <h3 id="a-b">四、 模块 A + B 终局合龙裁决：重资产洪流与多品类突围的真实底牌</h3>
@@ -1906,7 +2191,7 @@
 <p>2026年三季度，东鹏饮料交出了一份令市场屏息的阶段性成绩单：前三季度累计实现营业总收入 <code>185.96亿元</code>（同比 <code>+10.40%</code>），归母净利润 <code>41.45亿元</code>（同比 <code>+10.21%</code>）；但拆开单季看，在2026H1营收同增 <code>15.89%</code>（<code>124.43亿元</code>）、归母净利同增 <code>20.72%</code>（<code>28.67亿元</code>）的高景气之后，<strong>2026Q3单季营收骤然减速至 <code>61.53亿元</code>（同比微增 <code>+0.75%</code>），单季归母净利润 <code>12.78亿元</code>（同比下滑 <code>-7.80%</code>）</strong>；与此同时，资产负债表上的“蓄水池”——合同负债从2025年末的 <code>59.74亿元</code>（<code>5,974,383,093.28元</code>）回落至2026年9月末的 <code>50.90亿元</code>（<code>5,090,207,385.53元</code>），较年初净减少 <code>8.84亿元</code>（降幅 <code>-14.80%</code>）。</p>
 <p>这究竟是东鹏特饮基本盘触顶、渠道塞满后的动销休克，还是全行业在极端天气与消费降级共振下的主动洗盘？我们将五大软饮龙头的营运资金水位、预收款蓄水池与广义应收敞口拉出清单，逐一交叉审讯：</p>
 <h4 id="1-2025-vs-2026">1. 五大软饮龙头景气度、预收蓄水池与营运资金水位横向对质表（2025年报 vs 2026最新期）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审讯维度 / 核心指标</th>
@@ -2023,7 +2308,7 @@
 <td style="text-align: left;"><code>5.62亿元</code> (2026Q3末)<br/>存货周转天数：<strong>约 <code>55.4天</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>注：表中东鹏饮料与养元饮品引自上交所披露之2025年报及2026年三季报法定合并报表原列数（本年三季报未发生会计政策变更或重述年初数，2025年末原列数与2026三季报期初数100%一致）；农夫山泉、统一企业中国、康师傅控股引自港交所披露之2025年报及2026年中期报告（按IFRS 15准则列报）。</em></p>
 <div class="annotated-row"><div class="main-col"><h4 id="2_5">2. 交叉审讯结论：软饮大盘在“结构性降温”，东鹏在主动控货洗盘而非硬塞渠道</h4><p>通过对上述五家饮品巨头资产负债表与周转效率的严刑对质，我们可以撕开2026年软饮料行业的三层真实底牌：</p><ul>
 <li>
@@ -2047,7 +2332,7 @@
 <p>在软饮料行业，还有一个长期令外部投资者困惑的“财务奇观”：东鹏饮料的核心单品500ml金瓶特饮终端零售价仅卖5元（每百毫升单价1元，仅为红牛的一半），补水啦555ml终端零售价仅卖4元（甚至促销价3—3.5元），是一家彻头彻尾的“极致性价比大众饮品”；但它的<strong>归母净利率却常年高达 <code>21.15%</code>（2025A）至 <code>22.29%</code>（2026Q1-Q3）</strong>，比康师傅（<code>5.69%</code>）、统一企业中国（<code>6.46%</code>）高出整整 <strong>15—16个百分点</strong>！更反常的是，东鹏的<strong>销售费用率仅为 <code>16.31%</code>（2025A）和 <code>15.99%</code>（2026Q1-Q3）</strong>，比统一（<code>22.20%</code>）和康师傅（<code>22.93%</code>）低了 <strong>6—7个百分点</strong>！</p>
 <p>这到底是来自大单品规模效应、“五码合一”砍掉中间促销截留（或将返利直接冲减收入），还是在折旧与费用核算上玩了财技？我们先把五大龙头的利润表结构与东鹏的单吨经济账彻底扒开：</p>
 <h4 id="1-2025-vs-2026_1">1. 五大软饮龙头盈利结构与期间费用率横向对质表（2025全年 vs 2026最新期）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">利润率与费用率指标</th>
@@ -2148,10 +2433,10 @@
 <td style="text-align: left;"><strong><code>22.63%</code></strong> (<code>11.31亿元</code>)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2-2025">2. 东鹏饮料2025年核心品类“单吨经济账”全口径拆解表（严守年报销售口径）</h4>
 <p>为彻底看清东鹏一吨饮料到底怎么赚出近千元净利，我们严格采用2025年报披露的<strong>销售口径（即 <code>销售收入 ÷ 销量</code>、<code>销售成本 ÷ 销量</code>，营业成本中已包含 <code>8.33亿元</code> 物流运费，占总成本 <code>7.25%</code>；严禁用生产成本倒推虚构售价）</strong>，同时按照防呆准则列示<strong>合并报表直除口径</strong>与<strong>按各品类营收权重分摊公式口径</strong>的单吨期间费用：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">单吨经济账拆解项目 (2025年报基准)</th>
@@ -2261,7 +2546,7 @@
 <td style="text-align: left;"><strong>单吨归母净利：<code>736.8元/吨</code></strong><br/><em>(<code>44.15亿元 ÷ 599.19万吨</code>)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="3-21-16">3. 交叉审讯结论：揭秘东鹏 <code>21%+</code> 净利率与 <code>16%</code> 低销售费用率的四大底层真相</h4>
 <p>为什么同样卖饮料，康师傅和统一卖一吨茶水只能赚一两百块辛苦钱（净利率 <code>5%—8%</code>），而东鹏饮料卖一吨东鹏特饮能赚出 <code>2,155.4元</code> 毛利、合并单吨净赚 <code>736.8元</code>（净利率 <code>21%—22%</code>）？通过交叉对比会计政策、单吨成本与渠道链路，我们发现了四个环环相扣的真相：</p>
 <ul>
@@ -2387,7 +2672,7 @@
 <hr/>
 <h4 id="2-owner-earnings">2. 《东鹏饮料分步还原归母 Owner Earnings 明细表》</h4>
 <p>以下全部单元格数字均经由 Python <code>Decimal</code> 浮点零误差核验，严格区分历史审计值与买方模型假设参数：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">还原步骤与财务科目（单位：亿元）</th>
@@ -2504,7 +2789,7 @@
 <td style="text-align: left;">100%全集团口径并剔除税后净利息收益（零WC下主锚为<strong><code>45.46亿元</code></strong>）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看着2025年报里61.74亿的经营现金流和55.64亿的账面现金盈余，平庸的分析师会兴奋得把计算器按爆；但只要你看看2026年前三季度OCF（35.42亿）比归母净利（41.45亿）少的那6个亿，你就明白：去年底经销商为了拿春节返利提前打进来的那12.64亿预收款，只是借放在你账上的过路财神！把预收款脉冲砍掉、把维持12个大厂房和几百万台冰柜运转的4.52亿真金白银扣掉，东鹏在正常年份实打实能装进股东口袋的自由盈余是 <strong>46.0亿—47.2亿元</strong>。不需要任何会计粉饰，这依然是一台极其罕见的印钞机。</p></div></div>
 <hr/>
 <h3 id="pet-owner-earnings">二、 大宗原料（PET + 白砂糖）与产品结构弹性公式 &amp;《三档标尺 Owner Earnings 矩阵表》</h3>
@@ -2546,7 +2831,7 @@
 <p>基于 2026 年常态经营体量基准（年总销量 <code>665.00万吨</code>、营业总收入 <code>228.00亿元</code>、综合有效所得税率 <code>22.00%</code>、归母权益比例 <code>99.78%</code>，并同步附 2025 年经审计 <code>208.75亿元</code> 营收基数对照），公司每年约耗用 <strong>PET瓶级切片 <code>22.00万—25.00万吨</code>（买方模型基准取中枢 <code>24.00万吨</code>）</strong>，耗用 <strong>白砂糖 <code>35.00万—40.00万吨</code>（买方模型基准取中枢 <code>38.00万吨</code>）</strong>。三大核心敏感因子的税后归母 Owner Earnings 弹性公式精算如下：</p>
 <div class="math-display">\Delta <span class="math-text">税后归母 OE</span><sub><span class="math-text">原料</span></sub> = - ≤ ft(<span class="math-text">年耗用吨数</span>  ×  \Delta <span class="math-text">采购吨价</span>)  ×  (1 - 22.00\%)  ×  99.78\%</div>
 <div class="math-display">\Delta <span class="math-text">税后归母 OE</span><sub><span class="math-text">吨价/红包</span></sub> =  ≤ ft(<span class="math-text">基准营业收入</span>  ×  \Delta <span class="math-text">净结算吨价变动率</span>)  ×  (1 - 22.00\%)  ×  99.78\%</div>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">敏感性因子与波动单位</th>
@@ -2605,11 +2890,11 @@
 <td style="text-align: left;">特饮毛利率高达<code>50.79%</code>，其终端价格刚性与扫码率控盘是全公司利润的定海神针</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="3-owner-earnings-vs-vs">3. 《三档标尺 Owner Earnings 矩阵表》（顺风即期 vs 新常态主锚 vs 逆风底线）</h4>
 <p>为彻底消除周期噪音对后续估值模块的干扰，我们构建三把严密的买方标尺，将<strong>【2025经审计严苛零WC存量底盘锚（归母 OE <code>43.00亿元</code>，保守取整底盘锚 <code>42.50亿元</code>）】</strong>与<strong>【标尺二：2026新常态扩产中枢标尺（归母 OE <code>47.17亿元</code> / 零营运资金口径 <code>45.97亿元</code>）】</strong>确立为跨模块双轨核心基准：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心精算指标（单位：亿元，买方模型情景参数）</th>
@@ -2740,7 +3025,7 @@
 <td style="text-align: left;">括号外为仅剔除报表账面净利息收益(<code>-0.62亿</code>)口径；<strong>括号内(<code>44.97亿</code>)为严苛剥离超额现金全部税后净财务收益(<code>-2.20亿</code>)后的纯实业口径</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p>🔗 <strong>【模块 D 与模块 F 跨模块估值口径桥接说明】</strong>：
 本模块（模块 D）算出的 <strong>2025经审计严苛零WC归母OE为 <code>43.00亿元</code>（保守取整底盘锚 <code>42.50亿元</code>）</strong>、<strong>2026新产能扩产中枢归母OE为 <code>45.97—47.17亿元</code></strong>；模块 F 在后续估值定价时，为充分敬畏 2026Q3 单季增速换挡（<code>+0.75%</code>），主锚严格采用不依赖 2026 增量假设的保守存量底盘 <strong><code>42.50亿元</code></strong>（对应剥离净利息收益 <code>-2.20亿元</code> 后的无杠杆实业 <strong><code>Unlevered Firm OE = 40.30亿元</code></strong>），若采用模块 D 的 2026 新常态中枢（归母 OE <strong><code>47.17亿元</code></strong> / 剥离净财务收益后实业 <strong><code>Unlevered Firm OE = 44.97亿元</code></strong>），则 A+H 主锚 EV/OE 将进一步降至 <strong><code>14.31x</code></strong>（内生回报率跃升至 <strong><code>6.99%</code></strong>），H 股独立同权 EV/OE 更是低至 <strong><code>10.50x</code></strong>（内生回报率 <strong><code>9.53%</code></strong>）！</p>
@@ -2772,7 +3057,7 @@
 </li>
 </ul>
 <h4 id="2-owner-earnings_1">2. 《五大新转固及在建基地达产后增量归母 Owner Earnings 测算矩阵》</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">增量测算维度（单位：亿元，买方模型情景假设参数）</th>
@@ -2894,7 +3179,7 @@
 <td style="text-align: center;"><strong>64.72</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>核心精算结论</strong>：在买方最看重的 <strong>「新常态中枢标尺」</strong> 下，随着天津、中山、昆明、海南、成都五大基地在未来 2—3 年爬坡至 65%—75% 稳态稼动率，扣除全部新增折旧与维持性 CapEx 后，每年将额外为东鹏饮料垫高 <strong><code>+10.36亿 ~ +12.49亿元</code>（70%稼动率中枢为 <code>+11.43亿元</code>）</strong> 的归母 Owner Earnings，推动全公司常态化归母 OE 底盘从当前的 <strong><code>47.17亿元</code></strong> 稳步迈上 <strong><code>58.60亿元</code></strong> 台阶；若按 <strong>「今日实时低成本顺风标尺」</strong> 测算，增量归母 OE 更可达 <strong><code>+11.29亿 ~ +13.61亿元</code>（中枢 <code>+12.45亿元</code>）</strong>，远期顺风归母 OE 总盘子将突破 <strong><code>63.56亿元</code></strong>！</li>
 </ul>
@@ -2946,7 +3231,7 @@
 <blockquote>
 <p><strong>⚠️ 指标命名与口径红线声明</strong>：下表中由 <code>扣非归母净利润 + 归母折旧摊销 + 营运资金净变动</code> 构成的指标严格命名为 <strong>“模型简化归母内生现金流”</strong>，进一步扣减全口径维持性支出（自有维持性 CapEx <code>4.20亿元</code> + 使用权资产租赁本金偿还 <code>0.32亿元</code> = <code>4.52亿元</code>）后的指标严格命名为 <strong>“模型简化归母 Owner Earnings”</strong>（均属于买方模型情景推演指标，严禁与历史合并报表账面 OCF 混同）。全部数字经 Python <code>Decimal</code> 精算零尾差：</p>
 </blockquote>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">压力测试核心财务指标（单位：亿元）</th>
@@ -3119,7 +3404,7 @@
 <td style="text-align: center;">🟢 <strong>三大减震垫挽回10.15亿OE</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3-ocf-vs">3. 终极抗压拷问：双杀极限下谁先出局？（上市龙头 OCF 实证核查 vs 网红代工品牌出清推演）</h4><ol>
 <li>
@@ -3169,7 +3454,7 @@
 <p><strong>【2025年报审计报告原文铁证】</strong>：“如财务报表附注(七)、38、附注(七)、41、附注(十九)、6所示，东鹏饮料于2025年12月31日合并财务报表中确认在<strong>合同负债</strong>和<strong>其他应付款</strong>的<strong>应付销售返利与折扣</strong>金额分别为<strong>人民币 <code>3,185,496,887.00元</code></strong> 和<strong>人民币 <code>263,456,390.58元</code></strong>。”</p>
 </blockquote>
 <p>我们将这组核心附注数据与2026年最新季度动态拉出穿透清单：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">合同负债与返利池穿透科目</th>
@@ -3222,7 +3507,7 @@
 <td style="text-align: left;">每确认100元净营收背后，账上沉淀着约16.5元的已计提未兑付返利弹药库</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>深度排雷结论（一）：是否存在利用“返利预提比例”跨期平滑季度利润（如2026H1 vs 2026Q3）的空间？</strong></p><ul>
 <li><strong>客观机制审视：31.85亿返利池确实是管理层手中的“天然利润减震器（Cookie Jar Reserves）”</strong>。根据新收入准则，当东鹏向经销商发出一箱东鹏特饮时，管理层必须根据“经销商全年销量目标预计完成度”以及“终端消费者/门店对壹元乐享、箱内扫码红包的预计参与率（Redemption Rate）”，在当期预提销售返利与折扣——<strong>借记（冲减）当期营业收入，贷记合同负债</strong>。这意味着：</li>
 <li>在业绩爆发的上行期（如2025全年营收大增 <code>+31.80%</code>、2026H1净利大增 <code>+20.72%</code>），管理层完全有动力采取<strong>最严苛、最顶格的估计假设</strong>（例如假设几乎所有经销商都能拿满最高档阶梯返利、假设瓶盖扫码兑付率处于上限），从而在账上超额计提高达 <code>31.85亿元</code> 的应付返利负债，主动压低当期表观营收与毛利率，把利润“藏”进合同负债里；</li>
@@ -3238,7 +3523,7 @@
 <hr/>
 <h4 id="2_6">2. 会计政策严苛度与资产质量五维横向对质：应收坏账、存货跌价、冰柜折旧与研发资本化</h4>
 <p>为了全面检验东鹏饮料的会计成色，我们将东鹏与农夫山泉、统一企业中国、康师傅控股、养元饮品在五大敏感会计科目上的政策与数据拉出对质表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -3299,7 +3584,7 @@
 <td style="text-align: left;"><strong>严苛稳健型</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>深度排雷结论（二）：三大硬核证据证明东鹏会计政策“极其严苛，毫无激进美化之嫌”</strong></p>
 <ol>
 <li>
@@ -3325,7 +3610,7 @@
 <p>一家快消品公司能不能打胜仗，关键看前线扛枪的业务员有没有分到肉；而一家家族色彩浓厚的民营龙头值不值得长期托付，则要看实控人家族与高管在资本市场上的吃相。</p>
 <h4 id="1-2025">1. 2025年报员工结构、人均效能与一线薪酬现金流全穿透（客观审慎口径）</h4>
 <p>我们调取东鹏饮料2025年报“员工情况”章节、合并现金流量表、合并资产负债表及销售/成本明细附注，对 <strong><code>12,376名</code></strong> 在职员工的创收效能与真实薪酬分配进行实算：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">人员构成与薪酬效能审计指标</th>
@@ -3420,7 +3705,7 @@
 <td style="text-align: left;">随新基地投产及产量扩张，产线工人收入稳步增长</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>客观审慎审计结论</strong>：
 穿透现金流量表与费用附注可见，东鹏饮料2025年实际支付给职工的现金高达 <code>21.51亿元</code>（同比大增 <code>+34.43%</code>，增速甚至快于当年 <code>+31.80%</code> 的营收增速），2026年前三季度在Q3动销放缓的背景下，支付给职工的现金依然同比增长 <code>+9.68%</code> 至 <code>18.31亿元</code>。8,106名销售铁军年均综合薪酬福利达 <code>16.93万元</code>（月均约 <code>1.41万元</code>），这在三四线城市及县乡镇快消业代群体中属于极具诱惑力的“高薪重赏”，有力支撑了冰柜陈列与网点开拓的执行力。但同时必须保持客观审慎：快消饮料行业基层业务代表天然具有“高底薪提成弹性、强KPI考核、高流动率与末位淘汰”的行业属性，我们只能确认公司整体薪酬现金投入与业绩扩张高度匹配、未出现克扣基层薪酬以美化利润表的行为，而不宜作出“零裁员/零降薪”的绝对化断言。</p>
 <hr/>
@@ -3581,7 +3866,7 @@
 
 <h4 id="13-true-ev">1.3 东鹏饮料真实企业价值（True EV）四宫格精算矩阵表</h4>
 <p>基于公式 <strong><span class="math-inline"><span class="math-text">True EV（合并口径）</span> = <span class="math-text">有效总市值</span> + <span class="math-text">少数股东权益</span> + <span class="math-text">五项有息负债合计</span> - <span class="math-text">超额可自由支配现金</span></span></strong>（以及不含少数股东权益的归母口径 True EV），我们将三大市值口径与双层次超额现金交叉验算，汇总为以下零尾差精算矩阵：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">精算项目 / 估值维度</th>
@@ -3670,7 +3955,7 @@
 <td style="text-align: center;"><em><code>501.55 亿元</code></em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="unlevered-firm-oe">二、 七项并表桥接公式（Unlevered Firm OE）、真实内生回报率与三档分红回购现金收益率</h3>
 <h4 id="21">2.1 七项并表桥接公式：剥离超额现金躺赚利息，还原纯粹实业造血力</h4>
@@ -3711,7 +3996,7 @@
 </ul>
 <h4 id="22-unlevered-firm-oe-true-ev">2.2 隐含实业真实内生回报率（Unlevered Firm OE / True EV）全集对照表</h4>
 <p>将三档 <code>Unlevered Firm OE</code> 与四宫格 <code>True EV</code> 矩阵咬合，东鹏饮料当前的真实内生收益率与隐含估值倍数一目了然：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值口径与市值基准</th>
@@ -3779,10 +4064,10 @@
 <td style="text-align: center;"><em>A+H: <code>22.47x</code> (<code>4.45%</code>)<br/>全A: <code>22.90x</code> (<code>4.37%</code>)<br/>全H: <code>17.57x</code> (<code>5.69%</code>)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="23">2.3 严格按会计归属期拆分的三档现金回报率（严禁跨年混加）</h4>
 <p>在核查东鹏饮料的股东现金回报时，市场上常见的一种严重错配是：把 <strong>2025年报分红（在2026上半年实施派发）</strong> 与 <strong>2026中报分红（在2026下半年宣告派发）</strong> 以及 <strong>2026年内回购</strong> 直接简单相加，炮制出看似高达 6%+ 的“2026年日历年度派息率”。作为严谨买方，我们<strong>严格按利润归属会计年度拆分三档现金回报率，绝不跨期混加</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">现金回报率档位</th>
@@ -3815,7 +4100,7 @@
 <td style="text-align: center;">- 仅26H1已宣告：<strong><code>3.55%</code></strong><br/>- 2026全年预期纯股息率：<strong><code>4.39% — 4.88%</code></strong> 🔥</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>⚠️ <strong>【买方回购质量防伪声明】</strong>：东鹏饮料 2026 年斥资 <code>10.39 亿元</code> 回购的 <code>712.26 万股</code> 库存股，其法定披露用途为“减少注册资本（注销）或用于员工持股计划/股权激励”。在买方铁律中，<strong>若库存股未来以低价授予管理层或员工，本质上是股东承担的真实薪酬费用（SBC），不能视为对公众股东的纯现金返还；唯有最终依法予以减少注册资本注销（或按市价全额抵扣刚性现金薪酬）的部分，才能与 <code>3.43%—3.81%</code> 的纯股息率相加</strong>。即便保守将回购权重打对折甚至归零，公司仅靠纯现金分红也已提供 <strong><code>3.45%</code>（A股）至 <code>4.41%</code>（H股）</strong> 的硬核即期收息安全垫！</p>
 </blockquote>
@@ -3871,7 +4156,7 @@
 </li>
 </ul>
 <h4 id="32-reverse-sotp-implied-option-value">3.2 Reverse SOTP 双轨制拆骨定价与隐含残差（Implied Option Value）全景表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">拆骨分部 / 估值层级</th>
@@ -3981,7 +4266,7 @@
 <td style="text-align: center;"><strong><code>763.64 亿元</code></strong> <em>(折合 <code>105.03元/股</code>)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把一家公司拆开来称重（Reverse SOTP），是治疗市场先生“狂躁抑郁症”最好的解药。在 A 股 `110.22 元` 的价格上，市场给“东鹏特饮”算完 14 倍账（483 亿）、给“补水啦”和“果之茶”算完 111 亿账之后，留给印尼、越南出海和未来新单品的期权溢价大概是 `49.5 亿`（严苛现金口径下是 `79.5 亿`）——这说明 A 股的泡沫已经被挤掉了八成，但还算不上“捡烟蒂式的暴利免费午餐”。然而，当你扭头看一眼港股 `99.45 港元`（折合人民币 `84.57 元`）的 09980.HK 时，荒诞的一幕出现了：由于每股里裹着的 `19.66 元` 净现金不会因为你在香港买就打折，港股投资者相当于只花了 `471.97 亿` 就买下了整座实业帝国！光一个“东鹏特饮”保守按 14 倍收息就值 `483 亿`，这意味着港股把年入 40 多亿营收、净赚近 5 亿的“补水啦”和整个东南亚出海期权全当成垃圾白送给你，还倒找你 11 个亿！同一家公司、同一份分红支票，一边要你付 50 亿期权费，另一边白送还倒贴，傻子都知道该去哪个柜台排队！</p></div></div>
 <hr/>
 <h3 id="_19">四、 历史估值分位与海内外软饮同行横向估值比对表</h3>
@@ -4003,7 +4288,7 @@
 </ul>
 <h4 id="42-202611">4.2 海内外软饮龙头横向估值比对矩阵（2026年11月最新基准）</h4>
 <p>我们将东鹏饮料（A股与H股双视角）置于全球及中国软饮坐标轴中，与<strong>农夫山泉（09633.HK）</strong>、<strong>怪兽饮料（Monster Beverage, MNST.US）</strong>、<strong>统一企业中国（00220.HK）</strong>、<strong>康师傅控股（00322.HK）</strong>及<strong>养元饮品（603156.SH）</strong>进行硬核买方指标横向比对：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称与代码</th>
@@ -4088,7 +4373,7 @@
 <td style="text-align: left;">主业长期零增长甚至萎缩的纯收息标本；东鹏H股的隐含 True EV 倍数(<code>11.71x</code>)竟已跌至养元饮品水平！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>📊 横向比对买方结论</strong>：
 市场由于 2026Q3 的单季扰动，把 <strong>东鹏饮料 H股（14.47x P/OE，11.71x True EV/OE）</strong> 定价到了与营收几乎不增长的 <strong>统一（15x PE）、康师傅（14.5x PE）和养元饮品（11x True EV）</strong> 完全相同的“夕阳现金牛估值水位”！只要东鹏饮料未来 3 年维持 <code>8%—12%</code> 的稳健复合增长（仅靠全国冰冻化网点单点产出提升与电解质水渗透率自然增长即可实现），当前 H 股及回调后的 A 股都将展现极强的估值修复弹性与高股息复利双击。</p>
@@ -4184,7 +4469,7 @@
 <p><strong>保留 15%—20% AH 折价止盈价</strong>：<strong><code>133.21 港元（20%折价）— 141.53 港元（15%折价）</code></strong>。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球区分档</th>
@@ -4255,7 +4540,7 @@
 <td style="text-align: left;"><strong>安全边际耗尽，开启分批右侧减持兑现</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>投资中最美妙的事情，莫过于当你算完所有苛刻的账目后，发现市场先生正在跟自己怄气。2025 年大家抢着在 250 元（复权前高点）买东鹏的时候，没有人关心什么合同负债备付金；现在 2026 年三季报单季利润稍微喘了口气，市场先生立刻把 H 股砸到了 `99.45 港元`（隐含实业 True EV 只有 `11.71 倍`、股息率 `4.41%`）。记住我的原则：好生意哪怕慢下来，只要它的冰柜还霸占着全国 400 万家小卖部的门口，只要蓝领司机和外卖小哥累了还得拧开那个带防尘盖的瓶子，在 11—12 倍实业现金流的位置买入，你的胜率和赔率就已经锁死了。唯一能毁掉这笔买卖的，不是下个季度的增速是 8% 还是 15%，而是下面这三条真正动摇商业根基的“死刑红线”。</p></div></div>
 <hr/>
 <h4 id="52">5.2 三条基本面“死刑证伪红线”（触发任意一条即无条件清仓离场）</h4>
@@ -4345,7 +4630,7 @@
 </ol>
 <hr/>
 <h3 id="g-1">📊 表 G-1：四位投资大师闭门圆桌投票与核心判词总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名与流派</th>
@@ -4390,7 +4675,7 @@
 <td style="text-align: left;"><strong>“港股赔率已进黄金坑，但重锤满仓的扳机必须等看到2026Q4/2027Q1合同负债重回55亿+、特饮单季增速转正至+5%以上的二阶导数拐点！”</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="3-h-1">🏛️ 圆桌会终极买方共识裁决（3 票左侧重仓 H 股 + 1 票底仓等右侧扳机）</h3>
 <ol>
@@ -4431,7 +4716,7 @@
 <p><strong>💡 深度解答</strong>：</p>
 <p>要彻底看懂为什么一瓶终端只卖 <code>5.00 元</code>（出厂不含税净价仅 <code>2.12 元</code>）的 500ml 东鹏特饮，能赚出惊人的 <strong><code>50.79%</code> 毛利率</strong>，我们先把一瓶东鹏特饮放在手术台上切开，用 <strong>2025 年报经审计的分部成本数据（模块 C 单吨经济账）</strong>，精确还原出 <strong>“每一瓶 500ml 东鹏特饮的真实成本账单”</strong>：</p>
 <h5 id="1-500ml-2025-36757-7351">1. 一瓶 500ml 金瓶东鹏特饮的“解剖账单”（2025 年销量 <code>367.57 万吨</code> ≈ <code>73.51 亿瓶</code>）</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">单瓶（500ml）收入与成本拆解项</th>
@@ -4506,7 +4791,7 @@
 <td style="text-align: left;">全自动无人化灌装线，每瓶饮料分摊的工人工资仅 <strong>2分1厘钱</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>看懂上面这张表，您就能瞬间明白为什么 <strong>“突破 360 万吨（73.5 亿瓶）规模”</strong> 是一道让中小竞争对手绝望的分水岭——背后是三大工业经济学原理的共振：</p><h5 id="2_8">2. 原理一：固定折旧与人工的“百亿瓶分母碾压效应”（不换线、不停机的极致稼动率）</h5><ul>
 <li>
 <p><strong>高速产线的物理特性</strong>：现代饮料工业用的是德国克朗斯（Krones）或国产达意隆（Tech-Long）超高速灌装线，一条产线每小时能灌装 <strong><code>36,000 瓶 — 54,000 瓶</code>（即每秒钟像机关枪一样喷出 10 到 15 瓶饮料）</strong>！但一条产线加无菌车间和立体仓库要投资 <code>1.3 亿—1.5 亿元</code>，每年不管你开不开机，<strong>固定折旧（约 1,000 万元/条）是刚性不变的</strong>。</p>
@@ -4678,7 +4963,7 @@
 </ul>
 <h5 id="2_10">2. 现在的【白酒行业】是不是还是这套逻辑？</h5>
 <p><strong>一针见血的回答：不仅还是这套逻辑，而且白酒行业恰恰是全中国把这套“压货蓄水池 + 阶梯返利 + 费用截留”逻辑玩到最极致、并在 2024—2026 年遭遇最剧烈反噬的行业！</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -4708,7 +4993,7 @@
 <td style="text-align: left;"><strong>白酒遭遇“买酒的不喝酒、喝酒的不好意思扫码”死结</strong>！商务请客桌上800元一瓶酒，请客老板和领导谁会拿手机扫瓶盖里那5块钱红包？最后全被酒店服务员或造假黄牛（用针管抽酒/无损撬盖骗取开瓶红包后再封好卖掉）薅了羊毛！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>传统快消品和白酒那套“年底逼经销商贷款进货、再用返利逼着他们去隔壁省份亏本倾销”的把戏，就像往气球里拼命吹气——只要经济顺风、房价上涨，大家都能假装库存是值钱的宝贝；一旦风停了，塞在渠道里的几千万箱酒就会变成砸穿价格体系的泥石流。东鹏最聪明的地方，就是趁早用五个二维码把中间那些雁过拔毛的寄生虫全踢出了局。</p></div></div>
 <hr/>
 <h4 id="q6-1200-12">Q6：“扣除新品推广期 12.00% 的变动渠道费用率后”，这个 12% 有数据来源吗？</h4>
@@ -4733,7 +5018,7 @@
 </ul>
 <h5 id="2-2025-526">2. 第二步：穿透 2025 年报附注，剥离不随单箱新品产量波动的“刚性固定销售费用（<code>5.26%</code>）”</h5>
 <p>查阅本报告【模块 E】（原文第 991、1023 行）引用的 <strong>2025 年报销售费用附注明细</strong>，<code>34.05 亿元</code>（占营收 <code>16.31%</code>）的销售费用由三大块构成，我们按“固定成本 vs 变动成本”将其精确切分：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">2025年报销售费用及附加税明细科目</th>
@@ -4786,7 +5071,7 @@
 <td style="text-align: left;"><strong><code>17.26%</code> 总税费率 - <code>5.26%</code> 刚性固定费用率 = <code>12.00%</code> 变动渠道费用率！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="3-1200">3. 第三步：为什么用这 <code>12.00%</code> 去测算新建无菌线（补水啦 / 果之茶）的盈亏平衡点最精准？</h5><ul>
 <li>当中山、昆明、天津的新产线投产灌装“补水啦”和“果之茶”时，公司并不需要重新招一套总部高管，也不需要给现有的 8,106 名业务员再发一份基础底薪（即那 <strong><code>5.26%</code> 的固定销售费用已经被老大哥“东鹏特饮”扛掉了</strong>）；</li>
 <li>但是，为了把新产线造出来的几千万箱“补水啦”和“果之茶”塞进终端冰柜并卖出去，公司每多卖 100 块钱新品，就必须实打实地掏出 <strong><code>5.87 块钱</code> 渠道陈列与冰柜推广费 + <code>2.70 块钱</code> 业务员计件提成 + <code>2.48 块钱</code> 单品促销与跑店差旅费 + <code>0.95 块钱</code> 附加税 = 整整 <code>12.00 块钱</code>（<code>12.00%</code>）的变动渠道费用</strong>！</li>
@@ -4796,13 +5081,26 @@
 
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -4972,7 +5270,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《东鹏饮料_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/东鹏饮料_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《东鹏饮料 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/东鹏饮料 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -5030,6 +5328,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

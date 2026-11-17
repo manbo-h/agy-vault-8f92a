@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>澜起科技(688008.SH/06809.HK) 深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>澜起科技 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">澜起科技(688008.SH/06809.HK) 深度投研全集</div>
+    <div class="report-title">澜起科技 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -637,7 +922,7 @@
 <p><strong>收入与盈利成色</strong>：2022年曾冲高至9.37亿元，2023年受行业去库存影响大幅收缩，2025年恢复至3.08亿元（占总营收5.65%，同比+10.25%），2026年上半年实现收入2.20亿元（同比+31.2%）。由于津逮®CPU在底层架构与核心晶圆采购上需要与上游合作伙伴（如英特尔）进行深度利益分成，其毛利率长期处于10%—25%的低位区间（远低于互连类芯片的68.9%）。这也是为什么看澜起科技时，<strong>绝不能只看合并综合毛利率（2026年前三季度为66.18%），而必须盯死互连类芯片主业毛利率（68.9%）</strong>——津逮®收入每多涨一点，虽然赚了绝对毛利额、维护了国内大客户政企关系，但在算术上反而会把公司表观合并毛利率拉低2—3个百分点。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务分部名称</th>
@@ -692,7 +977,7 @@
 <td style="text-align: left;"><strong>2026Q1-Q3合并营收54.14亿，归母净利32.37亿，扣非23.27亿</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把近70%毛利率的内存互连芯片和十几毛利率的津逮CPU混在一张表里看，就像把喜诗糖果的纯巧克力利润和普通杂货店的代销流水搅和在一起。聪明的买方第一眼就会把两者剥开——前面那个才是让你躺着数钱的皇冠明珠，后面那个只是维持牌桌关系的入场券。</p></div></div>
 <hr/>
 <h3 id="2-ai">2. 产业周期时钟与“寒冬博弈身位”：代际更替叠加AI推理爆发，如何穿越半导体库存周期？</h3>
@@ -766,7 +1051,7 @@
 </li>
 </ul>
 <h3 id="3_1">3. 全球高速互连四大核心玩家硬实力横向对比表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心对标维度</th>
@@ -827,7 +1112,7 @@
 <td style="text-align: left;">估值极度高企，产品高度集中于AI机柜连接，一旦CSP自研或切方案波动剧烈</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看这张表你就明白什么叫“选对牌桌比努力更重要”。在内存接口这张桌子上，全世界只有三个玩家有资格坐庄，澜起不仅坐着，手里的筹码还是最多的；而在AI机柜互连那张新桌子上，虽然Astera Labs暂时吃肉，但澜起靠着全自研的底层SerDes技术和零版税成本，正像好市多一样一点点把价格和服务的螺丝拧紧。</p></div></div>
 <hr/>
 <h2 id="_4">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？（高度精炼，不写流水账）】</h2>
@@ -905,7 +1190,7 @@
 <li>但进入2024—2025年，公司明确开启了<strong>“注销减资式回购”</strong>：例如2025年6月同步推出的两份各2亿—4亿元回购方案中，第二期方案100%明确用于<strong>减少注册资本（依法注销减资）</strong>，实际回购约166.2万股予以注销，直接增厚了全体留存股东的每股收益（EPS）。2025年全年，公司“现金分红 + 现金回购”总额高达 <strong><code>11.19亿元</code></strong>，占当年归母净利润的比例高达 <strong><code>50.07%</code></strong>！</li>
 </ul>
 <h3 id="3-20212026">3. 五年一期现金流硬账本与防合并报表幻觉穿透（2021年—2026年前三季度）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流指标</th>
@@ -990,7 +1275,7 @@
 <td style="text-align: center;"><strong>188.67</strong> (有息负债 <strong>0</strong>)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>打破“合并报表幻觉”双项穿透体检</strong>：</li>
 </ul><ol>
@@ -1125,10 +1410,10 @@
    * 跟踪公司期末存货余额（2026Q3末为11.66亿元）与单季营收（20.79亿元）的匹配度。只要存货周转天数保持在130—160天以内的健康备货水位，且三大存储原厂服务器DDR5/MRDIMM出货排产紧俏，景气主升浪就未见顶。</p>
 </li>
 </ol>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="a">【追问模块 A：资本开支与重点研发/募投工程解剖】</h2>
 <p>针对澜起科技作为无晶圆厂（Fabless）集成电路设计龙头的特殊商业属性——账面没有晶圆制造厂房与光刻机产线那类动辄百亿的重资产在建工程，其真正的“资本性投入与工程底盘”高度浓缩在<strong>“表内高速测试实验室设备/光罩模具/EDA与IP购置（CapEx）+ 100%当期费用化的硬核研发投入（R&amp;D）+ A股与2026年H股两地IPO重大募投研发工程”</strong>之中。我们摒弃一切笼统套话，直接切开报表附注与工程流片账单做微创解剖。</p>
-<hr>
+<hr/>
 <h3 id="1-capexah-serdes">1. 算清单位经济账：表内 CapEx、光罩摊销密码、A/H 募投去向与自研 SerDes 省钱硬账</h3>
 <h4 id="1-capex-20242026q3">（1）表内 CapEx 与折旧摊销底账拆解（2024—2026Q3）：不建工厂的芯片公司，钱花哪去了？</h4>
 <p>先对齐全局锁定的财务基准数据：澜起科技 2024 年资本开支（购建固定资产、无形资产和其他长期资产支付的现金，即 CapEx）为 <strong>3.79 亿元</strong>，2025 年全年 CapEx 为 <strong>2.66 亿元</strong>（精确值为 <code>265,828,735.88</code> 元），而进入 2026 年前三季度（Q1—Q3），公司 CapEx 达到 <strong>4.03 亿元</strong>（同比大幅增长 <strong>76.75%</strong>，单三季度即显著提速）。与此同时，2025 年全年公司各类折旧与摊销总额合计为 <strong>1.71 亿元</strong>（精确合计 <code>17,079.47</code> 万元）。</p>
@@ -1151,7 +1436,7 @@
    对应公司在全球核心人才高地（上海漕河泾总部、昆山、北京、西安，以及美国硅谷、韩国首尔等海外站点）租赁的研发中心与本地化客户实验室场地。</p>
 </li>
 </ol>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">折旧与摊销资产类别</th>
@@ -1198,7 +1483,7 @@
 <td style="text-align: left;"><strong>2025年折旧摊销仅占营业收入的 3.13%，占互连毛利的 5.07%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2a-2026-h-ipo">（2）A 股与 2026 年 H 股两地 IPO 重大募投工程全复盘：严防混淆“费用化研发投入”与“资本性转固”</h4>
 <p>在审视芯片设计公司的募投项目时，买方必须确立一条防呆铁律：<strong>Fabless 公司的募投项目（如投入 10 亿元研发某系列芯片），其资金构成的 70%—80% 是研发工程师薪酬、工程样片流片费与验证测试费（在利润表中直接走“研发费用”当期核销），只有 20%—30% 会转化为测试机台、EDA 软件和量产光罩（在资产负债表中形成固定资产、无形资产与长期待摊费用）</strong>。因此，绝不能把募投项目的“累计资金投入金额”机械等同于“在建工程转固金额”。</p>
@@ -1224,7 +1509,7 @@
 <li><strong>2026 年 2 月 H 股港交所 IPO 募投工程（净额约 <code>79.48</code> 亿港元 / <code>73.12</code> 亿人民币，打造离岸美元/港币研发与并购弹药库）</strong>：
   为什么账上已经趴着 93 亿元人民币现金的澜起科技，还要在 2026 年初去香港募资近 80 亿港元？核心战略意图只有八个字：<strong>“离岸闭环，全球死磕”</strong>。由于台积电晶圆流片、海外 EDA 授权、硅谷/首尔研发中心发薪以及国际半导体 IP 并购全部以美元结算，H 股募资直接为公司建立了一个不受跨境购汇额度与审批周期掣肘的离岸外币资金池。其四大投向严格锁定主业：</li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">募资批次与工程项目名称</th>
@@ -1292,7 +1577,7 @@
 <td style="text-align: left;">直接用于支付台积电美元晶圆代工款、海外先进封测及日常跨国运营周转</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看一家科技公司是不是败家子，就看它拿到募投资金后的第一反应是去买地盖豪华总部大楼，还是去租房子买顶尖示波器。澜起当年把买楼改成租房、后来又果断砍掉烧钱赚吆喝的AI算力主芯片去专攻高速互连，说明管理层脑子里装的是复利算盘，而不是好大喜功的虚荣心。</p></div></div>
 <hr/>
 <h4 id="3-serdes-ip">（3）同行单位研发与资本投入强度比拼：全自研高速 SerDes IP 到底帮澜起省下了多少买路钱？</h4>
@@ -1328,7 +1613,7 @@
 <p><strong>在量产毛利率端（零版税抽血）</strong>：由于无需向外支付每颗芯片 2.5%—4.0% 的销售版税（Royalty），澜起每一颗互连芯片的直接销售成本（COGS）天生比依赖外购 IP 的同行低 <strong>3—4 个百分点</strong>。按公司互连芯片年收入 50 亿—60 亿元量级测算，全自研底层 IP 每年等于变相为股东多留存了 <strong>1.5 亿—2.4 亿元的纯毛利</strong>！</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">可比IC设计公司</th>
@@ -1378,7 +1663,7 @@
 <td style="text-align: left;"><strong>轻快聚焦</strong>：成熟工艺单次光罩仅数百万元人民币，但单颗芯片ASP与天花板远低于主接口芯片</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="4-capex-break-even">（4）新增 CapEx 转固/摊销后的盈亏平衡点（Break-even）精准测算</h4><p>许多投资者看到澜起科技 2026 年前三季度 CapEx 同比猛增 76.75% 达到 <strong>4.03 亿元</strong>（叠加 2025 年全年 CapEx <strong>2.66 亿元</strong>），心里难免犯嘀咕：这批集中砸下去的高频测试仪器、EDA 授权与新产品光罩模具，一旦全部转入固定资产、无形资产和长期待摊费用，未来每年会增加多少刚性折旧摊销？需要卖多少颗新芯片才能把这笔账平掉？</p><p>我们严格区分“当期资本开支（现金流出）”与“达到预定可使用状态后的转固/开始摊销”，在<strong>最严苛的满额压力假设</strong>下算一笔精确的买方账：</p><ol>
 <li><strong>新增年化折旧摊销额测算</strong>：
@@ -1520,7 +1805,7 @@
 <p><strong>DDR6 内存接口芯片（RCD/MDB）</strong>：处于<strong>“JEDEC 国际标准参数博弈与早期架构预研”</strong>刻度（预计每根 DDR6 模组将配 2 颗 RCD 及更多缓冲芯片，商业化量产预计在 2028—2029 年后）。</p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">新业务/新技术名称</th>
@@ -1581,7 +1866,7 @@
 <td style="text-align: center;"><strong>2028—2030年以后</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>公司财报把四样新产品装在一个篮子里告诉你“一共卖了5.38亿、涨了80%”，这就好比马戏团老板说“我们团里的大象和跳蚤加起来重五吨”。你得凑近了看清楚：真正挑大梁赚大钱的那头大象，是跟着内存条一块卖的MRCD/MDB、CKD和已经量产的PCIe 5.0 Retimer；至于CXL和还没出货的PCIe Switch，现在还是刚孵出来的幼苗，千万别在幼苗刚露头的时候就按参天大树的价格去买单。</p></div></div>
 <hr/>
 <h3 id="2-2030">2. 跨越鸿沟的三道生死关卡：从“样片合规”到“贡献 20%—30% 核心毛利”，卡在哪？</h3>
@@ -1667,7 +1952,7 @@
 </ol>
 <hr/>
 <h4 id="2_3">（2）四大新业务最终买方定性裁决表（撕掉宣传标签，按确定性与赔率排座次）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">远期新业务/新技术</th>
@@ -1707,17 +1992,17 @@
 <td style="text-align: left;">⚠️ <strong>【存在巨头挤压与长周期攻坚风险的远期战略期权】</strong><br/>（2028年前难献规模利润，属用H股募资提前布局的远期攻城锤，切忌在当期估值中提前透支）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这四张牌摊在桌子上，任何一个理智的赌徒都知道该怎么下注：MRCD/MDB是已经在往你兜里塞大钞的王牌，PCIe Retimer和CKD是旱涝保收的副手，CXL是一张不用交持仓费、赢了翻几倍的免费彩票，而PCIe Switch则是去跟博通那个三百斤的大块头掰手腕——赢了固然风光，但在还没掰赢之前，我们一分钱溢价也不替它提前付。</p></div></div>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
 <p>在半导体投研中，单看一家公司的财报极易陷入“自说自话”的幸存者偏差：当一家芯片设计公司营收同比增长33.44%、存货增长30.1%时，究竟是下游AI与数据中心真实需求全面井喷的主动备货，还是向模组厂与渠道强行塞货（Channel Stuffing）制造出来的虚假繁荣？当它的互连芯片毛利率冲上68.90%的历史极值时，究竟是实打实的技术首发溢价，还是靠少提折旧、研发资本化做出来的纸面富贵？</p>
 <p>为了彻底撕开真相，我们将澜起科技（688008.SH / 06809.HK）拉进全球高速互连产业链的“三方交叉审讯室”——直接调取其全球三大国际竞争对手 <strong>Rambus（RMBS.US，内存接口直接死敌）</strong>、<strong>Astera Labs（ALAB.US，PCIe Retimer与CXL头号霸主）</strong>、<strong>瑞萨电子（Renesas，吞并IDT后的内存接口老牌巨头）</strong>，并拉上A股内存模组配套SPD芯片密友兼同行 <strong>聚辰股份（688123.SH）</strong> 以及下游三大存储原厂（<strong>SK海力士、三星、美光</strong>）2025年年报至2026年三季报的最新经营底牌，展开一场零死角的交叉对质。</p>
-<hr>
+<hr/>
 <h3 id="ai">一、 景气度交叉对质：是AI与服务器真实抢货，还是下游超额压库？</h3>
 <h4 id="1-20252026q3">1. 全球同行与上下游 2025—2026Q3 核心经营指标全景对质表</h4>
 <p>我们将海内外四大高速互连芯片玩家及下游存储三巨头的最新财报账本对齐至同一时间切片（截至2026年第三季度末）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审讯维度 / 核心指标</th>
@@ -1778,7 +2063,7 @@
 <td style="text-align: left;">存储原厂对上游RCD/SPD芯片按月度刚性提货，无延长账期或压库退货现象</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2_4">2. 三重证据链交叉审讯：证伪“渠道压货”，锁定真实主升浪</h4><p>审视上表中的多维数据，我们可以从三条铁证链条得出确凿结论：</p><ul>
 <li>
 <p><strong>第一重铁证（A股密友“影子指标”聚辰股份的同步爆发）</strong>：在每一根DDR5服务器内存条上，澜起科技的RCD芯片与澜起/聚辰联合开发的SPD（序列检测集线器）芯片必须按照 <strong>“1颗RCD : 1颗SPD”</strong> 的严格物理比例成套贴装。如果澜起科技2026Q3单季营收大涨45.97%（达20.79亿元）是靠向个别客户虚假压货，那么配套的SPD芯片出货绝不可能同步跟涨。但翻开聚辰股份2026年三季报：其Q3单季营收高达 <strong><code>4.51亿元</code></strong>（同比+25.91%，<strong>环比暴增40.00%</strong>），Q3单季扣非归母净利润达 <strong><code>1.40亿元</code></strong>（<strong>环比暴增111%</strong>），双双创下聚辰上市以来单季历史最高纪录！聚辰在季报中明确指出，系下半年服务器DDR5内存模组及新型SOCAMM2/LPCAMM2商用放量拉动SPD芯片出货激增。两家公司财务曲线严丝合缝的同步陡峭上扬，直接锁死了下游内存模组真实贴片出货的物理真相。</p>
@@ -1797,7 +2082,7 @@
 <h3 id="689-rambus">二、 盈利质量交叉对质：为什么澜起的互连毛利率（68.9%）能反超硅谷鼻祖 Rambus？</h3>
 <p>把澜起科技与全球同行放在同一张利润表显微镜下，买方投资者最感震撼的一组数据是：<strong>在纯粹的硬件芯片销售上，澜起科技的互连类芯片毛利率（2025年65.57% <span class="math-inline"> → </span> 2026年前三季度 68.90%）不仅远超A股同行聚辰股份（53.75%），甚至比硅谷内存接口鼻祖 Rambus 的硬件芯片毛利率（60%—63%）整整高出了 6 至 8 个百分点！同时，澜起科技的扣非净利率（42.98%）更是冠绝全球所有可比对手！</strong></p>
 <h4 id="1-20252026q3_1">1. 四大核心玩家盈利结构与费用率横向拆解表（2025—2026Q3最新口径）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">盈利与费用拆解指标</th>
@@ -1851,7 +2136,7 @@
 <td style="text-align: center;"><strong>Q3单季扣非净利率：31.04%</strong> (1.40亿/4.51亿)<br/>2025全年扣非净利率 <strong>27.11%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2-689-43">2. 深度还原审计：澜起 68.9% 芯片毛利率与 43% 扣非净利率的三大底层密码</h4><p>为什么同样把晶圆交给台积电代工、把芯片卖给三星/海力士/美光，澜起科技的硬件毛利率和净利率能把欧美对手甩在身后？我们逐项剥离会计与商业因素：</p><ol>
 <li>
 <p><strong>密码一：高子代 RCD 与 MRCD/MDB 的“首发时间差溢价”（贡献约 +4~5 个百分点毛利优势）</strong>
@@ -1894,11 +2179,11 @@
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>商业竞争就像打网球，有时候你赢球是因为你打出了漂亮的制胜分，有时候则是因为你的对手（比如既要管汽车芯片又要管工业芯片的日本瑞萨）自己分心把球打到了网上。澜起聪明就聪明在：一辈子只盯死“数据中心高速信号搬运”这颗球，在老战场上把日本对手熬下马，又用交朋友绑生态的方式（拉着聚辰做SPD、绑着三星海力士做CXL）在新战场上筑起了深沟高垒。</p></div></div></div></div>
 
 
-<hr class="module-sep"/>
+<hr/>
 <h2 id="downer-earnings">【追问模块 D：常态盈利底盘（Owner Earnings）、三档价格标尺与抗压测算】</h2>
 <h3 id="owner-earnings">一、 剥离会计噪音与还原真实股东盈余（Owner Earnings）：从表观利润到买方真金白银</h3>
 <p>在审视澜起科技 2025 年报与 2026 年三季报时，如果只看利润表最底下一行的“归母净利润”，极易被巨额金融资产公允价值波动或期权摊销口径带偏节奏。按照巴菲特与芒格最为看重的<strong>“真实股东盈余（Owner Earnings）”</strong>铁律，买方必须先拿手术刀做三道硬核还原手术：<strong>第一刀切掉非经常性投资与补贴噪音，第二刀严肃界定高额股份支付费用的股权摊薄成本属性，第三刀核验折旧摊销与维持存量竞争力必需的防御性资本开支（Maintenance CapEx）差额。</strong></p>
-<hr>
+<hr/>
 <h4 id="1-2026q1-q3-32372327-910">1. 第一刀：拆解 2026Q1-Q3 表观归母净利（32.37亿元）与扣非净利（23.27亿元）之间 9.10亿元 的剪刀差</h4>
 <p>翻开澜起科技 2025 年年报及 2026 年第三季度报告，公司过去五年一期（2021—2025年及2026Q1-Q3）的盈利与现金流呈现出极强的爆发力，但非经常性损益在不同年份扮演了截然不同的放大器角色：</p>
 <ul>
@@ -1957,7 +2242,7 @@
 </li>
 <li>澜起科技对三大存储原厂（三星、SK海力士、美光）拥有极强的账期话语权，年化应收账款周转天数不足 28 天；但在业务持续增长期，为了保障台积电晶圆流片排期与安全库存，存货（2026Q3 末为 <code>11.66亿元</code>）与应收项目仍会产生适度净占用。我们在即期高景气标尺下扣除 <strong><code>1.30亿元/年</code></strong> 的常态营运资金追加，在 85 折新常态中枢标尺下扣除 <strong><code>1.00亿元/年</code></strong>，在极端低谷去库存标尺下设为 <strong><code>0.00亿元/年</code></strong>。</li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">真实股东盈余（Owner Earnings）分步还原科目的买方精算逻辑</th>
@@ -2042,7 +2327,7 @@
 <td style="text-align: left;">若将年化 3.60亿 股份支付视作非付现项加回的账面现金流极值</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把炒股票和买基金涨出来的 9 个亿公允价值浮盈当成芯片主业本事的人，迟早会在熊市里把底裤输光；至于把发给工程师的 3.6 个亿股票期权当成“不算钱的空气”加回利润表，那更是华尔街最下三滥的障眼法。当你把这两层泡沫全撇干净、把工程师期权老老实实当成真金白银的工资扣掉之后，澜起一年还能稳稳当当往股东兜里踹进 28 到 32.5 个亿的纯自由现金——这才叫经得起脱光衣服检查的硬汉子。</p></div></div>
 <hr/>
 <h3 id="asp-owner-earnings">二、 单位产品结构/ASP 税后归母利润弹性公式与《三档标尺 Owner Earnings 矩阵》</h3>
@@ -2096,7 +2381,7 @@
 <hr/>
 <h4 id="2-owner-earnings">2. 《三档产业景气与产品价格标尺 Owner Earnings 矩阵表》</h4>
 <p>为彻底杜绝把“周期高点或单季高景气年化值”误当成“永续稳态底盘”的常见买方错误，我们严格建立三把独立标尺，并将<strong>标尺二（85折新常态中枢标尺：<code>28.00亿元/年</code>）</strong>锁定为传导至后续估值模型与全市场性价比排行榜的<strong>唯一核心主锚</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">标尺维度与核心参数假设</th>
@@ -2161,7 +2446,7 @@
 <td style="text-align: center;"><strong><code>20.50 亿元/年</code></strong> <em>(加回 2.00亿 SBC)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="ai-2800">三、 增量垫高测算：当 AI 运力三剑客成熟消化后，常态造血底盘能从 <code>28.00亿元</code> 垫高到多少？</h3>
 <p>站在 2026 年的节点看，澜起科技的“四款互连新产品（MRCD/MDB、PCIe Retimer、CXL MXC、CKD）”在 2026 年上半年已斩获 <code>5.38亿元</code> 营收（同比暴增 80.7%），但距离其生命周期的稳态成熟体量仍有巨大身位——目前第二子代 MRCD/MDB 刚刚伴随新一代 AI/通用服务器 CPU 平台进入放量爬坡期，PCIe 6.x Retimer 与 CXL 3.1 MXC 正处于北美及国内头部云厂商送样导入与初期商用阶段。</p>
@@ -2193,7 +2478,7 @@
    * <strong>增量账本</strong>：传统 RCD 基本盘向第五/六子代全面迭代带来的净毛利增厚，在全额扣除上述三大新产品线扩产所需的增量防御性 CapEx（<code>-0.40亿元/年</code>）与增量营运资金占用（<code>-0.50亿元/年</code>）后，仍可稳健贡献净增归母 Owner Earnings = <strong><code>+0.60亿元/年</code></strong>。</li>
 </ol>
 <h4 id="2-owner-earnings_1">2. 双标尺下常态 Owner Earnings 增量垫高汇总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">增量垫高构成模块</th>
@@ -2254,7 +2539,7 @@
 <td style="text-align: left;"><strong>不靠跨界并购、纯靠同心圆内生裂变垫高的稳态造血中枢</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这笔账最迷人的地方在于，从 28 个亿垫高到 42 个亿的这 14 个亿新增纯利，不需要澜起去新建一座耗资百亿的晶圆厂，也不需要它去开发什么跨行业的陌生技术——不管是 MRCD、Retimer 还是 CXL，底层全是从它原本那套高速数模混合电路与自研 SerDes 手艺里长出来的亲儿子。用同一套研发班底和同一群客户渠道，在一台服务器里多收三道过路费，这种边际资本回报率简直高得让人脸红。</p></div></div>
 <hr/>
 <h3 id="rcd-1520-20">四、 极限压力测试：如果成熟 RCD 遭遇价格战暴跌 15%—20% 且台积电代工暴涨 20%，底线会失血吗？</h3>
@@ -2279,7 +2564,7 @@
 <hr/>
 <h4 id="2-python">2. 极限压力测试多情景 Python 精算敏感性矩阵表</h4>
 <p>我们以<strong>「标尺二：85折新常态核心主锚（营收 69.00亿元，其中互连芯片 65.00亿元 @ 67.00% 毛利率、津逮平台 4.00亿元 @ 18.00% 毛利率）」</strong>为起跳基准，对四种残酷压力情景进行全口径精算：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与抗压生存指标</th>
@@ -2396,7 +2681,7 @@
 <td style="text-align: center;"><strong>动态对冲后稳守近24亿真金白银</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_3">3. 极限压力测试的三大买方铁律结论</h4><ol>
 <li>
@@ -2411,14 +2696,14 @@
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我做压力测试从来不关心风和日丽时船能开多快，我只关心十级台风撞上来的时候船底会不会漏水。当一家公司的产品降价两成、上游台积电代工费同时暴涨两成、而且假设老板坐在办公室里傻等着挨揍，它一年居然还能保持 56% 的毛利率、净赚将近 19 个亿的纯自由现金流——伙计，这不是普通的木头船，这是用钛合金焊死核潜艇外壳的印钞机。</p></div></div></div></div>
 
 
-<hr class="module-sep"/>
+<hr/>
 <h2 id="e">【追问模块 E：会计成色与治理细节显微镜】</h2>
 <p>如果说业务增长决定了企业的“面子”，那么财务附注里的会计政策与公司治理细节就决定了企业利润的“里子”。在A股半导体板块中，不乏靠“延长应收账款账期放水确认收入、少提老旧芯片存货跌价准备、把30%研发支出资本化塞进无形资产、再用超低门槛的1元股权激励掏空小股东”的伪成长公司。</p>
 <p>那么，账面躺着188.67亿元广义现金、2026年前三季度归母净利润高达32.37亿元（扣非23.27亿元）的澜起科技（688008.SH / 06809.HK），它的利润表和资产负债表里究竟藏着的是“未爆暗雷”，还是被极度保守会计准则掩盖的“隐蔽金矿”？我们拿起审计显微镜，逐一解剖其2025年年报及2026年三季报的底层附注。</p>
-<hr>
+<hr/>
 <h3 id="904">一、 资产质量排雷与会计政策同行对质（应收、存货、折旧与9.04亿非经常损益穿透）</h3>
 <h4 id="1_4">1. 澜起科技与海内外可比同行核心会计政策严苛度对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -2471,7 +2756,7 @@
 <td style="text-align: left;"><strong>实打实硬扣（扣非净利已全额承受股权激励成本）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2-54530">2. 应收账款与信用减值显微镜：为什么54亿营收只有5.30亿应收且几乎零坏账？</h4>
 <p>按照严苛的买方审计防呆铁律，我们必须<strong>同时核验纯应收账款与包含应收票据、应收款项融资在内的“广义应收总额”</strong>，并<strong>严格区分资产负债表上的“期末坏账准备存量余额”与利润表上的“当期信用减值损失流量”</strong>：</p>
@@ -2497,7 +2782,7 @@
 <li><strong>第一步：穿透存货三大物理构成与期末跌价准备余额（存量底牌）</strong>
   翻开2025年报财务附注（2026Q3末存货净值11.66亿元延续同一核算结构），截至2025年12月31日，公司存货的<strong>账面余额（原值）、存货跌价准备期末余额（存量）与账面价值（净值）</strong>精确明细如下：</li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">存货明细科目</th>
@@ -2547,7 +2832,7 @@
 <td style="text-align: left;"><strong>2026Q3末账面净值增至 116,585.29万元 (11.66亿元)</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>第二步：解读“17.85% 超高存量跌价准备”背后的严苛会计哲学——前置排雷与顺周期藏富</strong>
   仔细看上表那组惊人的数字：在2025年末 <code>10.91亿元</code> 的存货原值上，澜起科技竟然已经累计趴着高达 <strong><code>1.95亿元</code>（<code>194,783,388.51元</code>）的存货跌价准备期末余额</strong>，综合跌价准备计提比例高达 <strong><code>17.85%</code></strong>！其中，对原材料晶圆的跌价计提比例高达 <strong>38.57%</strong>，对库存商品的跌价计提比例高达 <strong>24.37%</strong>！而到了2025年利润表流量端，当年计提与转回/转销存货跌价准备的净变动额（流量）为 <strong><code>-2,842.37万元</code></strong>。
@@ -2630,7 +2915,7 @@
 <hr/>
 <h4 id="2-vs">2. 研发铁军结构与“人均薪酬 vs 人均创利”剪刀差审计</h4>
 <p>我们调取2024—2025年报及2026三季报员工与薪酬底表，算清澜起科技这支全球顶尖芯片研发团队的“投入产出账”：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">人力资源与效能审计指标</th>
@@ -2684,7 +2969,7 @@
 <td style="text-align: left;"><strong>2026年前三季度仅9个月人均创利已突破 400万元/人（扣非近290万）！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>投入产出结论</strong>：2025年，澜起研发人员人均年薪从99.48万元温和增长 <strong>8.10%</strong> 至 <strong><code>107.54万元</code></strong>，但同期每位员工为公司创造的营业收入暴增 <strong>39.60%</strong> 至 <strong><code>695.9万元</code></strong>，人均创造的归母净利润暴增 <strong>47.47%</strong> 至 <strong><code>285.2万元</code></strong>（到了2026年前三季度，仅仅9个月的人均扣非净利润就已经追平2025全年）！这组凌厉的正向剪刀差铁证如山：<strong>澜起给工程师发的每一分钱高薪和每一股限制性股票，都以数倍的经营杠杆转化为了股东兜里的超额净利润。</strong></li>
 </ul>
@@ -2703,15 +2988,15 @@
 
 
 
-<hr class="module-sep"/>
+<hr/>
 <h2 id="f">【追问模块 F：解锁估值定价、隐含预期与击球区推演】</h2>
 <p>在穿透了澜起科技的全球标准垄断底座、AI运力第二曲线成色、治理旧账以及模块 D 严苛还原的真实股东盈余（Owner Earnings）之后，我们终于来到买方决策最冷酷的终极关卡——<strong>用真金白银称重</strong>。很多二级市场投资者之所以在优质芯片龙头上亏大钱，不是因为看错了公司的好坏，而是因为在景气高潮期把“好公司”和“不计成本的好股票”混为一谈，用买未来五年满产巅峰的价钱去接手别人兑现的筹码。</p>
 <p>本模块完全锁定 <strong>2026年11月17日</strong> 最新市值与 <strong>2026年三季报（2026Q3）</strong> 资产负债表硬数据，通过“全款买断整家生意的真实企业价值（True EV）核算”、“四把标尺隐含内生回报率检验”、“Reverse SOTP 拆骨倒推市场隐含期权”以及“全球同行估值对标与三档买方击球区”，彻底算清当下 <strong><code>150.97元/股</code></strong> 的澜起科技究竟贵不贵、贵在哪里、什么价位才具备让人睡得着觉的绝对赔率。</p>
-<hr>
+<hr/>
 <h3 id="true-ev">一、 真实企业价值（True EV）深度核算：全款买下整家生意的真实底价是多少？</h3>
 <p>如果今天你是一位手握重金的产业资本买方，决定把澜起科技在二级市场上的全部 A 股与 H 股一次性私有化买断，你实际需要掏出的净现金绝对不是股票软件上跳动的表观总市值 <strong><code>1,843.34亿元</code></strong>。因为当你付清股权收购款拿到公司钥匙的那一秒，你不仅接管了它每年吐出近三十亿真金白银的芯片印钞机，还直接接管了公司保险柜里趴着的 <strong><code>188.67亿元</code></strong> 广义现金储备，而且发现这家公司对银行和债权人的有息欠款竟然是 <strong><code>0.00元</code></strong>！</p>
 <h4 id="1-true-ev">1. 《澜起科技 True EV（真实企业价值）逐项拆解核算表》</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与财务科目</th>
@@ -2786,7 +3071,7 @@
 <td style="text-align: left;"><strong>锁定公式：<code>True EV = 1,843.34 + 0.00 + 0.00 - 177.67 = 1,665.67亿元</code></strong>（若按 A+H 精确市值口径则为 <code>1,657.23亿元</code>）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2-18867-17767">2. 账面 <code>188.67亿元</code> 现金（含 <code>177.67亿元</code> 超额净现金）的战略底牌与资金效率双刃剑</h4><p>在 A 股与港股半导体板块里，账上趴着近 190 亿元现金且一分钱有息负债都没有的纯芯片设计公司凤毛麟角。对买方而言，这笔相当于每股含金 <strong><code>14.55元</code></strong> 的超额现金具有两重截然不同的商业含义：</p><ul>
 <li>
 <p><strong>第一重含义（地缘防弹衣与逆周期研发核武库）</strong>：这 <code>188.67亿元</code> 广义现金主要由两部分攒成——其一是过去五年零九个月经营现金流净额（累计 <code>79.16亿元</code>）扣除极轻资本开支后沉淀的 <strong><code>60.64亿元</code> 自由现金流</strong>；其二是 2026 年 2 月港股 IPO（<code>06809.HK</code>）募集的约 <strong><code>79.48亿港元</code>（折合人民币约 <code>73.12亿元</code>）离岸外币资金池</strong>。在跨国供应链博弈复杂的当下，手握百亿级离岸美元/港币现汇，意味着澜起向台积电（TSMC）支付先进工艺流片掩膜版（Mask）与晶圆采购款、在硅谷及海外维持顶尖高速 SerDes 研发团队、乃至在行业寒冬期（如 2023 年）逆势全额投入 DDR5 高子代与 MRCD/MDB 首发验证时，拥有竞争对手无法比拟的财务免疫力；同时仅靠低风险外币定存与现金管理，每年就能稳稳产生 <code>3.5亿—4.5亿元</code> 的利息与理财底垫。</p>
@@ -2803,7 +3088,7 @@
 <p>算清了全款买下整家生意的真实买价（<code>True EV = 1,665.67亿元</code>），下一步就是把模块 D 锻造出的四把盈利标尺放上天平，看看以今天的价格买入并锁仓，仅靠公司内生赚取的自由现金流，每年能给我们提供多少真实回报率，以及市场到底给澜起的“AI 运力新故事”标了多高的价码。</p>
 <h4 id="1-owner-earnings">1. 四档 Owner Earnings 标尺与跨期分红/注销回购收益率矩阵</h4>
 <p>我们将模块 D 锁定的四档真实股东盈余（Owner Earnings）标尺，以及 2025 实绩与 2026 即期前瞻的股东现金回报（分红+回购），与当前 <code>True EV (1,665.67亿元)</code> 及总市值（<code>1,843.34亿元</code>）进行全方位对表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">买方估值与回报率考核标尺</th>
@@ -2880,7 +3165,7 @@
 <td style="text-align: left;">按 2026E 约 35% 现金分红率（约 <code>10.50亿元</code>）+ 常态化注销式回购（约 <code>2.00亿元</code>）测算的即期直接落袋收益率</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>回报率冷酷审视</strong>：以买方最核心的 <strong>标尺二（常态 Owner Earnings <code>28.00亿元</code>）</strong> 衡量，当前 <code>1,665.67亿元</code> 的 <code>True EV</code> 仅能提供 <strong><code>1.68%</code></strong> 的静态真实内生回报率（即期高景气标尺一为 <strong><code>1.95%</code></strong>），即期直接发到股东手里的“分红+注销回购”现金回报率约为 <strong><code>0.68%</code></strong>。很显然，没有哪位理性的长期买方会仅仅为了每年 <code>1.68%</code> 的静态票息去买一家半导体公司——投资者今天愿意接受不到 2% 的起始内生回报率，唯一的原因是相信澜起科技的盈利分母在未来 3—5 年内会随着 AI 运力革命发生成倍的非线性扩张。那么，当前股价究竟包含了多少这种扩张预期？我们直接上手术刀做 <strong>Reverse SOTP（反向分部拆骨估值）</strong>。</li>
 </ul>
@@ -2909,7 +3194,7 @@
 </li>
 </ol>
 <h4 id="3-825965-35">3. 买方严肃倒推：要兑现这 <code>825亿—965亿元</code> 的期权标价，澜起未来 3—5 年必须交出什么答卷？</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">拆骨估值组成模块</th>
@@ -2954,7 +3239,7 @@
 <td style="text-align: left;"><strong>公司整体常态扣非净利/OE 需从 28.5亿翻倍跃升至 <code>60亿—65亿元/年</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>残酷的算术验真</strong>：要想让今天花 <code>825亿—965亿元</code> 买下的这块“AI 运力期权”物有所值（假设 3—5 年后这批新业务步入成熟稳态，同样享受 <code>25x—30x</code> 合理估值倍数），那么 MRCD/MDB、PCIe 6.0/7.0 Retimer、CXL 3.1 MXC、CKD 以及未来的 PCIe Switch 与 DDR6 芯片，必须在存量 RCD 业务之外，<strong>每年额外再为澜起贡献 <code>30亿—35亿元</code> 的常态净利润（Owner Earnings）</strong>！</li>
 <li>
@@ -2969,7 +3254,7 @@
 <h3 id="_12">三、 赔率与行动锚点：全球同行估值对标、历史分位与买方三档击球区</h3>
 <p>既然拆骨倒推证明当前股价已经计入了可观的成长溢价，那么横向对比美股直接竞争对手 <strong>Rambus（RMBS）</strong>、<strong>Astera Labs（ALAB）</strong> 以及澜起科技自身的科创板历史估值带宽，它的相对性价比处于什么坐标？买方又该在什么水位扣动扳机？</p>
 <h4 id="1_6">1. 全球高速互连三剑客估值倍数与澜起历史估值分位横纵向对比</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">估值对标主体与历史坐标</th>
@@ -3019,7 +3304,7 @@
 <td style="text-align: left;">表观PE分位处于历史中低位（因2025-2026利润翻倍消化估值且含9亿金融收益），但<strong>按真实扣非OE衡量，绝对估值并不便宜</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>横纵向对比穿透结论</strong>：</li>
 </ul>
@@ -3040,7 +3325,7 @@
 <hr/>
 <h4 id="2_5">2. 买方实战操作手册：三档分档击球水位与赔率推演</h4>
 <p>面对这样一家“商业模式皇冠级、但当期价格已收了半程期权费”的顶级硬科技寡头，成熟的买方绝不会在情绪沸点满仓追高，而是提前在价格刻度尺上画好三条铁律水位线，耐心等待市场先生发脾气：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">买方分档击球区名称</th>
@@ -3081,7 +3366,7 @@
 <td style="text-align: left;">存量 RCD 垄断底座（<code>700-840亿</code>）即可完全兜底，<strong>AI 运力新产品（MRCD/Retimer/CXL）全部变成 0 元白送的免费期权！重锤满仓击球</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li>
 <p><strong>三档水位实战执行纪要</strong>：</p>
@@ -3114,14 +3399,23 @@
 
 
 
-<hr class="module-sep"/>
+<hr/>
+<hr/>
+<h2 id="g">【终章模块 G：投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）】</h2>
+<blockquote>
+<p><strong>📍 闭门会诊坐标与统一标尺（截至 2026 年 11 月 17 日收盘）</strong>：
+- <strong>标的与市值</strong>：澜起科技（<code>688008.SH</code> 收盘价 <strong><code>150.97元/股</code></strong> / <code>06809.HK</code> 收盘价约 <code>152.00港元/股</code>），有效总股本 <code>12.21亿股</code>，普通股总市值 <strong><code>1,843.34亿元</code></strong>。
+- <strong>现金家底与真实企业价值（True EV）</strong>：2026Q3 末账面广义现金高达 <strong><code>188.67亿元</code></strong>（货币资金 <code>157.99亿元</code> + 交易性金融资产 <code>30.69亿元</code>），全口径有息负债 <strong><code>0亿元</code></strong>；扣除 <code>11.00亿元</code> 刚性营运备付底仓后，超额可自由支配净现金 <strong><code>177.67亿元</code></strong>（折合每股净现金 <code>14.55元</code>），全款买断整门生意的真实总标价 <strong><code>True EV = 1,665.67亿元</code></strong>。
+- <strong>造血中枢与隐含回报率</strong>：模块 D 核定的「85 折新常态中枢」真实股东盈余（Owner Earnings）为 <strong><code>28.00亿元/年</code></strong>（2026 即期高景气年化 OE 为 <code>32.50亿元/年</code>，MRCD/MDB 与 Retimer 成熟放量后稳态 OE 为 <code>42.00亿元/年</code>，极端寒冬保底 OE 为 <code>18.50亿元/年</code>）。当前 <code>True EV</code> 对应的<strong>常态真实内生回报率（OE / True EV）为 <code>1.68%</code></strong>（即期 <code>1.95%</code>），即期“现金分红 + 注销回购”综合收益率约 <strong><code>0.68%</code></strong>。</p>
+</blockquote>
+<hr/>
 <h3 id="1-owner-earnings-inversion">1. 👴🏻 查理·芒格（商业模式寿命、Owner Earnings 算盘、逆向思维 Inversion 与死穴排雷）</h3>
 <div class="annotated-row"><div class="main-col"><p>“1972 年我和沃伦花 2500 万美元买下喜诗糖果（See's Candies）的时候，那门生意让我俩彻底开了窍——世界上最美妙的生意，是那种几乎不需要你每年往里追加重资产资本开支、却能靠着品牌或标准垄断年年顺畅提价、把赚来的每一分利润都变成真金白银汇回总部的印钞机。相反，我们早年买过的伯克希尔纺织厂和德克斯特鞋业（Dexter Shoe），账面利润看着挺热闹，可赚来的钱全变成了淘汰旧机器的折旧和跟低成本对手拼刺刀的门票，最后连底裤都亏掉了。</p><p>你把澜起科技放到我的解剖台上来看，单看它的生意模式，<strong>它简直就是半导体世界里的‘喜诗糖果’加‘收费桥’</strong>！它自己不建一座晶圆厂，固定资产只有区区 <code>6.30亿元</code>，却死死卡住了 JEDEC 国际内存标准的制定权。全球不管是三星、海力士还是美光，只要想卖服务器 DDR5 内存条，就得乖乖交过路费买它的 RCD 芯片，而且每往上升一个子代、或者升级到 AI 服务器用的 <code>1+10</code> 架构 MRCD/MDB，它就能名正言顺地提一次价，把互连芯片毛利率推高到惊人的 <code>68.90%</code>，过去五年零九个月累计创造了超过 <code>63亿元</code> 的自由现金流！这种靠脑力、标准和生态粘性赚钱的商业模式，比那些每年砸几百亿建厂买光刻机、折旧像雪崩一样的苦命重资产晶圆厂高明一万倍。</p><p><strong>但是！好公司不等于好股票，我们把算盘珠子拨一拨</strong>：今天你要花 <code>1,843.34亿元</code> 市值（剥离 <code>177.67亿元</code> 超额净现金后，真实企业价值 <code>True EV = 1,665.67亿元</code>）把这门生意全款买下来，它每年常态能给你吐出多少可自由支配的 Owner Earnings？<code>28.00亿元</code>！哪怕按今年高景气年化算也就 <code>32.50亿元</code>。这意味着你掏出真金白银买断它，<strong>第一年的常态内生回报率只有可怜的 <code>1.68%</code>，即期分红加注销回购回报率只有 <code>0.68%</code></strong>——连美国国债利息的零头都不到！更让我警惕的是我的‘逆向思维（Inversion）’：如果未来 5 年你在这只股票上亏掉一半的钱，你会死在哪儿？第一，死在<strong>‘为远期梦想支付了全额高溢价’</strong>，一旦 AI 服务器资本开支增速稍微放缓，近 60 倍的静态估值回归到 25—30 倍就会让你脱一层皮；第二，死在<strong>‘铁锤人综合征’</strong>——管理层兜里现在揣着 <code>188.67亿元</code> 的天量现金，同时每年还要给自己发近 <code>3亿元</code>（前三季度 <code>2.88亿元</code>）的股份支付激励，人类天性里最难克服的就是手握巨资却忍住不乱花，万一哪天他们步了当年 IDT 的后尘，拿这一百多亿现金去高溢价跨界并购一堆平庸芯片资产，护城河瞬间就会被稀释；第三，死在<strong>台积电单点代工断供的极端地缘黑天鹅</strong>。</p><p>所以我的结论非常干脆：<strong>这是一门万里挑一的顶级好生意，但标着一个让人下不去手的价格。把它放进我们伯克希尔的‘极品好公司观察篓’里，150.97 元我一股不买；耐心等市场先生发疯、股价跌回 85—100 元的黄金坑（对应 True EV 750亿—950亿元），我才会抡起大锤重仓出击！</strong>”</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把喜诗糖果卖到 60 倍市盈率，就算糖果再甜也会把买单的人齁死；好猎手最核心的本事不是枪法准，而是林子里没肥鹿的时候能坐着不动弹。</p></div></div></div></div>
 
 
 
 
-<hr>
+<hr/>
 <h3 id="2-diworsification">2. 🛒 彼得·林奇（六类股票归类法、草根存货验证与痛斥“多元恶化 Diworsification”）</h3>
 <div class="annotated-row"><div class="main-col"><p>“当年我掌管富达麦哲伦基金 13 年、翻遍全美一万多家上市公司石头的时候，我给自己立过两条铁规矩：第一，下重注前必须先给股票精准归类，搞清楚你买的到底是稳健大笨象、周期股、隐蔽资产股还是快速增长股（Fast Grower）；第二，永远去查资产负债表里的每股净现金和仓库里的存货周转，同时像防贼一样提防管理层搞<strong>‘多元恶化（Diworsification）’</strong>——也就是把主业辛苦赚来的钱拿去跨界收购完全不懂的烧钱副业！</p><p>按我的六类股票分类法，今天的澜起科技是一只非常罕见的混合体：<strong>它是‘披着半导体周期股外衣的快速增长型股票（Fast Grower）’，同时屁股底下还垫着一层‘每股高达 14.55 元超额净现金的隐蔽资产垫（Asset Play）’</strong>！很多人被 2023 年服务器去库存那波业绩腰斩吓破了胆，以为它纯粹是个看天吃饭的强周期股；但如果你去跑一跑草根产业链就会发现，每一次周期底部的洗牌，澜起的市占率都在往上跳一个大台阶——如今它在 DDR5 RCD 上已经拿下了 <code>36.8%</code> 的全球第一份额，把日本瑞萨和美国 Rambus 都甩在了身后！</p><p>我最喜欢看的是存货对质指标：2026 年三季报里，澜起的期末存货是 <code>11.66亿元</code>，比年初增长了 <code>30.1%</code>；但你看它三季度单季营收暴增了 <code>45.97%</code>（达到 <code>20.79亿元</code>），单季扣非净利润更是暴增了 <code>167.21%</code>！<strong>存货增速远远低于营收和利润增速，而且一年以内库龄占比超过 93%</strong>，这在我的麦哲伦选股手册里是最漂亮的‘良性拉动信号’——说明下游三星、海力士和美光的工厂正在排着队催它交货，根本不是向经销商压库塞货！更让我给管理层竖大拇指的，是他们在 2023 年底果断砍掉了烧钱无底洞般的‘云端 AI 算力主芯片’研发，把全部精锐兵力收回来专攻自己最拿手的高速互连同心圆（MRCD/MDB、PCIe Retimer、CKD、CXL MXC），今年上半年这四款新产品收入直接冲到 <code>5.38亿元</code>（同比增长 <code>80.7%</code>）。<strong>懂得及时止损、绝不搞‘多元恶化’，这才是真正懂产业的聪明管理层！</strong></p><p>不过，哪怕面对再优秀的快速增长股，我也绝不会丢掉 PEG 估值纪律。扣除每股 <code>14.55元</code> 的净现金后，当前股价相当于给常态盈利标了将近 60 倍市盈率，已经把未来两年的高增长消化了一大半。我的实战操作建议是：<strong>如果你手里已经有低成本底仓，继续拿着別轻易下车，紧盯每季度互连芯片毛利率（守住 66% 以上）和存货周转天数；如果你想新建重仓，现在别急着把子弹打光，留出小仓位跟踪 DDR5 第五子代和 MRCD 的放量节奏，把主力大部队留在场外，等股价回踩到 115—130 元的右侧舒服区间再分批加满！</strong>”</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>彼得最聪明的地方就是懂得看存货和砍副业——一个敢于亲手关掉烧钱面子工程、专心在老本行里挖深沟的管理层，比那些整天画大饼跨界造生态的骗子强太多了。</p></div></div></div></div>
 
@@ -3144,7 +3438,7 @@
 
 <hr/>
 <h3 id="5">5. 📋 四位投资大师圆桌投票与核心判词总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名与流派定位</th>
@@ -3184,7 +3478,7 @@
 <td style="text-align: left;"><strong>🚀 右侧顺势持仓（绑死移动止损）</strong><br/>趋势仓位继续让利润奔跑，设死 <strong><code>135元</code> 破位止损线</strong>与 <strong><code>65%</code> 毛利率红线</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -3225,16 +3519,29 @@
 <li>
 <p><strong>如果你是追求高安全边际、想买进收息并长期持有的买方价值资金</strong>：千万别在一百五十元上方跟着市场情绪去抢筹码，更别在股价冲向一百七八十元的狂热区去接盘。把它放进你的头号重点观察池，耐心等半导体周期不可避免的正常回调、或者等市场因为某个假利空误杀它——<strong>当股价回落到一百一十五到一百三十元区间时，可以开始建立第一批观察底仓；一旦哪天市场恐慌把它砸进八十五到一百元以下的黄金坑（这时候你买它的价格几乎只相当于买它账上的百亿现金加上老内存垄断底座，所有 AI 新业务全部变成白送），那就是你闭着眼睛抡起大锤重仓捡便宜货的绝佳时刻！</strong></p>
 </li>
-</ol></hr></hr></hr></hr></hr></hr>
+</ol>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3404,7 +3711,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《澜起科技(688008.SH/06809.HK) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/澜起科技(688008.SH/06809.HK) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《澜起科技 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/澜起科技 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3462,6 +3769,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

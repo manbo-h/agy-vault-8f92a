@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>贵州茅台_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>贵州茅台 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">贵州茅台_全模块深度投研全集</div>
+    <div class="report-title">贵州茅台 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -648,7 +933,7 @@
 <p><strong>2025—2026新账本</strong>：2025年，茅台<strong>直销渠道收入（<code>845.43亿元</code>，同比增长 <code>12.96%</code>，毛利率 <code>94.58%</code>）在公司历史上首次超越批发代理渠道（<code>842.32亿元</code>，同比下降 <code>12.05%</code>，毛利率 <code>87.86%</code>）</strong>。到了2026年前三季度，随着53度飞天茅台正式上线“i茅台”并实施动态调价（<code>1,499元</code> <span class="math-inline"> → </span> <code>1,539元</code> <span class="math-inline"> → </span> <code>1,639元/瓶</code>），<strong>直销渠道收入进一步暴增 <code>32.79%</code> 至 <code>737.74亿元</code>，占酒类收入比重跃升至 <code>56.36%</code></strong>（其中“i茅台”单平台前三季度不含税收入达 <strong><code>585.62亿元</code></strong>），而传统批发代理渠道继续压缩 <code>21.58%</code> 至 <code>571.20亿元</code>。同时，公司废除了向经销商提前收取数月预收货款的旧规，推行“物权不转移代售”与按动销实时配货，账面合同负债从2025年末的 <code>80.07亿元</code> 主动降至2026年三季末的 <code>20.84亿元</code>。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务与渠道维度</th>
@@ -707,7 +992,7 @@
 <td style="text-align: left;">经销合同价调至1369元，取消强制预收压货，转向代售与精准配额</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多华尔街分析师看到茅台合同负债从80亿掉到20亿就吓得尿裤子，以为酒卖不动了。他们连基本的商业账都没算明白：以前是你让经销商先交押金再去黑市倒卖赚暴利，现在是你把酒放在自己的“i茅台”APP上现钱现货卖1639块，一手交钱一手发货，哪还需要什么预收款蓄水池？</p></div></div>
 <h3 id="2">2. 产业周期时钟与“寒冬博弈身位”：对手在休克洗澡，茅台在兵不血刃收权</h3>
 <p>明确标定当前中国白酒产业所处的周期坐标：<strong>2025—2026年是继2013—2015年“塑化剂+限制三公消费”之后，中国白酒行业经历的十年一遇深度出清寒冬期（周期时钟处于“渠道去库中后段与价格倒挂出清底部”）</strong>。地产基建链条缩表、政商高端宴请降频，叠加过去五年酱酒热与浓香扩产留下的庞大社会库存，直接引爆了次高端与千元价格带的“价格倒挂潮”。</p>
@@ -764,7 +1049,7 @@
 
 <h3 id="2_1">2. 四大白酒龙头横向硬核比拼：谁在裸泳，谁穿了防弹衣？</h3>
 <p>我们将贵州茅台（600519.SH）与浓香双雄五粮液（000858.SZ）、泸州老窖（000568.SZ）以及清香龙头山西汾酒（600809.SH）拉到同一张桌子上，基于最新披露的 <strong>2025年报</strong> 与 <strong>2026年三季报（1—9月）</strong> 展开全维度实绩比拼：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心对质维度</th>
@@ -853,7 +1138,7 @@
 <td style="text-align: center;"><strong>23.16亿元</strong> (-31.21%)<br/><em>(主动控货停发缓解倒挂)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>从这张残酷的同台对质表中，可以直接得出三个穿透性的产业结论：</p>
 <ol>
 <li>
@@ -898,7 +1183,7 @@
 </ul>
 <h3 id="2-20212023-vs-20252026">2. “翻旧账对表”言行一致性审计（回溯 2021—2023 年报承诺 vs 2025—2026 实际交卷）</h3>
 <p>我们直接调取公司3—5年前（2021年报至2023年报）白纸黑字写下的经营目标与工程承诺，与截至2026年11月的实际落地结果逐项对表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">历史承诺来源与时间</th>
@@ -933,7 +1218,7 @@
 <td style="text-align: center;"><strong>超额兑现</strong><br/><em>(真金白银掏钱，绝不画饼)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看2025年发生了什么：同行为了保住纸面上的增长目标，拼命往经销商仓库里塞货，结果第二年不得不发一纸“会计差错更正公告”把300亿营收吐出来，连前董事长都进了局子。茅台在2025年宁可交出一份营收微降1.2%的真实成绩单，也不去干那种掩耳盗铃的蠢事，光是这份不造假的底线，在A股就值千金。</p></div></div>
 <h3 id="3_1">3. 质押、商誉与集团关联交易深度排雷</h3>
 <ul>
@@ -980,7 +1265,7 @@
 </ul>
 <h3 id="2-20212025202619">2. 五年一期现金流硬账本（2021—2025年及2026年1—9月标准对照表）</h3>
 <p>单位：人民币亿元</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流指标</th>
@@ -1085,7 +1370,7 @@
 <td style="text-align: center;"><strong>30.00</strong> <em>(已注销完毕)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="3_2">3. 打破“合并报表幻觉”双项穿透体检</h3>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>体检一：少数股东损益 vs 少数股东权益是否倒挂？</strong></li>
@@ -1106,7 +1391,7 @@
 <h2 id="_8">【第六部分：钱往哪砸、本事往哪长？资本开支流向、技术/模式动态进化与成长规划（三大核心支柱之三）】</h2>
 <h3 id="1-capex">1. 资本开支（CapEx）与重点在建工程全景解剖：钱到底花在了哪？</h3>
 <p>2021—2025年公司累计投入 <code>190.84亿元</code> 资本开支（2025年为 <code>31.28亿元</code>，2026年前三季度为 <code>14.50亿元</code>，期末在建工程余额 <code>28.26亿元</code>）。穿透2025年报与2026三季报在建工程附注，这批真金白银全部采用<strong>自有资金</strong>投入（无一分钱募资或借款），精确流向四大核心工程：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">重点在建/技改工程名称</th>
@@ -1146,7 +1431,7 @@
 <td style="text-align: left;"><strong>防御性与提效护城河开支</strong><br/><em>(扩大老酒储能蓄水池)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>算清这批资本开支的经济账</strong>：</p>
 <ul>
 <li>
@@ -1264,7 +1549,7 @@
 <h3 id="78">一、 算清单位经济账：为什么茅台单吨扩产成本高达78万元/吨？</h3>
 <p>在白酒行业步入存量竞争与产能结构性过剩的2025—2026年，贵州茅台的资本开支呈现出鲜明的<strong>“高单吨造价、长周期慢工、超低折旧盈亏平衡点”</strong>三大特征。2021—2025年五年间，公司购建固定资产、无形资产和其他长期资产支付的现金（CapEx）分别为 <code>33.50亿元</code>、<code>53.07亿元</code>、<code>26.20亿元</code>、<code>46.79亿元</code> 和 <code>31.28亿元</code>，五年累计资本开支 <code>190.84亿元</code>；2026年1—9月CapEx为 <code>14.50亿元</code>，期末在建工程余额 <code>28.26亿元</code>。</p>
 <p>我们将茅台当前在建及近年陆续投产的三大核心产能工程拆解至“单吨基酒产能投资额”，并与五粮液、山西汾酒、泸州老窖、习酒、珍酒李渡等头部酒企的旗舰扩产项目进行全口径横向对标：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">酒企名称</th>
@@ -1359,7 +1644,7 @@
 <td style="text-align: left;">已基本建成投产，高度机械化与自动化酿造</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看这张表吧！泸州老窖花6万块钱就能建出1吨浓香基酒产能，而茅台建1吨飞天茅台产能要花掉足足78万！如果这是一家钢铁厂或者水泥厂，我会立刻把管理层全开除；但因为那1吨酒五年后能卖出超过300万、毛利率接近94%，这78万根本不是什么建筑成本，而是通往印钞机俱乐部的买路钱。</p></div></div>
 <h4 id="1-7836">1. 深度拆解：为什么茅台酒单吨产能投资额高达 <code>78.36万元/吨</code>？</h4>
 <p>从上表可见，茅台酒“十四五”技改项目的单位产能造价（<code>78.36万元/吨</code>）不仅是泸州老窖智能酿造项目的 <strong>13.1倍</strong>、五粮液生态酿酒项目的 <strong>8—10倍</strong>、山西汾酒2030技改的 <strong>4.4倍</strong>，甚至比自家系列酒项目（<code>32.84—34.25万元/吨</code>）和同处赤水河流域的习酒（<code>27.01万元/吨</code>）还要高出 <strong>130%—190%</strong>。这种极端的造价悬殊绝非资金浪费，而是由三大硬核物理与工艺约束决定的：</p>
@@ -1442,7 +1727,7 @@
 <h2 id="b">【追问模块 B：远期期权（新业务/数字化与国际化/生物科技）证伪拆解】</h2>
 <h3 id="_11">一、 商业化刻度定位：四大“新曲线/远期期权”冷峻证伪总表</h3>
 <p>过去五年间，围绕贵州茅台“如何寻找第二增长曲线、如何拥抱年轻人、如何走出国门、如何花掉账上巨额现金”，公司先后尝试了四大新方向。站在2026年11月的今天，结合2025年报与2026年三季报的真实财务切片，这四大方向的商业化结局已出现<strong>“一飞冲天”与“一地鸡毛”的天壤之别</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">新方向/远期期权维度</th>
@@ -1482,7 +1767,7 @@
 <td style="text-align: left;"><strong>【已证伪并切除的品牌消耗陷阱】</strong>：卖19元咖啡和66元雪糕不仅不赚钱，反而严重透支顶奢神秘感；果断承认失误并止损退出是治理纠偏的明智之举</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>让茅台去卖66块钱一杯的冰淇淋和19块钱的拿铁，就像让劳斯莱斯去摆地摊卖印着欢庆女神车标的塑料钥匙扣——除了让掏几百万买车的老车主觉得脸上无光之外，对利润表毫无贡献！好在新管理层脑子非常清醒，在2026年痛快地承认这是“战略失误”并把地摊收了；反倒是那个不声不响在手机上卖酒的“i茅台”，三个季度就干出了585亿真金白银，这才是真正的商业智慧。</p></div></div>
 <hr/>
 <h3 id="_12">二、 跨越鸿沟的三道关卡：为什么跨界、出海与新科技屡屡碰壁？</h3>
@@ -1548,7 +1833,7 @@
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
 <p>在高端与次高端白酒长达十年的繁荣周期（2016—2024年）里，“渠道蓄水池（向经销商压货）”与“预收款调节器（合同负债）”曾掩盖了无数品牌的真实终端动销裂痕。然而，2025年至2026年前三季度这场十年一遇的行业深度出清，犹如一场冷酷的退潮大考。我们将 <strong>贵州茅台（600519.SH）</strong> 与三大直接竞争对手——浓香霸主 <strong>五粮液（000858.SZ）</strong>、清香龙头 <strong>山西汾酒（600809.SH）</strong>、高端浓香双雄之一 <strong>泸州老窖（000568.SZ）</strong>——截至2026年11月披露的 <strong>2025年报及2026年三季报（1—9月及Q3单季）</strong> 核心经营与财务附注数据摆上同一张审讯台，展开全维度的交叉对质。</p>
 <h3 id="2025-2026">一、 四大名酒 2025全年及 2026前三季度核心财务与经营对质总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对质维度</th>
@@ -1681,7 +1966,7 @@
 <td style="text-align: left;">茅台每卖100元酒稳赚48元纯利，比五粮液高出20—26个百分点、比汾酒高出19个百分点、比老窖高出10—16个百分点</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>退潮的时候，你不仅能看清谁没穿底裤，还能看清谁的底裤是借来的！五粮液一口气冲回303亿压货收入，等于当众承认过去那几百亿根本不是被人喝进肚子里了，而是硬塞进经销商仓库里充数的；只有茅台在别人忙着给经销商发红包续命的时候，坐在手机App后面直接收消费者的现钞。</p></div></div>
 <hr/>
 <h3 id="7430">二、 景气度与合同负债“真假蓄水池”对质：为什么茅台合同负债降74%是渠道革命，而同行降30%是动销休克？</h3>
@@ -1797,7 +2082,7 @@
 </li>
 </ul>
 <h4 id="2-owner-earnings">2. 贵州茅台常态真实股东盈余（Owner Earnings）分步还原表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">还原步骤与财务科目</th>
@@ -1882,7 +2167,7 @@
 <td style="text-align: left;"><strong>赚到的每一分会计利润，100%以上转化为可自由分配的真金白银！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>大多数制造业老板嘴里的“利润”，最后都变成了烂在仓库里的存货、收不回来的欠条和每隔五年就得推倒重买的机器设备；而茅台账上写着赚了835亿，实际能装进股东口袋里带走的真金白银居然有840亿！因为它的老窖池越用越值钱，每年投十几个亿维护费就能让这台印钞机永远转下去，这才是上帝偏爱的生意。</p></div></div>
 <hr/>
 <h3 id="35-i">二、 未来3—5年内生增量垫高测算（存量老酒释放 + i茅台直营满血 + 技改达产）</h3>
@@ -1963,7 +2248,7 @@
 <li><strong>传统经销渠道批零顺差已大幅收敛</strong>：对于剩余 <code>43.64%</code> 的传统经销渠道，自2026年合同出厂价提至 <code>1,369元/瓶</code>、社会批价稳在 <code>1,700—1,750元/瓶</code> 后，经销端的批零毛利顺差已从历史上的上千元大幅收窄至 <strong><code>330—380元/瓶</code></strong>。即便假设终端消费者与经销商仅分担 <code>55%</code> 的新增税负、剩余 <code>45%</code> 被迫由茅台酒厂通过渠道补贴承担，扣除25%企业所得税抵扣后，<strong>对贵州茅台常态归母净利润与 Owner Earnings 的实际净损耗仅约 <code>-15.00亿至 -18.00亿元/年</code></strong>！</li>
 </ul>
 <h4 id="3_5">3. 贵州茅台双极限抗压测试量化汇总表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流指标</th>
@@ -2038,13 +2323,13 @@
 <td style="text-align: center;"><strong>冲击仅-2.86%，护城河纹丝不动</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>一瓶卖1639块钱的酒，里面装的高粱和瓶子总共才值48块钱，哪怕全中国的高粱明天早上贵了三成，对茅台来说也不过是被蚊子叮了一口；至于把飞天砸到1500块的极限寒冬，它一年照样能往家里搬回720亿真金白银——你在全世界能找出几家在“最惨寒冬”里净利率还高达47.5%的公司？</p></div></div>
 <hr/>
 <h2 id="e">【追问模块 E：会计成色与治理细节显微镜】</h2>
 <p>在看清了业务层面的攻守格局与造血底盘后，我们拿起财务审计放大镜，穿透贵州茅台与五粮液、山西汾酒、泸州老窖2025年报及2026年三季报的财务报表附注，逐项排查应收票据、存货跌价、固定资产折旧、研发资本化、集团财务公司现金流异动以及国企薪酬治理的真实成色。</p>
 <h3 id="_16">一、 四家酒企会计政策与资产成色显微镜对比总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计显微镜维度</th>
@@ -2121,7 +2406,7 @@
 <td style="text-align: left;">茅台在背负3.5万庞大人工团队下，人均创利仍达235万（是五粮液的6.6倍、汾酒的2.7倍），且一线工匠薪酬全行业最高</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_17">二、 资产质量与会计政策四大焦点排雷</h3>
 <h4 id="1_5">1. 应收账款与应收票据：零赊销、零商票的“现金圣殿”</h4>
@@ -2238,7 +2523,7 @@
 </ul>
 <p>经过上述三刀严苛剥离后，贵州茅台账上真正归属全体股东、哪怕明天早上全部拿来发特别股息或注销回购也不会影响公司任何一瓶酒生产的<strong>“超额可自由支配净现金（Excess Cash）”为：<code>1,959.91 - 200.00 - 180.00 - 150.00 = 1,429.91亿元</code>（取整为 <code>1,430.00亿元</code>）</strong>！</p>
 <h4 id="2-true-ev20261111">2. 贵州茅台真实企业价值（True EV）穿透算账表（截至2026年11月11日）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">穿透核算科目</th>
@@ -2315,7 +2600,7 @@
 <td style="text-align: left;"><strong>买断整座茅台酿造帝国的实际净出价约为 <code>1.665万亿元</code>（折合每股真实EV约 <code>1,332.29元</code>）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看资产负债表就像看相亲对象的家底，不能光听媒人吹他家账上有1960亿存款，你得先把他替亲戚保管的200亿、压在央行取不出来的180亿、以及家里买米买菜备用的150亿全扣掉——哪怕这么往死里扣，茅台口袋里依然躺着1430亿随时能拿出来分掉的纯现金，而且一分钱银行贷款都不欠！</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值）</h3>
@@ -2379,7 +2664,7 @@
 </li>
 </ul>
 <h4 id="3-reverse-sotp">3. 贵州茅台 Reverse SOTP 逆向拆骨估值与隐含预期表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">拆骨层级与资产/业务分部</th>
@@ -2447,7 +2732,7 @@
 <td style="text-align: left;"><strong>核心静态回报率 <code>4.83%</code>；在 <span class="math-inline">r=8\%</span> 要求下仅需每年增长/提价 <code>3.17%</code> 即可回本！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>拆骨总结论</strong>：当前 <code>1,439.00元/股</code> 的定价，已经彻底挤干了2021年白马股泡沫期（当时股价 <code>2,600元</code>、PE近 <code>70倍</code>、隐含永续高增长）的全部周期与流动性泡沫，处于<strong>“估值水分完全洗净、合理公允偏保守、存量自由现金流与3.85%即期落袋回报扎实托底，但尚未达到7%—9%静态内生回报率的极端恐慌黄金坑”</strong>水位。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把账上1430亿纯现金和系列酒剥开之后，市场给“茅台酒”这块全世界独一份的金字招牌只标了20.7倍的真实市盈率，隐含要求它以后每年只要涨价3.17%就能让你赚到8%的年化回报——而它仓库里五年前酿好的基酒未来几年光靠自然出库就能多赚近20%，这笔账连小学生用手指头都能算明白。</p></div></div></div></div>
@@ -2456,7 +2741,7 @@
 <h3 id="_18">三、 全球坐标对标、分档击球锚点与“三条基本面死刑证伪红线”</h3>
 <h4 id="1_6">1. 全球顶奢与烈酒巨头横向坐标对标</h4>
 <p>为什么说当前约20倍 True EV/OE 的贵州茅台在全球硬资产坐标系中极具吸引力？我们将它放在三组锚点下横向审视：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对标维度与标的</th>
@@ -2501,10 +2786,10 @@
 <td style="text-align: left;"><strong>用买全球普通烈酒龙头的价格，买到了零负债、94%毛利率、近50%净利率的东方顶奢印钞机</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2_5">2. 三档实战击球区推演（什么价格挥棒？用多大仓位？）</h4>
 <p>遵循巴菲特与霍华德·马克斯“好生意也必须等好价格、根据安全边际厚度动态分配弹药”的买方铁律，我们以总股本 <strong><code>12.5008亿股</code></strong> 与超额净现金 <strong><code>1,430.00亿元</code></strong> 为标尺，划定清晰的三档实战击球锚点：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位与定性</th>
@@ -2549,7 +2834,7 @@
 <td style="text-align: left;"><strong>【闭眼挥棒满配区】</strong>：唯有在类似2013年塑化剂叠加三公禁令、2018年底或2022年10月外资非理性踩踏的极端黑天鹅时刻才会闪现。一旦触及，分红率逼近国债3倍，中期内生回报率超8%，<strong>无脑挥动最大号球棒100%顶格满配</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3_6">3. 三条基本面死刑证伪红线（一旦触发，无条件认错清仓！）</h4><p>价值投资绝不是盲目死扛。如果未来任何一天，贵州茅台出现以下 <strong>“三条基本面死刑证伪红线”</strong> 中的任意一条，说明我们赖以立论的底层护城河已发生不可逆的坍塌，无论当时股价跌到多便宜、账面浮亏多少，都必须无条件执行铁血清仓纪律：</p><ol>
 <li><strong>红线一：终端定价权与社交硬通货信仰坍塌（批价击穿 <code>1,450元</code> + i茅台长期流拍倒挂）</strong>
    - <strong>量化监控指标</strong>：53度飞天茅台社会真实散瓶批发价有效跌破 <strong><code>1,450元/瓶</code></strong>（即逼近 <code>1,369元</code> 传统经销合同出厂价 + 经销商最低物流资金生存成本线），<strong>且</strong>“i茅台”App上按 <code>1,639元 / 1,499元</code> 投放的53度飞天及核心非标产品出现<strong>连续两个季度以上的大面积无人申购、常态化滞销流拍与全渠道价格倒挂</strong>。</li>
@@ -2655,7 +2940,7 @@
 <p>因此，在 <code>1,439元</code> 的当下，把茅台当成‘一年翻倍的暴利进攻矛’是愚蠢的一厢情愿；它真正的买方定位，是组合里<strong>替代长久期国债、抵御法币购买力稀释的‘T2/T3交界核心收息盾牌与底仓压舱石’</strong>。现在你可以安心建立 <strong>5%—8% 的基础收息底仓</strong>，一边拿着每年近4%的确定性现金分红+回购缩股，一边静候两个重锤时刻：要么等待i茅台直营提价带动单季营收净利重回10%以上高增的<strong>右侧基本面加速拐点</strong>；要么留足备用子弹，一旦宏观黑天鹅或指数流动性踩踏把茅台错杀至 <strong><code>1,180—1,250元/股</code> 以下（对应 True EV 跌破1.4万亿、常态内生回报率突破 <code>6.0%—6.5%</code>、即期股息率超 <code>4.5%</code>）</strong>，那就是质地与赔率完美共振的世纪黄金重锤区！”</p>
 <hr/>
 <h3 id="5">📋 5. 四位投资大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">投资大师</th>
@@ -2695,7 +2980,7 @@
 <td style="text-align: left;"><strong>【T2/T3交界压舱石（5%—8%仓位）+ 留足黄金坑子弹】</strong><br/>• 现价（<code>1,439元</code>）定位为“高确定性收息盾牌”，配置 <strong>5%—8%</strong> 基础仓位吃3.84%分红回购；<br/>• <strong>黄金重锤锚点</strong>：严守 <strong><code>1,180—1,250元/股</code></strong> 以下（内生回报率 <code>&gt;6.0%</code>、股息率 <code>&gt;4.5%</code>）再打满重锤仓位！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <blockquote>
 <p>👴🏻 <strong>【查理·芒格的终场闭门拍板（Munger's Final Verdict）】</strong>：
@@ -2724,13 +3009,26 @@
 <p>在一千四百四十块左右（约二十倍真实企业价值倍数、常态内生回报率五个点出头、即期分红加回购率近四个点）的当下，别把它当成一年翻倍的进攻矛，它最准确的定位是组合里替代长期国债的“核心收息压舱石”。现在可配五到八个点底仓稳吃近四个点的分红缩股红利；留足重锤子弹，一旦宏观黑天鹅把它错杀到一千一百八十到一千二百五十块以下（内生回报率破六、股息率超四个半点），直接闭眼满仓！只要财务公司不违规输血且散瓶批价守住一千六百元，就安心当一辈子包租公。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2900,7 +3198,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《贵州茅台_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/贵州茅台_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《贵州茅台 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/贵州茅台 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2958,6 +3256,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

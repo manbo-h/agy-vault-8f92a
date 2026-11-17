@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>万华化学_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>万华化学 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">万华化学_全模块深度投研全集</div>
+    <div class="report-title">万华化学 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -646,7 +931,7 @@
 <h3 id="_3">二、 核心产品、成本身位与同行横向硬核比拼（核心支柱一）</h3>
 <p>研究化工企业的硬实力，不能只数它有多少个产品名词，得直接拉到全球牌桌上比三件事：<strong>单吨完全成本在成本曲线的哪个分位？单套装置工程放大到了什么级别？哪些是别人抄不走的“硬核王牌”，哪些只是凑热闹的“边缘或苦力品种”？</strong></p>
 <h4 id="1_1">1. 核心产品与全球直接竞争对手横向硬核对比</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">业务矩阵与分类</th>
@@ -693,7 +978,7 @@
 <td style="text-align: left;"><strong>待证伪考题 / 边缘承压项</strong>。通用PC已沦为红海微利品；电池材料虽被提拔为“第二主业”，但尚未证明能跑出媲美聚氨酯的超额资本回报率</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看懂这张表就看懂了万华的底牌：凡是带剧毒光气、剧毒氢氰酸或者高难度茂金属催化的连续流工程（MDI、TDI、ADI、POE、柠檬醛），它全是王牌；唯独到了下游只有宁德时代和比亚迪两个超级买家的磷酸铁锂，这套化工大锤就得小心变成给电池厂打工的苦力活。</p></div></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2_1">2. 把成本账算到骨头里：万华凭什么比欧洲和东北亚同行每吨省出几千块钱？</h4><p>很多分析喜欢笼统地讲“一体化优势”，我们直接拆开一吨MDI的车间成本账本看：
 生产1吨MDI，核心消耗大约是0.62吨纯苯、0.52吨硝酸、0.65吨液氯、一氧化碳/氢气合成气，以及巨量的高压蒸汽与电力。</p><ul>
@@ -784,7 +1069,7 @@
 
 <h4 id="3_1">3. 五年一期现金流硬账本与合并报表幻觉穿透</h4>
 <p><strong>万华化学 2021—2025年及2026年前三季度核心现金流审计对照表</strong>（单位：人民币亿元）</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -861,7 +1146,7 @@
 <td style="text-align: left;"><strong>收获拐点确立</strong>：净利超去年全年，CapEx同比锐减41.66%，FCF大幅释放</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(数据来源：万华化学2021—2025年经审计年度报告及2026年第三季度报告；注：尾数加总如有0.01亿差异系四舍五入所致。)</em></p><p>这张表藏着万华最惊人的造血真相：<strong>过去五年（2021—2025），在行业从景气巅峰一路跌进冰窟窿的过程里，万华累计净赚832.59亿元归母净利润，经营现金流净额更是高达1,542.14亿元（净现比高达1.85倍，利润含金量极足）！</strong> 五年自由现金流合计之所以为-150.82亿元，完全是因为它在五年里一口气砸下了惊世骇俗的<strong>1,692.96亿元资本开支</strong>——换句话说，它再造一个蓬莱基地、一套120万吨乙烯二期、一个福建百万吨聚氨酯基地外加全套新材料产线，91%的钱都是靠自家车间源源不断的经营现金流硬生生挣出来的！</p><p>同时，我们必须做两项严苛的<strong>“防合并报表幻觉”体检</strong>：</p><ul>
 <li>
 <p><strong>① 少数股东权益与损益匹配度（无纸面富贵）</strong>：2025年末，少数股东权益占比为9.84%（118.23亿/1,201.29亿），当年少数股东损益占比为6.91%（9.30亿/134.57亿）；到了2026年前三季度，少数股东权益占比为10.28%（133.26亿/1,296.32亿），少数股东损益占比同步回升至11.61%（20.56亿/177.14亿）。比例高度咬合，原因一清二楚：2026年福建基地（福建石化集团参股）MDI/TDI满产大赚，以及烟台石化（科威特PIC自2025年9月起持股25%）乙烷技改后大幅扭亏，合资方按股权正常分走约一成利润，母公司稳拿九成大头，毫无“肥水外流”或“母公司空心化”假象。</p>
@@ -993,7 +1278,7 @@
 <h3 id="_11">一、 算清单位经济账：单位产能投资是省是贵？转固新增多少折旧？多少稼动率能保本？</h3>
 <h4 id="1_5">1. 核心扩产项目“单位产能投资额”与国内外同行横向硬核比拼</h4>
 <p>先给总判断：<strong>在聚氨酯、大乙烯与高端聚烯烃（POE）三大化工老本行上，万华的单位产能投资额省到了令全球同行绝望的地步；唯独在跨界强攻的磷酸铁锂电池材料上，因为背上了重化工级安全环保标准与上游矿化公辅，它的单吨投资比锂电本土极简派龙头更“重”。</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心工程项目</th>
@@ -1033,7 +1318,7 @@
 <td style="text-align: left;"><strong>相对偏重</strong>。湖南裕能走的是极简厂房+快速迭代窑炉的轻快路线；万华习惯用大型重化工标准建厂，同步铺设了上游宜昌磷矿选矿、磷酸铁连续化装置及海阳核电绿电基建，前期固定资产包袱明显比传统锂电厂更重</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看这组数字多荒唐：巴斯夫在美国扩建17万吨MDI花了10亿美元（单吨4.18万人民币），万华在福建扩70万吨MDI单吨只花三四千块，差了整整八倍！在重化工牌桌上，建厂成本只有对手六分之一的人，天生就握着免死金牌。</p></div></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2-breakeven">2. 转固新增折旧账本与盈亏平衡稼动率（Breakeven）硬核测算</h4><p>查阅万华《2025年年度报告》会计政策附注：公司固定资产采用<strong>年限平均法</strong>计提折旧，残值率0%—5%，其中<strong>房屋建筑物折旧年限20—50年</strong>，<strong>核心化工机器设备折旧年限6.67—20年</strong>（主力大型连续化装置通常按12—15年计提，电池窑炉及精细设备按8—10年计提）。</p><ul>
 <li>
@@ -1255,7 +1540,7 @@
 </ul>
 <hr/>
 <h3 id="2026q3-9m-2026">2026年三季报（Q3 / 9M 2026）同行与上下游核心指标当庭对质表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对质方（报告期均为截至2026年9月30日）</th>
@@ -1308,7 +1593,7 @@
 <td style="text-align: left;">沧州大化合同负债 <strong>1.37亿元</strong>（较年初0.52亿大增 <strong>+164%</strong>）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(数据来源：各公司2026年第三季度报告、2026年半年度报告及Q3季报官方新闻稿。)</em></p>
 <hr/>
 <h3 id="_20">一、 景气度对质：行业真实需求到底是在全面升温，还是在向渠道压库？</h3>
@@ -1395,7 +1680,7 @@
 <hr/>
 <h3 id="_22">二、 拉到全球牌桌上比绝对火力：万华的研发买单能力已反超科思创、直逼陶氏</h3>
 <p>为什么大化工巨头的研发费用率普遍在2%左右？因为化工不是每年推倒重来的手机芯片。我们直接调出全球三大化工老霸主 <strong>2025财年年报</strong> 的研发硬数据做同台对比：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">全球/本土对标巨头</th>
@@ -1436,7 +1721,7 @@
 <td style="text-align: left;">卫星营收基数（前三季464亿）仅为万华四分之一，虽然百分比高，但绝对研发经费还不到万华利润表研发费（34.24亿）的一半</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>看出门道了吗？这里藏着两笔极容易被忽略的商业账：</p>
 <ol>
 <li><strong>“两千亿分母”里的贸易流水稀释效应</strong>：万华两千多亿营收分母里，装着<strong>八九百亿的石化基础乙烯裂解与全球LPG液化气大宗贸易</strong>！倒买倒卖丙烷和裂解标准乙烯分子是不需要重新搞分子研发的。如果把这八九百亿“低研发需求的基础石化与贸易”从分母里剔除，万华每年近50亿元研发经费几乎全砸在聚氨酯迭代与三四百亿规模的新材料上——<strong>其核心高技术板块的真实研发强度其实高达 4.5%—5.5%！</strong></li>
@@ -1509,7 +1794,7 @@
 <li>在不扩新摊子的稳态下，万华手握常年60亿—70亿元的客户预收货款（合同负债），且大量采用银行承兑汇票背书结算，存货与应收应付仅随通胀温和自然垫增，每年刚性净营运资金占用约 <strong>10亿—15亿元</strong>。</li>
 </ul>
 <h4 id="owner-earnings_1">【总账亮底】现有产能常态 Owner Earnings 测算汇总表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">测算构成项（均为归母稳态口径）</th>
@@ -1544,7 +1829,7 @@
 <td style="text-align: left;"><strong>比账面常态净利润高出约80亿元！核心源于激进会计折旧与长寿命园区物理维护费的剪刀差</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>看懂这张表的商业含金量</strong>：哪怕万华从明天起停止一切新项目扩张，仅靠今天已经建好的这套重资产机器，在平淡无奇的正常化工年景里，每年真正能自由装进股东口袋（可用于分红、回购注销或还债）的真金白银底盘，在 <strong>240亿—265亿元人民币</strong> 量级。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这就是为什么我和沃伦从来不看会计师算出来的表面净利润！万华按10年左右激进折旧扣掉了156亿，可那些特种钢塔和管廊能用30年，每年花60多亿保养就够了——中间那80多亿折旧剪刀差，就是躺在公司银行卡里实打实的真金白银，常态一年250亿Owner Earnings才是它真正的造血底盘。</p></div></div></div></div>
 
 <hr/>
@@ -1603,7 +1888,7 @@
 <hr/>
 <h3 id="_25">一、 资产质量排雷：三大核心科目的会计政策是“严苛保守”还是“激进注水”？</h3>
 <p>先把三家同行的2025年报会计政策与计提硬数据摆上桌面：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计维度（锚定2025年报及2026最新附注）</th>
@@ -1640,7 +1925,7 @@
 <td style="text-align: left;"><strong>干净彻底、不留死角</strong>。周转快、主业毛利厚，对微利品与历史遗留辅业重手出清</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>扒开这张表背后的三个魔鬼细节，你就知道万华财务团队做账有多“狠”：</p><ol>
 <li>
 <p><strong>应收账款：别人只看账龄，万华加了一道“国别主权风险紧箍咒”</strong>
@@ -2023,7 +2308,7 @@
 </ul>
 <hr/>
 <h3 id="5">5. 📋 四位投资大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">传奇投资大师</th>
@@ -2063,7 +2348,7 @@
 <td style="text-align: left;"><strong>✅ 右侧确认建仓 + 1.6 倍 PB（56—62元）黄金重锤</strong><br/><em>(下行极限回撤约 15%，三年上行赔率 45%—65%，风险收益比极佳)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h1 id="h-5">【模块 H：🎭 5分钟脱口秀复盘 &amp; 极简买方口袋卡（专治阅读疲劳的收尾彩蛋章）】</h1>
 <div class="callout callout-tip"><div class="callout-title">🎯 实战提示 (TIP)</div><div class="callout-body"><p><strong>阅读指南</strong>：如果你刚啃完前面三万字的化工工艺黑话、三季报审讯表和并购级估值模型，脑仁已经开始隐隐作痛——别慌，把计算器放下，泡杯浓茶。这一章我们切换成<strong>“半佛仙人式商业毒舌 + 顶级买方掌柜算盘”</strong>频道，用 30 秒口袋卡和一场 3 分钟的相亲查户口脱口秀，把万华化学（600309.SH）的底裤、印钞机和暗礁扒个底朝天！</p></div></div>
@@ -2206,13 +2491,26 @@
 <p>买万华赚的是“扩产收官还债涨市值”和“化工景气复苏”的钱。当前两千两百多亿市值（七十多元）处于老车间值回票价、新材料零元白送的舒适区，可直接建底仓。实战记住两条铁律：一是只要市场因关税嘴仗或油价波动把它错杀回两千亿市值以内（六十元以下），就是闭眼拿麻袋装的黄金坑；二是死盯季报负债表，只要一年期短债连续下降、全年资本开支压在两百亿以内拿钱还债分红，就坐稳收租；若管理层不还债反而继续借钱扩产电池材料，则果断停手。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2382,7 +2680,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《万华化学_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/万华化学_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《万华化学 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/万华化学 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2440,6 +2738,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

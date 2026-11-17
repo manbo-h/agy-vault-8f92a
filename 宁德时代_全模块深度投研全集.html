@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>宁德时代_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>宁德时代 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">宁德时代_全模块深度投研全集</div>
+    <div class="report-title">宁德时代 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -710,7 +995,7 @@
 </li>
 </ul>
 <h4 id="2-2025-2026">2. 国内外同行硬核横向对质表（锚定 2025年报 及 2026半年报 最新实绩）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对比维度</th>
@@ -779,7 +1064,7 @@
 <td style="text-align: left;">顶流全极耳大圆柱、One-Stop极简结构铁锂/三元、314Ah/600Ah+储能</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3-711">3. 穿透财务差距：宁德时代比同行高出的 7—11 个百分点净利率到底从哪来？</h4><p>对比上表可以清晰看到，在同样的碳酸锂价格和行业环境下，亿纬锂能与中创新航2026H1的净利率在<code>5.6%—7.2%</code>之间，储能毛利率甚至只有<code>12.5%</code>左右，而宁德时代的储能毛利率高达<code>23.96%</code>、整体净利率超过<code>16%</code>（2025全年归母净利率达<code>17.04%</code>）。这近10个百分点的惊人护城河，来自三笔实打实的硬账：</p><ol>
 <li>
 <p><strong>极限制造带来的良率与折旧摊薄优势（省出约 3—4 个百分点）</strong>：宁德时代拥有全球锂电行业仅有的3座世界经济论坛（WEF）认证“灯塔工厂”（宁德、宜宾、溧阳）。通过超级拉线改造，单条产线年产能从早期的1—2GWh跃升至10GWh以上，6800多个质量控制点实现AI毫秒级视觉检测，电芯缺陷率从行业普遍的PPM级（百万分之一）压降至<strong>PPB级（十亿分之一）</strong>。在锂电行业，原材料占成本约75%，制造良率每提升2%—3%，叠加95%以上的极限稼动率对固定资产折旧的摊薄，直接转化为3—4个百分点的纯毛利优势。</p>
@@ -876,7 +1161,7 @@
 
 
 <h4 id="3-202120252026">3. 五年一期现金流硬账本（2021—2025年及2026年前三季度标准对照表）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间（单位：亿元人民币）</th>
@@ -953,7 +1238,7 @@
 <td style="text-align: left;">营收猛增56%扩产备货，Q1-Q3仍维持正FCF</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="4">4. 打破“合并报表幻觉”深度体检</h4>
 <ul>
 <li>
@@ -1057,7 +1342,7 @@
 <p>要看懂宁德时代这 430.32 亿元在建工程和每年 420 亿—500 亿元 CapEx 的含金量，第一步必须把<strong>“单位产能投资额（单 GWh CapEx）”</strong>拆解到具体基地。过去五年，锂电行业最隐秘却最致命的分化，不仅发生在电芯良品率上，更发生在产线工程效率上。</p>
 <p>我们调取了宁德时代 2022 年定增募投最新进展公告（含 2026 年 3 月变更募集资金用途公告）、2025 年港股 IPO 招股书募投明细、海外建厂定点协议，以及国内外主要同行（亿纬锂能、中创新航、国轩高科、LG 新能源）的公开建厂预算，拉出以下硬核对比表：</p>
 <h4 id="a-1">表 A-1：宁德时代核心在建/新建基地与国内外同行“单位产能投资额”横向对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目分类</th>
@@ -1179,7 +1464,7 @@
 <td style="text-align: left;">受制于日韩设备供应链高溢价、欧美工会人工及漫长建设期，单 GWh 投资额居高不下</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：欧元兑人民币按约 7.70、美元兑人民币按约 7.12 折算；国内部分基地投资额包含配套模组 Pack 及园区初期公辅基建。)</em></p>
 <hr/>
 <h3 id="2-1822-gwh5663-gwh">2. 深层逻辑追问：为什么国内能省到极致（1.8—2.2 亿元/GWh），而欧洲贵出两倍多（5.6—6.3 亿元/GWh）还能赚钱？</h3>
@@ -1237,7 +1522,7 @@
 <h4 id="2-vs-wh-break-even-utilization">（2）国内超级拉线 vs 欧洲匈牙利基地：单 Wh 折旧与盈亏平衡稼动率（Break-even Utilization）对比</h4>
 <p>为了看清单个新工厂投产后的抗风险底线，我们构建单 GWh 单位经济模型（Unit Economics）：</p>
 <h4 id="a-2-vs-gwh">表 A-2：宁德时代国内超级拉线基地 vs 欧洲匈牙利基地单 GWh 盈亏平衡精算模型</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心测算维度</th>
@@ -1314,7 +1599,7 @@
 <td style="text-align: left;">当稼动率达到 85% 稳态时，国内单 GWh 营业利润率约 <strong>13%—15%</strong>，欧洲单 GWh 营业利润率高达 <strong>14.5%—17.5%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>算账结论（茶桌拍板）</strong>：
 1. <strong>国内基地的抗揍能力极其恐怖</strong>：得益于单 GWh 投资额压降至 <code>2.0 亿元</code> 左右，哪怕国内锂电价格战把均价打到 <code>0.46 元/Wh</code>，只要产线稼动率跨过 <strong>44%—48%</strong>，国内新基地就能覆盖全部刚性折旧和固定人工实现盈亏平衡！而宁德时代当前的真实产能利用率是多少？<strong>94.86%—96.9%！</strong> 在 95% 的满负荷运转下，单 Wh 折旧被摊薄到只有 <strong>3.4 分钱</strong>，这就是为什么二三线电池厂（稼动率 40%—50%、单 GWh 折旧高达 7—9 分钱）在亏血本，而宁德时代净利率反而冲上 15%—17% 的底层物理逻辑。
@@ -1442,7 +1727,7 @@
 <h2 id="_11">一、 四大新曲线全维证伪对比矩阵表</h2>
 <p>在逐一解剖之前，我们先将四大新业务的真实商业化刻度、卡脖子关卡、核心对手与终局定性浓缩在一张全景证伪表中：</p>
 <h4 id="b-1-2026">表 B-1：宁德时代四大远期/新业务曲线商业证伪全景矩阵（截至 2026 年下半年）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">拆解维度</th>
@@ -1489,7 +1774,7 @@
 <td style="text-align: left;"><strong>【LRS：零资本消耗、稳赚百亿纯利的制度套利利器】</strong> vs <strong>【磐石底盘：食之无味弃之可惜的平庸鸡肋】</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="_12">二、 逐项冷峻拆解：跨越鸿沟的三道关卡与竞争终局推演</h2>
 <h3 id="evtol">曲线一：全固态电池（及凝聚态/电动航空 eVTOL）——是颠覆者的达摩克利斯之剑，还是自己的加冕礼？</h3>
@@ -1670,7 +1955,7 @@
 <p>要把账算透，我们不能只听宁德时代一家之言。我们把它的 <strong>5 家国内外直接竞争对手</strong>——<strong>比亚迪（002594.SZ）</strong>、<strong>亿纬锂能（300014.SZ）</strong>、<strong>中创新航（03931.HK）</strong>、<strong>国轩高科（002074.SZ）</strong>、<strong>LG新能源（LGES）</strong>，以及 <strong>4 家核心上下游对质锚点</strong>——上游正极霸主<strong>湖南裕能（301358.SZ）</strong>、电解液龙头<strong>天赐材料（002709.SZ）</strong>、锂盐龙头<strong>赣锋锂业（002460.SZ）</strong>，与下游储能系统集成龙头<strong>阳光电源（300274.SZ）</strong>拉到同一张审讯桌上，用截至 <strong>2025年报、2026半年报及2026三季报</strong> 的最新硬核附注数据做一场三方交叉对质。</p>
 <h3 id="2025-2026q3">一、 锂电全产业链三方交叉对质总表（2025全年 — 2026Q3）</h3>
 <div class="callout callout-important"><div class="callout-title">⚡ 核心结论 (IMPORTANT)</div><div class="callout-body"><p><strong>对质基准说明</strong>：以下数据全部提取自各家公司已公开披露的《2025年年度报告》《2026年半年度报告》及《2026年第三季度报告》官方报表及附注，外币统一折算或采用中文货币单位表述。</p></div></div>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对质方与定位</th>
@@ -1796,7 +2081,7 @@
 <td style="text-align: left;">26Q3末:<code>409.72亿元</code><br/>(较年初<strong>+50.33%</strong>，海外大储在途待并网确收)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="2026">二、 景气度对质：2026年到底是真实需求井喷、海外抢装，还是向渠道压库？</h3>
 <p>看着上面这张三方对质表，第一眼最抓人眼球的反差有三个：</p>
@@ -1894,7 +2179,7 @@
 <h4 id="_13">第二层拆解（核心重头戏）：同口径会计还原测算——如果按二线同行的会计政策记账，宁德时代的真实利润有多恐怖？</h4>
 <div class="callout callout-tip"><div class="callout-title">🎯 实战提示 (TIP)</div><div class="callout-body"><p><strong>为什么必须做同口径会计还原？</strong><br>
 因为宁德时代目前的 `26.27%` 法定综合毛利率（2026H1为 `23.93%`、2026Q1-Q3为 `22.72%`）和 `722.01亿元` 归母净利润，是在极其保守的会计准则下算出来的。如果我们把宁德时代的 <strong>① 机器设备折旧年限、② 售后质保金（预计负债）计提强度、③ 研发投入资本化率、④ 存货与固定资产减值计提强度</strong> 这四大会计调节阀门，全部拧到与二线同行（亿纬锂能、国轩高科）完全一致的同口径标准，看看会发生什么！</br></p></div></div>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">会计调节科目</th>
@@ -1941,7 +2226,7 @@
 <td style="text-align: left;"><strong>2025同口径真实毛利率：<code>29.72%</code></strong><br/><em>(按2026H1基数还原亦高达 <code>27.38%</code>—<code>27.87%</code>)</em><br/><strong>同口径真实归母净利：<code>910.4亿元</code></strong><br/><strong>同口径真实净利率：<code>21.49%</code>！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>看懂这张还原表，后背都会发凉</strong>：
 - 如果把宁德时代和亿纬锂能、国轩高科放在同一把会计尺子下量，<strong>宁德时代 2025 年光是在“机器设备加速折旧（<code>+70.06亿</code>）”和“超额质保金预提（<code>+76.17亿</code>）”这两项计入营业成本的科目上，就主动压低了 <code>146.23亿元</code> 的毛利，相当于自己动手把综合毛利率砍掉了 <code>3.45 个百分点</code>！</strong>
 - 还原之后，宁德时代 2025 年在二线同行同口径下的真实综合毛利率高达 <strong><code>29.72%</code></strong>（即便按 2026H1 <code>23.93%</code> 毛利率基数还原亦达 <strong><code>27.38%—27.87%</code></strong>，比亿纬锂能、中创新航、国轩高科 <code>14.31%—16.71%</code> 的账面毛利率整整高出 <strong><code>11.2 — 13.5 个百分点</code></strong>！），真实可比归母净利润高达 <strong><code>910.4亿元</code></strong>（真实净利率 <strong><code>21.49%</code></strong>，比二线同行扣除研发资本化水分后的真实净利率 <code>0%—5%</code> 整整高出 <strong><code>16 — 21 个百分点</code></strong>！）。
@@ -1982,7 +2267,7 @@
 <h2 id="e">【追问模块 E：会计成色与治理细节显微镜】</h2>
 <p>在资本市场上，绝大多数财务分析是在帮投资人“排雷捉鬼”——排查哪家公司通过拉长折旧年限、少提坏账和存货跌价、滥用研发资本化来虚增利润。但当你拿着显微镜把宁德时代《2025年年度报告》《2026年半年度报告》及《2026年第三季度报告》的会计附注从头到尾审视一遍后，你会看到一个完全反过来的奇观：<strong>这是一家把会计准则的“谨慎性原则”用到近乎严酷、在每一个敏感科目上都在拼命“藏富于表外”的制造业巨兽。</strong></p>
 <h3 id="2025-2026q3_2">一、 同行会计政策与治理细节硬核对比总表（2025年报 — 2026Q3附注穿透）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计维度与敏感科目</th>
@@ -2059,7 +2344,7 @@
 <td style="text-align: left;"><strong>考核规则铁面无私（差一点也绝不改规则放水，直接作废冲回），治理极度硬核</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_14">二、 资产质量与会计政策排雷：五大敏感科目逐一显微镜穿透</h3>
 <h4 id="1-701470">1. 固定资产折旧年限与残值率：每年多计提近70亿折旧，把1,470亿原值的设备压成“半价隐形金矿”</h4>
@@ -2319,7 +2604,7 @@
 </li>
 </ul>
 <h4 id="4owner-earnings">（4）宁德时代“常态真实股东盈余（Owner Earnings）”分步加减还原总表（含归母口径 &amp; 无杠杆企业端口径）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">算账步骤与财务科目</th>
@@ -2420,7 +2705,7 @@
 <td style="text-align: left;"><strong>与合并 True EV 严格同口径：归母OE <code>856.00</code> + 少数股东OE <code>69.00</code>（净利52+D&amp;A 24-CapEx 7）+ 税后债务利息 <code>28.90</code> - 超额现金税后利息 <code>62.60</code> = <code>891.30亿元/年</code>（近期在建消化后达 <code>1,140亿—1,190亿元/年</code>）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="callout callout-important"><div class="callout-title">⚡ 核心结论 (IMPORTANT)</div><div class="callout-body"><p><strong>【买方铁律：为什么估值对标合并 True EV 时，必须同时核算 `891.30亿元` 的无杠杆企业端真实盈余（Unlevered Firm OE）？】</strong><br>
 - <strong>归母口径（`856.00亿元/年`）</strong>：分子是归属于母公司普通股股东的盈余（已扣除少数股东损益及折旧，但包含了账上 `3,425.94亿元` 超额现金产生的税后利息净收益），直接匹配普通股总市值（Market Cap）或扣除净现金后的归母 EV。<br>
 - <strong>合并企业端无杠杆口径（`Unlevered Firm OE = 891.30亿元/年`）</strong>：当我们在模块 F 计算合并真实企业价值（True EV）时，分母已经把 `3,425.94亿元` 超额现金一把扣掉了，同时加回了 `1,899.27亿元` 全口径有息债务和 `363.36亿元` 少数股东权益。为确保<strong>分子与分母 100% 严丝合缝（既不白拿已扣除超额现金的利息，也不漏算已加回少数股东与债权人的盈余）</strong>，严格匹配的 7 项桥接公式为：<br>
@@ -2527,7 +2812,7 @@
 <li><strong>情景二实算底线结论</strong>：即便关键原材料暴涨 <code>20%—50%</code>，除了首季度存在1—3个月顺价滞后导致单季毛利率微晃2—3个百分点外，<strong>全年维度下宁德时代综合毛利率底线稳守 <code>19.5%—21.0%</code>，归母净利润底线稳守 <code>560亿—620亿元</code>，年度真实股东盈余（Owner Earnings）稳守 <code>750亿—810亿元</code> 以上</strong>，自由现金流坚如磐石。</li>
 </ul>
 <h4 id="3_7">（3）双极限压力测试量化对照总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">压力测试维度与情景设定</th>
@@ -2596,7 +2881,7 @@
 <td style="text-align: center;"><strong>顺价公式+枧下窝锂矿+邦普回收完美闭环对冲</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="-_2">---</h2>
 <h2 id="f">【追问模块 F：解锁估值定价、隐含预期与击球区推演】</h2>
 <p>前面所有模块我们都忍住没谈股价和估值，就是为了先把“这台机器一年到底能赚多少真金白银（存量常态归母 Owner Earnings <code>856.00亿元/年</code>、无杠杆企业端 Unlevered Firm OE <code>891.30亿元/年</code>，近期在建消化后垫高至 <code>1,100亿—1,190亿元/年</code>）”算成铁案。现在，我们正式联网调取截至 <strong>2026年11月13日最新收盘（并完整保留 2026年11月6日初版基准做双坐标对照）</strong> 宁德时代 A股（300750.SZ）与 H股（03750.HK）的真实盘面价格、扣除回购库存股后的有效股本结构与 <strong>2026年三季报（2026年9月30日）严格同期间资产负债表</strong>，把买下整家宁德时代的这笔投资大账算得清清楚楚。</p>
@@ -2701,7 +2986,7 @@
 </li>
 </ul>
 <h4 id="true-ev2026q3">📊 宁德时代真实企业价值（True EV）精确拆解总表（2026Q3 同期间资产负债表 × 双股价/双股本基准）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值核算科目（财务锚定 2026年9月30日三季报）</th>
@@ -2804,7 +3089,7 @@
 <td style="text-align: left;"><strong>按最新收盘 <code>237.70元</code> 计，买下整家宁德时代的真实标价已跌破万亿至 <code>9,742亿—9,966亿元</code>！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>极具冲击力的算账真相</strong>：
 看清这张表，你就瞬间明白了什么叫顶级印钞机的资产负债表魔力——以最新收盘价 <strong><code>237.70元/股</code></strong> 计算，扣除回购专户里躺着的 <code>0.3926亿股</code> 库存股后，宁德时代 A+H 有效总市值为 <strong><code>11,129.43亿元</code></strong>（A股同价有效总市值 <strong><code>10,905.64亿元</code></strong>）；而公司账上 <code>3,425.94亿元</code> 超额现金全额偿还 <code>1,899.27亿元</code> 有息负债并买断 <code>363.36亿元</code> 少数股东权益后，还净剩 <strong><code>+1,163.31亿元</code></strong> 现金盾牌！<strong>这意味着全款买下整家宁德时代生意的真实总标价（True EV）已经历史性跌破 1 万亿元大关，仅需 <code>9,966.12 亿元</code>（A股同价口径下甚至仅需 <code>9,742.33 亿元</code>；即便按11月6日 <code>254.22元</code> 算亦仅 <code>10,500亿—10,708亿元</code>）！</strong></p>
@@ -2909,7 +3194,7 @@
 </li>
 </ol>
 <h4 id="reverse-sotptrue-ev">📊 宁德时代估值拆骨倒推表（Reverse SOTP，严格分离“总市值口径”与“True EV口径”，杜绝净现金双重计算）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">资产/业务层级拆解</th>
@@ -2977,7 +3262,7 @@
 <td style="text-align: left;"><strong>当前股价处于“存量资产超额兜底103%+、764GWh在建与四大期权全部免费白送还倒贴”的黄金击球区！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>拆骨倒推一针见血结论</strong>：
 1. 在 <strong>2026年11月13日最新收盘 A股 <code>237.70元/股</code></strong>（扣除库存股后 A+H 有效总市值 <strong><code>11,129.43亿元</code></strong>、A股同价有效总市值 <strong><code>10,905.64亿元</code></strong>；合并真实企业价值 True EV 仅 <strong><code>9,966.12亿元</code> / 同价 <code>9,742.33亿元</code></strong>）的位置上：
@@ -3024,7 +3309,7 @@
 <hr/>
 <h4 id="2-vs-vs">（2）分档击球行动指南：左侧底仓区 vs 右侧黄金重锤区 vs 情绪过热兑现区</h4>
 <p>为了不在盘面波动中盲目追涨杀跌，我们以 <strong>“真实企业价值倍数（True EV / 常态 Owner Earnings）”</strong> 与 <strong>“2026—2027年动态 PE / 隐含内生回报率”</strong> 为标尺，划定三条铁律分档击球线：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">击球分档区间</th>
@@ -3053,7 +3338,7 @@
 <td style="text-align: left;"><strong>【贪婪沸腾时的纪律离场区】</strong>：<br/>• <strong>触发背景</strong>：市场不仅给足了存量与764GWh在建增量的全部预期，还开始狂热炒作“全固态电池全面颠覆、换电一统天下、AI算力储能永动机”等叙事，股价重回或突破2026年5月 <code>468.75元</code> 高点以上。<br/>• <strong>行动策略</strong>：在 <code>450元</code> 以上开始每涨10%分批兑现三分之一，把被透支的远期期权溢价换成现金落袋。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="3_9">（3）三条基本面死刑证伪红线（一旦触发，无条件认错离场！）</h4>
 <p>真正的长期主义绝不是死拿不放的教条主义。如果未来跟踪过程中，宁德时代出现以下 <strong>任意一条可量化的基本面结构性恶化信号</strong>，说明我们前面赖以算账的“成本统治力、海外高毛利护城河或技术路线壁垒”已被证伪，无论当时股价跌了多少、PE看起来多便宜，<strong>必须无条件砍仓认错离场</strong>：</p>
@@ -3096,7 +3381,7 @@
 <p><strong>二线代工阵营承接分流</strong>：<strong>中创新航（第3）、亿纬锂能（第4）、国轩高科（第5）、欣旺达（第6）、瑞浦兰钧（第7，前三季度装机同比+118%+）、正力新能（第9）</strong>。</p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">车企名称</th>
@@ -3131,7 +3416,7 @@
 <td style="text-align: left;"><strong>影响有限</strong>：因湃与得壹受限于产线规模与稼动率，广汽昊铂高端系、奇瑞智界（Luxeed）仍高度依赖宁德时代。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="2-5619-391">2. 穿透三大认知盲区：为什么“去宁化”声浪之下，宁德时代三季度营收反而暴增 <code>56.19%</code>、全球份额升至 <code>39.1%</code>？</h3>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
@@ -3295,7 +3580,7 @@
 <p><strong>下行有存量 856 亿—891 亿造血、1,163 亿净现金盾牌和 5%—6% 前瞻分红回购铁底锁死，上行白拿 764 GWh 扩产释放与四大免费期权——这就是教科书级别的‘高胜率、高赔率不对称击球区’！</strong>”</p>
 <hr/>
 <h3 id="_16">📋 《四位投资大师圆桌投票与核心判词总表》</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名与流派标尺</th>
@@ -3335,7 +3620,7 @@
 <td style="text-align: left;"><strong>【极具吸引力的不对称击球】</strong><br/><code>237.70元</code>（及 <code>254.22元</code>）处于 <strong>第一档左侧底仓黄金区（50%-60%仓位）</strong>；若错杀至 <code>225元</code> 以下或右侧确认匈牙利/枧下窝放量，加满至 <strong>80%-100% 重锤仓位</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <p><em>本报告由 Antigravity 深度投研总控系统（全景八步底座 + 追问模块 A—G 满血并行引擎 + 随身芒格旁批系统）合成，并经 <code>deep-research-auditor</code> 独立铁面审计官（2026年11月15日）完成全量财务勾稽、Python算式与2026Q3/11月13日收盘盘面交叉核验修订。</em></p>
 <hr/>
@@ -3353,13 +3638,26 @@
 <p>用拆骨法算账，当前一万一千亿出头有效市值（扣净现金后真实企业价值不到一万亿），光现有成熟产线按十二倍保守估值加净现金就超一万一千四百亿！这意味着市场把在建的七百六十多吉瓦时先进产能、刚获环评批复的江西十万吨级锂矿及全固态电池等四大期权，全按零元白送还倒贴三百多亿。打法极干脆：在A股两百三十到两百六十元区间（优先买A股），跟着公司回购专户锁死五到六成底仓拿五六个点回报；若错杀跌破两百二十五元或确认匈牙利厂满产、江西锂矿复产，直接加满重锤。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3529,7 +3827,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《宁德时代_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/宁德时代_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《宁德时代 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/宁德时代 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3587,6 +3885,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

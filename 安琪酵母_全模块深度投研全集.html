@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>安琪酵母_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>安琪酵母 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">安琪酵母_全模块深度投研全集</div>
+    <div class="report-title">安琪酵母 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -621,7 +906,7 @@
 <h3 id="_3">【第一部分：拆解业务账本、周期时钟与顺价能力——谁在挑大梁，谁在凑规模，谁在拖后腿？】</h3>
 <h4 id="1">1. 业务结构与真实利益链条拆解</h4>
 <p>安琪酵母的合并报表由五大分部构成，但它们在商业棋局中的角色天差地别（以 2025 年经审计年报与 2026 年前三季度经营公告对表）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块</th>
@@ -674,7 +959,7 @@
 <td style="text-align: left;"><strong>技术协同与副产综合利用</strong>：含特种酶制剂（保障水解糖自产酶解降本）、有机肥（将发酵高浓度有机废水浓缩制成生物有机肥变废为宝）等。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>穿透到底层结算与渠道模式：</p><ul>
 <li>
 <p><strong>先款后货的强势经销网络</strong>：安琪在全球拥有超过 2.3 万家经销商，对绝大多数中小烘焙坊、面点铺及海外分销商实行“先款后货”或极短账期结算（2025 年末合同负债常年维持在 6 亿—7 亿元水位），这使得其酵母主业的现金回收速度极快。</p>
@@ -712,7 +997,7 @@
 <h3 id="_4">【第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）】</h3>
 <h4 id="1_1">1. 全球酵母四巨头硬核对决：为什么安琪能从地方小厂追到全球坐二望一？</h4>
 <p>全球酵母产业是极其典型的<strong>寡头垄断格局</strong>，乐斯福（法国）、安琪酵母（中国）、英联马利（英国）、拉曼（加拿大）四家合计切走了全球 <strong>75% 以上</strong>的产能份额。我们把四巨头拉到同一张工程与财务解剖台前：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对标维度</th>
@@ -759,7 +1044,7 @@
 <td style="text-align: left;">在葡萄酒与动物营养细分利基市场深耕，避开与安琪正面价格战</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2_1">2. 完全成本拆解与“双轨制碳源 + 环保副产闭环”工程壁垒</h4><p>要看懂安琪在成本曲线最左端的统治力，必须算清生产 <strong>1 吨活性干酵母</strong> 的物理与化学硬账本：</p><div class="math-display"><span class="math-text">4.5 吨糖蜜（含糖量 48\%—50\%）</span> + <span class="math-text">液氨/磷盐（氮磷营养源）</span> + <span class="math-text">无菌空气强力通氧（好氧呼吸倍增）</span>  —(30°<span class="math-text">C</span>—33°<span class="math-text">C</span><span class="math-text"> 精密流加发酵</span>)→  <span class="math-text">1 吨活性干酵母</span> + <span class="math-text">高浓度有机发酵母液</span></div><p>在 1 吨酵母的完全生产成本（约 1.1 万—1.3 万元/吨）中：</p><ul>
 <li><strong>核心碳源原料（糖蜜或水解糖）占 35%—45%</strong>：按常规 4.5 吨糖蜜转化 1 吨干酵母计算，糖蜜价格每波动 100 元/吨，吨酵母直接原料成本就跳动 450 元。安琪之所以能打破“看甘蔗老天爷脸色吃饭”的宿命，靠的是两张王牌：</li>
 </ul><ol>
@@ -872,7 +1157,7 @@
 </ul>
 <h4 id="3_2">3. 五年一期现金流硬账本与防合并报表幻觉穿透</h4>
 <p>我们拉出安琪酵母 <strong>2021—2025 五个完整会计年度 + 2026 年前三季度</strong> 的现金流硬账本（单位：人民币亿元）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务指标 (亿元)</th>
@@ -957,7 +1242,7 @@
 <td style="text-align: center;"><strong>约0.25</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>穿透这张五年一期总账，两大真相跃然纸上</strong>：</p><ol>
 <li><strong>从“重资产扩张失血期”正式跨入“自由现金流收获拐点”</strong>：
    - 在 2021—2024 年间，安琪为了抢占全球产能身位并建设 60 万吨水解糖产线，每年硬砸 17 亿—20 亿元 CapEx，导致连续四年自由现金流为负（四年累计净流出 20.55 亿元），分红与扩产缺口主要靠增加低息银行借款与 2022 年那笔 14.1 亿定增填补。</li>
@@ -983,7 +1268,7 @@
 <h3 id="_8">【第六部分：钱往哪砸、本事往哪长？资本开支流向、技术/模式动态进化与成长规划（三大核心支柱之三·重中之重）】</h3>
 <h4 id="1-capex-35">1. 资本开支（CapEx）、在建工程与 35 亿可转债募投全景拆解</h4>
 <p>把安琪 2024—2026 年每年约 17 亿—18 亿元的资本开支及 <strong>2026 年 9 月最新公布的 35 亿元可转债募投清单</strong> 摊在桌面上，每一分钱的去向都极其清晰：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">项目名称与基地坐标</th>
@@ -1037,7 +1322,7 @@
 <td style="text-align: left;">锁死云南甘蔗糖蜜资源，完成全国主力工厂碳源自主切换改造。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>算清这批钱的经济性质比例</strong>：</p>
 <ul>
 <li>
@@ -1154,7 +1439,7 @@
 <h4 id="1-50">1. 算清单位经济账：50 亿在建与募投工程包横向解剖、工艺溢价穿透与折旧盈亏平衡精算</h4>
 <h5 id="1_4">（1）核心扩产项目“单吨产能投资额”全景拆解与同行对标表</h5>
 <p>我们将安琪酵母截至 2026 年三季报的核心在建工程、2026 年 9 月《35亿元可转债预案》四大实体募投项目，与公司历史标杆项目（埃及二期、国内老产线技改）及国内外同行扩产预算拉到同一张工程审计表上进行横向对质：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目名称与实施主体</th>
@@ -1267,7 +1552,7 @@
 <td style="text-align: left;">欧美工会高昂建筑安装人工、严苛碳排放税及全套西门子/阿法拉伐顶配采购，造价为安琪的1.5—1.8倍。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="2_4">（2）穿透单位投资额差异的三层工程真相</h5><p>为什么国内老厂技改一吨产能只要 <strong>2.5 万元</strong>，而可克达拉、印尼、俄罗斯及宜昌酵母蛋白新项目的单吨投资额普遍飙升至 <strong>4.2 万—4.85 万元/吨</strong>？剥开表象，背后是三笔完全不同的工程物理账：</p><ul>
 <li>
 <p><strong>第一层差异：工艺链条从“单级粗加工”升级为“四级分子筛分联产”</strong>：
@@ -1424,7 +1709,7 @@
 <p>酵母蛋白要想从“年销几千吨的小众特色配料”真正跃迁为“年销五万吨、贡献十亿毛利的第三支柱”，必须硬闯过以下三道极其残酷的商业与工程关卡：</p>
 <h5 id="1_6">（1）第一关：底层生物化学单耗与吨成本硬碰硬对决（附三大主流蛋白全维对标表）</h5>
 <p>我们先将 <strong>安琪酵母蛋白（AnPro® 80）</strong> 与其宣称要替代的两大对手——<strong>进口浓缩乳清蛋白（WPC80）</strong> 和 <strong>国产大豆分离蛋白（SPI 90）</strong> 拉到同一张物理与财务解剖台上：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对标维度</th>
@@ -1489,7 +1774,7 @@
 <td style="text-align: left;">大众平价蛋白粉、火腿肠/速冻丸子填充料、植物肉的核心底座</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>算清酵母蛋白的“物理转化率与成本硬账”</strong>：
 很多研报想当然地以为“干酵母成本才 1.2 万元/吨，做成酵母蛋白卖 6 万元/吨岂不是暴利？”——这是完全不懂生物化学的算术错误！</p><ol>
 <li>
@@ -1575,7 +1860,7 @@
 </ul>
 <p><strong>安琪酵母唯一且不可复制的胜算</strong>：在于它<strong>绝不需要为了造酵母蛋白而从零去买糖蜜、建排污厂和铺渠道</strong>！全球没有任何一家乳清厂或合成生物初创公司，同时手握 <strong>“49 万吨发酵菌体底盘 + 16 万吨全球第一的 YE 消化池 + 60 万吨自产酶水解糖 + 覆盖全球 170 国的 2.3 万家食品工业经销商”</strong>。只要安琪守住“以 YE 需求定蛋白产量、主打 20% 黄金复配掺混”的克制边界，哪怕只切下全球浓缩乳清蛋白与高端植物蛋白市场 <strong>3%—5%</strong> 的掺混替换份额（对应全球 3 万—4 万吨稳态需求），也足以喂饱其核心产线。</p>
 <h5 id="2-b">（2）模块 B 最终冷酷定性（一刀切开三层期权成色）</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">新业务/技术资产层级</th>
@@ -1600,14 +1885,14 @@
 <td style="text-align: left;">🔴 <strong>【叫好不叫座的平庸微利/研发练兵资产】</strong><br/><em>(仅具技术储备与园区配套价值，估值定价时应直接按 0 元期权剥离处理)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h3>
 <p>要判断一家生物发酵与食品配料龙头的财报成色，绝不能只听管理层在业绩说明会上的单方陈词，而必须将其置于整条产业链的十字路口，与<strong>上游及同源生物发酵对手（梅花生物、莲花控股）</strong>、<strong>同场景烘焙原料同行（立高食品）</strong>、<strong>国际寡头宿敌（法国乐斯福 Lesaffre、英国英联马利 AB Mauri）</strong>以及<strong>下游调味品巨头客户（海天味业）</strong>进行残酷的“三方交叉审讯”。</p>
 <p>以下基于截至 2026 年 11 月 10 日已披露完毕的各家《2025年年度报告》与《2026年第三季度报告》核心数据，展开全方位对质。</p>
 <hr/>
 <h4 id="2025-vs-2026q1-q3">一、 全景财务与经营数据横向对质大表（2025 全年 vs 2026Q1-Q3）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对质维度与核心指标</th>
@@ -1693,7 +1978,7 @@
 <td style="text-align: left;">跨国海运链条拉长导致海外安全库存普遍维持在 <strong>90—120天</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_12">二、 景气度对质：烘焙与鲜味需求到底是在升温，还是在压库？</h4><p>把上述六方数据放在同一张解剖台上，关于行业真实景气度的三个核心真相立刻水落石出：</p><ol>
 <li>
@@ -1804,7 +2089,7 @@
 <li>得益于国内烘焙与小包装经销商“先款后货”制度（合同负债常年锁住 6 亿—7 亿元免息现金），安琪在国内传统主业上几乎不需要追加营运资金。但考虑到每年四季度甘蔗与甜菜榨季集中收购糖蜜的季节性备货，以及高毛利 YE（面对海天、雀巢等工业巨头需给予 30—60 天账期）和海外跨洋集装箱在途存货的稳步自然增长，存量业务每年保持正常通胀与结构升级所需的<strong>常态刚性营运资金追加占用约为 1.00 亿—1.50 亿元（基准取 1.25 亿元）</strong>。</li>
 </ul>
 <h5 id="2owner-earnings">（2）安琪酵母存量常态真实股东盈余（Owner Earnings）分步还原总表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">还原步骤与财务科目</th>
@@ -1872,14 +2157,14 @@
 <td style="text-align: left;"><strong>存量资产每年稳态可自由支配真金白银（约 20.5 亿—22.0 亿元/年，比账面净利高出约 36%！）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>核心结论点破</strong>：安琪酵母存量资产每年真正赚进股东口袋的自由现金流底盘高达 <strong>20.5 亿—22.0 亿元/年（中枢 21.00 亿元）</strong>，足足比账面归母净利润（15.44 亿元）高出 <strong>5.5 亿—6.5 亿元</strong>！原因就在于会计准则强行让物理寿命 20—25 年的不锈钢发酵罐在 10—14 年内加速提完折旧，制造了每年超 6 亿元的“折旧藏富剪刀差”。只要管理层明天宣布停止新建海外和蛋白工厂，安琪账面上立刻就能每年掏出 <strong>21 亿元</strong> 真金白银全额分给股东，而存量 49 万吨产能的竞争力不会下降分毫！</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>会计师总喜欢拿同一把尺子去量十年就报废的破电脑和能用二十五年的不锈钢大酒缸——安琪每年在账本上扣掉十一亿折旧费，但实际上只要花四五个亿换换阀门和滤膜就能让机器继续满负荷印钞；那多出来的六个亿并没有人间蒸发，它们正老老实实躺在公司的银行保险柜里。</p></div></div></div></div>
 
 <hr/>
 <h4 id="2_8">2. 增量垫高测算：三大高确定性在建项目投产后的造血跃迁</h4>
 <p>在不考虑“酵母蛋白（第三曲线）”出现激进爆发、完全将其视为零贡献的严苛保守前提下，仅看目前已经在建、工程进度过半且下游市场处于明显供不应求状态的<strong>三大高确定性主业扩产项目</strong>——<strong>俄罗斯 2.2 万吨扩建、印尼楠榜省 2 万吨新厂、新疆可克达拉 2 万吨绿色制造项目</strong>（合计新增 <strong>6.2 万吨</strong> 低成本酵母及深加工产能），一旦在 2026 年末至 2028 年间陆续建成消化，能把安琪的常态 Owner Earnings 造血中枢往上再垫高多少？</p>
 <p>我们逐个项目拆解其单吨经济账（基于埃及与俄罗斯一期已验证的成熟财务模型）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">在建核心项目</th>
@@ -1934,7 +2219,7 @@
 <td style="text-align: center;"><strong>+3.55—3.95 亿元/年</strong><br/><em>(若含配套YE升级可达 <strong>+3.5—4.5 亿元</strong>)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>增量跃迁结论</strong>：</p><ol>
 <li>
 <p><strong>为什么这三座工厂确定性极高？</strong> 俄罗斯一期（约 3 万吨）和埃及工厂（6 万吨）目前产能利用率常年超过 <strong>100%</strong>，不得不从国内宜昌、崇左基地跨洋调货支援中东、非洲、独联体与东南亚市场，白白承受高昂海运费；俄罗斯二期（甜菜糖蜜与廉价天然气大本营）、印尼工厂（绑定印尼本土糖业霸主 Budi 集团甘蔗糖蜜，免税直供东盟 6 亿人口）与新疆可克达拉（甜菜糖蜜直通霍尔果斯口岸辐射中亚）建成后，本质上是<strong>“用本地低成本产能直接承接现成的溢出订单 + 省下跨洋海运费”</strong>。</p>
@@ -2001,7 +2286,7 @@
 </li>
 </ol>
 <h5 id="3_8">（3）双极限压力测试全口径量化对比总表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">财务与现金流核心指标</th>
@@ -2083,7 +2368,7 @@
 <td style="text-align: center;"><strong>轻松覆盖 (4.20倍，现金流铁壁)</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在 2021 年以前，甘蔗糖厂老板只要打个喷嚏，安琪的利润表就得重感冒；但自从这帮湖北人砸钱建好了六十万吨水解糖车间和埃及工厂，他们等于给自己穿上了防弹衣——就算糖蜜再暴涨四分之一，他们只要拧开淀粉酶解阀门、再让每个包子铺的酵母贵上两毛钱，就能把风暴挡在门外。</p></div></div>
 <hr/>
 <hr/>
@@ -2091,7 +2376,7 @@
 <p>在完成了商业模式与同行对质后，我们必须拿起最严苛的审计显微镜，深入安琪酵母《2025年年度报告》与《2026年第三季度报告》的合并报表附注及公司治理底层，对<strong>应收账款、存货、固定资产与在建工程、研发资本化</strong>四大敏感会计科目逐一验毒，并对<strong>国企股权激励考核与薪酬人效</strong>进行穿透式审计。</p>
 <hr/>
 <h4 id="_15">一、 四家可比公司核心会计政策与报表质量横向对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计科目与会计政策维度</th>
@@ -2152,7 +2437,7 @@
 <td style="text-align: left;"><strong>满分纯净度</strong>：安琪年均近7亿元研发投入 <strong>100% 当期费用化</strong>，开发支出余额为0，未利用研发资本化粉饰一分钱利润</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_16">二、 资产质量排雷：四大敏感科目逐一验毒</h4><h5 id="1_9">1. 应收账款与海外汇兑/信用敞口审计</h5><ul>
 <li>
@@ -2265,7 +2550,7 @@
 <p>在二级市场买股票，绝不能只看 331.50 亿元的普通股市值表面标价。因为你如果作为产业买家把安琪酵母 100% 私有化买断，你不仅要掏出 331.50 亿元买下全体流通股东的股票，还必须替公司背上账面全部带息债务，并买断合资子公司的少数股东权益，同时你只能拿走账面货币资金中扣除全球十几个重资产基地日常刚性运转底仓后的那部分“超额闲置现金”。</p>
 <h5 id="1true-ev">（1）全款买断整家生意的真实企业价值（True EV）计算总表</h5>
 <p>我们严格对齐核心资产负债表基准口径，并同步对照《2025年年度报告》与《2026年第三季度报告》附注中的债务与现金科目做穿透核验：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">True EV 核算构成科目</th>
@@ -2306,7 +2591,7 @@
 <td style="text-align: left;"><strong>全款买断安琪酵母并清偿全部净有效债务的真实总标价（较普通股市值高出 56.8 亿元，溢价 17.1%）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>【附注交叉核验：为什么 2026Q3 账面应付债券与货币资金双双跳升，但净负债与 True EV 严丝合缝恒等？】</strong>
   细心的财务研究者翻开《2026年第三季度报告》会发现：截至 2026 年 9 月 30 日，公司账面短期借款为 39.69 亿元、长期借款 21.62 亿元、一年内到期非流动负债 5.08 亿元、应付债券增至 19.95 亿元（含发行的“25安琪K1”等科技创新公司债券）、租赁负债 1.06 亿元，表内毛有息负债一度冲高至约 87.4 亿元；但与此同时，<strong>账面货币资金也从基准期的 23.18 亿元同步暴增至 31.42 亿元（连同阶段性存放的待置换募集资金与大额存单）</strong>！这是因为公司在三季度刚刚发债募资、资金尚趴在账上等待偿还到期短贷及支付四季度工程款。在扣除对应待偿债专户现金后，公司的<strong>真实刚性净有息负债（Net Debt = 有效有息负债 60.50 亿元 - 超额可动用现金 7.18 亿元 = 53.32 亿元）</strong>保持高度稳定，全款买断整家生意的 <strong>True EV 稳固锚定在 388.3 亿元</strong>。</li>
@@ -2332,7 +2617,7 @@
 <h4 id="2-reverse-sotp">2. 隐含回报率与预期倒推（Reverse SOTP 拆骨估值法）</h4>
 <p>看清了 <strong>331.50 亿元普通股市值</strong> 与 <strong>388.30 亿元真实企业价值（True EV）</strong> 的标价签，再对照我们在模块 D 算出的 <strong>21.00 亿元存量常态 Owner Earnings</strong>（以及包含俄/印/疆三大在建项目落地后的 <strong>25.00 亿元稳态 Owner Earnings</strong>），这笔买卖的隐含回报率与市场预期底牌瞬间一览无余：</p>
 <h5 id="1_11">（1）静态回报率、真实估值倍数与低息杠杆增厚效应对照表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值与回报率核心标尺</th>
@@ -2373,7 +2658,7 @@
 <td style="text-align: left;">无杠杆全口径资本现金回报率底盘</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>【为什么 60.5 亿元债务在这里不是毒药，而是股东回报的放大器？】</strong>
   在商业算账中，负债究竟是毁灭价值还是创造价值，唯一取决于<strong>“资产端内生现金回报率（ROIC / EV收益率）”与“负债端税后资金成本”的利差</strong>。安琪酵母作为湖北省国资控股的行业龙头，其境内人民币银行借款与科创公司债（如票面利率仅 <strong>1.85%</strong> 的“25安琪K1”）综合名义融资利率已低至 <strong>2.5%—2.8%</strong>，扣除 15%—25% 企业所得税盾后的<strong>真实税后债务成本仅为 2.0%—2.3%</strong>！
@@ -2381,7 +2666,7 @@
 </ul>
 <h5 id="2reverse-sotp-3315">（2）Reverse SOTP（逆向分部加总拆骨法）：倒推 331.5 亿市值里到底装了什么预期？</h5>
 <p>现在的二级市场在 38.20 元/股（331.50 亿元总市值）的位置上，究竟给安琪的“国内传统酵母”、“全球 YE 与海外高增王牌”以及“酵母蛋白与合成生物第三曲线”分别赋予了多少估值？我们把公司切成三大业务骨块，做一次冷酷的<strong>逆向拆骨称重（Reverse SOTP）</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务分部骨块</th>
@@ -2434,7 +2719,7 @@
 <td style="text-align: left;"><strong>当前市值不仅对酵母蛋白和合成生物期权 0 元白送，甚至因担忧 35 亿可转债摊薄与资本开支而对存量基本盘倒贴了约 15 亿—20 亿元折价！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>拆骨倒推铁论</strong>：
 这张表把市场先生当前的底牌扒得干干净净——在 <strong>331.50 亿元</strong> 总市值下，仅仅是<strong>“国内 60% 垄断的发面酵母现金牛（值 156 亿） + 全球第一的 YE 与埃及/俄罗斯海外高增印钞机（值 171 亿—200 亿）”</strong>这两块已经跑通、每年稳吐 21 亿—25 亿元真金白银的铁打基本盘，就已经完全撑起了 <strong>330 亿—360 亿元</strong> 的合理市值！
 这意味着什么？意味着二级市场因为厌恶 2026Q3 单季汇兑波动、害怕 35 亿元可转债抽血摊薄、以及对重资产 CapEx 的条件反射式恐惧，不仅把安琪重金押注的<strong>“酵母蛋白替代乳清蛋白第三曲线 + 合成生物（PHA/特种酶）平台”当成 0 元赠品白白送给了你</strong>，甚至还把存量主业按 <strong>9—9.5 折</strong> 贱卖！这正是典型的<strong>“下行有存量高自由现金流托底、上行享海外扩产与蛋白新曲线免费看涨期权”</strong>的不对称博弈结构。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我这辈子最喜欢的买卖，就是花买一头高产奶牛的公允价钱，结果农场主因为急着借钱修谷仓，不仅把奶牛九五折卖给我，还白饶了一匹以后说不定能跑赢肯塔基赛马会的小马驹（酵母蛋白）——就算那匹小马驹将来长成一头蠢驴，光靠挤牛奶我也稳赚不赔。</p></div></div></div></div>
@@ -2443,7 +2728,7 @@
 <h4 id="3_10">3. 赔率、历史估值坐标与分档击球行动锚点</h4>
 <h5 id="1_12">（1）纵向历史估值区间与横向全球同行定价坐标对表</h5>
 <p>为了彻底校验当前 <strong>38.20 元/股（总市值 331.5 亿元，账面 PE 21.5x，P/OE 15.8x，True EV/OE 18.5x）</strong> 在时间与空间维度上的水位，我们将安琪拉进纵向历史周期与横向全球同行坐标系：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对标维度与标的</th>
@@ -2497,11 +2782,11 @@
 <td style="text-align: left;">梅花主打大宗玉米发酵味精与赖氨酸/苏氨酸，强周期大宗商品属性重、缺乏安琪小包装 C/B 端高粘性渠道与全球本土建厂壁垒，故安琪理应享受显著溢价</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>综合坐标定性</strong>：剔除 2020 年居家烘焙不可持续的泡沫极值后，安琪酵母的长期合理公允价值中枢应在 <strong>20x—22x P/OE（对应总市值 420 亿—460 亿元，股价 48.00—53.00 元/股）</strong>。当前的 <strong>38.20 元/股（331.5 亿元市值）</strong> 处于 <strong>“合理偏保守（向下距离历史极寒底部仅 15%—20% 空间，向上具备 30%—45% 价值回归与业绩成长双击赔率）”</strong> 的优质击球准备区。</p>
 <h5 id="2_9">（2）三档分步击球行动方案（具体到股价、市值与触发条件）</h5>
 <p>拒绝一把梭哈的赌徒式操作，针对安琪酵母当前“基本面强劲但面临 35 亿可转债审批发行与单季汇率扰动”的特征，制定以下<strong>三档分步击球操作矩阵</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球分档梯度</th>
@@ -2538,7 +2823,7 @@
 <td style="text-align: left;"><strong>【右侧双击确认】</strong>：若股价未跌入黄金坑，而在 <strong>2026Q4 或 2027Q1 财报</strong>中确认：① 单季合并毛利率重回 <strong>25.0% 以上</strong>（酵母主业毛利率 &gt;32.5%）；② 年度自由现金流持续超 <strong>8 亿—10 亿元</strong>；③ 印尼/俄罗斯新产能按期点火。<strong>动作</strong>：右侧顺势补齐剩余 <strong>30%—40% 仓位</strong>，持有待涨至 48—55 元公允价值区。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="3_11">（3）三条“基本面死刑证伪红线”（触发任意一条，无条件认错清仓！）</h5><p>价值投资最大的死穴是在基本面逻辑已经腐烂时，还抱着“越跌越买”的执念自我催眠。如果在未来的跟踪中，安琪酵母出现以下 <strong>三条死刑证伪红线中的任意一条</strong>，说明我们的核心投资底座已被击穿，无论当时股价涨跌，必须<strong>无条件认错清仓离场</strong>：</p><ol>
 <li><strong>【红线一：成本护城河与顺价权崩塌证伪】在國內糖蜜价格平稳（未超 1350 元/吨）且 60 万吨水解糖正常运转的前提下，“酵母及深加工主业”毛利率连续两个完整年度跌破 29.0%（或合并毛利率跌破 21.5%）</strong>：</li>
 </ol><ul>
@@ -2646,7 +2931,7 @@
 </ul>
 <hr/>
 <h3 id="_18">📋 四位投资大师圆桌投票与核心判词总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名</th>
@@ -2686,7 +2971,7 @@
 <td style="text-align: left;"><strong>【左侧分批建仓 / 恐慌时重击】</strong><br/>当前 <strong>38.20 元具备显著的不对称正期望值</strong>（下行空间约 15%—20%，上行修复空间 35%—55%），建议立即配置 <strong>50% 底仓</strong>；若可转债落地或汇率波动引发市场恐慌下探 <strong>28—33 元区间</strong>，果断打满剩余 50% 仓位。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -2702,13 +2987,26 @@
 <p>用拆骨法称重，国内六成份额烘焙酵母、全球第一YE配料，加年入近七十亿的海外工厂三块存量铁盘，保守价值三百六十亿到四百亿，已完全覆盖当前三百三十亿市值（三百八十八亿真实企业价值），酵母蛋白新业务等于零元白送。策略上：在三十六到三十八元先建五成左侧底仓，享糖蜜顺风与海外红利；若因可转债抽血或汇兑波动引发恐慌砸到二十八到三十三元（股东盈余收益率飙上七八个点），果断打满剩余五成仓位。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2878,7 +3176,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《安琪酵母_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/安琪酵母_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《安琪酵母 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/安琪酵母 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2936,6 +3234,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

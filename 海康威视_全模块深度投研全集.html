@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>海康威视_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>海康威视 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">海康威视_全模块深度投研全集</div>
+    <div class="report-title">海康威视 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -724,7 +1009,7 @@
 </ul>
 <h3 id="axismotorola-solutions">二、 国内外核心同行横向硬核比拼（大华股份、安讯士Axis、摩托罗拉系统Motorola Solutions）</h3>
 <p>我们将海康威视与国内头号对手<strong>大华股份（002236.SZ）</strong>，以及海外高端双雄<strong>安讯士（Axis Communications，佳能旗下）</strong>、<strong>摩托罗拉系统（Motorola Solutions，旗下含Avigilon、Pelco等视频巨头）</strong>拉到同一张桌面上做实测财务与商业比拼：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -778,7 +1063,7 @@
 <td style="text-align: left;">供应链成本高企，主要吃欧美政府强制清退中企后的合规溢价市场，在亚非拉中东等自由竞争市场毫无还手之力</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>欧美同行那50%的毛利率是靠华盛顿政客的保护伞喂出来的温室花朵；一旦拉到中东、拉美和东南亚的自由搏击场上，海康用三分之一的价格就能把它们打得找不着北。</p></div></div>
 <p><strong>横向比拼硬核结论</strong>：</p>
 <ol>
@@ -889,7 +1174,7 @@
 
 
 <h3 id="20212025-2026q1-3">三、 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2025年 + 2026Q1-3）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务指标（单位：亿元人民币）</th>
@@ -964,7 +1249,7 @@
 <td style="text-align: center;">55.87%（季节性备货）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：2026年前三季度OCF为72.13亿元、同比回落47.34%，主因一是2025年同期集中清收历史政企账款基数极高，二是2026年面对全球DRAM/NAND存储颗粒及核心芯片涨价周期，公司主动动用现金进行战略性低价备货；同时海康现金流具有极强的Q4集中回款季节性特征，前三季度22.32亿元CapEx同比大幅缩减27.64%，自由现金流依然净流入49.81亿元。)</em></p>
 <h4 id="_14">打破“合并报表幻觉”两项深度体检：</h4>
 <ol>
@@ -1209,7 +1494,7 @@
 <hr/>
 <h4 id="12-vs">1.2 单位面积造价与单位产能投资额：海康 vs. 同行横向硬核比价</h4>
 <p>为了验证海康威视基建与产线投入的资金效率，我们将海康旗下核心制造基地的<strong>“单位平方米造价”</strong>与<strong>“单位产能固定资产投资额”</strong>，拉出来与安防死敌<strong>大华股份</strong>（长沙智慧物联制造基地、杭州智能制造基地二期）、清洁电器智能制造龙头<strong>石头科技</strong>（惠州智造园）以及工业自动化龙头<strong>汇川技术</strong>（岳阳/常州工业机器人及伺服基地）进行同维度横向比对：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目名称</th>
@@ -1357,7 +1642,7 @@
 <td style="text-align: left;">含精密金切加工、电机绕线与重载老化测试，单方设备密度与海康机器人桐庐基地接近</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="callout callout-important"><div class="callout-title">⚡ 核心结论 (IMPORTANT)</div><div class="callout-body"><p><strong>拆账核心结论：海康威视的扩产造价到底偏省还是偏贵？</strong><br>
 从上表硬核比对可以看出，海康威视在重庆与桐庐两大主力制造基地的<strong>基建单方造价仅在 `3,334–3,342元/平方米` 之间，含全套产线设备的全口径单方造价仅 `4,349–4,948元/平方米`</strong>，不仅比同行大华股份同类基地（含设备单方造价 `6,200–9,100元/平方米`）<strong>便宜了 20%–45%</strong>，甚至比许多轻资产消费电子组装厂还要省钱！而且三大转固项目的<strong>最终决算转固金额均控制在预算的 `94.86%–96.77%` 以内，零超支结项</strong>。</br></p></div></div>
 <div class="munger-note"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>用自家造的机器人和视觉设备去建自家的工厂，每平米造价比同行便宜三成以上。这就叫“肥水不流外人田”的工程复利。</p></div></div>
@@ -1387,7 +1672,7 @@
 </ul>
 <p>我们分“<strong>第一批（2025年已转固三大项目，2026年全额计提）</strong>”与“<strong>第二批（三大在建工程，预计2026年底至2027年陆续转固）</strong>”两个梯度，并且同时测算<strong>“账面毛利直接覆盖口径”</strong>与更为严苛的<strong>“扣除变动期间费用后的真实边际贡献（Contribution Margin）覆盖口径”</strong>：</p>
 <h5 id="1">（1）每年新增折旧与园区刚性运营费用拆解表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">工程批次与项目名称</th>
@@ -1502,7 +1787,7 @@
 <td style="text-align: left;"><strong>8.7756 (约8.78亿)</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：房产税按税法规定以房产原值减除30%后的余值按1.2%从价计征，折合原值约0.84%/年；叠加园区基础物业安保、恒温恒湿洁净室底电与空压机动力维护等刚性运营费用约1.66%/年，合计刚性运维底费率约为房产原值的2.5%/年。)</em></p><h5 id="2breakeven-revenue-utilization">（2）盈亏平衡点（Breakeven Revenue &amp; Utilization）双口径压力测试</h5><p>已知2025年报基准：<strong>主业产品及服务毛利率为 <code>49.07%</code>，创新业务综合毛利率为 <code>39.12%</code></strong>。
 但在真实工厂运营中，如果只用账面毛利率去算保本营收，会忽略一个关键事实——每多卖出一台机器人或智能锁，除了BOM直接材料、计件人工和制造折旧外，还必须配套发生变动销售费用（渠道返利、电商投流、驻场售前工程师差旅）和变动研发适配与质保费。
 剔除新增固定折旧后，海康主业与创新业务的<strong>变动毛利率</strong>分别约为 <code>51.50%</code> 和 <code>42.50%</code>；扣除约 <code>21.50%</code>（主业）和 <code>18.50%</code>（创新业务）的变动期间费用率后，<strong>主业真实单位边际贡献率（Contribution Margin Ratio）约为 <code>30.00%</code>，创新业务真实单位边际贡献率约为 <code>24.00%</code></strong>。</p><p>据此，我们算出两个维度的盈亏平衡门槛：</p><ol>
@@ -1641,7 +1926,7 @@
 <p>在2026世界人工智能大会（WAIC）及年报中，海康宣称观澜大模型“覆盖90多个垂直行业、2000多个场景、上千款产品”，8大创新业务2025年营收达254.46亿元（8项中7项实现盈利），2026H1创新业务进一步大增28.93%至151.70亿元（占总营收32.40%）。
 但“有收入”不等于“商业模式跑通”，“场景多”更不等于“单点能赚钱”。我们将这两大远期引擎拆解为六大核心业务单元，严格按照<strong>「实验室样机 → 头部客户送样测试 → 小批量试产 → 跑通单点盈利模型、进入规模放量期」</strong>四个商业化刻度进行精准定标：</p>
 <h4 id="11_1">1.1 两大远期引擎（六大核心单元）商业化刻度与盈利兑现全景定位表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">远期引擎分类</th>
@@ -1709,7 +1994,7 @@
 <td style="text-align: left;"><strong>从安检跨界工业探伤</strong>：结合观澜X光大模型，在手机折叠屏精密铰链、PCBA焊点气泡与锂电对齐度检测上撕开缺口，但高精密工业CT与微米级探伤尚处国产替代早期。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="12">1.2 深度拆账：为什么“观澜大模型一体机”能赚到真金白银，而纯软件大模型公司却在亏钱？</h4><p>市面上绝大多数AI大模型公司至今深陷“算力折旧巨大、B端客户不愿为纯软件SaaS付费、定制化开发亏本赚吆喝”的泥潭。为什么海康威视的“观澜”大模型却能在2025–2026年直接拉动主业毛利率站上49.07%、推动2026Q1-3归母净利润暴增38.55%？
 因为海康走了一条极其老辣的<strong>“硬件搭台、模型唱戏、溢价卖盒子”</strong>路线：</p><ol>
 <li>
@@ -1841,7 +2126,7 @@
 <hr/>
 <h4 id="32">3.2 最终冷峻定性：逐一盖棺定论（拒绝和稀泥）</h4>
 <p>综合上述工程账本、商业化刻度、卡脖子关卡与终局推演，我们对海康威视旗下的远期引擎与创新业务集群做出如下最终定性：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">业务板块</th>
@@ -1876,7 +2161,7 @@
 <td style="text-align: left;">自身无上游NAND Flash与DRAM晶圆制造能力，本质是存储颗粒封装测试与模组贴牌生意，业绩高度受制于全球存储芯片涨跌价周期，增速垫底（+2.85%），主要承担内部视频存储配套与渠道复用职能，属于典型的平庸防卫型资产。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看新业务千万别被公关词藻迷了眼：机器人和热成像是实打实的现金牛，大模型一体机是高赔率的免费彩票，而给整车厂供货的汽车电子虽然增长猛，但面对车企每年10%以上的砍价，那可是要靠铁砂掌赚辛苦钱的苦差事。</p></div></div>
 <hr/>
 <h1 id="002415sz-c-e">🔬 海康威视（002415.SZ）深度追问模块 C &amp; 模块 E 完整穿透报告</h1>
@@ -1885,7 +2170,7 @@
 <p>要把海康威视在2025年至2026年前三季度的经营成色审个底朝天，绝不能只听海康自己讲“提质增效”的故事。我们把它的贴身肉搏死敌 <strong>大华股份（002236.SZ）</strong>、国内行业老三 <strong>千方科技（002373.SZ，核心主体宇视科技）</strong>、海外高端安防双雄 <strong>安讯士（Axis Communications，佳能集团旗下）</strong> 与 <strong>摩托罗拉系统（Motorola Solutions，MSI.US，含Avigilon）</strong>、科创板工业机器视觉标杆 <strong>奥普特（688686.SH）</strong>，以及上游核心安防光学镜头霸主 <strong>宇瞳光学（300790.SZ）</strong> 和安防AI SoC主控芯片龙头 <strong>星宸科技（301536.SZ）</strong> 全部拉到同一张审讯桌上，用截至2025年报与2026年三季报的真金白银数据做一场三方交叉对质。</p>
 <hr/>
 <h3 id="_26">一、 全球智能物联与机器视觉产业链“三方交叉对质”全景大表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">产业链位置与公司名称</th>
@@ -2033,7 +2318,7 @@
 <td style="text-align: left;">上游AI SoC营收翻倍（+111%），铁证2026年安防行业正经历端侧AI硬件升级浪潮</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="2026_1">二、 景气度对质：2026年行业到底是在“实质性升温”，还是在“向渠道压库”？</h3>
 <p>很多投资人看到海康威视2026年三季报里有两组看似矛盾的数据，心里直犯嘀咕：一方面，前三季度营收同比增长 <strong><code>12.60%</code></strong>（Q3单季 <strong><code>+13.71%</code></strong>），归母净利大增 <strong><code>38.55%</code></strong>；但另一方面，期末存货从年初的 <code>204.72亿元</code> 暴增 <strong><code>62.82%</code></strong> 到 <strong><code>333.34亿元</code></strong>，经营活动现金流净额（OCF）同比下滑 <strong><code>47.34%</code></strong> 至 <code>72.13亿元</code>。</p>
@@ -2109,7 +2394,7 @@
 </ul>
 <h4 id="3">3. 第三刀：期间费用率的规模摊薄与研发投入的“绝对碾压”（解释净利率差的核心桥梁）</h4>
 <p>我们把2026年前三季度两家公司的期间费用率放在显微镜下对比：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">费用科目（2026年Q1-Q3）</th>
@@ -2162,7 +2447,7 @@
 <td style="text-align: left;">海康在研发多投62.6亿的情况下，总费用率反而低2.43pct</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>看懂这张表，你就看懂了什么叫<strong>“规模降维打击”</strong>：</p><ul>
 <li>海康威视在2026年前三季度砸下了 <strong><code>93.46亿元</code></strong> 的研发费用（全年超 <code>120亿元</code> 量级），是同期大华股份（<code>30.82亿元</code>）的 <strong><code>3.03倍</code></strong>、是千方科技全年的近 <strong>10倍</strong>！</li>
 <li>更残酷的是，大华为了保住2026年的表观利润，前三季度研发费用同比几乎零增长（仅 <strong><code>+0.47%</code></strong>），研发费用率从2025年的 <code>13.24%</code> 压降到 <code>12.28%</code>；而海康在研发费用继续稳增 <strong><code>+6.96%</code></strong> 的同时，靠着销售费用率（<code>12.18%</code> vs 大华 <code>13.96%</code>）和管理费用率（<code>3.20%</code> vs 大华 <code>3.74%</code>）的规模摊薄，使得四项费用率合计（<code>28.69%</code>）比大华（<code>31.12%</code>）还要低 <strong><code>2.43个百分点</code></strong>！</li>
@@ -2350,7 +2635,7 @@
 而在常态经营下，即便海康严格执行“拒接烂账、控账期”的新纪律，只要业务维持健康运转并匹配名义GDP温和自然周转（叠加为防范供应链波动而维持约180亿—200亿元的战略原材料与产成品安全库存），每年仍需留存一定的刚性营运资金增量。结合2021—2025年完整周期的应收、存货与应付周转轧差，在“反内卷”新常态下，<strong>维持存量生意的常态刚性营运资金净占用（<span class="math-inline">\Delta WC<sub><span class="math-text">norm</span></sub></span>）锁定为 <code>8.00亿—12.00亿元/年</code>（中枢取 <code>10.00亿元</code>）</strong>。</p>
 <h4 id="2025-owner-earnings_1">第五步：水落石出——海康威视 2025 基准态 Owner Earnings 分步还原计算表</h4>
 <p>我们将上述四步硬核数据汇总为下表（同时列示含租赁与剔除租赁两套完全等价的验算口径）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与科目名称</th>
@@ -2475,7 +2760,7 @@
 <td style="text-align: left;"><strong>若按扣非归母净利137.03亿及8亿营运占用算，上限为 132.93 亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>核心结论一（2025基准态造血底盘）</strong>：
 在剥离了一切非经常性补助、顺风汇兑收益、去库存一次性现金回流以及扩张性拿地建园开支后，海康威视在2025基准态（45%—46%毛利率）下，每年稳态可自由支配的 <strong>归母真实股东盈余（Owner Earnings）精准落在 <code>128.70亿—132.93亿元</code> 区间，常态中枢为 <code>130.00亿元/年</code>！</strong>
@@ -2592,7 +2877,7 @@
 </li>
 </ol>
 <h4 id="3-vs">3. 双极限压力测试：“静态死扛 vs 动态减震垫”全维度对照表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">压力测试情景与核心指标</th>
@@ -2702,7 +2987,7 @@
 <td style="text-align: center;"><strong>极端双杀下仍净赚超110亿现金！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>核心结论三（抗压底线裁决）</strong>：
 算完这两笔账，你就彻底明白为什么海康威视是一门极其罕见的“反脆弱”生意：在静态木头人假设下看似吓人的“硬件跌价10%—15%”或“存储芯片暴涨20%”，一旦撞上海康 <strong>“观澜大模型软硬一体提价权 + 370亿现金逆周期锁仓与国产芯片替代 + 271亿费用池绩效奖金弹性包”</strong> 这三道动态减震墙，75%—85%的外部冲击都会被消化于无形！
@@ -2716,7 +3001,7 @@
 <p>为了彻底看清海康威视 <code>141.95亿元</code>（2025年）和 <code>129.11亿元</code>（2026Q1-Q3）归母净利润的含金量，我们直接调取《2025年年度报告》与《2026年第三季度报告》的财务报表附注，将海康威视与大华股份、千方科技、奥普特的会计政策与资产减值准备逐项对表。</p>
 <hr/>
 <h3 id="_29">一、 同行会计政策、资产减值准备与治理指标横向对比大表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计维度与核心科目</th>
@@ -2785,7 +3070,7 @@
 <td style="text-align: left;"><strong>海康人均扣非创利是大华的1.94倍，规模人效遥遥领先</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_30">二、 资产质量排雷：四大敏感科目的显微镜审视与“同口径利润还原测算”</h3>
 <p>拿放大镜逐字审读海康威视2025年报与2026年三季报附注，我们在四个最容易藏污纳垢的会计角落里，发现了极其硬核的真相：</p>
@@ -2825,7 +3110,7 @@
 </ul>
 <h4 id="4_1">4. 【硬核算账】如果按行业常态/偏宽松会计标准同口径还原，海康每年“少报”了多少利润？</h4>
 <p>我们不妨算一笔明白账——如果海康威视的管理层放弃现有的严苛保守标准，仅仅改成A股科技制造业常见的“中性偏宽松”会计政策，2025年（及2026年常态年化）的利润表会发生什么变化？</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">会计调节维度</th>
@@ -2872,7 +3157,7 @@
 <td style="text-align: left;">按15%高新技术企业所得税率折算，相当于<strong>每年隐性压低表观净利润约 <code>22.41亿元</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>【审计定性结论】</strong>：
 海康威视的会计政策属于A股罕见的 <strong>“极度严苛保守、主动藏富于表”</strong> 类型。它账面上 <code>141.95亿元</code>（2025年）和 <code>129.11亿元</code>（2026Q1-Q3）的归母净利润，不仅没有一滴会计注水，反而通过 <code>0%</code> 研发资本化、<code>17.66%</code> 的国内应收坏账计提率、<code>7.93%</code> 的产成品跌价计提率以及 <code>20年</code> 的厂房折旧年限，<strong>在资产负债表里悄悄储备了超过 <code>20亿元/年</code> 的隐性安全垫</strong>！</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多上市公司恨不得把裤衩都资本化来凑利润，海康倒好：117亿研发一分钱不资本化，国内应收账款先按17.66%砍一刀坏账，厂房按20年极速折旧。一年在表里悄悄藏了22亿利润，这种“自虐式记账”我喜欢。</p></div></div></div></div>
 
@@ -3036,7 +3321,7 @@
 </ul>
 <h4 id="3-vs-true-ev">3. 合并全口径 vs 归母口径 True EV 核算明细表</h4>
 <p>由于萤石网络（少数股东占52%）和海康机器人（少数股东占40%）账上也持有充沛的现金与少量借款，我们在計算 <strong>归母口径 True EV</strong> 时，必须把属于少数股东的那部分超额现金（约占合并超额现金的 <code>12.0%</code>，即 <code>33.40亿元</code>）和有息负债（约 <code>5.81亿元</code>）剔除，做到分子分母100%同口径匹配：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">True EV 核算项目</th>
@@ -3111,7 +3396,7 @@
 <td style="text-align: left;"><strong>全款买下海康归母生意的真实标价，比表面市值便宜 197亿—280亿元！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>核心结论四（True EV 折价真相）</strong>：
 哪怕采用最严苛的口径（取Q3刚分完红、刚还完债的现金低点，先硬扣90亿元永久营运底仓，再扣掉萤石和机器人少数股东的现金份额），海康威视当前的 <strong>归母口径 True EV 也仅为 <code>3,068.50亿元</code>（若按年底回款常态更是低至 <code>2,985.29亿元</code>）</strong>！
@@ -3122,7 +3407,7 @@
 <h3 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值）</h3>
 <h4 id="1-owner-earnings-yield">1. 静态回本年限、隐含内生股权回报率（Owner Earnings Yield）与综合股东回报率</h4>
 <p>我们将模块 D 算出的两档常态造血底盘，直接与当前表面总市值（<code>3,265.44亿元</code>）及归母 True EV（<code>3,068.50亿元</code> / 年末常态 <code>2,985.29亿元</code>）对撞：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值与回报率核心指标</th>
@@ -3157,7 +3442,7 @@
 <td style="text-align: left;">2025分红<code>105.40亿</code>+注销回购<code>20.28亿</code>=<code>125.68亿</code>；26中报已派<code>50.4亿</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>真金白银的股东回报铁证</strong>：
   2025年度，海康威视实施了中期分红 <code>36.66亿元</code>（10派4元）+ 年度分红 <code>68.74亿元</code>（10派7.5元），全年纯现金分红合计 <strong><code>105.40亿元</code></strong>（分红率高达 <strong><code>74.25%</code></strong>），外加2025年9月完成 <strong><code>20.28亿元</code></strong> 股份回购并100%注销（注销 <code>6,832.68万股</code>）！全年“现金分红+注销回购”真金白银回馈股东 <strong><code>125.68亿元</code></strong>，占全年归母净利的 <strong><code>88.54%</code></strong>，对应当前市值的<strong>即期综合股东收益率高达 <code>3.85%</code></strong>！
@@ -3166,7 +3451,7 @@
 <h4 id="2-reverse-sotp-ai">2. 拆骨倒推（Reverse SOTP）：创新业务与观澜 AI 大模型是不是接近“白送”？</h4>
 <p>现在我们来做最刺激的“拆骨手术（Reverse SOTP）”。海康威视绝不是一家单一的安防摄像机公司，它体内孵化出了 <strong>八大创新业务硬科技集群</strong>，2025年八大创新业务合计营收已高达 <strong>254.46亿元（同比 +13.17%，占总营收 27.51%）</strong>，2026年更是利润释放的主力军（前三季度少数股东损益同比暴增 <code>+92.85%</code> 至 <code>18.02亿元</code>）。</p>
 <p>我们把海康威视 <code>3,265.44亿元</code> 的总市值拆成三大块，全部严格折算为 <strong>002415 归母权益口径</strong>，看看二级市场到底给海康的传统主业和AI大模型定了什么价格：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块与资产拆解</th>
@@ -3259,7 +3544,7 @@
 <td style="text-align: left;"><em>主业公允价值 <code>2,760亿</code> + 超额净现金 <code>197亿</code> = <code>2,957亿</code>，剩余市值仅 <code>308亿</code> 买500亿创新业务+AI！</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>核心结论五（拆骨倒推的暴利真相）</strong>：
 把这张表看懂，你就会发现当前A股市场对海康威视的定价有多么割裂：
@@ -3291,7 +3576,7 @@
 </li>
 </ul>
 <h4 id="2-vs-vs">2. 分档击球条件（左侧底仓区 vs 黄金重锤区 vs 右侧确认与止盈区）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球分档档位</th>
@@ -3336,7 +3621,7 @@
 <td style="text-align: left;"><strong>停止买入，分批兑现止盈</strong>。此时市场已将观澜AI大模型与海康机器人的乐观预期打满，安全边际消失。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3_1">3. 三条基本面“死刑证伪红线”（一旦触发任一条，无条件清仓认错，绝不恋战！）</h4><p>真正的价值投资从不盲目死拿。如果在持有过程中，海康威视出现以下任何一条可量化的财务或产业恶化信号，说明我们的核心投资逻辑已被证伪，必须立刻无条件离场：</p><ol>
 <li><strong>【死刑红线一：定价权崩塌与反内卷破产】—— 合并综合毛利率连续两个季度跌破 <code>41.5%</code></strong>
    - <strong>量化标准</strong>：在剔除会计准则重分类影响后，如果公司合并毛利率从当前的 <code>49.0%+</code>（及2025常态 <code>45.5%</code>）一路雪崩，<strong>连续两个季度跌穿 <code>41.5%</code></strong>（即连我们在模块 D 极度严苛的双极限动态减震底线 <code>43.15%</code> 都被击穿），且同期三项费用率无法有效收缩。</li>
@@ -3441,7 +3726,7 @@
 </ol>
 <hr/>
 <h3 id="_33">五、 📋 四位投资大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">投资大师</th>
@@ -3481,7 +3766,7 @@
 <td style="text-align: left;"><strong>【分档左侧建仓 + 右侧加仓（高赔率不对称击球）】</strong><br/>32—36元建60%左侧底仓收息，若极端错杀破30元打满重锤，48元以上过热期分批兑现。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -3497,13 +3782,26 @@
 <p>现在三千两百多亿市值看似十九倍表观市盈率，但把两百多亿超额净现金、价值四五百亿的八大创新独角兽股权剥离，再把保守会计藏掉的二十多亿利润还原，核心主业真实市盈率仅十六到十八倍，还白拿近四个点的分红加回购及AI大模型免费期权。操作上，在三十二到三十六元区间踏实建好五六成底仓收息，遇鬼故事错杀破三十元就闭眼打满重锤，守住“应收周转不破一百四十五天红线”即可稳坐钓鱼台。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3673,7 +3971,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《海康威视_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/海康威视_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《海康威视 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/海康威视 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3731,6 +4029,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

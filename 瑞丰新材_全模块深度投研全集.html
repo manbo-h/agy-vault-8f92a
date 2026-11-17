@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>瑞丰新材_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>瑞丰新材 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">瑞丰新材_全模块深度投研全集</div>
+    <div class="report-title">瑞丰新材 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -700,7 +985,7 @@
 </li>
 </ol>
 <h4 id="3_1">3. 核心产品与国内外同行横向硬核比拼表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -761,7 +1046,7 @@
 <td style="text-align: left;">• <strong>全球API/ACEA行业标准规则制定者</strong><br/>• 垄断全球85%以上跨国车企（奔驰、宝马、大众、丰田等）全球统一初装油协议</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>瞧瞧这张表里的吨成本账！瑞丰卖1.90万元一吨，成本只要1.23万元，每吨净赚6700块毛利；国内老二锦州康泰卖1.80万元一吨，成本却高达1.55万元，每吨只剩2500块毛利。为什么？因为瑞丰连危险品五硫化二磷和全套单剂都是自己造的，而对手还要外买单剂来调酒。在制造业里，比同行每吨省出3200块钱成本，就是最硬的免死金牌。</p></div></div>
 <hr/>
 <h3 id="_5">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？】</h3>
@@ -839,7 +1124,7 @@
 </li>
 </ul>
 <h4 id="3-20212026q3">3. 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2026Q3）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务指标（单位：亿元人民币）</th>
@@ -914,7 +1199,7 @@
 <td style="text-align: center;"><strong>35.8%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>上市六年只向股民伸手要过一次钱（10.42亿净额），之后五年自己掏出12.36亿建新厂，还顺手给股东发了17.36亿真金白银的现金红包，账上还趴着近15亿现金理财。这种既不用靠借新还旧续命、又能把赚来的利润一大半变成现金分掉的公司，才叫真正的商业资产，而不是吞金怪兽。</p></div></div>
 <h4 id="4">4. 打破“合并报表幻觉”体检与造血定性：</h4>
 <ol>
@@ -1110,7 +1395,7 @@
 </ul>
 <h4 id="2-vs">2. 行业横向对标：瑞丰新乡棕地、沙特绿地 vs 利安隆（锦州康泰二期）及国际巨头</h4>
 <p>我们将瑞丰新材三大工程与国内最直接的竞争对手——<strong>利安隆（300596.SZ）旗下锦州康泰二期扩产项目</strong>以及行业常规绿地基准进行全景参数对比：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">工程项目名称</th>
@@ -1187,7 +1472,7 @@
 <td style="text-align: left;">全欧美进口哈氏合金/特种不锈钢反应装置、全自动黑灯工厂与严苛ESG零排放系统。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看懂那张表里的“2,174元/吨”和“15,233元/吨”了吗？在新乡老家搭几个搅拌桶混复合剂，那是借着老厂房的锅灶添把柴火，精明得像个犹太裁缝；但跑去沙特沙漠里从头盖厂，每一颗防爆螺丝钉都得按欧美石油大亨的规矩拿美金砸，造价直接翻了三倍——出海拿张“非中国原产地身份证”从来不是免费午餐，这笔昂贵的过路费得靠中东土豪的廉价原料和免税市场一点点抠回来！</p></div></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3-break-even">3. 转固折旧洪峰与盈亏平衡点（Break-even）刚性财务测算</h4><p>根据瑞丰新材定期报告披露的固定资产折旧会计政策：</p><ul>
 <li>
@@ -1346,7 +1631,7 @@
 <hr/>
 <h3 id="_14">一、 商业化刻度定位：剥离概念光环后的真实产业坐标</h3>
 <p>在润滑油添加剂行业，从实验室烧瓶合成出分子式，到真正变成利润表上过亿元的毛利，中间隔着一条由<strong>“小试 <span class="math-inline"> → </span> 中试放大 <span class="math-inline"> → </span> 第三方国际标准台架测试 <span class="math-inline"> → </span> 主机厂百万公里行车试验（Field Trial） <span class="math-inline"> → </span> OEM 供应商代码准入与批量稳定出货”</strong>构成的残酷长征。我们对瑞丰新材三大远期布局的真实商业化刻度穿透核查如下：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">远期业务 / 技术曲线</th>
@@ -1407,7 +1692,7 @@
 <td style="text-align: left;"><strong>零实质性财务贡献（纯远期概念储备）</strong>。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把 PPT 上的高科技名词翻译成会计语言其实很简单：API SP 和 CK-4 是在替股东印钞票的熟庄稼；自主 D1 标准和主机厂路试是正在猛浇化肥、眼看要抽穗的青苗；至于那个两千吨的高碳烯烃中试线和浸没式液冷，现在还只是实验室里养着玩的金鱼——好看，但离端上餐桌顶饱还隔着十万八千里！</p></div></div>
 <hr/>
 <h3 id="1_5">二、 跨越鸿沟的三道关卡：要赚到 1 亿元增量核心毛利到底卡在哪里？</h3>
@@ -1495,7 +1780,7 @@
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
 <p>在精细化工与工业添加剂赛道，单看一家公司的财报极易陷入“自说自话”的幸存者偏差。为了剥离地缘政治噪音与会计周期错配，我们将<strong>瑞丰新材（300910.SZ，国内民营第一龙头）</strong>、<strong>利安隆（300596.SZ，重点拆解其并购核心子公司“锦州康泰”润滑油添加剂分部，国内民营第二极）</strong>、<strong>NewMarket Corporation（NYSE: NEU，国际四大局之一雅富顿 Afton 母公司，全球唯一独立上市添加剂纯血标杆）</strong>，以及国内合资/老牌同行（<strong>上海海润、无锡南方</strong>）与下游央企巨头（<strong>中石化长城润滑油</strong>）拉上同一张审讯桌，开展残酷的三方交叉对质。</p>
 <h3 id="20242026q3">一、 三方交叉审讯全景横向对质表（2024—2026Q3）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审讯维度 / 核心指标</th>
@@ -1577,7 +1862,7 @@
 <td style="text-align: left;">康泰选择给润英联当“亚太白牌盟友”换取产能消化；瑞丰选择直捣四大局腹地，因此遭致更猛烈的地缘政治与供应链阻击</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把三家公司的账本并排摆在强光灯下，谁在吃肉、谁在喝汤、谁在挨揍一目了然——雅富顿像个养尊处优的老贵族，宁可把出货量砍掉8%也要靠涨价保住22%的利润率；锦州康泰像个刚凑齐装备的学徒，47%的开工率只能赚15%的辛苦钱，最后干脆把东南亚钥匙交给润英联代管；只有瑞丰这个河南愣头青，硬是把毛利率干到了比美国老贵族还高的35%，难怪老外要动用制裁名单给它使绊子。</p></div></div>
 <hr/>
 <h3 id="20">二、 深度穿透三问：景气度、20%毛利剪刀差与份额攻守战</h3>
@@ -1776,7 +2061,7 @@
 <p>基于巴菲特经典的股东盈余公式：</p>
 <div class="math-display"><span class="math-text">Owner Earnings</span> = <span class="math-text">常态主业归母净利润</span> + <span class="math-text">有效归母折旧摊销 (D\&amp;A)</span> - <span class="math-text">维持性资本开支 (Maintenance CapEx)</span> - <span class="math-text">常态刚性营运资金增量占用</span></div>
 <p>我们将瑞丰新材 2024 年实绩、2025 年实绩、2026 年年化调整值以及剥离噪音后的<strong>存量稳态常态中枢</strong>汇总还原如下：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">股东盈余（Owner Earnings）分步还原科目</th>
@@ -1869,7 +2154,7 @@
 <td style="text-align: left;"><strong>现有31.5万吨产能底盘每年可自由支配、可全额分红的真实内生造血中枢</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看懂这张表，你就知道为什么会计师编出来的现金流量表有时候会骗人——瑞丰每年花掉的 2 亿多资本开支里，有大半是在给明天的扩产买地买反应釜；如果你把扩产停掉、只维持现有的 31.5 万吨车间转轴，这台机器每年能雷打不动吐出 <strong>6.74 亿元</strong> 真金白银，比账面扣非净利润还要肥！</p></div></div>
 <hr/>
 <h3 id="_16">二、 在建与推进高确定性项目的“增量造血垫高测算”</h3>
@@ -1953,7 +2238,7 @@
 </li>
 </ul>
 <h4 id="3_6">3. 双极限压力测试全维度量化矩阵表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">压力测试情景与传导阶段设定</th>
@@ -2039,13 +2324,13 @@
 <td style="text-align: left;"><strong>基本免疫</strong>：高粘性复合剂顺价完成后，造血能力重回 6.2 亿+</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看到没有？就算天塌下来——产品价格硬生生砍掉 15%，或者上游石化原料一口气暴涨 20% 且一分钱都不往外传，瑞丰新材最惨的时候一年还能净吐出 <strong>3.9 亿到 4.0 亿元</strong> 的自由现金流；而 2026 年三季度那个把散户吓破胆的“26.28% 毛利率、9000 万单季利润”，恰恰就是两场极端风暴同时撞在一起砸出来的历史铁底！</p></div></div>
 <hr/>
 <h2 id="e">【追问模块 E：会计成色与治理细节显微镜】</h2>
 <p>当一家公司在三季度遭遇“欧盟制裁列名 + 单季净利腰斩 55.90% + 应收存货双升”的逆风局时，管理层究竟是在利用会计准则美化报表、放水冲量，还是在用近乎自虐的严苛会计政策把利润往土里埋？我们拿起财务法医的显微镜，逐项审视瑞丰新材 2024/2025 年报及 2026 半年报/三季报附注。</p>
 <h3 id="_18">一、 会计政策与资产质量同行横向对比表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计维度 / 核心科目</th>
@@ -2106,7 +2391,7 @@
 <td style="text-align: left;"><strong>硬核考核+真金白银回购</strong>：瑞丰不搞低门槛“1元购”利益输送，在周期底部拿2.28亿真金白银从二级市场买股储备激励弹药</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看两家同行怎么处理存货和研发，比听董事长在股东大会上赌咒发誓管用一百倍——利安隆一年计提7100万存货跌价，是因为锦州康泰那点可怜的14%毛利率根本扛不住风吹草动；瑞丰手握35%的厚实毛利安全垫，又把1.82亿研发费100%当期砍掉，这是典型的“宁可让当期利润表脱层皮，绝不给资产负债表留一粒沙子”。</p></div></div>
 <hr/>
 <h3 id="_19">二、 资产质量排雷：应收、存货与折旧研发的三重法医解剖</h3>
@@ -2292,7 +2577,7 @@
 </li>
 </ul>
 <h4 id="2-true-ev">2. 真实企业价值（True EV）清算明细表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">真实企业价值（True EV）清算推导步骤</th>
@@ -2374,7 +2659,7 @@
 <td style="text-align: left;"><strong>双口径中枢锁定：83.90 亿元（比账面总市值还便宜 1.60 亿元！）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把所有的银行贷款一分不少全还清，再给工厂车间抽屉里留足 3.5 个亿的买菜零花钱，结果你还能从公司保险柜里白捡走 1 到 2 个多亿的纯现金红包——这意味着你花 <strong>83.90 亿元</strong> 就把全中国最大、全球第五的润滑油添加剂摇钱树连锅端了，而且这还是在它刚刚给股东发完 4.36 亿元现金大奖之后！</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨定价）</h3>
@@ -2405,7 +2690,7 @@
 </ul>
 <h4 id="2-reverse-sotp">2. Reverse SOTP（逆向分部拆骨倒推）：市场先生到底在为什么买单，又把什么当废铁白送？</h4>
 <p>让我们用“逆向分部估值法（Reverse SOTP）”，把当前 <strong>85.50 亿元总市值（对应 83.90 亿元 True EV）</strong> 一块骨头一块骨头拆开，看看市场先生在 22.32 元的股价里究竟隐含了怎样荒诞的悲观预期：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">Reverse SOTP 逆向拆骨资产包</th>
@@ -2474,7 +2759,7 @@
 <td style="text-align: left;"><strong>存量基本盘按泥腿子苦力打折定价，未来再造一个瑞丰的四大引擎接近 0 元白送！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>拆骨核心结论</strong>：
   1. 如果你认可瑞丰新材现有的 31.5 万吨产能基本盘（全球市占率约 4%—5%，国内绝对第一，核心单剂全自给）值 <strong>12 倍常态 Owner Earnings（即 80.88 亿元，对应 8.33% 的内生现金流回报率）</strong>，再加上账面 <strong>1.65 亿元</strong> 超额净现金（或 5.02 亿元广义净现金），那么单靠<strong>“今天已经建好、正在转轴赚钱的存量资产”</strong>就值 <strong>82.53 亿—85.90 亿元</strong>——这刚好等于今天 <strong>85.50 亿元</strong> 的总市值！
@@ -2486,7 +2771,7 @@
 <h3 id="_20">三、 赔率定位、分档击球区与“三条基本面死刑证伪红线”</h3>
 <h4 id="1-vs-vs">1. 横向估值坐标对标：美股寡头标杆 vs 国内化工龙头 vs 自身历史中枢</h4>
 <p>为了彻底锚定瑞丰新材当前的赔率坐标，我们将它与全球润滑油添加剂四大寡头中唯一纯粹独立上市的标杆 <strong>NewMarket（美股纽交所代码：NEU，雅富顿 Afton Chemical 母公司）</strong>、国内大化工白马 <strong>万华化学（600309.SH）</strong> 以及国内精细化工助剂龙头 <strong>利安隆（300596.SZ）</strong> 进行截至 2026 年 11 月的横向同台比武：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">全球与国内可比公司对标维度</th>
@@ -2547,7 +2832,7 @@
 <td style="text-align: left;"><strong>5.10% 超高股息率护体</strong>，估值较自身历史中枢（22.8X）折价近 <strong>45%</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>当前估值定性裁决</strong>：
   综合以上多维坐标，瑞丰新材当前（22.32 元/股，总市值 85.50 亿元，True EV 83.90 亿元）毫无疑问处于<strong>“显著悲观折价区（深度低估与高赔率右侧前夜）”</strong>。市场把 2026Q3 因欧盟制裁重构海外销售网络及密集投入台架试验带来的阶段性利润下蹲（单季 0.90 亿元），错误地线性外推成了永久性衰退。</li>
@@ -2697,7 +2982,7 @@
 </ol>
 <hr/>
 <h3 id="_21">五、 📋 四位投资大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">投资大师</th>
@@ -2737,7 +3022,7 @@
 <td style="text-align: left;"><strong>🟢 重锤左侧黄金击球区（当前 22.32元直接击球）</strong><br/><em>"这是典型的第二层思维猎物——拿着 5.1% 的高股息等风过，向下空间被净现金锁死，向上白捡四张免费高赔率期权。"</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -2763,13 +3048,26 @@
 <p>今天二十二块多（市值八十五亿），哪怕降价一成半或原料涨两成，一年仍净赚四亿自由现金流绝不失血；常态下光靠存量产能十二年即回本，还白拿五个点股息率及新乡扩产、沙特工厂、自主D1国标初装突破等四张免费期权。趁机构因风控刻板砍仓，直接在十九块半到二十二块半左侧区买进六成底仓，拿高股息等单季毛利率重回三十一个点以上再加满；若美国跟进次级制裁导致毛利率连续三季跌破二十五则无条件离场。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2939,7 +3237,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《瑞丰新材_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/瑞丰新材_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《瑞丰新材 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/瑞丰新材 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2997,6 +3295,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

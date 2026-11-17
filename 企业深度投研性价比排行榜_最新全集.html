@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>企业深度投研性价比排行榜（全模块买方标尺版）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>企业深度投研性价比排行榜_最新全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">企业深度投研性价比排行榜（全模块买方标尺版）</div>
+    <div class="report-title">企业深度投研性价比排行榜_最新全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -635,7 +920,7 @@
 
 <hr/>
 <h2 id="57_1">二、 57 家深度投研标的「全维度硬核数据总表」</h2>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">排名与梯队</th>
@@ -1063,7 +1348,7 @@
 <td style="text-align: left;"><strong>H股舒适底仓区 / A股等回调</strong><br/><strong>首选折价H股建底仓 + 等黄金坑重锤</strong><br/><em>(重锤区 H股 <code>38—42港元</code> / A股 <code>36—40元</code>)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>| <strong>NO.47</strong><br/>⏳ T3 | <strong>浪潮信息</strong><br/><strong>A股 <code>000977.SZ</code></strong> (<code>54.10元</code>)<br/><em>(2026-11-17 全集定稿版)</em><br/><a href="file:///C:/Users/WINDOWS/.gemini/antigravity/brain/5e7c3629-37b4-4882-b1f6-6721bdab8457/浪潮信息_全模块深度投研全集.md">MD</a> | <a href="file:///C:/Users/WINDOWS/Downloads/浪潮信息(000977.SZ)_深度投研全集_20261117.pdf">PDF</a> | 市值: <code>794.45亿</code> (<code>26E PE 15.89x</code> / 稳态 <code>18.92x</code>)<br/><strong>True EV: <code>957.61亿</code></strong><br/><em>(26Q3货币资金106.34亿扣80亿备付底仓后超额现金26.34亿 vs 全口径债188.00亿[短借飙至120.75亿]；26Q1-Q3毛利率从4.88%跃至<code>8.61%</code>、归母净利<code>+165.32%</code>至<code>39.32亿</code>，但存货飙至<code>1,187.04亿</code>致OCF <code>-64.01亿</code>)</em> | • <strong>标尺二(新常态稳态主锚)</strong>: <strong><code>35.00亿/年</code></strong> <em>(常态净利42亿+D&amp;A 6.5亿-维持CapEx 2.5亿-刚性营运资金占用11亿；未扣WC账面OE <code>46.00亿</code>)</em><br/>• <strong>标尺一(26即期高景气年化)</strong>: <strong><code>43.00亿/年</code></strong> <em>(净利50亿，账面OE <code>54.00亿</code>)</em><br/>• <strong>标尺三(断供/价格战底线)</strong>: <strong><code>15.00亿/年</code></strong> | <strong>主锚True EV: <code>3.65%</code></strong> <em>(27.36年；未扣WC账面OE/EV <code>4.80%</code>；市值P/OE <code>22.70x</code>[<code>4.41%</code>])</em><br/><strong>26即期高景气EV: <code>4.49%</code></strong> <em>(22.27年)</em><br/>即期分红+注销回购: <strong><code>0.36%</code></strong> <em>(25分红0.59亿+注销回购2.25亿；26E预计<code>0.69%</code>)</em> | 传统X86服务器与存储稳态底座(净利15亿×12x=<code>180亿</code>)+全栈液冷整机柜与AI服务器JDM核心业务(净利27亿×18~20x=<code>486亿—540亿</code>)=<strong><code>666.00亿—720.00亿</code>保底(占总市值 <code>83.8%—90.6%</code>)</strong>；<strong>多元算力超节点+元脑企智软件栈+千亿库存涨价期权隐含 <code>74.45亿—128.45亿</code>(<code>9.4%—16.2%</code>)温和溢价</strong>！ | <strong>账面低PE vs 重存货观察博弈区</strong><br/><strong>1票右侧顺势博弈(德鲁肯米勒) + 2票等存货拐点/黄金坑(林奇/马克斯) + 1票回避重存货苦力(芒格)</strong><br/><em>(左侧黄金坑 <code>38.00—42.00元</code>[558—617亿]；右侧看千亿存货回落+OCF转正)</em> |</p><p>| <strong>NO.48</strong><br/>⏳ T3 | <strong>爱旭股份</strong><br/><strong>A股 <code>600732.SH</code></strong> (<code>13.14元</code>)<br/><a href="file:///C:/Users/WINDOWS/.gemini/antigravity/brain/f4c81dc1-4d17-49a1-af2b-515111c71adb/爱旭股份_全模块深度投研全集.md">MD</a> | <a href="file:///C:/Users/WINDOWS/Downloads/爱旭股份(600732.SH)_深度投研全集_20261111.pdf">PDF</a> | 市值: <code>277.91亿</code> (<code>6.15x PB</code>，减值缩水失真)<br/><strong>严苛True EV: <code>463.47亿</code></strong><br/><em>(背负138亿有息债[含86.8亿短债]+33.6亿少数股东权益+14亿Maxeon专利尾款，超额现金0；25年FCF+13.8亿，26Q3率先单季扭亏+4457万、毛利率13.31%)</em> | 存量35GW常态归母: <strong><code>18.50亿/年</code></strong> <em>(无杠杆OE <code>27.75亿</code>)</em><br/>17GW低成本技改(1.65亿/GW)达产52GW+削债: <strong><code>26.80亿—28.80亿/年</code></strong> <em>(无杠杆 <code>36.50亿</code>)</em> | <strong>存量归母/EV: <code>3.99%</code></strong> <em>(无杠杆 <code>5.99%</code> / 市值口径 <code>6.66%</code>)</em><br/><strong>52GW达产: <code>5.78%—6.21%</code></strong> <em>(无杠杆 <code>8.62%</code> / 市值口径 <code>10.36%</code>)</em><br/>即期股息: <code>0%</code> <em>(优先还债)</em> | 存量35GW无银ABC基地支撑 <strong>180亿—195亿(占市值65%—70%，对应8.5—9.2元)</strong>；<strong>市场已提前预支约93亿(33.5%)的17GW技改扩产溢价</strong>，仅8.6kg轻质组件与钙钛矿叠层期权0元白送！ | <strong>高杠杆反转观察区(≤1%哨兵仓)</strong><br/><strong>1票右侧小仓观察 + 3票等去杠杆或黄金坑</strong><br/><em>(左侧建仓 <code>8.50—9.50元</code>[180—200亿]，重锤 <code>6.60—7.60元</code> 或负债率&lt;68%右侧)</em> |
 | <strong>NO.49</strong><br/>🚨 T4 | <strong>东山精密</strong><br/><strong>A股 <code>002384.SZ</code></strong> (<code>83.69元</code>) / H股 <code>02384.HK</code> (<code>83.35港元</code>)<br/><a href="file:///C:/Users/WINDOWS/.gemini/antigravity/brain/bfdb25b4-abc9-4246-a0d4-ee32a4056a16/东山精密_全模块深度投研全集.md">MD</a> | <a href="file:///C:/Users/WINDOWS/Downloads/东山精密(002384.SZ_02384.HK)_深度投研全集_20261111.pdf">PDF</a> | 市值: <code>1,627.80亿</code> (<code>表观PE 22.6x</code>)<br/><strong>备考True EV: <code>1,786.26亿</code> / 严苛EV: <code>1,857.71亿</code></strong><br/><em>(背负249.2亿有息债 + 46.8亿无对赌商誉)</em> | 2026新常态全景: <strong><code>60.00亿/年</code></strong> <em>(已扣32.5亿设备迭代保命CapEx)</em><br/>55亿在建达产: <strong><code>76.00亿/年</code></strong> | <strong>存量常态: <code>3.23%—3.36%</code></strong> <em>(回本29.8—31.0年)</em><br/>在建达产: <strong><code>4.10%—4.26%</code></strong><br/>历史分红极低 | 果链FPC+汽零(465亿)扣净债务(-157亿)后<strong>老东山仅值308亿</strong>！<strong>市场为索尔思光模块+AI PCB预支高达1,319.8亿(30.3x高景气PE / 38.8x常态PE，比中际旭创贵60%+，0免费期权)</strong>！ | <strong>周期波峰高溢价规避区</strong><br/><strong>2票坚决回避 + 2票等回撤至 <code>46—52元</code> (<code>900—1,000亿</code>市值)黄金坑</strong> |
 | <strong>NO.50</strong><br/>🚨 T4 | <strong>赛分科技</strong><br/><strong>A股 <code>688758.SH</code></strong> (<code>23.19元</code>)<br/><a href="file:///C:/Users/WINDOWS/.gemini/antigravity/brain/ea9d0fb0-f036-40de-bb5f-f59702cbbf91/赛分科技_全模块深度投研全集.md">MD</a> | <a href="file:///C:/Users/WINDOWS/Downloads/赛分科技(688758.SH)_深度投研全集_20261112.pdf">PDF</a> | 市值: <code>96.58亿</code> (<code>26E PE ~44x</code>)<br/><strong>True EV: <code>89.28亿</code></strong><br/><em>(广义现金9.20亿 vs 短借1.06亿，净超额现金 <code>+7.34亿</code>，0商誉；26Q1-Q3净利率高达 <code>38.8%</code>)</em> | 2026当期常态: <strong><code>2.18亿/年</code></strong> <em>(区间 <code>2.10—2.30亿</code>，存量维护CapEx仅529万)</em><br/>扬州二期20万升达产稳态: <strong><code>4.20亿/年</code></strong> <em>(区间 <code>4.00—4.80亿</code>)</em> | <strong>当期常态: <code>2.44%</code></strong> <em>(True EV/OE <code>40.95倍</code>)</em><br/><strong>达产稳态: <code>4.70%</code></strong> <em>(True EV/OE <code>21.26倍</code>)</em><br/>分红+回购率: <strong><code>0.86%</code></strong> <em>(远期 <code>1.15%</code>)</em> | 净超额现金(7.34亿)+分析色谱柱现金牛20x(11.00亿)+扬州一期工业纯化商业化底座20x(32.00亿)=<strong><code>50.34亿</code>保底(占市值 <code>52.12%</code>，对应 <code>12.09元</code>)</strong>；<strong>市场已提前预支 <code>46.24亿</code>(47.88%) 的扬州二期20万升扩产与GLP-1/ADC期权溢价</strong>！ | <strong>好生意高景气溢价观察区</strong><br/><strong>1票右侧建仓(林奇PEG 0.9) + 3票等好球区</strong><br/><em>(左侧收集 <code>17.5—20.0元</code>[73—83亿]，黄金重锤 <code>13.5—15.5元</code>[56—65亿])</em> |
@@ -1595,7 +1880,7 @@ ightarrow$ 达产稳态 <code>4.20%—4.34%</code>（回本 <code>23.0—23.8年
 <h2 id="_4">四、 实战仓位分配建议：「四层金字塔」全天候组合方案</h2>
 <p>根据您是否具备<strong>港股通 / 港股账户权限</strong>，以下提供两套基于 52 家全集深度投研结论的实战配置方案。核心铁律是：<strong>用 85% 仓位立刻在第一档击球区锁定 T0/T1/T2 的高股息与高内生复利主力，永远保留 15% 机动现金池专门狙击各标的的“第二档黄金重锤坑”</strong>。</p>
 <h3 id="aah">方案 A：A+H 跨市场最优性价比组合（🌟 强烈推荐，吃透港股折价与零碳绿电铝红利）</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">金字塔仓位层级</th>
@@ -1630,11 +1915,11 @@ ightarrow$ 达产稳态 <code>4.20%—4.34%</code>（回本 <code>23.0—23.8年
 <td style="text-align: left;"><strong>暴跌时的印钞机</strong>：确保当市场发生系统性恐慌、行业去库存或年报一次性商誉洗澡时，你手里永远有满膛子弹在十年一遇的黄金坑里从容抄底。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="b-a">方案 B：纯 A 股账户性价比组合（若无港股通权限）</h3>
 <p>如果您仅操作 A 股账户，<strong>切记 100% 剔除中芯国际 A 股</strong>，将高股息与拐点仓位向 A 股折价小或 A 股独有的皇冠标的集中：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">金字塔仓位层级</th>
@@ -1669,7 +1954,7 @@ ightarrow$ 达产稳态 <code>4.20%—4.34%</code>（回本 <code>23.0—23.8年
 <td style="text-align: left;"><strong>暴跌时的印钞机</strong>：重点狙击<strong>贵州茅台黄金坑（<code>1,180—1,280元</code> / 重锤<code>≤1,000—1,100元</code>）</strong>、药明康德A回撤坑（<code>115—125元</code> / 重锤<code>90—100元</code>）、华东年报商誉减值坑（<code>23—24.5元</code>）、伊之密黄金坑（<code>14—16元</code>）、中际旭创回调坑（<code>≤360元</code>）、<strong>柏楚电子左侧坑（<code>80—86元</code> / 重锤<code>≤70元</code>）</strong>、法拉电子黄金坑（<code>85—95元</code>）、立讯精密A（<code>40—44元</code>）、牧原A（<code>33—37.5元</code>）及淮北矿业（<code>≤11.50元</code>）。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="_5">五、 组合整体体检与“死刑红线”动态巡检表</h2>
 <h3 id="1-a">1. 组合整体财务体检（以方案 A 为例）</h3>
@@ -1716,13 +2001,26 @@ ightarrow$ 达产稳态 <code>4.20%—4.34%</code>（回本 <code>23.0—23.8年
 
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -1892,7 +2190,7 @@ ightarrow$ 达产稳态 <code>4.20%—4.34%</code>（回本 <code>23.0—23.8年
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《企业深度投研性价比排行榜（全模块买方标尺版）》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/企业深度投研性价比排行榜（全模块买方标尺版）.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《企业深度投研性价比排行榜_最新全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/企业深度投研性价比排行榜_最新全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -1950,6 +2248,97 @@ ightarrow$ 达产稳态 <code>4.20%—4.34%</code>（回本 <code>23.0—23.8年
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

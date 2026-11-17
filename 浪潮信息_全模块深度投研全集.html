@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>浪潮信息(000977.SZ) 深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>浪潮信息 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">浪潮信息(000977.SZ) 深度投研全集</div>
+    <div class="report-title">浪潮信息 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -680,7 +965,7 @@
 </ol>
 <h3 id="vs-vs-vs">二、 国内四大算力整机巨头硬核横向比拼（浪潮信息 vs 工业富联 vs 新华三 vs 中科曙光）</h3>
 <p>我们将中国服务器市场的四大绝对主力拉到同一张桌子上，锚定2025年年报与2026年最新财务及经营口径进行硬碰硬对质：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心比拼维度</th>
@@ -734,7 +1019,7 @@
 <td style="text-align: left;"><strong>长板</strong>：海光芯片股权护城河、浸没相变液冷技术顶尖；<strong>短板</strong>：互联网商业市场体量小，市场化敏捷度偏弱</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="510">三、 横向对质的深度结论：为什么浪潮的费用率能比同行低出5—10个百分点？</h3>
 <div class="annotated-row"><div class="main-col"><p>从上表可以清晰看出浪潮信息最可怕的竞争底牌——<strong>极致的期间费用率压缩能力</strong>。中科曙光和新华三因为主打政企、金融、高校和地方智算中心，必须养庞大的省级销售团队、公关渠道和售前解决方案团队，销售+管理费用率动辄吃掉<code>7%—10%</code>的毛利；而浪潮信息采用JDM模式直供互联网巨头与头部运营商，单笔订单动辄数十亿甚至上百亿元，几乎不需要传统分销返利与公关应酬，其销售费用率与管理费用率常年被极致压缩在合计不足<code>2%</code>的水平！这意味着：<strong>同样一台毛利率只有<code>8.6%</code>的AI服务器，新华三或普通品牌厂卖一台可能因为费用率太高而倒贴钱，但浪潮信息扣掉不到<code>5%</code>的三费（含3%研发）后，依然能稳稳抠出<code>3%</code>以上的纯利！</strong> 这就是制造业里的“规模成本曲线最左端壁垒”。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看这张表你就明白什么叫“不同物种不能用同一把尺子量”。中科曙光靠中科院的牌子和手里攥着的海光芯片股票吃香喝辣，工业富联在太平洋对岸给美国首富们代工最新款算力机柜；而浪潮信息是在被美国人捆住一只手的情况下，靠着把销售和管理费用抠到骨头缝里，硬生生在国内互联网大厂的修罗场里杀出了一条血路。</p></div></div></div></div>
 
@@ -818,7 +1103,7 @@
 </li>
 </ul>
 <h3 id="20212025-2026q1-q3">三、 五年一期现金流硬账本与“营运资金黑洞”穿透（2021—2025年 + 2026Q1-Q3）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">会计期间</th>
@@ -911,7 +1196,7 @@
 <td style="text-align: center;"><strong>1,187.04</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="vs">四、 打破“合并报表幻觉”与造血定性：极其轻的固定资产 vs 极其重的营运资金</h3>
 <div class="annotated-row"><div class="main-col"><p>穿透上面这张表，我们可以看到浪潮信息最独特的财务解剖特征：</p><ol>
 <li>
@@ -1043,7 +1328,11 @@
    * 跟踪公司在运营商、金融及互联网推理集群中，基于海光、寒武纪、昆仑芯等本土算力底座的超节点方案订单占比是否突破<code>40%—50%</code>；同时在年报附注中核查存放于浪潮集团财务公司的货币资金占比是否持续压降，分红+注销回购支付率能否随利润爆发提升至<code>20%—30%</code>以上。</p>
 </li>
 </ol>
-<hr class="module-sep"/>
+<hr/>
+<hr/>
+<h2 id="a">【追问模块 A：资本开支与重点工程解剖】</h2>
+<p>如果用审视传统重化工业或晶圆代工厂的眼光去翻浪潮信息的资产负债表，任何一个老练的财务审计员都会感到极度反常：一家2025年营业收入高达<code>1,647.82亿元</code>、2026年前三季度营收达<code>1,293.29亿元</code>的全球算力整机巨头，截至2026年9月30日账面上的<strong>固定资产净值竟然只有区区<code>22.54亿元</code>（较2025年末的<code>25.85亿元</code>甚至还净减少了<code>3.31亿元</code>），期末在建工程账面余额更是只有微不足道的<code>0.167亿元</code>（<code>1,666.57万元</code>，2025年末仅为<code>679.59万元</code>）</strong>！一年花在购建固定资产、无形资产和其他长期资产上的现金（CapEx）常年不过<code>1.92亿—2.25亿元</code>。难道造AI服务器和液冷整机柜是一门完全不需要本钱的“空手套白狼”生意？本模块我们将拿手术刀剖开浪潮信息的重点制造工程、募投项目账本与产线盈亏平衡模型，算清它“极轻固定资产表象”背后真正的重资本底牌。</p>
+<hr/>
 <h3 id="22541648">一、 算清单位经济账：“22.54亿固定资产撬动1,648亿营收”的工程真相与产线盈亏平衡测算</h3>
 <h4 id="1">1. 穿透在建工程与固定资产账本：严格区分“期末账面余额”与“当期转固流量”</h4>
 <p>在审阅浪潮信息2024—2026Q3财报附注时，首先必须解除一个极易引发误判的会计防呆盲区——<strong>为什么一家正在全力扩充液冷与超节点产能的龙头，期末在建工程账面余额只有<code>679.59万元</code>（2025年末）和<code>1,666.57万元</code>（2026Q3末）？</strong></p>
@@ -1090,7 +1379,7 @@
 
 <h4 id="3-vs-vs">3. 算力三巨头资本开支与单位投资横向对比表（浪潮信息 vs 工业富联 vs 中科曙光）</h4>
 <p>为了看清浪潮信息这种“极轻厂房设备、极重研发与存货”模式在行业中的真实身位，我们将其与全球AI代工霸主<strong>工业富联（601138.SH）</strong>及国产超算与浸没液冷龙头<strong>中科曙光（603019.SH）</strong>进行同维度工程对质：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心工程与资本维度</th>
@@ -1137,7 +1426,7 @@
 <td style="text-align: left;">地方智算中心漫长的基建转固周期 + 政务/科研客户长账期应收账款</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="4_1">4. 新增折旧冲击与产线“双口径盈亏平衡稼动率”精算</h4><p>穿透上述表格，我们可以用硬核数学公式算清浪潮信息产线的盈亏平衡底线：</p><ul>
 <li><strong>第一层算账（纯工厂制造口径：折旧摊销几乎零负担）</strong>：</li>
 <li>公司2025年及2026年年化折旧与摊销总额仅约<strong><code>6.50亿元</code></strong>，占2025年总营收（<code>1,647.82亿元</code>）的比重仅为<strong><code>0.39%</code></strong>，占2026年年化营收的比重更是低至<strong><code>0.35%—0.38%</code></strong>。即便未来3年公司将2026年定增预案中的资本性投入分批建成转固（假设新增固定资产与无形资产<code>30亿—40亿元</code>，按5—10年综合折旧摊销率计算，每年新增折旧摊销约<code>3.5亿—5.0亿元</code>），届时全年总折旧摊销也不过<code>10亿—11.5亿元</code>，占千亿级营收比重依然不足<code>0.7%</code>。</li>
@@ -1167,7 +1456,7 @@
 
 
 
-<hr>
+<hr/>
 <h3 id="10">二、 审视消化能力：10万台+液冷产能与高密智造产线是“解瓶颈”还是“过剩”？</h3>
 <p>站在2026年三季报的时间节点，结合公司账面<strong><code>1,187.04亿元</code>存货（较2025年末的<code>465.08亿元</code>激增<code>+155.23%</code>）</strong>与下游智算中心建设节奏，我们对现有<code>10万台+</code>天池液冷产能及在建智造升级工程的消化能力做出如下穿透裁决：</p>
 <ul>
@@ -1273,7 +1562,7 @@
 </li>
 </ol>
 <h4 id="3">3. 浪潮信息两大新业务/新技术期权商业化证伪全景总表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">证伪拆解维度</th>
@@ -1308,7 +1597,7 @@
 <td style="text-align: left;"><strong>【不直接贡献纯软件暴利、但不可或缺的防卫性生态配套】</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>千万别听风就是雨，以为浪潮搞了个“源大模型”和“元脑企智”就能变成中国的微软或者Palantir。在中国卖东西给大企业和衙门，你想单拿一张软件光盘去收人家几千万年费，门儿都没有！但浪潮精明的地方在于，它把这套软件当成买牛排免费赠送的秘制黑椒汁——汁虽然不单卖钱，却能让原本只能卖苦力价的铁皮服务器多卖出好几个点的毛利！</p></div></div>
 <hr/>
 <h3 id="_19">二、 跨越鸿沟的三道生死关卡：高毛利红利能守多久？</h3>
@@ -1385,12 +1674,12 @@
 
 
 
-<hr class="module-sep"/>
+<hr/>
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
 <p>要看清浪潮信息在2026年三季报交出的那份“毛利率暴力反弹至<code>8.61%</code>、账面存货狂飙至<code>1,187.04亿元</code>”的成绩单到底是独门绝技还是行业共性，绝不能只听公司自己讲故事。我们将国内算力服务器赛道的另外三大绝对主力——<strong>工业富联（601138.SH，全球AI服务器ODM代工霸主）</strong>、<strong>紫光股份/新华三（000938.SZ，政企与运营商ICT算网巨头）</strong>、<strong>中科曙光（603019.SH，中科院系超算与国产海光信创国家队）</strong>——全部拉进同一间审讯室，并顺带调取上游芯片原厂（英伟达、海光信息、HBM存储三巨头）与下游买家（字节跳动、阿里巴巴、腾讯、三大运营商）的资本开支账本，以2025年年报及2026年三季报的实锤财务数据做一场刀刀见血的“三方交叉审讯”。</p>
-<hr>
+<hr/>
 <h3 id="2025-2026">一、 四大算力整机巨头 2025 年报 &amp; 2026 三季报硬核交叉审讯总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心审讯维度</th>
@@ -1479,7 +1768,7 @@
 <td style="text-align: left;"><strong><code>27.55亿元</code></strong><br/>(较年初暴增 <strong><code>+115.37%</code></strong>)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="3800">二、 景气度交叉审讯：全行业狂囤 3,800 亿存货，究竟是“锁单备货”还是“渠道压库”？</h3>
 <div class="annotated-row"><div class="main-col"><p>初看浪潮信息2026年三季报的投资者，第一反应往往是被账面上那<strong><code>1,187.04亿元</code>的天量存货（较年初净增<code>721.96亿元</code>，增幅高达<code>+155.23%</code>）</strong>和仅增长<code>7.18%</code>的表观营收吓出一身冷汗——“是不是货卖不动、全砸在自己仓库里了？”但当我们把另外三家同行和上下游的数据拼在一起做交叉审讯时，真相豁然开朗：</p><ol>
@@ -1567,7 +1856,12 @@
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>美国商务部原本想用一纸清单把浪潮信息变成一条搁浅的鲸鱼，结果却意外帮国内的几大巨头划清了势力范围——工业富联去太平洋对岸赚美元，中科曙光守着中科院和海光芯片吃信创皇粮，而浪潮信息把国内互联网大厂的机房变成了自己的私人后花园。只要国内的大模型还在吞吐Token、机房里的服务器还在发烧需要液冷降温，浪潮这头山东老牛的饭碗就没人能端走！</p></div></div></div></div>
 
 
-<hr class="module-sep"/>
+<hr/>
+<hr/>
+<h2 id="downer-earnings">【追问模块 D：常态盈利底盘（Owner Earnings）、三档盈利标尺与极限抗压测算】</h2>
+<p>如果只盯着浪潮信息利润表上的“归母净利润”数字看，投资人很容易陷入左右摇摆的眩晕感：2025年公司营收狂飙至<code>1,647.82亿元</code>，归母净利润却只有<code>24.13亿元</code>（综合毛利率惨跌至<code>4.88%</code>），仿佛是个纯靠垫资赚辛苦费的搬运工；可一转眼到了2026年前三季度，营收温和增长<code>7.18%</code>至<code>1,293.29亿元</code>，归母净利润却暴增<code>165.32%</code>至<code>39.32亿元</code>（综合毛利率跃升至<code>8.61%</code>，其中2026Q2单季冲上<code>10.28%</code>），与此同时经营活动现金流（OCF）却流出<code>-64.01亿元</code>、期末存货飙升至<code>1,187.04亿元</code>。</p>
+<p>要穿透这团“利润翻倍而现金流出”的迷雾，算清浪潮信息在剥离短期库存涨价红利与会计噪音后到底能为股东源源不断地创造多少真金白银，我们必须用巴菲特与芒格的<strong>“真实可支配股东盈余（Owner Earnings）”</strong>手术刀，结合公司独特的<strong>“极轻固定资产 + 极重营运资金周转”</strong>基因，对它的造血底盘做一次毫米级精算。</p>
+<hr/>
 <h3 id="owner-earnings">一、 剥离会计噪音、利润弹性公式与《三档盈利标尺 Owner Earnings 矩阵》</h3>
 <h4 id="1_3">1. 账面净利润成色审视：剥离非经常性损益与少数股东抽水</h4>
 <p>我们先将浪潮信息2024年、2025年与2026年前三季度（2026Q1-Q3）的盈利含金量放在显微镜下拆解：</p>
@@ -1641,7 +1935,7 @@
 </ul>
 <h4 id="4-owner-earnings">4. 《三档盈利与产品结构标尺 Owner Earnings 分步还原矩阵表》</h4>
 <p>拒绝用单一静态年份一刀切，我们结合浪潮信息当前的产品结构升级进度与行业竞争烈度，严格按统一公式<strong><code>真实可支配股东盈余（Owner Earnings） = 常态归母净利润 + 归母折旧与摊销（6.50亿元/年） - 防御性CapEx（2.50亿元/年） - 常态刚性营运资金占用（11.00亿元/年）</code></strong>，拉出以下三档标尺矩阵：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与核心参数</th>
@@ -1706,9 +2000,9 @@
 <td style="text-align: center;"><code>68.18%</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这张三档标尺表钉在你的办公桌正中间！如果只按账面粗算，浪潮信息在稳态下好像能赚46个亿；但被我们按着脑袋扣掉那11个亿永远拿不回来的营运周转垫资款后，真正能算作股东可支配自由盈余的主锚是35个亿！至于最右边那个15个亿的底线标尺，就是当你倒霉透顶、又撞上2025年那种大厂把毛利率压到5%的苦力价格战时，这台机器还能给你吐出来的保命钱。</p></div></div>
-<hr>
+<hr/>
 <h3 id="203543">二、 增量垫高测算：天池液冷基地满产与多元超节点如何把造血中枢从20亿垫高至35亿—43亿？</h3>
 <p>在2021—2025年的整整五年里，浪潮信息的年度归母净利润一直困在<code>17.83亿元—24.13亿元</code>的箱体里（扣除营运资金占用后的真实 Owner Earnings 长期徘徊在<code>12亿—17亿元</code>之间），为什么到了2026年，我们敢于将「标尺二：新常态稳态中枢」的真实可支配 Owner Earnings 锚定在<strong><code>35.00亿元/年</code></strong>、将「标尺一：即期高景气标尺」锚定在<strong><code>43.00亿元/年</code></strong>？</p>
 <p>这中间往上垫高的<strong><code>+18.00亿—26.00亿元/年</code>净增量台阶</strong>，绝不是靠拍脑袋预测未来营收翻倍，而是建立在两大已经建成投产、正在发生结构性放量的高毛利工程底座之上：</p>
@@ -1806,7 +2100,7 @@
 <li>配合公司账面现成趴着的<strong><code>106.34亿元</code>货币资金</strong>以及每年仅需<strong><code>2.50亿元</code></strong>的极低防御性CapEx，这笔逆势回流的巨额去库现金流足以轻松覆盖并偿还<code>120.75亿元</code>短期借款，确保公司在最极端的双杀寒冬里<strong>自由现金流（FCF）不仅不失血，反而大幅转正、绝无债务违约之虞</strong>！</li>
 </ul>
 <h4 id="3_1">3. 《双杀极限压力测试全链条定量推演总表》</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">压力测试维度与传导链条</th>
@@ -1881,14 +2175,14 @@
 <td style="text-align: left;"><strong>停止新增备货+存货变现回笼，配合106.34亿现金，绝无流动性断裂风险</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>外行人看浪潮信息那1,187亿存货，总觉得天随时要塌下来；但你把资产负债表翻过来一看，好家伙，下游字节、阿里这帮大主顾提前交了770.89亿的“合同负债”押金，上游供应商还欠着427.81亿的“应付账款”，这两笔不用付利息的钱加起来足足有1,198.70亿，比它仓库里的存货还多出11个亿！这就好比你帮大老板代购一屋子茅台，虽然酒全堆在你家仓库里，但大老板已经把六成五的酒钱押在你兜里了，剩下三成五你还赊着酒厂的账——哪怕明天茅台跌价百分之三、或者老板耍赖不要了，你顶多今年白干没赚到跑腿费，绝不可能因为这屋子酒把自己逼得跳楼破产！</p></div></div>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="e">【追问模块 E：会计成色与治理细节显微镜】</h2>
 <p>对于一家年营收超1,600亿元、账面同时挂着<strong><code>1,187.04亿元</code>天量存货</strong>、<strong><code>195.81亿元</code>应收账款</strong>和<strong><code>188.00亿元</code>全口径有息负债</strong>的算力硬件巨头而言，会计政策上哪怕只有<code>1%</code>的松紧调节（比如少提1%的存货跌价准备、拉长一年设备折旧、或者把10亿元研发费用资本化塞进无形资产），都足以让账面30多亿元的净利润发生天翻地覆的变形。本模块直接拿放大镜逐页审视浪潮信息2025年年度报告与2026年第三季度报告的财务报表附注，并与工业富联、紫光股份、中科曙光进行同维度会计政策对表，彻底排清报表里的暗雷与藏富成色。</p>
-<hr>
+<hr/>
 <h3 id="_22">一、 四大算力整机龙头核心会计政策与报表质量硬核对比表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -1933,7 +2227,7 @@
 <td style="text-align: left;"><strong>A股硬科技标杆级严苛</strong>：浪潮近40亿元研发支出中<code>98.31%</code>直接冲减当期利润，绝不玩“研发资本化虚增净利”的粉饰把戏</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_23">二、 资产质量排雷：拿显微镜穿透三大核心资产科目</h3>
 <div class="annotated-row"><div class="main-col"><h4 id="1-118704">1. 头号排雷区：<code>1,187.04亿元</code>天量存货的库龄结构与跌价计提充分度审计</h4><p>在浪潮信息2026年三季报的<code>1,765.27亿元</code>总资产中，仅<strong><code>存货</code>一项就高达<code>1,187.04亿元</code>（占总资产的<code>67.24%</code>）</strong>。为了防止把“资产负债表期末跌价准备余额”与“利润表当期减值损失流量”混为一谈，我们严格按存量与流量双口径拆解：</p><ul>
@@ -2090,10 +2384,10 @@
 <p><strong>资产负债表紧绷但逻辑自洽（高周转锁单驱动的阶段性杠杆）</strong>：<code>1,187.04亿元</code>存货与<code>120.75亿元</code>短期借款是应对外部实体清单制裁与下游大厂超节点集群爆发而主动采取的“重装锁仓”策略，有暴增<code>+295.20%</code>的合同负债背书；不存在虚假“存贷双高”，但<code>106.34亿元</code>货币资金属于维持两千亿盘子运转的刚性备付底仓（含集团财务公司关联存款），不可视为闲置超额现金。</p>
 </li>
 </ol>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="f">【追问模块 F：解锁估值定价、隐含预期与击球区推演】</h2>
 <p>在前序全景八步底座与模块 A—E 的穿透式解剖中，我们严守“先算清生意账、再谈市场出价”的买方纪律，完成了对浪潮信息（<code>000977.SZ</code>）千亿级算力存货蓄水池、JDM 联合开发商业模式、同行交叉对质及三档常态股东盈余（Owner Earnings）的实算。本模块正式解锁二级市场估值定价，站在<strong>全资买断整家企业的私人买方（Private Owner）视角</strong>，剥离表面市盈率（PE）的视觉障眼法，算清全款收购浪潮信息的真实总标价（True EV）、隐含内生回报率、拆骨估值溢价（Reverse SOTP）以及实战分档击球区。</p>
-<hr>
+<hr/>
 <h3 id="true-ev-95761-1187">一、 真实企业价值（True EV = 957.61 亿元）深度核算：穿透 1,187 亿存货背后的债务杠杆</h3>
 <p>在股票交易软件上，普通投资者看到的浪潮信息标价是截至 2026 年 11 月 17 日的收盘价 <strong><code>54.10 元/股</code></strong>，乘以有效总股本 <strong><code>14.6848 亿股</code></strong>（<code>1,468,476,655 股</code>），得出普通股总市值 <strong><code>794.45 亿元</code></strong>。如果仅用这个市值去除以 2026 年预计约 <code>50.00 亿元</code> 的归母净利润，表面动态 PE 仅为 <strong><code>15.89 倍</code></strong>——在动辄三五十倍 PE 的 A 股 AI 算力板块中，这看上去简直像是一颗被市场遗忘的廉价明珠。</p>
 <p>然而，在真正的买方并购谈判桌上，假如你今天掏出支票簿把浪潮信息 100% 私有化买断，你实际付出的代价绝不仅仅是 <code>794.45 亿元</code> 的股票市值，而是必须同时承接它资产负债表上为了维持千亿级算力备货而背负的巨额有息债务，且账面上的百亿货币资金绝大部分根本不能拿来冲抵收购款：</p>
@@ -2112,7 +2406,7 @@
 </li>
 </ol>
 <h4 id="f-1000977sztrue-ev-2026-11-17">📊 表 F-1：浪潮信息（000977.SZ）真实企业价值（True EV）穿透核算表（截至 2026 年 11 月 17 日）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: center;">核算顺位</th>
@@ -2208,7 +2502,7 @@
 <td style="text-align: left;"><strong>全款买断整家生意的真实总标价（比市值高出 <code>163.16 亿元</code>）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这就像你看中了一家标价 794 万的餐厅，进去一查账，发现老板为了在后厨囤满上万斤顶级和牛，向银行借了 188 万高利贷，而收银机里那 106 万现金里有 80 万是明天早上必须付给菜农和厨师的押金——你以为你是花 794 万买店，其实你签完字的那一刻就已经掏出了 958 万！</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">二、 隐含内生回报率、跨期股东回报拆分与 Reverse SOTP（拆骨估值倒推）</h3>
@@ -2236,7 +2530,7 @@
 <li>此时表面市值 PE 将被动飙升至 <strong><code>36.11 倍</code></strong>（市值 P/OE 达 <code>52.96 倍</code>），而 <strong><code>OE / True EV</code> 真实回报率将跌至仅 <code>1.57%</code></strong>（静态回本年限拉长至 <strong><code>63.84 年</code></strong>）。</li>
 </ul>
 <h4 id="f-2">📊 表 F-2：浪潮信息三档盈利标尺下的估值倍数与真实内生回报率对撞矩阵</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值维度与买方核心指标</th>
@@ -2311,7 +2605,7 @@
 <td style="text-align: left;"><strong>受制于 <code>161.66 亿</code> 净负债与营运资金占用</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街和 A 股的散户最容易被“15 倍市盈率”这种障眼法迷得神魂颠倒。如果一家公司账面赚了 50 亿，却要把里面的大把钞票继续填进仓库里买新芯片，再背上近两百亿的银行贷款，那它对你口袋里的现金贡献就只有 3.65% 的稳态回报——这甚至跑不赢很多旱涝保收的水电站和高速公路！</p></div></div>
 <h4 id="2_3">2. 跨期分红与注销式回购收益率拆分：为什么账面大赚却分不出钱？</h4>
 <p>检验一家企业的利润究竟是“真金白银”还是“账面富贵”，最残酷的试金石就是看它每年能拿多少现金分给股东或回购注销股票：</p>
@@ -2354,7 +2648,7 @@
    - 这意味着，当前 <code>794.45 亿元</code> 总市值中，二级市场为公司布局的<strong>“国产多元算力超节点（OAM/UBB 开放架构混训）+ EPAI 元脑企智大模型中间件软件生态 + <code>1,187 亿元</code> 战略芯片库存在缺货周期中的涨价弹性”</strong>所预支的远期期权溢价，仅仅只有 <strong><code>74.45—128.45 亿元</code></strong>（约 <strong><code>75—128 亿元</code></strong>，仅占总市值的 <strong><code>9.4%—16.2%</code> / 约 <code>10%—16%</code></strong>）！</li>
 </ol>
 <h4 id="f-3-reverse-sotp">📊 表 F-3：浪潮信息 Reverse SOTP（拆骨估值倒推）全息透视表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务拆骨分部</th>
@@ -2407,7 +2701,7 @@
 <td style="text-align: left;"><strong>定性：账面 PE 合理偏低、但因营运资金重压导致真实自由现金流折现偏贵</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>拆开骨头过完秤，结论再清楚不过了：现在的浪潮信息既不是那种地上白捡钱、期权 0 元白送的深度烟蒂股，但也绝不是那种靠几页 PPT 吹上天的 AI 空气币。它的市值里近九成都有实打实的服务器订单撑着，唯一的毛病就是这台赚钱机器太吃本金了！</p></div></div>
 <hr/>
 <h3 id="_25">三、 横向估值对比、赔率与分档击球区推演 + 三条基本面死刑证伪红线</h3>
@@ -2446,7 +2740,7 @@
 </li>
 </ul>
 <h4 id="f-4-a-2026">📊 表 F-4：全球及 A 股核心算力服务器龙头估值与商业壁垒横向对比表（2026 年基准）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司简称与代码</th>
@@ -2515,7 +2809,7 @@
 <td style="text-align: left;">纯云端 ODM 代工标准定价，靠极高绝对利润增速驱动股价</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2_4">2. 赔率测算与四档实战击球区推演（左/右侧操作指南）</h4>
 <p>综合以上 True EV 穿透核算、三档内生回报率及全球同行对标，我们对浪潮信息当前股价位置作出明确买方定性，并划定四档精确到具体价格与财报信号的实战击球区：</p>
 <ul>
@@ -2560,7 +2854,7 @@
 </li>
 </ul>
 <h4 id="f-5000977sz">📊 表 F-5：浪潮信息（000977.SZ）买方四档分档击球区与实战操作锚点总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球区档位</th>
@@ -2615,7 +2909,7 @@
 <td style="text-align: left;"><strong>算力概念情绪过热透支未来数年预期，果断分批逢高派发清仓</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>记住本杰明·格雷厄姆教给我们的老规矩：要在别人因为担心仓库里那 1,187 亿芯片卖不掉而恐慌抛售、把股价砸到 40 块钱以下的时候去当接盘侠；或者等它真正把那堆芯片变成白花花的钞票还清银行贷款时再上车——千万别在大家敲锣打鼓喊它市值要冲两千亿的时候去凑热闹！</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_2">3. ☠️ 三条基本面死刑证伪红线（一旦触发，无条件认错清仓！）</h4><p>在买方实战风控体系中，任何投资逻辑都必须预设明确的证伪边界。无论你是在 <code>54.10 元</code> 持有还是在 <code>40.00 元</code> 左侧抄底，未来只要浪潮信息在定期报告或外部经营环境中触发以下 <strong>“三条基本面死刑证伪红线”</strong> 中的任意一条，说明底层商业逻辑已发生不可逆的恶化，必须立即无条件止损清仓，绝不抱任何幻想：</p><ol>
@@ -2635,7 +2929,14 @@
 
 
 
-<hr class="module-sep"/>
+<hr/>
+<hr/>
+<h2 id="g">【终章模块 G：投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）】</h2>
+<blockquote>
+<p><strong>📍 闭门圆桌会背景设定</strong>：
+2026年11月17日，围绕 <strong>浪潮信息（<code>000977.SZ</code>）</strong> 当前 <strong><code>54.10 元/股</code></strong> 的最新收盘价（普通股总市值 <strong><code>794.45 亿元</code></strong>，加计全口径有息负债 <code>188.00 亿元</code> 与少数股东权益 <code>1.50 亿元</code>、扣除超额可自由支配现金 <code>26.34 亿元</code> 后，全款买断整家生意的 <strong><code>True EV = 957.61 亿元</code></strong>），我们邀请四位投资哲学截然不同却各自封神的华尔街传奇大师——<strong>查理·芒格（Charlie Munger）</strong>、<strong>彼得·林奇（Peter Lynch）</strong>、<strong>霍华德·马克斯 &amp; 塞思·卡拉曼（Howard Marks &amp; Seth Klarman）</strong>、<strong>斯坦利·德鲁肯米勒（Stanley Druckenmiller）</strong>——围坐一桌，结合他们毕生最刻骨铭心的真实成功与惨败案例，对这台“中国最大 AI 算力重装总包机器”做一场不留情面的闭门会诊。</p>
+</blockquote>
+<hr/>
 <h3 id="1-owner-earnings">1. 👴🏻 查理·芒格（商业模式寿命、Owner Earnings 算盘与逆向排雷）</h3>
 <blockquote>
 <p><strong>“如果一家生意的账面利润看着很美，但年底盘账时，你发现赚来的每一分钱都变成了院子里堆满的芯片和服务器零件，那你买的不是喜诗糖果，而是一家苦命的农机经销商！”</strong></p>
@@ -2657,7 +2958,7 @@
 <ul>
 <li><strong>👴🏻 芒格最终投票</strong>：<strong>【坚决回避（仅作为理解算力产业链的观察标本，绝不扣动买入扳机）】</strong>。</li>
 </ul>
-<hr>
+<hr/>
 <h3 id="2_5">2. 🛒 彼得·林奇（六类股票归类法、存货报警器与草根算账）</h3>
 <blockquote>
 <p><strong>“在我的投资词典里，当一家制造业公司的存货增速高达 +155%、而营收增速只有 +7% 时，这通常会拉响最高级别的空头警报——但科技硬件周期股最刺激的例外在于：如果这批存货全是大客户交了百亿定金排队抢的稀缺军火，它就可能是下一波业绩爆发的蓄水池！”</strong></p>
@@ -2735,7 +3036,7 @@
 </ul>
 <hr/>
 <h3 id="5">📋 5. 《四位投资大师圆桌投票与核心判词总表》</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">投资大师</th>
@@ -2775,7 +3076,7 @@
 <td style="text-align: left;">🚀 <strong>右侧顺势博弈</strong><br/><em>(紧盯单季毛利率 <code>8.5%+</code> 与存货发货结转，破位即斩)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>⚖️ 圆桌会终极票决（1 票坚决回避 : 2 票等待左侧黄金坑/存货消化拐点 : 1 票右侧趋势博弈）</strong>：
 四位大师的激烈交锋，彻底剥开了 <strong>浪潮信息（<code>000977.SZ</code>）</strong> 的双重面孔——从 <strong>巴菲特/芒格式的“十年永续自由现金流收息标尺”</strong> 来看，它因为需要不断垫资上千亿存货、分红回购率仅 <code>0.36%</code>、真实内生回报率 <code>3.65%</code>，绝非可以闭眼长拿的养老印钞机；但从 <strong>德鲁肯米勒/林奇式的“产业升级周期与盈利弹性标尺”</strong> 来看，液冷整机柜与超节点架构正将它的毛利率从 <code>4.88%</code> 的泥潭拉回 <code>8.61%+</code> 的黄金甜点区，手中 <code>1,187.04 亿元</code> 的算力现货正在兑现翻倍的业绩弹性。<strong>用周期成长股的快刀战法去交易它的液冷升级与存货释放红利，同时用困境猎手的冷酷底线去防备它的存货跌价与现金流回撤</strong>，才是驾驭这头算力巨兽的唯一正解。</p>
@@ -2840,16 +3141,29 @@
 <li>
 <p><strong>右侧持仓紧盯“两条保命铁律”</strong>：如果在当前五十多块钱的位置顺势跟进做波段，你手里只需要死死盯住每季度的两个硬指标——<strong>第一，单季毛利率必须稳稳守在八个点以上（证明液冷高毛利逻辑没破）；第二，那一千一百多亿存货必须开始陆续发货结转、把经营现金流由负转正去还银行短债。</strong> 什么时候你发现它的存货卖不动了、单季开始计提十几个亿以上的存货跌价损失，不管市场上 AI 的口号喊得多响，第一时间获利了结拔腿走人，绝不回头！</p>
 </li>
-</ol></hr></hr></hr></hr></hr></hr>
+</ol>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3019,7 +3333,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《浪潮信息(000977.SZ) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/浪潮信息(000977.SZ) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《浪潮信息 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/浪潮信息 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3077,6 +3391,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

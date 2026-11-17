@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>盐湖股份_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>盐湖股份 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">盐湖股份_全模块深度投研全集</div>
+    <div class="report-title">盐湖股份 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -728,7 +1013,7 @@
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>智利人虽然有更好的盐湖，但智利政客拿走了最高 40% 的过路费；澳洲人虽然有富矿，但得炸石头、漂洋过海运到中国再用一千度大火炉子烧。算完总账你会惊讶地发现，青海这锅“高镁锂比苦卤水”被连续移动床驯服后，竟然成了全世界谁也打不过的低成本霸主！</p></div></div></div></div>
 
 <h3 id="3_1">3. 核心产品与国内外同行硬核横向对比表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -814,7 +1099,7 @@
 <td style="text-align: left;">储量极大，但2030年后智利国家铜业(Codelco)拿走50%+1股控制权</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>硬核比拼结论</strong>：</p><ol>
 <li>
 <p><strong>王牌中的王牌</strong>：盐湖股份的“察尔汗 500 万吨氯化钾 + 9.8 万吨老卤/原卤提锂”是绝对的硬核王牌。只要农作物需要施钾肥，察尔汗盐湖每年就会源源不断产出数亿立方米富含锂离子的老卤。别家提锂要先花几万元买矿石、碎矿、上千度高温焙烧，盐湖股份的原料却是钾肥厂免费送过来的废液，这种<strong>“钾肥养提锂、副产吃干榨净”的一体化物理成本差（单吨比矿石/云母便宜 2 万—5 万元）</strong>，是任何外部制造业对手用管理内卷都无法抹平的鸿沟。</p>
@@ -949,7 +1234,7 @@
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>五年赚了 411 亿净利润，一分钱没分，全用来填十年前乱搞金属镁砸出来的“-420 亿未分配利润大坑”了！这简直是活生生的商业教科书：一个愚蠢的管理层用五年时间就能捅出让继任者还债十年的窟窿。不过，把 15 亿回购的股票 100% 注销掉，而不是找借口一折奖给高管，这证明现在的当家人心里是有小股东的。</p></div></div></div></div>
 
 <h3 id="3-20212026q3">3. 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2026Q3）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -1026,7 +1311,7 @@
 <td style="text-align: left;"><strong>110.1%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：资本开支 CapEx 严格取自合并现金流量表“购建固定资产、无形资产和其他长期资产支付的现金”；2023—2025年包含4万吨基础锂盐一体化项目建设高峰期现金支出；2026年前三季度数据已包含五矿盐湖同一控制下并表口径。)</em></p><p><strong>硬核财务穿透体检（打破合并报表幻觉）</strong>：</p><ol>
 <li>
 <p><strong>恐怖的自由现金流制造机</strong>：过去五年（2021—2025）加上 2026 年前三季度，盐湖股份累计实现归母净利润 <strong>500.39 亿元</strong>，累计经营活动现金流净额高达 <strong>610.07 亿元</strong>，而同期全部资本开支（哪怕算上新建一座 4 万吨世界级提锂工厂！）合计仅 <strong>70.64 亿元</strong>，五年零九个月累计创造无杠杆自由现金流（FCF）高达 <strong>539.43 亿元</strong>！净现比常年维持在 <strong>110%—150%</strong> 之间，赚到的每一分利润不仅全部变成了真金白银的现汇，而且由于大额固定资产折旧与矿业权摊销无需付现，现金流比净利润还要丰沛得多。</p>
@@ -1222,7 +1507,7 @@
 </ol>
 <p>为了直观呈现盐湖股份内生与外延项目的投资水位，我们将国内外主流盐湖与矿石提锂项目拉齐对比如下：</p>
 <h4 id="_13">《国内外盐湖/矿石提锂项目单位产能投资额与工艺横向对比表》</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目名称与所属主体</th>
@@ -1308,7 +1593,7 @@
 <td style="text-align: left;">每产 1 吨碳酸锂伴生 25–35 吨含氟铊长石粉与冶炼锂渣，环保固废填埋场与矿山选矿厂吞噬大量资本开支，现金成本居全球最右端</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3_3">3. 建成转固后的折旧摊销精确算账与盈亏平衡点（稼动率）推导</h4><p>很多投资者担心：本部 4 万吨项目 60.63 亿元砸下去，2025 年 9 月底转固后，2026 年起每年新增的固定资产折旧会不会像当年盐湖镁业一样变成吞噬利润的包袱？我们严格按照盐湖股份 2025 年报披露的固定资产会计政策（<strong>年限平均法，预计残值率统一为 3%：房屋 10—40 年、构筑物 25 年/年折旧率 3.88%、机器设备及电器设备 15 年/年折旧率 6.47%、电子及仪表计量设备 5 年/年折旧率 19.40%</strong>），把这笔折旧账拆解到小数点后两位：</p><ol>
 <li><strong>转固资产原值与分类拆解</strong>：
    * 项目核定概算总投资 <strong>60.63 亿元</strong>，扣除工程建设及设备采购环节约 9%—10% 的可抵扣增值税进项税额后，实际计入固定资产、无形资产及长期待摊费用的账面不含税原值约为 <strong>55.00 亿元</strong>。</li>
@@ -1668,7 +1953,7 @@
 
 
 <h3 id="_22">四、 《盐湖股份远期新业务/新技术期权商业化证伪汇总表》</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">远期新业务/技术方向</th>
@@ -1718,7 +2003,7 @@
 <td style="text-align: left;"><strong>【满足盐湖综合利用政绩要求、凑数点缀的平庸鸡肋资产】</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="-_1">---</h2>
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
 <blockquote>
@@ -1734,7 +2019,7 @@
 <p>如果我们把盐湖股份、藏格矿业、亚钾国际、天齐锂业、永兴材料这五家上游资源商的2025年报与2026年三季报摆在同一张桌子上，再把下游买钾肥的新洋丰、买碳酸锂的湖南裕能拉进来做“三方对口供”，真相就会像剥洋葱一样一层层显露出来。</p>
 <h3 id="_23">一、 盐湖股份与核心同行最新财报经营与盈利质量横向对质总表</h3>
 <p>在正式进入三方审讯前，我们先将五家上游对手及两家核心下游龙头截至2025年报与2026年三季报（1—9月）的全部硬核财务与经营指标锁定在同一张全景对质表中：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审讯维度与核心指标</th>
@@ -1901,7 +2186,7 @@
 <td style="text-align: left;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_24">二、 第一轮审讯：景气度对质——下游到底是在实质性升温补库，还是在渠道压库？</h3>
 <p>周期股最怕“伪景气”：表面上上游矿企营收大涨，实际上货全堆在贸易商仓库里，或者靠放宽赊销账期把货硬塞给下游。我们拿“合同负债（预收款）、应收账款、存货变动、经营现金流”这四把尺子，联合上下游一起来量一量：</p>
@@ -2162,7 +2447,7 @@
 
 <h4 id="4-owner-earnings">4. 《盐湖股份常态真实股东盈余（Owner Earnings）分步还原测算表》</h4>
 <p>我们将“2024 老底盘”、“2026 新常态满产底盘（理性中枢价）”以及“2026 实际景气运行实况”三套账本并列拆解如下：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">测算维度与分步还原科目</th>
@@ -2349,7 +2634,7 @@
 <td style="text-align: left;"><strong>真金白银造血天然高出账面净利约 6.2 亿元/年</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>核心结论一针见血</strong>：在完全剥离周期景气泡沫的理性中枢（钾肥 2500 元/吨、碳酸锂 9.0 万元/吨）下，盐湖股份 2026 新底盘的常态账面归母净利润为 <strong>72.35 亿元/年</strong>，而<strong>常态真实股东盈余（Owner Earnings）高达 78.55 亿元/年</strong>，比账面净利润整整高出 <strong>6.20 亿元/年（溢价率 108.57%）</strong>！原因极其硬核：重资产盐田工程与矿权在账面每年计提 14.35 亿元归母折旧摊销，但太阳晒卤和管道输卤的物理属性决定了每年只需花 8.15 亿元就能让资产永葆青春，再加上先款后货零营运资金沉淀，使它成为 A 股罕见的<strong>“自由现金流大于净利润”</strong>的顶级造血机器。</p>
 </blockquote>
@@ -2368,7 +2653,7 @@
 <p>这两大动作叠加，使盐湖股份的<strong>归母权益锂盐产能从 2.057 万吨/年暴增至 6.975 万吨/年，净增 4.918 万吨/年（增幅高达 +239.1%）</strong>，外加 <strong>15.3 万吨/年</strong>权益钾肥！</p>
 <p>为了算清这笔增量账，我们不仅要算新增产能赚了多少钱，还要诚实地扣除<strong>花掉 46.05 亿元现金收购五矿盐湖所牺牲的账面存款利息收入（按 2.0% 年化存款利率计，每年减少税后净利息收入约 0.78 亿元）</strong>。在不同锂价中枢下，这新增的 <strong>4.918 万吨权益锂盐 + 15.3 万吨权益钾肥</strong> 对公司常态造血中枢的硬核垫高幅度如下表所示：</p>
 <h4 id="2026-492-153">《2026 新增权益产能（+4.92万吨锂盐 &amp; +15.3万吨钾肥）造血底盘垫高测算表》</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">碳酸锂含税价格中枢假设</th>
@@ -2423,7 +2708,7 @@
 <td style="text-align: left;"><strong>+85.84%</strong>（造血突破百亿大关）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>增量垫高真相</strong>：哪怕在 9.0 万元/吨的平庸锂价下，本部 4 万吨全资项目达产叠加五矿盐湖并表，也把盐湖股份的常态归母净利润硬生生往上垫高了 <strong>20.37 亿元/年</strong>，把<strong>常态真实股东盈余（Owner Earnings）从老底盘的 55.38 亿元/年直接垫高了 23.17 亿元/年，跃升至 78.55 亿元/年（硬抬升幅度达 +41.84%）</strong>！更重要的是，一旦锂价处于 12 万—15.5 万元/吨的中高景气区间，这新增的 4.92 万吨纯权益锂盐每年就能多吐出 <strong>34 亿—47.5 亿元</strong> 的净现金流，这就是为什么 2026 年前三季度公司归母净利润能同比狂飙 90.09% 达到 89.40 亿元的底层算术逻辑。</p>
 </blockquote>
@@ -2500,7 +2785,7 @@
 
 
 <h4 id="3_9">3. 《盐湖股份双极限压力测试损益与现金流传导推演表》</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与经营指标</th>
@@ -2582,13 +2867,13 @@
 <td style="text-align: left;"><strong>铜墙铁壁！即便三重黑天鹅共振，年自由现金流仍近 49 亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="-_3">---</h2>
 <h2 id="e">【追问模块 E：会计成色与治理细节显微镜】</h2>
 <p>很多经历过2017—2019年“<code>*ST盐湖</code>”破产重整的老股民，心里总会留着一根刺：当年盐湖股份因为金属镁一体化项目和化工板块巨额亏损，曾创下A股惊天动地的458亿元账面亏损纪录；如今账上躺着345.28亿元现金、一年赚上百亿利润，现在的财务报表到底干不干净？有没有藏着新的资产减值暗雷？五矿入主后的治理和激励机制到底靠不靠谱？</p>
 <p>我们直接调出盐湖股份《2025年年度报告》与《2026年第三季度报告》的底层报表附注，联合四大同行的会计政策参数，放在显微镜下逐项审视。</p>
 <h3 id="_27">一、 盐湖股份与同行核心会计政策及资产质量参数对比表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计科目与治理参数</th>
@@ -2681,7 +2966,7 @@
 <td style="text-align: left;">盐湖执行严苛央企限薪令，高管零低价股权输送，15亿回购注销直接增厚全体股东权益</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_28">二、 资产质量排雷：逐项核验报表附注的“四大敏感区”</h3>
 <h4 id="1-190154">1. 应收账款与票据排雷：近190亿营收仅1.54亿应收账款，到底是怎么做到的？</h4>
@@ -2702,7 +2987,7 @@
 <h4 id="2-090">2. 存货跌价准备排雷：矿石提锂同行计提过亿跌价，盐湖股份为什么库存商品只计提 0.90%？是少提了吗？</h4>
 <p>在2024—2025年碳酸锂价格剧烈波动的周期里，外购锂辉石或高成本云母提锂企业动辄计提数亿乃至十亿级的存货跌价准备（即便自有矿龙头天齐锂业，截至2025年末也计提了 <strong>1.14亿元</strong> 存货跌价准备，其中库存商品跌价准备8,623万元）。
 那么，盐湖股份存货里到底装了什么？计提了多少？我们直接调出盐湖股份《2025年年度报告》存货附注原表（单位：元）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">存货明细科目</th>
@@ -2771,7 +3056,7 @@
 <td style="text-align: left;">较2024年末（跌价准备4,565.87万元）保持动态审慎计提</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>看懂这张表，你就看懂了盐湖股份为什么拥有对抗周期风暴的“金刚不坏之身”：</p>
 <ol>
 <li>
@@ -3013,7 +3298,7 @@
 
 
 <h4 id="3-true-ev-2026116">3. 《盐湖股份真实企业价值（True EV）精确拆解表（截至 2026年11月6日）》</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值拆解科目</th>
@@ -3109,7 +3394,7 @@
 <td style="text-align: left;"><strong>比表面市值便宜 171.79 亿元！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>震撼的投资真相</strong>：当你在股票软件上看到盐湖股份总市值 <strong>1,225.00 亿元</strong> 时，千万不要被这个表面数字骗了！因为你每花 23.15 元买下一股盐湖股份，公司账上就有 <strong>5.96 元/股的可自由支配超额现金（315.28 亿元 ÷ 52.92 亿股）</strong>，扣掉全部银行贷款和未来十几年才需付清的矿权款后，依然有 <strong>5.42 元/股的纯净现金（286.79 亿元 ÷ 52.92 亿股）</strong> 属于股东！
 换句话说，<strong>全款买下整座察尔汗盐湖（500万吨钾肥+6万吨权益锂）+ 一里坪盐湖（51%控股权）的真实企业标价（True EV），只有 938.21 亿元（哪怕按归母现金严格穿透也只有 959.22 亿元，合并账面口径仅 993.32 亿元），比表面总市值整整便宜了近三百亿元（折价高达 21.7%—23.4%）！相当于你用 17.73 元—18.13 元/股的真实净成本，买下了表面标价 23.15 元/股的中国盐湖资源总龙头！</strong></p>
@@ -3205,7 +3490,7 @@
 
 
 <h4 id="3-reverse-sotp">3. 《盐湖股份 Reverse SOTP 反向拆骨估值推演表》</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">反向拆骨步骤与资产包层级</th>
@@ -3282,7 +3567,7 @@
 <td style="text-align: left;"><strong>完全没有预支任何泡沫，纯属“买钾肥送现金，半买半送顶级提锂资产”！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_29">三、 赔率坐标、同行对标与实战击球区推演</h3>
 <h4 id="1_8">1. 历史分位与国内外同行估值坐标对标</h4>
@@ -3300,7 +3585,7 @@
 </li>
 </ul>
 <h5 id="2-2026-11">（2）横向国内外同行估值对比表（截至 2026 年 11 月最新行情）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称（股票代码）</th>
@@ -3368,7 +3653,7 @@
 <td style="text-align: left;">存量地下矿井维护 CapEx 远高于露天盐田，带有部分有息负债</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>估值坐标终极定性</strong>：对比藏格矿业（13.5—15 倍 PE）、亚钾国际（12.5—14.8 倍 PE）、SQM（13—15.5 倍 EV/EBITDA）以及 Nutrien（13.9 倍 PE），盐湖股份当前的表面 PE 仅 <strong>10.1 倍</strong>，扣除 286.8 亿元净现金后的<strong>真实核心业务 PE 仅 7.8 倍、真实 EV/EBITDA 仅约 5.8—6.2 倍</strong>！
 因此，我们给出明确无误的定性判断：当前盐湖股份（23.15 元 / 1225 亿元市值）绝不存在任何乐观透支，而是处于<strong>“表面估值合理偏保守、穿透 315 亿超额现金后的真实企业价值（True EV）显著低估”</strong>的高赔率状态！之所以市场还没把这个估值折价填平，唯一的压制因素就是<strong>“母公司报表未分配利润尚未彻底转正，导致过去几年无法派发高额现金分红，345 亿现金锁在账上未能转化为股息率”</strong>。而这层最后的窗户纸，正在被 2026 年狂飙的利润急速捅破！</p>
@@ -3376,7 +3661,7 @@
 <hr/>
 <h4 id="2_13">2. 四维分档击球区与实战行动锚点</h4>
 <p>既然看透了“345 亿现金 + 母公司未分配利润即将转正解锁分红”的核心矛盾，我们的实战击球策略就不再盲目猜K线，而是建立在精确的<strong>市值 / 股价 / True EV / 隐含回报率</strong>四维锚点之上：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球分档区间</th>
@@ -3421,7 +3706,7 @@
 <td style="text-align: left;"><strong>右侧分批止盈落袋</strong>。当分红重估完成且钾锂价格双双进入周期亢奋期，市场将景气暴利按 15 倍以上 PE 线性外推、隐含常态回报率跌破 5% 时，从容将筹码交给狂热资金。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_10">3. 三条“基本面死刑证伪红线”（触发任一即无条件清仓离场）</h4><p>投资老手永远在出发前就写好“撤退军令状”。如果未来盐湖股份出现以下三条量化红线中的任何一条，说明我们的核心投资逻辑已被证伪，无论当时股价涨跌、无论账面浮盈还是浮亏，必须<strong>无条件认错清仓离场</strong>：</p><ol>
 <li><strong>红线一：“金属镁黑洞死灰复燃”——盲目跨界重资产资本开支红线</strong>
@@ -3535,7 +3820,7 @@
 <p>这意味着什么？意味着在 <code>23.15</code> 元的当前价格下，你买进的是一笔 <strong>“向下有 287 亿净现金 + 517 亿钾肥现金牛焊死地板，向上有近 7 万吨最低成本锂盐高弹性 + 2027 分红破冰重估 + 0 元白送固态氯化锂与原卤扩产期权”</strong> 的教科书级不对称赌局！</p>
 <hr/>
 <h3 id="_30">📋 五、《四位投资大师圆桌投票与核心判词总表》</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">传奇投资大师</th>
@@ -3575,7 +3860,7 @@
 <td style="text-align: left;"><strong>【黄金赔率击球区（左脚底仓 + 18—20.5元满仓重锤）】</strong><br/>下行风险被净现金与钾肥焊死，上行享受产能翻倍、分红解锁与固态氯化锂三重免费看涨期权</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -3598,13 +3883,26 @@
 <p>给今天一千两百多亿市值（二十三块多）切三刀：切掉两百八十多亿净现金，再切掉价值五百多亿的钾肥底座，市场留给近七万吨归母顶级盐湖提锂产能的残值标价仅四百二十亿元——每万吨才六亿元，比自建厂钢筋水泥成本还便宜一半，固态电池氯化锂和原卤扩产期权更是零元白送！趁市场还在纠结过去没分红，二十三元附近可直接建四到五成底仓（回调至十八到二十块半则满仓重锤），安心坐等2026年报解锁分红支票。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3774,7 +4072,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《盐湖股份_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/盐湖股份_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《盐湖股份 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/盐湖股份 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3832,6 +4130,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>中际旭创_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>中际旭创 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">中际旭创_全模块深度投研全集</div>
+    <div class="report-title">中际旭创 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -673,7 +958,7 @@
 <li>LPO直接砍掉模块内功耗占40%、成本占25%的DSP芯片，依靠交换机端SerDes直接驱动，功耗降低约50%、时延降低30%以上，但存在互操作性差、传输距离短的物理局限。中际旭创在800G/1.6T LPO及半重定时（LRO/TRO）方案上已完成北美头部客户批量导入，同时在数据中心互联（DCI）相干光模块（400G/800G ZR/ZR+）上打破了Acacia（思科）的长期垄断。</li>
 </ul>
 <h4 id="2">2. 全球高速光通信四大核心玩家硬核比拼总表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -727,7 +1012,7 @@
 <td style="text-align: left;">产能高度集中于国内武汉等地，海外数通大客户直供占比低</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看美国老牌巨头Coherent吧——自己家里有磷化铟晶圆厂、自己造激光器芯片，按理说垂直一体化应该通杀全场才对，结果净利率连中际旭创和新易盛的三分之一都不到！为什么？因为在高端精密制造里，“实验室里有技术”和“在东南亚工厂里把一千万只1.6T模块的良率干到95%、成本砍掉一半”完全是两码事。中国工程师集群的工艺迭代速度，就是这道护城河最硬的水泥。</p></div></div>
 <hr/>
 <h3 id="_5">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？】</h3>
@@ -758,7 +1043,7 @@
 <li><strong>① “翻旧账对表”言行一致性审计（2021—2023年报承诺 vs 2025—2026实际交卷）</strong>：
   我们调取公司2021年26.99亿元定增募投计划及2022—2023年报经营计划逐一对表：</li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">历史承诺项目（2021定增/2022-2023年报）</th>
@@ -793,7 +1078,7 @@
 <td style="text-align: left;"><strong>说到做到、甚至提前交卷</strong>，战略前瞻性冠绝全球同行</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
 <p><strong>② 质押、杠杆与高点减持套现排查（唯一需客观正视的治理扣分项）</strong>：
@@ -853,7 +1138,7 @@
 </ul>
 <h4 id="3_1">3. 五年一期现金流硬账本与防合并报表幻觉穿透</h4>
 <p>我们拉出中际旭创 <strong>2021—2025年五个完整会计年度 + 2026年前三季度</strong> 的现金流硬账本（单位：亿元人民币）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -930,7 +1215,7 @@
 <td style="text-align: left;">36.01%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="4">4. 打破“合并报表幻觉”深度体检</h4><ul>
 <li><strong>① 为什么2026年前三季度归母净利高达222.38亿元，而OCF只有80.08亿元、FCF为-11.53亿元？（营运资金吞噬与极速扩产的真相）</strong>
   绝不能简单粗暴地给2026年前三季度的负自由现金流扣上“纸面富贵”的帽子，拆开资产负债表一看便知：</li>
@@ -1116,7 +1401,7 @@
   为什么中际旭创会比新易盛略“重”一点？核心秘密在于<strong>“自研硅光全工序内化 vs 传统分立式外购组装”的工艺代差</strong>：中际旭创没有把钱花在低效土建上，而是大量采购了晶圆级硅光光电混合测试台（Wafer-level Testing）与全自动亚微米耦合机，将硅光引擎（PIC）的测试、大功率CW光源贴装与FAU光纤阵列耦合全部收归体内完成。这种“设备端多花10%的钱”，直接省去了向外采购成品光引擎的中间商差价，并将1.6T硅光模块封装良率推升至92%以上，从而在利润表上兑换出了<strong>2026年前三季度高达46.39%（Q3单季46.61%）的惊人毛利率</strong>。</p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -1163,7 +1448,7 @@
 <td style="text-align: left;">IDM重资产包袱极重，海外人工与折旧高企，净利率显著落后中国双雄</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="3_3">（3）全面转固后的折旧摊销冲击与盈亏平衡稼动率精算</h5><p>当2026Q3末的 <strong>124.55亿元存量固定资产</strong> 与 <strong>54.95亿元在建工程</strong> 全部达到预定可使用状态并结转固定资产后，中际旭创账面固定资产净值将攀升至 <strong>179.50亿元</strong>（较2025年末的70.81亿元净增 <strong>108.69亿元</strong>，增幅达153.50%；若还原累计折旧，对应固定资产原值规模将突破210亿元）。我们来严密测算这笔巨额资产包转固后的年度折旧账单与盈亏平衡红线：</p><ul>
 <li>
 <p><strong>会计折旧年限基准</strong>：根据中际旭创年报会计政策，公司采用年限平均法计提折旧，其中<strong>房屋及建筑物</strong>折旧年限为20年（残值率5%，年折旧率4.75%）；<strong>机器设备</strong>名义折旧年限为5—10年（残值率5%，年折旧率9.50%—19.00%）。考虑到单波200G误码仪、高精度硅光耦合机等电子与光学测试设备更新换代极快，实务中核心产线设备加权平均折旧年限约为6.5—7.5年（综合年折旧率约13.0%）。</p>
@@ -1258,7 +1543,7 @@
 <hr/>
 <h4 id="1-ppt">1. 商业化刻度精准定位：谁在批量印钞，谁在送样验证，谁还在PPT与车展展台上？</h4>
 <p>我们先将中际旭创旗下的新技术与新业务按真实的商业化成熟度（从实验室概念到跑通单点盈利模型）进行冷酷切分，拒绝将“已量产主力”与“远期概念期权”混为一谈：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">新业务 / 新技术方向</th>
@@ -1305,7 +1590,7 @@
 <td style="text-align: left;"><strong>高（平庸鸡肋资产 + 极远期彩票）</strong>：传统汽配深陷车企年降泥潭，FTTV车载光通信在2028年前难有规模经济</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把每年赚两百多个亿的1.6T光模块和一年只卖几个亿、利润薄得像纸一样的汽车倒车雷达放在同一份报告里吹捧为“双轮驱动”，就像把一头成年霸王龙和一只刚孵出来的小麻雀绑在一辆马车上，然后告诉股东这叫“混合动力”。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_5">2. 跨越鸿沟的三道生死关卡：物理极限、运维噩梦与价值链话语权争夺</h4><p>为什么CPO（光电共封装）和汽车光电子听起来星辰大海，但在跨越商业化鸿沟（Crossing the Chasm）时却步履维艰？我们分别拆解它们各自卡着的三道生死门槛：</p><h5 id="cpo-npo">（一）CPO / NPO 赛道跨越鸿沟的三道生死关卡</h5><ol>
@@ -1408,7 +1693,7 @@
 <h3 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h3>
 <p>在高速光通信这个技术代际每18—24个月洗牌一次的残酷竞技场里，单看一家公司的财报极易陷入“自我感动的幸存者偏差”。为了剥离行业贝塔（<span class="math-inline">\beta</span>）的泡沫、还原真刀真枪的阿尔法（<span class="math-inline">\alpha</span>）成色，我们将全球光通信产业链最具代表性的四大A股核心玩家——全球光模块霸主<strong>中际旭创（300308.SZ）</strong>、纯血数通黑马<strong>新易盛（300502.SZ）</strong>、上游无源/有源光引擎寡头<strong>天孚通信（300394.SZ）</strong>、电信与数通双栖国家队<strong>光迅科技（002281.SZ）</strong>，连同海外头号劲敌<strong>Coherent（COHR.US）</strong>一并拉上审讯台，用截至2025年报与2026年三季报（2026Q1-Q3）的真实硬数据展开一场刀刀见血的“三方交叉对质”。</p>
 <h4 id="20252026q1-q3">一、 高速光通信代表企业2025及2026Q1-Q3经营与财务交叉对质总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与经营审讯维度</th>
@@ -1541,7 +1826,7 @@
 <td style="text-align: left;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把四家公司的底牌同时摊在桌面上，谁在裸泳、谁在印钞一目了然——有人拿着46%的毛利率和近700亿的营收在北美巨头金库里开挖掘机，有人却连经营现金流都贴成了负数（-18.81亿）去替下游垫资买单；在商业世界里，规模从来不是护城河，能把规模变成真金白银的自由现金流才是！</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_12">二、 景气度对质：百亿存货与千万合同负债的“冰火悖论”——是真需求锁料还是局部压库？</h4><p>审视上表，任何一个懂财务的审计师都会第一时间揪住两个看似极度违和的异常现象发出质问：
@@ -1642,7 +1927,7 @@
 <h3 id="e">【追问模块 E：会计成色与治理细节显微镜】</h3>
 <p>当一家制造业公司在短短三个季度内轰出695.47亿元营收、222.38亿元归母净利润，且资产负债表上同时趴着238.78亿元存货、173.09亿元应收账款和124.55亿元固定资产时，任何优秀的价值投资者都必须收起兴奋，拿起最严苛的法务会计放大镜，逐一排查它的利润表里究竟有没有“寅吃卯粮的会计调节水分”。</p>
 <h4 id="_14">一、 中际旭创与同行核心会计政策及资产减值计提横向对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心会计政策与减值审计维度</th>
@@ -1703,7 +1988,7 @@
 <td style="text-align: left;"><strong>高度克制且持续收敛</strong>：旭创资本化率仅3.62%且逐年走低，对百亿利润影响不足0.5%，远比光迅科技（8.50%）保守</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_15">二、 资产质量排雷：四大敏感科目逐一过堂</h4><ol>
 <li><strong>头号重点排雷：238.78亿元天量存货的内部结构与跌价准备计提（2.29% vs 新易盛6.86%）——是激进少提，还是订单锁定？</strong>
@@ -1870,7 +2155,7 @@
 </ul>
 <p>我们将上述四步还原过程汇总为下表，清晰对比“2025年经审计实绩”、“2026年化高景气极值”与“剥离首发暴利后的跨周期常态中枢”三套标尺：</p>
 <h4 id="owner-earnings_1">《中际旭创常态股东盈余（Owner Earnings）多情景分步还原测算表》</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流还原科目（单位：亿元人民币）</th>
@@ -1973,7 +2258,7 @@
 <td style="text-align: left;">剥离扩张期CapEx与存货占款后，真实含金量约为账面净利的9成</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>会计师总喜欢假装一台贴片机和激光耦合台能安安稳稳用满五年，但硅谷那帮疯子每24个月就把光模块速率翻一倍——如果你不把每年挣来的钱掏出27个亿去换最新款的测试仪表，你账面上那125亿的固定资产过两年就只配去生产博物馆纪念品；好在即便扣掉了这笔昂贵的“军备升级税”并砍掉10个点的暴利毛利，这台印钞机每年依然能实打实吐出165亿真金白银，这可比大多数整天吹牛却连折旧都赚不回来的伪科技公司硬朗多了。</p></div></div>
 <hr/>
 <h4 id="5495">二、 增量垫高测算：54.95亿元在建工程全面投产后的造血中枢跃迁</h4>
@@ -2066,7 +2351,7 @@
 <li>由于芯片涨价与关税垫资导致存货及应收占用額外增加约18.00亿元，自由现金流（压力态Owner Earnings）将从164.81亿元收缩至 <strong>+86.90亿元</strong>。虽然利润表遭受重创，但公司凭借账上 <strong>535.32亿元货币资金</strong> 与每年近87亿元的正向自由现金流，依然具备在牌桌上熬死所有中小竞争对手的绝对底气。</li>
 </ul>
 <h4 id="_18">《中际旭创双极限压力测试损益与现金流冲击推演表》</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心损益与现金流指标（基于存量产能底盘，单位：亿元）</th>
@@ -2183,7 +2468,7 @@
 <td style="text-align: center;"><strong>重度承压，但仍保住百亿级归母净利与87亿FCF</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>做压力测试就像测试一架飞机能不能在狂风暴雨里单引擎迫降——即便下游巨头突然翻脸砍价15%、上游芯片恶霸一分钱不让，甚至美国海关还在泰国工厂门口收过路费，中际旭创最惨的一年居然还能净赚85到112个亿、往保险柜里揣进90亿现金；当你手里握着自研硅光这张底牌和535亿现金粮草时，别人眼里的灭顶之灾，不过是你用来清理门户、顺便把二三线同行送进火葬场的免费大扫除。</p></div></div>
 <hr/>
 <h3 id="f">【追问模块 F：解锁估值定价、隐含预期与击球区推演】</h3>
@@ -2238,7 +2523,7 @@
 </li>
 </ol>
 <h4 id="true-ev202611">《中际旭创真实企业价值（True EV）核算明细表》（基准日：2026年11月）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值核算科目</th>
@@ -2297,7 +2582,7 @@
 <td style="text-align: left;"><strong>全款买断整家生意的真实净标价</strong>（较普通股表面市值折价约393.89亿元）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>中际旭创的管理层在2026年干了一件让华尔街投行都得脱帽致敬的资本运作——先在7月份趁着港股对AI算力饥渴难耐，用6,268万股H股从国际大户手里融来485亿人民币真金白银锁进保险柜，转头又在9月和10月掏出50亿把自家的A股买回来一把火烧掉（注销减资）；这就意味着你表面上花5,551亿买下这家公司，推门进屋就能先从账上提走460亿闲钱，真正为这台光模块印钞机掏出的净本金只有5,157亿。</p></div></div>
 <hr/>
 <h4 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值）</h4>
@@ -2361,7 +2646,7 @@
 </li>
 </ol>
 <h4 id="5551reverse-sotp">《中际旭创 5,551亿元总市值逆向拆骨（Reverse SOTP）价值解构表》</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">拆骨价值层级</th>
@@ -2430,7 +2715,7 @@
 <td style="text-align: center;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这5,551亿市值剥皮拆骨后你会发现一个很有趣的错位——华尔街和A股的交易员因为害怕2028年CPO抢饭碗或者AI算力见顶，只给了这家当年能赚近300亿的公司18倍的当年市盈率；但如果你按最土鳖的工厂算法，光靠它账上的净现金和手里已经建好及在建的产线按14倍苦力价估值，就能稳稳兜住3,654亿（差不多三分之二的市值），剩下的1,897亿远期溢价对于一家卡住全球算力咽喉的头号霸主来说，虽然不算白捡的便宜货，但也绝不是什么吹上天的肥皂泡。</p></div></div>
 <hr/>
 <h4 id="_19">三、 赔率与行动锚点：同行估值横评、分档击球区与死刑证伪红线</h4>
@@ -2580,7 +2865,7 @@
 </ol>
 <hr/>
 <h3 id="5">5. 📋 四位投资大师闭门投票与终极裁决总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">传奇大师</th>
@@ -2630,7 +2915,7 @@
 <td style="text-align: left;">“518亿净现金决定了它绝不会死在寒冬里，但4,800亿的核心业务标价决定了现在的赔率是对称的（1:1），好公司还要等坏消息砸出不对称买点。”</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -2660,13 +2945,26 @@ ightarrow$ 【真正无法违抗的周期地心引力】</strong>：再伟大的
 <p>看懂了这层周期钟摆，咱们的操作纪律就铁板钉钉了：<strong>好公司不等于在任何价格下都是好股票</strong>。当全世界都知道它是AI卖铲王、毛利率站在接近五成的历史最高峰、表面市盈率看着只有十几个点的时候，千万别被周期高点的“低市盈率幻觉”骗去满仓梭哈，因为此时的上下行赔率是对称的，甚至看到内部人高位减持时更要多一份克制。对付这种顶级硬科技周期龙头，最赚钱的买法永远是“等坏消息”——等哪天北美某家云巨头传出削减资本开支、或者下一代技术争论把市场吓得魂飞魄散，股价把毛利率回归的悲观预期彻底砸出来、扣除五百亿净现金后的核心业务回到十倍出头的常态估值时，那才是咱们仗着它五百亿现金防弹衣闭眼重锤的黄金买点。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2836,7 +3134,7 @@ ightarrow$ 【真正无法违抗的周期地心引力】</strong>：再伟大的
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《中际旭创_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中际旭创_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《中际旭创 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中际旭创 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2894,6 +3192,97 @@ ightarrow$ 【真正无法违抗的周期地心引力】</strong>：再伟大的
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

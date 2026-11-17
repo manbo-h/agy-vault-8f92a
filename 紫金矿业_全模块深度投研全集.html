@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>紫金矿业_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>紫金矿业 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">紫金矿业_全模块深度投研全集</div>
+    <div class="report-title">紫金矿业 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -678,7 +963,7 @@
 </ul>
 <h3 id="2">2. 核心矿山舰队与国内外同行硬核参数对质表</h3>
 <p>为了直观穿透紫金矿业在全球铜、金双赛道的真实身位，我们将紫金与国内外直接竞争对手（自由港、洛阳钼业、江西铜业、纽蒙特、山东黄金）截至2025年报及2026年最新披露的核心经营底牌拉到同一张桌面上对比：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -773,7 +1058,7 @@
 <td style="text-align: left;">胶东半岛深井采矿技术与国内整合</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="3_1">3. 储量替代率与“五环归一”工程硬壁垒（采掘业的生死命门）</h3>
 <div class="annotated-row"><div class="main-col"><p>采矿业与制造业最大的不同在于：<strong>制造业的工厂只要维修就能一直转，而矿山每挖出一吨矿石，地底下的家底就永远少一吨</strong>。如果一家矿企的“年度新增探明及并购储量”小于“年度开采消耗量”（即储量替代率 &lt; 100%），它本质上就是在坐吃山空、慢性自杀。</p><ul>
 <li>
@@ -820,7 +1105,7 @@
 <li><strong>① “翻旧账对表”言行一致性审计（拉出2021年初《五年（2021—2025）规划》逐项验卷）</strong>：
   我们在2021年初紫金矿业发布的《五年（2021—2025）规划和2030年发展目标纲要》及2023年初修订版中翻出当年管理层立下的军令状，与2025年年报实际交卷成绩做严苛比对：</li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">2021/2023年立下的2025年军令状</th>
@@ -850,7 +1135,7 @@
 <td style="text-align: left;"><strong>主动踩刹车调整</strong>：面对2023—2025年锂价暴跌80%，管理层拒绝为了凑产量指标而在低谷盲目烧钱抢建，主动放缓高成本环评卡点项目、转而控本并购藏格矿业，体现了极强的商业理性。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
 <p><strong>② 质押、杠杆与高点套现排查（无异常）</strong>：第一大股东闽西兴杭国有资产投资经营有限公司（上杭县国资委全资，持股约22.89%）股权结构清晰稳定，无高比例质押爆仓隐患；陈景河、邹来昌等核心高管团队多年通过高管增持与员工持股计划深度绑定，从未出现民企常见的实控人高位清仓式减持或掏空行为。</p>
@@ -910,7 +1195,7 @@
 </ul>
 <h3 id="3_2">3. 五年一期现金流硬账本与“防合并报表幻觉”穿透审计</h3>
 <p>我们将紫金矿业最近五个完整会计年度（2021—2025年）及最新一期（2026年1—9月三季报）的核心现金流与少数股东数据拉出标准对照表（单位：亿元人民币）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务指标（亿元）</th>
@@ -995,7 +1280,7 @@
 <td style="text-align: left;"><strong>146.5%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>穿透“合并报表幻觉”的两项深度体检</strong>：</p><ol>
 <li><strong>少数股东损益 vs 少数股东权益匹配度体检（有无“纸面合并富贵”？）</strong>：
    由于紫金的海外主力矿山普遍与东道国政府（如刚果金政府、塞尔维亚政府）或合资方共同持有，少数股东损益从2021年的39.22亿元增长至2025年的120.45亿元（2026年前三季度为159.85亿元）。但我们来算一笔ROE对比账：</li>
@@ -1177,7 +1462,7 @@
 </ul>
 <h4 id="2-vs_1">2. 紫金核心扩产工程 vs 国际矿业巨头新建项目对比表</h4>
 <p>为了直观展现紫金在工程端的统治力，我们将其与必和必拓（BHP）、力拓（Rio Tinto）、英美资源（Anglo American）、泰克资源（Teck Resources）及第一量子（First Quantum）近年建设或评估的同级别铜矿项目进行全维度对标：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">项目名称与所属公司</th>
@@ -1282,7 +1567,7 @@
 <td style="text-align: left;"><strong>遥遥无期</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3-3550">3. 工程护城河解构：省下35%—50%投资额的三大底层秘密</h4><p>为什么西方矿业巨头在智利、秘鲁、蒙古建一座铜矿，单位投资强度普遍高达 <strong><code>1.9万—3.1万美元/吨铜</code></strong>，且动辄超支50%以上，而紫金矿业在海拔5,300米的西藏极寒高原或塞尔维亚深井建矿，却能死死按在 <strong><code>1.2万—1.5万美元/吨铜</code></strong>，节省高達 <strong>35%—50%</strong> 的资本开支？答案绝非简单的“中国劳动力便宜”，而是三大系统级工程剪刀差：</p><ol>
 <li>
 <p><strong>“五环归一”自主内化 vs 西方外包EPCM寻租体系</strong>：BHP、Rio Tinto 或 Teck 在开发 QB2、Oyu Tolgoi 时，标准做法是将可研、设计、采购、施工管理层层外包给 Bechtel（柏克德）、 Hatch（赫氏）、Worley 等国际工程巨头（EPCM模式）。这些承包商按工时和总造价抽成，不仅自身设计费与管理费占去总投资的 <strong>15%—22%</strong>，且一旦地质条件变化（如岩层破碎度超预期），承包商立刻启动漫长的合同索赔与设计变更程序，导致工期拖延2—3年、财务费用滚雪球。反观紫金，独创 <strong>“地、采、选、冶、环五环归一”</strong> 工程管理体制——集团旗下的紫金设计院、紫金矿建、紫金工程技术公司全程主导，地质勘探还在打钻时，选矿实验室已在做矿石可选性试验，采矿工程师已在优化剥采比与开拓巷道。设计、施工、生产无缝咬合，彻底砍掉了高达15%以上的第三方EPCM溢价与扯皮摩擦成本。</p>
@@ -1499,7 +1784,7 @@
 <h3 id="_14">三、 竞争终局推演与最终定性：明修锂钾栈道、暗度巨龙陈仓的顶级阳谋</h3>
 <h4 id="1-vs">1. 紫金锂业（两湖两矿+藏格）vs 全球四大锂业霸主硬核对质表</h4>
 <p>我们将整合藏格矿业后的紫金锂业版图，与全球四大老牌锂业巨头（智利SQM、美国雅保Albemarle、中国盐湖股份、赣锋锂业）置于同一张显微镜下对质：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -1560,7 +1845,7 @@
 <td style="text-align: left;">偏紧（纯锂及电池上下游重资产投入大，周期底部资产负债表承压明显）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2_4">2. 凭什么分一杯羹？揭秘紫金跨界锂业的底层同源性与“一石二鸟”阳谋</h4><p>面对SQM、盐湖股份、赣锋锂业这些浸淫锂行业二十年的老牌霸主，紫金矿业既没有下游电池厂客户粘性，又是2021年底才入局的后来者，凭什么敢叫板全球前三？</p><ul>
 <li>
 <p><strong>第一，底层技术同源性——盐湖提锂的本质就是“巨型湿法冶金化工”</strong>：外界把碳酸锂看作高精尖的新能源行业，但在陈景河与紫金工程师眼中，<strong>盐湖提锂（吸附+膜分离+溶剂萃取+沉淀结晶）与紫金山起家的低品位铜金矿生物堆浸、刚果（金）穆索诺伊氧化铜钴矿的湿法酸浸—萃取—电积（SX-EW）在化学工程底层逻辑上100%同源</strong>！它们全都是在处理“每升仅含几百毫克目标金属的巨量低浓度溶液”，比拼的都是流体管道输送、离子交换树脂/吸附剂选择性、酸碱耗控制、蒸汽热平衡与防腐蚀车间管理。紫金把三十年湿法冶金沉淀的化工放大能力直接平移到拉果措、3Q盐湖和湘源锂云母焙烧浸出上，根本不存在所谓的“跨界外行门槛”。</p>
@@ -1588,7 +1873,7 @@
 <h1 id="c">追问模块 C：同行与上下游“三方交叉审讯”</h1>
 <p>在周期性资源行业里，单看一家企业的财务报表极易陷入“把全行业的β（贝塔）顺风误认为企业α（阿尔法）神功”的认知幻觉。为了剥离金铜价格上涨的普惠红利、检验紫金矿业成色的真伪，我们调取了国内最直接的三家产业链核心参照系——<strong>洛阳钼业（603993.SH，刚果金铜钴矿山直接对手+埃珂森IXM全球大宗贸易）</strong>、<strong>江西铜业（600362.SH，国内铜冶炼与下游加工标尺）</strong>、<strong>山东黄金（600547.SH，国内纯正黄金矿山龙头）</strong>，以及两家海外矿业巨头——<strong>自由港（Freeport-McMoRan，全球铜业风向标）</strong>与<strong>纽蒙特（Newmont，全球最大黄金生产商）</strong>截至2025年报与2026年三季报的真实财务与经营数据，展开一场残酷的“三方交叉审讯”。</p>
 <h3 id="vs-vs-vs-20252026q3">【紫金矿业 vs 洛阳钼业 vs 江西铜业 vs 山东黄金 2025—2026Q3核心财务与经营对质总表】</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心对质维度</th>
@@ -1698,7 +1983,7 @@
 <td style="text-align: left;"><strong>2025年</strong>：矿产金 <strong>48.89吨</strong> (+5.89%)<br/><strong>2026Q1-Q3</strong>：矿产金 <strong>26.21吨</strong> (-30.63%，受安全自查与基建减产拖累)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="tcrc">一、 景气度与产业链利润分配对质：TC/RC跌穿负值的残酷物竞天择</h3>
 <div class="annotated-row"><div class="main-col"><p>将紫金矿业、洛阳钼业与下游冶炼端标尺江西铜业的财报放在同一张解剖台上，最触目惊心的现象是<strong>“营收体量与利润留存的极致倒挂”</strong>，这组数据直接撕开了2025—2026年全球有色金属产业链利润分配的底层真相：</p><ul>
@@ -1779,7 +2064,7 @@
 </li>
 </ul>
 <h4 id="2025-vs-2026-vs-owner-earnings">【紫金矿业 2025基准年 vs 2026年化口径 vs 周期中枢常态化 Owner Earnings 分步还原测算表】</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流还原步骤（单位：亿元人民币）</th>
@@ -1924,7 +2209,7 @@
 <td style="text-align: left;">归母Owner Earnings与合并常规FCF勾稽严密，无纸面富贵水分</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>许多华尔街傻瓜看矿业股只盯着利润表最后一行，或者把会计师按历史买矿成本算出来的“采矿权摊销”直接加回去当自由现金流花掉——他们忘了矿井越挖越深，你不往井下砸几十亿打新巷道、加高尾矿库、换掉磨穿的球磨机，三年后矿山就会停产！但哪怕我们用最严苛的尺子扣掉近百亿维持性资本开支，紫金矿业把金价铜价砍回周期均值后，每年依然能往股东口袋里净揣 <strong>420亿元</strong> 真金白银，这才是真正的印钞机底盘，不是会计戏法。</p></div></div>
 <hr/>
 <h3 id="_17">二、 增量垫高测算：四大确定性项目投产后的造血中枢抬升</h3>
@@ -1969,7 +2254,7 @@
 <li><strong>常态 Owner Earnings 贡献</strong>：朱诺铜矿（53.59%权益）与塞尔维亚增量在周期常态铜金价格下，扣除维持性开拓支出后，<strong>合计为紫金母公司再垫高常态归母 Owner Earnings <code>+23.00亿元/年</code></strong>！</li>
 </ul>
 <h4 id="owner-earnings_1">【四大确定性增量项目对紫金矿业周期常态 Owner Earnings 垫高汇总表】</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">确定性增量项目名称</th>
@@ -2037,7 +2322,7 @@
 <td style="text-align: center;"><strong>535.00（区间520—550亿）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看懂卡莫阿那座50万吨铜冶炼厂，你就看懂了陈景河为什么比一般矿老板高明。以前从非洲内陆往海港拉含铜50%的矿粉，等于花天价运费拉了半车毫无价值的石头，还得看当地海关官员的脸色交精矿出口税；现在就地炼成99.7%的阳极铜，运费砍半，顺手把炼铜废气变成80万吨浓硫酸高价卖给隔壁缺酸的钴矿厂——这种把废料和运费黑洞变成纯利润的工程手艺，直接把紫金的周期常态造血底盘从 <strong>420亿元</strong> 硬生生垫高到了 <strong>535亿元</strong>！</p></div></div>
 <hr/>
 <h3 id="vs">三、 双极限压力测试：价格寒冬双杀 vs 资源民族主义与成本暴涨</h3>
@@ -2097,7 +2382,7 @@
 <li><strong>净侵蚀幅度汇总</strong>：合并口径下，税费暴涨（<code>47.20亿元</code>）+ 能源支护成本暴涨（<code>49.80亿元</code>）合计吞噬合并税前利润 <strong><code>97.00亿元/年</code></strong>；扣除所得税抵减效应（约 <code>18.50亿元</code>）及海外合资矿山少数股东按比例分担的部分（约 <code>21.70亿元</code>，如刚果金政府与艾芬豪共同分担卡莫阿加税与能源成本）后，对紫金归母净利润的净侵蚀为 <strong><code>56.80亿元</code></strong>，算上维持性CapEx通胀（<code>+8.00亿元</code>），<strong>对常态归母 Owner Earnings 的真实总侵蚀为 <code>64.80亿元/年</code>，侵蚀比例仅为 <code>12.11%</code>（常态 Owner Earnings 从 <code>535.00亿元</code> 降至 <code>470.20亿元</code>）</strong>！</li>
 </ol>
 <h4 id="vs_1">【金铜价格双杀 vs 成本税费暴涨极限抗压测试矩阵表（基于增量达产后新稳态口径）】</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">抗压测试核心指标</th>
@@ -2190,14 +2475,14 @@
 <td style="text-align: center;"><strong>319.00</strong> <em>(存量口径260亿)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>为什么要买全球成本最低前20%的矿山？这就是答案！当铜价腰斩式暴跌30%、海外政客再狠狠加税4个点、柴油和炸药再涨20%三件事同一天砸下来的时候，全球排在后30%的高成本矿山早就流血破产、关井停工了；而紫金矿业因为铜的现金成本只有一万七千块一吨、金只有两百块一克，再加上价格下跌时政府权利金和少数股东分红自动帮它卸掉了一百多亿包袱，哪怕在最黑暗的地狱模式下，它每年照样能挣回 <strong>260亿—319亿元</strong> 的纯自由现金流——你根本没法在周期底部杀死一个成本最低的巨无霸，它只会趁着别人破产去捡便宜尸首。</p></div></div>
 <h2 id="-_1">---</h2>
 <hr/>
 <h1 id="e">追问模块 E：会计成色与治理细节显微镜</h1>
 <p>一家每年创造逾 <code>750亿元—840亿元</code> 经营现金流、账面总资产高达 <strong><code>5,593.36亿元</code></strong>（2026Q3末）的跨国矿业帝国，其利润表里究竟是有水分的“激进繁荣”，还是被严苛会计准则刻意压低了的“隐蔽富矿”？管理层拿走千万级薪酬与股权激励的背后，究竟是低价发福利的内部人控制，还是真刀真枪的业绩对赌？我们调取紫金矿业与同行的最新年报财务附注及历次激励草案，置于高倍显微镜下逐项排雷。</p>
 <h3 id="_18">【紫金矿业与同行核心会计政策及资产成色横向对比表】</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计与治理维度</th>
@@ -2265,7 +2550,7 @@
 <td style="text-align: left;">国内员工为主，高管执行省属国企薪酬标准</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="89150">一、 资产质量与会计政策严苛度排雷：藏在891亿矿权与50亿弃置负债里的“保守主义”</h3>
 <p>审计一家频繁进行跨国并购的矿业集团，最怕看到的是“把天价并购溢价塞进商誉科目逃避每年的折旧摊销，同时拉长固定资产折旧年限、少提环境复垦负债来虚增当期利润”。然而，当我们拆开紫金矿业2025年报与2026年三季报的附注细节时，看到的却是一套<strong>近乎严苛的保守主义会计准则</strong>：</p>
@@ -2437,7 +2722,7 @@
 <li><strong>真实超额可自由支配现金（Excess Cash）</strong> = <code>1,035.34 - 68.00 - 145.00 - 180.00</code> = <strong><code>642.34亿元</code></strong>（对应净有息负债 Net Debt = <code>1,699.10 - 642.34 = 1,056.76亿元</code>）。</li>
 </ul>
 <h4 id="true-ev2026q3202611">【紫金矿业全口径真实企业价值（True EV）拆解核算表（截至2026Q3财报及2026年11月盘面）】</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">True EV 拆解核心科目（单位：亿元人民币）</th>
@@ -2568,7 +2853,7 @@
 <td style="text-align: left;"><strong>全款买断整座紫金帝国100%产权与债权的总标价</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>做并购算账的时候，最蠢的错误就是把子公司账上锁着的IPO募资当成母公司随时能拿去还债的零花钱，以及天真地以为每年分走两百亿利润的少数股东会愿意按账面净资产把股份卖给你！把受限现金、日常铺底资金和少数股东的真实身价全部扒干净之后，全款买下整座紫金矿业帝国的真实总标价是 <strong>9,279亿—9,742亿元</strong>——账算得越苛刻，你掏钱的时候才越不会当冤大头。</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值法）</h3>
@@ -2704,7 +2989,7 @@
 </li>
 </ul>
 <h4 id="reverse-sotp_1">【紫金矿业 Reverse SOTP（反向拆骨估值法）市场隐含预期倒推表】</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">资产模块拆骨层级</th>
@@ -2763,7 +3048,7 @@
 <td style="text-align: center;"><strong>5.93%</strong><br/><em>(扣除藏格后锂矿与期权近乎白送)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把一家大公司拆成几块骨头来称重，是治好股市恐高症最好的药方。你花7,072亿人民币在港股买下紫金矿业，光是目前已经在转的铜矿金矿和刚刚点火投产的巨龙二期、卡莫阿冶炼厂，哪怕金价铜价跌回历史中枢，就稳稳值 <strong>6,652亿元</strong>；剩下的420亿残差里，扣掉你手里抓着的240亿藏格矿业股票，相当于市场只收了你180亿，就把年产十几万吨碳酸锂的“两湖两矿”外加巨龙三期等十几座世界级后备大矿的探矿权打包白送给你——这种“买牛肉送整张牛皮外加一头小牛犊”的买卖，在华尔街那些卖16倍EV/EBITDA的同行那儿连做梦都别想。</p></div></div>
 <hr/>
 <h3 id="_20">三、 赔率定位、国际巨头对标、分档击球区与“三条基本面死刑证伪红线”</h3>
@@ -2786,7 +3071,7 @@
 </li>
 </ul>
 <h4 id="vs_2">【紫金矿业 vs 全球四大铜金矿业巨头核心估值与成长性对标表】</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对标维度</th>
@@ -2881,7 +3166,7 @@
 <td style="text-align: center;">24% — 28%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>估值定性终极裁决</strong>：
   通过历史纵向与全球横向双重对标，紫金矿业当前的估值定性结论非常清晰——<strong>绝不属于“周期顶部乐观透支”，也不再是2022年那种“极端悲观白菜价”，而是处于【合理偏保守（其中A股处于合理公允中枢偏下沿，H股处于合理偏保守的高性价比折价区）】</strong>！
@@ -2891,7 +3176,7 @@
 <h4 id="2_6">2. 实战分档击球区推演：什么价格建仓？什么价格重锤？什么价格离场？</h4>
 <p>拒绝模棱两可的“逢低关注”，我们以<strong>周期常态新稳态归母 Owner Earnings（<code>535.00亿元/年</code>）</strong>为绝对价值铁锚，设定清晰可执行的<strong>三档实战击球坐标</strong>（按总股本 <code>265.78亿股</code> 及 <code>1港元 = 0.92元人民币</code> 折算）：</p>
 <h4 id="601899sh-02899hk_2">【紫金矿业（601899.SH / 02899.HK）三档实战击球区与止盈警戒线推演表】</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位与仓位策略</th>
@@ -2932,7 +3217,7 @@
 <td style="text-align: left;"><strong>周期顶部泡沫透支信号</strong>：当金铜价格继续暴涨引发散户与趋势资金疯狂涌入，使市值突破万亿大关、常态Owner Earnings回报率跌破5%（即市场不仅把高景气当成永续，还给周期股拔到了20倍以上常态估值）时，安全边际彻底消失，必须开启分批右侧阶梯止盈！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_5">3. 三条“基本面死刑证伪红线”：一旦触发，无条件认错清仓离场！</h4><p>价值投资绝不是死捂股票的代名词。如果以下<strong>三条可量化、零模糊地带的基本面死刑红线</strong>中的任何一条被触发，说明紫金矿业赖以生存的“低成本工程护城河、全球资源整合能力或财务纪律”发生了不可逆的根基腐烂，无论当时股价涨跌，必须无条件执行清仓离场纪律：</p><ol>
 <li>
@@ -3018,7 +3303,7 @@
 按“赔率不对称性（Asymmetry）”衡量：在当前A+H约 <code>7,431亿元</code> 市值（A股 <code>28.35元</code> [<code>7,535亿</code>] / H股 <code>28.92港元</code> [<code>7,072亿</code>]）直接重仓追高，向上的估值扩张空间与商品价格阶段性回撤带来的向下波动空间大约在 <strong>1.2 : 1</strong>，赔率尚不够极端悬殊；因此最佳策略是<strong>在第一档舒服建仓区（<code>6,100亿—7,100亿元</code>，当前H股 <code>28.92港元</code> 已踏入该区间上沿）保留核心底仓享受每年两百亿级分红与产能内生复利，同时留足现金弹药</strong>。一旦未来全球宏观流动性震荡或衰退恐慌让铜金价格出现阶段性急跌，把紫金矿业的总市值砸入 <strong><code>6,100亿元</code> 以下乃至 <code>5,350亿元</code> 黄金重锤区</strong>（对应A股 <code>20.10—23.00元/股</code>、H股 <code>21.85—24.90港元/股</code>，届时剥离黄金与上市股权后的铜矿残值PE将跌破 <code>6—7倍</code>，新稳态常态OE回报率升破 <code>8.8%—10.0%</code>），向上与向下的不对称赔率将瞬间拉大到 <strong>3 : 1 以上</strong>——那将是价值猎手梦寐以求的“黄金坑重锤击球点”！</p>
 <hr/>
 <h3 id="_21">📋 五、 四位投资大师圆桌投票与终极裁决总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">大师席位与核心标尺</th>
@@ -3063,7 +3348,7 @@
 <td style="text-align: left;"><strong>3:1高赔率重锤击球区</strong>：宏观恐慌带动金铜回撤15%—20%、紫金总市值回落至 <strong><code>5,350亿—6,100亿元</code></strong>（A股 <strong><code>20.10—23.00元</code></strong> / H股 <strong><code>21.85—24.90港元</code></strong>，对应铜矿Stub PE跌破7倍）。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>💡 闭门圆桌会终极共识判词</strong>：
 四位大师虽然视角迥异，但得出了高度收敛的终极裁决——<strong>紫金矿业绝非平庸的靠天吃饭周期股，而是凭借“五环归一”工程壁垒、全球前25%极低成本与<code>650亿+</code>级自由现金流完成基因蜕变的“中国版必和必拓 + 矿业界比亚迪”</strong>。尽管通过剥离紫金黄金国际（02259.HK）与藏格矿业（000408.SZ）算出的核心铜矿残值（Stub Value）极具吸引力，但鉴于当前金价（<code>3,880—4,100美元/盎司</code>）与铜价（<code>1.36万—1.39万美元/吨</code>）的周期钟摆已摆至右侧85%—90%的历史极值分位，<strong>理性的投资者既不应因为恐高而清仓这台正在轰鸣印钞的复利机器，也不应在情绪沸点满仓加杠杆追涨；最优解是在第一档击球区（<code>6,100亿—7,100亿元</code>，H股 <code>02899.HK</code> 现价已处该区间上沿）以H股或A股底仓稳享高分红与巨龙二期等产能阿尔法，同时死盯邹来昌团队的千亿现金并购纪律，静候商品周期钟摆回撤至 <code>5,350亿—6,100亿元</code> 市值区间（A股 <code>20.10—23.00元</code> / H股 <code>21.85—24.90港元</code>）时，再打出满仓重锤的致命一击！</strong></p>
@@ -3174,7 +3459,7 @@
 <li><strong>原因三（实战指南：如果股价真的进入 <code>20.10元 — 23.00元</code> 这 12.3% 的缓冲带，我们该怎么操作？）</strong>：
    - 这 <code>12.3%</code> 的区间绝不是“躺平不动的盲区”，而是<strong>从 <code>60%</code> 标准底仓向 <code>80%</code> 准重仓平滑过渡的【第 1.5 档：金字塔阶梯加密区】</strong>！我们将全区间四级仓位刻度为您完整拼齐如下：</li>
 </ol>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">完整无缝击球刻度层级</th>
@@ -3233,17 +3518,30 @@
 <td style="text-align: left;"><strong>【周期狂热泡沫区】</strong>：常态估值突破20倍，安全边际耗尽，开启分批右侧阶梯止盈</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在23块钱建完六成底仓之后，为什么要特意留出20块到23块这百分之十几的缓冲带，不让你一下子把子弹打光？因为市场先生一旦发起疯来，往往比你想象的还要神经病！留着这12%的隔离带搞阶梯补仓，就是为了保证当股价真被砸穿20.10元、常态回报率飙过10%的世纪大坑出现时，你兜里还有最后两成重炮能轰出去，而不是像个早就打光子弹的散兵游勇一样坐在坑底叹气。</p></div></div>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3413,7 +3711,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《紫金矿业_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/紫金矿业_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《紫金矿业 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/紫金矿业 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3471,6 +3769,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

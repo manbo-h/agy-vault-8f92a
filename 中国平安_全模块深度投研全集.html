@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>中国平安_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>中国平安 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">中国平安_全模块深度投研全集</div>
+    <div class="report-title">中国平安 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -660,7 +945,7 @@
 <p><strong>构成与转型</strong>：包含陆金所控股（2024年7月并表）、平安健康（平安好医生，2025年初并表整合）、北大医疗集团（2025年营收57.23亿元）及已完成私有化退市的金融壹账通（总股本估值约24.20亿港元，注销外部计划股份现金对价约16.89亿港元）。它们的商业任务不再是去二级市场独立圈钱，而是给金融主业算三笔硬账：<strong>降获客成本、提保单件均、锁死客户留存率</strong>。2025年报数据显示，享有平安医疗养老生态圈服务权益的个人客户（占2.51亿个人客户超63%），其客均合同数达<strong>3.37个</strong>、客均AUM达<strong>5.99万元</strong>（2026Q3升至6.34万元），分别为不享有权益个人客户（2.11个、1.58万元）的<strong>1.6倍和3.8倍</strong>（横截面客户分层观测相关性），寿险新单件均保费更是达到普通客户的1.5—2.5倍。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务分部（2025年报及2026Q3季报）</th>
@@ -729,7 +1014,7 @@
 <td style="text-align: left;"><strong>综合金融+医疗养老闭环</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>过去华尔街投行忽悠平安把好医生、壹账通拆出去当“科技独角兽”卖高价，结果除了制造一堆关联交易和亏损泡沫外毫无用处；现在管理层终于醒过味来，把这些花架子收回厨房老老实实给寿险主业端茶倒水——记住，好工具就该装在主业的变速箱里，而不是拆下来摆在古董店里单卖。</p></div></div>
 <hr/>
 <h3 id="_4">二、 产业周期时钟与“寒冬博弈身位”：出清底部的反身性收割</h3>
@@ -836,7 +1121,7 @@
 <p><strong>横向对比</strong>：与零售之王招商银行（2026Q3不良率0.94%、拨备覆盖率389.39%、活期存款占比超50%、净息差1.82%）相比，平安银行的客观差距在于<strong>负债端活期存款沉淀能力仍偏弱（存款付息率高于招行约30—40个基点）</strong>，导致在主动砍掉高息高风险信用贷（将个人抵押类贷款占比拉升至61.8%—62.9%）后，净息差从昔日的2.7%一路回落至2025年的1.78%。但这种“用息差换资产安全”的主动缩表，彻底排掉了零售信贷周期违约的引信。</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心比拼维度</th>
@@ -905,7 +1190,7 @@
 <td style="text-align: center;"><strong>招商银行：26Q3不良0.94%，拨备389.39%，零售负债成本极低</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看金融机构千万别看谁在顺风局里吹牛吹得响，要看谁在逆风局里敢把烂账直接认进报表、把高风险生意一刀切掉。平安产险砍掉保证保险后COR干到了95.6%，平安银行把逾期90天偏离度按在0.83以下、把六成零售贷款换成有房本抵押的——这就像一个曾经爱飙车的年轻人终于系上了安全带，虽然车速慢了点，但至少不会开进悬崖里了。</p></div></div>
 <hr/>
 <h2 id="_8">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？】</h2>
@@ -1038,7 +1323,7 @@
 <hr/>
 <h3 id="_13">三、 五年一期金融机构专项硬账本与防合并报表幻觉穿透</h3>
 <p>按照金融与保险机构专项审计规则，我们列示中国平安<strong>2021—2025年五个完整会计年度及2026年前三季度</strong>的经营、现金流、资本内生充足率与分红硬账本对照表（<strong>口径说明</strong>：集团自2023年1月1日起执行新保险合同准则IFRS 17与新金融工具准则IFRS 9，2025年报五年财务摘要对2022—2024年可比数据进行了追溯重述，2021年为旧准则IFRS 4/IAS 39原始披露口径；表中同时列示重述值与原报披露值以供交叉核对）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心审计指标</th>
@@ -1173,7 +1458,7 @@
 <td style="text-align: left;">分红锚定营运利润30%—40%区间，稳健可持续</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>打破“合并报表幻觉”两项深度体检</strong>：</li>
 </ul><ol>
@@ -1382,7 +1667,7 @@
 </li>
 </ul>
 <p>我们将三大险资养老社区的单床投资额、物业改造成本与单床运营能耗拆解对比如表 A-1 所示：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心经济与工程指标</th>
@@ -1435,7 +1720,7 @@
 <td style="text-align: left;"><strong>0.6万—1.8万元/月/人</strong>（定位中高端富裕阶层，月费相对亲民）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="2-vs">2. 单个城芯颐年城的独立财务账 vs “保单+康养”联合经济账（买方单体项目单位经济情景推演）</h4><p><em>注：鉴于公司年报未单独披露单一康养社区的财务报表，上表 A-1 及本节单体项目测算系基于公开建筑参数（建筑面积约3.5万平方米、约270套康养公寓与护理床位）与行业高端养老造价基准构建的<strong>买方单位经济情景推演模型（Illustrative Unit Economics Scenario Model）</strong>。</em></p><p>以已正式开业运营的旗舰标杆<strong>上海“颐年城·静安8号”</strong>为例，我们测算其建成投运后的刚性成本与盈亏平衡红线：</p><ul>
 <li>
 <p><strong>固定折旧摊销与运营刚性成本情景参数</strong>：
@@ -1652,7 +1937,7 @@
 <h3 id="_22">三、 竞争终局推演与最终定性：鸡肋资产，还是高赔率的内生寿险护城河？</h3>
 <h4 id="1_1">1. 四大阵营竞争格局全景对决</h4>
 <p>在“保险+医养”这条赛道上，中国平安正面临来自<strong>泰康保险、友邦保险（AIA）、互联网流量平台（蚂蚁保/微保）以及公立医疗体系</strong>的四面合围。我们将四者的商业底牌与终局胜率拆解如表 B-1 所示：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">竞争维度</th>
@@ -1699,11 +1984,11 @@
 <td style="text-align: left;">无法切入需要深度面谈与复杂医养定制的百万/千万级高价值长险大单</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2_1">2. 定量拆解：医养生态圈对平安寿险主业的客户分层相关性与留存协同</h4>
 <p>既然平安好医生、北大医疗与居家养老在独立医疗服务市场上很难赚到暴利（好医生净利仅3.8亿元，北大医疗净利率微薄），为什么平安管理层还要倾全集团之力死磕这套生态？</p>
 <p>答案藏在平安寿险主业的<strong>客户分层对账单</strong>里（见表 B-2 定量拆解；<em>方法论说明：表中享有医养权益客户与普通客户的客均合同数及客均AUM差异属于横截面客户分层观测相关性——购买高件均保单的中高净值客户本就更容易达标获赠并激活医养权益，因此该指标在商业上主要验证“医养权益对高价值客群的筛选沉淀与退保锁死协同”，而非将全部差额简单归因为医养子公司的独立外生因果创造</em>）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心寿险经营与客户价值指标</th>
@@ -1750,7 +2035,7 @@
 <td style="text-align: left;"><strong>锁死高继续率，增厚寿险营运偏差正释放与合同服务边际（CSM）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3">3. 终局定性结论：不是独立印钞机，而是高赔率的“内生赋能护城河”</h4><p>综合以上全部商业证伪与定量对账，我们对平安的“中国版HMO与医疗养老生态圈”给出极其明确的终局定性：</p><ol>
 <li>
 <p><strong>证伪“独立医疗暴利神话”</strong>：
@@ -1868,7 +2153,7 @@
 <hr/>
 <h3 id="_23">三、 同行多维横向对质总表与份额攻守结论</h3>
 <p>我们将六大金融机构截至2025年报与2026年三季报的核心硬指标浓缩进同一张审讯大表：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心审讯维度</th>
@@ -1969,7 +2254,7 @@
 <td style="text-align: center;"><strong>招商银行：26Q3 NIM 1.82%，不良 0.94%，拨备 389.39%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>过去一年半份额攻守终极裁决——到底是谁在抢谁的客户和利润池？</strong>
   1. <strong>银保渠道战场（平安、太保疯狂收割中小险企与传统单渠道险企）</strong>：在“报行合一”斩断高手续费返还之前，银保渠道是数百家中小银行系和民营险企靠“给理财经理塞高额小账”垄断的领地；“报行合一”后，银行网点只能卖品牌最硬、能带去医疗养老绿通服务的头部大单。<strong>中国平安（2025银保NBV +138.0%）</strong>凭借自家平安银行主场及国有大行总对总签约，成为银保洗牌的最大赢家，直接抢走了中小险企退出的数千亿高价值期交市场。</li>
@@ -2046,7 +2331,7 @@
 <p><strong>全集团子公司内生监管资本留存情景合计</strong>：<span class="math-inline">170.00<span class="math-text"> 亿元（银行归母留存）</span> + 200.00<span class="math-text"> 亿元（寿险+产险归母留存）</span> = <strong>370.00<span class="math-text"> 亿元/年</span></strong></span>。</p>
 </li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">分步还原环节</th>
@@ -2121,7 +2406,7 @@
 <td style="text-align: left;"><strong>对2025全年宣告分红（488.91亿）覆盖倍数达 1.99倍</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="3_1">3. 口径二（母公司官方披露“可动用资金”与分红上缴硬账）：穿透控股架构看真金白银派息覆盖率</h4>
 <p>由于中国平安采用的是<strong>“集团控股（HoldCo）、子公司持牌经营（OpCo）”</strong>的治理架构，集团母公司本身不直接卖保单或放贷款，它向二级市场普通股股东派发<strong>488.91亿元</strong>年度宣告现金分红（2.70元/股，2025年现金流量表实际支付股息<strong>465.37亿元</strong>）的钱，必须靠旗下寿险、产险、银行等子公司通过董事会决议、满足各自监管偿付能力要求后，以<strong>现金股利形式真金白银上缴到集团母公司账户</strong>。</p>
@@ -2129,7 +2414,7 @@
 <ul>
 <li><strong>2025年全年及2026年上半年集团母公司可动用资金官方闭环桥接表</strong>：</li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">母公司可动用资金变动项目（官方年报/中报披露口径）</th>
@@ -2176,7 +2461,7 @@
 <td style="text-align: left;"><strong>2026年6月末母公司可动用资金已创近年新高（817.45亿元）！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
 <p><strong>母公司资产负债表有息债务穿透核查（消除可转债重复计入误区）</strong>：
@@ -2291,7 +2576,7 @@
 <p><strong>集团整体共振底线结论</strong>：产险巨灾（<code>-95.00亿元</code>）与银行百亿违约计提（<code>-43.47亿元</code>）同时爆发，合计削减集团归母营运利润与归母净利润<strong>138.47亿元（仅占2025年归母OPAT的10.30%）</strong>！集团全年归母营运利润依然高达<strong>1,205.68亿元</strong>（会计归母净利润达<code>1,347.78 - 138.47 =</code> <strong>1,209.31亿元</strong>），扣除370亿元监管资本留存后的买方常态可支配股东盈余仍达<strong>873.53亿元</strong>（未加回资管亏损口径为<strong>835.68亿元</strong>），对<strong>488.91亿元</strong>年度现金分红的覆盖倍数依然高达<strong>1.71倍—1.79倍</strong>！</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心考核指标（买方压力情景模拟表）</th>
@@ -2360,7 +2645,7 @@
 <td style="text-align: left;"><strong>分红锚定OPAT，具备极强抗周期韧性</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把国债跌到1.5%、股市暴跌20%、台风淹车和银行多烂掉100亿贷款四个鬼故事全绑在一起往平安头上砸，它一年居然还能赚出1,080亿营运利润、拿出近500亿现金分红——这就叫“诺亚方舟式的资产负债表”；大多数散户天天在甲板上担心下雨会淋湿衣服，却从来没低头看看脚下这艘船的钢板到底有多厚。</p></div></div>
 <hr/>
 <hr/>
@@ -2370,7 +2655,7 @@
 <h3 id="_26">一、 精算假设与资产减值排雷：平安的账本到底是“严苛保守藏富”还是“激进美化”？</h3>
 <h4 id="1-ev-csm-85">1. 内含价值（EV）与 CSM 精算假设横向审视：风险贴现率定在8.5%有多严苛？</h4>
 <p>寿险公司的内含价值（EV）和新业务价值（NBV）高度依赖两个人为设定的精算参数：<strong>长期投资回报率假设（分子端）</strong>与<strong>风险贴现率假设（分母端折现率）</strong>。分子设得越高、分母设得越低，算出来的EV和NBV就越虚胖。我们拉出A股四大上市险企2025年报的精算底牌：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">精算与会计政策维度</th>
@@ -2423,7 +2708,7 @@
 <td style="text-align: left;"><strong>平安利润表抗波动屏障最厚，高股息垫高净投资收益</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>精算显微镜结论</strong>：</li>
 </ul><ol>
@@ -2574,7 +2859,7 @@
 <hr/>
 <h4 id="2-pb-pev-popat-poe">2. 保险金融集团四大硬核估值标尺对齐（PB / PEV / P/OPAT / P/OE）</h4>
 <p>我们将截至2026年11月13日收盘的三大市值口径，同步对齐到保险股最核心的四把估值标尺上（严格区分<strong>普通股总市值倍数</strong>与<strong>HoldCo True EV 倍数</strong>，并同时列示2025年末与2026H1末双期精算内含价值基准）：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心估值标尺与财务分母基准（截至2026-11-13收盘）</th>
@@ -2621,7 +2906,7 @@
 <td style="text-align: left;">扣除370亿严苛子公司监管资本留存后，真实可分配自由盈余率仍达10.0%—12.7%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值）：市场究竟把平安寿险贱卖到了什么地步？</h3>
 <h4 id="1_4">1. 静态营运利润折算倍数、隐含内生股东回报率与真实净现金股息率</h4>
@@ -2722,7 +3007,7 @@
 <p><strong>H股全口径同价市值（7,998.45亿元）下，平安寿险隐含标价</strong> = <span class="math-inline">7,998.45 - 4,125.18 = <strong>3,873.27<span class="math-text"> 亿元人民币</span></strong></span>！</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块拆解（Reverse SOTP，2026-11-13收盘基准）</th>
@@ -2783,7 +3068,7 @@
 <td style="text-align: center;"><strong>54.29%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>请仔细端详上面这张拆骨表与精算内含价值勾稽关系透露出的三条硬核事实</strong>：</p><ul>
 <li>
 <p><strong>第一，精算内含价值（EV）与合同服务边际（CSM）的严格勾稽关系</strong>：
@@ -2821,7 +3106,7 @@
 <p><strong>横向全球与本土同行估值对标表</strong>：</p>
 </li>
 </ul>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">全球/本土对标巨头</th>
@@ -2914,12 +3199,12 @@
 <td style="text-align: left;">一旦“保险+医疗养老控费闭环”跑通，估值锚将具备长期重估潜力</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把全世界的保险巨头排成一排比比看：德国安联在欧洲那潭死水里卖1.7倍市净率、11倍市盈率，中国人寿A股卖将近2倍市净率，唯独一年赚1,344亿营运利润、H股股息率超6%的中国平安居然在0.77到0.93倍市净率裸泳——这就是华尔街常说的“综合企业折价（Conglomerate Discount）”，当市场因为你家里以前有个不成器的亲戚（地产信托）就把你全家当乞丐定价时，正是你拿着麻袋进场捡金子的时候。</p></div></div>
 <hr/>
 <h4 id="2-a-h">2. A股（元）与 H股（港元）四档连续分档击球区推演表（无缝覆盖全价格带）</h4>
 <p>基于总股本<strong>181.0764亿股</strong>、2026Q3每股净资产<strong>57.68元</strong>、2026H1末每股内含价值<strong>86.58元</strong>（2025年末为<strong>83.07元</strong>）、2025年法定每股营运利润<strong>7.42元</strong>（常态每股营运利润<strong>7.63元</strong>）及2025年已兑现每股股息<strong>2.70元</strong>（2026E预计<strong>2.80元</strong>），我们按2026年11月13日官方汇率中间价（<strong>1港元 = 0.85604元人民币</strong>）制定出<strong>边界严密连续、无价格真空断档的四档实战击球区推演表</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球分档区间（连续无缝边界）</th>
@@ -2974,7 +3259,7 @@
 <td style="text-align: left;"><strong>【右侧分批兑现离场】</strong> 当市场在牛市亢奋期将平安推上78元（尤其88元，对应1.02倍26H1 PEV）以上、股息率被摊薄至3.1%—3.5%以下时，应果断分批兑现筹码。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_2">3. 三条基本面死刑证伪红线（一旦触发无条件认错离场）</h4><p>价值投资最怕把“基本面真正恶化的泥潭”当成“越跌越买的黄金坑”。无论未来股价多便宜，只要中国平安在后续定期报告中触发以下<strong>三条可量化死刑证伪红线中的任意一条</strong>，说明我们的底层投资逻辑已被证伪，必须无条件清仓离场：</p><ul>
 <li><strong>🚨 死刑红线一（资产端利差损击穿底线）：6.83万亿险资的“净投资收益率”连续两年跌破 3.0%，且集团宣布下调每股现金股息</strong></li>
@@ -3107,7 +3392,7 @@
 </ol>
 <hr/>
 <h2 id="_28">📋 五、 四位投资大师闭门投票与终极裁决总表</h2>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名（角色推演）</th>
@@ -3147,7 +3432,7 @@
 <td style="text-align: left;"><strong>【左侧重配底仓 + 右侧催化满弓加仓】</strong><br/>当前位置拿足6%股息底仓享受免费看涨期权；一旦观察到 <strong>2027Q1 开门红 NBV 增速转正 + 长端利率企稳</strong> 两大右侧信号，立即满弓加仓博取戴维斯双击主升浪。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -3163,13 +3448,26 @@
 <p>买现在的平安，本质是买一张<strong>“下有破净资产和高股息铁底保护、上有万亿股票仓位免费看涨期权”</strong>的不对称彩票。当前A股还在净资产附近、港股仅零点七几倍市净率；按市值剥离产险、银行等非寿险资产后，市场给核心寿险的隐含标价甚至低于寿险账面净资产，仅约零点四到零点五倍内含价值，每年还稳发五到六个点现金股息！实战打法很简单：现价优先买入折价更深、股息率超六个点的港股做核心收息底仓；紧盯明年一季度开门红新业务价值增速转正和长端利率企稳两个信号，一旦亮灯或股市回暖，它账上一万两千多亿的公开市场股票和基金就会变成牛市加速器，届时顺势推满仓位吃戴维斯双击。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3339,7 +3637,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《中国平安_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国平安_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《中国平安 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国平安 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3397,6 +3695,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

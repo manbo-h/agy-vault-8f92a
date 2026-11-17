@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>立讯精密_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>立讯精密 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">立讯精密_全模块深度投研全集</div>
+    <div class="report-title">立讯精密 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -754,7 +1039,7 @@
 
 
 <h4 id="4-20252026">4. 核心产品与国内外同行横向硬核对比表（2025年报及2026三季报实绩）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度 / 企业名称</th>
@@ -831,7 +1116,7 @@
 <td style="text-align: left;">掌握高速互连底层专利池与北美芯片厂首发定义权，是立讯在通信端追赶的终极标杆</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_5">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？（高度精炼，不写流水账）】</h3>
 <p>立讯精密由王来春（曾是富士康深圳海洋电子厂首批女工，工作十年做到课长）、王来胜姐弟于1999年创业、2004年成立，从给富士康做配套连接线起步。回看其二十余年狂飙史，真正改写命运的生死转折只有三次：</p>
@@ -920,7 +1205,7 @@
 
 
 <h4 id="3-202120252026">3. 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2025年及2026年前三季度）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务指标（单位：亿元人民币）</th>
@@ -1005,7 +1290,7 @@
 <td style="text-align: center;">随立铠及莱尼并表正常波动</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="4">4. 打破“合并报表幻觉”两项深度体检</h4><ol>
 <li><strong>少数股东损益 vs 少数股东权益匹配度（无纸面富贵幻觉）</strong>：
    * 截至2025年末，公司归母净资产为 <strong>849.21亿元</strong>，少数股东权益为 <strong>191.00亿元</strong>（少数股东权益占总权益比例为 <strong>18.36%</strong>）；2025年全年归母净利润为 <strong>166.00亿元</strong>，少数股东损益为 <strong>15.70亿元</strong>（少数股东损益占合并总净利润181.70亿元的比例仅为 <strong>8.64%</strong>）。</li>
@@ -1205,7 +1490,7 @@
 </ul>
 <h4 id="2_4">2. 同行“单位产能投资额 / 单平米造价 / 设备投入强度”硬核横评</h4>
 <p>为什么立讯精密过去十年敢于在毛利率仅 10%—12% 的代工与零组件红海中频繁大举扩产，而资产周转率（2025 年总资产周转率约 1.35 次，固定资产周转率约 <strong>5.82 次</strong>）依然显著领先同行？核心秘密藏在<strong>“单平米土建造价”与“单位产能设备投入强度”</strong>的底层工程账里：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -1259,7 +1544,7 @@
 <td style="text-align: left;">组装环节轻资产、高周转，但在底层精密连接器、冷板精密加工与线缆押出等垂直制造环节不如立讯深厚。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>【茶桌深聊：立讯算工程账的“三把手术刀”】</strong>
 1. <strong>第一把刀：自研非标设备吃掉设备商 30%+ 毛利</strong>。消费电子与汽车线束产线每年都要随大客户改款而微调。同行如果向外部自动化设备商（如博众精工、赛腾股份等）采购一整条 FATP 组装或线束端接非标产线，设备商通常要赚取 30%—40% 的毛利率。而立讯依托常熟立讯智能装备与昆山自动化团队（超 4,000 名自动化与视觉算法工程师），自己买丝杠、导轨、伺服电机和工业相机，内部集成组装非标产线。<strong>同样一条预算 1 亿元的产线，立讯内部造价仅需 6,500 万—7,000 万元</strong>，直接把未来 5—8 年的年均设备折旧压低了三分之一。</p><ol start="2">
 <li>
@@ -1393,7 +1678,7 @@
 
 <hr/>
 <h3 id="_14">四、 重大在建工程与募投项目单位经济账与盈亏平衡测算总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">工程/募投项目名称</th>
@@ -1470,7 +1755,7 @@
 <td style="text-align: left;"><strong>驱动</strong>：北美GB200/GB300机柜铜缆/液冷定点放量；<strong>阻力</strong>：墨西哥治安成本、USMCA原产地规则重审及海外建厂超支风险。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="-">---</h2>
 <h1 id="b">追问模块 B：远期期权（新业务/新技术）证伪拆解 —— 剥离故事滤镜，谁是真主业、谁是资本消耗陷阱？</h1>
 <p>资本市场最喜欢给立讯精密讲两个宏大叙事：<strong>曲线一，从消费电子果链霸主摇身变为“AI 算力数据中心光、铜、电、热全栈底座”</strong>；<strong>曲线二，鲸吞百年巨头德国莱尼（LEONI）并深度绑定奇瑞，冲刺“全球汽车 Tier 1 前十强”</strong>，外加顺手布局“具身智能人形机器人线束与关节执行器”。</p>
@@ -1616,7 +1901,7 @@
 </ul>
 <h4 id="2_6">2. 最终冷峻定性：六大细分新业务商业证伪评级表</h4>
 <p>拒绝任何含糊其辞的“全面看好”，我们对立讯精密正在押注的六大新业务/远期期权做出最终商业定性：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">细分新业务 / 远期期权</th>
@@ -1670,12 +1955,12 @@
 <td style="text-align: left;">🎲 <strong>【人形机器人 = 低成本、高赔率的真实免费期权】</strong>（常熟自动化线可随时切换复用，赔率极高）；<br/>💣 <strong>【闻泰 ODM 局部资产 = 阶段性资本消耗与合规包袱】</strong>（需严防低毛利 ODM 长期稀释集团 ROE）。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h1 id="c">追问模块 C：同行与上下游“三方交叉审讯”</h1>
 <p>在精密制造与电子代工（EMS/ODM）的修罗场里，单看一家公司的财报极易被“合并报表口径扩张”或“会计科目重分类”迷住双眼。只有把身处同一条供应链（苹果果链、安卓ODM、英伟达AI算力链、全球车企Tier 1）的直接对手拉到同一张审讯桌上，逐项对质营收增速、预收款（合同负债）、存货周转、四费结构与毛利净利剪刀差，才能看清谁在裸泳、谁在真正吃下高壁垒份额。</p>
 <h3 id="c-1-vs-2025-2026q1-q3">📊 表 C-1：立讯精密 vs 五大国内外可比同行 2025全年及 2026Q1-Q3 全景经营对质大表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对质维度</th>
@@ -1833,7 +2118,7 @@
 <td style="text-align: left;">约 <strong>64.2亿美元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>数据来源：各公司 2025年年度报告、2026年半年度报告及 2026年第三季度报告（安费诺来自 SEC Form 10-K 及 2026 Q3 Form 10-Q）。</em></p>
 <hr/>
 <h3 id="2901-vs">一、 景气度对质：三大赛道真实需求是升温补库还是向代工厂压库？立讯 +29.01% 高增的“并表外延 vs 内生有机”拆骨还原</h3>
@@ -1852,7 +2137,7 @@
 <p><strong>【合理推论与定量剥离】</strong>：
 为了不被外延并表数据误导，我们根据 2025 年报及 2026 半年报/三季报披露的分部数据与交割节奏，对立讯精密 2026H1 及 2026Q1-Q3 的营收增长进行<strong>“外延并表 vs 内生有机增长”同口径剥离还原</strong>：</p>
 <h4 id="c-2-2026h1-2026q1-q3-vs">📊 表 C-2：立讯精密 2026H1 &amp; 2026Q1-Q3 营业收入“外延并表 vs 内生有机增长”拆解测算表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块与增长来源拆解</th>
@@ -1967,7 +2252,7 @@
 <td style="text-align: left;"><strong>核心结论：2026Q1-Q3立讯640.9亿净增营收中，约375亿（占58.5%）来自莱尼与闻泰并表外延贡献，约265.9亿（占41.5%）来自内生增长，真实内生增速约 +12.73%！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>拆骨结论一针见血</strong>：</p>
 <ol>
 <li>
@@ -2037,7 +2322,7 @@
 <li><strong>同口径还原实验</strong>：如果我们把立讯精密合并报表中约 <strong>1,950 亿元</strong> 的低毛利整机组装业务（iPhone/AirPods整机EMS及闻泰安卓ODM，平均毛利率约 <strong>6.5%—7.5%</strong>）单独剥离出去，只看立讯剩余约 <strong>900 亿元</strong> 的<strong>“核心精密零组件+AI高速互连+汽车线束与智能座舱”</strong>业务，其真实综合毛利率实际上高达 <strong>19.5%—21.5%</strong>，其中 AI 数据中心高速铜缆（DAC/ACC）与光模块业务毛利率更在 <strong>22%—28%</strong> 区间！</li>
 </ul>
 <h4 id="c-3-vs-2026q1-q3">📊 表 C-3：立讯精密 vs 工业富联、比亚迪电子、安费诺 2026Q1-Q3 盈利结构同口径还原表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">拆解维度与同口径还原步骤</th>
@@ -2091,7 +2376,7 @@
 <td style="text-align: left;">表观净利率 <strong>约 19.5%</strong><br/><em>(单Q3营业利润率 29.5%)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="22-2026">2.2 2026年前三季度“汇兑风暴”专题解剖：为什么立讯与蓝思同遭重创？</h4><p>审视 2026 年三季报，果链双雄 <strong>立讯精密</strong> 与 <strong>蓝思科技</strong> 出现了一个惊人一致的利润出血点——<strong>财务费用同比暴增逾 10 倍</strong>！</p><ul>
 <li>
 <p><strong>【客观事实】</strong>：</p>
@@ -2163,7 +2448,7 @@
 <li>此前全球汽车线束由日本住友电工、矢崎、安波福（Aptiv）、德国莱尼四大家族垄断。立讯在 2025 年 7 月正式并表莱尼后，一举跃升为<strong>全球前四大、中国第一大汽车线束巨头</strong>，不仅直接接管了莱尼在宝马、奔驰、大众、奥迪的欧洲本土 Tier 1 准入牌照，更将中国供应链的自动化降本与铜材集采导入莱尼全球 26 国工厂，实现并购首年扭亏为盈；同时在国内市场，立讯与奇瑞、理想、赛力斯、吉利深度绑定，2026Q1-Q3 汽车业务狂揽 <strong>509.70 亿元</strong> 营收，将比亚迪电子（高度依赖母公司比亚迪内部配套）和蓝思科技（局限于车载中控玻璃屏）远远甩在身后。</li>
 </ul>
 <h4 id="c-420252026q3">📊 表 C-4：2025—2026Q3 五大核心硬件战场份额攻守格局与赢家输家总览表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心战场</th>
@@ -2210,7 +2495,7 @@
 <td style="text-align: left;">立讯2026Q1-Q3汽车营收飙升至509.70亿元（2026H1同比暴增+274.10%）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="-_1">---</h2>
 <hr/>
 <h1 id="downer-earnings">追问模块 D：常态盈利底盘（Owner Earnings）与抗压测算</h1>
@@ -2234,7 +2519,7 @@
 </li>
 </ul>
 <p><strong>为什么立讯每年的“非经常性损益”动辄高达 24亿—35亿元？扣非净利润和表观净利润到底哪个才代表真实的常态盈利能力？</strong> 我们直接调取 2025年报与 2026年三季报的《非经常性损益项目及金额明细表》进行逐项穿透：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">非经常性损益明细科目</th>
@@ -2287,7 +2572,7 @@
 <td style="text-align: left;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>💡 茶桌硬核洞察（还原真实常态归母净利）</strong>：
 看懂这张表，你就瞬间明白了 2026年三季报“增收不增利”的假象：2026年前三季度，立讯表内承受了约 <strong>20亿元的外币汇兑损失</strong> 和 <strong>16.62亿元的利息费用</strong>，这两项全部留在了“经常性损益”里扣减利润；而用来对冲这 20亿元汇兑损失的 <strong>18.17亿元外汇衍生品收益</strong>，却因为会计准则分类被踢出了扣非净利润！
@@ -2301,7 +2586,7 @@
 <h3 id="effective-attributable-da">第二步：有效归母折旧摊销（Effective Attributable D&amp;A）精算——剔除立铠与莱尼少数股东的“虚胖折旧”</h3>
 <p>折旧与摊销（D&amp;A）虽然在利润表里扣减了利润，但不需要当期掏出现金，是重资产企业现金流的重要源泉。但对于立讯精密，<strong>绝对不能把合并现金流量表补充资料里的 D&amp;A 总额直接加回到归母净利润上！</strong></p>
 <p>我们先调取 <strong>2025年报第八节财务报告之“合并现金流量表补充资料”</strong> 与 <strong>2026年半年度报告/三季报</strong> 的确凿折旧摊销明细数据：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">折旧与摊销科目（合并报表全口径）</th>
@@ -2370,7 +2655,7 @@
 <td style="text-align: left;">真正能回流至立讯精密母公司股东口径的折旧摊销现金盾。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>🔍 为什么必须砍掉约 17%（23.30亿—25.50亿元）的少数股东折旧？</strong>
 看一眼资产负债表和控股架构就明白了：2025年末立讯精密少数股东权益高达 <strong>191.00亿元</strong>（占合并净资产的 <code>18.36%</code>），2026Q3末进一步增至 <strong>209.86亿元</strong>（精确值 <code>20,985,962,355.39元</code>）。这 209.86亿元少数股东权益主要集中在两大重资产核心主体：
@@ -2384,7 +2669,7 @@
 <p>2025年立讯精密合并资本开支（购建固定资产、无形资产和其他长期资产支付的现金）高达 <strong>179.04亿元</strong>（较2024年的 <code>121.11亿元</code> 激增 <code>+47.83%</code>）；2026年前三季度 CapEx 已花掉 <strong>148.39亿元</strong>（精确值 <code>14,838,709,293.04元</code>，较2025年同期的 <code>132.03亿元</code> 增长 <code>+12.39%</code>），全年合并 CapEx 预计达 <strong>192.00亿元</strong> 左右。</p>
 <p>很多看空者拿着“2025年 OCF 173.25亿 - CapEx 179.04亿 = 自由现金流 -5.79亿元”的结论，断言立讯是“赚假钱、利润全变成破铜烂铁机器”。而盲目乐观者又认为“656.86亿固定资产已经建好了，以后维持性 CapEx 只需要三四十亿”。<strong>这两种看法都严重脱离了电子精密制造的车间真相！</strong></p>
 <p>我们深入立讯精密 <strong>656.86亿元固定资产净值</strong>（2026Q3末数据，与2025年末的 <code>659.01亿元</code> 几乎完全持平，说明当期转固金额与折旧计提金额在 650亿底盘上达到了动态平衡）的内部结构，逐层剥离 <strong>“防御性/维持性 CapEx（Maintenance CapEx）”</strong> 与 <strong>“成长性 CapEx（Growth CapEx）”</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">存量固定资产分类（以656.86亿净值为基准）</th>
@@ -2445,7 +2730,7 @@
 <td style="text-align: left;"><em>用于新建昆山/常熟汽车Tier 1基地、越南义安/北江扩产、墨西哥线束工厂及AI数据中心224G铜缆/光模块/液冷新产能。</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="working-capital-owner-earnings">第四步：常态刚性营运资金占用（Working Capital）与存量 Owner Earnings 终极合成</h3>
 <div class="annotated-row"><div class="main-col"><p>除了固定资产维护，一家年营收高達 <strong>3,323亿元（2025）— 3,800亿元（2026年化）</strong> 的跨国制造航母，在日常周转中还需要垫付多少刚性营运资金？</p><ul>
@@ -2465,7 +2750,7 @@
 
 
 <p>现在，我们将上述四步精算数据全部严丝合缝地填入《立讯精密存量底盘真实股东盈余（Owner Earnings）分步还原总表》：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">精算推导步骤与核心科目</th>
@@ -2578,7 +2863,7 @@
 <td style="text-align: left;"><em>即便把20亿汇兑损失全留表内、把18亿锁汇收益全剔除，保底造血仍达 152亿—169亿元/年。</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>📌 第一部分核心结论</strong>：
 1. <strong>揭开“表观 FCF 为负”的面纱</strong>：2025年立讯表观自由现金流之所以是 <code>-5.79亿元</code>，2026前三季度表观现金流之所以紧绷，根本不是因为存量生意不赚钱，而是因为管理层把存量底盘每年稳稳产出的 <strong>162亿—184亿元 Owner Earnings</strong>，拿去支付了两笔面向未来的巨额账单——<strong>每年约 64亿—67亿元的归母成长性 CapEx（加上少数股东部分全口径约80亿元）</strong>，以及营收暴增 600多亿元叠加并购莱尼、闻泰所垫付的 <strong>近百亿增量营运资金</strong>！
@@ -2648,7 +2933,7 @@
 <li><strong>Owner Earnings 垫高精算</strong>：这批产线不同于低毛利的消费电子组装，其综合毛利率普遍高达 <strong>20%—30%</strong>，净利率达 <strong>10%—14%</strong>！随着 2026Q4 至 2027年产能爬坡满产，预计释放增量高毛利营收 <strong>260亿—320亿元</strong>，贡献增量归母常态净利润约 <strong>28.00亿元</strong>；更关键的是，<strong>这批产线的建设期 CapEx 已经在 2025—2026年掏完了</strong>！进入收获期后，每年计提的新增归母折旧（约 8.50亿元）远高于新产线前几年的维持性维护支出（约 3.50亿元），扣除约 3.00亿元增量营运资金后，每年可净增归母常态 Owner Earnings <strong>26.00亿—34.00亿元（中枢 <code>+30.00 亿元/年</code>）</strong>！</li>
 </ul>
 <h3 id="_19">📊 存量底盘 + 三大确定性增量垫高汇总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">造血层级拆解</th>
@@ -2725,7 +3010,7 @@
 <td style="text-align: left;"><strong>立讯精密在消化现有在建与并购资产后的真实稳态造血中枢！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>(注：为保持极度审慎，我们在后续模块 F 进行估值倒推时，将增量消化后的稳态常态 Owner Earnings 保守取整锚定为 <strong>225.00 亿元/年</strong>，对应稳态常态归母净利润约 <strong>215.00亿—225.00亿元</strong>、表观归母净利润约 <strong>235.00亿—245.00亿元</strong>。)</em></p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>莱尼扭亏向 3.5% 净利率爬坡、闻泰国内 ODM 导入零件自供、加上已经掏完钱的 55 亿在建工程达产——这三件事不需要求神拜佛讲新故事，只要按部就班拧干毛巾，就能把每年可支配真金白银从 184 亿垫高到 225 亿以上。</p></div></div></div></div>
 
 <hr/>
@@ -2805,7 +3090,7 @@
 <hr/>
 <h3 id="_20">📊 立讯精密双极限压力测试全维度量化抗压测算总表</h3>
 <p>我们将正常基准态与上述四种极限受压状态（压价10%、压价15%、原材料暴涨20%静态死扛、原材料暴涨20%动态联动）同台并列，检验其毛利率、归母净利润、Owner Earnings 与表观自由现金流（FCF）的生死底线：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与现金流抗压指标（2026存量年化基准）</th>
@@ -2970,7 +3255,7 @@
 <td style="text-align: left;"><strong>+121.50 亿元</strong> <em>(造血充沛)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>🛡️ 双极限抗压测试核心结论（茶桌拍板）</strong>：
 1. <strong>“低毛利率脆弱论”被彻底证伪</strong>：立讯精密表面上 <strong>11.91%</strong> 的综合毛利率，是因为分母里塞进了 <strong>1,950亿元零毛利的客供料过账流水（Buy &amp; Sell）</strong>！一旦剥离这层会计皇帝的新衣，其自制零组件、汽车与 AI 互连核心盘子的真实毛利率高达 <strong>32.33%</strong>。
@@ -2985,7 +3270,7 @@
 <p>在拆清了业务攻守之后，我们必须拿放大镜审视立讯精密的资产负债表与利润表附注：<strong>立讯常年保持 20%+ 的业绩增长，到底有没有靠放宽应收账款坏账计提、少提存货跌价、拉长机器设备折旧年限、或者把百亿研发投入做资本化来“注水美化利润”？其频繁推出的股票期权激励计划，到底是绑定核心骨干的军令状，还是变相发福利？</strong></p>
 <p>我们调取 <strong>立讯精密、工业富联、歌尔股份、蓝思科技</strong> 四家公司 <strong>2025年年度报告全文附注及 2026年三季报</strong>，做一场逐科目的会计与治理硬指标对质。</p>
 <h3 id="e-1-vs">📊 表 E-1：立讯精密 vs 工业富联、歌尔股份、蓝思科技 会计政策与治理硬指标全景对比表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审计与排雷维度</th>
@@ -3054,7 +3339,7 @@
 <td style="text-align: left;">41.6万员工管理跨度极大，董监高總薪酬仅2,104.55万元，高管现金支取极度克制</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_21">一、 资产质量与会计政策排雷：逐项穿透四大敏感会计科目</h3>
 <h4 id="11">1.1 应收账款账龄结构、坏账计提比例与表外保理核查</h4>
@@ -3135,7 +3420,7 @@
 <h4 id="21-2022-2025">2.1 最近两期股票期权激励计划（2022年计划 &amp; 2025年计划）行权考核门槛审计</h4>
 <p>立讯精密是 A 股消费电子板块中最擅长运用大规模股票期权绑定中高层与核心技术骨干的企业。我们调取其最近两期核心激励计划——<strong>《2022年股票期权激励计划》</strong>与<strong>《2025年股票期权激励计划》</strong>的考核条款与实际执行结果进行对质：</p>
 <h4 id="e-2-2022-2025-vs">📊 表 E-2：立讯精密 2022年及 2025年股票期权激励计划行权考核门槛 vs 实际达成审计表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">激励计划批次与覆盖规模</th>
@@ -3221,7 +3506,7 @@
 <td style="text-align: left;">〃</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>【激励审计冷峻判词：是硬指标还是发福利？】</strong>：</li>
 </ul>
@@ -3239,7 +3524,7 @@
 <h4 id="22">2.2 高管薪酬、员工结构跃迁与人均效能审计</h4>
 <p>最后，我们将立讯精密 2024 年报与 2025 年报的员工专业构成、现金流薪酬支出与董监高报酬拉出来做一次纵向与横向的匹配度审计：</p>
 <h4 id="e-3-20242025">📊 表 E-3：立讯精密 2024—2025年员工结构跃迁、董监高薪酬与人效指标匹配度审计表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计指标</th>
@@ -3314,7 +3599,7 @@
 <td style="text-align: left;">合并欧洲莱尼高薪工程师及国内3.4万名研发人员后，加权平均人均薪酬支出升至约9.80万元/年，与研发升级趋势一致</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>【薪酬与人效审计终极结论】</strong>：</li>
 </ul><ol>
@@ -3356,7 +3641,7 @@
 </li>
 </ol>
 <p>我们根据 <strong>2026年三季报（截至2026年9月30日）经审计/审阅资产负债表</strong> 及 <strong>2026年11月3日“立讯转债”到期兑付公告</strong>，列出毫厘不差的《立讯精密真实企业价值（True EV）精算还原表》：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">True EV 精算构成科目</th>
@@ -3469,7 +3754,7 @@
 <td style="text-align: left;"><strong>全款买断整家立讯精密（无债一身轻、100%独享全部子公司现金流）的真实总标价！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>💡 茶桌算账第一课：看清表面市值与 True EV 的 1,377亿元鸿沟！</strong>
 这张精算表揭示了一个极其深刻的事实：在二级市场上，立讯精密的 A股基准总市值看似只有 <strong>3,929.36亿元</strong>；但由于公司合并报表背负着 <strong>1,426.00亿元全口径有息负债</strong>（扣除 259.02亿元超额可自由支配现金后，<strong>真实净有息负债高达 1,166.98亿元</strong>），再加上必须分走立铠近一半利润和莱尼四分之一利润的 <strong>209.86亿元少数股东权益</strong>，全款买下这门生意的 <strong>True EV（真实企业价值）高达 5,306.20亿元</strong>——<strong>比表面总市值足足高出了 35.04%（+1,376.84亿元）！</strong>
@@ -3479,7 +3764,7 @@
 <h2 id="reverse-sotp">二、 隐含回报率、千亿短债杠杆审视与 Reverse SOTP（分类加总倒推）</h2>
 <h3 id="1-owner-earnings-yield">1. 静态回本年限与隐含内生回报率（Owner Earnings Yield）</h3>
 <p>把我们刚刚在模块 D 算出的三档真实造血底盘（2025审计存量底盘 <code>162.00亿元</code>、2026当前存量年化底盘 <code>184.00亿元</code>、三大增量消化后稳态底盘 <code>225.00亿元</code>），放进 <strong>表面总市值（3,929.36亿元）</strong> 与 <strong>真实企业价值 True EV（5,306.20亿元）</strong> 的天平上称重：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">估值基准维度</th>
@@ -3516,7 +3801,7 @@
 <td style="text-align: left;"><em>(注：计算 True EV 回报率时，分母应匹配加回少数股东盈余与税后利息费用后的“全企业无杠杆 Owner Earnings”，2026存量约 <code>218亿元</code>，稳态约 <code>265亿元</code>)</em>。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="2-101867-1426">2. 深度审视：1,018.67亿短期借款与 1,426亿总负债，究竟是增厚还是拖累股东回报？</h3>
 <div class="annotated-row"><div class="main-col"><p>看到 True EV 比总市值多出 1,376.84亿元（其中有息负债高达 1,426.00亿元，尤其是短期借款 <code>1,018.67亿元</code>），任何一个审慎的价值投资者都会追问：<strong>立讯精密为什么要背这么重的短期债务？这笔杠杆到底是在替普通股股东打工赚钱，还是在替银行打工吸血？</strong></p><p>我们用财报附注里的真实利率与资本回报率算一笔明白账：</p><ol>
 <li>
@@ -3540,7 +3825,7 @@
 <h3 id="3-reverse-sotp-3929-ai-tier-1">3. Reverse SOTP（分类加总倒推）：当前 3,929亿市值里，市场到底给 AI 算力和汽车 Tier 1 定了多少价？</h3>
 <p>现在的立讯精密早已不是当年那个单一靠 AirPods 耳机吃饭的果链代工厂，而是由 <strong>① 消费电子零整一体基本盘</strong>、<strong>② 汽车电子与全球线束 Tier 1（含莱尼）</strong>、<strong>③ AI 通信与数据中心高速互连</strong> 三驾马车组成的工业综合体。</p>
 <p>我们采用 <strong>Reverse SOTP（分类加总逆向倒推法）</strong>，先给最成熟、确定性最高的前两块业务按行业公允保守估值定价，然后从当前 <strong>3,929.36亿元（A股）/ 3,492.89亿元（H股）</strong> 总市值中扣减，看看二级市场究竟给最性感的 <strong>“AI 算力高速互连”</strong> 预支了多少溢价？</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块拆解（基于2026年化及增量消化稳态）</th>
@@ -3590,7 +3875,7 @@
 <td style="text-align: left;"><strong>倒推结果水落石出</strong>：<br/>• 在 <strong>A股 (50.78元)</strong> 下，市场给 30.05亿 AI 算力利润定价 <code>1,119.36亿</code>（对应 <strong>2026E 37.2x PE / 稳态 24.9x PE</strong>）；<br/>• 在 <strong>H股 (49.06港元)</strong> 下，市场给 AI 算力板块隐含定价仅 <strong><code>682.89亿</code></strong>（对应 <strong>2026E 22.7x PE / 稳态仅 15.2x PE</strong>！）。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>🎯 Reverse SOTP 拆骨核心洞察</strong>：
 1. <strong>A股定价（50.78元，市值 3,929亿）：合理偏保守，绝无泡沫透支</strong>。在扣除消费电子基本盘（<code>2,130亿</code>）与汽车 Tier 1（<code>680亿</code>）后，A股给立讯精密最核心的 AI 高速铜互连与光模块/液冷业务留出的隐含市值是 <strong><code>1,119.36亿元</code></strong>。考虑到立讯是全球少数掌握 224G/448G 极细同轴裸线物理发泡押出工艺、直接切入北美云巨头与 AI 机柜背板的连接器巨头（对标安费诺 APH 常年 31—32倍 PE），对应稳态 45亿利润仅 <strong>24.9倍 PE</strong> 的定价非常公允理性。
@@ -3612,7 +3897,7 @@
 </li>
 </ul>
 <p>我们再将立讯精密与国内外五大可比同行（截至 <strong>2026年11月上旬最新市场数据</strong>）同台比武：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">可比公司名称与代码</th>
@@ -3681,7 +3966,7 @@
 <td style="text-align: left;"><strong>立讯精密终极对标灯塔</strong>：全球连接器与 AI 高速铜互连霸主，靠持续精密制造并购整合长牛数十年，享受美股 31倍+ 常态高溢价。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>⚖️ 赔率总定性</strong>：
 综合历史分位、Reverse SOTP 拆解与同行对比，立讯精密在 <strong>2026年11月当前位置（A股 50.78元 / H股 49.06港元）</strong>：
@@ -3691,7 +3976,7 @@
 <hr/>
 <h3 id="2-ah">2. 三档可操作击球区锚点（具体到总市值、A/H股价与估值倍数）</h3>
 <p>为了让投资决策彻底告别模糊的感性判断，我们将立讯精密的赔率空间划分为三档可精准执行的量尺（以最新总股本 <code>77.38亿股</code> 为基准）：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位与策略定性</th>
@@ -3732,7 +4017,7 @@
 <td style="text-align: left;"><strong>【逢高分批锁定利润】</strong>：此时市场不仅把三大增量未来三年的乐观盈利全部满额计价，还开始给重资产组装业务强行拔估值（重演局部情绪过热），安全边际耗尽，应纪律性分批兑现。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="3-kill-criteria">3. 三条基本面死刑证伪红线（Kill Criteria：一旦触发，无条件认错清仓！）</h3>
 <div class="annotated-row"><div class="main-col"><p>再优秀的企业也有边界，再周密的推演也必须给自己留好“逃生舱门”。在持有立讯精密的过程中，如果未来财报或产业跟踪出现以下 <strong>三条量化证伪红线中的任意一条</strong>，说明我们的核心投资逻辑已发生根本性坍塌——<strong>此时无论股价跌了多少、PE 看起来有多便宜，都严禁盲目补仓摊平，必须无条件执行纪律认错离场</strong>：</p><ol>
@@ -3851,7 +4136,7 @@
 <p>因此，我的操作建议极其冷酷且讲求纪律：<strong>在当前价位（A 股 50.78 元 / H 股 49.06 港元），H 股已经具备显著的正向不对称赔率，值得建立中等底仓；而对于 A 股，最完美的黄金重锤击球区在 <code>40.00 元—44.00 元</code>（总市值 3,100 亿—3,400 亿元，对应稳态 14 倍 OE、将所有新业务期权 0 元白送）。拿好现有的 H 股折价筹码，留足一半子弹等待市场下一次因为关税或宏观恐慌把钟摆砸回 42 元以下，那才是困境猎手满仓挥棒的时刻！</strong>”</p>
 <hr/>
 <h2 id="_23">五、 📋 四位投资大师圆桌投票与终极裁决总表</h2>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">投资大师与核心流派</th>
@@ -3891,7 +4176,7 @@
 <td style="text-align: left;"><strong>【构建不对称赔率组合：现价买 H股 + 留足50%子弹等 A股 40—44元黄金重锤区】</strong><br/>下行有 36.31元/股分部基石托底，上行享受莱尼修复与 AI 算力估值双击。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>🏛️ 大师圆桌闭门终极合议裁决（3 票买入 H股 / 1 票等待黄金坑重锤，0 票看空离场）</strong>：
 四位大师一致认定：立讯精密绝非靠财务粉饰或单一爆款吃饭的平庸代工厂，而是一台<strong>“用严苛折旧藏富、用极致周转率把 32.33% 自制核心毛利率转化为 19% ROE”</strong>的世界级精密制造机器。
@@ -3925,13 +4210,26 @@
 <p>消费电子和汽车两块基石按保守收息价拆算就已托住两千八百亿元市值（每股三十六块多）。最优打法是<strong>首选港股（四十九港元左右）</strong>：比A股打近九折，市盈率不到十八倍，扣除传统业务后，市场给它顶级AI算力互连业务的隐含标价仅十五倍市盈率（同行安费诺高达三十一倍），等于按铁匠铺价格白送AI算力军火库！若买A股，五十块附近不必追高，留足一半子弹等关税噪音把股价砸回四十到四十四元黄金区再满仓挥棒。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -4101,7 +4399,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《立讯精密_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/立讯精密_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《立讯精密 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/立讯精密 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4159,6 +4457,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

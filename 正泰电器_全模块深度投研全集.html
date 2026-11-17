@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>正泰电器(601877.SH) 深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>正泰电器 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">正泰电器(601877.SH) 深度投研全集</div>
+    <div class="report-title">正泰电器 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -635,7 +920,7 @@
    - <strong>业务定性</strong>：2023 年正泰电器通过协议受让控股 A 股上市公司通润装备（持股约 <code>29.99%</code>），并把旗下的组串式光伏逆变器与储能系统业务主体“正泰电源”注入其中。正泰电源在北美工商业光伏逆变器市场连续多年市占率稳居前二，并加速向全球大型地面电站储能（大储）与工商业储能系统扩张。此外，公司账上仍保留一部分早年自持的高补贴工商业、地面及户用运营光伏电站（2025 年电站运营电费收入达 <code>110.36亿元</code>，毛利率高达 <code>53.04%</code>），每年提供极其肥厚的电费现金流与折旧盾牌。</li>
 </ol>
 <p><strong>表 1：正泰电器合并报表三大核心业务板块营收、毛利率与现金流属性拆解总表（2024—2025年）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务板块拆解</th>
@@ -703,10 +988,10 @@
 <td style="text-align: left;"><strong>2025年OCF达230.90亿，2026前三季度180.73亿</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为了彻底撕开合并报表的颗粒度黑盒，我们直接调取正泰电器 <strong>2024 年报与 2025 年报财务报表附注“营业收入和营业成本分解信息”及“主营业务分产品情况”</strong>，将公司旗下全部十二大细分商品类型的营收、成本与毛利率逐项拉出对账：</p>
 <p><strong>表 2：正泰电器按商品/服务类型分解的细分产品营业收入、成本与毛利率全量对账表（2024 vs 2025年报法定口径）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">所属大类</th>
@@ -879,12 +1164,12 @@
 <td style="text-align: left;">+1.30 pct</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="asp">二、 低压电器七大子品类深度解剖：实物销量（万台）、单件均价（ASP）与单位成本结构</h3>
 <p>为什么正泰电器的低压电器主业能在房地产持续下行的 2023—2025 年依然保持 <code>28.6%—30.0%</code> 的惊人毛利率？我们进一步调取年报“产销量情况分析表”的实物产销台数，并与分产品营收、成本交叉相除，还原出每一类低压元器件最真实的<strong>单件出厂均价（ASP）与单件毛利账本</strong>：</p>
 <p><strong>表 3：低压电器七大细分品类实物生产量、销售量与库存量全口径审计表（2024 vs 2025年报数据，单位：万台）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">细分产品类别</th>
@@ -997,10 +1282,10 @@
 <td style="text-align: left;"><strong>年出货近10亿台/件，2025库存总量腰斩</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：2025年报中建筑电器统计口径对部分小型附件进行了合并折算，因此单台均价同步跃升。)</em></p>
 <p><strong>表 4：低压电器核心子品类单件出厂均价（ASP）、单位营业成本与单件毛利额精算表（2023—2025年）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">细分品类</th>
@@ -1085,10 +1370,10 @@
 <td style="text-align: left;">淘汰低价工程塑料白板，向金属边框与智能联控开关升级</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>再往下穿透一层，看低压电器的生产成本究竟花在了哪里。根据正泰电器 2024 年报与 2025 年报“成本分析表”，低压电器板块的直接材料、直接人工与制造费用精确构成如下：</p>
 <p><strong>表 5：正泰电器低压板块生产成本三要素（材料、人工、制造费用）年报附注精算表（2024 vs 2025年）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">成本构成项目</th>
@@ -1143,9 +1428,9 @@
 <td style="text-align: left;"><strong>规模效应极强，人工与制造费用合计仅占总成本的13.36%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 6：低压电器五大核心子品类单位成本BOM结构（铜、银、钢、塑、芯）拆解与毛利率差序格局表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">细分品类</th>
@@ -1216,7 +1501,7 @@
 <td style="text-align: left;">接触器银触点与铜线圈占比极高，且下游机械OEM客户压价凶猛</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>仔细看表 4 和表 5 里的数字！正泰一年卖出近 10 亿只低压电器，平均每只小开关（终端电器）出厂价才 16 块 8 毛钱，但每卖一只就能稳赚 5 块 2 毛 8 的毛利；更可怕的是，在营收增长近 5% 的 2025 年，它的一线车间人工总成本居然只涨了 0.55%（多花了区区 600 万人民币）！为什么？因为温州乐清的黑灯工厂里全是 0.8 秒吐一个开关的自动机器人在干活。跟这种把单件人工成本压到 1 块 1 毛钱的规模怪兽打价格战，对手连买铜皮的钱都挣不回来。</p></div></div>
 <hr/>
 <h3 id="_4">三、 正泰安能（户用光伏绝对霸主）商业模式全解构：单瓦经济账、央企买家流水与通润装备协同</h3>
@@ -1224,7 +1509,7 @@
 <h4 id="1-unit-economics">1. 正泰安能四大业务模式与单瓦经济模型（Unit Economics）深度解剖</h4>
 <p>正泰安能的业务绝非单一的建站卖站，而是演进出了四套环环相扣的业务组合拳：</p>
 <p><strong>表 7：正泰安能四大业务模式权责利、资产归属与会计核算解剖表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">模式名称</th>
@@ -1264,10 +1549,10 @@
 <td style="text-align: left;">零资本开支，随累计建成规模滚雪球（已超40GW），毛利率 <strong><code>45%—60%</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为什么 2024—2025 年上游组件价格崩盘，反而让正泰安能赚得盆满钵满？让我们拉出 <strong>2022—2026E 正泰安能单瓦建站与出售经济模型（Unit Economics）</strong> 的精确推演表：</p>
 <p><strong>表 8：正泰安能户用光伏电站“滚动开发出售（BT）”单瓦经济模型（Unit Economics）演变表（2022—2026E，单位：元/W，不含税）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">单瓦收入与成本拆解项</th>
@@ -1382,9 +1667,9 @@
 <td style="text-align: left;"><strong>叠加上存量自持电站发电与40GW代运维高毛利，2025安能整体净利达30.40亿</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 9：正泰安能及绿色能源板块装机容量（GW）、交易规模与自持运营效率台账表（2022—2025年）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心经营与运营指标</th>
@@ -1470,11 +1755,11 @@
 <td style="text-align: left;">2026中正泰电器持股提至<strong>71.24%</strong>，归母利润贡献突破21亿+</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2">2. 谁在排队接盘正泰安能的屋顶电站？——央国企与险资大买家交易流水拆解</h4>
 <p>很多投资者担心：“农村屋顶电站那么分散，央企真的愿意一直买吗？”我们根据正泰安能 IPO 申报招股书、正泰电器历次《关于出售户用光伏电站资产的公告》及产权交易所公开挂牌记录，梳理出正泰安能背后的<strong>“五大金主阵营”</strong>：</p>
 <p><strong>表 10：正泰安能历年核心央国企及金融机构大买家电站资产包交易流水与合作机制明细表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">买方阵营排名</th>
@@ -1521,11 +1806,11 @@
 <td style="text-align: left;">在无风险利率下行周期，将正泰安能代运维的华东/华南高电价户用电站视作“类固收高息基础设施债券”配置</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="3-002150sz">3. 控股上市子公司通润装备（002150.SZ / 正泰电源）的协同架构与少数股东分流机制</h4>
 <p>2023 年上半年，正泰电器上演了一出极其精妙的“A 股控 A 股”资本运作：正泰电器斥资约 <code>10.20亿元</code> 收购 <strong>通润装备（002150.SZ，全球金属工具箱柜龙头）</strong> <code>29.99%</code> 股份成为其控股股东；同时，通润装备以现金 <code>8.40亿元</code> 反向收购正泰电器旗下的逆变器与储能业务主体——<strong>上海正泰电源系统有限公司 <code>97.10%</code> 股权</strong>。</p>
 <p><strong>表 11：控股子公司通润装备（002150.SZ / 正泰电源）并表架构、双主业拆分与利润分流审计表（2023—2025年）</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计维度与财务指标</th>
@@ -1579,13 +1864,13 @@
 <td style="text-align: left;"><strong>关键算账</strong>：通润装备赚2.81亿，其中约1.97亿计入正泰电器合并报表的“少数股东损益”，归母净利实得0.84亿</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把待售的屋顶光伏电站放进“存货”科目，是理解正泰电器资产负债表的命门。外行看到 420 亿存货吓得魂飞魄散，以为是卖不掉的断路器烂在仓库里生锈；内行一看就知道，那是几十吉瓦正在太阳底下每天发电印钞（光 2025 年排队等交割期间就顺手收了 110 亿电费、毛利率高达 53%！）、等着国电投和越秀金主排队签字提货的“带息金砖”。</p></div></div>
 <hr/>
 <h3 id="140">四、 国内外渠道网格细节：国内七大区与海外 140 国属地化统治力拆解</h3>
 <p>正泰电器之所以能让施耐德頭疼、让国内中小同行绝望，靠的不是某一项黑科技专利，而是它花了三十年编织的<strong>“海内外立体分销与本土化制造毛细血管网”</strong>。我们先调取 2024 年报与 2025 年报法定披露的<strong>“主营业务分地区情况”</strong>全量数据：</p>
 <p><strong>表 12：正泰电器国内七大区域及海外市场营业收入、营业成本与毛利率全口径对账表（2024 vs 2025年报法定口径，单位：万元）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">销售区域</th>
@@ -1710,11 +1995,11 @@
 <td style="text-align: left;"><em>(注：加上其他业务收入9.52亿后即等于合并总营收591.45亿元)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="1-600-6000-10">1. 国内渠道网格：“600 家一级核心大商 + 6,000 家二级分销 + 10 万五金终端”与四大直销铁军</h4>
 <p>在国内低压电器市场，正泰推行的是极具统治力的<strong>“蓝色快车经销网络 + 战略行业大客户直销”</strong>双轨制：</p>
 <p><strong>表 13：正泰电器国内低压电器渠道矩阵、客户结构、结算账期与毛利率贡献解剖表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">渠道类型</th>
@@ -1791,11 +2076,11 @@
 <td style="text-align: left;">国产替代政策强推，正泰“诺雅克（NOARK）”专攻外资替代</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2-140-2025-3357-10">2. 海外 140 国渠道网格：为什么 2025 年正泰海外毛利率飙升至 <code>33.57%</code>（比国内高近 10 个百分点）？</h4>
 <p>不同于国内很多电气厂靠给欧美品牌做低毛利 OEM 贴牌代工出海，正泰电器在海外坚持<strong>“自主品牌（CHINT + NOARK）+ 本土化子公司 + 区域中心工厂”</strong>的重度深耕模式。截至 2026 年港股 H 股招股书披露，正泰产品畅销全球 <strong>140 多个国家和地区</strong>，在海外设立了 <strong>30 多家本土化运营子公司、20 余个国际物流中心与区域制造基地</strong>，全球活跃海外经销商超 <strong>2,300 家</strong>：</p>
 <p><strong>表 14：正泰电器海外四大战区（欧洲、西亚非/中东、亚太、美洲）业务结构、本土化支点与毛利率拆解表（2025年，海外总营收 99.51亿元）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">海外核心战区</th>
@@ -1848,7 +2133,7 @@
 <td style="text-align: left;"><strong>2026年8月递表港股H股IPO，募资核心即用于进一步扩建海外制造基地，向海外营收占比25%+冲刺</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_5">五、 产业周期时钟、成本顺价权与客户转换代价测试</h3>
 <ol>
@@ -1862,7 +2147,7 @@
 </li>
 </ol>
 <p><strong>表 15：大宗原材料（铜、银、工程塑料）价格波动对正泰低压电器毛利率的敏感性压力测试与顺价传导表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">成本要素名称</th>
@@ -1921,7 +2206,7 @@
 <td style="text-align: left;"><strong>正向贡献 +0.2 至 +0.4 pct</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我最喜欢这种“在客户总成本里只占百分之一，但一旦失灵就会让整座工厂炸锅”的小玩意儿。采购经理哪怕脑袋被门夹了，也不会为了省二十块钱去换个杂牌断路器，然后冒着机房起火被炒鱿鱼的风险。更妙的是，当海外的施耐德和西门子因为欧洲电价太贵、工人罢工交不出货时，正泰在海外把毛利率悄悄干到了 33.57%——比国内还高出整整 10 个百分点！这就是中国制造供应链出海降维打击的威力。</p></div></div>
 <hr/>
 <h2 id="_6">【第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）】</h2>
@@ -1929,7 +2214,7 @@
 <h3 id="vs-schneider-vs-002706-vs">一、 低压电器战场：正泰 vs 施耐德电气（Schneider） vs 良信股份（002706） vs 常熟开关/宏发股份</h3>
 <p>国内约 <code>900亿—1,000亿元</code> 的低压电器市场呈现出极其清晰的金字塔梯队格局。我们先将正泰的主力产品与施耐德、良信股份拉到同一张参数与价格桌面上硬碰硬：</p>
 <p><strong>表 16：低压电器主力产品（ACB、MCCB、MCB、1500V直流断路器）正泰 vs 施耐德 vs 良信股份硬核参数与价格比拼表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心产品类别</th>
@@ -1974,9 +2259,9 @@
 <td style="text-align: left;">正泰不仅外部大卖，更有自家每年 <code>14GW+</code> 正泰安能电站与 <code>18GW</code> 正泰电源逆变器内部保底喂养</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 17：正泰电器 vs 施耐德电气 vs 良信股份 vs 天合富家 vs 创维光伏五大竞争维度全景对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">竞争维度对比</th>
@@ -2029,10 +2314,10 @@
 <td style="text-align: left;">缺乏底层电气制造基因，资产包周转率与毛利偏低</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为什么良信股份账面毛利率（约 <code>31%—32%</code>）看起来比正泰低压电器（<code>28.62%</code>）略高，但正泰低压电器的真实净利率却比良信高出一倍？我们拉出<strong>制造自制率与期间费用率剪刀差量化对标表</strong>：</p>
 <p><strong>表 18：低压电器制造端“零部件自制率、产线节拍与期间费用率剪刀差”正泰 vs 良信 vs 宏发量化对标表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">成本与费用效率指标</th>
@@ -2086,7 +2371,7 @@
 <td style="text-align: left;"><strong>终极裁决：正泰低压本部的真实营业利润率是良信股份的 2 倍！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>只看毛利率不看费用率的投资者，就像只看餐厅菜价贵不贵、却不看房租和服务员工资有多高的糊涂掌柜。良信股份给大客户做定制开关，毛利率虽然有 31%，但为了伺候这些大爷，它得养一大群高薪销售和定制工程师，销售加研发费用吃掉了近 20 个点，最后净利率只剩可怜的 7%、8%；正泰靠全国六千家经销商自己掏钱跑腿卖货，销售费用率只有 4 个点出头，最后落袋的营业利润率高达 17%！规模摊薄固定费用，永远是制造业最硬的铁律。</p></div></div>
 <hr/>
 <h2 id="_7">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？】</h2>
@@ -2106,7 +2391,7 @@
 </li>
 </ol>
 <p><strong>表 19：正泰四十年三次生死跃迁、关键资本动作与商业基因演化编年史简表（1984—2026年）</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">历史阶段</th>
@@ -2141,14 +2426,14 @@
 <td style="text-align: left;"><strong>“无硅一身轻的反周期算盘 + 全球属地化制造与算力配电跃迁”</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看正泰在 2022 年把重资产晶硅组件制造剥离出去、只留下轻资产的屋顶电站开发和低压电器这一招——这就像在淘金热泡沫破裂前夜，把赔钱的矿井卖掉，专心在路口卖铲子和收过路费。那些抱着百亿硅片产线死扛的同行，现在连哭都找不到调门。</p></div></div>
 <hr/>
 <h2 id="_8">【第四部分：管理层功过簿、“翻旧账”言行对表与治理排查】</h2>
 <h3 id="_9">一、 核心掌舵人底色与职业经理人交班架构</h3>
 <p>实控人兼董事长<strong>南存辉</strong>（1963 年生，修鞋匠出身的浙商教父级人物）掌舵正泰逾 40 年，其最大的个人特质是“重分利、稳字当头、极少赌身家”。近年来，公司管理层已完成向专业化与年轻化实战派的平稳交接：</p>
 <p><strong>表 20：正泰电器核心管理层、实控人家族及职业经理人权责分工与治理对齐表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">姓名</th>
@@ -2195,11 +2480,11 @@
 <td style="text-align: left;">严控制造端CapEx（降至18.85亿）与存货周转回笼（2025年OCF高达230.90亿）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_10">二、 四项治理硬核体检（“翻旧账对表”与关联交易放大镜）</h3>
 <p><strong>表 21：管理层“翻旧账”言行一致性审计表（回溯 2021—2023 年报承诺 vs 2025—2026 年实际交卷）</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">历史承诺时间与出处</th>
@@ -2234,11 +2519,11 @@
 <td style="text-align: left;"><strong>【稳步兑现 ★★★★☆】</strong><br/>整合顺畅，未发生商誉减值爆雷</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="_11">🔥 治理重点排查：与控股股东正泰集团（正泰新能组件采购）的日常关联交易审计</h4>
 <p>由于母公司正泰集团旗下拥有未上市的<strong>“正泰新能”</strong>（主营光伏电池与组件制造，2022—2023 年从上市公司剥离出去）与<strong>“正泰电气”</strong>（主营高压变压器与开关柜），上市公司正泰电器旗下的正泰安能在开发建设户用屋顶电站时，每年不可避免地会向集团兄弟公司“正泰新能”采购光伏组件；同时上市公司也会向正泰新能、正泰电气销售低压断路器、并网箱与控制器。</p>
 <p><strong>表 22：正泰电器与控股股东正泰集团系（正泰新能/正泰电气等）日常关联交易审计表（2023—2025年）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">关联交易方向与核心内容</th>
@@ -2270,14 +2555,14 @@
 <td style="text-align: left;">按正泰一级经销商/大客户公允出厂价结算，属于正常的产业链上下游元器件配套，毛利率约 <code>26%—29%</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>儿子（上市公司正泰安能）盖电站要买太阳能板，老爹（正泰集团）家里正好开了家太阳能板厂（正泰新能）。虽然目前账本上看，儿子确实按跳楼市场价拿到了便宜货、七成以上组件还在外面找别家买，毛利率还涨了 4 个点；但只要这层父子买卖关系存在，聪明的投资人就永远要把一只眼睛贴在他们的采购合同和预付款科目上。</p></div></div>
 <hr/>
 <h2 id="_12">【第五部分：资本创造还是资本消耗？融资、分红与自由现金流硬核审计（三大核心支柱之二）】</h2>
 <h3 id="17-2274">一、 上市 17 年融资与分红全历史台账：公众现金分红融资比高达 <code>227.4%</code>！</h3>
 <p>正泰电器自 <strong>2010 年 1 月 21 日</strong> 在上交所主板挂牌上市以来，长达 17 年从未在 A 股搞过恶性再融资抽血（自 2016 年底重组配套定增后，<strong>2017—2026 年连续近 10 年零 A 股股权再融资</strong>），同时连续 17 年每年雷打不动派发现金股息：</p>
 <p><strong>表 23：正泰电器上市以来（2010—2026年）全口径股权融资、历年现金分红与股份回购硬核台账表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计维度</th>
@@ -2310,11 +2595,11 @@
 <td style="text-align: left;">严苛买方口径下不计入注销分红回报，但避免了发新股摊薄老股东</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_13">二、 五年一期现金流硬账本与“合并报表三大幻觉”深度穿透</h3>
 <p><strong>表 24：正泰电器五年一期（2021—2026Q3）营收、归母净利、经营现金流（OCF）与自由现金流（FCF）硬账本总表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -2407,11 +2692,11 @@
 <td style="text-align: left;"><strong>427.8%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="420-415">🔍 深度财务侦探：穿透资产负债表上的“420 亿存货”与“415 亿有息负债”</h4>
 <p>初看正泰电器财报的人往往会被三个数字搞晕：① 为什么 2025 年 OCF 高达 <code>230.90亿元</code>？② 为什么账上躺着 <code>420.82亿元</code> 存货？③ 为什么账上有 <code>140.43亿元</code> 货币资金，却同时背着约 <code>415.0亿元</code> 有息负债？我们用一张底层穿透审计表把这三层窗户纸一次捅破：</p>
 <p><strong>表 25：正泰电器合并资产负债表“存货、货币资金、有息负债与少数股东权益”底层结构穿透审计表（2024—2026Q3）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心资产负债科目</th>
@@ -2464,7 +2749,7 @@
 <td style="text-align: left;"><strong>重大拐点</strong>：2026年6月正泰电器斥资 <code>11.16亿元</code> 将正泰安能持股从 <code>62.54%</code> 提升至 <strong><code>71.24%</code></strong>，每年直接为上市公司母公司股东多收拢约 <strong><code>2.7亿—3.2亿元</code></strong> 归母净利润！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看到两百三十亿的经营现金流别激动得蹦起来，看到四百亿的银行借款也别吓得尿裤子。正泰安能借银行年息不到 4 个点的绿电开发贷去盖屋顶电站，转手加价近 20% 卖给央企，卖完顺手把银行的钱还上；在排队等央企办过户手续的那大半年里，这些屋顶电站还没闲着，顺手在太阳底下发了 110 亿的电费（毛利率高达 53%）！只要央企还在买站，这四百亿负债就是帮股东打工的廉价苦力。</p></div></div>
 <hr/>
 <h2 id="_14">【第六部分：钱往哪砸、本事往哪长？资本开支流向、技术/模式动态进化与成长规划（三大核心支柱之三）】</h2>
@@ -2523,7 +2808,7 @@
 <p>正泰电器是一家<strong>“以年赚约 30 亿+的低压电器全品类现金牛为绝对安全底座，以年赚约 21 亿+归母利润的户用光伏高周转开发龙头（正泰安能，持股已提至 71.24%）为现金流放大器，同时手握 AIDC 算力配电国产替代与全球电网出海两大成长期权”</strong>的产业寡头。管理层在周期顶点果断剥离重资产晶硅组件、在估值低位撤回正泰安能分拆并增持收回少数股东权益，展现了极高的商业算盘水准与股东利益一致性。</p>
 <h3 id="_19">二、 未来三年财报可证伪跟踪路标与全局统一财务基准锁定表</h3>
 <p><strong>表 26：正泰电器未来三年四大可证伪硬指标监控阈值与全报告统一财务基准锁定总表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">维度分类</th>
@@ -2608,8 +2893,8 @@
 <td style="text-align: left;">后续所有模块（01—04）涉财务总数100%以此表为准，严禁出现分毫偏差</td>
 </tr>
 </tbody>
-</table>
-<hr class="module-sep"/>
+</table></div>
+<hr/>
 <h2 id="a">【追问模块 A：资本开支与重点工程解剖】</h2>
 <h3 id="1885">一、 资本开支结构大转身与合并报表《固定资产 + 在建工程》全口径盘点：从百亿重资产填坑到 18.85 亿元的“刀刃投资”</h3>
 <p>翻开正泰电器近五年的现金流量表与资产负债表附注，最令买方震撼的财务突变莫过于其资本开支（购建固定资产、无形资产和其他长期资产支付的现金，CapEx）的断崖式收敛：公司年度 CapEx 从 2022 年峰值的 <code>106.70亿元</code> 一路阶梯式速降至 2023 年的 <code>43.64亿元</code>、2024 年的 <code>29.51亿元</code>，并在 2025 年进一步大幅压降 <code>36.13%</code> 至 <strong><code>18.85亿元</code></strong>（2026 年前三季度亦仅温和支出约 <code>14.50亿元</code>）。与此同时，公司营业收入稳守 <code>590亿—645亿元</code> 量级（2025 年营收 <code>591.45亿元</code>，2026 年前三季度营收 <code>543.67亿元</code>、同比增长 <code>17.13%</code>），归母净利润更是在 2025 年创下 <strong><code>45.01亿元</code></strong> 的历史新高。为什么一家年收近六百亿的制造与新能源巨头，突然不需要每年砸上百亿建固定资产了？</p>
@@ -2626,7 +2911,7 @@
 </li>
 </ol>
 <p><strong>表 A-1：正泰电器五年一期（2021—2026Q3）资本开支（CapEx）、折旧摊销、固定资产与在建工程演变全景表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心指标</th>
@@ -2701,10 +2986,10 @@
 <td style="text-align: left;">重资产包袱彻底封顶，占总资产比例降至18.7%的安全水位</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为了看清 <code>284.56亿元</code> 固定资产里究竟装的是什么家底、有没有隐藏的减值地雷，我们直接提取 <strong>2025 年报财务报表附注“五(一)19. 固定资产情况表”</strong> 的原始数据进行穿透审计：</p>
 <p><strong>表 A-2：正泰电器合并报表《固定资产情况表》各大资产类别原值、累计折旧、减值准备与期末净值拆解表（2024末 vs 2025末）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">固定资产类别</th>
@@ -2775,8 +3060,8 @@
 <td style="text-align: left;"><strong>期末固定资产净值精确等于 <code>28,456,126,254.50元</code>（284.56亿元）</strong></td>
 </tr>
 </tbody>
-</table>
-<hr>
+</table></div>
+<hr/>
 <h3 id="_20">二、 《在建工程前十大核心项目全生命周期解剖大表》与车间级技改细节</h3>
 <p>在解剖具体在建工程前，我们严格遵循两条<strong>财务审计防呆铁律</strong>：</p>
 <ul>
@@ -2789,7 +3074,7 @@
 </ul>
 <p>我们将正泰电器 <strong>2024 年报与 2025 年报附注“在建工程情况表”及“重要在建工程项目本期变动情况表”</strong> 的全部法定明细项目，叠加控股子公司 <strong>通润装备（正泰电源松江基地）</strong> 专项公告及 <strong>2026 年 8 月港股 H 股招股书</strong> 披露的海外在建基地，拉出完整的<strong>《在建工程前十大核心项目全生命周期解剖大表》</strong>：</p>
 <p><strong>表 A-3：正泰电器及控股子公司《在建工程前十大核心项目全生命周期解剖大表》（2024—2025年报附注及专项公告实数）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">序号</th>
@@ -2963,11 +3248,11 @@
 <td style="text-align: left;">自有资金+H股募资</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="1">1. 深度解剖核心工程一：温州乐清智能低压电器“棕地数字化技改”车间级工序台账</h4>
 <p>为什么正泰电器每年在低压电器制造端仅需投入约 <code>8.5亿元</code>（含在建工程设备安装与直接购置固定资产），就能支撑 <code>227.36亿元</code> 营收与近 <code>10亿台</code> 的年出货量？因为正泰在温州乐清、嘉兴海宁与上海松江搞的是极高效率的<strong>“棕地数字化技改（Brownfield Upgrade）”</strong>——利用现成的成熟工业园区，将资金 100% 砸向六大核心制造工序的无人化升级：</p>
 <p><strong>表 A-4：正泰电器低压电器“未来工厂”六大核心车间工序数字化技改投入与生产节拍跃迁表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">车间工序环节</th>
@@ -3028,10 +3313,10 @@
 <td style="text-align: left;">助力2025年终端电器库存台数大降 <strong><code>38.36%</code></strong>、建筑电器库存大降 <strong><code>75.18%</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2-1370">2. 深度解剖核心工程二：控股子公司正泰电源（通润装备）上海松江光储智能制造基地（13.70亿元）</h4>
 <p><strong>表 A-5：正泰电源（通润装备 002150.SZ）上海松江光储智能制造基地投资构成与产能爬坡拆解表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">分项投资模块</th>
@@ -3084,10 +3369,10 @@
 <td style="text-align: left;"><strong>采取“厂房一次到位、产线按单上架”策略，杜绝产能闲置折旧风险</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="3-h-ipo">3. 深度解剖核心工程三：海外六大区域本土化制造基地集群（港股 H 股 IPO 核心募投方向）</h4>
 <p><strong>表 A-6：正泰电器全球六大区域本土化制造基地投资规模、主产产品、本地化率门槛与电网认证进度大表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">海外基地名称与区位</th>
@@ -3148,13 +3433,13 @@
 <td style="text-align: left;"><strong>捷克研发物流中心成熟运转，土耳其/东欧成套组装线加速放量</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我见过太多制造业老板患上“建厂狂躁症”，账上一有钱就忍不住买地盖大楼、买最贵的重型机器，最后把股东的真金白银全变成一堆生锈的废铁折旧。正泰把每年资本开支从一百多亿狠砍到十八亿，在建工程期末余额更是压到了区区十个亿出头，而每年光账面折旧就有二十五亿多——这意味着它不仅不用再往无底洞里填钱，反而每年能从旧资产里白捡好几个亿的现金流回血。学会在对的时候踩刹车，比只会踩油门高级十倍。</p></div></div>
 <hr/>
 <h3 id="_21">三、 算清单位经济账：对比良信股份、阳光电源，正泰的扩产是“省钱精算”还是“花冤枉钱”？</h3>
 <p>为了检验正泰电器管理层花钱的效率，我们把它的低压电器技改与光储扩产项目拉出来，与国内最直接的竞争对手——<strong>良信股份（002706.SZ）</strong>与<strong>阳光电源（300274.SZ）/ 固德威（688390.SH）</strong>的同类扩产项目做一场逐项拆解的单位经济账对质：</p>
 <p><strong>表 A-7：低压电器与光储扩产单位经济账横向对质表（正泰电器 vs 良信股份 vs 阳光电源 vs 固德威）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比项目 / 企业名称</th>
@@ -3229,10 +3514,10 @@
 <td style="text-align: left;"><strong><code>28%—33%</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>我们进一步对正泰电器 2024—2026 年推进的制造端扩产工程（累计新增转固规模约 <code>30.0亿元</code>）进行<strong>转固折旧增量精算</strong>与<strong>盈亏平衡稼动率（Break-even Utilization）推导</strong>：</p>
 <p><strong>表 A-8：核心制造在建工程全面转固后年新增折旧摊销额分拆精算及利润表冲击测算表（2026—2028E）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">新增转固资产构成类别</th>
@@ -3292,9 +3577,9 @@
 <td style="text-align: left;"><strong>仅占 2.89%（毫无折旧顿挫）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 A-9：三大核心制造扩产工程边际贡献率（Contribution Margin）与盈亏平衡稼动率精算推导表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">测算步骤与核心参数</th>
@@ -3387,12 +3672,12 @@
 <td style="text-align: left;"><strong>终极结论：只要产能利用率达到约 1/4 即可全面实现盈利！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看看良信在海盐平地起高楼花了近二十四亿，每砸一块钱只能换回两块钱营收，一转固就被折旧压得喘不过气；再看看正泰在老窝乐清搞技改，用现成的厂房和电镀车间，把钱全花在刀刃机器上，一块钱能撬动四块钱产值，开机干活只要达到四分之一产能就能保本。这就叫老钱（Old Money）的规模霸权——你还在借钱买砖头盖厨房，人家已经在现成的厨房里换上全自动炒菜机开始数钞票了。</p></div></div>
 <hr/>
 <h3 id="_22">四、 产能消化能力排摸与海外建厂三大落地硬骨头排查</h3>
 <p><strong>表 A-10：正泰电器核心产品线产能利用率、库存周转与新增产能消化瓶颈排摸表（2024—2026Q3）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">细分产品线</th>
@@ -3437,10 +3722,10 @@
 <td style="text-align: left;"><strong>【柔性按单上架】</strong>：2025逆变器储能营收大增45.2%至23.90亿；松江18GW+5GWh厂房先行，设备按订单上架无过剩之虞</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>尽管国内高端技改消化无忧，但针对正泰在<strong>沙特、埃及、墨西哥</strong>等海外基地的建设，买方必须冷水泼面，盯紧三块极易导致海外工期延误或初期成本超支的硬骨头：</p>
 <p><strong>表 A-11：正泰电器海外建厂（中东/北非/美洲近岸）三大真实落地硬骨头、财务冲击与缓释对策排查表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">海外落地阻力维度</th>
@@ -3473,7 +3758,7 @@
 <td style="text-align: left;">在沙特将本国员工配置于行政、关务与政府公关岗，核心产线提高自动化率；在埃及推动以美元/欧元计价的出口转口贸易对冲本币贬值</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在温州乐清，南存辉只要吹一声口哨，半小时车程内就有几百家模具厂、电镀厂和铜材加工厂连夜排队送货；但到了沙特的沙漠或者墨西哥的边境，你想找个能把断路器弹簧冲压误差控制在微米级的熟练工，比在沙漠里找冰块还难。出海建厂绝对是正确的方向，但永远别拿中国长三角的极限效率去套算海外工厂的投产时间表——多给它留一两年的试错折旧垫子，才不会在财报出来时大惊小怪。</p></div></div>
 <hr/>
 <h2 id="b">【追问模块 B：远期期权（新业务/新技术）证伪拆解】</h2>
@@ -3483,7 +3768,7 @@
 <h4 id="1-ai-12kw-120kw">1. 为什么 AI 算力机房引发了配电革命？——从 12kW 到 120kW+ 的单机柜配电价值量跃迁</h4>
 <p>随着英伟达（NVIDIA）GB200/NVL72、Rubin 以及华为昇腾万卡集群的部署，数据中心单机柜功率密度正从传统通算中心的 <code>6kW—12kW</code> 暴力跃升至 <strong><code>40kW—120kW+</code></strong>。这一物理剧变导致传统 400V 交流 UPS 配电链路全线告急（电流翻了十倍，铜排粗得塞不进机柜，且两级交直流转换损耗吃掉大量电能），倒逼全球智算中心向 <strong>“HVDC（240V/336V 高压直流）<span class="math-inline"> → </span> 巴拿马电源 <span class="math-inline"> → </span> Grid-to-Chip DC800V 超高压直流微网 + 固态断路器（SSCB）”</strong> 演进：</p>
 <p><strong>表 B-1：数据中心供电架构四代演进与单机柜/单兆瓦（MW）中低压配电元器件价值量跃迁表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">供电架构代际</th>
@@ -3533,10 +3818,10 @@
 <td style="text-align: left;"><strong>前沿攻坚期（0.5<span class="math-inline"> → </span>1）</strong>：1500V/2000V直流开关已量产，SSCB固态断路器样机挂网联调中</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2-vs-abb">2. 技术参数与成本硬碰硬：正泰/诺雅克 vs 施耐德、ABB、伊顿、维谛与良信股份</h4>
 <p><strong>表 B-2：AIDC 高密度配电核心产品正泰（含诺雅克 NOARK）与全球/国内头部竞争对手技术参数与价格横评表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">竞争厂商</th>
@@ -3595,10 +3880,10 @@
 <td style="text-align: left;"><strong>本土B端定制劲旅（份额 ~8%—10%）</strong>：在华为系与维谛供应链中先发卡位深，但缺总包体量</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为什么卖方都在吹捧“全固态断路器（SSCB）”，但实际算力机房里还没大规模铺开？我们用一张<strong>物理定律与 BOM 成本拆解表</strong>还原真相：</p>
 <p><strong>表 B-3：传统机械断路器 vs 混合式断路器（SSHCB） vs 全固态断路器（SSCB）物理性能与成本硬约束对比表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心技术与经济指标</th>
@@ -3645,10 +3930,10 @@
 <td style="text-align: left;">正泰同时握有机械式(<code>1500V/2000V</code>)、混合式(SSHCB)与全固态(SSCB)全栈技术，无论路线怎么走都稳坐钓鱼台</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="3">3. 国内头部大厂与海外智算中心导入进度盘点</h4>
 <p><strong>表 B-4：正泰电器（含诺雅克 NOARK）在国内外算力中心业主的 AVL 白名单认证与份额导入进度表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">下游算力业主 / 集成商客户</th>
@@ -3695,7 +3980,7 @@
 <td style="text-align: left;">相比施耐德海外长达6个月交期，正泰凭借东南亚本地产能以“3个月极速交付+7折价格”抢单</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>期权一最终定性</strong>：<strong>【高确定性、高赔率的真实免费期权（★★★★☆）】</strong>。这块业务完全长在正泰电器最擅长的低压电器主干根系上，零跨界沉没成本，哪怕全固态断路器（SSCB）因碳化硅成本高而放量较慢，仅靠现有的“诺雅克/昆仑”高端框架断路器、高压直流塑壳与智能母线在算力机房替换施耐德，未来三年就能为公司带来数十亿元高毛利（<code>32%—36%</code>）增量营收！</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>别被“全固态断路器微秒级切断”的物理名词迷花了眼——半导体芯片平时导电是会发热耗电的，而且贵得像金子！在算力机房老板眼里，能用便宜又省电的机械直流断路器解决的问题，绝不会轻易掏八倍的价钱去装全固态。正泰聪明就聪明在“两手抓”：嘴上跟你聊最前沿的双固态黑科技，手里先把眼下最好卖、毛利率三十多个点的常规高端框架和直流塑壳断路器，一车一车卖进阿里和字节跳动的机房里。</p></div></div></div></div>
@@ -3705,7 +3990,7 @@
 <h4 id="1-30">1. 正泰电源（通润装备）：北美工商业逆变器隐形冠军的真实账本与“30% 股权漏斗”</h4>
 <p>正泰电源（装在控股子公司通润装备 <code>002150.SZ</code> 体内）绝非讲故事的PPT概念，而是已经实打实跑通海外高毛利闭环的实力派玩家。我们提取正泰电器及通润装备 2024—2025 年报披露的分项财务数据：</p>
 <p><strong>表 B-5：正泰电源（通润装备 002150.SZ）光储逆变器与金属箱柜分产品营收、毛利率及北美市场地位拆解表（2023—2025年）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与业务指标</th>
@@ -3758,10 +4043,10 @@
 <td style="text-align: left;">推出 <code>1500V</code> 液冷储能系统与 <code>275kW—350kW</code> 组串式逆变器，在波兰、德国、日本、韩国及国内风光基地规模交付</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为了客观评估正泰电源在全球光储修罗场里的真实身位，我们将它与全球霸主 <strong>阳光电源、上能电气、特斯拉、宁德时代</strong> 拉出横向对比，并测算其对正泰电器母公司股东的真实利润传导：</p>
 <p><strong>表 B-6：全球光伏逆变器与大型储能系统赛道竞争格局对比表（正泰电源 vs 阳光电源 vs 上能电气 vs 特斯拉/宁德时代）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">竞争维度</th>
@@ -3806,9 +4091,9 @@
 <td style="text-align: left;">在大型地面储能(大储)价格战中，纯集成商受制于上游电芯厂下场抢单与阳光电源的规模压制</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 B-7：正泰电源（通润装备）业绩向正泰电器（601877.SH）归母净利润传导的“29.99% 股权漏斗”与北美关税情景测算表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">情景假设（2026—2027E）</th>
@@ -3849,11 +4134,11 @@
 <td style="text-align: left;">极端贸易战冲击下，正泰电器归母净利最大损失仅 <strong><code>-0.54亿元</code></strong>（风险天然隔离！）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2-vpp">2. 正泰安能虚拟电厂（VPP）与聚合售电：戳破“农村屋顶半夜卖高价电”的物理幻觉</h4>
 <p>很多卖方研报把正泰安能手握的 <strong><code>40GW+</code> 代运维农村屋顶电站</strong> 描绘成“未来靠虚拟电厂削峰填谷躺着暴富的超级金矿”。我们必须用两张硬核解剖表，分清什么是<strong>真实的防御性护城河</strong>、什么是<strong>违背物理常识的吹牛泡沫</strong>：</p>
 <p><strong>表 B-8：正泰安能虚拟电厂（VPP）聚合交易平台六大模块、10 省牌照布局与真实财务贡献解剖表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">VPP平台模块名称</th>
@@ -3886,10 +4171,10 @@
 <td style="text-align: left;"><strong>最重要的增值抓手</strong>：直接帮接盘央企弥补分时电价下跌缺口</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>为什么说纯农村户用屋顶光伏（不配储能）做虚拟电厂，永远不可能赚到晚高峰暴利？请看下面的<strong>物理出力与现货电价时段错配证伪表</strong>：</p>
 <p><strong>表 B-9：纯农村户用屋顶光伏（无储能） vs 工商业配储电站参与电力现货市场（VPP）的分时经济账证伪对比表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">每日分时时段</th>
@@ -3922,13 +4207,13 @@
 <td style="text-align: left;"><strong>终极定性</strong>：正泰安能的VPP绝不是靠“峰谷套利”暴富的印钞机，而是帮国电投/越秀等央企大买家<strong>“做午间切负荷防罚款 + 跨周期中长期锁价 + 卖绿证补差价”的刚需售后服务防弹衣</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街和股市里总有一帮人，一听到“虚拟电厂”四个字就开始流口水，以为把几百万块农村屋顶上的太阳能板连上网，就能在半夜变出电来卖高价。太阳晚上不上班，这是连小学生都懂的物理常识！正泰搞虚拟电厂，是为了帮买电站的央企大爷把中午的电尽量卖出个好价钱、顺手卖点绿证，让央企继续痛痛快快掏钱买它的新屋顶电站。这是一副极好的防弹衣，但别把防弹衣当成印钞机来吹牛。</p></div></div>
 <hr/>
 <h3 id="_23">三、 期权三：石墨烯高导触头新材料（上海正泰新材料）与氢能电解槽装备（上海泰氢晨）</h3>
 <h4 id="1-6">1. 石墨烯复合高导触头：已兑现 6 亿台内部配套的“省银利器”，而非百亿级外部独立大赛道</h4>
 <p><strong>表 B-10：正泰新材料“石墨烯铜基/银镍复合触头” vs 传统纯银/银氧化锡触头技术指标与内部降本经济账测算表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -3963,10 +4248,10 @@
 <td style="text-align: left;"><strong>估值裁决</strong>：这是一流工匠的<strong>“内部降本内功（每年为本部省下数千万元买银钱）”</strong>，价值已100%包含在低压电器28.62%毛利率中，严禁作为独立第二曲线重复给估值！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2-40gw-3gw">2. 氢能装备（正泰氢能 / 上海泰氢晨）：40GW 产能抢 3GW 需求的“未富先卷”修罗场与集团隔离保护</h4>
 <p><strong>表 B-11：正泰氢能（上海泰氢晨）电解槽业务布局、行业产能过剩格局与绿氢平价经济性死结证伪表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审视维度</th>
@@ -3995,12 +4280,12 @@
 <td style="text-align: left;"><strong>终极定性</strong>：未来3—5年绿氢装备纯属<strong>“0元远期彩票”</strong>，在估值模型中直接按 <code>0元</code> 计价</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把石墨烯加进断路器触头里少用点昂贵的白银，这叫“聪明工匠省成本的绝活”，它已经实打实帮正泰的六亿只开关保住了近三成的毛利率；至于绿氢电解槽，现在全国上百家大厂造了四十吉瓦的产能，去抢可怜巴巴的两三吉瓦订单，谁往里砸几十亿重资产谁就是冤大头。好在南存辉是个精明到骨子里的温州生意人，只拿集团的小钱跟行家合资买张看戏门票，绝不拿上市公司股东的血汗钱去当绿氢先烈。</p></div></div>
 <hr/>
 <h3 id="_24">四、 正泰电器三大远期期权（新业务/新技术）商业化证伪裁决总表</h3>
 <p><strong>表 B-12：正泰电器三大远期期权（新业务/新技术）商业化刻度、卡脖子关卡与买方终极证伪裁决总表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">期权维度</th>
@@ -4047,8 +4332,8 @@
 <td style="text-align: left;"><strong>【内部毛利护垫 + 0元远期彩票（★★☆☆☆）】</strong><br/>石墨烯触头已转化为低压电器28.62%高毛利底色；氢能严禁给予任何独立估值溢价</td>
 </tr>
 </tbody>
-</table>
-<hr class="module-sep"/>
+</table></div>
+<hr/>
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
 <p>要看清正泰电器（<code>601877.SH</code>）在“低压电器现金牛 + 户用光伏滚动开发”双轮驱动架构下的真实产业身位，绝不能仅凭其单家财报自说自话。由于正泰电器横跨<strong>低压电器（智能电气/智慧电器）</strong>与<strong>新能源（户用分布式光伏开发运维及光储逆变器）</strong>两大截然不同的产业生态，我们必须将审讯室拆分为左右两个对质法庭，拉出全球及国内最具代表性的七大直接竞争对手进行全方位交叉对质：</p>
 <ul>
@@ -4060,11 +4345,11 @@
 </li>
 </ul>
 <p>通过提取各方最新披露的 <strong>2023—2025年年度报告</strong>、<strong>2026年三季度报告</strong> 与正泰电器 <strong>2026年8月港交所H股招股书</strong> 核心经营数据及报表附注，我们展开一场刀刀见血的“三方交叉审讯”。</p>
-<hr>
+<hr/>
 <h3 id="2023a2026q3">一、 同行核心财务与经营指标全景横向对质大表（2023A—2026Q3）</h3>
 <h4 id="1_1">1. 双赛道七大对手核心财务与经营指标全景总表</h4>
 <p><strong>表 C-1：正泰电器与双赛道核心竞争对手战略身位及财务全景对质总表（2025A &amp; 2026Q1-Q3）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">审讯维度 / 核心指标</th>
@@ -4179,12 +4464,12 @@
 <td style="text-align: left;">25A存货周转约163天，合同负债常年维持百亿级高位</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2-20232026q3">2. 第一法庭与第二法庭 2023—2026Q3 营收及归母净利逐期增速拆解表</h4>
 <p>为进一步穿透周期波动的节奏，我们将两大法庭在 <strong>2023年、2024年、2025年及2026年前三季度</strong> 的营收与利润增速拆分列示：</p>
 <p><strong>表 C-2：第一法庭（低压电器与电工控制赛道）2023—2026Q3 营业收入及同比增速分期对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称</th>
@@ -4252,9 +4537,9 @@
 <td style="text-align: left;">高度绑定国内住宅装修后周期，25-26年受地产竣工下滑拖累进入平台期</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 C-3：第一法庭（低压电器与电工控制赛道）2023—2026Q3 归母净利润及扣非净利增速对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称</th>
@@ -4319,9 +4604,9 @@
 <td style="text-align: left;"><strong>高位承压</strong>：受铜塑成本上涨及新业务营销投入增加（销售费+11.55%）拖累</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 C-4：第二法庭（分布式光伏与光储逆变器赛道）2023—2026Q3 营业收入与业务结构对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称</th>
@@ -4374,9 +4659,9 @@
 <td style="text-align: left;">新能源占创维集团总营收（703.24亿）的33.6%，截至25年末累计并网户用电站超29.3GW</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 C-5：第二法庭（分布式光伏与光储逆变器赛道）2023—2026Q3 净利润与周期剪刀差对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称</th>
@@ -4435,7 +4720,7 @@
 <td style="text-align: left;"><strong>增收不增利</strong>：新能源营收涨16.5%至236.85亿，但分部业绩仅12.08亿，渠道返佣与财务成本沉重</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这两张表放在一起看，简直是一堂价值百亿的商业课。在第一法庭里，谁拥有全球化的工业客户和渠道定价权（正泰、宏发、施耐德），谁就能在地产寒冬里照样创出利润新高；在第二法庭里，谁抱死了重资产硅片组件产线（天合），谁就在产能过剩的泥潭里亏掉七十亿，而早早把组件厂剥离出去、只做下游屋顶电站开发和低压配电配套的正泰，却把上游流出的血变成了自己碗里的红烧肉。</p></div></div>
 <hr/>
 <h3 id="_25">二、 景气度与周转交叉对质：低压电器在温和复苏还是压库？户用光伏谁在控盘、谁在积压？</h3>
@@ -4455,7 +4740,7 @@
 <li>驱动本轮温和复苏的并非传统住宅地产（地产占正泰低压营收比重已压缩至不足15%），而是<strong>三大新质增量</strong>：一是国内电网配网智能化改造（国网/南网投资创历史新高）；二是全球及国内 <strong>AIDC（人工智能数据中心）</strong> 对高可靠框架断路器（ACB）、塑壳断路器（MCCB）及智能配电柜的爆发式需求；三是锂电、风电、储能及工业出海OEM设备商的配套采购。</li>
 </ul>
 <p><strong>表 C-6：全赛道核心玩家合同负债（预收经销商货款与电站/工程预收款）环比及同比变动验真表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称</th>
@@ -4516,9 +4801,9 @@
 <td style="text-align: left;">组件预订金随价格下行有所萎缩，但海外储能系统及分布式屋顶预收款维持一定韧性</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 C-7：全赛道核心玩家存货规模、底层结构异质性与存货周转天数（2024A—2026Q3）对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称</th>
@@ -4595,9 +4880,9 @@
 <td style="text-align: left;">包含硅棒、硅片、电池片、组件产成品及在建电站；2024-2025年因组件价格雪崩计提大额存货跌价</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 C-8：全赛道核心玩家应收账款规模、客户结算结构与应收账款周转天数（2024A—2026Q3）对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称</th>
@@ -4658,7 +4943,7 @@
 <td style="text-align: left;">组件销售以信用证（L/C）与电汇为主，但国内电站及分布式工程存在一定账期</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把不同商业模式的公司放在一张表上比“存货周转天数”，如果不把底层的资产性质剥开，就会得出极其荒唐的结论。正泰电器那 295 天的合并存货周转天数里，低压断路器其实只要 60 多天就卖光了，真正沉淀在账上的是正泰安能替央企金主代建的 370 多亿屋顶光伏电站。这就好比一家公司左手开五金超市（2个月周转一次），右手给央企做定制工业园开发（10个月交割一次），你要是用超市的标准去骂工业园盖得慢，那就是还没搞懂会计科目的基本常识。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_1">2. 分布式户用光伏赛道：正泰安能“主动缩表提质、加速周转”，同行深陷“制造亏损或垫资积压”</h4><p>在分布式光伏战场，2025年至2026年经历了“红区消纳受限、入市电价机制改革（136号文）、组件价格筑底”的惊涛骇浪，头部玩家的库存与周转策略呈现出云泥之别：</p><ul>
@@ -4687,7 +4972,7 @@
 <h3 id="_26">三、 产品代际与盈利质量深度对质（核心审讯！）：商业模式如何决定利润鸿沟？</h3>
 <h4 id="1_3">1. 低压电器核心产品性能极限与定价梯队比拼</h4>
 <p><strong>表 C-9：低压电器赛道四大核心品类技术参数极限与终端定价梯队对质表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心产品品类</th>
@@ -4740,12 +5025,12 @@
 <td style="text-align: left;">正泰用“施耐德7折的价格+95%的性能+现货秒发”形成降维打击</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2-303126q1-q32761-598-2862-16">2. 谜题一：为什么良信股份毛利率常年高达 30%—31%（26Q1-Q3为27.61%），净利率却只有可怜的 5.9%—8%；而正泰电器低压板块毛利率 28.62%，却能做出 16%+ 的分部营业利润率？</h4>
 <p>表面上看，良信股份主打中高端大客户定制，毛利率在过去多年一直比正泰低压电器高出 1.5—3 个百分点（直到2025—2026年受大客户压价与铜银涨价双重挤压，良信2026前三季度毛利率跌至 27.61%，甚至被正泰 28.62% 反超）。但一看净利率，<strong>良信股份2025年归母净利率仅 5.91%（2.65亿/44.85亿），2026年前三季度仅 6.27%（2.45亿/39.06亿）</strong>；反观<strong>正泰电器低压板块，在 28.62% 的毛利率下，分部营业利润率常年稳居 15%—17% 区间（每年稳态贡献约 33亿—36亿元分部净利润）</strong>！</p>
 <p><strong>表 C-10：全赛道核心玩家综合毛利率与核心业务分部毛利率（2023—2026Q3）逐项拆解表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称</th>
@@ -4822,9 +5107,9 @@
 <td style="text-align: left;"><strong>创维新能源分部毛利率仅约 8.0%—10.0%</strong>，缺乏底层电气元器件自产能力</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 C-11：全赛道核心玩家四项期间费用率（销售/管理/研发/财务）与净利率转化效率对质表（2025A 基准）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">公司名称</th>
@@ -4928,7 +5213,7 @@
 <td style="text-align: left;">创维新能源约8%—10%的微薄毛利扣掉渠道返佣与垫资利息后，分部净利率不足3%—4%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>造成正泰低压与良信股份这 <strong>10个百分点以上净利率鸿沟</strong> 的核心密码，在于<strong>“全渠道经销规模分摊 vs 行业大客户直销重费用”</strong>的商业模式底层差异：</p>
 <ol>
 <li><strong>销售费用率差出整整一倍（4.35% vs 8.70%）</strong>：</li>
@@ -4954,7 +5239,7 @@
 </li>
 </ol>
 <p><strong>表 C-12：低压电器“经销规模分摊模式（正泰）” vs “大客户直销定制模式（良信）”每 1 亿元营收利润留存模拟对质表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">每 10,000 万元低压电器营收拆解项</th>
@@ -5013,7 +5298,7 @@
 <td style="text-align: left;"><strong>每卖1亿元低压电器，正泰净赚1,652万，良信仅剩677万！真实赚钱效率是良信的 2.44倍！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多书呆子投资者只盯着毛利率看，以为毛利率31%的公司一定比毛利率28%的公司高级。他们忘了看利润表下半截！如果为了多赚那3个点的毛利，你必须养活成千上万名高薪推销员和定制研发工程师，多花掉11个点的期间费用，那这门生意简直就是替员工打工的苦役。正泰依靠几千家经销商建立起来的标准化分销网络，把期间费用率死死压在10%出头，这才是历经三十年检验的、能真正产生自由现金流的规模经济壁垒！</p></div></div>
 <hr/>
 <h4 id="3-2025-708-403-2429-1058">3. 谜题二：为什么 2025 年光伏全行业血流成河（天合巨亏70亿、创维毛利率仅8%），正泰电器的光伏板块毛利率却逆势暴涨 4.03 个百分点至 24.29%，正泰安能净利率高达 10.58%？</h4>
@@ -5034,7 +5319,7 @@
 <li><strong>3,000+代理商生态与数字化运维（泰极云）壁垒</strong>：正泰安能深耕农村与县域电网十余年，与正泰原有县域五金电工渠道深度复用，屋顶获取成本（获客费）远低于依靠高额现金返佣砸出来的跨界对手；且正泰持有高收益自持运营电站（发电毛利率高达 <strong>55%—60%</strong>）与超 <strong>40GW</strong> 代运维资产，高毛利的存量电费收入与运维服务收入进一步拉高了整个光伏板块的综合毛利率与净利率底座。</li>
 </ul>
 <p><strong>表 C-13：户用分布式光伏四大玩家单瓦建站 BOM 成本、屋顶获客费与央国企转售溢价拆解表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">单瓦经济模型拆解项（单位：元/W）</th>
@@ -5103,12 +5388,12 @@
 <td style="text-align: left;"><strong>正泰安能一年净赚 30.40亿元，独占户用光伏全行业超60%的利润池！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>为什么卖彩电的跨界玩家（创维光伏）盖屋顶电站只能赚 8% 的微薄毛利，而正泰安能却能赚到 24.29% 的毛利和 30.40 亿的纯利？因为一座电站里除了太阳能板，剩下的逆变器、并网箱、直流断路器和电表全是正泰自己家里造的！跨界玩家每装一座电站都得给上游电器厂交一遍过路费，而正泰把整条链条上的肥水全锁在了自己锅里。</p></div></div>
 <hr/>
 <h3 id="_27">四、 组织效能审讯：人均创收、人均创利与研发人员薪酬横向对质</h3>
 <p><strong>表 C-14：全赛道核心玩家员工总数、人均创收、人均创利与研发人员配置横向对质表（2025年报基准）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">组织效能指标</th>
@@ -5194,12 +5479,12 @@
 <td style="text-align: left;"><strong>约 32万—38万元/年</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_28">五、 过去一年半份额攻守终极判决：到底是谁在抢谁的份额？</h3>
 <p>综合 2025年报至 2026年三季报及 H 股招股书的四方数据对质，过去 18 个月里四大核心细分战场的份额得失已尘埃落定：</p>
 <p><strong>表 C-15：正泰电器低压电器板块在地产竣工下行期的四大增量结构切换矩阵表（2022A vs 2025A vs 2026Q3）</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">下游细分市场赛道</th>
@@ -5246,9 +5531,9 @@
 <td style="text-align: left;">依托沙特、埃及、泰国、越南、墨西哥等海外本土化工厂与全球140国经销网，吃下中东与东南亚电网基建红利</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 C-16：136号文全面入市与配网红黄区背景下全国户用光伏区域转移与洗牌结局表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">区域与竞争维度</th>
@@ -5274,7 +5559,7 @@
 <td style="text-align: left;"><strong>正泰安能国内户用市占率稳定在 30% 左右，高居全球第一</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ol>
 <li>
 <p><strong>战场一：中高端工业、电力电网与国产替代（抢施耐德/ABB的蛋糕）—— 正泰与宏发大胜，良信陷入价格肉搏</strong>
@@ -5303,7 +5588,7 @@
 <li><strong>天合富家</strong>受母公司天合光能巨亏拖累放缓扩张，<strong>创维光伏</strong>受困于 8% 毛利率与分拆转型阵痛，唯独<strong>正泰安能</strong>手握充沛现金流、71.24%的上市公司强控股权以及“开发-建设-转售-运维-绿电交易”全链条牌照，在广东、浙江、江苏、安徽、福建等南方高电价富裕省份的优质屋顶及工商业微电网市场实现了统治级控盘。</li>
 </ul>
 <p><strong>表 C-17：过去 18 个月（2025A—2026Q3）五大核心细分战场份额攻守终极裁决总表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心细分战场</th>
@@ -5350,14 +5635,14 @@
 <td style="text-align: left;">25A天合巨亏70.31亿，创维归母溢利跌37.3%，唯独正泰安能净赚30.40亿（净利率10.58%）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>当潮水退去、行业进入严酷的淘汰赛时，拥有“成本优势 + 渠道垄断 + 轻重资产灵活切换能力”的头号玩家，往往不仅不会死，反而会在对手流血收缩时兵不血刃地吞下整个增量市场。正泰在低压电器上靠经销网络熬死了白牌、逼退了外资，在户用光伏上靠剥离上游制造、专注下游开发避开了全行业的灭顶之灾——看懂了这两步棋，你就看懂了什么叫中国制造业老牌枭雄的生存智慧。</p></div></div>
-<hr class="module-sep"/>
+<hr/>
 <h1 id="downer-earnings">追问模块 D：常态盈利底盘（Owner Earnings）、三档价格标尺与抗压测算</h1>
 <blockquote>
 <p>💡 <strong>大白话导读</strong>：看正泰电器这种“一边是旱涝保收的低压电器现金牛、一边是滚动开发卖电站的户用光伏航母”的双轮驱动企业，最容易犯两个致命错误：一是把少数股东（正泰安能近三成外部股东、通润装备七成公众股东）的利润和折旧当成自己的；二是被过去两年高达 152 亿—230 亿元的经营现金流脉冲（本质是存量待售电站集中甩货变现）晃花了眼。本模块严格遵循巴菲特与芒格的 <strong>归母股东盈余（Parent-Attributable Owner Earnings）</strong> 铁律，剥离存货去化的脉冲噪音，剔除少数股东水分，基于 <strong>2026 年 11 月最新大宗商品现货行情（沪铜 10.9 万元/吨、白银 12,200 元/千克、TOPCon 组件 0.68—0.70 元/瓦）</strong>，为您一分一厘算出正泰电器在三种产业气候下真正能揣进母公司股东兜里的自由现金流底盘，并推演遭遇“铜银暴涨 + 电站跌价且周转慢半年 + 电网红线收紧 + 海外关税加征”五大极端压力情景时的生死底线。</p>
 </blockquote>
-<hr>
+<hr/>
 <h2 id="20212026e-owner-earnings-5200">一、 历史账面噪音剥离与 2021—2026E 双口径 Owner Earnings 七步桥接还原（标尺二主锚 = <code>52.00亿元/年</code>）</h2>
 <h3 id="1-20212026q3">1. 历史财务底座与股权穿透基准（2021—2026Q3）</h3>
 <p>在测算常态造血能力前，必须先校准 2021—2026Q3 完整财报底座与核心子公司的股权穿透比例，严防“合并口径虚胖”陷阱：</p>
@@ -5379,7 +5664,7 @@
 </li>
 </ul>
 <h4 id="1-20212026q3_1">📊 表 1：正泰电器 2021—2026Q3 历年核心利润表与现金流量表底座总览表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -5472,7 +5757,7 @@
 <td style="text-align: center;"><strong>+166.23</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>会计报表上的“合并利润”和“合并折旧”是管理层最喜欢拿来展示帝国规模的哈哈镜。如果一家子公司你只占 71% 甚至 30% 的股份，那另外 29% 和 70% 的现金流从法律和经济实质上都跟你毫无关系。做买方精算的第一条铁律，就是拿手术刀把属于少数股东的每一分利润、每一块钱折旧盾牌干净利落地切掉，只看真正流进母公司股东口袋里的真金白银。</p></div></div>
 <hr/>
 <h3 id="2-20212026e-vs-owner-earnings">2. 2021—2026E《合并全口径 vs 归母穿透口径 Owner Earnings 七步桥接还原详表》</h3>
@@ -5486,7 +5771,7 @@
 </li>
 </ul>
 <h4 id="220212026e-owner-earnings">📊 表 2：2021—2026E 合并报表全口径 Owner Earnings 七步桥接还原详表（单位：亿元）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">七步桥接还原科目（合并全口径）</th>
@@ -5621,9 +5906,9 @@
 <td style="text-align: left;"><strong>合并口径股东自由现金流（含少数股东份额）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="320212026e-owner-earnings">📊 表 3：2021—2026E 归母穿透口径 Owner Earnings 七步桥接还原详表（单位：亿元）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">七步桥接还原科目（归母穿透口径）</th>
@@ -5728,9 +6013,9 @@
 <td style="text-align: left;"><strong>买方核心主锚：<code>46.00+21.50-12.50-3.00 = 52.00亿元/年</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="4-capex">📊 表 4：核心业务主体股权结构演变与归母利润/折旧/维持性 CapEx 穿透系数矩阵表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心经营主体 / 业务单元</th>
@@ -5826,9 +6111,9 @@
 <td style="text-align: center;"><strong>-12.50</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="520212026q3-ocf-vs">📊 表 5：2021—2026Q3 账面经营现金流（OCF）脉冲拆解：常态工业造血 vs 屋顶电站存货去化回笼对照表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计年度</th>
@@ -5889,9 +6174,9 @@
 <td style="text-align: left;">开发与交割进入高周转良性循环，回款极其充沛</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="620212026e-capex-capex-vs-capex">📊 表 6：2021—2026E 资本开支（CapEx）二元剥离表：工业维持性 CapEx vs 电站/海外扩张性 CapEx 明细</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计年度</th>
@@ -5952,9 +6237,9 @@
 <td style="text-align: center;"><strong>12.50</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="720252026e-900">📊 表 7：2025—2026E 折旧与摊销四维结构拆解及“自持电站折旧盾牌剪刀差（+9.00亿元）”验算表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">资产类别与业务载体</th>
@@ -6013,7 +6298,7 @@
 <td style="text-align: left;"><strong>有效归母折旧(<code>21.50亿</code>)高于归母维持CapEx(<code>12.50亿</code>)整整 <code>+9.00亿元</code>！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="3-85-owner-earnings">3. 标尺二【85 折新常态中枢标尺】归母 Owner Earnings 分步精算还原主表</h3>
 <p>我们将 <strong>标尺二（85 折新常态中枢标尺）</strong> 设定为买方核心主锚——即充分预留 2026 年底沪铜（约 <code>10.9万元/吨</code>）与白银（约 <code>12,200元/千克</code>）高位运行成本损耗，并充分计入国家发改委/能源局 <strong>新能源 136 号文（全面入市交易）</strong> 落地后，正泰安能向央国企买家让利 <code>10%—15%</code> 的安全垫。在此严苛但务实的基准下，正泰电器常态归母 Owner Earnings 为 <strong><code>52.00亿元/年</code></strong>，具体四步拆解如下：</p>
@@ -6056,7 +6341,7 @@
 </li>
 </ol>
 <h4 id="8-owner-earnings">📊 表 8：正泰电器常态归母 Owner Earnings（巴菲特股东盈余）分步还原主表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与科目名称</th>
@@ -6131,14 +6416,14 @@
 <td style="text-align: left;"><strong>买方核心主锚：<code>46.00 + 21.50 - 12.50 - 3.00 = 52.00亿元/年</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="_29">二、 低压电器与户用光伏直接材料成本结构拆解及《铜银组件与电站单价税后弹性公式》</h2>
 <p>正泰电器的两大主业分别暴露在两条截然不同的价格敏感度曲线上：<strong>低压电器是典型的“精密金属/塑料制造 + 品牌渠道顺价博弈”</strong>，而 <strong>正泰安能则是典型的“上游组件集采成本 vs 下游央国企电站收购单价剪刀差博弈”</strong>。</p>
 <h3 id="1-bom">1. 低压电器与户用光伏底层物料 BOM 成本精细拆解</h3>
 <p>我们先用手术刀剖开 2025 年正泰电器低压电器业务（营收 <code>227.36亿元</code>、毛利率 <code>28.62%</code>、营业成本 <strong><code>162.29亿元</code></strong>）以及正泰安能户用光伏 EPC 建安成本的底层结构：</p>
 <h4 id="916229">📊 表 9：正泰电器低压电器业务营业成本（162.29亿元）与直接材料精细结构拆解表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">成本一级科目</th>
@@ -6223,9 +6508,9 @@
 <td style="text-align: left;"><strong>2025 年低压电器综合毛利 <code>65.07亿元</code>，毛利率 <code>28.62%</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="10">📊 表 10：低压电器四大产品线铜银耗用密度、毛利率与顺价能力差异对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">低压电器细分产品线</th>
@@ -6275,9 +6560,9 @@
 <td style="text-align: left;">国网/南网统招及海外智能电表改造；电子件占比高、受铜银波动最小</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="11-epc-2026">📊 表 11：正泰安能户用光伏 EPC 单瓦建安成本与央国企转让毛利全拆解表（2026 新常态基准）</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">户用电站开发成本与收入拆解项</th>
@@ -6338,7 +6623,7 @@
 <td style="text-align: left;">对应央国企全投资 IRR <code>6.2%—6.8%</code>，单瓦开发毛利约 <code>0.649元/瓦</code>（<strong>毛利率 <code>25.1%</code></strong>）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="2_2">2. 《铜价与银价波动对低压电器毛利率及归母净利的单位税后弹性公式》</h3>
 <p>根据 2026 年 11 月中旬最新大宗商品与光伏产业链实时行情：</p>
@@ -6392,7 +6677,7 @@
 </li>
 </ul>
 <h4 id="12-owner-earnings">📊 表 12：铜价与银价阶梯波动对低压电器毛利率及归母 Owner Earnings 的交叉敏感度矩阵表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">沪铜含税价 \ 白银含税价</th>
@@ -6445,9 +6730,9 @@
 <td style="text-align: center;"><code>27.11%</code> / <strong><code>-2.08亿</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="13-owner-earnings">📊 表 13：大宗原材料（铜/银/组件）与电站转让单价对归母 Owner Earnings 敏感度弹性总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">敏感度核心变量</th>
@@ -6502,13 +6787,13 @@
 <td style="text-align: center;"><strong><code>±5.53亿元</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看懂这张弹性表，你就立刻明白正泰电器真正的软肋和铠甲分别在哪里了。市场天天担心铜价涨一万块钱会把低压电器压垮，但算完账你会发现，靠着期货套保和渠道品牌提价，铜价波动一万块对归母现金流的净影响只有区区 6500 万；真正决定几十亿现金流起落的大阀门，是央国企买电站时的出价和正泰安能对几千家县域包工头的议价统治力！</p></div></div>
 <hr/>
 <h2 id="owner-earnings">三、 三档产业景气与大宗商品价格标尺下的 Owner Earnings 矩阵大表</h2>
 <p>为了彻底杜绝“线性外推”的盲目乐观，我们结合大宗商品价格水位、低压电器顺价周期与光伏入市电价政策演变，拉出 <strong>《三档大宗商品与产业景气标尺归母 Owner Earnings 矩阵大表》</strong>，将正泰电器的常态造血能力框定在 <strong><code>41.50亿元/年 — 56.50亿元/年</code></strong> 的清晰走廊内：</p>
 <h4 id="14">📊 表 14：三档大宗商品与产业价格标尺核心输入参数对照表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心底层输入变量</th>
@@ -6549,9 +6834,9 @@
 <td style="text-align: center;">配网红黄区收紧，交割量萎缩30%至 <strong><code>9.0GW</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="15-owner-earnings">📊 表 15：正泰电器三档产业景气与成本标尺归母 Owner Earnings 矩阵总表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心经营与财务指标</th>
@@ -6634,9 +6919,9 @@
 <td style="text-align: center;"><strong><code>53.20亿元/年</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="16-owner-earnings">📊 表 16：三档标尺下四大业务分部归母 Owner Earnings 独立造血贡献拆解矩阵表（单位：亿元）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务分部（归母穿透口径）</th>
@@ -6701,7 +6986,7 @@
 <td style="text-align: left;"><strong>双轮咬合下任何单一冲击均无法击穿40亿铁底</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="aidc-650950">四、 海外制造基地（沙特、土耳其、越南、埃及）、松江光储基地与 AIDC 放量的增量垫高测算（<code>+6.50亿至+9.50亿元/年</code>）</h2>
 <p>上述三档标尺仅反映了正泰电器 <strong>存量业务底盘</strong> 的造血能力。事实上，公司过去两年已完成大部分前置资本开支（这正是 2025 年总 CapEx 从 <code>29.51亿元</code> 降至 <code>18.85亿元</code> 的原因），三大增量引擎正处于从“资本投入期”迈向“现金流收获期”的拐点：</p>
@@ -6739,7 +7024,7 @@
 </li>
 </ul>
 <h4 id="17aidc">📊 表 17：全球本土化制造基地（沙特/土耳其/越南/埃及）及松江光储、AIDC 产能达产增量测算表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">增量产能基地与引擎项目</th>
@@ -6825,9 +7110,9 @@
 <td style="text-align: center;"><strong><code>+9.50亿元/年</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="18-2026e2028e-owner-earnings">📊 表 18：存量造血底盘 + 三大增量引擎达产后（2026E—2028E）归母 Owner Earnings 跃迁路径表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">造血演进阶段</th>
@@ -6860,7 +7145,7 @@
 <td style="text-align: center;"><code>8.23%</code> / <strong><code>10.35%</code></strong> / <code>11.68%</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="25-30-20">五、 五大极端压力测试情景矩阵：从“双杀基准”到“铜银涨25% + 装机跌30% + 关税20% 三杀极限”</h2>
 <blockquote>
@@ -6901,7 +7186,7 @@
 </li>
 </ul>
 <h4 id="19-20-15-vs">📊 表 19：极限压力测试基准对决（铜银暴涨 20% + 电站跌价 15% 且周转慢半年）静态死扛 vs 真实减震对比表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">压力测试核心维度</th>
@@ -6960,7 +7245,7 @@
 <td style="text-align: center;"><strong><code>+35.79亿元/年</code>（绝不失血，正向造血依然极其充沛！）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="2-25-30-20">2. 五大极端黑天鹅压力测试情景全矩阵（含铜银暴涨 25% + 电网红线装机跌 30% + 海外关税加征 20%）</h3>
 <p>为了将抗压测试推向买方风控的极致，我们在表 19 基础上进一步构建 <strong>五大极端压力情景矩阵（S1—S5）</strong>：</p>
@@ -6982,7 +7267,7 @@
 </li>
 </ul>
 <h4 id="20s1s5">📊 表 20：五大极端压力测试情景（S1—S5）全维度财务与现金流安全垫矩阵大表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">压力测试指标与科目</th>
@@ -7104,9 +7389,9 @@
 <td style="text-align: center;"><strong><code>+38.65亿元/年</code>（分红覆盖率达 2.77倍！）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="21s5">📊 表 21：世纪三杀极限情景（S5）下公司四道商业减震器逐项缓冲贡献量化表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">冲击来源与减震环节</th>
@@ -7146,7 +7431,7 @@
 <td style="text-align: center;"><strong><code>-6.50亿元</code></strong> <em>(含常态<code>-3.0亿</code>)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我常说，评估一艘船好不好，不能看它在风平浪静的游泳池里跑多快，而要看它在遭遇台风眼时船舱会不会进水沉没。你看表 20 里的 S2 和 S5 情景有多奇妙：当电网红线收紧导致新增装机下跌 30% 时，外行以为天塌了，但因为正泰安能少盖了 30% 的新电站，它当年立刻少垫出去几十亿的建安工程款，存量电站照样收电费和卖钱，结果 S2 下的自由现金流（`53.90亿`）反而比平时还多！就算遇到“铜银暴涨 25% + 装机跌 30% + 海外关税加 20%”三颗核弹同时砸下来的 S5 极限炼狱，它一年照样能往母公司股东兜里净揣进 <strong>`38.65亿元`</strong> 的真金白银，足够把每年 `13.97亿元` 的现金分红付将近三遍！这种怎么揍都不死、绝不失血的底盘，才是价值投资者敢于在低谷重仓睡觉的根本底气。</p></div></div>
 <hr/>
 <h2 id="d">六、 模块 D 核心精算结论汇总（供后续模块与总装直接调用）</h2>
@@ -7161,14 +7446,14 @@
 <p><strong>极限抗压底线</strong>：即便遭遇“铜银暴涨 20% + 电站跌价 15% + 周转期拉长半年”（S4）甚至“铜银暴涨 25% + 装机暴跌 30% + 海外关税加征 20%”（S5）的极端黑天鹅冲击，依托期货套保、终端提价 <code>5%—6%</code>、代理商施工费分担及“以销定产”急刹车机制，公司综合毛利率仍能守住 <strong><code>23.10%—23.50%</code></strong>，全年归母 Owner Earnings 仍高达 <strong><code>+35.79亿至+38.65亿元/年</code></strong>，资产负债表具备极强的反脆弱性与零失血安全边际。</p>
 </li>
 </ol>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="e">【追问模块 E：会计成色与治理细节显微镜】</h2>
 <p>对于一家资产总额超千亿、账面同时躺着 <strong>146.18亿元应收账款</strong> 与 <strong>420.82亿元巨额存货</strong>、固定资产及在建工程高达 <strong>298.73亿元</strong>，且控股股东正泰集团旗下拥有庞大未上市体外资产（如组件制造商正泰新能、高压设备制造商正泰电气）的民营制造业航母而言，如果不拿放大镜把它的会计勾稽关系、资产减值成色与关联交易抽屉协议照个底朝天，任何基本面推演都可能建立在流沙之上。本模块以最严苛的买方审计标准，调取正泰电器（<code>601877.SH</code>）及同行 <strong>2024—2025年年度报告附注</strong> 与 <strong>2026年三季报/港股招股书</strong> 底层数据，展开全方位会计排雷与公司治理穿透。</p>
-<hr>
+<hr/>
 <h3 id="_30">一、 资产质量四大排雷：穿透“百亿应收”、“四百亿存货”、“三百亿固资”与商誉的财务真相</h3>
 <h4 id="1-2025">1. 同行会计政策与资产质量核心指标横向审计对比总表（2025年报基准）</h4>
 <p><strong>表 E-1：正泰电器与五大同行会计政策严苛度及资产质量核心指标横向审计总表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -7233,7 +7518,7 @@
 <td style="text-align: left;"><strong>极度干净（A+级）</strong>：正泰13.26亿研发投入不玩“资本化藏费用”的粉饰把戏，利润表含金量扎实</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2-14618">2. 排雷一：146.18亿元应收账款与广义应收体系逐档解剖——有无“国补拖欠”与“烂尾坏账”地雷？</h4>
 <blockquote>
@@ -7243,7 +7528,7 @@
 </blockquote>
 <p>我们先拉出正泰电器与同行在<strong>狭义与广义应收款项结构</strong>、以及<strong>按账龄组合（1年以内、1-2年、2-3年、3-4年、4-5年、5年以上）坏账准备计提比例与账面明细</strong>上的三张硬核审计表：</p>
 <p><strong>表 E-2：正泰电器与同行狭义应收账款及广义应收款项体系（含应收票据/应收款项融资）结构对质表（2025A）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">应收款项审计科目</th>
@@ -7329,9 +7614,9 @@
 <td style="text-align: left;"><strong>27.13%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 E-3：正泰电器 vs 良信股份 vs 宏发股份 vs 天合光能 vs 阳光电源《按账龄组合（6档全明细）坏账准备计提比例对比表》</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">账龄分档区间</th>
@@ -7406,9 +7691,9 @@
 <td style="text-align: left;">全行业一致100%计提</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 E-4：正泰电器应收账款按“单项计提 + 信用风险特征组合（6档账龄）”账面余额与坏账准备结构解剖表（2025年报基准）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">应收账款计提类别与账龄分档</th>
@@ -7503,7 +7788,7 @@
 <td style="text-align: left;"><strong>存量坏账准备余额达17.32亿元（综合覆盖率10.59%），高于良信（7.89%）与宏发（5.50%）！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>穿透这 <strong>146.18亿元</strong> 纯应收账款及广义应收体系的底层明细，我们将其拆解为三大业务包进行排雷：</p>
 <ul>
 <li><strong>第一包：低压电器经销与电网/大客户集采应收款（极度健康，风险近乎为零）</strong></li>
@@ -7532,7 +7817,7 @@
 </li>
 </ul>
 <p><strong>表 E-5：正泰电器 146.18 亿元应收账款“三大业务包”风险敞口与回收周期排雷汇总表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">应收账款业务包</th>
@@ -7573,13 +7858,13 @@
 <td style="text-align: left;"><strong>需持续跟踪回款节奏（B+级）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="3-42082">3. 排雷二：420.82亿元巨额存货的“外科手术刀”——为什么它不是制造业滞销毒药？</h4>
 <p>初看正泰电器2025年报的投资者，往往会被资产负债表上高达 <strong>420.82亿元</strong> 的存货（占全年总营收591.45亿元的 <strong>71.15%</strong>！）吓出一身冷汗：一家电器公司怎么会囤积四百多亿的货？是不是断路器卖不出去、光伏组件全砸在手里了？</p>
 <p><strong>这是理解正泰电器资产负债表最核心的“防呆分水岭”——必须彻底劈开“常规工业制造存货”与“待售户用光伏电站开发成本/开发产品”的本质区别！</strong> 我们直接扒开年报合并财务报表附注中的“存货”科目，将其逐项拆列：</p>
 <p><strong>表 E-6：正泰电器 420.82 亿元巨额存货附注全科目解剖与跌价准备计提明细表（2025年报基准）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">存货附注细分科目</th>
@@ -7674,9 +7959,9 @@
 <td style="text-align: left;"><strong>彻底证伪“断路器或组件滞销爆雷”假说</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 E-7：“待售户用电站存货（正泰安能）” vs “晶硅组件工业存货（天合光能）”五大维度本质差异对质表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计对比维度</th>
@@ -7717,7 +8002,7 @@
 <td style="text-align: left;">正泰已主动砍掉北方红区开发、70%+增量转战南方高电价省份，封堵滞销暗礁</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
 <p><strong>第一刀：常规工业制造存货（仅占存货总额约 10%—12%，即 40亿—50亿元区间）</strong>
@@ -7756,7 +8041,7 @@
 <h4 id="4">4. 排雷三：固定资产折旧年限、自持电站减值测试与商誉排雷</h4>
 <p>除了存货里的“待售电站”，正泰电器合并资产负债表上还躺着 <strong>298.73亿元</strong>（2024年末为 <strong>292.59亿元</strong>）的固定资产及在建工程，以及并购形成的商誉。我们对这批长期资产的折旧政策与减值测试参数进行穿透核查：</p>
 <p><strong>表 E-8：正泰电器与同行固定资产分类折旧年限、预计净残值率及年折旧率横向对比表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">固定资产类别</th>
@@ -7806,9 +8091,9 @@
 <td style="text-align: left;"><strong>符合税法与物理寿命</strong>：单晶组件寿命25—30年，按20—25年折旧扎实稳健</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 E-9：正泰电器固定资产及在建工程（298.73亿元）结构拆分与自持光伏电站减值测试核心参数审计表（2025A）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">长期资产细分项</th>
@@ -7853,9 +8138,9 @@
 <td style="text-align: left;"><strong>折旧计提足额，电站折现率（5.76%—6.06%）符合当前国债利率+风险溢价基准</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>表 E-10：正泰电器合并商誉账面原值、减值准备及核心并购标的（通润装备/盎泰电源等）减值测试审计表（2025A）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">被投资单位 / 包含商誉的资产组名称</th>
@@ -7905,11 +8190,11 @@
 <td style="text-align: left;"><strong>极度安全</strong>：商誉占净资产比重极低，无大额商誉爆雷隐患</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="5-100">5. 排雷四：研发费用 100% 费用化的高含金量审计</h4>
 <p><strong>表 E-11：正泰电器与同行研发投入规模、硕博人才升级及研发资本化率纯净度对质表（2024A—2025A）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">研发审计指标</th>
@@ -7977,7 +8262,7 @@
 <td style="text-align: left;">博士55人、硕士607人</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>审计结论</strong>：2025年，正泰电器研发费用达 <strong>13.26亿元</strong>（重点投向高电压等级断路器、固态断路器、AIDC智能配电系统、构网型逆变器及虚拟电厂VPP平台）。经核查，公司将全部日常研发支出在发生当期<strong>直接计入利润表“研发费用”（资本化率为 0%）</strong>，没有任何通过将研发人员工资塞进“开发支出/无形资产”来虚增当期净利润的财务操纵行为。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我平生最讨厌那些把常规工程师的工资记作“资本化开发支出”塞进资产负债表里的管理层，那纯粹是在自欺欺人。正泰电器一年花掉 13.26 亿研发费，一分钱都不做资本化，全额从当年利润表里硬生生扣掉，同时还在一年之内把博士和硕士研发人数从 207 人扩招到 542 人——这种敢于在当期利润表上“实报实销”并偷偷储备硬核技术人才的公司，账本底子比那些花里胡哨的科技概念股干净得多。</p></div></div></div></div>
@@ -7987,7 +8272,7 @@
 <h4 id="1_4">1. 董事长南存辉及核心高管历年薪酬明细与业绩匹配度审视</h4>
 <p>我们调取正泰电器历年年报披露的董事、监事及高级管理人员税前报酬明细，检验管理层薪酬与公司利润及现金流表现是否同频共振：</p>
 <p><strong>表 E-12：正泰电器董事长南存辉及核心董监高税前薪酬明细与经营业绩匹配度审计表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">姓名</th>
@@ -8056,12 +8341,12 @@
 <td style="text-align: left;"><strong>审计裁决：2025年管理费用仅微增2.39%（23.89亿），销售费用下降2.70%（25.72亿），完全不存在高管慷股东之慨乱发薪酬现象</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2_3">2. 历期员工持股计划业绩考核硬门槛与“宁弃解锁、不签烂单”的治理实证</h4>
 <p>正泰电器近年来连续推出多期<strong>员工持股计划</strong>（覆盖公司董事、高管及核心技术与业务骨干），股票来源主要为公司从二级市场真金白银回购专用证券账户中的股份。我们重点审计其 <strong>2024年员工持股计划（草案）</strong> 及历期激励的考核门槛与实际执行结果：</p>
 <p><strong>表 E-13：正泰电器员工持股计划（以 2024 年期为代表）核心要素、业绩考核门槛与实际达成审计表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">激励计划维度 / 考核年度</th>
@@ -8114,7 +8399,7 @@
 <td style="text-align: left;">对核心并购标的严卡“扣非净利润”真金白银指标，保障上市公司并购零减值</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>检验一家公司管理层人品最准的办法，就是看当他们的个人奖金考核指标（比如营业收入增长率）跟公司长远生存利益发生冲突时，他们怎么选。2024年正泰定的员工持股解锁条件是要求2025年营收比2023年大涨56.25%。结果2025年光伏行业大洗牌，如果管理层为了解锁自己手里的股票去硬凑八百多亿营收，公司至少要亏掉几十亿现金流！但南存辉和团队怎么干的？他们宁可让自己手里的员工持股计划因为营收不达标而作废无法解锁，也坚决把低效营收砍掉8.33%，换来45.01亿的历史最高净利润和230.90亿的经营现金流！这种“宁弃私利、不签烂单”的常识与定力，在A股值得脱帽致敬。</p></div></div>
 <hr/>
 <h4 id="3-1116">3. 关联交易与资本运作显微镜：正泰新能组件采购 &amp; 正泰安能 11.16亿元股权受让审计</h4>
@@ -8124,7 +8409,7 @@
 <li><strong>交易背景与规模</strong>：正泰新能（专注于光伏电池与组件制造）在2022—2023年剥离出上市公司后，现为控股股东正泰集团旗下的核心制造平台。而上市公司控股子公司<strong>正泰安能</strong>作为全球最大的户用光伏开发商，每年需要采购海量光伏组件用于建站，因此正泰电器（及正泰安能）与正泰新能之间每年均会发生高达<strong>数十亿元级别</strong>的向关联方采购光伏组件日常关联交易（均需经董事会及股东大会严格审议年度日常关联交易预计额度，关联董事及股东回避表决）。</li>
 </ul>
 <p><strong>表 E-14：正泰电器向关联方“正泰新能”采购光伏组件及集团日常关联交易历年预计与实际执行审计表（2024—2026年）</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">关联交易年度与审批决策程序</th>
@@ -8169,7 +8454,7 @@
 <td style="text-align: left;">解决高低压成套柜内部元器件互供，按市场协议价结算，无异常资金往来或非经营性资金占用</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>定价机制与利益流向独立核查</strong>：</li>
 </ul><ol>
@@ -8191,7 +8476,7 @@
 <li>随后在 <strong>2026年中</strong>，正泰电器发布公告，通过上海联合产权交易所参与竞拍，以 <strong>11.16亿元</strong> 的交易对价，受让了外部战略股东<strong>国家绿色发展基金股份有限公司</strong>持有的正泰安能 <strong>3.16% 股权（对应 7,714.29万股）</strong>。交易完成后，正泰电器直接及间接持有正泰安能的股权比例由 <strong>68.08%（早期直接持股62.54%加员工持股/一致行动平台合并控制口径）正式提升至 71.24%</strong>。</li>
 </ul>
 <p><strong>表 E-15：正泰安能资本运作三部曲与正泰电器中小股东权益得失精算审计表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">资本运作关键节点</th>
@@ -8220,7 +8505,7 @@
 <td style="text-align: left;"><strong>战略升维</strong>：既维持了“低压电器+正泰安能”两大现金牛在母公司体内的完整合一，又打开了国际化融资通道（需常规跟踪最终H股发行规模的摊薄比例）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>中小股东利益得失的“算盘审计”</strong>：</li>
 </ul>
@@ -8250,7 +8535,7 @@
 <hr/>
 <h3 id="e_1">三、 模块 E 会计成色与公司治理十维终极审计结论</h3>
 <p><strong>表 E-16：正泰电器（<code>601877.SH</code>）会计成色与公司治理十维终极体检裁决卡</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计序号</th>
@@ -8332,7 +8617,7 @@
 <td style="text-align: left;">避免核心金母鸡被低价分拆摊薄，低位收回少数股东权益直接增厚归母净利润</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>经过四大资产排雷与治理穿透，正泰电器的财务报表与治理成色可终极定性为 <strong>“表象重资产吓人，内核现金流极硬，治理边界清晰”</strong>：</p><ol>
 <li>
 <p><strong>无虚增收入与费用潜规则</strong>：销管研三费率仅 <strong>10.63%</strong>，研发支出 <strong>13.26亿元</strong> 全额费用化（0%资本化），经营现金流净额（2025年 <strong>230.90亿元</strong>、2026Q1-Q3 <strong>180.73亿元</strong>）常年达到归母净利润的 <strong>4—5倍</strong>，彻底排除了造假虚增利润的一切可能。</p>
@@ -8346,7 +8631,11 @@
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把正泰电器的资产负债表和治理账本翻个底朝天之后，你会发现老派温州实业家最可爱的一面——他们在算账上精明到了骨子里：借银行不到 4 个点的绿电开发贷去盖成本暴跌的屋顶电站，加价卖给央企收回两百多亿现金；把亏钱的硅片组件留给集团母公司扛，把赚钱的电站开发股权从国家基金手里用 8.6% 的高回报率买回上市公司。只要你学会剥开那 420 亿电站存货的会计外壳，这就是一张经得起任何铁面审计官拷问的硬核报表。</p></div></div></div></div>
 
 
-<hr class="module-sep"/>
+<hr/>
+<hr/>
+<h2 id="freverse-sotp">【追问模块 F：解锁估值定价、Reverse SOTP 拆骨与击球区推演】</h2>
+<p>在前五个模块中，我们已经严格按照买方尽调铁律，将正泰电器（<code>601877.SH</code>）的产能工程底账、远期期权成色、同行交叉对质、三档常态股东盈余（Owner Earnings）以及会计与治理细节彻底扒了个底朝天。现在，我们正式揭开二级市场价格标签，调取截至 <strong>2026年11月中旬</strong> 的最新交易与财报基准数据，用最冷酷的买方算盘，核算全款买断这家企业的真实代价、市场先生当前隐含的悲观预期、四大业务板块的反向分类加总拆骨（Reverse SOTP）底牌，以及我们的分档击球坐标。</p>
+<hr/>
 <h3 id="true-ev-415">一、 真实企业价值（True EV）双口径穿透核算：为什么绝不能被表观 415 亿有息债吓跑？</h3>
 <p>在普通散户和机械跑量化筛子的人眼里，正泰电器常常因为合并资产负债表上高达 <code>415.00亿元</code> 的全口径有息负债，被直接打上“高杠杆重资产危险品”的标签。但如果你真懂正泰安能的“滚动开发—并网转固—整包出售央国企（BT/EPC周转）”商业模式，就会发现<strong>机械照搬合并表观有息负债来算企业价值（EV），会犯下买方估值中最致命的“只看负债不看对应准现金资产、且混淆母子公司权益归属”的双重算术错误</strong>！</p>
 <h4 id="1-202611-2026q3">1. 市值与资产负债表底层基准参数（截至 2026年11月中旬 &amp; 2026Q3 财报基准）</h4>
@@ -8369,7 +8658,7 @@
 </li>
 </ul>
 <h5 id="1-202611">📊 表 1：正泰电器二级市场估值底座与股本权益结构基准表（截至 2026年11月中旬）</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">基础估值参数项目</th>
@@ -8416,9 +8705,9 @@
 <td style="text-align: left;">正泰集团(<code>41.18%</code>)+正泰新能源投资(<code>8.39%</code>)+南存辉(<code>3.45%</code>)等，控制权极稳</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="2_4">📊 表 2：合并资产负债表有息负债五维科目逐项拆解与商业实质核查表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">资产负债表有息负债科目</th>
@@ -8479,8 +8768,8 @@
 <td style="text-align: left;"><strong>表面看似庞大，实则近70%绑定在待售屋顶电站存货上随交割自动出表！</strong></td>
 </tr>
 </tbody>
-</table>
-<hr>
+</table></div>
+<hr/>
 <h4 id="2-42082-360-280">2. 核心财务穿透：420.82 亿存货里的“360 亿准现金电站包”与“280 亿随站剥离开发贷”</h4>
 <p>为什么我们不能直接拿 <code>520.06亿市值 + 415.00亿有息债</code> 去对应归母股东盈余？请看资产负债表左侧与右侧的镜像咬合关系：</p>
 <ul>
@@ -8495,7 +8784,7 @@
 </li>
 </ul>
 <h5 id="341500">📊 表 3：415.00 亿元有息负债的经济实质三级穿透表（谁借的钱？谁来还？）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">有息负债经济实质分层</th>
@@ -8540,9 +8829,9 @@
 <td style="text-align: center;"><strong>口径A计入 <code>+135.00亿元</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="442082">📊 表 4：420.82 亿元合并存货的“准现金电站包”结构拆解与央国企交割抵债闭环验算表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">合并存货细分构成项目</th>
@@ -8603,9 +8892,9 @@
 <td style="text-align: center;"><strong>净释放现金流 &gt; <code>+80亿元</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="58995-1625">📊 表 5：89.95 亿元少数股东权益与 16.25 亿元少数股东损益穿透还原表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">非全资控股子公司名称</th>
@@ -8660,9 +8949,9 @@
 <td style="text-align: left;"><strong>2026中收回安能8.7%股权后，少数股东利润漏出显著收窄</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="614043-9000">📊 表 6：140.43 亿元账面广义货币资金的三级剥离与 90.00 亿元超额可自由支配现金核定表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">货币资金核查步骤</th>
@@ -8709,7 +8998,7 @@
 <td style="text-align: center;"><strong>在 True EV 中 100% 冲减有息负债</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="3-true-ev">3. 双口径真实企业价值（True EV）核算公式与对照总表</h4>
 <p>为了彻底杜绝“分子用归母利润、分母用全合并债务”的张冠李戴，我们同时锁定以下两把严丝合缝的买方标尺：</p>
@@ -8730,7 +9019,7 @@
 </li>
 </ul>
 <h5 id="7-a-true-ev56506vs-b-true-ev93501">📊 表 7：【口径 A：归母穿透 True EV（565.06亿）】vs【口径 B：严苛表观合并 True EV（935.01亿）】双标尺逐项桥接大表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算项目 / 估值标尺</th>
@@ -8777,7 +9066,7 @@
 <td style="text-align: left;"><strong>买断归母核心生意的真实总标价为 <code>565.06亿元</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把正泰安能替央企代建、马上就要一手交钱一手交货的 360 亿电站存货当成空气，却把绑在电站身上、交割那天自动跟着新东家走的 280 亿项目开发贷算成母公司股东要砸锅卖铁还的死债——这种会计书呆子连汽车经销商的库存融资（Floorplan Debt）都没搞明白！穿透掉那层代建周转的壳子，南存辉真正背在母公司身上的净债务只有区区 45 个亿，一年自由现金流就全还清了！</p></div></div>
 <hr/>
 <h3 id="20182026-10">二、 隐含内生回报率与 2018—2026 跨期分红/回购拆解：一年将近 10% 的真金白银回报</h3>
@@ -8830,7 +9119,7 @@
 <li><strong>极端压力惩罚测试</strong>：哪怕我们用最不讲理、最苛刻的错配算法——把 <code>360亿元</code> 待售电站存货变现价值直接归零，拿只属于母公司股东的 <code>52.00亿元</code> 归母 OE 去硬除包含了少数股东和全部项目开发贷的 <code>935.01亿元</code> 表观合并 True EV，其极端底线回报率也达到了 <strong><code>5.56%</code></strong>！</li>
 </ul>
 <h5 id="8-oe-yield">📊 表 8：三档景气标尺 × 三种企业价值口径下的隐含内生回报率（OE Yield）与静态回本年限全景矩阵表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">估值分母口径 \ 造血分子标尺</th>
@@ -8870,7 +9159,7 @@
 <td style="text-align: center;"><strong>超额溢价 <code>+835 bps</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2-20182026h1">2. 跨期分红与回购注销收益率严密拆分（2018—2026H1 完整审计）</h4>
 <ul>
@@ -8885,7 +9174,7 @@
 </li>
 </ul>
 <h5 id="9-2010">📊 表 9：正泰电器 2010 年上市以来全口径股权募资与累计现金分红资本创造审计表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">资本动作类别与时间节点</th>
@@ -8926,9 +9215,9 @@
 <td style="text-align: left;"><strong>公众现金分红融资比 = <code>227.4%</code>（净回馈市场超 <code>+87.6亿元</code>！）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="1020182026h1">📊 表 10：2018—2026H1 历年每股分红、现金分红总额、股息支付率与股息率演进明细表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">分红会计年度</th>
@@ -9023,9 +9312,9 @@
 <td style="text-align: center;"><code>2.69%</code>（即期核心锚）**</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="11-vs">📊 表 11：历次股份回购方案、实际耗资金额与股份用途（员工持股 vs 注销减资）严苛甄别审计表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">回购实施阶段</th>
@@ -9070,9 +9359,9 @@
 <td style="text-align: center;"><strong>即期总现金回报率 = <code>2.69%</code><em>(纯分红)</em></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="12-3803-731roic">📊 表 12：每年 38.03 亿元（73.1%）留存股东盈余的再投资去向、ROIC 转化效率与每股价值复利表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">每年 <code>52.00亿元</code> 归母 OE 分配去向</th>
@@ -9119,7 +9408,7 @@
 <td style="text-align: center;"><strong>每年内生增厚归母净利 <code>+4.4亿~+7.5亿元</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>9.20% 的穿透内生回报率、10 倍出头的真实市盈率，放在十年历史分位表上已经跌进了地窖最底下那 4% 的角落！很多人嫌它 2.69% 的股息率不如纯收息公用事业股高，但你要看南存辉把剩下的 38 亿留存现金花哪儿去了——他拿去把正泰安能这头年赚近 30 亿、ROE 超过 25% 的现金奶牛股权从国资手里一点点买回来，拿去沙特建毛利率超过 33% 的配电工厂！只要管理层留存的每一块钱能挣回 12% 以上的增量回报，我宁愿他少分点红、替我在免税的企业账户里继续滚大雪球！</p></div></div>
 <hr/>
 <h3 id="reverse-sotp-520">三、 四大业务板块拆骨估值倒推（Reverse SOTP）：看看 520 亿市值里到底白送了多少好东西？</h3>
@@ -9156,7 +9445,7 @@
 </li>
 </ul>
 <h5 id="13">📊 表 13：板块一（智慧电器/低压主业）与国内外同行财务成色及估值倍数横向对标大表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对标维度与核心指标</th>
@@ -9242,9 +9531,9 @@
 <td style="text-align: center;">证明A股对纯正低压电器给足20x估值</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="14_1">📊 表 14：板块一（智慧电器/低压电器现金牛）双盈利口径 × 三档估值倍数独立定价矩阵表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">智慧电器盈利基准口径</th>
@@ -9284,7 +9573,7 @@
 <td style="text-align: center;">—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2-40gw-7124-25159-7-17425">2. 板块二：正泰安能（户用光伏开发与 40GW+ 运维绝对霸主，最新持股 <code>71.24%</code>）—— 国资公允锚 <code>251.59亿元</code> / 7折极限保底 <code>174.25亿元</code></h4>
 <ul>
@@ -9308,7 +9597,7 @@
     <div class="math-display"><span class="math-text">正泰安能 71.24\% 股权 7 折保底价值</span> = 20.50<span class="math-text">亿元</span>  ×  8.5<span class="math-text">倍 PE</span> = <strong>174.25<span class="math-text">亿元</span></strong></div></li>
 </ul>
 <h5 id="155483-6254-7124">📊 表 15：板块二（正泰安能）股权比例演进（54.83% <span class="math-inline"> → </span> 62.54% <span class="math-inline"> → </span> 71.24%）与一级市场国资交易锚穿透表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">股权演进阶段与估值口径</th>
@@ -9358,9 +9647,9 @@
 <td style="text-align: left;"><strong>在国家级基金真金白银成交价基础上再打 6.93 折！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="16pbdcf-pe">📊 表 16：板块二（正泰安能）双底层资产拆骨称重表：纯电站收息资产（PB/DCF）+ 轻资产开发与代运维服务（PE）</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">正泰安能内部三大赚钱单元拆解</th>
@@ -9415,7 +9704,7 @@
 <td style="text-align: center;"><strong><code>186.44亿</code> <em>(主锚取174.25亿)</em></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="3-002150sz-vs-000">3. 板块三：正泰电源 / 通润装备（<code>002150.SZ</code>）控股权 + 本部自持电站净残值 vs 母公司净债务 —— 完美对冲清零（<code>0.00亿元</code>）</h4>
 <ul>
@@ -9438,7 +9727,7 @@
 </ul>
 <p>这意味着：<strong>在我们的拆骨模型里，根本不需要动用低压电器和正泰安能的一分钱价值，仅靠手里的通润装备（正泰电源）A 股股票和本部自持电站残值，就已经把母公司那 <code>45.00亿元</code> 归母有效净债务 100% 填平清零了！</strong></p>
 <h5 id="17-002150sz">📊 表 17：板块三（通润装备/正泰电源 002150.SZ 控股权 + 本部自持电站）与母公司有效净债务对冲验算表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">资产 / 负债对冲项</th>
@@ -9478,12 +9767,12 @@
 <td style="text-align: left;"><strong>两项资产(<code>45亿</code>)恰好 100% 覆盖清零母公司归母有效净债务(<code>-45亿</code>)！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="4-aidc-5169">4. 板块四：国际业务加速扩张 + AIDC 数据中心配电/固态断路器 + 绿氢装备三大远期期权 —— 市场倒贴 <code>-51.69亿元</code> 免费白送！</h4>
 <p>在把板块一（智慧电器 <code>397.50亿元</code>）、板块二（正泰安能 7 折保底 <code>174.25亿元</code>）和板块三（抵债后净残值 <code>0.00亿元</code>）加总后，正泰电器<strong>存量基本盘的地板级拆骨价值已经高达 <code>571.75亿元</code>（折合 <code>26.60元/股</code>）</strong>！而公司还有三大正在高速裂变的皇冠级远期成长曲线（板块四）：</p>
 <h5 id="18-aidc">📊 表 18：板块四（全球电网本土化出海 + AIDC 智算中心配电 &amp; 固态断路器 + 绿氢装备）三大成长期权独立价值测算表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">远期成长曲线（板块四）</th>
@@ -9528,11 +9817,11 @@
 <td style="text-align: center;"><strong>当前市值隐含定价 = <code>-51.69亿元</code>！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="5-reverse-sotp-5169">5. Reverse SOTP（反向分类加总拆骨）震撼汇总大表：倒贴 51.69 亿白送三大远期期权！</h4>
 <h5 id="19-reverse-sotp">📊 表 19：正泰电器四大业务板块 Reverse SOTP（反向分类加总拆骨）三档情境全景汇总大表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">拆骨资产模块（四大板块）</th>
@@ -9601,7 +9890,7 @@
 <td style="text-align: center;"><strong>市场不仅打折卖存量，还倒贴白送期权！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>🔥 拆骨倒推的两大核心暴击结论</strong>：</p><ol>
 <li>
 <p><strong>市场把正泰安能按不到 6 倍 PE 的废铁价甩卖</strong>：当前总市值 <code>520.06亿元</code> 减去智慧电器极度保守的 <code>397.50亿元</code> 后，二级市场留给“正泰安能 <code>71.24%</code> 股权 + 通润装备股权 + 海外与算力期权”的剩余市值只有区区 <strong><code>122.56亿元</code></strong>！哪怕其它所有资产全算 <code>0元</code>，这也意味着市场给年赚 <strong><code>20.50亿元</code> 归母净利润</strong>（且刚被国家绿色发展基金按 <code>353.16亿</code> 整体估值、对应归母 <code>251.59亿</code> 交易过）的正泰安能，只给了一个令人发指的 <strong><code>5.98倍 PE</code></strong>！如果按独立业务口径给低压电器 <code>420亿—480亿元</code> 估值，市场给正泰安能的隐含估值甚至只剩下 <strong><code>40亿—100亿元</code>（相当于 <code>2—5倍 PE</code> 白送）</strong>！</p>
@@ -9617,7 +9906,7 @@
 <h4 id="1-20162026-10-pe-ttm-pb">1. 2016—2026 年 10 年历史 PE-TTM / PB 估值分位全景审视</h4>
 <p>为什么我们敢断言当前 <code>24.20元/股</code>（总市值 <code>520.06亿元</code>）的正泰电器处于十年一遇的底部击球区？让我们拉出公司过去十年（2016—2026年）完整的历史估值分位表：</p>
 <h5 id="20-20162026-10-pe-ttm-pb">📊 表 20：正泰电器 2016—2026 年 10 年历史 PE-TTM 与 PB 估值中枢、极值区间及当前分位全景表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">估值指标维度</th>
@@ -9667,9 +9956,9 @@
 <td style="text-align: center;"><strong>🔥 十年罕见 10% 现金流收益率！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="21">📊 表 21：二级市场悲观定价的三大认知误区与买方深度尽调预期差纠偏对照表</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">市场先生的三大悲观鬼故事（第一层平庸共识）</th>
@@ -9698,12 +9987,12 @@
 <td style="text-align: left;">港股 H 股成功发行上市、海外与 AIDC 大单密集披露触发估值锚向施耐德/宏发靠拢</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="2-2420">2. 买方四档击球区与仓位行动锚点（当前股价：<code>24.20元/股</code>）</h4>
 <p>结合历史估值分位（当前处于近十年 4%—5% 极低分位）、无风险利率环境及 SOTP 拆骨保底价值，我们将正泰电器的买方操作坐标划分为四个清晰区间：</p>
 <h5 id="22">📊 表 22：正泰电器实战四档击球区（黄金重锤区 / 左侧收集区 / 合理持有区 / 泡沫止盈区）与仓位指南总表</h5>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球档位</th>
@@ -9748,7 +10037,7 @@
 <td style="text-align: left;">市场将正泰电器全面重估为“AIDC 算力配电 + 全球电网出海高成长龙头”（给予整体 <code>16—18倍 PE</code> 以上，对应表 19 情境三 <code>39.32元</code>）。届时安全边际变薄，启动分批阶梯止盈。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h4 id="3_1">3. 三条基本面死刑证伪红线（触发任一即无条件认错清仓，绝不死扛！）</h4>
 <p>价值投资绝不是盲目死拿。既然我们买入的核心逻辑建立在“正泰安能周转模型顺畅、上市公司与集团重资产组件制造严格隔离、低压电器看家护城河稳固”三大基石之上，一旦未来财报出现以下<strong>三条死刑证伪信号中的任何一条</strong>，意味着底层逻辑彻底崩塌，必须无条件挥刀离场：</p>
@@ -9767,7 +10056,7 @@
 </li>
 </ol>
 <h5 id="23">📊 表 23：正泰电器三条基本面死刑证伪红线量化监控仪表盘（每季财报必查清单）</h5>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">死刑证伪红线维度</th>
@@ -9800,9 +10089,9 @@
 <td style="text-align: left;">年报第三节“分行业/分产品毛利率”表</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我这辈子都在实践“逆向思维（Inversion）”——在算自己能赚多少钱之前，先把哪三颗子弹能打死我写得清清楚楚贴在办公桌上。只要央企还在买安能的电站、南存辉没把集团那摊苦命的组件工厂塞回上市公司、低压电器的毛利率还稳稳站在 28%—30% 左右，那任何因为市场情绪抽风导致的股价下跌，都是在给你送钞票；反过来，一旦那三条红线亮起任何一盏红灯，别跟股票谈恋爱，立刻拎包走人！</p></div></div>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="g">【终章模块 G：投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）】</h2>
 <blockquote>
 <p><strong>【闭门圆桌会背景】</strong>
@@ -9811,7 +10100,7 @@
 参会人：<strong>查理·芒格（Charlie Munger）</strong>、<strong>彼得·林奇（Peter Lynch）</strong>、<strong>霍华德·马克斯 &amp; 塞思·卡拉曼（Howard Marks &amp; Seth Klarman）</strong>、<strong>斯坦利·德鲁肯米勒（Stanley Druckenmiller）</strong>
 议题：当一家年产 <code>52.00亿元</code> 归母股东真实自由现金流（Owner Earnings）的“低压电器五金税务局 + 农村屋顶开发周转巨头”，因为名字里带了“光伏”二字被市场按 <code>10.00倍</code> P/OE、<code>11.3倍</code> 常态 PE 贱卖时，这究竟是周期制造的价值陷阱，还是千载难逢的认知套利击球区？</p>
 </blockquote>
-<hr>
+<hr/>
 <h3 id="owner-earnings_1">👴🏻 席位一：查理·芒格（商业模式寿命、Owner Earnings 算盘、铜银顺价护城河与死穴排雷）</h3>
 <blockquote>
 <p><strong>“如果你把一团葡萄干（好生意）和一团大便（烂生意）搅在一起，你得到的依然是一团大便。但南存辉先生在 2022 年干了一件极其聪明的事——他在光伏硅片组件最狂热的时候，把那团最烧钱、最苦命的重资产晶硅制造（正泰新能）从上市公司里干净利落地剥了出去！”</strong></p>
@@ -9949,7 +10238,7 @@
 <hr/>
 <h3 id="_35">📋 附：《四位投资大师圆桌投票、核心算盘与量化评分总表》</h3>
 <h4 id="1601877sh-2420">📊 表 1：四位传奇投资大师对正泰电器（601877.SH @ 24.20元）闭门会诊表决总表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">大师席位</th>
@@ -9994,9 +10283,9 @@
 <td style="text-align: left;"><strong>✅ 赞成买入</strong><br/><em>(4票全数通过)</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="2-10">📊 表 2：四位投资大师六维买方铁尺量化打分卡（满分 10 分）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">评估铁尺维度</th>
@@ -10081,7 +10370,7 @@
 <td style="text-align: left;"><strong>全市场罕见的“高现金流回报 + 负价格免费期权”核心底座标的</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -10128,16 +10417,29 @@
 <li>
 <p><strong>怎么扣扳机与守底线？</strong> <strong><code>21.50 — 25.50元</code>（当前 <code>24.20元</code> 所在区）</strong> 属于闭眼收集的左侧高赔率击球区（若极端错杀跌至 <code>20.00 — 21.50元</code> 则是黄金重锤区），直接建立核心底仓；紧盯接下来单季毛利率提价传导（消化铜银涨价）与港股 H 股发行落地的右侧催化，一旦单季扣非净利增速重回 <code>+15%</code> 以上即可顺势加码，目标看向合理公允区 <code>25.50 — 32.00元</code> 及乐观重估区 <code>35.00元+</code>。反之，若未来出现<strong>“存货突破 <code>500亿元</code> 且连续两年 OCF 转负”、“收购集团正泰新能或关联买组件贵于市价 <code>10%</code> 以上”</strong>或<strong>“低压电器毛利率连续两年跌破 <code>24.0%</code>”</strong>这三条死刑红线中的任意一条，则无条件纪律性清仓离场。</p>
 </li>
-</ul></hr></hr></hr></hr></hr></hr>
+</ul>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -10307,7 +10609,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《正泰电器(601877.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/正泰电器(601877.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《正泰电器 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/正泰电器 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -10365,6 +10667,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

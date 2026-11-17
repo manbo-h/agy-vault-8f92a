@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>圆通速递_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>圆通速递 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">圆通速递_全模块深度投研全集</div>
+    <div class="report-title">圆通速递 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -679,7 +964,7 @@
 <h3 id="_4">【第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）】</h3>
 <p>在电商快递这个高度标准化的竞技场里，拼的不是花哨的营销概念，而是刀刀见血的<strong>“单票中心操作成本 + 单票干线运输成本 + 全链路时效溢价”</strong>。我们直接把圆通速递拉到国内四大直接竞争对手——<strong>中通快递（ZTO，行业老大）、申通快递（002468.SZ，高弹性追赶者）、韵达股份（002120.SZ，传统老对手）、顺丰控股（002352.SZ，直营时效霸主）</strong>面前，用 2025 年报及 2026 年三季报的真实硬数据做一场彻底的同台比武。</p>
 <h4 id="1-2025-2026q1-q3">1. 通达系与头部快递五强核心经营与成本身位横向对比表（2025 全年及 2026Q1-Q3 最新口径）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心比拼维度</th>
@@ -756,7 +1041,7 @@
 <td style="text-align: left;">保持百亿级利润体量</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2-a">2. 穿透单票账本：圆通凭什么在 A 股通达系里笑傲群雄，又差在中通哪口气？</h4><p>从上面的硬核比武表中，我们可以极其清晰地定位圆通在全国成本与产品曲线中的真实坐标：</p><ul>
 <li><strong>对标韵达与申通：圆通靠“数字化颗粒度 + 提前三年完成重资产卡位”建立了显著的单票成本护城河</strong>
@@ -835,7 +1120,7 @@
 <ul>
 <li><strong>体检一：“翻旧账对表”言行一致性审计（回溯 2021—2022 年报规划 vs 2025—2026 实际交卷）</strong></li>
 </ul>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">回溯维度</th>
@@ -870,7 +1155,7 @@
 <td style="text-align: left;"><strong>低于预期</strong>（低估了国际航空物流的长周期残酷性）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>体检二：质押、杠杆与高点套现排查（无异常，实控人零恶意减持）</strong></li>
 <li>截至 2026 年三季报，控股股东<strong>蛟龙集团</strong>直接持股约 <code>30.70%</code>，创始人<strong>喻会蛟</strong>直接持股约 <code>2.94%</code>，携妻子张小娟及一致行动人合计控制约 <code>34%</code> 股份，控股权极度稳固，且控股股东股权质押比例极低（近乎零质押风险）。</li>
@@ -940,7 +1225,7 @@
 </ul>
 <hr/>
 <h4 id="3-20212026q3">3. 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2026Q3）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: center;">会计期间</th>
@@ -1017,7 +1302,7 @@
 <td style="text-align: center;"><strong>143.2%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>打破“合并报表幻觉”两项铁律体检</strong>：</li>
 </ul><ol>
@@ -1195,7 +1480,7 @@
 <h5 id="1_6">（1）全国核心枢纽转运中心扩产：单位产能投资额与通达四强横向比武</h5>
 <p>圆通近三年将约 <code>55%—60%</code> 的资本开支（年均约 <code>38—45 亿元</code>，含 2021 年定增募投中投入“多功能网络枢纽中心建设项目”的约 <code>26.8 亿元</code> 及后续自有资金追加）砸向了全国核心枢纽转运中心的拿地自建、改扩建与自动化分拣矩阵升级（代表性项目包括广东揭阳智创园、浙江义乌集运中心、广州花都/白云枢纽、湖北武汉枢纽、山东济南及河北廊坊华北转运中心等）。截至 2025 年末，圆通全网自营枢纽转运中心达 <strong><code>76 个</code></strong>，自动化分拣设备增至 <strong><code>386 套</code></strong>。</p>
 <p>我们直接调取圆通及同业（中通快递、韵达股份、申通快递）近年来新建/改扩建核心枢纽转运中心的公开募投说明书、环评备案及年报在建工程数据，对齐测算其<strong>“单位面积造价”</strong>与<strong>“每亿件年处理能力投资额”</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核心工程经济指标</th>
@@ -1256,7 +1541,7 @@
 <td style="text-align: left;"><strong>约 0.30 — 0.33 元/票</strong>（随产能爬坡持续下降中）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>单位经济账穿透剖析（圆通为什么“造价居中偏省，但产出效率极高”？）：</strong>
   1. <strong>拿地自建 vs 租赁改造的十年大账</strong>：外行常质疑为什么圆通不租现成的物流园（每年租金仅约 <code>240—360 元/平米</code>），而要砸下 <code>3,800—4,400 万元/万平米</code> 拿地自建？答案藏在物理结构与自动化刚性里：第三方标准普洛斯物流仓层高通常仅 9—10 米、柱网密集且地面承重有限，根本塞不下总高达 11—13 米的<strong>“三层立体交叉带分拣线 + 钢结构夹层平台”</strong>；更重要的是，租赁场地每 3—5 年面临房东涨租 <code>15%—20%</code> 或政府征地拆迁，一旦拆迁，耗资数千万元焊接安装的自动化分拣线拆卸报废率超过 <code>40%</code>！圆通拿下一手工业物流用地（50 年产权）并建造重卡可直接开上二楼卸货的“双层盘道枢纽”，虽然前期一次性 CapEx 看着高，但将建筑按 25—30 年、土地按 50 年折旧摊销后，<strong>折算到每平方米的年化固定折旧成本仅为 <code>130—160 元/平米/年</code>，比在义乌、广州、上海周边租用高标仓便宜整整一半以上</strong>！</li>
@@ -1516,7 +1801,7 @@
 </ul>
 <hr/>
 <h4 id="4">4. 两大远期期权全景商业证伪对比表与最终定性结论</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">证伪核心维度</th>
@@ -1561,7 +1846,7 @@
 <td style="text-align: left;"><strong>【100% 验真兑现的“确定性降本印钞机”】</strong>（已直接转化为公司成本曲线最左端的护城河）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>模块 B 终极定性收口（一锤定音）</strong>：
   1. 对于<strong>“AI 智多星大模型 + 无人车数字化赋能”</strong>，市场无需再做任何怀疑——它已经是一台<strong>每年在 345 亿件包裹上帮圆通和加盟商多抠出数亿元纯利润的“确定性降本印钞机”</strong>。
@@ -1573,7 +1858,7 @@
 <p>在买方研究的法庭上，任何单一公司自吹自擂的“数字化降本”或“网络优势”都不算数，唯有将圆通速递（<code>600233.SH</code>）与最直接的三大加盟制对手——<strong>中通快递（<code>02057.HK</code>）、申通快递（<code>002468.SZ</code>）、韵达股份（<code>002120.SZ</code>）</strong>，并对照直营龙头<strong>顺丰控股（<code>002352.SZ</code>）</strong>及上游电商平台（拼多多、抖音、淘天）的包裹结构演变放在同一张审讯桌上，用 2025 年报与 2026 年三季报的真金白银数据进行交叉对质，才能看清谁在裸泳、谁在靠并购粉饰、谁在真正赚取高质量的自由现金流。</p>
 <h4 id="20252026q3">一、 通达系四巨头 2025—2026Q3 财务与单票运营全维度交叉对质表</h4>
 <p>在进行横向对质前，必须先确立一条<strong>会计核算防呆基准</strong>：A 股三家（圆通、韵达、申通）均采用<strong>“含派费总额法”</strong>确认营收（即总部向揽件网点收取的含派费面单款全额计入营业收入，同时向派件网点支付的派送费约 <code>1.20—1.35元/票</code> 全额计入营业成本）；而港/美股上市的<strong>中通快递采用“不含派费净额法”</strong>（派费作为代收代付直接抵减，不进营收与成本，仅直客 KA 含派费）。因此，中通的表观营收较小、表观毛利率高达 <code>25%—30%</code>；要穿透表象看真实竞争力，<strong>必须剔除派费干扰，直接对质“单票运输成本 + 单票中心操作成本”与“单票归母净利”</strong>！</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对质维度</th>
@@ -1690,7 +1975,7 @@
 <td style="text-align: left;">预收大客户储值卡及月结为主</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把四家快递公司的底裤扒下来一对比，你就明白什么叫“同样的苦力活，不同的命”——中通和圆通已经把干线重卡和分拣机器拧成了每票 6 毛 4 的精密印钞机，而掉队的家伙每送一个包裹只能抠出 4 到 7 分钱钢镚，稍微刮点柴油涨价的风就得感冒！</p></div></div>
 <hr/>
 <h4 id="_11">二、 景气度与预收款对质：上游电商退货潮与“反内卷”下的真实水温</h4>
@@ -1873,7 +2158,7 @@
 
 <h5 id="4-owner-earnings">4. 第四步：圆通速递 Owner Earnings 分步还原与三档价格标尺矩阵表</h5>
 <p>为了彻底消除单一景气周期的线性外推偏误，我们在 <code>345.00亿件</code> 年业务量基准上，同步设立 <strong>标尺一【2026即期高景气年化标尺（65.00亿）】</strong>、<strong>标尺二【新常态稳态中枢标尺 · 买方核心主锚（56.50亿）】</strong> 与 <strong>标尺三【苛刻历史边际底线标尺（38.50亿）】</strong>，并与 2024A—2025A 历史数据进行全链条对齐：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">财务与造血还原核心科目</th>
@@ -2006,7 +2291,7 @@
 <td style="text-align: center;"><em>极端收缩至防御线 <code>33.00</code></em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>聪明人算账从不拿天气最好那天的收成当成一辈子的口粮，而是先把即期景气的六十五亿砍掉八亿五千万当安全垫，再去看看哪怕天塌下来还能不能剩三十八亿五千万——只有把最坏的底牌摸透了，你晚上睡觉才不会因为竞争对手降价两分钱而惊醒。</p></div></div>
 <hr/>
 <h4 id="_13">二、 增量垫高测算：嘉兴东方天地港扭亏转盈 + 高毛利散件占比提升</h4>
@@ -2040,7 +2325,7 @@
 </ul>
 <h5 id="3-owner-earnings-564-899">3. 双引擎叠加：Owner Earnings 向上垫高全景测算表（<code>+5.64亿</code> 至 <code>+8.99亿元/年</code>）</h5>
 <p>我们将上述两大内生结构改善引擎叠加至「标尺二：新常态稳态中枢（<code>56.50亿元</code>）」与「标尺一：2026即期高景气标尺（<code>65.00亿元</code>）」之上，清晰展现圆通未来 1—2 年的真实造血跃升阶梯：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">增量垫高维度与双标尺映射</th>
@@ -2087,7 +2372,7 @@
 <td style="text-align: center;"><strong><code>73.99</code>（约 <code>74.00亿</code>，单票 <code>0.214元</code>）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把一个每年倒贴近三亿的航空大包袱变成不赔钱甚至赚钱的资产，再把十分之三的便宜大路货换成高毛利退货散件，账面上就悄无声息多出五亿六到九个亿的纯现金——最顶级的商业魔术从来不是祈祷全行业一起涨价，而是自己把屋子里的漏水点堵上。</p></div></div>
 <hr/>
 <h4 id="_14">三、 极限压力测试：单票跌价 + 柴油/航油暴涨 + 派费刚性上调</h4>
@@ -2122,7 +2407,7 @@
 </ul>
 <h5 id="3-3850">3. 极限复合压力测试推演表（含标尺三 38.50亿 合龙与超极限末日死扛底线）</h5>
 <p>我们将“单票跌价 <code>0.08—0.10元/票</code>（对应前端快递均价下跌约 <code>12%—15%</code> 且扣除刚性上调的末端派费后，全部由总部中转与面单利润硬扛）”、“柴油/航油暴涨 <code>20%</code>”以及“动态对冲 vs 零对冲静态死扛”组合成四大递进压力梯度，检验圆通速递的底线生存能力：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">压力测试核心维度与财务结果（基于 <code>345.00亿件</code> 业务量）</th>
@@ -2225,7 +2510,7 @@
 <td style="text-align: center;"><strong>零失血！哪怕双杀静态死扛仍净造血逾 <code>31亿/年</code></strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="4_1">4. 终极抗压结论：圆通速递的“失血破产临界点”究竟在哪里？</h5><p>通过上述极限推演，我们可以给出一个极具震撼力的买方安全边际结论：</p><ul>
 <li>
 <p><strong>第一，即使遭遇“单票净跌 8 分钱 + 柴油/航油暴涨 20%”的复合黑天鹅（标尺三）</strong>，圆通速递的常态归母净利润仍能守住 <strong><code>34.00亿元/年</code></strong>，真实股东盈余（Owner Earnings）高达 <strong><code>38.50亿元/年</code></strong>（单票净造血 <code>0.112元</code>）；哪怕再退一步，进入“单票净跌 1 角钱（含末端派费倒贴）+ 柴油暴涨 20% 且管理层零对冲静态死扛”的超极限末日场景，公司依然能产生 <strong><code>26.59亿—27.38亿元</code></strong> 的归母净利润和 <strong><code>31.09亿—31.88亿元/年</code></strong> 的正向自由现金流（Owner Earnings），<strong>绝不存在任何经营性失血的可能</strong>！</p>
@@ -2275,7 +2560,7 @@
 </ul>
 <h5 id="2-27324">2. 固定资产折旧年限与研发资本化排雷：273.24 亿重资产是在“藏富”还是“粉饰”？</h5>
 <p>截至 2026 年三季度末，圆通速递账面<strong>固定资产高达 <code>273.24亿元</code>、在建工程 <code>26.87亿元</code></strong>，两项重资产合计达 <strong><code>300.11亿元</code></strong>，占总资产（<code>580.60亿元</code>）的半壁江山（<code>51.69%</code>）。对于如此庞大的重资产底盘，折旧年限哪怕调高或调低 2 年，都会导致每年数亿元的利润波动。我们将圆通与韵达、申通、顺丰的四大核心固定资产折旧政策与研发资本化率进行逐项横向对质：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计政策与核心资产类别</th>
@@ -2328,7 +2613,7 @@
 <td style="text-align: left;"><strong>100%纯度利润</strong>（近1.5—1.6亿/年IT研发投入全部直接冲减当期利润，零资本化粉饰）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>通过上表显微镜式的比对，我们可以得出三个极其硬核的排雷结论：</p><ul>
 <li>
 <p><strong>第一，圆通的运输车队与分拣设备折旧处于“极度严苛保守”状态，存在显著的“表外折旧藏富”效应</strong>：
@@ -2412,7 +2697,7 @@
 </li>
 </ul>
 <p><strong>表 1：圆通速递（600233.SH）买方全口径真实企业价值（True EV）核算明细表</strong></p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算步骤与科目名称</th>
@@ -2508,7 +2793,7 @@
 <td style="text-align: left;"><strong>全局锁定估值分母锚点：629.97 亿元（统一取整锚定 <code>630.0 亿元</code>）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>账上趴着 105 亿真金白银，扣掉全部带息欠款还净剩 24 亿现金，这帮会计师居然还管它叫“重资产负债企业”？哪怕我们按最苛刻的买方规矩把 30 亿日常买柴油、发工资的过河钱锁进保险柜，买断整家圆通也只要 630 亿——这资产负债表干净得像修道院的地板！</p></div></div>
 <hr/>
 <h4 id="reverse-sotp">二、 隐含回报率、跨期股东回报拆分与 Reverse SOTP（拆骨倒推隐含预期）</h4>
@@ -2549,7 +2834,7 @@
 <li>公司左手以 <code>2.4% — 2.8%</code> 的超低成本融入债务资金（且账面百亿现金理财与大额存单收益即可覆盖大部分利息支出），右手将其投入内生现金回报率高达 <strong><code>8.97% — 10.32%</code></strong> 的核心转运中心自动化升级与干线甩挂车队中，净赚 <strong><code>600 — 750 bps</code></strong> 的正向利差（<span class="math-inline"><span class="math-text">ROIC</span> \gg <span class="math-text">WACC</span></span>）。这种良性财务杠杆在不牺牲任何安全边际的前提下，将普通股股东的净资产收益率（ROE）从资产端回报率进一步放大——2026 年前三季度公司加权平均 ROE 已跃升至 <strong><code>12.56%</code></strong>，全年年化 ROE 预计高达 <strong><code>15.5% — 16.0%</code></strong>。</li>
 </ul>
 <p><strong>表 2：圆通速递三档标尺下的隐含内生回报率（OE / True EV）全景对照表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">估值标尺维度</th>
@@ -2598,7 +2883,7 @@
 <td style="text-align: left;"><strong>18.23x</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="22">2.2 跨期分红与注销式回购收益率拆分：从资本开支高峰迈向现金奶牛收获期</h5>
 <p>买方不仅看公司赚多少 Owner Earnings，更看管理层愿不愿意把真金白银分给小股东。梳理圆通速递 2024—2026 年的股东现金回报轨迹，可以清晰看到一条“年中分红破冰 + 注销式回购兜底 + 远期分红率跃升”的陡峭曲线：</p>
 <ul>
@@ -2655,7 +2940,7 @@
 </li>
 </ul>
 <p><strong>表 3：圆通速递（600233.SH）Reverse SOTP 拆骨估值与免费期权称重表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">拆骨资产模块</th>
@@ -2696,14 +2981,14 @@
 <td style="text-align: left;"><strong>当前 True EV = 630.0 亿元（显著低估，下行铁底锁死，上行免费期权丰厚）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这就像你花 630 万去买一家每年稳赚近 60 万纯现金的黄金铺面，结果签完合同房东把钥匙一扔说：“顺便把隔壁那个刚砸了 100 多万建好、带私人跑道和 14 架波音货机的长三角航空货运基地也白送你了，因为华尔街那帮近视眼觉得它今年还在付装修费！”这种免费送上门的彩票，是我和沃伦最喜欢的午餐。</p></div></div>
 <hr/>
 <h4 id="_16">三、 同行横向估值对比、赔率坐标与分档击球区推演</h4>
 <h5 id="31">3.1 同行横向估值与盈利质量大比武：为什么圆通是当前快递板块性价比之王？</h5>
 <p>为了验证圆通速递在全行业中的相对赔率，我们将中国快递行业五大巨头——<strong>圆通速递（600233.SH）、中通快递（02057.HK / ZTO.US）、申通快递（002468.SZ）、韵达股份（002120.SZ）、顺丰控股（002352.SZ）</strong> 截至 2026 年三季报及 2026年11月 最新估值指标拉入同一张标尺进行横向比武：</p>
 <p><strong>表 4：圆通速递 vs 中通快递 vs 申通快递 vs 韵达股份 vs 顺丰控股 2026 最新估值与盈利质量对比表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心对比维度</th>
@@ -2788,7 +3073,7 @@
 <td style="text-align: left;">鄂州机场与直营壁垒深厚，但估值贵出40%、ROE比圆通低5个百分点</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><em>(注：韵达股份 A 股证券代码为 <code>002120.SZ</code>；表中各家 2026 年前三季度业绩均引自 2026 年 10 月末最新披露之三季报法定数据。)</em></p>
 <p>通过表 4 的全维度横向解剖，圆通速递的买方阿尔法（Alpha）一目了然：</p>
 <ul>
@@ -2842,7 +3127,7 @@
 </li>
 </ul>
 <p><strong>表 5：圆通速递（600233.SH）三档实战击球区与买方估值坐标速查表</strong></p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球区档位定性</th>
@@ -2891,7 +3176,7 @@
 <td style="text-align: left;"><strong>分批止盈</strong>：景气预期与航空期权已充分计价，安全边际收窄，纪律性兑现离场</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>以 18 块 1 的价格买进，哪怕嘉兴那个大机场一分钱不赚，光靠国内送快递每年也能给你吐出 9% 到 10% 以上的真金白银回报；要是大盘发疯跌破 15 块 5，你就该把老婆藏在床垫底下的私房钱也掏出来买进；等哪天市场先生喝高了愿意出 25 块以上向你买，你就面带微笑把筹码全都礼貌地卖还给他。投资哪有那么复杂？</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h5 id="33">3.3 三条基本面死刑证伪红线（一旦触发无条件认错离场铁律）</h5><p>成熟的买方从不谈“无脑信仰”，只信奉可被证伪的客观数据。在持有圆通速递的过程中，必须时刻用望远镜盯紧以下 <strong>三条量化基本面死刑证伪红线</strong>——只要任意一条在财报中被实质性击穿，说明我们的核心投资逻辑已发生不可逆的质变，无论当时股价盈亏如何，必须无条件执行纪律认错清仓：</p><ul>
@@ -2989,7 +3274,7 @@
 <p>听着，当一家千亿级营收体量的行业龙头，同时出现<strong>‘毛利率跳升 3 个点 + 利润增速飙上 60% + 份额超额领跑行业 9.5 个点 + 自由现金流转正并开启中期分红’</strong>这四大右侧信号，而市场先生居然还用旧时代的偏见给它标着 <strong><code>10 倍</code> 动态 PE（<code>18.10 元</code>）</strong> 的白菜价——这根本不是什么缓慢的价值修复，这是典型的<strong>认知滞后带来的黄金击球窗口</strong>！我的策略非常干脆：在 <code>18.10 元</code> 现价直接建立主力底仓，一旦四季度旺季提价与全年超 60 亿利润兑现，这就是一发赔率与胜率双高的重炮！”</p>
 <hr/>
 <h3 id="_17">📋 四位大师闭门投票与终极裁决总表</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">传奇大师</th>
@@ -3034,7 +3319,7 @@
 <td style="text-align: center;"><strong>🟢 果断重注</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p><strong>🏆 大师圆桌终极合议裁决（4 票全票通过 · 买方评级：强力击球区）</strong>：
 四位大师一致认为：在 <strong><code>18.10 元/股</code>（总市值 <code>619.93 亿元</code>、True EV <code>630.0 亿元</code>）</strong> 的定价刻度上，市场仍停留在“过去五年快递价格战与重资产扩产”的后视镜里，完全低估了圆通速递 <strong>2026 年自由现金流大拐点（前三季度 FCF <code>+16.45 亿元</code>）与盈利能力的阶梯式跃迁（常态 Owner Earnings <code>56.50—65.00 亿元/年</code>）</strong>。只要管理层严守航空机队资本开支纪律，当前股价就是“买地面印钞机、白送天上百亿机场”的绝佳击球点！</p>
@@ -3146,7 +3431,7 @@
 </li>
 </ul>
 <h4 id="vs-vs">三、 圆通 vs 顺丰 vs 中通、韵达：到底有什么区别？</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -3179,7 +3464,7 @@
 <td style="text-align: left;">前几年网点管理波动、自动化改造稍慢一步，单票成本比圆通贵3—5分钱、单价还比圆通低，年赚约 <strong>19亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>一句话分清这四家：顺丰是“皇家御林军”，全靠自己养兵，服务极其体面但军费重得吓人；中通、圆通、韵达三兄弟则是“只修高速公路、把跑腿活儿全外包给包工头的精明地主”。在这三兄弟里，中通是地盘最大、专挑肥肉吃的老大；圆通是拿着计算器把每一滴柴油抠到极限、还梦想造机场买飞机的老二；韵达则是前两年打盹掉队、正在后面咬牙追赶的老三。</p></div></div>
 <hr/>
 <h3 id="q2">Q2：极兔哪来的资本打价格战？国家当时不管控这种类似于产能过剩的恶意价格竞争吗？</h3>
@@ -3377,7 +3662,7 @@
 </ol>
 <h4 id="ai">二、 算力与 AI 研发开销在财报里有记录吗？一年花多少钱？为什么划算得惊人？</h4>
 <p><strong>在财报附注的「研发费用」、「管理费用—信息化费」以及「无形资产/开发支出/数据资源」三个科目里有完整记录！</strong> 我们把数字拎出来算一笔投入产出比（ROI）大账：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">财报核查科目</th>
@@ -3403,7 +3688,7 @@
 <td style="text-align: left;">除以全年 311 亿件包裹后，单票分摊的 AI 与全部 IT 研发投入<strong>连 1 分钱的三分之二都不到</strong>！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>💡 买方震撼算账结论（花 2 个亿算力研发费，省下 15 个亿柴油费）</strong>：
   你看明白这笔账有多恐怖了吗？圆通一年在“智多星 AI 大模型 + 阿里云算力 + 全部 IT 程序员”身上花掉的总投入，哪怕把费用化和资本化全算上，一年也就 <strong><code>2.3 亿 — 2.5 亿元人民币</code></strong>（占它 750 亿总营收的 <strong><code>0.3%</code></strong> 都不到，平摊到 311 亿件包裹上，<strong>每件包裹只花掉 <code>0.007 元</code>[不到 1 分钱]</strong>）！
@@ -3467,7 +3752,7 @@
 <p>在快递行业里，衡量一家公司护城河硬不硬的终极铁尺，就是看它的<strong>「单票核心运营成本（= 单票干线运输成本 + 单票转运中心分拣操作成本）」</strong>。</p>
 <p>我直接为您画出一张 <strong>2025—2026 年中国快递江湖《全行业单票核心成本曲线（Cost Curve）从左到右座次总表》</strong>，谁在最左端躺赢、谁在中间肉搏、谁在最右端流血甚至已经出局，一眼看穿：</p>
 <h4 id="_27">📊 中国快递行业「单票核心成本曲线」从左到右全景排位表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">成本曲线位置与梯队定性</th>
@@ -3521,7 +3806,7 @@
 <td style="text-align: left;"><strong>完全不同的物种</strong>：顺丰和京东是全直营商务/品质仓配模式，一单收 15—18 元，不跟通达系抢 3 块钱的淘宝包邮袜子（顺丰当年试水 3 块钱电商件的“丰网”亏得一塌糊涂，已于 2023 年以 11.83 亿元割肉卖给了极兔）。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="_28">💡 一句话看懂这张成本座位表对您的投资意义：</h4>
 <p>在 3 块钱一单的平民电商快递江湖里，<strong><code>0.70 元/票</code>（干线+中转）就是荣枯生死线</strong>：</p>
 <ul>
@@ -3625,7 +3910,7 @@
    请看下面这张<strong>《反内卷限价前 vs 限价后的五巨头博弈算账表》</strong>，您一眼就能看懂为什么限价是中通和圆通的天大福音：</p>
 </li>
 </ol>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">博弈场景</th>
@@ -3648,7 +3933,7 @@
 <td style="text-align: left;">卖家一看：<strong>“既然现在发韵达要 1.25 元，发圆通也只要 1.25—1.30 元，价格差不多，我当然选速度更快、不丢件的圆通！”</strong> <span class="math-inline"> → </span> 弱势对手订单雪崩，包裹全涌向圆通！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>💡 终极结论</strong>：
   您的经济学直觉完全正确——因为老玩家内部产能充裕，国家限价<strong>并不能让快递单价一飞冲天</strong>（单价只会贴着监管底价红线走）；但限价最致命的作用，是<strong>缴械了高成本弱势对手手里唯一能用来抢客户的“低价自杀炸药包”</strong>！
@@ -3657,13 +3942,26 @@
 
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3833,7 +4131,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《圆通速递_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/圆通速递_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《圆通速递 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/圆通速递 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3891,6 +4189,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

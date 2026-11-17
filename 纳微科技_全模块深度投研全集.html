@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>纳微科技_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>纳微科技 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">纳微科技_全模块深度投研全集</div>
+    <div class="report-title">纳微科技 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -722,7 +1007,7 @@
 <hr/>
 <h3 id="_6">二、 核心产品线与国内外直接对手硬核对标（谁是真王牌，谁有短板？）</h3>
 <p>我们将纳微科技的三大核心微球战线（小分子/多肽硅胶与聚合物填料、大分子抗体亲和/离子层析介质、分析色谱柱）拉到全球霸主 <strong>思拓凡（Cytiva）</strong>、<strong>诺力昂/Kromasil</strong>、<strong>大曹（Daisogel/Osaka Soda）</strong> 以及国内直接竞争对手 <strong>赛分科技（688758.SH）</strong>、<strong>蓝晓科技（300487.SZ）</strong>、<strong>博格隆（Bio-Link）</strong> 面前，做一场不留情面的硬指标横评：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对比维度 / 细分赛道</th>
@@ -755,7 +1040,7 @@
 <td style="text-align: left;"><strong>【全产业链自产基球降维打击】</strong><br/>国内极少数从“底层亚二微米单分散基球合成 <span class="math-inline"> → </span> 表面键合修饰 <span class="math-inline"> → </span> 自动化装柱”全链路自主的厂商，连续三年保持 30%+ 高速增长</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>别听那些厂家吹什么“我们也能造微球”，这就好比大家都能用面粉蒸馒头，但人家纳微蒸出来的十万个馒头用游标卡尺量误差不超过一根头发丝，而且一锅出炉九成都是正品；对手蒸出来的大大小小还得雇人拿着筛子筛掉七成废品。在工业纯化这行，粒径均一性差十倍，药厂车间的过滤管子就得堵死！</p></div></div>
 <hr/>
 <h2 id="_7">【第三部分：成长历史与生死转折——今天的本事是怎么练出来的？（高度精炼）】</h2>
@@ -869,7 +1154,7 @@
 <hr/>
 <h3 id="20212025-2026">三、 五年一期现金流硬账本与“防合并报表幻觉”穿透（2021—2025 年及 2026 前三季度）</h3>
 <p>我们将纳微科技 2021—2025 年五个完整会计年度及最新 2026 年前三季度（1—9 月）的核心收入、利润、经营现金流（OCF）、资本开支（CapEx）与自由现金流（FCF）拉通列示如下：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -954,7 +1239,7 @@
 <td style="text-align: left;"><strong>108.7%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><em>注：数据源自纳微科技 2021—2025 年各年度经审计年报及 2026 年第三季度报告。CapEx 取自合并现金流量表“购建固定资产、无形资产和其他长期资产支付的现金”。</em></p><p>穿透这张五年一期的硬账本，可以读出三个极其关键的商业真相：</p><ol>
 <li>
 <p><strong>极高含金量的经营造血（五年累计净现比高達 97.2%，2026 前三季度达 108.7%）</strong>：
@@ -1176,7 +1461,7 @@
 </li>
 </ul>
 <h4 id="2">2. 色谱填料/层析介质行业重点扩产项目横向对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比维度</th>
@@ -1237,7 +1522,7 @@
 <td style="text-align: left;">承接全球 GLP-1 多肽巨头的百吨级商业化合成树脂订单</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3-breakeven-point">3. 新增折旧摊销冲击与盈亏平衡点（Breakeven Point）双向精算</h4><p>一旦南通如东项目历经 3 年建设期全面建成转固，将对纳微科技的利润表形成实打实的刚性折旧考验。我们严格按照会计准则进行拆解测算：</p><ul>
 <li><strong>转固资产与刚性折旧摊销测算</strong>：</li>
 </ul><ol>
@@ -1485,7 +1770,7 @@
 <p><strong>IVD 化学发光磁珠与多孔碳微球</strong> ➔ <strong>【慢变量鸡肋（IVD 磁珠）与低成本远期微型彩票（碳微球）】</strong>：IVD 磁珠年收入仅 <strong>777.56万元</strong>（占营收 0.84%），受困于下游医疗器械注册变更死锁与大厂自研，属于典型的“研发投入重、技术门槛高、但商业转化极慢的鸡肋型慢变量”；而多孔碳微球（4 吨规划产能）只是南通甲类车间顺带孵化的特种工业分离材料小期权，在未看到百吨级低成本连续碳化突破前，严禁给予新能源硅碳负极估值溢价。</p>
 </li>
 </ol>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">评估维度</th>
@@ -1532,7 +1817,7 @@
 <td style="text-align: left;">🚀 <strong>【高胜率真成长主引擎（固相合成载体）】</strong><br/>🎟️ <strong>【低成本特种材料微型彩票（多孔碳微球）】</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>花三个亿现金去买毛利率只有 46% 的仪器厂，还背上一屁股商誉，这在账房先生眼里简直像用金条去换铜板；但如果这几台机器能像特洛伊木马一样塞进药企实验室，逼着客户往后十年都得买你毛利率 80% 的微球填料和色谱柱，这笔保护费就交得还不算太蠢。至于那个一年只卖七百多万的诊断磁珠，下游客户换个磁珠比换老婆还费劲，就别指望它能立刻给你下金蛋了；真正肥得流油的，是给减肥药大厂按吨卖一次性合成树脂的买卖——毕竟没有什么比卖“用完一次就得扔掉重买”的高毛利耗材更让资本家做梦笑醒的了。</p></div></div>
 <hr/>
 <h2 id="c">【追问模块 C：同行与上下游“三方交叉审讯”】</h2>
@@ -1540,7 +1825,7 @@
 <p>在生物医药上游分离纯化与科学仪器赛道，单看一家企业的财报极易陷入管理层叙事的自嗨。要看清纳微科技（688690.SH）2025 年至 2026 年前三季度“营收提速、净利翻倍、现金流井喷”的真实成色，必须将其置于严酷的同行与上下游坐标系中，与国内最纯正的色谱填料同行<strong>赛分科技（688758.SH）</strong>、吸附分离与多肽固相合成载体龙头<strong>蓝晓科技（300487.SZ）</strong>、国产色谱分析仪器代表<strong>皖仪科技（688600.SH，直接对标纳微控股子公司福立仪器）</strong>以及全球生物工艺霸主<strong>丹纳赫（Danaher / Cytiva）</strong>进行一场刀刀见血的“三方交叉审讯”。</p>
 <hr/>
 <h3 id="2025a-2026q1-q3">一、 核心经营与财务指标全景横向对质大表（2025A — 2026Q1-Q3）</h3>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对质维度与核心指标</th>
@@ -1657,7 +1942,7 @@
 <td style="text-align: left;">自由现金流转化率常年维持 <strong>100%+</strong> 标杆水平</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把同行账本摊在阳光下对质，就像在退潮的海滩上拿着望远镜数裤衩——谁在靠压库存做假繁荣，谁在靠硬核耗材收真金白银，只需看一眼“存货微增 4.7%、经营现金流暴增 356%”这组数字，连盲人都能摸出谁才是真正的现金奶牛。</p></div></div>
 <hr/>
 <h3 id="_26">二、 三大核心审讯维度深度拆解</h3>
@@ -1801,7 +2086,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <div class="math-display"><span class="math-text">真实股东盈余（Owner Earnings）</span> = <span class="math-text">常态归母净利润</span> + <span class="math-text">有效归母折旧与摊销（D\&amp;A）</span> - <span class="math-text">防御性维护资本开支（Maintenance CapEx）</span> - <span class="math-text">常态刚性营运资金追加占用（</span>\Delta<span class="math-text">NWC）</span></div>
 <p>结合 2025 年经审计年报与 2026 年三季报最新经营底盘（2026 年 1-9 月实现营收 8.88 亿元、归母净利 2.21 亿元、扣非净利 2.01 亿元、OCF 2.41 亿元，全年常态归母净利底盘已稳稳站上 2.60 亿—2.80 亿元量级），我们分步还原纳微科技的真实造血底盘如下：</p>
 <h4 id="d-1-2025-vs-2026-owner-earnings">表 D-1：纳微科技 2025 基准年 vs 2026 常态年化 Owner Earnings 分步还原测算表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">测算步骤与财务科目（单位：人民币万元）</th>
@@ -1910,7 +2195,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <td style="text-align: left;"><strong>常态 OE / 常态扣非归母净利转化率高达 110.6%—119.6%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>会计师总喜欢用直线折旧法把一口能用十五年的不锈钢合成反应釜在十年内扣光利润，但那口锅在第十年零一天照样能煮出卖八千块钱一升的微球！如果你分不清“为了保住老生意不得不扔进水里的维护费”和“为了抢新地盘主动砸下去的扩产钱”，你就会把一台每年净吐两三个亿真金白银的印钞机当成苦哈哈的重资产作坊。</p></div></div>
 <hr/>
 <h3 id="_27">二、 增量造血垫高测算：三大确定性物理引擎还能把底盘往上抬高多少？</h3>
@@ -2013,7 +2298,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 </ul>
 <h4 id="3_1">3. 终极组合拳（压力情景一 + 压力情景二同时爆发）与资产负债表防线核验</h4>
 <h4 id="d-2">表 D-2：纳微科技常态底盘双极限压力测试与现金流防线全景对比表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">核心财务与造血指标</th>
@@ -2138,7 +2423,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <td style="text-align: center;"><strong>固若金汤（三杀叠加仍净赚超 2 亿现金）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>抗压测试硬核结论</strong>：
   哪怕把“核心产品全线降价 15% + 上游原料暴涨 20% + 南通新厂新增 5,000 万折旧空转”这三座大山在同一天全部砸向纳微科技（上表最右列的“终极地狱模式”），公司的综合毛利率依然能守在 <strong>60.73%</strong> 以上，全年扣非归母净利润仍有 <strong>1.18 亿元</strong>，而真正流入股东口袋的 <strong>Owner Earnings 自由现金流更是高达 2.08 亿元</strong>！
@@ -2151,7 +2436,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <p>高毛利、高增长的科创板生物医药上游企业，往往也是财务调节与商誉爆雷的重灾区。纳微科技 2025 年净利大增 64.18%、2026 年前三季度扣非净利翻倍（+110.85%）的背后，到底有没有通过放宽应收账款信用期、少提存货跌价、拉长设备折旧、将研发支出资本化或者隐瞒商誉减值来“化妆”利润？我们直接调取容诚会计师事务所出具的审计报告附注与同行会计政策，用显微镜逐项穿透排雷。</p>
 <hr/>
 <h3 id="_28">一、 同行核心会计政策与减值计提标准横向对比表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -2198,7 +2483,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <td style="text-align: left;"><strong>历史包袱已大幅出清</strong>：赛谱仪器已计提 34.2% 减值并在 2025 年扭亏为盈，商誉风险可控</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_29">二、 资产质量排雷：四大敏感科目逐一穿透</h3>
 <h4 id="1-biotech">① 应收账款账龄与坏账计提：Biotech 客户有赖账风险吗？</h4>
@@ -2293,7 +2578,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <hr/>
 <h4 id="2_4">2. 高管薪酬与全员人效（人均创收 / 人均创利）匹配度审计</h4>
 <p>我们将纳微科技 2024 年、2025 年及 2026 年（年化）的员工专业结构、核心高管薪酬与人均效能指标拉通对比：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">审计维度与具体指标</th>
@@ -2347,7 +2632,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <td style="text-align: left;"><strong>经营杠杆全面引爆</strong>：人均创利两年翻了逾三倍，人效剪刀差彻底兑现</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>治理细节穿透总结</strong>：</p><ol>
 <li>
 <p><strong>创始人与职业经理人的黄金分工</strong>：实控人、国家重大人才工程专家江必旺博士（持股核心、纳米微球底层技术奠基人）2025 年税前报酬仅 <strong>126.41 万元</strong>，甚至低于公司不少资深研发总监，其个人财富完全与公司长期内在价值深度捆绑，绝无通过高额个人薪酬掏空上市公司的动机；而总经理（CEO）牟一萍女士作为曾在安捷伦（Agilent）任职近三十年、一路做到全球副总裁兼生命科学与化学分析大中华区总经理的行业顶级实战派高管，拿 <strong>363.00 万元</strong>的市场化薪酬，在 2025—2026 年成功主导了纳微全面预算管理、销售铁军狼性改革以及福立仪器与色谱耗材的跨业务整合（直接体现为 2026Q1-Q3 销售费用率下降 3.12 pct、管理费用率下降 4.82 pct、营收增长 32.36%），每一分高管薪酬都换回了数倍的经营效率提升。</p>
@@ -2368,7 +2653,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <p>单纯看表观总市值会忽略两个关键资产负债表项：一是公司合并报表中包含了浙江福立仪器（少数股东持股 55.20%）与苏州赛谱仪器（少数股东持股 23.33%）的少数股东权益；二是公司账面拥有丰厚的净现金储备。我们按机构级并购清算公式实算 <strong>真实企业价值（True EV，即如果今天把整家公司 100% 买断并拿走超额现金所需支付的真实净代价）</strong>：</p>
 <div class="math-display"><span class="math-text">True EV</span> = <span class="math-text">普通股总市值</span> + <span class="math-text">少数股东权益</span> + <span class="math-text">全口径有息负债（含租赁负债）</span> - <span class="math-text">超额可自由支配现金（Excess Cash）</span></div>
 <h4 id="f-1688690shtrue-ev">表 F-1：纳微科技（688690.SH）真实企业价值（True EV）精确核算明细表</h4>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">核算项目与调整步骤</th>
@@ -2463,7 +2748,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <td style="text-align: left;">若将福立仪器等少数股东权益按 3.50 亿元公允市值还原，真实收购代价为 <strong>162.59 亿元</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多华尔街傻瓜算企业价值时只看账面现金，却忘了店里收银机每天必须留点零钱找零、而且子公司还有一半股份属于别人！把找零的底仓钱扣掉、再把合伙人的那份股权算清楚，你会发现买下整座纳微科技真正要掏的钱大约是一百六十一亿——不多不少，跟股票市值几乎一模一样。</p></div></div>
 <hr/>
 <h3 id="reverse-sotp">二、 隐含回报率与预期倒推（Reverse SOTP 拆骨估值）</h3>
@@ -2521,7 +2806,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 </br></li>
 </ul>
 <h4 id="f-2688690shreverse-sotp">表 F-2：纳微科技（688690.SH）Reverse SOTP 拆骨估值倒推全景表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务与资产拆骨层级</th>
@@ -2574,7 +2859,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <td style="text-align: left;"><strong>市场为“60+ 临床三期转商业化 + GLP-1/小核酸固相合成载体 + IVD 磁珠 + 欧美出海”预付的门票钱！</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><ul>
 <li><strong>拆骨倒推的冷酷真相</strong>：
   在 40.01 元/股（161.57 亿元市值）的位置上，<strong>有 53.5%（86.48 亿元）是有现成高毛利现金流和账面净现金兜底的“硬骨头”，而另外 46.5%（75.09 亿元）则是市场为未来成长提前支付的“梦想溢价”</strong>。
@@ -2610,7 +2895,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <h4 id="2-vs">2. 分档击球区推演：左侧安全边际区 vs 右侧业绩催化重锤区</h4>
 <p>为了拒绝情绪化追涨杀跌，我们制定严格挂钩 <code>True EV / 常态 Owner Earnings</code> 与 <code>Reverse SOTP 保底价值</code> 的四档操作击球纪律：</p>
 <h4 id="f-3688690sh">表 F-3：纳微科技（688690.SH）机构级分档击球区与操作纪律坐标表</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">击球分档定位</th>
@@ -2655,7 +2940,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <td style="text-align: left;"><strong>右侧追击加仓条件（必须同时满足以下两项硬指标）</strong>：<br/>① <strong>单季业绩质变</strong>：核心填料单季收入突破 <strong>2.30 亿元</strong> 且单季扣非归母净利站稳 <strong>0.95 亿—1.00 亿元</strong>（年化常态 OE 跃升至 <strong>4.0 亿元+</strong>，直接把 160 亿市值的倍数砸进 40 倍以内）；<br/>② <strong>新曲线大单落地</strong>：GLP-1 多肽/小核酸固相合成载体或欧美 MNC 商业化项目斩获 <strong>单笔 ≥ 5,000 万元</strong> 的年度商业化采购长单。</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_3">3. 三条基本面死刑证伪红线（触碰即无条件认错清仓）</h4><p>投资硬科技最怕在基本面逻辑已经腐烂时，还用“长期主义”自我催眠。无论买入成本是多少，一旦未来定期报告或经营动态触发以下<strong>任意一条量化死刑红线</strong>，代表我们的核心投资假设被彻底证伪，必须无条件一键清仓离场：</p><ol>
 <li><strong>【红线一：价格护城河崩塌证伪——核心填料毛利率跌破 75.0%】</strong>
@@ -2772,7 +3057,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <hr/>
 <h3 id="_32">五、 📋 四位投资大师圆桌投票与核心判词总表</h3>
 <p>为了将四位传奇大师的第一性原理、历史镜鉴与操作标尺浓缩为可直接指导实战的决策坐标，特汇总闭门圆桌会终极裁决总表如下：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">大师姓名与流派</th>
@@ -2817,7 +3102,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <td style="text-align: left;"><em>“在 60 亿市值时别人恐惧你该贪婪；在 158 亿市值时，市场已经让你为南通还没盖好的厂房提前付了钞票——好猎手懂得等钟摆摆回来再扣扳机。”</em></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="_33">六、 🏛️ 圆桌会终极合议裁决：写给长期投资者的行动纲领</h3>
 <p>四位大师推开椅子起身握手，虽然在“是否愿意为高成长支付 50 倍以上溢价”上各有流派分野，但对 <strong>纳微科技（688690.SH）</strong> 的底层定性与实战锚点达成了高度一致的<strong>三条终极共识</strong>：</p>
@@ -2868,13 +3153,26 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
 <p>当前近一百六十亿市值（五十多倍常态盈利）已提前透支南通新厂和远期管线利好，绝不追高。最聪明的打法是等定增折价或大盘回调把市值砸回九十五到一百一十五亿（股价二十四到二十九块）再分批建仓；若恐慌错杀到八九十亿市值（存量现金牛全额兜底，远期管线白送）就闭眼重锤。底线：只要微球毛利率跌破七成五，或老板又掏大钱买亏损硬件厂，无条件清仓。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -3044,7 +3342,7 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《纳微科技_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/纳微科技_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《纳微科技 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/纳微科技 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3102,6 +3400,97 @@ ightarrow$ <strong>赛分【纯填料 + 分析耗材】合计营收 4.03 亿元�
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');

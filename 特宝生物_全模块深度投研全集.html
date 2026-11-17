@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>特宝生物_全模块深度投研全集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>特宝生物 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -388,28 +389,295 @@
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
+    .table-scroll-wrap { overflow: visible !important; }
   }
   @media screen {
+    :root {
+      --agy-font-size: 19px;
+      --agy-line-height: 1.82;
+    }
     body {
       background: #f1f5f9 !important;
-      padding: 20px 16px 80px 16px !important;
+      padding: 16px 14px 80px 14px !important;
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+      -webkit-text-size-adjust: 100%;
     }
     .report-header, .report-content {
-      max-width: 1060px;
+      max-width: 1240px;
       margin-left: auto;
       margin-right: auto;
     }
     .report-content {
       background: #ffffff;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
     }
     .report-header {
       border-radius: 12px 12px 0 0;
-      padding: 22px 34px 16px 34px;
-      background: #ffffff;
+      padding: 22px 32px 16px 32px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       margin-bottom: 0;
+    }
+    .report-title {
+      font-size: calc(var(--agy-font-size) * 1.48) !important;
+    }
+    .report-meta {
+      font-size: calc(var(--agy-font-size) * 0.76) !important;
+    }
+    /* 屏幕端（尤其 Pad 横竖屏）字号与行高动态放大适配 */
+    .report-content p,
+    .report-content li {
+      font-size: var(--agy-font-size) !important;
+      line-height: var(--agy-line-height) !important;
+    }
+    .report-content p {
+      margin: 10px 0 14px 0 !important;
+    }
+    .report-content li {
+      margin-bottom: 6px !important;
+    }
+    .report-content h1 {
+      font-size: calc(var(--agy-font-size) * 1.40) !important;
+      line-height: 1.35 !important;
+      margin-top: 32px !important;
+      margin-bottom: 16px !important;
+    }
+    .report-content h2 {
+      font-size: calc(var(--agy-font-size) * 1.20) !important;
+      line-height: 1.4 !important;
+      padding: 9px 14px !important;
+      margin-top: 26px !important;
+      margin-bottom: 14px !important;
+    }
+    .report-content h3 {
+      font-size: calc(var(--agy-font-size) * 1.08) !important;
+      line-height: 1.45 !important;
+      margin-top: 20px !important;
+      margin-bottom: 10px !important;
+    }
+    .report-content h4 {
+      font-size: calc(var(--agy-font-size) * 1.02) !important;
+      line-height: 1.45 !important;
+      margin-top: 14px !important;
+      margin-bottom: 8px !important;
+    }
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 14px 0 18px 0;
+      border-radius: 6px;
+    }
+    .report-content table,
+    .report-content table.wide-table {
+      font-size: calc(var(--agy-font-size) * 0.84) !important;
+      line-height: 1.55 !important;
+      margin: 0 !important;
+    }
+    .report-content th,
+    .report-content td,
+    .report-content table.wide-table th,
+    .report-content table.wide-table td {
+      padding: 8px 10px !important;
+    }
+    .report-content .side-col,
+    .report-content .munger-note,
+    .report-content .munger-note-table {
+      font-size: calc(var(--agy-font-size) * 0.90) !important;
+      line-height: 1.68 !important;
+      padding: 12px 15px !important;
+    }
+    .report-content .munger-title {
+      font-size: calc(var(--agy-font-size) * 0.92) !important;
+      margin-bottom: 6px !important;
+    }
+    .report-content blockquote,
+    .report-content .callout {
+      font-size: calc(var(--agy-font-size) * 0.95) !important;
+      line-height: 1.72 !important;
+      padding: 12px 16px !important;
+    }
+    .report-content code,
+    .report-content pre {
+      font-size: calc(var(--agy-font-size) * 0.85) !important;
+    }
+    /* 通栏大字模式（Pad 默认开启，或用户一键切换）：正文 100% 满宽，芒格便签满宽紧贴段落下方 */
+    body.agy-layout-single .annotated-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    body.agy-layout-single .main-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    body.agy-layout-single .side-col {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin-top: 2px !important;
+    }
+    /* 平板竖屏及窄屏（<= 980px）自动收窄留白、强制通栏大字 + 宽表顺滑横滑 */
+    @media screen and (max-width: 1180px) {
+      body {
+        padding: 6px 6px 80px 6px !important;
+      }
+      .report-header {
+        padding: 18px 18px 14px 18px !important;
+      }
+      .report-content {
+        padding: 18px 18px !important;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      .annotated-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .main-col, .side-col {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .report-content table.wide-table {
+        min-width: 680px;
+      }
+    }
+    /* 护眼主题：暖黄羊皮纸模式 (Sepia) */
+    body.agy-theme-sepia {
+      background: #e8dec8 !important;
+    }
+    body.agy-theme-sepia .report-content {
+      background: #fbf6e9 !important;
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content p,
+    body.agy-theme-sepia .report-content li,
+    body.agy-theme-sepia .report-content td {
+      color: #2b2118 !important;
+    }
+    body.agy-theme-sepia .report-content h1,
+    body.agy-theme-sepia .report-content h3,
+    body.agy-theme-sepia .report-content strong,
+    body.agy-theme-sepia .report-content b {
+      color: #1a120b !important;
+    }
+    body.agy-theme-sepia .report-content h2 {
+      background: #f2e9d2 !important;
+      color: #1e3a8a !important;
+    }
+    body.agy-theme-sepia .report-content tbody tr:nth-child(even) td {
+      background-color: #f4ecd6 !important;
+    }
+    body.agy-theme-sepia .report-content th {
+      background-color: #e6dac0 !important;
+    }
+    /* 护眼主题：深色夜间模式 (Dark) */
+    body.agy-theme-dark {
+      background: #090d16 !important;
+    }
+    body.agy-theme-dark .report-content {
+      background: #111827 !important;
+      color: #e2e8f0 !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.agy-theme-dark .report-content p,
+    body.agy-theme-dark .report-content li,
+    body.agy-theme-dark .report-content td {
+      color: #cbd5e1 !important;
+    }
+    body.agy-theme-dark .report-content h1,
+    body.agy-theme-dark .report-content h3,
+    body.agy-theme-dark .report-content h4,
+    body.agy-theme-dark .report-content strong,
+    body.agy-theme-dark .report-content b {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content h2 {
+      background: #1e293b !important;
+      color: #38bdf8 !important;
+      border-left-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content th {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    body.agy-theme-dark .report-content th strong,
+    body.agy-theme-dark .report-content th b,
+    body.agy-theme-dark .report-content th span {
+      color: #f8fafc !important;
+    }
+    body.agy-theme-dark .report-content td {
+      border-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content tbody tr:nth-child(even) td {
+      background-color: #162032 !important;
+    }
+    body.agy-theme-dark .report-content blockquote,
+    body.agy-theme-dark .report-content .callout {
+      background: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #38bdf8 !important;
+    }
+    body.agy-theme-dark .report-content .side-col,
+    body.agy-theme-dark .report-content .munger-note,
+    body.agy-theme-dark .report-content .munger-note-table {
+      background: #271f10 !important;
+      border-color: #92400e !important;
+      border-left-color: #f59e0b !important;
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body p {
+      color: #fde68a !important;
+    }
+    body.agy-theme-dark .report-content .munger-body strong,
+    body.agy-theme-dark .report-content .munger-body b,
+    body.agy-theme-dark .report-content .munger-title {
+      color: #fbbf24 !important;
+    }
+    body.agy-theme-dark .report-content code {
+      background: #1e293b !important;
+      color: #f472b6 !important;
+    }
+    body.agy-theme-dark .report-content pre {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+    /* 顶部与目录内嵌的 Pad 阅读外观控制栏 */
+    .agy-reader-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .agy-r-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-r-btn:hover, .agy-r-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    #agy-toc-sidebar.collapsed #agy-toc-reader-box {
+      display: none !important;
     }
     #agy-ask-popover {
       position: fixed;
@@ -599,11 +867,28 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">特宝生物_全模块深度投研全集</div>
+    <div class="report-title">特宝生物 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-17</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
-      <span>💡 交互提示：用鼠标滑动选中任意文字即可直接弹出提问框（自动打包原文+问题到剪贴板）</span>
+      <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
+    </div>
+    <!-- 平板与屏幕护眼阅读调节栏（打印 PDF 时自动隐藏，设置全局永久记忆） -->
+    <div class="agy-reader-bar no-print">
+      <span style="color:#fbbf24;font-weight:700;">👓 平板阅读调节：</span>
+      <button class="agy-r-btn" onclick="agyStepFont(-1.5)" title="减小字号">A-</button>
+      <span id="agy-font-label" style="color:#38bdf8;font-weight:700;min-width:44px;text-align:center;">19px</span>
+      <button class="agy-r-btn" onclick="agyStepFont(1.5)" title="放大字号">A+</button>
+      <button class="agy-r-btn" data-fsize="17" onclick="agySetFont(17)">标准</button>
+      <button class="agy-r-btn" data-fsize="19" onclick="agySetFont(19)">大字</button>
+      <button class="agy-r-btn" data-fsize="21" onclick="agySetFont(21)">特大</button>
+      <button class="agy-r-btn" data-fsize="23" onclick="agySetFont(23)">超大</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" id="agy-btn-layout" onclick="agyToggleLayout()" title="切换通栏满宽大字或左右双栏旁批">📐 版式：通栏满宽</button>
+      <span style="color:#475569;margin:0 2px;">|</span>
+      <button class="agy-r-btn" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+      <button class="agy-r-btn" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸护眼</button>
+      <button class="agy-r-btn" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
     </div>
   </div>
   <div class="report-content">
@@ -642,7 +927,7 @@
 <h3 id="_3">二、 核心产品、临床硬证据与同行横向比拼（核心支柱之一）</h3>
 <p>研究创新药企，绝不能听企业公关稿喊“1类新药、填补空白”，必须把它的临床终点数据、不良反应黑框门槛、给药体验和经济账直接拉到国内外最强对手面前过筛子。特宝手里的牌非常清晰：<strong>“派格宾”是决定生死的唯一硬核王牌，“益佩生”是有力争上游潜力的次主力王牌，“珮金”是差异化突围的战术品种，而“特尔立/特尔津/特尔康”三款短效老药则是无需多费笔墨的边缘存量。</strong></p>
 <p>我们先通过一张横向硬核比拼表，把三大核心产品与国内外直接对手放在同一把尺子下对齐：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">维度 / 品种</th>
@@ -711,7 +996,7 @@
 <td style="text-align: left;">金赛增同批降价进医保（9mg约900元级），年药费同样降至<strong>3万元区间</strong>；隆培暂仍为高价自费</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>穿透这张表，我们把三个产品的临床成色和商业真相彻底聊透：</p>
 <div class="annotated-row"><div class="main-col"><h4 id="1-vs">1. 派格宾 vs 小核酸新贵：跨试验对比的“基线陷阱”与真实的处方博弈</h4><p>现在医药圈最热的话题，就是GSK的Bepirovirsen在2026年10月获FDA批准（《新英格兰医学杂志》发表B-Well III期数据）以及浩博医药AHB-137亮眼的II期数据，会不会让长效干扰素变成“上一代淘汰品”？<strong>这里必须严守临床证据纪律，戳破两个常见的跨试验误读：</strong></p><ul>
 <li>
@@ -793,7 +1078,7 @@
 
 
 <h4 id="3_1">3. 近五年一期现金流硬账本与合并报表穿透（单位：亿元）</h4>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">会计期间</th>
@@ -862,7 +1147,7 @@
 <td style="text-align: center;"><strong>+0.90</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>穿透这张现金流硬账本，三个关键财务真相一目了然</strong>：</p><ol>
 <li>
 <p><strong>为什么五年累计归母净利润28.82亿元，经营现金流净额（22.70亿元）却少了6.12亿元？</strong> 既没有虚增利润，也没有体外漏水，差额几乎严丝合缝沉淀在了随着营收翻三倍而同步膨胀的<strong>公立医院渠道应收账款</strong>里（从2021年初的2亿多元一路涨至2025年末的10.69亿元、2026年三季末的11.51亿元）。只要派格宾和益佩生还在高速进院放量，医药商业公司3—4个月的正常账期就会持续吃掉一部分营运资金，但一级商业龙头坏账率极低，2025年回款发力时单年OCF便猛增69.37%至7.29亿元、单年自由现金流飙至4.78亿元。</p>
@@ -1007,7 +1292,7 @@
 <h3 id="1-4877">1. 算清单位经济账：单位投资是省是贵？4,877万元新增折旧需要多少营收和稼动率打平？</h3>
 <h4 id="1">（1）横向比拼“单位产能投资强度”：比传统短效水针显贵，但在同代际长效生物药里极其精打细算</h4>
 <p>出于商业保密原因，特宝在公开版《特宝转债募集说明书》及审核问询函回复中未直接列出新产线达产后的单一“万支”绝对值，但完整披露了总投资额（4.21亿元）、首年测算基准单价（<strong>800元/支</strong>，并预设逐年约5%的降价缓冲）、10年计算期<strong>税后内部收益率（26.94%）</strong>及折旧参数。拉出国内三家同行的真实扩产账本横向对表，特宝这套方案的“贵”与“省”一目了然：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">对比企业与扩产项目</th>
@@ -1044,7 +1329,7 @@
 <td style="text-align: left;"><strong>单支产能投资仅3.6—7.5元/支</strong>；无高分子PEG共价修饰与复杂多聚体纯化损耗，硬件门槛与单支价值不在同一维度</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>工程对表结论——非常实在的“老厂腾笼换鸟省钱法”</strong>：
 * 如果外行拿安科生物“1.5亿元扩2000万支短效针”来比，特宝花4.21亿元扩长效生长激素看似“偏贵”——但短效针患者一年要打365针，长效针一年只打52针（1支顶7支），且Y型PEG长效工艺多出了一整套极吃收率的<strong>“高分子定点共价偶联反应 + 大体积层析柱精细切除非修饰蛋白与多聚杂质 + 零防腐剂A级无菌预充次抛灌装”</strong>昂贵硬件，根本不能按原始支数简单除。
 * 真正同代际对标维昇药业在苏州砸6亿元绿地建厂（投6亿产6亿），特宝直接在海沧翁角路老厂区现成建筑里做适应性洁净装修，<strong>把原本要花在桩基土建和市政配套上的1.5亿—2亿元全省了下来，全部转化成了核心工艺设备</strong>，投入产出效率高出一大截。</p>
@@ -1080,7 +1365,7 @@
 <hr/>
 <h3 id="2_2">2. 审视消化能力：是“雪中送炭解断货之急”，还是可能“投产即过剩”？</h3>
 <p>直接掀开特宝生物在可转债发行文件中披露的<strong>2024—2025年三大产线真实产能底牌</strong>，答案没有任何模糊地带——<strong>近两年绝对是“火烧眉毛式的雪中送炭”，存量产线已经快被医保放量撑爆了</strong>：</p>
-<table class="wide-table">
+<div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">业务产线板块（折算标准）</th>
@@ -1125,7 +1410,7 @@
 <td style="text-align: left;"><strong>起步过渡产线极袖珍</strong>，根本接不住医保爆发洪峰</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>算一笔最紧迫的订单消化账：</p><ul>
 <li><strong>短期（2026—2028年）存在实打实的“断供瓶颈”</strong>：益佩生2025年5月才获批，起步产线全年核定产能只有区区 <strong>49.56万支</strong>，仅靠下半年自费市场卖了2.56亿元，当年稼动率就已经顶到了 <strong>81.58%</strong>！而2026年1月1日国家医保落地后，<strong>2026年三季度益佩生单季销量同比暴增超260%</strong>。一位生长激素缺乏症（GHD）儿童每周1针、一年刚需消耗52支——也就是说，<strong>全国只要有9,500名患儿稳定用上益佩生，这49.56万支老产能就彻底清零见底了</strong>（对应医保后出厂产值天花板死死卡在3.5亿元左右）！连老大哥派格宾和血液线都在91%—108%的高负荷运转，根本腾不出富余车间。因此4.21亿元新产线完全是为了救医保放量的急。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>派格宾车间107.7%超负荷连轴转，益佩生老产线满打满算只够全国9,500个孩子打一年，而三季度销量一下暴增了260%！这哪是什么“盲目扩产过剩”，这分明是饭店门口排起了长龙，后厨只有一口小铁锅的甜蜜烦恼。</p></div></div></div></div>
@@ -1168,7 +1453,7 @@
 <hr/>
 <h3 id="1_1">1. 商业化刻度定位：连“小批量试产”都还谈不上，全处在烧钱验证的早期实验室/临床爬坡段</h3>
 <p>用硬科技制造的标尺来对齐医药研发进度，这三块新业务目前的真实刻度如下表所示——<strong>没有任何一项跑通了单点盈利模型，距离贡献1分钱商业化毛利至少还有3—7年</strong>：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">远期新业务 / 核心代号</th>
@@ -1203,7 +1488,7 @@
 <td style="text-align: left;">前期临床前及I期耗资数千万元级，重头烧钱在后期的II/III期数百家医院入组</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h3 id="2_3">2. 跨越鸿沟的三道关卡：想真正贡献核心毛利，各自卡着哪几道“鬼门关”？</h3>
 <p>这三条线要想从“吃钱吞金兽”变成“赚钱现金牛”，横在面前的绝不只是时间问题，而是极其冷酷的物理工艺、临床替代账与准入壁垒：</p>
@@ -1280,7 +1565,7 @@
 </li>
 </ul>
 <p>先看四家药企2026年三季报的硬核交叉对质总表：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">对质维度（2026年前三季度 / 三季末）</th>
@@ -1369,7 +1654,7 @@
 <td style="text-align: center;"><strong>5%</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>拿着这张五方取证表，我们针对三个核心问题逐一当庭对质：</p>
 <hr/>
 <h3 id="1_2">1. 景气度对质：行业到底是在升温还是压库？传唤上游“键凯科技”验明正身</h3>
@@ -1504,7 +1789,7 @@
 <hr/>
 <h3 id="3-101520">3. 极限压力测试：核心药价再跌10%—15%，或关键原料暴涨20%，底线会不会失血？</h3>
 <p>为了看清最恶劣环境下的生存底牌，我们设定一个极其残酷的<strong>“静态零弹性硬扛”前提</strong>——假设核心产品降价时，<strong>销量一盒都不因此增加（零以价换量补偿）</strong>，且公司不裁撤现有研发与核心学术团队，完全用存量利润硬吞冲击：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">极限抗压测试情景（锚定当前约36.5亿元不含税年化底座）</th>
@@ -1551,7 +1836,7 @@
 <td style="text-align: left;"><strong>依然可全额覆盖分红与防御投入</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>穿透这张压力测试表，有两个反直觉但极其重要的商业真相必须刻在脑子里：</p><ol>
 <li>
 <p><strong>对上游原材料涨价“近乎免疫”</strong>：很多习惯研究制造业的投资人一听“单一供应商Y型PEG原料涨价20%”就紧张。算一下账就释然了——特宝近37亿元营收对应的全年总营业成本只有约4.2亿元，其中包含Y型PEG衍生物（键凯科技供应）、进口预灌封注射器包材、发酵培养基和层析填料在内的<strong>全部直接材料采购总额加起来一年也就2.0亿元出头</strong>（单算Y型PEG原料采购额更只有数千万元至亿元级）。哪怕全世界所有上游供应商联合起来明天涨价20%，特宝一年总共也就多掏<strong>约4,000万元</strong>成本，税后利润只掉0.34亿元，连毛利率的皮毛（仅波动约1.1个百分点）都伤不到！</p>
@@ -1570,7 +1855,7 @@
 <hr/>
 <h3 id="1_3">1. 资产质量排雷：大头极度保守自虐，唯独应收坏账率“偏薄但无实质水分”</h3>
 <p>将特宝生物2025年报及2026年三季报附注中的核心会计估计，与长春高新、安科生物、凯因科技做逐项像素级比对：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">会计审计维度</th>
@@ -1605,7 +1890,7 @@
 <td style="text-align: left;"><strong>保守到近乎“自残”</strong>：仅BD首付款不挂无形资产这一项，就主动少报了约<strong>1.6亿元</strong>当期税前账面利润！</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="annotated-row"><div class="main-col"><p>把里面最值得推敲的两个细节挑出来深挖：</p><ul>
 <li>
 <p><strong>放大镜下的唯一瑕疵——为什么10.74亿元的1年以内应收账款只提了0.47%（506.82万元）坏账准备？</strong>
@@ -1678,7 +1963,7 @@
 <hr/>
 <h3 id="1-ev">1. 真实企业价值（EV）穿透核算：买下整家生意的净标价是多少？</h3>
 <p>算特宝生物2026年三季报的真实EV，必须格外小心一个<strong>90%散户都会踩的“可转债专户现金双算陷阱”</strong>。我们先按2026年9月30日合并资产负债表把全部家底和债务逐项清点干净：</p>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">EV 核算科目（截至2026年三季报 + 11月上旬市值）</th>
@@ -1718,7 +2003,7 @@
 <td style="text-align: left;"><code>187.00 + 23.29 - 18.71 ≈ 191.6亿元</code>（净有息负债仅约+4.58亿元，近乎零净负债）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>【关键防双算拆解】</strong>：
 看清上面那18.71亿元超额现金的来路——里面有近<strong>14.5亿—15亿元</strong>其实是2026年8月刚借进来的“特宝转债”募集专户资金！因此买这门生意必须分开看两本EV账：</p>
 <ul>
@@ -1885,7 +2170,7 @@
 <p><strong>我们的赔率裁决</strong>：当前的钟摆已经摆过了中轴线，进入了“温和悲观、挤干泡沫”的左侧偏合理区域。在<strong>180亿—190亿元市值（约45—46元）</strong>建立基础底仓，你承担的是有限的估值波动风险，白拿的是整套慢乙肝二代管线与儿科ISS扩圈的免费期权；而一旦2026年报表面数据或小核酸舆论把市值错杀到<strong>145亿—160亿元（15—17倍常态盈余，内生回报率破6%）</strong>，那就是赔率极度不对称的黄金重锤区！</p>
 <hr/>
 <h3 id="_11">📋 五、 四位投资大师闭门投票与终极裁决总表</h3>
-<table>
+<div class="table-scroll-wrap"><table>
 <thead>
 <tr>
 <th style="text-align: left;">投资大师</th>
@@ -1925,7 +2210,7 @@
 <td style="text-align: left;"><strong>【分档建仓：180—190亿底仓 / 145—160亿重锤】</strong><br/>下行底线极厚、上行期权免费，具备典型的风险收益不对称优势</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
@@ -1951,13 +2236,26 @@
 <p>今天一百八十多亿市值（四十五六元），哪怕药价再降一成半、原料涨两成，一年仍净赚五亿真金白银；光算派格宾和益佩生医保内可见放量就已完全覆盖当前企业价值，三大远期期权全部零元白送！趁散户被三季报吓跑，现价即可分批建底仓；若市值被错杀到一百四十五亿至一百六十亿元就是闭眼重锤的黄金坑。</p>
   </div>
 
-  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏） -->
+  <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
   <div id="agy-toc-sidebar" class="no-print collapsed" title="点击展开/收起章节目录">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
       <strong id="agy-toc-title-text" style="color:#38bdf8;font-size:12px;cursor:pointer;" onclick="agyToggleToc()">🧭 章节电梯导航</strong>
       <div style="display:flex;gap:5px;align-items:center;width:100%;justify-content:flex-end;">
         <a id="agy-toc-book-btn" href="./index.html" style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 7px;font-size:11px;color:#cbd5e1;text-decoration:none;font-weight:bold;" title="返回投研总书架">📚 书架</a>
         <span id="agy-toc-toggle-btn" onclick="agyToggleToc()" style="background:#1e293b;border:1px solid #475569;border-radius:5px;padding:3px 7px;font-size:11px;color:#38bdf8;font-weight:bold;cursor:pointer;">目录</span>
+      </div>
+    </div>
+    <div id="agy-toc-reader-box" style="margin-top:8px;padding:7px 8px;background:#1e293b;border:1px solid #334155;border-radius:7px;display:flex;flex-direction:column;gap:6px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(-1.5)">A-</button>
+        <span id="agy-toc-font-label" style="color:#38bdf8;font-weight:700;font-size:12px;">19px</span>
+        <button class="agy-r-btn" style="padding:3px 8px;font-size:12px;" onclick="agyStepFont(1.5)">A+</button>
+        <button class="agy-r-btn" id="agy-toc-btn-layout" style="padding:3px 7px;font-size:11.5px;flex:1;" onclick="agyToggleLayout()">📐 通栏</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:4px;">
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="day" onclick="agySetTheme('day')">☀️ 纯白</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="sepia" onclick="agySetTheme('sepia')">📜 暖纸</button>
+        <button class="agy-r-btn" style="flex:1;padding:3px 4px;font-size:11.5px;" data-theme="dark" onclick="agySetTheme('dark')">🌙 夜间</button>
       </div>
     </div>
     <div id="agy-toc-list"></div>
@@ -2127,7 +2425,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《特宝生物_全模块深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/特宝生物_全模块深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《特宝生物 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/特宝生物 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2185,6 +2483,97 @@
       };
       // 页面加载或刷新时自动恢复之前已保存的划词问题
       renderBasket();
+
+      // 平板/屏幕护眼阅读外观设置（字号缩放、单/双栏通栏切换、护眼底色，全局跨报告永久记忆）
+      var prefKey = 'agy_reader_prefs_v1';
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 1180);
+      var prefs = {
+        fontSize: isTouchDevice ? 19.5 : 18.5,
+        layout: isTouchDevice ? 'single' : 'dual',
+        theme: 'day'
+      };
+      try {
+        var savedPrefs = localStorage.getItem(prefKey);
+        if (savedPrefs) {
+          var parsed = JSON.parse(savedPrefs);
+          if (parsed && typeof parsed === 'object') {
+            if (parsed.fontSize) prefs.fontSize = Number(parsed.fontSize);
+            if (parsed.layout) prefs.layout = parsed.layout;
+            if (parsed.theme) prefs.theme = parsed.theme;
+          }
+        }
+      } catch(e) {}
+
+      function savePrefs() {
+        try {
+          localStorage.setItem(prefKey, JSON.stringify(prefs));
+        } catch(e) {}
+      }
+
+      function applyPrefs() {
+        var fz = Math.max(14, Math.min(28, Number(prefs.fontSize) || 19));
+        prefs.fontSize = fz;
+        document.documentElement.style.setProperty('--agy-font-size', fz + 'px');
+        var lbl1 = document.getElementById('agy-font-label');
+        var lbl2 = document.getElementById('agy-toc-font-label');
+        var fzText = (fz % 1 === 0 ? fz : fz.toFixed(1)) + 'px';
+        if (lbl1) lbl1.textContent = fzText;
+        if (lbl2) lbl2.textContent = fzText;
+
+        document.querySelectorAll('.agy-r-btn[data-fsize]').forEach(function(b){
+          if (Math.abs(Number(b.getAttribute('data-fsize')) - fz) < 0.6) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        if (prefs.layout === 'single') {
+          document.body.classList.add('agy-layout-single');
+        } else {
+          document.body.classList.remove('agy-layout-single');
+        }
+        var lBtn1 = document.getElementById('agy-btn-layout');
+        var lBtn2 = document.getElementById('agy-toc-btn-layout');
+        if (lBtn1) lBtn1.textContent = (prefs.layout === 'single') ? '📐 版式：通栏满宽' : '📰 版式：左右双栏';
+        if (lBtn2) lBtn2.textContent = (prefs.layout === 'single') ? '📐 通栏' : '📰 双栏';
+
+        document.body.classList.remove('agy-theme-sepia', 'agy-theme-dark');
+        if (prefs.theme === 'sepia') document.body.classList.add('agy-theme-sepia');
+        if (prefs.theme === 'dark') document.body.classList.add('agy-theme-dark');
+        document.querySelectorAll('.agy-r-btn[data-theme]').forEach(function(b){
+          if (b.getAttribute('data-theme') === prefs.theme) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      window.agySetFont = function(sz) {
+        prefs.fontSize = Number(sz);
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyStepFont = function(delta) {
+        prefs.fontSize = Math.max(14, Math.min(28, (Number(prefs.fontSize) || 19) + delta));
+        savePrefs();
+        applyPrefs();
+      };
+      window.agyToggleLayout = function() {
+        prefs.layout = (prefs.layout === 'single') ? 'dual' : 'single';
+        savePrefs();
+        applyPrefs();
+        showToast(prefs.layout === 'single' ? '📐 已切换为「通栏满宽大字」模式（横竖屏皆宜）' : '📰 已切换为「左右双栏旁批」模式');
+      };
+      window.agySetTheme = function(th) {
+        prefs.theme = th;
+        savePrefs();
+        applyPrefs();
+      };
+
+      applyPrefs();
+
       window.agyToggleToc = function() {
         var sb = document.getElementById('agy-toc-sidebar');
         sb.classList.remove('scrolling-hide');
