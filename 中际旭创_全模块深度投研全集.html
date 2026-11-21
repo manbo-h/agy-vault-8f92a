@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>中际旭创 深度投研全集</title>
+<title>中际旭创(300308.SZ) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">中际旭创 深度投研全集</div>
+    <div class="report-title">中际旭创(300308.SZ) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-21</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -892,7 +1350,10 @@
     </div>
   </div>
   <div class="report-content">
-    <h1 id="300308sz-03308hk">中际旭创（300308.SZ / 03308.HK）长期商业价值深度投研全集</h1>
+    <h1 id="300308sz-03308hk-2026-11-21">中际旭创（300308.SZ / 03308.HK）深度投研报告 · 2026-11-21 二元对峙重校版</h1>
+<blockquote>
+<p><strong>⚔️ 【2026-11-21 零信任红蓝二元极限对峙终审声明】</strong>：本全集已完成「零信任信息隔离独立盲审做空报告 vs 原投研报告」的一手《2025年报》《2026年三季报》及港股招股书/回购派息公告交叉核验与 Python 精确验算（行情基准 <code>2026-11-20</code> 收盘：A股 <code>393.20元</code> / H股 <code>490.00港元</code>，真实汇率 <code>1 HKD = 0.855 CNY</code>）。本次终审<strong>彻底纠偏原稿五项核心硬伤</strong>——① 补计三季报暴增 <code>+462.44%</code> 至 <strong><code>50.63亿元</code></strong> 的长期应付款（TeraHop 等子公司增资刚性回购义务明股实债）与 <code>1.64亿</code> 租赁负债，并扣减 <code>10/12</code> 已派中期红利 <code>14.07亿</code>、纠偏 H 股含绿鞋净募资实为 <code>608.30亿港元</code>（80% 专款专用绑定研发/扩产/并购），<strong>将可扣现金由原稿 <code>460.32亿</code> 分层折价严砍至 <code>155.25亿</code>，核定严苛归母 True EV 为 A股 <code>4,532.81亿</code> / H股 <code>4,834.67亿</code>（同价较旧口径硬增 <code>+317.39亿</code>）</strong>；② 戳穿 <code>9M26</code> 账面净利 <code>222.38亿</code> 背后的负自由现金流（<code>OCF 80.08亿 - CapEx 91.61亿 = FCF -11.53亿</code>）与 <code>411.87亿</code> 存货/应收占款双险；③ 剥离 <code>46.6%</code> 周期峰顶毛利锚定，<strong>硬砍跨周期归母常态 OE <code>-32.0%</code> 至 <code>112.0亿元/年</code>（达产 <code>-38.0%</code> 至 <code>136.0亿元/年</code>）</strong>，现价严苛 EV/OE 高达 <strong><code>40.5x</code></strong>（常态回报仅 <code>2.47%</code>、TTM 纯现金股息 <code>2.20元/股</code> 仅 <code>0.56%</code>）；④ 实锤 9 月 <code>883.94元</code> 均价 <code>49.97亿</code> 高位回购两月蒸发 <code>27.74亿</code>（<code>-55.5%</code>）、Q3 金融投资亏 <code>-5.89亿</code> 与 <code>13.87亿</code> 汇兑失血，撤销资本配置高分赞歌；⑤ <strong>彻底废除原稿 <code>358—392元</code> 致命接飞刀买点，重校 A 股两档严苛买点至 <code>155.00—195.00元</code>（重锤 <code>≤155.00元</code>），并对畸高溢价 <code>+6.55%</code> 且 70 天后面临 <code>2027-01-29</code> 33家基石 <code>270.41亿港元</code> 解禁核弹的 H 股 <code>03308.HK</code> 实行一票否决（<code>veto_h: true</code>，严禁买入）</strong>！详见模块 D、F、G、H 终审重校专章。</p>
+</blockquote>
 <hr/>
 <h2 id="_1">阶段一：全景基本面八步底座</h2>
 <h3 id="_2">【开篇破题：两段话直击生意灵魂与当期核心张力】</h3>
@@ -941,21 +1402,25 @@
 <p>在高速光通信赛道，决定生死的核心战场只有三个：<strong>800G/1.6T可插拔高速光模块</strong>、<strong>硅光（Silicon Photonics）自研集成度</strong>、以及 <strong>LPO/AEC/NPO等低功耗新型互连方案</strong>。我们直接把中际旭创拉到全球最核心的三家对手——<strong>新易盛（300502.SZ，全球第二）</strong>、<strong>Coherent（COHR.US，美国老牌垂直一体化巨头）</strong>、<strong>天孚通信（300394.SZ，上游无源/有源光引擎龙头）</strong> 面前做一场刺刀见红的横向比拼。</p>
 <h4 id="1_1">1. 核心技术路线与工程硬实力拆解</h4>
 <ul>
-<li><strong>传统EML方案 vs 自研硅光（SiPh）方案（胜负手所在）</strong>：</li>
-<li>在单通道100G/200G（对应800G/1.6T光模块）世代，传统方案采用磷化铟（InP）电吸收调制激光器（EML），全球产能高度集中在Lumentum、Coherent和三菱电机手中，扩产周期长达18—24个月，2025—2026年全行业面临严重的EML芯片荒。</li>
 <li>
-<p>中际旭创早在十年前便组建底层芯片团队自研CMOS工艺硅光芯片。硅光方案将调制器、波导、合分波器全部集成在标准硅晶圆（由Tower Semiconductor、台积电等代工）上，外置仅需一颗低成本、供货充沛的CW（连续波）大功率激光器光源。<strong>2026年中际旭创在800G与1.6T出货中，硅光方案渗透率已突破60%—70%</strong>。这不仅让它在全球EML芯片断供危机中依然畅通无阻地交付，更直接将公司综合毛利率从34.65%推升至46.39%！</p>
+<p><strong>传统EML方案 vs 自研硅光（SiPh）方案（胜负手所在）</strong>：</p>
+<ul>
+<li>在单通道100G/200G（对应800G/1.6T光模块）世代，传统方案采用磷化铟（InP）电吸收调制激光器（EML），全球产能高度集中在Lumentum、Coherent和三菱电机手中，扩产周期长达18—24个月，2025—2026年全行业面临严重的EML芯片荒。</li>
+<li>中际旭创早在十年前便组建底层芯片团队自研CMOS工艺硅光芯片。硅光方案将调制器、波导、合分波器全部集成在标准硅晶圆（由Tower Semiconductor、台积电等代工）上，外置仅需一颗低成本、供货充沛的CW（连续波）大功率激光器光源。<strong>2026年中际旭创在800G与1.6T出货中，硅光方案渗透率已突破60%—70%</strong>。这不仅让它在全球EML芯片断供危机中依然畅通无阻地交付，更直接将公司综合毛利率从34.65%推升至46.39%！</li>
+</ul>
 </li>
 <li>
 <p><strong>1.6T世代统治力（单通道200G）</strong>：</p>
-</li>
-<li>
-<p>1.6T光模块（8通道×200G）对信号完整性、散热及COB（板上芯片封装）对准精度要求呈指数级上升（对准公差需控制在亚微米级）。中际旭创深度参与英伟达GB200/GB300/Rubin及谷歌TPU v6/v7早期联合定义，<strong>在全球1.6T首发量产市场占据50%—70%的绝对统治份额</strong>，量产良率稳定在90%以上，领先欧美同行（如Coherent）至少2个季度。</p>
+<ul>
+<li>1.6T光模块（8通道×200G）对信号完整性、散热及COB（板上芯片封装）对准精度要求呈指数级上升（对准公差需控制在亚微米级）。中际旭创深度参与英伟达GB200/GB300/Rubin及谷歌TPU v6/v7早期联合定义，<strong>在全球1.6T首发量产市场占据50%—70%的绝对统治份额</strong>，量产良率稳定在90%以上，领先欧美同行（如Coherent）至少2个季度。</li>
+</ul>
 </li>
 <li>
 <p><strong>LPO（线性驱动可插拔）与相干光模块</strong>：</p>
-</li>
+<ul>
 <li>LPO直接砍掉模块内功耗占40%、成本占25%的DSP芯片，依靠交换机端SerDes直接驱动，功耗降低约50%、时延降低30%以上，但存在互操作性差、传输距离短的物理局限。中际旭创在800G/1.6T LPO及半重定时（LRO/TRO）方案上已完成北美头部客户批量导入，同时在数据中心互联（DCI）相干光模块（400G/800G ZR/ZR+）上打破了Acacia（思科）的长期垄断。</li>
+</ul>
+</li>
 </ul>
 <h4 id="2">2. 全球高速光通信四大核心玩家硬核比拼总表</h4>
 <div class="table-scroll-wrap"><table>
@@ -1316,16 +1781,18 @@
 <p>剥离一切公文套话，站在2026年11月的时间节点往后看，真正有资格让中际旭创伤筋动骨的结构性暗礁与周期博弈只有两件事：</p>
 <h4 id="aicapex238145">暗礁一：AI算力资本开支（CapEx）周期见顶回落与“238亿存货+145亿固定资产”的高位反噬博弈（危与机一体两面）</h4>
 <ul>
-<li><strong>客观事实与隐患边界（“危”在哪）</strong>：
-  光模块本质上是下游北美四大云巨头（Google、Meta、Microsoft、Amazon）与NVIDIA资本开支的二阶导数。2026年前三季度中际旭创年化营收接近千亿、归母净利率高达32%，这是建立在下游不计成本抢装算力集群、1.6T供不应求享受超高首发溢价的极端景气之上的。但截至2026年9月末，公司账面<strong>存货已高达238.78亿元</strong>，<strong>固定资产与在建工程合计达179.50亿元（124.55亿+54.95亿）</strong>。一旦未来1—2年下游AI大模型商业化变现不及预期，导致北美云厂商CapEx增速从+40%以上骤降至持平甚至负增长：</li>
-</ul>
+<li>
+<p><strong>客观事实与隐患边界（“危”在哪）</strong>：
+  光模块本质上是下游北美四大云巨头（Google、Meta、Microsoft、Amazon）与NVIDIA资本开支的二阶导数。2026年前三季度中际旭创年化营收接近千亿、归母净利率高达32%，这是建立在下游不计成本抢装算力集群、1.6T供不应求享受超高首发溢价的极端景气之上的。但截至2026年9月末，公司账面<strong>存货已高达238.78亿元</strong>，<strong>固定资产与在建工程合计达179.50亿元（124.55亿+54.95亿）</strong>。一旦未来1—2年下游AI大模型商业化变现不及预期，导致北美云厂商CapEx增速从+40%以上骤降至持平甚至负增长：</p>
 <ol>
 <li>高速测试与耦合设备每年将产生数十亿元的刚性折旧，稼动率一旦跌破70%，毛利率将从46%的景气巅峰向30%—35%的常态中枢回落；</li>
 <li>238.78亿元存货中若包含大量针对特定代际（如800G或早期1.6T分立方案）的定制化光芯片与物料，在产品代际快速切换或客户砍单延期的极端情景下，将面临大额存货跌价准备计提的直接冲击。</li>
 </ol>
-<ul>
-<li><strong>产业寒冬的双向博弈（“机”在哪）</strong>：
-  如果算力周期真的迎来阶段性降温，谁先死？目前二三线光模块厂为了抢单，普遍在高价外购EML芯片、依靠有息负债扩产，毛利率比中际旭创低10—15个百分点。而中际旭创手握 <strong>535.32亿元现金（扣除16.92亿有息负债后净现金超518亿元）</strong>，且拥有成本低20%的自研硅光芯片方案。一旦行业打响价格战出清，中际旭创庞大的净现金血槽足以支撑它在微利状态下连续熬死所有高成本对手，并在下一代3.2T复苏时垄断更高份额。</li>
+</li>
+<li>
+<p><strong>产业寒冬的双向博弈（“机”在哪）</strong>：
+  如果算力周期真的迎来阶段性降温，谁先死？目前二三线光模块厂为了抢单，普遍在高价外购EML芯片、依靠有息负债扩产，毛利率比中际旭创低10—15个百分点。而中际旭创手握 <strong>535.32亿元现金（扣除16.92亿有息负债后净现金超518亿元）</strong>，且拥有成本低20%的自研硅光芯片方案。一旦行业打响价格战出清，中际旭创庞大的净现金血槽足以支撑它在微利状态下连续熬死所有高成本对手，并在下一代3.2T复苏时垄断更高份额。</p>
+</li>
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="cpo">暗礁二：英伟达推进CPO（共封装光学）垂直整合 + 北美地缘政治穿透执法的双重挤压</h4><ul>
 <li>
@@ -1483,9 +1950,11 @@
 <h4 id="2-20272028">2. 审视消化能力：“雪中送炭解瓶颈”还是2027—2028年“投产即过剩”？</h4>
 <p>结合当前存量产能的极限负荷状态，以及下游北美四大云巨头（Google、Meta、Amazon、Microsoft）与NVIDIA算力集群的真实架构演进，我们对这批新增产能的消化前景必须按时间轴切分为两个截然不同的阶段来冷峻审视：</p>
 <ul>
-<li><strong>第一阶段（2026年Q4至2027年全年）：确定性的“雪中送炭解瓶颈”，谁有合规产能谁印钞</strong></li>
 <li>
-<p><strong>存量产线已处于极限超负荷状态</strong>：2025年公司全年销售光模块2,109万只（同比+44.55%），而2026年前三季度营收飙升至695.47亿元（+178.13%），其中2026Q3单季营收高达277.69亿元（年化营收已突破1,100亿元大关）。目前无论是苏州、铜陵基地，还是泰国TeraHop一期、二期工厂，800G与1.6T核心产线均处于“三班倒、稼动率超100%”的满负荷连轴转状态，产能缺口是制约当期交付的唯一物理瓶颈。</p>
+<p><strong>第一阶段（2026年Q4至2027年全年）：确定性的“雪中送炭解瓶颈”，谁有合规产能谁印钞</strong></p>
+<ul>
+<li><strong>存量产线已处于极限超负荷状态</strong>：2025年公司全年销售光模块2,109万只（同比+44.55%），而2026年前三季度营收飙升至695.47亿元（+178.13%），其中2026Q3单季营收高达277.69亿元（年化营收已突破1,100亿元大关）。目前无论是苏州、铜陵基地，还是泰国TeraHop一期、二期工厂，800G与1.6T核心产线均处于“三班倒、稼动率超100%”的满负荷连轴转状态，产能缺口是制约当期交付的唯一物理瓶颈。</li>
+</ul>
 </li>
 <li>
 <p><strong>下游AI集群架构升级带来“配比乘数效应”</strong>：在NVIDIA从GB200向GB300及下一代Rubin架构（NVL72 / NVL144机柜）演进的过程中，单台计算节点向Scale-out后端网络及Scale-across跨机房网络溢出的带宽需求翻倍，GPU与1.6T高速光模块的配比正从早期的 <code>1 : 2.5</code> 加速向 <code>1 : 4</code> 乃至 <code>1 : 6</code> 跃升；与此同时，Google第八代/第九代TPU集群（依托OCS全光交换架构）与Meta的Arista以太网超大规模集群正全面从800G向1.6T切换。因此，54.95亿元在建工程在2026年底至2027年上半年的陆续转固，是典型的“订单等产线”，落地即被Google、NVIDIA、Meta、AWS四大核心客户包圆。</p>
@@ -1607,13 +2076,14 @@
 <li>
 <p><strong>第三关（商业模式与话语权生死劫）：NVIDIA + 台积电联合控盘，光模块龙头会否沦为“赚辛苦费的组装配角”？</strong>
    这是所有投资中际旭创的人最必须正视的<strong>远期商业模式证伪核心</strong>：</p>
-</li>
-</ol><ul>
+<ul>
 <li>在<strong>可插拔时代（800G / 1.6T / 3.2T）</strong>，产业分工是清晰的：博通/英伟达卖交换机芯片，中际旭创直接向Google/Meta/亚马逊定义并交付完整的光模块整机。中际旭创自己设计硅光芯片、自己采购DSP和CW光源、自己封装测试，掌握着完整的BOM定价权与46.39%的超高毛利率；</li>
 <li>一旦未来真正进入<strong>CPO（光电共封装）统治时代</strong>，物理边界的消失将直接导致商业边界的坍塌！因为光引擎必须和交换ASIC芯片封装在同一个CoWoS基板上，谁来干这件事？答案是<strong>台积电（TSMC，依托其COUPE硅光集成平台与CoWoS先进封装）</strong>和<strong>芯片霸主（NVIDIA、Broadcom）</strong>。</li>
 <li>在CPO的价值链闭环里，NVIDIA或博通直接委托台积电将交换芯片（ASIC）与硅光引擎（PIC/EIC）合封为一体并直接卖给云厂商；而在无源光组件端，天孚通信（300394.SZ）或Fabrinet可以直接向台积电/英伟达供应光纤阵列（FAU）与透镜组件。<strong>试问：在这个新闭环里，原本赚取整机模块丰厚利润的中际旭创在哪里？</strong></li>
 <li>如果中际旭创不能在CPO生态中死死咬住<strong>“自研高良率硅光引擎芯片（PIC）供应商”</strong>或<strong>“高附加值外置光源模块（ELSFP）与NPO子系统总成商”</strong>的核心生态位，而是被NVIDIA与台积电排除在核心基板封装之外，那么中际旭创在CPO时代的单机价值量与毛利率将遭遇严峻的“去品牌化与组装配角化”挤压。</li>
-</ul><h5 id="_11">（二）汽车光电子与车载传感赛道（重庆君歌电子）跨越鸿沟的三道关卡</h5><ol>
+</ul>
+</li>
+</ol><h5 id="_11">（二）汽车光电子与车载传感赛道（重庆君歌电子）跨越鸿沟的三道关卡</h5><ol>
 <li>
 <p><strong>第一关：国内整车厂（OEM）惨烈的“年降绞肉机”与长账期现金流黑洞</strong>
    中际旭创于2023年通过全资子公司江苏智驰网联出资约3亿元人民币（股权转让3,960万元 + 增资26,040万元）收购<strong>重庆君歌电子科技有限公司62.45%股权</strong>（账面形成商誉3,848.73万元，截至2025年末未计提减值）。君歌电子的核心基本盘是汽车超声波雷达（累计出货过亿颗）、车载环视摄像头、毫米波雷达与车身控制器。
@@ -1630,7 +2100,6 @@
    从物理学上看，光纤确实具备抗电磁干扰（EMI）、重量减轻70%、带宽高达10Gbps—50Gbps以上的绝对优势；但从汽车工程经济账上看，目前主流L2+/L3级智能汽车的车载以太网与传感器传输速率（2.5Gbps—10Gbps）用低成本铜线完全够用，而车规级（AEC-Q102认证，要求在 <code>-40°C 至 +105°C</code> 极端温差与剧烈颠簸振动下连续工作15年零失效）的激光器、光电转换チップ及抗振光纤连接器成本极其高昂。在单车数据量尚未跨过50Gbps临界点之前，精打细算的主机厂采购总监绝不会为了“用不上的冗余带宽”每辆车多掏上千元成本。这意味着FTTV在2028—2030年L4级Robotaxi大规模普及前，只能停留在高端概念车试装与前瞻预研阶段。</p>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>一个在北美金矿里用大铲子每天铲回几千万美元现金的矿工，非要分心去中国汽车供应链的泥潭里跟几百家配件厂抢几分钱的倒车雷达生意，这在心理学上叫“盲目多元化的自大症”；好在这笔学费只花了三个亿，对现在的旭创来说，连九牛身上的一根毫毛都算不上。</p></div></div></div></div>
-
 
 
 
@@ -1671,14 +2140,18 @@
 </li>
 </ul><h5 id="2_6">（2）终局定性结论</h5><p>综合以上穿透式证伪拆解，我们对中际旭创的两大远期业务给出如下冷峻定性：</p><ol>
 <li>
-<p><strong>下一代光互连技术矩阵（3.2T硅光 / NPO / CPO / 相干DCI）——定性为【高价值演进门票 + 战略级防御技术备胎】</strong>：
-   - 其中，<strong>3.2T硅光可插拔、NPO/XPO近封装光学以及800G/1.6T ZR相干光模块</strong>，是顺应AI算力向柜内（Scale-up）与跨数据中心（Scale-across）延伸的<strong>“高胜率、高赔率真实增长曲线”</strong>，将在2027—2029年无缝接棒1.6T可插拔，继续充当公司的核心印钞机；
-   - 而纯正的 <strong>CPO（光电共封装）</strong>，对于中际旭创而言则是一张<strong>“不得不重金押注的防御性技术备胎”</strong>——对公司最有利的商业终局是可插拔与NPO架构把生命周期延续到3.2T甚至6.4T世代（让公司继续稳坐整机庄家位置）；但如果2028年后CPO真的在Scale-up机柜内强行普及，公司今天在CPO光引擎、自研硅光PIC与ELS外置光源上的提前卡位，就是确保自己不被台积电与英伟达踢出牌桌的保命底牌。</p>
+<p><strong>下一代光互连技术矩阵（3.2T硅光 / NPO / CPO / 相干DCI）——定性为【高价值演进门票 + 战略级防御技术备胎】</strong>：</p>
+<ul>
+<li>其中，<strong>3.2T硅光可插拔、NPO/XPO近封装光学以及800G/1.6T ZR相干光模块</strong>，是顺应AI算力向柜内（Scale-up）与跨数据中心（Scale-across）延伸的<strong>“高胜率、高赔率真实增长曲线”</strong>，将在2027—2029年无缝接棒1.6T可插拔，继续充当公司的核心印钞机；</li>
+<li>而纯正的 <strong>CPO（光电共封装）</strong>，对于中际旭创而言则是一张<strong>“不得不重金押注的防御性技术备胎”</strong>——对公司最有利的商业终局是可插拔与NPO架构把生命周期延续到3.2T甚至6.4T世代（让公司继续稳坐整机庄家位置）；但如果2028年后CPO真的在Scale-up机柜内强行普及，公司今天在CPO光引擎、自研硅光PIC与ELS外置光源上的提前卡位，就是确保自己不被台积电与英伟达踢出牌桌的保命底牌。</li>
+</ul>
 </li>
 <li>
-<p><strong>汽车光电子与车载传感业务（重庆君歌电子 + 智驰领驭）——定性为【平庸鸡肋资产（附带一张2030年后的FTTV极远期彩票）】</strong>：
-   - 站在2026年年化营收超千亿、前三季度归母净利润高达222.38亿元的巨人肩膀上审视，重庆君歌电子所代表的传统车载传感器业务（连同光组件全年营收不到8亿元、占比仅2%且利润微薄），在财务与商业模式上是一块彻头彻尾的<strong>“平庸鸡肋资产”</strong>。
-   - 投资者在进行公司价值评估时，<strong>应当将汽车光电子业务的当期估值权重直接归零（完全不予计入核心估值溢价）</strong>，仅将其视作管理层用3亿元零花钱买下的一个“车规级制造实验室与主机厂准入壳资源”——万一2030年以后L4级自动驾驶真的引爆了“光纤上车（FTTV）”的百亿级蓝海，这张廉价彩票或许能派上用场；但在那之前，它既不能雪中送炭，也无需为其锦上添花抱有不切实际的幻想。</p>
+<p><strong>汽车光电子与车载传感业务（重庆君歌电子 + 智驰领驭）——定性为【平庸鸡肋资产（附带一张2030年后的FTTV极远期彩票）】</strong>：</p>
+<ul>
+<li>站在2026年年化营收超千亿、前三季度归母净利润高达222.38亿元的巨人肩膀上审视，重庆君歌电子所代表的传统车载传感器业务（连同光组件全年营收不到8亿元、占比仅2%且利润微薄），在财务与商业模式上是一块彻头彻尾的<strong>“平庸鸡肋资产”</strong>。</li>
+<li>投资者在进行公司价值评估时，<strong>应当将汽车光电子业务的当期估值权重直接归零（完全不予计入核心估值溢价）</strong>，仅将其视作管理层用3亿元零花钱买下的一个“车规级制造实验室与主机厂准入壳资源”——万一2030年以后L4级自动驾驶真的引爆了“光纤上车（FTTV）”的百亿级蓝海，这张廉价彩票或许能派上用场；但在那之前，它既不能雪中送炭，也无需为其锦上添花抱有不切实际的幻想。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>CPO就像是一场你明明知道一旦开打、赌场规矩就会对庄家不利的牌局，但作为桌面上最大的赢家，你必须花钱买好防弹衣坐在桌上，因为只要你还坐在牌桌上，哪怕规矩变了你也能分走最大的一块肉；至于那家做汽车雷达的小子公司，就当是富豪在后院养的一盆普通盆景，别指望它能长成参天大树给你遮风挡雨。</p></div></div></div></div>
 
@@ -1832,8 +2305,10 @@
 <div class="annotated-row"><div class="main-col"><h4 id="_12">二、 景气度对质：百亿存货与千万合同负债的“冰火悖论”——是真需求锁料还是局部压库？</h4><p>审视上表，任何一个懂财务的审计师都会第一时间揪住两个看似极度违和的异常现象发出质问：
 第一，截至2026年9月30日，四大企业存货全线暴增——<strong>中际旭创存货从年初的126.81亿元飙升88.30%至238.78亿元，新易盛存货从72.34亿元暴涨140.70%至174.13亿元，天孚通信存货暴涨178.65%至12.74亿元，光迅科技存货暴增110.76%至121.10亿元</strong>，仅四家A股代表企业的合计存货就高达 <strong>546.75亿元</strong>！
 第二，与高达238.78亿元的天量存货相比，中际旭创账面上的<strong>合同负债（预收客户货款）居然只有区区0.1129亿元（1,128.81万元，甚至比2025年末的2,632.74万元还少了一半）</strong>！</p><p>这究竟是AI算力泡沫破裂前的“全行业恶性压库”，还是高端产能军备竞赛下的“战略锁料”？透过三方现金流与供应链底层机制的交叉印证，真相清晰浮现：</p><ol>
-<li><strong>为什么光模块霸主“合同负债仅千万级，存货却高达两百亿级”？——VMI（供应商管理库存）与Rolling Forecast（滚动排产预测）机制的底层铁律</strong>
-   - <strong>买方霸权下的零预付款惯例</strong>：中际旭创前五大客户高度集中于Google、Nvidia、Meta、AWS、Microsoft等北美万亿美元级云巨头（CSP）与AI算力霸主。在北美科技巨头的全球供应链标准合同中，头部合格供应商从不采取“先打预付款再排产”的落后贸易模式（只有中小散客或紧缺零组件才偶有预收款，这也是为何光迅科技、天孚通信对中小客户有一定合同负债，而纯服务顶级巨头的旭创合同负债仅1,128.81万元）。</li>
+<li><strong>为什么光模块霸主“合同负债仅千万级，存货却高达两百亿级”？——VMI（供应商管理库存）与Rolling Forecast（滚动排产预测）机制的底层铁律</strong><ul>
+<li><strong>买方霸权下的零预付款惯例</strong>：中际旭创前五大客户高度集中于Google、Nvidia、Meta、AWS、Microsoft等北美万亿美元级云巨头（CSP）与AI算力霸主。在北美科技巨头的全球供应链标准合同中，头部合格供应商从不采取“先打预付款再排产”的落后贸易模式（只有中小散客或紧缺零组件才偶有预收款，这也是为何光迅科技、天孚通信对中小客户有一定合同负债，而纯服务顶级巨头的旭创合同负债仅1,128.81万元）。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>Rolling Forecast（12—18个月滚动需求预测）+ 刚性锁料协议</strong>：北美大客户通常提前4—6个季度向中际旭创下达Rolling Forecast（滚动需求预测），并按季度转化为不可撤销的PO（采购订单）。由于上游核心物料——尤其是Lumentum、Coherent、Broadcom生产的200G EML激光器芯片、CW光源芯片以及3nm/5nm高速DSP电芯片——扩产周期长达12—18个月且全球产能极度紧缺，中际旭创必须提前2—3个季度拿着客户的Rolling Forecast向海外芯片原厂下达锁定产能的采购长单。</p>
@@ -1842,8 +2317,10 @@
 <p><strong>VMI（Vendor Managed Inventory，供应商管理库存）交货确认规则</strong>：北美CSP大厂普遍采用VMI仓管模式。中际旭创从泰国或苏州工厂生产出的800G/1.6T光模块，空运发往北美大客户指定的海外VMI保税监管仓后，在客户从VMI仓实际领用（Pull）并完成上机验收之前，物权仍归属中际旭创，在资产负债表上必须全额计入<strong>“存货—发出商品”与“存货—库存商品”</strong>！一旦客户领用，直接触发应收账款确认（账期通常60—90天），根本不经过“合同负债（预收账款）”科目！</p>
 </li>
 </ul><ol start="2">
-<li><strong>现金流与营收转化率的残酷对质：谁在高效周转，谁在吃力囤货？</strong>
-   - <strong>中际旭创的“真金白银快周转”</strong>：2026年前三季度，中际旭创“购买商品、接受劳务支付的现金”高达 <strong>495.90亿元</strong>（同比暴增187.29%），全力抢占全球200G EML与CW光芯片配额；但与此同时，其前三季度营业收入同比狂飙 <strong>178.13%至695.47亿元</strong>（其中Q3单季营收高达277.69亿元），存货较年初增幅（<strong>+88.30%</strong>）远低于同期营收增幅（<strong>+178.13%</strong>）！这说明中际旭创的238.78亿元存货根本不是卖不出去的积压品，而是支撑单季近300亿交付洪峰的“周转活水”，因此其前三季度在狂砸近500亿采购现金的同时，依然净赚回 <strong>80.08亿元</strong> 的经营现金流净额（OCF）！</li>
+<li><strong>现金流与营收转化率的残酷对质：谁在高效周转，谁在吃力囤货？</strong><ul>
+<li><strong>中际旭创的“真金白银快周转”</strong>：2026年前三季度，中际旭创“购买商品、接受劳务支付的现金”高达 <strong>495.90亿元</strong>（同比暴增187.29%），全力抢占全球200G EML与CW光芯片配额；但与此同时，其前三季度营业收入同比狂飙 <strong>178.13%至695.47亿元</strong>（其中Q3单季营收高达277.69亿元），存货较年初增幅（<strong>+88.30%</strong>）远低于同期营收增幅（<strong>+178.13%</strong>）！这说明中际旭创的238.78亿元存货根本不是卖不出去的积压品，而是支撑单季近300亿交付洪峰的“周转活水”，因此其前三季度在狂砸近500亿采购现金的同时，依然净赚回 <strong>80.08亿元</strong> 的经营现金流净额（OCF）！</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>同行备货的分化隐忧</strong>：反观同行，新易盛2026Q1-Q3存货较年初激增 <strong>140.70%至174.13亿元</strong>（购买商品支付现金272.68亿元，+164.07%），高于其同期营收增速（+92.97%），且Q3单季归母净利润环比Q2出现约19%的阶段性回落，导致其前三季度OCF同比大降68.42%至14.64亿元；而光迅科技存货翻倍至121.10亿元（+110.76%），营收增速却仅有36.94%，前三季度OCF更是直接失血至 <strong>-18.81亿元</strong>！交叉比对证明：全行业都在疯抢光芯片备料，但<strong>中际旭创凭借1.6T与硅光800G的绝对首发优势，实现了“备料即出货、出货即回款”的良性循环，而部分二线厂商已开始承受“高价抢料备货但下游提货节奏不及预期”的现金流紧绷压力</strong>。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>外行看存货只看绝对数字，看到238亿就吓得尿裤子；内行看存货跟营收和现金流的配速——中际旭创存货涨88%，营收涨178%，嘴里还嚼着80亿的正向经营现金流，这叫给印钞机装弹药；至于那些存货翻倍、营收只涨三成、经营现金流倒贴近19亿的公司，那才叫把真金白银冻进了冷库里！</p></div></div></div></div>
@@ -1856,8 +2333,10 @@
 
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2026565">三、 盈利质量对质：破解市场最大谜团——为何新易盛净利率曾长期领先，而中际旭创2026年毛利率暴力跃升5.65个百分点？</h4><p>在过去两年的资本市场争论中，一直存在一个令众多投资者困惑不已的财务谜题：<strong>为什么体量较小的新易盛，其表观毛利率与归母净利率长期比行业老大中际旭创高出3—5个百分点？而在2026年前三季度，中际旭创的综合毛利率又为何能从2025年前三季度的40.74%（2025全年42.04%）暴力跃升5.65个百分点至46.39%（Q3单季46.61%，首度反超新易盛Q3单季的46.27%）？</strong></p><p>我们将两家公司的利润表与成本结构放在解剖台上逐层剥离，答案藏在以下五个维度的结构性差异中：</p><ol>
-<li><strong>毛利率反超的核心引擎：1.6T首发垄断红利 + 自研硅光（SiPh）芯片替代外购EML</strong>
-   - <strong>2025年新易盛毛利率占优的原因（47.81% vs 旭创42.04%）</strong>：2025年，中际旭创作为全球800G主供，承担了北美大客户庞大基数下的成熟期阶梯降价（年化降幅约10%—15%），且当时传统的EML方案需高价外购Lumentum/Coherent的100G EML光芯片与Marvell的DSP芯片；而新易盛在2025年处于从400G向800G切换的低基数爆发期，叠加部分低功耗LPO（线性驱动可插拔光模块，省去高价DSP芯片）方案出货以及泰国工厂极致低人工成本红利，阶段性推高了表观毛利率。</li>
+<li><strong>毛利率反超的核心引擎：1.6T首发垄断红利 + 自研硅光（SiPh）芯片替代外购EML</strong><ul>
+<li><strong>2025年新易盛毛利率占优的原因（47.81% vs 旭创42.04%）</strong>：2025年，中际旭创作为全球800G主供，承担了北美大客户庞大基数下的成熟期阶梯降价（年化降幅约10%—15%），且当时传统的EML方案需高价外购Lumentum/Coherent的100G EML光芯片与Marvell的DSP芯片；而新易盛在2025年处于从400G向800G切换的低基数爆发期，叠加部分低功耗LPO（线性驱动可插拔光模块，省去高价DSP芯片）方案出货以及泰国工厂极致低人工成本红利，阶段性推高了表观毛利率。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>2026年中际旭创毛利率暴涨5.65pct（达46.39%，Q3单季46.61%反超新易盛46.27%）的两大杀手锏</strong>：</p>
@@ -1870,13 +2349,17 @@
 </li>
 </ul><ol start="2">
 <li>
-<p><strong>研发投入强度的战略分野：“重剑无锋的技术筑墙” vs “极致精简的成本跟随”</strong>
-   - 对质两家公司的研发账本：2025年全年，中际旭创研发投入高达 <strong>16.76亿元</strong>（计入损益的研发费用 <strong>16.15亿元</strong>，研发人员 <strong>2,169人</strong>，技术人员合计2,341人），是新易盛2025年研发费用（<strong>7.02亿元</strong>）的 <strong>2.3倍</strong>；到了2026年前三季度，中际旭创研发费用进一步猛增97.04%至 <strong>18.63亿元</strong>（占营收2.68%），而新易盛同期研发费用仅为 <strong>6.00亿元</strong>（占营收仅 <strong>1.88%</strong>，同比仅增19.7%），中际旭创的研发绝对投入达到新易盛的 <strong>3.1倍</strong>！
-   - 新易盛通过极度克制的研发团队规模与极简的销售管理费用（销管费用率合计仅约1.1%），在利润表上“省”出了约1.5—2个百分点的净利率优势；但中际旭创每年多砸下去的十几个亿研发真金白银，全部变成了1.6T/3.2T硅光芯片、相干光模块、CPO/NPO光电共封装以及液冷光模块的专利壁垒与首发入场券。</p>
+<p><strong>研发投入强度的战略分野：“重剑无锋的技术筑墙” vs “极致精简的成本跟随”</strong></p>
+<ul>
+<li>对质两家公司的研发账本：2025年全年，中际旭创研发投入高达 <strong>16.76亿元</strong>（计入损益的研发费用 <strong>16.15亿元</strong>，研发人员 <strong>2,169人</strong>，技术人员合计2,341人），是新易盛2025年研发费用（<strong>7.02亿元</strong>）的 <strong>2.3倍</strong>；到了2026年前三季度，中际旭创研发费用进一步猛增97.04%至 <strong>18.63亿元</strong>（占营收2.68%），而新易盛同期研发费用仅为 <strong>6.00亿元</strong>（占营收仅 <strong>1.88%</strong>，同比仅增19.7%），中际旭创的研发绝对投入达到新易盛的 <strong>3.1倍</strong>！</li>
+<li>新易盛通过极度克制的研发团队规模与极简的销售管理费用（销管费用率合计仅约1.1%），在利润表上“省”出了约1.5—2个百分点的净利率优势；但中际旭创每年多砸下去的十几个亿研发真金白银，全部变成了1.6T/3.2T硅光芯片、相干光模块、CPO/NPO光电共封装以及液冷光模块的专利壁垒与首发入场券。</li>
+</ul>
 </li>
 <li>
-<p><strong>股权激励摊销与子公司少数股东损益（TeraHop分流）的“账面错觉”</strong>
-   - 市场常误以为中际旭创2026Q1-Q3的净利率是 <strong>31.98%</strong>（归母净利222.38亿 ÷ 营收695.47亿），比新易盛的 <strong>35.70%</strong>（归母净利113.72亿 ÷ 营收318.50亿）低了3.72个百分点。但若掀开合并利润表的底层附注，你会发现两个关键的会计分流项：</p>
+<p><strong>股权激励摊销与子公司少数股东损益（TeraHop分流）的“账面错觉”</strong></p>
+<ul>
+<li>市场常误以为中际旭创2026Q1-Q3的净利率是 <strong>31.98%</strong>（归母净利222.38亿 ÷ 营收695.47亿），比新易盛的 <strong>35.70%</strong>（归母净利113.72亿 ÷ 营收318.50亿）低了3.72个百分点。但若掀开合并利润表的底层附注，你会发现两个关键的会计分流项：</li>
+</ul>
 </li>
 </ol><ul>
 <li>
@@ -1886,8 +2369,10 @@
 <p><strong>高额股份支付费用与H股汇兑损失</strong>：中际旭创为绑定两千余名核心研发与工程骨干，常年滚动实施限制性股票激励计划（仅2025年股份支付费用就减少归母净利润约2.23亿元，2026年前三季度随第四期激励计划归属进一步增加），且2026年前三季度因完成香港联交所（03308.HK）H股上市募资及美元净资产庞大，在人民币升值阶段确认了 <strong>11.36亿元</strong> 的财务费用（汇兑损失）。即便背负着远超同行的研发投入、股权激励摊销和汇兑损益，中际旭创依然交出了近35%的合并净利率！</p>
 </li>
 </ul><ol start="4">
-<li><strong>与上游天孚通信（62.56%毛利率）及国家队光迅科技（25.52%毛利率）的生态位对质</strong>
-   - <strong>天孚通信（300394.SZ）</strong>作为上游“卖铲人”，2026Q1-Q3毛利率高达 <strong>62.56%</strong>（Q3单季更是触及惊人的 <strong>65.05%</strong>），净利率达 <strong>43.84%</strong>。这并非因为光模块不如光组件赚钱，而是因为天孚通信专攻光通信里的“高定裁缝活”——高速光引擎封装、FAU光纤阵列、隔离器与透镜等定制化极强、人工与精密耦合良率壁垒极高但单价较低的组件（前三季度营收47.51亿元，体量仅为中际旭创的 <strong>6.8%</strong>）。中际旭创既是天孚通信的下游客户，又通过自建无源/光引擎产线保持议价制衡。</li>
+<li><strong>与上游天孚通信（62.56%毛利率）及国家队光迅科技（25.52%毛利率）的生态位对质</strong><ul>
+<li><strong>天孚通信（300394.SZ）</strong>作为上游“卖铲人”，2026Q1-Q3毛利率高达 <strong>62.56%</strong>（Q3单季更是触及惊人的 <strong>65.05%</strong>），净利率达 <strong>43.84%</strong>。这并非因为光模块不如光组件赚钱，而是因为天孚通信专攻光通信里的“高定裁缝活”——高速光引擎封装、FAU光纤阵列、隔离器与透镜等定制化极强、人工与精密耦合良率壁垒极高但单价较低的组件（前三季度营收47.51亿元，体量仅为中际旭创的 <strong>6.8%</strong>）。中际旭创既是天孚通信的下游客户，又通过自建无源/光引擎产线保持议价制衡。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>光迅科技（002281.SZ）</strong>虽然拥有从光芯片到模块的垂直研发能力（研发费用率高达7.34%），但因其高达一半以上的业务深陷国内传统电信运营商接入网/传输网集采及国内云厂低价竞标红海，导致其2026Q1-Q3毛利率仅为 <strong>25.52%</strong>、净利率仅 <strong>10.99%</strong>，尚不及中际旭创的三分之一。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多人看到新易盛净利率比中际旭创高3个点就觉得发现了新大陆，却看不见中际旭创一年多掏了12个亿喂养两千名顶尖芯片工程师、还给子公司核心骨干分了18.57亿的少数股东利润！省下研发费换来的高净利率就像为了省草料钱不喂马，短跑看着轻快，等跑进1.6T和3.2T的无人区，你就会知道谁的马真正有耐力。</p></div></div></div></div>
@@ -1904,20 +2389,26 @@
 <h4 id="_13">四、 份额攻守终极裁决：过去一年半，全球光模块牌桌上到底是谁在抢谁的份额？</h4>
 <p>复盘2025年初至2026年三季度末（从800G全面普及到1.6T首发放量）这决定产业格局的18个月，全球高速光模块牌桌上的份额攻守战已经尘埃落定：</p>
 <ol>
-<li><strong>头号大赢家——中际旭创（300308.SZ）：通吃1.6T时代红利，把领先身位拉大到“断层式统治”</strong>
-   - <strong>体量碾压</strong>：2025年全年，中际旭创营收（382.40亿元）是新易盛（248.42亿元）的 <strong>1.54倍</strong>；而到了2026年前三季度，中际旭创营收暴涨178.13%至 <strong>695.47亿元</strong>，一举将对新易盛（318.50亿元）的领先倍数扩大至 <strong>2.18倍</strong>！单看2026年Q3单季，中际旭创单季营收（<strong>277.69亿元</strong>）更是达到了新易盛单季营收（109.40亿元）的 <strong>2.54倍</strong>！</li>
+<li><strong>头号大赢家——中际旭创（300308.SZ）：通吃1.6T时代红利，把领先身位拉大到“断层式统治”</strong><ul>
+<li><strong>体量碾压</strong>：2025年全年，中际旭创营收（382.40亿元）是新易盛（248.42亿元）的 <strong>1.54倍</strong>；而到了2026年前三季度，中际旭创营收暴涨178.13%至 <strong>695.47亿元</strong>，一举将对新易盛（318.50亿元）的领先倍数扩大至 <strong>2.18倍</strong>！单看2026年Q3单季，中际旭创单季营收（<strong>277.69亿元</strong>）更是达到了新易盛单季营收（109.40亿元）的 <strong>2.54倍</strong>！</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>抢了谁的份额？</strong> 中际旭创凭借1.6T OSFP/OSFP-XD光模块与800G硅光模块的绝对良率与交付统治力，一方面在<strong>Nvidia（GB200/GB300/Rubin配套）与Google（TPU v6/v7集群）</strong>两大超级买家中拿走了头把交椅，另一方面直接蚕食了海外老牌巨头 <strong>Coherent（COHR.US）</strong> 和 <strong>思科（Cisco/Acacia）</strong> 在北美四大CSP（Google、Meta、AWS、Microsoft）中的高端份额。</li>
 </ul>
 <ol start="2">
 <li>
-<p><strong>结构性赢家——新易盛（300502.SZ）：在800G第二供应商与特定CSP客户中成功卡位，但1.6T代际切换期面临增速换挡</strong>
-   - 新易盛在2025年凭借对Meta、AWS及部分北美客户的800G突破实现了+187.29%的狂飙，稳居全球数通光模块第二把交椅。但进入2026年Q3，随着行业最肥美的增量转向1.6T，新易盛Q3单季营收（109.40亿元）与归母净利（38.43亿元，环比Q2回落约19%）显露出在1.6T初期放量节奏及硅光自研深度上与中际旭创存在约1—2个季度的身位差。</p>
+<p><strong>结构性赢家——新易盛（300502.SZ）：在800G第二供应商与特定CSP客户中成功卡位，但1.6T代际切换期面临增速换挡</strong></p>
+<ul>
+<li>新易盛在2025年凭借对Meta、AWS及部分北美客户的800G突破实现了+187.29%的狂飙，稳居全球数通光模块第二把交椅。但进入2026年Q3，随着行业最肥美的增量转向1.6T，新易盛Q3单季营收（109.40亿元）与归母净利（38.43亿元，环比Q2回落约19%）显露出在1.6T初期放量节奏及硅光自研深度上与中际旭创存在约1—2个季度的身位差。</li>
+</ul>
 </li>
 <li>
-<p><strong>失意者与掉队者——海外老牌巨头（Coherent）与传统电信模块商（光迅科技等）</strong>
-   - <strong>Coherent（COHR.US）</strong>：尽管受益于AI算力外溢，其FY27Q1（对应自然年2026Q3）数通业务营收同比增长79%至19.5亿美元（约合人民币138亿元），但这一数字甚至还不到中际旭创同期单季营收（277.69亿元）的一半！受制于欧美高企的研发与制造人工成本，Coherent综合毛利率仅39.1%（比中际旭创低逾7个百分点），在模块组装与快速迭代响应上已彻底丧失与中国双雄正面对抗的能力，正被迫退守上游InP（磷化铟）200G EML激光器芯片供应环节。</p>
+<p><strong>失意者与掉队者——海外老牌巨头（Coherent）与传统电信模块商（光迅科技等）</strong></p>
+<ul>
+<li><strong>Coherent（COHR.US）</strong>：尽管受益于AI算力外溢，其FY27Q1（对应自然年2026Q3）数通业务营收同比增长79%至19.5亿美元（约合人民币138亿元），但这一数字甚至还不到中际旭创同期单季营收（277.69亿元）的一半！受制于欧美高企的研发与制造人工成本，Coherent综合毛利率仅39.1%（比中际旭创低逾7个百分点），在模块组装与快速迭代响应上已彻底丧失与中国双雄正面对抗的能力，正被迫退守上游InP（磷化铟）200G EML激光器芯片供应环节。</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -1991,8 +2482,10 @@
 </table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_15">二、 资产质量排雷：四大敏感科目逐一过堂</h4><ol>
-<li><strong>头号重点排雷：238.78亿元天量存货的内部结构与跌价准备计提（2.29% vs 新易盛6.86%）——是激进少提，还是订单锁定？</strong>
-   - <strong>存货内部解剖</strong>：以2025年报经审计完整明细为基准，中际旭创期末存货账面余额 <strong>129.79亿元</strong>（净值126.81亿元）中，<strong>原材料为46.05亿元（占35.48%）</strong>，主要为高价值的进口光芯片（EML/CW）与DSP电芯片；<strong>在产品、自制半成品及发出商品合计55.45亿元（占42.72%）</strong>，全部处于产线流转或已发往北美大客户VMI仓待领用状态；真正趴在自家仓库里的<strong>库存商品（产成品）仅为28.29亿元（占21.80%）</strong>，仅相当于公司不到1个月的出货量！到了2026Q3末，存货净值增至 <strong>238.78亿元</strong>，同样呈现“芯片原材料战略锁仓 + 1.6T/800G在产及海外VMI在途商品占比近八成”的典型漏斗结构。</li>
+<li><strong>头号重点排雷：238.78亿元天量存货的内部结构与跌价准备计提（2.29% vs 新易盛6.86%）——是激进少提，还是订单锁定？</strong><ul>
+<li><strong>存货内部解剖</strong>：以2025年报经审计完整明细为基准，中际旭创期末存货账面余额 <strong>129.79亿元</strong>（净值126.81亿元）中，<strong>原材料为46.05亿元（占35.48%）</strong>，主要为高价值的进口光芯片（EML/CW）与DSP电芯片；<strong>在产品、自制半成品及发出商品合计55.45亿元（占42.72%）</strong>，全部处于产线流转或已发往北美大客户VMI仓待领用状态；真正趴在自家仓库里的<strong>库存商品（产成品）仅为28.29亿元（占21.80%）</strong>，仅相当于公司不到1个月的出货量！到了2026Q3末，存货净值增至 <strong>238.78亿元</strong>，同样呈现“芯片原材料战略锁仓 + 1.6T/800G在产及海外VMI在途商品占比近八成”的典型漏斗结构。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>为何中际旭创存货跌价准备计提比例（2.29%，2.98亿元）低于新易盛（6.86%，5.33亿元）与光迅科技（8.64%，5.43亿元）？</strong></p>
@@ -2005,19 +2498,25 @@
 <p><strong>客观风险警示</strong>：虽然当前订单饱满使2.29%的计提率完全合规，但鉴于光模块行业每18—24个月发生一次剧烈代际切换（如2027—2028年从800G向1.6T/3.2T全面迁移，以及EML向硅光/CPO切换），一旦未来某个季度下游云厂资本开支放缓或技术路线突变，高达238.78亿元的存货基数哪怕出现5%的呆滞减值，也将瞬间吞噬约12亿元当期利润。这是投资者必须紧盯的头号资产负债表敞口。</p>
 </li>
 </ul><ol start="2">
-<li><strong>应收账款账龄与坏账计提过堂：173.09亿元应收款成色几何？</strong>
-   - <strong>账龄极度干净</strong>：截至2025年末，中际旭创按组合计提坏账的应收账款余额63.03亿元中，<strong>1年以内账龄占比高达99.54%</strong>！2026Q3末应收账款攀升至 <strong>173.09亿元</strong>，表面看似较年初（62.77亿元）激增175.75%，但将其与2026Q3单季高达 <strong>277.69亿元</strong> 的营业收入对照即可发现：期末应收账款仅相当于Q3单季营收的 <strong>62.3%</strong>，意味着平均回款账期（DSO）严格控制在 <strong>50—56天</strong> 以内，说明北美科技巨头付款极其守信，毫无拖欠迹象。</li>
+<li><strong>应收账款账龄与坏账计提过堂：173.09亿元应收款成色几何？</strong><ul>
+<li><strong>账龄极度干净</strong>：截至2025年末，中际旭创按组合计提坏账的应收账款余额63.03亿元中，<strong>1年以内账龄占比高达99.54%</strong>！2026Q3末应收账款攀升至 <strong>173.09亿元</strong>，表面看似较年初（62.77亿元）激增175.75%，但将其与2026Q3单季高达 <strong>277.69亿元</strong> 的营业收入对照即可发现：期末应收账款仅相当于Q3单季营收的 <strong>62.3%</strong>，意味着平均回款账期（DSO）严格控制在 <strong>50—56天</strong> 以内，说明北美科技巨头付款极其守信，毫无拖欠迹象。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>坏账政策比直接对手更严苛</strong>：新易盛对优质境外大客户按“无风险组合”处理，1年以内坏账计提率仅0.01%—0.02%；而中际旭创不仅对正常账龄组合按预期信用损失率计提 <strong>0.46%</strong>（2,921.82万元），更对存在回收瑕疵的2,941.41万元客户欠款果断采取<strong>单项计提，计提比例高达90.51%</strong>（2,662.35万元），综合坏账计提率达 <strong>0.88%</strong>，体现了极强的财务洁癖。</li>
 </ul><ol start="3">
-<li><strong>固定资产折旧与CapEx洪峰审计：124.55亿元固定资产与54.95亿元在建工程是否存在利润调节猫腻？</strong>
-   - <strong>折旧政策铁证</strong>：中际旭创机器设备（高速贴片机、硅光耦合台、Keysight高速误码测试仪等）统一采用年限平均法，折旧年限 <strong>5—10年</strong>，预计净残值率 <strong>3%</strong>。对比新易盛（机器设备5—10年，残值率5%）与光迅科技（7年，残值率3%—5%），中际旭创设定的残值率更低（3% vs 新易盛5%），每年计入营业成本的折旧分摊更为充分，<strong>完全不存在通过拉长折旧年限虚增毛利率的财务把戏</strong>。</li>
+<li><strong>固定资产折旧与CapEx洪峰审计：124.55亿元固定资产与54.95亿元在建工程是否存在利润调节猫腻？</strong><ul>
+<li><strong>折旧政策铁证</strong>：中际旭创机器设备（高速贴片机、硅光耦合台、Keysight高速误码测试仪等）统一采用年限平均法，折旧年限 <strong>5—10年</strong>，预计净残值率 <strong>3%</strong>。对比新易盛（机器设备5—10年，残值率5%）与光迅科技（7年，残值率3%—5%），中际旭创设定的残值率更低（3% vs 新易盛5%），每年计入营业成本的折旧分摊更为充分，<strong>完全不存在通过拉长折旧年限虚增毛利率的财务把戏</strong>。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>在建工程转固压力测试</strong>：2026年前三季度，公司CapEx高达 <strong>91.61亿元</strong>（为2025全年19.53亿元的4.69倍！），推动固定资产从年初70.81亿元跃升至 <strong>124.55亿元</strong>，在建工程从14.22亿元飙升至 <strong>54.95亿元</strong>（主要为泰国二期扩产基地、苏州与铜陵1.6T/硅光自动化产线）。按机器设备平均7年折旧测算，未来一年新增约100亿元产能全面转固后，每年将新增约 <strong>13—14亿元</strong> 的刚性折旧成本；在当前年化超千亿营收规模下，新增折旧占营收比重仅约1.2%，完全被1.6T高毛利所吸收。</li>
 </ul><ol start="4">
-<li><strong>研发投入资本化率核查：16.76亿元研发投入里藏了多少水分？</strong>
-   - 2025年，中际旭创研发总投入 <strong>16.76亿元</strong>（1,675,931,098.18元），其中直接计入当期损益的研发费用高达 <strong>16.15亿元</strong>（1,615,281,749.38元），研发支出资本化金额仅为 <strong>0.61亿元</strong>（6,064.93万元），<strong>研发投入资本化率仅为3.62%</strong>（较2024年的6.64%主动下调了3.02个百分点）。
-   - 0.61亿元的资本化金额占公司2025年归母净利润（107.97亿元）的比例仅为 <strong>0.56%</strong>！进入2026年前三季度，18.63亿元研发费用更是几乎全额费用化。相比于光迅科技高达8.50%的研发资本化率，中际旭创的利润表含金量堪称真金不怕火炼。</li>
+<li><strong>研发投入资本化率核查：16.76亿元研发投入里藏了多少水分？</strong><ul>
+<li>2025年，中际旭创研发总投入 <strong>16.76亿元</strong>（1,675,931,098.18元），其中直接计入当期损益的研发费用高达 <strong>16.15亿元</strong>（1,615,281,749.38元），研发支出资本化金额仅为 <strong>0.61亿元</strong>（6,064.93万元），<strong>研发投入资本化率仅为3.62%</strong>（较2024年的6.64%主动下调了3.02个百分点）。</li>
+<li>0.61亿元的资本化金额占公司2025年归母净利润（107.97亿元）的比例仅为 <strong>0.56%</strong>！进入2026年前三季度，18.63亿元研发费用更是几乎全额费用化。相比于光迅科技高达8.50%的研发资本化率，中际旭创的利润表含金量堪称真金不怕火炼。</li>
+</ul>
+</li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>想看一家公司管账老不老实，别听董事长在酒会上吹什么，去翻它的附注角落——明明赚着上百亿的利润，中际旭创却把研发资本化率从6.64%砍到3.62%，连三千万有瑕疵的应收款都直接按90.51%计提坏账，机器残值率设得比对手还低；这种在丰年里拼命藏粮、不占会计便宜的财务总监，才是股东真正的守夜人！</p></div></div></div></div>
 
 
@@ -2029,8 +2528,8 @@
 
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_16">三、 激励与薪酬审计：股权激励是“真硬仗”还是“发福利”？高管与全员薪酬是否匹配？</h4><p>一家科技制造龙头能否在残酷的代际更迭中保持狼性，直接取决于它的利益分配机制是“向一线研发与产能攻坚者倾斜”，还是沦为“管理层自肥的提款机”。我们调取中际旭创最近两期限制性股票激励计划及2025年报薪酬账本进行穿透式审计：</p><ol>
-<li><strong>第三期与第四期限制性股票激励计划行权门槛审计：阶梯式千亿军令状 vs 行业超预期爆发</strong>
-   - <strong>第三期限制性股票激励计划（覆盖2024—2027年，营收/净利双轨考核）</strong>：<ul>
+<li><strong>第三期与第四期限制性股票激励计划行权门槛审计：阶梯式千亿军令状 vs 行业超预期爆发</strong><ul>
+<li><strong>第三期限制性股票激励计划（覆盖2024—2027年，营收/净利双轨考核）</strong>：</li>
 <li>首次授予部分设定了清晰的进阶门槛：其中第三个归属期（截至2026年度累计）要求营业收入累计不低于 <strong>510亿元</strong> 或归母净利润累计不低于 <strong>89.30亿元</strong>；第四个归属期（截至2027年度累计）要求营业收入累计不低于 <strong>745亿元</strong> 或归母净利润累计不低于 <strong>123.40亿元</strong>。</li>
 </ul>
 </li>
@@ -2057,8 +2556,10 @@
 <p><strong>审计定性（是硬指标还是发福利？）</strong>：站在2026年三季报（前三季度已轰出695.47亿营收）的后视镜看，四年1,732亿的目标似乎已被轻松跨越；但若还原到<strong>2025年初草案制定时的历史基准</strong>（彼时公司2023年营收仅107.18亿、2024年营收238.62亿），管理层敢于签下从238亿一路跳增至年均450亿—560亿、四年累计1,732亿的考核契约，在当时绝对是极具挑战性的“硬骨头”。只不过全球AI算力军备竞赛的指数级爆发（叠加公司1.6T垄断份额）让实际业绩跑出了远超契约上限的斜率。唯一需要指出的治理瑕疵是：<strong>第四期激励计划仅考核营业收入而未同步绑定扣非净利润率或ROE底线</strong>，在极端情况下存在“为冲刺营收规模而牺牲边际利润率”的机制漏洞，好在公司目前46.39%的高毛利率证明其并未陷入低价冲量的误区。</p>
 </li>
 </ul><ol start="2">
-<li><strong>高管薪酬克制力与11,625名全员人均创利/薪酬匹配度审计</strong>
-   - <strong>核心高管现金薪酬极度克制</strong>：根据2025年年度报告披露的高管税前报酬总额，面对全年107.97亿元的归母净利润，公司核心管理层领取的税前薪酬总额高度理性——董事长兼总裁 <strong>刘圣</strong> 为 <strong>418.34万元</strong>，董事兼财务总监 <strong>王晓丽</strong> 为 <strong>251.26万元</strong>，副总裁兼董秘 <strong>王军</strong> 为 <strong>241.61万元</strong>，职工代表董事 <strong>陈彩云</strong> 为 <strong>201.69万元</strong>，常务副总裁 <strong>王晓东</strong> 为 <strong>100.70万元</strong>。一位掌管全球第一大光模块帝国、年赚超百亿净利的科学家型创始人，年薪仅418万元人民币，其核心财富增值完全与全体股东通过二级市场股权及限制性股票长期绑定。</li>
+<li><strong>高管薪酬克制力与11,625名全员人均创利/薪酬匹配度审计</strong><ul>
+<li><strong>核心高管现金薪酬极度克制</strong>：根据2025年年度报告披露的高管税前报酬总额，面对全年107.97亿元的归母净利润，公司核心管理层领取的税前薪酬总额高度理性——董事长兼总裁 <strong>刘圣</strong> 为 <strong>418.34万元</strong>，董事兼财务总监 <strong>王晓丽</strong> 为 <strong>251.26万元</strong>，副总裁兼董秘 <strong>王军</strong> 为 <strong>241.61万元</strong>，职工代表董事 <strong>陈彩云</strong> 为 <strong>201.69万元</strong>，常务副总裁 <strong>王晓东</strong> 为 <strong>100.70万元</strong>。一位掌管全球第一大光模块帝国、年赚超百亿净利的科学家型创始人，年薪仅418万元人民币，其核心财富增值完全与全体股东通过二级市场股权及限制性股票长期绑定。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>全员人均薪酬与人均创收/创利的黄金剪刀差</strong>：<ul>
 <li>截至2025年末，中际旭创在职员工合计 <strong>11,625人</strong>（其中生产人员8,090人、技术人员2,341人［含研发人员2,169人］、行政977人、销售135人、财务82人）。</li>
@@ -2123,9 +2624,9 @@
 </li>
 <li>
 <p><strong>第二步：还原存量产能在合理稼动率（82.5%）与供需平衡态毛利率（36.5%）下的常态归母净利</strong></p>
-</li>
-<li>
-<p><strong>常态营收底盘锚定</strong>：2026年Q3单季营收277.69亿元对应的是存量124.55亿元固定资产在95%以上极限稼动率及1.6T首发高ASP下的峰值产出（年化约1,050亿—1,100亿元）。若将存量固定资产稼动率回调至跨周期健康的 <strong>80%—85%（中枢82.5%）</strong>，并扣除首发价格溢价10%—12%，则现有124.55亿元已投产固定资产对应的<strong>跨周期常态年化营收底盘约为 820.00亿元</strong>。</p>
+<ul>
+<li><strong>常态营收底盘锚定</strong>：2026年Q3单季营收277.69亿元对应的是存量124.55亿元固定资产在95%以上极限稼动率及1.6T首发高ASP下的峰值产出（年化约1,050亿—1,100亿元）。若将存量固定资产稼动率回调至跨周期健康的 <strong>80%—85%（中枢82.5%）</strong>，并扣除首发价格溢价10%—12%，则现有124.55亿元已投产固定资产对应的<strong>跨周期常态年化营收底盘约为 820.00亿元</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>常态毛利率与净利率锚定</strong>：将毛利率从2026Q1-Q3极值（46.39%）及2025年高位（42.04%）下调约6—10个百分点，锚定于供需平衡态下的 <strong>36.50%（区间35.0%—38.0%）</strong>——这一水平既剔除了首发稀缺溢价，又客观反映了公司硅光芯片自给率提升、泰国基地规模化生产以及龙头议价权相比400G时代（毛利率26%—30%）的结构性升级。</p>
@@ -2135,16 +2636,16 @@
 </li>
 <li>
 <p><strong>第三步：加回有效归母折旧与摊销（D&amp;A）</strong></p>
-</li>
+<ul>
 <li>根据2025年年报现金流量表补充资料，2025年全口径折旧与摊销合计为 <strong>9.34亿元</strong>，其中：固定资产折旧 <strong>7.40亿元</strong>（739,763,105.70元，含计入营业成本5.94亿元、研发费用1.23亿元、管理费用0.23亿元）、无形资产摊销 <strong>0.86亿元</strong>（86,462,840.02元）、长期待摊费用摊销 <strong>0.84亿元</strong>（84,362,955.44元）、使用权资产折旧 <strong>0.24亿元</strong>（23,619,942.98元）。扣除少数股东占比后，2025年有效归母折旧摊销为 <strong>8.60亿元</strong>。</li>
-<li>
-<p>进入2026年，随着2025年（19.53亿元）及2026年前三季度（91.61亿元）累计超111亿元CapEx大举转化为高端产线，公司固定资产净值已跃升至 <strong>124.55亿元</strong>（无形资产4.38亿元）。按核心生产与测试设备5年折旧、厂房建筑20年折旧的会计政策实算，当前124.55亿元固定资产对应的年化全口径折旧与摊销已达 <strong>21.50亿元</strong>；按归母权益比例折算，<strong>有效归母折旧与摊销（D&amp;A）为 19.80亿元/年</strong>。</p>
+<li>进入2026年，随着2025年（19.53亿元）及2026年前三季度（91.61亿元）累计超111亿元CapEx大举转化为高端产线，公司固定资产净值已跃升至 <strong>124.55亿元</strong>（无形资产4.38亿元）。按核心生产与测试设备5年折旧、厂房建筑20年折旧的会计政策实算，当前124.55亿元固定资产对应的年化全口径折旧与摊销已达 <strong>21.50亿元</strong>；按归母权益比例折算，<strong>有效归母折旧与摊销（D&amp;A）为 19.80亿元/年</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>第四步：严苛扣减“光模块代际跃迁刚性防御性CapEx”与“常态营运资金占用”（核心避坑步！）</strong></p>
-</li>
-<li>
-<p><strong>光模块行业的特殊折旧与维护性CapEx陷阱</strong>：在传统重工业（如水电、水泥、铜矿）中，设备物理寿命长达15—30年，维持存量产能仅需耗费折旧额20%—50%的维护性支出。但<strong>光模块是典型的“摩尔定律驱动型短周期精密制造”</strong>——速率每2年迭代一代（400G → 800G → 1.6T → 3.2T），封装形态从EML可插拔向硅光（SiPh）、线性直驱（LPO）、近封装光学（NPO）演进。虽然厂房、洁净室及通用SMT贴片机可跨代复用，但<strong>高精度硅光耦合台、晶圆级光学测试仪、特定波特率（如200G/lane升级至400G/lane）的高速误码率测试仪（BERT）与采样示波器</strong>存在显著的“技术性贬值”！会计上按5年计提的账面折旧（19.80亿元），根本不足以覆盖每2—3年一次的产线技术改造、测试仪表升级与制具更换。</p>
+<ul>
+<li><strong>光模块行业的特殊折旧与维护性CapEx陷阱</strong>：在传统重工业（如水电、水泥、铜矿）中，设备物理寿命长达15—30年，维持存量产能仅需耗费折旧额20%—50%的维护性支出。但<strong>光模块是典型的“摩尔定律驱动型短周期精密制造”</strong>——速率每2年迭代一代（400G → 800G → 1.6T → 3.2T），封装形态从EML可插拔向硅光（SiPh）、线性直驱（LPO）、近封装光学（NPO）演进。虽然厂房、洁净室及通用SMT贴片机可跨代复用，但<strong>高精度硅光耦合台、晶圆级光学测试仪、特定波特率（如200G/lane升级至400G/lane）的高速误码率测试仪（BERT）与采样示波器</strong>存在显著的“技术性贬值”！会计上按5年计提的账面折旧（19.80亿元），根本不足以覆盖每2—3年一次的产线技术改造、测试仪表升级与制具更换。</li>
+</ul>
 </li>
 <li>
 <p><strong>防御性CapEx审慎定标</strong>：如果中际旭创不每年投入巨资升级现有产线的耦合与高速测试设备，其存量产能将在24个月内沦为只能生产低毛利老旧型号的“落后产能”。因此，维持存量820亿元营收规模与36.5%毛利率技术代际竞争力所必需的<strong>归母防御性/设备迭代更新CapEx</strong>，绝不能低于账面折旧，而必须按<strong>有效归母折旧摊销的 135%—140%</strong>（或按存量124.55亿元固定资产净值的约22%更新率）计提，即每年刚性消耗 <strong>27.00亿元</strong>！</p>
@@ -2282,22 +2783,22 @@
 </li>
 <li>
 <p><strong>增量常态归母净利润测算（严扣TeraHop少数股东权益漏损）</strong>：</p>
-</li>
-<li>
-<p>按常态综合毛利率 <strong>36.00%</strong>（略低于存量36.50%，保守反映产能消化期的价格折让）、规模效应摊薄后的增量期间费用率 <strong>7.00%</strong>、有效所得税率 <strong>12.50%</strong>（泰国新增产能享受BOI企业所得税减免优惠）计算，新增294.00亿元营收可贡献合并常态净利润约 <strong>74.55亿元</strong>。</p>
+<ul>
+<li>按常态综合毛利率 <strong>36.00%</strong>（略低于存量36.50%，保守反映产能消化期的价格折让）、规模效应摊薄后的增量期间费用率 <strong>7.00%</strong>、有效所得税率 <strong>12.50%</strong>（泰国新增产能享受BOI企业所得税减免优惠）计算，新增294.00亿元营收可贡献合并常态净利润约 <strong>74.55亿元</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>关键股权扣减</strong>：由于54.95亿元在建工程中约60%集中于泰国基地等海外孙公司TeraHop体系内（中际旭创持股 <strong>67.70%</strong>，少数股东持股 <strong>32.30%</strong>），增量利润中归属于少数股东的比例将高于存量综合水平（约占增量合并净利的 <strong>18.0%—19.0%</strong>，即约13.75亿元）。扣除少数股东损益后，<strong>新增常态归母净利润约为 60.80亿元/年</strong>。</p>
 </li>
 <li>
 <p><strong>增量真实股东盈余（Incremental Owner Earnings）净垫高量</strong>：</p>
-</li>
+<ul>
 <li><code>[+]</code> 新增常态归母净利润：<strong>+60.80亿元</strong>；</li>
 <li><code>[+]</code> 新增有效归母折旧摊销：54.95亿元转固后年化全口径折旧约9.80亿元，扣除少数股东分摊后有效归母D&amp;A约为 <strong>+8.00亿元</strong>；</li>
 <li><code>[-]</code> 新增防御性设备更新CapEx：同样按新增有效归母D&amp;A的135%严苛计提，每年需投入 <strong>-10.80亿元</strong> 用于产线代际升级；</li>
 <li><code>[-]</code> 新增刚性营运资金占用：按新增294亿元营收的1.2%计提，每年沉淀 <strong>-3.50亿元</strong>。</li>
-<li>
-<p><code>[=]</code> <strong>增量真实股东盈余净值</strong>：<code>60.80 + 8.00 - 10.80 - 3.50 = +54.50亿元/年</code>（区间 <strong>50.00—58.00亿元/年</strong>）。</p>
+<li><code>[=]</code> <strong>增量真实股东盈余净值</strong>：<code>60.80 + 8.00 - 10.80 - 3.50 = +54.50亿元/年</code>（区间 <strong>50.00—58.00亿元/年</strong>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>完全体常态造血底盘汇总结论</strong>：
@@ -2314,18 +2815,18 @@
 </li>
 <li>
 <p><strong>分支 1A（动态产业链传导态——硅光自研降本 + 上游芯片联动分担 45% 降价压力）</strong>：</p>
-</li>
-<li>
-<p>在真实产业博弈中，中际旭创作为占全球高端光模块超35%份额的超级买家，绝不会单方面死扛降价：一方面，公司通过将自研硅光（SiPh）渗透率从50%强推至70%以上，直接替代昂贵的进口EML光芯片；另一方面，向上游DSP芯片商（博通/Marvell）、激光器与结构件供应商转嫁年降压力，合计可对冲约 <strong>45%</strong> 的终端降价损失（即营业成本端同步缩减 <code>123.00 × 45% = 55.35亿元</code>，营业成本由常态的520.70亿元降至465.35亿元）。</p>
+<ul>
+<li>在真实产业博弈中，中际旭创作为占全球高端光模块超35%份额的超级买家，绝不会单方面死扛降价：一方面，公司通过将自研硅光（SiPh）渗透率从50%强推至70%以上，直接替代昂贵的进口EML光芯片；另一方面，向上游DSP芯片商（博通/Marvell）、激光器与结构件供应商转嫁年降压力，合计可对冲约 <strong>45%</strong> 的终端降价损失（即营业成本端同步缩减 <code>123.00 × 45% = 55.35亿元</code>，营业成本由常态的520.70亿元降至465.35亿元）。</li>
+</ul>
 </li>
 <li>
 <p><strong>冲击结果</strong>：综合毛利率从36.50%下滑3.27个百分点至 <strong>33.23%</strong>；归母净利润从182.01亿元降至 <strong>129.50亿元</strong>（跌幅-28.9%）；由于终端降价导致应收账款与存货账面价值同步缩水，营运资金反而释放约 <strong>+12.00亿元</strong> 现金回流，加上公司可主动将防御性CapEx压缩15%至23.00亿元，最终 <strong>极限自由现金流（FCF / 压力态Owner Earnings）仍高达 +140.30亿元</strong>！</p>
 </li>
 <li>
 <p><strong>分支 1B（静态死扛极限态——上游芯片垄断拒不降价，公司 100% 硬吃 15% 降价）</strong>：</p>
-</li>
-<li>
-<p>假设上游博通DSP与Lumentum光芯片处于绝对卖方垄断，一分钱不降，营业成本死锁在 <strong>520.70亿元</strong>，123.00亿元降价全额扣减中际旭创毛利。</p>
+<ul>
+<li>假设上游博通DSP与Lumentum光芯片处于绝对卖方垄断，一分钱不降，营业成本死锁在 <strong>520.70亿元</strong>，123.00亿元降价全额扣减中际旭创毛利。</li>
+</ul>
 </li>
 <li>
 <p><strong>冲击结果</strong>：毛利额直接从299.30亿元腰斩式暴跌至176.30亿元，综合毛利率雪崩11.21个百分点至 <strong>25.29%</strong>（跌回2021年400G时代水平）；扣除刚性研发与管理费用后，常态归母净利润从182.01亿元断崖下跌至 <strong>85.20亿元</strong>（跌幅高达 <strong>-53.2%</strong>）。但即便在这场惨烈的“静态死扛”风暴中，依靠19.80亿元折旧加回与营运资金缩水释放的现金，公司 <strong>全年自由现金流依然维持在 +92.00亿元 的正流入状态</strong>，离亏损失血线仍有百亿级安全缓冲！</p>
@@ -2344,11 +2845,13 @@
 </li>
 </ol>
 <ul>
-<li><strong>双击叠加冲击结果</strong>：</li>
+<li><strong>双击叠加冲击结果</strong>：<ul>
 <li>上游芯片暴涨（+43.74亿元）与自担一半关税（+43.05亿元）合计直接吞噬毛利 <strong>86.79亿元</strong>！</li>
 <li>在营收820.00亿元不变的情况下，综合毛利率从36.50%暴跌10.58个百分点至 <strong>25.92%</strong>；</li>
 <li>扣非归母净利润从182.01亿元重挫至 <strong>112.10亿元</strong>（跌幅 <strong>-38.4%</strong>）；</li>
 <li>由于芯片涨价与关税垫资导致存货及应收占用額外增加约18.00亿元，自由现金流（压力态Owner Earnings）将从164.81亿元收缩至 <strong>+86.90亿元</strong>。虽然利润表遭受重创，但公司凭借账上 <strong>535.32亿元货币资金</strong> 与每年近87亿元的正向自由现金流，依然具备在牌桌上熬死所有中小竞争对手的绝对底气。</li>
+</ul>
+</li>
 </ul>
 <h4 id="_18">《中际旭创双极限压力测试损益与现金流冲击推演表》</h4>
 <div class="table-scroll-wrap"><table class="wide-table">
@@ -2471,6 +2974,115 @@
 </table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>做压力测试就像测试一架飞机能不能在狂风暴雨里单引擎迫降——即便下游巨头突然翻脸砍价15%、上游芯片恶霸一分钱不让，甚至美国海关还在泰国工厂门口收过路费，中际旭创最惨的一年居然还能净赚85到112个亿、往保险柜里揣进90亿现金；当你手里握着自研硅光这张底牌和535亿现金粮草时，别人眼里的灭顶之灾，不过是你用来清理门户、顺便把二三线同行送进火葬场的免费大扫除。</p></div></div>
 <hr/>
+<h4 id="2026-11-21-owner-earnings-1120-1360">四、 ⚔️ 【2026-11-21 二元对峙终审重校：剥离周期峰顶幻觉，硬砍常态 Owner Earnings 至 <code>112.0 → 136.0 亿元</code>】</h4>
+<blockquote>
+<p><strong>🚨 终审强制覆盖声明</strong>：经红蓝二元极限对质与 2026Q3 财报（营收环比 <code>+24.63%</code> 但归母净利环比骤降至 <code>+8.48%</code>、净利率单季暴跌 <code>460 bps</code> 至 <code>30.92%</code>）法医核验，上文模块 D 原稿存在三项系统性乐观偏差：① 将无上游核心 EML/3nm DSP 芯片、前五大客户高度集中（<code>81.9%</code>）的精密光引擎封装厂跨周期常态毛利率过高锚定在 <code>36.5%</code>（较 2019–2022 历史中枢 <code>25.5%–27.1%</code> 偏高近 <code>1,000 bps</code>）；② 将 54.95 亿在建工程按 <code>5.35x</code> 高周转直接线性推演至 <code>1,114亿</code> 常态营收，严重低估 2027–2028 年全行业在泰国/马来西亚集中扩产导致的年降与产能消化期；③ 低估每 24 个月代际换代（800G→1.6T→3.2T）的设备技术贬值、LPO 去 DSP 拉低 ASP（<code>-15%~-25%</code>）以及 <code>238.78亿</code> 天量存货跨周期跌价摩擦。同时，红队基准档直接按 2019 年纯组装时代 <code>28.0%</code> 毛利/<code>600亿</code> 营收（OE <code>79.05亿</code>）压测，亦过度抹杀了自研 CMOS 硅光芯片（渗透率 <code>&gt;60%</code>）带来的真实 BOM 降本结构红利。<strong>以下 Python 精算重校口径（归母口径，与模块 F 严苛归母 True EV 100% 对齐）全面替代旧版 <code>164.81 → 219.31亿元</code>！</strong></p>
+</blockquote>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">终审重校 Owner Earnings 核心科目（归母口径 · 亿元）</th>
+<th style="text-align: center;">存量 <code>124.55亿</code> 固定资产跨周期常态底盘</th>
+<th style="text-align: center;">叠加 <code>54.95亿</code> 在建工程保守达产增量</th>
+<th style="text-align: center;"><strong>终审重校完全体常态底盘</strong></th>
+<th style="text-align: left;">对质蓝队旧稿 (<code>164.81 → 219.31亿</code>) 与红队基准 (<code>79.05亿</code>) 裁决依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>跨周期常态年化营业收入</strong></td>
+<td style="text-align: center;"><strong><code>700.00</code></strong></td>
+<td style="text-align: center;"><code>+180.00</code></td>
+<td style="text-align: center;"><strong><code>880.00</code></strong></td>
+<td style="text-align: left;">存量较 Q3 年化 <code>1,111亿</code> 回调 <code>-37%</code>（剔除 1.6T 首发高价与极限满载）；在建工程按保守 <code>3.3x</code> 周转（硬砍旧稿 <code>5.35x</code>），防 2027–2028 行业过剩</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>跨周期常态综合毛利率</strong></td>
+<td style="text-align: center;"><strong><code>32.00%</code></strong></td>
+<td style="text-align: center;"><code>31.00%</code></td>
+<td style="text-align: center;"><strong><code>31.80%</code></strong></td>
+<td style="text-align: left;"><strong>中枢锚定</strong>：高于 2019–2022 纯分立组装均值（<code>~26%</code>）约 <code>+600bps</code>（确认硅光降本红利），但严苛砍掉旧稿 <code>36.5%</code> 幻想（<code>81.9%</code> 北美大客户必压价）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>常态毛利额</strong></td>
+<td style="text-align: center;"><code>224.00</code></td>
+<td style="text-align: center;"><code>+55.80</code></td>
+<td style="text-align: center;"><code>279.80</code></td>
+<td style="text-align: left;">营业成本中已全额含入 <code>124.55亿→179.5亿</code> 转固后的飙升折旧（<code>~21→30亿/年</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[-]</code> 刚性研发、销管及汇兑/财务摩擦</td>
+<td style="text-align: center;"><code>-56.00</code> (<code>8.0%</code>)</td>
+<td style="text-align: center;"><code>-12.60</code> (<code>7.0%</code>)</td>
+<td style="text-align: center;"><code>-68.60</code></td>
+<td style="text-align: left;">研发刚性保底 <code>4.8%</code>（<code>33.6亿+</code>）支撑 3.2T/NPO/CPO 军备竞赛，计入长期汇兑对冲成本</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[=]</code> 营业利润（EBIT）</td>
+<td style="text-align: center;"><code>168.00</code></td>
+<td style="text-align: center;"><code>+43.20</code></td>
+<td style="text-align: center;"><code>211.20</code></td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[-]</code> 综合所得税（<code>14%</code> / 泰国增量 <code>13%</code>）</td>
+<td style="text-align: center;"><code>-23.52</code></td>
+<td style="text-align: center;"><code>-5.62</code></td>
+<td style="text-align: center;"><code>-29.14</code></td>
+<td style="text-align: left;">合并常态净利 <code>144.48亿</code>（完全体 <code>182.06亿</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[-]</code> 少数股东损益扣减（TeraHop <code>32.3%</code> 分流）</td>
+<td style="text-align: center;"><code>-13.73</code> (<code>9.5%</code>)</td>
+<td style="text-align: center;"><code>-6.95</code> (<code>18.5%</code>)</td>
+<td style="text-align: center;"><code>-20.68</code></td>
+<td style="text-align: left;">9M26 实绩 <code>7.71%</code>，随海外泰国基地占在建工程 <code>~60%</code> 抬升至 <code>9.5%</code>（增量 <code>18.5%</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[=]</code> <strong>终审常态归母净利润</strong></td>
+<td style="text-align: center;"><strong><code>130.75</code></strong> (<code>18.7%</code>)</td>
+<td style="text-align: center;"><strong><code>+30.63</code></strong></td>
+<td style="text-align: center;"><strong><code>161.38</code></strong> (<code>18.3%</code>)</td>
+<td style="text-align: left;">归母净利率由 9M26 峰顶 <code>31.98%</code> 回归至 <code>18.3%–18.7%</code> 精密硬件龙头合理中枢</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[+]</code> 有效归母折旧摊销（D&amp;A）</td>
+<td style="text-align: center;"><code>+19.20</code></td>
+<td style="text-align: center;"><code>+7.80</code></td>
+<td style="text-align: center;"><code>+27.00</code></td>
+<td style="text-align: left;">对应 <code>124.55亿</code> 存量及 <code>54.95亿</code> 新增转固后归母折旧</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[-]</code> <strong>代际更新刚性防御性 CapEx（<code>145%</code> D&amp;A）</strong></td>
+<td style="text-align: center;"><code>-27.80</code></td>
+<td style="text-align: center;"><code>-11.30</code></td>
+<td style="text-align: center;"><code>-39.10</code></td>
+<td style="text-align: left;">严控每 24 个月高速误码仪/硅光耦合台技术性淘汰重置支出（高于旧稿 <code>136%</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[-]</code> 常态 WC 占用 + 年度存货跌价/年降准备</td>
+<td style="text-align: center;"><code>-9.50</code></td>
+<td style="text-align: center;"><code>-2.60</code></td>
+<td style="text-align: center;"><code>-12.10</code></td>
+<td style="text-align: left;">计入 <code>~1.4%</code> 常态周转垫资与代际切换呆滞料跌价摩擦准备</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[=]</code> <strong>Python 精确归母 Owner Earnings</strong></td>
+<td style="text-align: center;"><strong><code>112.65</code></strong></td>
+<td style="text-align: center;"><strong><code>+24.53</code></strong></td>
+<td style="text-align: center;"><strong><code>137.18</code></strong></td>
+<td style="text-align: left;">转化率 <code>OE / 归母净利 = 85.7%</code>（与红队 <code>85%</code> 转化纪律完全对齐）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>★ 终审保守定标（写入严苛重校总榜）</strong></td>
+<td style="text-align: center;"><strong><code>112.00 亿元/年</code></strong></td>
+<td style="text-align: center;"><strong><code>+24.00 亿元/年</code></strong></td>
+<td style="text-align: center;"><strong><code>136.00 亿元/年</code></strong></td>
+<td style="text-align: left;"><strong>较旧稿 <code>164.81 → 219.31亿</code> 硬砍 <code>-32.0%</code> / <code>-38.0%</code>！</strong></td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
 <h3 id="f">【追问模块 F：解锁估值定价、隐含预期与击球区推演】</h3>
 <blockquote>
 <p><strong>估值解锁引言</strong>：在模块 D 彻底算清中际旭创“存量常态164.81亿元、在建投产后完全体常态219.31亿元”的真实股东盈余（Owner Earnings）底盘后，我们正式引入截至 <strong>2026年11月11日（以11月10日完整收盘数据及11月11日最新股本公告为基准）</strong> 的A+H股二级市场价格，剥开账面市值的水分，核算全款买下整家生意的<strong>真实企业价值（True EV）</strong>，并倒推当前价格背后的隐含预期与击球赔率。</p>
@@ -2506,13 +3118,13 @@
 <h5 id="2-true-ev535terahop">2. 穿透资产负债表核算 True EV：别被账上535亿现金迷了眼，也别漏了TeraHop的少数股权</h5>
 <p>如果一名全现金收购方要将中际旭创100%私有化并拿走其全部自由现金流，他实际需要支付的<strong>真实企业价值（True EV）</strong>必须经过以下三项加减法修正：</p>
 <ol>
-<li><strong><code>[+]</code> 少数股东权益（49.51亿元账面值 vs 隐含公允价值重估）</strong>：
-   截至2026年9月30日，合并资产负债表上的少数股东权益为 <strong>49.51亿元</strong>，且2026年前三季度少数股东损益达 <strong>18.57亿元</strong>（年化约24.76亿元）。这部分少数股权的核心载体是公司持股 <strong>67.70%</strong> 的海外旗舰控股孙公司 <strong>TeraHop Pte. Ltd.</strong>（其余 <strong>32.30%</strong> 少数股权由海外管理层、战投及合作方持有）。由于我们在模块 D 计算“归母净利润（182.01亿元）”与“归母Owner Earnings（164.81亿元）”时，<strong>已经在分子端严格扣除了归属于少数股东的利润与现金流</strong>，因此按会计与估值配比原则：</li>
-</ol>
+<li>
+<p><strong><code>[+]</code> 少数股东权益（49.51亿元账面值 vs 隐含公允价值重估）</strong>：
+   截至2026年9月30日，合并资产负债表上的少数股东权益为 <strong>49.51亿元</strong>，且2026年前三季度少数股东损益达 <strong>18.57亿元</strong>（年化约24.76亿元）。这部分少数股权的核心载体是公司持股 <strong>67.70%</strong> 的海外旗舰控股孙公司 <strong>TeraHop Pte. Ltd.</strong>（其余 <strong>32.30%</strong> 少数股权由海外管理层、战投及合作方持有）。由于我们在模块 D 计算“归母净利润（182.01亿元）”与“归母Owner Earnings（164.81亿元）”时，<strong>已经在分子端严格扣除了归属于少数股东的利润与现金流</strong>，因此按会计与估值配比原则：</p>
 <ul>
 <li>在与<strong>归母口径Owner Earnings</strong>对比时，加回账面少数股东权益 <strong>49.51亿元</strong> 即可完成债权/股权边界闭合（甚至从严苛的归母口径出发，剔除少数股东权益后的归母EV更为纯粹；此处我们严格遵照标准公式将 <strong>49.51亿元</strong> 全额加回作为安全垫惩罚项；若按15倍PE重估TeraHop少数股权公允价值约370亿元，则对应分子必须同步加回TeraHop少数股东享有的约15亿—20亿元常态现金流，两相抵消后估值倍数一致）。</li>
 </ul>
-<ol start="2">
+</li>
 <li>
 <p><strong><code>[+]</code> 全口径有息负债（16.92亿元）</strong>：
    核查2026年三季报负债端，公司有息负债极度轻量，合计仅 <strong>16.92亿元</strong>：包括短期借款 <strong>3.36亿元</strong>、一年内到期的非流动负债 <strong>8.70亿元</strong>、长期借款 <strong>4.86亿元</strong>，应付债券为 <strong>0元</strong>。</p>
@@ -2589,18 +3201,20 @@
 <h5 id="1-true-ev-owner-earningsowner-earnings-yield">1. 静态回本年限（True EV / Owner Earnings）与隐含内生回报率（Owner Earnings Yield）</h5>
 <p>将 <strong>5,157.05亿元 True EV</strong>（以及5,550.94亿元表面市值）与我们在模块 D 中严苛推演的三把盈余标尺直接对撞，立刻可以看清当前价格的真实赔率：</p>
 <ul>
-<li><strong>标尺一：对比2026年高景气年化基准（年化归母净利298.00亿元 / 剔除扩产存货吞噬后的稳态高景气Owner Earnings约269.10亿元）</strong></li>
 <li>
-<p><strong>动态市盈率（PE-2026E）</strong>：<code>5,550.94 / 298.00 = 18.63倍</code>（True EV / 2026E归母净利仅为 <strong>17.31倍</strong>）。</p>
+<p><strong>标尺一：对比2026年高景气年化基准（年化归母净利298.00亿元 / 剔除扩产存货吞噬后的稳态高景气Owner Earnings约269.10亿元）</strong></p>
+<ul>
+<li><strong>动态市盈率（PE-2026E）</strong>：<code>5,550.94 / 298.00 = 18.63倍</code>（True EV / 2026E归母净利仅为 <strong>17.31倍</strong>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>高景气稳态回本年限（True EV / 高景气稳态OE）</strong>：<code>5,157.05 / 269.10 = 19.16年</code>，对应隐含内生回报率 <strong>5.22%</strong>（若按2026年实绩因百亿备货扣减后的表观OE 134.10亿元计，则为38.46年 / 2.60%）。</p>
 </li>
 <li>
 <p><strong>标尺二：对比存量资产跨周期常态底盘（常态归母净利 182.01亿元 / 常态Owner Earnings 164.81亿元）</strong></p>
-</li>
-<li>
-<p>当完全剥离1.6T首发暴利、将毛利率从46.39%砍回36.50%后：</p>
+<ul>
+<li>当完全剥离1.6T首发暴利、将毛利率从46.39%砍回36.50%后：</li>
+</ul>
 </li>
 <li>
 <p><strong>存量常态PE（市值 / 常态归母净利）</strong>：<code>5,550.94 / 182.01 = 30.50倍</code>（True EV口径为 <strong>28.33倍</strong>）。</p>
@@ -2610,9 +3224,9 @@
 </li>
 <li>
 <p><strong>标尺三：对比54.95亿元在建工程全面达产后的完全体跨周期常态底盘（完全体常态归母净利 242.81亿元 / 完全体常态Owner Earnings 219.31亿元）</strong></p>
-</li>
-<li>
-<p>考虑到54.95亿元在建工程的资金早已从账面支出（无需动用460.32亿元超额现金），待其未来12—18个月全面释放产能后：</p>
+<ul>
+<li>考虑到54.95亿元在建工程的资金早已从账面支出（无需动用460.32亿元超额现金），待其未来12—18个月全面释放产能后：</li>
+</ul>
 </li>
 <li>
 <p><strong>完全体常态PE（True EV / 完全体常态归母净利）</strong>：<code>5,157.05 / 242.81 = 21.24倍</code>（表面市值口径为 <strong>22.86倍</strong>）。</p>
@@ -2749,18 +3363,20 @@
 <h5 id="2-vs">2. 分档击球区推演：左侧收息观察区 vs 右侧黄金重锤区</h5>
 <p>基于模块 D 的常态Owner Earnings底盘（存量164.81亿元 / 完全体219.31亿元）与模块 F 的拆骨内在价值（3,654亿元底线价值），我们为严守安全边际的价值投资者划定两道精确到市值与股价的击球锚点：</p>
 <ul>
-<li><strong>第一档：【左侧底仓 / 观察击球区】——总市值 4,200亿—4,600亿元（对应A股股价约 358元—392元/股，True EV 约 3,800亿—4,200亿元）</strong></li>
 <li>
-<p><strong>估值隐含锚点</strong>：在此区间内，True EV 仅相当于完全体跨周期常态Owner Earnings（219.31亿元）的 <strong>17.3x—19.1x</strong>（隐含常态内生回报率跃升至 <strong>5.2%—5.8%</strong>），对应2026年高景气动态PE仅 <strong>14.0x—15.4x</strong>；第五层远期期权溢价被压缩至15%以内。</p>
+<p><strong>第一档：【左侧底仓 / 观察击球区】——总市值 4,200亿—4,600亿元（对应A股股价约 358元—392元/股，True EV 约 3,800亿—4,200亿元）</strong></p>
+<ul>
+<li><strong>估值隐含锚点</strong>：在此区间内，True EV 仅相当于完全体跨周期常态Owner Earnings（219.31亿元）的 <strong>17.3x—19.1x</strong>（隐含常态内生回报率跃升至 <strong>5.2%—5.8%</strong>），对应2026年高景气动态PE仅 <strong>14.0x—15.4x</strong>；第五层远期期权溢价被压缩至15%以内。</li>
+</ul>
 </li>
 <li>
 <p><strong>触发条件与操作策略</strong>：当市场因北美某家云大厂单季CapEx指引微调、或地缘关税传闻引发恐慌性杀估值，导致股价从当前471元再回撤 <strong>17%—24%</strong> 进入该区间时，安全边际已足够厚实，可分批建立 <strong>30%—50% 的基础底仓</strong>，同时享受公司每年分红+注销回购带来的约1.5%—2.0%现金回报垫。</p>
 </li>
 <li>
 <p><strong>第二档：【黄金重锤区 / 历史级满仓赔率区】——总市值 ≤ 3,650亿元（对应A股股价 ≤ 311元/股，True EV ≤ 3,256亿元）</strong></p>
-</li>
-<li>
-<p><strong>估值隐含锚点</strong>：此时公司总市值直接跌穿我们在Reverse SOTP中测算的<strong>前四层确定性内在价值底线（3,654.23亿元）</strong>！True EV（3,256亿元）对应完全体跨周期常态Owner Earnings（219.31亿元）的静态回本年限缩短至 <strong>14.8年</strong>（隐含常态内生回报率高达 <strong>6.75%</strong>），对应存量常态OE也仅为 <strong>19.7倍</strong>，对应2026年高景气PE更是跌至荒谬的 <strong>12.2倍</strong>——相当于市场把未来所有的3.2T升级、CPO演进、硅光溢价及全球第一的市场地位全部当成“零价值废纸”白送！</p>
+<ul>
+<li><strong>估值隐含锚点</strong>：此时公司总市值直接跌穿我们在Reverse SOTP中测算的<strong>前四层确定性内在价值底线（3,654.23亿元）</strong>！True EV（3,256亿元）对应完全体跨周期常态Owner Earnings（219.31亿元）的静态回本年限缩短至 <strong>14.8年</strong>（隐含常态内生回报率高达 <strong>6.75%</strong>），对应存量常态OE也仅为 <strong>19.7倍</strong>，对应2026年高景气PE更是跌至荒谬的 <strong>12.2倍</strong>——相当于市场把未来所有的3.2T升级、CPO演进、硅光溢价及全球第一的市场地位全部当成“零价值废纸”白送！</li>
+</ul>
 </li>
 <li>
 <p><strong>触发条件与操作策略</strong>：只要下文列出的“三条基本面死刑证伪红线”未触发，一旦市场因系统性流动性危机或极端情绪错杀将市值砸入3,650亿元以下，属于典型的“黄金掉在地板上”，应毫不犹豫挥出重锤满仓击球。</p>
@@ -2773,21 +3389,209 @@
 <hr/>
 <div class="annotated-row"><div class="main-col"><h5 id="3_6">3. 三条“基本面死刑证伪红线”（触及任意一条，无条件清仓离场！）</h5><p>在科技硬件投资中，“便宜”绝不能成为死守结构性衰败企业的借口。一旦中际旭创在未来经营中触及以下三条带有明确量化阈值的<strong>“死刑证伪红线”</strong>中的任意一条，说明其核心护城河或商业模式已发生不可逆的坍塌，无论当时股价跌得多便宜，必须无条件认错清仓：</p><ol>
 <li>
-<p><strong>【红线一：技术路线颠覆证伪——CPO/NPO跳过传统光模块商，或硅光良率崩盘导致毛利率结构性破位】</strong>
-   - <strong>量化阈值</strong>：若英伟达、博通在下一代交换机（如Rubin Ultra及后续架构）中全面推行CPO（光电共封装），且<strong>绕过中际旭创直接由台积电（CoWoS-L光学中介层）+ 天孚通信/Fabrinet完成光引擎封装交付</strong>，导致中际旭创在下一代高速光互连核心节点的<strong>定点份额跌破 20%</strong>；或者在行业尚未进入全面萧条期时，公司<strong>连续两个季度综合毛利率跌破 28.0%</strong>（证明自研硅光芯片未能形成成本护城河，沦为纯组装苦力）。</p>
+<p><strong>【红线一：技术路线颠覆证伪——CPO/NPO跳过传统光模块商，或硅光良率崩盘导致毛利率结构性破位】</strong></p>
+<ul>
+<li><strong>量化阈值</strong>：若英伟达、博通在下一代交换机（如Rubin Ultra及后续架构）中全面推行CPO（光电共封装），且<strong>绕过中际旭创直接由台积电（CoWoS-L光学中介层）+ 天孚通信/Fabrinet完成光引擎封装交付</strong>，导致中际旭创在下一代高速光互连核心节点的<strong>定点份额跌破 20%</strong>；或者在行业尚未进入全面萧条期时，公司<strong>连续两个季度综合毛利率跌破 28.0%</strong>（证明自研硅光芯片未能形成成本护城河，沦为纯组装苦力）。</li>
+</ul>
 </li>
 <li>
-<p><strong>【红线二：客户垂直整合与地缘脱钩证伪——北美前三大CSP客户订单流失或泰国基地遭无豁免高额制裁】</strong>
-   - <strong>量化阈值</strong>：若谷歌、Meta、英伟达、亚马逊等核心客户通过自研设计+扶持本土/纯外资代工厂（如Fabrinet、Coherent）实施激进的“去中资背景供应链”替代，导致中际旭创<strong>海外收入占比从当前的85%以上断崖式跌破 60%</strong>，或<strong>连续两个季度营收同比下滑超过 25% 且显著跑输新易盛、Coherent等同行15个百分点以上</strong>；又或美国政府对中际旭创泰国控股子公司（TeraHop）实施针对性实体清单封锁或加征 <strong>&gt;25% 的穿透性惩罚关税</strong> 且无法通过异地代工规避。</p>
+<p><strong>【红线二：客户垂直整合与地缘脱钩证伪——北美前三大CSP客户订单流失或泰国基地遭无豁免高额制裁】</strong></p>
+<ul>
+<li><strong>量化阈值</strong>：若谷歌、Meta、英伟达、亚马逊等核心客户通过自研设计+扶持本土/纯外资代工厂（如Fabrinet、Coherent）实施激进的“去中资背景供应链”替代，导致中际旭创<strong>海外收入占比从当前的85%以上断崖式跌破 60%</strong>，或<strong>连续两个季度营收同比下滑超过 25% 且显著跑输新易盛、Coherent等同行15个百分点以上</strong>；又或美国政府对中际旭创泰国控股子公司（TeraHop）实施针对性实体清单封锁或加征 <strong>&gt;25% 的穿透性惩罚关税</strong> 且无法通过异地代工规避。</li>
+</ul>
 </li>
 <li>
-<p><strong>【红线三：造血质量与资本纪律恶化证伪——巨额存货减值暴雷或乱搞跨界并购挥霍535亿现金】</strong>
-   - <strong>量化阈值</strong>：由于公司当前账面存货高达238.78亿元、应收账款达173.09亿元，若因技术代际切换失误导致<strong>单年度计提存货跌价准备及应收坏账损失超过当期归母净利润的 15%（即单年减值暴雷超30亿元）</strong>；或者管理层违背聚焦光互连主业的承诺，动用账上535.32亿元货币资金发起<strong>单笔超过 80亿元 的非相关多元化跨界并购（或大额低效关联交易）</strong>，且在<strong>连续四个季度经营性现金流净额（OCF）与归母净利润比值低于 0.50</strong> 的情况下依然盲目扩建低端产能。</p>
+<p><strong>【红线三：造血质量与资本纪律恶化证伪——巨额存货减值暴雷或乱搞跨界并购挥霍535亿现金】</strong></p>
+<ul>
+<li><strong>量化阈值</strong>：由于公司当前账面存货高达238.78亿元、应收账款达173.09亿元，若因技术代际切换失误导致<strong>单年度计提存货跌价准备及应收坏账损失超过当期归母净利润的 15%（即单年减值暴雷超30亿元）</strong>；或者管理层违背聚焦光互连主业的承诺，动用账上535.32亿元货币资金发起<strong>单笔超过 80亿元 的非相关多元化跨界并购（或大额低效关联交易）</strong>，且在<strong>连续四个季度经营性现金流净额（OCF）与归母净利润比值低于 0.50</strong> 的情况下依然盲目扩建低端产能。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在科技行业里钓鱼，最忌讳的就是在鱼群还没游过来的时候把鱼饵全撒光，或者在鲨鱼已经咬断渔网的时候还死抱着船舷不撒手——记住那3,650亿到4,500亿的击球标尺和这三条带血的死刑红线：没到便宜价之前管住你那双痒痒的手，万一哪天台积电和英伟达真的联手把可插拔光模块的桌子给掀了，你也得比兔子跑得还快，千万别跟一条正在过时的技术路线谈恋爱。</p></div></div></div></div>
 
 
 
+<hr/>
+<h4 id="2026-11-21-true-ev-reverse-sotp-ah">四、 ⚔️ 【2026-11-21 二元对峙铁面重校：严苛 True EV 还原、Reverse SOTP 拆骨纠偏、A/H 新分档击球区与非黑即白裁决表】</h4>
+<blockquote>
+<p><strong>🚨 终审强制覆盖声明</strong>：截至 <code>2026-11-20</code> 收盘，中际旭创 A 股已从 <code>11-10</code> 的 <code>471.00元</code> 重挫至 <strong><code>393.20元</code></strong>（<code>-3.72%</code>，较 <code>6/22</code> 泡沫极值 <code>1,415.68元</code> 已回撤 <code>-72.2%</code>），H 股（<code>03308.HK</code>）暴跌至 <strong><code>490.00港元</code></strong>（<code>-8.50%</code>，较 <code>7/30</code> IPO 发行价 <code>980港元</code> 精准腰斩 <code>-50.0%</code>；按真实央行汇率 <code>1 HKD = 0.855 CNY</code> 折合人民币 <strong><code>418.95元</code></strong>，竟然仍较 A 股存在 <strong><code>+6.55%</code> 的极端荒谬溢价</strong>！）。若沿用上文原稿旧买点（<code>358—392元</code>），投资者今日即会盲目接飞刀！经法医级穿透 2026Q3 财报附注与招股书资金用途，<strong>以下严苛归母 True EV、拆骨底线、重校两档买点与非黑即白裁决表全面替代旧版结论！</strong></p>
+</blockquote>
+<h5 id="1-true-ev-2026-11-20-117226-1-hkd-0855-cny">1. 终极严苛归母 True EV 穿透桥（2026-11-20 收盘 · 有效总股本 <code>11.7226亿股</code> · 真实汇率 <code>1 HKD = 0.855 CNY</code>）</h5>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">严苛 True EV 构成科目（人民币亿元）</th>
+<th style="text-align: center;">A 股基准<br/>(<code>300308.SZ @ 393.20元</code>)</th>
+<th style="text-align: center;">H 股基准<br/>(<code>03308.HK @ 490.00港元 ≈ 418.95元</code>)</th>
+<th style="text-align: left;">官方一手附注铁证与终审分层折价算式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. 二级市场有效总市值</strong>（拟注销 <code>565.31万股</code> 后 <code>11.7226亿股</code>）</td>
+<td style="text-align: center;"><strong><code>4,609.31</code></strong></td>
+<td style="text-align: center;"><strong><code>4,911.17</code></strong></td>
+<td style="text-align: left;">注：腾讯注销前 <code>11.7791亿股</code> A股市值 <code>4,631.54亿</code>，A+H混合有效市值 <code>4,625.45亿</code>；<strong>H股较A股溢价 <code>+6.55%</code>（凭空多出 <code>+301.86亿</code>！）</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(+) 26Q3 传统有息负债合计</code></td>
+<td style="text-align: center;"><code>+18.56</code></td>
+<td style="text-align: center;"><code>+18.56</code></td>
+<td style="text-align: left;">短借 <code>3.36</code> + <code>&lt;1y非流 8.70</code> + 长借 <code>4.86</code> + <strong>租赁负债 <code>1.64</code></strong>（补齐原稿漏项！）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(+) 长期应付款（子公司增资刚性回购义务·明股实债）</code></td>
+<td style="text-align: center;"><strong><code>+50.63</code></strong></td>
+<td style="text-align: center;"><strong><code>+50.63</code></strong></td>
+<td style="text-align: left;"><strong>红队核心击穿！</strong> 26Q3 暴增 <code>+462.44%</code>（精确 <code>5,063,000,635.38元</code>），附注实锤为 TeraHop 等子公司增资附带刚性股份回购义务</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(+) 非对赌普通少数股东权益（严谨防双重计算）</code></td>
+<td style="text-align: center;"><code>+9.56</code></td>
+<td style="text-align: center;"><code>+9.56</code></td>
+<td style="text-align: left;">2025年末少数股东权益 <code>18.56亿</code> 减年初回购负债 <code>9.00亿</code> = <code>9.56亿</code>（剔除已被 <code>50.63亿</code> 回购负债覆盖的 TeraHop 重复部分；全计则为 <code>49.51亿</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>优先求偿权合计</strong></td>
+<td style="text-align: center;"><strong><code>+78.75</code></strong></td>
+<td style="text-align: center;"><strong><code>+78.75</code></strong></td>
+<td style="text-align: left;">归母股东之上的真实债权及明股实债刚性兜底敞口</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(-) 分层折价后可扣减严苛净有效现金</code></td>
+<td style="text-align: center;"><strong><code>-155.25</code></strong></td>
+<td style="text-align: center;"><strong><code>-155.25</code></strong></td>
+<td style="text-align: left;"><strong>精确算式（彻底废除原稿无条件狂扣 <code>460.32亿</code>，亦纠偏红队极端归零）</strong>：26Q3 账面现金 <code>535.32亿</code> - <code>10/12</code> 已派中期分红 <code>14.07亿</code> = <code>521.25亿</code> - 全球供应链营运安全底仓 <code>90.00亿</code> = <strong><code>431.25亿</code></strong>（主体为 H股含绿鞋净募资 <code>608.30亿港元</code> 专户）。按招股书用途分层折现：① <strong>20% 一般/供应链韧性用途</strong>（<code>86.25亿</code>）× <strong><code>80%</code></strong> = <code>69.00亿</code>；② <strong>80% 专款锁死研发(<code>35%</code>)/扩产(<code>30%</code>)/并购(<code>15%</code>)</strong>（<code>345.00亿</code>）× <strong><code>25%</code></strong>（扣 75% 专款烧钱与资本错配折价）= <code>86.25亿</code> → 合计 <strong><code>155.25亿</code></strong>（综合折现率 <code>36.0%</code> / 折价 <code>-64.0%</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. 严苛 EV 调整差额（<code>ev_delta = 优先求偿权 - 有效现金</code>）</strong></td>
+<td style="text-align: center;"><strong><code>-76.50</code></strong></td>
+<td style="text-align: center;"><strong><code>-76.50</code></strong></td>
+<td style="text-align: left;">精确公式校验：<code>base_mcap + ev_delta == base_ev</code>（较旧法 <code>-393.89亿</code> 硬增 <strong><code>+317.39亿</code></strong>！）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>★ 3. 终审严苛归母 True EV（100% 对齐归母 OE）</strong></td>
+<td style="text-align: center;"><strong><code>4,532.81</code> 🚨</strong></td>
+<td style="text-align: center;"><strong><code>4,834.67</code> 🚫</strong></td>
+<td style="text-align: left;"><strong>A 股严苛 EV 仍高达 <code>4,533亿</code>；对应 TTM 真实 FCF（<code>31.43亿</code>）高达 <code>144.2x EV/FCF</code>！</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="2-ttm-reverse-sotp-2026-11-20">2. 严苛口径回报率、TTM 纯股息、Reverse SOTP 拆骨重校与新两档实战买点（2026-11-20 收盘基准）</h5>
+<ul>
+<li>
+<p><strong>核心回报与 TTM 纯现金股息（剔除 <code>884元</code> 高位自残回购与含股权激励用途新回购的水分！）</strong>：</p>
+</li>
+<li>
+<p><strong>A 股（<code>300308.SZ @ 393.20元</code>，严苛 True EV <code>4,532.81亿</code>）</strong>：</p>
+<ul>
+<li>严苛常态归母 OE <strong><code>112.00亿/年</code></strong> → 对应严苛 EV 内生回报率仅 <strong><code>2.47%</code></strong>（<strong><code>40.5 倍</code> EV/OE！</strong>）；</li>
+<li>严苛达产完全体归母 OE <strong><code>136.00亿/年</code></strong> → 对应严苛 EV 回报仅 <strong><code>3.00%</code></strong>（<strong><code>33.3 倍</code> EV/OE！</strong>）；</li>
+</ul>
+</li>
+<li>
+<p><strong>TTM 实派纯现金股息</strong>：2025 末期 <code>1.00元</code> + 2026 中期 <code>1.20元</code> = <strong><code>2.20 元/股</code></strong>（派息率仅占 TTM 净利 <code>9.72%</code>），对应 A 股股息率仅 <strong><code>0.56%</code></strong>！（9 月 <code>883.94元</code> 均价回购注销 <code>565.31万股</code> 两月即蒸发 <code>27.74亿</code> 属反面资本毁灭，11/18 提议的 <code>20–40亿</code> 回购含股权激励用途，一律按 <strong><code>0%</code></strong> 永久回报计！）</p>
+</li>
+<li>
+<p><strong>H 股（<code>03308.HK @ 490.00港元 ≈ 418.95元</code>，严苛 True EV <code>4,834.67亿</code>）</strong>：</p>
+<ul>
+<li>常态 EV 回报仅 <strong><code>2.32%</code></strong>（<code>43.2x</code>）、达产仅 <strong><code>2.81%</code></strong>（<code>35.5x</code>）、TTM 纯现金股息仅 <strong><code>0.53%</code></strong>（扣港股红利税后不足 <code>0.45%</code>），却较 A 股反常溢价 <strong><code>+6.55%</code></strong>，且 <strong>70 天后（2027年1月29日）</strong> 33 家深套腰斩（成本 <code>980港元</code>）的基石投资者 <strong><code>270.41亿港元</code></strong> 筹码将迎来禁售期届满解禁！</li>
+</ul>
+</li>
+<li>
+<p><strong>Reverse SOTP 严苛拆骨重校（彻底证伪旧稿 <code>3,654亿</code> 确定性底线！）</strong>：</p>
+</li>
+<li>
+<p><strong>① 存量产线常态基本盘</strong>：重校常态 OE <code>112.0亿</code> × <strong><code>13.0x</code></strong>（严控 CPO 终值压顶 + 无上游核心芯片折价，较旧稿 <code>14.0x × 164.81亿</code> 全面下修）= <strong><code>1,456.0 亿元</code></strong>；</p>
+</li>
+<li>
+<p><strong>② 54.95 亿在建工程保守增量盘</strong>：增量 OE <code>24.0亿</code> × <strong><code>12.0x</code></strong> = <strong><code>288.0 亿元</code></strong>；</p>
+</li>
+<li>
+<p><strong>③ 2026Q4—2027 年 1.6T 窗口期超额现金流折现</strong>：考虑年降加速与存货去化压力，保守认计一次性超额净现值 <strong><code>100.0 亿元</code></strong>；</p>
+</li>
+<li>
+<p><strong>【存量+在建经营底线合计】</strong>：<code>1,456.0 + 288.0 + 100.0</code> = <strong><code>1,844.0 亿元</code></strong>（叠加净有效现金 <code>+76.50亿</code> 后权益清算底线仅 <strong><code>1,920.5 亿元</code> ≈ <code>163.83元/股</code></strong>）！</p>
+</li>
+<li>
+<p><strong>冷酷对质结论</strong>：存量+在建经营底线（<code>1,844.0亿</code>）仅覆盖当前 A 股严苛 EV（<code>4,532.81亿</code>）的 <strong><code>40.7%</code></strong>！换言之，即便跌了 <code>-72%</code> 至 <code>393.20元</code>，市场仍在为充满 CPO 与地缘变数的 2028 年后远期期权支付高达 <strong><code>+2,688.8 亿元</code>（占 EV <code>59.3%</code>）的巨额泡沫溢价</strong>！</p>
+</li>
+<li>
+<p><strong>🔥 终审重校 A/H 两档实战击球区（彻底废除旧稿 <code>358—392元</code> 致命接飞刀线！）</strong>：</p>
+</li>
+<li>
+<p><strong>🇨🇳 A 股（<code>300308.SZ</code> · 现价 <code>393.20元</code> → ⏳ 高于重校第二档上沿 <code>+101.6%</code>，须再腰斩 <code>-50.4%</code>，严禁接飞刀！）</strong>：</p>
+</li>
+<li>
+<p><strong>🎯 第一档左侧重锤区</strong>：<strong><code>≤ 155.00 元</code></strong>（严苛 True EV <code>≤ 1,740.5亿</code>，存量+在建拆骨经营底线 <code>1,844亿</code> <strong>覆盖 <code>≥ 105.9%</code> 实现远期期权 0 元白送</strong>，常态 EV 回报 <strong><code>≥ 6.43%</code></strong> / <code>≤15.5x</code>，达产 <strong><code>≥ 7.81%</code></strong> / <code>≤12.8x</code>，股息 <code>≥ 1.42%</code>）</p>
+</li>
+<li>
+<p><strong>🟢 第二档正常左侧买点区</strong>：<strong><code>155.00 — 195.00 元</code></strong>（严苛 True EV <code>1,740.5—2,209.4亿</code>，拆骨覆盖 <code>83.5%—105.9%</code>，常态回报 <strong><code>5.07% — 6.43%</code></strong> / 达产 <strong><code>6.16% — 7.81%</code></strong>，逼近红队第一档温和空头目标 <code>188.89元</code>、充分消化周期均值回归与 CPO 压制）</p>
+</li>
+<li>
+<p><strong>🇭🇰 H 股（<code>03308.HK</code> · 现价 <code>490.00港元</code> → 🚫 <code>veto_h: true</code> 一票否决，严禁买高溢价 H 股！）</strong>：</p>
+</li>
+<li>
+<p><strong>🎯 H 股第一档重锤线</strong>：<strong><code>≤ 165.00 港元</code></strong>（折 <code>≤ 141.08元</code>，计入解禁后常态 <code>-10%</code> 流动性折价，严苛 EV <code>≤ 1,577亿</code>，常态回报 <code>≥ 7.10%</code> / 达产 <code>≥ 8.62%</code>）</p>
+</li>
+<li>
+<p><strong>🟢 H 股第二档参考区</strong>：<strong><code>165.00 — 205.00 港元</code></strong>（折 <code>141.08—175.28元</code>，<strong>在 2027-01-29 <code>270.41亿港元</code> 基石解禁出清且 H/A 转负折价之前，100% 严禁触碰 H 股！</strong>）</p>
+</li>
+</ul>
+<h3 id="2026-11-21">⚔️ 【2026-11-21 独立盲审做空“非黑即白”二元极限对质终极裁决表】</h3>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核心争议战场</th>
+<th style="text-align: left;">🔴 红队盲审做空指控（铁证与狙击逻辑）</th>
+<th style="text-align: left;">🔵 蓝队原报告主张（原稿口径与反击点）</th>
+<th style="text-align: left;">⚖️ 终审裁决官「非黑即白」铁面裁决（直接改数！）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>争议 1：<code>535亿</code> 现金成色、<code>50.63亿</code> 明股实债与严苛 True EV</strong></td>
+<td style="text-align: left;">80% IPO 募资（含绿鞋净额 <code>608.3亿港元</code>，纠偏蓝队误写 <code>534.1亿</code>）专款专用锁死研发/扩产/并购 + 10/12 已派红利 <code>14.07亿</code> + 营运底仓 <code>92.6亿</code> → 严苛口径扣 <code>0</code> 现金；补计租赁债 <code>1.64亿</code> + 长期应付款 <code>50.63亿</code>（TeraHop 回购义务）+ 非对赌少数股东 <code>9.56亿</code> = <code>+78.75亿</code> → EV <code>4,704亿</code></td>
+<td style="text-align: left;">仅计 <code>16.92亿</code> 传统债 + <code>49.51亿</code> 少数股东权益，直接从 <code>535.32亿</code> 狂扣 <code>460.32亿</code> 现金（仅留 <code>75亿</code> 底仓，漏扣 <code>14.07亿</code> 已派分红、漏计 <code>1.64亿</code> 租赁债与 <code>50.63亿</code> 长期应付款！）→ <code>ev_delta = -393.89亿</code></td>
+<td style="text-align: left;"><strong>🔴 红队击穿 85%（同时纠偏红队 0 现金极值）</strong>：全盘废除蓝队无条件狂扣现金与漏算 <code>50.63亿</code> 明股实债的硬伤！扣 <code>14.07亿</code> 已派分红与 <code>90亿</code> 营运底仓后，对 <code>431.25亿</code> IPO 资金池按招股书用途分层折现（20%一般用途8折 + 80%专款用途2.5折 = <strong><code>155.25亿</code></strong>），减 <code>+78.75亿</code> 优先求偿权 → <strong><code>ev_delta = -76.50亿</code></strong>，严苛归母 True EV 定格为 <strong>A股 <code>4,532.81亿</code> / H股 <code>4,834.67亿</code></strong>（较旧法硬增 <code>+317.39亿</code>）！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>争议 2：9M26 净利 <code>222.38亿</code> vs FCF <code>-11.53亿</code> 与 <code>412亿</code> 存货应收</strong></td>
+<td style="text-align: left;">9M26 净现比从 <code>100.9%</code> 断崖跌至 <code>36.01%</code>（OCF <code>80.08亿</code> - CapEx <code>91.61亿</code> = FCF <code>-11.53亿</code>），TTM FCF 仅 <code>31.43亿</code>（<code>149.7x EV/FCF</code>）；存货 <code>238.78亿</code>（期末周转 <code>172.9天</code>，资产减值仅计提 <code>1,390万</code>）+ 应收 <code>173.09亿</code> 吞噬全部净利，叠 <code>179.5亿</code> 固定/在建资产，一旦年降将爆存货跌价与折旧剪刀差</td>
+<td style="text-align: left;">存货增速 <code>+88.3%</code> 低于营收 <code>+178.1%</code>（林奇绿灯），Q3 应收对应 <code>~56天</code> 正常大厂账期，2021–2025 累计正 FCF 超百亿，定性为极速扩张期正常垫资</td>
+<td style="text-align: left;"><strong>🔴 红队击穿 75%</strong>：蓝队虽证伪“财务造假”（DSO 约 56 天与历史造血清白），但严重低估周期峰顶风险！在 <code>46.6%</code> 史诗暴利顶点竟录得负 FCF 且依赖 608 亿港元股权抽血，背负 <code>238.78亿</code> 高价锁料存货与 <code>179.5亿</code> 扩产资产（折旧将从 <code>7.4亿</code> 飙升至 <code>20–30亿+</code>），<strong>一旦 2027 年发生 <code>-15%~-25%</code> 年降或砍单，跌价计提与负经营杠杆极具杀伤力！</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>争议 3：跨周期常态 OE——<code>164.81→219.31亿</code> 周期锚定 vs <code>79.05亿</code> 空头均值回归</strong></td>
+<td style="text-align: left;">26Q3 已现“营收 <code>+24.6% QoQ</code>、净利仅 <code>+8.5% QoQ</code>、净利率骤降 <code>-460bps</code>”拐点；无上游高端 EML/3nm DSP（第一大外购商占 <code>32%–38%</code>），2019–2022 毛利仅 <code>24.5%–27.1%</code>，按 <code>600亿</code> 营收 / <code>28%</code> 毛利砸出基准 OE <code>79.05亿</code>（深度 <code>43.99亿</code>）</td>
+<td style="text-align: left;">按存量 <code>820亿</code> 营收 / <code>36.5%</code> 毛利给归母 OE <code>164.81亿</code>，叠加 54.95亿在建工程按 <code>5.35x</code> 高周转给到 <code>1,114亿</code> 营收 / <code>219.31亿</code> 完全体 OE</td>
+<td style="text-align: left;"><strong>🔴 红队重锤击穿 70%（🛡️ 蓝队硅光红利反杀 28% 极值）</strong>：彻底废除蓝队 <code>36.5%</code> 毛利与 <code>1,114亿</code> 营收幻想！但空头照搬 2019 年纯组装 <code>28%</code> 毛利亦忽视自研 CMOS 硅光（渗透率 <code>&gt;60%</code>）的真实 BOM 降本优势。终审按 <code>700亿</code> 营收 / <code>32.0%</code> 毛利 / <code>145%</code> 代际更新 CapEx / <code>9.5%</code> 少数股东扣减 → <strong>硬砍常态归母 OE <code>-32.0%</code> 至 <code>112.0亿/年</code>（达产 <code>-38.0%</code> 至 <code>136.0亿/年</code>）</strong>，现价对应 <strong><code>40.5x</code> 常态 EV/OE</strong>！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>争议 4：NVIDIA Rubin CPO 去中介化 vs 开放式可插拔防线</strong></td>
+<td style="text-align: left;">NVIDIA Spectrum-X / Quantum-X Photonics CPO 已切入量产，核心链为 <code>TSMC COUPE + SPIL + Foxconn/Fabrinet + Lumentum/Coherent</code>，中际缺席核心名单；叠加铜进光退与 LPO 去 DSP 拉低 ASP <code>15%–25%</code>，<code>643亿$</code> 市值倒挂上游芯片寡头 Coherent/Lumentum 极度荒谬</td>
+<td style="text-align: left;">未来 2–3 年 Scale-Out 与 DCI 仍以 1.6T/3.2T 可插拔及 NPO 为主，Google/Meta/AWS 排斥英伟达封闭 CPO 绑定，且中际拥有自研硅光与 NPO/ELS 卡位</td>
+<td style="text-align: left;"><strong>🔴 红队击穿估值终值，🛡️ 蓝队守住 2027–2029 过渡期业务</strong>：蓝队对非英伟达云厂商在 2027–2028 年持续采购可插拔与 DCI 的判断成立（反杀空头 <code>46.84元</code> 一夜归零论）；但红队铁律不可反驳——<strong>只要英伟达建起绕开中国封装厂的 CPO 生态，中际终值倍数必须永久封顶在 <code>12x–13x</code>，绝不允许享有上游芯片寡头的市值溢价！</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>争议 5：资本运作审计——<code>980港元</code> 世纪逃顶、<code>884元</code> 自残回购与高管减持</strong></td>
+<td style="text-align: left;">实控人王伟修家族与董事长刘圣累计高位减持套现超 <code>41亿</code>；7/30 以 <code>980港元</code> 世纪逃顶套牢 33 家基石 <code>-50%</code>；9 月均价 <code>883.94元</code> 花 <code>49.97亿</code> 高位接盘回购，两月即浮亏 <code>-55.5%</code>（蒸发 <code>27.74亿</code>）；Q3 金融资产公允价值巨亏 <code>-5.89亿</code>，9M26 汇兑损失 <code>13.87亿</code>；11/18 新 <code>20–40亿</code> 回购含股权激励非全额注销；TTM 纯股息仅 <code>0.56%</code></td>
+<td style="text-align: left;">将 <code>49.97亿</code> 回购注销高度美化为“蒂姆·库克式范本”，仅轻描淡写高管减持，漏报 <code>884元</code> 巨额高位资本毁灭、<code>-5.89亿</code> 炒股亏损与 <code>13.87亿</code> 汇兑失血</td>
+<td style="text-align: left;"><strong>🔴 红队 100% 完胜</strong>：在泡沫顶点花 <code>50亿</code> 仅注销 <code>0.48%</code> 股本、两月烧毁 <code>27.74亿</code> 属于教科书级顺周期资本错配！叠加 <code>41亿+</code> 内部人套现、裸奔汇兑巨亏、<code>0.56%</code> 寒酸分红及新回购夹带员工激励，<strong>立刻撤销治理溢价赞歌，质地分重校打压至 <code>-0.5</code>（非注销回购按 <code>0%</code> 回报处理）！</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>争议 6：H 股 <code>03308.HK</code> <code>+6.55%</code> 荒谬溢价 + 2027-01-29 基石解禁核弹</strong></td>
+<td style="text-align: left;">H 股 <code>490港元</code>（折 <code>418.95元</code>）较 A 股 <code>393.20元</code> 反常溢价 <code>+6.55%</code>；70 天后（<code>2027-01-29</code>）33 家深套腰斩的基石（<code>270.41亿港元</code>，占基础发行 <code>49.12%</code>）解禁，极小流通盘瞬间近乎翻倍，首推做空 H 股</td>
+<td style="text-align: left;">竟将 H 股溢价误吹为“国际机构流动性溢价”，按过时 <code>0.91</code> 汇率估算，且完全未预警 2027 年 1 月底 270 亿港元基石解禁核弹</td>
+<td style="text-align: left;"><strong>🔴 红队 100% 完胜</strong>：<strong>立刻对 H 股 <code>03308.HK</code> 触发一票否决（<code>veto_h: true</code>, <code>quality_bonus_h: -5.0</code>, <code>🚨 T4 高溢价规避</code>）！</strong> 严禁在 <code>+6.55%</code> 溢价与 70 天后天量腰斩基石解禁前买入任何一股 H 股！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>争议 7：A 股击球区终审——旧 <code>358—392元</code> 接飞刀 vs 空头 <code>46.84—102.96元</code> 崩盘</strong></td>
+<td style="text-align: left;">给出基准空头目标 <code>102.96元</code>（<code>-73.8%</code>）、深度压力 <code>46.84元</code>（<code>-88.1%</code>）、温和一档 <code>188.89元</code>（<code>-52.0%</code>）</td>
+<td style="text-align: left;">旧稿划定左买区 <code>358—392元</code>（重锤 <code>≤311元</code>），对照今日 <code>393.20元</code> 几乎已触发买入信号！</td>
+<td style="text-align: left;"><strong>🔴 红队击穿旧买点，🛡️ 蓝队守住 <code>155元</code> 龙头底线</strong>：<strong>立刻废除 <code>358—392元</code> 致命接飞刀买点！</strong> 现价拆骨覆盖率仅 <code>40.7%</code>，须严控零仓位观望；但公司仍为全球 1.6T/硅光龙头且账面实握 <code>521亿</code> 现金，跌至 <code>46.84元</code>（市值 <code>549亿</code>≈白送全业务）过于极端。<strong>终审锚定 A 股新买点：<code>155.00—195.00元</code>（重锤 <code>≤155.00元</code>），静待周期回归砸出真黄金坑！</strong></td>
+</tr>
+</tbody>
+</table></div>
 <hr/>
 <h2 id="g">终章模块 G：投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）</h2>
 <blockquote>
@@ -2917,6 +3721,13 @@
 </tbody>
 </table></div>
 <hr/>
+<h3 id="6-2026-11-21-11-11">6. ⚖️ 【2026-11-21 零信任二元对峙终审合议裁决（全面刷新 11-11 旧坐标）】</h3>
+<p>在引入独立盲审做空报告的一手核验铁证（<code>9M26</code> FCF 跌穿零轴至 <code>-11.53亿</code>、<code>50.63亿</code> 长期应付款明股实债、80% IPO 募资专款锁死、<code>883.94元</code> 均价回购两月蒸发 <code>27.74亿</code>、Q3 金融投资亏 <code>-5.89亿</code>、<code>13.87亿</code> 汇兑损失，以及 <code>2027-01-29</code> H股 <code>270.41亿港元</code> 基石解禁核弹）并同步刷新至 <strong>2026-11-20 收盘坐标（A股 <code>393.20元</code> / H股 <code>490.00港元</code>）</strong> 后，四位投资大师达成<strong>零分歧终审合议</strong>：</p>
+<ul>
+<li><strong>🗳️ A 股（<code>300308.SZ @ 393.20元</code>）终审票决</strong>：<strong><code>0 票抄底 / 严禁接飞刀（⏳ T3 偏贵观望）</code></strong>！巴菲特收回对 9 月高位回购的“库克式赞誉”（在 <code>884元</code> 泡沫区烧毁 <code>27.74亿</code> 现金反证了资本配置短板），林奇指出虽然 <code>393元</code> 较年内高点已跌去 <code>-72%</code>、表观 PE 跌至 <code>17.88x</code>，但按重校跨周期归母常态 OE（<code>112.0亿</code> → 达产 <code>136.0亿</code>）与严苛 True EV（<code>4,532.81亿</code>）称重，<strong>依然高达 <code>40.5x</code> 常态 EV/OE、仅 <code>0.56%</code> 纯现金股息、拆骨底线仅兜住 <code>40.7%</code></strong>，属于教科书级的“硬件周期顶点低 PE 陷阱”！<strong>全体一致废除旧 <code>358—392元</code> 买点，死守重校两档纪律：<code>155.00—195.00元</code> 分批左侧建仓，<code>≤155.00元</code> 黄金重锤！</strong></li>
+<li><strong>🚫 H 股（<code>03308.HK @ 490.00港元 ≈ 418.95元</code>）终审票决</strong>：<strong><code>一票否决（veto_h: true · 🚨 T4 高溢价规避）</code></strong>！较 A 股畸高溢价 <code>+6.55%</code> 且 70 天后即面临 33 家腰斩基石 <code>270.41亿港元</code> 解禁洪峰，<strong>100% 严禁买入溢价 H 股</strong>，待解禁出清且 H/A 转负折价并落入 <code>165.00—205.00港元</code>（重锤 <code>≤165.00港元</code>）后再行评估！</li>
+</ul>
+<hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
 <p><strong>前面那十万字的财报细节和模型我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【中际旭创】这家企业，你只需要在脑子里记住这四件事：</strong></p>
@@ -2925,24 +3736,29 @@
 <p>外行看光模块，总觉得它就是个“两头受气的组装厂”——上游最贵的光芯片和电芯片捏在欧美巨头手里，下游又是谷歌、英伟达、亚马逊这帮全世界最精明、最会压价的超级买方，凭什么它能赚得盆满钵满？真相在于：<strong>它卖的根本不是静态的标准零件，而是全球AI算力每一年半到两年强制升级一次的“工程首发时间差”和“自研硅光芯片良率”</strong>。当传输速度从800G跳到1.6T甚至3.2T，谁能提前半年配合英伟达和谷歌把新一代架构调通、在头四个季度把多通道光电耦合的量产良率干到九成以上，谁就能独吞首发窗口期最大块的肥肉和超高毛利；等二三线小厂吭哧吭哧把良率磨出来，大客户早就切换到下一代产品了。永远比老二快半圈的工程迭代能力，外加提前十年布局、如今渗透率过半的自研硅光芯片降本杀手锏，就是它谁也抢不走的铁饭碗。</p>
 <h3 id="2_7">2. 它的财务家底和经营周期现在发生了什么本质变化？（为什么它是真印钞机还是苦力）</h3>
 <p>现在的旭创正站在AI算力军备竞赛最炽热的聚光灯下：随着1.6T光模块大规模放量和自研硅光方案普及，它的盈利能力已经冲到了历史极值，一年赚的净利润达到了两三百亿级别，刚在港股完成上市募资后，账上更是躺着五百多亿净现金，还拿出了几十亿真金白银回购自家A股并彻底注销。但作为你的买方研究员，我必须帮你保持绝对清醒：<strong>这门生意在骨子里依然带有鲜明的“重资产科技周期”宿命</strong>。为了保住全球第一的王座，它每两年就得砸下上百亿资本开支去买最新一代的高速耦合与测试机台，仓库里为了保交付更是备下了两百多亿的存货。它是一台马力惊人的印钞机，但绝不是一台可以停下脚步躺着收租的永动机。</p>
-<h3 id="3_7">3. 市场担心的那些“软肋”，到底是真死穴还是纸老虎？（买方真伪辩证 &amp; 危中之机）</h3>
-<p>市场上关于旭创的鬼故事每天都在飞，我替你逐一剥离了噪音，<strong>前两个大家最怕的风险其实是“纸老虎”或洗牌契机，只有第三个才是决定买卖赔率的真命门</strong>：</p>
+<h3 id="3-2026-11-21">3. 市场担心的那些“软肋”，到底是真死穴还是纸老虎？（2026-11-21 二元对峙终审真伪辩证）</h3>
+<p>经过独立盲审做空机构与原报告的刺刀对质，关于旭创的几大争议已经彻底水落石出，<strong>别再轻信“跌了 72% 就是白菜价”或“账上 535 亿全是闲钱”的多头催眠话术</strong>：</p>
 <ul>
 <li>
-<p><strong>第一，所谓“CPO（共封装光学）技术把传统可插拔光模块彻底革除”的软肋 $
-ightarrow$ 【未来两三年内被严重夸大的纸老虎】</strong>：很多人怕英伟达搞CPO直接把光引擎焊在交换机芯片旁，甩开光模块厂。但实际上，CPO在散热、返修和良率上还有一堆工程难关，未来两三年在机柜间互连（Scale-Out）的主战场上，1.6T和3.2T可插拔模块及NPO依然是绝对主力；更重要的是，谷歌、亚马逊、Meta这三大自研算力芯片的云巨头极度排斥被英伟达的封闭生态绑架，坚定支持开放标准的可插拔模块，而且旭创自己在硅光光引擎和NPO上早就卡好了身位。</p>
+<p><strong>第一，账面“535 亿现金 + 负自由现金流 + 50.63 亿明股实债”的真相 → 【被原稿严重美化的真风险】</strong>：2026 年前三季度公司账面狂赚 <code>222.38 亿</code> 净利，但经营现金流仅 <code>80.08 亿</code>、资本开支暴增至 <code>91.61 亿</code>，<strong>自由现金流已转负（<code>-11.53 亿</code>）</strong>，全靠 <code>411.87 亿</code> 存货与应收垫资吸干；账面 <code>535.32 亿</code> 现金主体是 <code>7/30</code> H股按 <code>980 港元</code> 募来的 <code>608.30 亿港元</code> 专户资金（80% 刚性绑定研发/扩产/并购，绝不能当无条件净现金狂扣！），还要扣掉 <code>10/12</code> 已派的 <code>14.07 亿</code> 红利、并补上暴增 <code>+462%</code> 至 <code>50.63 亿</code> 的 TeraHop 子公司刚性回购负债（明股实债）。分层折价后净有效现金仅 <code>155.25 亿</code>，扣完优先求偿权仅净减 <code>76.5 亿</code>，<strong>严苛 True EV 高达 <code>4,532.81 亿</code></strong>！</p>
 </li>
 <li>
-<p><strong>第二，所谓“北美关税与二三线同行价格战”的软肋 $
-ightarrow$ 【已通过海外产能化解、且能在寒冬熬死对手的危中之机】</strong>：公司早就把海外核心制造搬到了泰国，并引入阿布扎比投资局和淡马锡作为海外主体战略股东，合规护城河很深；至于价格战，二三线小厂全靠借债、高价外购芯片扩产，真要是行业降温打起价格战，手握五百多亿净现金、又有低成本自研硅光芯片的旭创，反而能趁机把高成本对手彻底清出牌桌。</p>
+<p><strong>第二，所谓“CPO 颠覆与客户集中”的软肋 → 【2027–2028 过渡期不会一夜归零，但永久锁死估值天花板】</strong>：未来两三年谷歌、Meta、亚马逊在机柜间互连（Scale-Out）与跨数据中心（DCI）仍离不开 1.6T/3.2T 可插拔及自研硅光（这反杀了空头 <code>46.84 元</code> 的一夜清零论）；但英伟达 Rubin 世代 CPO 已切入量产且核心链锁定台积电/矽品/Fabrinet/Lumentum，叠加前五大客户集中度飙升至 <code>81.9%</code>、美国市场占 <code>61.7%</code>，<strong>中际旭创的终值倍数必须永久封顶在 <code>12x–13x</code>，绝不能再当 30 倍科技成长股定价</strong>。</p>
 </li>
 <li>
-<p><strong>第三，“下游云巨头资本开支放缓引发的峰值毛利率均值回归与两百多亿存货减值” $
-ightarrow$ 【真正无法违抗的周期地心引力】</strong>：再伟大的硬件制造厂，面对谷歌和英伟达这样的买方，接近五成的超高毛利率和三成多的净利率也绝不可能是永久稳态。一旦明年或后年下游大模型变现慢于预期、云厂商把算力投资增速往下调一调，或者取消缺货期的“双倍下单”，高额机台折旧加上两百多亿存货的消化压力，必然会让它的利润率向常态中枢回归。</p>
+<p><strong>第三，“46.6% 峰值毛利率回归 + 238.78 亿高价存货 + 资本配置失分” → 【当下最具杀伤力的周期地心引力】</strong>：2026Q3 已出现“营收环比 <code>+24.6%</code>、净利环比骤降至 <code>+8.5%</code>、净利率掉 <code>460 bps</code>”的钝化信号；更扎眼的是实控人及董事长高位累计减持超 <code>41 亿</code>、9 月管理层竟在 <strong><code>883.94 元</code></strong> 均价砸 <code>49.97 亿</code> 回购两月浮亏 <code>-55.5%</code>（蒸发 <code>27.74 亿</code>）、Q3 炒股公允价值亏 <code>-5.89 亿</code>、9M26 汇兑损失 <code>13.87 亿</code>，而 TTM 纯现金股息率仅寒酸的 <strong><code>0.56%</code></strong>！</p>
 </li>
 </ul>
-<h3 id="4_1">4. 咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
-<p>看懂了这层周期钟摆，咱们的操作纪律就铁板钉钉了：<strong>好公司不等于在任何价格下都是好股票</strong>。当全世界都知道它是AI卖铲王、毛利率站在接近五成的历史最高峰、表面市盈率看着只有十几个点的时候，千万别被周期高点的“低市盈率幻觉”骗去满仓梭哈，因为此时的上下行赔率是对称的，甚至看到内部人高位减持时更要多一份克制。对付这种顶级硬科技周期龙头，最赚钱的买法永远是“等坏消息”——等哪天北美某家云巨头传出削减资本开支、或者下一代技术争论把市场吓得魂飞魄散，股价把毛利率回归的悲观预期彻底砸出来、扣除五百亿净现金后的核心业务回到十倍出头的常态估值时，那才是咱们仗着它五百亿现金防弹衣闭眼重锤的黄金买点。</p>
+<h3 id="4-2026-11-21">4. 咱们到底该怎么买它、怎么赚它的钱？（2026-11-21 重校实战操作底线）</h3>
+<p>记住查诺斯和巴菲特共同敲响的警钟：<strong>周期性硬件制造股永远在 PE 最高（甚至亏损）时见底，而在 PE 看着只有 <code>17.88 倍</code>、毛利率站在 <code>46.6%</code> 外太空的顶峰最危险！</strong> 经终审挤干水分重校，公司跨周期归母常态 Owner Earnings 仅为 <strong><code>112.0 亿/年</code>（在建达产 <code>136.0 亿/年</code>）</strong>——这意味着今天 <code>393.20 元</code> 的 A 股看似腰斩再腰斩，实质仍高达 <strong><code>40.5 倍</code> 常态 EV/OE</strong>，存量+在建拆骨经营底线（<code>1,844 亿</code>）仅兜住严苛 EV 的 <strong><code>40.7%</code></strong>！</p>
+<ul>
+<li>
+<p><strong>🇨🇳 A 股（<code>300308.SZ</code>）死命令</strong>：<strong>彻底废除旧 <code>358—392 元</code> 买点，现价 <code>393.20 元</code> 坚决 <code>0 票抄底</code>、绝不接飞刀！</strong> 耐心等待 2027 年 1.6T 年降落地、存货与折旧压力彻底释放，待股价再腰斩回调至 <strong><code>155.00 — 195.00 元</code></strong>（严苛 EV 回报 <code>5.07%—6.43%</code>）再考虑分批左侧建仓，跌破 <strong><code>≤ 155.00 元</code></strong>（拆骨经营底线 <code>≥105.9%</code> 全覆盖、常态回报 <code>≥6.43%</code> / 达产 <code>≥7.81%</code>）才是真正的黄金重锤区！</p>
+</li>
+<li>
+<p><strong>🇭🇰 H 股（<code>03308.HK</code>）死命令</strong>：<strong>一票否决（<code>veto_h: true</code>），严禁买入！</strong> 现价 <code>490.00 港元</code>（折 <code>418.95 元</code>）反常较 A 股溢价 <strong><code>+6.55%</code></strong>，且 <strong>70 天后（2027 年 1 月 29 日）</strong> 33 家深套腰斩的基石投资者 <strong><code>270.41 亿港元</code></strong> 筹码即将集中解禁，属于极度高危的筹码踩踏区，在解禁出清且跌入 <strong><code>165.00 — 205.00 港元</code></strong>（重锤 <code>≤ 165.00 港元</code>）前，连一根手指都不要碰！</p>
+</li>
+</ul>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -3134,7 +3950,7 @@ ightarrow$ 【真正无法违抗的周期地心引力】</strong>：再伟大的
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《中际旭创 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中际旭创 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《中际旭创(300308.SZ) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中际旭创(300308.SZ) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3331,6 +4147,553 @@ ightarrow$ 【真正无法违抗的周期地心引力】</strong>：再伟大的
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
