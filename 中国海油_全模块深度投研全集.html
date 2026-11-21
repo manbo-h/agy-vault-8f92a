@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>中国海油 深度投研全集</title>
+<title>中国海油(600938.SH) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">中国海油 深度投研全集</div>
+    <div class="report-title">中国海油(600938.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-21</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -892,7 +1350,10 @@
     </div>
   </div>
   <div class="report-content">
-    <h1 id="600938sh-00883hk20252026">中国海油（600938.SH / 00883.HK）全景基本面、成本硬实力、动态进化与长期商业价值深度调研（2025年报+2026三季报·随身芒格旁批+大师圆桌终极版）</h1>
+    <h1 id="600938sh-00883hk202520262026-11-21">中国海油（600938.SH / 00883.HK）全景基本面、成本硬实力、动态进化与长期商业价值深度调研（2025年报+2026三季报·随身芒格旁批+大师圆桌终极版·2026-11-21 二元对峙重校版）</h1>
+<blockquote>
+<p><strong>⚔️ 2026-11-21 红蓝二元极限对峙终审重校声明</strong>：本版已历经零信任独立盲审做空报告与原投研底稿的“非黑即白”法医级交叉对峙，行情锚已刷新至 <strong>2026年11月20日收盘</strong>（A股 <code>30.29元</code> / H股 <code>21.70港元</code>，真实汇率 <strong><code>1港元 = 0.855人民币</code></strong> / <strong><code>1美元 = 6.67人民币</code></strong>，A/H溢价撕裂至 <strong><code>+63.26%</code></strong>）。原稿全部硬核产业研究均予保留，但在 <strong>模块 D（常态 OE 重校）、模块 F（严苛 True EV 穿透、8项非黑即白对峙裁决表与 A/H 新两档击球区）、模块 G（大师重校票决）及模块 H（研究员交底）</strong> 已执行铁面手术修正，一切核心估值、回报率与操作指令均以 <strong>2026-11-21 二元对峙重校口径</strong> 为终极准绳！</p>
+</blockquote>
 <p><strong>报告锚定基准期</strong>：2021—2025年经审计年度报告（含2026年3月27日发布的《2025年年度报告》）、2026年半年度报告（2026年8月27日发布）及2026年第三季度报告（2026年10月31日发布，截至2026年9月30日最新完整法定披露财报）及最新外部监管与资产交割动态。</p>
 <hr/>
 <h2 id="_1">【开篇破题：两段话直击生意灵魂与当期核心张力】</h2>
@@ -915,14 +1376,16 @@
 </li>
 <li>
 <p><strong>凑规模但必不可少的通道业务——油气贸易及其他配套（占总营收约14%—15%，微利走量）</strong>：</p>
-</li>
-<li>
-<p>2025年油气贸易（营销）收入为536.84亿元、其他业务收入88.84亿元（2026年前三季度贸易及其他非油气销售收入合计502.20亿元）。很多初看财报的人会疑惑为什么纯粹的采油企业会有五百多亿的贸易流水。本质上，这主要源于中外合作“产品分成合同（PSC）”下公司代为包销外国合作方分得的份额油，以及国际贸易子公司为平滑船期、调配不同API度原油品种开展的背靠背转手贸易。这块业务毛利率极低（通常仅1%—2%），不承担核心库存跌价敞口，属于典型的“过水通道”，分析真实盈利能力时应重点紧盯油气销售主业。</p>
+<ul>
+<li>2025年油气贸易（营销）收入为536.84亿元、其他业务收入88.84亿元（2026年前三季度贸易及其他非油气销售收入合计502.20亿元）。很多初看财报的人会疑惑为什么纯粹的采油企业会有五百多亿的贸易流水。本质上，这主要源于中外合作“产品分成合同（PSC）”下公司代为包销外国合作方分得的份额油，以及国际贸易子公司为平滑船期、调配不同API度原油品种开展的背靠背转手贸易。这块业务毛利率极低（通常仅1%—2%），不承担核心库存跌价敞口，属于典型的“过水通道”，分析真实盈利能力时应重点紧盯油气销售主业。</li>
+</ul>
 </li>
 <li>
 <p><strong>历史包袱与边缘拖后腿项——北美高成本非常规油砂与部分老旧海外区块</strong>：</p>
-</li>
+<ul>
 <li>2013年并购加拿大尼克森（Nexen）遗留的加拿大长湖（Long Lake）油砂项目，由于蒸汽辅助重力泄油（SAGD）工艺能耗高、稀释沥青管道运输贴水大，长期处于成本曲线最右端。公司近年通过关停低效井、推进再气化改造将其从失血泥潭中拉出，并坚持在景气期审慎计提减值清理历史包袱（2024年计提资产减值及跌价准备80.47亿元、2025年计提38.09亿元、<strong>2026年前三季度趁油价高位再度审慎计提资产减值损失72.43亿元</strong>），使核心资产包愈发纯净。</li>
+</ul>
+</li>
 </ul>
 <h3 id="2">2. 产业周期时钟与“寒冬博弈身位”：供给端资本开支约束下的“熬鹰赢家”</h3>
 <p>2025年至2026年的国际油价走势（2025年布伦特均价跌至68.2美元/桶 → 2026年前三季度受中东地缘冲突与全球上游供给瓶颈驱动回升至88.86美元/桶），生动验证了当前全球油气行业所处的特殊周期位置：<strong>需求端虽受电动化转型影响增速趋缓，但供给端受过去十年全球油气巨头ESG资本开支长期欠账、在产老油田每年6%—8%的自然递减以及北美页岩油核心甜点区（Tier-1库存井）老化制约，全行业处于“底部刚性极强、一旦遭遇地缘脉冲即向上高弹性爆发”的结构性紧平衡阶段。</strong></p>
@@ -1400,10 +1863,12 @@
 <h3 id="2_2">2. 研发真实投向与技术/商业模式动态进化：从“买西方黑匣子”到“深水全栈自主”</h3>
 <p>中国海油的研发高度聚焦于解决海底极端工况下的增储降本难题（2025年至2026年持续攻关深水深层关键核心技术）：</p>
 <ul>
-<li><strong>底层钻完井与水下硬科技突破——“璇玑”系统、深水采油树自主化与三大2026年最新技术利器</strong>：</li>
-<li>自主研发的<strong>“璇玑”旋转导向钻井与随钻测井系统</strong>已实现全球超2,000口井规模化应用，彻底打破斯伦贝谢、贝克休斯垄断，并在2025年实现<strong>深水水下采油树及控制系统自主化阶段性突破</strong>；</li>
 <li>
-<p>2026年上半年，公司再添三项硬核工程突破：<strong>① 攻克深层万米级大位移井垂深与位移双重极限延伸难题</strong>，形成超深大位移井高效建产技术；<strong>③ 创新形成350°C高温电泵注采一体化技术</strong>，在渤海垦利10-2稠油热采油田全面推广应用并实现连续两轮有效注采，撬动渤海数亿吨稠油储量经济动用；<strong>③ 成功使用国内首艘自主集成大型压裂船完成首批海上压裂作业</strong>，为海上低渗油气田开发提供了经济有效的破局方案！</p>
+<p><strong>底层钻完井与水下硬科技突破——“璇玑”系统、深水采油树自主化与三大2026年最新技术利器</strong>：</p>
+<ul>
+<li>自主研发的<strong>“璇玑”旋转导向钻井与随钻测井系统</strong>已实现全球超2,000口井规模化应用，彻底打破斯伦贝谢、贝克休斯垄断，并在2025年实现<strong>深水水下采油树及控制系统自主化阶段性突破</strong>；</li>
+<li>2026年上半年，公司再添三项硬核工程突破：<strong>① 攻克深层万米级大位移井垂深与位移双重极限延伸难题</strong>，形成超深大位移井高效建产技术；<strong>③ 创新形成350°C高温电泵注采一体化技术</strong>，在渤海垦利10-2稠油热采油田全面推广应用并实现连续两轮有效注采，撬动渤海数亿吨稠油储量经济动用；<strong>③ 成功使用国内首艘自主集成大型压裂船完成首批海上压裂作业</strong>，为海上低渗油气田开发提供了经济有效的破局方案！</li>
+</ul>
 </li>
 <li>
 <p><strong>深水工程范式进化——“深水水下生产系统+浅水导管架处理平台”远程回接模式</strong>：
@@ -1506,20 +1971,28 @@
 <h3 id="4">未来两到三年翻开财报必看的 4 个可量化、可证伪“硬核验证路标”</h3>
 <div class="annotated-row"><div class="main-col"><p>剥离二级市场短期的油价情绪噪音，后续每次定期报告披露时，请直接核验以下四把硬尺子：</p><ol>
 <li>
-<p><strong>【成本与效率铁尺】剔除从价税费后的桶油硬成本能否稳守底线（桶油作业费 ≤ 8.0 美元/桶、桶油 DD&amp;A ≤ 15.5 美元/桶）</strong>：
-   * 2026年前三季度桶油主要成本升至30.57美元/桶主要系86.32美元高油价拉升特别收益金所致；后续翻开2026年报与2027季报时，重点拆看<strong>桶油作业费（Lifting Cost）是否继续稳守在7.2—8.0美元/桶区间</strong>、<strong>桶油DD&amp;A是否稳在14.5—15.5美元/桶</strong>。只要这两项工程硬成本不失控，公司的全球前10%成本王座就坚不可摧。</p>
+<p><strong>【成本与效率铁尺】剔除从价税费后的桶油硬成本能否稳守底线（桶油作业费 ≤ 8.0 美元/桶、桶油 DD&amp;A ≤ 15.5 美元/桶）</strong>：</p>
+<ul>
+<li>2026年前三季度桶油主要成本升至30.57美元/桶主要系86.32美元高油价拉升特别收益金所致；后续翻开2026年报与2027季报时，重点拆看<strong>桶油作业费（Lifting Cost）是否继续稳守在7.2—8.0美元/桶区间</strong>、<strong>桶油DD&amp;A是否稳在14.5—15.5美元/桶</strong>。只要这两项工程硬成本不失控，公司的全球前10%成本王座就坚不可摧。</li>
+</ul>
 </li>
 <li>
-<p><strong>【储量接替生死尺】77.7 亿桶高基数下，内生储量替代率（RRR）能否维持在 120% 以上、储量寿命能否守住 10 年底线</strong>：
-   * 每年3月年报必看SEC口径净证实储量变动表：在年净产量迈上7.8亿—8.0亿桶油当量的高基数后，重点核验渤海深层（渤中8-3南）、南海（陵水36-1、惠州19-6、惠州21-8）及海外区块新探明及扩边储量能否继续支撑<strong>120%—150%以上的内生储量替代率，确保储量寿命（R/P）不跌破10年安全线</strong>。</p>
+<p><strong>【储量接替生死尺】77.7 亿桶高基数下，内生储量替代率（RRR）能否维持在 120% 以上、储量寿命能否守住 10 年底线</strong>：</p>
+<ul>
+<li>每年3月年报必看SEC口径净证实储量变动表：在年净产量迈上7.8亿—8.0亿桶油当量的高基数后，重点核验渤海深层（渤中8-3南）、南海（陵水36-1、惠州19-6、惠州21-8）及海外区块新探明及扩边储量能否继续支撑<strong>120%—150%以上的内生储量替代率，确保储量寿命（R/P）不跌破10年安全线</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>【重点资本开支转化尺】圭亚那第5—6期 FPSO（Uaru / Whiptail）与巴西桑托斯自营区块、国内深水项目投产兑现度</strong>：
-   * 跟踪2026全年能否顺利达成<strong>780—800百万桶油当量</strong>目标（前三季度已完成593.7百万桶，完成率75.2%），以及2026—2028年<strong>圭亚那Uaru、Whiptail两艘日产25万桶级FPSO</strong>、<strong>巴西Buzios 8满产爬坡与Ametista自营区块勘探</strong>是否按期推进，验证每年约1,150亿—1,200亿元资本开支向真实高毛利产量的转化效率。</p>
+<p><strong>【重点资本开支转化尺】圭亚那第5—6期 FPSO（Uaru / Whiptail）与巴西桑托斯自营区块、国内深水项目投产兑现度</strong>：</p>
+<ul>
+<li>跟踪2026全年能否顺利达成<strong>780—800百万桶油当量</strong>目标（前三季度已完成593.7百万桶，完成率75.2%），以及2026—2028年<strong>圭亚那Uaru、Whiptail两艘日产25万桶级FPSO</strong>、<strong>巴西Buzios 8满产爬坡与Ametista自营区块勘探</strong>是否按期推进，验证每年约1,150亿—1,200亿元资本开支向真实高毛利产量的转化效率。</li>
+</ul>
 </li>
 <li>
-<p><strong>【股东诚意与现金流安全尺】不低于 45% 的全年派息率兑现度、3,363 亿现金配置去向与资产减值监控</strong>：
-   * 继2026年中期派发0.94港元/股高额股息后，核查2026全年派息率是否严格兑现<strong>≥45%</strong>承诺（或随净现金突破2,300亿元进一步提升派息率/派发特别股息），中海石油财务公司存款是否继续严守<strong>220亿元</strong>规模边界，并关注2026年前三季度计提的<strong>72.43亿元资产减值损失</strong>在年报附注中的具体项目归属（是否集中于北美或海外特定区块一次性出清）。</p>
+<p><strong>【股东诚意与现金流安全尺】不低于 45% 的全年派息率兑现度、3,363 亿现金配置去向与资产减值监控</strong>：</p>
+<ul>
+<li>继2026年中期派发0.94港元/股高额股息后，核查2026全年派息率是否严格兑现<strong>≥45%</strong>承诺（或随净现金突破2,300亿元进一步提升派息率/派发特别股息），中海石油财务公司存款是否继续严守<strong>220亿元</strong>规模边界，并关注2026年前三季度计提的<strong>72.43亿元资产减值损失</strong>在年报附注中的具体项目归属（是否集中于北美或海外特定区块一次性出清）。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>记住这四把尺子就够了：作业费别破8美元、储量寿命别破10年、圭亚那和巴西的巨型抽油船按时下水、账上那3,363亿现金老老实实分给股东别拿去乱买垃圾矿。只要这四条铁律不破，不管华尔街明天早上把油价喊到100美元还是砸到60美元，你只需要稳稳坐在摇椅上收股息支票。</p></div></div></div></div>
 
@@ -2180,9 +2653,9 @@
 <ul>
 <li>
 <p><strong>第一幕：2025年油价下跌14.6%的“逆风抗压测试”</strong></p>
-</li>
-<li>
-<p><strong>业绩抗压总览</strong>：2025年布伦特原油均价跌至68.2美元/桶（同比-14.6%），中国海油平均实现油价同步下跌13.4%至 <strong>66.47美元/桶</strong>。作为100%纯上游公司，按理说油价跌13.4%会导致利润腰斩；但中国海油2025年全年依然交出了 <strong>营业收入3,982.20亿元（仅微降5.3%）、归母净利润1,220.82亿元（仅下降11.5%）、扣非归母净利润1,203.79亿元（仅下降9.8%）</strong> 的惊艳答卷！</p>
+<ul>
+<li><strong>业绩抗压总览</strong>：2025年布伦特原油均价跌至68.2美元/桶（同比-14.6%），中国海油平均实现油价同步下跌13.4%至 <strong>66.47美元/桶</strong>。作为100%纯上游公司，按理说油价跌13.4%会导致利润腰斩；但中国海油2025年全年依然交出了 <strong>营业收入3,982.20亿元（仅微降5.3%）、归母净利润1,220.82亿元（仅下降11.5%）、扣非归母净利润1,203.79亿元（仅下降9.8%）</strong> 的惊艳答卷！</li>
+</ul>
 </li>
 <li>
 <p><strong>三重护城河拆解（为什么利润跌幅-11.5%甚至比实现油价跌幅-13.4%还要小？）</strong>：</p>
@@ -2202,9 +2675,9 @@
 <ul>
 <li>
 <p><strong>第二幕：2026年1—9月油价大涨27.1%的“顺风进攻测试”</strong></p>
-</li>
-<li>
-<p><strong>量价齐升弹性</strong>：进入2026年前三季度，地缘冲突推动布伦特原油期货均价飙升至 <strong>88.86美元/桶（同比+27.1%）</strong>。中国海油平均实现油价同比大涨 <strong>26.4%</strong> 至 <strong>86.32美元/桶</strong>（其中第三季度单季实现油价更是高达 <strong>88.03美元/桶，同比暴涨32.1%</strong>），平均实现气价进一步上涨 <strong>3.4%</strong> 至 <strong>8.13美元/千立方英尺</strong>（单Q3达 <strong>8.41美元/千立方英尺</strong>）；同时油气净产量在2025年高基数上继续稳步增长 <strong>2.7%</strong> 至 <strong>593.7百万桶油当量</strong>（其中中国净产量 <code>408.5百万桶 +1.9%</code>，海外圭亚那与巴西项目发力驱动海外净产量达 <code>185.1百万桶 +4.3%</code>；石油液体产量 <code>464.4百万桶 +4.3%</code>）。</p>
+<ul>
+<li><strong>量价齐升弹性</strong>：进入2026年前三季度，地缘冲突推动布伦特原油期货均价飙升至 <strong>88.86美元/桶（同比+27.1%）</strong>。中国海油平均实现油价同比大涨 <strong>26.4%</strong> 至 <strong>86.32美元/桶</strong>（其中第三季度单季实现油价更是高达 <strong>88.03美元/桶，同比暴涨32.1%</strong>），平均实现气价进一步上涨 <strong>3.4%</strong> 至 <strong>8.13美元/千立方英尺</strong>（单Q3达 <strong>8.41美元/千立方英尺</strong>）；同时油气净产量在2025年高基数上继续稳步增长 <strong>2.7%</strong> 至 <strong>593.7百万桶油当量</strong>（其中中国净产量 <code>408.5百万桶 +1.9%</code>，海外圭亚那与巴西项目发力驱动海外净产量达 <code>185.1百万桶 +4.3%</code>；石油液体产量 <code>464.4百万桶 +4.3%</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>高减值与高税负下的真实暴利</strong>：2026年前三季度中国海油油气销售收入同比暴增 <strong>19.5%</strong> 至 <strong>3,053.54亿元</strong>（其中石油液体销售收入暴增 <strong>24.0%</strong> 至 <strong>2,653.58亿元</strong>），总营业收入达 <strong>3,555.74亿元（+13.8%）</strong>；<strong>哪怕在2026年前三季度主动计提了高达 72.43亿元 的资产减值损失（上年同期仅0.65亿元）以及多交了 57.39亿元 特别收益金与资源税（税金及附加同比+42.3%至193.20亿元）之后，归母净利润依然大增 16.8% 至 1,191.18亿元，扣非归母净利润大增 17.8% 至 1,189.25亿元，销售净利率高达 33.52%！</strong>（若还原72.43亿元资产减值，2026年前三季度实际内生税前利润增速高达 <strong>+20.2%</strong>！）</p>
@@ -2219,21 +2692,23 @@
 </li>
 <li>
 <p><strong>审讯乙方一：中海油服（601808.SH）——2025年净利逆势暴增22.5%至38.42亿元，2026年前三季度稳守32.33亿元高盈利平台！</strong></p>
-</li>
-<li>
-<p>2025年在国际油价大跌14.6%的寒冬里，中海油服全年实现营业收入 <strong>502.83亿元（+4.1%）</strong>，归母净利润逆势狂飙 <strong>22.5%</strong> 至 <strong>38.42亿元</strong>！进入2026年前三季度，中海油服营收进一步增长 <strong>2.5%</strong> 至 <strong>357.29亿元</strong>（单Q3营收119.41亿元，同比+3.5%），归母净利润达 <strong>32.33亿元（同比+0.7%）</strong>，归母净资产攀升至485.70亿元。</p>
+<ul>
+<li>2025年在国际油价大跌14.6%的寒冬里，中海油服全年实现营业收入 <strong>502.83亿元（+4.1%）</strong>，归母净利润逆势狂飙 <strong>22.5%</strong> 至 <strong>38.42亿元</strong>！进入2026年前三季度，中海油服营收进一步增长 <strong>2.5%</strong> 至 <strong>357.29亿元</strong>（单Q3营收119.41亿元，同比+3.5%），归母净利润达 <strong>32.33亿元（同比+0.7%）</strong>，归母净资产攀升至485.70亿元。</li>
+</ul>
 </li>
 <li>
 <p><strong>交叉结论</strong>：中海油服运营的 <strong>60座钻井平台</strong> 日历天使用率持续稳居90%左右的满负荷水位。如果甲方中国海油为了压低自己的桶油作业费（7.46美元/桶）而对乙方搞恶性压价，中海油服绝不可能在2025年实现净利+22.5%的跃升并在2026年稳居单季12亿元+的净利润高位！</p>
 </li>
 <li>
 <p><strong>审讯乙方二：海油工程（600583.SH）——前期近600亿天量订单在2026年全面进入结转兑现期，2026Q3单季净利大增16.15%、OCF暴增519%！</strong></p>
-</li>
+<ul>
 <li>
 <p>回看2025年：海油工程全年营收271.63亿元（-9.32%）、归母净利润20.84亿元（-3.56%）。为什么2025年海油工程营收微降？因为2025年它正忙着承揽高达372亿元+的国内外超级新订单（在手订单一度冲上595亿元），大量新项目处于前期图纸设计与钢材采办阶段，尚未达到按完工进度确认收入的高峰。</p>
 </li>
 <li>
 <p>到了 <strong>2026年前三季度</strong>，前期积压的国内渤海/南海深水平台与海外中东EPCI总包大单全面进入密集建造与海上安装高峰！海油工程2026年1—9月实现营业收入 <strong>194.61亿元（同比大增+10.19%；其中单Q3营收70.77亿元，同比+11.57%）</strong>，实现归母净利润 <strong>16.80亿元（同比+4.66%；其中单Q3归母净利5.88亿元，同比大增+16.15%，单Q3扣非净利更是大增+20.22%至5.34亿元）</strong>！更夸张的是现金流：2026年前三季度海油工程经营活动现金流净额（OCF）高达 <strong>33.93亿元（同比暴增+34.16%，单Q3单季OCF高达18.32亿元，同比暴增519.14%）</strong>！</p>
+</li>
+</ul>
 </li>
 <li>
 <p><strong>上下游博弈终局定性</strong>：甲方中国海油付款极其爽快（从不拖欠关联工程款，直接促成海油工程单季OCF暴增5倍），乙方中海油服与海油工程则通过模块化、标准化制造与高效率钻完井作业，帮助中国海油把国内海域桶油作业费死死钉在 <strong>6.75美元/桶</strong> 的全球深水极限低位。海油系甲乙双方共同构筑了坚不可摧的“深海产融工程共同体”。</p>
@@ -2258,56 +2733,60 @@
 </li>
 <li>
 <p><strong>中国石油（“油气和新能源分部”——纯上游板块）</strong>：</p>
-</li>
-<li>
-<p>即使完全剥离炼化与销售板块，只看中国石油最赚钱的“油气和新能源分部”（如2024年分部营收9,068.13亿元、分部经营利润1,597.45亿元；2025—2026年分部结构一致），其 <strong>纯上游分部经营利润率常年维持在 17.5%—19.0% 区间</strong>。</p>
+<ul>
+<li>即使完全剥离炼化与销售板块，只看中国石油最赚钱的“油气和新能源分部”（如2024年分部营收9,068.13亿元、分部经营利润1,597.45亿元；2025—2026年分部结构一致），其 <strong>纯上游分部经营利润率常年维持在 17.5%—19.0% 区间</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>中国石化（“勘探及开发事业部”——纯上游板块）</strong>：</p>
-</li>
-<li>
-<p>剥离下游炼化与营销后，只看中国石化“勘探及开发事业部”（如2024年分部收入2,972.00亿元、经营收益563.90亿元），其 <strong>纯上游分部经营利润率常年维持在 18.0%—19.5% 区间</strong>。</p>
+<ul>
+<li>剥离下游炼化与营销后，只看中国石化“勘探及开发事业部”（如2024年分部收入2,972.00亿元、经营收益563.90亿元），其 <strong>纯上游分部经营利润率常年维持在 18.0%—19.5% 区间</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>康菲石油（ConocoPhillips，全球最大纯上游独立油气巨头）</strong>：</p>
-</li>
-<li>
-<p>同为纯上游巨头，康菲石油税前经营利润率约为 <strong>25%—28%</strong>，净利率约为 <strong>15%—16.5%</strong>，整整比中国海油低了一半！</p>
+<ul>
+<li>同为纯上游巨头，康菲石油税前经营利润率约为 <strong>25%—28%</strong>，净利率约为 <strong>15%—16.5%</strong>，整整比中国海油低了一半！</li>
+</ul>
 </li>
 </ul>
 <blockquote>
 <p><strong>核心审讯结论</strong>：即便将两桶油的炼化与加油站全部剥离，只拎出最赚钱的纯上游板块同台竞技，<strong>中国海油的纯上游经营利润率（50%—55%）依然比中国石油上游分部（17.6%）高出约 35个百分点，比中国石化上游分部（19.0%）高出约 33个百分点，更是国际纯上游标杆康菲石油的两倍！</strong></p>
 </blockquote>
 <div class="annotated-row"><div class="main-col"><h4 id="2-3335">2. 四维拆解：这33—35个百分点的纯上游利润率鸿沟究竟从何而来？</h4><ol>
-<li><strong>第一重差异：7.46美元/桶（国内海域仅6.75美元/桶）的极限现金作业费 vs 陆上衰老油田的高昂抽汲成本</strong></li>
-</ol><ul>
+<li>
+<p><strong>第一重差异：7.46美元/桶（国内海域仅6.75美元/桶）的极限现金作业费 vs 陆上衰老油田的高昂抽汲成本</strong></p>
+<ul>
 <li>
 <p>根据《2025年年度报告》第285行官方披露：2025年中国海油桶油作业费进一步压降至 <strong>7.46美元/桶油当量</strong>（同比-2.0%），其中 <strong>中国海域桶油作业费仅为 6.75美元/桶</strong>（同比-1.7%），海外为9.18美元/桶（同比-1.4%）！</p>
 </li>
 <li>
 <p>对比之下，中国石油单位油气操作成本高达 <strong>12.05美元/桶</strong>（比中海油高出 <strong>4.59美元/桶</strong>，比中海油国内海域高出 <strong>78.5%</strong>！），中国石化现金操作成本折合约 <strong>14.70美元/桶</strong>（几乎是中海油全集团的 <strong>2倍</strong>、国内海域的 <strong>2.18倍</strong>！）。</p>
 </li>
-<li>
-<p><strong>产业物理本质</strong>：大庆、胜利、长庆等陆上主力老油田开发逾半个世纪，综合含水率高达85%—92%，需要数万台游梁式抽油机昼夜耗电抽水、高强度注入聚合物/三元复合驱油剂，并供养数十万名陆上采油厂职工与矿区后勤；而中国海油在渤海、南海的海上平台及海外圭亚那、巴西深水FPSO，单井自然地层能量充沛、单井日产量高达数百乃至上万桶，且“深海一号”等平台全面普及数智化无人值守与“台风生产模式”，单桶分摊的人工与动力费极低。仅作业费一项，按中海油年产7.77亿桶油当量计算，每年就比中石油、中石化同等产量多赚 <strong>250亿—400亿元人民币</strong> 的纯现金利润！</p>
+</ul>
 </li>
+</ol><ul>
+<li><strong>产业物理本质</strong>：大庆、胜利、长庆等陆上主力老油田开发逾半个世纪，综合含水率高达85%—92%，需要数万台游梁式抽油机昼夜耗电抽水、高强度注入聚合物/三元复合驱油剂，并供养数十万名陆上采油厂职工与矿区后勤；而中国海油在渤海、南海的海上平台及海外圭亚那、巴西深水FPSO，单井自然地层能量充沛、单井日产量高达数百乃至上万桶，且“深海一号”等平台全面普及数智化无人值守与“台风生产模式”，单桶分摊的人工与动力费极低。仅作业费一项，按中海油年产7.77亿桶油当量计算，每年就比中石油、中石化同等产量多赚 <strong>250亿—400亿元人民币</strong> 的纯现金利润！</li>
 </ul><ol start="2">
-<li><strong>第二重差异：每桶油当量真实净回值（Netback）的代际差</strong></li>
-</ol><ul>
+<li>
+<p><strong>第二重差异：每桶油当量真实净回值（Netback）的代际差</strong></p>
+<ul>
 <li>中石油、中石化的上游分部收入分母中，混杂了大量向内部炼厂调拨的关联结算流水及油田伴生工程劳务收入；若按硬碰硬的 <strong>“每生产一桶油当量创造的纯上游经营利润”</strong> 还原：中国石油每桶油当量仅赚 <strong>约12—13美元/桶</strong>，中国石化每桶油当量仅赚 <strong>约15美元/桶</strong>，而中国海油在2025年（油价66.47美元）每桶油当量赚 <strong>约30.5美元/桶</strong>，在2026年前三季度（油价86.32美元）每桶油当量更是狂赚 <strong>约37.5美元/桶</strong>！一桶油赚的钱是两桶油的 <strong>2.5—3倍</strong>！</li>
-</ul><ol start="3">
-<li><strong>第三重差异：海外圭亚那Stabroek（25%权益）与巴西Mero/Búzios盐下油田的“黄金现金奶牛”红利</strong></li>
-</ol><ul>
+</ul>
+</li>
+<li>
+<p><strong>第三重差异：海外圭亚那Stabroek（25%权益）与巴西Mero/Búzios盐下油田的“黄金现金奶牛”红利</strong></p>
+<ul>
 <li>2026年前三季度，中国海油海外净产量同比增长 <strong>4.3%</strong> 至 <strong>185.1百万桶油当量</strong>（占总产量的31.2%），核心增量全部来自全球油气工业皇冠上的明珠——<strong>圭亚那Stabroek区块</strong> 与 <strong>巴西盐下超深水大油田</strong>。圭亚那Stabroek区块享有极佳的产品分成合同（PSA）条款（最高75%的当期产油量作为Cost Oil优先回收投资与成本，25%的Profit Oil由承包商与政府五五分成，政府综合分成仅14.5%），且原油为低硫轻质甜油，实现价格贴近甚至溢价于布伦特；而康菲石油（COP）虽然产量体量相当，但其主力产区在美国本土页岩油气，不仅页岩井首年递减率高达40%—60%需无休止打井维持，且北美伴生天然气严重过剩（Henry Hub气价仅2—3美元/千立方英尺，不到中国海油 <strong>8.13美元/千立方英尺</strong> 实现气价的三分之一！）。</li>
-</ul><ol start="4">
-<li><strong>第四重差异：2.03%的极致期间费用率与负净财务费用（利息净收入）</strong></li>
-</ol><ul>
+</ul>
+</li>
+<li>
+<p><strong>第四重差异：2.03%的极致期间费用率与负净财务费用（利息净收入）</strong></p>
+<ul>
 <li>2026年前三季度，中国海油3,555.74亿元营收下，销售费用仅 <strong>3.83亿元</strong>（占营收 <strong>0.11%</strong>！因为原油和管道气直接批发给中石化、中石油炼厂与沿海大电厂，根本不需要养几万座加油站营销人员），管理费用仅 <strong>54.72亿元</strong>（占营收 <strong>1.54%</strong>），研发费用 <strong>10.59亿元</strong>（占营收 <strong>0.30%</strong>），财务费用仅 <strong>3.08亿元</strong>（其中利息收入高达 <strong>34.87亿元</strong>，远超利息费用 <strong>16.03亿元</strong>，实际实现 <strong>利息净收入18.84亿元</strong>！）。四项期间费用率合计仅 <strong><code>2.03%</code></strong>，把每一分毛利都原封不动地转化为了净利润。</li>
-</ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>陆上老油田抽上来十桶水才筛出一桶油，还得养活几十万人的庞大后勤社会；而中海油在中国海域抽一桶油的现金作业费只要6.75美元，3,555亿营收只花掉3.83亿销售费用！在大宗商品行业里，谁拥有最低的开采成本和最干净的费用表，谁就拥有免死金牌。</p></div></div></div></div>
-
-
-
-
-
+</ul>
+</li>
+</ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>陆上老油田抽上来十桶水才筛出一桶油，还得养活几十万人的庞大后勤社会；而中海油在中国海域抽一桶油的现金作业费只要6.75美元，3,555亿营收只花掉3.83亿销售费用！在大宗商品行业里，谁拥有最低的开采成本和最干净的费用表，谁就拥有免死金牌。</p></div></div></div></div>
 
 
 
@@ -2315,27 +2794,29 @@
 <hr/>
 <h3 id="_18">四、 份额与资源攻守结论：海洋油气扛起全国增储上产主旗，沿海高毛利气田构筑区域垄断壁垒</h3>
 <div class="annotated-row"><div class="main-col"><ol>
-<li><strong>国内原油战场：陆上老油田处于“高成本稳产防守态”，中国海油独占全国原油增量的75%—80%以上！</strong></li>
-</ol><ul>
+<li>
+<p><strong>国内原油战场：陆上老油田处于“高成本稳产防守态”，中国海油独占全国原油增量的75%—80%以上！</strong></p>
+<ul>
 <li>
 <p>正如董事长张传江在《2025年年度报告》致辞中明确指出的：“全年油气净产量再创新高，达777.3百万桶油当量，同比大幅增长7%。<strong>海洋油气已成为中国油气增储上产的核心力量</strong>”，公司更在2025年首次荣获 <strong>“全球最佳国家石油公司勘探企业”</strong> 称号，净证实储量飙升至 <strong>77.7亿桶油当量</strong>！</p>
 </li>
 <li>
 <p>2026年前三季度，中国海油再获5个新发现、成功评价23个含油气构造（包括渤中8-3南、惠州21-8、曹妃甸22-3等大中型油气田苗子），并成功投产渤中26-6油田开发项目（二期）、番禺10-4油田等9个新项目，国内净产量达 <strong>408.5百万桶油当量（+1.9%）</strong>，向2026全年 <strong>780—800百万桶油当量</strong> 的产量目标稳步挺进。</p>
 </li>
-</ul><ol start="2">
-<li><strong>沿海高毛利天然气战场：海气零长途管输费直供大湾区、海南与环渤海，实现气价逆势站上8.13美元/千立方英尺！</strong></li>
-</ol><ul>
+</ul>
+</li>
+<li>
+<p><strong>沿海高毛利天然气战场：海气零长途管输费直供大湾区、海南与环渤海，实现气价逆势站上8.13美元/千立方英尺！</strong></p>
+<ul>
 <li>
 <p>2025年，中国海油天然气销量暴增 <strong>13.1%</strong> 至984.0十亿立方英尺，实现气价逆势上涨 <strong>3.0%</strong> 至 <strong>7.95美元/千立方英尺</strong>；2026年前三季度，平均实现气价进一步攀升 <strong>3.4%</strong> 至 <strong>8.13美元/千立方英尺</strong>（第三季度单季更是达到 <strong>8.41美元/千立方英尺</strong>，折合人民币超2.1元/立方米）！</p>
 </li>
 <li>
 <p>相比于中国石油从新疆、陕甘宁跨越三四千公里管道输送到广东（沿途被国家管网扣除高昂长途管输费），中国海油的南海东部（惠州、番禺、白云气田群）、南海西部（“深海一号”一期/二期、东方、崖城气田群）与渤海（渤中19-6大型凝析气田）直接在家门口通过海底管道登陆广东珠三角、香港、海南及环渤海工业腹地，<strong>零长途跨省管输费损耗</strong>，牢牢锁死了中国经济最发达沿海地带的高毛利工业与发电用气增量份额。</p>
 </li>
-</ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>美国那些页岩油老板最惨的地方，就是伴生出来的天然气多到没处放，只能按2美元的白菜价贱卖甚至白烧掉；而中海油在南海和渤海抽出来的气，一上岸就是珠三角和京津冀最富有的工业区，连长途过路费都不用交就能卖到8.41美元，这种地理垄断优势连上帝都羡慕。</p></div></div></div></div>
-
-
-
+</ul>
+</li>
+</ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>美国那些页岩油老板最惨的地方，就是伴生出来的天然气多到没处放，只能按2美元的白菜价贱卖甚至白烧掉；而中海油在南海和渤海抽出来的气，一上岸就是珠三角和京津冀最富有的工业区，连长途过路费都不用交就能卖到8.41美元，这种地理垄断优势连上帝都羡慕。</p></div></div></div></div>
 
 <h2 id="-_1">---</h2>
 <h1 id="e">【追问模块 E】会计成色与治理细节显微镜</h1>
@@ -2499,9 +2980,9 @@
 </li>
 <li>
 <p><strong>存货（2026Q3末 <code>68.16亿元</code> vs 2025年末 <code>60.90亿元</code> vs 2024年末 <code>60.90亿元</code>）</strong>：</p>
-</li>
-<li>
-<p>横跨三年，无论油价是66美元还是88美元，中国海油的存货始终锁死在 <strong>60亿—68亿元</strong> 的极低水位，仅占年化营业收入的 <strong>1.4%</strong> 左右！其中绝大部分是海上平台生产备品备件与周转材料，在途原油库存极小且账面生产成本仅约30美元/桶，无论油价如何剧烈波动，都彻底免疫中石化、中石油那种动辄数十亿元的炼化库存跌价减值冲击。</p>
+<ul>
+<li>横跨三年，无论油价是66美元还是88美元，中国海油的存货始终锁死在 <strong>60亿—68亿元</strong> 的极低水位，仅占年化营业收入的 <strong>1.4%</strong> 左右！其中绝大部分是海上平台生产备品备件与周转材料，在途原油库存极小且账面生产成本仅约30美元/桶，无论油价如何剧烈波动，都彻底免疫中石化、中石油那种动辄数十亿元的炼化库存跌价减值冲击。</li>
+</ul>
 </li>
 <li>
 <p><strong>3,454.76亿元广义现金的真实性与财务公司关联存款专项审计</strong>：</p>
@@ -2789,9 +3270,11 @@
 <p><strong>勘探资本支出（2025全年为192.56亿元：中国178.94亿+海外13.62亿；2026前三季度为143.33亿元，占 15.9%，全年约 190亿元）</strong>：由于这190亿元勘探投入支撑了约 <strong>160%+</strong> 的储量替代率（净增储量5亿桶），若仅需维持 <strong>100% 储量替代率（RRR=100%，不追求储量净扩张）</strong>，所需维持性勘探资本开支约为 <code>190亿元 × (100% / 160%) ≈ 115亿—125亿元</code>（其余约 <strong>65亿—75亿元</strong> 属于超额囤粮的扩张性勘探）。</p>
 </li>
 <li>
-<p><strong>开发资本支出及其他（2025全年开发+生产资本化共995.73亿元；2026前三季度开发支出为551.17亿元，占 61.3%，全年纯开发支出约 730亿—740亿元）</strong>：
-   * 在这约735亿元纯开发支出中，约一半（约 <strong>350亿—390亿元</strong>）用于建设接替产能以填补在产油气田每年的自然递减缺口，确保 <strong>7.8亿—8.0亿桶年产量稳产不掉</strong>；
-   * 另一半（约 <strong>345亿—385亿元</strong>）则完全投向圭亚那Uaru/Whiptail、巴西Buzios、南海深水大气区二期及渤中26-6二期等<strong>纯增量扩张项目</strong>！</p>
+<p><strong>开发资本支出及其他（2025全年开发+生产资本化共995.73亿元；2026前三季度开发支出为551.17亿元，占 61.3%，全年纯开发支出约 730亿—740亿元）</strong>：</p>
+<ul>
+<li>在这约735亿元纯开发支出中，约一半（约 <strong>350亿—390亿元</strong>）用于建设接替产能以填补在产油气田每年的自然递减缺口，确保 <strong>7.8亿—8.0亿桶年产量稳产不掉</strong>；</li>
+<li>另一半（约 <strong>345亿—385亿元</strong>）则完全投向圭亚那Uaru/Whiptail、巴西Buzios、南海深水大气区二期及渤中26-6二期等<strong>纯增量扩张项目</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>加总核定与少数股东份额扣除（口径一）</strong>：</p>
@@ -3134,6 +3617,78 @@
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>大多数人一听油价跌就吓得尿裤子，因为他们根本没看懂中国税法给中海油塞了一张多么美妙的“免费看跌期权”——油价涨到86块时国家收走几十亿暴利税，油价一旦跌破65块，暴利税直接归零、资源税和油服费跟着打折！哪怕油价真跌回45块的冰河期，北美页岩油老板全都排队跳楼去了，中海油靠着6.75美元的现金采油成本还能一年净赚510亿利润、照发230亿分红，这叫“别人流血我抄底”！</p></div></div></div></div>
 
 
+<hr/>
+<h3 id="2026-11-21-firm-oe-667-psc-900-capex">⚔️ 【2026-11-21 红蓝二元对峙重校：常态/达产 Firm OE、汇率 6.67、圭亚那 PSC 切换与 900 亿维持性 CapEx 硬核修正】</h3>
+<p>在 2026 年 11 月 21 日零信任独立盲审做空报告的极限压力对质下，上述原稿基于“旧汇率 <code>7.12</code> + 战时 85 折 <code>$75</code> 油价 + <code>750 亿</code> 偏低维持性 CapEx + 零扣圭亚那 PSC 切换”算出的 <code>1,440 亿 → 1,570 亿</code> Firm OE 存在<strong>四处不可回避的系统性高估</strong>，经 Python 精确复核，现执行<strong>无条件四刀硬砍重校（常态 Firm OE 硬砍 <code>-25.0%</code> 至 <code>1,080.0 亿元/年</code>，达产 Firm OE 硬砍 <code>-24.8%</code> 至 <code>1,180.0 亿元/年</code>）</strong>：</p>
+<ol>
+<li>
+<p><strong>第一刀（油价主锚去战时脉冲）</strong>：2026 年 10–11 月中东地缘冲突将 Brent 脉冲推高至 <code>$92.57–$136/桶</code>（Brent–WTI 价差畸高至 <code>$8.59</code>），但 IEA 2026 年 11 月月报已预警 <strong>2026Q4 转为过剩（<code>+170 万桶/日</code>）及 2027 年全球供给暴增（<code>+660 万桶/日</code>）</strong>。买方跨周期常态主锚从 <code>$75</code> 强行下修至 <strong>2025 年报实测均衡水位 <code>Brent $69.0/桶</code>（实现油价 <code>$66.50/桶</code>）</strong>，并同步考核 <strong><code>Brent $65.0</code> 过剩基准</strong>！</p>
+</li>
+<li>
+<p><strong>第二刀（真实汇率 <code>USD/CNY = 6.67</code> 硬核重算）</strong>：截至 <code>2026-11-20</code>，人民币汇率已由原稿采用的 <code>7.12</code> 大幅升值 <code>-6.3%</code> 至 <strong><code>6.67</code></strong>（港元同步降至 <code>0.855</code>）。美元计价油气收入折算成人民币直接缩水，仅汇价一项即硬吃常态净利润约 <strong><code>-85 亿元/年</code></strong>！</p>
+</li>
+<li>
+<p><strong>第三刀（一手实锤：圭亚那 Stabroek 区块 PSC 成本油回收切换 <code>-45 亿元/年</code>）</strong>：据海外权威能源机构与圭亚那政府公开披露，Stabroek 联合体累计投资超 <code>550 亿美元</code> 历史成本池已大幅回收完毕，早期高达 <code>75%</code> 上限的“成本油（Cost Oil）”回收占比显著下降，更多原油转入 50/50 分成的“利润油（Profit Oil）”（圭亚那政府综合分成比例正从早期 <code>~12.5%</code> 向 <code>~35%–40%</code> 抬升，虽有 Uaru/Whiptail 滚动 CapEx 部分对冲，但权益油比例台阶式稀释已成既定事实）。原稿对此零扣减，现硬性扣减 <strong><code>-45.0 亿元/年</code></strong> 税后盈利与现金流拖累！</p>
+</li>
+<li>
+<p><strong>第四刀（尊重油气“跑步机重置通胀”：维持性 CapEx 从 <code>750 亿</code> 硬升至 <code>900 亿/年</code>）</strong>：原稿将 <code>1,150–1,200 亿</code> 总 CapEx 硬切出 <code>430 亿</code> 为纯扩张支出，给出低于 DD&amp;A（<code>850 亿</code>）的 <code>750 亿</code> 维持性 CapEx，明显低估了渤海老油田 <code>9%+</code> 自然递减、深水接替通胀及 2026Q3 桶油主要成本抬头至 <code>$32.35</code>（前三季 <code>$30.57</code>）的现实。现<strong>驳回空头把 <code>1,150 亿</code> 全部 CapEx 视为原地踏步维持费的极端做法</strong>（2025 年 RRR 高达 <code>164%</code>、净增证实储量 <code>+5.0 亿桶</code> 且产量持续正增长，确有 <code>~250 亿</code> 纯增储扩产投入），但将<strong>刚性维持性 CapEx 大幅上调 <code>+150 亿元</code> 至 <code>900.0 亿元/年</code></strong>（占 <code>1,150 亿</code> 总 CapEx 的 <code>78.3%</code>，高于 <code>850 亿</code> DD&amp;A 整整 <code>50 亿</code>），叠加 <strong><code>50.0 亿元</code></strong> 年化弃置现金流出与 WC 调节（刚性扣减合计 <strong><code>950.0 亿元/年</code></strong>）！</p>
+</li>
+</ol>
+<h4 id="2026-11-21-fcf-firm-oe-667-790-mboe-psc-45">📊 2026-11-21 二元对峙重校版：多油价情景真实盈利、FCF 与无杠杆 Firm OE 核验表（现汇 <code>6.67</code>、产量 <code>790 MBOE</code>、已扣圭亚那 PSC <code>-45 亿</code>）</h4>
+<div class="table-scroll-wrap"><table class="wide-table">
+<thead>
+<tr>
+<th style="text-align: left;">2027 宏观油价情景（Brent / 实现油价）</th>
+<th style="text-align: center;">重校归母净利润 (亿元)</th>
+<th style="text-align: center;">重校经营现金流 OCF (亿元)</th>
+<th style="text-align: center;">扣全额 <code>1,150亿</code> CapEx 后账面 FCF (亿元)</th>
+<th style="text-align: center;"><strong>重校无杠杆 Firm OE</strong> <em>(扣维持CapEx 900亿+弃置50亿+桥接-7.5亿)</em></th>
+<th style="text-align: center;">45% 承诺派息对应每股股息 (人民币)</th>
+<th style="text-align: center;">A 股 (<code>30.29元</code>) / H 股 (<code>21.70港元</code>) 对应股息率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Brent <code>$70.0</code>（长期均值 / 实现 <code>$67.5</code>）</strong></td>
+<td style="text-align: center;"><code>1,144.4</code></td>
+<td style="text-align: center;"><code>2,066.4</code></td>
+<td style="text-align: center;"><code>916.4</code></td>
+<td style="text-align: center;"><strong><code>1,108.9</code></strong></td>
+<td style="text-align: center;"><code>1.0835 元</code></td>
+<td style="text-align: center;">A: <code>3.58%</code> / H: <code>5.84%</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>★ Brent <code>$69.0</code>（2025实测均衡重校主锚 / 实现 <code>$66.5</code>）</strong></td>
+<td style="text-align: center;"><strong><code>1,120.0</code></strong></td>
+<td style="text-align: center;"><strong><code>2,040.0</code></strong></td>
+<td style="text-align: center;"><strong><code>890.0</code></strong></td>
+<td style="text-align: center;"><strong><code>1,080.0</code></strong> <em>(归母含息 <code>1,090亿</code>)</em></td>
+<td style="text-align: center;"><strong><code>1.0604 元</code></strong></td>
+<td style="text-align: center;"><strong>A: <code>3.50%</code> / H: <code>5.72%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Brent <code>$65.0</code>（2027 过剩基准 / 实现 <code>$62.5</code>）</strong></td>
+<td style="text-align: center;"><code>1,013.5</code></td>
+<td style="text-align: center;"><code>1,935.5</code></td>
+<td style="text-align: center;"><code>785.5</code></td>
+<td style="text-align: center;"><strong><code>978.0</code></strong></td>
+<td style="text-align: center;"><code>0.9596 元</code></td>
+<td style="text-align: center;">A: <code>3.17%</code> / H: <code>5.17%</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Brent <code>$60.0</code>（过剩加深压力 / 实现 <code>$57.5</code>）</strong></td>
+<td style="text-align: center;"><code>872.4</code></td>
+<td style="text-align: center;"><code>1,794.4</code></td>
+<td style="text-align: center;"><code>644.4</code></td>
+<td style="text-align: center;"><strong><code>836.9</code></strong></td>
+<td style="text-align: center;"><code>0.8259 元</code></td>
+<td style="text-align: center;">A: <code>2.73%</code> / H: <code>4.45%</code></td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>重校终极锚定</strong>：<strong>跨周期常态合并无杠杆 Firm OE = <code>1,080.0 亿元/年</code></strong>（较旧稿 <code>1,440.0 亿</code> 硬砍 <code>-25.0%</code>）；2027—2028 在建工程（圭亚那 Uaru/Whiptail、巴西 Buzios 8、渤中 26-6 二期、南海深水）在计入 PSC 稀释与 <code>6.67</code> 汇率后，达产净增由旧稿 <code>+130 亿</code> 下修至 <code>+100 亿</code> ➔ <strong>重校达产 Firm OE = <code>1,180.0 亿元/年</code></strong>（较旧稿 <code>1,570.0 亿</code> 硬砍 <code>-24.8%</code>）！同时，<strong>2026Q3 单季净利环比下滑 <code>-28.65%</code> 至 <code>333 亿</code> 实为单季 <code>72.40 亿</code> 一次性海外减值（税后 ~<code>52 亿</code>）拖累，且桶油作业费仅 <code>$7.60/桶</code>、不含税成本仅 <code>$24.57/桶</code></strong>——证明一旦油价回归 <code>$65–$69</code>，暴利税归零仍会提供坚实成本底盘，<strong>驳回空头把公司砸向低油价永久崩盘的误杀</strong>！</li>
+</ul>
 <h2 id="-_2">---</h2>
 <h2 id="f">【追问模块 F：解锁估值定价、隐含预期与击球区推演】</h2>
 <p>现在，我们正式解锁估值讨论。基于 <strong>《2026年第三季度报告》（截至2026年9月30日未经审计资产负债表）</strong> 与 <strong>截至2026年11月9日最新收盘股价及总市值</strong>，我们将模块 D 算出的 <strong>“每年 1,350亿—1,550亿元常态真实所有者盈余（Owner Earnings）”</strong> 与当前二级市场的真实买断标价（True EV）正面碰撞，把这笔投资账算得清清楚楚。</p>
@@ -3249,10 +3804,10 @@
 </li>
 <li>
 <p><strong>（3）准刚性负债（弃置义务 ARO 折现现值 + 长期应付款）与严苛口径净现金</strong>：</p>
-</li>
+<ul>
 <li>截至2026年9月30日，资产负债表非流动负债中列示 <strong>预计负债（油气田远期弃置义务 ARO 折现现值）高达 <code>1,209.75 亿元</code></strong>（120,975百万元，2025年末为1,160.39亿元），外加 <strong>长期应付款 <code>29.22 亿元</code></strong>（2,922百万元），两项<strong>准刚性负债合计达 <code>1,238.97 亿元</code></strong>。</li>
-<li>
-<p>如果我们采用华尔街最严苛的机构买方视角，将这 <code>1,238.97亿元</code> 未来10—30年的平台拆除与长期应付款<strong>全额视同今天就要背负的准有息债务</strong>并入，则 <strong>广义刚性债务合计 = <code>667.04亿（显性带息债） + 1,238.97亿（弃置预计负债+长期应付款） = 1,906.01 亿元</code></strong>，加少数股东权益 <code>25.01亿元</code> 后为 <strong><code>1,931.02 亿元</code></strong>。</p>
+<li>如果我们采用华尔街最严苛的机构买方视角，将这 <code>1,238.97亿元</code> 未来10—30年的平台拆除与长期应付款<strong>全额视同今天就要背负的准有息债务</strong>并入，则 <strong>广义刚性债务合计 = <code>667.04亿（显性带息债） + 1,238.97亿（弃置预计负债+长期应付款） = 1,906.01 亿元</code></strong>，加少数股东权益 <code>25.01亿元</code> 后为 <strong><code>1,931.02 亿元</code></strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>★ 严苛口径真实净现金（Net Cash - 严苛）</strong>：
@@ -3489,12 +4044,16 @@
 <p>我们同时采用 <strong>【主口径：合并分部 EV 直接拆骨法（直接对标严苛合并 True EV 與常规合并 True EV）】</strong> 与 <strong>【对照口径：归母股权市值 + 常规净现金拆骨法】</strong> 进行双轨交叉验算：</p>
 <ol>
 <li>
-<p><strong>第一块骨头：国内四大海域（渤海+南海东西部+东海）存量基本盘（年净产量约 5.45 亿桶油当量，享有国家排他性海域合作专营权） = 保守分部 EV <code>8,500.00 亿元</code></strong>
-   * 2026年前三季度国内净产量已达408.5百万桶（全年约5.45亿桶），国内桶油作业费低至 <strong>6.75美元/桶</strong>。在70—80美元稳态油价及8.13美元/千立方英尺长协气价下，仅国内存量基本盘每年就能稳态创造无杠杆真实所有者盈余约 <strong><code>895—900 亿元/年</code></strong>。按 <strong>10% 折现率（约9.5倍 OE，假设未来零增长）</strong> 给这块旱涝保收的国内垄断基本盘保守定价，其独立分部价值为 <strong><code>8,500.00 亿元</code></strong>。</p>
+<p><strong>第一块骨头：国内四大海域（渤海+南海东西部+东海）存量基本盘（年净产量约 5.45 亿桶油当量，享有国家排他性海域合作专营权） = 保守分部 EV <code>8,500.00 亿元</code></strong></p>
+<ul>
+<li>2026年前三季度国内净产量已达408.5百万桶（全年约5.45亿桶），国内桶油作业费低至 <strong>6.75美元/桶</strong>。在70—80美元稳态油价及8.13美元/千立方英尺长协气价下，仅国内存量基本盘每年就能稳态创造无杠杆真实所有者盈余约 <strong><code>895—900 亿元/年</code></strong>。按 <strong>10% 折现率（约9.5倍 OE，假设未来零增长）</strong> 给这块旱涝保收的国内垄断基本盘保守定价，其独立分部价值为 <strong><code>8,500.00 亿元</code></strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二块骨头：海外常规在产存量资产包（伊拉克、尼日利亚、印尼、英国、乌干达、加拿大等，不含圭亚那与巴西，年产约 1.05 亿桶） = 保守分部 EV <code>750.00 亿元</code></strong>
-   * 每年贡献稳态 Owner Earnings 约115亿元，按海外地缘折价 <strong>6.5倍 OE</strong> 保守作价 <strong><code>750.00 亿元</code></strong>。</p>
+<p><strong>第二块骨头：海外常规在产存量资产包（伊拉克、尼日利亚、印尼、英国、乌干达、加拿大等，不含圭亚那与巴西，年产约 1.05 亿桶） = 保守分部 EV <code>750.00 亿元</code></strong></p>
+<ul>
+<li>每年贡献稳态 Owner Earnings 约115亿元，按海外地缘折价 <strong>6.5倍 OE</strong> 保守作价 <strong><code>750.00 亿元</code></strong>。</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -3502,13 +4061,17 @@
 </ul>
 <ol start="3">
 <li>
-<p><strong>第三块骨头（仅用于归母股权市值对照口径）：账上可随时提走的真实净现金底仓（Net Cash）</strong>
-   * 常规口径净现金为 <strong><code>+1,865.68 亿元</code></strong>；预扣全部1,209.75亿元远期弃置负债、29.22亿元长期应付款和385.58亿元待派中期股利后的<strong>严苛口径净现金仍达 <code>+626.71 亿元</code></strong>（在合并分部 EV 主口径中，净现金已在分母 True EV 中直接抵减，绝不重复计算）。</p>
+<p><strong>第三块骨头（仅用于归母股权市值对照口径）：账上可随时提走的真实净现金底仓（Net Cash）</strong></p>
+<ul>
+<li>常规口径净现金为 <strong><code>+1,865.68 亿元</code></strong>；预扣全部1,209.75亿元远期弃置负债、29.22亿元长期应付款和385.58亿元待派中期股利后的<strong>严苛口径净现金仍达 <code>+626.71 亿元</code></strong>（在合并分部 EV 主口径中，净现金已在分母 True EV 中直接抵减，绝不重复计算）。</li>
+</ul>
 </li>
 <li>
-<p><strong>第四块骨头（全球深水皇冠明珠残差对标项）：圭亚那 Stabroek 区块 25% 权益（27.5亿桶可采资源量）+ 巴西盐下 Mero/Buzios 超深水权益 = 国际一级并购市场公允分部 EV <code>3,230.00 亿元</code></strong>
-   * 直接对标真实产业并购成交价：<strong>雪佛龙（Chevron）于2025年7月赢下ICC国际商会仲裁并正式完成以 530 亿美元股权对价（含承债总企业价值约 600 亿美元）收购赫斯（Hess）</strong>，其中赫斯持有的 <strong>圭亚那 Stabroek 区块 30% 权益</strong> 在交易中的独立公允作价高达 <strong>420亿—450亿美元</strong>。
-   * 按同比例折算，中国海油持有的 <strong>圭亚那 Stabroek 区块 25% 权益</strong>，在国际并购市场上的真金白银标价高达 <strong><code>(420 ~ 450亿美元) × (25% / 30%) = 350亿—375亿美元</code>（折合人民币约 <code>2,590 亿元</code>）</strong>！加上 <strong>巴西盐下 Mero（9.65%权益）与 Buzios（7.34%权益）</strong> 两大超深水巨型油田（公允价值约90亿美元，折合人民币约 <strong><code>640 亿元</code></strong>），南美深水双子星的独立产业价值合计高达 <strong><code>3,230.00 亿元人民币</code></strong>（全公司经营资产公允合并 EV 合计 = <code>9,250.00 + 3,230.00 = 12,480.00亿元</code>）！</p>
+<p><strong>第四块骨头（全球深水皇冠明珠残差对标项）：圭亚那 Stabroek 区块 25% 权益（27.5亿桶可采资源量）+ 巴西盐下 Mero/Buzios 超深水权益 = 国际一级并购市场公允分部 EV <code>3,230.00 亿元</code></strong></p>
+<ul>
+<li>直接对标真实产业并购成交价：<strong>雪佛龙（Chevron）于2025年7月赢下ICC国际商会仲裁并正式完成以 530 亿美元股权对价（含承债总企业价值约 600 亿美元）收购赫斯（Hess）</strong>，其中赫斯持有的 <strong>圭亚那 Stabroek 区块 30% 权益</strong> 在交易中的独立公允作价高达 <strong>420亿—450亿美元</strong>。</li>
+<li>按同比例折算，中国海油持有的 <strong>圭亚那 Stabroek 区块 25% 权益</strong>，在国际并购市场上的真金白银标价高达 <strong><code>(420 ~ 450亿美元) × (25% / 30%) = 350亿—375亿美元</code>（折合人民币约 <code>2,590 亿元</code>）</strong>！加上 <strong>巴西盐下 Mero（9.65%权益）与 Buzios（7.34%权益）</strong> 两大超深水巨型油田（公允价值约90亿美元，折合人民币约 <strong><code>640 亿元</code></strong>），南美深水双子星的独立产业价值合计高达 <strong><code>3,230.00 亿元人民币</code></strong>（全公司经营资产公允合并 EV 合计 = <code>9,250.00 + 3,230.00 = 12,480.00亿元</code>）！</li>
+</ul>
 </li>
 <li>
 <p><strong>第五块骨头：海上风电（16兆瓦“海油安澜号”张力腿浮式风电、海南CZ7）、恩平15-1/东方1-1海上CCUS及巴西桑托斯盆地自营深水勘探期权 = <code>0 元</code> 白送</strong>。</p>
@@ -3755,18 +4318,24 @@
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_5">3. 一旦触发必须无条件认错离场的“三条基本面死刑证伪红线”</h4><p>无论我们对当前估值多么乐观，一旦未来定期报告中出现以下<strong>三条可量化“死刑红线”中的任何一条</strong>，必须无条件认错清仓：</p><ol>
 <li>
-<p><strong>【死刑红线一：扣除税费联动后的桶油真实成本失控红线】</strong>
-   * <strong>量化指标</strong>：剔除高油价导致的从价资源税与特别收益金上涨后，公司<strong>桶油作业费（Lifting Cost）连续两个完整年度突破 <code>9.50 美元/桶</code></strong>（2025年报为7.46美元/桶，国内仅6.75美元/桶；2026Q1-Q3为7.60美元/桶），或<strong>不含税桶油主要成本突破 <code>29.00 美元/桶</code></strong>（2025年不含税桶油主要成本仅 <strong><code>24.53 美元/桶</code></strong> [<code>27.90 - 3.37</code>]，2026Q1-Q3仅 <code>24.57 美元/桶</code>）。这代表国内主力老油田含水率暴涨、自然递减失控，低成本护城河实质性瓦解。</p>
+<p><strong>【死刑红线一：扣除税费联动后的桶油真实成本失控红线】</strong></p>
+<ul>
+<li><strong>量化指标</strong>：剔除高油价导致的从价资源税与特别收益金上涨后，公司<strong>桶油作业费（Lifting Cost）连续两个完整年度突破 <code>9.50 美元/桶</code></strong>（2025年报为7.46美元/桶，国内仅6.75美元/桶；2026Q1-Q3为7.60美元/桶），或<strong>不含税桶油主要成本突破 <code>29.00 美元/桶</code></strong>（2025年不含税桶油主要成本仅 <strong><code>24.53 美元/桶</code></strong> [<code>27.90 - 3.37</code>]，2026Q1-Q3仅 <code>24.57 美元/桶</code>）。这代表国内主力老油田含水率暴涨、自然递减失控，低成本护城河实质性瓦解。</li>
+</ul>
 </li>
 <li>
-<p><strong>【死刑红线二：储量接替枯竭或重蹈“百亿美元高价并购/盲目跨界”覆辙红线】</strong>
-   * <strong>量化指标 ①</strong>：年报披露的 <strong>内生储量替代率（Organic RRR）连续两年跌破 <code>100%</code></strong> 且 <strong>SEC证实储量寿命跌破 <code>8.0 年</code></strong>（2025年末为77.7亿桶、寿命10.0年）；</p>
+<p><strong>【死刑红线二：储量接替枯竭或重蹈“百亿美元高价并购/盲目跨界”覆辙红线】</strong></p>
+<ul>
+<li><strong>量化指标 ①</strong>：年报披露的 <strong>内生储量替代率（Organic RRR）连续两年跌破 <code>100%</code></strong> 且 <strong>SEC证实储量寿命跌破 <code>8.0 年</code></strong>（2025年末为77.7亿桶、寿命10.0年）；</li>
+</ul>
 </li>
 </ol><ul>
 <li><strong>量化指标 ②</strong>：或者管理层在80美元以上高油价期再次发起<strong>单笔超 <code>100 亿美元</code> 的高溢价海外非常规油气并购</strong>（重蹈2013年尼克森油砂覆辙），或将<strong>超过总CapEx <code>15%</code> 的资金投向无协同的陆上平价风光项目</strong>。</li>
 </ul><ol start="3">
-<li><strong>【死刑红线三：海外皇冠资产（圭亚那）丧失权益或分红/财务公司存款违约红线】</strong>
-   * <strong>量化指标 ①</strong>：<strong>圭亚那 Stabroek 区块（25%权益）</strong> 因极端地缘制裁冻结、主权违约或军事冲突导致<strong>停产或丧失超过 <code>50%</code> 的权益现金流</strong>；</li>
+<li><strong>【死刑红线三：海外皇冠资产（圭亚那）丧失权益或分红/财务公司存款违约红线】</strong><ul>
+<li><strong>量化指标 ①</strong>：<strong>圭亚那 Stabroek 区块（25%权益）</strong> 因极端地缘制裁冻结、主权违约或军事冲突导致<strong>停产或丧失超过 <code>50%</code> 的权益现金流</strong>；</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>量化指标 ②</strong>：或者公司在账面躺着逾3,300亿元广义现金的情况下，<strong>违背 <code>2025—2027年全年派息率不低于45%</code> 的承诺</strong>，或突破关联交易防线将存放于<strong>中海油财务公司的存款上限从 <code>260 亿元</code>（2025年末实际余额 <code>219.96亿元</code>）大幅上调至 <code>800 亿元</code> 以上</strong>。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>同一头每天产210多万桶牛奶的顶级奶牛，在A股标价31块钱人民币，跨过深圳河到了香港居然只卖23块港币（折合21块4人民币），足足打了六九折！只要你有港股通账户，哪怕扣掉20%的红利税，买港股到手股息率还是比A股高出一大截。至于那三条死刑红线，请用刻刀刻在你的脑门上——只要桶油作业费没破9.5美元、没去当冤大头搞百亿美元跨国并购、圭亚那油田还在正常产油，你就尽管坐稳扶好收钱！</p></div></div></div></div>
@@ -3776,6 +4345,203 @@
 
 
 
+<hr/>
+<h3 id="2026-11-21-true-ev-ah">⚔️ 【2026-11-21 独立盲审做空“非黑即白”二元极限对质终极裁决表与严苛 True EV / A&amp;H 新分档击球区】</h3>
+<blockquote>
+<p><strong>裁决基准日</strong>：<code>2026-11-21</code>（行情锚 <code>2026-11-20</code> 收盘：A股 <code>600938.SH</code> <strong><code>30.29 元</code></strong>，隐含总市值 <strong><code>14,396.82 亿元</code></strong>；H股 <code>00883.HK</code> <strong><code>21.70 港元</code></strong>，按真实汇率 <strong><code>1 港元 = 0.855 人民币</code></strong> 折合 <strong><code>18.55 元人民币</code></strong>，隐含总市值 <strong><code>8,818.47 亿元</code></strong>；总股本 <strong><code>475.30 亿股</code></strong>；<strong>A/H 股价溢价飙升至 <code>+63.26%</code> / H 股折价 <code>-38.75%</code></strong>！）</p>
+</blockquote>
+<h4 id="1-8">1. 8 大核心争议“非黑即白”二元极限对质终极裁决表</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: center;">编号</th>
+<th style="text-align: left;">争议焦点</th>
+<th style="text-align: left;">红队独立盲审指控</th>
+<th style="text-align: left;">蓝队原稿立场与一手财报核验</th>
+<th style="text-align: left;">⚖️ 终审二元裁决（绝不和稀泥）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: left;"><strong>财司关联存款暴增 + 漏扣弃置专户受限存款</strong></td>
+<td style="text-align: left;">2026H1 中海油财务公司存款暴增 <code>+69.4%</code> 至 <strong><code>372.65 亿</code></strong>，且政府监管弃置专户受限存款 <strong><code>81.22 亿</code></strong> 法律严禁挪用，须从自由现金中硬扣。</td>
+<td style="text-align: left;">原稿虽已扣 <code>385.58 亿</code> 已派中期股息、扣 <code>200 亿</code> 运营底仓并全额计入 <code>1,209.75 亿</code> ARO，但<strong>沿用 2025 年报旧财司数 <code>220 亿</code>（漏扣 <code>152.65 亿</code> 增量），且完全漏扣 <code>81.22 亿</code> 弃置专户受限资金</strong>！</td>
+<td style="text-align: left;"><strong>✅ 空头击穿 (无条件硬改)</strong><br/>终极严苛净现金从 <code>+626.71 亿</code> 硬砍至 <strong><code>+392.49 亿</code></strong>（True EV 硬增 <strong><code>+234.22 亿</code></strong>）！</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: left;"><strong>A/H 史诗级估值剪刀差与“高息避风港”证伪</strong></td>
+<td style="text-align: left;">A 股较 H 股溢价高达 <code>+63.26%</code>（True EV 溢价放大至 <code>+66.2%–+74.2%</code>），A 股 TTM 股息率仅 <code>4.21%</code>（常态跌破 <code>3.6%</code>，<code>$65</code> 跌至 <code>3.17%</code>），毫无红利性价比。</td>
+<td style="text-align: left;">原稿 11-09 仍按旧汇率 <code>0.916</code> 算 A/H 溢价 <code>+45.2%</code> 并把 <code>31 元</code> A 股标为“常青底仓区 / 原榜 T0”，已完全脱离 <code>2026-11-20</code> 真实汇率 <code>0.855</code> 下的极度畸形溢价现实！</td>
+<td style="text-align: left;"><strong>✅ 空头击穿 (无条件硬改)</strong><br/>A 股剔除出 T0 与当前买入区，<strong>0 票追高</strong>，A 股两档买点大砍至 <strong><code>19—23 元</code>（重锤 <code>≤19 元</code>）</strong>！</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: left;"><strong>战时油价锚定偏差 + 现汇 <code>6.67</code> 汇损 + 2027 过剩</strong></td>
+<td style="text-align: left;">当前 <code>$92.57</code> Brent 含 <code>$8.59</code> 战时价差泡沫，IEA 预警 26Q4 过剩 <code>+170 万桶/日</code> 及 2027 供给 <code>+660 万桶/日</code>；人民币升至 <code>6.67</code> 吞噬近百亿折算净利。</td>
+<td style="text-align: left;">原稿用战时油价 <code>$88.86</code> 打 85 折定 <code>$75</code> 主锚，并沿用旧汇率 <strong><code>7.12</code></strong>，系统性高估常态归母净利润与人民币分红折算额。</td>
+<td style="text-align: left;"><strong>✅ 空头击穿 (无条件硬改)</strong><br/>常态油价锚下修至 2025 实测均衡 <strong><code>Brent $69</code>（实现 <code>$66.5</code>）</strong>，全模型强制切换现汇 <strong><code>USD/CNY = 6.67</code></strong>！</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: left;"><strong>圭亚那 Stabroek 区块触发 PSC 利润油分成切换</strong></td>
+<td style="text-align: left;">Stabroek 累计 <code>550 亿美元</code> 历史投资已基本回收完毕，成本油回收率从 <code>75%</code> 上限大幅下滑，圭亚那政府综合分成抬升，权益油利润率台阶下移。</td>
+<td style="text-align: left;">经独立检索海外一手能源权威报道（OilNOW/EnergyNow），Stabroek 历史成本池大幅消解、政府综合分成由 <code>~12.5%</code> 向 <code>~35%–40%</code> 抬升<strong>完全属实</strong>！原稿对此零计提。</td>
+<td style="text-align: left;"><strong>✅ 空头击穿 (无条件硬改)</strong><br/>在重校盈利模型中硬性扣减 <strong><code>-45.0 亿元/年</code></strong> PSC 权益稀释拖累，并下调南美双子星 SOTP 公允值至 <code>2,500 亿</code>！</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: left;"><strong>维持性 CapEx 偏乐观（<code>750 亿</code> 低于 DD&amp;A <code>850 亿</code>）</strong></td>
+<td style="text-align: left;">海上老油田自然递减叠加深水开发通胀，原稿把 <code>1,150–1,200 亿</code> 总 CapEx 硬切出 <code>430 亿</code> 为纯扩张、仅扣 <code>750 亿</code> 维持费，显著低估油气“跑步机重置税”。</td>
+<td style="text-align: left;">原稿 <code>750 亿</code> 维持性 CapEx 确实低于 <code>850 亿</code> DD&amp;A，在 2025 年 FCF 仅 <code>885–975 亿</code> 的铁证面前显得过于乐观，必须大幅上调。</td>
+<td style="text-align: left;"><strong>✅ 空头击穿 (无条件硬改)</strong><br/>维持性 CapEx 硬升至 <strong><code>900.0 亿元/年</code></strong>（占总 CapEx <code>78.3%</code>，叠加 <code>50 亿</code> 弃置流出合计扣 <code>950 亿</code>），常态 Firm OE 由 <code>1,440 亿</code> 硬砍 <code>-25.0%</code> 至 <strong><code>1,080.0 亿</code></strong>！</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: left;"><strong>指控“26Q3 盈利崩塌 &amp; 桶油成本失控至 <code>$32.35</code>”</strong></td>
+<td style="text-align: left;">26Q3 归母净利环比暴跌 <code>-28.65%</code> 至 <code>333 亿</code>，单季桶油成本飙至 <code>$32.35</code>，证明成本护城河已破。</td>
+<td style="text-align: left;">26Q3 单季突发计提了 <strong><code>72.40 亿</code> 一次性非现金海外减值</strong>（税后直损 ~<code>52 亿</code>），还原后经营净利 ~<code>385 亿</code>（同比 <code>+18%+</code>）；桶油成本上升主因 <code>$86–$88</code> 高油价触发 <code>$65</code> 以上阶梯暴利税（前三季税金及附加暴增 <code>+42.3%</code> 至 <code>193.20 亿</code>）及汇率折算，<strong>前三季桶油作业费仅 <code>$7.60/桶</code>（国内 <code>$6.75</code>）、不含税成本仅 <code>$24.57/桶</code></strong>！</td>
+<td style="text-align: left;"><strong>🛡️ 硬数据反杀 (空头误杀)</strong><br/>油价一旦跌回 <code>$65</code>，暴利税 <code>100%</code> 归零、桶油成本自动回落至 <code>$27.5–$28.5</code>，全球前 10% 成本铁裤衩毫发无损！</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: left;"><strong>把 <code>1,150 亿</code> 全额 CapEx 当纯维持费（再扣 <code>72 亿</code>）</strong></td>
+<td style="text-align: left;">空头以全口径 FCF 再减 <code>72 亿</code> 算 <code>$65</code> 严格 OE 仅 <code>758.5 亿</code>，断言中国海油永远被锁死在原地踏步的跑步机上。</td>
+<td style="text-align: left;">2025 年在 <code>1,188 亿</code> CapEx 下，公司不仅稳产，还实现 <strong>内生储量替代率 <code>164%</code>（证实储量净增 <code>+5.0 亿桶</code> 至历史新高 <code>77.7 亿桶</code>）与净产量 <code>+7.0%</code> 增长</strong>，且 <code>1,688 亿</code> 在建工程正推动 2026—2028 产量向 <code>8.3 亿桶</code> 迈进！</td>
+<td style="text-align: left;"><strong>🛡️ 硬数据反杀 (空头误杀)</strong><br/>确有约 <code>250 亿元/年</code> 属真实增储扩产的扩张性 CapEx，不可全额污蔑为原地维持消耗！</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: left;"><strong>按 <code>7x–8x</code> 低倍数看空 H 股至 <code>10.5–19.5 港元</code></strong></td>
+<td style="text-align: left;">空头在 <code>$65/$60</code> 下给 <code>7.0x–8.0x</code> 低倍数，即便对折价近 40% 的 H 股（<code>21.70 港元</code>）也给出 <code>-10% ~ -37%</code> 的看空目标。</td>
+<td style="text-align: left;">在 H 股 <code>21.70 港元</code>（折 <code>18.55 元</code>，终极严苛 EV 仅 <strong><code>8,426.0 亿</code></strong>）下，即便按重校硬砍 <code>-25%</code> 后的 <code>1,080 亿</code> 常态 Firm OE，<strong>H 股严苛 EV/OE 仅 <code>7.80 倍</code>（内生回报 <code>12.82%</code> → 达产 <code>14.00%</code>）</strong>；即便 <code>$65</code> 过剩基准下回报仍达 <strong><code>11.61%</code></strong>；TTM 股息率 <strong><code>6.87%</code></strong>（港股通税后 <strong><code>5.49%</code></strong> 秒杀 A 股税前 <code>4.21%</code>），SOTP 存量基本盘（<code>7,600 亿</code>）覆盖 H 股严苛 EV <code>90.2%</code>，南美深水双子星仅打 <strong><code>3.30 折</code></strong> 甩卖！</td>
+<td style="text-align: left;"><strong>🛡️ 硬数据反杀 (空头误杀)</strong><br/>H 股（<code>00883.HK</code>）已充分计价油价回调与海外折价，<strong>坚决捍卫 H 股第二档正常买入区与 <code>👑 T0</code> 皇冠地位</strong>！</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="2-2026-11-21-true-ev-26q3-26h1-2026-11-20">2. 2026-11-21 终极严苛 True EV 穿透重构表（基准：26Q3 财报 + 26H1 附注 + 2026-11-20 收盘价，单位：亿元）</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">重构科目</th>
+<th style="text-align: center;">原稿严苛口径 (11-09旧锚)</th>
+<th style="text-align: center;"><strong>2026-11-21 终极严苛终审口径</strong></th>
+<th style="text-align: left;">变动与硬核审计说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>A 股隐含总市值 / H 股隐含总市值</strong></td>
+<td style="text-align: center;"><code>14,767.56</code> / <code>10,170.35</code></td>
+<td style="text-align: center;"><strong><code>14,396.82</code></strong> (<code>30.29元</code>) / <strong><code>8,818.47</code></strong> (<code>21.70港元×0.855</code>)</td>
+<td style="text-align: left;">A/H 市值差扩大至 <strong><code>5,578.35 亿</code></strong>（A 股溢价 <code>+63.26%</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(+) 账面货币资金 + 交易性金融资产</code></td>
+<td style="text-align: center;"><code>+3,363.31</code></td>
+<td style="text-align: center;"><code>+3,363.31</code></td>
+<td style="text-align: left;">26Q3：<code>3,295.05 亿 + 68.26 亿</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(-) 期后已派 2026 中期股息</code></td>
+<td style="text-align: center;"><code>-385.58</code></td>
+<td style="text-align: center;"><strong><code>-385.58</code></strong></td>
+<td style="text-align: left;">已于 <code>2026-10-16</code> 派发离账</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(-) 政府监管弃置专户受限存款</code></td>
+<td style="text-align: center;"><code>0.00</code> <em>(漏扣)</em></td>
+<td style="text-align: center;"><strong><code>-81.22</code></strong></td>
+<td style="text-align: left;"><strong>硬补扣！</strong> 26H1 附注披露法定不可挪用</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(-) 中海油财务公司关联存款 (100%全扣)</code></td>
+<td style="text-align: center;"><code>-220.00</code> <em>(旧25年数)</em></td>
+<td style="text-align: center;"><strong><code>-372.65</code></strong></td>
+<td style="text-align: left;"><strong>硬补扣 <code>+152.65 亿</code>！</strong> 26H1 半年暴增 <code>+69.4%</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(-) 最低运营周转底仓现金</code></td>
+<td style="text-align: center;"><code>-200.00</code></td>
+<td style="text-align: center;"><strong><code>-200.00</code></strong></td>
+<td style="text-align: left;">维持 4,000 亿级营收日常周转底仓</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>＝ 终极自由支配现金 (Free Cash)</strong></td>
+<td style="text-align: center;"><code>2,557.73</code></td>
+<td style="text-align: center;"><strong><code>2,323.86</code></strong></td>
+<td style="text-align: left;">与红队极端空头口径分毫不差</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(+) 显性带息债 + 少数股东 + 长期应付款</code></td>
+<td style="text-align: center;"><code>721.27</code></td>
+<td style="text-align: center;"><strong><code>721.62</code></strong></td>
+<td style="text-align: left;">显性债 <code>667.39</code>（含 H1 一年到期 <code>40.49</code>）+ 少数股东 <code>25.01</code> + 长付 <code>29.22</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>(+) 油气资产弃置义务 ARO (100%全额)</code></td>
+<td style="text-align: center;"><code>1,209.75</code></td>
+<td style="text-align: center;"><strong><code>1,209.75</code></strong></td>
+<td style="text-align: left;">100% 全额视作今日刚性债务，零水分</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>＝ 终极严苛净现金 (<code>ev_delta</code> 取负)</strong></td>
+<td style="text-align: center;"><strong><code>+626.71</code></strong></td>
+<td style="text-align: center;"><strong><code>+392.49</code></strong> (<code>ev_delta = -392.49</code>)</td>
+<td style="text-align: left;">较旧稿硬砍 <strong><code>-234.22 亿</code></strong>，较散户多头幻觉砍 <strong><code>-85.5%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>★ 终极严苛 True EV (A 股 / H 股)</strong></td>
+<td style="text-align: center;"><code>14,140.85</code> / <code>9,543.64</code></td>
+<td style="text-align: center;"><strong><code>14,004.33 亿 (A)</code> / <code>8,425.98 亿 (H)</code></strong></td>
+<td style="text-align: left;"><strong>A 股 True EV 比 H 股贵 <code>+66.20%</code>！</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>★ 重校严苛 EV / 常态 Firm OE (<code>1,080亿</code>)</strong></td>
+<td style="text-align: center;"><code>9.82x (A)</code> / <code>6.63x (H)</code></td>
+<td style="text-align: center;"><strong><code>12.97x (A)</code> / <code>7.80x (H)</code></strong></td>
+<td style="text-align: left;"><strong>A 股内生回报骤降至 <code>7.71%</code>；H 股仍高达 <code>12.82%</code>（达产 <code>14.00%</code>）！</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>★ 真实 TTM 股息率 (<code>1.49 HKD ≈ 1.274元</code>)</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>A: <code>4.21%</code> / H: <code>6.87%</code> (港股通税后 <code>5.49%</code>)</strong></td>
+<td style="text-align: left;">H 股税后实到手股息率仍秒杀 A 股税前 <code>+1.28%</code>！</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-2026-11-21-reverse-sotp-ah">3. 2026-11-21 重校 Reverse SOTP 与 A/H 严苛新两档击球区</h4>
+<ul>
+<li>
+<p><strong>重校 Reverse SOTP（现汇 <code>6.67</code> + <code>$69</code> 油价 + PSC 折价）</strong>：国内近海垄断基本盘保守下修至 <code>7,000 亿</code>（原 <code>8,500 亿</code>）+ 海外常规存量 <code>600 亿</code>（原 <code>750 亿</code>，充分计入 <code>72.4 亿</code> 减值教训）= <strong>存量常规基本盘保底 EV <code>7,600 亿</code></strong>；圭亚那 25% + 巴西盐下双子星重校公允 EV <strong><code>2,500 亿</code></strong>（原 <code>3,230 亿</code>）➔ 全公司公允 EV <code>10,100 亿</code>，加净现金 <code>392.5 亿</code> 对应公允总市值 <code>10,492.5 亿</code>（折合 <strong><code>22.08 元/股</code></strong> / <strong><code>25.82 港元/股</code></strong>）。</p>
+</li>
+<li>
+<p><strong>A 股 (<code>30.29 元</code>，严苛 EV <code>14,004.3 亿</code>)</strong>：存量基本盘仅覆盖严苛 EV <strong><code>54.3%</code></strong>，市场给南美双子星开出 <strong><code>+6,404.3 亿</code></strong> 天价残差（溢价 <strong><code>+156.2%</code></strong>！），彻底证伪“A 股 30 元无泡沫论”！</p>
+</li>
+<li>
+<p><strong>H 股 (<code>21.70 港元</code>，严苛 EV <code>8,426.0 亿</code>)</strong>：存量基本盘覆盖严苛 EV <strong><code>90.2%</code></strong>，南美深水双子星仅标价 <strong><code>+826.0 亿</code>（打 <code>3.30 折</code> 甩卖）</strong>！</p>
+</li>
+<li>
+<p><strong>重校严苛两档击球操作锚点（彻底废止旧稿 A 股 <code>28—32.5 元</code> 宽松买点！）</strong>：</p>
+</li>
+</ul>
+<ol>
+<li>
+<p><strong>🇨🇳 A 股 (<code>600938.SH</code>，现价 <code>30.29 元</code>，高于新第二档 <code>+31.7%</code> → ⏳ 坚决等回调，0 票追高！)</strong>：</p>
+<ul>
+<li>🎯 <strong>第一档重锤线</strong>：<strong><code>≤19.00 元</code></strong>（严苛 EV <code>≤8,638 亿</code>，<code>EV/OE ≤8.00x</code>，回归近 H 股平价，常态回报 <code>≥12.50%</code>，TTM 股息 <code>≥6.71%</code> / <code>$65</code> 过剩底线股息 <code>≥5.05%</code>）；</li>
+<li>🟢 <strong>第二档正常买点</strong>：<strong><code>19.00—23.00 元</code></strong>（将 A/H 溢价压回 <code>≤+24%</code> 理性区，严苛 <code>EV/OE 8.00—9.76x</code>，常态回报 <code>10.25%—12.50%</code>，TTM 股息 <code>5.54%—6.71%</code> / <code>$69</code> 常态股息 <code>4.61%—5.58%</code>）。</li>
+</ul>
+</li>
+<li>
+<p><strong>🇭🇰 H 股 (<code>00883.HK</code>，现价 <code>21.70 港元</code>，折 <code>18.55 元</code> → ✅ 正处第二档正常买入区上沿！)</strong>：</p>
+<ul>
+<li>🎯 <strong>H 第一档重锤线</strong>：<strong><code>≤18.50 港元</code></strong>（折 <code>≤15.82 元</code>，严苛 EV <code>≤7,126 亿</code>，<code>EV/OE ≤6.60x</code>，常态回报 <code>≥15.16%</code>，TTM 股息 <code>≥8.05%</code> / <code>$65</code> 过剩底线股息 <code>≥6.07%</code>）；</li>
+<li>🟢 <strong>H 第二档正常买点</strong>：<strong><code>18.50—22.00 港元</code></strong>（折 <code>15.82—18.81 元</code>，严苛 EV <code>7,126—8,548 亿</code>，<code>EV/OE 6.60—7.91x</code>，常态回报 <code>12.63%—15.16%</code>，TTM 股息 <code>6.77%—8.05%</code> / 港股通税后 <code>5.42%—6.44%</code>）。当下可于 H 股分批建仓收息，同时保留弹药紧盯 <code>2026-11-29</code> OPEC+ 会议及 2027 累库期是否砸出 <code>≤18.50 港元</code> 重锤黄金坑！</li>
+</ul>
+</li>
+</ol>
 <hr/>
 <h1 id="g">【终章模块 G：投资大师闭门圆桌会——四大买方流派结合毕生实战的终极会诊】</h1>
 <blockquote>
@@ -3843,14 +4609,18 @@
 <p>大家好，我是霍华德·马克斯，旁边坐着塞思·卡拉曼。我们用<strong>“第二层思维（Second-Level Thinking）”</strong>追问一句：<strong>当前 <code>31.07元</code> 的 A 股价格和 <code>23.36港元</code> 的港股价格里，市场到底把多高的油价计入进去了（Priced-in）？如果油价从 88 美元暴跌回 55—65 美元，这家公司的自由现金流和分红底线在哪里？</strong></p>
 <ol>
 <li>
-<p><strong>周期钟摆的真实刻度——市场根本没有给 88 美元油价计入泡沫溢价，港股甚至还在按 51—53 美元油价贴现！</strong>
-   * 2025 年全年布伦特原油均价只有 <strong><code>68.2美元/桶</code></strong>（实现油价 <strong><code>66.47美元/桶</code></strong>），在这场货真价实的中低油价压力测试中，中国海油实打实交出了 <strong><code>1,220.82亿元</code> 归母净利润、<code>2,090.42亿元</code> 经营现金流、<code>+974.87亿元</code> 自由现金流和 <code>1,310.42亿元</code> 巴菲特所有者盈余</strong>，并派发了 <strong><code>1.28港元/股</code></strong> 的股息！
-   * 用塞思的<strong>“剥离现金与存量残值法（Stub Value）”</strong>给港股（<code>00883.HK</code>，<code>23.36港元/股</code>，严苛合并 True EV <code>9,543.64亿元</code> / 常规合并 True EV <code>8,304.67亿元</code>）称重：仅国内近海基本盘（<code>8,500亿元</code>）+ 海外常规存量资产（<code>750亿元</code>）两项经营分部保底价值就达 <strong><code>9,250.00亿元</code></strong>，覆盖了港股严苛 True EV 的 <strong>96.92%</strong>！这意味着国际并购市场公允价值高达 <strong><code>3,230.00亿元</code></strong> 的圭亚那 25% 权益与巴西盐下超深水大油田，在港股严苛 EV 下隐含残差仅 <strong><code>293.64亿元</code>（打 <code>0.91折</code> 甩卖）</strong>；若按常规合并 True EV（<code>8,304.67亿元</code>）算，更是 <strong>100% 免费白送还倒找 <code>945.33亿元</code></strong>！
-   * 即使油价明天早上就跌回 2025 年那种 <strong>66 美元/桶</strong> 的中低水平，港股依然能稳稳拿到 <strong><code>5.48%</code> 的保底股息率</strong>；即便跌到 <strong>55 美元/桶</strong>（对应归母 OE <code>870亿元</code>、账面 FCF <code>+510亿元</code>），45% 分红（<code>378亿元</code>）依然被当期自由现金流 1.35 倍全额覆盖！</p>
+<p><strong>周期钟摆的真实刻度——市场根本没有给 88 美元油价计入泡沫溢价，港股甚至还在按 51—53 美元油价贴现！</strong></p>
+<ul>
+<li>2025 年全年布伦特原油均价只有 <strong><code>68.2美元/桶</code></strong>（实现油价 <strong><code>66.47美元/桶</code></strong>），在这场货真价实的中低油价压力测试中，中国海油实打实交出了 <strong><code>1,220.82亿元</code> 归母净利润、<code>2,090.42亿元</code> 经营现金流、<code>+974.87亿元</code> 自由现金流和 <code>1,310.42亿元</code> 巴菲特所有者盈余</strong>，并派发了 <strong><code>1.28港元/股</code></strong> 的股息！</li>
+<li>用塞思的<strong>“剥离现金与存量残值法（Stub Value）”</strong>给港股（<code>00883.HK</code>，<code>23.36港元/股</code>，严苛合并 True EV <code>9,543.64亿元</code> / 常规合并 True EV <code>8,304.67亿元</code>）称重：仅国内近海基本盘（<code>8,500亿元</code>）+ 海外常规存量资产（<code>750亿元</code>）两项经营分部保底价值就达 <strong><code>9,250.00亿元</code></strong>，覆盖了港股严苛 True EV 的 <strong>96.92%</strong>！这意味着国际并购市场公允价值高达 <strong><code>3,230.00亿元</code></strong> 的圭亚那 25% 权益与巴西盐下超深水大油田，在港股严苛 EV 下隐含残差仅 <strong><code>293.64亿元</code>（打 <code>0.91折</code> 甩卖）</strong>；若按常规合并 True EV（<code>8,304.67亿元</code>）算，更是 <strong>100% 免费白送还倒找 <code>945.33亿元</code></strong>！</li>
+<li>即使油价明天早上就跌回 2025 年那种 <strong>66 美元/桶</strong> 的中低水平，港股依然能稳稳拿到 <strong><code>5.48%</code> 的保底股息率</strong>；即便跌到 <strong>55 美元/桶</strong>（对应归母 OE <code>870亿元</code>、账面 FCF <code>+510亿元</code>），45% 分红（<code>378亿元</code>）依然被当期自由现金流 1.35 倍全额覆盖！</li>
+</ul>
 </li>
 <li>
-<p><strong>A 股与港股的赔率分野</strong>：
-   * 在 <strong>港股（<code>00883.HK</code>，<code>23.36港元/股</code>）</strong>，下行有 65 美元油价下 <code>5.48%</code> 的保底股息和 <code>3,363亿元</code> 现金护体，上行有 75—88 美元油价下 <strong><code>6.85%—7.49%</code> 的高股息 + 6.63 倍严苛合并 EV/Firm OE 的深度价值重估空间</strong>——这是教科书级的“下行有限、上行敞口巨大”的不对称高赔率击球区！</p>
+<p><strong>A 股与港股的赔率分野</strong>：</p>
+<ul>
+<li>在 <strong>港股（<code>00883.HK</code>，<code>23.36港元/股</code>）</strong>，下行有 65 美元油价下 <code>5.48%</code> 的保底股息和 <code>3,363亿元</code> 现金护体，上行有 75—88 美元油价下 <strong><code>6.85%—7.49%</code> 的高股息 + 6.63 倍严苛合并 EV/Firm OE 的深度价值重估空间</strong>——这是教科书级的“下行有限、上行敞口巨大”的不对称高赔率击球区！</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -3918,6 +4688,12 @@
 </tbody>
 </table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>四拨人吵了一下午，结论其实用脚趾头都能想明白：同一头每天产 217 万桶奶、兜里还揣着 3,363 亿现金的超级奶牛，在陆家嘴卖 31 块钱人民币，在香港中环只卖 23 块多港币（折合 21 块 4 毛人民币）。要是你有港股通账户却偏要去买贵了 45% 的那一份，那你一定是在跟自己的钱包赌气；要是你只能买 A 股，那就趁每次华尔街原油交易员哭爹喊娘砸油价的时候，笑眯眯地把带血的筹码捡进篮子里！</p></div></div>
+<blockquote>
+<p><strong>⚔️ 【2026-11-21 二元极限对峙 · 四大买方流派终极重校票决（最新行情锚：A股 <code>30.29元</code> / H股 <code>21.70港元 ≈ 18.55元</code>，A/H溢价 <code>+63.26%</code>）】</strong>：
+经历红队独立盲审做空炮火洗礼、补扣 <code>372.65亿</code> 财司存款与 <code>81.22亿</code> 弃置专户受限资金（严苛净现金砍至 <code>+392.49亿</code>）、并将常态 Firm OE 四刀硬砍 <code>-25.0%</code> 至 <strong><code>1,080.0 亿元/年</code></strong>（达产 <code>1,180.0亿</code>）后，四大流派投票出现剧烈分化与终极共识：
+* <strong>🇨🇳 A 股 (<code>600938.SH @ 30.29元</code>) — <code>0 票追高（全票暂停买入，坚决等回调至 ≤23.00 元或无条件切换 H 股！）</code></strong>：严苛 EV 高达 <code>14,004.3亿</code>（<code>EV/OE 12.97倍</code>，内生回报仅 <code>7.71%</code>，TTM 股息 <code>4.21%</code>，<code>$65</code> 过剩油价下股息仅 <code>3.17%</code>），且较 H 股溢价高达 <strong><code>+63.26%</code></strong>（严苛 EV 溢价 <strong><code>+66.20%</code></strong>），巴菲特、林奇、马克斯与德鲁肯米勒全票否决在 30 元追高 A 股！仅当回调至 <strong><code>19.00—23.00 元</code></strong>（重锤 <strong><code>≤19.00 元</code></strong>）才重新触发买点。
+* <strong>🇭🇰 H 股 (<code>00883.HK @ 21.70港元 ≈ 18.55元</code>) — <code>🌟 3.5 票黄金建仓收息（严苛 EV/OE 仅 7.80 倍，回报 12.82%，TTM 股息 6.87% / 港股通税后 5.49%）</code></strong>：巴菲特、林奇与马克斯均维持 H 股重仓收息赞成票（存量基本盘 <code>7,600亿</code> 覆盖 H 股严苛 EV <code>8,426亿</code> 的 <code>90.2%</code>，南美双子星仅打 <code>3.3折</code>）；仅德鲁肯米勒扣留 <code>0.5 票</code> 警示 <code>2026-11-29</code> OPEC+ 会议及 2027 供给过剩的短期趋势压力，建议在 <strong><code>18.50—22.00 港元</code></strong> 分批建仓并保留弹药，若油价回调砸出 <strong><code>≤18.50 港元</code></strong> 则果断全仓重锤！</p>
+</blockquote>
 <hr/>
 <h1 id="h-5">【模块 H：🎭 5分钟脱口秀复盘 &amp; 极简买方口袋卡（专治阅读疲劳的收尾彩蛋章）】</h1>
 <blockquote>
@@ -4055,11 +4831,15 @@
 <h3 id="1_7">1. 它到底靠什么在行业里立身？（看家饭碗）</h3>
 <p>千万别把中海油跟背着几万座加油站和亏损化工装置的综合石油公司混为一谈。中海油是全球纯度最高的“专职海底挖油人”，八成半以上收入和几乎全部利润都来自纯粹的上游油气勘探开发。它手里攥着两张别人抢不走的王牌：一是享有中国近海排他性的勘探开发合作专营权，并用独创的“海上区域中心化开发和模块标准化制造”，把桶油主要成本焊死在二十八到三十美元的全球最底端（其中捞一桶油的现金作业费只要七美元出头）；二是参股了南美圭亚那和巴西盐下两大世纪级超深水富油田。只要国际油价在三十五美元以上，中海油每天从海底抽上来的两百一十多万桶油气都在哗哗变成纯现金。</p>
 <h3 id="2_7">2. 它的财务家底和经营周期现在发生了什么本质变化？（为什么它是真印钞机还是苦力）</h3>
-<p>它的家底厚到惊人，且正处在“千亿在建工程集中转固喷油、自由现金流创历史纪录”的收获拐点。看真实资产负债表：账上躺着三千三百多亿广义现金，超九成锁在外部大银行吃高息；哪怕还清所有带息债，再按最苛刻标准把未来三十年油田枯竭拆平台的上千亿预计弃置费今天全额预扣掉，兜里居然还净剩六百多亿纯现金！在正常七十五美元油价下，扣除维持产量的打井开支后，它每年能实打实揣进兜里一千四百多亿真实股东盈余。今年前三季度伴随圭亚那和巴西新项目投产，前九个月自由现金流就干到一千一百多亿，超越历史任何一年全年，中期分红直接大涨近三成。</p>
+<p>它的家底依然硬核，但在 <strong>2026-11-21 独立盲审红蓝对峙</strong> 挤干全部水分后，我们必须拿最冷酷的真数看清现状：账上虽有 <code>3,363 亿</code> 广义现金，但扣掉已于 10 月派走的 <code>385.58 亿</code> 中期分红、法律锁死的 <code>81.22 亿</code> 弃置专户、半年暴增 <code>+69.4%</code> 至 <code>372.65 亿</code> 的集团财务公司存款、<code>200 亿</code> 周转底仓、再还清 <code>667.39 亿</code> 显性债及全额预扣 <code>1,209.75 亿</code> 海上拆平台弃置负债（ARO）与 <code>29.22 亿</code> 长期应付款后，<strong>终极严苛净现金为 <code>+392.49 亿元</code></strong>（仍是货真价实的净现金堡垒，但绝非散户吹嘘的 <code>2,711 亿</code>！）。同时，在现汇 <code>USD/CNY = 6.67</code>、锚定 <code>Brent $69</code>（2025 实测均衡实现油价 <code>$66.5</code>）、硬扣圭亚那 PSC 成本油回收切换 <code>-45 亿</code> 并将维持性 CapEx 从 <code>750 亿</code> 上调至更尊重行业递减通胀的 <code>900 亿/年</code> 后，<strong>重校常态无杠杆 Firm OE 硬砍至 <code>1,080.0 亿元/年</code>（达产 <code>1,180.0 亿</code>）</strong>——缩水四分之一之后，它依然是一台千亿级真实自由现金流印钞机！</p>
 <h3 id="3_7">3. 市场担心的那些“软肋”，到底是真死穴还是纸老虎？（买方真伪辩证 &amp; 危中之机）</h3>
-<p>市场不敢给高估值的三个心结，用买方算盘一打就穿。第一怕“油价暴跌业绩崩盘”，其实有极厚的<strong>天然减震垫</strong>——去年油价跌到六十多美元时它照样净赚一千两百多亿；哪怕油价真砸到五十五美元，国家六十五美元起征的暴利税会自动归零替它挡刀，一年照样赚八九百亿真钱，分红稳如泰山。第二怕“雪佛龙并购赫斯后海外深水权益受损”，这已是<strong>落地的纸老虎</strong>——仲裁虽未让中海油行使优先购买权，但中海油在圭亚那四分之一的核心权益纹丝不动，正加速吐钞票。真正要盯住的<strong>硬约束</strong>只有两个：<strong>一是油价若因全球大衰退长期跌破四十美元；二是新管理层手握三千多亿现金后，绝不能偏离“九成以上资金只投高回报油气井”的铁律去乱搞低效新能源并购</strong>。</p>
+<p>红蓝对峙把空头指控切成了两半：<strong>真正击穿旧乐观预期、必须认账硬改的“真压力”</strong>有五条：① 2027 年 IEA 预警全球原油供给洪峰与中东战时油价脉冲退潮；② 人民币升至 <code>6.67</code> 对美元收入的折算侵蚀；③ 圭亚那 Stabroek 区块 550 亿美元成本油回收完毕后的利润油分成台阶下移；④ 财司关联存款暴增至 <code>372.65 亿</code> 与 <code>81.22 亿</code> 弃置专户受限；⑤ A 股较 H 股高达 <code>+63.26%</code> 的畸形流动性溢价泡沫。而<strong>被一手硬数据精准反杀的“空头误杀”</strong>有三条：① 26Q3 单季净利环比降 <code>-28.65%</code> 实为单季 <code>72.4 亿</code> 一次性海外减值所致，且前三季桶油作业费仅 <code>$7.60</code>（不含税成本 <code>$24.57</code>），一旦油价回落至 <code>$65</code>，暴利税 <code>100%</code> 归零自动托底成本；② 连续 8 年 <code>164%</code> 内生储量替代率与产量正增长证伪“全部 CapEx 都是原地踏步跑步机”；③ H 股 <code>21.70 港元</code> 下 <code>7.80 倍</code> 严苛 EV/OE 与 <code>6.87%</code> TTM 股息率已充分计价回调风险，反杀空头看空 H 股至 <code>10–17 港元</code> 的过激崩盘论！</p>
 <h3 id="4_2">4. 咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
-<p>中海油在港股的定价是价值投资的教科书。用拆骨法算账：在港股扣掉净现金后，买下整家中海油只要八九千亿人民币，光靠国内渤海、南海存量油田和常规海外油田就完全值回票价，这意味着在国际并购市场上价值三千两百多亿人民币的圭亚那和巴西世纪深水油田，香港市场是按“零元到一折”白送给你的，同时每年发六个点以上股息！实战底线极其干脆：首选折价近三成、回本年限仅六个多年的港股（二十三港元左右）重锤建仓锁仓收租；A股（三十一元左右）作为稳健底仓拿着，一旦油价阶段性跌破七十美元把A股带回二十六到二十八元区间，就是闭眼加满的黄金坑。</p>
+<p><strong>A 股与 H 股彻底冰火两重天，绝不和稀泥！（2026-11-21 二元对峙重校版）</strong>
+* <strong>🇨🇳 A 股 (<code>600938.SH</code>，现价 <code>30.29 元</code>)：坚决不追高（0 票追高，严禁此时买入！）</strong>。在 <code>+63.26%</code> 股价溢价（严苛 EV 溢价 <code>+66.20%</code>）下，A 股严苛 EV 高达 <code>14,004.3 亿</code>（<code>12.97x</code> 常态 Firm OE，回报仅 <code>7.71%</code>，TTM 股息仅 <code>4.21%</code>，<code>$65</code> 过剩油价下股息仅 <code>3.17%</code>），已彻底丧失高息安全垫。唯有耐心等待油价回调与溢价收敛至 <strong><code>19.00—23.00 元</code>（第二档正常买点）</strong> 或 <strong><code>≤19.00 元</code>（第一档重锤线）</strong> 方可出手！</p>
+<ul>
+<li><strong>🇭🇰 H 股 (<code>00883.HK</code>，现价 <code>21.70 港元 ≈ 18.55 元</code>)：核心黄金收息主阵地（3.5 票建仓！）</strong>。在终极严苛 EV 仅 <code>8,426.0 亿</code> 下，存量常规基本盘（<code>7,600 亿</code>）即覆盖 <code>90.2%</code>，重校价值 <code>2,500 亿</code> 的圭亚那+巴西双子星仅打 <strong><code>3.3 折</code></strong> 甩卖，对应 <code>7.80x</code> 严苛 EV/OE（常态回报 <strong><code>12.82%</code></strong> → 达产 <strong><code>14.00%</code></strong>）与 <strong><code>6.87%</code></strong> TTM 股息率（港股通扣 20% 税后实到手 <strong><code>5.49%</code></strong>，依然碾压 A 股税前 <code>4.21%</code>！）。现价正处重校第二档正常买入区（<strong><code>18.50—22.00 港元</code></strong>）上沿，可分批建仓吃息，同时留足现金弹药紧盯 <code>11-29</code> OPEC+ 会议及 2027 累库期，若砸进 <strong><code>≤18.50 港元</code></strong> 第一档重锤线（回报 <code>≥15.16%</code>、股息 <code>≥8.05%</code>）则果断满仓重锤！</li>
+</ul>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -4251,7 +5031,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《中国海油 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国海油 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《中国海油(600938.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国海油(600938.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4448,6 +5228,553 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
