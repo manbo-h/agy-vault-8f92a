@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>立讯精密 深度投研全集</title>
+<title>立讯精密(002475.SZ) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">立讯精密 深度投研全集</div>
+    <div class="report-title">立讯精密(002475.SZ) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-21</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -892,9 +1350,14 @@
     </div>
   </div>
   <div class="report-content">
-    <h1 id="002475sz-02475hk">立讯精密（002475.SZ / 02475.HK）全模块深度投研全集</h1>
-<p><strong>——全景基本面八步底座 + 六大单点微创追问模块（A—F）+ 终章模块 G（投资大师闭门圆桌会）100% 满血精算版</strong></p>
+    <h1 id="002475sz-02475hk-2026-11-21">立讯精密（002475.SZ / 02475.HK）深度投研报告 · 2026-11-21 二元对峙重校版</h1>
+<p><strong>——全景基本面八步底座 + 六大单点微创追问模块（A—F）+ 终章模块 G（投资大师闭门圆桌会）+ 零信任红蓝二元极限对峙终审重校全集</strong></p>
 <blockquote>
+<p><strong>⚔️ 【2026-11-21 零信任红蓝二元极限对峙终审声明】</strong>：
+本全集原稿已完成由独立法医做空团队出具的《立讯精密（002475.SZ / 02475.HK）独立盲审做空深度报告》与原蓝队投研底稿的<strong>“非黑即白”零信任交叉对质、一手财报核验及 Python 全口径重校</strong>（锚定 <strong>2026-11-20 收盘实时基准</strong>：A 股 <code>002475.SZ</code> <strong><code>45.70 元</code></strong>，<code>-4.09%</code>，有效总股本 <code>77.4335 亿股</code>，市值 <strong><code>3,538.71 亿元</code></strong>；H 股 <code>02475.HK</code> <strong><code>45.16 港元</code></strong>，<code>-5.44%</code>，按真实汇率 <code>1 HKD = 0.855 CNY</code> 折合 <strong><code>38.61 元</code></strong>，较 7 月 9 日 <code>63.28 港元</code> IPO 价破发 <strong><code>-28.63%</code></strong>，H 股总市值折人民币 <strong><code>2,989.85 亿元</code></strong>，<strong>A/H 溢价 <code>+18.36%</code> / H 股折价 <code>-15.51%</code></strong>）。
+- <strong>🔴 红队 6 项硬核击穿（原稿全面认错修正）</strong>：① <strong>原稿事实错误纠偏</strong>：2025 年报实测利息费用为 <strong><code>17.65 亿元</code></strong>（非原稿误录之 <code>9.48 亿</code>）、利息收入 <code>9.98 亿</code>（净利息支出 <code>7.67 亿</code>），立铠精密实际持股 <strong><code>49.75%</code></strong>（少数股东 <code>50.25%</code>，非原稿 <code>50.013%</code>），且原稿模块 G 林奇发言中存在多处与三季报及模块 C 矛盾的错录（26Q3 存货实为 <strong><code>657.91 亿 / +55.41%</code></strong> 而非 <code>518.69 亿 / +22.53%</code>，26 业绩预告归母增速实为 <strong><code>+15%–20%</code></strong> 而非 <code>+23%–28%</code>）；② <strong>千亿债务海啸与流动性红灯</strong>：26Q3 狭义有息债暴增 <code>+47.3%</code> 至 <code>1,458.12 亿</code>（短借 <code>1,018.67 亿</code>）、2025 质押短借暴增 <code>+267.7%</code> 至 <code>188.08 亿</code>，叠加 11/03 现金兑付 <code>32.12 亿</code> 立讯转债及 <strong>11/20 急获银行间 TDFI 全品种发债（含超短融/永续票据）注册批文</strong>，严苛合并 True EV 重校为 <strong>A 股 <code>4,772.94 亿元</code> / H 股 <code>4,224.08 亿元</code></strong>（EV 调整项 <strong><code>+1,234.23 亿元</code></strong>）；③ <strong>9M26 现金流断崖绝非纯季节性</strong>：2022–2025 年三季报 OCF 全为正数（<code>+29.6亿 / +72.2亿 / +66.8亿 / +34.8亿</code>），26 9M 首次暴跌至 <strong><code>-64.34 亿元</code></strong>、FCF 高达 <strong><code>-212.73 亿元</code></strong>（103.5% 吃光 <code>205.5 亿</code> H 股 IPO 募资），4.75 年累计 FCF 转化率仅 <code>13.5%</code>、上市 16 年股权净抽血 <code>176.5 亿元</code>；④ <strong>维持性 CapEx 跑步机硬砍 OE</strong>：原稿“折旧高于维持 CapEx 形成 +33.5 亿现金盾”被连续 5 年 CapEx 持续超折旧证伪，全口径合并无杠杆企业端常态 OE 重校为 <strong><code>160.00 亿元/年</code></strong>（对应归母权益端仅 <strong><code>134.00 亿元/年</code></strong>，较原稿 <code>184.0 亿</code> 硬砍 <strong><code>-27.2%</code></strong>），达产企业端 OE 重校为 <strong><code>195.00 亿元/年</code></strong>（归母 <code>164.0 亿</code>，硬砍 <code>-27.1%</code>）；⑤ <strong>AI 算力高估值幻觉与苹果绝对停滞</strong>：2025 年苹果绝对销售额 <code>1,883.81 亿</code> 同比倒退 <code>-0.92%</code>，9M26 扣非净利率跌至 <code>3.64%</code>，26H1 通信/AI 仅占营收 <code>9.52%</code>（毛利率 <code>17.29%</code>），按重校核心净利 <code>165 亿</code> 拆骨，现价 A 股隐含 AI 业务高达 <strong><code>69.6x PE</code></strong>（H 股亦高达 <strong><code>48.5x PE</code></strong>）；⑥ <strong>微薄股息 + 49 天后 H 股基石解禁</strong>：三期合并 TTM 纯现金股息仅 <strong><code>0.309 元/股</code></strong>（A 股股息率 <strong><code>0.68%</code></strong> / H 股 <strong><code>0.80%</code></strong>），且 <strong>2027-01-09</strong> 面临 <code>117.54 亿港元</code>（占 H 股 <code>48.44%</code>、浮亏 <code>-28.6%</code>）基石投资者解禁砸盘风险。
+- <strong>🔵 蓝队 3 项硬数据反杀（否定空头 <code>21.00 元</code> 崩盘论）</strong>：① <strong>纠偏红队分子分母错配</strong>：红队拿“合并严苛 True EV（含千亿债+少数股东）”直除“归母权益端 OE（<code>115.2 亿</code>）”算出 <code>39.3x / 2.54%</code> 属明显错配，统一还原为合并企业端无杠杆 OE（<code>160.0 亿 → 195.0 亿</code>）后，A/H 严苛 EV 回报率为 <code>3.35%→4.09%</code> / <code>3.79%→4.62%</code>（虽仍偏贵，但非虚构的 <code>2.54%</code> 绝境）；② <strong>反杀 9M FCF 线性外推永久失血论</strong>：立讯 2022–2025 历年 Q4 单季 OCF 均录得 <strong><code>+98亿 至 +204亿元</code></strong> 的果链旺季回款脉冲，26Q4 仍有强回款缓冲（预计全年 OCF 转正至 <code>85–125 亿</code>，但全年 FCF 仍大概率为负 <code>-70~-110 亿</code>），叠加 18.17 亿外汇衍生品收益确系对冲表内汇兑损失，非财务造假；③ <strong>反杀 <code>21.00 元</code> 深度崩盘目标</strong>：在 <code>21.00 元</code>（市值 <code>1,626 亿</code> / <code>1.35x PB</code> / <code>9.86x</code> 重校核心 PE），仅消费电子+汽车传统底盘（<code>1,728.5 亿</code>）即超过总市值、等同将年赚 <code>26 亿</code> 净利的全球前二 224G/448G 算力互连板块作价 <strong><code>-102 亿元</code></strong>，严重低估了立讯全球 41.6 万产能网络与苹果/英伟达/莱尼 Tier 1 的物理替换壁垒。
+- <strong>⚖️ 终审实战操盘裁决（A 股 0 票追高 / H 股 0 票追高，严守重校深跌买点）</strong>：现价 <strong>A 股 <code>45.70 元</code>（严苛 EV 回报 <code>3.35%</code>、AI 隐含 <code>69.6x PE</code>）与 H 股 <code>45.16 港元</code>（严苛 EV 回报 <code>3.79%</code>、49 天后基石解禁）均全面否决现价介入！</strong> 重校买点硬砍下移：<strong>A 股左侧建仓 <code>27.00—32.00 元</code>（重锤 <code>≤27.00 元</code>）</strong>；<strong>H 股等 2027-01-09 基石解禁砸坑回落至 <code>31.00—36.00 港元</code>（折 <code>26.51—30.78 元</code>，重锤 <code>≤31.00 港元</code>）</strong>。详见模块 D、模块 F 末尾《二元极限对质终极裁决表》及模块 G/H 同步重校结论。</p>
 <p><strong>档案基准与覆盖范围声明</strong>：
 - <strong>数据锚点</strong>：截至 <strong>2026年11月</strong> 最新法定披露文件（涵盖《2021—2025年年度报告》、《2026年半年度报告》、《2026年第三季度报告》、2026年7月9日港交所主板 H 股 <code>02475.HK</code> 招股书及上市公告、2026年11月3日“立讯转债”到期兑付摘牌公告，以及德国莱尼 LEONI 74.9% 股权并表、闻泰科技 ODM 资产包交割等最新产业与监管动态）。
 - <strong>全集结构</strong>：
@@ -920,27 +1383,29 @@
 <hr/>
 <h3 id="_3">【第一部分：拆解业务账本、周期时钟与顺价能力——谁在挑大梁，谁在凑规模，谁在拖后腿？】</h3>
 <div class="annotated-row"><div class="main-col"><h4 id="1">1. 业务结构与利益链条：三层金字塔的真实赚钱分工</h4><p>立讯精密的收入盘子在2025年达到3323.44亿元，2026年上半年达到1745.04亿元，按赚钱逻辑和商业角色，内部非常清晰地切分为三大板块：</p><ul>
-<li><strong>第一层：消费电子（营收压舱石与现金流周转底座，2025年营收2642.66亿元，占比79.52%，毛利率10.64%；2026H1营收1224.76亿元，占比70.18%，毛利率10.25%）</strong></li>
 <li>
-<p><strong>买单客户与产品矩阵</strong>：核心买单方是以苹果（Apple）为首的全球消费电子巨头（占公司总营收比重虽较早年近75%有所下降，但仍在60%以上），以及2025—2026年接手闻泰科技国内ODM资产包（嘉兴永瑞、无锡、深圳等主体，交易对价约43.89亿元，除印度受限资产终止外均已交割）后扩容的小米、三星、荣耀等安卓阵营客户。产品横跨零组件（连接器、马达、无线充电、声学）、模组（立铠精密金属结构件、立景创新摄像头模组生态）到系统整机组装（iPhone主力高端机型Pro/Pro Max组装、AirPods主力代工、Apple Watch、Vision Pro及AI智能眼镜）。</p>
+<p><strong>第一层：消费电子（营收压舱石与现金流周转底座，2025年营收2642.66亿元，占比79.52%，毛利率10.64%；2026H1营收1224.76亿元，占比70.18%，毛利率10.25%）</strong></p>
+<ul>
+<li><strong>买单客户与产品矩阵</strong>：核心买单方是以苹果（Apple）为首的全球消费电子巨头（占公司总营收比重虽较早年近75%有所下降，但仍在60%以上），以及2025—2026年接手闻泰科技国内ODM资产包（嘉兴永瑞、无锡、深圳等主体，交易对价约43.89亿元，除印度受限资产终止外均已交割）后扩容的小米、三星、荣耀等安卓阵营客户。产品横跨零组件（连接器、马达、无线充电、声学）、模组（立铠精密金属结构件、立景创新摄像头模组生态）到系统整机组装（iPhone主力高端机型Pro/Pro Max组装、AirPods主力代工、Apple Watch、Vision Pro及AI智能眼镜）。</li>
+</ul>
 </li>
 <li>
 <p><strong>账本真相（谁凑规模、谁挑大梁）</strong>：表面上看，消费电子10.25%—10.64%的毛利率拉低了公司整体毛利水平，这是因为整机组装（FATP）采取<strong>Buy &amp; Sell（买断原物料再组装销售）</strong>模式，一颗高通基带或台积电代工芯片过一道立讯的账，只产生2%—4%的组装毛利，却做大了数千亿的分母。真正的利润大头藏在<strong>“零件自供率”</strong>里——当立讯拿到iPhone和AirPods组装权后，把内部的连接线、声学器件、无线充电线圈、以及控股50.013%的立铠精密（盐城/昆山）金属中框大规模导入，零组件环节的毛利率普遍在18%—25%以上。<strong>整机组装负责“凑规模、锁客户、加快资产周转”，自供精密零组件负责“挑大梁赚厚利”</strong>。</p>
 </li>
 <li>
 <p><strong>第二层：通信与数据中心互联（高毛利技术尖刀，2025年营收245.68亿元，占比7.39%，毛利率18.40%；2026H1营收166.09亿元，占比9.52%，毛利率17.29%）</strong></p>
-</li>
-<li>
-<p><strong>买单客户与痛点解决</strong>：直接服务北美四大云厂商（CSP）、英伟达（NVIDIA）等AI算力芯片霸主及国内外服务器整机厂、电信运营商。核心产品是“铜、光、电、热”一体化方案：高速铜缆连接（DAC无源铜缆、ACC有源铜缆、AEC及背板连接器）、高速光模块（800G/1.6T）、AI服务器电源管理及冷板/浸没式液冷散热系统。</p>
+<ul>
+<li><strong>买单客户与痛点解决</strong>：直接服务北美四大云厂商（CSP）、英伟达（NVIDIA）等AI算力芯片霸主及国内外服务器整机厂、电信运营商。核心产品是“铜、光、电、热”一体化方案：高速铜缆连接（DAC无源铜缆、ACC有源铜缆、AEC及背板连接器）、高速光模块（800G/1.6T）、AI服务器电源管理及冷板/浸没式液冷散热系统。</li>
+</ul>
 </li>
 <li>
 <p><strong>账本真相</strong>：这是全公司毛利率最高（17.3%—18.4%）、技术溢价最纯粹的板块。在一台英伟达NVL72高密度机柜里，背板高速铜连接直接决定了GPU之间数千条224G通道的信号完整性与散热功耗，一旦出现单个通道误码或过热，整台价值数百万美元的算力机柜就会瘫痪。下游客户对价格敏感度远低于消费电子，愿意为高良率和提前一个季度的交付支付高额溢价。</p>
 </li>
 <li>
 <p><strong>第三层：汽车互联及精密组件（体量狂飙的第二支柱，2025年营收392.55亿元，占比11.81%，毛利率15.75%；2026H1营收323.91亿元，占比18.56%，毛利率14.14%）</strong></p>
-</li>
-<li>
-<p><strong>买单客户与角色进化</strong>：涵盖整车高低压线束、特种高速连接器、智能座舱域控制器、智能驾驶传感器及激光雷达配套。客户既包括宝马、奔驰、大众等欧洲百年豪华车企（通过并购德国莱尼LEONI直接继承），也包括奇瑞（深度战略绑定及合资）、蔚小理、比亚迪、广汽及北美新能源车企。</p>
+<ul>
+<li><strong>买单客户与角色进化</strong>：涵盖整车高低压线束、特种高速连接器、智能座舱域控制器、智能驾驶传感器及激光雷达配套。客户既包括宝马、奔驰、大众等欧洲百年豪华车企（通过并购德国莱尼LEONI直接继承），也包括奇瑞（深度战略绑定及合资）、蔚小理、比亚迪、广汽及北美新能源车企。</li>
+</ul>
 </li>
 <li>
 <p><strong>账本真相</strong>：过去市场担心立讯吞下亏损的欧洲老牌巨头莱尼会被严重拖后腿，但2025—2026年的实绩证明，立讯用中国供应链的采购成本、模具开发速度和精益管理对莱尼全球26国工厂做“外科手术式”降本，<strong>莱尼并表首年即实现扭亏为盈</strong>，汽车板块毛利率稳守在14.14%—15.75%区间，营收占比从2024年的5.12%一举跃升至2026H1的18.56%，正式跨过规模拐点成为第二大支柱。</p>
@@ -959,15 +1424,19 @@
 </li>
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="3">3. 成本顺价权与客户转换代价测试</h4><ul>
-<li><strong>上游涨价与关税传导机制</strong>：</li>
-<li>在<strong>整机组装（FATP）业务</strong>中，核心芯片、存储、屏幕等高价值BOM（物料清单）绝大部分采取<strong>客供料（Consignment）或大客户指定价格Buy &amp; Sell模式</strong>，上游芯片或贵金属涨价主要由终端品牌客户（如苹果）直接承担，立讯赚取的是定额工程制造与良率管理费，受原材料涨价挤压极小；</li>
 <li>
-<p>在<strong>自制连接器与汽车线束业务</strong>中，核心原材料为铜材（占线束直接材料成本40%以上）、工程塑料及黄金电镀材。在汽车线束领域，立讯（及莱尼）与整车厂普遍签有<strong>“铜价联动公式（Copper Escalation Clause）”</strong>，当LME铜价波动超过约定阈值时，每季度或每半年自动调整结算价，顺价周期在3—6个月以内，且立讯正在大力推广“铝代铜”高压线束技术，直接从物理工艺上帮车企对冲铜价暴涨。</p>
+<p><strong>上游涨价与关税传导机制</strong>：</p>
+<ul>
+<li>在<strong>整机组装（FATP）业务</strong>中，核心芯片、存储、屏幕等高价值BOM（物料清单）绝大部分采取<strong>客供料（Consignment）或大客户指定价格Buy &amp; Sell模式</strong>，上游芯片或贵金属涨价主要由终端品牌客户（如苹果）直接承担，立讯赚取的是定额工程制造与良率管理费，受原材料涨价挤压极小；</li>
+<li>在<strong>自制连接器与汽车线束业务</strong>中，核心原材料为铜材（占线束直接材料成本40%以上）、工程塑料及黄金电镀材。在汽车线束领域，立讯（及莱尼）与整车厂普遍签有<strong>“铜价联动公式（Copper Escalation Clause）”</strong>，当LME铜价波动超过约定阈值时，每季度或每半年自动调整结算价，顺价周期在3—6个月以内，且立讯正在大力推广“铝代铜”高压线束技术，直接从物理工艺上帮车企对冲铜价暴涨。</li>
+</ul>
 </li>
 <li>
 <p><strong>客户强行替换立讯的真实代价</strong>：</p>
-</li>
+<ul>
 <li>如果苹果或英伟达想把立讯换掉，绝不是发一封招标邮件那么简单。以iPhone Pro系列整机及立铠金属中框为例，立讯在昆山、盐城、越南义安及北江拥有数十万熟练产业工人、数万台定制CNC机床与自研自动化检测线，且早在产品发布前18—24个月就派驻上千名研发工程师与苹果联合开展<strong>NPI（新产品导入）与JDM（联合开发制造）</strong>。强行切换供应商，意味着新接手方需要重新投入上百亿元资本开支建厂、经历至少12—18个月的良率爬坡地狱，期间一旦良率掉3个百分点，大客户秋季新品断货一周的损失就高达数十亿美元。这种<strong>“重资产产能规模 + 极限良率工程能力 + 越南/墨西哥全球多地合规交付”</strong>的组合拳，构成了极高的生态替换壁垒。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>库克当然想每天早上醒来换一家更便宜的代工厂，但要是换人会导致秋季新 iPhone 良率掉 3 个点、断货一礼拜少卖几十亿美元，他就会乖乖坐下来跟王来春喝茶。这就叫用苦活累活修出来的护城河。</p></div></div></div></div>
 
 
@@ -1137,11 +1606,13 @@
 <div class="annotated-row"><div class="main-col"><p>董事长王来春（50年代末生人，常年一线督战）与副董事长王来胜姐弟分工明确，核心高管与事业部总经理由内部狼性提拔与台系/欧美顶尖工程专家混编而成，执行力在A股制造业中堪称标杆。常规高管履历与董事会运作无异常，我们直接切入<strong>四项硬核治理审计</strong>：</p><ol>
 <li><strong>“翻旧账对表”言行一致性审计（回溯2021—2023年报战略承诺 vs 2025—2026年落地实绩）</strong>：</li>
 </ol><ul>
-<li><strong>承诺一（2022年2月宣布135亿元定增募投计划）</strong>：当时规划投入智能可穿戴、新能源汽车高压连接、半导体先进封测、显示模组等6大项目。<strong>实际落地对表</strong>：2023年底公司主动宣布终止定增（未向A股股民抽血），但并非项目烂尾，而是改用自有及自筹资金先行投入——截至2025—2026年，常熟、昆山、盐城、嘉善相关产线已陆续建成转固，随后在2026年7月改道港股H股向全球机构募资242.36亿港元补足长期资本。<strong>定性：灵活务实，工程按期推进，未因定增终止而耽误产能卡位。</strong></li>
-<li><strong>承诺二（2021—2022年报提出“汽车业务冲击全球Tier 1前十，与奇瑞合资造车/ODM”）</strong>：2022年2月立讯曾高调宣布与奇瑞拟在“三个月内成立合资公司”从事整车ODM。<strong>实际落地对表</strong>：受制于整车代工资质审批门槛及重资产风险，合资公司实际在半年多后才设立，且立讯此后明显收拢了“直接下场造整车”的激进野心，转而调整为“立讯有限体外参股奇瑞控股 + 上市公司聚焦汽车线束/连接器/智能座舱Tier 1”，并在2024—2025年通过吞下德国莱尼（LEONI）一举实现汽车年营收近400亿元（2026H1已达323.91亿元）。<strong>定性：战略大方向（汽车Tier 1）超预期兑现，但早年“整车ODM”口号在撞上产业现实后做了冷峻的纠偏收缩。</strong></li>
 <li>
-<p><strong>承诺三（2026年中收购闻泰ODM“抢跑”合规瑕疵）</strong>：在接盘闻泰科技43.89亿元ODM业务过程中，因未依法提前完成经营者集中申报即先行实施部分交割，于2026年中被国家市场监管总局依据《反垄断法》罚款90万元（主动报告从轻处罚）；同时印度闻泰资产因当地查封冻结无法过户，立讯果断终止印度部分交易并追索退款。<strong>定性：展现了一贯“抢时间窗口”的狼性并购风格，在跨国问题资产止损上头脑清醒，但反垄断合规程序偶有急躁越界。</strong>
-2. <strong>质押、杠杆与高点套现排查（需重点留意的治理瑕疵点）</strong>：</p>
+<p><strong>承诺一（2022年2月宣布135亿元定增募投计划）</strong>：当时规划投入智能可穿戴、新能源汽车高压连接、半导体先进封测、显示模组等6大项目。<strong>实际落地对表</strong>：2023年底公司主动宣布终止定增（未向A股股民抽血），但并非项目烂尾，而是改用自有及自筹资金先行投入——截至2025—2026年，常熟、昆山、盐城、嘉善相关产线已陆续建成转固，随后在2026年7月改道港股H股向全球机构募资242.36亿港元补足长期资本。<strong>定性：灵活务实，工程按期推进，未因定增终止而耽误产能卡位。</strong></p>
+<ul>
+<li><strong>承诺二（2021—2022年报提出“汽车业务冲击全球Tier 1前十，与奇瑞合资造车/ODM”）</strong>：2022年2月立讯曾高调宣布与奇瑞拟在“三个月内成立合资公司”从事整车ODM。<strong>实际落地对表</strong>：受制于整车代工资质审批门槛及重资产风险，合资公司实际在半年多后才设立，且立讯此后明显收拢了“直接下场造整车”的激进野心，转而调整为“立讯有限体外参股奇瑞控股 + 上市公司聚焦汽车线束/连接器/智能座舱Tier 1”，并在2024—2025年通过吞下德国莱尼（LEONI）一举实现汽车年营收近400亿元（2026H1已达323.91亿元）。<strong>定性：战略大方向（汽车Tier 1）超预期兑现，但早年“整车ODM”口号在撞上产业现实后做了冷峻的纠偏收缩。</strong></li>
+<li><strong>承诺三（2026年中收购闻泰ODM“抢跑”合规瑕疵）</strong>：在接盘闻泰科技43.89亿元ODM业务过程中，因未依法提前完成经营者集中申报即先行实施部分交割，于2026年中被国家市场监管总局依据《反垄断法》罚款90万元（主动报告从轻处罚）；同时印度闻泰资产因当地查封冻结无法过户，立讯果断终止印度部分交易并追索退款。<strong>定性：展现了一贯“抢时间窗口”的狼性并购风格，在跨国问题资产止损上头脑清醒，但反垄断合规程序偶有急躁越界。</strong>
+2. <strong>质押、杠杆与高点套现排查（需重点留意的治理瑕疵点）</strong>：</li>
+</ul>
 </li>
 <li>
 <p><strong>历史减持记录</strong>：实控人控股平台<strong>立讯有限（香港立讯）</strong>及王来胜曾在2020年7月、2021年2月（消费电子景气与股价历史高位区间）两次通过大宗交易合计减持约2.7亿股，套现逾百亿元人民币。虽官方披露减持资金主要用于偿还银行借款及在体外替上市公司先行收购高风险重资产（如参与纬创/立铠并购、耗资约100亿元战略入股奇瑞控股），但客观上确实发生在历史景气高点。</p>
@@ -1151,12 +1622,16 @@
 </li>
 </ul><ol start="3">
 <li>
-<p><strong>商誉与亏损包袱审视</strong>：
-   * 尽管立讯上市以来并购超过20起，但截至 <strong>2026年9月30日，公司账面商誉仅为22.91亿元</strong>（较2025年末的22.39亿元仅微增2.32%），占归母净资产（1204.73亿元）比重不到 <strong>1.9%</strong>！为什么吞下莱尼、纬创、日铠、闻泰ODM等数百亿营收资产却几乎没留商誉？因为立讯极擅长在对手亏损或破产重整期以<strong>“接近甚至低于可辨认净资产公允价值（破净或平价）”</strong>的价格抄底（甚至产生营业外负商誉利得），从根源上掐灭了大额商誉爆雷隐患。</p>
+<p><strong>商誉与亏损包袱审视</strong>：</p>
+<ul>
+<li>尽管立讯上市以来并购超过20起，但截至 <strong>2026年9月30日，公司账面商誉仅为22.91亿元</strong>（较2025年末的22.39亿元仅微增2.32%），占归母净资产（1204.73亿元）比重不到 <strong>1.9%</strong>！为什么吞下莱尼、纬创、日铠、闻泰ODM等数百亿营收资产却几乎没留商誉？因为立讯极擅长在对手亏损或破产重整期以<strong>“接近甚至低于可辨认净资产公允价值（破净或平价）”</strong>的价格抄底（甚至产生营业外负商誉利得），从根源上掐灭了大额商誉爆雷隐患。</li>
+</ul>
 </li>
 <li>
-<p><strong>利益切分与关联交易排查</strong>：
-   * 立讯长期采用<strong>“大股东立讯有限体外先行孵化/重资产参股 + 上市公司业务协同或成熟后注入”</strong>的双轨模式（典型如立讯有限参股奇瑞后，立讯精密每年与奇瑞系发生数十亿元汽车零部件日常关联交易；又如闻泰ODM部分过渡安排）。目前关联交易定价均按市场化公允原则履行股东大会审议，未发现大股东掏空上市公司利益的迹象（反而是大股东用自身股权质押替上市公司扛了前期重资产孵化风险），但体外杠杆与关联交易规模的持续扩大仍需保持跟踪。</p>
+<p><strong>利益切分与关联交易排查</strong>：</p>
+<ul>
+<li>立讯长期采用<strong>“大股东立讯有限体外先行孵化/重资产参股 + 上市公司业务协同或成熟后注入”</strong>的双轨模式（典型如立讯有限参股奇瑞后，立讯精密每年与奇瑞系发生数十亿元汽车零部件日常关联交易；又如闻泰ODM部分过渡安排）。目前关联交易定价均按市场化公允原则履行股东大会审议，未发现大股东掏空上市公司利益的迹象（反而是大股东用自身股权质押替上市公司扛了前期重资产孵化风险），但体外杠杆与关联交易规模的持续扩大仍需保持跟踪。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>上百次并购只在账上留了 22.9 亿商誉，说明这位女掌门人专挑别人快咽气的时候按破净价抄底，从不买泡沫。但大股东自己质押了近四成股票在体外扛奇瑞的重资产，这根绷紧的弦你心里得时刻有数。</p></div></div></div></div>
 
@@ -1292,13 +1767,17 @@
 </tbody>
 </table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="4">4. 打破“合并报表幻觉”两项深度体检</h4><ol>
-<li><strong>少数股东损益 vs 少数股东权益匹配度（无纸面富贵幻觉）</strong>：
-   * 截至2025年末，公司归母净资产为 <strong>849.21亿元</strong>，少数股东权益为 <strong>191.00亿元</strong>（少数股东权益占总权益比例为 <strong>18.36%</strong>）；2025年全年归母净利润为 <strong>166.00亿元</strong>，少数股东损益为 <strong>15.70亿元</strong>（少数股东损益占合并总净利润181.70亿元的比例仅为 <strong>8.64%</strong>）。</li>
+<li><strong>少数股东损益 vs 少数股东权益匹配度（无纸面富贵幻觉）</strong>：<ul>
+<li>截至2025年末，公司归母净资产为 <strong>849.21亿元</strong>，少数股东权益为 <strong>191.00亿元</strong>（少数股东权益占总权益比例为 <strong>18.36%</strong>）；2025年全年归母净利润为 <strong>166.00亿元</strong>，少数股东损益为 <strong>15.70亿元</strong>（少数股东损益占合并总净利润181.70亿元的比例仅为 <strong>8.64%</strong>）。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>审计结论</strong>：少数股东拿走了18.36%的净资产份额，却只分走了8.64%的净利润！这说明母公司全资持有的核心连接器、声学、通信与汽车模组业务，其真实ROE（约19.5%）远高于存在少数股东的非全资重资产子公司（如持股50.013%的立铠精密、持股74.9%的德国莱尼），<strong>绝不存在靠高盈利非全资子公司粉饰合并报表利润的幻觉</strong>，反而随着莱尼后续整合提效，归母利润弹性更大。</li>
 </ul><ol start="2">
-<li><strong>“681亿现金 vs 1018亿短债”的存贷双高与2026Q3经营现金流转负真相（极关键排雷！）</strong>：
-   * 翻开2026年三季报资产负债表，最触目惊心的一组数字是：账面<strong>货币资金高达681.14亿元</strong>（较年初611.59亿元增长11.37%），但与此同时，<strong>短期借款从年初的601.38亿元猛增69.39%至1018.67亿元</strong>，加上一年内到期的非流动负债（约104.47亿元）和长期借款（247.01亿元），全口径有息负债高达约 <strong>1370亿元</strong>！且2026年前三季度经营现金流净额为 <strong>-64.34亿元</strong>。这难道是资金链吃紧或假账信号吗？</li>
+<li><strong>“681亿现金 vs 1018亿短债”的存贷双高与2026Q3经营现金流转负真相（极关键排雷！）</strong>：<ul>
+<li>翻开2026年三季报资产负债表，最触目惊心的一组数字是：账面<strong>货币资金高达681.14亿元</strong>（较年初611.59亿元增长11.37%），但与此同时，<strong>短期借款从年初的601.38亿元猛增69.39%至1018.67亿元</strong>，加上一年内到期的非流动负债（约104.47亿元）和长期借款（247.01亿元），全口径有息负债高达约 <strong>1370亿元</strong>！且2026年前三季度经营现金流净额为 <strong>-64.34亿元</strong>。这难道是资金链吃紧或假账信号吗？</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>穿透产业账本看真相</strong>：</p>
@@ -1324,26 +1803,30 @@
 <h4 id="1-capex">1. 资本开支（CapEx）与在建工程真实流向全景拆解</h4>
 <p>穿透2025年报、2026半年报在建工程附注及2026年7月港股H股招股书，当前的资本开支严格按三大方向分配：</p>
 <ul>
-<li><strong>第一类：纵深强化与存量迭代开支（约占CapEx的40%——国内长三角核心大本营技改）</strong></li>
 <li>
-<p><strong>核心落点</strong>：<strong>常熟立讯厂房及设备安装工程</strong>（预算超40亿元，持续推进转固）、<strong>昆山板块（昆山立讯、联滔、昆山立臻及2026H1新设艾界科技）</strong>、<strong>盐城立铠精密金属结构件自动化产线升级</strong>。</p>
+<p><strong>第一类：纵深强化与存量迭代开支（约占CapEx的40%——国内长三角核心大本营技改）</strong></p>
+<ul>
+<li><strong>核心落点</strong>：<strong>常熟立讯厂房及设备安装工程</strong>（预算超40亿元，持续推进转固）、<strong>昆山板块（昆山立讯、联滔、昆山立臻及2026H1新设艾界科技）</strong>、<strong>盐城立铠精密金属结构件自动化产线升级</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>商业账本</strong>：这部分钱不是盲目扩充低端组装工位，而是针对iPhone折叠屏/超薄机型新工艺、钛合金与铝金属CNC复合加工、以及整合闻泰嘉兴/无锡ODM产线后的自动化换人技改，目的是死守消费电子超10%的毛利率底线。</p>
 </li>
 <li>
 <p><strong>第二类：全球化合规交付与近岸制造开支（约占CapEx的35%——越南、墨西哥及欧洲莱尼基地）</strong></p>
-</li>
-<li>
-<p><strong>核心落点</strong>：在建工程附注中挑大梁的 <strong>“越南立铠厂房工程”</strong>、<strong>“越南义安立讯二期厂房建设及设备安装工程”</strong>（承接苹果穿戴、声学及部分整机海外交付），以及 <strong>“墨西哥立讯厂房工程”</strong>（预算超5亿元，叠加莱尼在墨西哥、东欧、北非的存量工厂改造）。</p>
+<ul>
+<li><strong>核心落点</strong>：在建工程附注中挑大梁的 <strong>“越南立铠厂房工程”</strong>、<strong>“越南义安立讯二期厂房建设及设备安装工程”</strong>（承接苹果穿戴、声学及部分整机海外交付），以及 <strong>“墨西哥立讯厂房工程”</strong>（预算超5亿元，叠加莱尼在墨西哥、东欧、北非的存量工厂改造）。</li>
+</ul>
 </li>
 <li>
 <p><strong>商业账本</strong>：这是应对欧美关税壁垒与大客户“China+N”供应链安全审查的必交保命钱。越南工厂的人工成本约为国内长三角的60%—70%，虽然初期良率爬坡与物流配套拉低了1—2个百分点的毛利，但随着义安二期与越南立铠实现本地化结构件直供，越南基地已跨过规模盈亏平衡点；墨西哥基地则直接卡位北美车企与北美AI数据中心机柜的免税/低关税近岸交付。</p>
 </li>
 <li>
 <p><strong>第三类：开辟新赛道的进攻性成长开支（约占CapEx的25%——AI算力高速互联与汽车智能智造）</strong></p>
-</li>
+<ul>
 <li><strong>核心落点</strong>：东莞、昆山、嘉善及海外的高速铜缆（224G/448G）、800G/1.6T硅光模块无尘车间、液冷散热测试线，以及汽车智能座舱域控、智能底盘与高压连接系统产线。</li>
+</ul>
+</li>
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="2_2">2. 研发真实投向与技术/商业模式的动态跃迁</h4><ul>
 <li>
@@ -1398,12 +1881,10 @@
 <li>
 <p><strong>客观事实与执法逻辑区分</strong>：
   立讯精密超70%的最终收入来自海外客户。这里必须严格区分两种截然不同的跨国监管逻辑：</p>
-</li>
-<li>
-<p>第一种是<strong>按“产品原产地（Country of Origin）”执法的贸易关税</strong>：针对这一层，立讯在越南（义安、北江）、墨西哥及收购德国莱尼获得的东欧、北非26国生产基地<strong>完全防得住</strong>，能够满足苹果、北美云厂商与欧美车企的近岸/友岸交付要求；</p>
-</li>
-<li>
-<p>第二种是<strong>按“母公司国籍/最终控制权”穿透执法的安全清单或供应链排华法案</strong>（如美国国防部1260H清单、FCC设备禁令，或类似荷兰政府干预闻泰安世半导体控制权的极端地缘行政干预）：一旦遭遇此类按股权控制权穿透的制裁，单纯在越南或墨西哥建厂是<strong>防不住</strong>的。目前立讯曾成功打赢美国ITC 337调查（安费诺专利诉讼以和解及交叉授权落幕），并未被列入美国BIS实体清单或1260H清单，但其新并表的德国莱尼（横跨欧洲、北非、美洲数万名外籍员工与强悍的欧洲工会）以及北美AI算力客户，对地缘政治与跨国工会罢工、海外资产司法管辖权高度敏感（印度闻泰资产因当地查封冻结而被迫终止交割就是鲜活的前车之鉴）。</p>
+<ul>
+<li>第一种是<strong>按“产品原产地（Country of Origin）”执法的贸易关税</strong>：针对这一层，立讯在越南（义安、北江）、墨西哥及收购德国莱尼获得的东欧、北非26国生产基地<strong>完全防得住</strong>，能够满足苹果、北美云厂商与欧美车企的近岸/友岸交付要求；</li>
+<li>第二种是<strong>按“母公司国籍/最终控制权”穿透执法的安全清单或供应链排华法案</strong>（如美国国防部1260H清单、FCC设备禁令，或类似荷兰政府干预闻泰安世半导体控制权的极端地缘行政干预）：一旦遭遇此类按股权控制权穿透的制裁，单纯在越南或墨西哥建厂是<strong>防不住</strong>的。目前立讯曾成功打赢美国ITC 337调查（安费诺专利诉讼以和解及交叉授权落幕），并未被列入美国BIS实体清单或1260H清单，但其新并表的德国莱尼（横跨欧洲、北非、美洲数万名外籍员工与强悍的欧洲工会）以及北美AI算力客户，对地缘政治与跨国工会罢工、海外资产司法管辖权高度敏感（印度闻泰资产因当地查封冻结而被迫终止交割就是鲜活的前车之鉴）。</li>
+</ul>
 </li>
 <li>
 <p><strong>缓冲筹码与伤筋动骨临界点</strong>：立讯2026年7月在港股引入淡马锡、GIC、阿布扎比投资局等国际主权基金作为基石股东，并在新加坡设立海外并购控股平台，本质上都是在做国际治理结构的“合规防火墙”。只要不触发针对消费电子及商用通信连接器的母公司级直接制裁禁令，海外多点建厂反而帮立讯吃下了原本属于中小型大陆工厂的出海份额。</p>
@@ -1421,9 +1902,11 @@
 </li>
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="3-ai">3. 暗礁三：大客户“扶植二供压价”与AI算力互连技术代际跃迁风险</h4><ul>
-<li><strong>客观事实依据</strong>：</li>
+<li><strong>客观事实依据</strong>：<ul>
 <li>在<strong>消费电子端</strong>，苹果一贯奉行残酷的“双供应商/三供应商制衡策略”（如在印度大力扶植塔塔集团Tata接盘部分iPhone组装，在国内用比亚迪电子、歌尔、蓝思交叉制衡），这意味着立讯在果链存量品种上的毛利率永远面临年降（Annual Price Reduction）压力（消费电子毛利率从早年近18%一路降至如今的10.25%—10.64%正是明证）；</li>
 <li>在<strong>AI算力互连端</strong>，当前224G铜缆（DAC/ACC）在机柜内大杀四方，但随着算力芯片向448G及更高速率演进，物理铜缆的传输距离极限将进一步缩短，若未来两三年内<strong>CPO（共封装光学）或光背板技术</strong>成本超预期暴跌并提前在机柜内替代铜缆，而立讯在硅光/CPO领域的卡位若慢于中际旭创、天孚通信或海外光芯片巨头，其通信板块的高毛利红利将被削弱。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在越南和墨西哥盖厂能挡住按“出生地”收的关税，但挡不住按“户口本”穿透的极端政治清单；所以在港股把淡马锡、GIC 和中东主权基金请上船当基石股东，这叫聪明人的防弹衣。</p></div></div></div></div>
 
 
@@ -1456,9 +1939,11 @@
 <h4 id="1-h">1. 三大核心工程群与 H 股募投项目全景拆解</h4>
 <p>通过交叉比对立讯精密《2025 年年度报告》、《2026 年半年度报告》之“合并财务报表项目注释——重要的在建工程项目本期变动情况”以及《2026 年 7 月 H 股全球发售招股说明书》，公司过去两年半的 <strong>448.54 亿元</strong> 资本开支与 <strong>242.36 亿港元</strong> H 股募资并非盲目撒网，而是高度聚焦于以下三大核心战役：</p>
 <ul>
-<li><strong>工程群一：国内长三角核心母基地（常熟、昆山、盐城、嘉善）——“超高精度零组件 + 折叠屏/钛金属结构件 + 具身智能母工厂”</strong></li>
 <li>
-<p><strong>常熟立讯厂房建设及设备安装工程</strong>：这是立讯近三年单体预算最大的国内基建项目。据 2025 年报及 2026 半年报附注披露，“常熟立讯厂房建设”项目总预算高达 <strong>41.53 亿元</strong>（精确预算数 4,152,734,386.86 元），截至 2026 年 6 月末工程累计投入占预算比例已达 <strong>99.01%</strong>，2026H1 本期转入固定资产 6,462.12 万元，期末在建工程账面余额 <strong>15.59 亿元</strong>；配套的“常熟立讯设备安装工程”预算超 <strong>11.40 亿元</strong>，工程进度达 <strong>99.70%</strong>，绝大部分已于 2025—2026H1 完成转固。常熟基地不仅承载智能移动终端高精密声学/电磁/射频零组件（延续前期规划的 27 亿元智能移动终端精密零组件产线），更在 2025—2026 年挂牌建设“立讯机器人常熟总部基地”及声学车载模组产线。</p>
+<p><strong>工程群一：国内长三角核心母基地（常熟、昆山、盐城、嘉善）——“超高精度零组件 + 折叠屏/钛金属结构件 + 具身智能母工厂”</strong></p>
+<ul>
+<li><strong>常熟立讯厂房建设及设备安装工程</strong>：这是立讯近三年单体预算最大的国内基建项目。据 2025 年报及 2026 半年报附注披露，“常熟立讯厂房建设”项目总预算高达 <strong>41.53 亿元</strong>（精确预算数 4,152,734,386.86 元），截至 2026 年 6 月末工程累计投入占预算比例已达 <strong>99.01%</strong>，2026H1 本期转入固定资产 6,462.12 万元，期末在建工程账面余额 <strong>15.59 亿元</strong>；配套的“常熟立讯设备安装工程”预算超 <strong>11.40 亿元</strong>，工程进度达 <strong>99.70%</strong>，绝大部分已于 2025—2026H1 完成转固。常熟基地不仅承载智能移动终端高精密声学/电磁/射频零组件（延续前期规划的 27 亿元智能移动终端精密零组件产线），更在 2025—2026 年挂牌建设“立讯机器人常熟总部基地”及声学车载模组产线。</li>
+</ul>
 </li>
 <li>
 <p><strong>盐城立铠与昆山立臻/联滔结构件及整机技改</strong>：盐城立铠主攻苹果 iPhone/MacBook 钛合金及铝金属精密结构件与 Top Module 显示结构模组，昆山立臻及昆山联滔则承载 iPhone 高端机型（Pro/Pro Max 及超薄/折叠形态预研产线）的整机 FATP 组装与高密连接器升级。立讯在该区域基本不再拿地新建大型毛坯厂房，而是以<strong>存量厂房棕地改造 + 高密度 CNC 数控机床/激光焊接自动化线换代</strong>为主，设备投资占资本开支比重高达 <strong>78%—85%</strong>。</p>
@@ -1468,9 +1953,9 @@
 </li>
 <li>
 <p><strong>工程群二：海外“China+N”交付基地（越南北江/义安、墨西哥、东欧/北非莱尼基地）——“地缘关税防火墙与近岸总装枢纽”</strong></p>
-</li>
-<li>
-<p><strong>越南义安立讯二期厂房与设备工程</strong>：位于越南义安省兴源县 VSIP 工业园。据 2026 半年报附注，“义安立讯二期厂房建设”预算总额 <strong>16.31 亿元</strong>（精确预算数 1,630,994,012.90 元），截至 2026H1 工程累计投入占预算比例达 <strong>88.05%</strong>，期末在建工程余额 <strong>12.64 亿元</strong>（2026H1 仅转固 59.55 万元，意味着近 13 亿元主体建筑将在 2026 下半年至 2027 年初集中竣工转固）；配套的“义安设备安装工程”预算约 <strong>6.70 亿元</strong>，工程进度已超 <strong>91%</strong>。该基地定位为穿戴设备、声学模组及消费电子整机在东南亚的低成本制造中心。</p>
+<ul>
+<li><strong>越南义安立讯二期厂房与设备工程</strong>：位于越南义安省兴源县 VSIP 工业园。据 2026 半年报附注，“义安立讯二期厂房建设”预算总额 <strong>16.31 亿元</strong>（精确预算数 1,630,994,012.90 元），截至 2026H1 工程累计投入占预算比例达 <strong>88.05%</strong>，期末在建工程余额 <strong>12.64 亿元</strong>（2026H1 仅转固 59.55 万元，意味着近 13 亿元主体建筑将在 2026 下半年至 2027 年初集中竣工转固）；配套的“义安设备安装工程”预算约 <strong>6.70 亿元</strong>，工程进度已超 <strong>91%</strong>。该基地定位为穿戴设备、声学模组及消费电子整机在东南亚的低成本制造中心。</li>
+</ul>
 </li>
 <li>
 <p><strong>越南立铠厂房工程</strong>：总预算 <strong>12.40 亿元</strong>（1,239,999,000.00 元），截至 2026H1 工程累计投入占预算比例达 <strong>87.43%</strong>，随着前期大规模转固，2026H1 期末在建余额降至 <strong>1.46 亿元</strong>，目前已进入大规模产能释放期，直接为越南及印度的整机组装厂就近配套精密结构件与显示模组。</p>
@@ -1480,9 +1965,9 @@
 </li>
 <li>
 <p><strong>工程群三：AI 算力高速互联产线 + 闻泰国内 ODM 资产包（嘉兴/无锡/昆明/深圳）并表技改</strong></p>
-</li>
-<li>
-<p><strong>AI 算力光铜电热产线（东莞、昆山、嘉善及海外）</strong>：受益于 H 股募资中 <strong>30%（约 72.12 亿港元，折合人民币约 67 亿元）</strong> 投向技术研发与智能制造工艺升级，立讯在东莞、昆山等地密集扩建 <strong>224G/448G 高速裸线物理发泡押出产线、高速铜缆（DAC/ACC）自动化焊接测试线、800G/1.6T 硅光/LPO 光模块洁净室产线</strong>以及冷板液冷 CDU/Manifold 精密加工线。</p>
+<ul>
+<li><strong>AI 算力光铜电热产线（东莞、昆山、嘉善及海外）</strong>：受益于 H 股募资中 <strong>30%（约 72.12 亿港元，折合人民币约 67 亿元）</strong> 投向技术研发与智能制造工艺升级，立讯在东莞、昆山等地密集扩建 <strong>224G/448G 高速裸线物理发泡押出产线、高速铜缆（DAC/ACC）自动化焊接测试线、800G/1.6T 硅光/LPO 光模块洁净室产线</strong>以及冷板液冷 CDU/Manifold 精密加工线。</li>
+</ul>
 </li>
 <li>
 <p><strong>闻泰 ODM 资产包（43.89 亿元交易对价）并表技改</strong>：2025 年初立讯以总对价 <strong>43.89 亿元</strong> 收购闻泰科技旗下嘉兴永瑞、无锡闻泰、无锡闻讯、昆明闻讯、深圳闻泰等产品集成（ODM）资产包。由于闻泰原产线此前因实体清单冲击及亏损导致设备维护滞后、自动化率偏低，立讯在 2025 下半年至 2026 年对其国内嘉兴、无锡、昆明基地导入了立讯自研的 IT 制造执行系统（MES）与自动化贴片/测试技改，旨在将其改造为服务非苹果系安卓客户、AI PC、车载智能座舱及 IoT 硬件的 ODM 现金流底座。</p>
@@ -1578,8 +2063,10 @@
 <p><strong>土地使用权及软件/长期待摊新增年摊销</strong>：<span class="math-inline"><span class="math-text">35.88 亿元</span>  ÷  10 <span class="math-text">年（综合摊销期）</span> = <strong>3.59 <span class="math-text">亿元/年</span></strong></span>。</p>
 </li>
 </ol><ul>
-<li><strong>合计新增刚性折旧与摊销洪峰</strong>：当这批 2024—2026Q3 投入的 448.54 亿元资本开支（含期末 54.85 亿元在建工程）全部完成转固进入满额计提周期后，立讯精密每年将背负 <strong>49.13 亿元</strong>（其中纯固定资产折旧 <strong>45.54 亿元/年</strong>）的增量折旧与摊销！</li>
+<li><strong>合计新增刚性折旧与摊销洪峰</strong>：当这批 2024—2026Q3 投入的 448.54 亿元资本开支（含期末 54.85 亿元在建工程）全部完成转固进入满额计提周期后，立讯精密每年将背负 <strong>49.13 亿元</strong>（其中纯固定资产折旧 <strong>45.54 亿元/年</strong>）的增量折旧与摊销！<ul>
 <li><em>（注：若仅单算 2026Q3 末账面 54.85 亿元在建工程未来 12 个月转固的影响——其中约 30 亿元为常熟及义安二期厂房、24.85 亿元为设备安装，则该单批在建工程转固后将直接新增年折旧约 <span class="math-inline">30  ×  4.75\% + 24.85  ×  12.67\% = <strong>4.57 <span class="math-text">亿元/年</span></strong></span>。）</em></li>
+</ul>
+</li>
 </ul><p><strong>第二步：测算覆盖新增折旧与固定付现成本的“盈亏平衡点（Breakeven Point）”</strong>
 在重资产制造业中，新增产线投产后不仅产生非付现的<strong>固定资产折旧（每年 49.13 亿元）</strong>，还会同步产生刚性的<strong>固定付现制造与管理费用</strong>（包括厂房基础物业能耗、产线保底维护保养费、车间管理人员与底薪技工固定薪酬、房产税及保险费，按行业工程经验通常约为新增固定资产原值的 <strong>3.5%/年</strong>，即 <span class="math-inline">412.66  ×  3.5\% = <strong>14.44 <span class="math-text">亿元/年</span></strong></span>）。
 因此，这批新资产每年新增的<strong>总固定成本（Fixed Costs, <span class="math-inline">FC</span>）</strong>为：</p><div class="math-display">FC = 49.13 <span class="math-text">亿元（新增折旧摊销）</span> + 14.44 <span class="math-text">亿元（新增固定付现成本）</span> = <strong>63.57 <span class="math-text">亿元/年</span></strong></div><ul>
@@ -1600,8 +2087,10 @@
 </ul><ol>
 <li><strong>综合口径盈亏平衡新增营收</strong>：
      <div class="math-display"><span class="math-text">盈亏平衡新增营收</span> = <span class="math-frac"><span class="frac-num"><span class="math-inline"><span class="math-text">新增总固定成本 </span> 63.57 <span class="math-text">亿元</span></span></span><span class="frac-den"><span class="math-inline"><span class="math-text">综合边际贡献率 </span> 11.90\%</span></span></span> = <strong>534.20 <span class="math-text">亿元/年</span></strong></div>
-<em>（即便采取最严苛的会计静态口径——即假设 11.80% 综合毛利率不做可变/固定成本拆解、直接用毛利硬扛 49.13 亿元新增折旧摊销加上约 4.5% 期间费用，所需的会计盈亏平衡新增营收约为 <strong>673.01 亿元/年</strong>。）</em></li>
+<em>（即便采取最严苛的会计静态口径——即假设 11.80% 综合毛利率不做可变/固定成本拆解、直接用毛利硬扛 49.13 亿元新增折旧摊销加上约 4.5% 期间费用，所需的会计盈亏平衡新增营收约为 <strong>673.01 亿元/年</strong>。）</em><ol start="2">
 <li><strong>盈亏平衡对应的生死线稼动率（Breakeven Utilization Rate）</strong>：</li>
+</ol>
+</li>
 </ol><ul>
 <li>
 <p><strong>现金流不失血底线（仅覆盖 14.44 亿元固定付现成本）</strong>：仅需新增营收 <strong>121.34 亿元/年</strong>，对应设计产能稼动率仅需 <strong>5.65%</strong>；</p>
@@ -1630,16 +2119,22 @@
 <p>对比立讯精密的真实收入增量——<strong>2025 年全年净增营收 635.49 亿元（3,323.44 亿 vs 2,687.95 亿），2026 年前三季度同比净增营收约 640.90 亿元（2,850.12 亿 vs 2025Q1-Q3 约 2,209.22 亿）</strong>，两年累计净增营收已超 <strong>1,276 亿元</strong>，恰好跨过了我们上面算出的 <strong>1,285 亿元</strong> 完全盈亏平衡门槛！但如果我们拆开三个业务抽屉逐一审视，冷热温差极为悬殊：</p>
 <ol>
 <li>
-<p><strong>AI 算力数据中心高速互联产线（东莞/昆山/墨西哥 224G 铜缆、液冷 QD 与 800G/1.6T 光模块）：100% 属于“雪中送炭解瓶颈”</strong>
-   * <strong>客观事实</strong>：通信及数据中心板块 2025 年营收 <strong>245.68 亿元（+33.81%，毛利率 18.40%）</strong>，2026H1 进一步提速至 <strong>166.09 亿元（+49.66%，占比升至 9.52%，毛利率 17.29%）</strong>。在英伟达 GB200/GB300 NVL72 机柜及北美四大 CSP 自研 AI 机柜放量拉动下，立讯的高速裸线物理发泡押出线与 224G DAC/ACC 产线在 2025—2026Q3 处于 <strong>95%—100% 满负荷连轴转状态</strong>（甚至需要三班倒抢交期），北美大客户超 15 个 GPU 冷板与液冷快接头（QD）定点项目排产已排至 2027 年。这块新增 CapEx 不仅没有闲置风险，反而因高频发泡押出设备交期长而存在产能缺口。</p>
+<p><strong>AI 算力数据中心高速互联产线（东莞/昆山/墨西哥 224G 铜缆、液冷 QD 与 800G/1.6T 光模块）：100% 属于“雪中送炭解瓶颈”</strong></p>
+<ul>
+<li><strong>客观事实</strong>：通信及数据中心板块 2025 年营收 <strong>245.68 亿元（+33.81%，毛利率 18.40%）</strong>，2026H1 进一步提速至 <strong>166.09 亿元（+49.66%，占比升至 9.52%，毛利率 17.29%）</strong>。在英伟达 GB200/GB300 NVL72 机柜及北美四大 CSP 自研 AI 机柜放量拉动下，立讯的高速裸线物理发泡押出线与 224G DAC/ACC 产线在 2025—2026Q3 处于 <strong>95%—100% 满负荷连轴转状态</strong>（甚至需要三班倒抢交期），北美大客户超 15 个 GPU 冷板与液冷快接头（QD）定点项目排产已排至 2027 年。这块新增 CapEx 不仅没有闲置风险，反而因高频发泡押出设备交期长而存在产能缺口。</li>
+</ul>
 </li>
 <li>
-<p><strong>德国莱尼（LEONI）全球线束基地与国内奇瑞/头部车企高压线束产能：“结构性冷热不均，东欧老厂做减法、中国与北非/墨西哥做加法”</strong>
-   * <strong>客观事实</strong>：汽车电子板块 2025 年营收暴增 <strong>185.34% 至 392.55 亿元（毛利率 15.75%）</strong>，2026H1 再飙 <strong>274.10% 至 323.91 亿元（占比跃升至 18.56%，毛利率 14.14%）</strong>。国内芜湖/常熟等地配套奇瑞、理想、广汽的高压线束与智能域控产线稼动率高达 <strong>85%+</strong>，属于紧平衡；但并表进来的莱尼欧洲本土及部分东欧老基地（服务大众、奥迪、保时捷等传统欧洲燃油/电动平台），受欧洲本土汽车年产量萎缩影响，存量产能利用率一度不足 <strong>65%</strong>，存在明显的“结构性产能富余”，必须靠关停高成本老厂（如塞尔维亚厂）并将订单向摩洛哥、突尼斯及中国供应链转移来消化。</p>
+<p><strong>德国莱尼（LEONI）全球线束基地与国内奇瑞/头部车企高压线束产能：“结构性冷热不均，东欧老厂做减法、中国与北非/墨西哥做加法”</strong></p>
+<ul>
+<li><strong>客观事实</strong>：汽车电子板块 2025 年营收暴增 <strong>185.34% 至 392.55 亿元（毛利率 15.75%）</strong>，2026H1 再飙 <strong>274.10% 至 323.91 亿元（占比跃升至 18.56%，毛利率 14.14%）</strong>。国内芜湖/常熟等地配套奇瑞、理想、广汽的高压线束与智能域控产线稼动率高达 <strong>85%+</strong>，属于紧平衡；但并表进来的莱尼欧洲本土及部分东欧老基地（服务大众、奥迪、保时捷等传统欧洲燃油/电动平台），受欧洲本土汽车年产量萎缩影响，存量产能利用率一度不足 <strong>65%</strong>，存在明显的“结构性产能富余”，必须靠关停高成本老厂（如塞尔维亚厂）并将订单向摩洛哥、突尼斯及中国供应链转移来消化。</li>
+</ul>
 </li>
 <li>
-<p><strong>消费电子果链基地（常熟/昆山/盐城/越南）与闻泰国内 ODM 资产包（嘉兴/无锡/昆明）：“果链稳态高稼动，闻泰 ODM 资产包处于痛苦的良率与客户重构阵痛期”</strong>
-   * <strong>客观事实与合理推论</strong>：消费电子 2025 年营收 <strong>2,642.66 亿元（占比 79.52%，毛利率 10.64%）</strong>，2026H1 达 <strong>1,224.76 亿元（+19.27%，毛利率 10.25%）</strong>。苹果 iPhone 高端机型结构件（盐城立铠）与穿戴整机（越南义安/北江）得益于立讯在果链内部的份额挤压式提升，旺季稼动率高达 <strong>90%+</strong>，淡季维持在 <strong>65%—70%</strong>，消化能力极强。</p>
+<p><strong>消费电子果链基地（常熟/昆山/盐城/越南）与闻泰国内 ODM 资产包（嘉兴/无锡/昆明）：“果链稳态高稼动，闻泰 ODM 资产包处于痛苦的良率与客户重构阵痛期”</strong></p>
+<ul>
+<li><strong>客观事实与合理推论</strong>：消费电子 2025 年营收 <strong>2,642.66 亿元（占比 79.52%，毛利率 10.64%）</strong>，2026H1 达 <strong>1,224.76 亿元（+19.27%，毛利率 10.25%）</strong>。苹果 iPhone 高端机型结构件（盐城立铠）与穿戴整机（越南义安/北江）得益于立讯在果链内部的份额挤压式提升，旺季稼动率高达 <strong>90%+</strong>，淡季维持在 <strong>65%—70%</strong>，消化能力极强。</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -1819,10 +2314,10 @@
 <h3 id="_16">二、 跨越鸿沟的三道生死关卡：技术物理极限与产业链卡脖子解剖</h3>
 <h4 id="1-ai">1. AI 算力赛道：从“铜连接强豪”到“光铜电热全栈霸主”的三道窄门</h4>
 <ul>
-<li><strong>第一关：448G 时代的底层物理衰减极限（“铜进光退”的物理边界在哪里？）</strong></li>
 <li>
-<p><strong>硬核工程拆解</strong>：为什么在 112G 和 224G SerDes 世代，英伟达 GB200/GB300 NVL72 机柜内部果断采用铜缆背板（DAC/ACC）取代光模块？因为铜缆成本仅为同速率光模块的 <strong>1/5—1/8</strong>，且零功耗（DAC）、故障率极低。但根据电磁波高频传输的<strong>趋肤效应（Skin Effect）与介质损耗定律</strong>，当单通道速率从 224G 翻倍至 <strong>448G（对应奈奎斯特频率高达 110GHz 以上）</strong> 时，电信号在铜导线中的衰减呈指数级恶化：</p>
+<p><strong>第一关：448G 时代的底层物理衰减极限（“铜进光退”的物理边界在哪里？）</strong></p>
 <ul>
+<li><strong>硬核工程拆解</strong>：为什么在 112G 和 224G SerDes 世代，英伟达 GB200/GB300 NVL72 机柜内部果断采用铜缆背板（DAC/ACC）取代光模块？因为铜缆成本仅为同速率光模块的 <strong>1/5—1/8</strong>，且零功耗（DAC）、故障率极低。但根据电磁波高频传输的<strong>趋肤效应（Skin Effect）与介质损耗定律</strong>，当单通道速率从 224G 翻倍至 <strong>448G（对应奈奎斯特频率高达 110GHz 以上）</strong> 时，电信号在铜导线中的衰减呈指数级恶化：</li>
 <li>在 112G 时代，无源铜缆（DAC）可稳定传输 <strong>3—5 米</strong>（足以跨机柜或覆盖整机柜）；</li>
 <li>在 224G 时代，无源铜缆（DAC）的有效无损传输距离被物理定律硬生生压缩至 <strong>1.0—2.0 米以内</strong>（超过 2 米必须加装 Redriver/Retimer 芯片做成有源铜缆 ACC/AEC，仅限于单机柜内部 Scale-up 纵向互连）；</li>
 </ul>
@@ -1832,22 +2327,26 @@
 </li>
 <li>
 <p><strong>第二关：核心有源芯片 100% 外购依赖（光模块“无芯组装”的利润天花板）</strong></p>
-</li>
-<li>
-<p><strong>硬核工程拆解</strong>：铜缆之所以毛利率高达 22%—28%，是因为无源铜缆（DAC）不需要昂贵的有源芯片，核心壁垒全在材料发泡、极细同轴线编织、高频阻抗一致性与精密压接工艺——这恰恰是立讯最擅长的“材料+精密机械工艺”。然而，一旦进入 <strong>800G/1.6T 光模块</strong> 领域，物料清单（BOM）成本的 <strong>50%—60%</strong> 被两大核心有源芯片死死卡住：一是 <strong>DSP 数字信号处理芯片</strong>（被 <strong>Marvell 美满电子、Broadcom 博通</strong> 高度垄断），二是 <strong>高速激光器芯片（200G EML 电吸收调制激光器芯片或高功率 CW 硅光光源芯片）</strong>（被 <strong>Lumentum、Coherent、住友电工、三菱电机</strong> 卡脖子）。</p>
+<ul>
+<li><strong>硬核工程拆解</strong>：铜缆之所以毛利率高达 22%—28%，是因为无源铜缆（DAC）不需要昂贵的有源芯片，核心壁垒全在材料发泡、极细同轴线编织、高频阻抗一致性与精密压接工艺——这恰恰是立讯最擅长的“材料+精密机械工艺”。然而，一旦进入 <strong>800G/1.6T 光模块</strong> 领域，物料清单（BOM）成本的 <strong>50%—60%</strong> 被两大核心有源芯片死死卡住：一是 <strong>DSP 数字信号处理芯片</strong>（被 <strong>Marvell 美满电子、Broadcom 博通</strong> 高度垄断），二是 <strong>高速激光器芯片（200G EML 电吸收调制激光器芯片或高功率 CW 硅光光源芯片）</strong>（被 <strong>Lumentum、Coherent、住友电工、三菱电机</strong> 卡脖子）。</li>
+</ul>
 </li>
 <li>
 <p><strong>残酷真相</strong>：<strong>立讯精密并无底层 InP（磷化铟）激光器光芯片或 CMOS 高速 DSP 芯片的自产能力</strong>。在 2025—2026 年全球 1.6T 光模块抢夺 200G EML 芯片的缺货潮中，Lumentum 等芯片原厂优先保供年采购量数百万只的第一梯队霸主（中际旭创、新易盛、Coherent），立讯作为追赶者不仅拿货配额受限，且采购单价较头部双雄高出 <strong>8%—15%</strong>。即便立讯押注硅光（SiPh）和 LPO（去 DSP 方案）试图绕开部分瓶颈，只要不掌握底层有源光芯片，其光模块业务本质上仍是“高端光学封装代工”，很难复制铜缆的高额超额利润。</p>
 </li>
 <li>
 <p><strong>第三关：北美 CSP 云巨头白盒交换机与整机柜的严苛认证替换周期</strong></p>
-</li>
+<ul>
 <li><strong>硬核工程拆解</strong>：在北美四大云厂商（AWS、微软 Azure、谷歌 GCP、Meta）的数据中心里，高价值的光模块与液冷 CDU 并非“谁便宜用谁”。因为一颗售价 5,000 元的 1.6T 光模块若在万卡集群训练中发生闪断，或者一个售价 200 元的液冷快接头（QD）发生微渗漏，直接烧毁的是一台价值 <strong>2,000 万元人民币的 GB200 NVL72 整机柜</strong>！因此，北美 CSP 对光模块和液冷系统的白盒认证（Qualification）周期长达 <strong>12—18 个月</strong>，且一旦中际旭创、新易盛（光模块）或奇鋐 AVC、双鸿、丹佛斯（液冷/QD）率先卡住主供（Primary Vendor，占 60%—70% 份额）生态位，后发者立讯即便通过验证，初期也只能从 <strong>10%—20% 的二供/三供份额</strong> 啃起。</li>
 </ul>
+</li>
+</ul>
 <div class="annotated-row"><div class="main-col"><h4 id="2-tier-1-tier-1">2. 汽车 Tier 1 赛道：从“莱尼苦力线束”到“高净利 Tier 1 前十”的三道难关</h4><ul>
-<li><strong>第一关：将莱尼（LEONI）从“1%—2% 净利率欧洲苦力”改造成“5%+ 净利率现金牛”的脱层皮手术</strong></li>
 <li>
-<p><strong>硬核工程拆解</strong>：汽车整车线束被称为“汽车的血管与神经”，但它有一个极度反直觉的产业特性——<strong>它是现代汽车工业中仅存的、无法实现 100% 全自动化的重度劳动密集型产品</strong>！一辆智能电动车的低压+高压线束包含 <strong>2,000—3,000 根不同线径导线、数百个异形插件和上千个分支节点</strong>，虽然前道开线、压接可以自动化，但后道在工装板上穿胶套、缠胶带、合拢布线仍需大量人工操作（人工成本占线束总成本的 <strong>20%—28%</strong>）。</p>
+<p><strong>第一关：将莱尼（LEONI）从“1%—2% 净利率欧洲苦力”改造成“5%+ 净利率现金牛”的脱层皮手术</strong></p>
+<ul>
+<li><strong>硬核工程拆解</strong>：汽车整车线束被称为“汽车的血管与神经”，但它有一个极度反直觉的产业特性——<strong>它是现代汽车工业中仅存的、无法实现 100% 全自动化的重度劳动密集型产品</strong>！一辆智能电动车的低压+高压线束包含 <strong>2,000—3,000 根不同线径导线、数百个异形插件和上千个分支节点</strong>，虽然前道开线、压接可以自动化，但后道在工装板上穿胶套、缠胶带、合拢布线仍需大量人工操作（人工成本占线束总成本的 <strong>20%—28%</strong>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>莱尼此前为何常年亏损（2023 年营收 54.62 亿欧元却净亏 1.28 亿欧元）？</strong> 因为莱尼的研发总部与高端产线留在高福利的德国，而制造工厂虽分布在罗马尼亚、塞尔维亚、乌克兰、突尼斯，但其<strong>二级原材料供应链（铜杆、护套塑料粒子、端子连接器）长期被欧洲本土高价供应商绑定</strong>，且各工厂 IT 系统割裂、模具开发外包昂贵。</p>
@@ -1857,15 +2356,15 @@
 </li>
 <li>
 <p><strong>第二关：车规级功能安全认证（ISO 26262 ASIL-D）与整车厂 3—5 年定点转换壁垒</strong></p>
-</li>
-<li>
-<p><strong>硬核工程拆解</strong>：消费电子的认证周期是 <strong>6—9 个月</strong>，坏了大不了售后换新；而汽车底盘域控、智驾域控及高压主线束涉及生命安全，必须通过车规级功能安全最高等级 <strong>ISO 26262 ASIL-D</strong>、AEC-Q100 及零缺陷质量体系认证，从拿到主机厂定点（Design Win）、经历冬标/夏标两轮极寒极热路试，到最终 SOP 量产上车，完整周期长达 <strong>30—48 个月</strong>。更致命的是，汽车线束采取<strong>“贴身伴随式生产（Just-in-Sequence）”</strong>，由于线束体积庞大、车型配置组合多达上万种，线束厂必须建在距离主机厂总装车间 <strong>50—200 公里半径内</strong>，且每换一代平台才能重新招标一次。这意味着立讯即便手握莱尼牌照，想从矢崎、住友电工手中抢夺丰田、大众现存平台的存量份额，也只能耐着性子等主机厂 <strong>3—5 年一次的平台大换代</strong>。</p>
+<ul>
+<li><strong>硬核工程拆解</strong>：消费电子的认证周期是 <strong>6—9 个月</strong>，坏了大不了售后换新；而汽车底盘域控、智驾域控及高压主线束涉及生命安全，必须通过车规级功能安全最高等级 <strong>ISO 26262 ASIL-D</strong>、AEC-Q100 及零缺陷质量体系认证，从拿到主机厂定点（Design Win）、经历冬标/夏标两轮极寒极热路试，到最终 SOP 量产上车，完整周期长达 <strong>30—48 个月</strong>。更致命的是，汽车线束采取<strong>“贴身伴随式生产（Just-in-Sequence）”</strong>，由于线束体积庞大、车型配置组合多达上万种，线束厂必须建在距离主机厂总装车间 <strong>50—200 公里半径内</strong>，且每换一代平台才能重新招标一次。这意味着立讯即便手握莱尼牌照，想从矢崎、住友电工手中抢夺丰田、大众现存平台的存量份额，也只能耐着性子等主机厂 <strong>3—5 年一次的平台大换代</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>第三关：主机厂“自研域控 + 垂直整合”对独立 Tier 1 生存空间的剧烈挤压</strong></p>
-</li>
-<li>
-<p><strong>硬核工程拆解</strong>：立讯寄望于“智能座舱域控 + 智能驾驶域控 + 智能底盘”把单车配套价值量从线束的 <strong>3,000—5,000 元</strong> 推升至 <strong>1.5万—3 万元</strong>。然而，当前中国及全球智能电动车市场正在发生一场残酷的<strong>“去中介化”</strong>：</p>
+<ul>
+<li><strong>硬核工程拆解</strong>：立讯寄望于“智能座舱域控 + 智能驾驶域控 + 智能底盘”把单车配套价值量从线束的 <strong>3,000—5,000 元</strong> 推升至 <strong>1.5万—3 万元</strong>。然而，当前中国及全球智能电动车市场正在发生一场残酷的<strong>“去中介化”</strong>：</li>
+</ul>
 </li>
 <li>
 <p><strong>头部车企全面自研核心域控设计</strong>：特斯拉、比亚迪（弗迪系自产全套线束、连接器与域控，几乎不给外部留肉）、理想、蔚来、小鹏、小米汽车乃至华为鸿蒙智行，全部将智驾与座舱域控的<strong>系统架构、底层软件与核心板卡设计</strong>牢牢抓在自己手里！它们需要的不再是像博世、大陆那样赚取 20%+ 毛利的传统黑盒 Tier 1，而是只需要立讯或比亚迪电子提供<strong>“白盒硬件代工（EMS/JDM，赚 8%—12% 的贴片组装辛苦费）”</strong>。</p>
@@ -2297,13 +2796,17 @@
 <p>这绝不是简单的“谁管理更好”，而是由<strong>“会计确认准则（总额法 Buy &amp; Sell vs 净额法/零组件模式）”</strong>与<strong>“垂直一体化自供深度”</strong>共同决定的数学铁律。我们来做一次严密的<strong>同口径拆解还原</strong>：</p>
 <ol>
 <li>
-<p><strong>为什么工业富联毛利率只有 7.09%，净利率却高达 4.29%（四费率合计仅 1.84%）？</strong>
-   - 在 AI 服务器（如英伟达 NVL72 机柜）和 iPhone 整机代工的 <strong>Buy &amp; Sell（买断客供料总额法）</strong> 模式下，一颗价值 3 万美元的英伟达 GPU 或苹果主芯片，工业富联按原价买进、组装后再按原价加微薄加工费卖给客户。这 3 万美元芯片在会计上<strong>全额计入营业收入和营业成本</strong>，但毛利几乎为 0！
-   - 这种天量的“零毛利过手料（Pass-through BOM）”把工业富联的分母（营业收入 9,414 亿元）撑得无比巨大，从而把表观毛利率直接稀释到 <strong>7.09%</strong>，同时也把研发费用率稀释到 <strong>0.87%</strong>（虽然绝对研发投入高达 81.73 亿元）、管理费用率稀释到 <strong>0.52%</strong>。</p>
+<p><strong>为什么工业富联毛利率只有 7.09%，净利率却高达 4.29%（四费率合计仅 1.84%）？</strong></p>
+<ul>
+<li>在 AI 服务器（如英伟达 NVL72 机柜）和 iPhone 整机代工的 <strong>Buy &amp; Sell（买断客供料总额法）</strong> 模式下，一颗价值 3 万美元的英伟达 GPU 或苹果主芯片，工业富联按原价买进、组装后再按原价加微薄加工费卖给客户。这 3 万美元芯片在会计上<strong>全额计入营业收入和营业成本</strong>，但毛利几乎为 0！</li>
+<li>这种天量的“零毛利过手料（Pass-through BOM）”把工业富联的分母（营业收入 9,414 亿元）撑得无比巨大，从而把表观毛利率直接稀释到 <strong>7.09%</strong>，同时也把研发费用率稀释到 <strong>0.87%</strong>（虽然绝对研发投入高达 81.73 亿元）、管理费用率稀释到 <strong>0.52%</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>为什么立讯精密毛利率能比工业富联高出 4.82 个百分点（11.91% vs 7.09%）？</strong>
-   - <strong>第一层原因：高毛利纯零组件业务的結構支撑</strong>。立讯并非纯粹的 EMS 组装厂！在立讯的营收盘子里，<strong>通讯互联及数据中心（2025毛利率 18.40%）、汽车互联及线束（2025毛利率 15.75%）</strong> 合计占比已从 2025 年的 19.20% 跃升至 2026H1 的 <strong>28.08%</strong>（汽车 18.56% + 通讯 9.52%）。这两块核心零组件业务直接把公司整体毛利率往上拉高了约 <strong>1.8—2.2 个百分点</strong>。</p>
+<p><strong>为什么立讯精密毛利率能比工业富联高出 4.82 个百分点（11.91% vs 7.09%）？</strong></p>
+<ul>
+<li><strong>第一层原因：高毛利纯零组件业务的結構支撑</strong>。立讯并非纯粹的 EMS 组装厂！在立讯的营收盘子里，<strong>通讯互联及数据中心（2025毛利率 18.40%）、汽车互联及线束（2025毛利率 15.75%）</strong> 合计占比已从 2025 年的 19.20% 跃升至 2026H1 的 <strong>28.08%</strong>（汽车 18.56% + 通讯 9.52%）。这两块核心零组件业务直接把公司整体毛利率往上拉高了约 <strong>1.8—2.2 个百分点</strong>。</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -2315,8 +2818,10 @@
 </li>
 </ul>
 <ol start="3">
-<li><strong>为什么立讯与安费诺（Amphenol）存在“36.9% vs 11.9%”的巨大毛利率鸿沟？</strong>
-   - 安费诺<strong>坚决不做任何低毛利的整机组装（EMS/ODM）</strong>！安费诺的 266 亿美元营收 100% 来自高壁垒的通信高速背板连接器、军工航天连接器、工业传感器，且在英伟达 Overpass 架构及高速背板连接器上握有核心专利池（与泰科 TE 交叉授权），因此在 AI 算力爆发中享受到 <strong>33.1% 的部门营业利润率</strong>。</li>
+<li><strong>为什么立讯与安费诺（Amphenol）存在“36.9% vs 11.9%”的巨大毛利率鸿沟？</strong><ul>
+<li>安费诺<strong>坚决不做任何低毛利的整机组装（EMS/ODM）</strong>！安费诺的 266 亿美元营收 100% 来自高壁垒的通信高速背板连接器、军工航天连接器、工业传感器，且在英伟达 Overpass 架构及高速背板连接器上握有核心专利池（与泰科 TE 交叉授权），因此在 AI 算力爆发中享受到 <strong>33.1% 的部门营业利润率</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>同口径还原实验</strong>：如果我们把立讯精密合并报表中约 <strong>1,950 亿元</strong> 的低毛利整机组装业务（iPhone/AirPods整机EMS及闻泰安卓ODM，平均毛利率约 <strong>6.5%—7.5%</strong>）单独剥离出去，只看立讯剩余约 <strong>900 亿元</strong> 的<strong>“核心精密零组件+AI高速互连+汽车线束与智能座舱”</strong>业务，其真实综合毛利率实际上高达 <strong>19.5%—21.5%</strong>，其中 AI 数据中心高速铜缆（DAC/ACC）与光模块业务毛利率更在 <strong>22%—28%</strong> 区间！</li>
@@ -2423,9 +2928,11 @@
 </ul>
 <h4 id="3-airpods-vrmr-ai">3. 战场三：AirPods 声学耳机、VR/MR 与 AI 智能眼镜</h4>
 <ul>
-<li><strong>攻守态势</strong>：<strong>立讯精密 vs 歌尔股份</strong> 的双寡头博弈呈现“此消彼长”。</li>
+<li><strong>攻守态势</strong>：<strong>立讯精密 vs 歌尔股份</strong> 的双寡头博弈呈现“此消彼长”。<ul>
 <li>在 <strong>AirPods 战线</strong>，立讯精密已牢牢占据苹果 AirPods 系列（含高阶降噪款 AirPods Pro 及新款）<strong>60%—65% 的绝对主导份额</strong>，歌尔股份虽修复了早年的砍单创伤，但份额被限制在 <strong>30%—35%</strong> 左右，且不得不承受大客户的成熟品年降压力。</li>
 <li>在 <strong>AI 智能眼镜与 XR 战线</strong>，歌尔股份凭借在 Meta Ray-Ban 智能眼镜及 Quest 系列上的深度绑定守住了先发身位，但立讯已联合国内互联网巨头及北美客户全面切入 AI 音频眼镜与 AR 光波导整机代工，歌尔 2026 单 Q3 营收下滑 <strong>7.80%</strong>、存货暴增 <strong>71.68%</strong>，暴露出其消费电子整机护城河正遭遇立讯全方位的贴身肉搏。</li>
+</ul>
+</li>
 </ul>
 <h4 id="4-gb200gb300-dacacc-ai">4. 战场四：英伟达 GB200/GB300 高速铜缆（DAC/ACC）、背板连接器与 AI 服务器组件</h4>
 <ul>
@@ -2444,8 +2951,10 @@
 </ul>
 <h4 id="5">5. 战场五：汽车高低压线束、智能座舱与智驾域控</h4>
 <ul>
-<li><strong>攻守态势</strong>：立讯通过 <strong>“41亿元鲸吞百年巨头德国莱尼（Leoni）+ 国内自主车企内生狂飙”</strong>，彻底改写了全球汽车线束格局！</li>
+<li><strong>攻守态势</strong>：立讯通过 <strong>“41亿元鲸吞百年巨头德国莱尼（Leoni）+ 国内自主车企内生狂飙”</strong>，彻底改写了全球汽车线束格局！<ul>
 <li>此前全球汽车线束由日本住友电工、矢崎、安波福（Aptiv）、德国莱尼四大家族垄断。立讯在 2025 年 7 月正式并表莱尼后，一举跃升为<strong>全球前四大、中国第一大汽车线束巨头</strong>，不仅直接接管了莱尼在宝马、奔驰、大众、奥迪的欧洲本土 Tier 1 准入牌照，更将中国供应链的自动化降本与铜材集采导入莱尼全球 26 国工厂，实现并购首年扭亏为盈；同时在国内市场，立讯与奇瑞、理想、赛力斯、吉利深度绑定，2026Q1-Q3 汽车业务狂揽 <strong>509.70 亿元</strong> 营收，将比亚迪电子（高度依赖母公司比亚迪内部配套）和蓝思科技（局限于车载中控玻璃屏）远远甩在身后。</li>
+</ul>
+</li>
 </ul>
 <h4 id="c-420252026q3">📊 表 C-4：2025—2026Q3 五大核心硬件战场份额攻守格局与赢家输家总览表</h4>
 <div class="table-scroll-wrap"><table>
@@ -3011,7 +3520,16 @@
 </tr>
 </tbody>
 </table></div>
-<div class="annotated-row"><div class="main-col"><p><em>(注：为保持极度审慎，我们在后续模块 F 进行估值倒推时，将增量消化后的稳态常态 Owner Earnings 保守取整锚定为 <strong>225.00 亿元/年</strong>，对应稳态常态归母净利润约 <strong>215.00亿—225.00亿元</strong>、表观归母净利润约 <strong>235.00亿—245.00亿元</strong>。)</em></p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>莱尼扭亏向 3.5% 净利率爬坡、闻泰国内 ODM 导入零件自供、加上已经掏完钱的 55 亿在建工程达产——这三件事不需要求神拜佛讲新故事，只要按部就班拧干毛巾，就能把每年可支配真金白银从 184 亿垫高到 225 亿以上。</p></div></div></div></div>
+<div class="annotated-row"><div class="main-col"><p><em>(注：为保持极度审慎，我们在后续模块 F 进行估值倒推时，将增量消化后的稳态常态 Owner Earnings 保守取整锚定为 <strong>225.00 亿元/年</strong>，对应稳态常态归母净利润约 <strong>215.00亿—225.00亿元</strong>、表观归母净利润约 <strong>235.00亿—245.00亿元</strong>。)</em></p><blockquote>
+<p><strong>⚔️ 【2026-11-21 二元对峙终审重校口径同步（模块 D 强制纠偏）】</strong>：
+经红蓝对质与 2022–2026 历年硬现金流复核，原模块 D 存在三处明显乐观偏差，终审予以刚性重校并 100% 对齐合并企业端（Unlevered Firm）分母：
+1. <strong>维持性 CapEx 证伪“+33.5 亿折旧现金盾”</strong>：2022–2026E 立讯资本开支（<code>135.8 / 113.9 / 121.1 / 179.0 / ~195 亿</code>）连续 5 年跑赢或紧贴折旧摊销（25 年 <code>137.3 亿</code> / 26E <code>150.0 亿</code>），苹果年度改款与“China+N”越南/墨西哥重复建厂决定了约 <strong><code>160.0 亿元</code>（折旧的 <code>106.7%</code>，占总 CapEx 约 <code>82%</code>）</strong> 属刚性防御性 CapEx，真实折旧与维持 CapEx 存在 <strong><code>-10.0 亿元/年</code></strong> 跑步机缺口，而非原稿假设的 <code>+39.5 亿</code> 合并正现金盾；
+2. <strong>2026Q4 预告冲刺风险与立铠/利息数据纠偏</strong>：2025 年报实测利息费用为 <strong><code>17.65 亿元</code></strong>（非原稿 <code>9.48 亿</code>）、立铠精密持股比例为 <strong><code>49.75%</code></strong>（少数股东 <code>50.25%</code>）；剔除政府补助（<code>~11 亿</code>）及高杠杆下不可持续的理财收益（<code>~16 亿</code>），仅合理还原外汇套保对冲错配并计入 Q4 冲刺及融资成本抬升折扣后，重校<strong>常态归母核心净利 <code>165.0 亿元</code></strong>（合并常态净利 <code>182.5 亿</code>，加回税后净融资成本 <code>+14.0 亿</code> 得合并 NOPAT <strong><code>196.5 亿元</code></strong>）；
+3. <strong>重校双口径 Owner Earnings（100% 对齐合并 True EV）</strong>：
+   - <strong>重校全合并企业端常态 OE（<code>steady_oe</code>）</strong> = <code>196.5 (NOPAT) + 150.0 (D&amp;A) - 160.0 (维持性CapEx) - 26.5 (结构性营运资金摩擦)</code> = <strong><code>160.00 亿元/年</code></strong>（对应<strong>归母权益端常态 OE <code>134.00 亿元/年</code></strong>，较原稿归母 <code>184.0 亿</code> 硬砍 <strong><code>-27.2%</code></strong>，较原稿企业端 <code>218.0 亿</code> 硬砍 <strong><code>-26.6%</code></strong>！）；
+   - <strong>重校全合并企业端达产 OE（<code>full_oe</code>）</strong>：对莱尼欧洲整合（工会/德系车承压下修至 <code>+6 亿</code>）、闻泰 ODM 整合（薄利+印度仲裁下修至 <code>+5 亿</code>）及 AI/汽车在建产能释放（224G 铜缆二供毛利上限下修至 <code>+19 亿</code> 归母）合计给予 <code>+35 亿</code> 合并增量，锚定 <strong><code>195.00 亿元/年</code></strong>（对应归母权益端达产 OE <strong><code>164.00 亿元/年</code></strong>，较原稿 <code>225.0 亿</code> 硬砍 <strong><code>-27.1%</code></strong>！）。</p>
+</blockquote></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>莱尼扭亏向 3.5% 净利率爬坡、闻泰国内 ODM 导入零件自供、加上已经掏完钱的 55 亿在建工程达产——这三件事不需要求神拜佛讲新故事，只要按部就班拧干毛巾，就能把每年可支配真金白银从 184 亿垫高到 225 亿以上。</p></div></div></div></div>
+
 
 <hr/>
 <h2 id="1191">三、 双极限压力测试：11.91% 的毛利率防线究竟有多抗揍？</h2>
@@ -3026,9 +3544,11 @@
 </li>
 <li>
 <p><strong>锁定真实的受创敞口（1,400亿元真实价值创造盘子）</strong>：真正暴露在大客户“极端年降或关税分摊压价 10%—15%”炮火之下的，是立讯精密的 <strong>“整机组装加工费（MVA）+ 自制消费电子精密零组件（立铠结构件、声学、马达、连接器）+ 汽车电子 Tier 1 + AI 通信互连”</strong>——这部分的真实营收敞口合计约为 <strong>1,400.00 亿元</strong>（贡献了全部 452.58亿元毛利，对应真实增值业务毛利率高达 <strong>32.33%</strong>！）。</p>
-</li>
+<ul>
 <li>当这 <strong>1,400.00亿元</strong> 核心业务遭遇下游 <strong>10% 极端压价</strong> 时，名义毛利冲击总额为 <strong><code>-140.00 亿元</code></strong>；</li>
 <li>当遭遇下游 <strong>15% 毁灭级压价</strong> 时，名义毛利冲击总额为 <strong><code>-210.00 亿元</code></strong>。</li>
+</ul>
+</li>
 </ul>
 <h4 id="2_8">2. 三道产业缓冲垫的量化传导</h4>
 <p>面对 <code>-140亿元</code>（-10%档）至 <code>-210亿元</code>（-15%档）的名义毛利冲击，立讯精密在真实车间与供应链中拥有三道刚性减震机制：</p>
@@ -3353,9 +3873,9 @@
 </li>
 <li>
 <p><strong>一旦发生逾期</strong>：逾期 1—60 天计提 <strong>5.00%</strong>；逾期 61—120 天直接跳升至 <strong>30.00%</strong>；逾期 121—180 天计提 <strong>40.00%</strong>；逾期 181—365 天计提 <strong>50.00%</strong>；逾期 1 年以上计提 <strong>90.00%—100.00%</strong>！</p>
-</li>
-<li>
-<p>此外，立讯在附注中明确规定：<strong>若应收账款转为商业承兑汇票结算，账龄绝不重新起算，而是严格追溯至原应收账款初始确认日连续计算账龄</strong>，彻底堵死了业内常见的“年末让烂账客户开一张商票把长账龄洗成短期票据以逃避坏账计提”的财务伎俩。</p>
+<ul>
+<li>此外，立讯在附注中明确规定：<strong>若应收账款转为商业承兑汇票结算，账龄绝不重新起算，而是严格追溯至原应收账款初始确认日连续计算账龄</strong>，彻底堵死了业内常见的“年末让烂账客户开一张商票把长账龄洗成短期票据以逃避坏账计提”的财务伎俩。</li>
+</ul>
 </li>
 <li>
 <p><strong>【为什么未逾期部分只提 0.05%？有潜藏雷区吗？】</strong>：
@@ -3376,12 +3896,12 @@
 <li>
 <p><strong>【VMI 客供料与 Buy &amp; Sell 模式下的跌价含金量剖析】</strong>：
   立讯的存货主要由 <strong>原材料、在产品、库存商品、发出商品</strong> 四大块构成。在苹果及头部车企的供应链体系中：</p>
-</li>
-</ul>
 <ol>
 <li>属于 <strong>VMI（供应商管理库存）或具有明确客户订单绑定（PO Backed）</strong> 的专用物料，即便因客户改版停产导致呆滞，按照果链标准合同（Master Supply Agreement），代工厂也有权向苹果发起 <strong>NRE / 呆滞料索赔（E&amp;O Claim）</strong>；</li>
 <li>在拥有客户索赔兜底机制的前提下，立讯依然对库龄超过 180 天、或处于代际切换期的在产品与库存商品计提了高达 <strong>19.15 亿元（4.33%）</strong> 的存货跌价准备（甚至超过了存货规模是其 3.5 倍的工业富联的 16.93 亿元跌价总额！）。这充分说明立讯在期末存货可变现净值测试上采取了<strong>“宁可当期多提减值压低利润，绝不把呆滞库存留到下一年爆雷”</strong>的极度保守策略。</li>
 </ol>
+</li>
+</ul>
 <h4 id="13">1.3 固定资产折旧年限与折旧方法对比：藏在机器折旧里的利润垫</h4>
 <ul>
 <li>
@@ -3805,14 +4325,18 @@
 <h3 id="2-101867-1426">2. 深度审视：1,018.67亿短期借款与 1,426亿总负债，究竟是增厚还是拖累股东回报？</h3>
 <div class="annotated-row"><div class="main-col"><p>看到 True EV 比总市值多出 1,376.84亿元（其中有息负债高达 1,426.00亿元，尤其是短期借款 <code>1,018.67亿元</code>），任何一个审慎的价值投资者都会追问：<strong>立讯精密为什么要背这么重的短期债务？这笔杠杆到底是在替普通股股东打工赚钱，还是在替银行打工吸血？</strong></p><p>我们用财报附注里的真实利率与资本回报率算一笔明白账：</p><ol>
 <li>
-<p><strong>极度廉价的债务融资成本（税后成本 <code>&lt; 1.90%</code>）</strong>：
-   - 2025年全年，立讯精密利润表“利息费用”仅为 <strong><code>9.48亿元</code></strong>（同年“利息收入” <code>4.06亿元</code>，外加委托理财收益 <code>11.20亿元</code>，利息与理财净收益反而是正的 <code>+5.78亿元</code>！）。
-   - 2026年前三季度，因并表德国莱尼存量债务、阶段性增加外币流贷及业务扩张，前三季度“利息费用”升至 <strong><code>16.62亿元</code></strong>（年化约 <code>22.16亿元</code>）。但同期公司获得的“委托理财及大额存单收益”高达 <strong><code>12.85亿元</code></strong>（年化约 <code>17.13亿元</code>），加上账面存款利息收入（年化约 <code>5.50亿元</code>），<strong>广义利息收支依然基本打平</strong>！
-   - 即便单算负债端的刚性付息率：年化约 22亿—28亿元的利息支出对应约 1,200亿—1,400亿元的计息债务均额，其<strong>综合名义借款利率仅约 <code>2.00% — 2.20%</code></strong>（得益于国内顶尖制造业白名单贴息贷款、低息供应链票据融资及科创债）；扣除 15% 高新技术企业所得税盾后，<strong>税后真实债务资金成本仅为 <code>1.70% — 1.87%</code></strong>！</p>
+<p><strong>极度廉价的债务融资成本（税后成本 <code>&lt; 1.90%</code>）</strong>：</p>
+<ul>
+<li>2025年全年，立讯精密利润表“利息费用”仅为 <strong><code>9.48亿元</code></strong>（同年“利息收入” <code>4.06亿元</code>，外加委托理财收益 <code>11.20亿元</code>，利息与理财净收益反而是正的 <code>+5.78亿元</code>！）。</li>
+<li>2026年前三季度，因并表德国莱尼存量债务、阶段性增加外币流贷及业务扩张，前三季度“利息费用”升至 <strong><code>16.62亿元</code></strong>（年化约 <code>22.16亿元</code>）。但同期公司获得的“委托理财及大额存单收益”高达 <strong><code>12.85亿元</code></strong>（年化约 <code>17.13亿元</code>），加上账面存款利息收入（年化约 <code>5.50亿元</code>），<strong>广义利息收支依然基本打平</strong>！</li>
+<li>即便单算负债端的刚性付息率：年化约 22亿—28亿元的利息支出对应约 1,200亿—1,400亿元的计息债务均额，其<strong>综合名义借款利率仅约 <code>2.00% — 2.20%</code></strong>（得益于国内顶尖制造业白名单贴息贷款、低息供应链票据融资及科创债）；扣除 15% 高新技术企业所得税盾后，<strong>税后真实债务资金成本仅为 <code>1.70% — 1.87%</code></strong>！</li>
+</ul>
 </li>
 <li>
-<p><strong>极其丰厚的正向杠杆利差（ROIC <code>12%—14%</code> vs 税后债息 <code>1.8%</code>）</strong>：
-   - 立讯精密将这笔税后成本仅 <code>1.8%</code> 的低息资金投入到精密制造、汽车线束与 AI 算力产线中，创造出的全口径投入资本回报率（ROIC）常年高达 <strong><code>12.0% — 14.0%</code></strong>，从而将归属于普通股股东的净资产收益率（ROE）从无杠杆状态下的约 13% 强力撬动至 <strong><code>18.5% — 20.5%</code></strong>！</p>
+<p><strong>极其丰厚的正向杠杆利差（ROIC <code>12%—14%</code> vs 税后债息 <code>1.8%</code>）</strong>：</p>
+<ul>
+<li>立讯精密将这笔税后成本仅 <code>1.8%</code> 的低息资金投入到精密制造、汽车线束与 AI 算力产线中，创造出的全口径投入资本回报率（ROIC）常年高达 <strong><code>12.0% — 14.0%</code></strong>，从而将归属于普通股股东的净资产收益率（ROE）从无杠杆状态下的约 13% 强力撬动至 <strong><code>18.5% — 20.5%</code></strong>！</li>
+</ul>
 </li>
 </ol><ul>
 <li><strong>定性结论</strong>：在当前阶段，立讯精密的债务杠杆<strong>不是吞噬股东价值的毒药，而是极具中国特色的“低息政策红利放大器”</strong>——它用不到 2% 的廉价债权资金，替普通股股东赚取了超过 10个百分点的超额净利差！这也是为什么看立讯不能只机械套用死板的 <code>True EV / OE</code> 倍数，而必须看到<strong>“低息负债替股权增值”</strong>的结构性优势。当然，这笔千亿短债唯一的阿喀琉斯之踵在于<strong>“跨币种错配与极端流动性挤兑风险”</strong>（我们将在文末的死刑证伪红线中严格设防）。</li>
@@ -4047,7 +4571,8 @@
 <li>
 <p><strong>证伪本质</strong>：说明公司在汽车与海外重资产扩张中彻底丧失了对上下游账期和资本开支的管控力，所谓的“存量每年 184亿 Owner Earnings”沦为账面应收账款与存货减值假象，重资产飞轮退化为吞噬股东现金的“庞氏产能黑洞”。</p>
 </li>
-</ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把果链老本行和汽车线束按白菜价一扣，A 股给 AI 算力只算了 25 倍稳态 PE，而打九折的 H 股更是只按 15 倍代工厂价格白送 AI 铜连接龙头！在 49 港元附近买 H 股、或者等 A 股回调到 40—44 元黄金区重锤，赔率足够让你睡个安稳觉。</p></div></div></div></div>
+</ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把果链老本行和汽车线束按白菜价一扣，A 股给 AI 算力只算了 25 倍稳态 PE，而打九折的 H 股更是只按 15 倍代工厂价格白送 AI 铜连接龙头！在 49 港元附近买 H 股、或者等 A 股回调到 40—44 元黄金区重锤，赔率足够让你睡个安稳觉。<br>
+<em>(⚔️ 2026-11-21 终审注：上述原稿模块 F 锚定 11 月 9 日旧价及未扣减 CapEx 跑步机前的旧口径，以下为 2026-11-21 零信任红蓝对质后的终极裁决表，全篇估值与买卖操盘一律以本裁决表为准！)</em></br></p></div></div></div></div>
 
 
 
@@ -4055,6 +4580,140 @@
 
 
 
+<hr/>
+<h3 id="2026-11-21">⚔️ 【2026-11-21 独立盲审做空“非黑即白”二元极限对质终极裁决表】</h3>
+<blockquote>
+<p><strong>实时行情基准（2026-11-20 收盘，真实汇率 <code>1 HKD = 0.855 CNY</code>，有效总股本 <code>77.4335 亿股</code>）</strong>：
+- <strong>A 股 <code>002475.SZ</code></strong>：<strong><code>45.70 元</code></strong>（<code>-4.09%</code>，市值 <strong><code>3,538.71 亿元</code></strong>，静态 PE <code>19.51x</code>，PB <code>2.95x</code>）
+- <strong>H 股 <code>02475.HK</code></strong>：<strong><code>45.16 港元</code></strong>（<code>-5.44%</code>，折人民币 <strong><code>38.61 元</code></strong>，H 股市值折人民币 <strong><code>2,989.85 亿元</code></strong>，较 7/9 IPO 价 <code>63.28 港元</code> 深幅破发 <strong><code>-28.63%</code></strong>，<strong>A/H 溢价 <code>+18.36%</code> / H 股折价 <code>-15.51%</code></strong>）</p>
+</blockquote>
+<h4 id="1_7">1. 红蓝核心争议逐项法医裁决（绝不和稀泥）</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核心对质战场</th>
+<th style="text-align: left;">🔴 红队独立盲审做空指控</th>
+<th style="text-align: left;">🔵 蓝队原稿核心抗辩</th>
+<th style="text-align: left;">⚖️ 终审裁决官铁面定性（一手财报 + Python 复核）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>一、资本结构与严苛合并 True EV（债务海啸 + 质押短借 + 昨日急发新债）</strong></td>
+<td style="text-align: left;">26Q3 狭义有息债暴增 <code>+47.3%</code> 至 <code>1,458.12 亿</code>（短借 <code>1,018.67 亿</code>）+ 超短融 <code>~50 亿</code>；2025 质押短借暴增 <code>+267.7%</code> 至 <code>188.08 亿</code>；11/03 现金兑付 <code>32.12 亿</code> 转债后，<strong>11/20 急获银行间 TDFI 全品种发债批文（含永续票据）</strong>，严苛 True EV 达 <code>4,533–4,833 亿</code></td>
+<td style="text-align: left;">账面有 <code>681.14 亿</code> 现金，2025 利息费用仅 <code>9.48 亿</code>，税后借债成本 <code>&lt;1.9%</code> 属低息正向杠杆套利</td>
+<td style="text-align: left;"><strong>🔴 红队完胜（击穿原稿重大事实错误）！</strong> 核查 2025 年报原文：利息费用实为 <strong><code>17.65 亿元</code></strong>（利息收入 <code>9.98 亿</code>，净利息支出 <code>7.67 亿</code>，原稿 <code>9.48 亿</code> 严重低估近一半！），质押短借确已暴增 <code>+267.7%</code> 至 <strong><code>188.08 亿</code></strong>，11/20 <code>TDFI50号</code> 批文坐实流动性紧绷。终审精算：<strong>总债 <code>1,476.00 亿</code></strong>（<code>1,458.12 + 50.00超短融 - 32.12转债兑付</code>）− <strong>自由现金 <code>451.63 亿</code></strong>（兑付后现金 <code>649.02 + 50%交易性金融资产62.91 - 法定受限20.30 - 营运与质押受困底仓240.00</code>）= <strong>严苛净债 <code>1,024.37 亿</code></strong>；加 <strong>少数股东权益 <code>209.86 亿</code></strong>（对应 26E 少数股东损益 <code>~18.5 亿</code> = <code>11.3x PE / ROE 8.8%</code>，与全球结构件/线束同行齐平，按 <code>1.0x</code> 账面值公允无需虚增）→ <strong>EV 调整项 <code>+1,234.23 亿元</code></strong>！<strong>严苛合并 True EV：A 股 <code>4,772.94 亿元</code>（+34.9%）/ H 股 <code>4,224.08 亿元</code>（+41.3%）</strong>。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>二、9M26 OCF <code>-64.34 亿</code> / FCF <code>-212.73 亿</code>：季节性还是结构性失血？</strong></td>
+<td style="text-align: left;">9M26 OCF 暴跌 <code>-285%</code> 至 <code>-64.34 亿</code>、FCF <code>-212.73 亿</code>（103.5% 吃光 <code>205.5 亿</code> H 股 IPO 募资），4.75 年累计 FCF 仅 <code>85.16 亿</code>（转化率 <code>13.5%</code>），16 年股权净抽血 <code>176.5 亿</code></td>
+<td style="text-align: left;">属苹果 Q3 备货脉冲季节性低点，历年 Q4 回款 <code>200+ 亿</code>，无需过度恐慌</td>
+<td style="text-align: left;"><strong>🔴 红队 70% 击穿 + 🔵 蓝队 30% 反杀！</strong> 核查 2022–2026 历年三季报一手 OCF：<strong>22 9M <code>+29.61 亿</code>、23 9M <code>+72.22 亿</code>、24 9M <code>+66.75 亿</code>、25 9M <code>+34.78 亿</code>、26 9M <code>-64.34 亿</code></strong>——此前四年三季报从未为负！26 9M 同比骤降近 <code>100 亿</code>（应收 <code>+42.6%</code>、存货 <code>+55.4%</code> 远超营收 <code>+29.0%</code>），彻底击穿蓝队“纯常规季节性”辩护，证明莱尼（90–120 天账期）+ 闻泰 Buy&amp;Sell ODM 导致营运资金结构性恶化。但蓝队反杀亦成立：22–25 年 Q4 单季 OCF 高达 <code>+98亿 / +204亿 / +204亿 / +138亿</code>，26Q4 旺季回款大概率将全年 OCF 拉回 <code>+85–125 亿</code>（全年 FCF 仍深负 <code>-70~-110 亿</code>），并非红队按 9M 线性外推的永续失血崩盘。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>三、AI 算力叙事 vs 苦力代工底色 &amp; 分子分母同口径 Owner Earnings</strong></td>
+<td style="text-align: left;">2025 苹果绝对销售额 <code>1,883.81 亿</code>（<code>-0.92%</code>）已停滞，三大核心制造子公司净利率仅 <code>2.12%–2.22%</code>，9M26 扣非净利率跌至 <code>3.64%</code>、非经常损益占 <code>20.55%</code>；严苛 OE 仅 <code>115.2 亿</code>，对应 True EV 高达 <code>39.3x</code>（回报率 <code>2.54%</code>）</td>
+<td style="text-align: left;">剔除 1,950 亿客供过账后自制毛利率 32%，18.17 亿衍生品收益对冲表内汇兑损失；归母常态 OE <code>184 亿 → 225 亿</code></td>
+<td style="text-align: left;"><strong>⚖️ 双向纠偏（红队砍 OE 胜 + 蓝队纠错配胜）！</strong> ① <strong>红队击穿蓝队</strong>：苹果绝对额停滞、立铠持股实为 <code>49.75%</code>、扣非净利率四年阴跌至 <code>3.64%</code>、5 年 CapEx 持续超 D&amp;A 彻底戳破原稿“+33.5 亿折旧现金盾”幻觉；且原稿模块 G 林奇将存货错录为 <code>518.69 亿(+22.5%)</code>（实为 <code>657.91 亿/+55.4%</code>）属严重内鬼错误。② <strong>蓝队纠偏红队</strong>：红队拿“合并 True EV”直除“归母权益端 OE <code>115.2 亿</code>”存在<strong>致命分子分母错配</strong>（漏加少数股东及税后净融资成本），且全额抹杀锁汇对冲收益有失公允。终审 100% 对齐合并口径：<strong>重校企业端常态 OE = <code>160.00 亿元/年</code></strong>（NOPAT <code>196.5</code> + D&amp;A <code>150.0</code> − 维持性 CapEx <code>160.0</code> − 刚性 WC <code>26.5</code>，对应归母权益端 <strong><code>134.00 亿</code></strong>，硬砍原稿 <code>-27.2%</code>），<strong>达产企业端 OE = <code>195.00 亿元/年</code></strong>（归母 <code>164.0 亿</code>）。当前 <strong>A 股严苛 EV/OE = <code>29.83x</code>（回报 <code>3.35%</code> / 达产 <code>4.09%</code>），H 股 = <code>26.40x</code>（回报 <code>3.79%</code> / 达产 <code>4.62%</code>）</strong>，依然显著偏贵！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>四、Reverse SOTP 拆骨与“AI 算力高估值泡沫”</strong></td>
+<td style="text-align: left;">26H1 通信/AI 仅占营收 <code>9.52%</code>（<code>166.09 亿</code>，毛利率 <code>17.29%</code>）；消费电子按 <code>11x</code> + 汽车 <code>10x</code> 拆骨后，A 股隐含 AI 业务高达 <code>61.4x–75.2x PE</code>，安费诺压顶+未来光进铜退将引爆双杀</td>
+<td style="text-align: left;">消费电子 <code>15x</code> + 汽车 <code>24x</code> 托底 <code>2,810 亿</code>，H 股隐含 AI 仅 <code>15.2x</code> 稳态 PE</td>
+<td style="text-align: left;"><strong>🔴 红队基本胜出（但反杀 <code>21.00 元</code> 崩盘论）！</strong> 按重校核心净利 <code>165 亿</code>（消费电子 <code>121 亿 × 12.5x = 1,512.5 亿</code> + 汽车 <code>18 亿 × 12.0x = 216.0 亿</code> = 传统底盘 <strong><code>1,728.5 亿元</code></strong>，仅覆盖 A 股市值 <strong><code>48.8%</code></strong> / H 股市值 <strong><code>57.8%</code></strong>）：当前 A 股（<code>45.70 元</code>）隐含通信/AI（<code>26 亿</code> 核心净利）标价高达 <strong><code>1,810.2 亿</code>（<code>69.6x PE</code>！）</strong>，H 股（<code>45.16 港元</code>）亦高达 <strong><code>1,261.3 亿</code>（<code>48.5x PE</code>！）</strong>，远超安费诺 <code>31x PE</code>，泡沫确凿无疑！但蓝队成功反杀空头 <code>21.00 元</code> 极端目标：在 <code>21.00 元</code>（市值 <code>1,626 亿 / 1.35x PB / 9.86x</code> 核心 PE），传统基本盘（<code>1,728.5 亿</code>）已超总市值、将年赚 <code>26 亿</code> 的 224G/448G 全球前二算力互连板块作价 <strong><code>-102 亿元</code></strong>，明显矫枉过正。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>五、股息率安全垫、A/H 溢价与 2027-01-09 基石解禁</strong></td>
+<td style="text-align: left;">常态股息率仅 <code>0.55%</code>（TTM 极限 <code>0.68%</code>），A/H 溢价高达 <code>+18.36%</code>，且 <strong>2027-01-09</strong> H 股 <code>63.28 港元</code> IPO 基石投资者 6 个月解禁期满（已深套 <code>-28.6%</code>）将触发二次踩踏</td>
+<td style="text-align: left;">H 股较 A 股折价具性价比，优先买 H 股</td>
+<td style="text-align: left;"><strong>🔴 红队完胜！</strong> 核实三期真实纯现金派息：25 年度 <code>0.1391 元</code>（7/20 已派）+ 26 中期 <code>0.1099 元</code>（10/22 已派）+ 26Q3 <code>0.060 元</code>（10/29 董事会已批、无需股东会）= <strong>TTM 合计 <code>0.309 元/股</code></strong>，对应 A 股股息率仅 <strong><code>0.68%</code></strong>、H 股仅 <strong><code>0.80%</code></strong>，毫无红利防守垫；且 2026-07-09 上市引入的 26–28 家基石投资者锁仓 <code>117.54 亿港元</code>（占 H 股 <code>48.44%</code>），距 <strong>2027-01-09 解禁仅剩 49 天</strong>，A 股与 H 股当前均严禁提前抄底！</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="2-ah-774335-1-hkd-0855-cny">2. 终审重校 A/H 股严格两档买点与实战估值标尺（以 <code>77.4335 亿股</code>、<code>1 HKD = 0.855 CNY</code> 精确验算）</h4>
+<div class="table-scroll-wrap"><table class="wide-table">
+<thead>
+<tr>
+<th style="text-align: left;">市场与终审击球档位</th>
+<th style="text-align: center;">重校目标价区间</th>
+<th style="text-align: center;">对应总市值（人民币亿元）</th>
+<th style="text-align: center;">对应严苛合并 True EV（亿元）</th>
+<th style="text-align: center;">对应严苛 EV / 常态 OE（<code>160 亿</code>）与回报率</th>
+<th style="text-align: center;">对应严苛 EV / 达产 OE（<code>195 亿</code>）与回报率</th>
+<th style="text-align: center;">对应重校核心 PE（<code>165 亿</code>）/ PB / 隐含 AI PE</th>
+<th style="text-align: center;">对应 TTM 股息率（<code>0.309 元</code>）</th>
+<th style="text-align: left;">终审实战动作与触发条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>当前 A 股坐标 (<code>002475.SZ</code>)</strong></td>
+<td style="text-align: center;"><strong><code>45.70 元</code></strong></td>
+<td style="text-align: center;"><code>3,538.7</code></td>
+<td style="text-align: center;"><strong><code>4,772.9</code></strong></td>
+<td style="text-align: center;"><code>29.83x</code> (<strong><code>3.35%</code></strong>)</td>
+<td style="text-align: center;"><code>24.48x</code> (<code>4.09%</code>)</td>
+<td style="text-align: center;"><code>21.4x</code> / <code>2.94x</code> / <strong><code>69.6x</code></strong></td>
+<td style="text-align: center;"><code>0.68%</code></td>
+<td style="text-align: left;"><strong>🚫 0 票追高！</strong> 溢价 <code>+18.36%</code> + AI 泡沫高企 + 净债千亿</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>🎯 A 股第二档（左侧建仓区）</strong></td>
+<td style="text-align: center;"><strong><code>27.00—32.00 元</code></strong></td>
+<td style="text-align: center;"><code>2,091—2,478</code></td>
+<td style="text-align: center;"><code>3,325—3,712</code></td>
+<td style="text-align: center;"><code>20.78—23.20x</code> (<code>4.31%—4.81%</code>)</td>
+<td style="text-align: center;"><code>17.05—19.04x</code> (<code>5.25%—5.86%</code>)</td>
+<td style="text-align: center;"><code>12.7—15.0x</code> / <code>1.74—2.06x</code> / <code>13.9—28.8x</code></td>
+<td style="text-align: center;"><code>0.97%—1.14%</code></td>
+<td style="text-align: left;">较现价回调 <code>-30% ~ -41%</code>，AI 估值压回安费诺之下，仅在 Q4 回款与短债压缩兑现后分批左侧建仓</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>🔥 A 股第一档（重锤底仓区）</strong></td>
+<td style="text-align: center;"><strong><code>≤27.00 元</code></strong></td>
+<td style="text-align: center;"><code>≤2,091</code></td>
+<td style="text-align: center;"><code>≤3,325</code></td>
+<td style="text-align: center;"><code>≤20.78x</code> (<strong><code>≥4.81%</code></strong>)</td>
+<td style="text-align: center;"><code>≤17.05x</code> (<strong><code>≥5.86%</code></strong>)</td>
+<td style="text-align: center;"><code>≤12.7x</code> / <code>≤1.74x</code> / <strong><code>≤13.9x</code></strong></td>
+<td style="text-align: center;"><code>≥1.14%</code></td>
+<td style="text-align: left;">穿破红队 <code>28.50 元</code> 基准空头底，AI 互连按传统制造业估值打折甩卖，具备厚实安全边际</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>当前 H 股坐标 (<code>02475.HK</code>)</strong></td>
+<td style="text-align: center;"><strong><code>45.16 港元</code></strong><br/><em>(折 <code>38.61 元</code>)</em></td>
+<td style="text-align: center;"><code>2,989.9</code></td>
+<td style="text-align: center;"><strong><code>4,224.1</code></strong></td>
+<td style="text-align: center;"><code>26.40x</code> (<strong><code>3.79%</code></strong>)</td>
+<td style="text-align: center;"><code>21.66x</code> (<code>4.62%</code>)</td>
+<td style="text-align: center;"><code>18.1x</code> / <code>2.48x</code> / <strong><code>48.5x</code></strong></td>
+<td style="text-align: center;"><code>0.80%</code></td>
+<td style="text-align: left;"><strong>🚫 0 票抢跑！</strong> 虽折价 <code>-15.5%</code>，但 AI 仍值 <code>48.5x</code> 且 <strong>49 天后（2027-01-09）迎 <code>117.5 亿港元</code> 基石解禁！</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>🎯 H 股第二档（左侧建仓区）</strong></td>
+<td style="text-align: center;"><strong><code>31.00—36.00 港元</code></strong><br/><em>(折 <code>26.51—30.78 元</code>)</em></td>
+<td style="text-align: center;"><code>2,052—2,383</code></td>
+<td style="text-align: center;"><code>3,287—3,618</code></td>
+<td style="text-align: center;"><code>20.54—22.61x</code> (<code>4.42%—4.87%</code>)</td>
+<td style="text-align: center;"><code>16.85—18.55x</code> (<code>5.39%—5.93%</code>)</td>
+<td style="text-align: center;"><code>12.4—14.4x</code> / <code>1.70—1.98x</code> / <code>12.5—25.2x</code></td>
+<td style="text-align: center;"><code>1.00%—1.17%</code></td>
+<td style="text-align: left;">等 <strong>2027-01-09 基石解禁砸坑</strong> 及 26 年报验明 OCF/短债后，优先于 A 股分批介入</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>🔥 H 股第一档（重锤底仓区）</strong></td>
+<td style="text-align: center;"><strong><code>≤31.00 港元</code></strong><br/><em>(折 <code>≤26.51 元</code>)</em></td>
+<td style="text-align: center;"><code>≤2,052</code></td>
+<td style="text-align: center;"><code>≤3,287</code></td>
+<td style="text-align: center;"><code>≤20.54x</code> (<strong><code>≥4.87%</code></strong>)</td>
+<td style="text-align: center;"><code>≤16.85x</code> (<strong><code>≥5.93%</code></strong>)</td>
+<td style="text-align: center;"><code>≤12.4x</code> / <code>≤1.70x</code> / <strong><code>≤12.5x</code></strong></td>
+<td style="text-align: center;"><code>≥1.17%</code></td>
+<td style="text-align: left;">精准卡位红队 H 股基准底（<code>30.50 港元</code>），权益端常态 OE 回报 <code>≥6.53%</code>，AI 算力近乎白菜价</td>
+</tr>
+</tbody>
+</table></div>
 <h2 id="-_3">---</h2>
 <h1 id="g">终章模块 G：投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）</h1>
 <blockquote>
@@ -4122,16 +4781,16 @@
 <li>
 <p><strong>塞思·卡拉曼的‘剥离残值法（Stub Value / Reverse SOTP）’称重：H 股正在以代工厂白菜价派送 AI 算力期权！</strong>
    我们在模块 F 里做的 Reverse SOTP 拆骨表，完美契合卡拉曼当年在《安全边际》里最推崇的剥离估值法：</p>
-</li>
-</ol>
 <ul>
 <li>仅仅把立讯最成熟、确定性最高的 <strong>消费电子零整一体基本盘（2026E 净利 142 亿元，按保守收息 15 倍 PE 作价 2,130 亿元）</strong> 与 <strong>汽车电子及线束 Tier 1（按 680 亿元作价）</strong> 加总，这两块传统基石就已经稳稳托住了 <strong>2,810.00 亿元人民币</strong> 的市值底盘（折合每股保底价值 <strong><code>36.31 元/股</code></strong>）！</li>
 <li>从 H 股当前总市值（<strong>3,492.89 亿元人民币</strong>）中剥离掉这 2,810 亿元基石资产后，市场留给立讯 <strong>AI 通信与数据中心高速互连业务（2026E 净利 30.05 亿元、稳态 45.00 亿元，掌握全球稀缺 224G/448G 物理发泡铜缆与光模块/液冷）</strong> 的残值标价（Stub Value）竟然只有 <strong><code>682.89 亿元</code></strong>！对应稳态利润仅 <strong>15.2 倍 PE</strong>——要知道，大洋彼岸做一模一样生意的安费诺（Amphenol）常年交易在 <strong>31—32 倍 PE</strong>！这意味着在港股买立讯，你是以传统铁匠铺的价格，买走了一家全球顶级的 AI 算力互连军火商。</li>
 </ul>
-<ol start="3">
-<li><strong>极限抗压底线与赔率结构：哪怕遭遇历史级风暴也绝不失血的资产负债表。</strong>
+</li>
+<li>
+<p><strong>极限抗压底线与赔率结构：哪怕遭遇历史级风暴也绝不失血的资产负债表。</strong>
    作为困境债务投资者，我最看重模块 D 的双极限压力测试：哪怕立讯遭遇 <strong>‘全线产品单价暴跌 15%’</strong> 或 <strong>‘铜金芯片暴涨 20%’</strong> 的百年一遇休克，依靠果链 <code>Buy &amp; Sell</code> 客供料隔离盾、3—6 个月铜价联动公式和向上游转嫁机制，它的常态 Owner Earnings 依然能死守在 <strong><code>128 亿—155 亿元/年</code></strong>；而且因为它每年有 <strong>126 亿元归母折旧（全口径 151.5 亿元）</strong> 兜底，一旦危机降临砍掉一半扩产 CapEx，它的表观自由现金流反而会飙升到 <strong><code>+94.5 亿至 +121.5 亿元/年</code></strong>！
-   更重要的是，在我们首轮全景底座按 <strong>5% 严苛折现率</strong> 测算的维持性自由现金流永续现值中，立讯精密的绝对安全边际底线是 <strong><code>2,117 亿元（折合 27.36 元/股）</code></strong>，而分部加总基石底盘是 <strong><code>2,810 亿元（折合 36.31 元/股）</code></strong>。</li>
+   更重要的是，在我们首轮全景底座按 <strong>5% 严苛折现率</strong> 测算的维持性自由现金流永续现值中，立讯精密的绝对安全边际底线是 <strong><code>2,117 亿元（折合 27.36 元/股）</code></strong>，而分部加总基石底盘是 <strong><code>2,810 亿元（折合 36.31 元/股）</code></strong>。</p>
+</li>
 </ol>
 <p>因此，我的操作建议极其冷酷且讲求纪律：<strong>在当前价位（A 股 50.78 元 / H 股 49.06 港元），H 股已经具备显著的正向不对称赔率，值得建立中等底仓；而对于 A 股，最完美的黄金重锤击球区在 <code>40.00 元—44.00 元</code>（总市值 3,100 亿—3,400 亿元，对应稳态 14 倍 OE、将所有新业务期权 0 元白送）。拿好现有的 H 股折价筹码，留足一半子弹等待市场下一次因为关税或宏观恐慌把钟摆砸回 42 元以下，那才是困境猎手满仓挥棒的时刻！</strong>”</p>
 <hr/>
@@ -4178,36 +4837,36 @@
 </tbody>
 </table></div>
 <blockquote>
-<p><strong>🏛️ 大师圆桌闭门终极合议裁决（3 票买入 H股 / 1 票等待黄金坑重锤，0 票看空离场）</strong>：
-四位大师一致认定：立讯精密绝非靠财务粉饰或单一爆款吃饭的平庸代工厂，而是一台<strong>“用严苛折旧藏富、用极致周转率把 32.33% 自制核心毛利率转化为 19% ROE”</strong>的世界级精密制造机器。
-针对当前二级市场定价（<strong>A股 <code>50.78元</code> / H股 <code>49.06港元</code></strong>），圆桌会给出的最优实战方略是：
-1. <strong>跨市场套利与底仓首选 H股（02475.HK，<code>49.06港元</code>）</strong>：享受较 A股 <strong>11.11%</strong> 的同股同权折价，对应 2026E PE 仅 <strong>17.91倍</strong>、稳态 Owner Earnings 内生回报率高达 <strong>6.44%</strong>，相当于按代工厂估值白捡全球顶级的 AI 高速铜互连与汽车 Tier 1 期权；
-2. <strong>A股（002475.SZ）黄金重锤挂单区锁定 <code>40.00元 — 44.00元</code>（总市值 <code>3,100亿—3,400亿元</code>）</strong>：在此区间内，三大增量期权完全免费赠送，安全边际坚不可摧；
-3. <strong>持仓期间铁血风控</strong>：每个财报季严格对照模块 F 设定的 <strong>“三条基本面死刑证伪红线”</strong>（果链核心份额或 AI 铜缆被 CPO 提前颠覆、2027年中莱尼净利率仍低于 1% 或 ROIC 跌破 8%、净现比连续两年低于 0.70 且短债突破 1,300亿），不破红线则安心陪伴这艘精密制造航母穿越周期！</p>
+<p><strong>🏛️ 2026-11-21 二元对峙重校版 · 大师圆桌终极合议裁决（A 股 0 票追高 / H 股 0 票抢跑，4 票一致要求深度折价并死守现金流/解禁红线！）</strong>：
+<em>(注：原稿 11 月 10 日圆桌会曾出现两处关键瑕疵——① 彼得·林奇发言中将 26Q3 存货误录为 <code>518.69 亿(+22.53%)</code>、合同负债误录为 <code>4.54→12.12 亿(+166.96%)</code>、26 年业绩预告归母增速误录为 <code>+23%–28%</code>，经核查一手三季报及模块 C 实为存货 <strong><code>657.91 亿(+55.41%)</code></strong>、合同负债 <code>9.31→12.52 亿(+34.46%)</code>、预告增速 <code>+15%–20%</code>，已彻底纠偏；② 原稿采用 <code>9.48 亿</code> 错误 2025 利息费用及过低维持性 CapEx 导致高估常态 OE 并误判现价 H 股具备买入赔率。)</em>
+经红蓝极限对质与重校后，四位大师合议裁决如下：
+1. <strong>A 股（<code>002475.SZ</code>，现价 <code>45.70 元</code>）— 0 票追高，彻底否决原稿 <code>44—47 元</code> 买点</strong>：当前 A 股较 H 股溢价高达 <strong><code>+18.36%</code></strong>，严苛合并 True EV 高达 <strong><code>4,772.94 亿元</code></strong>，对应重校企业端常态 OE（<code>160.0 亿</code>）回报率仅 <strong><code>3.35%</code></strong>（<code>29.83x</code>），剥离传统底盘（<code>1,728.5 亿</code>）后隐含通信/AI 业务高达 <strong><code>69.6x PE</code></strong>，且 TTM 股息率仅 <strong><code>0.68%</code></strong>！重校后 A 股左侧建仓区硬砍至 <strong><code>27.00—32.00 元</code></strong>，重锤底仓区 <strong><code>≤27.00 元</code></strong>；
+2. <strong>H 股（<code>02475.HK</code>，现价 <code>45.16 港元 ≈ 38.61 元</code>）— 0 票抢跑，静候 2027-01-09 基石解禁砸坑</strong>：H 股虽较 IPO 价已破发 <code>-28.63%</code>、较 A 股折价 <code>-15.51%</code>，但严苛合并 True EV（<code>4,224.08 亿</code>）对应常态 OE 回报仍仅 <strong><code>3.79%</code></strong>（隐含 AI <code>48.5x PE</code>），且 <strong>49 天后（2027-01-09）</strong> 即面临 <code>117.54 亿港元</code>（占 H 股 <code>48.44%</code>、深套 <code>-28.6%</code>）基石投资者解禁抛压！重校后 H 股左侧建仓区锁定 <strong><code>31.00—36.00 港元</code></strong>（折 <code>26.51—30.78 元</code>），重锤底仓区 <strong><code>≤31.00 港元</code></strong>（精准卡位红队 <code>30.50 港元</code> 基准空头底）；
+3. <strong>反杀极端崩盘论与双线铁血验证路标</strong>：立讯全球精密制造规模、224G/448G 算力互连前二卡位、莱尼全球 Tier 1 网络及历年 Q4 单季 <code>138—204 亿</code> 旺季回款特性，有力反杀了空头 <code>21.00 元</code>（AI 业务作价负值）崩盘论；但在下手建仓前，必须死盯 <strong>① 2026 年报 OCF 能否回正至 <code>100 亿+</code> 且短债从 <code>1,018.7 亿</code> 实质压降；② 11/20 TDFI 批文下是否被迫发行高息永续债；③ 2027-01-09 基石解禁出清及莱尼 2027 净利率爬坡</strong>！</p>
 </blockquote>
 <hr/>
-<h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
+<h2 id="h-1-2026-11-21">【模块 H：💼 专属买方研究员的 1 分钟闭门交底（2026-11-21 二元对峙终审重校版）】</h2>
 <blockquote>
-<p><strong>前面那十万字的财报细节和模型我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【立讯精密】这家企业，你只需要在脑子里记住这四件事：</strong></p>
+<p><strong>前面那十万字的财报细节、模型与红蓝法医对质我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【立讯精密】这家企业，你只需要在脑子里记住这四件事：</strong></p>
 </blockquote>
-<h3 id="1_7">1. 它到底靠什么在行业里立身？（看家饭碗）</h3>
-<p>别被它三千多亿营收、表面十一个点左右的毛利率骗了，以为它只是赚辛苦费的组装厂。立讯真正的王牌是“用低毛利整机组装做流量入口和客户抓手，反向喂饱体内高毛利的精密连接器、声学模组和结构件”。在苹果整机组装里，近两千亿是代买代卖芯片屏幕的“过手流水”，剔除后自产精密零组件真实毛利率超三成，配上每年五六次的固定资产周转率，硬生生跑出近两成净资产收益率。说白了，它是帮苹果、英伟达和头部车企把复杂图纸变成亿级高良率商品的“精密工程总包商”。</p>
+<h3 id="1_8">1. 它到底靠什么在行业里立身？（看家饭碗）</h3>
+<p>别被它三千多亿营收、表面十一个点左右的毛利率骗了，以为它只是赚辛苦费的组装厂。立讯真正的王牌是“用低毛利整机组装做流量入口和客户抓手，反向喂饱体内高毛利的精密连接器、声学模组和结构件”。在苹果整机组装里，近两千亿是代买代卖芯片屏幕的“过手流水”，剔除后自产精密零组件真实毛利率超三成，配上高周转率与全球化跨国交付网，说白了，它是帮苹果、英伟达和头部车企把复杂图纸变成亿级高良率商品的“精密工程总包商”。</p>
 <h3 id="2_9">2. 它的财务家底和经营周期现在发生了什么本质变化？（为什么它是真印钞机还是苦力）</h3>
-<p>它是一台“用严苛折旧藏富、靠三驾马车跨界收割”的机器。立讯会计极保守：设备加速折旧每年高达近一百三十亿（全口径超一百五十亿），百亿研发几乎全部当期费用化，逾期六十天应收款直接砍三成计提坏账；还原后存量每年稳吐一百八十多亿、稳态超两百三十亿元真实股东盈余。更亮眼的是，白菜价收购的德国百年线束巨头莱尼首年即扭亏，加上掌握全球稀缺的AI算力高速物理发泡铜缆与光热全栈方案，汽车与AI算力正以每年五成以上速度狂飙，接过了消费电子的增长大旗。</p>
+<p>经 2026-11-21 零信任红蓝对质彻底卸妆后，真相远比卖方叙事冷峻：<strong>它绝不是“躺赢的 AI 轻资产印钞机”，而是一台正在经历“重资产 CapEx 跑步机 + 千亿短债高压 + 并购消化阵痛”的精密代工巨兽</strong>。2025 年报实测苹果绝对销售额已微跌 <code>-0.92%</code>，三大核心制造主体净利率仅 <code>2.1%–2.2%</code>，26 9M 扣非净利率跌至 <code>3.64%</code>、存货暴增 <code>+55.4%</code>、OCF 史上首次前三季度转负至 <code>-64.34 亿</code>（FCF <code>-212.73 亿</code> 瞬间吃光 7 月 H 股 <code>205.5 亿</code> IPO 募资）。连续五年 CapEx 持续超折旧，决定了它的重校企业端常态真金白银（Owner Earnings）只有 <strong><code>160 亿元/年</code></strong>（归母仅 <code>134 亿元/年</code>，较旧估算硬砍近三成），而非原稿吹嘘的 <code>184–225 亿</code>！</p>
 <h3 id="3_2">3. 市场担心的那些“软肋”，到底是真死穴还是纸老虎？（买方真伪辩证 &amp; 危中之机）</h3>
 <ul>
 <li>
-<p><strong>一千亿短期借款与前三季度经营现金流为负？——这是“正向杠杆套利与洗牌利器（危中之机）”</strong>：它账上握着六百八十多亿现金、刚在港股融了两百四十多亿港元，手里全是随时能贴现的苹果英伟达应收款；它借税后不到两个点的境内低息短债支撑近四千亿营收备货，并趁欧美高利率寒冬把资金链断裂的莱尼和闻泰ODM低价吞下。只要不发生全球休克砍单，千亿短债反而筑起了对手无法企及的资金壁垒。</p>
+<p><strong>千亿短债（<code>1,018.7 亿</code>）、<code>188 亿</code> 质押短借与 11/20 急注 TDFI 全品种新债？——这是真警报，绝非无伤大雅的“套利红利”！</strong> 2025 年真实利息费用高达 <code>17.65 亿</code>（非原稿误算之 <code>9.48 亿</code>），9M26 财务费用暴增 12 倍至 <code>32.24 亿</code>，严苛净负债高达 <code>1,024 亿</code>、叠加 <code>210 亿</code> 少数股东权益后，真实企业价值（True EV）比表观市值足足沉重了 <strong><code>1,234 亿元</code></strong>！</p>
 </li>
 <li>
-<p><strong>原产地关税？——靠越南、墨西哥及莱尼东欧北非二十六国工厂完全防得住</strong>。</p>
+<p><strong>前三季度 FCF 亏 <code>213 亿</code> 会不会资金链断裂？——不至于崩盘，但已证明失血常态化</strong>：立讯历年 Q4 旺季回款极强（<code>+138 至 +204 亿</code>），能把全年 OCF 托回正值，加上 <code>18.17 亿</code> 锁汇收益对冲表内汇兑损失，绝非财务造假或 <code>21 元</code> 破产论；但 2025–2026 连续两年自由现金流为负、上市 16 年向股市净抽血 <code>176.5 亿</code>、TTM 股息率仅 <code>0.68%</code>，决定了它<strong>根本没有红利防守底</strong>。</p>
 </li>
 <li>
-<p><strong>真正的三大硬约束（真死穴）</strong>：一是重资产宿命，每年必须刚性砸回近百亿更新模具产线，且算上净债务后的真实企业价值（五千三百亿）比表面市值高出一千多亿；二是员工暴增至四十多万，整合欧洲工会与跨国母公司级合规审查是硬骨头；三是远期AI机柜若过早“光进铜退（CPO颠覆铜缆）”将冲击铜互连底座。</p>
+<p><strong>真正的三大硬约束（真死穴）</strong>：一是 <strong>9.5% 的 AI 业务被当成 70 倍 PE 炒作</strong>（26H1 通信/AI 营收占比仅 <code>9.52%</code>、毛利率 <code>17.29%</code>，二供卡位且远期面临光进铜退）；二是 <strong>刀锋利润率负向杠杆</strong>（毛利率跌 1 个点即斩杀近 20% 扣非净利）；三是 <strong>41.6 万员工整合欧洲莱尼工会 + 控股股东质押率 <code>37.8%</code> + 仅考核营收的期权治理瑕疵</strong>。</p>
 </li>
 </ul>
 <h3 id="4_1">4. 咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
-<p>消费电子和汽车两块基石按保守收息价拆算就已托住两千八百亿元市值（每股三十六块多）。最优打法是<strong>首选港股（四十九港元左右）</strong>：比A股打近九折，市盈率不到十八倍，扣除传统业务后，市场给它顶级AI算力互连业务的隐含标价仅十五倍市盈率（同行安费诺高达三十一倍），等于按铁匠铺价格白送AI算力军火库！若买A股，五十块附近不必追高，留足一半子弹等关税噪音把股价砸回四十到四十四元黄金区再满仓挥棒。</p>
+<p><strong>核心纪律：现价 A 股（<code>45.70 元</code>）与 H 股（<code>45.16 港元</code>）一律 0 票追高、严禁接飞刀！</strong> 按重校核心净利 <code>165 亿</code> 拆骨，消费电子+汽车传统底盘只值 <strong><code>1,728.5 亿元</code></strong>，现价 A 股给通信/AI 标价高达 <strong><code>69.6x PE</code></strong>（H 股亦高达 <strong><code>48.5x PE</code></strong>），严苛 EV 回报率仅 <code>3.35%</code>（A）/ <code>3.79%</code>（H），而且 <strong>49 天后（2027 年 1 月 9 日）H 股将迎来 <code>117.54 亿港元</code>（浮亏 <code>-28.6%</code>）基石投资者解禁抛压</strong>！最优买方打法是<strong>彻底耐心空仓等待</strong>：等基石解禁砸坑与 2026 年报验证短债压降后，<strong>优先在 H 股跌回 <code>31.00—36.00 港元</code>（重锤 <code>≤31.00 港元</code>）或 A 股跌回 <code>27.00—32.00 元</code>（重锤 <code>≤27.00 元</code>）</strong>、AI 算力压回 12–25 倍合理估值且严苛 EV 回报靠近 5%–6% 时，再扣动左侧扳机！</p>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -4399,7 +5058,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《立讯精密 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/立讯精密 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《立讯精密(002475.SZ) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/立讯精密(002475.SZ) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4596,6 +5255,553 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
