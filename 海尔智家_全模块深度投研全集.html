@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>海尔智家 深度投研全集</title>
+<title>海尔智家(600690.SH_06690.HK) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">海尔智家 深度投研全集</div>
+    <div class="report-title">海尔智家(600690.SH_06690.HK) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-22</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -892,7 +1350,15 @@
     </div>
   </div>
   <div class="report-content">
-    <h1 id="600690sh-06690hk-690dde-ag">海尔智家（600690.SH / 06690.HK / 690D.DE）全模块深度投研全集（全景八步底座 + 模块 A—G 大师圆桌会 · 铁面审计精修版）</h1>
+    <h1 id="600690sh-06690hk-690dde-ag-v4">海尔智家（600690.SH / 06690.HK / 690D.DE）全模块深度投研全集（全景八步底座 + 模块 A—G 大师圆桌会 · V4 官方原表验真终审版）</h1>
+<blockquote>
+<p><strong>⚔️ 【2026-11-22 V4 终审裁决置顶声明】</strong>
+本报告已于 <strong>2026-11-22</strong> 经买方投委会首席独立裁判官依据巨潮资讯网三份法定原版 PDF（<code>2026Q3 1225641263.PDF</code>、<code>2026H1 1225522691.PDF</code>、<code>2025AR 1225038336.PDF</code>）、交易所官方三表及 14 次对等联网反查完成 <strong>V4 三道防滑跪铁闸红蓝终极二元对质（状态：<code>REVISED</code>）</strong>。<strong>所有最新定价、EV/OE、股息率与实战操作指令，均以模块 G 正上方的《V4 终审裁决实录（单一真相区）》为准：</strong>
+* <strong>最新市场锚点（<code>2026-11-22</code>，汇率 <code>1 港元 = 0.855 人民币</code>，注销 H 股后最新登记总股本 <code>92.99 亿股</code>）</strong>：<strong>A 股 <code>23.02 元</code></strong>（总市值 <code>2,140.52 亿</code> / <code>PB 1.74x</code>）｜ <strong>H 股 <code>22.36 港元</code></strong>（折人民币 <strong><code>19.12 元</code></strong>，总市值 <code>1,777.68 亿</code> / <code>PB 1.44x</code>，<strong>A 股较 H 股溢价 <code>+20.41%</code> / H 股折价 <code>-16.95%</code></strong>）。
+* <strong>核心事实硬修正</strong>：100% 认领 <code>26Q3</code> 营收 <code>-10.13%</code>/扣非 <code>-32.17%</code>、表观利润含 <strong><code>20.05 亿</code></strong> 美国海关一次性退税（单 Q3 <code>14.93 亿</code>）+ 砍研发 <code>-13.57 亿</code> + 期权失效冲回 <code>6.78 亿</code>、保理退潮致 9M OCF <code>-39.00%</code>、<strong>取消 2026 中期分红致严格 TTM 实派股息降至 <code>0.8915 元</code></strong>（A 股 <strong><code>3.87%</code></strong> / H 股税前 <strong><code>4.66%</code></strong>；26E 58% 承诺常态息 <code>~1.05 元</code> 对应 A <code>4.56%</code> / H <code>5.49%</code>）、财务公司 <code>339.76 亿</code>（<code>99.93%</code> 顶格）按统一标准折价 <code>50%</code>（<code>-169.88 亿</code>）并穿透 <code>479.68 亿</code> 真实刚性债+养老金及 <code>68.16 亿</code> 少数股东权益（纠偏旧稿 <code>70.23 亿</code>），<strong>锁定 V4 严苛 <code>True EV</code> = A 股 <code>2,298.30 亿</code> / H 股 <code>1,935.46 亿</code></strong>（<code>ev_delta = +157.78 亿</code>），<strong>跨周期无杠杆 Firm OE 硬下修 <code>-18.1%</code> 至 <code>162.0 亿</code>（3 年达产 <code>182.0 亿</code>）</strong>。
+* <strong>对空头三重叠加反杀</strong>：反杀空头拿“美的归母”对比“海尔扣非”的口径偷换（美的 9M 扣非 <code>-22.49%</code>、格力单 Q3 <code>-44.32%</code>、海信单 Q3 <code>-96.73%</code>）；证实 <code>20.05 亿</code> 退税系美国最高法院裁定 IEEPA 关税越权后的法定退款且已合规计入非经常性损益；证实海尔印度出售 49% 股权（<code>55.91 亿</code>）系引入巴蒂+华平化解印度外资合规风险且保留并表控制权的溢价战略交易；粉碎空头分子分母错配+永续扣并购喊出 A 股 <code>13.68 元</code>（<code>1.03x PB</code>）的虚空幻想。
+* <strong>V4 锁定两档击球区与最新裁决</strong>：<strong>A 股退出买区（<code>0 票追高</code>）</strong>，重锤 <code>≤17.50 元</code> / 分批 <code>17.50—20.00 元</code>（现价 <code>23.02 元</code> 偏贵 <code>+15.1%</code>、严苛 EV 回报仅 <code>7.05%</code>，建议换仓 H 股）；<strong>H 股紧贴买区上沿（<code>4 票待回踩分批</code>）</strong>，重锤 <code>≤18.50 港元</code> / 分批 <code>18.50—21.50 港元</code>（现价 <code>22.36 港元</code> 高出上限仅 <code>+4.0%</code>、严苛 EV 回报 <code>8.37%</code> / 达产 <code>9.40%</code>，耐心等回踩 <code>≤21.50 港元</code> 分批建底仓）。</p>
+</blockquote>
 <h3 id="_1">【开篇破题：掀开合并报表的表象，看懂三千亿大白电帝国的底牌与当期“冰与火”】</h3>
 <div class="annotated-row"><div class="main-col"><p>如果只扫一眼表面合并报表，很容易把海尔智家看成一家“净利率常年比格力低近 10 个百分点、比美的低近 3 个百分点、销售费用率高达 11% 左右”的笨重家电组装厂。但若顺着产业链的真实利益分配往深处扒，会发现完全相反的商业底牌：<strong>海尔智家真正的印钞底座，是全球断层第一的制冷（冰箱/冷柜）与洗涤（洗衣机/干衣机）双寡头现金牛，外加中国万元以上超高端家电绝对霸主“卡萨帝（Casarte）”与北美本土第一大厨电及大家电巨头“通用电气家电（GE Appliances）”这两座高壁垒护城河。</strong> 它之所以在报表上显得“毛利高、费用也高、净利率偏薄”，核心原因在于过去二十年它选了一条最苦、最重的路——拒绝像国内同行早年那样靠低毛利代工（OEM）赚快钱，而是坚持在全球自建品牌（OBM）、自建本土研发制造与重度终端零售网络；同时在历史发展中背负过海尔电器（1169.HK）与 A 股母公司双轨运行的渠道摩擦，以及空调上游核心压缩机长期外购的成本短板。读懂海尔，就是读懂它如何一边靠“冰洗+卡萨帝+北美 GEA”源源不断造血，一边给自己动刀做“数字化降费、压缩机垂直一体化补课、全球并购资产整合”的长期内功。</p><p>把坐标轴拉到最新披露的 <strong>2025 年报与 2026 年三季报</strong>，海尔智家正处在一场剧烈的“内外冷热交锋与主动阵痛”之中。2025 年公司营收首次冲破三千亿大关达到 <strong>3,023.47 亿元</strong>（+5.71%），归母净利润 <strong>195.53 亿元</strong>（+4.39%），经营现金流净额高达 <strong>260.03 亿元</strong>；但步入 2026 年前三季度，营收回落至 <strong>2,218.19 亿元</strong>（同比下降 5.23%），归母净利润降至 <strong>149.99 亿元</strong>（同比下降 13.67%，其中 Q3 单季营收降 10.13%、归母净利降 12.31%），经营现金流净额同比缩水 39.00% 至 <strong>106.70 亿元</strong>。掀开这份看似降温的三季报，里面藏着三股力量的剧烈撕扯：<strong>第一是国内政策周期退潮</strong>——2025 年“国补”以旧换新透支了大量换机需求，2026 年高基数叠加补贴退坡令国内白电大盘三季度零售额跌去约 10%；<strong>第二是人民币升值与主动重组的短期出血</strong>——作为海外收入占比过半（2025 年海外收入 1,545.45 亿元，占比 51.1%）的跨国巨头，2026Q3 单季因汇率波动产生汇兑净损失 3.64 亿元（同比增亏近 5 亿元），同时管理层从 2025Q4 起主动对欧洲区域（Candy 体系）与全球供应链动大手术，仅 Q3 单季就砸进去约 5 亿元一次性重组裁撤费用；<strong>第三则是水下新引擎的逆势暗涌</strong>——国内“统仓 ToC”一盘货改革让线上线下份额逆势双升，新并购的开利商用制冷（CCR）与南非百年水暖龙头 Kwikot 首年即交出双位数增长答卷，智慧楼宇磁悬浮与暖通业务突破百亿大关。短期的报表失速，究竟是全球消费见顶的拐点，还是海尔借行业寒冬完成全球供应链换血的深蹲？我们一笔笔算清这本账。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>别被表面 6.5% 的净利率骗了！海尔在海外干的是自己开店、自己养车队、自己打广告的苦活，等于把格力让给渠道商赚的钱自己先花在了修护城河上；至于 2026Q3 那 5 个亿重组费和 3.6 亿汇兑损失，就像给老房子换屋顶碰上下大雨，疼是真疼，但屋基一点没烂。</p></div></div></div></div>
 
@@ -1077,8 +1543,10 @@
 <p><strong>商誉包袱审视（需保持警惕但暂未爆雷）</strong>：截至 2025 年末，海尔智家账面商誉高达 <strong>273.00 亿元</strong>（2026Q3 末随汇率折算微降至 <strong>260.13 亿元</strong>），占归母净资产（1,230.68 亿元）的 <strong>21.1%</strong>！其中大头是 2016 年收购 GE Appliances 形成的约 200 亿元商誉，以及收购 Candy、斐雪派克、开利商用制冷（CCR）和 Kwikot 形成的商誉。GEA 目前每年稳定赚取数十亿元人民币净利润，减值风险极低；<strong>真正的软肋在于欧洲 Candy 及 FPA 资产组</strong>，若欧洲重组后盈利仍不达预期或折现率上调，存在计提局部商誉减值的潜在敞口。</p>
 </li>
 <li>
-<p><strong>利益切分与集团财务公司关联占款深度排查（核心治理瑕疵点）</strong>：
-   * 历史上海尔智家曾因集团体外关联交易繁杂备受诟病，2020 年私有化海尔电器后已大幅清理。</p>
+<p><strong>利益切分与集团财务公司关联占款深度排查（核心治理瑕疵点）</strong>：</p>
+<ul>
+<li>历史上海尔智家曾因集团体外关联交易繁杂备受诟病，2020 年私有化海尔电器后已大幅清理。</li>
+</ul>
 </li>
 </ol><ul>
 <li><strong>但有一项必须拎出来敲警钟的财务治理瑕疵——海尔集团财务有限责任公司的“存多贷少”资金沉淀！</strong> 根据《关于海尔集团财务有限责任公司 2025 年年度及 2026 年半年度风险持续评估报告》，截至 2025 年末（及 2026 年 6 月末），海尔智家在集团财务公司的<strong>存款余额高达 339.74 亿元（2026H1 末为 339.76 亿元，紧贴 340 亿元每日最高限额上限），占上市公司全部存款总额（754.79 亿元）的 45.01%！</strong> 与此同时，上市公司在集团财务公司的贷款余额却仅有 <strong>37.67 亿元</strong>，而转身向外部商业银行借了 <strong>326.77 亿元</strong>有息贷款！尽管财务公司给予了 0.0001%—3.96% 的存款利率且海尔集团提供连带责任担保、至今未发生提款违约，但把近 340 亿元真金白银常年顶格存放在集团财务公司、同时在体外背负三百多亿外部银行借款，这在资金使用效率与独立性上依然是对中小股东不够友好的“存贷双高”类安排。</li>
@@ -1229,9 +1697,11 @@
 <h4 id="1-capex">1. 百亿资本开支（CapEx）与在建工程真实流向全景拆解</h4>
 <p>穿透 2025 年报及 2026 半年报的在建工程附注与重大非股权投资公告，海尔这每年 100 亿元的 CapEx 绝非在国内盲目扩建同质化老产能，而是高度聚焦在<strong>“三大进攻与纵深战场”</strong>：</p>
 <ul>
-<li><strong>流向一：海外新兴市场本土化超级工厂与北美供应链扩建（占 CapEx 约 45%—50%，属于开辟新区域与防关税的进攻兼防御开支）</strong></li>
 <li>
-<p><strong>泰国春武里空调工业园</strong>：总投资超十亿元人民币，规划年产能高达 <strong>600 万套</strong>（含家用空调、窗机、热泵等），是中国家电品牌在东南亚规模最大的空调制造基地，一期已于 <strong>2025 年 9 月正式投产</strong>。这笔账算得极精：它不仅直接就地供应泰国及东南亚高温高湿刚需市场（海尔在泰国空调与冷柜市占率稳居第一），更重要的是作为<strong>出口北美与欧洲的“关税安全跳板”</strong>，承接原本从中国出口美国的窗机与分体机产能。</p>
+<p><strong>流向一：海外新兴市场本土化超级工厂与北美供应链扩建（占 CapEx 约 45%—50%，属于开辟新区域与防关税的进攻兼防御开支）</strong></p>
+<ul>
+<li><strong>泰国春武里空调工业园</strong>：总投资超十亿元人民币，规划年产能高达 <strong>600 万套</strong>（含家用空调、窗机、热泵等），是中国家电品牌在东南亚规模最大的空调制造基地，一期已于 <strong>2025 年 9 月正式投产</strong>。这笔账算得极精：它不仅直接就地供应泰国及东南亚高温高湿刚需市场（海尔在泰国空调与冷柜市占率稳居第一），更重要的是作为<strong>出口北美与欧洲的“关税安全跳板”</strong>，承接原本从中国出口美国的窗机与分体机产能。</li>
+</ul>
 </li>
 <li>
 <p><strong>埃及斋月十日城生态园（一期 + 二期）</strong>：总投资 <strong>1.6 亿美元</strong>（折合人民币约 11.5 亿元），设计总产能超 100 万台。一期（空调、洗衣机、电视）已于 2024 年 5 月投产，二期（冰箱、冷柜）在 2025—2026 年加速转固。为什么非要去埃及建厂？因为埃及拥有辐射中东、北非及东非近 20 亿人口的免税贸易协定（COMESA 及阿拉伯自贸区），此前从中国海运过去不仅要交高额关税，交货周期长达 90 天；埃及本土建厂后，<strong>供应链交付周期从 3 个月直接砍到 15 天</strong>，关税清零，直接卡死了中东非刚起步的黄金身位。</p>
@@ -1241,9 +1711,9 @@
 </li>
 <li>
 <p><strong>流向二：国内上合示范区高端产能迭代与上游空调核心部件垂直一体化（占 CapEx 约 30%—35%，属于把主业成本往极限压的纵深强化开支）</strong></p>
-</li>
-<li>
-<p><strong>青岛胶州上合经济示范区系列百亿级产业集群</strong>：包括冰空洗大件智能制造基地，特别是 2025 年报重点推进的<strong>上合示范区 300 万台洗衣机新建项目（总投资 17.84 亿元）</strong>及青岛超大容积/平嵌制冷电器项目。这不是简单的低水平扩产，而是用高度模块化、黑灯工厂产线替换二十年前的老旧高人工产线，专门生产出口高毛利滚筒机与国内卡萨帝平嵌/洗烘集成新品。</p>
+<ul>
+<li><strong>青岛胶州上合经济示范区系列百亿级产业集群</strong>：包括冰空洗大件智能制造基地，特别是 2025 年报重点推进的<strong>上合示范区 300 万台洗衣机新建项目（总投资 17.84 亿元）</strong>及青岛超大容积/平嵌制冷电器项目。这不是简单的低水平扩产，而是用高度模块化、黑灯工厂产线替换二十年前的老旧高人工产线，专门生产出口高毛利滚筒机与国内卡萨帝平嵌/洗烘集成新品。</li>
+</ul>
 </li>
 <li>
 <p><strong>空调压缩机与核心部件自制补课</strong>：联合海立股份在郑州投建的转子压缩机合资工厂，以及自建空调电脑板、电机、换热器配套产线。每提高 10% 的压缩机与控制器自制率，就能在空调采购端省下数亿元的供应商毛利截留，这是海尔空调把分部利润率从 4% 往 8% 推升的命根子。</p>
@@ -1813,9 +2283,11 @@
 </li>
 </ul><ol start="2">
 <li>
-<p><strong>【低成本高赔率的真实免费期权】——数据中心（AIDC）液冷温控与欧洲 R290 热泵复苏</strong>：
-   - 这两块业务不需要海尔再额外砸几十亿新建专用工厂（完全可以复用胶州中央空调互联工厂和泰国春武里基地的现有产线，边际 CapEx 极低）。
-   - 如果未来两年欧洲央行降息带动建筑业复苏、且欧盟碳税加码重新拉大“气电比价”，海尔在欧洲早已完成渠道铺设的 R290 热泵随时能重回 30%+ 的高增长；同理，如果海尔能通过并购一家中小型精密温控/CDU 企业，或借助集团旗下冰山冷热、海尔生物等工业温控经验打入国内二线算力中心白名单，数据中心温控就能提供意外的业绩惊喜。<strong>对待这两块业务，投资人的正确姿势是：在底线估值里给 0 溢价，一旦兑现纯属白送的免费看涨期权（Free Call Option）。</strong></p>
+<p><strong>【低成本高赔率的真实免费期权】——数据中心（AIDC）液冷温控与欧洲 R290 热泵复苏</strong>：</p>
+<ul>
+<li>这两块业务不需要海尔再额外砸几十亿新建专用工厂（完全可以复用胶州中央空调互联工厂和泰国春武里基地的现有产线，边际 CapEx 极低）。</li>
+<li>如果未来两年欧洲央行降息带动建筑业复苏、且欧盟碳税加码重新拉大“气电比价”，海尔在欧洲早已完成渠道铺设的 R290 热泵随时能重回 30%+ 的高增长；同理，如果海尔能通过并购一家中小型精密温控/CDU 企业，或借助集团旗下冰山冷热、海尔生物等工业温控经验打入国内二线算力中心白名单，数据中心温控就能提供意外的业绩惊喜。<strong>对待这两块业务，投资人的正确姿势是：在底线估值里给 0 溢价，一旦兑现纯属白送的免费看涨期权（Free Call Option）。</strong></li>
+</ul>
 </li>
 <li>
 <p><strong>【难以独立贡献高毛利的防御配套或鸡肋资产】——三翼鸟场景品牌与莱西绿色再循环工厂</strong>：</p>
@@ -2016,21 +2488,27 @@
 （海尔 vs 美的 差距：-3.11个百分点；海尔 vs 格力 差距：-10.48个百分点）
 </code></pre>
 <ol>
-<li><strong>第一刀：海外商业模式差异（100% OBM 自主品牌创牌 vs 60% OEM 代工贴牌）——解释约 1.8 ~ 2.2 个百分点的差距</strong>
-   - <strong>事实数据</strong>：2025年海尔海外营收约1,500亿元（占比约50%），且<strong>近100%为自主品牌（GEA、Haier、Candy、Fisher &amp; Paykel、AQUA）</strong>；而美的海外营收约1,800亿元（占比约40%），其中<strong>约55%—60%为OEM/ODM代工业务</strong>；格力海外营收占比仅约15%，且大半亦为代工或买断出口。</li>
+<li><strong>第一刀：海外商业模式差异（100% OBM 自主品牌创牌 vs 60% OEM 代工贴牌）——解释约 1.8 ~ 2.2 个百分点的差距</strong><ul>
+<li><strong>事实数据</strong>：2025年海尔海外营收约1,500亿元（占比约50%），且<strong>近100%为自主品牌（GEA、Haier、Candy、Fisher &amp; Paykel、AQUA）</strong>；而美的海外营收约1,800亿元（占比约40%），其中<strong>约55%—60%为OEM/ODM代工业务</strong>；格力海外营收占比仅约15%，且大半亦为代工或买断出口。</li>
+</ul>
+</li>
 </ol>
 <ul>
-<li><strong>财务机理</strong>：做代工（OEM）时，货柜拉到顺德港或宁波港装船（FOB离岸价），厂家既不用花一分钱打海外电视广告、不用给海外大卖场交进场陈列费、不用在欧美养几千人的本土售后维修车队，因此代工业务的<strong>毛利率虽然只有15%—18%，但销售费用率几乎为0%—1%，净利率稳拿7%—9%</strong>！</li>
 <li>
-<p>相反，海尔在海外做100%自主品牌（OBM），产品从工厂出来后，要自己承担跨洋海运、美国本土仓储配送、Home Depot/Lowe's的终端导购与促销、全美及全欧的品牌广告以及售后保修。这导致海尔境外毛利率虽然高达 <strong>24.58%</strong>，但海外销售与管理费用率合计吃掉了 <strong>16%—17%</strong>，叠加海外并购无形资产摊销，海尔海外经营利润率常年处在 <strong>5.5%—6.5%</strong> 区间。</p>
+<p><strong>财务机理</strong>：做代工（OEM）时，货柜拉到顺德港或宁波港装船（FOB离岸价），厂家既不用花一分钱打海外电视广告、不用给海外大卖场交进场陈列费、不用在欧美养几千人的本土售后维修车队，因此代工业务的<strong>毛利率虽然只有15%—18%，但销售费用率几乎为0%—1%，净利率稳拿7%—9%</strong>！</p>
+<ul>
+<li>相反，海尔在海外做100%自主品牌（OBM），产品从工厂出来后，要自己承担跨洋海运、美国本土仓储配送、Home Depot/Lowe's的终端导购与促销、全美及全欧的品牌广告以及售后保修。这导致海尔境外毛利率虽然高达 <strong>24.58%</strong>，但海外销售与管理费用率合计吃掉了 <strong>16%—17%</strong>，叠加海外并购无形资产摊销，海尔海外经营利润率常年处在 <strong>5.5%—6.5%</strong> 区间。</li>
+</ul>
 </li>
 <li>
 <p><strong>同口径还原</strong>：如果把海尔海外1,500亿OBM业务换成美的式的OEM代工模式，海尔的整体销售费用率将从 <strong>11.20%</strong> 直接下降至 <strong>8.0%</strong> 左右，仅此一项，表观净利率差距就解释了 <strong>约1.8—2.2个百分点</strong>。但代价是什么？代价是放弃全球第一大家电自主品牌的定价权与终端护城河！看看同在北美做自主品牌的百年巨头 <strong>惠而浦（Whirlpool）</strong>——2026年三季度惠而浦全球营收下跌8.8%至36.77亿美元，北美核心大家电（MDA）EBIT利润率跌至惨淡的 <strong>3.0%</strong>，全公司Ongoing EBIT利润率仅 <strong>2.6%</strong>，GAAP准则下更是单季净亏损2.49亿美元（净利率 <strong>-6.8%</strong>）！在北美高通胀、高利率、高人工的地狱模式里，海尔旗下的GE Appliances能保持份额逆势扩张并维持6%以上的营业利润率，已经是全球大家电自主品牌里的最高效样本。</p>
 </li>
 </ul>
 <ol start="2">
-<li><strong>第二刀：财务费用剪刀差（海外并购有息负债 vs 国内先款后货净现金躺赚）——解释 1.60 ~ 2.70 个百分点的差距</strong>
-   - <strong>事实数据</strong>：2025年，海尔智家合并利润表利息费用高达 <strong>26.79亿元</strong>（<code>2,679,484,195.35元</code>），减去利息收入 <strong>17.20亿元</strong>（<code>1,719,937,738.86元</code>，其中财务公司存款利息收入 7.95 亿元）后，<strong>净利息支出为 +9.60亿元（占营收 +0.32%）</strong>；仅因2025年欧元等外币升值带来超10亿元汇兑净收益，才使2025全年表观财务费用录得 <strong>-0.51亿元</strong>（费率 <strong>-0.02%</strong>）。而进入2026年前三季度，当外币升值红利消失并转为3.64亿元Q3汇兑损失时，海尔2026Q1-Q3财务费用立刻暴露为净支出 <strong>+15.75亿元</strong>（财务费用率 <strong>+0.71%</strong>）！反观美的集团2025年财务费用为 <strong>-59.04亿元</strong>（净财务收入，费率 <strong>-1.29%</strong>）；格力电器2025年财务费用更是高达 <strong>-40.86亿元</strong>（净利息收入58.85亿元减去利息支出19.65亿元，费率 <strong>-2.39%</strong>；2026Q1-Q3为 <strong>-24.19亿元</strong>，费率 <strong>-1.92%</strong>）。</li>
+<li><strong>第二刀：财务费用剪刀差（海外并购有息负债 vs 国内先款后货净现金躺赚）——解释 1.60 ~ 2.70 个百分点的差距</strong><ul>
+<li><strong>事实数据</strong>：2025年，海尔智家合并利润表利息费用高达 <strong>26.79亿元</strong>（<code>2,679,484,195.35元</code>），减去利息收入 <strong>17.20亿元</strong>（<code>1,719,937,738.86元</code>，其中财务公司存款利息收入 7.95 亿元）后，<strong>净利息支出为 +9.60亿元（占营收 +0.32%）</strong>；仅因2025年欧元等外币升值带来超10亿元汇兑净收益，才使2025全年表观财务费用录得 <strong>-0.51亿元</strong>（费率 <strong>-0.02%</strong>）。而进入2026年前三季度，当外币升值红利消失并转为3.64亿元Q3汇兑损失时，海尔2026Q1-Q3财务费用立刻暴露为净支出 <strong>+15.75亿元</strong>（财务费用率 <strong>+0.71%</strong>）！反观美的集团2025年财务费用为 <strong>-59.04亿元</strong>（净财务收入，费率 <strong>-1.29%</strong>）；格力电器2025年财务费用更是高达 <strong>-40.86亿元</strong>（净利息收入58.85亿元减去利息支出19.65亿元，费率 <strong>-2.39%</strong>；2026Q1-Q3为 <strong>-24.19亿元</strong>，费率 <strong>-1.92%</strong>）。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -2041,16 +2519,22 @@
 </li>
 </ul>
 <ol start="3">
-<li><strong>第三刀：品类物理属性与上游核心零部件自给率差异——解释 1.5 ~ 4.5 个百分点的差距</strong>
-   - <strong>冰洗 vs 空调的物理属性鸿沟（海尔 vs 格力）</strong>：格力80%以上收入来自家用及商用空调，空调单品价值高、标准化程度极高（主力机型就那十几款模具）、体积紧凑且由安装工入户组装；而海尔过半收入来自冰箱、冷柜、洗衣机，冰洗产品体积庞大（一台对开门冰箱占用的仓储与干线物流体积是空调的3倍以上），SKU极其繁杂，运输仓储装卸费用率天生比空调高出 <strong>1.5—2.0个百分点</strong>。再叠加格力单一空调品类高達 <strong>35.28%</strong> 的毛利率（2025年）与仅 <strong>4.92%</strong> 的极低销售费用率，解释了海尔与格力之间剩余的 <strong>5—6个百分点</strong> 差距。但请注意：2026年三季度，当空调行业价格竞争加剧、铜价上涨时，格力前三季度毛利率立刻从32.75%掉到 <strong>27.03%</strong>（已被海尔的 <strong>27.18%</strong> 反超！），Q3单季净利率更是从17%跌至 <strong>10.89%</strong>，证明单一空调高毛利并非永动机。</li>
+<li><strong>第三刀：品类物理属性与上游核心零部件自给率差异——解释 1.5 ~ 4.5 个百分点的差距</strong><ul>
+<li><strong>冰洗 vs 空调的物理属性鸿沟（海尔 vs 格力）</strong>：格力80%以上收入来自家用及商用空调，空调单品价值高、标准化程度极高（主力机型就那十几款模具）、体积紧凑且由安装工入户组装；而海尔过半收入来自冰箱、冷柜、洗衣机，冰洗产品体积庞大（一台对开门冰箱占用的仓储与干线物流体积是空调的3倍以上），SKU极其繁杂，运输仓储装卸费用率天生比空调高出 <strong>1.5—2.0个百分点</strong>。再叠加格力单一空调品类高達 <strong>35.28%</strong> 的毛利率（2025年）与仅 <strong>4.92%</strong> 的极低销售费用率，解释了海尔与格力之间剩余的 <strong>5—6个百分点</strong> 差距。但请注意：2026年三季度，当空调行业价格竞争加剧、铜价上涨时，格力前三季度毛利率立刻从32.75%掉到 <strong>27.03%</strong>（已被海尔的 <strong>27.18%</strong> 反超！），Q3单季净利率更是从17%跌至 <strong>10.89%</strong>，证明单一空调高毛利并非永动机。</li>
+</ul>
+</li>
 </ol>
 <ul>
-<li><strong>上游压缩机与电机自给率差距（海尔 vs 美的）</strong>：这是海尔相比美的真正存在的“内功短板”。美的旗下的<strong>美芝（GMCC）压缩机</strong>和<strong>威灵电机</strong>分别占据全球空调/冰箱压缩机与电机的第一梯队（全球市占率超30%—40%），格力旗下的<strong>凌达压缩机</strong>与<strong>凯邦电机</strong>也实现了高度自给；而海尔长期采取“整机研发+全球模块化采购”策略，空调与冰箱压缩机大量向 <strong>海立股份（600619.SH）</strong>、加西贝拉（长虹华意）、美芝等外部采购。</li>
+<li><strong>上游压缩机与电机自给率差距（海尔 vs 美的）</strong>：这是海尔相比美的真正存在的“内功短板”。美的旗下的<strong>美芝（GMCC）压缩机</strong>和<strong>威灵电机</strong>分别占据全球空调/冰箱压缩机与电机的第一梯队（全球市占率超30%—40%），格力旗下的<strong>凌达压缩机</strong>与<strong>凯邦电机</strong>也实现了高度自给；而海尔长期采取“整机研发+全球模块化采购”策略，空调与冰箱压缩机大量向 <strong>海立股份（600619.SH）</strong>、加西贝拉（长虹华意）、美芝等外部采购。<ul>
 <li>我们拿上游 <strong>海立股份</strong> 的财报交叉验证：在2025—2026年空调排产震荡期，海立股份凭借向海尔、大金等整机厂供应转子式压缩机及拓展新能源车热管理，依然保持了约6%—8%的压缩机毛利留存与稳健分红。这意味着在空调和冰洗核心零部件环节，<strong>美的和格力把原本属于上游零部件厂的 1.0 ~ 1.5 个百分点的制造毛利留在了集团合并报表内</strong>，而海尔直到近两年才与海立股份合资建厂（郑州海立海尔等）加速补齐自制压缩机短板。</li>
 </ul>
+</li>
+</ul>
 <ol start="4">
-<li><strong>第四刀：2026Q3阶段性重组与汇兑扰动还原</strong>
-   - 2026年三季度单季，海尔扣非归母净利同比下滑32.17%，引发市场担忧。但拆开三季报附注对质：</li>
+<li><strong>第四刀：2026Q3阶段性重组与汇兑扰动还原</strong><ul>
+<li>2026年三季度单季，海尔扣非归母净利同比下滑32.17%，引发市场担忧。但拆开三季报附注对质：</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -2103,23 +2587,31 @@
 <hr/>
 <h3 id="_21">四、 四大核心战场份额攻守结论：到底是谁在抢谁的碗？</h3>
 <div class="annotated-row"><div class="main-col"><p>结合 <strong>奥维云网（AVC）</strong> 零售监测、<strong>产业在线（IBA）</strong> 出货排产数据及 <strong>欧睿国际（Euromonitor）</strong> 2025—2026年最新统计，过去一年多里，三大巨头在四大核心战场的肉搏战局极其清晰：</p><ol>
-<li><strong>冰箱与冷柜战场：海尔“一超统御”，在40%+高地上继续拔高均价</strong>
-   - <strong>战局数据</strong>：2025—2026年，海尔系（海尔+卡萨帝+Leader）在国内冰箱线下零售额份额稳居 <strong>44%—48%</strong>、线上零售额份额约 <strong>39%—41%</strong>，综合全渠道份额超过 <strong>42%</strong>，接近第二名（美的系约16%—18%）与第三名（海信容声系约15%—17%）之和；全球冰箱品牌零售量份额更是连续18年蝉联全球第一（超22%）。</li>
+<li><strong>冰箱与冷柜战场：海尔“一超统御”，在40%+高地上继续拔高均价</strong><ul>
+<li><strong>战局数据</strong>：2025—2026年，海尔系（海尔+卡萨帝+Leader）在国内冰箱线下零售额份额稳居 <strong>44%—48%</strong>、线上零售额份额约 <strong>39%—41%</strong>，综合全渠道份额超过 <strong>42%</strong>，接近第二名（美的系约16%—18%）与第三名（海信容声系约15%—17%）之和；全球冰箱品牌零售量份额更是连续18年蝉联全球第一（超22%）。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>谁在抢谁</strong>：在普通对开门冰箱沦为红海之际，海尔发明并垄断了<strong>“零距离自由嵌入式（平嵌）”冰箱</strong>与<strong>“全空间保鲜”</strong>赛道。在1万元以上的高端冰箱市场，卡萨帝单品牌线下份额高达 <strong>50%以上</strong>，直接抢走了博世（Bosch）、西门子（Siemens）、松下等外资品牌在中国的最后一块自留地；在北美与欧洲市场，海尔则利用GEA多门冰箱与海尔平嵌产品，持续蚕食惠而浦（Whirlpool）与伊莱克斯（Electrolux）的中高端份额。</li>
 </ul><ol start="2">
-<li><strong>洗衣机与洗护战场：海尔 vs 美的（小天鹅）双寡头封死天花板</strong>
-   - <strong>战局数据</strong>：国内洗衣机市场已被海尔系（全渠道份额约 <strong>45%—47%</strong>）与美的系（小天鹅+美的，全渠道份额约 <strong>27%—29%</strong>）彻底锁死，双寡头合计拿走超 <strong>74%</strong> 的市场份额，格力在洗衣机领域份额不足2%基本出局。</li>
+<li><strong>洗衣机与洗护战场：海尔 vs 美的（小天鹅）双寡头封死天花板</strong><ul>
+<li><strong>战局数据</strong>：国内洗衣机市场已被海尔系（全渠道份额约 <strong>45%—47%</strong>）与美的系（小天鹅+美的，全渠道份额约 <strong>27%—29%</strong>）彻底锁死，双寡头合计拿走超 <strong>74%</strong> 的市场份额，格力在洗衣机领域份额不足2%基本出局。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>谁在抢谁</strong>：美的（小天鹅）凭借极致的供应链成本与电商爆款策略，在2,000—4,000元中端洗烘市场攻势凶猛；而海尔则靠<strong>“直驱电机技术+双擎热泵干衣机+卡萨帝中子F2洗干集成机”</strong>死死守住高端洗护阵地，并在2025—2026年推出网红爆款“懒人三筒分区洗衣机”，在年轻消费群体中实现了口碑与高毛利的双向收割。两家共同把松下、LG和国内二线品牌挤压到了生存边缘。</li>
 </ul><ol start="3">
-<li><strong>家用空调战场：美的稳坐第一、格力被动守擂、海尔成为“最大变量抢食者”</strong>
-   - <strong>战局数据</strong>：这是2025—2026年火药味最浓的战场。国内家用空调全渠道零售额中，美的以约 <strong>28%—30%</strong> 居首，格力以约 <strong>25%—27%</strong> 居次，而海尔空调全渠道份额已从三年前的10%左右一路逆势攀升至 <strong>14%—16%</strong>（部分月份出货份额突破17%），稳居第三极！</li>
+<li><strong>家用空调战场：美的稳坐第一、格力被动守擂、海尔成为“最大变量抢食者”</strong><ul>
+<li><strong>战局数据</strong>：这是2025—2026年火药味最浓的战场。国内家用空调全渠道零售额中，美的以约 <strong>28%—30%</strong> 居首，格力以约 <strong>25%—27%</strong> 居次，而海尔空调全渠道份额已从三年前的10%左右一路逆势攀升至 <strong>14%—16%</strong>（部分月份出货份额突破17%），稳居第三极！</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>谁在抢谁</strong>：在2026年行业缩量周期中，格力为了保住30%+的高毛利率坚持“不打价格战”，导致其在2,000—3,000元主流走量价位段被美的（华凌品牌）和奥克斯、小米联合围剿；与此同时，<strong>海尔空调成了最大的增量赢家</strong>——一方面靠统帅（Leader）“超省电”系列在线上年轻市场猛抢小米和二线品牌的份额，另一方面靠海尔“洗空气/静悦”和卡萨帝星云系列切入中高端，叠加与海立股份合资补齐压缩机自产能力后成本下降，海尔在2025—2026年空调业务的营收增速与毛利率改善幅度均显著跑赢格力。</li>
 </ul><ol start="4">
-<li><strong>暖通中央空调与热泵战场：内资全面替代外资，海尔独占“磁悬浮+商冷”两翼</strong>
-   - <strong>战局数据</strong>：在大型商用及家装多联机中央空调市场，美的、格力、海尔已与大金（Daikin）、日立形成五强争霸。</li>
+<li><strong>暖通中央空调与热泵战场：内资全面替代外资，海尔独占“磁悬浮+商冷”两翼</strong><ul>
+<li><strong>战局数据</strong>：在大型商用及家装多联机中央空调市场，美的、格力、海尔已与大金（Daikin）、日立形成五强争霸。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>谁在抢谁</strong>：在房地产精装配套下滑的背景下，传统家装多联机承压，但工业厂房、数据中心温控、医院轨道交通改造等大型水机/离心机需求坚挺。海尔凭借<strong>全球市占率第一的“磁悬浮中央空调”</strong>（国内份额超50%，全球份额超25%）以及2024年底并表的<strong>开利商用制冷（Carrier Commercial Refrigeration）</strong>，在大型公建节能改造与欧洲商超冷链二氧化碳（CO2）制冷机市场开辟了美格难以复制的差异化赛道。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在存量肉搏战里，格力为了保住面子和毛利率死扛不降价，结果市场份额成了别人的盘中餐；海尔守着冰洗四成多的铁桶江山，再用统帅和自产压缩机去偷袭空调市场，这叫典型的『以正合，以奇胜』。</p></div></div></div></div>
@@ -2173,22 +2665,26 @@
 <p>很多粗糙的研报在计算自由现金流或 Owner Earnings 时，会直接把现金流量表补充资料里的四项折旧摊销一股脑加回。但在实业投资人眼里，<strong>有两块折旧摊销是绝不能随便加回给母公司股东的</strong>：</p>
 <p>我们先调取海尔智家 2024 年与 2025 年年度报告附注《现金流量表补充资料》的官方精确数据：</p>
 <ul>
-<li><strong>2024 年报实数</strong>：
-  1. 固定资产折旧、油气资产折耗、生产性生物资产折旧：<code>47.10亿元</code>（<code>4,710,040,398.23元</code>）
-  2. 使用权资产摊销（折旧）：<code>15.01亿元</code>（<code>1,500,944,847.15元</code>）
-  3. 无形资产摊销：<code>14.02亿元</code>（<code>1,402,369,891.11元</code>）
-  4. 长期待摊费用摊销：<code>4.67亿元</code>（<code>467,259,900.10元</code>）</li>
 <li>
-<p><em>2024 年全口径折旧与摊销合计</em>：<code>47.10 + 15.01 + 14.02 + 4.67 = 80.80亿元</code>。</p>
+<p><strong>2024 年报实数</strong>：</p>
+<ol>
+<li>固定资产折旧、油气资产折耗、生产性生物资产折旧：<code>47.10亿元</code>（<code>4,710,040,398.23元</code>）</li>
+<li>使用权资产摊销（折旧）：<code>15.01亿元</code>（<code>1,500,944,847.15元</code>）</li>
+<li>无形资产摊销：<code>14.02亿元</code>（<code>1,402,369,891.11元</code>）</li>
+<li>长期待摊费用摊销：<code>4.67亿元</code>（<code>467,259,900.10元</code>）
+- <em>2024 年全口径折旧与摊销合计</em>：<code>47.10 + 15.01 + 14.02 + 4.67 = 80.80亿元</code>。</li>
+</ol>
 </li>
 <li>
-<p><strong>2025 年报实数（叠加 2026 年新转固微增趋势）</strong>：
-  1. 固定资产折旧：<code>53.02亿元</code>（<code>5,302,037,821.98元</code>，较 2024 年增加 <code>5.92亿元</code>，系上合冰箱二期、埃及一期等新工厂转固所致）
-  2. 使用权资产摊销（折旧）：<code>17.81亿元</code>（<code>1,780,528,813.26元</code>）
-  3. 无形资产摊销：<code>14.13亿元</code>（<code>1,413,186,944.70元</code>，主要为土地使用权、自研及并购核心技术专利、工业软件摊销）
-  4. 长期待摊费用摊销：<code>2.54亿元</code>（<code>254,178,883.72元</code>，主要为厂房装修改造及终端展厅摊销）</p>
+<p><strong>2025 年报实数（叠加 2026 年新转固微增趋势）</strong>：</p>
+<ol>
+<li>固定资产折旧：<code>53.02亿元</code>（<code>5,302,037,821.98元</code>，较 2024 年增加 <code>5.92亿元</code>，系上合冰箱二期、埃及一期等新工厂转固所致）</li>
+<li>使用权资产摊销（折旧）：<code>17.81亿元</code>（<code>1,780,528,813.26元</code>）</li>
+<li>无形资产摊销：<code>14.13亿元</code>（<code>1,413,186,944.70元</code>，主要为土地使用权、自研及并购核心技术专利、工业软件摊销）</li>
+<li>长期待摊费用摊销：<code>2.54亿元</code>（<code>254,178,883.72元</code>，主要为厂房装修改造及终端展厅摊销）
+- <em>2025 年全口径折旧与摊销合计</em>：<code>53.02 + 17.81 + 14.13 + 2.54 = 87.50亿元</code>（进入 2026 年，随泰国春武里基地一期等转固，全口径 D&amp;A 年化约 <code>89.00亿—90.50亿元</code>）。</li>
+</ol>
 </li>
-<li><em>2025 年全口径折旧与摊销合计</em>：<code>53.02 + 17.81 + 14.13 + 2.54 = 87.50亿元</code>（进入 2026 年，随泰国春武里基地一期等转固，全口径 D&amp;A 年化约 <code>89.00亿—90.50亿元</code>）。</li>
 </ul>
 <p><strong>【关键审计扣减】</strong>：</p>
 <ol>
@@ -2205,8 +2701,10 @@
 <p>绝非如此，但买方审计也绝不能对海尔“跨国多基地持续技改”的重资产属性掉以轻心！翻开海尔智家 2024—2025 年报的《在建工程重大项目变动表》与董事会投资公告，我们将全集团 CapEx 严格切分为三层（并按 <code>95.99%</code> 归母权益比例扣除 <code>4.01%</code> 少数股东分摊份额）：</p>
 <ol>
 <li>
-<p><strong>第一层：纯粹的新兴市场绿地造厂与上游压缩机新建扩张 CapEx（Pure Greenfield Growth CapEx，归母每年约 <code>18.00亿—25.00亿元</code>）</strong>：
-   - 包括泰国春武里年产 600 万套空调工业园、埃及生态园一二期、印度北部工业园扩建、郑州海立合资转子压缩机基地等<strong>从无到有的新产能开辟</strong>。这部分投资一旦建成达产，无需每隔两三年重复建设。</p>
+<p><strong>第一层：纯粹的新兴市场绿地造厂与上游压缩机新建扩张 CapEx（Pure Greenfield Growth CapEx，归母每年约 <code>18.00亿—25.00亿元</code>）</strong>：</p>
+<ul>
+<li>包括泰国春武里年产 600 万套空调工业园、埃及生态园一二期、印度北部工业园扩建、郑州海立合资转子压缩机基地等<strong>从无到有的新产能开辟</strong>。这部分投资一旦建成达产，无需每隔两三年重复建设。</li>
+</ul>
 </li>
 <li>
 <p><strong>第二层：维持存量运转的常规基础维护 CapEx（Basic Maintenance CapEx，归母每年约 <code>48.00亿—55.00亿元</code>，基准中枢 <code>51.00亿元</code>，已扣除 4.01% 少数股东分摊）</strong>：</p>
@@ -2221,15 +2719,19 @@
 </li>
 <li>
 <p><strong>③ 全球数字化 IT 架构、统仓 ToC 系统与终端专卖店展陈例行翻新（归母每年约 <code>10.00亿—12.00亿元</code>）</strong>。</p>
-</li>
+<ul>
 <li><em>注：若仅扣除上述 <code>51.00亿元</code> 常规基础维护 CapEx（及 <code>5.00亿元</code> 营运资金占用），则海尔智家常规口径下的常态归母 Owner Earnings 高达 <code>185.00 + 68.15 - 51.00 - 5.00 = 197.15亿元</code>（区间 <code>183.90亿—206.40亿元</code>）！</em>
 3. <strong>第三层（买方严苛审计追加扣减）：全球老工业园“自动化替人”与高端黑灯产线防老化刚性升级 CapEx（Brownfield Automation &amp; Upgrade CapEx，归母每年约 <code>20.00亿—25.00亿元</code>，基准中枢 <code>25.00亿元</code>）</strong>：</li>
 <li>正如我们在模块 A 所揭示的：海尔在美国肯塔基州路易斯维尔（Appliance Park）、新西兰 FPA、欧洲及国内拥有大量老旧工业园，面对海外蓝领工会时薪与福利的刚性上涨，海尔每年必须持续投入 <code>20亿—25亿元</code> 进行棕地自动化机械臂改造与产线迭代，才能守住现有毛利率不被海外人工通胀吞噬！</li>
 <li>秉持买方最严苛的审慎原则，我们将第二层（常规基础维护 <code>51.00亿元</code>）与第三层（全球老基地持续自动化升级 <code>25.00亿元</code>）合并定义为<strong>【严苛广义归母维持性 CapEx（中枢 <code>76.00亿元</code>，区间 <code>73.00亿—75.00亿元</code>，对应全口径约 <code>79.18亿元</code>，扣除 4.01% 少数股东份额 <code>-3.18亿元</code> 后为 <code>76.00亿元</code>）】</strong>！</li>
 </ul>
+</li>
+</ul>
 <ol start="4">
-<li><strong>常态归母营运资金净占用（Working Capital Requirement，每年约 <code>3.00亿—8.00亿元</code>，中枢 <code>5.00亿元</code>）</strong>：
-   - 在海外新兴市场占比提升、跨国海运在途存货与欧美 KA 商超应收账期客观存在的背景下，审慎计提每年 <code>5.00亿元</code>（区间 <code>3.00亿—8.00亿元</code>）的归母常态营运资金净占用。</li>
+<li><strong>常态归母营运资金净占用（Working Capital Requirement，每年约 <code>3.00亿—8.00亿元</code>，中枢 <code>5.00亿元</code>）</strong>：<ul>
+<li>在海外新兴市场占比提升、跨国海运在途存货与欧美 KA 商超应收账期客观存在的背景下，审慎计提每年 <code>5.00亿元</code>（区间 <code>3.00亿—8.00亿元</code>）的归母常态营运资金净占用。</li>
+</ul>
+</li>
 </ol>
 <hr/>
 <h4 id="owner-earnings_1">第四步：得出海尔智家常态 Owner Earnings 终极账本</h4>
@@ -2492,21 +2994,29 @@
 <p>但为什么在过去二十年中国家电行业数次惨烈的价格战（如 2014—2015 年格力清场战、2019—2020 年奥克斯线上价格战、2024—2026 年空调二线品牌血拼）中，三大白电巨头从来没有出现过这种“静态休克”？因为真实的产业运行中存在着<strong>四道强大的动态减震缓冲垫</strong>：</p>
 <ol>
 <li>
-<p><strong>第一道减震阀：渠道返利池与促销费的“自动联动缩水”（吸收约 <code>30%—35%</code> 的终端降幅）</strong>
-   - 海尔智家的资产负债表上，常年挂着近 <code>300亿元</code> 的广义预提销售返利、推广支持费与合同负债（计入其他应付款 <code>190.52亿</code>、合同负债 <code>76.33亿</code>、预计负债 <code>24.90亿</code>），利润表上每年的销售费用高达 <code>338.78亿元</code>（新准则销售费用率 <code>11.21%</code>，若含重分类至成本的质保费则广义营销与质保费率约 <code>15.0%</code>）。
-   - 家电行业的定价机制不是“一手交钱一手交货的一口价”，而是“基准开盘价 + 月度/季度/年度阶梯提货返利 + 终端促销费分摊”。当终端均价下跌 <code>10%—15%</code> 时，经销商的提货返利比例、价保折让与门店促销补贴会自动按合同机制同向缩减，渠道商与终端门店会共同吸收约 <code>3.5%—5.0%</code> 的价格跌幅，而非全部砸穿海尔的净出厂结算价。</p>
+<p><strong>第一道减震阀：渠道返利池与促销费的“自动联动缩水”（吸收约 <code>30%—35%</code> 的终端降幅）</strong></p>
+<ul>
+<li>海尔智家的资产负债表上，常年挂着近 <code>300亿元</code> 的广义预提销售返利、推广支持费与合同负债（计入其他应付款 <code>190.52亿</code>、合同负债 <code>76.33亿</code>、预计负债 <code>24.90亿</code>），利润表上每年的销售费用高达 <code>338.78亿元</code>（新准则销售费用率 <code>11.21%</code>，若含重分类至成本的质保费则广义营销与质保费率约 <code>15.0%</code>）。</li>
+<li>家电行业的定价机制不是“一手交钱一手交货的一口价”，而是“基准开盘价 + 月度/季度/年度阶梯提货返利 + 终端促销费分摊”。当终端均价下跌 <code>10%—15%</code> 时，经销商的提货返利比例、价保折让与门店促销补贴会自动按合同机制同向缩减，渠道商与终端门店会共同吸收约 <code>3.5%—5.0%</code> 的价格跌幅，而非全部砸穿海尔的净出厂结算价。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二道减震阀：统仓 ToC 直配改革砍掉“二批分销加价层”（吸收约 <code>15%—20%</code> 的终端降幅）</strong>
-   - 过去三年，海尔在国内下沉市场全面推进“数字化统仓统配（ToC 一盘货）”，绕过传统省级代理商与二级批发商的层层加价（传统二批加价率通常在 <code>6%—8%</code>），由海尔区域中心仓直接配送至乡镇专卖店或消费者家中。这意味着，即便终端消费者买到的冰箱、空调便宜了 <code>10%</code>，其中有 <code>2.0%—3.0%</code> 是通过砍掉中间商冗余物流与加价层级省出来的，并不伤及工厂端的出厂毛利。</p>
+<p><strong>第二道减震阀：统仓 ToC 直配改革砍掉“二批分销加价层”（吸收约 <code>15%—20%</code> 的终端降幅）</strong></p>
+<ul>
+<li>过去三年，海尔在国内下沉市场全面推进“数字化统仓统配（ToC 一盘货）”，绕过传统省级代理商与二级批发商的层层加价（传统二批加价率通常在 <code>6%—8%</code>），由海尔区域中心仓直接配送至乡镇专卖店或消费者家中。这意味着，即便终端消费者买到的冰箱、空调便宜了 <code>10%</code>，其中有 <code>2.0%—3.0%</code> 是通过砍掉中间商冗余物流与加价层级省出来的，并不伤及工厂端的出厂毛利。</li>
+</ul>
 </li>
 <li>
-<p><strong>第三道减震阀：三千亿链主对上游供应商的“背靠背年降共担”（吸收约 <code>20%—25%</code> 的终端降幅）</strong>
-   - 海尔每年向全球上游采购超过 <code>1,800亿元</code> 的钢板、塑料粒子、钣金件、电子元器件与包装辅料。在行业爆发全面价格战的极端周期里，整机厂会启动严格的“供应商背靠背年降谈判（Annual Cost Down）”与模块化通用件简配降本，上游供应商通常需分担 <code>3.0%—4.5%</code> 的采购降价（对应节约营业成本约 <code>55亿—80亿元</code>）。</p>
+<p><strong>第三道减震阀：三千亿链主对上游供应商的“背靠背年降共担”（吸收约 <code>20%—25%</code> 的终端降幅）</strong></p>
+<ul>
+<li>海尔每年向全球上游采购超过 <code>1,800亿元</code> 的钢板、塑料粒子、钣金件、电子元器件与包装辅料。在行业爆发全面价格战的极端周期里，整机厂会启动严格的“供应商背靠背年降谈判（Annual Cost Down）”与模块化通用件简配降本，上游供应商通常需分担 <code>3.0%—4.5%</code> 的采购降价（对应节约营业成本约 <code>55亿—80亿元</code>）。</li>
+</ul>
 </li>
 <li>
-<p><strong>第四道减震阀：卡萨帝（内销占比超 <code>15%</code>）与北美 GE Profile / Monogram 的高端结构刚性护盘（吸收约 <code>15%—20%</code> 的整体冲击）</strong>
-   - 价格战杀红眼的永远是 1,500—2,500 元的入门级挂机空调和低端小冰箱；而海尔智家手里握着两张别的白电厂没有的王牌——国内万元以上份额超 <code>60%</code> 的<strong>卡萨帝（Casarte）</strong>，以及北美高端成套嵌入式厨电品牌 <strong>Monogram / Café / GE Profile</strong>。这部分合计超 <code>550亿元</code> 的高净值人群定制化需求，具备极强的品牌黏性与价格刚性，几乎不参与低端机型的泥潭肉搏。</p>
+<p><strong>第四道减震阀：卡萨帝（内销占比超 <code>15%</code>）与北美 GE Profile / Monogram 的高端结构刚性护盘（吸收约 <code>15%—20%</code> 的整体冲击）</strong></p>
+<ul>
+<li>价格战杀红眼的永远是 1,500—2,500 元的入门级挂机空调和低端小冰箱；而海尔智家手里握着两张别的白电厂没有的王牌——国内万元以上份额超 <code>60%</code> 的<strong>卡萨帝（Casarte）</strong>，以及北美高端成套嵌入式厨电品牌 <strong>Monogram / Café / GE Profile</strong>。这部分合计超 <code>550亿元</code> 的高净值人群定制化需求，具备极强的品牌黏性与价格刚性，几乎不参与低端机型的泥潭肉搏。</li>
+</ul>
 </li>
 </ol>
 <p>综合这四道产业减震阀，当行业终端均价暴跌 <code>10%</code>（严酷价格战）或 <code>15%</code>（毁灭级价格战）时，实际穿透四层缓冲后净传导至海尔智家利润表的<strong>净利率折损约为 <code>1.60—2.80个百分点</code></strong>。叠加公司在逆风期主动削减扩张性 CapEx，归母净利润底线仍能稳稳守住 <strong><code>132.00亿元</code>（跌10%）</strong> 与 <strong><code>98.00亿元</code>（跌15%）</strong>，严苛广义维持口径下的常态自由现金流（简化归母 OE）依然高达 <strong><code>122.15亿元</code></strong> 与 <strong><code>91.15亿元</code></strong>（常规基础维护口径下更达 <strong><code>147.15亿元</code></strong> 与 <strong><code>114.15亿元</code></strong>）！</p>
@@ -2515,22 +3025,28 @@
 <p>我们再推演第二个让市场闻风丧胆的宏观黑天鹅：<strong>铜、铝、冷轧钢板、硅钢及 ABS/HIPS/MDI 化工材料全面暴涨 <code>20%</code>，同时美国政府对来自墨西哥、东南亚及中国的进口家电无差别加征 <code>20%—25%</code> 惩罚性关税</strong>！</p>
 <p>我们先算清海尔智家在这场风暴中的<strong>精确风险敞口底账</strong>：</p>
 <ol>
-<li><strong>大宗原材料暴涨 20% 的真实成本冲击</strong>：
-   - 海尔智家常态生产直接营业成本约 <code>2,080亿元</code>（剔除重分类质保费后的制造口径毛利率 <code>30.8%</code>，新准则表观营业成本约 <code>2,200亿元</code>）。其中，铜（蒸发器/冷凝器铜管、电机漆包线，约占成本 <code>10%—12%</code>）、钢材（冷轧板、镀锌板、硅钢片，约占 <code>18%—20%</code>）、大宗化工料（ABS/聚丙烯塑料粒子、MDI/聚醚保温发泡料，约占 <code>14%—16%</code>）、铝及外购大宗标准件（约占 <code>18%—20%</code>）四项合计占生产营业成本约 <strong><code>62%</code>（即约 <code>1,290亿元</code> 原材料基数）</strong>。
-   - 若上述大宗原材料现货价格暴涨 <code>20%</code>，理论静态新增成本高达 <code>1,290 × 20% = 258.00亿元</code>。</li>
+<li><strong>大宗原材料暴涨 20% 的真实成本冲击</strong>：<ul>
+<li>海尔智家常态生产直接营业成本约 <code>2,080亿元</code>（剔除重分类质保费后的制造口径毛利率 <code>30.8%</code>，新准则表观营业成本约 <code>2,200亿元</code>）。其中，铜（蒸发器/冷凝器铜管、电机漆包线，约占成本 <code>10%—12%</code>）、钢材（冷轧板、镀锌板、硅钢片，约占 <code>18%—20%</code>）、大宗化工料（ABS/聚丙烯塑料粒子、MDI/聚醚保温发泡料，约占 <code>14%—16%</code>）、铝及外购大宗标准件（约占 <code>18%—20%</code>）四项合计占生产营业成本约 <strong><code>62%</code>（即约 <code>1,290亿元</code> 原材料基数）</strong>。</li>
+<li>若上述大宗原材料现货价格暴涨 <code>20%</code>，理论静态新增成本高达 <code>1,290 × 20% = 258.00亿元</code>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>但海尔有两大供应链护盾</strong>：第一，海尔拥有成熟的<strong>大宗商品期货套期保值机制</strong>（年报附注中常年持有铜、铝、塑料远期衍生品合约）与宝钢、万华化学等巨头的年度长协阶梯锁价机制，可平滑掉约 <code>30%</code> 的现货暴涨峰值；第二，推进“铝代铜”换热器技术改型与压缩机/电机自制化降本，可再对冲约 <code>5%</code> 的成本压力。扣除 <code>35%</code> 的套保与技术对冲后，<strong>原材料暴涨 20% 实际净增的刚性采购成本约为 <code>167.70亿元</code>（税前）</strong>。</li>
 </ul>
 <ol start="2">
-<li><strong>美国对墨西哥/东南亚加征 20%—25% 关税的真实敞口</strong>：
-   - 很多不熟悉海尔海外布局的投资者一听到“美国加关税”，就以为海尔 <code>790亿元</code> 的北美业务要全军覆没。这是最大的认知误区！</li>
+<li><strong>美国对墨西哥/东南亚加征 20%—25% 关税的真实敞口</strong>：<ul>
+<li>很多不熟悉海尔海外布局的投资者一听到“美国加关税”，就以为海尔 <code>790亿元</code> 的北美业务要全军覆没。这是最大的认知误区！</li>
+</ul>
+</li>
 </ol>
 <ul>
-<li><strong>海尔在北美卖的家电，近 <code>80%</code> 是在美国本土造的！</strong> 自 2016 年收购 GEA 以来，海尔在美国肯塔基州路易斯维尔（Appliance Park 总部工业园）、南卡罗来纳州卡姆登、亚拉巴马州迪凯特、佐治亚州拉斐特、田纳西州塞默尔等地拥有 <strong>9 座大型本土制造工厂</strong>，美国本土销售的大型厨电、高容积冰箱、洗衣机、热水器约 <strong><code>75%—80%</code> 由美国本土工厂直接生产</strong>，完全不受任何进口关税影响！</li>
+<li><strong>海尔在北美卖的家电，近 <code>80%</code> 是在美国本土造的！</strong> 自 2016 年收购 GEA 以来，海尔在美国肯塔基州路易斯维尔（Appliance Park 总部工业园）、南卡罗来纳州卡姆登、亚拉巴马州迪凯特、佐治亚州拉斐特、田纳西州塞默尔等地拥有 <strong>9 座大型本土制造工厂</strong>，美国本土销售的大型厨电、高容积冰箱、洗衣机、热水器约 <strong><code>75%—80%</code> 由美国本土工厂直接生产</strong>，完全不受任何进口关税影响！<ul>
 <li>真正暴露在关税敞口下的，仅有约 <code>20%—25%</code> 的跨国补充产能（主要是从墨西哥参股 48.41% 的 Mabe 基地进口的部分对开门冰箱/燃气灶，以及从泰国春武里基地和中国进口的窗机空调、小型冷柜）。这部分进口产品对应北美终端销售额约 <code>160亿—195亿元</code>，对应海关完税离岸申报货值（FOB 成本价）约为 <strong><code>90.00亿—110.00亿元</code></strong>。</li>
 <li>若美国对墨西哥及东南亚进口产能加征 <code>20%</code> 关税，静态新增关税成本约为 <code>100亿元 × 20% = 20.00亿元</code>；经过供应链原产地调配与与墨西哥代工方分摊后，<strong>实际净增关税成本约为 <code>15.00亿—18.00亿元</code>（取中枢 <code>16.50亿元</code>）</strong>。</li>
 <li>更微妙的竞争格局在于：海尔在北美最大的两个死敌——韩国三星（Samsung）和 LG，它们在美国本土只有极少数洗衣机组装线，其销往美国的冰箱、厨电、空调高度依赖墨西哥（蒂华纳、蒙特雷工厂）和越南/泰国进口（进口敞口高达 <code>60%—70%</code>）！因此，一旦美国对墨西哥和东南亚普加关税，三星和 LG 的成本受损程度是海尔 GEA 的 3 倍以上，必然倒逼整个北美家电市场全线提价 <code>5%—8%</code>，美国本土产能占比近 <code>80%</code> 的海尔 GEA 反而能享受显著的相对竞争红利！</li>
+</ul>
+</li>
 </ul>
 <p>我们将上述两场极限风暴（情景一：终端均价跌 10%—15%；情景二：原材料暴涨 20% + 关税冲击下的“不提价硬扛” vs “温和提价 5% 顺价”）完整推演至下表：</p>
 <h4 id="_26">【海尔智家双极限压力测试全景推演账本】</h4>
@@ -2774,9 +3290,11 @@
 </li>
 <li>
 <p><strong>账龄与坏账计提对质</strong>：翻开2025年报附注对比账龄，<strong>海尔的应收账款成色甚至远优于格力</strong>：</p>
-</li>
+<ul>
 <li>海尔按组合计提的应收账款余额约278.50亿元中，<strong>1年以内账龄占比超过94.8%</strong>（超264亿元），且海尔对1年以内计提 <strong>1.24%</strong>、1—2年计提 <strong>18.74%</strong>、2—3年计提 <strong>29.12%</strong>、3年以上计提 <strong>64.56%—100%</strong>，对出现财务困难的个别客户更是直接按 <strong>95.04%</strong> 单项计提坏账！</li>
 <li>反观格力电器，虽然应收账款总额只有190.66亿元，但其中 <strong>3年以上账龄的陈年老账高达30.09亿元（占比15.78%）</strong>，主要卡在历史上的新能源汽车货款及废弃电器拆解基金补贴上，导致格力不得不计提了高达30.79亿元的坏账准备。相比之下，海尔的应收账款是典型的高周转、高信用等级“活水”。</li>
+</ul>
+</li>
 </ul>
 <h4 id="2-389-vs-167">2. 存货跌价准备：3.89% vs 美的 1.67%，谁对库存减值更狠？</h4>
 <ul>
@@ -2857,11 +3375,11 @@
 <li>
 <p><strong>260.13 亿元商誉的减值测试假设审视</strong>：
   截至2025年末，海尔账面商誉约260.13亿元，核心由 <strong>GE Appliances（约200亿元量级）</strong>、<strong>Candy（意大利）</strong>、<strong>Fisher &amp; Paykel（新西兰）</strong> 及 <strong>开利商用制冷（CCR）</strong> 构成。核查2025年报商誉减值测试附注可见：</p>
-</li>
-<li>
-<p>占商誉大头的 <strong>GEA</strong> 现金流预测极为扎实，过去八年营收与利润较并购初期翻倍，安全垫极厚，毫无减值风险；</p>
-</li>
+<ul>
+<li>占商誉大头的 <strong>GEA</strong> 现金流预测极为扎实，过去八年营收与利润较并购初期翻倍，安全垫极厚，毫无减值风险；</li>
 <li>但针对欧洲 <strong>Candy</strong> 与新西兰 <strong>FPA</strong> 资产组，管理层在减值测试中采用的未来5年预测期营收复合增速（约3%—6%）、永续增长率（1.5%—2.0%）及税前折现率（WACC约9.5%—11.5%），虽然符合第三方评估准则，但在欧洲高通胀、需求疲软及新西兰房地产低迷的背景下，实际经营达成度一直处于紧平衡状态。2026年三季度海尔果断斥资约5亿元对欧洲及海外架构实施深度重组裁员与供应链整合，某种意义上正是为了兑现商誉减值测试中的利润率改善假设、避免未来触发商誉减值雷区而采取的“刮骨疗毒”之举。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>查理一直说：『给我看激励机制，我就能告诉你结果。』李华刚一年只拿 355 万死工资，不到方洪波的三分之一，要想拿到持股计划的股票，必须把 ROE 干到 17% 以上！当净资产越来越厚时，怎么保住 17% 的 ROE？唯一的办法就是拼命把钱分给股东、回购注销股票把分母变小！这就是为什么我喜欢锁死 ROE 的考核，它逼着管理层跟小股东坐在同一条船上。</p></div></div></div></div>
 
 
@@ -2921,14 +3439,14 @@
 </li>
 <li>
 <p><strong>全口径有息负债（2026Q3 末合并资产负债表实数汇总，严防母公司报表串表）</strong>：</p>
-</li>
+<ul>
 <li>短期借款：<strong><code>202.93亿元</code></strong>（<code>20,293,497,158.38元</code>，2025 年末为 <code>174.21亿元</code>）</li>
 <li>一年内到期的非流动负债：<strong><code>53.70亿元</code></strong>（<code>5,369,976,076.69元</code>，2025 年末为 <code>86.79亿元</code>，含一年内到期的长借及租赁负债）</li>
 <li>长期借款：<strong><code>152.04亿元</code></strong>（合并资产负债表实数 <code>15,204,115,680.61元</code>，2025 年末为 <code>111.66亿元</code>；<em>审计警示：切勿误抄母公司资产负债表的 <code>37.48亿元</code> 而漏算境外子公司 <code>114.56亿元</code> 长期借款！</em>）</li>
 <li>应付债券：<strong><code>35.00亿元</code></strong>（<code>3,500,000,000.00元</code>，2025 年末为 <code>35.00亿元</code>）</li>
 <li><em>账面主要带息债务小计</em>：<code>202.93 + 53.70 + 152.04 + 35.00 =</code> <strong><code>443.67亿元</code></strong>（2025 年末同口径为 <code>407.66亿元</code>，剔除一年内到期租赁等非贷款项后的纯贷款与债券总额为 <code>364.43亿元</code>）</li>
-<li>
-<p>另加：非流动租赁负债（2026Q3 末合并资产负债表实数）：<strong><code>45.04亿元</code></strong>（<code>4,504,210,658.42元</code>，2025 年末为 <code>45.51亿元</code>，我们在模块 D 已明确将租赁视为刚性债务责任）</p>
+<li>另加：非流动租赁负债（2026Q3 末合并资产负债表实数）：<strong><code>45.04亿元</code></strong>（<code>4,504,210,658.42元</code>，2025 年末为 <code>45.51亿元</code>，我们在模块 D 已明确将租赁视为刚性债务责任）</li>
+</ul>
 </li>
 <li>
 <p><strong>合并全口径有息负债合计</strong>：<code>443.67 + 45.04 =</code> <strong><code>488.71亿元</code></strong>。</p>
@@ -3196,22 +3714,28 @@
 <h4 id="2-reverse-sotp-true-ev">2. Reverse SOTP（反向分部拆骨倒推）：区分“股权市值口径”与“严苛 True EV 扣债同口径”，看市场给“四大增量与反转期权”标价多少钱？</h4>
 <p>为了看清当前 <code>2,010.44亿元</code>（A股）和 <code>1,817.95亿元</code>（H股）市值（以及严苛 True EV <code>2,347.89亿元</code> A股 / <code>2,155.40亿元</code> H股）里到底隐含了多么悲观的预期，我们采用<strong>“反向分部估值法（Reverse SOTP）”</strong>——先把海尔手里已经完全成熟、竞争格局铁板一块的“三座存量现金牛”按最保守的收息股估值剥离出去，并分别在 <strong>【口径 A：普通股股权市值口径（基于账面乐观口径下广义存款全额覆盖债务）】</strong> 与 <strong>【口径 B：审慎严苛 True EV 扣债同口径（100% 剔除 339.76 亿财务公司存款、全额扣除未分配净债务）】</strong> 下，看看剩下的“高成长与反转资产包”卖多少钱：</p>
 <ol>
-<li><strong>第一块存量基石：中国区“冰箱 + 洗衣机 + 水家电（热水器/净水）”绝对霸主现金牛（含卡萨帝冰洗底座）</strong>
-   - <strong>业务体量与盈利</strong>：国内冰箱（线下份额 <code>47.7%</code>）、洗衣机（线下份额超 <code>46%</code>）、电热水器（份额第一）合计年营收约 <code>1,060亿—1,100亿元</code>，综合营业利润率常年稳定在 <code>12.5%—14.0%</code>，每年稳态贡献分部归母净利润约 <strong><code>115.00亿—122.00亿元</code>（取中枢 <code>118.00亿元</code>，无杠杆分部 NOPAT/OE 约 <code>122.00亿元</code>）</strong>。</li>
+<li><strong>第一块存量基石：中国区“冰箱 + 洗衣机 + 水家电（热水器/净水）”绝对霸主现金牛（含卡萨帝冰洗底座）</strong><ul>
+<li><strong>业务体量与盈利</strong>：国内冰箱（线下份额 <code>47.7%</code>）、洗衣机（线下份额超 <code>46%</code>）、电热水器（份额第一）合计年营收约 <code>1,060亿—1,100亿元</code>，综合营业利润率常年稳定在 <code>12.5%—14.0%</code>，每年稳态贡献分部归母净利润约 <strong><code>115.00亿—122.00亿元</code>（取中枢 <code>118.00亿元</code>，无杠杆分部 NOPAT/OE 约 <code>122.00亿元</code>）</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>保守剥离定价</strong>：哪怕假设它未来永远 0 增长，仅按纯收息公用事业股给予最保守的 <strong><code>10.0倍—10.5倍 PE / EV/NOPAT</code></strong>，这块存量资产的底线价值也高达 <strong><code>1,200.00亿元</code></strong>（无杠杆分部 EV 约 <strong><code>1,250.00亿元</code></strong>）。</li>
 </ul>
 <ol start="2">
-<li><strong>第二块存量基石：北美 GE Appliances（GEA）本土龙头 + 墨西哥 Mabe（48.41% 股权）成熟现金牛</strong>
-   - <strong>业务体量与盈利</strong>：北美 GEA 年营收约 <code>790亿元</code>，在北美大家电市场份额稳居第一阵营（约 <code>24%—25%</code>），美国本土 80% 产能自给自足，叠加墨西哥龙头 Mabe 每年稳定的联营投资收益（约 <code>6.5亿—7.5亿元</code>），美洲成熟底盘每年稳态贡献分部经营净利约 <strong><code>48.00亿—52.00亿元</code>（取中枢 <code>50.00亿元</code>，加回境外并购贷款税后利息前无杠杆分部 NOPAT 约 <code>62.00亿元</code>）</strong>。</li>
+<li><strong>第二块存量基石：北美 GE Appliances（GEA）本土龙头 + 墨西哥 Mabe（48.41% 股权）成熟现金牛</strong><ul>
+<li><strong>业务体量与盈利</strong>：北美 GEA 年营收约 <code>790亿元</code>，在北美大家电市场份额稳居第一阵营（约 <code>24%—25%</code>），美国本土 80% 产能自给自足，叠加墨西哥龙头 Mabe 每年稳定的联营投资收益（约 <code>6.5亿—7.5亿元</code>），美洲成熟底盘每年稳态贡献分部经营净利约 <strong><code>48.00亿—52.00亿元</code>（取中枢 <code>50.00亿元</code>，加回境外并购贷款税后利息前无杠杆分部 NOPAT 约 <code>62.00亿元</code>）</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>保守剥离定价</strong>：给予极为克制的 <strong><code>9.5倍 PE</code></strong>，北美成熟业务股权口径底线价值为 <strong><code>475.00亿元</code></strong>（无杠杆分部 EV 约 <strong><code>580.00亿元</code></strong>）。</li>
 </ul>
 <ol start="3">
-<li><strong>第三块存量基石：中国区家用空调与厨电存量业务</strong>
-   - <strong>业务体量与盈利</strong>：国内家用空调（含卡萨帝与 Leader 空调）及国内厨电合计年营收约 <code>430亿—450亿元</code>，随着郑州压缩机合资厂投产与自制率提升，稳态净利率稳定在 <code>5.5%—6.0%</code>，每年贡献分部净利约 <strong><code>25.00亿元</code></strong>。</li>
+<li><strong>第三块存量基石：中国区家用空调与厨电存量业务</strong><ul>
+<li><strong>业务体量与盈利</strong>：国内家用空调（含卡萨帝与 Leader 空调）及国内厨电合计年营收约 <code>430亿—450亿元</code>，随着郑州压缩机合资厂投产与自制率提升，稳态净利率稳定在 <code>5.5%—6.0%</code>，每年贡献分部净利约 <strong><code>25.00亿元</code></strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>保守剥离定价</strong>：按二线白电折价给予仅 <strong><code>8.0倍 PE</code></strong>，对应保守底线价值为 <strong><code>200.00亿元</code></strong>（无杠杆分部 EV 约 <strong><code>210.00亿元</code></strong>）。</li>
@@ -3449,16 +3973,18 @@
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_3">3. 铁血风控：一旦触发必须无条件认错离场的“三条基本面死刑证伪红线”</h4><p>真正的价值投资绝不是盲目死拿。我们在茶桌前买下海尔智家，买的是它<strong>“国内冰洗水+卡萨帝的绝对统治力”、“北美 GEA 本土化现金牛护城河”以及“治理改善后 55%+ 的真金白银分红承诺”</strong>。如果未来出现以下任何一条触及商业模式命门的量化恶化信号，说明我们的核心投资逻辑已被证伪，无论股价涨跌，必须无条件清仓认错离场：</p><ol>
 <li>
-<p><strong>【死刑红线一：现金流与关联方治理恶化红线——分红率倒退或集团财务公司资金黑洞扩大】</strong>
-   - <strong>量化触发标准</strong>：</p>
+<p><strong>【死刑红线一：现金流与关联方治理恶化红线——分红率倒退或集团财务公司资金黑洞扩大】</strong></p>
 <ul>
+<li><strong>量化触发标准</strong>：</li>
 <li>公司在无极端战争/全球金融危机不可抗力的情况下，违背股东回报承诺，将<strong>年度现金分红率从 <code>55%</code> 以上倒退回 <code>45%</code> 以下</strong>；</li>
 <li>或者存放于<strong>海尔集团财务公司的关联存款余额非但没有压降，反而突破 <code>380亿元</code>（或占公司广义货币资金比例超过 <code>50%</code>）</strong>，且同期公司外部带息债务继续攀升至 <code>400亿元</code> 以上，同时连续两个完整会计年度 <strong>经营活动现金流净额（OCF）与归母净利润之比跌破 <code>0.90</code></strong>（说明账面利润无法转化为真实可支配现金，或者关联方资金沉淀性质发生实质性恶化）。</li>
 </ul>
 </li>
 <li>
-<p><strong>【死刑红线二：核心基本盘坍塌红线——卡萨帝高端护城河失守或北美 GEA 份额与利润率双杀】</strong>
-   - <strong>量化触发标准</strong>：</p>
+<p><strong>【死刑红线二：核心基本盘坍塌红线——卡萨帝高端护城河失守或北美 GEA 份额与利润率双杀】</strong></p>
+<ul>
+<li><strong>量化触发标准</strong>：</li>
+</ul>
 </li>
 </ol><ul>
 <li>
@@ -3468,8 +3994,8 @@
 <p><strong>北美端</strong>：北美 GE Appliances（GEA）在无一次性闭厂重组因素下，全年营业利润率<strong>跌破 <code>4.5%</code></strong>（常态为 <code>6.5%—7.0%</code>），且在北美大家电市场份额连续两年萎缩超过 <code>2个百分点</code>（说明美国本土高昂工会人工成本失控，或被三星、LG 抢走核心大连锁渠道）。</p>
 </li>
 </ul><ol start="3">
-<li><strong>【死刑红线三：海外并购与欧洲无底洞红线——欧洲与新并购业务连续巨额失血或引发超 30 亿元商誉爆雷】</strong>
-   - <strong>量化触发标准</strong>：<ul>
+<li><strong>【死刑红线三：海外并购与欧洲无底洞红线——欧洲与新并购业务连续巨额失血或引发超 30 亿元商誉爆雷】</strong><ul>
+<li><strong>量化触发标准</strong>：</li>
 <li>2026 年已经花掉 <code>8亿—10亿元</code> 重组费后，<strong>2027—2028 年欧洲业务（Candy / Haier Europe）依然无法实现经营性止血，连续两年经营亏损超过 <code>5.00亿元/年</code></strong>，或者每年仍需以“重组优化”名义持续吞噬 <code>5亿元</code> 以上的额外费用（说明欧洲老牌工会与低效供应链已成无法治愈的慢性出血黑洞）；</li>
 <li>或者因欧洲 Candy、开利商用冷链（CCR）、南非 Kwikot 等海外并购标的经营远不及预期，触发对账面 <strong><code>260.13亿元</code> 商誉</strong>计提<strong>单年超过 <code>30.00亿元</code> 的大规模商誉减值</strong>，彻底证伪公司跨国并购整合能力。</li>
 </ul>
@@ -3480,6 +4006,212 @@
 
 
 
+<hr/>
+<h3 id="v4-2026-11-22">✅ 【V4 终审裁决实录（2026-11-22 官方原表法医验真 · 三道铁闸终审单一真相区）】</h3>
+<blockquote>
+<p><strong>终审状态</strong>：<code>REVISED</code>（基于巨潮法定原版 PDF <code>2026Q3 1225641263.PDF</code> / <code>2026H1 1225522691.PDF</code> / <code>2025AR 1225038336.PDF</code>、交易所官方归集三表及 <strong>14 次对等联网一手反查</strong> 完成红蓝终极二元对质）
+<strong>最新市场基准（<code>2026-11-22</code> · 统一汇率 <code>1 港元 = 0.855 人民币</code>）</strong>：
+* <strong>最新法定登记总股本</strong>：<strong><code>92.9854 亿股</code></strong>（<code>26Q3 P12</code> 实收资本 <code>93.0309 亿股</code> 扣除 <code>2026-10</code> 正式注销的 <code>0.0455 亿股</code> H 股；另注：<code>2026-10</code> 已要约回购锁定 <code>0.7939 亿股</code> D 股待注销 + 截至 <code>11-20</code> A 股回购专户存 <code>1.1369 亿股</code> 库存股，待注销后总股本将进一步缩减）。
+* <strong>A 股（<code>600690.SH</code>）</strong>：现价 <strong><code>23.02 元</code></strong>（52 周 <code>20.84—25.47 元</code>，<code>BVPS 13.24 元</code> / <code>PB 1.74x</code>）→ 总市值 <strong><code>2,140.52 亿元</code></strong> → V4 严苛 <strong><code>True EV = 2,298.30 亿元</code></strong>（<code>ev_delta = +157.78 亿</code>）。
+* <strong>H 股（<code>06690.HK</code>）</strong>：现价 <strong><code>22.36 港元</code></strong>（折人民币 <strong><code>19.12 元</code></strong>，52 周 <code>18.03—28.20 港元</code>，<code>BVPS 15.48 港元</code> / <code>PB 1.44x</code>，<strong>A 股较 H 股溢价 <code>+20.41%</code> / H 股折价 <code>-16.95%</code></strong>）→ 总市值 <strong><code>1,777.68 亿元</code></strong> → V4 严苛 <strong><code>True EV = 1,935.46 亿元</code></strong>。</p>
+</blockquote>
+<h4 id="1-pdf">1. 官方原表与原版 PDF 逐科法医验真对照表</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核验维度</th>
+<th style="text-align: left;">V1 原稿（蓝方）表述</th>
+<th style="text-align: left;">盲审做空备忘录（红方）指控</th>
+<th style="text-align: left;">V4 法定 PDF 与官方三表零误差核验真相</th>
+<th style="text-align: left;">裁判落锤</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>9M/Q3 营收与扣非净利</strong></td>
+<td style="text-align: left;">仅强调 Q3 扣非 <code>-32.17%</code> 源于 5 亿重组费+3.64 亿汇兑损失</td>
+<td style="text-align: left;">9M 营收 <code>-5.23%</code> / Q3 <code>-10.13%</code>；9M 扣非 <code>-24.11%</code> / Q3 <code>-32.17%</code></td>
+<td style="text-align: left;"><code>26Q3 P1/P6/P13</code> <strong>100% 证实</strong>：9M 营收 <code>2,218.19 亿</code>（<code>-5.23%</code>）、单 Q3 <code>697.04 亿</code>（<code>-10.13%</code>）；归母 <code>149.99 亿</code>（<code>-13.67%</code>）；<strong>扣非 <code>128.19 亿</code>（<code>-24.11%</code>）、单 Q3 仅 <code>35.20 亿</code>（<code>-32.17%</code>）</strong>。但红方拿“美的归母 <code>+9.27%</code>”对比“海尔扣非”系口径偷换——全行业同期扣非齐跌（美的 9M 扣非 <code>-22.49%</code>、格力 Q3 <code>-44.32%</code>、海信 Q3 <code>-96.73%</code>）。</td>
+<td style="text-align: left;"><strong>认领事实 + 反杀口径偷换</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>20.05 亿一次性退税 + 砍研发 + 期权冲回</strong></td>
+<td style="text-align: left;">完全漏提 <code>20.05 亿</code> 退税、研发同比缩减与期权冲回</td>
+<td style="text-align: left;">退税 <code>20.05 亿</code>（单 Q3 <code>14.93 亿</code>）灌水毛利率 <code>+2.14pct</code>；砍研发 <code>-13.57 亿</code>；期权失效冲回 <code>6.78 亿</code></td>
+<td style="text-align: left;"><code>26Q3 P4/P6/P13</code> &amp; <code>26H1 P122/P149</code> <strong>全部核实为真</strong>：① 税收/法规一次性收益 9M <code>20.05 亿</code>（单 Q3 <code>14.93 亿</code>），系美国最高法院裁定 IEEPA 关税越权后 CBP 向美国登记进口商 GEA 的<strong>法定退税</strong>（此前曾被多缴关税压低毛利，且公司已全额计入非经常性损益剔出于扣非之外）；② 9M 研发费 <code>78.66 亿</code> 较同期 <code>92.22 亿</code> 降 <code>-13.57 亿</code>（<code>-14.71%</code>）；③ 26H1 股份支付冲回 <code>6.78 亿</code>（高于摊销 <code>4.54 亿</code>，净增利润 <code>+2.24 亿</code>）。</td>
+<td style="text-align: left;"><strong>认领失真盲区 + 澄清合法退税性质</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCF <code>-39%</code>、商票激增与海外保理退潮</strong></td>
+<td style="text-align: left;">仅轻描淡写提及 OCF 降 <code>39%</code>，未拆解保理与商票</td>
+<td style="text-align: left;">9M OCF <code>106.70 亿</code>（<code>-39%</code>），单 Q3 仅 <code>9.18 亿</code>；商票半年 <code>+83.6%</code>；TTM 扣租赁 FCF 仅 <code>76.82 亿</code></td>
+<td style="text-align: left;"><code>26Q3 P5/P16</code> &amp; <code>26H1 P119/P141</code> <strong>核实原数</strong>：9M OCF <code>106.70 亿</code>、CapEx <code>74.25 亿</code>（<code>+12.88%</code>）、表观 FCF <code>32.45 亿</code>；卖断保理应收余额由 <code>63.43 亿</code> 降至 <code>58.22 亿</code>（Q3 进一步放缓致广义应收激增 <code>+73.67 亿</code>）；商票由 <code>58.07 亿</code> 增至 <code>106.59 亿</code>（<code>+83.6%</code>）、应付周转拉长至 <code>134.5 天</code>。但<strong>保理退潮属一次性营运资金结构回归，非永久造血丧失</strong>（2021—2025 均值 OCF <code>244.70 亿</code>）。</td>
+<td style="text-align: left;"><strong>认领现金流压力 + 反杀永续崩盘外推</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>中期分红取消与真实 TTM 股息率</strong></td>
+<td style="text-align: left;">沿用 FY25 全年 <code>107.55 亿</code> 标称股息率 <code>5.35%—5.44%</code></td>
+<td style="text-align: left;">取消 2026 中期分红，造血跌穿分红线</td>
+<td style="text-align: left;"><code>26H1 P46</code> 铁证 <strong>2026 半年度利润分配为<code>否</code></strong>；<code>25AR P79</code> 证实 2025 中期分红（<code>0.2692 元/股</code>）除权日为 <strong><code>2025-11-07</code></strong>（早于 <code>2026-11-22</code> 超 12 个月！），故 <strong>严格 TTM 实派仅剩 2025 末期 <code>0.89151 元/股</code></strong>（A 股 <code>3.87%</code> / H 股税前 <code>4.66%</code>）。但公司仍保有 <code>2026—2028</code> 承诺全年分红率 <code>≥58% / ≥60%</code> + 年内 <code>35 亿+</code> 三地回购（H 股 <code>455 万股</code> + D 股 <code>7,939 万股</code> 全额注销），26E 常态 58% 分红约 <code>1.05 元/股</code>（A <code>4.56%</code> / H <code>5.49%</code>）。</td>
+<td style="text-align: left;"><strong>硬修正 TTM 股息率 + 保留全年分红规划锚</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>海尔印度出售 49% 股权（<code>55.91 亿</code>）</strong></td>
+<td style="text-align: left;">原稿未重点穿透此项交易</td>
+<td style="text-align: left;">卖掉核心海外成长资产“断臂求生硬撑分红”</td>
+<td style="text-align: left;"><code>26H1 P149/P168</code> &amp; <code>26Q3 P16</code> 证实对价 <code>55.91 亿</code>（对应净资产 <code>20.82 亿</code>，增厚资本公积 <code>36.58 亿</code>）。<strong>对等联网铁证反杀</strong>：海尔留 <code>49%</code> 仍为最大单一股东并保留并表控制权，引入印度顶级财团 <strong>巴蒂（Bharti）+ 华平（Warburg）</strong> 合持 <code>49%</code>、高管 <code>2%</code>，系以 <code>~2.7x PB</code>（整体估值 <code>~114 亿</code>）高溢价化解印度外资合规/税务地缘风险的教科书级本土化避险！</td>
+<td style="text-align: left;"><strong>彻底反杀空头定性误判</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>财务公司存款、真实刚性债与少数股东权益</strong></td>
+<td style="text-align: left;">误抄 <code>26Q3</code> 少数股东权益为 <code>70.23 亿</code>；未剔 1 年内到期中质保拨备，未加养老金；财司 100% 扣光</td>
+<td style="text-align: left;">财司 <code>339.76 亿</code>（<code>99.93%</code> 顶格）占其总负债 <code>63.1%</code>；真实刚性债 <code>479.68 亿</code>；基准折 <code>50%</code>、严格折 <code>100%</code></td>
+<td style="text-align: left;"><code>26H1 P54/P144/P145/P169/P180</code> &amp; <code>26Q3 P12</code> 精准核定：① 财司存款 <code>339.76 亿</code>（连应收利息 <code>10.98 亿</code> 敞口 <code>350.74 亿</code>），26H1 年化收息仅 <code>1.96%</code> 且已续签 <code>2027—2029</code> 协议，按<strong>全榜统一 <code>50%</code> 治理折价</strong>扣 <code>-169.88 亿</code>；② 显性含租债 <code>488.71 亿</code> 剔 <code>25.28 亿</code> 质保预计负债，加 <code>14.82 亿</code> 海外设定受益养老金 + <code>1.43 亿</code> 长期应付款 = <strong><code>479.68 亿</code></strong>；③ <code>26Q3</code> 少数股东权益实数为 <strong><code>68.16 亿</code></strong>（非旧稿 <code>70.23 亿</code>）。</td>
+<td style="text-align: left;"><strong>100% 穿透精确重构 V4 True EV</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>260.13 亿商誉与生态分部亏损</strong></td>
+<td style="text-align: left;">认为商誉假设合规、CCR 协同良好</td>
+<td style="text-align: left;">显性预算期拉长至 <code>5—15 年</code>（最高增速 <code>9.83%</code>）；生态分部由盈转亏 <code>-1.74 亿</code></td>
+<td style="text-align: left;"><code>26H1 P139/P172</code> <strong>100% 证实</strong>：<code>260.13 亿</code> 商誉（GEA <code>202.33 亿</code>、CCR <code>22.05 亿</code>、Candy <code>20.09 亿</code> 等）确采用 <strong><code>5—15 年</code> 超长显性预算期</strong>；<code>智慧家庭生态及其他</code> 分部（含 CCR）26H1 利润由 <code>+3.43 亿</code> 转亏 <strong><code>-1.74 亿</code></strong>，海外整体经营利润率低（<code>25AR P47</code> 为 <code>4.37%</code>），必须永久纳入质地折价与红线监控！</td>
+<td style="text-align: left;"><strong>100% 认领并下调质地加分</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="2-vs">2. 铁闸一 &amp; 二：事实层硬修正 vs 悲观叠加层反杀裁决表</h4>
+<ul>
+<li><strong>【事实层 100% 硬认领与结构重校】</strong>：</li>
+</ul>
+<ol>
+<li><strong>V4 严苛 <code>True EV</code> 精确重构（<code>2026-09-30</code> 资产负债表对齐法定登记总股本 <code>92.9854 亿股</code>）</strong>：<ul>
+<li>广义现金及定存池 <strong><code>744.69 亿</code></strong>（<code>26Q3 P10</code> 货币资金 <code>410.84</code> + 交易性金融资产 <code>35.15</code> + 1 年内到期定存 <code>112.13</code> + 债权投资定存 <code>175.94</code> + <code>26H1 P180</code> 存放财司其他流动资产定存 <code>10.63</code>）</li>
+<li>扣：受限资金 <code>-14.29 亿</code>（<code>410.84 - 396.55</code>）+ 财务公司 <code>339.76 亿</code> 按统一标准 <code>50%</code> 治理折价 <strong><code>-169.88 亿</code></strong> + 全球 5% 营收营运底仓 <code>-145.00 亿</code> + 境外存款 <code>254.55 亿</code> × 10% 汇回摩擦 <code>-25.46 亿</code> ＝ <strong>可自由支配超额现金 <code>390.06 亿</code></strong>；</li>
+<li>对冲 <strong><code>479.68 亿</code> 真实刚性债与养老金</strong> ＝ <strong>V4 真实净负债 <code>+89.62 亿</code></strong>（彻底推翻市场“净现金 250 亿”幻觉），加 <code>26Q3</code> 少数股东权益账面 <strong><code>+68.16 亿</code></strong> ＝ <strong><code>ev_delta = +157.78 亿</code></strong>！</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>▶ A 股（<code>23.02 元</code>）V4 True EV = <code>2,298.30 亿</code>｜ H 股（<code>22.36 港元 = 19.12 元</code>）V4 True EV = <code>1,935.46 亿</code></strong>（与红方基准 <code>50%</code> 折价口径仅差 <code>0.12 亿</code>，实现 EV 事实层完全共识！）。</li>
+</ul>
+<ol start="2">
+<li><strong>跨周期无杠杆 Firm OE 硬下修 <code>-18.1%</code>（彻底告别 2025 国补高景气线性外推）</strong>：</li>
+</ol>
+<ul>
+<li>
+<p><strong>盈利还原轨</strong>：剔除 2025 国补脉冲（扣非 <code>186.04 亿</code>）与 2026 寒冬谷底（扣非约 <code>148—152 亿</code>），锚定<strong>跨周期常态归母扣非净利 <code>162.0 亿</code></strong>（较 V1 <code>185.0 亿</code> 硬砍 <code>-12.4%</code>，已计入研发费率恢复 <code>3.55%</code> 常态及海外低利润率约束）→ 还原合并常态净利 <code>168.75 亿</code>（含少数股东 <code>6.75 亿</code>）→ 加回税后刚性债利息 <code>+18.37 亿</code>（跨周期年均利息 <code>22.0 亿 × 83.5%</code>）、减去抵债超额现金税后利息 <code>-6.32 亿</code> → <strong>合并无杠杆 <code>NOPAT = 180.80 亿</code></strong>；加回自有产权非付现 D&amp;A <code>+72.0 亿</code>（<code>25AR P207</code> 实数 <code>69.69 亿</code>，使用权资产摊销 <code>17.81 亿</code> 与租赁现金流出 <code>18.01 亿</code> 1:1 对冲）→ 减去上修后的<strong>合并严苛广义维持+自动化技改 CapEx <code>-82.0 亿</code></strong>与常态 WC 占用 <code>-6.0 亿</code> = <code>164.80 亿</code>；</p>
+</li>
+<li>
+<p><strong>五年历史现金轨交叉校验</strong>：2021—2025 均值 OCF <code>244.70 亿</code> - 均值全口径 CapEx <code>90.11 亿</code> - 租赁 <code>18.01 亿</code> = <code>136.58 亿</code>（已扣全额扩产的有杠杆纯 FCF），加回其中绿地扩产 CapEx 约 <code>10 亿</code> 与税后净利息 <code>12.0 亿</code> = <code>158.6 亿</code>。</p>
+</li>
+<li>
+<p><strong>▶ 双轨严密交汇锁定：V4 跨周期无杠杆 <code>Steady Firm OE = 162.0 亿/年</code></strong>（较 V1 <code>197.7 亿</code> 硬砍 <strong><code>-18.1%</code></strong>；对应归母有杠杆 OE 约 <code>144 亿</code>），<strong>3 年达产稳态 <code>Full Firm OE = 182.0 亿/年</code></strong>（欧洲重组止血 + 泰国/埃及/郑州压缩机达产 + 降息周期释放约 <code>+20 亿</code>，较 V1 <code>218.7 亿</code> 硬砍 <strong><code>-16.8%</code></strong>）。</p>
+</li>
+<li>
+<p><strong>【悲观叠加层精准反杀】</strong>：</p>
+</li>
+<li>
+<p><strong>反杀红方“四重叠加喊 A 股 <code>13.68 元</code>”</strong>：红方在估值端同时犯下四重悲观叠加——① 用包含 <code>479.68 亿</code> 债务的合并 True EV 做分母，分子却取未加回 <code>12 亿</code> 税后净利息与 <code>7 亿</code> 少数股东权益的 <code>130 亿</code> 有杠杆口径（<strong>分子分母错配，人为虚增 EV/OE 倍数 ~15%</strong>）；② 在扣除全口径 CapEx <code>90.11 亿</code>（含绿地扩产）后，再永续硬扣 <code>15 亿/年</code> “外延并购漏损”；③ 严格口径下把财务公司 100% 清零（等同视海尔集团违约破产）；④ 叠加压至 <code>11x</code> 极寒倍数，砸出 A 股 <code>13.68 元</code>（<code>1.03x PB</code>）的虚空目标价！</p>
+</li>
+</ul>
+<h4 id="3-reality-check-reverse-sotp-v4-ah">3. 铁闸三：历史估值分位 Reality Check、严苛重校 Reverse SOTP 与 V4 锁定 A/H 两档击球区</h4>
+<ul>
+<li>
+<p><strong>历史 5—10 年估值分位 Reality Check</strong>：</p>
+</li>
+<li>
+<p><strong>A 股（<code>600690.SH</code>）</strong>：近 5 年真实 PB 最低地板为 <strong><code>1.51x</code></strong>（<code>2026</code> 年谷底，对应最新 <code>BVPS 13.24 元</code> = <strong><code>19.99 元</code></strong>），近 5 年 PE 谷底 <code>9.4x—10.9x</code>，52 周区间 <code>20.84—25.47 元</code>。空头 <code>13.68 元</code>（<code>1.03x PB</code>）在海尔近十年历史中从未触及；但当前 <code>23.02 元</code>（<code>PB 1.74x</code> / <code>True EV / OE = 14.19x</code> / 严苛回报仅 <code>7.05%</code> / 严格 TTM 息仅 <code>3.87%</code>）叠加 <strong><code>+20.41%</code> AH 溢价</strong>，显然已无安全边际！</p>
+</li>
+<li>
+<p><strong>H 股（<code>06690.HK</code>）</strong>：52 周区间 <code>18.03—28.20 港元</code>，上市以来极端熊市地板 <code>15.65 港元</code>。当前 <code>22.36 港元</code> 折人民币仅 <strong><code>19.12 元</code></strong>（<code>PB 1.44x</code> 已破 A 股五年地板、<code>True EV / OE = 11.95x</code> / 严苛回报 <strong><code>8.37%</code></strong> / 达产 <strong><code>9.40%</code></strong>），较 A 股存在 <strong><code>-16.95%</code></strong> 巨幅折价剪刀差！</p>
+</li>
+<li>
+<p><strong>严苛重校 Reverse SOTP（无杠杆分部 EV 同口径，挤干 V1 旧稿 <code>2,040 亿</code> 水分）</strong>：</p>
+<ul>
+<li>① 国内核心冰洗水+卡萨帝（常态税后 NOPAT <code>95 亿 × 9.5x</code>）= <strong><code>900 亿</code></strong>；② 北美 GEA + 墨西哥 Mabe（常态 NOPAT <code>42 亿 × 9.0x</code>）= <strong><code>380 亿</code></strong>；③ 国内空调+厨电（常态 NOPAT <code>18 亿 × 7.5x</code>）= <strong><code>135 亿</code></strong>；④ 参股金融非核心股权（财务公司 42% 账面净资产 <code>85.6 亿</code> 折 5 折 <code>43 亿</code> + 青岛银行 8.19% 等长投 <code>27 亿</code>）= <strong><code>70 亿</code></strong> → <strong>成熟基石无杠杆 EV 合计 <code>1,485 亿</code></strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>拆骨真相</strong>：剩余四大资产包（新兴市场 <code>~320 亿</code> [仅海尔印度 49% 刚以 <code>55.9 亿</code> 变现，留存 49% 即值 <code>56 亿</code>] + 欧洲 <code>~280 亿</code> + 商冷/楼宇 <code>~180 亿</code> + 日澳 <code>~105 亿</code>，合计营收 <code>~700 亿</code>）在 <strong>A 股 <code>23.02 元</code>（EV <code>2,298 亿</code>）下隐含标价高达 <code>813 亿</code>（<code>1.16x PS</code>），彻底证伪 V1 “白送海外”叙事</strong>；在 <strong>H 股 <code>22.36 港元</code>（EV <code>1,935 亿</code>）下隐含标价 <code>450 亿</code>（<code>0.64x PS</code>）</strong>，仅当 H 股回踩至 <code>≤18.50—21.50 港元</code>（隐含标价降至 <code>144—382 亿</code> / <code>0.21—0.55x PS</code>）时，才真正具备极厚实的安全边际！</p>
+</li>
+<li>
+<p><strong>V4 最终锁定 A/H 两档实战击球区</strong>：</p>
+</li>
+<li>
+<p><strong>A 股（<code>600690.SH</code>，现价 <code>23.02 元</code> → 🔴 退出买区，0 票追高）</strong>：</p>
+</li>
+<li>
+<p><strong>第一档（重锤黄金坑）</strong>：<strong><code>≤17.50 元</code></strong>（<code>PB ≤1.32x</code> 砸穿近 5 年 PB 地板 <code>1.51x</code>，True EV <code>≤1,785 亿</code> / <code>≤11.0x</code>，常态回报 <code>≥9.08%</code> / 达产 <code>≥10.20%</code>，严格 TTM 息 <code>≥5.09%</code> / 26E 58% 承诺息 <code>≥6.00%</code>）；</p>
+</li>
+<li>
+<p><strong>第二档（分批建仓区）</strong>：<strong><code>17.50—20.00 元</code></strong>（<code>PB 1.32—1.51x</code> 精准踩实近 5 年 PB 地板 <code>19.99 元</code>，True EV <code>1,785—2,018 亿</code> / <code>11.0x—12.5x</code>，常态回报 <code>8.03%—9.08%</code> / 达产 <code>9.02%—10.20%</code>，严格 TTM 息 <code>4.46%—5.09%</code> / 26E 息 <code>5.25%—6.00%</code>）。</p>
+</li>
+<li>
+<p><strong>H 股（<code>06690.HK</code>，现价 <code>22.36 港元 = 19.12 元</code> → 🟡 紧贴买区上沿，4 票待回踩分批）</strong>：</p>
+</li>
+<li>
+<p><strong>第一档（重锤黄金坑）</strong>：<strong><code>≤18.50 港元</code></strong>（折 <code>≤15.82 元</code>，<code>PB ≤1.20x</code> 逼近 52 周低 <code>18.03 港元</code>，True EV <code>≤1,629 亿</code> / <code>≤10.1x</code>，常态回报 <code>≥9.95%</code> / 达产 <code>≥11.18%</code>，严格 TTM 息税前 <code>≥5.64%</code> / 26E 息 <code>≥6.64%</code> / 港股通税后 <code>≥5.31%</code>）；</p>
+</li>
+<li>
+<p><strong>第二档（左侧分批建仓区）</strong>：<strong><code>18.50—21.50 港元</code></strong>（折 <code>15.82—18.38 元</code>，<code>PB 1.20—1.39x</code>，True EV <code>1,629—1,867 亿</code> / <code>10.1x—11.5x</code>，常态回报 <code>8.68%—9.95%</code> / 达产 <code>9.75%—11.18%</code>，严格 TTM 息税前 <code>4.85%—5.64%</code> / 26E 息 <code>5.71%—6.64%</code> / 港股通税后 <code>4.57%—5.31%</code>）。</p>
+</li>
+</ul>
+<h4 id="4-v1-v4">4. 📋 《V1 → V4 演进对照表》</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核心指标 / 锚点</th>
+<th style="text-align: center;">V1 原稿旧锚</th>
+<th style="text-align: center;">V4 官方原表验真终审新锚</th>
+<th style="text-align: left;">修正幅度与核心动因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>基准股价 &amp; AH 溢价</strong></td>
+<td style="text-align: center;">A <code>21.62 元</code> / H <code>21.20 港元</code>（汇率 <code>0.922</code>，溢价 <code>10.6%</code>）</td>
+<td style="text-align: center;"><strong>A <code>23.02 元</code> / H <code>22.36 港元</code></strong>（汇率 <code>0.855</code>，<strong>溢价 <code>+20.41%</code></strong>）</td>
+<td style="text-align: left;">切换 11-22 实时价与统一汇率，H 股相对性价比剪刀差剧增</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>严苛 True EV（A / H）</strong></td>
+<td style="text-align: center;">A <code>2,347.9 亿</code> / H <code>2,155.4 亿</code>（<code>ev_delta +337.5 亿</code>）</td>
+<td style="text-align: center;"><strong>A <code>2,298.30 亿</code> / H <code>1,935.46 亿</code></strong>（<strong><code>ev_delta +157.78 亿</code></strong>）</td>
+<td style="text-align: left;">统一财司 <code>50%</code> 折价 + 穿透剔质保加养老金 <code>479.68 亿</code> 刚性债 + 纠偏 MI <code>68.16 亿</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>跨周期 Steady / Full Firm OE</strong></td>
+<td style="text-align: center;"><code>197.7 亿</code> / <code>218.7 亿</code></td>
+<td style="text-align: center;"><strong><code>162.0 亿</code> / <code>182.0 亿</code></strong></td>
+<td style="text-align: left;"><strong>硬下修 <code>-18.1%</code> / <code>-16.8%</code></strong>：剔除国补脉冲、计入研发复常与 82 亿合并维持 CapEx</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>即期股息率（严格 TTM）</strong></td>
+<td style="text-align: center;">A <code>5.44%</code> / H <code>5.92%</code>（FY25 静态）</td>
+<td style="text-align: center;"><strong>A <code>3.87%</code> / H <code>4.66%</code></strong>（<code>0.8915 元</code>；26E 58% 息 A <code>4.56%</code>/H <code>5.49%</code>）</td>
+<td style="text-align: left;">2026 中期分红取消且 25 中期除权已超 12 个月，拒绝虚高股息幻觉</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>质地加分（A / H）</strong></td>
+<td style="text-align: center;"><code>1.8</code></td>
+<td style="text-align: center;"><strong>A <code>0.8</code> / H <code>1.0</code></strong></td>
+<td style="text-align: left;">扣减财司 340 亿顶格锁定、260 亿长预算期商誉及 Q3 扣非失速折价</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>A 股击球区（重锤 / 分批）</strong></td>
+<td style="text-align: center;"><code>≤19.00</code> / <code>20.50—23.00 元</code></td>
+<td style="text-align: center;"><strong><code>≤17.50</code> / <code>17.50—20.00 元</code></strong></td>
+<td style="text-align: left;"><strong>全面下移 1.5—3.0 元</strong>，A 股现价 <code>23.02 元</code> 彻底退出买区</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>H 股击球区（重锤 / 分批）</strong></td>
+<td style="text-align: center;"><code>≤18.50</code> / <code>20.00—22.50 港元</code></td>
+<td style="text-align: center;"><strong><code>≤18.50</code> / <code>18.50—21.50 港元</code></strong></td>
+<td style="text-align: left;">收窄上沿至 <code>21.50 港元</code>，现价 <code>22.36 港元</code> 仅高出 <code>+4.0%</code> 待回踩建仓</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>V4 终审最痛快的地方，在于把多空两边的“戏精表演”全撕了！蓝方拿着 2025 年国补脉冲的顶峰利润算 198 亿现金流、漏提 20 亿退税和砍 13.6 亿研发，那是盲目乐观；空头拿美的“归母”去比海尔“扣非”、把高价引入印度大财团当成断臂求生、再在估值里搞分子分母错配喊出 13.68 元，那是故意吓人。把水分挤干后真相一目了然：A 股 23 块贵了，别碰；H 股 22.36 港元折合 19 块出头，稍微回踩到 21.5 港元以下就是极好的捡漏区！</p></div></div>
+<div class="munger-note"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>别光听管理层喊“58%—60% 分红规划”，记住 2026 年半年报里清清楚楚写着“中期不分配”，而且财务公司里那 339.76 亿照样贴着 340 亿红线刚续签了三年！所以我们的纪律很简单：只给 0.8—1.0 的克制质地加分，A 股绝不给溢价买单，一切看 2026 年报兑现 58% 分红和 2027 年欧洲止血的真凭实据。</p></div></div>
 <hr/>
 <h1 id="g">终章模块 G：投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）</h1>
 <blockquote>
@@ -3598,6 +4330,13 @@
 </tr>
 </tbody>
 </table></div>
+<blockquote>
+<p><strong>🛡️ 【2026-11-22 V4 官方原表验真 × 三道铁闸终审圆桌合议修正投票】</strong>
+经 2026-11-22 官方原版 PDF 法医穿透与红蓝二元对质后，四位大师一致修正了 V1 阶段基于 <code>197.7 亿</code> Firm OE 与 <code>5.44%</code> 静态股息的乐观基调，在 <strong><code>162.0 亿</code> 跨周期无杠杆 Firm OE（达产 <code>182.0 亿</code>）、V4 严苛 <code>True EV</code>（A 股 <code>2,298.30 亿</code> / H 股 <code>1,935.46 亿</code>，<code>ev_delta = +157.78 亿</code>）及取消中期分红后严格 TTM 息 <code>0.8915 元</code>（A <code>3.87%</code> / H <code>4.66%</code>）</strong> 的单一真相底座上重新投票：
+* <strong>🔴 A 股（<code>600690.SH</code>，现价 <code>23.02 元</code>）：<code>0 票追高</code>（退出买区，建议换仓 H 股）</strong> —— 巴菲特、芒格、林奇、马克斯/卡拉曼全票否定在 <code>23.02 元</code>（<code>PB 1.74x</code>、高出新买点上限 <code>+15.1%</code>、较 H 股溢价 <code>+20.41%</code>、严苛 EV 回报仅 <code>7.05%</code>、严格 TTM 息仅 <code>3.87%</code>）追高！A 股必须严守回踩 <strong><code>17.50—20.00 元</code></strong> 分批建仓、<strong><code>≤17.50 元</code></strong> 重锤的纪律。
+* <strong>🟡 H 股（<code>06690.HK</code>，现价 <code>22.36 港元</code> 折 <code>19.12 元</code>）：<code>4 票待回踩分批</code>（紧贴买区上沿，持 A 换 H 首选）</strong> —— 现价较 A 股深度折价 <code>-16.95%</code>、<code>PB 1.44x</code>（已低于 A 股近 5 年地板）、严苛 EV 回报 <strong><code>8.37%</code></strong>（达产 <strong><code>9.40%</code></strong>）、26E 58% 承诺税前息 <strong><code>5.49%</code></strong>（叠加 H/D 股全额注销回购），距 V4 新买点上限 <strong><code>21.50 港元</code></strong> 仅高出 <code>+4.0%</code>。合议策略：持有 A 股者可立即换仓 H 股收割 20% 溢价差；新资金耐心等待 26Q4 消化国补退坡及业绩真空期回踩 <strong><code>18.50—21.50 港元</code></strong> 分批建底仓、<strong><code>≤18.50 港元</code></strong> 重锤！
+* <strong>铁血追踪红线升级</strong>：除紧盯财司存款红线（严防续签至 2029 后突破 340 亿上限或收息持续倒挂）与欧洲重组止血外，新增追踪 <strong><code>2026 年报是否如期兑现 ≥58% 分红率</code>、<code>研发费率是否回升至 ≥3.5% 常态</code> 及 <code>260.13 亿商誉（尤其 CCR/Candy）减值测试风险</code></strong>。</p>
+</blockquote>
 <hr/>
 <h1 id="h-5">【模块 H：🎭 5分钟脱口秀复盘 &amp; 极简买方口袋卡（专治阅读疲劳的收尾彩蛋章）】</h1>
 <blockquote>
@@ -3731,18 +4470,26 @@
 
 
 <hr/>
-<h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
+<h2 id="h-1-v4">【模块 H：💼 专属买方研究员的 1 分钟闭门交底（V4 终审同步更新版）】</h2>
 <blockquote>
-<p><strong>前面那十万字的财报细节和模型我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【海尔智家】这家企业，你只需要在脑子里记住这四件事：</strong></p>
+<p><strong>前面那十万字的财报细节、红蓝二元对质和官方 PDF 法医穿透我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【海尔智家（600690.SH / 06690.HK）】这家企业，你只需要在脑子里记住这四件经过 V4 终审落锤的硬真相：</strong></p>
 </blockquote>
 <h3 id="1_4">1. 它到底靠什么在行业里立身？（看家饭碗）</h3>
-<p>外行总嫌海尔表面净利率比格力、美的低，销售费用率高，误以为它是笨重的二流家电厂。其实扒开报表看，它的底牌是全球断层第一的冰箱与洗衣机双寡头现金牛，外加两座别人砸几百亿也抄不走的高端堡垒——统治中国万元以上高端家电七成份额的“卡萨帝”，以及占领北美半壁江山的美国本土第一大厨电与大家电巨头“通用电气家电（GEA）”。早年净利率显得薄，是因为它拒绝做赚快钱的贴牌代工，花了二十年在全球自建品牌、本土工厂和送装车队，如今这套全球本土化网络已修成最宽的护城河。</p>
-<h3 id="2_6">2. 它的财务家底和经营周期现在发生了什么本质变化？（为什么它是真印钞机还是苦力）</h3>
-<p>它的真相是“表面利润被折旧和短期改造费掩盖的超级印钞机”。哪怕扣掉最严苛的资本开支，海尔一年仍稳吐一百七十多亿真实股东自由现金流！更关键的质变是治理与分红铁律：管理层戴上“净资产收益率必须守住百分之十七以上”的紧箍咒，为缩小净资产分母，分红率从三成多猛提到现在的五成五，还承诺未来两年奔向六成以上，并在A股、H股和德国D股大举回购注销。等明年泰国、埃及新厂和郑州自建压缩机厂达产、欧洲止血，年造血能力将直接冲上近两百亿。</p>
-<h3 id="3_5">3. 市场担心的那些“软肋”，到底是真死穴还是纸老虎？（买方真伪辩证 &amp; 危中之机）</h3>
-<p>市场的三个担忧里，两个是送买点的纸老虎，一个是需盯紧的治理瑕疵。第一，怕今年三季报扣非下滑三成多是基本面见顶——这是被一次性费用吓破胆！三季度下滑是因为国补退坡高基数，叠加管理层主动砸五个亿对欧洲老旧供应链裁员关厂，外加三个多亿汇兑损失。给欧洲老房子换屋顶疼一个季度，换来的是明年起每年省下大笔人工费的利润反转，存货还在下降，恰恰砸出黄金买点。第二，怕美墨加关税打垮海外半壁江山——海尔北美所售家电八成直接在美国本土九大工厂生产，关税打过来靠亚洲出口的同行先死，海尔反而能提价抢份额。真正的硬瑕疵是集团财务公司存款：把三百多亿现金存母集团财务公司拿低息，自己却在外面借四百多亿带息债付高息。虽然我们算估值时把这三百多亿当废纸全扣掉依然极便宜，但这块伤疤必须用红线盯死。</p>
-<h3 id="4_3">4. 咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
-<p>用拆骨法算账：光把国内冰洗霸主、卡萨帝、美国GEA和国内空厨按水电煤保守估值加起来，就已超过港股一千八百亿总市值！在港股买海尔（或打六六折的德国D股），不仅核心印钞机打折卖你，还把七百多亿营收的新兴市场、商用冷链和欧洲业务零元白送，甚至倒贴几十亿！打法上，在港股二十港元、A股二十一元附近建好六成左侧底仓拿近六个点股息；等明年一季报见欧洲重组费归零、内销现金流转正再把仓位打满，死守“财务公司存款不破三百八十亿”红线。</p>
+<p>外行总嫌海尔表面净利率比格力、美的低，误以为它是笨重的二流家电厂。扒开报表看，它的真实底座是全球断层第一的冰箱与洗衣机双寡头现金牛、统治中国万元以上高端冰洗七成份额的“卡萨帝”，以及占领北美本土第一阵营、八成产能建在美国本土的“通用电气家电（GEA）”。但你同时必须清醒看到它的结构短板：海外 1,558 亿营收的经营利润率只有 4.37%（远低于国内的 9.52%），新并购的开利商冷等智慧家庭生态分部在 2026 上半年更是由盈转亏 <code>-1.74 亿</code>——它是一头强韧的全球白电大象，绝不是旱涝保收的完美印钞机。</p>
+<h3 id="2-v4">2. 它的财务家底和经营周期现在发生了什么本质变化？（V4 挤干水分后的真实家底）</h3>
+<p>2026 年三季报彻底打碎了“稳健线性增长”的幻想：在国补高基数退坡与全行业寒冬中（同期美的 9M 扣非 <code>-22.5%</code>、格力单 Q3 <code>-44.3%</code>、海信单 Q3 <code>-96.7%</code>），海尔单 Q3 营收跌 <code>-10.13%</code>、扣非暴跌 <code>-32.17%</code>，而且表观净利里还藏着 <code>20.05 亿</code> 美国海关退税（系美国最高法院裁定 IEEPA 关税越权后的合法退款，已剔出于扣非之外）、研发压缩 <code>-13.57 亿</code> 与期权失效冲回 <code>6.78 亿</code>；海外保理退潮更导致 9M OCF 骤降 <code>-39%</code>、公司顺势取消了 2026 中期分红。但把所有一次性脉冲和水分挤干后，海尔的家底依然扎实：按全榜统一标准对财务公司 <code>339.76 亿</code> 顶格存款打 5 折、穿透 <code>479.68 亿</code> 真实刚性债+养老金后，海尔实质为 <code>+89.62 亿</code> 净负债（绝非市场幻觉的净现金）；跨周期无杠杆常态自由现金流（Firm OE）应由旧稿的 <code>197.7 亿</code> 硬下修至 <strong><code>162.0 亿/年</code></strong>（3 年达产 <code>182.0 亿</code>），依然是一台抗打的现金流机器，只是不再享有高增长溢价。</p>
+<h3 id="3_5">3. 市场担心的那些“软肋”，哪些是真死穴、哪些是空头吓唬人？（买方真伪辩证）</h3>
+<p><strong>三处真瑕疵必须认领并用价格打折补偿</strong>：① 把 <code>339.76 亿</code>（99.93% 贴着上限）常年钉死在母集团控股的财务公司吃 1.96% 低息、刚又续签至 2029 年，同时自己背 480 亿刚性债导致存贷倒挂；② 账上 <code>260.13 亿</code> 商誉靠“5—15 年超长预算期”维持零减值，欧洲 Candy 与商冷 CCR 仍有减值隐患；③ 取消 2026 中期分红后，严格近 12 个月（TTM）实派股息只有 <code>0.8915 元</code>（A 股仅 <code>3.87%</code>），必须紧盯 2026 年报能否兑现 <code>≥58%</code> 全年分红承诺。<strong>但空头喊 A 股跌到 <code>13.68 元</code> 纯属过度吓唬人</strong>：海尔印度卖 49% 股权套现 <code>55.91 亿</code> 是引入印度顶级巴蒂财团+华平投资、自己留 49% 保持并表控制权的教科书级本土化避险，不是断臂求生；保理退潮也是一次性营运资金回归，而非永久失去造血能力；空头用有杠杆 OE 除含债 EV 属于分子分母错配。</p>
+<h3 id="4-v4-ah">4. 咱们到底该怎么买它、怎么赚它的钱？（V4 终审 A/H 差异化实战底线）</h3>
+<p>一句话看懂当下最大的套利与纪律：<strong>A 股已贵，坚决不追；H 股紧贴买区，是绝对首选！</strong></p>
+<ul>
+<li>
+<p><strong>A 股（<code>600690.SH</code>，现价 <code>23.02 元</code> → 🔴 退出买区，0 票追高）</strong>：高出新买点上限 <code>+15.1%</code>、较 H 股溢价高达 <strong><code>+20.41%</code></strong>，严苛 EV 回报仅 <code>7.05%</code>、严格 TTM 股息率仅 <code>3.87%</code>，拆骨后海外资产隐含标价 <code>813 亿</code> 毫无白送可言。持 A 股者建议直接换仓 H 股；死守 A 股者必须等回踩 <strong><code>17.50—20.00 元</code></strong>（踩实近 5 年 PB 地板 <code>1.51x</code>）再分批建仓、<strong><code>≤17.50 元</code></strong> 重锤。</p>
+</li>
+<li>
+<p><strong>H 股（<code>06690.HK</code>，现价 <code>22.36 港元</code> 折 <code>19.12 元</code> → 🟡 紧贴买区上沿，4 票待回踩分批）</strong>：较 A 股深度折价 <code>-16.95%</code>、<code>PB 1.44x</code>、严苛 EV 回报已达 <strong><code>8.37%</code></strong>（3 年达产 <code>9.40%</code>）、26E 58% 承诺税前息 <strong><code>5.49%</code></strong>（叠加 H/D 股全额注销回购），距新买点上限仅一步之遥（<code>+4.0%</code>）。新资金耐心等 26Q4 消化国补退坡回踩 <strong><code>18.50—21.50 港元</code></strong> 分批建底仓、<strong><code>≤18.50 港元</code></strong> 拿麻袋重锤，同时死守“2026 年报兑现 58% 分红、欧洲 2027 止血、财务公司不破 340 亿上限”三条铁血红线！</p>
+</li>
+</ul>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -3934,7 +4681,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《海尔智家 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/海尔智家 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《海尔智家(600690.SH_06690.HK) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/海尔智家(600690.SH_06690.HK) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4131,6 +4878,553 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
