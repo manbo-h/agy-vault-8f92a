@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>工商银行(601398.SH) 深度投研全集</title>
+<title>工商银行(601398.SH/01398.HK) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -750,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -941,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">工商银行(601398.SH) 深度投研全集</div>
+    <div class="report-title">工商银行(601398.SH/01398.HK) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-20</span>
+      <span>📅 导出日期：2026-11-22</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -968,6 +1352,7 @@
   <div class="report-content">
     <h1 id="601398sh-1398hk">中国工商银行（601398.SH / 1398.HK）深度基本面全景投研底座</h1>
 <blockquote>
+<p>📌 <strong>【V4 终审重校声明（2026-11-22）】</strong>：本报告已于 <code>2026-11-22</code> 完成买方投委会（IC）<strong>V4「官方原表法医验真 × 18 次对等联网反查 × 三道防滑跪铁闸二元极限对质终审」</strong>（终审结论：<strong><code>REVISED</code></strong>）。全部核心盈利中枢、资本约束、红蓝争议裁决、A/H 股双市场两档实战击球区及仓位纪律，均以正文下方 <strong><code>## ✅ 【V4 终审裁决实录（2026-11-22 官方原表法医验真 · 三道铁闸终审单一真相区）】</code></strong> 及同步刷新的 <strong>模块 H</strong> 为唯一法定口径（前文 V1 历史推演保留供研究留痕，凡与终审单一真相区冲突者一律以 V4 终审为准）。核心重校速览：实时锚定 A 股 <code>9.40 元</code>（<code>0.836x PB</code> / TTM 股息 <code>3.40%</code>）、H 股 <code>7.885 港元</code>（按统一汇率 <code>0.855</code> 折 <code>6.7417 元</code>，<code>0.600x PB</code> / 税前股息 <code>4.75%</code> / 港股通税后 <code>3.80%</code>、A/H 溢价 <code>+39.43%</code>）；常态归母普通股 Core OE 由 V1 <code>3,423.92 亿</code> 硬下修 <code>-3.14%</code> 至 <strong><code>3,316.50 亿</code></strong>（达产 <strong><code>3,457.83 亿</code></strong>）；A 股买点收紧至 <strong><code>6.80 — 7.80 元</code></strong>（重锤 <strong><code>≤ 6.80 元</code></strong>，现价 <code>9.40 元</code> 溢价 <code>+20.5%</code> 严禁追高），H 股买点收紧至 <strong><code>6.40 — 7.40 港元</code></strong>（重锤 <strong><code>≤ 6.40 港元</code></strong>，现价 <code>7.885 港元</code> 仅高出买点上沿 <code>+6.6%</code>，免税机构可小仓底仓/个人静待回踩或持 A 换 H）。</p>
 <p><strong>基准日期</strong>：2026年11月20日 ｜ <strong>财务口径</strong>：集团合并报表（最新锚定 <code>2026年第三季度报告</code>、<code>2026年半年度报告</code> 及经审计 <code>2025年年度报告</code>）｜ <strong>研究边界</strong>：本底座聚焦商业本质、负债成本护城河、资产质量穿透、资本创造力与动态进化逻辑，严守“禁谈估值”边界（估值定价统一置于模块 F 与模块 G 解锁）。</p>
 </blockquote>
 <hr/>
@@ -1732,11 +2117,11 @@
 <p><strong>路标四（数智降本与非息破局进化路标）</strong>：检验 <strong>成本收入比（<code>2026H1</code> <code>22.70%</code> / <code>2025全年</code> <code>28.05%</code>）能否在 AI 大模型“工银智涌”赋能下实现年度中枢持续下移（全年压进 <code>27%</code> 以内）</strong>，同时观察 <strong>手续费及佣金净收入同比增速能否从 <code>2026Q3</code> 的 <code>+1.55%</code> 加速修复至 <code>+5%</code> 以上、境外机构税前利润占比能否稳步迈向 <code>12%—15%</code></strong>（检验摆脱日本式纯国内低息内卷的真正第二引擎成色）。</p>
 </li>
 </ol>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="a">【追问模块 A：资本消耗、千亿定增与重点投向解剖】</h2>
 <p>对于非金融制造业而言，资本开支（CapEx）的本质是拿现金去建厂房、买设备，核心拷问在于“单位产能投资贵不贵、转固折旧压不压垮利润”；但对于资产规模已达 <code>57.82万亿元</code>、堪称全球商业银行“航空母舰”的中国工商银行而言，<strong>核心一级资本（CET1）就是它的物理产能，风险加权资产（RWA）增速就是它的扩产节奏，新《商业银行资本管理办法》下的风险权重与税后 RAROC（经风险调整的资本回报率）则是它的单位经济账</strong>。</p>
 <p>市场对工行最大的认知盲区，在于看到其 <code>2026Q3</code> 核心一级资本充足率仍高居 <code>13.07%</code>（稳居六大行第一梯队），便误以为宇宙行“资本富余、并不缺钱”，进而对 <code>2026年9月</code> 紧急启动的 <code>1,000亿元</code> 定向增发以及 <code>2026年11月</code> 拟申请的不超过 <code>9,500亿元</code> 资本与 TLAC 债务工具额度感到困惑。本模块将彻底剥开“高资本充足率”的表象，从 G-SIBs 监管红线上移、TLAC 终极达标倒计时、“五篇大文章”与政府债的微观 RAROC 算账，以及每年近 <code>300亿元</code> 金融科技投入与 <code>1.54万个</code> 物理网点的效能对质四大维度，完成对宇宙行资本投向的手术刀级解剖。</p>
-<hr>
+<hr/>
 <h3 id="g-sibs-1000-9500-tlac">一、资本饥渴症的底层密码：G-SIBs 晋级第三组、<code>1,000亿元</code> 定增与 <code>9,500亿元</code> TLAC 备战账本</h3>
 <p>要看懂工行 <code>2026年</code> 密集补血的真实紧迫性，绝不能盯着静态的 <code>13.07%</code> 自我陶醉，必须把<strong>资产负债表扩张速率、国际监管组别跃升、以及 <code>2028年</code> TLAC 终极硬红线</strong>三张底牌放在同一张桌子上算总账。</p>
 <h4 id="1-rwa-9-cet1-50bp">1. 内源造血跑输 RWA 膨胀：9个月 CET1 净耗 <code>50BP</code> 的隐形失血</h4>
@@ -2212,12 +2597,12 @@
 </tbody>
 </table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这三大故事放进离心机甩干水分后，真相其实特别清爽——AI 科技是用来帮自己看家护院省电费的，大财富是用来给 `39.75万亿` 存款大池子做粘合剂的，唯一真正往体外长出新利润触角的，是跟着中国制造业出海、拿着非洲 `19国` 清算牌照和数字货币桥的国际化业务。只不过这笔海外钱赚得不容易，左手要防美联储降息，右手要防华尔街监管动不动开出几千万美元的罚单。</p></div></div>
-<hr class="module-sep"/>
+<hr/>
 <h1 id="c">追问模块 C：同行与上下游“三方交叉审讯”——宇宙行的真实护城河、增长含金量与市占攻守真相</h1>
 <blockquote>
 <p><strong>本模块审讯基线</strong>：严格对齐 <code>2026年三季报（2026Q3）</code> 与 <code>2026年半年报（2026H1）</code> 一手官方财报口径，将中国工商银行（下称“工行”）置于中国建设银行（建行）、中国农业银行（农行）、中国银行（中行）及股份行零售标杆招商银行（招行）的四方交叉火力之下，并穿透至“上游资金供给端（储户与同业）—中游金融基础设施—下游信贷与资管需求端（央国企、地方基建、居民按揭）”三方生态，拆解宇宙行在 <code>2026年</code> 行业息差见底回暖周期中的真实胜负手与结构性隐忧。</p>
 </blockquote>
-<hr>
+<hr/>
 <h2 id="2026q3">一、2026Q3 利润表逐行对质：为什么农行、建行营收增速碾压工行，而招行反而垫底？</h2>
 <p>如果仅看 <code>2026Q3</code> 财报封面的营收与归母净利润同比增速，市场极易产生一种错觉：工行营收增速 <code>+8.74%</code>、归母净利增速 <code>+5.83%</code>，不仅落后于农行（营收 <code>+12.33%</code>、净利 <code>+7.10%</code>）和建行（营收 <code>+11.37%</code>、净利 <code>+6.55%</code>），似乎只是大行中的“中庸之辈”；而昔日标杆招行（营收 <code>+5.34%</code>、净利 <code>+2.38%</code>）则彻底掉队。</p>
 <p>但只要把五大行 <code>2026Q3</code> 利润表拆解至<strong>利息净收入、手续费及佣金净收入、其他非息（投资收益与公允价值变动）、信用/资产减值损失</strong>四个核心发动机，一幅与表观增速截然不同的商业真相就会浮出水面。</p>
@@ -2618,12 +3003,12 @@
 <p><strong>长尾红利与真正对手</strong>：工行定期存款占比高既是当下付息率（<code>1.15%</code>）略高于农/建的原因，也是 <code>2026—2027年</code> 高息定存集中到期重定价的最大红利蓄水池；未来三年工行最大的竞争压力来自资本与效率双优的建行，以及下沉资产质量极佳但资本告急的农行，而非陷入零售萎缩泥潭的招行。</p>
 </li>
 </ol>
-<hr class="module-sep"/>
+<hr/>
 <h1 id="dbank-owner-earnings">追问模块 D：常态盈利底盘（Bank Owner Earnings）、三档利率/信用标尺与极限压力测试</h1>
 <blockquote>
 <p><strong>本模块核心使命</strong>：穿透超大型商业银行高杠杆与跨期平滑的会计表象，逐笔剥离优先股/永续债扣息、债市交易脉冲与季节性扰动，独立建立适配全球系统重要性银行（G-SIB）资本硬约束的 <strong><code>Bank Owner Earnings</code>（普通股股东可自由支配盈余）</strong> 精算体系；通过三档跨度极大的利率与信用标尺，拷问中国工商银行（<code>601398.SH</code> / <code>1398.HK</code>）在 <code>1.6%</code> 利率常态与日本式极寒双杀下的绝对造血底线、拨备厚度与核心一级资本防线，并量化 <code>1,000亿元</code> 特别国债定增、AT1 高息置换及 AI 降本三重增量红利。全部数据锚定工行 <code>2025年经审计年报</code>、<code>2026年半年度报告</code>、<code>2026年三季报</code> 及截至 <code>2026年11月20日</code> 的公开公告，经独立模型零误差勾稽验算。</p>
 </blockquote>
-<hr>
+<hr/>
 <h2 id="d1">D.1 第一层拆解：剥离会计噪音，还原工行归母普通股真实盈利底盘</h2>
 <p>解剖超大型国有商业银行，第一条纪律是<strong>绝不把利润表底行的“归母净利润”直接等同于普通股股东的真实造血底盘</strong>。对于总资产已达 <code>57.82万亿元</code> 的宇宙第一大行，表观归母净利润与普通股真实盈利之间隔着三重失真滤网：<strong>凌驾于普通股之上的其他一级资本工具（AT1）刚性派息抽水、债牛周期不可持续的交易浮盈脉冲、以及免税政府债与税收新政交织下的有效税率漂移</strong>。唯有逐层剔除杂质，才能露出工行最硬核的造血真身。</p>
 <h3 id="d11-at1">D.1.1 权益归属的“隐形抽水机”：AT1 优先股与永续债刚性扣息逐笔起底</h3>
@@ -3232,12 +3617,12 @@
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把整张底盘摊开，工行展现出的是极其罕见的“不对称盈利结构”：向下看，极寒双杀冻三年仍有 `5,064亿` PPOP、`2,569亿` 超额拨备和 `12.64%` CET1 托底，死守近 `2,000亿` 利润与 `1,106亿` 分红；向上看，千亿定增解开了 G-SIB 第三组紧箍咒，AT1 置换切掉头等舱抽水，AI 大模型正在削平 `2,400亿` 费用山头。一台永不熄火、越老越省油、减速即刻狂吐 `1,800亿—2,000亿` 自由现金流的巨型印钞机，唯一要做的就是算清底座，绝不被短期噪音动摇。</p></div></div></div></div>
 
 
-<hr class="module-sep"/>
+<hr/>
 <h1 id="e">追问模块 E：会计成色与治理细节显微镜——资产质量验毒、金融投资浮盈底牌与限薪反腐排雷</h1>
 <blockquote>
 <p><strong>本模块审讯基线</strong>：银行是全球最容易通过“五级分类认定松紧、拨备计提节奏、金融投资三分类（AC/FVOCI/FVTPL）兑现浮盈”来调节账面利润的特殊行业。本模块摒弃一切表观增速滤镜，以零信任（Zero-Trust）买方审计视角，横向直击工商银行与建行、农行、中行、招行 <code>2025年报</code>、<code>2026H1</code> 及 <code>2026Q3</code> 核心财报附注，对工行资产质量真实度、利润含金量及国有大行治理漏洞进行全维度显微镜排雷。</p>
 </blockquote>
-<hr>
+<hr/>
 <h2 id="129">一、资产质量“验毒台”：不良率 <code>1.29%</code> 的光鲜表面下，究竟藏着什么暗礁？</h2>
 <p>截至 <code>2026年9月末</code>，工商银行不良贷款率为 <code>1.29%</code>（较上年末下降 <code>2BP</code>），与建设银行（<code>1.29%</code>）持平，略高于农业银行（<code>1.23%</code>）、中国银行（<code>1.22%</code>）及招商银行（<code>0.94%</code>）。若仅看这一项静态指标，工行似乎风平浪静。</p>
 <p>但只要把显微镜推至<strong>关注类贷款、逾期贷款、剪刀差（逾期90天以上偏离度）、核销强度及分行业/分零售品种不良率</strong>五大先导指标，就会立刻触发两声刺耳的警报，同时也看到工行极度罕见的“刮骨疗毒”决心。</p>
@@ -3621,14 +4006,14 @@
 <p><strong>治理底色“高效率、低显薪、强整改”</strong>：在 <code>92.64万元</code> 高管限薪与 <code>35.5万元</code> 人均薪酬的严苛成本约束下，工行跑出了四大行第一的人均创利（<code>90.48万元</code>）与五行第一的薪酬净利润产出比（<code>2.55倍</code>）；经历张红力、刘立宪案强力震慑后，风险资产直营直管与反腐合规整改正在见效，后续核心治理观察点为零售风险拐点及追索扣回数据的量化披露透明度。</p>
 </li>
 </ol>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="freverse-sotp">【追问模块 F：解锁估值定价、隐含预期、Reverse SOTP 拆骨与分档击球区推演】</h2>
 <blockquote>
 <p><strong>定价基准日</strong>：<code>2026年11月20日</code> ｜ <strong>实时行情锁死</strong>：A股（<code>601398.SH</code>）<code>9.09元/股</code>（昨日收盘 <code>9.10元</code>，创上市二十年盘中历史新高）、H股（<code>1398.HK</code>）<code>7.83港元/股</code>（折合人民币 <code>6.704元/股</code>，汇率 <code>1港元 = 0.8562人民币</code>）、A/H 溢价率 <strong><code>+35.59%</code></strong> ｜ <strong>宏观利率锚</strong>：中国 <code>10年期国债收益率 = 1.60%</code>（区间 <code>1.57%—1.62%</code>），<code>1年期LPR = 3.0%</code>，<code>5年期LPR = 3.5%</code>。</p>
 </blockquote>
 <p>走到这一步，我们正式解除前文“禁谈估值”的封印，把这头近 <code>58万亿元</code> 资产的宇宙第一大行拉到买方定价台前称重。站在 <code>2026年11月20日</code>，工行正呈现出前所未有的<strong>“冰火割裂双面魔方”</strong>：A股刚刚触及 <strong><code>9.10元/股</code></strong> 历史新高，现价 <code>9.09元</code> 对应总市值 <strong><code>3.24万亿元</code></strong>、<code>0.81倍PB</code>，税前 TTM 股息率已从 <code>2022—2023年</code> 的 <code>6.4%—6.8%</code> 腰斩至 <strong><code>3.52%</code></strong>（较 <code>1.60%</code> 十年期国债利差压缩至 <strong><code>+192BP</code></strong>）；而同股同权的 H股在 <code>7.83港元</code>（折合 <code>6.704元</code>）仍停留在 <strong><code>0.60倍PB</code></strong> 深度破净区，税前 TTM 股息率高达 <strong><code>4.77%</code></strong>（<code>2026E 4.89%</code>），国债利差仍厚达 <strong><code>+317BP</code></strong>！</p>
 <p>这就抛出了生死拷问：创历史新高的 <code>9.09元</code> 工行 A股究竟是“低利率时代合理债替定价”，还是“红利抱团拥挤后的透支陷阱”？折价超四分之一的 <code>7.83港元</code> H股，扣完港股通个人 <code>20%</code> 刚性红利税后究竟有多划算？下面用金融买方专属定价尺子逐项算透。</p>
-<hr>
+<hr/>
 <h3 id="_23">一、 颠覆实业估值公式：金融买方专属「真实收购标价基准」与「真实核定净资产」压力修正</h3>
 <h4 id="1-ev-">1. 为什么机械套用实业 <code>EV = 市值 + 债务 - 现金</code> 是银行估值最大笑话？</h4>
 <p>在为实业股定价时，买方第一条铁律是用 <code>True EV = 市值 + 有息负债 - 自由现金</code> 还原收购价；但<strong>一旦套用到商业银行身上立刻闹出天大笑话</strong>：</p>
@@ -4262,12 +4647,244 @@
 
 
 
-<hr class="module-sep"/>
+<hr/>
+<h2 id="v4-2026-11-22">✅ 【V4 终审裁决实录（2026-11-22 官方原表法医验真 · 三道铁闸终审单一真相区）】</h2>
+<blockquote>
+<p><strong>🏛️ 终审元数据头（IC 唯一法定基准）</strong>
+- <strong>终审日期 / 财报锚点</strong>：<code>2026-11-22</code> ｜ 锚定 <code>2026Q3</code>（巨潮原件 <code>1225648840.PDF</code>，26 页）、<code>2026H1</code>（<code>1225526043.PDF</code>，272 页）、<code>2025AR</code>（<code>1225047240.PDF</code>，408 页）及交易所官方结构化三表
+- <strong>实时行情与汇率锚</strong>：A 股（<code>601398.SH</code>）现价 <strong><code>9.40 元</code></strong>（<code>+3.30%</code>，52 周 <code>6.85—9.49 元</code> / 复权区间 <code>8.19—10.01 元</code>）；H 股（<code>01398.HK</code>）现价 <strong><code>7.885 港元</code></strong>（<code>+0.25%</code>，52 周 <code>5.59/5.96—8.18 港元</code>）；统一汇率 <strong><code>1 港元 = 0.855 人民币</code></strong>，折合 <strong><code>6.7417 元/股</code></strong>，<strong>A/H 溢价 <code>+39.43%</code></strong>
+- <strong>股本与定增摊薄口径</strong>：精准普通股总股本 <strong><code>3,564.0626 亿股</code></strong>（<code>356,406,257,089</code> 股，<code>26H1 P.99</code>）；银行专属 Equity 口径 <code>True EV = 普通股总市值</code>（<code>ev_delta = 0.0</code>）——A 股全口径 <strong><code>33,502.19 亿元</code></strong>，H 股全口径 <strong><code>24,027.75 亿元</code></strong>；<code>26Q3</code> 归母普通股净资产 <strong><code>40,058.08 亿元</code></strong>（<code>BVPS = 11.2394 元</code>，已扣 <code>1,149.27 亿</code> 优先股与 <code>2,499.97 亿</code> 永续债）。<code>1,000 亿元</code> A 股定增（财政部 <code>700 亿</code> + 中国烟草体系 <code>300 亿</code>，<code>2026-11-11</code> 上交所过会，定价基准日为发行期首日前 20 交易日均价，锁定期 5 年）：按现价 <code>9.40 元</code> 备考新增 <code>106.38 亿股</code>（<code>+2.98%</code>），<strong>永久摊薄 EPS/DPS <code>-2.90%</code>、备考 BVPS <code>11.1861 元</code>（<code>-0.47%</code>）</strong>；按 <code>9.00 元</code> 备考摊薄 EPS/DPS <code>-3.02%</code>、备考 BVPS <code>11.1717 元</code>（<code>-0.60%</code>）
+- <strong>精确 TTM 现金股息与宏观无风险利率锚</strong>：严格已实施 TTM 普通股股息 = <code>2025 末期 0.1689 元</code>（2026 年 5 月派发）+ <code>2026 中期 0.1511 元</code>（2026-09-29 股东会通过，A 股已于 <code>2026-10-21</code> 除权派发完毕）= <strong><code>0.3200 元/股</code></strong>；中国 <code>10 年期国债 = 1.60%</code>（<code>1.58%—1.62%</code>），<code>30 年期国债 = 2.02%—2.05%</code>
+- <strong>V4 终审结论</strong>：<strong><code>REVISED</code></strong>（18 次对等联网反查 + 原版 PDF 逐页取证完成双向极限纠偏）</p>
+</blockquote>
+<hr/>
+<h4 id="1-pdf">1. 官方原表与原版 PDF 逐科法医验真对照表</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核验维度与核心财务科目</th>
+<th style="text-align: left;">官方原表 / 原版 PDF 精确铁证</th>
+<th style="text-align: left;">PDF 页码 / 法定出处</th>
+<th style="text-align: left;">红蓝分歧硬裁定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>精准股本 &amp; 普通股净资产</strong></td>
+<td style="text-align: left;">总股本 <code>3,564.0626 亿股</code>；归母权益 <code>43,707.32 亿</code> − 其他权益工具 <code>3,649.24 亿</code>（优先股 <code>1,149.27 亿</code> + 永续债 <code>2,499.97 亿</code>）= <strong><code>40,058.08 亿元</code></strong>（<code>BVPS = 11.2394 元</code>）</td>
+<td style="text-align: left;"><code>26Q3 P.12</code> / <code>26H1 P.99, P.119</code></td>
+<td style="text-align: left;"><strong>100% 锁定零误差基准</strong>；A 股 <code>9.40 元</code> 静态 PB <strong><code>0.836x</code></strong>，H 股 <code>7.885 港元</code> 静态 PB <strong><code>0.600x</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>精确 TTM 普通股股息</strong></td>
+<td style="text-align: left;"><code>2025 末期 0.1689 元</code> + <code>2026 中期 0.1511 元</code>（<code>2026-10-21</code> 已除权实派）= <strong><code>0.3200 元/股</code></strong></td>
+<td style="text-align: left;"><code>26Q3 P.7</code> / <code>26H1 P.99</code> / 上交所派息公告</td>
+<td style="text-align: left;"><strong>纠偏空头旧口径 <code>0.3103 元</code></strong>：现价 A 股 TTM 股息 <strong><code>3.40%</code></strong>（仍极低，仅超 30Y 国债 <code>+135 bps</code>）；H 股税前 <strong><code>4.75%</code></strong> / 港股通税后 <strong><code>3.80%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>母行单体 <code>26H1</code> 盈利真相</strong></td>
+<td style="text-align: left;">母行单体净利润 <code>1,579.37 亿</code> vs 25H1 <code>1,587.58 亿</code>（<strong><code>-0.52%</code></strong>），<strong>但母行营收大增 <code>+6.98%</code></strong>（<code>4,116.08 亿</code> vs <code>3,847.52 亿</code>）、<strong>利息净收入 <code>+8.18%</code></strong>、<strong>税前利润正增 <code>+1.83%</code></strong>（<code>1,873.24 亿</code> vs <code>1,839.62 亿</code>）</td>
+<td style="text-align: left;"><code>26H1 P.120</code> 合并及公司利润表</td>
+<td style="text-align: left;"><strong>反杀空头片面叙事</strong>：母行并非主业失速，净利微降 <code>-8.21 亿</code> 系上半年母行多提 <strong><code>+204.35 亿</code>（<code>+20.31%</code>）信用减值</strong>且多缴 <strong><code>+41.83 亿</code> 所得税</strong>所致</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>26Q3</code> 单季信用减值与拨备</strong></td>
+<td style="text-align: left;"><code>26Q3</code> 单季信用减值 <strong><code>239.10 亿元</code></strong>，环比 <code>Q2</code>（<code>577.24 亿</code>）降 <code>-58.58%</code>，<strong>但同比 <code>25Q3</code>（<code>221.33 亿</code>）实为多提 <code>+8.03%（+17.77 亿）</code></strong>；然而 <code>26Q3</code> 末拨备覆盖率单季环比骤降 <strong><code>-5.94 pct</code> 至 <code>211.64%</code></strong>（贷款拨备余额单季净减 <strong><code>-139.83 亿</code></strong> 至 <code>8,820.65 亿</code>）</td>
+<td style="text-align: left;"><code>26Q3 P.6, P.8</code> / 官方三表 JSON</td>
+<td style="text-align: left;"><strong>双向各打五十大板</strong>：戳破空头拿季节性环比喊“同比砍拨备造假”，同时<strong>打假 V1“逆周期藏富”过度乐观</strong>——高强度核销下拨备垫正在实质漏气</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCI 归零真相 &amp; AC 债表外浮盈</strong></td>
+<td style="text-align: left;">归母总 OCI 虽降至 <code>26H1</code> <code>106.58 亿</code> / <code>26Q3</code> <code>15.84 亿</code>，<strong>但 <code>26H1</code> FVOCI 金融工具累计税后浮盈反增 <code>+69.26 亿</code> 至 <code>581.71 亿元</code></strong>（<code>26Q3</code> 仍存 <strong><code>~520 亿元</code></strong>），总 OCI 下滑全系人民币升值致<strong>外币报表折算差额暴亏至 <code>-299.5 亿</code></strong>与保险“其他”项 <code>-217 亿</code>拖累！更关键的是 <strong><code>26H1</code> AC 摊余成本债（<code>13.46 万亿</code>）表外公允价值达 <code>13.99 万亿</code>，表外未实现浮盈高达 <code>+5,317.60 亿元</code></strong>（半年净增 <code>+866.48 亿</code>，Level 1+2 占 <strong><code>99.35%</code></strong>，税后 <strong><code>~3,988 亿</code> / <code>+1.12 元/股</code></strong>）！</td>
+<td style="text-align: left;"><code>26H1 P.201-202</code>（附注 42）/<code>26Q3 P.10</code> / <strong><code>26H1 P.262</code>（附注八、5）</strong></td>
+<td style="text-align: left;"><strong>核弹级反杀空头“浮盈油箱归零”误判</strong>！同时<strong>硬认领</strong> <code>25 年</code> AC 债终止确认 <code>190.23 亿</code>（<code>+452%</code>）、<code>26H1</code> 再卖 <code>108.08 亿</code>（<code>26H1 P.196</code>）、<code>26Q1-Q3</code> 投收+公允价值 <code>642.36 亿</code> 偏高，常态 Core OE 必须硬挤水</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>零售/地产资产质量与核销</strong></td>
+<td style="text-align: left;">个人按揭不良率 <code>1.29%</code>（<code>743.20 亿</code>，18 月 <code>+56 bps</code>）、信用卡 <code>5.37%</code>（<code>320.67 亿</code>，余额压降 <code>-14.4%</code>）、对公地产 <code>6.27%</code>（<code>538.51 亿</code>，半年 <code>+88 bps</code>）、关注类 <code>1.97%</code>（<code>6,295.92 亿</code>）、逾期 <code>1.60%</code>（<code>5,126.23 亿</code>，半年 <code>+498.88 亿</code>，逾期 3 月内暴增 <code>+25.9%</code>）、<code>26H1</code> 核销 <code>819.11 亿</code>（年化 <code>1,638 亿</code>，还原核销年化不良生成率 <strong><code>0.606%</code> / <code>1,894 亿</code></strong>）、关注迁徙率 <code>29.15%</code></td>
+<td style="text-align: left;"><code>26H1 P.69-73, P.142</code> / <code>25AR P.85-88, P.254</code></td>
+<td style="text-align: left;"><strong>100% 坦诚认领！</strong> 空头打中 V1 命门，常态贷款信用成本必须由 V1 <code>0.56%</code> 硬上修至 <strong><code>0.60%</code></strong>（年减值 <code>1,950 亿</code>），确保不吃老本</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>资本约束、G-SIB 与千亿定增</strong></td>
+<td style="text-align: left;"><code>26Q3</code> RWA <code>30.48 万亿</code>（9 个月 <code>+7.81%</code> / 年化 <code>+10.42%</code>，低息票据贴现扩至 <code>3.17 万亿</code>）；CET1 21 个月连降 <code>-103 bps</code> 至 <strong><code>13.07%</code></strong>；FSB 升入 G-SIB 第三组，<strong><code>2027-01-01</code> 法定 CET1 底线硬升 <code>+50 bps</code> 至 <code>9.5%</code></strong>、外部 TLAC 底线 <code>20.5%</code>（<code>2028</code> 年 <code>22.5%</code>，现 <code>21.36%</code>）；<code>1,000 亿</code> 定增仅静态补血 <strong><code>+32.8 bps</code></strong>（<code>13.40%</code>）且按前 20 日均价破净发行（非 2025 年建/中/交/邮溢价锁价）</td>
+<td style="text-align: left;"><code>26Q3 P.6, P.17-19</code> / <code>2026-11-11</code> 上交所过会公告</td>
+<td style="text-align: left;"><strong>100% 认领资本失血与 <code>-2.90%</code> 永久摊薄！</strong> 但反杀空头外推 <code>8.5%</code> 永续 RWA 增速得出负自由盈余的极端假设</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h4 id="2_7">2. 铁闸一 &amp; 铁闸二：红蓝核心争议二元裁决实录</h4>
+<p><strong>（一）100% 坦诚认领并硬修正的五大铁血硬伤（红方空头击中 V1 软肋）</strong>
+1. <strong>A 股 <code>9.40 元</code> 抱团溢价失控，性价比全面崩坏</strong>：较 V1 撰稿时的 <code>9.09 元</code> 再涨 <code>+3.4%</code>，账面 PB 冲至 <strong><code>0.836x</code></strong>（近 5 年 <code>&gt;95%</code> 分位），精确 TTM 股息率沉降至 <strong><code>3.40%</code></strong>（定增摊薄后仅 <code>3.30%</code>，较 30 年期国债 <code>2.05%</code> 仅余 <strong><code>+125—135 bps</code></strong> 风险溢价），较同股同权的 H 股畸形溢价 <strong><code>+39.43%</code></strong>，且较隔壁 A 股招商银行（<code>4.58%</code> 股息率、<code>13.5%</code> ROE、<code>389%</code> 拨备）股息倒挂 <code>-118 bps</code>，<strong>V4 彻底否决 A 股追高（<code>0 票追高</code>）</strong>。</p>
+<ol start="2">
+<li>
+<p><strong>零售与地产信用恶化进入深水区，拨备垫边际漏气</strong>：按揭不良飙至 <code>1.29%</code>、信用卡 <code>5.37%</code>、对公地产 <code>6.27%</code>、关注类 <code>1.97%</code>、逾期 3 个月以内半年激增 <code>+25.9%</code>、半年核销翻倍至 <code>819 亿</code> 仍令 <code>26Q3</code> 拨备覆盖率单季骤降 <code>-5.94 pct</code> 至 <code>211.64%</code>（贷款拨备单季净减 <code>-139.83 亿</code>）。V4 将常态贷款信用成本由 V1 <code>0.56%</code> 硬上修 <strong><code>+4 bps</code> 至 <code>0.60%</code></strong>（年化减值 <strong><code>1,950 亿元</code></strong>，比 2025 实提多提 <code>+620 亿</code>），杜绝以吃拨备老本维系利润。</p>
+</li>
+<li>
+<p><strong>2027 年高息定存重定价红利退坡 + 6% 债券增值税渐进侵蚀</strong>：18 次联网反查显示，2027 年 2 年期以上高息定存到期规模将同比锐减逾 <code>10 万亿</code>（券商测算存款重定价对息差提振将回落至 2026 年的 <code>~40%</code> / 约 <code>+8 bps</code>）；同时自 <code>2025-08-08</code> 起新发国债/地方债/金融债利息恢复征收 <code>6%</code> 增值税（综合附加约 <code>6.4%—6.6%</code>），尽管严格“新老划断”（老券免税至到期且新券发行利率将部分前置转嫁），但未来 3 年仍将渐进拖累 NIM <code>3—5 bps</code>。V4 将新常态稳态 NIM 由 V1 <code>1.24%</code> 审慎下修至 <strong><code>1.23%</code></strong>（较 <code>26Q3</code> 实际 <code>1.29%</code> 严苛下修 <code>-6 bps</code>）。</p>
+</li>
+<li>
+<p><strong>超额卖债兑现收益必须挤水</strong>：<code>2025 年</code> 终止确认 AC 老券暴增 <code>+452%</code> 至 <code>190.23 亿</code>、<code>2026H1</code> 再卖 <code>108.08 亿</code>，<code>2026Q1-Q3</code> 投资收益+公允价值变动高达 <code>642.36 亿</code>（占税前利润 <code>18.7%</code>）。V4 将常态其他非息从 <code>26Q3</code> 年化 <code>~1,128 亿</code> 及 V1 <code>820 亿</code> 再压实至 <strong><code>800 亿元</code></strong>。</p>
+</li>
+<li>
+<p><strong>资本约束与千亿破净定增永久摊薄</strong>：<code>2027-01-01</code> G-SIB 第三组 <code>+50 bps</code> 附加资本落地后，哪怕叠加 <code>1,000 亿</code> 定增（仅补血 <code>+32.8 bps</code>），CET1 相对法定红线净缓冲垫仍从 2024 年末 <code>5.10%</code> 缩至 <code>3.90%</code>；且与 2025 年建/中/交/邮财政部溢价锁价注资不同，工行本次按“发行期首日前 20 交易日均价”发行，现价下必然破净并永久摊薄 EPS/DPS <strong><code>-2.90%</code></strong>（按 <code>9.40 元</code>）至 <strong><code>-3.02%</code></strong>（按 <code>9.00 元</code>），V4 相应将质地加分由 V1 <code>2.4</code> 硬下修至 <strong>A 股 <code>1.6</code> / H 股 <code>1.8</code></strong>。</p>
+</li>
+</ol>
+<p><strong>（二）铁面反杀空头四重误判与悲观复利叠加（严守铁闸二，拒绝滑跪！）</strong>
+1. <strong>反杀“OCI 归零 = 债市浮盈油箱耗竭”的附注盲视</strong>：空头未穿透 <code>26H1 P.201</code> 附注 42.1 与 <code>26H1 P.262</code> 附注八、5，把人民币升值至 <code>6.65—6.68</code> 导致的 <strong><code>-299.5 亿元</code> 外币报表折算负差</strong> 误读为卖光债券浮盈！实证工行 FVOCI 税后浮盈仍留存 <strong><code>~520 亿元</code></strong>，而 <code>13.46 万亿</code> AC 摊余成本债的表外公允价值浮盈更逆势增厚至 <strong><code>+5,317.60 亿元</code></strong>（Level 1+2 占 <code>99.35%</code>，税后 <strong><code>+3,988 亿元</code> / <code>+1.12 元/股</code></strong>），叠加超出 150% 红线的税后超额拨备 <code>+1,927 亿元</code>，真实还原家底高达 <strong><code>12.90 元/股</code></strong>！</p>
+<ol start="2">
+<li>
+<p><strong>反杀“Q3 单季减值腰斩 <code>-58.58%</code> 粉饰利润”与“母行失速”话术</strong>：<code>26Q3 P.8</code> 铁证 <code>26Q3</code> 单季信用减值 <code>239.10 亿</code> 同比 <code>25Q3</code>（<code>221.33 亿</code>）实为<strong>多提 <code>+8.03%</code></strong>，环比回落系工行历年“前高后低”计提节奏；<code>26H1 P.120</code> 铁证核心母行营收大增 <strong><code>+6.98%</code></strong>、税前利润正增 <strong><code>+1.83%</code></strong>，净利微降 <code>-0.52%</code> 纯因多提 <code>+204.35 亿</code> 减值与多缴 <code>+41.83 亿</code> 所得税。</p>
+</li>
+<li>
+<p><strong>反杀“6% 债券增值税一次性全量重算”与“8.5% 永续 RWA 增速倒逼负自由现金流”</strong>：财政部 2025 年 4 号公告实行严格“新老划断”，存量老券免税至到期且新券票息将通过一级市场利差部分转嫁，2026—2028 年对净利润净侵蚀仅 <code>0.3%—1.5%</code> 级；空头更将 <code>2025—2026</code> 政策性逆周期冲量（<code>8.5%+</code> RWA 增速）线性外推成永续，硬扣 <code>3,386 亿</code> 资本留存制造“负自由盈余 <code>-36 亿</code>”恐慌，并将“扣完扩表留存后的纯剩余分红余额”混同于银行同业通行的<strong>归母普通股 Core OE</strong> 口径！</p>
+</li>
+<li>
+<p><strong>V4 统一银行同业口径 Core OE 精算结果（100% 对齐招商银行 V4 标杆）</strong>：</p>
+<ul>
+<li>生息资产 <code>55.00 万亿</code> × V4 稳态 NIM <code>1.23%</code> = 利息净收入 <code>6,765 亿</code> + 手续费 <code>1,120 亿</code> + 挤水其他非息 <code>800 亿</code> = 营收 <code>8,685 亿</code> − 营业支出 <code>2,740 亿</code> = <strong>PPOP <code>5,945.00 亿</code></strong> − 上修后信用减值 <code>1,950.00 亿</code>（信用成本 <code>0.60%</code>）= 税前 <code>3,995.00 亿</code> → 扣 <code>14.0%</code> ETR 及 <code>0.85%</code> 少数股东 = 归母净利 <code>3,406.50 亿</code> − AT1 刚性股息 <code>90.00 亿</code> = <strong>V4 常态归母普通股 Core OE = <code>3,316.50 亿元/年</code></strong>（较 V1 <code>3,423.92 亿</code> 理性下修 <strong><code>-3.14%</code></strong>，对应基期静态 ROAE <code>8.28%</code> / 定增备考 ROAE <code>8.08%</code>，与空头自己测算的 <code>3,300—3,450 亿</code> 常态净利完全交汇！）；</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>
+<p><strong>资本留存约束透明附注</strong>：按 <code>30.48 万亿</code> RWA 与 <code>13.0%</code> CET1 目标，内生自平衡 RWA 增速上限为 <strong><code>5.49%</code></strong>；当 <code>g_RWA = 7.5%</code> 时自由可分配余额仅 <code>344.9 亿</code>（确实不足覆盖 <code>1,140.5 亿</code> 分红，需千亿定增托底）；当 <code>g_RWA</code> 回归 <strong><code>5.0%</code></strong> 成熟增速时自由可分配余额达 <strong><code>1,335.4 亿</code></strong>（覆盖分红 <code>1.17x</code>），降至 <strong><code>4.0%</code></strong> 时跃升至 <strong><code>1,731.6 亿</code></strong>（覆盖 <code>1.52x</code>）；</p>
+</li>
+<li>
+<p><strong>3 年达产稳态 Core OE = <code>3,457.83 亿元/年</code></strong>（较 V1 <code>3,554.58 亿</code> 下修 <strong><code>-2.72%</code></strong>，计入零售信用成本过峰回落 <code>3 bps</code>、AI 降本压降 CIR <code>0.7 pct</code>、千亿定增 50% 杠杆释效 <code>+50 亿</code> 及 AT1 精准省息 <code>+3.25 亿</code>，并已再扣 6% 增值税进一步渗透 <code>-1 bp</code>）。</p>
+</li>
+</ul>
+<hr/>
+<h4 id="3-reality-check-pb-roe-ah">3. 铁闸三：历史估值分位 Reality Check、银行 PB-ROE/股息锚与 A/H 两档击球区锁定</h4>
+<ul>
+<li>
+<p><strong>历史分位与 1.6% 无风险利率锚的冷酷现实</strong>：过去 5 年工行 A 股年末 PB 为 <code>0.50x</code>（21年）→ <code>0.49x</code>（22年）→ <code>0.50x</code>（23年）→ <code>0.61x</code>（24年）→ <code>0.65x</code>（25年）→ <code>0.836x</code>（26年11月），52 周实盘区间为 A 股 <code>6.85—9.49 元</code>、H 股 <code>5.59/5.96—8.18 港元</code>。空头按十年前 3% 国债时代要求的 <code>12% Ke</code> / <code>5.0%</code> A 股股息率强行把合理价压到 <code>6.50 元</code>（<code>0.58x PB</code>），忽视了今日 10 年期国债已跌至 <code>1.60%</code>、险资 OCI 刚性配置底盘已将大行中枢结构性抬升的现实；但与此同时，V1 把 A 股买点上沿放到 <code>8.40 元</code>（<code>3.81%</code> 股息率）和 H 股放到 <code>8.00 港元</code>（现价已入买区），又显然在零售不良抬头、拨备下行与定增摊薄面前给得过于宽松！</p>
+</li>
+<li>
+<p><strong>Reverse SOTP 拆骨 V4 重校</strong>：资金业务主权债底盘（稳态税后 <code>880 亿 × 11.5x PE</code> = <code>1.01 万亿</code>）+ 超低成本存款与传统信贷底盘（<code>2,436.5 亿 × 6.5x PE</code> = <code>1.58 万亿</code>）= <strong>存量硬保底 <code>2.59 万亿元</code></strong>（<code>0.65x PB</code> / <code>7.81x P/OE</code>）。A 股 <code>9.40 元</code>（<code>3.35 万亿</code>）已较拆骨底线<strong>透支溢价 <code>+7,600 亿元</code>（<code>+29.3%</code>）</strong>；H 股 <code>7.885 港元</code>（<code>2.40 万亿</code>）仍折价 <strong><code>-1,872 亿元</code>（<code>-7.2%</code>）</strong>，三大远期期权维持 <code>0 元白送</code>。</p>
+</li>
+<li>
+<p><strong>V4 最终锁定 A/H 双市场两档实战击球区（汇率统一 <code>1 HKD = 0.855 RMB</code>）</strong>：</p>
+</li>
+<li>
+<p><strong>A 股（<code>601398.SH</code>，现价 <code>9.40 元</code>）</strong>：</p>
+</li>
+<li>
+<p><strong>第一档（黄金重锤区）</strong>：<strong><code>≤ 6.80 元</code></strong>（账面 PB <code>≤ 0.605x</code> / 备考 <code>≤ 0.608x</code>，精准踩实 52 周低点 <code>6.85 元</code>；<code>P/OE ≤ 7.31x</code>，常态回报 <strong><code>≥ 13.68%</code></strong> / 达产 <strong><code>≥ 14.27%</code></strong>，精确 TTM 免税股息 <strong><code>≥ 4.71%</code></strong> [摊薄后 <code>≥ 4.57%</code>]，超 10Y 国债 <strong><code>≥ +311 bps</code></strong>）；</p>
+</li>
+<li>
+<p><strong>第二档（左侧底仓收息区）</strong>：<strong><code>6.80 — 7.80 元</code></strong>（账面 PB <code>0.605x — 0.694x</code> / 备考 <code>0.608x — 0.697x</code>，<code>P/OE 7.31x — 8.38x</code>，常态回报 <strong><code>11.93% — 13.68%</code></strong> / 达产 <strong><code>12.44% — 14.27%</code></strong>，TTM 免税股息 <strong><code>4.10% — 4.71%</code></strong> [摊薄后 <code>3.98% — 4.57%</code>]，超 10Y 国债 <strong><code>+250 — +311 bps</code></strong>）。<strong>现价 <code>9.40 元</code> 高出买点上限 <code>+20.51%</code>，坚决 <code>0 票追高</code>！</strong></p>
+<ul>
+<li><strong>H 股（<code>01398.HK</code>，现价 <code>7.885 港元</code> 折 <code>6.7417 元</code>）</strong>：</li>
+</ul>
+</li>
+<li>
+<p><strong>第一档（黄金重锤区）</strong>：<strong><code>≤ 6.40 港元</code></strong>（折 <code>≤ 5.47 元</code>，账面 PB <code>≤ 0.487x</code> / 备考 <code>≤ 0.489x</code>，<code>P/OE ≤ 5.88x</code>，常态回报 <strong><code>≥ 17.01%</code></strong> / 达产 <strong><code>≥ 17.73%</code></strong>，税前 TTM 股息 <strong><code>≥ 5.85%</code></strong> / 港股通个人税后 <strong><code>≥ 4.68%</code></strong>）；</p>
+</li>
+<li>
+<p><strong>第二档（左侧底仓收息区）</strong>：<strong><code>6.40 — 7.40 港元</code></strong>（折 <code>5.47 — 6.33 元</code>，账面 PB <code>0.487x — 0.563x</code> / 备考 <code>0.489x — 0.566x</code>，<code>P/OE 5.88x — 6.80x</code>，常态回报 <strong><code>14.71% — 17.01%</code></strong> / 达产 <strong><code>15.33% — 17.73%</code></strong>，税前 TTM 股息 <strong><code>5.06% — 5.85%</code></strong> / 港股通个人税后 <strong><code>4.05% — 4.68%</code></strong>）。<strong>现价 <code>7.885 港元</code> 仅高出 V4 新买点上限 <code>+6.55%</code></strong>，免税机构可保留小仓位吃 <code>4.75%</code> 高息，港股通个人严禁追高、静待回踩 <code>≤ 7.40 港元</code> 分批建仓，或用于<strong>“持 A 换 H”</strong>吃掉 <code>+39.43%</code> 畸形溢价！</p>
+</li>
+</ul>
+<hr/>
+<h4 id="4-v1-v4">4. 📋 《V1 → V4 演进对照表》</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核心投研与估值坐标</th>
+<th style="text-align: center;">V1 原稿基准（<code>2026-11-20</code>）</th>
+<th style="text-align: center;">独立空头盲审底线（<code>2026-11-22</code>）</th>
+<th style="text-align: center;"><strong>V4 终审单一真相（<code>2026-11-22</code>）</strong></th>
+<th style="text-align: left;">变动幅度与终审依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>A / H 现价与溢价</strong></td>
+<td style="text-align: center;"><code>9.09 元</code> / <code>7.83 港元</code> (<code>+35.59%</code>)</td>
+<td style="text-align: center;"><code>9.40 元</code> / <code>7.885 港元</code> (<code>+39.43%</code>)</td>
+<td style="text-align: center;"><strong><code>9.40 元</code> / <code>7.885 港元</code> (<code>+39.43%</code>)</strong></td>
+<td style="text-align: left;">A 股再涨 <code>+3.4%</code>，统一汇率 <code>0.855</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>银行专属 True EV (A / H)</strong></td>
+<td style="text-align: center;"><code>32,397.3 亿</code> / <code>23,893.5 亿</code></td>
+<td style="text-align: center;"><code>33,502.2 亿</code> / <code>24,027.8 亿</code></td>
+<td style="text-align: center;"><strong><code>33,502.19 亿</code> / <code>24,027.75 亿</code></strong></td>
+<td style="text-align: left;"><code>ev_delta = 0.0</code>（精准 <code>3,564.0626 亿股</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>普通股净资产 / BVPS</strong></td>
+<td style="text-align: center;"><code>40,058.08 亿</code> / <code>11.24 元</code></td>
+<td style="text-align: center;"><code>40,058.08 亿</code> / <code>11.24 元</code>（备考 <code>11.19</code>）</td>
+<td style="text-align: center;"><strong><code>40,058.08 亿</code> / <code>11.24 元</code></strong>（备考 <code>11.19</code>）</td>
+<td style="text-align: left;"><code>26Q3</code> 扣优先股+永续债 <code>3,649.24 亿</code> 零误差</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>常态 Core OE (<code>steady_oe</code>)</strong></td>
+<td style="text-align: center;"><code>3,423.92 亿</code>（模块D <code>3,424.44</code>）</td>
+<td style="text-align: center;">普通股净利 <code>3,350 亿</code>（扣 8.5% RWA <code>-36 亿</code>）</td>
+<td style="text-align: center;"><strong><code>3,316.50 亿</code></strong>（<code>g=5%</code> 自由余额 <code>1,335 亿</code>）</td>
+<td style="text-align: left;"><strong>下修 <code>-3.14%</code></strong>（NIM <code>1.23%</code> / 信用成本 <code>0.60%</code> / 非息挤水）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>达产 Core OE (<code>full_oe</code>)</strong></td>
+<td style="text-align: center;"><code>3,554.58 亿</code>（模块D <code>3,555.46</code>）</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong><code>3,457.83 亿</code></strong></td>
+<td style="text-align: left;"><strong>下修 <code>-2.72%</code></strong>（已扣 6% 增值税持续渗透）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>严格 TTM 每股股息 / 股息率</strong></td>
+<td style="text-align: center;"><code>0.3200 元</code>（A <code>3.52%</code> / H <code>4.77%</code>）</td>
+<td style="text-align: center;"><code>0.3103 元</code>（A <code>3.30%</code> / H <code>4.60%</code>）</td>
+<td style="text-align: center;"><strong><code>0.3200 元</code></strong>（A <strong><code>3.40%</code></strong> / H 税前 <strong><code>4.75%</code></strong>）</td>
+<td style="text-align: left;"><code>26-10-21</code> 已派发中期息，港股通税后 <strong><code>3.80%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>拆骨保底价值 (SOTP)</strong></td>
+<td style="text-align: center;"><code>2.95 万亿</code>（A 溢 <code>+2,900 亿</code>）</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong><code>2.59 万亿</code></strong>（A 溢 <strong><code>+7,600 亿</code></strong> / H 折 <code>-1,872 亿</code>）</td>
+<td style="text-align: left;">挤水 <code>-12.2%</code>，另有 AC 债表外税后浮盈 <code>+3,988 亿</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>A 股两档实战击球区</strong></td>
+<td style="text-align: center;"><code>7.10 — 8.40 元</code>（重锤 <code>≤ 7.10</code>）</td>
+<td style="text-align: center;"><code>6.50 — 7.20 元</code>（强力做空）</td>
+<td style="text-align: center;"><strong><code>6.80 — 7.80 元</code></strong>（重锤 <strong><code>≤ 6.80 元</code></strong>）</td>
+<td style="text-align: left;"><strong>上限收紧 <code>-7.1%</code></strong>，现价 <code>9.40 元</code> 高出 <strong><code>+20.5%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>H 股两档实战击球区</strong></td>
+<td style="text-align: center;"><code>6.70 — 8.00 港元</code>（重锤 <code>≤ 6.70</code>）</td>
+<td style="text-align: center;"><code>6.50 — 7.20 港元</code>（偏空）</td>
+<td style="text-align: center;"><strong><code>6.40 — 7.40 港元</code></strong>（重锤 <strong><code>≤ 6.40 港元</code></strong>）</td>
+<td style="text-align: left;"><strong>上限收紧 <code>-7.5%</code></strong>，现价 <code>7.885 港元</code> 高出 <strong><code>+6.6%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>质地加分 (A / H)</strong></td>
+<td style="text-align: center;"><code>2.4</code> / <code>2.4</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong><code>1.6</code> / <code>1.8</code></strong></td>
+<td style="text-align: left;">较 V1 硬砍 <code>-0.8 / -0.6</code>，拉开与招行 (<code>2.5</code>) 代差</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IC 最终票决动作</strong></td>
+<td style="text-align: center;">A 股 <code>0 票</code> / H 股 <code>3 票买入</code></td>
+<td style="text-align: center;">A 股强空 / H 股偏空</td>
+<td style="text-align: center;"><strong>A 股 <code>0 票追高</code>（溢价 <code>+20.5%</code>）/ H 股待回踩 <code>≤ 7.40 港元</code> 分批（免税机构小底仓或持 A 换 H）</strong></td>
+<td style="text-align: left;">纪律严守折价与安全垫，绝不替抱团买单</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这场红蓝终审是最标准的“防盲目乐观，也防盲目恐慌”教材！空头扒开报表抓出的按揭 `1.29%`、信用卡 `5.37%`、拨备单季掉 `6` 个点、以及 `9.40 元` A 股只剩 `3.40%` 股息还附带 `-2.9%` 定增摊薄，刀刀见血，咱们必须老老实实把常态盈利和买点砍下来；可空头没翻附注就把汇率折算负差当成“债市浮盈油箱归零”，殊不知工行 `13.46 万亿` 摊余成本债的表外浮盈还悄悄涨到了 `5,318 亿元`！两下称重结论极其干脆：今天 `9.40 元` 的工行 A 股是拥挤的类债陷阱，一分钱不追；真想买这台主权级金融基础设施，要么等 A 股砸回 `7.80 元` 以下，要么趁着 `+39.4%` 的畸形溢价切到 H 股，在 `7.40 港元` 以下把税前 `5%+` 的高息和免费期权慢慢装进口袋！</p></div></div>
+<hr/>
 <h1 id="g">【终章模块 G：投资大师闭门圆桌会——三位华尔街传奇的终极会诊】</h1>
 <blockquote>
 <p><strong>闭门会议背景</strong>：截至 <code>2026年11月20日</code>，中国工商银行（<code>601398.SH</code> / <code>1398.HK</code>）正处于过去五年最具戏剧性的交叉口：<code>2026Q3</code> 营收反弹 <code>+8.74%</code>、单季净利大增 <code>+9.97%</code>、净息差回升至 <code>1.29%</code>；<code>1,000亿元</code> 财政部与烟草定增已过会，同期 FSB 将其晋升为中资首家 G-SIB 第三组；而 A股 <code>9.09元</code>（<code>0.81x PB</code> / 股息 <code>3.52%</code>）刚创二十年新高，H股 <code>7.83港元</code>（折合 <code>6.704元</code> / <code>0.60x PB</code> / 免税股息 <code>4.77%</code>）仍深陷 <code>+35.59%</code> 折价鸿沟。我们邀请三位华尔街传奇大师围坐一桌，用第一人称视角做出终极裁决。</p>
 </blockquote>
-<hr>
+<hr/>
 <h2 id="peter-lynch58">一、 🛒 彼得·林奇（Peter Lynch）：用麦哲伦基金的街头常识，称一称这头“58万亿大笨象”的生意账</h2>
 <p>诸位好，我是彼得·林奇。在富达麦哲伦基金十三年、创造年化 <code>29%</code> 回报的生涯里，我从来不信投行三百页的宏观预测，只问三个街头常识：<strong>第一，它属于“六类股票”里的哪一类？第二，管理层有没有乱搞“多元恶化（Diworsification）”？第三，货架上的标价对不对得起生意成色？</strong></p>
 <p>先把工行放进六大分类箱：别被 <code>2026Q3</code> 单季净利大涨 <code>+9.97%</code>、营收 <code>+8.74%</code> 冲昏头脑，以为挖到了“快速增长股”！一台总资产 <code>57.82万亿元</code> 的金融巨鲸，在地球上任何地方都不可能是快增长股。工行本质是典型的<strong>“缓慢增长型大笨象（Slow Grower）叠加周期性信用出清与隐蔽资产底盘（Asset Play）”</strong>。买大笨象的铁律极其朴素：<strong>绝不靠成长幻想赚五倍，只靠极低成本壁垒下的厚实股息，或华尔街按残值甩卖它的折价筹码！</strong></p>
@@ -4404,18 +5021,26 @@
 </tbody>
 </table></div>
 <hr/>
-<h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
+<h2 id="h-1-v4-2026-11-22">【模块 H：💼 专属买方研究员的 1 分钟闭门交底（V4 终审同步刷新版 · 2026-11-22）】</h2>
 <blockquote>
-<p><strong>“前面那十万字的财报细节和模型我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于中国工商银行这家企业，你只需要在脑子里记住这四件事：”</strong></p>
+<p><strong>“前面那十万字的财报细节、独立空头的尖锐质疑和官方原版 PDF 逐页验真我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于中国工商银行（<code>601398.SH</code> / <code>01398.HK</code>）这家企业，站在 <code>2026年11月22日</code>，你只需要在脑子里记住这四件事：”</strong></p>
 </blockquote>
-<p><strong>第一件事：它到底靠什么在行业里立身？</strong>
-工商银行的核心底牌不是讲金融科技故事，也不是靠高息放贷博暴利，而是手握一套全市场难以复制的三重基础盘：国家信用背书带来的近四十万亿极低成本存款、超过三十万亿的资产托管与央国企对公结算主渠道，以及全球顶级水准的超低运营费率。在利率持续走低的行业寒冬里，高成本中小银行被迫退出，优质央国企信贷与居民避险储蓄反而源源不断向工行集中。它本质上是国民经济运转离不开的国家级金融基础设施，只要国家信用稳固，这套低成本吸储加极低摩擦运转的商业模式就具备极强护城河。</p>
-<p><strong>第二件事：它的财务家底和经营周期现在发生了什么本质变化？</strong>
-经历四年净息差持续压缩后，工行已迈过最难熬的失血谷底。前几年高息揽进来的定期存款集中到期、置换成低息新存款，带动主业营收与息差率先企稳回升；而且在同行靠卖债或单笔股权浮盈增厚利润时，工行没有透支债券浮盈，反而主动关闭非信贷减值转回开关、拿出大笔利润集中核销历史坏账，报表成色在大行中最扎实。即便放进息差大跌、坏账翻倍的极寒压力测试里连续扛三年、照常发完每年千亿级现金分红，核心资本依然远高于国际监管红线。只要未来扩表节奏自然放缓，它就是一台能释放巨量自由现金流的超级印钞机。</p>
-<p><strong>第三件事：它身上有哪些表面软肋？哪些是纸老虎，哪个才是真软肋？</strong>
-市场上吓人的两个鬼故事其实是纸老虎：一是担心千亿定增抽血摊薄，其实这是财政部和烟草体系锁仓五年的战略补血，专门用来对冲高速扩表和国际监管升档，反而锁死了未来稳定分红底线；二是担心低利率拖垮大行，其实低利率先出清的是中小银行，工行靠免税政府债与规模集约反而收割份额。真正要紧盯的软肋有三条：第一，零售端信用卡和按揭不良周期尚未彻底见顶，关注类和逾期指标在大行中偏高，未来仍需持续花利润清淤；第二，国有压舱石定位锁死了分红比例上限，且高息定存到期红利明年后半段大概率钝化；第三，眼下最现实的硬伤是险资抱团已把 A股推至二十年历史新高，股息安全垫明显变薄。</p>
+<p><strong>第一件事：它到底靠什么在行业里立身？家底到底有多硬？</strong>
+工商银行的核心底牌不是讲科技成长故事，而是国家信用背书下的近 <code>40 万亿元</code> 极低成本存款（付息率仅 <code>1.15%</code>）、逾 <code>30 万亿元</code> 资产托管与央国企结算主渠道，以及全球极低的运营费率。经过 V4 官方附注穿透验真，市场最担心的“债市浮盈油箱归零”其实是把汇率折算负差看串行了——工行表内 FVOCI 浮盈仍有约 <code>520 亿元</code>，而 <code>13.46 万亿元</code> 摊余成本债的表外公允价值浮盈更厚达 <strong><code>+5,317.6 亿元</code></strong>（税后近 <code>4,000 亿</code>），叠加超额拨备与 <code>4.01 万亿</code> 普通股净资产，金融防弹底盘依然硬如混凝土。</p>
+<p><strong>第二件事：它的真实盈利中枢和资本周期眼下卡在哪里？</strong>
+经历了 2026 年高息定期存款到期带来的息差企稳反弹后，工行即将进入<strong>“负债重定价红利退坡 + 零售不良出清 + 资本硬约束”</strong>的三重紧平衡期：第一，零售按揭不良率已升至 <code>1.29%</code>、信用卡飙至 <code>5.37%</code>、对公地产达 <code>6.27%</code>、关注类 <code>1.97%</code> 与逾期 <code>1.60%</code> 均居大行高位，半年狂核 <code>819 亿</code> 仍令 <code>26Q3</code> 拨备覆盖率单季下降 <code>5.94</code> 个百分点至 <code>211.64%</code>；第二，过去两年高速扩表把 CET1 压低了 <code>103 bps</code> 至 <code>13.07%</code>，而 <code>2027年1月1日</code> 升入 G-SIB 第三组又将法定底线硬抬 <code>+50 bps</code>，使得 <code>1,000 亿</code> 财政部+烟草定增更多是“被动补血”而非进攻子弹，并永久摊薄老股东每股收益与股息约 <code>2.9%—3.0%</code>。扣除这些硬伤与超额卖债水分后，工行 V4 常态归母普通股 Core OE 下修锁定在 <strong><code>3,316.5 亿元/年</code></strong>（达产 <strong><code>3,457.8 亿元/年</code></strong>），只有在未来扩表增速自然放缓至 <code>5%</code> 以下时，才能真正释放丰厚自由现金流。</p>
+<p><strong>第三件事：当下股价最大的陷阱是什么？</strong>
+最大的硬伤不是工行会破产，而是<strong>在岸险资与红利抱团已经把 A 股推到 <code>9.40 元</code>（<code>0.836x PB</code>）的高位拥挤区</strong>！按已实派 TTM 每股 <code>0.3200 元</code> 股息计算，A 股股息率已沉降至仅 <strong><code>3.40%</code></strong>（定增摊薄后仅 <code>3.30%</code>，仅比 30 年期国债高出 <code>125—135 bps</code>），比同股同权的 H 股足足贵了 <strong><code>+39.43%</code></strong>，甚至比 ROE 高出近 4 个点、拨备厚近一倍的隔壁招商银行 A 股（<code>4.58%</code> 股息）还低了 <code>118 bps</code>！一旦长债利率微幅反弹或 2027 年业绩增速回落，高位追买 A 股极易赚了 <code>3%</code> 股息却亏掉 <code>15%—20%</code> 本金。</p>
 <p><strong>第四件事：咱们到底该怎么买它、怎么赚它的钱？</strong>
-操作纪律只有八个字：<strong>严禁追高，只买折价。</strong> 眼下绝不要去历史新高价位追买透支安全垫的 A股，早年低价底仓继续安心收息即可；新资金只有两条稳赢路径：要么利用两地巨大的折价鸿沟，在深度破净的 H股左侧分批建底仓，免税机构拿丰厚股息，个人投资者守住厚实本金安全垫、静待两地溢价收窄时切回 A股；要么管住手等市场回调，等 A股回到具备充足股债利差的安全区再进场。守住不追高、紧盯息差与拨备底线，时间自然会把稳健复利装进口袋。</p></hr></hr></hr></hr></hr></hr>
+V4 终审纪律只有八个字：<strong>严禁追 A，等折买 H。</strong></p>
+<ul>
+<li>
+<p><strong>A 股（<code>601398.SH</code>，现价 <code>9.40 元</code>）</strong>：现价高出 V4 新买点上限（<code>7.80 元</code>）整整 <strong><code>+20.5%</code></strong>，<strong>坚决 <code>0 票追高</code></strong>！低成本老股东可继续收息或趁 <code>+39.4%</code> 畸形溢价“持 A 换 H”，新资金务必死等回踩 <strong><code>6.80 — 7.80 元</code></strong>（股息 <code>4.10%—4.71%</code>）再左侧分批，跌至 <strong><code>≤ 6.80 元</code></strong> 才重锤；</p>
+</li>
+<li>
+<p><strong>H 股（<code>01398.HK</code>，现价 <code>7.885 港元</code>）</strong>：按 <code>0.855</code> 汇率折 <code>6.74 元</code>（<code>0.600x PB</code> / 税前股息 <code>4.75%</code> / 港股通个人扣 20% 税后 <code>3.80%</code>），较 V4 拆骨保底仍具折价安全垫，且距新买点上限 <strong><code>7.40 港元</code></strong> 仅差 <code>+6.6%</code>。<strong>内地免税险资/机构</strong>可保留底仓收息，<strong>港股通个人投资者</strong>不必急于追在 <code>7.885 港元</code>，耐心等回踩 <strong><code>6.40 — 7.40 港元</code></strong>（税前息 <code>5.06%—5.85%</code> / 税后 <code>4.05%—4.68%</code>）分批建仓、<strong><code>≤ 6.40 港元</code></strong> 闭眼重锤，未来若 A/H 溢价收窄至 <code>&lt; +18%</code> 时再顺手 H 换 A 兑现价差并拿回免税特权！</p>
+</li>
+</ul>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -4607,7 +5232,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《工商银行(601398.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/工商银行(601398.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《工商银行(601398.SH/01398.HK) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/工商银行(601398.SH/01398.HK) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4804,6 +5429,553 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
