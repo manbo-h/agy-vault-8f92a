@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>比亚迪 深度投研全集</title>
+<title>比亚迪(002594.SZ_01211.HK) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">比亚迪 深度投研全集</div>
+    <div class="report-title">比亚迪(002594.SZ_01211.HK) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-22</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -897,6 +1355,7 @@
 <p><strong>报告基准日</strong>：2026年11月11日 ｜ <strong>最新财报锚点</strong>：2025年年度报告 &amp; 2026年第三季度报告（及1—10月产销快报）
 <strong>最新股本与市值基准</strong>：总股本 <strong>91.17 亿股</strong>（2025中期“10送8转12”后）｜A股收盘价 <strong>84.88 元/股</strong>｜全A同权总市值 <strong>7,738.68 亿元</strong>（A+H约7,600亿元）｜标准 <strong>True EV 7,892.31 亿元</strong>
 <strong>体例说明</strong>：本报告由【阶段一：全景基本面八步底座】、【阶段二：追问模块 A—F 单点微创解剖】与【终章模块 G：四位传奇投资大师闭门圆桌会】无缝合卷而成，全篇随身内嵌查理·芒格（Charlie Munger）毒舌旁批。</p>
+<p><strong>⚔️ 【2026-11-22 V4 终审裁决置顶声明（以文末「V4 单一真相区」为准）】</strong>：本原稿 V1 版本（2026-11-11）已于 <strong>2026-11-22</strong> 完成巨潮原版 PDF（<code>26Q3 1225641442.PDF</code> / <code>26H1 1225531835.PDF</code> / <code>25AR 1225045351.PDF</code>）逐页法医验真、独立红方盲审做空及 V4 三道防滑跪铁闸终审，定级 <strong><code>REVISED（核心估值与买点全面重构）</code></strong>。核心硬修正如下：① <strong>纠偏 V1 漏债 <code>946.05 亿</code></strong>（26Q3 显性含租债实为 <code>1,056.37 亿</code> + 超短融 <code>50.50 亿</code> + 6–12 个月信托伪永续债 <code>170.81 亿</code> = 全口径真债 <strong><code>1,277.68 亿</code></strong>，扣可动用现金+理财 <code>705.17 亿</code> 并加回少数股东 <code>127.46 亿</code> 后，<code>ev_delta</code> 硬上修至 <strong><code>+699.97 亿元</code></strong>；同时核实表内尚有 <code>284.15 亿</code> 定期存单兜底营运流动性）；② <strong>挤干 OE 水分与分红错录</strong>：认领 <code>26H1</code> 国内汽车 <code>-33.62%</code>、研发资本化率跳升至 <code>19.24%</code>、递延收益净抽血及 <code>2025</code> 分红暴砍 <code>-73%</code>（实派 <strong><code>0.358 元/股</code></strong>），同步反杀空头忽略 9M26 异常汇兑损失（<code>~68 亿</code>）、无视 26Q3/10月海外翻倍拐点与全球第一储能业务及把 <code>CapEx &gt; D&amp;A</code> 永久化的三重悲观叠加，将合并无杠杆常态 <code>Owner Earnings</code> 由 <code>640 → 780 亿</code> 硬重校为 <strong><code>380.0 → 480.0 亿元/年</code></strong>；③ <strong>A/H 严厉分化裁决（2026-11-22，<code>1 港元 = 0.855 元</code>）</strong>：<strong>A 股（<code>79.68 元</code> / True EV <code>7,964.55 亿</code>）较 H 股（<code>62.35 港元 = 53.31 元</code> / True EV <code>5,560.28 亿</code>）溢价高达 <code>+49.47%</code></strong>，严苛 EV 常态回报仅 <code>4.77%</code>、TTM 股息仅 <code>0.45%</code>，<strong>A 股触发红牌否决（<code>veto_a=true</code>，严禁追高！等回归 <code>46.00—54.00 元</code> / 重锤 <code>≤ 46.00 元</code>）</strong>；<strong>H 股（<code>62.35 港元</code> / PB <code>1.95x</code> 贴近 52 周低 <code>61.90 港元</code>）</strong> 严苛回报 <code>6.83%</code>（达产 <code>8.63%</code>），<strong>退守观望等小幅回踩 <code>50.00—58.00 港元</code> 分批建底仓、<code>≤ 50.00 港元</code> 左侧重锤</strong>！下文中原模块 A—F 保留初稿研究脉络，所有最终财务口径、估值锚、A/H 买点及圆桌投票<strong>一律以模块 G 上方【V4 终审裁决实录（单一真相区）】为准</strong>。</p>
 </blockquote>
 <hr/>
 <h1 id="_1">阶段一：全景基本面八步底座（含段旁芒格批注）</h1>
@@ -923,18 +1382,20 @@
 </li>
 <li>
 <p><strong>手机部件、组装及其他产品（现金流稳定器与 AI 算力新触角，营收占比约 20%）</strong>：</p>
-</li>
-<li>
-<p>主要由持股 65.76% 的港股上市子公司<strong>比亚迪电子（00285.HK）</strong>承载。2025 年分部营收 1,552.37 亿元（占比 19.31%），毛利率 <strong>6.29%</strong>；2026 年上半年实现营收 694.05 亿元（占比 20.13%）。</p>
+<ul>
+<li>主要由持股 65.76% 的港股上市子公司<strong>比亚迪电子（00285.HK）</strong>承载。2025 年分部营收 1,552.37 亿元（占比 19.31%），毛利率 <strong>6.29%</strong>；2026 年上半年实现营收 694.05 亿元（占比 20.13%）。</li>
+</ul>
 </li>
 <li>
 <p><strong>真实协同关系</strong>：外行常嫌弃这块业务拉低了集团合并毛利率，但内行看门道——第一，它背靠苹果（iPad 组装及钛合金手机结构件主力供应商，2023 年底斥资 158 亿元收购捷普成都/无锡基地后切入苹果核心金属件腹地）与安卓巨头，每年稳定贡献 35 亿—45 亿元净利润且资产周转极快；第二，它在精密注塑、金属CNC、热管理液冷与智能座舱域控制器上的大规模制造能力，直接反哺了比亚迪汽车的电子电气架构（汽车智能座舱、热管理模块、智驾域控大量由比亚迪电子内供）；第三，2025—2026 年其切入英伟达（NVIDIA）AI 服务器液冷模组、高压电源与数据中心机柜供应链，正在打开高毛利企业级硬件空间。</p>
 </li>
 <li>
 <p><strong>结算模式与渠道账期</strong>：</p>
-</li>
+<ul>
 <li>下游终端对经销商及直营客户严格执行<strong>“先款后货、预收定金”</strong>。截至 2026 年三季度末，公司账面<strong>合同负债（主要为预收购车款及海外订单定金）暴增至 929.46 亿元，较年初（514.71 亿元）狂增 80.58%</strong>，显示在手未交付订单极其饱满。</li>
 <li>对上游供应商，过去高度依赖自建供应链金融凭证“迪链”（账期往往达 180—270 天）；自 2025 年下半年起，响应国家《保障中小企业款项支付条例》与中汽协 60 天账期倡议，公司主动停减非标电子凭证、转向合规商业承兑/银行承兑汇票及现金结算（2026 年三季度末应付票据达 788.63 亿元，较年初增长 251%），正在经历从“极限占款杠杆”向“规范信用账期”的良性过渡。</li>
+</ul>
+</li>
 </ul>
 <h3 id="2">2. 产业周期时钟与“寒冬博弈身位”</h3>
 <p>当前全球新能源汽车行业正处于<strong>“国内产能过剩中后段惨烈出清、海外渗透率早期爆发与贸易壁垒博弈交织”</strong>的周期阶段：</p>
@@ -1249,9 +1710,11 @@
 </tbody>
 </table></div>
 <div class="annotated-row"><div class="main-col"><ul>
-<li><strong>深度解读 2025—2026Q3 自由现金流转负的真实账本</strong>：</li>
 <li>
-<p>看上面这张表，最刺眼的数字无疑是 <strong>2025 年自由现金流净流出 976.72 亿元</strong> 以及 <strong>2026 年前三季度净流出 329.09 亿元</strong>。很多肤浅的评论据此惊呼“比亚迪现金流断裂了”，但只要拆开报表附注，真相一目了然：</p>
+<p><strong>深度解读 2025—2026Q3 自由现金流转负的真实账本</strong>：</p>
+<ul>
+<li>看上面这张表，最刺眼的数字无疑是 <strong>2025 年自由现金流净流出 976.72 亿元</strong> 以及 <strong>2026 年前三季度净流出 329.09 亿元</strong>。很多肤浅的评论据此惊呼“比亚迪现金流断裂了”，但只要拆开报表附注，真相一目了然：</li>
+</ul>
 </li>
 <li>
 <p><strong>分子端（OCF 波动）</strong>：2022—2024 年比亚迪 OCF 高达 1,300 亿—1,697 亿元，很大程度上包含了销量翻倍带来的“迪链”无息应付账款净增加额（每年滚存数百亿占款）。2025 年公司一方面主动压缩“迪链”规模、缩短供应商账期（一次性挤出历史应付账款泡沫），另一方面因海外销量突破百万辆，在途海运整车及海外备货导致<strong>存货在 2026 年三季度末攀升至 2,215.78 亿元（较年初激增 60.08%）</strong>。即便在“主动还供应商旧账 + 海外暴增备货占款”的双重挤压下，2025 年 OCF 仍净流入 591.36 亿元，<strong>2026 年前三季度 OCF 更同比大增 33.36% 至 544.70 亿元</strong>，说明主业造血极其強悍！</p>
@@ -1297,8 +1760,10 @@
 </li>
 <li>
 <p><strong>第三类：维持存量国内千万级产线模具更新、环保安全与研发试验场的“防御性开支”（占比约 15%）</strong>：</p>
-</li>
+<ul>
 <li>国内西安（年产超百万辆）、合肥长丰、郑州航空港、深汕特别合作区四大超级整车基地已全面建成达产，当前国内整车厂房基建已进入尾声，存量开支主要为新车型冲压模具更换、全地形赛车场/极端气候试验室及产线智能化改造。</li>
+</ul>
+</li>
 </ul>
 <h3 id="2_3">2. 研发真实投向与技术/商业模式的动态跃迁</h3>
 <ul>
@@ -1379,10 +1844,12 @@
 </ul>
 <h3 id="2215">暗礁二：供应链“去迪链化”规范后的营运资金重构与 2,215 亿高存货周转考验</h3>
 <div class="annotated-row"><div class="main-col"><ul>
-<li><strong>客观事实依据</strong>：</li>
-<li>过去比亚迪长期维持超千亿“負营运资金（Negative Working Capital）”奇观，靠的是“迪链”电子债权凭证对上游供应商长达 6—9 个月的无息占款。2025 年下半年起，受国家清理拖欠中小企业账款专项监管与行业 60 天账期规范约束，比亚迪主动缩减“迪链”、改用合规票据与现金支付，直接导致 2025 年经营现金流净额同比下降 55.69% 至 591.36 亿元。</li>
 <li>
-<p>与此同时，随着海外战线拉长（海运船期往返长达 45—60 天、海外各国港口及直营/经销库存储备增加），截至 2026 年 9 月 30 日，公司<strong>账面存货飙升至 2,215.78 亿元（较年初增长 60.08%）</strong>，货币资金从年初的 754.25 亿元降至 309.88 亿元（主要拿去还了近 200 亿短债并支付建厂款）。</p>
+<p><strong>客观事实依据</strong>：</p>
+<ul>
+<li>过去比亚迪长期维持超千亿“負营运资金（Negative Working Capital）”奇观，靠的是“迪链”电子债权凭证对上游供应商长达 6—9 个月的无息占款。2025 年下半年起，受国家清理拖欠中小企业账款专项监管与行业 60 天账期规范约束，比亚迪主动缩减“迪链”、改用合规票据与现金支付，直接导致 2025 年经营现金流净额同比下降 55.69% 至 591.36 亿元。</li>
+<li>与此同时，随着海外战线拉长（海运船期往返长达 45—60 天、海外各国港口及直营/经销库存储备增加），截至 2026 年 9 月 30 日，公司<strong>账面存货飙升至 2,215.78 亿元（较年初增长 60.08%）</strong>，货币资金从年初的 754.25 亿元降至 309.88 亿元（主要拿去还了近 200 亿短债并支付建厂款）。</li>
+</ul>
 </li>
 <li>
 <p><strong>企业的缓冲筹码与极限抗压边界</strong>：</p>
@@ -1402,20 +1869,28 @@
 <h3 id="2-4">2. 未来两到三年必看的 4 个可量化、可证伪“硬核验证路标”</h3>
 <ol>
 <li>
-<p><strong>【海外基地转固爬坡与出口毛利路标（验证资本开支转化率）】</strong>：
-   * 紧盯 <strong>2026 年 Q4 匈牙利塞格德工厂是否如期投产</strong>，以及 <strong>2027 年巴西（30 万产能）、印尼（15 万产能）、泰国（15 万产能）三大基地的综合产能利用率能否跨过 65% 盈亏平衡线</strong>；同时核查年报/半年报中<strong>境外业务毛利率能否稳守在 18.5%—20% 以上</strong>，全口径海外年销量在 2026 年突破 180 万辆后能否向 220 万—250 万辆稳步迈进。</p>
+<p><strong>【海外基地转固爬坡与出口毛利路标（验证资本开支转化率）】</strong>：</p>
+<ul>
+<li>紧盯 <strong>2026 年 Q4 匈牙利塞格德工厂是否如期投产</strong>，以及 <strong>2027 年巴西（30 万产能）、印尼（15 万产能）、泰国（15 万产能）三大基地的综合产能利用率能否跨过 65% 盈亏平衡线</strong>；同时核查年报/半年报中<strong>境外业务毛利率能否稳守在 18.5%—20% 以上</strong>，全口径海外年销量在 2026 年突破 180 万辆后能否向 220 万—250 万辆稳步迈进。</li>
+</ul>
 </li>
 <li>
-<p><strong>【高端品牌（腾势+方程豹+仰望）占比与单车盈利路标（验证技术溢价兑现度）】</strong>：
-   * 跟踪三大高端品牌合计销量占集团总销量的比重，能否从 2026 年前三季度的 <strong>13% 稳步提升至 15%—18% 以上</strong>（重点看方程豹钛 7、钛 9 与腾势 N9/Z9 系列的持续月销稳态，防“上市三个月脉冲后腰斩”），带动集团剔除比亚迪电子后的<strong>单车均价（ASP）止跌回升、单车归母净利稳守 7,500—9,000 元区间</strong>。</p>
+<p><strong>【高端品牌（腾势+方程豹+仰望）占比与单车盈利路标（验证技术溢价兑现度）】</strong>：</p>
+<ul>
+<li>跟踪三大高端品牌合计销量占集团总销量的比重，能否从 2026 年前三季度的 <strong>13% 稳步提升至 15%—18% 以上</strong>（重点看方程豹钛 7、钛 9 与腾势 N9/Z9 系列的持续月销稳态，防“上市三个月脉冲后腰斩”），带动集团剔除比亚迪电子后的<strong>单车均价（ASP）止跌回升、单车归母净利稳守 7,500—9,000 元区间</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>【自由现金流（FCF）转正拐点与存货周转红线（验证财务造血健康度）】</strong>：
-   * 重点核查 <strong>2026 年报及 2027 年各季报的“购建固定资产、无形资产支付的现金（CapEx）”是否如期从 2025 年 1,568 亿元的峰值回落至 1,000 亿—1,100 亿元常态区间</strong>，推动全口径<strong>自由现金流（OCF - CapEx）在 2026 全年或 2027 年重新恢复每年 300 亿—500 亿元以上的正向净流入</strong>；同时监控<strong>存货周转天数不得连续两个季度超过 105 天</strong>，现金分红率（或叠加回购注销）随着 CapEx 见顶能否重回 30% 以上。</p>
+<p><strong>【自由现金流（FCF）转正拐点与存货周转红线（验证财务造血健康度）】</strong>：</p>
+<ul>
+<li>重点核查 <strong>2026 年报及 2027 年各季报的“购建固定资产、无形资产支付的现金（CapEx）”是否如期从 2025 年 1,568 亿元的峰值回落至 1,000 亿—1,100 亿元常态区间</strong>，推动全口径<strong>自由现金流（OCF - CapEx）在 2026 全年或 2027 年重新恢复每年 300 亿—500 亿元以上的正向净流入</strong>；同时监控<strong>存货周转天数不得连续两个季度超过 105 天</strong>，现金分红率（或叠加回购注销）随着 CapEx 见顶能否重回 30% 以上。</li>
+</ul>
 </li>
 <li>
-<p><strong>【欧盟 MIP 最低限价执行与固态电池商业化节点（验证外部政策与远期技术）】</strong>：
-   * 跟踪中欧“最低进口限价（MIP）”落地的具体车型核定清单及匈牙利工厂欧盟原产地认证进展（防止欧盟发起二次反规避调查）；技术端紧盯 <strong>2027 年全固态电池小批量装车实测循环寿命与成本数据</strong>，以及“天神之眼”城区 NOA 在 15 万—25 万元车型的真实用户激活率。</p>
+<p><strong>【欧盟 MIP 最低限价执行与固态电池商业化节点（验证外部政策与远期技术）】</strong>：</p>
+<ul>
+<li>跟踪中欧“最低进口限价（MIP）”落地的具体车型核定清单及匈牙利工厂欧盟原产地认证进展（防止欧盟发起二次反规避调查）；技术端紧盯 <strong>2027 年全固态电池小批量装车实测循环寿命与成本数据</strong>，以及“天神之眼”城区 NOA 在 15 万—25 万元车型的真实用户激活率。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -1618,13 +2093,17 @@
 <hr/>
 <h3 id="vs">三、 审视消化能力：雪中送炭的出海/高端产能 vs 结构性承压的国内传统产线</h3>
 <div class="annotated-row"><div class="main-col"><p>将比亚迪当前的产能版图与订单蓄水池对齐，截至2026年9月30日，公司账面<strong>合同负债高达 929.46亿元（同比暴增 80.58%）</strong>，<strong>存货达 2,215.78亿元（同比增长 60.08%）</strong>。如此庞大的预收账款与在途/备货存货，叠加 2026年前10月累计销量 <strong>362.17万辆</strong>（其中前10月海外销量高达 <strong>150.7万辆，同比激增 92%，占总销量比重跃升至 41.6%以上</strong>；前三季度腾势、方程豹、仰望三大高端品牌销量 <strong>41万辆，同比增长 75%，占比超 13%</strong>），我们可以对存量与新增产能的真实消化能力做出冷酷切分：</p><ul>
-<li><strong>第一类：雪中送炭、供不应求的“瓶颈突破型产能”</strong>
-  1. <strong>海外四大属地化整车基地（合计 75万—90万辆）与 8艘自建滚装船队（年运力 70万—80万辆）</strong>：2026年前10月比亚迪海外销量已达 150.7万辆，全年海外销量正稳步冲刺 <strong>180万—190万辆</strong> 大关（较2025年全年的 104.96万辆净增约 80万辆）。目前海外销量的 80% 以上仍依赖国内基地生产后通过滚装船跨洋出口，这也是三季报存货暴增至 2,215.78亿元的核心原因（数十万辆出口车处于长达 30—50 天的海上漂流及海外港口清关在途状态）。因此，巴西卡马萨里、印尼苏邦、泰国罗勇及即将量产的匈牙利塞格德工厂，绝非盲目扩产，而是承接存量 180万辆级海外订单、置换高关税贸易出口的“救命产能”，叠加 8艘自建滚装船满负荷运转，消化确定性极高。</li>
+<li><strong>第一类：雪中送炭、供不应求的“瓶颈突破型产能”</strong><ol>
+<li><strong>海外四大属地化整车基地（合计 75万—90万辆）与 8艘自建滚装船队（年运力 70万—80万辆）</strong>：2026年前10月比亚迪海外销量已达 150.7万辆，全年海外销量正稳步冲刺 <strong>180万—190万辆</strong> 大关（较2025年全年的 104.96万辆净增约 80万辆）。目前海外销量的 80% 以上仍依赖国内基地生产后通过滚装船跨洋出口，这也是三季报存货暴增至 2,215.78亿元的核心原因（数十万辆出口车处于长达 30—50 天的海上漂流及海外港口清关在途状态）。因此，巴西卡马萨里、印尼苏邦、泰国罗勇及即将量产的匈牙利塞格德工厂，绝非盲目扩产，而是承接存量 180万辆级海外订单、置换高关税贸易出口的“救命产能”，叠加 8艘自建滚装船满负荷运转，消化确定性极高。</li>
+</ol>
+</li>
 </ul><ol start="2">
 <li><strong>深汕二期及郑州/合肥高端车型与二代刀片电池产线</strong>：随着方程豹“钛系列”（钛7热销、钛9于11月9日作为第1900万辆新能源车下线）推动高端品牌单月销量站稳 5万—6万辆台阶，以及搭载 1000V 高压架构与第二代刀片电池的新车型订单积压（体现为 929.46亿元合同负债），高端定制总装线与新一代长刀/闪充电芯产线处于满负荷连轴转状态。</li>
 </ol><ul>
-<li><strong>第二类：面临结构性稼动率分流压力的“国内传统经济型产线”</strong>
-  1. <strong>国内 550万—600万辆存量名义产能的内部冷热不均</strong>：经过2021—2024年的狂飙突进，比亚迪在西安（超100万辆）、合肥（132万辆）、郑州（超120万辆）、长沙（60万辆）、常州（40万辆）、济南（30万辆）、抚州（30万辆）等国内基地的合计设计产能已逼近 <strong>580万辆</strong>。</li>
+<li><strong>第二类：面临结构性稼动率分流压力的“国内传统经济型产线”</strong><ol>
+<li><strong>国内 550万—600万辆存量名义产能的内部冷热不均</strong>：经过2021—2024年的狂飙突进，比亚迪在西安（超100万辆）、合肥（132万辆）、郑州（超120万辆）、长沙（60万辆）、常州（40万辆）、济南（30万辆）、抚州（30万辆）等国内基地的合计设计产能已逼近 <strong>580万辆</strong>。</li>
+</ol>
+</li>
 </ul><ol start="2">
 <li>
 <p><strong>国内内销增速放缓带来的产线分流</strong>：用2026年前10月总销量 362.17万辆减去海外销量 150.7万辆，可知<strong>前10月比亚迪国内市场销量约为 211.47万辆</strong>（全年国内销量预计在 260万—270万辆区间，较2025年国内销量 355.28万辆出现明显的主动结构调整与增速放缓）。即便加上由国内基地生产并装船出口的约 130万—140万辆整车，2026年国内整车基地的实际总产量约为 <strong>400万—410万辆</strong>，对应国内 580万辆名义产能的整体平均稼动率已从早期的 95%+ 回落至 <strong>70%—72%</strong> 左右。</p>
@@ -1641,24 +2120,32 @@
 <hr/>
 <h3 id="_13">四、 排查落地阻力：海外合规暗礁与国内兆瓦闪充的物理瓶颈</h3>
 <div class="annotated-row"><div class="main-col"><p>重资产撒出去只是第一步，要让这 791.81亿元在建工程顺利转化为利润，比亚迪正迎面撞上海内外最坚硬的四块“铁板”：</p><ol>
-<li><strong>欧盟《外国补贴条例（FSR）》调查与 50%—60% 原产地本地化率的双鬼拍门</strong>
-   - <strong>FSR 反补贴合规审查</strong>：为绕开欧盟对中国纯电动车加征的 17.0% 反补贴税（叠加 10% 基础关税合计 27.0%），比亚迪斥资 40亿欧元落子匈牙利塞格德。然而欧盟委员会已动用《外国补贴条例（FSR）》武器，重点核查该项目是否获得了中国政策性金融机构低息信贷、内部关联方低于市场价的设备/电池转让，以及匈牙利欧尔班政府提供的巨额直接财政补贴与土地税费减免。若欧盟最终裁定构成“扭曲欧盟内部市场的外国补贴”，比亚迪可能被迫接受退还部分补贴、承诺最低限价或限制产能上限等严苛救济措施。</li>
+<li><strong>欧盟《外国补贴条例（FSR）》调查与 50%—60% 原产地本地化率的双鬼拍门</strong><ul>
+<li><strong>FSR 反补贴合规审查</strong>：为绕开欧盟对中国纯电动车加征的 17.0% 反补贴税（叠加 10% 基础关税合计 27.0%），比亚迪斥资 40亿欧元落子匈牙利塞格德。然而欧盟委员会已动用《外国补贴条例（FSR）》武器，重点核查该项目是否获得了中国政策性金融机构低息信贷、内部关联方低于市场价的设备/电池转让，以及匈牙利欧尔班政府提供的巨额直接财政补贴与土地税费减免。若欧盟最终裁定构成“扭曲欧盟内部市场的外国补贴”，比亚迪可能被迫接受退还部分补贴、承诺最低限价或限制产能上限等严苛救济措施。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>原产地规则（Rules of Origin）的成本反噬</strong>：根据欧盟海关原产地认定硬门槛，塞格德工厂绝不能只做 SKD/CKD 大件组装，其<strong>欧盟本土增加值率必须超过 50%—60%</strong>（且电芯与电池包需逐步实现欧洲本地化生产）才能合法获得“欧盟原产”身份免除反补贴税。但欧洲本土汽车零部件（如钢材、轮胎、内饰、玻璃、线束）采购价格普遍比中国国内高出 <strong>25%—35%</strong>，且匈牙利熟练产业工人短缺、能源成本高昂，这将大幅侵蚀塞格德工厂早期的毛利率空间。</li>
 </ul><ol start="2">
-<li><strong>巴西卡马萨里工厂的劳工合规风暴、强势工会与本土供应链荒漠</strong>
-   - <strong>劳工与ESG合规创伤</strong>：在卡马萨里工厂紧锣密鼓推进四大工艺土建期间，其外包建筑承包商（金匠建设）曾因中国籍劳工签证类别不符、加班工时超标、宿舍卫生条件及护照集中保管问题，遭到巴西劳工检察院（MPT）与联邦警察的高调突击调查并勒令停工整改。这一风波不仅导致卡马萨里工厂全工艺贯通进度比原计划推迟了近半年（初期只能以 SKD 半散件组装过渡），更让比亚迪在拉美置于国际劳工组织与西方媒体的放大镜之下。</li>
+<li><strong>巴西卡马萨里工厂的劳工合规风暴、强势工会与本土供应链荒漠</strong><ul>
+<li><strong>劳工与ESG合规创伤</strong>：在卡马萨里工厂紧锣密鼓推进四大工艺土建期间，其外包建筑承包商（金匠建设）曾因中国籍劳工签证类别不符、加班工时超标、宿舍卫生条件及护照集中保管问题，遭到巴西劳工检察院（MPT）与联邦警察的高调突击调查并勒令停工整改。这一风波不仅导致卡马萨里工厂全工艺贯通进度比原计划推迟了近半年（初期只能以 SKD 半散件组装过渡），更让比亚迪在拉美置于国际劳工组织与西方媒体的放大镜之下。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>属地用工与关税阶梯跳升压力</strong>：巴西拥有全球最严苛的《统一劳工法（CLT）》和极具战斗力的巴伊亚州金属工人工会（Sindicato dos Metalúrgicos），企业不仅要承担高达基本工资 70%—80% 的法定福利与社保附加费，还面临频繁的罢工谈判风险；与此同时，巴西本土几乎没有现成的磷酸铁锂正极、隔膜与车规级电控供应链，而巴西政府正按时间表将电动车整车及 SKD/CKD 散件进口关税阶梯式上调至 <strong>35%</strong>，倒逼比亚迪必须在南美从零扶持本土供应商集群。</li>
 </ul><ol start="3">
 <li>
-<p><strong>印尼苏邦工厂的 TKDN 本土化率硬约束</strong>
-   - 印尼政府将享受 0% 进口关税和奢侈品销售税（PPnBM）减免的电动汽车 <strong>TKDN（国内组件本地化率）法定门槛锁定在 40%，并规定自 2027年起向 60% 刚性跃升</strong>。由于印尼本土虽有丰富的红土镍矿，但主打的是三元前驱体冶炼，缺乏比亚迪刀片电池所需的磷酸铁锂（LFP）产业链及精密汽车电子配套，比亚迪苏邦工厂在 2026年9月落成后，如何在 12—18 个月内将本地化采购比例拉升至 60%，是决定其在东南亚能否守住价格优势的关键考题。</p>
+<p><strong>印尼苏邦工厂的 TKDN 本土化率硬约束</strong></p>
+<ul>
+<li>印尼政府将享受 0% 进口关税和奢侈品销售税（PPnBM）减免的电动汽车 <strong>TKDN（国内组件本地化率）法定门槛锁定在 40%，并规定自 2027年起向 60% 刚性跃升</strong>。由于印尼本土虽有丰富的红土镍矿，但主打的是三元前驱体冶炼，缺乏比亚迪刀片电池所需的磷酸铁锂（LFP）产业链及精密汽车电子配套，比亚迪苏邦工厂在 2026年9月落成后，如何在 12—18 个月内将本地化采购比例拉升至 60%，是决定其在东南亚能否守住价格优势的关键考题。</li>
+</ul>
 </li>
 <li>
-<p><strong>国内“闪充中国”1500kW 兆瓦闪充桩遭遇的市政配电网容量极限</strong>
-   - 2025—2026年比亚迪高调发布全域 1000V 高压架构与单枪峰值功率 <strong>1500kW</strong> 的滑轨悬吊式 T 型兆瓦闪充桩（实现“5分钟充至70%、9分钟充至97%”）。然而在工程落地上，单枪 1500kW 意味着一座仅配备 4 把闪充枪的小型站点，其瞬时满负荷峰值功率就高达 <strong>4,500kW—6,000kW（4.5MW—6MW）</strong>——这相当于一整座大型商业综合体或 1,500 户城市居民小区的全部用电负荷！
-   - 当前中国绝大多数城市核心商圈与老旧高速公路服务区的 10kV 配电变压器余量仅在 <strong>630kVA—1,250kVA</strong> 之间，根本无法承受 1500kW 闪充桩哪怕单枪启动时的剧烈电流冲击。若向国家电网申请 10kV 乃至 35kV 专线扩容，不仅审批与破路施工周期长达 6—12 个月，且单站外线增容改造费用动辄高达 <strong>200万—400万元</strong>。为此，比亚迪被迫采取<strong>“光储充一体化（站内强配自研刀片电池储能柜作为电力缓冲池，闲时慢充蓄电、忙时与电网并网放电）”</strong>的“闪充站中站”方案。这虽然绕开了电网容量死结，但也直接把单座闪充站的固定资产投入推高至 <strong>150万—200万元以上</strong>，且面临城市地下车库消防审批禁令（储能柜不得入地库）与地面场地租金高昂的现实掣肘。</p>
+<p><strong>国内“闪充中国”1500kW 兆瓦闪充桩遭遇的市政配电网容量极限</strong></p>
+<ul>
+<li>2025—2026年比亚迪高调发布全域 1000V 高压架构与单枪峰值功率 <strong>1500kW</strong> 的滑轨悬吊式 T 型兆瓦闪充桩（实现“5分钟充至70%、9分钟充至97%”）。然而在工程落地上，单枪 1500kW 意味着一座仅配备 4 把闪充枪的小型站点，其瞬时满负荷峰值功率就高达 <strong>4,500kW—6,000kW（4.5MW—6MW）</strong>——这相当于一整座大型商业综合体或 1,500 户城市居民小区的全部用电负荷！</li>
+<li>当前中国绝大多数城市核心商圈与老旧高速公路服务区的 10kV 配电变压器余量仅在 <strong>630kVA—1,250kVA</strong> 之间，根本无法承受 1500kW 闪充桩哪怕单枪启动时的剧烈电流冲击。若向国家电网申请 10kV 乃至 35kV 专线扩容，不仅审批与破路施工周期长达 6—12 个月，且单站外线增容改造费用动辄高达 <strong>200万—400万元</strong>。为此，比亚迪被迫采取<strong>“光储充一体化（站内强配自研刀片电池储能柜作为电力缓冲池，闲时慢充蓄电、忙时与电网并网放电）”</strong>的“闪充站中站”方案。这虽然绕开了电网容量死结，但也直接把单座闪充站的固定资产投入推高至 <strong>150万—200万元以上</strong>，且面临城市地下车库消防审批禁令（储能柜不得入地库）与地面场地租金高昂的现实掣肘。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>物理定律和市政供电局从来不看车企的PPT发布会。当你向车主承诺“五分钟充满电”时，你其实是在承诺自己要在全中国成千上万个加油站旁边，自掏腰包建起一座座小型变电站和储能银行。</p></div></div></div></div>
 
@@ -1744,8 +2231,10 @@
 <hr/>
 <h3 id="_16">三、 跨越鸿沟的三道生死关卡</h3>
 <div class="annotated-row"><div class="main-col"><p>这三大新业务若要真正撑起比亚迪下一个十年的核心毛利池，必须硬闯以下三道最难跨的关卡：</p><ol>
-<li><strong>底层物理定律与工程成本关（针对固态电池、兆瓦闪充与端到端算力）</strong>
-   - <strong>硫化物全固态电池的“三座大山”</strong>：首先是<strong>固-固界面接触阻抗与体积膨胀失效</strong>——液态电解液能完美浸润电极颗粒，而全固态电解质与硅基负极在充放电时存在高达 15%—30% 的体积呼吸膨胀，极易产生微裂纹导致容量断崖衰减，必须在电池包外加装沉重的超高压力机械夹具（数兆帕至数十兆帕堆叠压力）；其次是<strong>化学毒性与环境严苛度</strong>——硫化物电解质一旦接触空气中的微量水分即反应生成剧毒且易燃的硫化氢（<span class="math-inline"><span class="math-text">H</span><sub>2</sub><span class="math-text">S</span></span>）气体，全套产线必须在露点低于 -40℃ 甚至 -50℃ 的极致干燥房或惰性气体密闭舱内运转，设备折旧与能耗是传统刀片电池产线的 3倍以上；最后是<strong>原材料成本死结</strong>——核心前驱体硫化锂（<span class="math-inline"><span class="math-text">Li</span><sub>2</sub><span class="math-text">S</span></span>）当前市场吨价仍高达百万元级，导致全固态电芯综合成本超过 <strong>2.0元/Wh</strong>，是比亚迪第二代液态磷酸铁锂刀片电池（约 <strong>0.30—0.35元/Wh</strong>）的 <strong>6倍</strong>！在二代刀片电池已经实现“9分钟充至97%、续航破1000公里、极寒-30℃仅需12分钟充满”的背景下，全固态电池极难在 2030年前算过液态刀片电池的经济账。</li>
+<li><strong>底层物理定律与工程成本关（针对固态电池、兆瓦闪充与端到端算力）</strong><ul>
+<li><strong>硫化物全固态电池的“三座大山”</strong>：首先是<strong>固-固界面接触阻抗与体积膨胀失效</strong>——液态电解液能完美浸润电极颗粒，而全固态电解质与硅基负极在充放电时存在高达 15%—30% 的体积呼吸膨胀，极易产生微裂纹导致容量断崖衰减，必须在电池包外加装沉重的超高压力机械夹具（数兆帕至数十兆帕堆叠压力）；其次是<strong>化学毒性与环境严苛度</strong>——硫化物电解质一旦接触空气中的微量水分即反应生成剧毒且易燃的硫化氢（<span class="math-inline"><span class="math-text">H</span><sub>2</sub><span class="math-text">S</span></span>）气体，全套产线必须在露点低于 -40℃ 甚至 -50℃ 的极致干燥房或惰性气体密闭舱内运转，设备折旧与能耗是传统刀片电池产线的 3倍以上；最后是<strong>原材料成本死结</strong>——核心前驱体硫化锂（<span class="math-inline"><span class="math-text">Li</span><sub>2</sub><span class="math-text">S</span></span>）当前市场吨价仍高达百万元级，导致全固态电芯综合成本超过 <strong>2.0元/Wh</strong>，是比亚迪第二代液态磷酸铁锂刀片电池（约 <strong>0.30—0.35元/Wh</strong>）的 <strong>6倍</strong>！在二代刀片电池已经实现“9分钟充至97%、续航破1000公里、极寒-30℃仅需12分钟充满”的背景下，全固态电池极难在 2030年前算过液态刀片电池的经济账。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>1500V 碳化硅与电网配储折旧关</strong>：全域 1000V 架构要求车载主逆变器、OBC 及直流快充模块全面升级至耐压 <strong>1500V 甚至 1700V 的车规级碳化硅（SiC）MOSFET 芯片</strong>，高耐压晶圆外延良率远低于常规 800V 平台所用的 1200V 芯片；而在场站端，每座“闪充中国”站点标配的储能缓冲柜若按每天循环 1.5 次计算，单度电充电服务费至少需收 <strong>0.60—0.80元/kWh</strong> 才能覆盖设备折旧，但在当前向车主免费赠送闪充权益的推广期，这笔账完全由比亚迪买单。</p>
@@ -1755,12 +2244,16 @@
 </li>
 </ul><ol start="2">
 <li>
-<p><strong>高端豪华心智破圈与产品定义关（针对腾势、方程豹与仰望）</strong>
-   - <strong>“工程师技术自嗨”与“高净值圈层情绪价值”的错位</strong>：复盘腾势 N7 早期因前脸“胡须灯”设计与智驾交付延迟而折戟、以及方程豹豹5在上市大半年后突然官降 5万元（从 28.98万起直降至 23.98万起）引发老车主集体拉横幅维权，深刻暴露出比亚迪冲击 30万—100万元高端市场的最大软肋——<strong>习惯于用“价格战+机械参数堆料（如原地掉头、应急浮水、三电机千匹马力）”去解构豪华车市场</strong>。然而，中国 40万元以上豪华车买家的核心痛点是“品牌尊贵感、保值率预期、顶级座舱审美与零接管的高阶智驾体验”。如何戒掉“卖不动就官降背刺老车主”的性价比肌肉记忆，建立稳定的豪华品牌价格体系与圈层文化，是比造出四电机底盘难得多的管理大考。</p>
+<p><strong>高端豪华心智破圈与产品定义关（针对腾势、方程豹与仰望）</strong></p>
+<ul>
+<li><strong>“工程师技术自嗨”与“高净值圈层情绪价值”的错位</strong>：复盘腾势 N7 早期因前脸“胡须灯”设计与智驾交付延迟而折戟、以及方程豹豹5在上市大半年后突然官降 5万元（从 28.98万起直降至 23.98万起）引发老车主集体拉横幅维权，深刻暴露出比亚迪冲击 30万—100万元高端市场的最大软肋——<strong>习惯于用“价格战+机械参数堆料（如原地掉头、应急浮水、三电机千匹马力）”去解构豪华车市场</strong>。然而，中国 40万元以上豪华车买家的核心痛点是“品牌尊贵感、保值率预期、顶级座舱审美与零接管的高阶智驾体验”。如何戒掉“卖不动就官降背刺老车主”的性价比肌肉记忆，建立稳定的豪华品牌价格体系与圈层文化，是比造出四电机底盘难得多的管理大考。</li>
+</ul>
 </li>
 <li>
-<p><strong>地缘贸易高墙与北美云巨头供应链壁垒关（针对全球大储与 AI 服务器）</strong>
-   - <strong>美国 FEOC 排斥与 301 关税围剿</strong>：美国是全球毛利率最高（普遍超 30%）的大型储能市场，但随着美国《通胀削减法案（IRA）》对“受关注外国实体（FEOC）”限制条款收紧，以及美国对中国储能电池加征的 301 关税从 7.5% 大幅跃升至 <strong>25% 乃至未来更高水平</strong>，中国产储能柜直供美国电网的盈利空间被剧烈压缩，迫使比亚迪必须加速在中东、欧洲、拉美及澳新市场开辟增量，或通过海外电池厂曲线合规。</p>
+<p><strong>地缘贸易高墙与北美云巨头供应链壁垒关（针对全球大储与 AI 服务器）</strong></p>
+<ul>
+<li><strong>美国 FEOC 排斥与 301 关税围剿</strong>：美国是全球毛利率最高（普遍超 30%）的大型储能市场，但随着美国《通胀削减法案（IRA）》对“受关注外国实体（FEOC）”限制条款收紧，以及美国对中国储能电池加征的 301 关税从 7.5% 大幅跃升至 <strong>25% 乃至未来更高水平</strong>，中国产储能柜直供美国电网的盈利空间被剧烈压缩，迫使比亚迪必须加速在中东、欧洲、拉美及澳新市场开辟增量，或通过海外电池厂曲线合规。</li>
+</ul>
 </li>
 </ol><ul>
 <li><strong>北美 CSP 云巨头的供应链铁幕</strong>：在 AI 算力服务器与液冷领域，全球 70% 以上的英伟达 GB200/GB300 高算力机柜采购集中于微软、Meta、谷歌、亚马逊四大北美云服务商（CSP）。出于地缘政治与供应链安全考量，北美 CSP 将核心整机柜 JDM 代工份额牢牢锁在<strong>工业富联（鸿海系）、广达、纬创、美超微</strong>等台美系厂商手中。比亚迪电子虽与英伟达保持紧密技术合作，但在切入海外顶级 CSP 核心机柜白名单时面临天然的地缘玻璃天花板，短期内主要依赖国内互联网大厂（字节、阿里、腾讯）、运营商及比亚迪集团自建智驾算力中心消化产能。</li>
@@ -1785,10 +2278,12 @@
 </ul>
 <h4 id="2-megapack">2. 电池与全球大储赛道：直面宁德时代（神行/天恒）与特斯拉 Megapack</h4>
 <ul>
-<li><strong>竞争格局推演</strong>：</li>
-<li>在<strong>车用动力电池与补能端</strong>，面对宁德时代通过“神行超充电池”与“骁遥增混电池”向各大车企普及 4C—6C 快充，比亚迪凭借<strong>第二代刀片电池 + 全域 1000V 架构 + 1500kW 兆瓦闪充</strong>，在补能速度上实现了对三元锂电池的反向降维打击，彻底锁死了磷酸铁锂（LFP/LMFP）路线在 2030年前的统治地位，保证了比亚迪整车垂直一体化的成本优势不被瓦解。</li>
 <li>
-<p>在<strong>全球大型储能（BESS）端</strong>，相较于特斯拉 Megapack（电芯需外采宁德时代或自建艰难爬坡，系统溢价极高但产能受限）和阳光电源（擅长 PCS 变流器与系统集成，但电芯外采），比亚迪与宁德时代是全球仅有的两家兼具<strong>“百GWh级超低成本电芯自造 + 构网型系统集成（MC Cube / 浩瀚）”</strong>全栈能力的巨头。在中东、欧洲、拉美及亚太新兴市场的新能源强制配储浪潮中，比亚迪储能稳居全球前二寡头之列。</p>
+<p><strong>竞争格局推演</strong>：</p>
+<ul>
+<li>在<strong>车用动力电池与补能端</strong>，面对宁德时代通过“神行超充电池”与“骁遥增混电池”向各大车企普及 4C—6C 快充，比亚迪凭借<strong>第二代刀片电池 + 全域 1000V 架构 + 1500kW 兆瓦闪充</strong>，在补能速度上实现了对三元锂电池的反向降维打击，彻底锁死了磷酸铁锂（LFP/LMFP）路线在 2030年前的统治地位，保证了比亚迪整车垂直一体化的成本优势不被瓦解。</li>
+<li>在<strong>全球大型储能（BESS）端</strong>，相较于特斯拉 Megapack（电芯需外采宁德时代或自建艰难爬坡，系统溢价极高但产能受限）和阳光电源（擅长 PCS 变流器与系统集成，但电芯外采），比亚迪与宁德时代是全球仅有的两家兼具<strong>“百GWh级超低成本电芯自造 + 构网型系统集成（MC Cube / 浩瀚）”</strong>全栈能力的巨头。在中东、欧洲、拉美及亚太新兴市场的新能源强制配储浪潮中，比亚迪储能稳居全球前二寡头之列。</li>
+</ul>
 </li>
 <li>
 <p><strong>最终定性</strong>：</p>
@@ -1996,11 +2491,11 @@
 <li>
 <p><strong>比亚迪的“全链利润内循环”</strong>：比亚迪是全球唯一实现 <strong>“刀片电池电芯 + 电机电控（八合一电驱） + 功率半导体（车规级 IGBT/SiC 碳化硅模块） + 专用混动发动机（第五代 DM 热效率 46.06%） + 冲压模具与整车总装”</strong> 逾 <strong>75% 价值量自研自产</strong> 的车企。
   我们来算一笔精确的单车硬账：在一台售价 13.5 万元的新能源车中，动力电池包成本约 3.2 万元，电驱、电控、IGBT、车灯、线束、座椅及热管理模组等核心零部件成本约 3.8 万元（合计内部自供零部件约 7.0 万元）。</p>
-</li>
-<li>
-<p>如果向外部采购（如宁德时代+大陆/博世），供应商按平均 <strong>20% 毛利率（扣除供应商自身研发与管理费用后约 10%—12% 净利率）</strong> 定价，车企需支付 7.0 万元采购款；</p>
-</li>
+<ul>
+<li>如果向外部采购（如宁德时代+大陆/博世），供应商按平均 <strong>20% 毛利率（扣除供应商自身研发与管理费用后约 10%—12% 净利率）</strong> 定价，车企需支付 7.0 万元采购款；</li>
 <li>而在比亚迪内部，弗迪电池、弗迪动力、弗迪科技、比亚迪半导体按内部成本协同供货，将原本属于上游 Tier-1 供应商的 <strong>约 8,000 元—10,000 元/辆的制造毛利</strong> 全额截留在上市公司合并报表内！折算到 13.5 万元的单车售价上，仅 <strong>垂直一体化消除双重加价（Double Marginalization）</strong> 一项，就凭空增厚了比亚迪整车业务 <strong>6.0%—7.4% 的毛利率</strong>！</li>
+</ul>
+</li>
 </ul>
 <h4 id="2-30-45-40">2. 第二层（结构性跃迁，贡献约 +3.0% 至 +4.5% 毛利率优势）：高溢价海外出口占比突破 40% 与高端矩阵放量</h4>
 <ul>
@@ -2105,10 +2600,12 @@
 </li>
 <li>
 <p><strong>剥离进攻性扩张开支，实算“维持存量竞争力必需的防御性 CapEx”</strong>：</p>
-</li>
+<ul>
 <li>2025 年比亚迪购建固定资产、无形资产和其他长期资产支付的现金（总 CapEx）高达 <strong>1,568.08 亿元</strong>；而到了 <strong>2026 年前三季度，总 CapEx 已显著回落至 873.79 亿元（同比大幅下降 24.0%）</strong>，预示着国内产能建设高峰已彻底过去。</li>
 <li>在当前每年 1,100 亿—1,568 亿元的总 CapEx 中，<strong>约 75%—80% 属于典型的“进攻性扩张资本开支（Growth CapEx）”</strong>：包括在巴西、匈牙利、印尼、泰国、乌兹别克斯坦平地新建海外整车基地，斥巨资建造 8 艘 7000—9200 车位远洋滚装船队，扩建二代刀片电池、储能超级工厂与碳化硅晶圆厂，以及铺设全国兆瓦闪充网络。</li>
 <li>如果假设比亚迪从明天起停止扩张产能规模，仅仅为了<strong>维持现有 460 万—500 万辆存量产能的长期竞争力不萎缩</strong>，每年必需支出的<strong>防御性资本开支（Maintenance CapEx）</strong>包含以下三块刚性支出：</li>
+</ul>
+</li>
 </ul>
 <ol>
 <li>
@@ -2343,9 +2840,11 @@
 </li>
 <li>
 <p><strong>造血中枢跃迁量级</strong>：当目前账上这 <strong>791.81 亿元在建工程</strong> 在 2026 年底至 2027 年全面转固并消化产能后：</p>
-</li>
+<ul>
 <li>公司的<strong>常态归母净利润中枢</strong>将在现有 <code>360 亿—400 亿元</code> 的基础上，再往上硬生生垫高 <strong><code>110.00 亿—150.00 亿元</code></strong>，跃升至 <strong><code>470.00 亿—550.00 亿元/年</code></strong>；</li>
 <li>叠加这批新资产转固后带来的每年约 80 亿—100 亿元新增折旧现金流回流，比亚迪的<strong>常态真实股东盈余（Owner Earnings）中枢将被垫高 <code>130.00 亿—180.00 亿元</code>，从当前的 <code>580 亿—680 亿元/年</code> 推升至 <code>710.00 亿—860.00 亿元/年</code></strong>！</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="_18">三、 双极限压力测试：狂风暴雨下的毛利与自由现金流生死线</h3>
@@ -2791,15 +3290,15 @@
 </li>
 <li>
 <p><strong>少数股东权益（Minority Interest）约 <code>122.00 亿—127.46 亿元</code></strong>：</p>
-</li>
-<li>
-<p>2025 年末为 <strong>122.65 亿元</strong>，2026Q3 末为 <strong>127.46 亿元</strong>（主要为比亚迪持股 65.76% 的港股上市公司 <strong>比亚迪电子 00285.HK</strong> 其余 34.24% 公众股东所享有的净资产权益；由于合并利润表与折旧已包含比亚迪电子，计算 True EV 时必须加回 <strong><code>122.00 亿元</code></strong> 少数股东权益，或按市值法加回约 157 亿元少数股东市值）。</p>
+<ul>
+<li>2025 年末为 <strong>122.65 亿元</strong>，2026Q3 末为 <strong>127.46 亿元</strong>（主要为比亚迪持股 65.76% 的港股上市公司 <strong>比亚迪电子 00285.HK</strong> 其余 34.24% 公众股东所享有的净资产权益；由于合并利润表与折旧已包含比亚迪电子，计算 True EV 时必须加回 <strong><code>122.00 亿元</code></strong> 少数股东权益，或按市值法加回约 157 亿元少数股东市值）。</li>
+</ul>
 </li>
 <li>
 <p><strong>广义现金储备与“超额可自由支配现金（Excess Cash）”的严苛辨析</strong>：</p>
-</li>
-<li>
-<p>截至 2026Q3 末，比亚迪账面 <strong>货币资金为 <code>309.88 亿元</code></strong>，叠加随时可变现的低风险银行结构性存款及理财产品（<strong>交易性金融资产 <code>407.35 亿元</code></strong>），公司账面<strong>广义现金储备合计达 <code>717.23 亿元</code>（约 <code>700.00 亿元</code>）</strong>。</p>
+<ul>
+<li>截至 2026Q3 末，比亚迪账面 <strong>货币资金为 <code>309.88 亿元</code></strong>，叠加随时可变现的低风险银行结构性存款及理财产品（<strong>交易性金融资产 <code>407.35 亿元</code></strong>），公司账面<strong>广义现金储备合计达 <code>717.23 亿元</code>（约 <code>700.00 亿元</code>）</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>关键拷问：这 700 多亿现金能不能全部从 EV 里扣掉？绝对不能！</strong></p>
@@ -3145,21 +3644,310 @@
 <h4 id="3_4">3. 三条冷酷无情的“基本面死刑证伪红线”（一旦触发，无条件清仓离场）</h4>
 <p>价值投资绝不是盲目死拿。为防止比亚迪未来从“拥有强大现金流剪刀差的工业印钞机”退化为“巴菲特当年痛恨的伯克希尔纺织厂式重资产吞金兽”，我们设定以下<strong>三条具体、量化、毫无妥协余地的基本面死刑证伪红线</strong>——只要未来财报或经营数据触发其中任何一条，不论当时股价涨跌，必须无条件认错清仓：</p>
 <ul>
-<li><strong>🚨 死刑红线一：资本开支失控与自由现金流剪刀差逆转红线（防沦为重资产无底洞）</strong></li>
 <li>
-<p><strong>量化触发标准</strong>：随着 2026—2027 年海外四大基地建设收尾，比亚迪年度总 CapEx 理应从 1,568 亿元的高峰回落至 <strong>800 亿—1,000 亿元</strong> 以内；如果未来公司因盲目跨界多元化或无效产能军备竞赛，导致 <strong>2027—2028 年年度总 CapEx 依然连续两年超过 <code>1,350 亿元</code></strong>，且 <strong><code>经营活动现金流净额（OCF） - 总 CapEx</code> 连续 6 个季度为巨额负数（累计失血超 400 亿元）</strong>，同时反映终端订单蓄水池的 <strong>合同负债从 929.46 亿元萎缩超过 35%（跌破 <code>600 亿元</code>）</strong>、账面广义现金储备被耗尽并转为大额净有息负债——这证明其“高折旧回流自由现金”的逻辑彻底破产，已沦为必须靠无休止烧钱才能维持体面的重资产苦命生意，<strong>立即清仓</strong>！</p>
+<p><strong>🚨 死刑红线一：资本开支失控与自由现金流剪刀差逆转红线（防沦为重资产无底洞）</strong></p>
+<ul>
+<li><strong>量化触发标准</strong>：随着 2026—2027 年海外四大基地建设收尾，比亚迪年度总 CapEx 理应从 1,568 亿元的高峰回落至 <strong>800 亿—1,000 亿元</strong> 以内；如果未来公司因盲目跨界多元化或无效产能军备竞赛，导致 <strong>2027—2028 年年度总 CapEx 依然连续两年超过 <code>1,350 亿元</code></strong>，且 <strong><code>经营活动现金流净额（OCF） - 总 CapEx</code> 连续 6 个季度为巨额负数（累计失血超 400 亿元）</strong>，同时反映终端订单蓄水池的 <strong>合同负债从 929.46 亿元萎缩超过 35%（跌破 <code>600 亿元</code>）</strong>、账面广义现金储备被耗尽并转为大额净有息负债——这证明其“高折旧回流自由现金”的逻辑彻底破产，已沦为必须靠无休止烧钱才能维持体面的重资产苦命生意，<strong>立即清仓</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>🚨 死刑红线二：出海战略折戟与海外高毛利阿尔法崩塌红线（防第二增长曲线证伪）</strong></p>
-</li>
-<li>
-<p><strong>量化触发标准</strong>：市场给比亚迪高于传统车企的估值溢价，核心建立在“海外再造一个高毛利比亚迪”之上。如果未来 <strong>匈牙利、巴西、印尼三大核心海外本地化基地</strong> 因严重地缘政治制裁、资产没收、合规封锁或工会罢工而长期停摆，导致公司 <strong>海外年度销量增速断崖式跌破 <code>15%</code>（年出口及海外本地产销总额卡死在 <code>100 万辆</code> 以内）</strong>；或者海外市场被迫卷入恶性杀价，导致 <strong>海外单车净利从 1.5 万元腰斩跌破 <code>0.60 万元/辆</code>、集团合并毛利率连续两个季度跌破 <code>16.0%</code></strong>——这证明其海外高毛利护城河被击穿，公司将被锁死在国内存量内卷泥潭中，<strong>立即清仓</strong>！</p>
+<ul>
+<li><strong>量化触发标准</strong>：市场给比亚迪高于传统车企的估值溢价，核心建立在“海外再造一个高毛利比亚迪”之上。如果未来 <strong>匈牙利、巴西、印尼三大核心海外本地化基地</strong> 因严重地缘政治制裁、资产没收、合规封锁或工会罢工而长期停摆，导致公司 <strong>海外年度销量增速断崖式跌破 <code>15%</code>（年出口及海外本地产销总额卡死在 <code>100 万辆</code> 以内）</strong>；或者海外市场被迫卷入恶性杀价，导致 <strong>海外单车净利从 1.5 万元腰斩跌破 <code>0.60 万元/辆</code>、集团合并毛利率连续两个季度跌破 <code>16.0%</code></strong>——这证明其海外高毛利护城河被击穿，公司将被锁死在国内存量内卷泥潭中，<strong>立即清仓</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>🚨 死刑红线三：高阶智驾与固态电池底层技术代差被颠覆红线（防诺基亚时刻）</strong></p>
-</li>
+<ul>
 <li><strong>量化触发标准</strong>：汽车产业下半场是智能化与下一代电池化学体系的决战。如果未来 18—24 个月内：① 在 <strong>20 万—35 万元中高端主战场</strong>，“天神之眼”智驾体验与华为鸿蒙智行、头部新势力拉开不可逾越的代差，导致腾势、方程豹及汉唐旗舰车型的合计月销量萎缩至 <strong><code>2.5 万辆</code> 以下</strong>（高端化彻底失败）；或 ② 竞争对手率先实现低成本全固态电池或颠覆性电池体系规模化装车（能量密度 <code>&gt; 450 Wh/kg</code> 且单瓦时成本低于磷酸铁锂），导致比亚迪引以为傲的刀片电池与 DM 5.0 插混产线一夜之间沦为巨额落后减值资产，<strong>国内新能源乘用车市占率从 34%+ 连续三个季度跌破 <code>22.0%</code></strong>——这证明其底层技术底座遭到降维打击，<strong>立即清仓</strong>！</li>
 </ul>
+</li>
+</ul>
+<hr/>
+<h3 id="v4-2026-11-22">✅ 【V4 终审裁决实录（2026-11-22 官方原表法医验真 · 三道铁闸终审单一真相区）】</h3>
+<blockquote>
+<p><strong>终审状态</strong>：<strong><code>REVISED（V1 硬伤全面修正 + 反杀红方三重悲观叠加 + A股高溢价红牌否决 / H股候买）</code></strong>
+<strong>法定底稿</strong>：巨潮资讯网原版 PDF（<code>2026Q3 1225641442.PDF</code> / <code>2026H1 1225531835.PDF</code> / <code>2025AR 1225045351.PDF</code>）+ 交易所官方结构化三表零误差基准 + 14 项独立一手联网反查。
+<strong>A/H 核心基准锚定（2026-11-22，统一汇率 <code>1 港元 = 0.855 人民币</code>）</strong>：
+- <strong>精确总股本</strong>：<strong><code>91.1720 亿股</code></strong>（<code>9,117,197,565 股</code>，其中 A 股 <code>54.3380 亿股</code> 占 <code>59.60%</code>、H 股 <code>36.8340 亿股</code> 占 <code>40.40%</code>，<code>26H1 P57</code>）｜ <strong>普通股归母净资产</strong>：<code>2,489.73 亿元</code>（已剔除 <code>170.81 亿</code> 永续债，<strong><code>BVPS = 27.31 元 / 31.94 港元</code></strong>）｜ <strong>精确 TTM 每股分红</strong>：<strong><code>0.358 元/股</code></strong>（2025 年度实派 <code>32.64 亿</code>，<code>26H1 P37</code>，26H1 零派息）。
+- <strong>A 股（<code>002594.SZ</code>）</strong>：现价 <strong><code>79.68 元</code></strong>（52 周 <code>72.34—88.42 元</code>）｜全 A 总市值 <strong><code>7,264.58 亿元</code></strong>｜严苛 True EV <strong><code>7,964.55 亿元</code></strong>（<code>ev_delta = +699.97 亿</code>）｜普通股 PB <strong><code>2.92x</code></strong>｜TTM PE <strong><code>22.97x</code></strong>｜严苛 EV 常态回报 <strong><code>4.77%</code></strong>（达产 <code>6.03%</code>）｜TTM 股息 <strong><code>0.45%</code></strong>｜<strong>较 H 股溢价 <code>+49.47%</code> → 触发红牌否决（<code>veto_a = true</code>）</strong>！
+- <strong>H 股（<code>01211.HK</code>）</strong>：现价 <strong><code>62.35 港元</code></strong>（折 <strong><code>53.31 元</code></strong>，52 周 <code>61.90—113.40 港元</code>，较 A 股折价 <strong><code>-33.10%</code></strong>）｜全 H 总市值 <strong><code>4,860.31 亿元</code></strong>｜严苛 True EV <strong><code>5,560.28 亿元</code></strong>（<code>ev_delta = +699.97 亿</code>）｜普通股 PB <strong><code>1.95x</code></strong>｜TTM PE <strong><code>15.37x</code></strong>｜严苛 EV 常态回报 <strong><code>6.83%</code></strong>（达产 <code>8.63%</code>）｜TTM 股息 <strong><code>0.67%</code></strong>｜<strong>距第二档上沿仅 <code>+7.5%</code>，退守观望等回踩 <code>50.00—58.00 港元</code> 建底仓</strong>！</p>
+</blockquote>
+<hr/>
+<h4 id="1-pdf">1. 官方原表与原版 PDF 逐科法医验真对照表</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核验科目（单位：亿元人民币）</th>
+<th style="text-align: left;">官方原表 / 原版 PDF 法定原数与页码坐标</th>
+<th style="text-align: left;">V1 多头旧稿记录</th>
+<th style="text-align: left;">红方盲审空头主张</th>
+<th style="text-align: left;"><strong>V4 终审法医裁决</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>精确总股本及 A/H 拆分</strong></td>
+<td style="text-align: left;">总 <code>91.1720 亿股</code>（A 股 <code>54.3380 亿</code> 59.60% / H 股 <code>36.8340 亿</code> 40.40%，<code>26H1 P57</code>）</td>
+<td style="text-align: left;">误写 A 股 <code>58.13 亿</code> / H 股 <code>33.04 亿</code></td>
+<td style="text-align: left;">精确对齐 <code>91.1720 亿股</code></td>
+<td style="text-align: left;"><strong>✅ 纠偏 V1</strong>：锁定 <code>91.1720 亿股</code>（A 59.60% / H 40.40%）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>表内显性有息负债（含租赁）</strong></td>
+<td style="text-align: left;">短借 <code>186.70</code> + 1Y到期 <code>34.93</code> + 长借 <strong><code>594.80</code></strong> + 应付债券 <strong><code>149.94</code></strong> + 长租 <strong><code>90.00</code></strong> = <strong><code>1,056.37 亿</code></strong>（<code>26Q3 P7-8</code>）</td>
+<td style="text-align: left;">严重漏录长借/债券并误缩长租 10 倍，仅写 <code>331.63 亿</code></td>
+<td style="text-align: left;">精确核实 <code>1,056.37 亿</code></td>
+<td style="text-align: left;"><strong>✅ 100% 认领红方</strong>：彻底推翻 V1 错录，显性含租债锁定 <strong><code>1,056.37 亿</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>隐匿类债（超短融 + 伪永续债）</strong></td>
+<td style="text-align: left;"><code>其他流动负债</code> 含 270 天科创债/超短融 <code>50.22 亿</code>（<code>26H1 P140</code>，Q3 应计 <strong><code>50.50 亿</code></strong>）+ <code>其他权益工具</code> 信托永续债 <strong><code>170.81 亿</code></strong>（6–12 个月初始期、<code>+300BP</code> 跳升至 6%，<code>26Q3 P8</code>, <code>26H1 P144-146</code>）</td>
+<td style="text-align: left;">完全漏计（0 亿元）</td>
+<td style="text-align: left;">100% 计入 True Debt（<code>+221.31 亿</code>）</td>
+<td style="text-align: left;"><strong>✅ 100% 认领红方</strong>：6–12 月期信托永续债与超短融系刚性债务，<strong>全口径 True Debt = <code>1,277.68 亿</code></strong>（比 V1 暴增 <code>+946.05 亿</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>现金、理财与定期存单池</strong></td>
+<td style="text-align: left;">货币资金 <code>309.88</code>（现金等价物 <strong><code>297.82</code></strong>，<code>26Q3 P10</code>）+ 理财 <code>407.35</code>（<code>26H1 P107</code>）= <strong><code>705.17 亿</code></strong>；<strong>另有 <code>91.07 亿</code> 1Y 内定存（<code>26H1 P118</code>）+ <code>193.08 亿</code> &gt;1Y 大额存单（<code>26H1 P135</code>）= <code>284.15 亿</code></strong></td>
+<td style="text-align: left;">写 <code>717.23 亿</code> 扣备付后认 <code>300 亿</code> 超额现金</td>
+<td style="text-align: left;">仅看 <code>297.82 亿</code> 宣称“仅够 14.5 天付现”；标准 EV 扣 <code>705.17 亿</code></td>
+<td style="text-align: left;"><strong>⚖️ 双向纠偏</strong>：反杀“14.5 天断链”恐慌（广义现金+理财+定存实达 <strong><code>~989 亿</code></strong>）；EV 严格仅扣 <code>705.17 亿</code>（将 <code>284 亿</code> 定存留作营运底仓缓冲），<strong>True Net Debt = <code>+572.51 亿</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>少数股东权益 &amp; <code>ev_delta</code></strong></td>
+<td style="text-align: left;">26Q3 账面少数股东权益 <strong><code>127.46 亿</code></strong>（<code>26Q3 P8</code>；对应比亚迪电子 34.24% 当前市值 <code>~118.5 亿</code>）</td>
+<td style="text-align: left;">写 <code>122.00 亿</code>，<code>ev_delta = +153.63 亿</code></td>
+<td style="text-align: left;">计入 <code>127.46 亿</code>，<code>ev_delta = +699.97 亿</code></td>
+<td style="text-align: left;"><strong>✅ 锁定 <code>ev_delta = +699.97 亿元</code></strong>：A 股 True EV <strong><code>7,964.55 亿</code></strong>，H 股 True EV <strong><code>5,560.28 亿</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>26Q3 TTM 业绩与单季拐点</strong></td>
+<td style="text-align: left;">26Q3 TTM 营收 <code>8,040.03</code> / 合并净利 <code>320.73</code> / 归母 <strong><code>316.31</code></strong> / 扣非 <code>299.60</code>；<strong>26Q3 单季营收 <code>2,214.89</code>（<code>+13.59%</code>）、归母 <code>100.20</code>（<code>+28.08%</code>）、扣非 <code>86.30</code>（<code>+25.25%</code>）</strong>（<code>26Q3 P2, P8</code>）</td>
+<td style="text-align: left;">仅引用 Q3 高光，给常态归母 <code>380 亿</code> 偏高</td>
+<td style="text-align: left;">锚定 26H1 悲观外推，轻视 Q3/10月反转</td>
+<td style="text-align: left;"><strong>⚖️ 客观锚定</strong>：以 26Q3 TTM <code>320.73 亿</code> 合并净利为起点逐项还原，不夸大亦不抹杀 Q3 拐点</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>9M26 财务费用与异常汇兑</strong></td>
+<td style="text-align: left;">9M26 财务费用 <strong><code>+73.68 亿</code></strong>（同比恶化 <code>103.04 亿</code>），但利息费用 <code>28.11</code> vs 利息收入 <code>23.31</code>（<strong>净利息仅 <code>4.80 亿</code></strong>）；<code>26H1 P154</code> 实锤半年汇兑损失 <strong><code>47.03 亿</code></strong>（9M 估 <code>~65—68 亿</code>）</td>
+<td style="text-align: left;">未充分揭示汇兑风险</td>
+<td style="text-align: left;">将汇兑损失当永久性成本未做归一化</td>
+<td style="text-align: left;"><strong>🛡️ 反杀红方</strong>：9M26 约 <code>65—68 亿</code> 汇兑损失属汇率周期扰动，归一化至正常摩擦可释放税后 <strong><code>+34 亿</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>26H1 分地区汽车营收与毛利</strong></td>
+<td style="text-align: left;">中国汽车 <code>1,455.81 亿</code>（<strong><code>-33.62%</code></strong>，毛利率 <strong><code>17.00%</code></strong>）；境外汽车 <code>1,294.87 亿</code>（<strong><code>+55.83%</code></strong>，毛利率 <strong><code>28.40%</code></strong>，占汽车毛利 <strong><code>59.78%</code></strong>，<code>26H1 P150-151</code>）</td>
+<td style="text-align: left;">混用 25 全年口径，掩盖 26H1 国内失速</td>
+<td style="text-align: left;">准确挖出国内塌方，但将海外暴利简单判死</td>
+<td style="text-align: left;"><strong>✅ 认领国内失速 + 理性重估海外</strong>：认领国内承压，但 7–10 月海外暴增 <code>103%–154%</code> 且四国本土厂接棒，不可归零</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>研发资本化率骤升</strong></td>
+<td style="text-align: left;">研发资本化率：<code>24年 1.78%</code> → <code>25H1 4.16%</code> → <code>25全年 8.61%</code> → <strong><code>26H1 19.24%</code></strong>（<code>55.54 / 288.61 亿</code>，<code>25AR P224</code>, <code>26H1 P167</code>），Q3 开发支出升至 <code>74.48 亿</code>（<code>26Q3 P7</code>）</td>
+<td style="text-align: left;">仍宣称“91% 费用化极度保守”，未更新 26H1 跃升</td>
+<td style="text-align: left;">抓获现行，在盈利中扣 <code>-60 亿</code></td>
+<td style="text-align: left;"><strong>✅ 100% 认领并现金扣除</strong>：虽 19.24% 仍低于长城（43.4%）/长安（30.5%）、持平吉利（19.4%），但在 OE 中 <strong>100% 现金全额扣除 <code>90 亿/年</code> 资本化研发</strong>（杜绝美化！）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>331.98 亿设备回转在建 &amp; 折旧</strong></td>
+<td style="text-align: left;"><code>26H1 P124</code> 原值 <code>331.98 亿</code>（<strong>已提折旧 <code>199.94 亿</code> / 折旧率 60.2%，净值仅 <code>132.04 亿</code></strong>）转入在建技改；<strong>26H1 固资折旧反增 <code>+6.85%</code> 至 <code>364.64 亿</code>（年化 <code>729.3 亿</code>，<code>26H1 P161</code>）且在建工程利息资本化为 <code>0</code>（<code>26H1 P127</code>）</strong>；机器折旧政策 <code>3–12 年</code>（<code>25AR P150</code>）</td>
+<td style="text-align: left;">过度高估折旧藏富，仅扣 <code>385 亿</code> 维持 CapEx</td>
+<td style="text-align: left;">渲染为“暂停折旧操纵利润”，并假设 <code>CapEx &gt; D&amp;A</code> 永久吞金</td>
+<td style="text-align: left;"><strong>⚖️ 铁面纠偏双边</strong>：反杀“暂停折旧造假”指控（折旧实增 <code>+6.85%</code>、利息资本化为 0）；但将维持+技改固定 CapEx 从 V1 的 <code>330 亿</code> 硬上修至 <strong><code>590 亿</code></strong>（叠 <code>90 亿</code> 研发资本化 = <code>680 亿</code>，占不含租 D&amp;A <code>790 亿</code> 的 <strong><code>86.1%</code></strong>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>政府补助与增值税优惠</strong></td>
+<td style="text-align: left;">9M26 其他收益 <strong><code>109.13 亿</code></strong>（占利润总额 <code>40.87%</code>，<code>26Q3 P8</code>）；<code>26H1 P143</code> 递延收益新收仅 <code>26.43 亿</code> 却摊销 <code>67.26 亿</code>（净失血 <code>-40.83 亿</code>）；<code>5%</code> 增值税加计抵减 <strong><code>2027-12-31</code> 到期</strong>（<code>26H1 P106</code>）</td>
+<td style="text-align: left;">几乎未做折价扣减</td>
+<td style="text-align: left;">扣 <code>-40 亿</code> 补助折价</td>
+<td style="text-align: left;"><strong>✅ 100% 认领并硬扣</strong>：将非现金递延摊销及到期税收优惠在常态盈利中硬扣税后 <strong><code>-60.0 亿元/年</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>存货 <code>2,215.78 亿</code> vs 合同负债 &amp; 60 天账期</strong></td>
+<td style="text-align: left;">存货 <code>2,215.78 亿</code>（<code>+60.08%</code>，跌价率 <code>2.48%</code> vs 24年 <code>5.12%</code>，<code>26H1 P116</code>）；但 <strong><code>合同负债</code> 同步暴增 <code>+80.58%</code> 至 <code>929.46 亿</code></strong>（<code>26Q3 P3, P7</code>）；应付账款+其他应付款 21 月已净还 <code>-1,227 亿</code>，应付票据升至 <code>788.63 亿</code>，9M26 OCF 反弹 <strong><code>+33.36%</code></strong> 至 <code>544.70 亿</code></td>
+<td style="text-align: left;">过度乐观认为“全是在途摇钱树”</td>
+<td style="text-align: left;">渲染滞销暴雷与“一次性再抽血 1,500 亿”</td>
+<td style="text-align: left;"><strong>⚖️ 理性折中</strong>：月销 18 万海外车（45–60 天海运在途）+ 全球第一大储交付可解释约 <code>400–500 亿</code> 正常增量；60 天账期属全行业渐进规范，非一夜抽血 1,500 亿；但在 OE 中预留存货跌价正常化 + <code>-30 亿/年</code> 常态 WC 占用</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2025 分红与比亚迪电子商誉</strong></td>
+<td style="text-align: left;">2025 年度每 10 股派 <strong><code>3.58 元</code></strong>（总 <strong><code>32.64 亿</code></strong>，同比 <strong><code>-73.0%</code></strong>，<code>26H1 P37</code>，2026-07-31 除息）；比亚迪电子 9M26 净利 <strong><code>9.63 亿</code>（<code>-69.3%</code>）</strong>，港股市值仅 <code>~405 亿港元（346 亿 RMB）</code>，含 <code>43.62 亿</code> 捷普商誉（<code>26H1 P131</code>）</td>
+<td style="text-align: left;">错录股息率 <code>2.0%</code>；错估比亚迪电子持股值 <code>302—600 亿</code></td>
+<td style="text-align: left;">精准指出真实股息率仅 <code>0.45%</code> 及电子拖累</td>
+<td style="text-align: left;"><strong>✅ 100% 认领修正</strong>：锁定 <code>ttm_dps = 0.358 元</code>（A 股 <code>0.45%</code> / H 股 <code>0.67%</code>）；比亚迪电子 65.76% 权益按现价严苛重估为 <strong><code>228 亿</code></strong>（100% EV <code>346 亿</code>）</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h4 id="2-vs">2. 铁闸一 &amp; 二：事实层硬修正 vs 悲观叠加层反杀裁决表</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">裁决维度</th>
+<th style="text-align: left;">✅ 100% 认领并硬修正的红方铁证（事实层）</th>
+<th style="text-align: left;">🛡️ 14 次一手反查铁面反杀的红方过度悲观（假设叠加层）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>资本结构与流动性</strong></td>
+<td style="text-align: left;">① 彻底撕毁 V1 <code>331.6 亿</code> 有息债错账，全额计入 <code>594.8 亿</code> 长借、<code>149.9 亿</code> 债券、<code>90 亿</code> 长租、<code>50.5 亿</code> 短融与 <code>170.8 亿</code> 信托伪永续债（True Debt <strong><code>1,277.68 亿</code></strong>）；② 认领 21 个月 FCF <code>-1,305.8 亿</code> 与 <code>2025.3</code> H 股配售摊薄、分红暴砍 <code>-73%</code>，大幅下调质地加分（A 股 <code>-5.0</code> / H 股 <code>+0.5</code>）。</td>
+<td style="text-align: left;">① 戳破“现金仅剩 14.5 天即将断链”：空头漏计 <code>26H1 P118/P135</code> 披露的 <strong><code>284.15 亿元</code> 银行定期存单</strong>，广义流动性池实为 <strong><code>~989 亿</code></strong>；② 戳破“60 天账期一夜抽血 1,500 亿”：过去 21 个月已完成 <code>-1,227 亿</code> 应付/往来去杠杆且 9M26 OCF 同比大增 <strong><code>+33.36%</code></strong>，全行业 17 家车企均处渐进过渡期，绝不会一夜抽干。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>核心盈利与会计成色</strong></td>
+<td style="text-align: left;">① 认领 <code>26H1</code> 国内汽车营收暴跌 <code>-33.62%</code>（毛利率 <code>17.00%</code>）、2025 员工持股考核失败及比亚迪电子 9M26 净利暴跌 <code>-69.3%</code>；② 100% 剔除 <code>19.24%</code> 超额研发资本化（在 OE 中现金全额扣 <strong><code>-90 亿/年</code></strong>）；③ 硬扣递延收益吃老本与 2027 增值税加计抵减到期（税后 <strong><code>-60 亿/年</code></strong>）；④ 将维持+技改固定 CapEx 由 V1 <code>330 亿</code> 硬翻倍至 <strong><code>590 亿/年</code></strong>（叠加资本化研发合计 <code>680 亿</code>，占 ex-ROU D&amp;A <code>790 亿</code> 的 <strong><code>86.1%</code></strong>）。</td>
+<td style="text-align: left;">① 抓获空头“<strong>分子分母错配 + 未剔除 68 亿汇兑异常损失</strong>”：空头从扣完利息且饱含 <code>~65—68 亿</code> 周期性汇兑损失的归母净利出发，再二次扣减永续债息、却拿去除以全债 True EV；② 戳破“332 亿设备转在建=停折旧造假”：该批设备已折旧 <code>60.2%</code>，26H1 固资折旧反增 <strong><code>+6.85%</code></strong> 至 <code>364.64 亿</code>（年化 <code>729 亿</code>）且在建利息资本化为 <code>0</code>；③ 戳破“永动重资产永久 <code>CapEx &gt; D&amp;A</code>”：比亚迪 <code>3–12 年</code>（实际 <code>~6.5 年</code>）超短加速折旧与 <code>9–12 年</code> 物理寿命间确有约 <strong><code>110—140 亿/年</code></strong> 真实折旧现金盾（非 V1 幻想的 <code>330 亿</code>，亦非空头的 <code>-40 亿</code>）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第二曲线与出海壁垒</strong></td>
+<td style="text-align: left;">① 认领 <strong>2026.10 欧盟对混动（PHEV）启动保障措施调查</strong>、墨西哥 <code>50%</code> 关税与巴西 <code>35%</code> 关税合围现实，承认海外 <code>28.4%</code> 直出毛利率必将向 <code>23%—24%</code> 回归。</td>
+<td style="text-align: left;">① 戳破“海外塌方与单腿归零”：2026 年 7–10 月比亚迪总销量已重回 <strong><code>+11% ~ +18%</code></strong> 双位数正增长，海外月销连续 4 个月站稳 <strong><code>17—19 万辆</code>（同比 <code>+103% ~ +154%</code>）</strong>，全年目标上调至 <strong><code>180 万辆</code></strong>；泰国（10 万辆下线/50% 本地化）、印尼（10 万辆下线/41%–47% 本地化）、巴西（10 万辆下线、2027.1 冲 50% 本地化并斩获 <strong>10 万辆墨西哥/阿根廷大单直接绕开墨西哥 50% 关税</strong>）、匈牙利（40 亿欧工厂 <strong>26Q4 正式量产</strong>）正全面接棒；② 戳破空头对<strong>全球第一大储</strong>的视而不见：InfoLink 确证比亚迪 <strong>2026H1 登顶全球储能系统出货第一</strong>（手握沙特 <code>12.5 GWh</code> + 2026.7 阿联酋 Masdar <code>11.275 GWh</code> 浩瀚 2710Ah 超级大单），且弗迪电池已成为小米汽车最大外部供应商。</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>🧮 V4 终审合并无杠杆 Firm Owner Earnings 透明算式（100% 对齐 True EV 分母）</strong>：
+- <strong>常态起点（<code>steady_oe = 380.0 亿元/年</code>，较 V1 <code>640 亿</code> 硬砍 <code>-40.6%</code>）</strong>：<code>26Q3 TTM</code> 合并净利 <code>320.7 亿</code> + 扣超额现金后无杠杆净利息还原 <code>+18.0 亿</code> + 异常汇兑损失归一化（由 9M <code>~68 亿</code> 回常态）<code>+34.0 亿</code> - 递延收益吃老本与 2027 增值税优惠到期硬扣 <code>-60.0 亿</code> - 海外毛利回归（<code>28.4%→23.5%</code>）及存货跌价正常化对冲放量与第一大储增量净摩擦 <code>-13.0 亿</code> = 归一化无杠杆合并净利 <strong><code>299.7 亿</code></strong>（若按费用化研发口径折算，剔除水分后的纯核心归母净利约 <strong><code>207—220 亿</code></strong>）；加回不含 IFRS16 使用权折旧的实物与无形 D&amp;A <strong><code>+790.0 亿</code></strong>（使用权折旧 <code>26 亿</code> 与租赁本金 <code>27 亿</code> 1:1 对冲） - 严苛维持与换代固定 CapEx <strong><code>-590.0 亿</code></strong> - 100% 现金全额扣除资本化研发 <strong><code>-90.0 亿</code></strong>（总维持性现金投入 <code>680 亿</code>，占 ex-ROU D&amp;A <strong><code>86.1%</code></strong>） - 后 60 天账期常态 WC 占用 <strong><code>-30.0 亿</code></strong> = <strong><code>379.7 亿元</code> → 锁定 <code>380.0 亿元/年</code></strong>！
+- <strong>2027—2028 达产稳态（<code>full_oe = 480.0 亿元/年</code>，较 V1 <code>780 亿</code> 硬砍 <code>-38.5%</code>）</strong>：消化 <code>791.81 亿</code> 在建工程（匈/巴/印/泰四厂本地化放量至海外 <code>220—240 万辆</code> + 全球第一储能 + 高端矩阵 + 2021–2023 老设备折旧悬崖释放），预留 35% 地缘合规折损后净增 <strong><code>+100.0 亿元/年</code></strong> → 锁定 <strong><code>480.0 亿元/年</code></strong>。</p>
+</blockquote>
+<hr/>
+<h4 id="3-reality-check-reverse-sotp-v4-ah">3. 铁闸三：历史估值分位 Reality Check、严苛重校 Reverse SOTP 与 V4 锁定 A/H 两档击球区</h4>
+<ol>
+<li><strong>历史 10 年估值分位与全球可比 Reality Check（彻底粉碎空头 <code>22 元 / 0.8x PB</code> 虚空幻想）</strong>：</li>
+</ol>
+<ul>
+<li>
+<p><strong>自身历史绝对地板</strong>：2018—2019 年新能源补贴退坡至暗寒冬（年净利仅 <code>16 亿</code>、ROE 仅 <code>2.6%</code>），比亚迪 A 股 PB 最低守在 <strong><code>1.89x—2.18x</code></strong>（H 股 <code>~1.5x</code>）；2024 年 2 月大盘 <code>2,635</code> 点极度恐慌底，A 股复权最低 <strong><code>~54.3 元</code></strong>（拆股前 <code>162 元</code>，PB <code>3.6x</code> / PE <code>17–18x</code>），H 股复权最低 <strong><code>~55.7 港元</code></strong>（拆股前 <code>167 港元</code>）。当前 <strong>H 股 <code>62.35 港元</code>（PB <code>1.95x</code> / TTM PE <code>15.37x</code>）已紧贴 52 周低点（<code>61.90 港元</code>）并创 2019 年以来 PB 最低分位</strong>！</p>
+</li>
+<li>
+<p><strong>全球车企对标</strong>：丰田（零增长油车，<code>7.5–9.5x PE / 0.9–1.0x PB</code>）、吉利（<code>6–7.5x PE / 1.1–1.2x PB</code>）、长城（<code>18–19x PE / 1.9–2.0x PB</code>）、特斯拉（<code>350x+ PE / 14–18x PB</code>）。比亚迪作为全球第一新能源车企 + 全球第一储能系统商（海外仍处 <code>+100%</code> 放量期），<strong>H 股在 <code>1.5x—1.8x PB</code>（<code>50—58 港元</code>）已具备极厚全球比较安全边际</strong>，而空头按 <code>0.8x PB</code> 拍出的 <code>22 元</code> 彻底脱离过去 10 年交易现实；但 <strong>A 股在 <code>79.68 元</code>（<code>2.92x PB</code> / <code>23.0x PE</code> / 较同股同权 H 股溢价 <code>+49.47%</code>）属于极端估值泡沫，必须红牌否决！</strong></p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>V4 严苛企业端 Reverse SOTP 拆骨核验（直接对齐 True EV，零重复扣债）</strong>：</li>
+</ol>
+<ul>
+<li>
+<p><strong>积木 ① 比亚迪电子（<code>00285.HK</code> 100% 企业价值）</strong>：按现价市值折 <strong><code>346 亿元</code></strong>（已覆盖合并 EV 中 <code>127.46 亿</code> 少数股东权益，充分反映 9M26 净利 <code>-69%</code> 及商誉承压）；</p>
+</li>
+<li>
+<p><strong>积木 ② 全球第一储能 + 弗迪电池外供</strong>：年出货 <code>60—80 GWh</code> + 小米/丰田外供，独立净利 <code>50—60 亿</code> × 严苛 <code>14x PE</code> = <strong><code>770 亿元</code></strong>（区间 <code>700—840 亿</code>）；</p>
+</li>
+<li>
+<p><strong>积木 ③ 海外汽车业务</strong>：稳态 <code>180—220 万辆</code>，本地化后毛利回归 <code>23%—24%</code>、清洁净利 <code>150—170 亿</code> × 克制 <code>14x PE</code> = <strong><code>2,250 亿元</code></strong>（区间 <code>1,950—2,550 亿</code>）；</p>
+</li>
+<li>
+<p><strong>积木 ④ 国内汽车基本盘（王朝/海洋 + 腾势/方程豹）</strong>：挤干研发资本化与补贴后清洁净利 <code>40—60 亿</code> + <code>110 亿</code> 加速折旧现金盾，按 <code>9—11x</code> 现金流保守标价 = <strong><code>1,350 亿元</code></strong>（区间 <code>1,200—1,500 亿</code>）；</p>
+</li>
+<li>
+<p><strong>积木 ⑤ <code>228.85 亿</code> 长期股权投资（锂矿/汽金联营，年化收益 <code>~11 亿</code>）</strong>：按 <code>0.8x</code> 账面保守折算 <strong><code>180 亿元</code></strong>。</p>
+</li>
+<li>
+<p><strong>📊 拆骨合计（不含智驾/固态电池/仰望期权）= <code>4,896 亿元</code>（区间 <code>4,376—5,450 亿</code>）</strong>：</p>
+<ul>
+<li>对照 <strong>A 股 True EV（<code>7,964.55 亿</code>）</strong>：拆骨资产仅覆盖 <strong><code>61.5%</code></strong>，买入 A 股等于硬吞 <strong><code>3,069 亿元</code></strong> 泡沫与 A/H 溢价税！</li>
+<li>对照 <strong>H 股 True EV（<code>5,560.28 亿</code>）</strong>：拆骨资产已覆盖 <strong><code>88.1%</code></strong>；若回踩至 <strong><code>58.00 港元</code>（EV <code>5,221 亿</code>）</strong> 覆盖率达 <strong><code>93.8%</code></strong>；砸入 <strong><code>≤ 50.00 港元</code>（EV <code>≤ 4,598 亿</code>）</strong> 覆盖率达 <strong><code>106.5%</code></strong>，全部智驾/固态/仰望期权彻底 0 元白送且倒贴！</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><strong>V4 终审锁定 A/H 两档实战击球区</strong>：</li>
+</ol>
+<ul>
+<li>
+<p><strong>🚫 A 股（<code>002594.SZ</code>，现价 <code>79.68 元</code> → 触发 <code>veto_a = true</code> 严禁买入！）</strong>：</p>
+</li>
+<li>
+<p><strong>第一档（左侧重锤区）</strong>：<strong><code>≤ 46.00 元</code></strong>（折 <code>53.8 港元</code>，较 H 股重锤仅容忍 <code>+7.6%</code> 溢价；<code>PB ≤ 1.68x</code>，<code>True EV ≤ 4,894 亿</code> 获拆骨资产 <code>100%</code> 兜底，常态回报 <strong><code>≥ 7.76%</code></strong> / 达产 <strong><code>≥ 9.81%</code></strong>）。</p>
+</li>
+<li>
+<p><strong>第二档（正常买入区）</strong>：<strong><code>46.00 — 54.00 元</code></strong>（严锚 2024.2 熊市复权底 <code>54.3 元</code> 并与当前 H 股折合价 <code>53.31 元</code> 平价；<code>PB 1.68x—1.98x</code>，<code>True EV 4,894—5,623 亿</code>，常态回报 <strong><code>6.76%—7.76%</code></strong> / 达产 <strong><code>8.54%—9.81%</code></strong>）。</p>
+</li>
+<li>
+<p><strong>🟡 H 股（<code>01211.HK</code>，现价 <code>62.35 港元</code> → 退守观望等 <code>-7.0%</code> 回踩即进买区！）</strong>：</p>
+</li>
+<li>
+<p><strong>第一档（左侧重锤区）</strong>：<strong><code>≤ 50.00 港元</code></strong>（折 <code>≤ 42.75 元</code>，击穿 2024.2 复权底 <code>55.7 港元</code> 直探 2019 寒冬 <code>1.57x PB</code>，<code>True EV ≤ 4,598 亿</code> 拆骨覆盖 <code>106.5%</code>，常态回报 <strong><code>≥ 8.27%</code></strong> / 达产 <strong><code>≥ 10.44%</code></strong>）。</p>
+</li>
+<li>
+<p><strong>第二档（正常买入区）</strong>：<strong><code>50.00 — 58.00 港元</code></strong>（折 <code>42.75 — 49.59 元</code>，<code>PB 1.57x—1.82x</code> 踩穿 2019 年底 <code>1.89x</code> 地板，<code>True EV 4,598—5,221 亿</code>，常态回报 <strong><code>7.28%—8.27%</code></strong> / 达产 <strong><code>9.19%—10.44%</code></strong>）。</p>
+</li>
+</ul>
+<hr/>
+<h4 id="4-v1-v4">4. 📋 《V1 → V4 演进对照表》</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核心投研参数</th>
+<th style="text-align: center;">V1 原多头稿（2026-11-11）</th>
+<th style="text-align: center;">红方隔离盲审（2026-11-22）</th>
+<th style="text-align: center;"><strong>V4 终审锁定（2026-11-22 单一真相）</strong></th>
+<th style="text-align: left;">演进逻辑核心说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>基准股价（A / H）</strong></td>
+<td style="text-align: center;">A <code>84.88 元</code> / 未单列 H</td>
+<td style="text-align: center;">A <code>79.68 元</code> / H <code>62.35 港元</code></td>
+<td style="text-align: center;"><strong>A <code>79.68 元</code> / H <code>62.35 港元</code>（<code>53.31 元</code>）</strong></td>
+<td style="text-align: left;">揭示 A/H 巨额溢价 <strong><code>+49.47%</code></strong>，实行双市场分化裁决</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>全口径 True Debt / <code>ev_delta</code></strong></td>
+<td style="text-align: center;"><code>331.63 亿</code> / <code>+153.63 亿</code></td>
+<td style="text-align: center;"><code>1,277.68 亿</code> / <code>+699.97 亿</code></td>
+<td style="text-align: center;"><strong><code>1,277.68 亿</code> / <code>+699.97 亿</code></strong></td>
+<td style="text-align: left;">100% 补回 V1 错漏的 <code>946 亿</code> 长借/债券/长租/短融/伪永续债；<code>284 亿</code> 定存留作营运底仓</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>严苛 True EV（A / H）</strong></td>
+<td style="text-align: center;">A <code>7,892.31 亿</code></td>
+<td style="text-align: center;">A <code>7,964.55 亿</code> / H <code>5,560.28 亿</code></td>
+<td style="text-align: center;"><strong>A <code>7,964.55 亿</code> / H <code>5,560.28 亿</code></strong></td>
+<td style="text-align: left;">与法定 26Q3 原表零误差对齐</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>常态 → 达产 OE（亿元/年）</strong></td>
+<td style="text-align: center;"><code>640.0 → 780.0 亿</code></td>
+<td style="text-align: center;">核心 <code>160–200 亿</code> / FCF <code>121 亿</code></td>
+<td style="text-align: center;"><strong>合并无杠杆 <code>380.0 → 480.0 亿</code></strong></td>
+<td style="text-align: left;">砍 V1 <code>-40.6%</code>（扣 <code>90 亿</code> 资本化研发、<code>60 亿</code> 补助折价、维持 CapEx 翻倍至 <code>590 亿</code>），反杀空头汇兑错算与折旧归零</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TTM 每股分红 / 股息率</strong></td>
+<td style="text-align: center;">错录 <code>2.0%</code></td>
+<td style="text-align: center;"><code>0.358 元</code>（A <code>0.45%</code>）</td>
+<td style="text-align: center;"><strong><code>0.358 元</code>（A <code>0.45%</code> / H <code>0.67%</code>）</strong></td>
+<td style="text-align: left;">100% 认领 2025 分红暴砍 <code>-73%</code> 事实</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>严苛 EV 常态回报率</strong></td>
+<td style="text-align: center;">A <code>8.11%</code>（虚高）</td>
+<td style="text-align: center;">A <code>2.02%</code> / H <code>2.89%</code>（过低）</td>
+<td style="text-align: center;"><strong>A <code>4.77%</code> / H <code>6.83%</code></strong>（达产 <code>6.03%</code> / <code>8.63%</code>）</td>
+<td style="text-align: left;">一目了然：A 股太贵，H 股逼近甜区</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>两档买点（A 股 / H 股）</strong></td>
+<td style="text-align: center;">A <code>80–86</code> / 重锤 <code>≤75</code></td>
+<td style="text-align: center;">A <code>32–39.5</code>（底 <code>22</code>）/ H <code>37–46</code></td>
+<td style="text-align: center;"><strong>A <code>46–54 元</code>（重锤 <code>≤46</code>）/ H <code>50–58 港元</code>（重锤 <code>≤50</code>）</strong></td>
+<td style="text-align: left;">彻底终结 A 股 <code>75–86 元</code> 荒谬买点，亦粉碎 <code>22 元</code> 空中楼阁</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>最终评级与质地加分</strong></td>
+<td style="text-align: center;">3 票看多 / <code>qb +2.0</code></td>
+<td style="text-align: center;">强烈做空</td>
+<td style="text-align: center;"><strong>A 股 <code>veto_a=true</code> (<code>qb -5.0</code>) / H 股退守候买 (<code>qb +0.5</code>)</strong></td>
+<td style="text-align: left;">严禁为同一家公司多付 <code>+49.5%</code> 智商税；盯紧 H 股回踩 <code>≤58 港元</code>！</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把 `595 亿` 长期借款和 `171 亿` 半年期信托债从企业价值里漏掉，就像称一头大象的体重时忘了把大象背上驮着的铁矿石一起过秤——不管王传福的刀片电池造得多漂亮，会计底账错了就是错了。同样地，当港股柜台正以 `53.31 元` 打折甩卖同一张股权凭证时，还在 A 股柜台花 `79.68 元` 抢货的人，需要的不是深度投研报告，而是一堂小学减法课。</p>
+<p>👴🏻 <strong>【芒格旁批】</strong>：但做空机构把一次性的 `68 亿` 汇兑损失当成永恒诅咒、把 `284 亿` 银行大额存单装作看不见、把全球第一储能和月销十八万辆的海外爆发全抹成零，再按 `0.8 倍 PB` 喊出 `22 元` 清算价，这也不是理性分析——这是拿着显微镜专找毛孔、却假装看不见面前站着一头年营收八千亿工业巨兽的偏执狂。真正聪明的猎手只做一件事：彻底拉黑 `79.68 元` 的 A 股，把子弹上膛，静静盯着已经跌到 52 周低点（`62.35 港元`）的 H 股，只要情绪再砸出 `-7%` 踩进 `50—58 港元`，就分批接走带血的全球霸主筹码。</p></div></div>
 <hr/>
 <h1 id="g-2026">模块 G：终章——投资大师闭门圆桌会（比亚迪 2026 深度会诊）</h1>
 <blockquote>
@@ -3306,20 +4094,28 @@
 <p><strong>合议评级：3 票看多（1票直接重锤 + 2票分批建仓） vs 1 票审慎观察（等待高分红右侧）</strong></p>
 <p>四位大师虽然视角迥异，但在剥开比亚迪 2026 年三季报的会计迷雾后达成了一个无可辩驳的共识：<strong>在 84.88 元/股（总市值 7,738.68 亿元、True EV 约 7,850 亿元）的刻度上，市场因为对“重资产资本开支（两年超2,440亿）”和“表面存货激增（2,215.78亿）”的第一层恐惧，错误地给一台每年真实产粮 600 亿—650 亿元（P/OE 仅 12 倍）的全球工业寡头打上了折价标签。</strong></p>
 <p>2026 年第三季度单季归母净利突破 <strong>100.20 亿元（+28.08%）</strong>、经营现金流大增 <strong>33.36%（544.70亿元）</strong>、合同负债飙升 <strong>80.58%（929.46亿元）</strong> 与资本开支同比收窄 <strong>24%（873.79亿元）</strong> 四组数据的共振，标志着比亚迪正处于从<strong>“全球重资产产能强行军”向“海外与高端自由现金流大丰收”切换的历史性拐点</strong>。对于能够承受海外地缘波动、看得懂 650 亿折旧藏富的长期投资者而言，75 元—85 元区间已是兼具深厚安全垫（下行底线 63—68 元）与丰厚双击赔率（上行目标 110—126 元）的黄金击球区。</p>
+<p><strong>🛡️ 【2026-11-22 V4 官方原表验真 × 三道铁闸终审圆桌合议修正投票】</strong>：
+经逐页法医穿透巨潮三份法定原版 PDF 并完成红蓝二元对质，四位大师正式<strong>作废上述 V1 旧稿投票（<code>84.88元 3票看多</code>）</strong>，全票签发 <strong>V4 终审 A/H 分化裁决</strong>：
+- <strong>🚫 A 股（<code>002594.SZ</code>，现价 <code>79.68 元</code>）：<code>4 票全票坚决否决（veto_a = true · 严禁追高！）</code></strong> —— 补回 <code>946 亿</code> 漏债并重校 <code>380 亿</code> 常态 Firm OE 后，A 股严苛 EV（<code>7,964.55 亿</code>）常态回报仅 <strong><code>4.77%</code></strong>、TTM 股息仅 <strong><code>0.45%</code></strong>、且较同股同权 H 股溢价高达 <strong><code>+49.47%</code></strong>，拆骨安全垫仅覆 <code>61.5%</code>！四位大师一致否决任何在 <code>79.68 元</code> 买入 A 股的行为；A 股投资人必须死等回撤至 <strong><code>46.00—54.00 元</code></strong>（重锤 <strong><code>≤ 46.00 元</code></strong>）或直接切换 H 股通道！
+- <strong>🟡 H 股（<code>01211.HK</code>，现价 <code>62.35 港元</code> 折 <code>53.31 元</code>）：<code>退守观望候买（1 票林奇紧盯右侧 + 3 票巴菲特/芒格/马克斯-卡拉曼静待回踩 ≤ 58.00 港元分批建仓、≤ 50.00 港元满弓重锤）</code></strong> —— H 股已较 A 股深折 <strong><code>-33.10%</code></strong>、紧贴 52 周低点（<code>61.90 港元</code>）与 2019 年以来最低 PB（<code>1.95x</code>），严苛 EV（<code>5,560.28 亿</code>）常态回报 <strong><code>6.83%</code></strong>、达产 <strong><code>8.63%</code></strong>、拆骨覆盖 <strong><code>88.1%</code></strong>。但鉴于 21 个月 FCF <code>-1,306 亿</code>、26Q3 单季 CapEx 仍反弹至 <code>426.8 亿</code>、<code>2,216 亿</code> 存货周转偏高及欧盟 10 月新启混动保障调查，无需在 <code>62.35 港元</code> 抢跑；耐心等待 <strong><code>-7.0%</code></strong> 情绪回踩至 <strong><code>50.00—58.00 港元</code></strong>（常态回报 <code>7.28%—8.27%</code> / 达产 <code>9.19%—10.44%</code>）分批建底仓，若恐慌砸穿 <strong><code>≤ 50.00 港元</code></strong>（<code>PB ≤ 1.57x</code>、拆骨覆 <code>106.5%</code>）则果断拎桶重锤！</p>
 </blockquote>
 <hr/>
-<h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
+<h2 id="h-1-2026-11-22-v4">【模块 H：💼 专属买方研究员的 1 分钟闭门交底（2026-11-22 V4 终审校准版）】</h2>
 <blockquote>
-<p><strong>前面那十万字的财报细节和模型我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【比亚迪】这家企业，你只需要在脑子里记住这四件事：</strong></p>
+<p><strong>前面那十万字的财报细节、红方盲审做空弹药和 V4 三道铁闸终审模型我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【比亚迪（002594.SZ / 01211.HK）】，你只需要在脑子里记住这四件事：</strong></p>
 </blockquote>
 <h3 id="1_9">1. 它到底靠什么在行业里立身？（看家饭碗）</h3>
-<p>外行看比亚迪，总觉得它是个靠压榨供应商账期、在十万块家用车市场拼刺刀走量的苦命组装厂。其实它的真正底牌，是全球唯一跑通“矿山参股、刀片电池、车规芯片、电驱电控、整车制造到自建远洋滚装船队”全链路垂直一体化的超级工业母机。别的车企造车，电池找宁德、电控找博世，三四道零件利润全被别人赚走；比亚迪通过旗下弗迪系五大零部件王国，把七成以上核心零件全在自己锅里造出来。同配置车型它的硬件成本比组装同行天生便宜一万五千元以上，这才是它敢在寒冬里主动掀桌子清场的免死金牌。</p>
-<h3 id="2_7">2. 它的财务家底和经营周期现在发生了什么本质变化？（为什么它是真印钞机还是苦力）</h3>
-<p>它的账本藏着全市场最大的“会计藏富幻觉”，且刚跨过“重资产强行军结束、海外与高端大丰收”的历史拐点。很多人嫌它表观净利只有三百多亿，却没看见它每年在利润表里扣掉了七百亿左右的折旧摊销和近六百亿几乎全额费用化的研发投入！把非付现折旧加回来扣除日常维持开支，它一年真实股东自由造血能力高达六百亿以上。更关键的是，前两年砸下两千多亿全球建厂的资本开支洪峰在今年三季度已明显收窄，而海外卖车一年狂飙近一倍、占比冲破四成，腾势、方程豹、仰望三大高端品牌同步放量，单季净利已重返百亿大关。</p>
-<h3 id="3_5">3. 市场担心的那些“软肋”，到底是真死穴还是纸老虎？（买方真伪辩证 &amp; 危中之机）</h3>
-<p>市场的三大恐慌里，两个是纯纸老虎，一个是真硬骨头。第一，见账面存货飙到两千两百多亿就喊滞销爆雷——这是不看预收款的假鬼故事！对照看一眼高达九百多亿、同比暴增八成的合同负债（预收车款）就明白了，那些存货根本不是车库滞销车，而是客户早付了定金、正装在滚装船上发往欧洲、南美和东南亚去赚两成高毛利的在途摇钱树。第二，怕缩减“迪链”账期导致现金流断裂——去年主动加快还供应商钱确实阵痛了一把，但今年三季度经营现金流已大增三成多，包袱早已甩干净。真正需警惕的硬约束是海外建厂的地缘与关税摩擦：在巴西、欧洲等地铺开的近八百亿在建工程，面临海外工会、反补贴关税及能否守住海外高毛利的长期考验。</p>
-<h3 id="4_1">4. 咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
-<p>千万别被它表观二十多倍市盈率骗了。用拆骨法把账面净现金、比亚迪电子股权和价值两千多亿的弗迪电池剥离后，市场留给它“年销四百多万辆整车加近两百万辆高毛利出口帝国”的隐含残值不到四千亿，按真实股东盈余算仅十二倍左右。实战打法很简单：在七十五到八十五元区间就是白菜价买全球工业寡头的黄金建仓区，逢海外关税鬼故事砸盘就分批吸筹；等明年全球建厂资本开支彻底回落、自由现金流井喷冲向五六百亿时坐享双击，同时死盯“预收车款必须与存货同步增长”这条验证底线。</p>
+<p>比亚迪真正的硬底牌，是全球唯一跑通“矿山参股—刀片电芯—IGBT/SiC 车规芯片—第五代 DM 混动与二代 10C 闪充—整车制造—自建远洋滚装船队与四大洲本地化工厂”的全链路垂直一体化工业母机，同时它还是 <strong>2026 年上半年登顶全球第一的电池储能系统霸主</strong>（手握沙特 12.5GWh 与阿联酋 Masdar 11.275GWh 超级大单）以及小米汽车的最大外供电池商。当国内 10 万级家用车陷入惨烈肉搏时，正是这份全自制成本差与全球四大洲本地工厂（泰国、印尼、巴西均已突破 10 万辆下线，匈牙利 26Q4 正式量产），让它在 2026 年 7—10 月凭借月均 <code>17—19 万辆</code>（同比暴增 <code>+103%—154%</code>）的海外狂飙，把集团总销量重新拉回双位数正增长。</p>
+<h3 id="2-v4">2. 它的财务家底和真实盈利成色到底怎样？（V4 挤干水分后的真底账）</h3>
+<p><strong>千万别再信旧稿里“有息债只有 330 亿、常态赚 640 亿、股息 2%”的童话了！</strong> V4 逐页法医核查官方原表揭开了硬伤：第一，加上 <code>595 亿</code> 长借、<code>150 亿</code> 债券、<code>90 亿</code> 租赁、<code>50.5 亿</code> 短融和 <code>171 亿</code> 半年期信托伪永续债，比亚迪全口径真实有息债务实为 <strong><code>1,277.68 亿元</code></strong>；过去 21 个月为消化 60 天账期去杠杆与全球建厂，累计烧掉 <strong><code>-1,306 亿元</code> FCF</strong>，2025 年分红更是暴砍 <code>-73%</code> 至每股 <strong><code>0.358 元</code></strong>（A 股股息率仅 <code>0.45%</code>）。第二，<code>26H1</code> 国内汽车营收暴跌 <code>-33.62%</code>、研发资本化率骤升至 <code>19.24%</code>、递延收益开始吃老本，比亚迪电子前三季净利暴跌 <code>-69%</code>。但反过来，空头喊的“要断链、只赚 160 亿、跌到 22 元”也是过度恐吓——账上除了 <code>705 亿</code> 现金理财外还有 <code>284 亿</code> 银行定存（广义现金池近千亿），9M26 利润表还被一次性 <code>~68 亿</code> 汇兑损失砸了大坑，且它 <code>3—12 年</code> 的超短机器折旧确实藏着约 <code>110—140 亿/年</code> 现金缓冲。挤干全部水分并把维持+技改 CapEx 严苛拉高至 <code>680 亿/年</code> 后，它真正的合并常态造血底盘是 <strong><code>380 亿元/年</code></strong>（海外四厂达产后 <strong><code>480 亿元/年</code></strong>）。</p>
+<h3 id="3_5">3. 市场担心的“软肋”，哪些是真暗礁，哪些是纸老虎？</h3>
+<p><strong>两个真暗礁必须死盯</strong>：① <strong>欧美与拉美关税墙合围</strong>——2026 年墨西哥关税飙至 50%、巴西复征 35%、欧盟 10 月又刚对混动车启动保障措施调查，海外 <code>28.4%</code> 的直出暴利一定会随着本地化建厂回归 <code>23%—24%</code>，核心看巴西（已接单 10 万辆供墨/阿绕税）与匈牙利工厂的稼动率能否顺利接棒；② <strong>资本开支纪律与股东回报意愿</strong>——只要 26Q4—2027 年 CapEx 不切实从千亿高峰回落、FCF 不转正、分红率不重返 30%+，市场就不会给它高估值。<strong>两个纸老虎无需恐慌</strong>：① <strong>“只剩 14 天现金要暴雷”是漏看 <code>284 亿</code> 大额存单与 <code>9M26 OCF +33.4%</code> 反弹的鬼故事</strong>；② <strong><code>2,216 亿</code> 存货虽偏高需警惕跌价，但背后对应着同比暴增 <code>+80.6%</code> 的 <code>929.46 亿</code> 预收车款</strong>，其中近半是月销 18 万海外车的海运在途车与大储交付货，并非纯滞销垃圾。</p>
+<h3 id="4-v4">4. 咱们到底该怎么买它、怎么赚它的钱？（V4 终审铁律）</h3>
+<p><strong>核心就一句话：坚决拉黑溢价近五成的 A 股，把子弹留给已经跌到 52 周地板附近的 H 股！</strong>
+- <strong>🚫 A 股（<code>002594.SZ</code>，现价 <code>79.68 元</code>）</strong>：较同股同权的 H 股（折 <code>53.31 元</code>）贵出 <strong><code>+49.47%</code></strong>，严苛 EV 常态回报仅 <code>4.77%</code>，拆骨资产只覆盖 <code>61.5%</code>，<strong>红牌否决严禁买入</strong>！除非极端大跌回到 <strong><code>46.00—54.00 元</code></strong>（重锤 <strong><code>≤ 46.00 元</code></strong>），否则碰都别碰。</p>
+<ul>
+<li><strong>🟡 H 股（<code>01211.HK</code>，现价 <code>62.35 港元</code>）</strong>：PB 仅 <code>1.95x</code>（2019 年来最低）、严苛回报已达 <code>6.83%</code>（达产 <code>8.63%</code>）、拆骨资产覆盖 <code>88.1%</code>，距离买点仅差 <strong><code>-7.0%</code></strong>。眼下不必急着抢跑，耐心等情绪或关税噪音把它砸进 <strong><code>50.00—58.00 港元</code></strong>（回报 <code>7.28%—8.27%</code>）分批建底仓，若泥沙俱下砸穿 <strong><code>≤ 50.00 港元</code></strong>（<code>PB ≤ 1.57x</code>、拆骨覆 <code>106.5%</code>、智驾/固态期权全白送），就果断拎桶重锤，坐等 2027 年 CapEx 见顶与海外/大储 FCF 泄洪的双击！</li>
+</ul>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -3511,7 +4307,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《比亚迪 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/比亚迪 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《比亚迪(002594.SZ_01211.HK) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/比亚迪(002594.SZ_01211.HK) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3708,6 +4504,553 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
