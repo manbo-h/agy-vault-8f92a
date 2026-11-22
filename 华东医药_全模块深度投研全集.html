@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>华东医药 深度投研全集</title>
+<title>华东医药(000963.SZ) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">华东医药 深度投研全集</div>
+    <div class="report-title">华东医药(000963.SZ) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-22</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -892,7 +1350,12 @@
     </div>
   </div>
   <div class="report-content">
-    <p><b>档案基准日</b>：2026-11-10 ｜ <b>最新财报锚点</b>：2025年报、2026半年报、2026三季报（2026-10-28披露）及2026-11-03 NDA公告 ｜ <b>估值收盘锚点</b>：2026-11-06（27.72元/股，总市值486.14亿元）</p>
+    <blockquote>
+<p><strong>⚔️ 【2026-11-22 V4 终审裁决置顶声明（以文末「V4 单一终审真相区」为全篇唯一法定准绳）】</strong><br/>
+本档案原 V1 底稿（2026-11-10）因严重遗漏 <strong>2026-11-20 刚刚全国落地的第十二批国采（4 款丢标 <code>46.34 亿</code> + 3 款中选 <code>20.76 亿</code>，直击医药工业 <code>45.39%</code> 半壁江山）</strong> 与 <strong>2026-11-19 吲哚布芬“晶型 D”专利被宣告全部无效</strong>、低估 <code>Sinclair</code> 医美商誉大洗澡风险及未扣非现金票据背书 CapEx，已触发 <strong>V4 级重大重校（<code>REVISED</code>）</strong>！<br/>
+经第 0 棒交易所官方三表、巨潮原版 PDF（<code>25AR</code>/<code>26H1</code>/<code>26Q3</code>）逐页法医核验及 <strong>18 次独立联网反查</strong>，投委会三道防滑跪铁闸终审锁定最新法定锚点（基准日 <code>2026-11-22</code>，现价 <strong><code>24.85 元</code></strong>，总股本 <code>17.5374 亿股</code>，市值 <strong><code>435.80 亿</code></strong>）：<strong>True EV <code>439.10 亿</code></strong>（<code>ev_delta +3.30 亿</code>）｜<strong>跨周期常态 Owner Earnings 硬砍 <code>-33.9%</code> 至 <code>23.0 亿/年</code></strong>（达产 <code>29.5 亿/年</code>，同时反杀空头双重扣减研发资本化与盲套 <code>63.44%</code> 降幅压出的 <code>16.73 亿</code> 极寒底）｜<strong>质地加分砍至 <code>0.0</code></strong>（原 <code>+1.4</code>）｜<strong>现价 <code>24.85 元</code>（<code>EV/OE 19.09x</code>、内生回报 <code>5.24%</code>）全票退出买区（<code>🔴 0票接飞刀</code>）</strong>，待 2027H1 集采与 <code>8—14 亿</code> 商誉减值利空出清、砸穿 52 周低点 <code>22.85 元</code> 后，<strong>V4 锁定两档击球区：<code>18.00—20.50 元</code> 左侧建仓 / <code>≤ 18.00 元</code> 黄金重锤</strong>（旧稿第一区与模块 A—F 保留历史研判原貌，一切定量与买卖纪律以模块 G 上方「V4 单一终审真相区」及刷新版模块 H 为准）。</p>
+</blockquote>
+<p><b>档案基准日</b>：2026-11-10 ｜ <b>最新财报锚点</b>：2025年报、2026半年报、2026三季报（2026-10-28披露）及2026-11-03 NDA公告 ｜ <b>估值收盘锚点</b>：2026-11-06（27.72元/股，总市值486.14亿元）</p>
 <hr/>
 <h2 id="30">📌 第一区：30秒决策仪表盘（置顶摘要卡）</h2>
 <div class="callout callout-warning"><div class="callout-body">💡 <p><b>【生意底牌一句话】</b></p>
@@ -1154,10 +1617,10 @@
 </li>
 <li>
 <p><b>① “翻旧账对表”（回溯2021—2022年报设定的2025军令状）</b>：</p>
-</li>
+<ul>
 <li><i>承诺“2025年创新业务占整体工业营收30%”</i> → <b>方向兑现、节奏慢约一年半但零注水</b>：未把普通改剂型塞进创新口径充数，2025年纯创新产品收入23.4亿元（占工业15.81%），2026前三季冲至 <b>25.28亿元（占比21.76%）</b>，手握11款NDA审评品种，预计2027年扎实跨过30%门槛。</li>
-<li>
-<p><i>工业微生物高增蓝图</i> → <b>前期受全球Biotech投融资寒冬拖累低于早期乐观预期</b>（2025年7.77亿元），但整合七大基地后2026前三季已恢复 <b>+20.69%</b> 增长。</p>
+<li><i>工业微生物高增蓝图</i> → <b>前期受全球Biotech投融资寒冬拖累低于早期乐观预期</b>（2025年7.77亿元），但整合七大基地后2026前三季已恢复 <b>+20.69%</b> 增长。</li>
+</ul>
 </li>
 <li>
 <p><b>② 质押与减持排查（安全）</b>：截至2025年末，控股股东远大集团质押1.43亿股，仅占其持股的 <b>19.52%</b>（占公司总股本仅 <b>8.14%</b>），无景气高点恶性清仓减持黑历史。</p>
@@ -1307,15 +1770,15 @@
 </li>
 <li>
 <p><b>结构性暗礁一（利润表非现金雷区）：28.40亿元医美商誉减值风险</b></p>
-</li>
-<li>
-<p>国内再生针剂供给扩容不可逆，若2026四季度至2027年Sinclair海外及国内复苏不及预期，存在一次性计提 <b>3亿—8亿元商誉减值</b> 砸穿当期表观净利的现实可能；但并购款早在2018—2022年付讫，纯账面核销不伤中美华东一分钱经营现金流。</p>
+<ul>
+<li>国内再生针剂供给扩容不可逆，若2026四季度至2027年Sinclair海外及国内复苏不及预期，存在一次性计提 <b>3亿—8亿元商誉减值</b> 砸穿当期表观净利的现实可能；但并购款早在2018—2022年付讫，纯账面核销不伤中美华东一分钱经营现金流。</li>
+</ul>
 </li>
 <li>
 <p><b>周期博弈二（危与机一体两面）：2026—2028国内GLP-1“百团大战”价格踩踏 vs 全矩阵收割</b></p>
-</li>
-<li>
-<p><b>危</b>：司美格鲁肽专利到期后十余家类似药混战，注射单靶点暴利归零。</p>
+<ul>
+<li><b>危</b>：司美格鲁肽专利到期后十余家类似药混战，注射单靶点暴利归零。</li>
+</ul>
 </li>
 <li>
 <p><b>机</b>：低价将激活数千万大众减重与基层代谢慢病增量，最先失血出局的是无自有原料车间、高价外包CDMO且无基层药店地面部队的纯Biotech；华东手握<b>“随餐口服低成本片剂HDM1002 + 江东自有原料车间 + 万人县域零售铁军 + 年40亿经营现金流血槽”</b>，具备熬死中小对手收割终局份额的反身性优势。</p>
@@ -1394,10 +1857,12 @@
 <p><b>千倍原料消耗差揭示消化真相</b>：注射司美格鲁肽（2.4mg/周）1名患者全年仅耗约 <b>0.15克</b> 原料药（250kg够160万人用一年，全行业数十吨扩产明牌过剩，华东仅作内部制剂保供并可柔性切换给双靶点HDM1005）；反观<b>口服小分子HDM1002（400mg/日），1名患者全年消耗高达146克纯原料药（是针剂的近1,000倍！）</b>，50万患者即需超70吨高纯化学原料药与近2亿片压片产能，化学合成与ADC自产线均为刚需解渴；唯独宜昌美琪健康一期（126吨VK2/PQQ等）撞上价格腰斩面临过剩爬坡。</p>
 </li>
 <li>
-<p><b>三大落地硬骨头</b>：
-  1. 杭州主城拱墅半山周边住宅密集，二区甲类防爆与高毒ADC偶联车间的消防安评验收极严，且面临外埠产粗品/毒素、主城偶联灌装的跨区危化调度摩擦；
-  2. 湖北美琪健康（中美华东40% + 珲达20% + 安琪集团40%）在功能配料跌价期与安琪酵母自营大健康业务存在潜在同业温差；
-  3. 制剂端瑞士Ypsomed等精密多剂量注射笔组件与进口特种层析填料的国产二供变更备案耗时。</p>
+<p><b>三大落地硬骨头</b>：</p>
+<ol>
+<li>杭州主城拱墅半山周边住宅密集，二区甲类防爆与高毒ADC偶联车间的消防安评验收极严，且面临外埠产粗品/毒素、主城偶联灌装的跨区危化调度摩擦；</li>
+<li>湖北美琪健康（中美华东40% + 珲达20% + 安琪集团40%）在功能配料跌价期与安琪酵母自营大健康业务存在潜在同业温差；</li>
+<li>制剂端瑞士Ypsomed等精密多剂量注射笔组件与进口特种层析填料的国产二供变更备案耗时。</li>
+</ol>
 </li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>注意这个惊人的物理数字：<strong>打针减肥一年只耗 0.15 克药粉，而每天吃一片小分子药（HDM1002）一年要吃掉 146 克药粉，足足差了 1000 倍！</strong> 所以全中国扩建的多肽针剂原料厂未来一定会严重过剩，但华东给口服小分子和 ADC 建的车间是救命刚需，只要开三成工就能回本！</p></div></div></div></div>
 
@@ -1731,6 +2196,233 @@
 
 
 <hr/>
+<h3 id="v4-2026-11-22">✅ 【V4 终审裁决实录（2026-11-22 官方原表法医验真 · 三道铁闸终审单一真相区）】</h3>
+<blockquote>
+<p><strong>终审状态</strong>：<strong><code>REVISED（重大重校 · 现价全票退出买区）</code></strong> ｜ <strong>法医基准日</strong>：<code>2026-11-22</code> ｜ <strong>法定原件溯源</strong>：交易所三表基准 + 巨潮资讯网原版 PDF（<code>26Q3 1225637393.PDF</code> 20页 / <code>26H1 1225511869.PDF</code> 250页 / <code>25AR 1225168701.PDF</code> 325页）+ <strong>18 次独立联网反查</strong><br/>
+<strong>核心基准锚定</strong>：A 股现价 <strong><code>24.85 元/股</code></strong>（<code>-2.13%</code>，52 周 <code>22.85—27.93 元</code>）｜总股本 <strong><code>17.5374 亿股</code></strong>（<code>26Q3 P17</code>）｜总市值 <strong><code>435.80 亿元</code></strong>｜<strong>V4 True EV <code>439.10 亿元</code></strong>（<code>ev_delta +3.30 亿</code>）｜<strong>V4 跨周期常态 Owner Earnings <code>23.0 亿元/年</code></strong>（达产 <strong><code>29.5 亿元/年</code></strong>）｜<strong>现价 <code>True EV / OE = 19.09x</code>（内生收益率 <code>5.24%</code>）</strong>｜<strong>TTM 每股分红 <code>0.93 元</code>（股息率 <code>3.74%</code>）</strong>｜<strong>质地加分 <code>0.0</code></strong>（原 <code>+1.4</code>）｜<strong>V4 终审投票：<code>🔴 0票现价接飞刀（等待 2027H1 集采与商誉利空出清后回踩 18.00—20.50 元左侧建仓 / ≤18.00 元重锤）</code></strong>。</p>
+</blockquote>
+<h4 id="1-pdf">1. 官方原表与原版 PDF 逐科法医验真对照表</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核验维度</th>
+<th style="text-align: left;">V1 原多头底稿口径</th>
+<th style="text-align: left;">红方独立盲审口径</th>
+<th style="text-align: left;">第 0 棒官方原件 + 原版 PDF 页码铁证</th>
+<th style="text-align: left;">V4 裁判官法医终审定论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>总股本与利润核心结构</strong></td>
+<td style="text-align: left;"><code>17.54 亿股</code>；中美华东贡献超 <code>98%</code> 归母净利</td>
+<td style="text-align: left;"><code>17.5374 亿股</code>；中美华东贡献集团 <code>100.3%</code> 净利润</td>
+<td style="text-align: left;"><code>26Q3 P17</code> 精确股本 <strong><code>1,753,736,848 股</code></strong>（26年3月注销激励股 28.42 万股）；<code>25AR P56</code> 中美华东净利 <strong><code>34.22 亿</code></strong> vs 集团全合并 <strong><code>34.11 亿</code></strong>（<code>100.3%</code>）；<code>26Q3 P5</code> 中美华东归母 <strong><code>26.60 亿</code></strong> vs 集团归母 <strong><code>27.72 亿</code></strong>（<code>96.0%</code>）；<code>26Q3 P8</code> 医药商业净利 <strong><code>3.38 亿</code></strong>（<code>25AR</code> <code>4.79 亿</code>）</td>
+<td style="text-align: left;"><strong>红方结构事实精准</strong>。中美华东是全集团绝对利润心脏；商业每年约 <code>4.5—4.8 亿</code> 稳健净利被海外医美亏损、参股研发亏损及总部费用对冲。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>有息负债、受限现金与 True EV</strong></td>
+<td style="text-align: left;">负债 <code>19.65 亿</code>（漏租赁）；受限按 <code>2.40 亿</code>；未计少数股权与应付股利；<code>ev_delta -0.14 亿</code></td>
+<td style="text-align: left;">含租总债 <code>20.74 亿</code>；不受限现金 <code>39.38 亿</code> 扣 <code>18 亿</code> 底仓与 <code>0.72 亿</code> 股利；加少数股权 <code>3.22 亿</code>；<code>ev_delta +3.30 亿</code></td>
+<td style="text-align: left;"><code>26Q3 P15-17, P20</code>：货币资金 <code>41.15 亿</code>（现金及等价物 <strong><code>39.38 亿</code></strong>、受限 <strong><code>1.76 亿</code></strong>）；短借 <code>16.44</code> + 1年内到期 <code>0.70</code> + 长借 <code>2.51</code> + 租赁负债 <strong><code>1.09</code></strong> = <strong><code>20.74 亿</code></strong>；少数股东权益 <strong><code>3.22 亿</code></strong>；应付股利 <strong><code>0.72 亿</code></strong>；<code>26Q1</code>/<code>26Q3</code> 单季 OCF 失血 <code>-8.52</code>/<code>-6.39 亿</code></td>
+<td style="text-align: left;"><strong>采纳严苛口径 <code>True EV = 439.10 亿</code>（<code>ev_delta +3.30 亿</code>）</strong>。补齐 V1 漏计的 <code>1.09 亿</code> 租赁负债、<code>3.22 亿</code> 少数股权与 <code>0.72 亿</code> 应付股利，严扣 <code>18.00 亿</code> 营运底仓；另保留 <code>16.56 亿</code> 长投及 <code>6.71 亿</code> FVOCI 权益未作抵扣。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>研发费用骤降与资本化率争议</strong></td>
+<td style="text-align: left;">工业资本化率约 <code>37.4%</code>（偏松约 2pct），未扣减 26Q3 同比顺风</td>
+<td style="text-align: left;"><code>26H1</code> 资本化率半年由 <code>16.91%</code> 翻倍至 <code>32.66%</code>、<code>26H1</code> 转无形 <code>0 元</code>= 只进不出黑洞，<code>26Q3</code> 研发费降 <code>-3.34 亿</code>（<code>-22.19%</code>）</td>
+<td style="text-align: left;"><code>26H1 P203-204</code> 核实 <code>26H1</code> 资本化 <code>3.62 亿</code>（<code>32.66%</code>）vs <code>25H1</code> <code>2.03 亿</code>（<code>16.91%</code>），<code>26Q3 P17</code> 研发费用降 <code>-3.34 亿</code>；<strong>但 <code>25AR P273-274</code> 铁证抓包</strong>：<strong>2024 全年合并资本化率 <code>43.11%</code>（<code>10.80/25.06 亿</code>）、2025 全年 <code>35.55%</code>（<code>9.67/27.20 亿</code>）且 2025 年结转无形资产 <code>2.32 亿</code></strong>；且 <code>26H1 P203-204</code> 显示 <strong><code>63.5%</code>（<code>2.30 亿</code>）资本化流向自研核心三期管线 <code>HDM1002</code>（<code>1.24 亿</code>，已获 NDA 受理）与 <code>HDM1005</code>（<code>1.06 亿</code>）</strong></td>
+<td style="text-align: left;"><strong>各打五十大板、精准除水</strong>。承认 <code>9M26</code> 同比确有 <code>~2.0 亿</code> 资本化顺风，但戳破空头“突然翻倍+只进不出”的切片剪辑；且在 OE 中一次性归口扣减持续性研发资本化，严防空头重复扣减。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>软资产与票据背书 CapEx</strong></td>
+<td style="text-align: left;">仅列现金 CapEx <code>15.74 亿</code>（25年）/<code>7.49 亿</code>（9M26），未提票据背书买资产</td>
+<td style="text-align: left;">四大软资产 <code>102.43 亿</code>（占净资产 <code>39.78%</code>）；25年含票据 CapEx <code>19.39 亿</code>、真实 FCF 仅 <code>23.07 亿</code>；25年票据贴现终止确认 <code>60.15 亿</code></td>
+<td style="text-align: left;"><code>26Q3 P16</code>：无形 <code>36.96</code> + 开发支出 <code>23.08</code> + 商誉 <code>28.40</code> + 其他非流动资产 <code>13.99</code>（<code>26H1 P177</code> 含预付技术/无形款 <code>12.44 亿</code>）= <strong><code>102.43 亿</code></strong>（占 <code>257.50 亿</code> 归母净资产 <code>39.78%</code>）；<code>25AR P267</code> 实锤商业汇票背书付长期资产 <strong><code>3.65 亿</code></strong>（24年 <code>4.18 亿</code>）；<code>25AR P289</code> 票据贴现终止确认 <strong><code>60.15 亿</code></strong></td>
+<td style="text-align: left;"><strong>100% 认领空头法医硬核发现</strong>。2025 年含票据真实 FCF 实为 <code>23.07 亿</code>（非 <code>26.71 亿</code>），据此反推集采前常态 OE 上限仅约 <code>28.5 亿</code>（戳破 V1 <code>34.8 亿</code> 虚高！）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>医美崩盘与 Sinclair 商誉测试</strong></td>
+<td style="text-align: left;">预估 2026AR 商誉减值 <code>3—8 亿</code>，轻描淡写称“占总盘不足 3%”</td>
+<td style="text-align: left;">医美 <code>9M26</code> <code>9.06 亿</code>（<code>-42.20%</code>），国内剔新品压货暴跌超 <code>-64%</code>；<code>Sinclair</code> <code>14.15 亿</code> 商誉 0 减值、安全垫仅 <code>5,856 万</code>（<code>2.18%</code>），26AR 将砸 <code>12.24—15.74 亿</code> 大洗澡</td>
+<td style="text-align: left;"><code>26Q3 P8</code> 医美 <strong><code>9.06 亿</code>（<code>-42.20%</code>）</strong>（国内 <code>4.56 亿</code> <code>-54.20%</code>，含 <code>芮妥欣®</code> 近亿元铺货；海外 <code>4.92 亿</code> <code>-31.60%</code>）；<code>26H1 P40</code> 明文披露 <code>Sinclair</code> <strong>“本期亏损”</strong>却勾选“无重大减值风险”；<code>26H1 P168-171</code> 核实 <code>Sinclair</code> <code>14.15 亿</code> 商誉 0 减值，账面 <code>26.82 亿</code> vs 可收回 <code>27.41 亿</code>（安全垫 <strong><code>5,856 万 / 2.18%</code></strong>），竟照搬 25AR 永续利润率 <strong><code>20.95%</code></strong>（<code>High Tech</code> <strong><code>31.03%</code></strong>）！</td>
+<td style="text-align: left;"><strong>100% 认领并大幅上修减值预警至 <code>8—14 亿</code></strong>。<code>Sinclair</code> 纸糊安全垫在 2026 年报审计中极难过关，2027 年 1—4 月业绩预告/年报将引爆表观净利大洗澡，必须待其出清后再谈买点。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TTM 分红与分红可持续性</strong></td>
+<td style="text-align: left;">仅列 25 年分红率 <code>47.8%</code>、<code>3.36%</code> 股息率（@27.72 元）</td>
+<td style="text-align: left;">TTM 分红 <code>16.31 亿</code>（<code>3.74%</code> @24.85 元），2027 年 FCF 缩水后派息逼近 <code>100%</code>，神话破灭</td>
+<td style="text-align: left;"><code>25AR P308</code> 2025 末期 <code>0.58 元</code>（<code>10.17 亿</code>）+ <code>26H1 P49</code> 2026 中期 <code>0.35 元</code>（<code>6.14 亿</code>）= <strong>TTM DPS <code>0.93 元/股</code>（<code>16.31 亿</code>，股息率 <code>3.74%</code>）</strong>；<code>26H1 P236</code> 远大集团质押 <code>19.81%</code> 续贷有现金分红刚需</td>
+<td style="text-align: left;"><strong>确认 TTM DPS <code>0.93 元</code></strong>，同时客观预警：2027 集采谷底现金流缩至 <code>20—23 亿</code> 时，<code>16.31 亿</code> 分红对应派息占 FCF 升至 <code>70%—80%</code>，分红增长停滞且存在小幅微调（<code>10%—20%</code>）风险。</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="2-vs">2. 铁闸一 &amp; 二：事实层硬修正 vs 悲观叠加层反杀裁决表</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">争议焦点</th>
+<th style="text-align: left;">红方做空逻辑</th>
+<th style="text-align: left;">铁闸一（18次独立联网反查）&amp; 铁闸二（防三重叠加）终审裁决</th>
+<th style="text-align: left;">对常态 OE / 估值的净影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>① 第十二批国采净利悬崖 + 吲哚布芬专利无效</strong></td>
+<td style="text-align: left;">4 丢标（<code>46.34 亿</code>）跌 <code>65%—75%</code> + 3 中选（<code>20.76 亿</code>）套 <code>63.44%</code> 降幅跌 <code>45%—55%</code>；按 <code>40%</code> 税前边际率算税后净利大坑 <strong><code>-14.45 亿</code></strong></td>
+<td style="text-align: left;"><strong>【认领核弹事实 + 反杀 <code>-4.0 亿</code> 过度高估】</strong>：① <strong>100% 认领</strong>：第十二批国采确于 <code>2026-11-20</code> 落地，4 丢标（吲哚布芬/阿格列汀/吡格列酮二甲双胍/艾沙康唑 <code>46.34 亿</code>）+ 3 中选（他克莫司/环孢素/美沙拉秦 <code>20.76 亿</code>）合占工业 <strong><code>45.39%</code></strong> 且 <code>26Q3</code> 零计入；<code>2026-11-19</code> 吲哚布芬“晶型 D”专利确被国知局宣告全部无效（公司拟提行政诉讼但禁令壁垒已破），原 V1 漏判系重大失职！② <strong>精准反杀三处夸大</strong>：(a) 联网实查第十二批引入“反内卷双锚点”，<strong>他克莫司中选实测降幅仅 <code>48%—53%</code></strong>（远低于空头盲套的全场均值 <code>63.44%</code>），且中选品种享“以量补价 + 学术推广费大幅缩减（从 25%—30% 降至 &lt;5%）”，3 款中选净营收降约 <code>40%</code>（<code>-8.30 亿</code>）、税前净伤仅 <strong><code>-2.32 亿</code></strong>；(b) 参考 <strong>2020 年阿卡波糖（&gt;30 亿）丢标先例</strong>，华东凭院外零售/基层队伍缓冲，当年扣非净利仅降 <code>-5.62%</code>，4 丢标保守按萎缩 <code>65%</code>（留存 <code>35%</code> 院外/自费，损营收 <code>-30.12 亿</code>）；(c) 中美华东整体营业利润率仅 <code>26.6%</code>（<code>25AR P56</code>），扣除变动推广费后边际税前利润率取 <strong><code>33%</code></strong>（非空头拍脑袋 <code>40%</code>），丢标税前净伤 <strong><code>-9.94 亿</code></strong>。<strong>合计税前冲击 <code>-12.26 亿</code>，税后（15%税率）净利真实大坑为 <code>-10.4 亿</code>（区间 <code>-9.5 至 -11.5 亿</code>）</strong>！</td>
+<td style="text-align: left;">较 V1（零扣减）硬砍 <strong><code>-10.4 亿</code></strong>；较空头（<code>-14.45 亿</code>）反杀回拨 <strong><code>+4.0 亿</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>② 研发资本化率与 OE 现金流双重扣减</strong></td>
+<td style="text-align: left;">净利先扣研发资本化虚增 <code>-2.50 亿</code>，算 OE 时再扣维持性 BD/无形资产超 D&amp;A 现金失血 <code>-4.50 亿</code></td>
+<td style="text-align: left;"><strong>【抓获 <code>2.5 亿</code> 经典重复扣减魔术】</strong>：华东现金流量表中，资本化研发支出已全额计入 <code>购建固定/无形/其他长期资产支付现金 (CapEx)</code>！空头先在会计净利中扣 <code>-2.50 亿</code> 资本化虚增，又在 <code>OE = NP + D&amp;A - CapEx</code> 中再扣一次 <code>-4.50 亿</code>，相当于把同一笔资本化研发扣了两次！更何况 <code>25AR P273</code> 证明 24/25 全年资本化率本就是 <code>43.11%/35.55%</code>（26H1 <code>32.66%</code> 反而下行）且 <code>26H1</code> <code>63.5%</code> 投向已报产的 <code>HDM1002</code> 与 <code>HDM1005</code>。V4 终审采用<strong>零重复扣减单轨法</strong>：常态会计净利 <code>27.5 亿</code> + 折旧摊销 <code>11.2 亿</code> - 物理维护 CapEx <code>4.5 亿</code> - 持续性资本化研发及 BD 补充 <code>8.8 亿</code> - 租赁本金 <code>1.0 亿</code> - WC <code>1.4 亿</code> = <strong><code>23.0 亿</code></strong>（与 25AR 真实 FCF <code>23.07 亿</code> 自上而下推演的 <code>23.1 亿</code> 严丝合缝！）。</td>
+<td style="text-align: left;">较 V1（低估票据/BD CapEx）硬挤水分；反杀空头重复扣减 <strong><code>+2.5 亿</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>③ 创新药放量对冲 + 表外 <code>80—101 亿</code> BD 里程碑定性</strong></td>
+<td style="text-align: left;">创新药掺水（混入 <code>尼欣那</code>）且 <code>爱拉赫</code> 难进医保，2027—2028 创新+工微净利增量仅给 <code>+3.80 亿</code>；把 <code>80—101 亿</code> 表外 BD 里程碑渲染成刚性抽血债</td>
+<td style="text-align: left;"><strong>【认领掺水与未进基本医保 + 反杀低估与债化恐吓】</strong>：① <strong>认领硬伤</strong>：<code>26Q3 P6</code> 确将丢标老药 <code>尼欣那®</code> 计入 <code>25.28 亿</code> 创新矩阵；且 <code>2026-11-14</code> 新版国谈公布，<strong><code>爱拉赫®</code> 确未进入基本医保</strong>（仅入选 <code>2026-11-10</code> 商保创新药推荐清单），短期放量受限；② <strong>反杀三项硬催化</strong>：(a) 同日国谈官宣自研 1 类新药 <strong><code>迈瑞东®</code>（美凡厄替尼）首次纳入基本医保</strong>、<code>惠优静®</code>（<code>+400%</code>）顺利续约、<code>赛乐信®</code>（<code>&gt;4 亿/+100%</code>）克罗恩病获批、<code>派舒宁®</code>/<code>信立安®</code> 医保放量；(b) <strong>王牌自研口服小分子 GLP-1 <code>HDM1002</code>（卡维列隆）于 <code>2026-11-03</code> 正式获 NMPA 受理 NDA</strong>，100% 全球自有知识产权、<strong>零外部 BD 分成</strong>，预计 2027 年底—2028 年接棒，叠加 <code>HDM1005</code> 双靶点及工业微生物（<code>9M26 +20.69%</code>，xRNA/多肽 <code>+50%</code>），2027—2028 创新+工微真实净利增量可达 <strong><code>+5.0 至 +6.0 亿</code></strong>（中枢 <code>+5.0 亿</code>，2028—2029 达产阶段再增 <code>+6.5 亿</code>）；(c) 表外 <code>80—101 亿</code> BD 里程碑中 <strong>70%—80% 为高额商业销售达成里程碑</strong>（卖爆才付的成功提成），绝非无条件刚性债务！</td>
+<td style="text-align: left;">2027—2028 常态增量上修至 <strong><code>+5.0 亿</code></strong>；2028—2029 达产 OE 锚定 <strong><code>29.5 亿</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>④ 医美商誉大洗澡 vs 永续现金流混淆</strong></td>
+<td style="text-align: left;">医美商誉将计提 <code>12.24—15.74 亿</code> 大洗澡，并将医美折价压至 <code>10—18 亿</code></td>
+<td style="text-align: left;"><strong>【区分一次性非现金核销与常态现金流】</strong>：100% 认可 <code>Sinclair</code> 面临 <code>8—14 亿</code> 商誉减值冲击 2026 年报利润表，并在 Reverse SOTP 中将<strong>海外 <code>Sinclair</code>/光电直接按 <code>0 元</code> 归零</strong>、国内注射残值砍至 <strong><code>12 亿</code></strong>；但绝不将一次性非现金商誉减值混入跨周期常态 Owner Earnings，避免对医美做二次惩罚！</td>
+<td style="text-align: left;">2026AR 存在 <strong><code>8—14 亿</code></strong> 砸坑诱因，但不改变跨周期 <strong><code>23.0 亿</code></strong> 造血底盘</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-reality-check-reverse-sotp-v4">3. 铁闸三：历史估值分位 Reality Check、严苛重校 Reverse SOTP 与 V4 锁定两档击球区</h4>
+<ol>
+<li><strong>历史 10 年估值分位 Reality Check（粉碎空头 <code>13.00—14.90 元</code> 虚空清算价）</strong>：</li>
+</ol>
+<ul>
+<li>
+<p><strong>2020 年 3 月极端历史大底（阿卡波糖丢标 + 疫情暴跌）</strong>：前复权股价极底 <strong><code>16.02 元</code></strong>，静态 PE 创全历史最低 <strong><code>10.58x</code></strong>，PB 底部约 <strong><code>2.0x</code></strong>；</p>
+</li>
+<li>
+<p><strong>2024 年 9 月医药大熊市底部</strong>：前复权股价低点 <strong><code>25.96 元</code></strong>，PE 极底 <strong><code>15.45x</code></strong>，PB 约 <strong><code>2.0x</code></strong>；</p>
+</li>
+<li>
+<p><strong>今日（<code>2026-11-22</code>，<code>24.85 元</code>）</strong>：52 周区间 <code>22.85—27.93 元</code>，账面 BVPS <strong><code>14.68 元</code></strong>（PB <code>1.69x</code>），即便一次性核销 <strong><code>12 亿</code></strong> 医美商誉（每股扣 <code>-0.68 元</code>），剔商誉后净资产 <strong><code>14.00 元/股</code></strong>（调整后 PB <code>1.78x</code>）。空头喊出的 <code>13.00—14.90 元</code> 对应 <strong><code>0.89x—1.01x</code> PB（剔商誉 <code>0.93x—1.06x</code>）</strong>、仅 <code>8.3x—9.5x</code> 集采后常态 PE，属于对一家具备 20% 工业净利率、287 亿医药商业网络与口服 GLP-1 NDA 管线企业的破净清算幻想，严重背离历史分位现实！</p>
+</li>
+<li>
+<p><strong>但现价 <code>24.85 元</code> 同样绝非买点</strong>：对应 V4 重校 <strong><code>True EV / OE = 19.09x</code>（常态内生收益率仅 <code>5.24%</code>）</strong>、集采后常态 PE <code>15.85x</code>，在国采刚落地 48 小时、专利刚无效 72 小时、2026 年报 <code>8—14 亿</code> 商誉减值尚未出清前，赔率严重不足，<strong>必须坚决退出买区！</strong></p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>V4 严苛重校 Reverse SOTP（戳破旧稿“创新仅 71 亿白送”幻觉）</strong>：</li>
+</ol>
+<ul>
+<li>
+<p><strong>块 ① 浙江医药商业配送</strong>：年稳态净利 <code>4.5 亿 × 8.0x PE</code> = <strong><code>36 亿元</code></strong>；</p>
+</li>
+<li>
+<p><strong>块 ② 集采后传统工业老药底盘</strong>（百令胶囊 + 3 款中选移植免疫 + 4 款丢标院外残余）：消化第十二批国采后常态净利约 <code>18.0 亿 × 11.5x</code> 零增长 PE = <strong><code>207 亿元</code></strong>（较 V1 <code>350 亿</code> 硬砍 <code>-41%</code>！）；</p>
+</li>
+<li>
+<p><strong>块 ③ 全球医美残值</strong>：海外 <code>Sinclair</code>/光电按 <strong><code>0 元</code></strong> 清零，国内注射矩阵企稳赚 <code>1.2 亿 × 10x PE</code> = <strong><code>12 亿元</code></strong>；</p>
+</li>
+<li>
+<p><strong>块 ④ 工业微生物</strong>：<code>26E</code> 营收 <code>~9.5 亿</code>（<code>+20.7%</code>）× <code>2.5x PS</code> = <strong><code>23 亿元</code></strong>；</p>
+</li>
+<li>
+<p><strong>非创新四块托底合计 = <code>278 亿元</code></strong>（扣 <code>ev_delta +3.30 亿</code> 后净托底 <code>275 亿</code>，仅覆盖现价 <code>435.80 亿</code> 市值的 <strong><code>63.1%</code></strong>！）。<strong>现价 <code>24.85 元</code> 给创新药板块隐含标价高达 <code>161 亿元</code>（占 EV <code>36.7%</code>）</strong>，远非 V1 宣称的“71 亿白送”；唯有股价砸至 <strong><code>20.50 元</code></strong>（创新标价压至 <strong><code>85 亿</code></strong>）方现赔率，砸至 <strong><code>≤ 18.00 元</code></strong>（创新标价 <strong><code>≤ 41 亿</code></strong>）时，光已商业化的非尼欣那创新药（年化 <code>~27 亿</code> 营收）即值回票价，自研口服 GLP-1 <strong><code>HDM1002</code> 与 <code>HDM1005</code> 才真正成为 0 元免费期权！</strong></p>
+</li>
+</ul>
+<ol start="3">
+<li><strong>V4 最终锁定两档实战击球区（等待 2027H1 集采 + 商誉双雷落地）</strong>：</li>
+</ol>
+<ul>
+<li>
+<p><strong>🟡 左侧分批建仓区（Tier 2）：<code>18.00 — 20.50 元</code></strong>（较现价回调 <strong><code>-17.5% 至 -27.6%</code></strong>，砸穿 52 周低点 <code>22.85 元</code>）：对应市值 <code>315.7—359.5 亿</code>、True EV <code>319.0—362.8 亿</code>（<code>EV/OE 13.87x—15.77x</code>），<strong>常态内生回报 <code>6.34%—7.21%</code> / 达产回报 <code>8.13%—9.25%</code></strong>，PB <code>1.23x—1.40x</code>（剔 12 亿商誉 <code>1.29x—1.46x</code>），集采后常态 PE <code>11.48x—13.07x</code>，TTM 股息率 <code>4.54%—5.17%</code>（即便分红微调 15% 仍有 <code>3.86%—4.39%</code>）。</p>
+</li>
+<li>
+<p><strong>🟢 极寒黄金重锤区（Tier 1）：<code>≤ 18.00 元</code></strong>（较现价回调 <strong><code>≥ -27.6%</code></strong>，逼近 2020 年阿卡波糖丢标大底 <code>16.02 元</code>）：对应市值 <code>≤ 315.7 亿</code>、True EV <code>≤ 319.0 亿</code>（<code>EV/OE ≤ 13.87x</code>），<strong>常态内生回报 <code>≥ 7.21%</code> / 达产回报 <code>≥ 9.25%</code></strong>，PB <code>≤ 1.23x</code>（剔商誉 <code>≤ 1.29x</code>），集采后常态 PE <code>≤ 11.48x</code> 贴实 2020 历史绝对地板 <code>10.58x</code>，TTM 股息率 <code>≥ 5.17%</code>，创新管线隐含标价压至 <code>≤ 41 亿</code>！</p>
+</li>
+</ul>
+<h4 id="4-v1-v4">4. 📋 《V1 → V4 演进对照表》</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核心估值与风控指标</th>
+<th style="text-align: center;">V1 原多头底稿（2026-11-10）</th>
+<th style="text-align: center;">红方盲审极限空头（2026-11-22）</th>
+<th style="text-align: center;"><strong>V4 三道铁闸终审锁定（2026-11-22）</strong></th>
+<th style="text-align: left;">核心变动幅度与裁决逻辑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>基准股价 / 总市值</strong></td>
+<td style="text-align: center;"><code>27.72 元</code> / <code>486.14 亿</code></td>
+<td style="text-align: center;"><code>24.85 元</code> / <code>435.80 亿</code></td>
+<td style="text-align: center;"><strong><code>24.85 元</code> / <code>435.80 亿</code></strong></td>
+<td style="text-align: left;">对齐 <code>2026-11-22</code> 实时价与 <code>17.5374 亿</code> 精确股本</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>EV 调节项 (<code>ev_delta</code>) / True EV</strong></td>
+<td style="text-align: center;"><code>-0.14 亿</code> / <code>486.00 亿</code></td>
+<td style="text-align: center;"><code>+3.30 亿</code> / <code>439.10 亿</code></td>
+<td style="text-align: center;"><strong><code>+3.30 亿</code> / <code>439.10 亿</code></strong></td>
+<td style="text-align: left;">补齐租赁负债 <code>1.09 亿</code> + 少数股权 <code>3.22 亿</code> + 应付股利 <code>0.72 亿</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>跨周期常态 Owner Earnings</strong></td>
+<td style="text-align: center;"><code>34.8 亿/年</code></td>
+<td style="text-align: center;"><code>16.73 亿/年</code></td>
+<td style="text-align: center;"><strong><code>23.0 亿/年</code></strong></td>
+<td style="text-align: left;">较 V1 <strong>硬砍 <code>-33.9%</code></strong>（认领第十二批国采 <code>-10.4 亿</code> + 票据/研发 CapEx）；反杀空头双重扣减与过度悲观 <strong><code>+37.5%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>达产 Owner Earnings（2028—2029）</strong></td>
+<td style="text-align: center;"><code>45.2 亿/年</code></td>
+<td style="text-align: center;">未给达产</td>
+<td style="text-align: center;"><strong><code>29.5 亿/年</code></strong></td>
+<td style="text-align: left;">较 V1 <strong>硬砍 <code>-34.7%</code></strong>；锚定全自研零分成 <code>HDM1002</code> + <code>HDM1005</code> 接棒</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>现价 True EV / 常态 OE（内生回报）</strong></td>
+<td style="text-align: center;"><code>13.97x</code>（<code>7.16%</code>）</td>
+<td style="text-align: center;"><code>26.25x</code>（<code>3.81%</code>）</td>
+<td style="text-align: center;"><strong><code>19.09x</code>（<code>5.24%</code>）</strong></td>
+<td style="text-align: left;">跌破 6% 买方及格线，现价缺乏安全边际</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SOTP 隐含创新管线标价</strong></td>
+<td style="text-align: center;"><code>71 亿</code>（占 <code>14.6%</code>）</td>
+<td style="text-align: center;">清算价 <code>13.0—14.9 元</code></td>
+<td style="text-align: center;"><strong><code>161 亿</code>（占 <code>36.7%</code>）</strong></td>
+<td style="text-align: left;">戳破旧稿“白送”幻觉；须跌至 <code>≤ 18.00 元</code> 才压至 <code>≤ 41 亿</code> 真正白送</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>医美商誉减值预警（2026AR）</strong></td>
+<td style="text-align: center;"><code>3—8 亿</code></td>
+<td style="text-align: center;"><code>12.24—15.74 亿</code></td>
+<td style="text-align: center;"><strong><code>8—14 亿</code></strong></td>
+<td style="text-align: left;"><code>Sinclair</code> 安全垫仅 <code>5,856 万</code>（<code>2.18%</code>），大洗澡概率极高</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>质地加分 (<code>quality_bonus</code>)</strong></td>
+<td style="text-align: center;"><code>+1.4</code></td>
+<td style="text-align: center;">负分</td>
+<td style="text-align: center;"><strong><code>0.0</code></strong></td>
+<td style="text-align: left;">硬砍 <code>-1.4</code>：剥离质地溢价，保留“无金融占款/零公众圈钱”中性底色</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>两档击球区（建仓 / 重锤）</strong></td>
+<td style="text-align: center;"><code>26.00—28.00 元</code> / <code>≤ 24.50 元</code></td>
+<td style="text-align: center;">目标 <code>13.00—14.90 元</code></td>
+<td style="text-align: center;"><strong><code>18.00—20.50 元</code> / <code>≤ 18.00 元</code></strong></td>
+<td style="text-align: left;">现价 <strong><code>24.85 元</code> 全票退出买区</strong>，拒绝在集采与商誉双雷落地前接飞刀</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>V1 底稿犯了买方研究员最致命的“后视镜失明症”——盯着 2020 年阿卡波糖丢标说“最痛时刻早已翻篇”，却没看见 <strong>48 小时前刚落地的第十二批国采直接把中美华东 45% 的工业收入架在了断头台上</strong>，还把 `Sinclair` 那张只剩 2% 安全垫的纸糊商誉当成了小擦伤！幸好红方盲审拉响了防空警报。</p></div></div>
+<div class="munger-note"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>但做空机构同样爱犯“把同一头牛扒两张皮”的毛病——一边在利润表里扣掉 2.5 亿研发资本化，一边又在现金流 CapEx 里把这笔钱再扣一次；一边把 2020 年靠药店地推扛住阿卡波糖丢标的铁军当成空气，一边把只在卖爆后才付的 BD 销售分成当成明天到期的刚性债务，喊出跌破净资产的 `13 块钱`。<strong>真正成熟的猎手既不在 `24.85 元` 替集采和商誉雷买单，也不在 `13 元` 做白日梦——把子弹攥在手里，等明年上半年业绩和商誉双雷砸穿 `20.50 元` 再弯腰捡带血的筹码！</strong></p></div></div>
+<hr/>
 <h2 id="g">🏛️ 终章模块 G：投资大师闭门圆桌会（四位传奇宗师结合毕生实战的终极会诊）</h2>
 <h3 id="warren-buffett-owner-earnings">🥤 第一席：沃伦·巴菲特（Warren Buffett）——护城河寿命、再投资宿命与 Owner Earnings 算盘</h3>
 <div class="annotated-row"><div class="main-col"><h4 id="1989">“它让我想起 1989 年买强生和默克，但得先确保医美别变成我的德克斯特鞋业”</h4><ul>
@@ -1815,11 +2507,13 @@
 <p><b>第二层思维的人会问</b>：“这些坏消息是不是已经全写在 27.72 元的股价里了？在 486 亿元的总市值里，我们到底为它的未来付了多少钱？”</p>
 </li>
 <li>
-<p><b>用卡拉曼“剥离残值法（Stub Value）”算清下行底线</b>：我们在 2008 年危机中和日常买困境证券时，最喜欢算一笔“极端清算账”。把华东医药拆成四块：
-  1. 浙江医药商业配送（年赚 4 亿，给 9 倍 PE）= <strong>37 亿元</strong>；
-  2. 中美华东传统慢病与免疫老药（哪怕砍掉所有在研新药，每年稳赚 27 亿，按零增长老药企 13 倍 PE 算）= <strong>350 亿元</strong>；
-  3. 全球医美（把海外亏损光电硬件直接按 <strong>0 元破产清零</strong>，国内注射针剂按底部年赚 2 亿给 14 倍 PE）= <strong>28 亿元</strong>；
-  4. 以上三块存量老家底加起来 = <strong>415 亿元（已经托住了当前总市值的 85.4%！）</strong>。</p>
+<p><b>用卡拉曼“剥离残值法（Stub Value）”算清下行底线</b>：我们在 2008 年危机中和日常买困境证券时，最喜欢算一笔“极端清算账”。把华东医药拆成四块：</p>
+<ol>
+<li>浙江医药商业配送（年赚 4 亿，给 9 倍 PE）= <strong>37 亿元</strong>；</li>
+<li>中美华东传统慢病与免疫老药（哪怕砍掉所有在研新药，每年稳赚 27 亿，按零增长老药企 13 倍 PE 算）= <strong>350 亿元</strong>；</li>
+<li>全球医美（把海外亏损光电硬件直接按 <strong>0 元破产清零</strong>，国内注射针剂按底部年赚 2 亿给 14 倍 PE）= <strong>28 亿元</strong>；</li>
+<li>以上三块存量老家底加起来 = <strong>415 亿元（已经托住了当前总市值的 85.4%！）</strong>。</li>
+</ol>
 </li>
 <li>
 <p><b>不对称赔率裁决</b>：这意味着，哪怕在最悲观的假设下，这家公司的存量现金流底盘也封死了你向下超过 15% 的永久本金损失空间（期间每年还有 3.36% 的真实现金分红陪跑）；而向上呢？你只花了 <strong>71 亿元（486 - 415）</strong> 的零头，就买下了已报产的口服小分子 GLP-1（HDM1002）、双靶点 HDM1005、独家卵巢癌 ADC 爱拉赫、全球权益 ROR1 ADC（HDM2005）以及连续增长 50% 的小核酸原料药。如果明年 1—4 月年报季因为计提医美商誉减值，把市值砸到 <strong>400 亿—430 亿元</strong>（即创新管线彻底 0 元白送），那就是千载难逢的黄金重锤坑！</p>
@@ -1870,41 +2564,50 @@
 </tr>
 </tbody>
 </table></div>
+<blockquote>
+<p><strong>🛡️ 【2026-11-22 V4 官方原表验真 × 三道铁闸终审圆桌合议修正投票】</strong><br/>
+<strong>终审合议裁决：<code>🔴 0 票现价接飞刀（4 票全票撤销 V1 买入建议，退出即期买区！）</code></strong><br/>
+在第 0 棒官方原表、巨潮原版 PDF 及 18 次独立联网反查摆出铁证后——第十二批国采刚于 <code>2026-11-20</code> 落地击穿医药工业 <code>45.39%</code> 盘子（4 款丢标 <code>46.34 亿</code> + 3 款中选 <code>20.76 亿</code>）、吲哚布芬“晶型 D”专利刚于 <code>2026-11-19</code> 被判全部无效、<code>Sinclair</code> <code>14.15 亿</code> 商誉安全垫仅剩 <code>5,856 万</code>（<code>2.18%</code>）直面 <code>8—14 亿</code> 年报大洗澡、且 V4 严苛重校常态 Owner Earnings 已硬砍 <code>-33.9%</code> 至 <strong><code>23.0 亿/年</code></strong>（现价 <code>24.85 元</code> 对应 <code>True EV 439.10 亿</code>、<code>EV/OE 19.09x</code>、内生回报仅 <strong><code>5.24%</code></strong>，拆骨后创新管线隐含标价高达 <strong><code>161 亿</code></strong> 而非旧稿 71 亿）——四位大师达成高度一致的修正合议：
+- <strong>🥤 巴菲特（撤回买入，改为观望等坑）</strong>：“我喜欢它 26 年不向公众圈钱的底色，但第十二批国采直接把这头奶牛的产奶量从 35 亿砍到了 23 亿，现在掏 439 亿（5.24% 回报率）买一头明年还要挨集采和商誉两闷棍的农场太贵了。等它跌到 <strong><code>≤ 20.50 元</code></strong>（回报率 ≥ 6.34%）再叫我！”
+- <strong>👴🏻 芒格（撤回建仓，坚持等商誉洗净）</strong>：“<code>Sinclair</code> 亏着钱却在财报里照搬 <code>20.95%</code> 永续利润率，这种自欺欺人的账本明年 4 月必洗澡。不急着当烈士，等 <code>8—14 亿</code> 商誉出清和一季报集采真伤落地再动手。”
+- <strong>🛒 彼得·林奇（撤回即期收集，盯紧 <code>HDM1002</code> 与院外留存）</strong>：“创新药虽有 <code>迈瑞东</code> 进医保、<code>赛乐信</code> 翻倍和 <code>HDM1002</code> 获 NDA 受理，但 <code>25.28 亿</code> 盘子里混进了丢标老药 <code>尼欣那</code>，短期挡不住 <code>46 亿</code> 丢标大坑。留到 2027 年上半年看院外留存率与 <code>HDM1002</code> 审评节奏，跌入 <strong><code>18.00—20.50 元</code></strong> 再翻石头！”
+- <strong>🕰️ 马克斯 &amp; 卡拉曼（全票否决 24.85 元，锁死 <code>≤ 18.00 元</code> 黄金重锤）</strong>：“现价非创新四块残值仅托底 <code>275 亿</code>（<code>63.1%</code>），安全边际严重不足；但空头喊 <code>13 元</code>（破净清算）也脱离 2020 年历史极底（<code>10.58x PE</code> / <code>16.02 元</code>）。耐心等明年上半年双雷引爆砸穿 52 周低点 <code>22.85 元</code>： <strong><code>18.00—20.50 元</code> 左侧建仓，<code>≤ 18.00 元</code>（创新管线标价 <code>≤ 41 亿</code>、PB <code>≤ 1.23x</code>）满弓重锤！</strong>”</p>
+</blockquote>
 <hr/>
 <h2 id="_10">🗓️ 第四区：跨期认知与跟踪进化日志</h2>
 <div class="callout callout-note"><div class="callout-body">📝 <p><b>2026-11-10 深度建档与大师圆桌翻新版</b></p>
 <ul>
 <li><b>核心看多三大支点</b>：<br/>
 
-  1. <b>极致自律的资本基因与强悍内生造血</b>：上市26年仅向公众募资2.50亿元、累计派现94.87亿元（2025分红率47.8%），严苛除水后常态Owner Earnings达34.8亿元/年，对应486亿True EV隐含回报率7.16%/年（在建与在审新药消化后升至8.8%—9.8%/年）；<br/>
-  2. <b>原创创新药从输血迈入收获奇点</b>：2026前三季创新产品收入25.28亿元大增48.33%（占工业21.76%），自研口服小分子GLP-1卡维列隆（HDM1002）刚于 2026-11-03 获NDA受理，解决多肽空腹限水与冷链注射笔痛点，叠加乌司奴单抗翻倍放量与爱拉赫独占窗口；<br/>
-  3. <b>极度安全的价格赔率</b>：存量底座覆盖85.4%市值，96条创新管线与工微期权打包仅作价71亿元（14.6%），且应收账款1年以内5%一刀切计提还暗藏超3.5亿元利润安全垫。</li>
+    1. <b>极致自律的资本基因与强悍内生造血</b>：上市26年仅向公众募资2.50亿元、累计派现94.87亿元（2025分红率47.8%），严苛除水后常态Owner Earnings达34.8亿元/年，对应486亿True EV隐含回报率7.16%/年（在建与在审新药消化后升至8.8%—9.8%/年）；<br/>
+    2. <b>原创创新药从输血迈入收获奇点</b>：2026前三季创新产品收入25.28亿元大增48.33%（占工业21.76%），自研口服小分子GLP-1卡维列隆（HDM1002）刚于 2026-11-03 获NDA受理，解决多肽空腹限水与冷链注射笔痛点，叠加乌司奴单抗翻倍放量与爱拉赫独占窗口；<br/>
+    3. <b>极度安全的价格赔率</b>：存量底座覆盖85.4%市值，96条创新管线与工微期权打包仅作价71亿元（14.6%），且应收账款1年以内5%一刀切计提还暗藏超3.5亿元利润安全垫。</li>
 <li><b>最大顾虑与紧盯隐患</b>：<br/>
 
-  1. <b>28.40亿元医美商誉悬顶与再生红海巷战</b>：国内医美上半年腰斩52.46%，海外光电EBD已实质证伪，2026年报存在一次性计提3亿—8亿元非现金商誉减值风险；<br/>
-  2. <b>长期资产端会计偏松</b>：工业研发资本化率偏高（约37.4%，开发支出23.08亿元）叠加折旧年限偏长（20—50年/5—20年直线法），对当期工业净利率有约2个百分点的软垫美化；<br/>
-  3. <b>海外BD出海短板与万人销售换血大考</b>：跨国License-out尚未破冰，且占全员65.35%的12,479名传统销售大军向C端慢病新零售与三甲肿瘤MSL转型的执行效率待验。</li>
+    1. <b>28.40亿元医美商誉悬顶与再生红海巷战</b>：国内医美上半年腰斩52.46%，海外光电EBD已实质证伪，2026年报存在一次性计提3亿—8亿元非现金商誉减值风险；<br/>
+    2. <b>长期资产端会计偏松</b>：工业研发资本化率偏高（约37.4%，开发支出23.08亿元）叠加折旧年限偏长（20—50年/5—20年直线法），对当期工业净利率有约2个百分点的软垫美化；<br/>
+    3. <b>海外BD出海短板与万人销售换血大考</b>：跨国License-out尚未破冰，且占全员65.35%的12,479名传统销售大军向C端慢病新零售与三甲肿瘤MSL转型的执行效率待验。</li>
 <li><b>下一次定期报告（《2026年年度报告》，预计2027年4月下旬披露；前瞻节点关注2026年12月医保双目录结果及2027年1月业绩预告）第一眼必翻的 5 项附注科目</b>：<br/>
 
-  1. <b>财务附注——“商誉减值测试”</b>：核查英国Sinclair及海外EBD资产组的折现率假设、收入预测调整与本年实际计提减值金额（一次性出清越干脆越好）；<br/>
-  2. <b>财务附注——“开发支出”与“无形资产”变动表</b>：核查23.08亿元开发支出中有多少顺利获批转入无形资产、有无临床终止核销，以及工业研发资本化率是否随Ⅲ期结项自然回落至30%以内；<br/>
-  3. <b>分部报告与经营讨论——“医药工业创新产品收入 &amp; 医美单季营收”</b>：验证2026Q4医美单季能否企稳在3亿元以上，以及全年创新产品收入能否突破35亿元；<br/>
-  4. <b>现金流量表补充资料——“经营活动现金流净额 &amp; 固定资产/无形资产折旧摊销”</b>：核验Q4医院集中结算后全年OCF是否如期回到40亿元上下（净现比≥1.0），核对半山一区与江东车间转固后的实际折旧增量；<br/>
-  5. <b>利润分配预案公告</b>：验证结合2026中期已派发的6.14亿元，全年现金分红支付率是否继续稳守在45%—50%的高诚意水位。</li>
+    1. <b>财务附注——“商誉减值测试”</b>：核查英国Sinclair及海外EBD资产组的折现率假设、收入预测调整与本年实际计提减值金额（一次性出清越干脆越好）；<br/>
+    2. <b>财务附注——“开发支出”与“无形资产”变动表</b>：核查23.08亿元开发支出中有多少顺利获批转入无形资产、有无临床终止核销，以及工业研发资本化率是否随Ⅲ期结项自然回落至30%以内；<br/>
+    3. <b>分部报告与经营讨论——“医药工业创新产品收入 &amp; 医美单季营收”</b>：验证2026Q4医美单季能否企稳在3亿元以上，以及全年创新产品收入能否突破35亿元；<br/>
+    4. <b>现金流量表补充资料——“经营活动现金流净额 &amp; 固定资产/无形资产折旧摊销”</b>：核验Q4医院集中结算后全年OCF是否如期回到40亿元上下（净现比≥1.0），核对半山一区与江东车间转固后的实际折旧增量；<br/>
+    5. <b>利润分配预案公告</b>：验证结合2026中期已派发的6.14亿元，全年现金分红支付率是否继续稳守在45%—50%的高诚意水位。</li>
 </ul></div></div>
 <hr/>
-<h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
+<h2 id="h-1-2026-11-22-v4">【模块 H：💼 专属买方研究员的 1 分钟闭门交底（2026-11-22 V4 终审刷新版）】</h2>
 <blockquote>
-<p><strong>前面那十万字的财报细节和模型我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【华东医药】这家企业，你只需要在脑子里记住这四件事：</strong></p>
+<p><strong>前面全部官方财报原件、原版 PDF 附注、红蓝对质与 18 次独立联网核查我已经替你彻底算穿了。现在忘掉繁琐的小数点，关于【华东医药】，你只需要在脑子里牢牢记住这四件事：</strong></p>
 </blockquote>
-<h3 id="1_5">1. 它到底靠什么在行业里立身？（看家饭碗）</h3>
-<p>别被它账上三百多亿毛利率仅六七个点的浙江医药批发流水迷了眼，那只是件挡风棉袄。华东医药真正的灵魂是全资子公司“中美华东”，用三分之一收入贡献全公司九成八以上净利润。它的看家饭碗是“高壁垒微生物发酵与复杂化学合成底盘，加深入全国三甲和县域基层的一万两千名销售铁军”。靠器官移植免疫抑制剂（极难换药）和慢病老药这台提款机，它在完全不向股市伸手圈钱的前提下，内生孵化出口服GLP-1减肥药、卵巢癌ADC和自免生物药三大创新药集群。</p>
-<h3 id="2_8">2. 它的财务家底和经营周期现在发生了什么本质变化？（为什么它是真印钞机还是苦力）</h3>
-<p>它的资本品格在A股堪称异类——上市二十六年只向公众股民募资两个半亿，却累计分红近九十五亿！目前有息负债与超额自由现金刚好完全抵消，随基建高峰过去，资本开支缩减三成，剔除水分后的常态真实股东盈余每年稳在三十五亿左右。更关键的拐点在于：表面看三季报总营收和利润只涨一两个点，那是医美板块在主动控货洗牌；水面之下，工业创新药收入前三季度狂飙近五成突破二十五亿，自研随餐口服减肥片（卡维列隆，不用空腹不用打针）刚获上市申请受理，正处“老药托底、新药井喷”前夜。</p>
-<h3 id="3_4">3. 市场担心的那些“软肋”，到底是真死穴还是纸老虎？（买方真伪辩证 &amp; 危中之机）</h3>
-<p>市场揪着不放的有三个软肋。第一，“医美收入腰斩且年底面临三到八亿英国子公司商誉减值”，这是<strong>典型的纸老虎和黄金坑制造机（危中之机）</strong>——商誉减值是不掏一分钱现金的账面冲销，且当前四百八十多亿市值已把海外美容仪按零元清算；一旦年报计提引发恐慌砸盘，反而是白捡筹码的良机。第二，“研发资本化率偏高、折旧年限偏长美化了约两个点净利率”，核算时已将这部分全额扣减，三十五亿造血底子依然极硬。真正的<strong>硬约束</strong>是：尚无跨国百亿美元级出海授权大单，且一万多名传统院内代表能否转型卖好C端减肥药和肿瘤新药，得看明年实战。</p>
-<h3 id="4_1">4. 咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
-<p>用拆骨法算账，医药配送、传统慢病老药和国内医美针剂三块存量家底就值四百一十五亿，托住当前总市值八成五以上；市场给全部九十六条创新药管线和工业微生物的打包标价仅七十亿出头，近乎白送。操作分两步走：在四百五十亿到四百九十亿市值（二十五块五到二十八元）建一半收息底仓，拿三个多点股息等减肥药获批；留一半子弹，等明年四月前商誉减值砸出四百亿出头的恐慌坑时满弓重锤。只要管理层不再去海外乱买亏损器械，就踏实吃肉。</p>
+<h3 id="1_5">1. 它到底靠什么在行业里立身？（看家饭碗与刚挨的一记重锤）</h3>
+<p>别被近三百亿、毛利率仅六七个点的浙江医药批发流水迷了眼，真正养活全家的依然是 100% 全资核心子公司 <strong>中美华东</strong>（用三分之一营收赚走全公司九成六到百分之百的净利润）。它的看家饭碗是“高壁垒微生物发酵底盘 + 深入医院和基层药店的万人推广铁军”，历史自律底色极佳（上市 26 年只向散户募资 2.5 亿，累计分红近 95 亿，零集团财务公司占款）。<strong>但必须清醒</strong>：就在两天前（2026 年 11 月 20 日）全国落地的<strong>第十二批国采</strong>直接轰炸了中美华东 <strong>45.4%</strong> 的医药工业盘子——吲哚布芬等 4 款大品种丢标（涉及 46.3 亿收入，且吲哚布芬核心晶型专利在 11 月 19 日刚被判无效），他克莫司等 3 款中选降价（涉及 20.8 亿），三季报里还一分钱都没体现，2027 年老药造血平台必然硬生生下一大截台阶！</p>
+<h3 id="2-127-pe">2. 它的财务家底和经营周期现在发生了什么本质变化？（为什么现在不能看表面 12.7 倍 PE）</h3>
+<p>今天 24.85 元看着只有 12.7 倍表观市盈率和 3.74% 股息率，实则是<strong>集采落地前的“旧快照”</strong>！把第十二批国采净利大坑（约 10.4 亿）、票据背书买资产和持续性研发/BD 资本化支出全部按真实口径扣干净，再对冲上 2027—2028 年新药（迈瑞东首进医保、赛乐信翻倍、加格列净与工业微生物高增）的增量，它跨周期的<strong>常态真实股东盈余（Owner Earnings）要从旧稿的 34.8 亿硬砍三分之一，降到 23.0 亿元/年</strong>（2028—2029 年口服减肥药 HDM1002 放量达产后有望修复至 29.5 亿）。另外，账上 102.4 亿软资产占了净资产近四成，尤其是海外医美 <strong>Sinclair</strong> 营收暴跌超三成且已亏损，账上 14.15 亿商誉却一分未提、安全垫只剩五千多万（2.18%），明年 4 月披露的 2026 年报大概率要引爆 <strong>8 亿至 14 亿元的商誉大洗澡</strong>。</p>
+<h3 id="3_4">3. 市场和空头担心的那些“雷”，哪些是真刀子，哪些是吓唬人？（买方真伪辩证）</h3>
+<p>真刀子我们 100% 认领：<strong>45% 工业盘子遇集采 + 吲哚布芬专利被破 + Sinclair 商誉大洗澡 + 爱拉赫未进基本医保</strong>，这四把刀明年上半年都要真刀真枪砸在季报和年报上，所以现价绝不当烈士！但空头顺势喊出跌破净资产的“13 块钱”，也犯了三重悲观叠加的毛病：第一，空头把研发资本化在利润和现金流里<strong>重复扣了两次</strong>（2.5 亿），且没看清今年 63.5% 的研发资本化是真金白银砸在了已经受理上市申请的自研王牌口服减肥药 <strong>HDM1002</strong> 和双靶点 <strong>HDM1005</strong> 上；第二，他克莫司中选实际降幅约五成而非空头乱套的 63%，且华东 2020 年阿卡波糖丢标时靠院外药店稳住了基本盘；第三，表外百亿 BD 里程碑里七成以上是“卖爆了才给提成”的成功费，根本不是刚性债。<strong>它不是要破产的垃圾股，而是一头正在经历“集采+商誉双阵痛换血”的老牌强龙。</strong></p>
+<h3 id="4-v4">4. 咱们到底该怎么操作、在哪儿出手？（V4 铁血实战底线）</h3>
+<p>重算严苛拆骨账：浙江商业（36 亿）+ 集采后存量老药（207 亿）+ 医美残值（海外清零、国内 12 亿）+ 工业微生物（23 亿），四块非创新底座只托住 <strong>275 亿</strong>（现价市值的 63%），意味着今天 24.85 元（True EV 439 亿，真实 EV/OE 高达 19.1 倍、内生回报仅 5.24%）还给创新药标了 <strong>161 亿</strong> 高价，绝不是白送！<strong>实战铁律只有一条：现价 24.85 元 0 票接飞刀，全票退出买区！</strong> 攥紧现金耐心等明年 1—4 月商誉减值预告和一二季报集采真伤砸穿 52 周低点（22.85 元）：跌入 <strong>18.00—20.50 元</strong>（回报率 6.3%—7.2%，PB 1.23—1.40 倍）再左侧分批建底仓；真若恐慌砸到 <strong>18.00 元以下</strong>（逼近 2020 年阿卡波糖丢标历史大底、创新管线标价压至 41 亿以下真正白送），毫不犹豫满弓重锤！</p>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -2096,7 +2799,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《华东医药 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/华东医药 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《华东医药(000963.SZ) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/华东医药(000963.SZ) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2293,6 +2996,553 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
