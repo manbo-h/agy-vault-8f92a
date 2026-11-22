@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>招商银行(600036.SH / 03968.HK) 深度投研全集</title>
+<title>招商银行(600036.SH) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -925,6 +925,215 @@
       color: #94a3b8;
       border-color: #475569;
     }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -1116,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">招商银行(600036.SH / 03968.HK) 深度投研全集</div>
+    <div class="report-title">招商银行(600036.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-20</span>
+      <span>📅 导出日期：2026-11-22</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -1144,6 +1353,7 @@
     <h1 id="600036sh-03968hk">招商银行（600036.SH / 03968.HK）深度投研全景底座</h1>
 <blockquote>
 <p><strong>基准报告期</strong>：2026年第三季度报告（3Q2026，未经审计）、2026年半年度报告（1H2026）及 2021—2025 年经审计年度报告（数据截至 <code>2026年11月20日</code>）。本阶段严格聚焦商业本质、资产负债表底牌、同行硬核对质与动态进化能力，<strong>不涉及任何估值与价格讨论</strong>。</p>
+<p><strong>⚔️ 2026-11-22 物理隔离盲审做空 × 防“空头滑跪”三道铁闸终审重校声明</strong>：本全集已于 <code>2026年11月22日</code> 接受独立物理隔离做空备忘录的极限盲审攻防，并由投委会（IC）执行 <strong>20 次一手季报/行情穿透反查（铁闸一）+ 事实层与假设层严苛二元切割（铁闸二）+ 10 年历史 PB/PE 极底 Reality Check（铁闸三）</strong> 终审裁决。按最新收盘价 <strong>A股 <code>44.00元</code> / H股 <code>53.75港元</code></strong>（汇率基准 <code>1港元 = 0.855人民币</code>，H股折 <code>45.96元</code> 罕见倒挂溢价 <strong><code>+4.45%</code></strong>）硬核重校：① <strong>100% 认领并修正事实层硬伤</strong>：信用卡前三季新生成不良 <strong><code>347.11亿元</code></strong>（占全行 <code>61.81%</code>）致 <code>26H1</code> 零售税前利润暴跌 <code>-17.58%</code> 占比跌破 <code>50%</code>、关注率升至 <strong><code>1.59%</code></strong>、贷款边际对公化（公司贷 <code>+10.59%</code> vs 零售贷 <code>-1.28%</code>），将常态贷款信用成本由 <code>0.62%</code> 上调至 <strong><code>0.70%</code></strong>（年总减值 <code>536.71亿</code>）、稳态 NIM 下移至 <strong><code>1.72%</code></strong>，<strong>常态 Core OE 由 <code>1,415.26亿</code> 理性下修 <code>-5.04%</code> 至 <code>1,343.89亿元</code></strong>（拐点达产 <code>1,463.72亿元</code>）；② <strong>铁面反杀空头四重数据剪辑与三重悲观叠加</strong>：拆穿“Q3 单季减值同比 <code>+44.34%</code> 加速失控”的基数幻觉（实为 <code>Q1 148.46亿 → Q2 143.31亿 → Q3 125.98亿</code> 连续两季环比骤降 <code>-12.09%</code>，信用卡新生成不良亦 <code>Q1 120.42 → Q2 116.56 → Q3 110.13亿</code> 两连降），拨备覆盖率 Q3 环比反升 <strong><code>+4.29pct</code> 至 <code>389.39%</code></strong>，不良处置近六成为有现金回收的 ABS 而非归零核销，且 <code>14.39%</code> CET1 握有提分红破除分母膨胀的核按钮；③ <strong>击球区与交易指令重校</strong>：<strong>A股两档买点收严至第二档 <code>36.50—41.00元</code>（PB <code>0.78—0.87x</code> / 股息 <code>4.92%—5.52%</code>）、第一档重锤 <code>≤36.50元</code>（PB <code>≤0.78x</code> / 贴近今年 7 月底 <code>35.28元</code>），当前 <code>44.00元</code> 已触 52 周高点 <code>44.16元</code> 且超出买点上限 <code>+7.3%</code>，降级为 <code>0票追高 / 观察等待回调</code>；H股 <code>53.75港元</code> 溢价倒挂且港股通税后股息仅 <code>3.51%</code>，<code>100% 强制否决禁买</code></strong>！完整红蓝二元对质实录详见【模块 F 末尾终审章节】及同步更新的【模块 G/H 裁决】。</p>
 </blockquote>
 <hr/>
 <h2 id="_1">【开篇破题：两段话直击生意灵魂与当期核心张力】</h2>
@@ -4354,6 +4564,156 @@
 <li><strong>当前击球区水位与排行榜梯队建议</strong>：当前 <code>43.32元</code> 处于 <strong>【第二档：左侧高赔率建仓击球区（<code>38—44元</code>）上沿偏内侧】</strong>，高股息防弹底盘 + 破净低估 + 营收反转右侧信号初现，建议录入《性价比排行榜》<strong>【第二梯队核心重仓 / 准第一梯队（高确定性底仓压舱石）】</strong>（若回踩 <code>38元</code> 以下则瞬间跃升至第一梯队黄金重锤区）！</li>
 </ul>
 <hr/>
+<h3 id="2026-11-22">⚔️ 【2026-11-22 物理隔离盲审做空 × 防“空头滑跪”三道铁闸二元对质终审实录】</h3>
+<blockquote>
+<p>📌 <strong>终审庭审基准与价格刷新（截至 <code>2026年11月22日</code>）</strong>：针对物理隔离独立盲审出具的《招商银行(600036.SH)_独立盲审做空备忘录》（目标公允价 <code>35.15—37.50元</code> / <code>41.35—44.12港元</code>，核心直指“零售信贷坏账失控 + 资产对公化平庸退化与机械性 ROE 重力塌缩”两根毒刺），买方投委会（IC）启动最高级别红蓝对质终审。行情同步刷新至最新收盘价：<strong>A股 <code>44.00元</code></strong>（总股本 <code>252.20亿股</code> / 精准 <code>252.1985亿股</code>，总市值 <strong><code>11,096.73亿元</code></strong>，对应 <code>2026Q3</code> 归母普通股净资产 <code>11,819.97亿元</code> [已扣 <code>1,999.89亿</code> 永续债，BVPS <strong><code>46.87元</code></strong>]，账面 PB <strong><code>0.939x</code></strong>，200%超额拨备还原 PB <strong><code>0.866x</code></strong>，TTM 免税股息率 <strong><code>4.58%</code></strong>）、<strong>H股 <code>53.75港元</code></strong>（按统一基准汇率 <code>1港元 = 0.855人民币</code> 折合 <strong><code>45.96元</code></strong>，总市值 <strong><code>11,590.10亿元</code></strong>，罕见较 A股倒挂溢价 <strong><code>+4.45%</code></strong>，账面 PB <strong><code>0.981x</code></strong>，税前股息 <strong><code>4.39%</code></strong> / 港股通扣 <code>20%</code> 红利税后仅 <strong><code>3.51%</code></strong>）。以下经 <strong>20 次一手财报与市场数据针对性联网反查</strong> 及 Python 全链路精算，给出绝不滑跪、绝不和稀泥的终审裁决。</p>
+</blockquote>
+<h4 id="1-20-vs">① 铁闸一 &amp; 二：20 次一手反查与“事实层硬改 vs 假设层/数据反杀”二元裁决矩阵</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">空头核心指控（两根毒刺拆解）</th>
+<th style="text-align: left;">20 次一手季报/业绩会联网穿透核查铁证</th>
+<th style="text-align: left;">终审二元裁决</th>
+<th style="text-align: left;">量化落地与财务模型修正动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>毒刺 1A：信用卡坏账黑洞吞噬零售利润、<code>26H1</code> 零售利润占比跌破 <code>50%</code>、关注/逾期率走高</strong></td>
+<td style="text-align: left;">100% 属实：<code>26Q1-Q3</code> 母行新生成不良 <strong><code>561.60亿</code></strong>（<code>+81.57亿</code> / 生成率 <code>1.07%</code>），其中信用卡 <strong><code>347.11亿</code></strong>（占 <code>61.81%</code>）；<code>26H1</code> 零售税前利润 <strong><code>428.88亿</code></strong>（<code>-17.58%</code>，占比 <code>47.27%</code>）；集团关注率 <strong><code>1.59%</code></strong>（<code>+16bp</code>）、逾期率 <strong><code>1.32%</code></strong>（<code>+7bp</code>）；<code>26Q3</code> 非卡不良生成 <code>79.61亿</code> 较 <code>Q2</code>（<code>66.03亿</code>）确有反弹（对公 <code>21.36亿</code> + 非卡零售 <code>58.25亿</code>）。</td>
+<td style="text-align: left;"><strong>🩸 事实层命中硬改</strong></td>
+<td style="text-align: left;">旧稿标尺二将常态贷款信用成本设在 <code>0.62%</code>（总减值 <code>472.08亿</code>）<strong>明显偏乐观！</strong> 强制将常态贷款信用成本硬性上调 <code>+8bp</code> 至 <strong><code>0.70%</code></strong>（加非贷 <code>15亿</code> = 年总减值 <strong><code>536.71亿元</code></strong>，较 2025 实提多 <strong><code>+141亿</code></strong>、高于 <code>26Q1-Q3</code> 季节性年化 <code>497亿</code>），穿透税后直接砍减常态 OE <strong><code>-48亿</code></strong> 级别！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>毒刺 1B：<code>26Q3</code> 单季减值 <code>+44.34%</code> 加速失控、拨备“持续漏气失血”、须按 <code>0.95%</code> 永久信用成本砍利润至 <code>1,280亿</code></strong></td>
+<td style="text-align: left;"><strong>空头存在严重同比基数剪辑与会计误判！</strong> ① 穿透三份季报单季序列：<strong>信用卡新生成不良 <code>Q1 120.42亿 → Q2 116.56亿 (-3.2%) → Q3 110.13亿 (-5.5%)</code> 已连续两季环比下行</strong>（累计 <code>-8.55%</code>），管理层业绩会亦确认 Q3 信用卡逾期额与逾期率同步回落；② <strong>全行单季信用减值 <code>Q1 148.46亿 → Q2 143.31亿 (-3.5%) → Q3 125.98亿 (-12.1%)</code> 两连降</strong>，所谓“同比 <code>+44.34%</code>”纯系 <code>25Q3</code> 仅 <code>87.28亿</code> 非信贷回拨制造的极低基数；③ <strong>集团拨备覆盖率 Q3 较 <code>26H1</code>（<code>385.10%</code>）环比强力反弹 <code>+4.29pct</code> 至 <code>389.39%</code></strong>；④ <code>534.50亿</code> 不良处置中 <strong>ABS 证券化占 <code>318.91亿</code>（<code>59.7%</code>，有现金回流）、现金清收 <code>62.06亿</code>（<code>11.6%</code>）、抵债 <code>21.28亿</code>，常规核销仅 <code>132.25亿</code>（<code>24.7%</code>）</strong>；且个人房贷不良率逆降 <code>3bp</code> 至 <strong><code>0.48%</code></strong>、对公地产不良大降 <code>75bp</code> 至 <code>3.89%</code>。</td>
+<td style="text-align: left;"><strong>🛡️ 假设层/数据反杀</strong></td>
+<td style="text-align: left;"><strong>严禁把无抵押信用卡单条线峰值 LGD 外推为全行 <code>0.95%</code> 永久信用成本！</strong> 拒绝空头将常态归母净利砍至 <code>1,280亿</code>（扣永续债仅 <code>1,234亿</code>）的极寒滑跪，同时保留 <code>2,728.38亿</code> 拨备池对应的 <strong><code>732.51亿</code>（250%线）—<code>995.27亿</code>（200%线）</strong>税后超额安全垫。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>毒刺 2A：零售贷款缩表 <code>-1.28%</code>、公司贷狂飙 <code>+10.59%</code> 拉低综合收益率（<code>-111bp</code> 价差），现价 <code>44.00元</code> / H股 <code>53.75港元</code> 缺乏安全边际</strong></td>
+<td style="text-align: left;">100% 属实：零售贷款 <code>36,726.77亿</code>（<code>-475.14亿</code>，占比 <code>49.28%</code> 跌破半壁）vs 公司贷 <code>35,561.74亿</code>（<code>+3,404.24亿</code>，占比 <code>47.71%</code>）；<code>26H1</code> 零售收益率 <code>3.70%</code> vs 对公 <code>2.59%</code> 存在 <code>111bp</code> 价差；且 A股 <code>44.00元</code> 已触及 <strong>52 周高点 <code>44.16元</code></strong>（较 7 月底 <code>34.28元</code> 反弹 <code>+28.4%</code>），TTM 股息率压至 <code>4.58%</code>；H股 <code>53.75港元</code>（折 <code>45.96元</code>）溢价 <strong><code>+4.45%</code></strong> 且港股通税后股息仅 <strong><code>3.51%</code></strong>。</td>
+<td style="text-align: left;"><strong>🩸 事实层命中硬改</strong></td>
+<td style="text-align: left;">① 将稳态 NIM 由 <code>1.74%</code> 再下修 <code>2bp</code> 至 <strong><code>1.72%</code></strong>（较当前 <code>1.82%</code> 预留 <code>10bp</code> 缓冲），净手续费由 <code>785亿</code> 审慎调降至 <strong><code>775亿</code></strong>；② 收严 Reverse SOTP 拆骨（大财富严苛净利由 <code>205亿</code> 下调至 <code>190亿 @ 12x PE</code>），发现现价 <code>44.00元</code> 已吃光大财富折价；③ <strong>收严 A股买点至 <code>36.50—41.00元</code>，现价 <code>44.00元</code> 正式降级为 <code>0票追高 / 观察等待</code>；H股 <code>53.75港元</code> 维持 <code>100% 强制否决禁买</code></strong>！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>毒刺 2B：存款 <code>0.95%</code> 成本优势已耗尽、财富管理 <code>Q3</code> <code>-7.13%</code> 证伪、机械性 ROE 必崩破 <code>11.5%</code>、被宁波银行全面反超</strong></td>
+<td style="text-align: left;"><strong>四重因果倒置与三重悲观复利叠加！</strong> ① 存款成本 <strong><code>0.95%</code></strong> + 活期占比 <strong><code>49.75%</code></strong> 即使不再降息，依然比工行（<code>1.15%</code>）低 <code>20bp</code>、比宁波/平安/兴业低 <strong><code>37—45bp</code></strong>，在 <code>10.26万亿</code> 盘子上每年稳省 <strong><code>~400亿元</code></strong> 永久利差；且零售缩表 <code>-475亿</code> 中 <strong><code>-479.88亿</code> 全部源于主动压降高危信用卡</strong>（非卡零售反增 <code>+4.74亿</code>）；② <code>26Q3</code> 财富中收 <code>73.12亿</code> 同比 <code>-7.13%</code> 纯因 <strong><code>25Q3</code> 权益牛市脉冲制造了 <code>78.73亿</code> 超高基数</strong>（<code>25H1</code> 季均仅 <code>63.99亿</code>），<code>26Q1-Q3</code> 全期仍高增 <strong><code>+13.71%</code></strong>（代理基金 <code>+31.63%</code>、信托 <code>+32.27%</code>），AUM 九个月净增 <strong><code>+1.63万亿</code> 至 <code>18.71万亿</code>（<code>+9.52%</code>）</strong>；③ 宁波银行 <code>13.99%</code> ROAE 背后是紧贴红线的 <strong><code>9.56%</code> CET1</strong> 与 <code>3.4%</code> 低股息，而招行 <strong><code>14.39%</code>（高级法）/ <code>12.08%</code>（权重法）CET1</strong> 连续 <strong><code>13年</code> 零普通股抽血</strong>，且 <code>2026年</code> 连赎 <code>275亿</code> 优先股 + <code>430亿</code> 高息永续债，即便在重校 <code>1,343.89亿</code> 下纯自由可分配盈余仍达 <strong><code>750.58亿</code>（理论无损分红上限 <code>55.9%</code>）</strong>，手握提分红破除分母膨胀的核按钮！</td>
+<td style="text-align: left;"><strong>🛡️ 假设层/数据反杀</strong></td>
+<td style="text-align: left;"><strong>严禁“0.95% 永久信用成本 + 0.73x 熊市 PB + 超额拨备与 14.39% 资本归零”三重悲观复利叠加！</strong> 仅在分子端扣足现实增量，分母端回归历史真实 PB 锚，拒绝把招行按平庸股份行打折贱卖。</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这场庭审最精彩之处在于把“真病灶”和“吓唬人的假警报”切得干干净净。信用卡前三季爆了 `347亿` 新不良、零售利润占比跌破一半、现价 `44元` 顶在一年最高点门口——这是铁打的硬伤，多头闭眼喊买纯属自欺欺人；但空头拿去年 `87亿` 极低基数硬说今年三季度减值“失控暴增 `+44%`”，却故意藏起一季度 `148亿` → 二季度 `143亿` → 三季度 `126亿` 连续大幅回落的事实，这就是典型的拿后视镜当望远镜。好裁判从不跟空头一起恐慌，也不跟多头一起做梦。</p></div></div>
+<hr/>
+<h4 id="2-510-reality-check">② 铁闸三：过去 5—10 年历史估值最低分位 Reality Check（杜绝空中楼阁与追高）</h4>
+<p>联网核实招商银行过去十年（<code>2016—2026年</code>）真实历史 PB 与价格大底坐标：</p>
+<ul>
+<li>
+<p><strong>A股（<code>600036.SH</code>）十年极底刻度</strong>：<code>2016—2021年</code> 成长溢价期 PB 介于 <code>1.10x—2.01x</code>；进入 <code>2022—2026年</code> 低利率与地产出清周期后，<strong><code>2022年10月</code> 最低 <code>0.74x PB</code></strong>、<strong><code>2023年12月</code> 历史极端大底 <code>0.67x PB</code></strong>、<strong><code>2024年1月</code> 最低 <code>0.68x PB</code></strong>，而就在本年度 <strong><code>2026年7月1日</code></strong>（行长交棒盲盒期 + 科技股抽血）刚砸出 52 周最低点 <strong><code>34.28元</code>（不复权 <code>35.28元</code>，对应约 <code>0.75x—0.78x PB</code>）</strong>；52 周高点为 <strong><code>44.16元</code></strong>。当前 <code>44.00元</code>（<code>0.939x PB</code>）虽位于 10 年全周期约 <code>23.4%</code> 分位，但已精准顶在 <strong>近 3 年熊市重构期的 <code>85%—90%</code> 高位与 52 周绝顶门口</strong>！</p>
+</li>
+<li>
+<p><strong>H股（<code>03968.HK</code>）十年极底刻度</strong>：<code>2022—2024年</code> 极端谷底落于 <strong><code>0.60x—0.70x PB</code></strong>，本年度 52 周低点为 <strong><code>43.34港元</code></strong>（按 <code>0.855</code> 折合人民币 <code>37.06元</code>，<code>0.79x PB</code>）。当前 <strong><code>53.75港元</code></strong>（折人民币 <code>45.96元</code>，<code>0.981x PB</code>）不仅距 52 周低点已反弹 <code>+24.0%</code>，更荒谬地较 A股溢价 <strong><code>+4.45%</code></strong> 且叠加 <code>20%</code> 港股通红利税，<strong>毫无任何左侧配置资格</strong>。</p>
+</li>
+<li>
+<p><strong>现实落地校准</strong>：基于上述 10 年历史底轨与重校后 <code>46.87元</code> BVPS，<strong>A股第一档左侧重锤区精准钉死 <code>≤ 36.50元</code>（PB <code>≤ 0.779x</code> / 200%还原 PB <code>≤ 0.718x</code>，紧贴今年 7 月不复权低点 <code>35.28元</code> 与重校块 1 清算底 <code>33.99—35.03元</code>，TTM 免税股息 <code>≥ 5.52%</code> / 常态回报 <code>≥ 14.60%</code>）</strong>；<strong>第二档正常买入区精准收严至 <code>36.50—41.00元</code>（PB <code>0.779x—0.875x</code> / 200%还原 <code>0.718x—0.807x</code>，P/OE <code>6.85x—7.69x</code>，常态回报 <code>13.00%—14.60%</code>，TTM 免税股息 <code>4.92%—5.52%</code>）</strong>；<strong>H股仅在回踩 <code>39.00—44.00港元</code>（PB <code>0.71x—0.80x</code> / 税前股息 <code>5.36%—6.05%</code> / 港股通税后 <code>4.29%—4.84%</code>）且同步消除对 A股溢价时才具观察价值，重锤区 <code>≤ 39.00港元</code></strong>。</p>
+</li>
+</ul>
+<hr/>
+<h4 id="3_4">③ 【三联对照】核心量化坐标、拆骨估值与两档击球区终审校准表</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核心量化锚点（基准：<code>2026-11-22</code>，汇率 <code>0.855</code>）</th>
+<th style="text-align: center;">旧原稿基准（<code>11-20</code> @ <code>43.32元</code>）</th>
+<th style="text-align: center;">红方独立空头极寒推演</th>
+<th style="text-align: center;"><strong>🏆 今日三道铁闸终审重校（最终唯一主锚）</strong></th>
+<th style="text-align: left;">变动幅与买方裁决说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>A股/H股最新价 &amp; 总市值（<code>ev_delta = 0</code>）</strong></td>
+<td style="text-align: center;">A <code>43.32元</code>(<code>10,925.2亿</code>)<br/>H <code>54.00港元</code></td>
+<td style="text-align: center;">A <code>44.00元</code> / H <code>53.75港元</code><br/><em>(H溢价 <code>+3.84%</code>@0.850)</em></td>
+<td style="text-align: center;"><strong>A <code>44.00元</code>（<code>11,096.73亿</code>）</strong><br/><strong>H <code>53.75港元</code>（折 <code>45.96元</code>/<code>11,590.10亿</code>）</strong></td>
+<td style="text-align: left;">排行榜严格按 <code>ev_delta=0</code> 统一口径；H 较 A 溢价 <strong><code>+4.45%</code></strong>，账面 PB A <code>0.939x</code> / H <code>0.981x</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>核心模型假设（NIM / 贷款信用成本 / 减值）</strong></td>
+<td style="text-align: center;">NIM <code>1.74%</code> / 信用成本 <code>0.62%</code><br/>总信用减值 <code>472.08亿</code></td>
+<td style="text-align: center;">NIM <code>1.65%</code> / 信用成本 <code>0.95%</code><br/>总信用减值 <code>708—728亿</code></td>
+<td style="text-align: center;"><strong>NIM <code>1.72%</code> / 信用成本 <code>0.70%</code></strong><br/><strong>总信用减值 <code>536.71亿</code></strong> <em>(+非贷<code>15亿</code>)</em></td>
+<td style="text-align: left;">100% 硬认领零售坏账与对公化稀释（减值加码 <code>+64.6亿</code>），反杀 <code>0.95%</code> 极寒永续假设</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>常态归母普通股盈余（Core OE / <code>steady_oe</code>）</strong></td>
+<td style="text-align: center;"><code>1,415.26亿元</code><br/><em>(EPS <code>5.61元</code> / ROAE <code>11.97%</code>)</em></td>
+<td style="text-align: center;">约 <code>1,234—1,254亿元</code><br/><em>(归母净利 <code>1,280—1,300亿</code>)</em></td>
+<td style="text-align: center;"><strong><code>1,343.89亿元</code></strong><br/><em>(EPS <strong><code>5.33元</code></strong> / 静态 ROAE <strong><code>11.37%</code></strong>)</em></td>
+<td style="text-align: left;">较旧稿理性下修 <strong><code>-5.04%</code></strong>（<code>-71.37亿</code>），已足额扣除 <code>46.23亿</code> 审慎滚动永续债年息</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>纯自由可分配现金盈余（扣 5.5% RWA 留存）</strong></td>
+<td style="text-align: center;"><code>821.95亿元</code>（极限分红 <code>58.1%</code>）</td>
+<td style="text-align: center;">未单算（假设分红锁死 <code>35%</code>）</td>
+<td style="text-align: center;"><strong><code>750.58亿元</code>（极限分红 <code>55.9%</code>）</strong></td>
+<td style="text-align: left;">仍为现行 <code>508.43亿</code> 分红的 <strong><code>1.48倍</code></strong>，手握提分红率至 <code>40%+</code> 破除 ROE 稀释的资本底牌</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>拐点/达产稳态 Core OE（<code>full_oe</code>）</strong></td>
+<td style="text-align: center;"><code>1,530.70亿元</code> <em>(EPS <code>6.07元</code>)</em></td>
+<td style="text-align: center;">无上行空间假设</td>
+<td style="text-align: center;"><strong><code>1,463.72亿元</code></strong> <em>(EPS <strong><code>5.80元</code></strong>)</em></td>
+<td style="text-align: left;">较旧稿下修 <code>-4.38%</code>：信用卡出清（信用成本 <code>0.60%</code>）+ AUM <code>22万亿</code>（严苛 <code>16bp</code>）+ AI 降本 <code>1.0pct</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>A股现价 <code>44.00元</code> 常态回报 &amp; TTM 股息率</strong></td>
+<td style="text-align: center;">回报 <code>12.95%</code> <em>(TEV <code>14.25%</code>)</em><br/>股息 <code>4.65%</code> <em>(@43.32)</em></td>
+<td style="text-align: center;">盈利缩水 + 估值杀向 <code>0.75x PB</code></td>
+<td style="text-align: center;"><strong>常态回报 <code>12.11%</code></strong> <em>(P/OE <code>8.26x</code>)</em><br/><strong>达产 <code>13.19%</code> / TTM 股息 <code>4.58%</code></strong></td>
+<td style="text-align: left;">若扣 <code>995.27亿</code> 税后超额拨备（200%线）则 TEV 回报 <code>13.30%</code>；H股港股通税后股息仅 <strong><code>3.51%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>审慎重校 Reverse SOTP 拆骨验证</strong></td>
+<td style="text-align: center;">块1 <code>9,059亿</code> + 块2 <code>2,768亿</code> + 块3 <code>750亿</code>（大财富打67折）</td>
+<td style="text-align: center;">全部剥离逻辑归零</td>
+<td style="text-align: center;"><strong>块1 <code>8,573—8,835亿</code> + 块2 <code>2,280亿</code> + 块3 <code>500亿</code></strong> <em>(全景 <code>45.01—46.06元</code>)</em></td>
+<td style="text-align: left;">现价 <code>44.00元</code> 下块2残余标价 <code>11.9—13.3x PE</code>，<strong>旧稿“大财富67折白送”已基本消失，不可追高！</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>🎯 A股第一档（左侧重锤区）</strong></td>
+<td style="text-align: center;"><code>≤ 38.00元</code> (<code>≤0.81x PB</code>)</td>
+<td style="text-align: center;">公允靶点 <code>35.15—37.50元</code></td>
+<td style="text-align: center;"><strong><code>≤ 36.50元</code></strong> (<code>≤0.78x PB</code> / 还原 <code>≤0.72x</code>)</td>
+<td style="text-align: left;">P/OE <code>≤6.85x</code>，常态回报 <strong><code>≥14.60%</code></strong>，TTM 免税股息 <strong><code>≥5.52%</code></strong>，踩实今年 7 月底 <code>35.28元</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>🟢 A股第二档（正常买入区）</strong></td>
+<td style="text-align: center;"><code>38.00 — 44.00元</code> <em>(旧称甜区)</em></td>
+<td style="text-align: center;">强烈回避溢价</td>
+<td style="text-align: center;"><strong><code>36.50 — 41.00元</code></strong> (<code>0.78—0.87x PB</code>)</td>
+<td style="text-align: left;">P/OE <code>6.85—7.69x</code>，常态回报 <strong><code>13.00%—14.60%</code></strong>，TTM 免税股息 <strong><code>4.92%—5.52%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>🇭🇰 H股两档区 &amp; 溢价否决状态</strong></td>
+<td style="text-align: center;"><code>41.50—48.00港元</code> <em>(禁买)</em></td>
+<td style="text-align: center;">靶点 <code>41.35—44.12港元</code></td>
+<td style="text-align: center;"><strong>第二档 <code>39.00—44.00港元</code> / 重锤 <code>≤39.00</code></strong><br/><strong>🚨 <code>veto_h: true</code>（现 <code>53.75</code> 禁买！）</strong></td>
+<td style="text-align: left;">当前 <code>53.75港元</code> 超上限 <code>+22.2%</code> 且较 A股溢价 <code>+4.45%</code> + 扣 <code>20%</code> 税，<strong>内地资金 100% 否决！</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>🗳️ 投委会终极交易指令</strong></td>
+<td style="text-align: center;"><code>3:0</code> 全票现价建仓 A股</td>
+<td style="text-align: center;">强烈回避 / 做空溢价</td>
+<td style="text-align: center;"><strong>A股 <code>0票追高（等≤41.00元建仓/老仓收息）</code><br/>H股 <code>0票（100%溢价否决禁买）</code></strong></td>
+<td style="text-align: left;"><strong>不和稀泥</strong>：现价 <code>44.00元</code> 高出买点上限 <code>+7.3%</code> 且贴 52 周高点，新资金管住手静候回调或减值拐点！</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把账算到小数点后两位，结论反而最朴素：招商银行依然是中国商业银行里成本最低（`0.95%` 存款）、护城河最深（`18.71万亿` AUM）、装甲最厚（`389%` 拨备 + `14.39%` 核心资本）的头号霸主，绝不是空头口中那具行将就木的僵尸；但<strong>再好的霸主，在信用卡坏账还没彻底出清、股价刚从 `34块` 一口气涨了近三成顶在 `44元` 年内高点的时候，也不是让你闭眼追高的击球点</strong>。老股东可以安稳躺着吃 `4.58%` 免税股息和 `7.35%` 净资产复利；新钱只要有点耐心，等市场先生下一次犯糊涂把它砸回 `41元` 甚至 `36.5元` 以下再扣扳机，或者等财报亲眼确认单季减值同比转负再上车，胜率和赔率会舒服十倍！</p></div></div>
+<hr/>
 <h2 id="g">【模块 G：三位投资大师闭门圆桌会——穿越周期的终极拷问与交易裁决】</h2>
 <blockquote>
 <p>📌 <strong>闭门圆桌会设定</strong>：时间锁死 <code>2026年11月20日</code>，桌上摊开着招商银行（<code>600036.SH</code> / <code>03968.HK</code>）全部六卷深度解剖底账——A股现价 <strong><code>43.32元</code></strong>（静态 PB <code>0.924x</code>，扣 <code>995.27亿元</code> 税后超额拨备后还原 PB <strong><code>0.852x</code></strong>，True Equity Value <strong><code>9,929.97亿元</code></strong>），H股 <strong><code>54.00港元</code></strong>（折合 <code>46.20元</code>，罕见溢价 <strong><code>+6.66%</code></strong>）；买方审慎主锚（标尺二）Core OE <strong><code>1,415.26亿元</code></strong>（EPS <code>5.61元</code>，A股回报 <code>12.95%</code> / TEV 回报 <code>14.25%</code>，自由可分配 <code>821.95亿元</code> / 极限分红率 <code>58.1%</code>），即期年化（标尺一）Core OE <strong><code>1,487.44亿元</code></strong>（EPS <code>5.90元</code>），<code>2025年</code> 实派免税股息 <strong><code>4.65%</code></strong>。我们邀请三位横跨成长草根、困境安全边际与宏微观大势的传奇大师，用各自的真实战法对招行进行不留情面的交叉审讯。</p>
@@ -4410,18 +4770,20 @@
 
 
 <hr/>
-<h3 id="_22">📊 三位投资大师圆桌投票与买方实战执行总表</h3>
-<p>综合三位大师的深度交叉审讯，圆桌会以 <strong><code>3 : 0</code> 压倒性一致通过「A股（<code>600036.SH</code>）现价 <code>43.32元</code> 具备高确定性左侧建仓价值」</strong>，且全票否决当前溢价 <code>+6.66%</code> 且税负更重的港股通 H股。核心分歧仅在于“此刻一次性打满仓位”还是“现价建 <code>50%—60%</code> 核心底仓 + 留 <code>40%—50%</code> 弹药应对左侧深坑或右侧拐点”，最终形成以下两张可直接贴在交易桌前的终极裁决总表：</p>
-<h4 id="1_5">表 1：三位投资大师圆桌投票、历史镜像与核心判词总表</h4>
+<h3 id="2026-11-22_1">📊 三位投资大师圆桌投票与买方实战执行总表（⚔️ <code>2026-11-22</code> 三道铁闸终审重校版）</h3>
+<blockquote>
+<p><strong>⚔️ 2026-11-22 终审价格与票决重校说明</strong>：上述圆桌记录基于 <code>11-20</code> A股 <code>43.32元</code> 与旧稿 <code>1,415.26亿</code> 主锚；经 <code>11-22</code> 物理隔离盲审做空 × 三道铁闸终审后，A股最新收盘价已涨至 <strong><code>44.00元</code></strong>（贴紧 52 周高点 <code>44.16元</code>、较今年 7 月低点 <code>34.28元</code> 已涨 <code>+28.4%</code>），且在 100% 认领信用卡 <code>347.11亿</code> 不良生成、零售利润占比跌破 <code>50%</code> 与贷款结构边际对公化后，常态 Core OE 下修 <code>-5.04%</code> 至 <strong><code>1,343.89亿元</code></strong>（达产 <code>1,463.72亿元</code>），A股第二档正常买入区收严至 <strong><code>36.50—41.00元</code></strong>（重锤 <strong><code>≤36.50元</code></strong>）。三位大师当庭复核后一致改判：<strong>A股现价 <code>44.00元</code> 由旧稿 <code>3:0</code> 激进建仓正式降级为 <code>0票追高（老仓持股收息，新资金静候 ≤41.00元 回调建仓或右侧减值转负扳机）</code>；H股 <code>53.75港元</code>（折 <code>45.96元</code>，溢价 <code>+4.45%</code> + 港股通税后仅 <code>3.51%</code>）维持 <code>3:0</code> 100% 强制否决禁买！</strong></p>
+</blockquote>
+<h4 id="1_5">表 1：三位投资大师圆桌投票、历史镜像与核心判词总表（终审刷新）</h4>
 <div class="table-scroll-wrap"><table class="wide-table">
 <thead>
 <tr>
 <th style="text-align: left;">大师席位</th>
 <th style="text-align: left;">股票定性 / 核心分析滤镜</th>
 <th style="text-align: left;">历史实战镜像参照</th>
-<th style="text-align: left;">最看重的招行硬牌（多头铁证）</th>
-<th style="text-align: left;">最警惕的暗礁（审慎敲打）</th>
-<th style="text-align: left;">圆桌最终投票与仓位指令</th>
+<th style="text-align: left;">最看重的招行硬牌（多头反杀铁证）</th>
+<th style="text-align: left;">最警惕的暗礁（事实层硬认领）</th>
+<th style="text-align: left;">圆桌最终投票与仓位指令（<code>@ A股44.00元 / H股53.75港元</code>）</th>
 </tr>
 </thead>
 <tbody>
@@ -4429,37 +4791,37 @@
 <td style="text-align: left;"><strong>🛒 彼得·林奇</strong><br/><em>(草根成长 &amp; 隐蔽资产)</em></td>
 <td style="text-align: left;"><strong>稳定增长大笨象 (Stalwart) + 隐蔽资产型 (Asset Play)</strong> 混合体</td>
 <td style="text-align: left;">克莱斯勒困境反转 + 沃尔沃未入账资产 + 警惕吉列/美孚“多元恶化”</td>
-<td style="text-align: left;"><code>0.95%</code> 破 1 存款成本、<code>49.75%</code> 活期、<code>18.71万亿</code> AUM、香港永隆半年 <code>47.34亿港元</code> 爆发、AI 省 <code>1,556万</code> 工时压出 <code>29.23%</code> CIR</td>
-<td style="text-align: left;">警惕 <strong><code>招银金投 AIC</code></strong>（<code>150亿</code> 仅赚 <code>0.55亿</code> / ROE <code>0.73%</code>）演变为“多元恶化”；紧盯信用卡 <code>347亿</code> 坏账排毒</td>
-<td style="text-align: left;"><strong>✅ 积极建仓（Buy）</strong><br/>现价 <code>43.32元</code> 建立核心压舱底仓，跌破 <code>38元</code> 翻倍重锤</td>
+<td style="text-align: left;"><code>0.95%</code> 破 1 存款成本、<code>49.75%</code> 活期、<code>18.71万亿</code> AUM、香港永隆半年 <code>47.34亿港元</code> 爆发、AI 省 <code>1,556万</code> 工时压出 <code>29.23%</code> CIR；信用卡生成 <code>Q1→Q2→Q3</code> 两连降</td>
+<td style="text-align: left;">信用卡前三季 <code>347.11亿</code> 新不良致 <code>26H1</code> 零售利润 <code>-17.58%</code> 跌破半壁；警惕 <strong><code>招银金投 AIC</code></strong>（<code>150亿</code> 仅赚 <code>0.55亿</code>）演变为“多元恶化”</td>
+<td style="text-align: left;"><strong>⏳ 观察等待 / 拒绝追高（Hold / Wait）</strong><br/>好公司不必在 <code>44.00元</code>（52周高点门口）追买；老仓躺赢收息，新钱等 <strong><code>≤41.00元</code></strong> 建底仓、<strong><code>≤36.50元</code></strong> 翻倍重锤</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🕰️ 马克斯 &amp; 卡拉曼</strong><br/><em>(安全边际 &amp; 残值剥离)</em></td>
-<td style="text-align: left;"><strong>超厚双层防弹衣下的极度非对称残值套利</strong></td>
+<td style="text-align: left;"><strong>超厚双层防弹衣下的高质银行，但 <code>44元</code> 已吃光残值白送折价</strong></td>
 <td style="text-align: left;">2008 年次贷困境债抄底 + 经典“剥离残值法 (Stub Value)”</td>
-<td style="text-align: left;">还原 PB 仅 <strong><code>0.852x</code></strong>、TEV 回报 <strong><code>14.25%</code></strong>、<code>995亿</code> 表外拨备 + <code>1,207亿</code> AC 债暗仓 + <code>9,784亿</code> 核弹防线；<strong>块 3 全白送且大财富打 <code>67折</code></strong></td>
-<td style="text-align: left;">切忌在 <code>43.32元</code>（建仓区偏上沿）一次打光全部弹药；严守三大基本面死刑红线防极端黑天鹅</td>
-<td style="text-align: left;"><strong>✅ 分批建仓（Buy）</strong><br/>现价建核心底仓吃 <code>4.65%</code> 免税高息，留预备队蹲守 <code>34—38元</code> 黄金坑</td>
+<td style="text-align: left;"><code>389.39%</code> 拨备 Q3 环比反升 <code>+4.29pct</code>、<code>733—995亿</code> 税后超额拨备 + <code>1,207亿</code> AC 债暗仓 + <code>14.39%</code> CET1（<code>13年</code> 零抽血）+ 极限双杀硬扛底线</td>
+<td style="text-align: left;">重校拆骨后 <code>44.00元</code> 给大财富标价已达 <code>11.9—13.3x PE</code>，“打 67 折白送”红利已消失；账面 PB <code>0.939x</code> 处近 3 年 <code>85%—90%</code> 高位</td>
+<td style="text-align: left;"><strong>⏳ 拒绝 <code>44元</code> 追高（0票追高）</strong><br/>严守安全边际纪律！新资金等回踩 <strong><code>36.50—41.00元</code></strong>（PB <code>0.78—0.87x</code> / 股息 <code>4.92%—5.52%</code>）再左侧分批进场，<strong><code>≤36.50元</code></strong> 重锤</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>⚡ 德鲁肯米勒</strong><br/><em>(二阶导数 &amp; 催化交易)</em></td>
-<td style="text-align: left;"><strong>右脚已落、等待利润加速度引爆的“带薪看涨期权”</strong></td>
+<td style="text-align: left;"><strong>减值环比已现拐点苗头，但同比转负与分红提档扳机未彻底扣响</strong></td>
 <td style="text-align: left;">1992 年狙击英镑 + 2022 底重仓英伟达 + 2000 年科网泡沫斩仓教训</td>
-<td style="text-align: left;">营收 <code>+5.34%</code> / Q3 <code>+6.41%</code> 反转、代理基金 <code>+31.63%</code>、香港双核井喷、A/H 倒挂 <code>-6.24%</code> 与工行 PE 倒挂的补涨弹性</td>
-<td style="text-align: left;">信用卡减值 <strong><code>+25.26%</code></strong> 暂压制归母净利增速在 <code>+2.38%</code>，利润二阶导数与分红提档扳机尚未彻底扣响</td>
-<td style="text-align: left;"><strong>✅ 底仓+催化加满</strong><br/>现价锁 A股建 <strong><code>50%—60%</code></strong> 底仓，紧盯减值转负或跌破 <code>38元</code> 打满</td>
+<td style="text-align: left;">营收 <code>+5.34%</code> / Q3 <code>+6.41%</code> 反转、单季减值 <code>Q1 148→Q2 143→Q3 126亿</code> 环比 <code>-12.1%</code>、连赎 <code>275亿</code> 优先股与 <code>430亿</code> 高息永续债减负</td>
+<td style="text-align: left;">贷款边际对公化（公司贷 <code>+10.59%</code> vs 零售 <code>-1.28%</code>）、关注率 <code>1.59%</code> 仍在上行、归母净利增速暂被锁在 <code>+2.38%</code>；<code>44元</code> 贴近前高缺赔率</td>
+<td style="text-align: left;"><strong>⏳ 观望等回踩或右侧扳机（Wait for Trigger）</strong><br/>不在 <code>44元</code> 追高！要么等回踩 <strong><code>≤41.00元</code></strong> 左侧吃息，要么等 <code>26FY/27Q1</code> 确认<strong>信用减值同比转负</strong>或<strong>分红提档 <code>40%</code></strong> 再右侧追击</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🏆 圆桌终极裁决</strong></td>
-<td style="text-align: left;"><strong>高确定性复利压舱石（准第一梯队 / 第二梯队头牌）</strong></td>
-<td style="text-align: left;">买方四把铁尺全维度过关（<code>3 : 0</code> 全票看多 A股、全票否决港股通 H股）</td>
-<td style="text-align: left;"><strong>标尺二 Core OE <code>1,415.26亿</code></strong> / <strong>自由可分配 <code>821.95亿</code></strong> / <strong>极限分红率 <code>58.1%</code></strong> / <strong>零修复年化复利 <code>12.32%—12.95%</code></strong></td>
-<td style="text-align: left;">信用卡坏账滞后出清节奏 + 国央企限薪背景下中长期组织锐气钝化风险</td>
-<td style="text-align: left;"><strong>🎯 100% 锁定 A股 <code>600036.SH</code>：现价建底仓，左侧越跌越买、右侧拐点加满</strong></td>
+<td style="text-align: left;"><strong>顶级复利底盘，但当下 <code>44.00元</code> 处偏高等待位（<code>0票追高</code>）</strong></td>
+<td style="text-align: left;">买方四把铁尺严格重校（A股 <strong><code>0票追高 / 等≤41元</code></strong>；H股 <strong><code>3:0 强制否决禁买</code></strong>）</td>
+<td style="text-align: left;"><strong>重校常态 Core OE <code>1,343.89亿</code></strong> / <strong>自由可分配 <code>750.58亿</code></strong> / <strong>极限分红率 <code>55.9%</code></strong> / <strong>拐点达产 <code>1,463.72亿</code></strong></td>
+<td style="text-align: left;">信用卡与非卡零售滞后出清节奏 + 对公化稀释息差 + 国央企限薪下组织锐气隐忧</td>
+<td style="text-align: left;"><strong>🎯 A股 <code>600036.SH</code> 老仓收息、新资金严禁 <code>44元</code> 追高（买点 <code>36.50—41.00元</code> / 重锤 <code>≤36.50元</code>）；H股 <code>03968.HK</code> 100% 禁买！</strong></td>
 </tr>
 </tbody>
 </table></div>
-<h4 id="2600036sh">表 2：招商银行（600036.SH）买方实战行动与催化 / 风控触发矩阵</h4>
+<h4 id="2600036sh">表 2：招商银行（600036.SH）买方实战行动与催化 / 风控触发矩阵（三道铁闸重校版）</h4>
 <div class="table-scroll-wrap"><table>
 <thead>
 <tr>
@@ -4471,22 +4833,28 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>🟢 建仓与左侧重锤信号</strong></td>
-<td style="text-align: left;">① <strong>当前价位 <code>43.32元</code></strong>（<code>38—44元</code> 第二档建仓区）；<br/>② <strong>极端回踩 <code>34—38元</code></strong>（账面 PB <code>0.73—0.81x</code>，直逼块 1 地板 <code>35.92元</code>）</td>
-<td style="text-align: left;">当前已破净且享 <code>4.65%</code> 免税股息与 <code>12.3%—13.0%</code> 零修复复利；跌破 <code>38元</code> 则大财富与期权彻底 <code>0元倒贴白送</code></td>
-<td style="text-align: left;">① 现价即建 <strong><code>50%—60%</code></strong> 目标底仓（只买 A股）；<br/>② 若砸进 <strong><code>38元</code> 以下</strong>且未破红线，果断动用余粮<strong>重锤加至满配</strong></td>
+<td style="text-align: left;"><strong>🟡 当前水位：观察等待 / 老仓收息</strong></td>
+<td style="text-align: left;"><strong>当前 A股 <code>44.00元</code></strong>（账面 PB <code>0.939x</code> / 200%还原 <code>0.866x</code>，P/OE <code>8.26x</code>，常态回报 <code>12.11%</code>，TTM 免税股息 <code>4.58%</code>，贴近 52 周高点 <code>44.16元</code>）</td>
+<td style="text-align: left;">高出重校第二档上限 <code>41.00元</code> 约 <strong><code>+7.3%</code></strong>，大财富残值折价已基本兑现；老仓享 <code>~11.9%</code> 零修复复利，但新资金赔率不足</td>
+<td style="text-align: left;">① <strong>新资金严禁追高（0票追高）</strong>，持币耐心等待回调或右侧财报催化；<br/>② <strong>已有老仓位可安稳持股收息</strong>，不必因空头噪音恐慌割肉；<br/>③ <strong>H股 <code>53.75港元</code> 溢价 <code>+4.45%</code> + 扣 <code>20%</code> 红利税，100% 禁买！</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>🟢 左侧建仓与重锤信号</strong></td>
+<td style="text-align: left;">① <strong>回踩第二档正常买入区 <code>36.50 — 41.00元</code></strong>（PB <code>0.78—0.87x</code>，P/OE <code>6.85—7.69x</code>，常态回报 <code>13.00%—14.60%</code>，TTM 股息 <strong><code>4.92%—5.52%</code></strong>）；<br/>② <strong>极端回踩第一档重锤区 <code>≤ 36.50元</code></strong>（PB <code>≤0.78x</code>，直逼今年 7 月低点 <code>35.28元</code> 与块 1 地板 <code>33.99—35.03元</code>，股息 <strong><code>≥5.52%</code></strong>）</td>
+<td style="text-align: left;">跌入 <code>≤41.00元</code> 重现近 <code>5%</code> 免税股息 + 大财富打折安全边际；跌穿 <code>36.50元</code> 则大财富与三大期权彻底 <strong><code>0元倒贴白送</code></strong></td>
+<td style="text-align: left;">① 回调至 <strong><code>36.50—41.00元</code></strong> 立即启动分批建仓（仅买 A股）；<br/>② 若市场情绪宣泄再砸 <strong><code>≤36.50元</code></strong> 且未破死刑红线，果断动用压箱底弹药<strong>重锤锁筹</strong></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🚀 右侧主升浪加仓扳机</strong></td>
-<td style="text-align: left;">① <strong>连续 2 季信用卡新生成不良环比下降</strong>且全行<strong>信用减值同比转负 (<code>&lt;0%</code>)</strong>；<br/>② <strong>代理基金/财富中收维持 <code>+15%+</code> 高增</strong>；<br/>③ <strong>管理层官宣现金分红率提档至 <code>38%—40%+</code></strong></td>
-<td style="text-align: left;">利润增速从 <code>+2.38%</code> 瞬间解锁至 <code>+8%—10%</code> 释放戴维斯双击；分红提档至 <code>40%</code> 将推高股息率破 <code>5.2%—5.5%</code> 引发险资抢筹</td>
-<td style="text-align: left;">确认任一核心拐点落地后，<strong>立即将剩余 <code>40%—50%</code> 仓位右侧追击打满</strong>，目标看至 PB 修复 <code>1.15—1.25x</code>（<code>54—58元</code>）</td>
+<td style="text-align: left;">① <strong><code>26FY / 27Q1</code> 确认全行信用减值同比转负 (<code>&lt;0%</code>)</strong>、信用卡新生成不良延续三连降且关注率停止攀升（<code>&lt;1.60%</code>）；<br/>② <strong>零售贷款重回正增长</strong>止住对公化稀释；<br/>③ <strong>管理层官宣现金分红率提档至 <code>38%—40%+</code></strong></td>
+<td style="text-align: left;">净利润增速突破 <code>+2.4%</code> 枷锁向 <code>+7%—10%</code> 释放戴维斯双击；分红提档彻底打破 <code>65%</code> 留存引发的机械性 ROE 下行魔咒</td>
+<td style="text-align: left;">确认核心右侧扳机落地后，即使股价站上 <code>44—46元</code> 亦可右侧增配，目标看至 PB 修复 <code>1.10—1.20x</code>（<code>51—56元</code>）</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>🟡 持有收息与分批止盈</strong></td>
-<td style="text-align: left;">① <strong>进入 <code>44—54元</code></strong>（<code>0.94—1.15x PB</code>，覆盖 <code>46.87元</code> 破净线及 <code>49.87元</code> 拆骨全景中枢）；<br/>② <strong>冲高 <code>54—62元+</code></strong>（<code>1.15—1.32x PB</code>，股息率压至 <code>3.5%</code> 附近）</td>
-<td style="text-align: left;">估值修复兑现、赔率回归中性；超过 <code>54元</code> 后赔率显著收窄（注意：随每股净资产每年自增约 <code>3.6—3.8元</code>，区间每年上移 <code>+8%</code>）</td>
-<td style="text-align: left;">① <code>44—54元</code> <strong>停止追高，安稳躺平收息复利</strong>；<br/>② 进入 <code>54元</code> 以上<strong>分批左侧减仓兑现</strong>，留核心底仓或切换更高赔率标的</td>
+<td style="text-align: left;"><strong>🟠 合理偏高与分批止盈</strong></td>
+<td style="text-align: left;">① <strong><code>41.00 — 50.00元</code></strong>（<code>0.87—1.07x PB</code>，覆盖 <code>46.87元</code> 破净线及 <code>45.01—46.06元</code> 重校拆骨全景中枢）；<br/>② <strong>冲高 <code>≥ 52.00元</code></strong>（<code>≥1.11x PB</code>，股息率压至 <code>≤3.88%</code>）</td>
+<td style="text-align: left;">估值充分兑现重校拆骨价值与破净修复，赔率显著收窄（随 BVPS 每年自增约 <code>3.4—3.6元</code>，区间每年上移 <code>+7.4%</code>）</td>
+<td style="text-align: left;">① <code>41—50元</code> <strong>不追高，老仓躺平收息</strong>；<br/>② 进入 <strong><code>52元</code></strong> 以上<strong>分批左侧减仓兑现</strong>，切换更高赔率标的</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🔴 死刑红线（无条件清仓）</strong></td>
@@ -4505,10 +4873,10 @@
 别以为招行靠放高息贷款赚钱，银行业的真胜负手在负债端。招行靠手机银行体验、企业代发工资和私人银行服务，留住了全国两亿多中产和二十多万高净值家庭。这群人把近一半存款以极低利息的活期趴在账上，让招行平均存款成本跌破百分之一，比国有大行还要便宜一大截。握着全行业最便宜的资金，放款不用下沉赌高风险客户就能拿最厚的息差，还能管着近十九万亿居民财富稳收手续费，这就是同行学不去的看家饭碗。</p>
 <p><strong>第二件事：它的财务家底和经营周期现在发生了什么本质变化？</strong>
 熬过前几年息差下行和地产出清的寒冬，招行已率先走出营收停滞期，利息和财富中收双双恢复增长，净息差初步企稳。更硬核的是家底：连续十三年不向股市配股融资，每年拿出三分之一以上利润派发现金分红后，核心资本和坏账拨备反而攒成全行业最厚的底盘，表外还藏着巨额超额拨备和债券浮盈。加上香港子公司盈利大增、人工智能压低运营费用率，它是靠自己造血的真印钞机，绝非靠融资续命的苦力。</p>
-<p><strong>第三件事：它身上有哪些表面软肋？哪些是纸老虎或危中之机，哪个才是真软肋？</strong>
-市场常炒的两个担忧其实经不起推敲。看到上半年对公利润超过零售就喊零售不行了，真相只是对公地产旧雷早已清完轻装上阵，零售正在主动排毒；担心高息定存到期红利消退和债市波动，更是典型的危中之机——债市回调往往伴随经济和股市回暖，届时近十九万亿财富盘子卖基金、做托管赚的高毛利手续费会直接放量，稳稳对冲息差和债市波动。真正要盯紧的真软肋只有两个：短期硬伤是信用卡和无抵押消费贷随居民收入周期暴露的滞后坏账，出清还需几个季度；中长期隐忧则是行业限薪与从严问责下缺少股权激励，要提防这家十余万人的大机构日后逐步国企化、丢掉市场锐气。</p>
-<p><strong>第四件事：咱们到底该怎么买它、怎么赚它的钱？</strong>
-第一，内地个人投资者直接买更便宜且持股满一年免税的 A 股，别碰眼下比 A 股贵、分红还要扣两成红利税的港股通 H 股。第二，眼下四十出头的价位已跌破账面净资产，扣掉账外超额拨备等于打八五折买银行，还白送香港业务并打折买下中国第一大财富板块；哪怕估值一辈子不涨，光靠免税分红加净资产内生增长每年也能稳拿双位数复利。现价即可先建一半左右底仓收息，若恐慌跌破三十八块果断重仓加码，或等财报确认信用卡坏账见顶、减值转负再打满剩余仓位。守住活期占比、拨备底线和不配股这三条红线，这笔钱很难亏。</p>
+<p><strong>第三件事：它身上有哪些表面软肋？哪些是纸老虎，哪个才是经红蓝盲审确认的真软肋？</strong>
+市场和空头常炒的几个恐慌点里，有些经不起逐季细查：比如喊三季度单季减值同比暴涨失控、拨备漏气，翻开一二三季报实数一看，信用卡新生成不良和全行单季减值其实都已经连续两个季度环比回落，三季度拨备覆盖率反而环比回升了四个多点，且近六成不良处置是有现金回流的资产证券化而非全额归零核销。但有两块真软肋必须百分百认账：第一，信用卡前三季新生成不良三百四十多亿，确实把上半年零售税前利润打得同比大降、占比首次跌破一半，关注率也抬到了百分之一点五九，拖累常态盈利中枢下修约五个点；第二，眼下零售贷款微缩而对公贷款大增，会轻微稀释未来息差，叠加行业限薪下中长期要提防十余万人的大机构丢掉市场锐气。</p>
+<p><strong>第四件事：咱们到底该怎么买它、怎么赚它的钱？（<code>2026-11-22</code> 终审刷新）</strong>
+第一，内地个人投资者<strong>百分百禁买当前比 A 股还贵四点四个多点、港股通分红还要扣两成税（到手仅三点五个点）的 H 股</strong>，只盯 A 股。第二，经过红蓝三道铁闸终审重校，<strong>A 股当前四十四块正顶在一年最高点门口，已经超出重校后的正常买入区上限（三十六块五到四十一块）约七个多点，大财富折价基本消化完毕，新资金绝不在四十四块追高！</strong> 已有老仓位可以安稳躺着吃四点五八的免税股息和净资产复利；新钱只要管住手，耐心等市场回调到<strong>四十一块以下</strong>（股息近五厘、PB 零点八七倍以下）分批建底仓，若情绪恐慌再砸回<strong>三十六块五以下</strong>（贴近今年七月初低点）果断重锤加满，或者等年报/一季报亲眼看到信用减值同比转负再右侧上车。守住活期占比、拨备底线和不配股这三条红线，好公司配合好价格，这笔钱很难亏。</p>
 <hr/>
 <h2 id="i-interactive-qa">【模块 I：💬 买方实战追问与深度答疑实录（Interactive Q&amp;A）】</h2>
 <h4 id="q1-2026-34">Q1：既然招商银行回报率这么高、底子这么好，那为什么 <code>2026年</code> 年中股价还一度被砸到过 <code>34块多</code>？</h4>
@@ -4739,7 +5107,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《招商银行(600036.SH / 03968.HK) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/招商银行(600036.SH / 03968.HK) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《招商银行(600036.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/招商银行(600036.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -5012,15 +5380,39 @@
           // 提取每行精确排序指标
           var hasFullOe = false;
           var hasDiv = false;
+          var hasObjScore = false;
           var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
           var rowData = trs.map(function(tr, origIdx){
             var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
             var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
-            var rank = parseNum(getTxt(colRank), /NO\.(\d+)/i, 1);
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
             if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
 
             var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
             var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
 
             if (isRadar) {
               var pxTxt = getTxt(colPx);
@@ -5032,17 +5424,20 @@
               fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
               if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
               var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
               if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
                 isHkOnly = true;
               }
             } else {
               var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
               px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
               chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
               var oeTxt2 = getTxt(colOe);
               oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
               fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
-              divRate = parseNum(oeTxt2, /实时股息\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
               if (colDisc >= 0) {
                 var discTxt = getTxt(colDisc);
                 disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
@@ -5081,21 +5476,34 @@
 
             return {
               tr: tr,
+              td0: tds[0],
               origIdx: origIdx,
               rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
               dist: dist,
               oe: oe,
               fullOe: fullOe,
               div: divRate,
               chg: chg,
               disc: disc,
-              isHkOnly: isHkOnly
+              isHkOnly: isHkOnly,
+              isStale: isStale
             };
           });
 
           if (trs.length < 2) return;
 
-          var state = { key: 'rank', dir: 'asc', aOnly: false };
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
 
           // 定义每列表头点击对应的排序键与默认方向
           var colMap = {};
@@ -5139,6 +5547,7 @@
             { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
             { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
           ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
           if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
           if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
           if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
@@ -5167,15 +5576,236 @@
               state.aOnly = !state.aOnly;
               fBtn.classList.toggle('active', state.aOnly);
               fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
-              rowData.forEach(function(d){
-                if (d.isHkOnly) d.tr.style.display = state.aOnly ? 'none' : '';
-              });
+              applyFilters();
             });
             bar.appendChild(fBtn);
           }
 
           var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
           anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
 
           function updateUI() {
             Object.keys(colMap).forEach(function(cStr){
