@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>圆通速递 深度投研全集</title>
+<title>圆通速递(600233.SH) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">圆通速递 深度投研全集</div>
+    <div class="report-title">圆通速递(600233.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-22</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -902,27 +1360,29 @@
 <hr/>
 <h3 id="_3">【第一部分：拆解业务账本、周期时钟与顺价能力——谁在挑大梁，谁在凑规模，谁在拖后腿？】</h3>
 <div class="annotated-row"><div class="main-col"><h4 id="1">1. 业务结构与利益链条：看清“快递印钞、货代承压、航空培育”的三本账</h4><p>圆通速递的合并报表由三大板块拼合而成，但三者的赚钱逻辑与盈利成色截然不同：</p><ul>
-<li><strong>第一块：国内加盟制快递主业（绝对挑大梁的利润支柱）</strong></li>
 <li>
-<p><strong>商业模式与结算机制</strong>：采用“枢纽转运中心自营化 + 末端加盟网络扁平化”模式。下游终端使用者是淘宝、拼多多、抖音、快手等平台的数百万电商卖家，但直接向圆通上市公司买单并结算的客户是遍布全国的<strong>加盟商网点</strong>。加盟商采用<strong>“面单充值预付 + 中转费实时扣款”</strong>的结算规矩——加盟商先拿现金向总部购买电子面单、预存中转费，包裹每经过一次总部转运中心扫描，系统当场自动划扣中转费与干线运费。这种机制让圆通快递主业几乎不存在恶性应收账款坏账，现金回款极度强悍。</p>
+<p><strong>第一块：国内加盟制快递主业（绝对挑大梁的利润支柱）</strong></p>
+<ul>
+<li><strong>商业模式与结算机制</strong>：采用“枢纽转运中心自营化 + 末端加盟网络扁平化”模式。下游终端使用者是淘宝、拼多多、抖音、快手等平台的数百万电商卖家，但直接向圆通上市公司买单并结算的客户是遍布全国的<strong>加盟商网点</strong>。加盟商采用<strong>“面单充值预付 + 中转费实时扣款”</strong>的结算规矩——加盟商先拿现金向总部购买电子面单、预存中转费，包裹每经过一次总部转运中心扫描，系统当场自动划扣中转费与干线运费。这种机制让圆通快递主业几乎不存在恶性应收账款坏账，现金回款极度强悍。</li>
+</ul>
 </li>
 <li>
 <p><strong>体量与盈利贡献</strong>：2024 年快递业务实现营收 <code>622.95 亿元</code>（占总营收 <code>90.24%</code>），毛利率 <code>9.19%</code>；2025 年快递业务完成量突破 <code>311.44 亿件</code>（同比 <code>+17.20%</code>），单独贡献归母净利润高达 <strong><code>46.14 亿元</code></strong>（同比 <code>+7.14%</code>），相当于公司合并归母净利润（<code>43.22 亿元</code>）的 <strong><code>106.76%</code></strong>！进入 2026 年前三季度，快递件量再达 <code>249.61 亿件</code>（同比 <code>+10.52%</code>），带动合并归母净利润飙升至 <code>46.30 亿元</code>。</p>
 </li>
 <li>
 <p><strong>第二块：国际货代与跨境供应链业务（凑规模但受地缘关税冲击的顺周期副业）</strong></p>
-</li>
-<li>
-<p><strong>主体与账期特征</strong>：主要由控股港股子公司圆通国际快递（06123.HK）及跨境团队运营，面向进出口贸易商提供海运、空运货代及国际快递服务。与国内快递“先交钱后过秤”不同，国际货代面对B端外贸客户存在一定信用账期，且直接暴露在全球贸易摩擦与海空运价波动之下。</p>
+<ul>
+<li><strong>主体与账期特征</strong>：主要由控股港股子公司圆通国际快递（06123.HK）及跨境团队运营，面向进出口贸易商提供海运、空运货代及国际快递服务。与国内快递“先交钱后过秤”不同，国际货代面对B端外贸客户存在一定信用账期，且直接暴露在全球贸易摩擦与海空运价波动之下。</li>
+</ul>
 </li>
 <li>
 <p><strong>体量与盈利表现</strong>：2024 年货代行业实现营收 <code>37.59 亿元</code>，毛利率 <code>8.48%</code>；但进入 2025 年，受美国关税政策反复及取消小额豁免（T86 清关收紧）冲击，2025 年上半年货代营收同比骤降 <code>47.22%</code> 至 <code>10.45 亿元</code>（毛利率 <code>7.47%</code>），全年呈现收缩态势。</p>
 </li>
 <li>
 <p><strong>第三块：自有航空货运业务（战略协同但当期持续失血的吞金兽）</strong></p>
-</li>
-<li>
-<p><strong>主体与重资产属性</strong>：依托杭州圆通货运航空有限公司（截至 2026 年中拥有 <code>14 架</code>全货机：10 架波音 757、3 架波音 767、1 架国产 C909）与 2025 年底投运的嘉兴“东方天地港”枢纽，主攻高时效航空件与亚欧美跨境货运包机。</p>
+<ul>
+<li><strong>主体与重资产属性</strong>：依托杭州圆通货运航空有限公司（截至 2026 年中拥有 <code>14 架</code>全货机：10 架波音 757、3 架波音 767、1 架国产 C909）与 2025 年底投运的嘉兴“东方天地港”枢纽，主攻高时效航空件与亚欧美跨境货运包机。</li>
+</ul>
 </li>
 <li>
 <p><strong>财务拖累量化</strong>：2024 年航空业务实现营收 <code>17.17 亿元</code>，毛利率为 <strong><code>-9.69%</code></strong>；2025 年上半年航空业务营收 <code>8.87 亿元</code>，毛利率仍为 <strong><code>-6.13%</code></strong>。用 2025 年合并归母净利润 <code>43.22 亿元</code> 减去快递单板块归母净利润 <code>46.14 亿元</code> 可清晰算出：<strong>航空与国际货代等非快递业务在 2025 年合计净吃掉了母公司约 <code>2.92 亿元</code> 的纯利润</strong>。</p>
@@ -943,9 +1403,11 @@
 </li>
 <li>
 <p><strong>第三阶段（2025 年下半年至 2026 年至今：“反内卷”政策底 + 成本剪刀差全面兑现期）</strong>：</p>
-</li>
+<ul>
 <li>自 2025 年下半年起，国家邮政局联合多省市监管部门强力整治“低于成本价恶意揽收”，义乌、广州、揭阳等核心产粮区全面划定揽收底价红线并刚性提价。</li>
 <li>在这一轮周期时钟里，圆通展现出了极强的<strong>“反身性收割身位”</strong>：当行业禁止无底线低价抢件后，原本靠低价续命的尾部网点与弱势同行瞬间失去唯一武器；而圆通凭借已建成的全网数字化路由与高密度自动化枢纽，在 2026 年第三季度不仅享受到了价格企稳带来的毛利率跃升（前三季度毛利率飙升 <code>2.97 个百分点</code> 至 <code>11.84%</code>），更在 Q3 单季拿下了 <strong><code>12.44%</code> 的件量增速（超出行业平均增速高达 <code>9.5 个百分点</code>）</strong>，市占率冲上 <code>16.2%—16.4%</code> 的历史新高！</li>
+</ul>
+</li>
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="3">3. 成本顺价权与客户转换代价测试</h4><ul>
 <li>
@@ -1044,8 +1506,10 @@
 </table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2-a">2. 穿透单票账本：圆通凭什么在 A 股通达系里笑傲群雄，又差在中通哪口气？</h4><p>从上面的硬核比武表中，我们可以极其清晰地定位圆通在全国成本与产品曲线中的真实坐标：</p><ul>
-<li><strong>对标韵达与申通：圆通靠“数字化颗粒度 + 提前三年完成重资产卡位”建立了显著的单票成本护城河</strong>
-  1. <strong>单票核心成本 <code>0.64 元</code> 的恐怖杀伤力</strong>：在 2024 至 2025 年间，圆通将单票运输成本从 <code>0.42 元</code> 干到了 <strong><code>0.37 元</code></strong>（同比大降 <code>10.35%</code>），单票中心操作成本从 <code>0.28 元</code> 压到了 <strong><code>0.27 元</code></strong>（同比再降 <code>3.75%</code>）。两项合计 <code>0.64 元/票</code>，比韵达、申通同口径普遍低出 <code>0.03—0.06 元/票</code>。别小看这 4 分钱的差距——乘以圆通每年 311 亿件的包裹量，直接就是 <strong><code>12.4 亿元</code> 的税前纯利润优势</strong>！</li>
+<li><strong>对标韵达与申通：圆通靠“数字化颗粒度 + 提前三年完成重资产卡位”建立了显著的单票成本护城河</strong><ol>
+<li><strong>单票核心成本 <code>0.64 元</code> 的恐怖杀伤力</strong>：在 2024 至 2025 年间，圆通将单票运输成本从 <code>0.42 元</code> 干到了 <strong><code>0.37 元</code></strong>（同比大降 <code>10.35%</code>），单票中心操作成本从 <code>0.28 元</code> 压到了 <strong><code>0.27 元</code></strong>（同比再降 <code>3.75%</code>）。两项合计 <code>0.64 元/票</code>，比韵达、申通同口径普遍低出 <code>0.03—0.06 元/票</code>。别小看这 4 分钱的差距——乘以圆通每年 311 亿件的包裹量，直接就是 <strong><code>12.4 亿元</code> 的税前纯利润优势</strong>！</li>
+</ol>
+</li>
 </ul><ol start="2">
 <li>
 <p><strong>为什么圆通能压到这么低？</strong> 一是<strong>硬件饱满度</strong>：截至 2025 年末，圆通全网自营枢纽转运中心达 <code>76 个</code>，部署自动化分拣设备高达 <code>386 套</code>（含窄带分拣、柔性分拣与无人供件设备），自有干线车辆超 <code>6,810 辆</code>；二是<strong>软件颗粒度（“一号工程”数字化与 AI 智多星）</strong>：圆通是通达系里最早把管理颗粒度从“按月考核转运中心”切碎到“按小时、按单车装载率、按单条分拣线人效”实时考核的企业，直接把装车空置率与二次中转率拧干到了物理极限。</p>
@@ -1054,8 +1518,10 @@
 <p><strong>单票溢价能力反超韵达</strong>：“圆准达”等中高端产品的推广，加上全网全程时长缩短、遗失破损率连年下降，使得圆通在义乌、广东等核心市场能够比韵达多卖 <code>0.05—0.10 元/票</code> 的品牌与时效溢价。一增一减之间，2026 年前三季度圆通斩获 <code>46.30 亿元</code> 归母净利，几乎是申通（<code>15.75 亿元</code>）的近 3 倍！</p>
 </li>
 </ol><ul>
-<li><strong>仰视老大哥中通快递：圆通与行业第一名那“一倍利润差距”到底差在哪？</strong>
-  1. <strong>规模分母与峰值产能冗余度差距</strong>：中通 2025 年业务量达 <code>385.2 亿件</code>，比圆通（<code>311.44 亿件</code>）多出整整 <code>73.76 亿件</code>（多出近 24% 的规模）。在干线发车与超级转运中心折旧摊销上，中通的规模分母更大，干线直发率（减少中转次数）更高。</li>
+<li><strong>仰视老大哥中通快递：圆通与行业第一名那“一倍利润差距”到底差在哪？</strong><ol>
+<li><strong>规模分母与峰值产能冗余度差距</strong>：中通 2025 年业务量达 <code>385.2 亿件</code>，比圆通（<code>311.44 亿件</code>）多出整整 <code>73.76 亿件</code>（多出近 24% 的规模）。在干线发车与超级转运中心折旧摊销上，中通的规模分母更大，干线直发率（减少中转次数）更高。</li>
+</ol>
+</li>
 </ul><ol start="2">
 <li>
 <p><strong>高毛利散件（退换货逆向件/非电商散单）占比差距</strong>：中通近年来坚决“不做亏本快件”，大力拓展高客单价的电商退货件与个人散件，使得中通单票核心快递收入比通达同行高出 <code>0.10—0.15 元/票</code>，而这多出来的 1 毛多钱几乎 100% 转化为纯毛利！</p>
@@ -1089,17 +1555,23 @@
 <p>圆通速递由桐庐人喻会蛟（喻渭蛟）、张小娟夫妇于 2000 年在上海创立。复盘其 26 年发展史，真正决定今日组织基因的只有三个生死转折点：</p>
 <ol>
 <li>
-<p><strong>第一次跃迁（2005—2015 年）：敢为人先吃下淘宝红利与阿里战略入股</strong>
-   * 在申通早期垄断江浙沪商务件时，喻会蛟率先降价主动拥抱马云创立初期的淘宝网，成为第一家与电商平台深度绑定接口的快递企业，并最早提出“全网一盘棋”与航空件探索，于 2015 年引入阿里巴巴战略投资，并于 2016 年作价 175 亿元借壳“大杨创世”成为 <strong>A 股快递第一股</strong>。</p>
+<p><strong>第一次跃迁（2005—2015 年）：敢为人先吃下淘宝红利与阿里战略入股</strong></p>
+<ul>
+<li>在申通早期垄断江浙沪商务件时，喻会蛟率先降价主动拥抱马云创立初期的淘宝网，成为第一家与电商平台深度绑定接口的快递企业，并最早提出“全网一盘棋”与航空件探索，于 2015 年引入阿里巴巴战略投资，并于 2016 年作价 175 亿元借壳“大杨创世”成为 <strong>A 股快递第一股</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>最惨痛的生死危机（2017—2018 年）：借壳上市后骄兵必败、加盟网点爆仓停摆之痛</strong>
-   * 2016 年夺下上市头筹后，圆通一度陷入盲目扩张与管理松懈：对枢纽转运中心自营化改造滞后，总部对加盟商简单粗暴“以罚代管”，导致 2017 年初北京、花园桥等多个核心网点因资金链断裂爆发快件积压停摆风波。当年圆通业务量增速骤降，市场份额接连被中通、韵达反超，从行业第一滑落至第三，交出了极其惨痛的学费。</p>
+<p><strong>最惨痛的生死危机（2017—2018 年）：借壳上市后骄兵必败、加盟网点爆仓停摆之痛</strong></p>
+<ul>
+<li>2016 年夺下上市头筹后，圆通一度陷入盲目扩张与管理松懈：对枢纽转运中心自营化改造滞后，总部对加盟商简单粗暴“以罚代管”，导致 2017 年初北京、花园桥等多个核心网点因资金链断裂爆发快件积压停摆风波。当年圆通业务量增速骤降，市场份额接连被中通、韵达反超，从行业第一滑落至第三，交出了极其惨痛的学费。</li>
+</ul>
 </li>
 <li>
-<p><strong>刮骨疗毒的绝地反击（2019—2025 年）：潘水苗挂帅推行“数字化一号工程”与重资产补课</strong>
-   * 痛定思痛的喻会蛟在 2019 年做出了一生中最正确的用人决定——礼聘拥有深厚IT与精益管理背景的<strong>潘水苗</strong>出任总裁，彻底摒弃粗放经验主义，开启长达五年的<strong>“全面数字化转型（一号工程）”</strong>与转运中心全面自营化、自动化重资产猛攻。
-   * 通过金刚系统升级、管理驾驶舱、客户管家与网点财务赋能，圆通硬生生在 2021—2022 年行业大洗牌中完成了对韵达的全面反超，重回行业第二并死死守住至今。</p>
+<p><strong>刮骨疗毒的绝地反击（2019—2025 年）：潘水苗挂帅推行“数字化一号工程”与重资产补课</strong></p>
+<ul>
+<li>痛定思痛的喻会蛟在 2019 年做出了一生中最正确的用人决定——礼聘拥有深厚IT与精益管理背景的<strong>潘水苗</strong>出任总裁，彻底摒弃粗放经验主义，开启长达五年的<strong>“全面数字化转型（一号工程）”</strong>与转运中心全面自营化、自动化重资产猛攻。</li>
+<li>通过金刚系统升级、管理驾驶舱、客户管家与网点财务赋能，圆通硬生生在 2021—2022 年行业大洗牌中完成了对韵达的全面反超，重回行业第二并死死守住至今。</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -1157,21 +1629,25 @@
 </tbody>
 </table></div>
 <div class="annotated-row"><div class="main-col"><ul>
-<li><strong>体检二：质押、杠杆与高点套现排查（无异常，实控人零恶意减持）</strong></li>
-<li>截至 2026 年三季报，控股股东<strong>蛟龙集团</strong>直接持股约 <code>30.70%</code>，创始人<strong>喻会蛟</strong>直接持股约 <code>2.94%</code>，携妻子张小娟及一致行动人合计控制约 <code>34%</code> 股份，控股权极度稳固，且控股股东股权质押比例极低（近乎零质押风险）。</li>
 <li>
-<p>实控人喻会蛟夫妇自借壳上市以来从未在二级市场进行过掏空式大额减持（甚至在定增及增持窗口自掏腰包参与认购）；二股东<strong>阿里系</strong>（杭州阿里创投持股约 <code>9%</code>、杭州灏月持股约 <code>5%</code>，合计约 <code>14%—15%</code>）虽因阿里巴巴集团自身非核心资产梳理发生过内部主体划转或极小比例大宗优化，但整体战略协同稳定。</p>
+<p><strong>体检二：质押、杠杆与高点套现排查（无异常，实控人零恶意减持）</strong></p>
+<ul>
+<li>截至 2026 年三季报，控股股东<strong>蛟龙集团</strong>直接持股约 <code>30.70%</code>，创始人<strong>喻会蛟</strong>直接持股约 <code>2.94%</code>，携妻子张小娟及一致行动人合计控制约 <code>34%</code> 股份，控股权极度稳固，且控股股东股权质押比例极低（近乎零质押风险）。</li>
+<li>实控人喻会蛟夫妇自借壳上市以来从未在二级市场进行过掏空式大额减持（甚至在定增及增持窗口自掏腰包参与认购）；二股东<strong>阿里系</strong>（杭州阿里创投持股约 <code>9%</code>、杭州灏月持股约 <code>5%</code>，合计约 <code>14%—15%</code>）虽因阿里巴巴集团自身非核心资产梳理发生过内部主体划转或极小比例大宗优化，但整体战略协同稳定。</li>
+</ul>
 </li>
 <li>
 <p><strong>体检三：商誉与亏损包袱审视（总体干净，仅存小额港股并购余波）</strong></p>
-</li>
-<li>
-<p>圆通账面商誉主要来自 2017 年收购港股先达国际（现“圆通国际快递”）及少量境内资产，此前已对表现不佳的国际业务计提过相应商誉减值，当前账面剩余商誉占净资产比例极低（不足 <code>2%</code>），无百亿级商誉爆雷隐患。</p>
+<ul>
+<li>圆通账面商誉主要来自 2017 年收购港股先达国际（现“圆通国际快递”）及少量境内资产，此前已对表现不佳的国际业务计提过相应商誉减值，当前账面剩余商誉占净资产比例极低（不足 <code>2%</code>），无百亿级商誉爆雷隐患。</li>
+</ul>
 </li>
 <li>
 <p><strong>体检四：利益切分与关联交易排查（常规可控）</strong></p>
-</li>
+<ul>
 <li>全部核心转运中心土地厂房、干线车队、14 架全货机及嘉兴东方天地港均 100% 装在上市公司体内，不存在大股东体外截留核心资产收租或集团财务公司违规吸存占款黑洞。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>给管理层打分，要拆成两个人看：潘水苗管国内快递，那是一把精确到小数点后两位的手术刀，五年前吹过的牛全变成了财报里省下来的真金白银；喻老板管飞机和国际业务，虽然嘉兴大机场比原计划晚了一年多才建好、飞机还在亏钱，但人家两口子一股没乱卖、也没在体外搞小金库吸血。这种“管家极其精明、老板虽然爱追梦但手脚干净”的班子，在A股算是相当靠谱了。</p></div></div></div></div>
 
 <hr/>
@@ -1195,10 +1671,12 @@
 </ul>
 <h4 id="2_2">2. 上市以来实际向股东回报了多少钱？（分红 + 注销式回购真金白银审计）</h4>
 <ul>
-<li><strong>现金分红持续跃升（含 2026 年历史首次中期分红）</strong>：</li>
-<li>2016—2020 年：处于资本开支补课期，每年派现约 <code>4.2—5.0 亿元</code>，五年合计约 <code>22.8 亿元</code>；</li>
 <li>
-<p>2021—2023 年：2021 年派现约 <code>5.15 亿元</code>（10派1.5元），2022 年派现约 <code>8.59 亿元</code>（10派2.5元），2023 年派现约 <code>12.01 亿元</code>（10派3.5元）；</p>
+<p><strong>现金分红持续跃升（含 2026 年历史首次中期分红）</strong>：</p>
+<ul>
+<li>2016—2020 年：处于资本开支补课期，每年派现约 <code>4.2—5.0 亿元</code>，五年合计约 <code>22.8 亿元</code>；</li>
+<li>2021—2023 年：2021 年派现约 <code>5.15 亿元</code>（10派1.5元），2022 年派现约 <code>8.59 亿元</code>（10派2.5元），2023 年派现约 <code>12.01 亿元</code>（10派3.5元）；</li>
+</ul>
 </li>
 <li>
 <p><strong>2024 年度分红</strong>：每 10 股派 <code>3.60 元</code>，合计派发现金红利约 <strong><code>12.31 亿元</code></strong>（分红率约 <code>30.7%</code>）；</p>
@@ -1214,10 +1692,10 @@
 </li>
 <li>
 <p><strong>股份回购去向严审（区分“真注销”与“发激励”）</strong>：</p>
-</li>
+<ul>
 <li>2023—2025 年间，公司多次实施集中竞价回购，其中 <strong>2025 年直接将超 <code>3.70 亿元</code> 回购股份予以注销减资</strong>（实打实增厚每股含金量，等同于现金分红！）；</li>
-<li>
-<p>2026 年公司继续推进新一轮回购，截至 2026 年 10 月 31 日已回购 <code>229.33 万股</code>（耗资约 <code>3,998.47 万元</code>）。</p>
+<li>2026 年公司继续推进新一轮回购，截至 2026 年 10 月 31 日已回购 <code>229.33 万股</code>（耗资约 <code>3,998.47 万元</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>全口径真实股东回报（累计现金分红 73.53 亿元 + 2025 年注销回购 3.70 亿元）</strong>：合计达 <strong><code>77.23 亿元</code></strong>，全口径分红融资比已修复至 <strong><code>79.3%</code></strong>（若剔除大股东借壳时自掏腰包的配套募资，对二级市场公众股东的净回报比已接近 100%）。</p>
@@ -1323,27 +1801,29 @@
 <h4 id="1-capex">1. 资本开支（CapEx）、在建工程与重资产真实流向全景拆解</h4>
 <p>圆通在 2024 年（<code>67.68 亿元</code>）、2025 年（<code>86.07 亿元</code>）和 2026 年前三季度（<code>49.85 亿元</code>）合计砸下了超过 <strong><code>203 亿元</code></strong> 的真金白银，使固定资产账面净值从 2023 年末的一百多亿元一路推高至 2026Q3 末的 <strong><code>273.24 亿元</code></strong>（同期在建工程从高峰回落至 <code>26.87 亿元</code>）。这 200 多亿到底砸向了哪里？我们按经济性质将其拆解为三笔账：</p>
 <ul>
-<li><strong>第一笔（约占近三年 CapEx 的 55%—60%）：把国内主业成本往极限压的“纵深强化开支”（转运中心土地自购 + 自动化升级）</strong></li>
 <li>
-<p><strong>具体流向</strong>：对揭阳、义乌、广州、武汉、廊坊、济南等核心产粮区与枢纽节点的转运中心进行<strong>拿地自建与多层立体化改造</strong>（截至 2025 年末自营枢纽达 <code>76 个</code>），并密集加装双层/三层自动交叉带、窄带分拣机与无人供件设备（达 <code>386 套</code>）。</p>
+<p><strong>第一笔（约占近三年 CapEx 的 55%—60%）：把国内主业成本往极限压的“纵深强化开支”（转运中心土地自购 + 自动化升级）</strong></p>
+<ul>
+<li><strong>具体流向</strong>：对揭阳、义乌、广州、武汉、廊坊、济南等核心产粮区与枢纽节点的转运中心进行<strong>拿地自建与多层立体化改造</strong>（截至 2025 年末自营枢纽达 <code>76 个</code>），并密集加装双层/三层自动交叉带、窄带分拣机与无人供件设备（达 <code>386 套</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>商业回报验证</strong>：为什么非要自己买地修中心，不能租厂房？因为租来的厂房不仅每年涨租、随时面临拆迁断网风险，而且层高与柱距根本无法安装大型多层交叉带分拣机！圆通砸下重金把核心枢纽变成自有产权并装满自动化设备后，单票中心操作成本稳稳锁在 <code>0.27 元</code>，且峰值日处理能力突破 <code>1.2 亿件</code> 而不爆仓，这笔钱花得极具性价比。</p>
 </li>
 <li>
 <p><strong>第二笔（约占近三年 CapEx 的 15%—20%）：维持与迭代干线运能的“防御兼强化开支”（重卡更新与甩挂车队）</strong></p>
-</li>
-<li>
-<p><strong>具体流向</strong>：汰换老旧高油耗货车，大规模购置 15 米/17.5 米大容量甩挂牵引车及清洁能源重卡（自有干线车超 <code>6,810 辆</code>）。</p>
+<ul>
+<li><strong>具体流向</strong>：汰换老旧高油耗货车，大规模购置 15 米/17.5 米大容量甩挂牵引车及清洁能源重卡（自有干线车超 <code>6,810 辆</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>商业回报验证</strong>：直接驱动单票运输成本在 2024、2025 两年分别大降 <code>9.41%</code>（至 <code>0.42 元</code>）和 <code>10.35%</code>（至 <code>0.37 元</code>），投资回收期仅需 2.5—3 年。</p>
 </li>
 <li>
 <p><strong>第三笔（约占近三年 CapEx 的 25%—30%）：开辟远期空网与跨境第二曲线的“进攻性成长开支”（嘉兴东方天地港 + 自有货机）</strong></p>
-</li>
-<li>
-<p><strong>具体流向</strong>：核心是位于浙江嘉兴南湖机场的全球航空物流枢纽——<strong>“东方天地港”</strong>（规划总投资达 122 亿元，一期占地近 1,500 亩、建筑面积超 110 万平方米，配备可起降波音 747 全货机的 4E 级跑道），以及将全货机机队扩充至 <code>14 架</code>（含首架国产 C909 货机）。</p>
+<ul>
+<li><strong>具体流向</strong>：核心是位于浙江嘉兴南湖机场的全球航空物流枢纽——<strong>“东方天地港”</strong>（规划总投资达 122 亿元，一期占地近 1,500 亩、建筑面积超 110 万平方米，配备可起降波音 747 全货机的 4E 级跑道），以及将全货机机队扩充至 <code>14 架</code>（含首架国产 C909 货机）。</li>
+</ul>
 </li>
 <li>
 <p><strong>工程节点与转化现状</strong>：2025 年 7 月东方天地港多式联运中心整体交付，8 月航空货站竣工，<strong>2025 年底全面建成并投入运营</strong>（正式从“在建工程”转入“固定资产运营”）；2026 年 5 月起先后开通直飞达卡、卢森堡、芝加哥、洛杉矶、东京、大阪等洲际与亚洲全货机航线，并于 <strong>2026 年 9 月签约启动东方天地港二期（国际商贸与生鲜冷链集散中心）</strong>。目前该板块尚处 2—3 年长周期产能爬坡初期，转固后的新增折旧与航线培育费用仍在形成短期利润减项。</p>
@@ -1354,16 +1834,22 @@
 <p>不要以为快递公司的研发只是做个查快递的小程序。纵向对比过去三年，圆通的研发与IT投入全部围绕<strong>“把人工智能嵌入全网百万级节点的自动决策”</strong>展开，拿出了三项实打实的硬指标进步：</p>
 <ol>
 <li>
-<p><strong>AI“智多星”与本地化大模型全面接管客服与网点调度</strong>：
-   * 在 2025—2026 年，圆通将自研的“智多星”AI 系统与 DeepSeek 等大模型深度融合，直接部署到全国数千家加盟网点。以前一个日均 5 万件的加盟网点需要雇佣 8—10 名客服人员每天处理催件、改地址、理赔仲裁；现在 AI 智能客服直接自动闭环处理超 <code>80%</code> 的常规工单，不仅帮加盟商每年省下数十万元人工成本，更将全网虚假签收率与申诉率压降至历史最低水平。</p>
+<p><strong>AI“智多星”与本地化大模型全面接管客服与网点调度</strong>：</p>
+<ul>
+<li>在 2025—2026 年，圆通将自研的“智多星”AI 系统与 DeepSeek 等大模型深度融合，直接部署到全国数千家加盟网点。以前一个日均 5 万件的加盟网点需要雇佣 8—10 名客服人员每天处理催件、改地址、理赔仲裁；现在 AI 智能客服直接自动闭环处理超 <code>80%</code> 的常规工单，不仅帮加盟商每年省下数十万元人工成本，更将全网虚假签收率与申诉率压降至历史最低水平。</li>
+</ul>
 </li>
 <li>
-<p><strong>动态智能路由与“车货匹配”算法迭代</strong>：
-   * 过去干线发车靠调度员经验“定时定点发车”，遇到淡季或局部流向波动极易出现“半车空跑”。圆通通过实时 AI 路由算法，根据全网每小时揽收热力图动态拼车、动态调整直发与中转路径，这是 2025 年单票运输成本能从 <code>0.42 元</code> 猛降至 <code>0.37 元</code>、2026 年前三季度毛利率跳升近 3 个百分点的底层技术秘密。</p>
+<p><strong>动态智能路由与“车货匹配”算法迭代</strong>：</p>
+<ul>
+<li>过去干线发车靠调度员经验“定时定点发车”，遇到淡季或局部流向波动极易出现“半车空跑”。圆通通过实时 AI 路由算法，根据全网每小时揽收热力图动态拼车、动态调整直发与中转路径，这是 2025 年单票运输成本能从 <code>0.42 元</code> 猛降至 <code>0.37 元</code>、2026 年前三季度毛利率跳升近 3 个百分点的底层技术秘密。</li>
+</ul>
 </li>
 <li>
-<p><strong>商业模式向“分层溢价 + 端到端跨境供应链”演进</strong>：
-   * 在国内端，推出按时效承诺收费的<strong>“圆准达”</strong>，打破通达系“所有包裹一个白菜价”的宿命，切入高价值品牌电商与逆向退货件；在国际端，从过去倒卖舱位的纯货代，向“嘉兴东方天地港集货 + 自有全货机干线 + 海外自建清关与派送网络”的端到端国际快递进化。</p>
+<p><strong>商业模式向“分层溢价 + 端到端跨境供应链”演进</strong>：</p>
+<ul>
+<li>在国内端，推出按时效承诺收费的<strong>“圆准达”</strong>，打破通达系“所有包裹一个白菜价”的宿命，切入高价值品牌电商与逆向退货件；在国际端，从过去倒卖舱位的纯货代，向“嘉兴东方天地港集货 + 自有全货机干线 + 海外自建清关与派送网络”的端到端国际快递进化。</li>
+</ul>
 </li>
 </ol>
 <div class="annotated-row"><div class="main-col"><h4 id="3_1">3. 未来成长蓝图梯度审视与国内外同行正反镜鉴</h4><ul>
@@ -1442,16 +1928,22 @@
 <h4 id="2-3">2. 未来两到三年必看的 3 个可量化、可证伪“硬核验证路标”</h4>
 <ol>
 <li>
-<p><strong>【路标一：资本开支收敛度与嘉兴枢纽/航空板块减亏进度（验证进化与排雷）】</strong>
-   * <strong>量化标尺</strong>：盯紧年报与半年报中“快递主业归母净利 vs 合并归母净利”的差额（2025 年该差额为 <code>-2.92 亿元</code>），以及航空业务毛利率（2024 年 <code>-9.69%</code> <span class="math-inline"> → </span> 2025H1 <code>-6.13%</code>）。要求嘉兴东方天地港投运后，非快递业务（航空+货代）合计年度亏损严控在 <code>3 亿元</code> 以内并逐年收窄迈向盈亏平衡；同时全年 CapEx 从 2025 年峰值 <code>86.07 亿元</code> 稳步回落并控制在 <code>55—65 亿元</code> 以内。</p>
+<p><strong>【路标一：资本开支收敛度与嘉兴枢纽/航空板块减亏进度（验证进化与排雷）】</strong></p>
+<ul>
+<li><strong>量化标尺</strong>：盯紧年报与半年报中“快递主业归母净利 vs 合并归母净利”的差额（2025 年该差额为 <code>-2.92 亿元</code>），以及航空业务毛利率（2024 年 <code>-9.69%</code> <span class="math-inline"> → </span> 2025H1 <code>-6.13%</code>）。要求嘉兴东方天地港投运后，非快递业务（航空+货代）合计年度亏损严控在 <code>3 亿元</code> 以内并逐年收窄迈向盈亏平衡；同时全年 CapEx 从 2025 年峰值 <code>86.07 亿元</code> 稳步回落并控制在 <code>55—65 亿元</code> 以内。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标二：单票核心成本优势与自由现金流/分红兑现底线（验证造血成色）】</strong>
-   * <strong>量化标尺</strong>：单票运输成本 + 单票中心操作成本合计稳定在 <strong><code>0.62—0.65 元</code></strong> 区间（保持 A 股通达系第一）；全年自由现金流（<code>OCF - CapEx</code>）继 2026 年前三季度转正（<code>+16.45 亿元</code>）后，全年稳定在 <strong><code>20—35 亿元</code></strong> 以上，且全年现金分红 + 注销式回购占归母净利润比例稳定在 <strong><code>30%—40%</code></strong> 以上。</p>
+<p><strong>【路标二：单票核心成本优势与自由现金流/分红兑现底线（验证造血成色）】</strong></p>
+<ul>
+<li><strong>量化标尺</strong>：单票运输成本 + 单票中心操作成本合计稳定在 <strong><code>0.62—0.65 元</code></strong> 区间（保持 A 股通达系第一）；全年自由现金流（<code>OCF - CapEx</code>）继 2026 年前三季度转正（<code>+16.45 亿元</code>）后，全年稳定在 <strong><code>20—35 亿元</code></strong> 以上，且全年现金分红 + 注销式回购占归母净利润比例稳定在 <strong><code>30%—40%</code></strong> 以上。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标三：行业“反内卷”价格底线与圆通份额剪刀差（验证周期身位）】</strong>
-   * <strong>量化标尺</strong>：跟踪每月经营快报中的“单票快递产品收入”与“业务量同比增速”——只要单票收入维持在 <strong><code>2.05—2.20 元</code></strong> 企稳不破位，且圆通季度件量增速持续跑赢全国快递行业平均增速 <strong><code>3—5 个百分点</code> 以上</strong>（市占率稳步向 <code>17%</code> 迈进），则证明其“量质双升”的收割逻辑完全成立。</p>
+<p><strong>【路标三：行业“反内卷”价格底线与圆通份额剪刀差（验证周期身位）】</strong></p>
+<ul>
+<li><strong>量化标尺</strong>：跟踪每月经营快报中的“单票快递产品收入”与“业务量同比增速”——只要单票收入维持在 <strong><code>2.05—2.20 元</code></strong> 企稳不破位，且圆通季度件量增速持续跑赢全国快递行业平均增速 <strong><code>3—5 个百分点</code> 以上</strong>（市占率稳步向 <code>17%</code> 迈进），则证明其“量质双升”的收割逻辑完全成立。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -1463,17 +1955,21 @@
 <h4 id="0-vs-vs">0. 前置会计排雷：厘清“当期转固 vs 期末在建余额”与“资金投入比 vs 物理完工度”</h4>
 <p>在解剖具体工程之前，必须先打破两处极易误导外行投资者的财务报表错觉：</p>
 <ul>
-<li><strong>第一处错觉：为什么 2026 年前三季度在建工程期末余额仅比 2025 年末减少了 <code>2.82 亿元</code>（从 <code>29.69 亿元</code> 降至 <code>26.87 亿元</code>），但同期固定资产净值却暴增了 <code>21.82 亿元</code>（从 <code>251.42 亿元</code> 增至 <code>273.24 亿元</code>）？</strong></li>
 <li>
-<p><strong>严禁混淆“当期转固金额”与“期末在建工程余额”</strong>：在建工程科目不是一潭死水，而是一个<strong>“动态中转漏斗（蓄水池）”</strong>，其恒等式为：<code>期末在建工程余额 = 期初在建工程余额 + 当期新增在建工程投入 - 当期竣工转入固定资产金额</code>。</p>
+<p><strong>第一处错觉：为什么 2026 年前三季度在建工程期末余额仅比 2025 年末减少了 <code>2.82 亿元</code>（从 <code>29.69 亿元</code> 降至 <code>26.87 亿元</code>），但同期固定资产净值却暴增了 <code>21.82 亿元</code>（从 <code>251.42 亿元</code> 增至 <code>273.24 亿元</code>）？</strong></p>
+<ul>
+<li><strong>严禁混淆“当期转固金额”与“期末在建工程余额”</strong>：在建工程科目不是一潭死水，而是一个<strong>“动态中转漏斗（蓄水池）”</strong>，其恒等式为：<code>期末在建工程余额 = 期初在建工程余额 + 当期新增在建工程投入 - 当期竣工转入固定资产金额</code>。</li>
+</ul>
 </li>
 <li>
 <p><strong>真实资金流转还原</strong>：2026 年前三季度，圆通合计支付资本开支 <code>49.85 亿元</code>（其中一部分用于直接购置无需长期土建的干线重卡与单机设备并直接计入固定资产，另一部分约 <code>32—36 亿元</code> 持续注入嘉兴东方天地港收尾工程及揭阳、义乌、济南等在建转运中心）。与此同时，随着嘉兴东方天地港航空货站、多式联运中心及多地枢纽转运中心在 2025 年底至 2026 年上半年集中达到预定可使用状态，<strong>当期从在建工程批量结转至固定资产的真实金额高达 <code>35—39 亿元</code></strong>！正是因为“一边新注水约 35 亿元、一边开闸放水转固约 38 亿元”，才使得池子里的期末余额看似只微降了 <code>2.82 亿元</code>，实则水下已经完成了一轮巨量产能的竣工交付与转固切换（扣除 2026 年前三季度计提的约 <code>18—20 亿元</code> 存量折旧后，固定资产账面净值仍净增 <code>21.82 亿元</code>）。</p>
 </li>
 <li>
 <p><strong>第二处错觉：为什么定增募投及重点基建项目附注中，常出现“工程物理进度已达 100% 竣工投产，但资金累计投入比例仅停留在 80%—88%”的现象？</strong></p>
-</li>
+<ul>
 <li><strong>严禁将“资金累计支付比例”等同于“工程物理进度”</strong>：在大型物流园区土建（如钢结构厂房、多层钢筋混凝土分拨中心）与大型自动化交叉带分拣线采购中，行业铁律是按里程碑节点付款——预付款 <code>10%—20%</code>、设备到场/主体封顶付至 <code>60%—70%</code>、联调竣工验收付至 <code>80%—85%</code>。剩余 <strong><code>12%—20%</code> 的资金缺口并非工程烂尾或缩水，而是必须扣除的“工程竣工决算审价尾款（约 5%—10%）”以及扣留 1—2 年的“工程与设备质量保证金（质保金，约 5%—10%）”</strong>，叠加圆通利用自身强势甲方地位通过银行承兑汇票（账期 6 个月）支付工程款的时间差。因此，物理产能早已 100% 满负荷运转创造现金流，而账面现金支付往往滞后 12—18 个月才彻底清零。</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h4 id="1_5">1. 算清单位经济账：地面转运中心与嘉兴“东方天地港”的成本标尺与盈亏平衡测算</h4>
@@ -1543,8 +2039,10 @@
 </tbody>
 </table></div>
 <div class="annotated-row"><div class="main-col"><ul>
-<li><strong>单位经济账穿透剖析（圆通为什么“造价居中偏省，但产出效率极高”？）：</strong>
-  1. <strong>拿地自建 vs 租赁改造的十年大账</strong>：外行常质疑为什么圆通不租现成的物流园（每年租金仅约 <code>240—360 元/平米</code>），而要砸下 <code>3,800—4,400 万元/万平米</code> 拿地自建？答案藏在物理结构与自动化刚性里：第三方标准普洛斯物流仓层高通常仅 9—10 米、柱网密集且地面承重有限，根本塞不下总高达 11—13 米的<strong>“三层立体交叉带分拣线 + 钢结构夹层平台”</strong>；更重要的是，租赁场地每 3—5 年面临房东涨租 <code>15%—20%</code> 或政府征地拆迁，一旦拆迁，耗资数千万元焊接安装的自动化分拣线拆卸报废率超过 <code>40%</code>！圆通拿下一手工业物流用地（50 年产权）并建造重卡可直接开上二楼卸货的“双层盘道枢纽”，虽然前期一次性 CapEx 看着高，但将建筑按 25—30 年、土地按 50 年折旧摊销后，<strong>折算到每平方米的年化固定折旧成本仅为 <code>130—160 元/平米/年</code>，比在义乌、广州、上海周边租用高标仓便宜整整一半以上</strong>！</li>
+<li><strong>单位经济账穿透剖析（圆通为什么“造价居中偏省，但产出效率极高”？）：</strong><ol>
+<li><strong>拿地自建 vs 租赁改造的十年大账</strong>：外行常质疑为什么圆通不租现成的物流园（每年租金仅约 <code>240—360 元/平米</code>），而要砸下 <code>3,800—4,400 万元/万平米</code> 拿地自建？答案藏在物理结构与自动化刚性里：第三方标准普洛斯物流仓层高通常仅 9—10 米、柱网密集且地面承重有限，根本塞不下总高达 11—13 米的<strong>“三层立体交叉带分拣线 + 钢结构夹层平台”</strong>；更重要的是，租赁场地每 3—5 年面临房东涨租 <code>15%—20%</code> 或政府征地拆迁，一旦拆迁，耗资数千万元焊接安装的自动化分拣线拆卸报废率超过 <code>40%</code>！圆通拿下一手工业物流用地（50 年产权）并建造重卡可直接开上二楼卸货的“双层盘道枢纽”，虽然前期一次性 CapEx 看着高，但将建筑按 25—30 年、土地按 50 年折旧摊销后，<strong>折算到每平方米的年化固定折旧成本仅为 <code>130—160 元/平米/年</code>，比在义乌、广州、上海周边租用高标仓便宜整整一半以上</strong>！</li>
+</ol>
+</li>
 </ul><ol start="2">
 <li><strong>双层/三层立体分拣 + 无人供件的坪效魔法</strong>：在揭阳、义乌等寸土寸金的产粮区，圆通并非简单平铺单层流水线，而是通过“底层重货矩阵粗分 + 二层/三层双层交叉带细分小件 + 前端全自动无人供件台（替代传统人工摆件）”，将单座 10 万平米枢纽的日均峰值处理能力从传统的 <code>250 万件/天</code> 直接翻倍推升至 <strong><code>500—600 万件/天</code>（年化处理能力达 <code>18—20 亿件</code>）</strong>。这就把“每亿件年产能的固定资产投资额”死死压在了 <strong><code>0.85—1.05 亿元</code></strong> 的高性价比区间，直接支撑单票中心操作成本降至 <strong><code>0.27 元</code></strong>。</li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>外行看快递公司花几百亿买地盖厂房觉得太重，内行一看就知道这是门算得精透的“房东替代账”——在义乌和广州租别人的仓库，房东看你装了价值几千万的分拣机搬不走，隔三年就坐地起价敲你竹杠；现在圆通自己拿50年产权的工业地、盖三层立体大楼，摊到每平米一年的折旧费比交房租便宜一半还多，顺便用机器把分拣小哥替掉了一大半，这笔买卖划算得简直像抢钱！</p></div></div></div></div>
@@ -1569,16 +2067,18 @@
 </ul>
 <p>基于上述法定会计标尺，我们将圆通 2025—2026 年集中竣工转固的两大资产包拆开，逐笔核算其<strong>“年度新增折旧摊销额”</strong>与<strong>“盈亏平衡作业门槛”</strong>：</p>
 <ul>
-<li><strong>资产包一：全国地面枢纽转运中心及自动化设备（2025—2026 两年合计新增转固约 <code>70 亿元</code>）</strong></li>
 <li>
-<p><strong>转固结构拆解</strong>：在 2025—2026 年陆续竣工转固的全国地面枢纽项目中，包含厂房及园区建筑物约 <code>42 亿元</code>（按 3.5% 年折旧率计）、自动化分拣机器设备约 <code>28 亿元</code>（按 9.5% 年折旧率计），另有配套新增土地使用权约 <code>12 亿元</code>（按 2.0% 年摊销率计）。</p>
+<p><strong>资产包一：全国地面枢纽转运中心及自动化设备（2025—2026 两年合计新增转固约 <code>70 亿元</code>）</strong></p>
+<ul>
+<li><strong>转固结构拆解</strong>：在 2025—2026 年陆续竣工转固的全国地面枢纽项目中，包含厂房及园区建筑物约 <code>42 亿元</code>（按 3.5% 年折旧率计）、自动化分拣机器设备约 <code>28 亿元</code>（按 9.5% 年折旧率计），另有配套新增土地使用权约 <code>12 亿元</code>（按 2.0% 年摊销率计）。</li>
+</ul>
 </li>
 <li>
 <p><strong>每年新增折旧与摊销额</strong>：
     <div class="math-display"><span class="math-text">地面枢纽年新增折旧摊销</span> = 42  ×  3.5\% + 28  ×  9.5\% + 12  ×  2.0\% = 1.47 + 2.66 + 0.24 = <strong>4.37<span class="math-text"> 亿元/年</span></strong></div></p>
-</li>
-<li>
-<p><strong>盈亏平衡点测算（双路径验证）</strong>：</p>
+<ul>
+<li><strong>盈亏平衡点测算（双路径验证）</strong>：</li>
+</ul>
 </li>
 </ul>
 <ol>
@@ -1590,16 +2090,20 @@
 </li>
 </ol>
 <ul>
-<li><strong>资产包二：浙江嘉兴“东方天地港”全球航空物流枢纽（一期工程集中转固）</strong></li>
 <li>
-<p><strong>划清“122 亿元规划总投资”与“圆通上市公司当期表内实际转固额”的边界</strong>：公开报道中嘉兴项目总投资为 <code>122 亿元</code>，但必须严密区分投资主体与分期节奏——嘉兴南湖机场的飞行区 4E 级跑道（3,400 米）、滑行道、空管塔台及市政配套属于军民合用机场主体工程（主要由嘉兴地方政府平台公司及机场合资主体投资建设）；圆通速递上市公司体内直接出资建设的“东方天地港”项目，核心是一期占地约 <code>1,410—1,500 亩</code>、总建筑面积超 <strong><code>110 万平方米</code></strong> 的三大功能区（多式联运集散中心、国际/国内航空货站区、机务维修 MRO 与保税仓储区）及场内全套高度自动化分拣、冷链与海关智能查验设备。</p>
+<p><strong>资产包二：浙江嘉兴“东方天地港”全球航空物流枢纽（一期工程集中转固）</strong></p>
+<ul>
+<li><strong>划清“122 亿元规划总投资”与“圆通上市公司当期表内实际转固额”的边界</strong>：公开报道中嘉兴项目总投资为 <code>122 亿元</code>，但必须严密区分投资主体与分期节奏——嘉兴南湖机场的飞行区 4E 级跑道（3,400 米）、滑行道、空管塔台及市政配套属于军民合用机场主体工程（主要由嘉兴地方政府平台公司及机场合资主体投资建设）；圆通速递上市公司体内直接出资建设的“东方天地港”项目，核心是一期占地约 <code>1,410—1,500 亩</code>、总建筑面积超 <strong><code>110 万平方米</code></strong> 的三大功能区（多式联运集散中心、国际/国内航空货站区、机务维修 MRO 与保税仓储区）及场内全套高度自动化分拣、冷链与海关智能查验设备。</li>
+</ul>
 </li>
 <li>
 <p><strong>转固金额与年度新增折旧摊销精算</strong>：截至 2025 年 7—8 月多式联运中心与航空货站竣工、2025 年底全面投运及 2026 年 5 月国际开港，圆通在嘉兴东方天地港一期工程中累计已完成投入并陆续从“在建工程”转入“固定资产/无形资产”的核心重资产规模约为 <strong><code>48 — 55 亿元</code></strong>（其中高标航空货站、多式联运中心及机务库房建筑约 <code>32 亿元</code>；场内跨境自动分拣矩阵、安检机及冷链温控设备约 <code>13 亿元</code>；1,500 亩工业及物流仓储土地使用权约 <code>6 亿元</code>；其余远期机位配套及 2026 年 9 月刚签约的二期国际商贸与生鲜冷链中心将在未来数年分批投入）。
     <div class="math-display"><span class="math-text">东方天地港一期年新增折旧摊销</span>  ≈  32  ×  3.5\% + 13  ×  9.5\% + 6  ×  2.0\% = 1.12 + 1.235 + 0.12 = <strong>2.475<span class="math-text"> 亿元/年（约 </span> 2.4—2.6<span class="math-text"> 亿元/年）</span></strong></div>
 <em>(注：若进一步叠加上圆通航空现有的 <code>14 架全货机</code> 机队本身的年度飞机折旧、发动机大修摊销及融资租赁费用约 <code>2.5—2.8 亿元/年</code>，则圆通“嘉兴东方天地港一期 + 14架全货机”组成的空网板块，每年背负的刚性固定折旧与摊销底座合计约为 <strong><code>5.0 — 5.4 亿元/年</code></strong>。)</em></p>
-</li>
+<ul>
 <li><strong>嘉兴“东方天地港”一期盈亏平衡点测算（国内分拨 + 国际航空货站 + 全货机三账合一）</strong>：</li>
+</ul>
+</li>
 </ul>
 <ol>
 <li>
@@ -1624,18 +2128,20 @@
 <p><strong>结论判定</strong>：因此，圆通在义乌、揭阳、广州、武汉、廊坊等核心产粮区与主干路由节点投产的新建自动化转运中心，绝非盲目扩产的面子工程，而是<strong>实打实“雪中送炭”的峰值稳压器与降本利器</strong>——平时维持在 <code>75%—82%</code> 的黄金舒适稼动率，旺季直接拉满至 <code>100%</code> 顶住日均 1.3 亿件洪峰而无需外租场地，这正是 2026 年前三季度圆通能在件量增长 <code>10.52%</code> 的同时将综合毛利率推高至 <code>11.84%</code> 的核心底气。唯一存在的局部温和冗余，仅限于东北、西北等非核心人口流出区域的少数二线转运中心（因当地出港件量偏少，回程分拣设备白班利用率偏低，但占全网固定资产比重不足 <code>8%</code>，无碍大局）。</p>
 </li>
 </ul><h5 id="2_5">（2）嘉兴“东方天地港”的消化真相：为什么“国内多式联运”能迅速喂饱，而“国际航空货站”面临苦战？</h5><p>同样建在嘉兴南湖机场旁边的 1,500 亩园区里，东方天地港内部两大功能板块的产能消化境遇却呈现出鲜明的<strong>“地面火热、空中慢热”</strong>劈叉格局：</p><ul>
-<li><strong>为什么“国内多式联运集散中心”能较快填满并消化折旧？</strong></li>
 <li>
-<p><strong>长三角几何圆心的天然区位红利 + 自有存量包裹平移</strong>：嘉兴地处上海、杭州、苏州、宁波四大经济与电商重镇的正中心（距四地直线距离均在 80—100 公里以内，高速公路网四通八达）。长三角地区本身就贡献了圆通全网超过 <strong><code>35%</code>（年均超 110—120 亿件）</strong> 的快递揽派与中转吞吐量！</p>
+<p><strong>为什么“国内多式联运集散中心”能较快填满并消化折旧？</strong></p>
+<ul>
+<li><strong>长三角几何圆心的天然区位红利 + 自有存量包裹平移</strong>：嘉兴地处上海、杭州、苏州、宁波四大经济与电商重镇的正中心（距四地直线距离均在 80—100 公里以内，高速公路网四通八达）。长三角地区本身就贡献了圆通全网超过 <strong><code>35%</code>（年均超 110—120 亿件）</strong> 的快递揽派与中转吞吐量！</li>
+</ul>
 </li>
 <li>
 <p><strong>无需向外求客，左手倒右手即可填仓</strong>：2025 年 7 月东方天地港多式联运中心一交付，圆通根本不需要去市场上苦苦哀求外部客户，直接将原本分散在嘉兴老场地、浙北及苏南周边的陆运快件分拨业务平移整合进这座拥有最新交叉带分拣矩阵的超级枢纽，顺带承接长三角发往全国的“圆准达”高时效快件集拼。凭借自家每年 345 亿件的庞大国内快递底座，多式联运中心的地面分拣产能仅用半年时间就迅速爬升至 <strong><code>70%</code> 以上</strong> 的健康水位。</p>
 </li>
 <li>
 <p><strong>为什么“国际航空货站与全货机航线”面临严峻的 2—3 年货源爬坡考验？</strong></p>
-</li>
-<li>
-<p><strong>体量悬殊与转换壁垒</strong>：东方天地港规划的远期年货邮吞吐量高达 <code>240 万吨</code>（近期至 2030 年目标亦达 <code>80—110 万吨</code>），而前面我们算过，光是覆盖一期国际货站的刚性折旧与运营成本，每年就需要 <strong><code>40—45 万吨</code></strong> 的航空货邮吞吐量。</p>
+<ul>
+<li><strong>体量悬殊与转换壁垒</strong>：东方天地港规划的远期年货邮吞吐量高达 <code>240 万吨</code>（近期至 2030 年目标亦达 <code>80—110 万吨</code>），而前面我们算过，光是覆盖一期国际货站的刚性折旧与运营成本，每年就需要 <strong><code>40—45 万吨</code></strong> 的航空货邮吞吐量。</li>
+</ul>
 </li>
 <li>
 <p><strong>自家现有的 14 架飞机远远喂不饱这座超级货站</strong>：不妨算一笔极其冷酷的物理运力账——圆通航空目前拥有的 <code>14 架</code> 全货机（10 架窄体机 B757 载重仅 28 吨、3 架宽体机 B767 载重约 52 吨、1 架支线机 C909 载重约 10 吨），全机队单次最大总业载合计仅为 <strong><code>446 吨</code></strong>！即便这 14 架飞机全部驻扎在嘉兴（实际上还有相当一部分在飞杭州、深圳、昆明等航线）、每天飞满 2 个起落、全年 330 天满载飞行，<strong>圆通自有 14 架货机一年能创造的极限货邮吞吐量也只有 <code>20 — 25 万吨</code> 左右</strong>！</p>
@@ -1657,37 +2163,49 @@
 <p>回溯圆通 2021—2022 年的规划披露，公司最早曾期望嘉兴全球航空物流枢纽在 2023 年底至 2024 年间建成投运；但实际工程轨迹是：2025 年 7—8 月多式联运中心与航空货站竣工、2025 年底嘉兴南湖机场正式通航、<strong>2026 年 5 月 28 日才正式飞出首班国际全货机航线（嘉兴—达卡）</strong>。造成这 1.5—2 年顺延的并非圆通资金链紧张（公司账上常年躺着近百亿现金），而是撞上了中国航空基建领域最难啃的三块硬骨头：</p>
 <ol>
 <li>
-<p><strong>军民合用机场改扩建的跨军地审批与空域切割（头号耗时大户）</strong>：
-   * 嘉兴南湖机场并非在一片白纸上新建纯民用机场，而是<strong>在原军用机场基础上实施的“军民合用改扩建工程”</strong>。要在长三角这个全国民航客机与防空识别区最稠密的空域里，把跑道扩建至 3,400 米 4E 级标准（可起降满载波音 747 全货机），不仅涉及国务院、中央军委联合批复立项，更需要战区空军、民航华东局、地方政府就<strong>“军民航飞行程序切割、夜间货运起降空域走廊划设、导航台站电磁兼容与净空保护”</strong>进行上百轮严苛的技术论证与安全协调，光这一项跨体制协同就耗去了远超普通工程的周期。</p>
+<p><strong>军民合用机场改扩建的跨军地审批与空域切割（头号耗时大户）</strong>：</p>
+<ul>
+<li>嘉兴南湖机场并非在一片白纸上新建纯民用机场，而是<strong>在原军用机场基础上实施的“军民合用改扩建工程”</strong>。要在长三角这个全国民航客机与防空识别区最稠密的空域里，把跑道扩建至 3,400 米 4E 级标准（可起降满载波音 747 全货机），不仅涉及国务院、中央军委联合批复立项，更需要战区空军、民航华东局、地方政府就<strong>“军民航飞行程序切割、夜间货运起降空域走廊划设、导航台站电磁兼容与净空保护”</strong>进行上百轮严苛的技术论证与安全协调，光这一项跨体制协同就耗去了远超普通工程的周期。</li>
+</ul>
 </li>
 <li>
-<p><strong>国家一类航空口岸开放验收与国际航权时刻分配</strong>：
-   * 机场跑道和货站水泥大楼盖好只是第一步；要想飞国际货运航线，嘉兴机场必须被列入国家口岸开放年度计划，并通过海关总署、国家移民管理局（边检）、民航局对国际货站查验线、保税监管仓、熏蒸与冷链检疫设施的逐项联合验收。这也是为什么工程在 2025 年下半年即已物理竣工、2025 年底实现国内通航，但直到 2026 年 5 月底才正式取得国际口岸全套放行资质并实现国际首航。</p>
+<p><strong>国家一类航空口岸开放验收与国际航权时刻分配</strong>：</p>
+<ul>
+<li>机场跑道和货站水泥大楼盖好只是第一步；要想飞国际货运航线，嘉兴机场必须被列入国家口岸开放年度计划，并通过海关总署、国家移民管理局（边检）、民航局对国际货站查验线、保税监管仓、熏蒸与冷链检疫设施的逐项联合验收。这也是为什么工程在 2025 年下半年即已物理竣工、2025 年底实现国内通航，但直到 2026 年 5 月底才正式取得国际口岸全套放行资质并实现国际首航。</li>
+</ul>
 </li>
 <li>
-<p><strong>重型宽体货机引进节奏与特种机务（MRO）人才配套制约</strong>：
-   * 波音 767/757 客改货（BCF/BDSF）受全球航空供应链紧张及适航取证影响，交付周期普遍拉长；同时，嘉兴作为新建货运基地，从零组建具备宽体货机定检维修资质（CCAR-145 部）的机务工程师团队与国际航线签派团队，也经历了扎实的资质爬坡期。</p>
+<p><strong>重型宽体货机引进节奏与特种机务（MRO）人才配套制约</strong>：</p>
+<ul>
+<li>波音 767/757 客改货（BCF/BDSF）受全球航空供应链紧张及适航取证影响，交付周期普遍拉长；同时，嘉兴作为新建货运基地，从零组建具备宽体货机定检维修资质（CCAR-145 部）的机务工程师团队与国际航线签派团队，也经历了扎实的资质爬坡期。</li>
+</ul>
 </li>
 </ol>
 <h5 id="22026-9">（2）前瞻排雷：2026 年 9 月启动的“东方天地港二期”及后续核心转运中心还有哪些硬阻力？</h5>
 <ul>
-<li><strong>土地指标紧箍咒（一二线核心城市一手物流用地极度稀缺）</strong>：</li>
 <li>
-<p>随着全国地面枢纽自营化率已达极高水位（76 个自营中心），圆通未来在北上广深及长三角、珠三角核心城区周边若想继续拿地扩建转运中心，面临地方政府极其严苛的<strong>“亩均税收考核指标”</strong>——地方政府往往倾向于把工业用地批给高亩均税收的芯片、新能源工厂，而对占地动辄两三百亩、但主要作为成本中心（税收留在总部或开票地）的快递分拨中心卡得极严，往往要求绑定区域结算总部或跨境贸易额才肯批地。</p>
+<p><strong>土地指标紧箍咒（一二线核心城市一手物流用地极度稀缺）</strong>：</p>
+<ul>
+<li>随着全国地面枢纽自营化率已达极高水位（76 个自营中心），圆通未来在北上广深及长三角、珠三角核心城区周边若想继续拿地扩建转运中心，面临地方政府极其严苛的<strong>“亩均税收考核指标”</strong>——地方政府往往倾向于把工业用地批给高亩均税收的芯片、新能源工厂，而对占地动辄两三百亩、但主要作为成本中心（税收留在总部或开票地）的快递分拨中心卡得极严，往往要求绑定区域结算总部或跨境贸易额才肯批地。</li>
+</ul>
 </li>
 <li>
 <p><strong>东方天地港二期（国际商贸与生鲜冷链中心）的能耗审批与特种检疫牌照</strong>：</p>
-</li>
+<ul>
 <li>2026 年 9 月圆通签约启动的东方天地港二期主攻“高标生鲜冷链集散与国际商贸”。一方面，超大型冷库群属于高耗电设施，在浙江省严控“能耗双控/碳排放强度”背景下，获取新增大额电力负荷与节能审查指标门槛不低；另一方面，生鲜冷链要真正运转起来（如空运进口智利车厘子、挪威三文鱼、东南亚榴莲），必须向海关总署申领<strong>“进境冰鲜水产品、进境食用水生动物、进境水果指定监管场地”</strong>三大特种牌照，从硬件达标到正式获批挂牌通常需要 12—18 个月的实战核验期。</li>
+</ul>
+</li>
 </ul>
 <h2 id="-">---</h2>
 <h3 id="b">【追问模块 B：远期期权（新业务/新技术）证伪拆解】</h3>
 <p>在资本市场上，企业最喜欢把正在烧钱的新业务包装成“极具想象力的第二增长曲线”。为了彻底剥离公关辞令与情绪滤镜，我们将圆通速递当前重金押注的两大远期期权——<strong>① “圆通航空 + 嘉兴东方天地港 + 国际快递出海”跨境空网一体化战略（核心第二曲线期权）</strong> 与 <strong>② “AI 智多星大模型 + 无人车/数字化末端赋能”（技术降本期权）</strong>——推上手术台，用物理定律、客户转换门槛与竞争终局格局做一场冷酷的商业证伪。</p>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="1_7">1. 商业化刻度精准定位：一个已在地面“日进斗金”，一个还在天上“负重爬坡”</h4><p>截至 2026 年下半年，如果用<strong>“概念设想 <span class="math-inline"> → </span> 实验室/局部试点 <span class="math-inline"> → </span> 产能导入与亏损爬坡期 <span class="math-inline"> → </span> 跨过盈亏平衡点 <span class="math-inline"> → </span> 规模化利润兑现期”</strong>这把五级刻度尺来丈量，圆通的这两大期权正处在截然不同的生命周期阶段：</p><ul>
-<li><strong>技术期权（AI“智多星 YTO-GPT”大模型 + 末端无人车矩阵）：已越过拐点，全面步入【第 5 级：规模化降本利润兑现期】</strong></li>
 <li>
-<p><strong>非PPT概念，已嵌入全网毛细血管</strong>：圆通并非去搞烧钱的通用大模型军备竞赛，而是将自研的“智多星（YTO-GPT）”与开源推理模型深度融合，直接嫁接到全网 76 个转运中心与数千家一级加盟商的日常作业中。</p>
+<p><strong>技术期权（AI“智多星 YTO-GPT”大模型 + 末端无人车矩阵）：已越过拐点，全面步入【第 5 级：规模化降本利润兑现期】</strong></p>
+<ul>
+<li><strong>非PPT概念，已嵌入全网毛细血管</strong>：圆通并非去搞烧钱的通用大模型军备竞赛，而是将自研的“智多星（YTO-GPT）”与开源推理模型深度融合，直接嫁接到全网 76 个转运中心与数千家一级加盟商的日常作业中。</li>
+</ul>
 </li>
 <li>
 <p><strong>硬核量化战果</strong>：</p>
@@ -1703,9 +2221,11 @@
 <p><strong>末端无人配送车（与九识智能等头部无人车企深度合作）</strong>：截至 2026 年，圆通已在嘉兴、义乌、杭州、苏州、泉州等全国数百个网点规模化投用 L4 级城配无人物流车（用于“加盟网点分拨部 <span class="math-inline"> → </span> 菜鸟驿站/兔喜社区店”的短驳接驳），将原本需要面包车司机往返跑腿的短驳成本从 <strong><code>0.12—0.15 元/票</code> 直接砍半至 <code>0.05—0.07 元/票</code></strong>！</p>
 </li>
 </ol><ul>
-<li><strong>第二曲线期权（“圆通航空 + 嘉兴东方天地港 + 国际出海”）：正卡在【第 3 级：重资产产能导入与亏损爬坡初期】</strong></li>
 <li>
-<p><strong>客观经营刻度</strong>：硬件骨架已搭起——截至 2026 年中拥有 <strong><code>14 架</code> 自有全货机</strong>（10 架波音 757、3 架波音 767、1 架国产 C909），嘉兴东方天地港一期 110 万平米建筑已于 2025 年底投运，并在 2026 年 5 月起密集首航孟加拉达卡、匈牙利布达佩斯、卢森堡、美国芝加哥/洛杉矶、日本东京/大阪、印度班加罗尔等国际货运航线。</p>
+<p><strong>第二曲线期权（“圆通航空 + 嘉兴东方天地港 + 国际出海”）：正卡在【第 3 级：重资产产能导入与亏损爬坡初期】</strong></p>
+<ul>
+<li><strong>客观经营刻度</strong>：硬件骨架已搭起——截至 2026 年中拥有 <strong><code>14 架</code> 自有全货机</strong>（10 架波音 757、3 架波音 767、1 架国产 C909），嘉兴东方天地港一期 110 万平米建筑已于 2025 年底投运，并在 2026 年 5 月起密集首航孟加拉达卡、匈牙利布达佩斯、卢森堡、美国芝加哥/洛杉矶、日本东京/大阪、印度班加罗尔等国际货运航线。</li>
+</ul>
 </li>
 <li>
 <p><strong>冷酷的财务成色</strong>：虽然航线剪彩热闹非凡，但翻开财报底牌——2024 年航空业务实现营收 <code>17.17 亿元</code>，毛利率为 <strong><code>-9.69%</code></strong>；2025 年上半年航空业务营收 <code>8.87 亿元</code>，毛利率依然为 <strong><code>-6.13%</code></strong>；叠加受跨境关税冲击的货代业务（2025H1 营收同比暴跌 <code>47.22%</code> 至 <code>10.45 亿元</code>，毛利率仅 <code>7.47%</code>），<strong>2025 全年航空与国际等非快递业务合计净亏掉母公司约 <code>2.92 亿元</code> 归母净利润</strong>（快递主业赚 <code>46.14 亿元</code>，合并归母净利被拉低至 <code>43.22 亿元</code>）。随着 2026 年东方天地港转固折旧全额计提，该板块仍处在实打实的“战略失血培育期”。</p>
@@ -1722,18 +2242,22 @@
 <h5 id="vs">第一关：底层物理经济账死结——“窄体机航程油耗劣势”与“去程满载 vs 回程空载”的双向失衡</h5>
 <p>航空货运是一门被物理定律（最大起飞重量、航程半径、吨公里油耗）死死统治的残酷生意，圆通航空目前卡在两个硬伤上：</p>
 <ul>
-<li><strong>机队结构偏窄体化，缺乏洲际远程重型宽体机（B747/B777）的规模降本能力</strong>：</li>
 <li>
-<p>拆开圆通航空现有的 <code>14 架</code> 全货机家底，高达 <strong><code>10 架</code> 是波音 757-200F 窄体货机</strong>（最大业载仅约 <code>28 吨</code>，满载航程仅约 <code>3,900 公里</code>），外加 <code>1 架</code> 国产 C909 支线货机（业载约 <code>10 吨</code>），真正具备中远程跨区域能力的只有 <strong><code>3 架</code> 波音 767-300F 中型宽体机</strong>（业载约 <code>52—55 吨</code>，航程约 <code>6,000 公里</code>），而像顺丰、中货航主力执飞欧美洲际航线的<strong>波音 747-400F/8F 或波音 777F 重型远程宽体货机（业载超 <code>100—130 吨</code>、直飞航程超 <code>9,000 公里</code>），圆通自有产权机队里目前是 <code>0 架</code></strong>（部分欧美洲际航线需依赖湿租/包租外部宽体运力或中途技术经停加油）！</p>
+<p><strong>机队结构偏窄体化，缺乏洲际远程重型宽体机（B747/B777）的规模降本能力</strong>：</p>
+<ul>
+<li>拆开圆通航空现有的 <code>14 架</code> 全货机家底，高达 <strong><code>10 架</code> 是波音 757-200F 窄体货机</strong>（最大业载仅约 <code>28 吨</code>，满载航程仅约 <code>3,900 公里</code>），外加 <code>1 架</code> 国产 C909 支线货机（业载约 <code>10 吨</code>），真正具备中远程跨区域能力的只有 <strong><code>3 架</code> 波音 767-300F 中型宽体机</strong>（业载约 <code>52—55 吨</code>，航程约 <code>6,000 公里</code>），而像顺丰、中货航主力执飞欧美洲际航线的<strong>波音 747-400F/8F 或波音 777F 重型远程宽体货机（业载超 <code>100—130 吨</code>、直飞航程超 <code>9,000 公里</code>），圆通自有产权机队里目前是 <code>0 架</code></strong>（部分欧美洲际航线需依赖湿租/包租外部宽体运力或中途技术经停加油）！</li>
+</ul>
 </li>
 <li>
 <p><strong>单位吨公里成本代差</strong>：在航空物理账本上，一架载重 28 吨的波音 757 与一架载重 105 吨的波音 777F 同样需要配备 2 名以上飞行员、同样要交航路费与起降费，窄体机执飞中长途航线的<strong>单吨公里油耗与机组摊销成本比大型宽体机高出 <code>25% — 35%</code></strong>，在东南亚、日韩等短途航线上尚可周转，一旦拉长航线就极易亏穿燃油成本。</p>
 </li>
 <li>
 <p><strong>跨境电商贸易顺差带来的“去程爆仓、回程空跑”双向货源失衡死结</strong>：</p>
-</li>
+<ul>
 <li>国际全货机能否赚钱，核心不看去程（Outbound），而看<strong>回程（Inbound）</strong>！从嘉兴、杭州飞往欧美、南亚（达卡）或东欧（布达佩斯）的去程航班，装满了中国卖家发出的服装、3C小家电与日用百货，去程载运率轻松做到 <code>90% 以上</code>，运价可达 <code>25 — 40 元/公斤</code>（约合 <code>3.5 — 5.5 美元/公斤</code>）。</li>
 <li>但飞机飞到孟加拉达卡、匈牙利布达佩斯或美国洛杉矶卸完货后，<strong>回程装什么回嘉兴？</strong> 中国从海外进口的大宗矿产粮食全部走海运船队，少部分高价值芯片、奢侈品与精密仪器则高度集中在上海浦东、香港或法兰克福的成熟外航客机腹舱与三大国际快递巨头手中！如果圆通的货机回程只能拉到 <code>30%—40%</code> 的低价普货（甚至以 <code>6 — 9 元/公斤</code> 的白菜价揽货垫舱），那么<strong>去程赚的毛利会在回程的航空煤油（占航司成本 <code>35%—40%</code>）和起降费里被彻底赔光</strong>。これが圆通航空年营收超 17 亿元、毛利率却常年为负数的头号物理病根！</li>
+</ul>
+</li>
 </ul>
 <h5 id="2_7">第二关：下游大客户认证与货源结构鸿沟——“2元淘宝白牌客群”无法自然转化为“航空高价值直客”</h5>
 <p>很多投资者天真地认为：“圆通国内每天有近 1 亿件包裹、几百万个电商卖家客户，顺手把他们转化成国际航空客户还不容易吗？”这完全是对物流客群分层的致命误判：</p>
@@ -1750,18 +2274,22 @@
 </ul>
 <h5 id="t86">第三关：跨国地缘关税围堵与航权牌照准入——欧美取消“小额免税（T86）”引发的空运向海运迁徙</h5>
 <ul>
-<li><strong>欧美关税规则改变直接打击“直邮航空小包”基本盘</strong>：</li>
-<li>过去五年中国跨境航空货运爆发的核心制度红利，是美国的 <strong><code>800 美元小额免税条款（Section 321 / T86 清关）</code></strong> 与欧盟的 <strong><code>150 欧元免税门槛</code></strong>——只要把货物拆成几十美元的航空小包从中国直接空运寄给欧美消费者，就能合法免除关税且极速通关，这催生了每天数千吨的跨境直邮空运包机需求。</li>
 <li>
-<p>然而，自 2025 年以来，美国收紧并废除针对中国商品的 T86 小额免税通道、加征高额关税，欧盟亦全面推进取消 150 欧元免税豁免。当“空运直邮小包”失去免税套利优势且面临逐票严查报关时，跨境电商卖家为了活命，正大规模将履约模式从<strong>“中国空运直发（Air Direct）”切换为“海运集装箱大宗头程 + 欧美本土海外仓备货（Ocean + Overseas Warehouse）”</strong>！</p>
+<p><strong>欧美关税规则改变直接打击“直邮航空小包”基本盘</strong>：</p>
+<ul>
+<li>过去五年中国跨境航空货运爆发的核心制度红利，是美国的 <strong><code>800 美元小额免税条款（Section 321 / T86 清关）</code></strong> 与欧盟的 <strong><code>150 欧元免税门槛</code></strong>——只要把货物拆成几十美元的航空小包从中国直接空运寄给欧美消费者，就能合法免除关税且极速通关，这催生了每天数千吨的跨境直邮空运包机需求。</li>
+<li>然而，自 2025 年以来，美国收紧并废除针对中国商品的 T86 小额免税通道、加征高额关税，欧盟亦全面推进取消 150 欧元免税豁免。当“空运直邮小包”失去免税套利优势且面临逐票严查报关时，跨境电商卖家为了活命，正大规模将履约模式从<strong>“中国空运直发（Air Direct）”切换为“海运集装箱大宗头程 + 欧美本土海外仓备货（Ocean + Overseas Warehouse）”</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>财报已现直接冲击证据</strong>：圆通 2025 年上半年国际货代业务营收之所以同比骤降 <strong><code>47.22%</code></strong>（从约 <code>19.8 亿元</code> 跌至 <code>10.45 亿元</code>），正是美线跨境空运直邮需求受关税重锤后的真实写照！虽然圆通迅速将嘉兴首航航线转向孟加拉达卡、匈牙利布达佩斯（中欧陆空联运跳板）、日本东京/大阪等非美区域对冲风险，但全球贸易保护主义对跨境航空总需求的压制是长期结构性的。</p>
 </li>
 <li>
 <p><strong>国际航权（尤其是第五航权）与海外黄金时刻壁垒</strong>：</p>
-</li>
+<ul>
 <li>国际货运航线受双边政府航空协定严格管制，核心枢纽机场的航权配额与起降时刻優先向国字号三大航（中货航、国货航、南航物流）及先发龙头顺丰航空倾斜；圆通要想实现“嘉兴 <span class="math-inline"> → </span> 欧洲某国 <span class="math-inline"> → </span> 第三国”的串飞揽货（以解决回程空载问题），必须拿到难度极高的<strong>国际第五航权（Fifth Freedom Traffic Rights）</strong>，这在当前地缘博弈下每一条都需要漫长的外交与民航双边谈判。</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h4 id="3_2">3. 竞争终局推演与最终定性：强敌环伺下，圆通凭什么在长三角分一杯羹？</h4>
@@ -1784,9 +2312,11 @@
 <h5 id="2_8">（2）终局博弈推演：面对顺丰与菜鸟的挤压，圆通凭什么在长三角活下来并分一杯羹？</h5>
 <p>既然顺丰机队大 7 倍、中货航占着上海浦东、菜鸟握着阿里商流，圆通砸下重金建成的嘉兴“东方天地港”是不是注定要被挤压成死局？答案恰恰相反——<strong>圆通虽然打不赢全球争霸战，但它在“长三角 1 小时货运圈”里卡住了一个极具含金量的差异化生态位</strong>：</p>
 <ul>
-<li><strong>圆通唯一且不可复制的物理王牌：“长三角几何圆心 + 距货源地集卡车程仅 1 小时” vs 顺丰鄂州与上海浦东的软肋</strong></li>
 <li>
-<p><strong>对比顺丰鄂州花湖机场</strong>：鄂州位于湖北，地理位置处于中国版图正中央，极其适合做“全国国内夜间互转的轴辐式中心（Hub）”；但对于<strong>国际外贸出口与跨境电商</strong>而言，中国超过 <strong><code>38%—40%</code> 的高附加值机电出口、跨境包裹与进口生鲜消费集中爆发在长三角（上海、苏州、杭州、宁波、义乌、无锡）</strong>！苏州工业园区的电子产品或杭州、义乌的跨境包裹如果要出国，根本没有必要先用飞机或卡车拉到 600 公里外的湖北鄂州绕一圈再飞海外！</p>
+<p><strong>圆通唯一且不可复制的物理王牌：“长三角几何圆心 + 距货源地集卡车程仅 1 小时” vs 顺丰鄂州与上海浦东的软肋</strong></p>
+<ul>
+<li><strong>对比顺丰鄂州花湖机场</strong>：鄂州位于湖北，地理位置处于中国版图正中央，极其适合做“全国国内夜间互转的轴辐式中心（Hub）”；但对于<strong>国际外贸出口与跨境电商</strong>而言，中国超过 <strong><code>38%—40%</code> 的高附加值机电出口、跨境包裹与进口生鲜消费集中爆发在长三角（上海、苏州、杭州、宁波、义乌、无锡）</strong>！苏州工业园区的电子产品或杭州、义乌的跨境包裹如果要出国，根本没有必要先用飞机或卡车拉到 600 公里外的湖北鄂州绕一圈再飞海外！</li>
+</ul>
 </li>
 <li>
 <p><strong>对比上海浦东国际机场（PVG）与杭州萧山机场（HGH）</strong>：上海浦东虽然是全球前三大货运机场，但其空域时刻早已饱和到极致（客机优先，全货机极难拿到黄金新增时刻），且浦东机场周边地面交通拥堵、国际货站排队安检入仓动辄耗时 <strong>6—10 小时</strong>，地面操作费与仓储费高昂。</p>
@@ -1796,8 +2326,10 @@
 </li>
 <li>
 <p><strong>无法回避的天然劣势与边界约束</strong>：</p>
-</li>
+<ul>
 <li>由于缺乏顺丰那样的国内高毛利商务时效件底盘做全天候机腹垫舱，圆通绝不能盲目效仿顺丰去买五六十架飞机搞全国全货机轴辐对飞；它的最优生存策略是<strong>“轻机队（严控自有货机在 15—20 架以内，以亚洲周边精品航线为主） + 重枢杻（把嘉兴东方天地港做成向全球货运航司、包机商、跨境平台开放共享的‘长三角低成本国际货运第二空港’与‘多式联运超级收租婆’）”</strong>。</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h4 id="4">4. 两大远期期权全景商业证伪对比表与最终定性结论</h4>
@@ -1848,9 +2380,11 @@
 </tbody>
 </table></div>
 <div class="annotated-row"><div class="main-col"><ul>
-<li><strong>模块 B 终极定性收口（一锤定音）</strong>：
-  1. 对于<strong>“AI 智多星大模型 + 无人车数字化赋能”</strong>，市场无需再做任何怀疑——它已经是一台<strong>每年在 345 亿件包裹上帮圆通和加盟商多抠出数亿元纯利润的“确定性降本印钞机”</strong>。
-  2. 对于市场分歧最大的<strong>“嘉兴东方天地港 + 圆通航空 + 国际出海”</strong>，我们拒绝任何极端化的非黑即白，给出最冷峻的买方定性：它既不是管理层宣传里很快能赚大钱的“短期暴利第二曲线”（受制于窄体机队结构、欧美关税壁垒与回程揽货难度，未来 2—3 年能把年度亏损从近 3 亿元逐步收窄至盈亏平衡就已是及格交卷），但<strong>也绝不是部分悲观者眼里“极大概率打水漂的资本消耗陷阱”</strong>！因为喻会蛟拿下的不是一堆会贬值的废铁，而是<strong>长三角沪杭苏几何中心 1,500 亩不可再生的空港物流土地与 4E 级专业货运机场牌照</strong>；更重要的是，哪怕国际空运爬坡慢一点，圆通自身每年 345 亿件且还在年增 30 多亿件的国内快递主业，完全能够通过“国内多式联运超级分拨中心”把嘉兴基地 60% 以上的地面产能吃干抹净！<strong>用每年净赚 50—60 亿元的国内快递现金牛，去全额兜底并孵化一张“长三角稀缺国际货运空港牌照”，这是一笔下行底线已被锁死、上行赔率留给时间检验的“长周期重资产实物期权”。</strong></li>
+<li><strong>模块 B 终极定性收口（一锤定音）</strong>：<ol>
+<li>对于<strong>“AI 智多星大模型 + 无人车数字化赋能”</strong>，市场无需再做任何怀疑——它已经是一台<strong>每年在 345 亿件包裹上帮圆通和加盟商多抠出数亿元纯利润的“确定性降本印钞机”</strong>。</li>
+<li>对于市场分歧最大的<strong>“嘉兴东方天地港 + 圆通航空 + 国际出海”</strong>，我们拒绝任何极端化的非黑即白，给出最冷峻的买方定性：它既不是管理层宣传里很快能赚大钱的“短期暴利第二曲线”（受制于窄体机队结构、欧美关税壁垒与回程揽货难度，未来 2—3 年能把年度亏损从近 3 亿元逐步收窄至盈亏平衡就已是及格交卷），但<strong>也绝不是部分悲观者眼里“极大概率打水漂的资本消耗陷阱”</strong>！因为喻会蛟拿下的不是一堆会贬值的废铁，而是<strong>长三角沪杭苏几何中心 1,500 亩不可再生的空港物流土地与 4E 级专业货运机场牌照</strong>；更重要的是，哪怕国际空运爬坡慢一点，圆通自身每年 345 亿件且还在年增 30 多亿件的国内快递主业，完全能够通过“国内多式联运超级分拨中心”把嘉兴基地 60% 以上的地面产能吃干抹净！<strong>用每年净赚 50—60 亿元的国内快递现金牛，去全额兜底并孵化一张“长三角稀缺国际货运空港牌照”，这是一笔下行底线已被锁死、上行赔率留给时间检验的“长周期重资产实物期权”。</strong></li>
+</ol>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把底牌亮到底吧：如果你指望圆通那14架飞机和嘉兴新机场明年就给你赚十几个亿，那你肯定是在做白日梦，顺丰王卫有100架飞机在鄂州都还在苦熬呢！但反过来想，喻老板在上海、杭州、苏州正中间圈下了1500亩带4E级跑道的绝版地皮，就算天上国际航班一时半会儿装不满，地上自家每年345亿件淘宝快递拉过去分拣也把场地费付得七七八八了。有地上这头每年净赚几十亿的现金奶牛托底，这张“长三角货运机场牌照”就算慢一点，也是一张亏不死人、万一熬出来就独占山头的实物期权！</p></div></div></div></div>
 
 <hr/>
@@ -2541,9 +3075,9 @@
 </li>
 <li>
 <p><strong>业务结构拆解：为何快递主业无应收，16.46 亿应收到底来自哪里？</strong></p>
-</li>
-<li>
-<p><strong>加盟制快递主业（占营收近 90%）实行“零赊销预收制”</strong>：圆通总部对全国数千家一级加盟网点实行严格的电子面单充值与中转费预扣制度——加盟商必须先向总部账户打款充值（形成资产负债表上约 <code>18.5—21.0亿元</code> 的<strong>合同负债</strong>），包裹每经过一个自动化转运中心扫描即实时扣费。因此，占大头的加盟快递主业天然不产生应收账款，<strong>从商业机制上彻底杜绝了“向加盟商放宽信用账期、塞面单虚增包裹量和收入”的造假空间</strong>。</p>
+<ul>
+<li><strong>加盟制快递主业（占营收近 90%）实行“零赊销预收制”</strong>：圆通总部对全国数千家一级加盟网点实行严格的电子面单充值与中转费预扣制度——加盟商必须先向总部账户打款充值（形成资产负债表上约 <code>18.5—21.0亿元</code> 的<strong>合同负债</strong>），包裹每经过一个自动化转运中心扫描即实时扣费。因此，占大头的加盟快递主业天然不产生应收账款，<strong>从商业机制上彻底杜绝了“向加盟商放宽信用账期、塞面单虚增包裹量和收入”的造假空间</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>16.46 亿应收账款的两大真实来源</strong>：其一，是<strong>圆通国际（国际货运代理、跨境电商干线包机及海空运业务）</strong>面向海外及跨国企业客户的常规账期结算；其二，是<strong>总部直签品牌大客户（KA 客户、银行政务件及电商平台统一结算的逆向退货件）</strong>，此类客户信用等级高，通常约定 <code>30—60天</code> 的月结账期。</p>
@@ -2637,10 +3171,10 @@
 </li>
 <li>
 <p><strong>公司层面业绩考核门槛（“双轨满足其一”机制）</strong>：</p>
-</li>
+<ul>
 <li>以第一个行权期（2025年度）为例，考核条件设定为：<strong>以 2024 年度经审计归母净利润为基数，2025 年度归母净利润增长率不低于 <code>10%</code>；或以 2024 年度业务完成量为基数，2025 年度业务完成量增长率不低于行业平均增长率</strong>（后续行权年度如 2026、2027 年依此递进考核利润增速或超越行业件量增速）。若公司层面未达标，当期期权全部强制注销。</li>
-<li>
-<p>同时叠加<strong>个人层面严苛强制分布考核</strong>：个人年度绩效分为 <code>A+、A、B+、B、C、D</code> 多档，唯有排名前列且绩效达标者方可 100% 行权，排名靠后或平庸者按比例打折乃至取消当期行权资格。</p>
+<li>同时叠加<strong>个人层面严苛强制分布考核</strong>：个人年度绩效分为 <code>A+、A、B+、B、C、D</code> 多档，唯有排名前列且绩效达标者方可 100% 行权，排名靠后或平庸者按比例打折乃至取消当期行权资格。</li>
+</ul>
 </li>
 <li>
 <p><strong>买方独立审计定性</strong>：
@@ -2653,9 +3187,9 @@
 </li>
 <li>
 <p><strong>追问：为什么在 2025 年行业价格战背景下，总裁薪酬从 185 万涨到 471 万？是否存在高管自肥？</strong></p>
-</li>
-<li>
-<p><strong>审计判决</strong>：完全匹配且物超所值！潘水苗自 2019 年执掌圆通总裁帅印以来，亲手主导了“全面数字化转型”与“一号工程”，把曾经在成本端落后于韵达、中通的圆通，一步步改造成 <strong>2025 年单票核心成本 <code>0.64元</code>（单票运输 <code>0.37元</code> 同比骤降 <code>-10.35%</code>，A股通达系成本最低）、快递主业净赚 <code>46.14亿元</code>、市占率稳居行业第二（<code>15.65%</code> -&gt; 2026Q3 <code>16.4%</code>）</strong> 的效率机器。2025 年薪酬翻倍，本质是对“单票核心成本压降夺冠 + 份额逆势扩张 + 2026 年利润大爆发前夜战略落地”的绩效兑现。对于一家年营收超 <code>750亿元</code>、年赚 <code>43亿—46亿元</code> 净利润的巨头而言，核心灵魂总裁拿 <code>471.64万元</code> 年薪，<strong>仅占公司一年归母净利润的 <code>0.10%</code>（千分之一）</strong>！实控人喻渭蛟夫妇充分放权给以潘水苗为核心的专业管理团队，彻底打破了民营家族快递企业的治理天花板。</p>
+<ul>
+<li><strong>审计判决</strong>：完全匹配且物超所值！潘水苗自 2019 年执掌圆通总裁帅印以来，亲手主导了“全面数字化转型”与“一号工程”，把曾经在成本端落后于韵达、中通的圆通，一步步改造成 <strong>2025 年单票核心成本 <code>0.64元</code>（单票运输 <code>0.37元</code> 同比骤降 <code>-10.35%</code>，A股通达系成本最低）、快递主业净赚 <code>46.14亿元</code>、市占率稳居行业第二（<code>15.65%</code> -&gt; 2026Q3 <code>16.4%</code>）</strong> 的效率机器。2025 年薪酬翻倍，本质是对“单票核心成本压降夺冠 + 份额逆势扩张 + 2026 年利润大爆发前夜战略落地”的绩效兑现。对于一家年营收超 <code>750亿元</code>、年赚 <code>43亿—46亿元</code> 净利润的巨头而言，核心灵魂总裁拿 <code>471.64万元</code> 年薪，<strong>仅占公司一年归母净利润的 <code>0.10%</code>（千分之一）</strong>！实控人喻渭蛟夫妇充分放权给以潘水苗为核心的专业管理团队，彻底打破了民营家族快递企业的治理天花板。</li>
+</ul>
 </li>
 <li>
 <p><strong>IT 数字化人员结构与人均效能闭环</strong>：
@@ -2829,9 +3363,11 @@
 </li>
 <li>
 <p><strong>4. 极低债务融资成本与正向财务杠杆增厚效应</strong>：</p>
-</li>
+<ul>
 <li>为什么圆通账上躺着 <code>105.52 亿元</code> 广义现金，却还要保留 <code>81.49 亿元</code> 有息负债？因为圆通作为长三角 AAA 级核心物流民生基建龙头，其获得的银行专项基建贷款、绿色供应链贷款及公司债综合融资成本极低，年化利率仅 <strong><code>2.4% — 2.8%</code></strong>。</li>
 <li>公司左手以 <code>2.4% — 2.8%</code> 的超低成本融入债务资金（且账面百亿现金理财与大额存单收益即可覆盖大部分利息支出），右手将其投入内生现金回报率高达 <strong><code>8.97% — 10.32%</code></strong> 的核心转运中心自动化升级与干线甩挂车队中，净赚 <strong><code>600 — 750 bps</code></strong> 的正向利差（<span class="math-inline"><span class="math-text">ROIC</span> \gg <span class="math-text">WACC</span></span>）。这种良性财务杠杆在不牺牲任何安全边际的前提下，将普通股股东的净资产收益率（ROE）从资产端回报率进一步放大——2026 年前三季度公司加权平均 ROE 已跃升至 <strong><code>12.56%</code></strong>，全年年化 ROE 预计高达 <strong><code>15.5% — 16.0%</code></strong>。</li>
+</ul>
+</li>
 </ul>
 <p><strong>表 2：圆通速递三档标尺下的隐含内生回报率（OE / True EV）全景对照表</strong></p>
 <div class="table-scroll-wrap"><table class="wide-table">
@@ -2910,9 +3446,11 @@
 </li>
 <li>
 <p><strong>3. 未来两年股息率向 <code>4.0% — 5.0%</code> 跃升的必然逻辑</strong>：</p>
-</li>
+<ul>
 <li>过去三年（2023—2025年），圆通因全力建设嘉兴“东方天地港”枢纽及购置全货机，年度总资本开支（CapEx）一度高达 <code>86 亿元</code> 峰值，限制了分红比例的进一步拔升。</li>
 <li>随着嘉兴东方天地港在 2025—2026 年全面竣工投产，公司重资产基建高峰正式翻篇，未来两年总 CapEx 将快速回落至 <strong><code>50 — 60 亿元/年</code></strong>，每年直接释放出 <code>25 — 35 亿元</code> 的额外自由现金流冗余。在账面已有 <code>24.03 亿元</code> 净现金的背景下，公司分红率具备从当前的 <code>30%</code> 向 <strong><code>40% — 50%</code></strong> 跃升的极强财务基础，届时对应当前 <code>18.10 元</code> 买点的静态股息率将直接跃升至 <strong><code>4.0% — 5.0%</code></strong>！</li>
+</ul>
+</li>
 </ul>
 <h5 id="23-reverse-sotp-14-0">2.3 Reverse SOTP（拆骨估值法）重锤推演：百亿级嘉兴“东方天地港”与 14 架全货机居然 0 元白送？</h5>
 <p>如果把圆通速递当前的 <strong><code>630.0 亿元</code> True EV</strong> 放到手术台上做 <strong>Reverse SOTP（逆向分部拆骨估值）</strong>，将其拆解为 <strong>“第一块：国内快递现金牛底座”</strong> 与 <strong>“第二块：嘉兴东方天地港 + 14 架自有全货机 + 圆通国际跨境网络”</strong> 分别独立称重，我们将发现一个令所有买方机构拍案惊奇的定价错杀：</p>
@@ -3091,9 +3629,11 @@
 </blockquote>
 <p>为指导买方实战仓位配置，我们按严苛的 <code>OE / True EV</code> 内生回报率铁尺，划定以下 <strong>三档实战击球区</strong>：</p>
 <ul>
-<li><strong>🟢 第一档：黄金重锤击球区（深度低估捡钱区）—— 股价 <code>≤ 15.50 元/股</code></strong></li>
 <li>
-<p><strong>市值与 True EV 坐标</strong>：对应普通股总市值 <strong><code>≤ 530.88 亿元</code>（约 <code>≤ 530 亿元</code>）</strong>，对应买方 True EV <strong><code>≤ 540.92 亿元</code>（约 <code>≤ 540 亿元</code>）</strong>。</p>
+<p><strong>🟢 第一档：黄金重锤击球区（深度低估捡钱区）—— 股价 <code>≤ 15.50 元/股</code></strong></p>
+<ul>
+<li><strong>市值与 True EV 坐标</strong>：对应普通股总市值 <strong><code>≤ 530.88 亿元</code>（约 <code>≤ 530 亿元</code>）</strong>，对应买方 True EV <strong><code>≤ 540.92 亿元</code>（约 <code>≤ 540 亿元</code>）</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>隐含回报率与估值指标</strong>：稳态内生回报率（<code>OE / True EV</code>）<strong><code>&gt; 10.45%</code>（约 <code>&gt; 10.5%</code>）</strong>，2026 即期内生回报率 <strong><code>&gt; 12.02%</code></strong>；对应 2026E 动态 PE <strong><code>&lt; 8.77 倍</code>（约 <code>&lt; 8.8 倍</code>）</strong>，对应稳态中枢 PE <strong><code>&lt; 10.21 倍</code></strong>，静态 PB <strong><code>&lt; 1.39 倍</code></strong>。</p>
@@ -3103,9 +3643,9 @@
 </li>
 <li>
 <p><strong>🟡 第二档：左侧/右侧主力建仓击球区（当前水位 · 极佳性价比区）—— 股价 <code>15.50 — 18.80 元/股</code></strong></p>
-</li>
-<li>
-<p><strong>市值与 True EV 坐标</strong>：对应普通股总市值 <strong><code>530.88 — 643.90 亿元</code>（约 <code>530 — 644 亿元</code>）</strong>，对应买方 True EV <strong><code>540.92 — 653.94 亿元</code>（约 <code>540 — 654 亿元</code>）</strong>。</p>
+<ul>
+<li><strong>市值与 True EV 坐标</strong>：对应普通股总市值 <strong><code>530.88 — 643.90 亿元</code>（约 <code>530 — 644 亿元</code>）</strong>，对应买方 True EV <strong><code>540.92 — 653.94 亿元</code>（约 <code>540 — 654 亿元</code>）</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>隐含回报率与估值指标</strong>：稳态内生回报率（<code>OE / True EV</code>）处于 <strong><code>8.64% — 10.45%</code></strong>（核心主力区间 <strong><code>8.8% — 10.5%</code></strong>），2026 即期内生回报率 <strong><code>9.94% — 12.02%</code>（核心区间 <code>&gt; 10.0%</code>）</strong>；对应 2026E 动态 PE <strong><code>8.8 — 10.6 倍</code></strong>，稳态中枢 PE <strong><code>10.2 — 12.4 倍</code></strong>。</p>
@@ -3115,9 +3655,9 @@
 </li>
 <li>
 <p><strong>🔴 第三档：情绪透支兑现区（分批止盈区）—— 股价 <code>≥ 24.50 — 26.00 元/股</code></strong></p>
-</li>
-<li>
-<p><strong>市值与 True EV 坐标</strong>：对应普通股总市值 <strong><code>839.12 — 890.50 亿元</code>（约 <code>840 — 890 亿元</code>）</strong>，对应买方 True EV <strong><code>849.16 — 900.54 亿元</code>（约 <code>850 — 900 亿元</code>）</strong>。</p>
+<ul>
+<li><strong>市值与 True EV 坐标</strong>：对应普通股总市值 <strong><code>839.12 — 890.50 亿元</code>（约 <code>840 — 890 亿元</code>）</strong>，对应买方 True EV <strong><code>849.16 — 900.54 亿元</code>（约 <code>850 — 900 亿元</code>）</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>隐含回报率与估值指标</strong>：对应稳态归母净利静态 PE <strong><code>&gt; 16.1 — 17.1 倍</code></strong>（即便按高景气净利静态 PE 亦 <strong><code>&gt; 14.7 — 16.0 倍</code></strong>），静态 PB <strong><code>&gt; 2.20 — 2.33 倍</code></strong>；稳态隐含内生回报率（<code>OE / True EV</code>）被摊薄至 <strong><code>6.27% — 6.65%</code>（跌破 <code>6.3%</code> 止盈警戒线）</strong>。</p>
@@ -3202,6 +3742,156 @@
 
 
 
+<hr/>
+<h3 id="2026-11-22">⚔️ 【2026-11-22 物理隔离盲审做空 × 防“空头滑跪”三道铁闸二元对质终审实录】</h3>
+<blockquote>
+<p><strong>【终审庭审背景与核心原则】</strong>：为彻底挤干原看多报告中对“2026H1 单票暴利成因”、“折旧摊销藏富盾”、“嘉兴东方天地港产权归属”及“股东现金回馈率”的乐观水分与事实失误，买方投委会（IC）于 <code>2026年11月22日</code> 引入物理隔离《独立盲审做空备忘录》（实时基准价更新为 <strong>A 股 <code>18.45元/股</code></strong>，<code>-0.81%</code>，总股本 <code>34.25亿股</code>，表观市值 <strong><code>631.95亿元</code></strong>，PE-TTM <code>10.40x</code>，PB <code>1.66x</code>），强制执行<strong>防“空头滑跪”三道铁闸</strong>——发起 <strong><code>24次</code> 一手财报与经营简报穿透反查</strong>，严格切割<strong>“事实层 100% 无条件认领硬改”</strong>与<strong>“假设层三重悲观叠加反杀”</strong>，并经近 <code>5—10年</code> 历史估值极底 Reality Check 完成终审重校。</p>
+</blockquote>
+<h4 id="vs_1">一、 铁闸一 &amp; 铁闸二：红蓝核心交锋与“事实层硬改 vs 假设层反杀”二元裁决矩阵</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">红蓝交锋焦点</th>
+<th style="text-align: left;">红方做空核心指控</th>
+<th style="text-align: left;">投委会 <code>24次</code> 一手财报与公告穿透实证结果</th>
+<th style="text-align: left;">二元终审裁决与量化修正落地</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. <code>26H1</code> 派费暴砍 <code>-7.88%</code> 制造峰值暴利 × <code>26Q3</code> 净利环比 <code>-19.09%</code> 与 <code>8—10月</code> 单票“独跌”</strong></td>
+<td style="text-align: left;"><code>26H1</code> 单票收入反跌 <code>-1.04%</code>、运输+操作仅省 <code>0.018元</code>，暴利 &gt;100% 来自单票派费暴砍 <code>-7.88%</code>（<code>1.34→1.24元</code>）；<code>26Q2</code> 单票净利 <code>0.2081元</code> 已成大顶，<code>26Q3</code> 业务量创新高但归母环比暴跌 <code>-19.09%</code>（扣非 <code>-20.79%</code>）；<code>8—10月</code> 唯独圆通连续同比深跌（10月 <code>2.13元/-4.56%</code>），苏皖豫网点呼吁涨派费反水，单票将跌回 <code>0.126—0.136元</code></td>
+<td style="text-align: left;">① <strong>三大盈利硬伤 100% 坐实</strong>：<code>26H1</code> 半年报确认单票收入 <code>2.17元（-1.04%）</code>、运输 <code>0.36元（-2.41%）</code>、操作 <code>0.26元（-3.47%）</code>、揽派成本确从 <code>1.34元</code> 骤降 <code>-7.88%</code> 至 <code>1.24元</code>；<code>26Q3</code> 件量 <code>86.82亿件（环比+0.53%）</code> 下归母 <code>14.54亿（环比-19.09%）</code>、扣非 <code>14.10亿（环比-20.79%）</code>、单票净利回落至 <code>0.1675元</code>；<code>8/9/10月</code> 单票 <code>2.05（-4.40%）/2.08（-5.76%）/2.13元（-4.56%）</code> 确跑输韵达 <code>2.21元（+4.74%）</code> 与中通 Q3 核心 ASP <code>+13.7%</code>（中通单票调整净利 <code>0.2510元</code> 领先 <code>+49.9%</code>）！<br/>② <strong>但三记一手实证精准反杀空头移花接木</strong>：其一，申通 10 月单票 <code>2.24元（+2.75%）</code> 实因 <strong><code>2025年11月</code> 并表高客单价品质网络“浙江丹鸟物流”</strong>导致口径不可比，申通 Q3 单票净利仅 <code>0.070元</code>、韵达仅 <code>0.040元</code>，圆通即便回落至 <code>0.1675元</code> 仍为申通 <code>2.4倍</code>、韵达 <code>4.2倍</code>，且运输+操作 <code>0.62元</code> 仍居 A 股通达最低；其二，<code>2026年9月</code> 苏（<code>+0.1元</code>）/皖（<code>+0.15元</code>）/豫（<code>+0.2-0.3元</code>）系<strong>中通/圆通/申通/韵达/极兔全行业在邮政局“反内卷”督导下向 ToB 电商客户联合提价</strong>，并非圆通网点单独反水，且圆通 10 月单票较 9 月环比已企稳回升 <code>+0.05元</code>；其三，<code>26Q3</code> 扣非同比仍大增 <strong><code>+39.80%</code></strong>、件量 <code>+12.44%</code>（市占率扩至 <code>16.2%—16.4%</code>），绝非失血溃败！</td>
+<td style="text-align: left;"><strong>🩸 事实层硬改 + 🛡️ 假设层反杀</strong>：① 彻底抛弃旧稿锚定 <code>26Q2</code> 峰值的 <code>60.50亿</code> 即期扣非与 <code>52.00亿</code> 常态净利假设，将<strong>国内快递主业跨周期单票归母净利硬拉回 <code>2025</code> 价格战底盘 <code>0.148元/票</code></strong>（直接剥离 <code>26H1</code> 派费脉冲红利），按 <code>345亿件</code> 存量盘子锁定国内快递常态归母净利 <strong><code>51.00亿元</code></strong>；② 扣减非快递拖累 <code>-3.50亿</code> 后锁定<strong>合并常态扣非归母净利 <code>47.50亿元</code></strong>（较旧稿 <code>52.00亿</code> 硬砍 <code>-8.7%</code>）；③ 坚决反杀将单票压至 <code>0.126元</code> 的恐慌外推！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. 旧稿虚报 <code>37.5亿</code> D&amp;A 伪造“折旧藏富” × <code>11季 203.6亿</code> CapEx 吞光 OCF</strong></td>
+<td style="text-align: left;"><code>2024Q1—2026Q3</code> 累计归母 <code>129.64亿</code>、OCF <code>203.37亿</code>，但 CapEx 高达 <code>203.60亿</code>（占 OCF <code>100.11%</code>），累计 FCF <code>-0.23亿</code>；固定资产+在建飙至 <code>300.11亿</code> 折旧攀升，常态维持及扩产 CapEx 仍需 <code>43—50亿</code>，2027E 真实 FCF 仅 <code>20—35亿</code></td>
+<td style="text-align: left;">① <strong>揪出原稿最严重会计硬伤（100% 无条件硬改！）</strong>：穿透《2024年报》及《2026半年报》附注 79《现金流量表补充资料》原数，圆通 <code>2024</code> 四项 D&amp;A 精确合计仅 <strong><code>25.18亿元</code></strong>（固资折旧 <code>19.97</code> + 使用权 <code>2.14</code> + 无形 <code>1.75</code> + 长期待摊 <code>1.32</code>），<code>2026H1</code> 精确合计仅 <strong><code>15.57亿元</code></strong>（固资折旧 <code>12.64</code> [<code>+13.54%</code>] + 使用权 <code>0.93</code> + 无形 <code>1.21</code> + 长期待摊 <code>0.79</code>），<strong><code>2026</code> 年化真实全口径 D&amp;A 仅 <code>31.14亿元</code></strong>（2027 稳态预计 <code>32.50亿元</code>），旧稿凭空编造 <code>37.50亿元</code> D&amp;A 并炮制 <code>+4.50亿/年</code>“折旧藏富盾”彻底穿帮！另查实 <code>26Q3</code> 合同负债精确为 <strong><code>13.50亿元</code></strong>（纠偏旧稿误写 <code>18.5—21.0亿</code>），近 11 季累计表观 FCF 为 <code>-0.23亿</code> 亦属实；<br/>② <strong>反杀 CapEx 永久黑洞外推</strong>：一手查实 <code>2026Q1-Q3</code> CapEx <code>49.85亿</code> 较 <code>2025Q1-Q3（63.31亿）</code> 已<strong>实质同比大降 <code>-21.26%</code></strong>，其中 <strong><code>26Q3</code> 单季 CapEx 已收敛至 <code>15.03亿</code>、单季 FCF 达 <code>+11.68亿</code>（FCF/归母净利飙升至 <code>80.3%</code>）</strong>，在建工程回落至 <code>26.87亿</code>，证明 <code>2025</code> 年 <code>86.07亿</code> 确系建网峰值；且 <code>26Q3</code> 账面广义现金 <code>105.52亿</code>（货币 <code>79.28</code> + 理财 <code>26.24</code>）全覆盖全口径有息债 <code>81.49亿</code>（短借 <code>44.33</code> + 一年内到期 <code>6.65</code> + 长借 <code>15.86</code> + 债 <code>9.99</code> + 租赁 <code>4.66</code>），账面净现金 <code>+24.03亿元</code> 属实！</td>
+<td style="text-align: left;"><strong>🩸 事实层硬改 + 🛡️ 假设层反杀</strong>：① <strong>全额清零旧稿虚构的 <code>+4.50亿</code> 折旧盾</strong>，按真实稳态 D&amp;A <code>32.50亿</code> 对比严苛维持性防御 CapEx <code>35.00亿</code>，<strong>反扣 <code>-2.50亿元/年</code> 重资产重置缺口</strong>，将<strong>合并常态自由 <code>Owner Earnings</code> 从旧稿 <code>56.50亿</code> 暴力硬砍 <code>-20.4%</code> 至 <code>45.00亿元/年</code></strong>（3年远期达产从 <code>63.80亿</code> 下修 <code>-18.5%</code> 至 <strong><code>52.00亿元/年</code></strong>）；② 严守 <code>True EV</code> 分母锁定 <strong><code>641.99亿元</code></strong>（<code>ev_delta = +10.04亿</code>，保留 <code>30亿</code> 刚性营运备付底仓）；③ 反杀空头把 <code>43—50亿</code> 含扩产总 CapEx 永续扣除算成 <code>20—35亿</code> 极寒 FCF！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3. 嘉兴“东方天地港”产权归属大乌龙 × 航空与国际越投越亏黑洞</strong></td>
+<td style="text-align: left;">总投资 <code>122亿</code> 的嘉兴“东方天地港”一级投资主体为控股股东蛟龙集团而非上市公司，存在“航线亏损归上市公司、物业归大股东”的关联租赁暗雷；圆通航空 <code>2023—2025</code> 连亏 <code>-2.99/-2.52/-2.23亿</code>，<code>26H1</code> 投运后反而半年狂亏 <code>-2.78亿</code>（营收跌超 40%）；圆通国际连亏（<code>26H1</code> 亏 <code>-0.62亿港元</code>），管理层仍要买宽体货机</td>
+<td style="text-align: left;">① <strong>原稿第二大史诗级事实错误 100% 坐实并无条件硬改</strong>：穿透公开签约与公告证实，嘉兴“东方天地港”（总投资 <code>122亿</code>）的核心一级投资与产权主体确系<strong>控股股东上海圆通蛟龙投资发展（集团）有限公司联合嘉兴国资平台</strong>，旧稿宣称“122亿东方天地港 100% 装在上市公司体内、0元白送百亿资产”彻底失实！且 <code>2026-01-10</code> 公告（临 2026-003）披露 <code>2026</code> 年度圆通速递与蛟龙集团及阿里系日常关联交易预计上限高达 <strong><code>50.67亿元</code></strong>（含租入场地/物业），关联租赁外溢风险真实存在；同时一手证实 <strong><code>26H1</code> 圆通航空分部半年狂亏 <code>-2.78亿元</code>（营收暴跌 <code>-45.24%</code>）、圆通国际 <code>26H1</code> 亏 <code>-6,169.1万港元</code>（扩亏 <code>+2.1%</code>）</strong>，非快递板块对合并净利的年化净拖累已恶化至 <strong><code>-3.72亿</code> 级别</strong>！<br/>② <strong>反杀重复计提处刑</strong>：在分子端已将 <code>-3.50亿/年</code> 航空亏损足额扣除、且在 SOTP 中彻底剥离东方天地港并给予航空国际负估值折价后，严禁再叠加 <code>8.8x PE / 0.95x PB</code> 双重绞杀！</td>
+<td style="text-align: left;"><strong>🩸 彻底推翻“0元白送机场”逻辑 + 质地重罚</strong>：① <strong>在 Reverse SOTP 中 100% 踢出非上市公司产权的“122亿嘉兴东方天地港”</strong>，并将圆通航空+国际由“免费期权”直接降级为<strong>价值折价项（净扣 <code>-25</code> 至 <code>-35亿元</code>）</strong>；② 合并常态净利刚性预提 <strong><code>-3.50亿元/年</code></strong> 非快递净亏损；③ 将治理与质地加分（<code>quality_bonus_a</code>）由旧稿 <strong><code>1.8</code></strong> 严厉重罚砍至 <strong><code>0.8</code></strong>！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4. <code>2025</code> 分红暴砍 <code>-30.6%</code> 至 <code>0.25元</code> × <code>2026</code> 中期分红漏报 × 阿里系（杭州灏月）三连减持</strong></td>
+<td style="text-align: left;"><code>2025</code> 净利增 <code>+7.73%</code> 分红反暴砍 <code>-30.6%</code> 至 <code>0.25元</code>（分红率 <code>19.81%</code>，现价息仅 <code>1.36%</code>），惨输中通前三季 <code>&gt;10亿美元</code> 回购；二股东阿里系（杭州灏月）三连击大宗减持 <code>6%</code> 至 <code>5.06%</code>，随时跌破举牌线静默清仓</td>
+<td style="text-align: left;">① <strong>认领旧稿股息注水与减持抛压</strong>：旧稿 <code>base_div = 2.78%</code> 将“预估全年分红 + 已结束的 <code>2025</code> 年一次性 <code>3.70亿</code> 注销回购”混算注水，而 <code>2026年7月</code> 新回购仅 <code>3,000—5,000万</code> 且用于<strong>员工持股/激励（非注销）</strong>；<code>2025</code> 年报派息确大砍至 <code>0.25元</code>；杭州灏月持股降至 <code>5.06%</code>（剩余 <code>~1.73亿股 / ~32亿元</code> 潜在抛压）属实；<br/>② <strong>抓获空头两处重大失真并强势反杀</strong>：其一，<strong>空头刻意隐瞒了圆通 <code>2026年9月16日</code> 已真金白银派发完毕的历史首次中期现金分红 <code>0.12元/股</code>（<code>4.11亿元</code>）</strong>！真实滚动 <strong>TTM 实派现金红利 = <code>0.25 + 0.12 = 0.37元/股</code>（<code>12.67亿元</code>）</strong>，已略超 <code>2024</code> 年 <code>0.36元</code>，现价真实 <strong>TTM 现金股息率 = <code>2.01%</code></strong>（虽非高息股，但比空头虚称的 <code>1.36%</code> 高出近五成）；其二，一手穿透证实<strong>杭州灏月</strong>系 <code>2023年底</code> 阿里“1+6+N”分立设立的非核心财务投资剥离平台，<code>2024—2026</code> 同步清仓<strong>丽人丽妆（17.57%）、大幅减持美凯龙/分众传媒/圆通</strong>以聚焦电商与 AI 云，而阿里系核心战略主体<strong>杭州阿里创投仍稳持圆通 <code>9.14%</code> 股份未动（阿里系合计仍持 <code>14.75%</code>）</strong>，将其渲染为“内幕看空圆通基本面”属偷换概念！</td>
+<td style="text-align: left;"><strong>🩸 硬改真实 TTM 股息 + 🛡️ 戳穿漏报与偷换概念</strong>：① 严苛挤干旧稿 <code>2.78%</code> 注水口径，将 <strong><code>ttm_dps</code> 锁定为真金白银已派发的 <code>0.37元/股</code>（<code>base_div_a = 2.01%</code>）</strong>，彻底剥离非注销激励回购；② 客观提示杭州灏月 <code>~32亿</code> 剩余减持筹码压制，同时驳斥“阿里看空基本面”谬论！</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="510-reality-check-reverse-sotp">二、 铁闸三：过去 <code>5—10年</code> 历史估值极低分位 Reality Check 与 Reverse SOTP 重校</h4>
+<p>为严防“空头滑跪”将买点砍成十年买不到的空中楼阁（空头极端目标价 <code>10.50元</code> 隐含 <code>0.94x</code> 破净 PB），同时坚决把已溢价的现价 <code>18.45元</code> 踢出买区，投委会以近 <code>5—10年</code> 历史真实估值地板与最新 <code>52周</code> 区间完成刚性校准：</p>
+<ol>
+<li><strong>过去 <code>5年</code> 真实历史极底与 <code>52周</code> 实测坐标（Choice / 亿牛网 / 行情穿透）</strong>：</li>
+</ol>
+<ul>
+<li>
+<p><strong><code>52周</code> 真实波动区间（截至 <code>2026年11月</code>）</strong>：最低 <strong><code>14.78 — 14.90元</code></strong>，最高 <strong><code>22.49 — 22.86元</code></strong>。今日收盘 <strong><code>18.45元</code></strong> 仍高于 <code>52周</code> 低点 <code>+24.8%</code>，远未进入恐慌低估区；</p>
+</li>
+<li>
+<p><strong>过去 <code>5年</code> 真实 PE / PB 极底锚</strong>：<code>2022年</code> PE <code>23.45x—47.94x</code>（均 <code>31.79x</code>）；<code>2023年</code> PE <code>10.70x—28.20x</code>（均 <code>16.52x</code>）；<strong><code>2024年</code> 行业价格战极寒期历史 PE 最低触及 <code>9.89x</code>（均 <code>13.48x</code>），历史 PB 极底区间为 <code>1.30x—1.50x</code></strong>；<code>2025年</code> PE <code>10.80x—17.41x</code>（均 <code>13.15x</code>）。</p>
+</li>
+<li>
+<p><strong>Reality Check 判决</strong>：圆通作为拥有 <code>76座</code> 自有枢纽土地厂房（固定资产 <code>273.24亿</code>）与 <code>+24.03亿</code> 净现金的行业亚军，过去十年即便在 <code>2021</code> 恶性价格战与 <code>2024</code> 极度悲观期也从未长期破净，空头极端底 <code>10.50元</code>（<code>0.94x PB</code> / 常态 PE <code>7.57x</code>）属四重悲观叠加的虚空靶子；<strong>真正可落地、高胜率的历史极低分位锚定在 <code>PB 1.20x—1.40x</code> / 常态 <code>PE 9.5x—11.2x</code>（对应 <code>13.50 — 15.50元</code>，精准覆盖 <code>52周</code> 最低价 <code>14.78元</code> 附近）！</strong>
+2. <strong>严苛重校 Reverse SOTP 拆骨（100% 剔除非上市公司产权的 <code>122亿</code> 嘉兴东方天地港！）</strong>：</p>
+</li>
+<li>
+<p><strong>第一块（国内快递现金牛底座）</strong>：常态归母净利 <strong><code>51.00亿元</code></strong>（<code>345亿件 × 0.148元/票</code>），给予成熟加盟快递公允保守估值 <strong><code>10.0x — 11.0x</code> 常态 PE</strong> = <strong><code>510.0 — 561.0亿元</code> EV</strong>；</p>
+</li>
+<li>
+<p><strong>第二块（圆通航空 <code>13—14架</code> 货机 + 圆通国际 <code>06123.HK</code>）</strong>：彻底删除旧稿错误计入的控股股东嘉兴东方天地港，因该板块年化净亏 <strong><code>-3.50亿元</code></strong>，按亏损资本化抵减机队清算残值后给予<strong>负价值折价 <code>-35.0</code> 至 <code>-25.0亿元</code></strong>；</p>
+</li>
+<li>
+<p><strong>合计公允拆骨企业价值（Fair EV） = <code>475.0 — 536.0亿元</code></strong> → 扣除 <code>ev_delta (+10.04亿元)</code> 后对应<strong>公允拆骨股权价值 = <code>465.0 — 526.0亿元</code>（<code>13.57 — 15.36元/股</code>）</strong>！</p>
+</li>
+<li>
+<p><strong>冷酷定价裁决</strong>：旧稿声称 <code>18.10元</code> “0元白送百亿东方天地港”已被彻底证伪——<strong>今日现价 <code>18.45元</code>（市值 <code>631.95亿</code>）不仅毫无免费期权，反而较严格剥离东方天地港后的拆骨上限（<code>526.0亿 / 15.36元</code>）溢价 <code>+106.0亿元</code>（<code>+20.1%</code>），且常态 <code>OE / True EV</code> 跌至仅 <code>7.01%</code>、TTM 股息仅 <code>2.01%</code>，必须立即降级退出买区！</strong></p>
+</li>
+</ul>
+<h4 id="2026-11-22_1">三、 【三联对照】核心量化坐标与两档击球区终审校准总表（基准日：<code>2026-11-22</code>）</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">买方核心估值与定价锚点</th>
+<th style="text-align: center;"><strong>旧原稿（2026-11-17 蓝方基准）</strong></th>
+<th style="text-align: center;"><strong>红方做空极寒口径（三重叠加）</strong></th>
+<th style="text-align: center;"><strong>🔥 今日三道铁闸终审重校（唯一主锚）</strong></th>
+<th style="text-align: left;">终审变动穿透说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>实时股价 / 总股本 / 表观市值</strong></td>
+<td style="text-align: center;"><code>18.10元</code> / <code>34.25亿股</code> / <code>619.93亿</code></td>
+<td style="text-align: center;"><code>18.45元</code> / <code>34.23亿股</code> / <code>631.95亿</code></td>
+<td style="text-align: center;"><strong><code>18.45元</code> / <code>34.25亿股</code> / <code>631.95亿</code></strong></td>
+<td style="text-align: left;">对应 <code>26Q3</code> BVPS <code>11.15元</code> 静态 <strong><code>PB = 1.66x</code></strong>，TTM PE <code>10.40x</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>买方真实企业价值 <code>True EV</code></strong></td>
+<td style="text-align: center;"><code>629.97亿</code> <em>(ev_delta <code>+10.04亿</code>)</em></td>
+<td style="text-align: center;">下限 <code>601.27亿</code> <em>(未扣备付/少股)</em></td>
+<td style="text-align: center;"><strong><code>641.99亿</code></strong> <em>(ev_delta <strong><code>+10.04亿</code></strong>)</em></td>
+<td style="text-align: left;">严守全口径债 <code>81.49亿</code> + 少股 <code>4.07亿</code> - 超额现金 <code>75.52亿</code>（锁 <code>30亿</code> 备付）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>全口径真实 D&amp;A vs 维持性 CapEx</strong></td>
+<td style="text-align: center;">虚报 D&amp;A <code>37.50亿</code> vs <code>33.00亿</code><br/><em>(伪折旧盾 <code>+4.50亿</code>)</em></td>
+<td style="text-align: center;">固资折旧 <code>25—28亿</code> vs 总 CapEx <code>43—50亿</code></td>
+<td style="text-align: center;"><strong>真实稳态 D&amp;A <code>32.50亿</code> vs 维持性 <code>35.00亿</code></strong><br/><em>(反扣 <strong><code>-2.50亿/年</code></strong> 重置缺口)</em></td>
+<td style="text-align: left;">穿透 <code>26H1</code> 附注 79 精确 D&amp;A <code>15.57亿</code>（年化 <code>31.14亿</code>），彻底戳穿旧稿虚报！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>合并常态扣非归母净利润</strong></td>
+<td style="text-align: center;"><code>52.00亿</code> <em>(即期 <code>60.50亿</code>)</em></td>
+<td style="text-align: center;">基准 <code>47.00亿</code> / 极端 <code>41.00亿</code></td>
+<td style="text-align: center;"><strong><code>47.50亿</code></strong> <em>(快递 <code>51.00亿</code> - 航货 <code>3.50亿</code>)</em></td>
+<td style="text-align: left;">快递单票拉回 <code>2025</code> 价格战底盘 <code>0.148元</code>，现价隐含<strong>常态 <code>PE = 13.30x</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>常态自由 <code>Owner Earnings</code> (<code>steady_oe</code>)</strong></td>
+<td style="text-align: center;"><code>56.50亿</code> → 达产 <code>63.80亿</code></td>
+<td style="text-align: center;">基准 FCF <code>35.00亿</code> / 极端 <code>20.00亿</code></td>
+<td style="text-align: center;"><strong><code>45.00亿</code></strong> <em>(较旧稿 <code>-20.4%</code>)</em> → <strong>3年达产 <code>52.00亿</code></strong> <em>(较旧稿 <code>-18.5%</code>)</em></td>
+<td style="text-align: left;">全额抹平 <code>+4.50亿</code> 伪折旧盾并倒扣 <code>-2.50亿</code>；反杀将扩产 CapEx 永续扣减！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>现价隐含 <code>OE / True EV</code>（常态 / 达产）</strong></td>
+<td style="text-align: center;"><code>8.97%</code> / <code>10.13%</code></td>
+<td style="text-align: center;"><code>5.82%</code> / <code>3.33%</code></td>
+<td style="text-align: center;"><strong>常态 <code>7.01%</code> / 3年达产 <code>8.10%</code></strong></td>
+<td style="text-align: left;">跌破买方 <code>8.0%</code> 买点门槛，现价 <strong><code>18.45元</code> 性价比彻底消失！</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>真实 <code>TTM</code> 派息与现金股息率</strong></td>
+<td style="text-align: center;">注水 <code>2.78%</code> <em>(含预估及旧回购)</em></td>
+<td style="text-align: center;">漏报中期息，仅算 <code>0.25元</code> (<code>1.36%</code>)</td>
+<td style="text-align: center;"><strong>TTM 实派 <code>0.37元/股</code>（<code>0.25+0.12</code>）→ 现价 <code>2.01%</code></strong></td>
+<td style="text-align: left;">挤干旧稿注水回购，同时抓获空头刻意隐瞒 <code>26年9月</code> 首派 <code>0.12元</code> 中期息！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Reverse SOTP 公允拆骨股权值</strong></td>
+<td style="text-align: center;"><code>580—630亿</code> + 白送 <code>122亿</code> 机场</td>
+<td style="text-align: center;"><code>468—470亿</code> (<code>13.80元</code>) / 极端 <code>10.50元</code></td>
+<td style="text-align: center;"><strong><code>465.0 — 526.0亿</code>（<code>13.57 — 15.36元/股</code>）</strong></td>
+<td style="text-align: left;">彻底剔除大股东蛟龙集团产权的东方天地港，现价 <code>18.45元</code> 实为<strong>溢价 <code>+20.1%</code></strong>！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>终审两档严苛击球区 &amp; 质地加分</strong></td>
+<td style="text-align: center;">一档 <code>≤15.50元</code><br/>二档 <code>16.50—18.80元</code><br/><em>(质地 <code>+1.8</code>，4票买入)</em></td>
+<td style="text-align: center;">公允 <code>13.80元</code><br/>极端 <code>10.50元</code></td>
+<td style="text-align: center;"><strong>一档重锤：<code>≤ 13.50元</code></strong> <em>(PB <code>≤1.21x</code>, 常态PE <code>≤9.73x</code>, OE/EV <code>≥9.52%</code>, 息 <code>≥2.74%</code>)</em><br/><strong>二档买区：<code>13.50 — 15.50元</code></strong> <em>(PB <code>1.21—1.39x</code> 踩实52周低<code>14.78</code>, OE/EV <code>8.32%—9.52%</code>)</em><br/><em>(质地重罚降至 <strong><code>+0.8</code></strong>，<strong>🔴 0票追高/降级退出买区</strong>)</em></td>
+<td style="text-align: left;">较旧稿上限猛砍 <strong><code>-17.6%</code></strong>！现价高出买区上限 <code>+19.0%</code>，严守纪律等回踩 <code>≤15.50元</code> 分批建仓、<code>≤13.50元</code> 左侧重锤！</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这场铁面审计狠狠扇醒了旧报告里的两处致命幻觉——第一，旧稿居然把 `2026H1` 实打实只有 `15.57亿`（年化 `31.14亿`）的折旧摊销硬编成 `37.50亿`，凭空变出 `4.5亿` 并不存在的“折旧藏富”；第二，居然把控股股东蛟龙集团牵头投资的 `122亿` 嘉兴“东方天地港”算成上市公司“0元白送的绝版地皮”，完全闭眼不看圆通航空半年狂亏 `2.78亿` 和 `50.67亿` 关联交易敞口！把这两层水分挤干、把单票利润拉回 `2025` 年的 `0.148元` 实盘底盘后，现价 `18.45元` 哪里是什么“10倍低估白送机场”？它真实常态 PE 高达 `13.3倍`、自由现金流回报只有 `7.01%`、现金股息才 `2.01%`，还比剥离机场后的拆骨公允值贵了整整两成！此时此刻，把现价一脚踢出买区，就是价值投资最起码的诚实。</p></div></div>
+<div class="munger-note"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>但同样绝不要被空头吓破胆去等什么 `10.50元` 的破净神话！穿透财报另一面你会发现：空头刻意藏起了圆通今年 9 月已经真金白银发到手的 `0.12元` 史上首次中期分红，把全行业在邮政局督导下向电商客户联合涨价曲解成圆通网点造反，还把阿里集团通过杭州灏月全线清仓非核心投资（连丽人丽妆、美凯龙一起卖，但阿里创投仍死死握着圆通 `9.14%`）包装成内幕看空。圆通底子并没有烂——`2026` 前三季度资本开支已经硬生生同比砍掉了 `-21.3%`、单季自由现金流飙回 `11.68亿`，国内地面 `0.62元` 的单票核心成本仍是全 A 股通达最低、单票净利依然是申通的 `2.4倍` 和韵达的 `4.2倍`。好生意配上平庸的资本配置，解药从来不是判它死刑，而是<strong>拒绝在 `18.45元` 买单，耐心搬张板凳等它跌回 `13.50—15.50元`（甚至 `≤13.50元` 击穿五年 PB 极底）时再从容接盘！</strong></p></div></div>
 <hr/>
 <h2 id="g">【终章模块 G：投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）】</h2>
 <blockquote>
@@ -3491,8 +4181,10 @@
 <h4 id="_19">二、 国家当时为什么没立刻管住？后来是怎么重拳出击把价格战焊死的？</h4>
 <p>国家监管对快递恶性价格战的态度，经历了从<strong>“早期取证难、地方默许”</strong>到<strong>“闹出民生风波后亮剑叫停”</strong>，再到<strong>“2025—2026 年上升为国家反内卷最高意志”</strong>的三步演进：</p>
 <ul>
-<li><strong>第一阶段（2020 年—2021 年初：为什么最初没管住？）</strong>
-  1. <strong>“账面合规、私下返现”的障眼法</strong>：快递费属于市场调节价。极兔和通达系在义乌打价格战时，表面合同单价依然写着合规的 <code>1.8 元</code>，但私下通过微信转账、充十万送五万的“新客户开拓补贴”把实际价格砸到了 <code>0.8 — 1.0 元</code>，监管部门早期很难抓到“低于成本倾销”的账面铁证。</li>
+<li><strong>第一阶段（2020 年—2021 年初：为什么最初没管住？）</strong><ol>
+<li><strong>“账面合规、私下返现”的障眼法</strong>：快递费属于市场调节价。极兔和通达系在义乌打价格战时，表面合同单价依然写着合规的 <code>1.8 元</code>，但私下通过微信转账、充十万送五万的“新客户开拓补贴”把实际价格砸到了 <code>0.8 — 1.0 元</code>，监管部门早期很难抓到“低于成本倾销”的账面铁证。</li>
+</ol>
+</li>
 </ul>
 <ol start="2">
 <li><strong>地方电商政绩的微妙博弈</strong>：对于义乌、揭阳等小商品产地而言，快递费越便宜，当地 2 块钱的头绳、5 块钱的手机壳就越能包邮卖爆全国。因此在价格战初期，只要没闹出网点倒闭群体事件，地方往往把低价快递视为对本地中小电商的变相让利，睁一只眼闭一只眼。</li>
@@ -3539,18 +4231,14 @@
 <li>
 <p><strong>为什么伤不到圆通上市公司总部？（复盘 2021 年 9 月真实发生过的“全网涨派费转嫁案”）</strong>
   假设明天国家下达死命令：“全国所有快递加盟商老板，必须给手下的快递小哥补齐社保，折算下来每送一件包裹的人工社保成本要增加 <strong><code>0.10 元</code>（1毛钱）</strong>！”</p>
-</li>
-<li>
-<p>如果让北京派件网点的张老板自己硬扛这 1 毛钱，张老板送一件本来才赚 1 毛钱，第二天就会关门罢工，全网就瘫痪了。</p>
-</li>
+<ul>
+<li>如果让北京派件网点的张老板自己硬扛这 1 毛钱，张老板送一件本来才赚 1 毛钱，第二天就会关门罢工，全网就瘫痪了。</li>
 <li>所以圆通总部会怎么做？在 <strong>2021 年 8 月底</strong>，国家七部委要求保障快递员权益时，圆通、中通、申通、韵达、百世、极兔六家总部在同一天发出通知：<strong>“自 2021 年 9 月 1 日起，全网末端派件费统一上调 <code>0.10 元/票</code>！”</strong></li>
-<li>
-<p><strong>钱是怎么流转的？</strong></p>
-<ol>
-<li>圆通总部把系统参数一改：义乌收件网点李老板每发一件包裹，总部系统从他充值卡里代扣的派件费从 <code>1.10 元</code> 自动调高到 <strong><code>1.20 元</code></strong>，然后转手把这 <strong><code>1.20 元</code></strong> 发给北京派件网点张老板（张老板多拿了这 1 毛钱，去给小哥交社保或发补贴）；</li>
-<li>义乌李老板卡里每单被多扣了 1 毛钱，他当天下午就给淘宝卖袜子的老板发微信：“国家规定9月1日起全网涨派费保障小哥权益，从今天起发一单快递从 <code>3.00 元</code> 涨到 <strong><code>3.10 元</code></strong>！”</li>
-<li>淘宝老板一看六家快递全涨了 1 毛钱，只能乖乖掏钱（或者把袜子从 9 块 9 包邮悄悄涨到 10 块包邮，由全国网购消费者买单）。</li>
-</ol>
+<li><strong>钱是怎么流转的？</strong>
+1. 圆通总部把系统参数一改：义乌收件网点李老板每发一件包裹，总部系统从他充值卡里代扣的派件费从 <code>1.10 元</code> 自动调高到 <strong><code>1.20 元</code></strong>，然后转手把这 <strong><code>1.20 元</code></strong> 发给北京派件网点张老板（张老板多拿了这 1 毛钱，去给小哥交社保或发补贴）；
+2. 义乌李老板卡里每单被多扣了 1 毛钱，他当天下午就给淘宝卖袜子的老板发微信：“国家规定9月1日起全网涨派费保障小哥权益，从今天起发一单快递从 <code>3.00 元</code> 涨到 <strong><code>3.10 元</code></strong>！”
+3. 淘宝老板一看六家快递全涨了 1 毛钱，只能乖乖掏钱（或者把袜子从 9 块 9 包邮悄悄涨到 10 块包邮，由全国网购消费者买单）。</li>
+</ul>
 </li>
 <li>
 <p><strong>最终结果</strong>：这新增的 1 毛钱社保成本，从<strong>消费者/淘宝卖家 <span class="math-inline"> → </span> 义乌收件网点 <span class="math-inline"> → </span> 圆通总部系统过手 <span class="math-inline"> → </span> 北京派件网点张老板</strong>，完整走了一圈；而圆通上市公司总部自己收的那 <strong><code>0.80 — 1.00 元</code> 高速公路中转过路费，一分钱都没少收，一分钱也不用自己倒贴</strong>！这就是原文那句“派费属于总部代收代付的过手科目，主要由前端电商卖家买单，对总部毛利侵蚀极其有限”背后的冷酷商业逻辑。</p>
@@ -3574,10 +4262,12 @@
 </li>
 <li>
 <p><strong>圆通为什么能攒下全国最肥沃的一批老牌加盟商？因为圆通起步最早、抱淘宝大腿最快！</strong></p>
-</li>
+<ul>
 <li>圆通成立于 <strong>2000 年 5 月</strong>（比中通早 2 年，比极兔早整整 20 年）；</li>
 <li>更关键的是，<strong>2005 年马云刚创立淘宝网没多久，当时顺丰和 EMS 根本瞧不上淘宝几块钱的包裹，是圆通老板喻会蛟第一个冲上去跟马云签了战略合作协议，成为全中国第一家系统对接淘宝网的快递公司！</strong></li>
 <li>在 2005—2015 年中国网购爆发的第一个黄金十年里，江浙沪、广东、福建无数老百姓想干快递发财，当时市面上名气最大、淘宝单子最多的就是申通和圆通（那时候中通和韵达还是小弟）。这批最早跟着圆通吃下淘宝红利的草根老板，如今都已变成了在当地拥有几万平方米仓库、几十辆货车、身家几千万甚至上亿的物流地头蛇，和圆通血肉相连绑了二十年！</li>
+</ul>
+</li>
 </ul>
 <h4 id="500">二、 现实算账维度：假设你今天手里有 500 万现金想入行接手一个快递网点，为什么选圆通往往比选别的公司更划算？</h4>
 <p>把今天市面上的快递公司摆在桌面上，用加盟商老板的真金白银算一笔账：</p>
@@ -3595,9 +4285,11 @@
    做加盟商最怕什么？最怕<strong>“总部中转慢、丢件多、还乱罚款”</strong>。如果总部大卡车比别人慢半天，你去求淘宝卖家发货，淘宝卖家怕被买家差评根本不理你；更可怕的是，前几年部分二线快递总部因为自己经营效率低、成本高，为了保上市公司利润，拼命向加盟商压任务、开天价罚单，把加盟商逼得苦不堪言。</p>
 </li>
 <li>
-<p><strong>为什么圆通成了加盟商眼里“稳健又好赚”的黄金梧桐树？（三大吸金法宝）</strong>
-   * <strong>法宝一：潘水苗给加盟商装了全行业最牛的“傻瓜式赚钱软件（网点管家 + 客户管家）”</strong>
-     以前加盟商老板都是泥腿子出身，只知道闷头拉货，年底一算账才发现被某个电商大客户拖欠运费亏了本、或者某条派件路线油费漏水。圆通总裁潘水苗上任后，专门帮加盟商开发了一套直达手机端的数字化系统，每天自动帮网点老板算清每一单、每一个快递员、每一个客户的盈亏，甚至由圆通总部出面担保，联合银行给加盟商提供低息贷款买自动化分拣设备！<strong>“加盟别的快递是总部考核你，加盟圆通是总部派 IT 专家手把手教你省钱管账”</strong>，这让圆通网点的存活率和盈利面在行业里名列前茅。</p>
+<p><strong>为什么圆通成了加盟商眼里“稳健又好赚”的黄金梧桐树？（三大吸金法宝）</strong></p>
+<ul>
+<li><strong>法宝一：潘水苗给加盟商装了全行业最牛的“傻瓜式赚钱软件（网点管家 + 客户管家）”</strong>
+ 以前加盟商老板都是泥腿子出身，只知道闷头拉货，年底一算账才发现被某个电商大客户拖欠运费亏了本、或者某条派件路线油费漏水。圆通总裁潘水苗上任后，专门帮加盟商开发了一套直达手机端的数字化系统，每天自动帮网点老板算清每一单、每一个快递员、每一个客户的盈亏，甚至由圆通总部出面担保，联合银行给加盟商提供低息贷款买自动化分拣设备！<strong>“加盟别的快递是总部考核你，加盟圆通是总部派 IT 专家手把手教你省钱管账”</strong>，这让圆通网点的存活率和盈利面在行业里名列前茅。</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -3638,8 +4330,10 @@
 </li>
 </ul>
 <ol start="2">
-<li><strong>关于“虚假签收率与遗失率压降至历史最低”的官方财报铁证</strong>：
-   * 在圆通速递披露的定期报告核心运营指标中，明确记录了数字化与 AI 质控上线后的服务质量跃迁：<strong>快件遗失率同比下降超 <code>47%</code></strong>，<strong>虚假签收率同比下降近 <code>30%</code></strong>，客户投诉率同步显著回落，带动高溢价品质快递产品“圆准达”在各大电商平台的准点履约率稳居通达系首位。</li>
+<li><strong>关于“虚假签收率与遗失率压降至历史最低”的官方财报铁证</strong>：<ul>
+<li>在圆通速递披露的定期报告核心运营指标中，明确记录了数字化与 AI 质控上线后的服务质量跃迁：<strong>快件遗失率同比下降超 <code>47%</code></strong>，<strong>虚假签收率同比下降近 <code>30%</code></strong>，客户投诉率同步显著回落，带动高溢价品质快递产品“圆准达”在各大电商平台的准点履约率稳居通达系首位。</li>
+</ul>
+</li>
 </ol>
 <hr/>
 <h3 id="q6-ai">Q6：圆通自己用 AI 不要算力花费的吗？用的谁家的模型，租的哪的算力？算力开销在财报里有记录吗？</h3>
@@ -3651,13 +4345,17 @@
 <h4 id="_24">一、 用的谁家的模型？租的哪里的算力？</h4>
 <ol>
 <li>
-<p><strong>核心底座模型：阿里云「通义千问（Qwen）」+「DeepSeek」双引擎混合架构</strong>
-   * 别忘了股权关系：<strong>阿里巴巴至今仍是圆通速递的第二大股东（持股约 20%）</strong>！圆通的“智多星（YTO-GPT）”并不是自己从零烧几十亿美金去训练一个通用百亿参数大模型，而是直接站在二股东阿里的肩膀上，以<strong>阿里云“通义千问（Qwen）”开源/商业基座大模型</strong>为核心，并在 2025 年迅速接入了极高性价比的 <strong>DeepSeek（深度求索）</strong> 推理模型，再用圆通自己积攒了二十年的上千亿条地址库、路由表和客服语料做<strong>垂直领域微调（Fine-tuning）与知识库检索增强（RAG）</strong>。
-   * 至于“AI 实时路由与动态拼车算法”，本质上是<strong>“运筹学整数规划算法（OR）+ 机器学习时序预测模型”</strong>（预测未来 6 小时义乌到广州有多少吨货、怎么拼 17.5 米大挂车最满），这类结构化数学模型对昂贵英伟达训练卡的消耗极小，主要吃常规服务器 CPU 和轻量推理卡算力。</p>
+<p><strong>核心底座模型：阿里云「通义千问（Qwen）」+「DeepSeek」双引擎混合架构</strong></p>
+<ul>
+<li>别忘了股权关系：<strong>阿里巴巴至今仍是圆通速递的第二大股东（持股约 20%）</strong>！圆通的“智多星（YTO-GPT）”并不是自己从零烧几十亿美金去训练一个通用百亿参数大模型，而是直接站在二股东阿里的肩膀上，以<strong>阿里云“通义千问（Qwen）”开源/商业基座大模型</strong>为核心，并在 2025 年迅速接入了极高性价比的 <strong>DeepSeek（深度求索）</strong> 推理模型，再用圆通自己积攒了二十年的上千亿条地址库、路由表和客服语料做<strong>垂直领域微调（Fine-tuning）与知识库检索增强（RAG）</strong>。</li>
+<li>至于“AI 实时路由与动态拼车算法”，本质上是<strong>“运筹学整数规划算法（OR）+ 机器学习时序预测模型”</strong>（预测未来 6 小时义乌到广州有多少吨货、怎么拼 17.5 米大挂车最满），这类结构化数学模型对昂贵英伟达训练卡的消耗极小，主要吃常规服务器 CPU 和轻量推理卡算力。</li>
+</ul>
 </li>
 <li>
-<p><strong>算力来源：阿里云公共云弹性算力 + 圆通自建私有云数据中心</strong>
-   * 日常稳态流量跑在圆通上海总部及嘉兴自建的私有云 GPU/CPU 推理集群上；每逢“618”和“双11”流量暴增数倍时，直接通过 <strong>阿里云（Alibaba Cloud）</strong> 弹性租用云端算力，用完即退，绝不让昂贵的显卡在淡季闲置吃灰。</p>
+<p><strong>算力来源：阿里云公共云弹性算力 + 圆通自建私有云数据中心</strong></p>
+<ul>
+<li>日常稳态流量跑在圆通上海总部及嘉兴自建的私有云 GPU/CPU 推理集群上；每逢“618”和“双11”流量暴增数倍时，直接通过 <strong>阿里云（Alibaba Cloud）</strong> 弹性租用云端算力，用完即退，绝不让昂贵的显卡在淡季闲置吃灰。</li>
+</ul>
 </li>
 </ol>
 <h4 id="ai">二、 算力与 AI 研发开销在财报里有记录吗？一年花多少钱？为什么划算得惊人？</h4>
@@ -3718,8 +4416,10 @@
 </li>
 <li>
 <p><strong>浙江义乌（全球小商品之都）</strong>：采取“阶梯式抬升底价 + 总量配额锁死”双管齐下——将 300 克以内轻小件的揽收底价从早期的 <code>1.10 元</code> 阶梯式强制拉升至 <strong><code>1.20 — 1.35 元/票</code> 以上</strong>，并严禁各家快递网点在双 11 旺季通过“私下微信返现、充十万送三万”变相击穿底价。一旦被系统查出某网点实际结算价低于底价红线，邮政管理局直接约谈总部、对该网点采取<strong>“限制日均打单配额”甚至“停业整顿断网”</strong>的严厉处罚！</p>
-</li>
+<ul>
 <li>随后在 2025 年四季度至 2026 年，全国超过 <strong>20 个省份</strong> 陆续跟进上调了当地电商大客户快递底价。</li>
+</ul>
+</li>
 </ul>
 <ol start="3">
 <li><strong>手段三：严抓“跨区揽收（黄牛倒卖面单）”与“末端服务质量罚款”</strong>
@@ -3729,18 +4429,24 @@
 <p>天上不会掉馅饼，圆通、中通一年多赚出来的几十亿利润，以及基层快递小哥稳住的派费，必然有人在替它们买单。真正承担了“反内卷”代价的是以下三类群体：</p>
 <ol>
 <li>
-<p><strong>头号买单者：卖“9块9包邮、2块钱小商品”的白牌低端电商卖家与拼多多/淘工厂极低客单价商户</strong>
-   * 以前在义乌和揭阳，一个卖 <code>3.9 元</code> 手机壳、或者 <code>5.9 元</code> 一包抽纸的白牌小商家，全靠 <code>1.0 元</code> 甚至 <code>0.9 元</code> 的极致低价快递才能保住每单两毛钱的微利。
-   * 当广东和义乌把快递底价硬生生往上提了 <strong><code>0.20 — 0.40 元/票</code></strong> 后，这几毛钱直接吃光了白牌超低价卖家的全部利润！他们要么被迫把商品提价到 <code>6.9 元</code>、<code>9.9 元</code>（把物流涨价传导给终端网购消费者），要么直接退出“几块钱全国包邮”的恶性内卷。</p>
+<p><strong>头号买单者：卖“9块9包邮、2块钱小商品”的白牌低端电商卖家与拼多多/淘工厂极低客单价商户</strong></p>
+<ul>
+<li>以前在义乌和揭阳，一个卖 <code>3.9 元</code> 手机壳、或者 <code>5.9 元</code> 一包抽纸的白牌小商家，全靠 <code>1.0 元</code> 甚至 <code>0.9 元</code> 的极致低价快递才能保住每单两毛钱的微利。</li>
+<li>当广东和义乌把快递底价硬生生往上提了 <strong><code>0.20 — 0.40 元/票</code></strong> 后，这几毛钱直接吃光了白牌超低价卖家的全部利润！他们要么被迫把商品提价到 <code>6.9 元</code>、<code>9.9 元</code>（把物流涨价传导给终端网购消费者），要么直接退出“几块钱全国包邮”的恶性内卷。</li>
+</ul>
 </li>
 <li>
-<p><strong>二号买单者：原本靠“唯低价论”抢单的二三线弱势快递与尾部加盟网点</strong>
-   * 当大家的价格都被监管按在 <code>1.40 元</code>（广东）或 <code>1.25 元</code>（义乌）的同一起跑线上，<strong>不准再通过降价 1 毛钱去抢客户</strong>时，淘宝和拼多多卖家自然会问一句：“既然发圆通、中通是 <code>1.40 元</code>，发韵达、申通、极兔也是 <code>1.40 元</code>，那我为什么不选速度更快、丢件更少、服务更好的中通和圆通？”
-   * 结果就是：反内卷底价一锁死，过去靠低价续命的弱势网点瞬间失去了唯一的揽客手段，订单哗哗流向中通和圆通（这就是为什么 2026 年 Q3 行业只增长 2.9%，圆通件量却逆势猛增 <strong>12.44%</strong>）！</p>
+<p><strong>二号买单者：原本靠“唯低价论”抢单的二三线弱势快递与尾部加盟网点</strong></p>
+<ul>
+<li>当大家的价格都被监管按在 <code>1.40 元</code>（广东）或 <code>1.25 元</code>（义乌）的同一起跑线上，<strong>不准再通过降价 1 毛钱去抢客户</strong>时，淘宝和拼多多卖家自然会问一句：“既然发圆通、中通是 <code>1.40 元</code>，发韵达、申通、极兔也是 <code>1.40 元</code>，那我为什么不选速度更快、丢件更少、服务更好的中通和圆通？”</li>
+<li>结果就是：反内卷底价一锁死，过去靠低价续命的弱势网点瞬间失去了唯一的揽客手段，订单哗哗流向中通和圆通（这就是为什么 2026 年 Q3 行业只增长 2.9%，圆通件量却逆势猛增 <strong>12.44%</strong>）！</li>
+</ul>
 </li>
 <li>
-<p><strong>三号买单者：靠倒卖低价快递面单赚差价的“快递黄牛（中间商）”</strong>
-   * 随着底价透明化与异地面单封杀，寄生在快递行业十几年、靠向总部骗取大客户阶梯返利再拆包卖给散户的“面单黄牛”被彻底清剿出局，这部分原本被黄牛截留的灰色利润重新回流到了圆通总部和正规加盟商手里。</p>
+<p><strong>三号买单者：靠倒卖低价快递面单赚差价的“快递黄牛（中间商）”</strong></p>
+<ul>
+<li>随着底价透明化与异地面单封杀，寄生在快递行业十几年、靠向总部骗取大客户阶梯返利再拆包卖给散户的“面单黄牛”被彻底清剿出局，这部分原本被黄牛截留的灰色利润重新回流到了圆通总部和正规加盟商手里。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -3826,13 +4532,17 @@
 <p>很多人听到“嘉兴东方天地港”，以为 1,454 亩地全都是停飞机的跑道和装飞机的国际货站。但翻开嘉兴秀洲区王店镇的园区工程总平图就会发现，它是典型的<strong>“前店（北侧航空区 40%）+ 后厂（南侧陆运多式联运与云仓区 60%）”</strong>复合体：</p>
 <ol>
 <li>
-<p><strong>为什么拿地时要把“陆运分拣中心”和“机场货站”绑在一起盖？</strong>
-   * <strong>拿地算盘</strong>：在上海、杭州、苏州正中间的黄金几何圆心，想一次性批下近 1,500 亩连片工业物流用地，如果只报批“普通公路快递分拨中心”，地方政府根本不可能给这么大地块；但以“全球航空物流枢纽 + 多式联运超级基地”立项，圆通一次性拿下了长三角核心区绝无仅有的百万平米级连片基地！</p>
+<p><strong>为什么拿地时要把“陆运分拣中心”和“机场货站”绑在一起盖？</strong></p>
+<ul>
+<li><strong>拿地算盘</strong>：在上海、杭州、苏州正中间的黄金几何圆心，想一次性批下近 1,500 亩连片工业物流用地，如果只报批“普通公路快递分拨中心”，地方政府根本不可能给这么大地块；但以“全球航空物流枢纽 + 多式联运超级基地”立项，圆通一次性拿下了长三角核心区绝无仅有的百万平米级连片基地！</li>
+</ul>
 </li>
 <li>
-<p><strong>园区内部“空陆奇妙配合”的真实作业流程是怎么跑的？</strong>
-   * <strong>场景 A（飞机落地的国内高时效件 <span class="math-inline"> → </span> 5 分钟直通陆运分拣线）</strong>：
-     每天凌晨，圆通的波音 757/767 全货机从深圳、广州、昆明、成都等地满载高时效快件（如广东电子产品、云南鲜花、顺德生鲜、“圆准达”急件）降落在嘉兴南湖机场跑道 <span class="math-inline"> → </span> 滑行进入北侧紧挨跑道的<strong>国内航空货站</strong>卸机 <span class="math-inline"> → </span> 拆板后的快件<strong>根本不需要装卡车出大门</strong>，直接通过园区内部跨区自动传送带/无人牵引车，5 分钟内直接滑入南侧隔壁栋的<strong>“多式联运超级分拨中心”</strong> <span class="math-inline"> → </span> 与来自长三角各地的陆运快件一起在三层立体交叉带分拣线上完成自动分拣 <span class="math-inline"> → </span> 装上早已停在南侧月台的几十辆 17.5 米重卡，1 小时内直达上海、杭州、苏州、宁波各大派件网点！</p>
+<p><strong>园区内部“空陆奇妙配合”的真实作业流程是怎么跑的？</strong></p>
+<ul>
+<li><strong>场景 A（飞机落地的国内高时效件 <span class="math-inline"> → </span> 5 分钟直通陆运分拣线）</strong>：
+ 每天凌晨，圆通的波音 757/767 全货机从深圳、广州、昆明、成都等地满载高时效快件（如广东电子产品、云南鲜花、顺德生鲜、“圆准达”急件）降落在嘉兴南湖机场跑道 <span class="math-inline"> → </span> 滑行进入北侧紧挨跑道的<strong>国内航空货站</strong>卸机 <span class="math-inline"> → </span> 拆板后的快件<strong>根本不需要装卡车出大门</strong>，直接通过园区内部跨区自动传送带/无人牵引车，5 分钟内直接滑入南侧隔壁栋的<strong>“多式联运超级分拨中心”</strong> <span class="math-inline"> → </span> 与来自长三角各地的陆运快件一起在三层立体交叉带分拣线上完成自动分拣 <span class="math-inline"> → </span> 装上早已停在南侧月台的几十辆 17.5 米重卡，1 小时内直达上海、杭州、苏州、宁波各大派件网点！</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -3843,18 +4553,24 @@
 <p>您的怀疑非常符合常识，但只要算清下面这<strong>三笔物理账</strong>，就会明白为什么长三角现有的老场地真的快被撑爆了：</p>
 <ol>
 <li>
-<p><strong>第一笔账：圆通两年净增近 <code>80 亿件</code> 包裹，长三角老场地早已“爆肚”超负荷！</strong>
-   * 快递不是存量死水！圆通 2024 年业务量是 <code>265.73 亿件</code>，2025 年冲到 <code>311.44 亿件</code>（一年净增 <code>45.7 亿件</code>），2026 年预计达 <code>345 亿件</code>（再增 <code>33.5 亿件</code>）——<strong>短短两年时间，圆通全网每年凭空多出了近 <code>80 亿件</code> 包裹！</strong>
-   * 江浙沪皖（长三角）占了圆通全网 <strong><code>35%</code> 以上</strong> 的吞吐量，这意味着<strong>光是长三角地区，2025—2026 两年每年就要多塞进来 <code>25 — 28 亿件</code> 新增包裹（每天多出 <code>700万 — 800万件</code>）</strong>！七八年前建的老上海中心、老杭州中心、老嘉兴中心早就处于超负荷紧绷状态，到了双十一甚至连大卡车排队进门都要堵几公里。</p>
+<p><strong>第一笔账：圆通两年净增近 <code>80 亿件</code> 包裹，长三角老场地早已“爆肚”超负荷！</strong></p>
+<ul>
+<li>快递不是存量死水！圆通 2024 年业务量是 <code>265.73 亿件</code>，2025 年冲到 <code>311.44 亿件</code>（一年净增 <code>45.7 亿件</code>），2026 年预计达 <code>345 亿件</code>（再增 <code>33.5 亿件</code>）——<strong>短短两年时间，圆通全网每年凭空多出了近 <code>80 亿件</code> 包裹！</strong></li>
+<li>江浙沪皖（长三角）占了圆通全网 <strong><code>35%</code> 以上</strong> 的吞吐量，这意味着<strong>光是长三角地区，2025—2026 两年每年就要多塞进来 <code>25 — 28 亿件</code> 新增包裹（每天多出 <code>700万 — 800万件</code>）</strong>！七八年前建的老上海中心、老杭州中心、老嘉兴中心早就处于超负荷紧绷状态，到了双十一甚至连大卡车排队进门都要堵几公里。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二笔账：不是掏空自有老场地，而是“关停老破小 + 退租高价外部临时仓”！</strong>
-   * 在嘉兴东方天地港建好之前，圆通在嘉兴原有的老转运中心面积狭小、设备老旧，且为了应付每年暴增的包裹，圆通被迫在浙北、苏南、上海周边向社会房东<strong>高价租赁了大量临时分拨大棚和外围云仓</strong>。
-   * 2025 年底东方天地港的多式联运中心一投产，圆通干的事是：<strong>把原嘉兴老转运中心整体搬迁合并进来，同时把周边高价租来的外部社会仓库退租清退！</strong> 用自家每平米年折旧仅 <code>130—150 元</code> 的嘉兴新基地，替掉了每平米年租金高达 <code>300 元</code> 的外部租赁仓。</p>
+<p><strong>第二笔账：不是掏空自有老场地，而是“关停老破小 + 退租高价外部临时仓”！</strong></p>
+<ul>
+<li>在嘉兴东方天地港建好之前，圆通在嘉兴原有的老转运中心面积狭小、设备老旧，且为了应付每年暴增的包裹，圆通被迫在浙北、苏南、上海周边向社会房东<strong>高价租赁了大量临时分拨大棚和外围云仓</strong>。</li>
+<li>2025 年底东方天地港的多式联运中心一投产，圆通干的事是：<strong>把原嘉兴老转运中心整体搬迁合并进来，同时把周边高价租来的外部社会仓库退租清退！</strong> 用自家每平米年折旧仅 <code>130—150 元</code> 的嘉兴新基地，替掉了每平米年租金高达 <code>300 元</code> 的外部租赁仓。</li>
+</ul>
 </li>
 <li>
-<p><strong>第三笔账：为什么“在其他地方买地建新中心”跟嘉兴基地完全不冲突？</strong>
-   * 圆通近三年确实在广东揭阳、山东济南、河北廊坊、湖北武汉等地买了新地盖转运中心。但快递分拣是<strong>“强地域物理绑定”</strong>的——广东揭阳新建的中心，只能分拣潮汕发出的衣服，不可能飞过来帮嘉兴分拣浙江的包裹！而在<strong>“上海—杭州—苏州—宁波”这个全国包裹最密集的 1 小时黄金圈</strong>里，土地指标极其稀缺，嘉兴东方天地港就是圆通在整个长三角腹地唯一新建的百万平米级超级地面+空中总枢纽！</p>
+<p><strong>第三笔账：为什么“在其他地方买地建新中心”跟嘉兴基地完全不冲突？</strong></p>
+<ul>
+<li>圆通近三年确实在广东揭阳、山东济南、河北廊坊、湖北武汉等地买了新地盖转运中心。但快递分拣是<strong>“强地域物理绑定”</strong>的——广东揭阳新建的中心，只能分拣潮汕发出的衣服，不可能飞过来帮嘉兴分拣浙江的包裹！而在<strong>“上海—杭州—苏州—宁波”这个全国包裹最密集的 1 小时黄金圈</strong>里，土地指标极其稀缺，嘉兴东方天地港就是圆通在整个长三角腹地唯一新建的百万平米级超级地面+空中总枢纽！</li>
+</ul>
 </li>
 </ol>
 <div class="annotated-row"><div class="main-col"><h4 id="_30">三、 ⚖️ 买方冷峻客观裁决：原报告这句话到底有几分真、几分水分？</h4><p>作为您的专属买方研究员，我绝不护短，给您交个最实在的底——原报告说“国内快递主业能把嘉兴基地 60% 以上的地面产能吃干抹净”，这句话<strong>“七分是物理事实，但有三分财务回报率的水分”</strong>：</p><ul>
@@ -3880,18 +4596,24 @@
 <p>今天就算给一个超级富豪 <strong>500 亿元现金</strong>，他也绝对造不出中国第七家全国性电商快递公司。因为快递行业有一条极其残酷的<strong>“最小有效规模生死线（Minimum Efficient Scale）”</strong>：</p>
 <ol>
 <li>
-<p><strong>第一道铁门：日均 <code>5,000 万单</code>（年化近 <code>200 亿件</code>）的物理规模绝壁</strong>
-   * 国家“反内卷”划定的底价红线是多少？义乌是 <strong><code>1.20 — 1.35 元/票</code></strong>，广东是 <strong><code>1.40 元/票</code></strong>——注意，国家只是禁止“8毛钱亏本自杀”，<strong>并没有把快递费定在 5 块钱的暴利水平</strong>！
-   * 在 <code>1.20 — 1.40 元</code> 的价格下，为什么中通和圆通能赚大钱？因为它们一年有 <strong>310 亿—385 亿件</strong>包裹（每天近 <strong>1 亿件</strong>），全国 76 个转运中心之间 24 小时都能把 17.5 米超大型甩挂重卡塞得满满当当，把单票运输+分拣成本摊薄到了惊人的 <strong><code>0.62 — 0.64 元/票</code></strong>！
-   * 假如今天有个新玩家进场，哪怕他发动钞能力一天抢到 <code>500 万单</code>（一年 18 亿件），分摊到全国 30 个省、上千条路由上，他的大卡车连五分之一都装不满，单票运输+分拣成本会高达 <strong><code>2.00 — 3.00 元/票</code></strong>！按国家规定的 <code>1.30 元</code> 底价接单，圆通每单赚 2 毛钱，新玩家每单要倒贴亏 1 块 5 毛钱，500 亿现金烧光也跨不过日均 5,000 万单的规模生死线！</p>
+<p><strong>第一道铁门：日均 <code>5,000 万单</code>（年化近 <code>200 亿件</code>）的物理规模绝壁</strong></p>
+<ul>
+<li>国家“反内卷”划定的底价红线是多少？义乌是 <strong><code>1.20 — 1.35 元/票</code></strong>，广东是 <strong><code>1.40 元/票</code></strong>——注意，国家只是禁止“8毛钱亏本自杀”，<strong>并没有把快递费定在 5 块钱的暴利水平</strong>！</li>
+<li>在 <code>1.20 — 1.40 元</code> 的价格下，为什么中通和圆通能赚大钱？因为它们一年有 <strong>310 亿—385 亿件</strong>包裹（每天近 <strong>1 亿件</strong>），全国 76 个转运中心之间 24 小时都能把 17.5 米超大型甩挂重卡塞得满满当当，把单票运输+分拣成本摊薄到了惊人的 <strong><code>0.62 — 0.64 元/票</code></strong>！</li>
+<li>假如今天有个新玩家进场，哪怕他发动钞能力一天抢到 <code>500 万单</code>（一年 18 亿件），分摊到全国 30 个省、上千条路由上，他的大卡车连五分之一都装不满，单票运输+分拣成本会高达 <strong><code>2.00 — 3.00 元/票</code></strong>！按国家规定的 <code>1.30 元</code> 底价接单，圆通每单赚 2 毛钱，新玩家每单要倒贴亏 1 块 5 毛钱，500 亿现金烧光也跨不过日均 5,000 万单的规模生死线！</li>
+</ul>
 </li>
 <li>
-<p><strong>第二道铁门：牌桌上已经没有第二个“百世快递”可以借壳吞并了</strong>
-   * 当年极兔（2020 年）之所以能成为最后一个挤上牌桌的玩家，除了烧掉 350 亿风投、背靠拼多多喂单之外，最关键的一步是在 2021 年底吞并了原本就有全国网点底子的<strong>百世快递</strong>，2023 年又吞并了顺丰旗下的<strong>丰网速运</strong>。今天，二三线快递（天天、百世、丰网、宅急送、全峰、快捷）早已全部死绝或被吞并，新玩家想买现成壳子都没处买！</p>
+<p><strong>第二道铁门：牌桌上已经没有第二个“百世快递”可以借壳吞并了</strong></p>
+<ul>
+<li>当年极兔（2020 年）之所以能成为最后一个挤上牌桌的玩家，除了烧掉 350 亿风投、背靠拼多多喂单之外，最关键的一步是在 2021 年底吞并了原本就有全国网点底子的<strong>百世快递</strong>，2023 年又吞并了顺丰旗下的<strong>丰网速运</strong>。今天，二三线快递（天天、百世、丰网、宅急送、全峰、快捷）早已全部死绝或被吞并，新玩家想买现成壳子都没处买！</li>
+</ul>
 </li>
 <li>
-<p><strong>第三道铁门：一二线城市核心物流用地与全国快递牌照早已“双双关闸”</strong>
-   * 国家邮政局目前已实质性停批新的全国跨省快递经营牌照；同时，北上广深、义乌、杭州周边根本批不出几十块连片的两三百亩一手工业用地给新玩家盖转运中心。因此，<strong>“场外新玩家进入”的概率是绝对的 <code>0%</code></strong>。</p>
+<p><strong>第三道铁门：一二线城市核心物流用地与全国快递牌照早已“双双关闸”</strong></p>
+<ul>
+<li>国家邮政局目前已实质性停批新的全国跨省快递经营牌照；同时，北上广深、义乌、杭州周边根本批不出几十块连片的两三百亩一手工业用地给新玩家盖转运中心。因此，<strong>“场外新玩家进入”的概率是绝对的 <code>0%</code></strong>。</li>
+</ul>
 </li>
 </ol>
 <h4 id="_31">二、 最关键的博弈：既然没有新玩家，那场内的“老五家（中通、圆通、申通、韵达、极兔）”会不会自己扩产过剩，导致平均单价再次降低？</h4>
@@ -3900,10 +4622,12 @@
 <p>那么，当<strong>“老玩家内部产能充裕”</strong>遇上<strong>“国家反内卷限制最低价”</strong>，会发生什么奇妙的化学反应？</p>
 <ol>
 <li>
-<p><strong>第一重反应：平均单价确实“涨不上天”，而是齐刷刷地贴着“监管底价地板”走！</strong>
-   * 因为五家巨头手里都有充裕的分拣线，谁都想多吃包裹把机器填满。
-   * 当国家规定“义乌最低不准低于 <code>1.20 元</code>、广东不准低于 <code>1.40 元</code>”时，在平时淡季，没有一家敢把价格主动涨到 <code>1.80 元</code>（谁涨谁丢客户），大家都会默契地把大客户报价定在 <strong><code>1.20 — 1.25 元</code>（刚好贴着国家不处罚的合格线边缘）</strong>！
-   * 甚至个别产能吃不饱的老三老四（比如部分弱势区域的韵达或申通网点），还会在合格线边缘试探搞点“充话费送礼品”的擦边球优惠，这就导致<strong>全行业的平均单价很难大幅暴涨，只会呈现“底部焊死、贴地平稳飞行”的态势</strong>（这完美印证了您的判断：圆通 2026Q3 的单票收入约 <code>2.06 元</code>，确实没有暴涨，只是止跌企稳）。</p>
+<p><strong>第一重反应：平均单价确实“涨不上天”，而是齐刷刷地贴着“监管底价地板”走！</strong></p>
+<ul>
+<li>因为五家巨头手里都有充裕的分拣线，谁都想多吃包裹把机器填满。</li>
+<li>当国家规定“义乌最低不准低于 <code>1.20 元</code>、广东不准低于 <code>1.40 元</code>”时，在平时淡季，没有一家敢把价格主动涨到 <code>1.80 元</code>（谁涨谁丢客户），大家都会默契地把大客户报价定在 <strong><code>1.20 — 1.25 元</code>（刚好贴着国家不处罚的合格线边缘）</strong>！</li>
+<li>甚至个别产能吃不饱的老三老四（比如部分弱势区域的韵达或申通网点），还会在合格线边缘试探搞点“充话费送礼品”的擦边球优惠，这就导致<strong>全行业的平均单价很难大幅暴涨，只会呈现“底部焊死、贴地平稳飞行”的态势</strong>（这完美印证了您的判断：圆通 2026Q3 的单票收入约 <code>2.06 元</code>，确实没有暴涨，只是止跌企稳）。</li>
+</ul>
 </li>
 <li>
 <p><strong>第二重反应（买方最核心的赚钱秘密）：为什么“单价贴着监管底线走”，反而成了圆通和中通收割对手的屠龙刀？</strong>
@@ -4131,7 +4855,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《圆通速递 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/圆通速递 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《圆通速递(600233.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/圆通速递(600233.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4328,6 +5052,553 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
