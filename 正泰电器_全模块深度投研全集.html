@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>正泰电器 深度投研全集</title>
+<title>正泰电器(601877.SH) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">正泰电器 深度投研全集</div>
+    <div class="report-title">正泰电器(601877.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-22</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -902,22 +1360,28 @@
 <h3 id="_3">一、 业务结构与利益链条：穿透“三驾马车”与十二大细分品类的真实账本</h3>
 <p>正泰电器的合并报表由三大核心板块咬合而成，它们在资产轻重、周转速度、客户群体与现金流脾气上截然不同：</p>
 <ol>
-<li><strong>第一支柱：智慧电器（低压电器及仪表基本盘，营收占比 <code>38.44%</code>，毛利贡献约 <code>43%</code>）</strong>
-   - <strong>卖什么与谁买单</strong>：涵盖配电电器（万能式断路器 ACB、塑壳断路器 MCCB）、终端电器（小型断路器 MCB、漏电保护器）、控制电器（接触器、继电器、变频器、软起动器）、电源电器（稳压电源、变压器、UPS）、电子电器、仪器仪表（智能电表、水气热表）及建筑电器（墙壁开关插座、智能家居面板），累计超 100 个系列、6 万余种规格。下游客户分为四大阵营：<strong>① 盘厂与建筑基础设施分销渠道</strong>（五金机电城经销商、成套设备厂）；<strong>② 工业 OEM 与高端大客户直销</strong>（机械制造、新能源车充电桩、通信基站及华为、阿里、字节跳动等 AIDC 数据中心机房）；<strong>③ 电力电网集采</strong>（国家电网、南方电网农网改造与智能电表招标）；<strong>④ 海外本土化渠道与项目</strong>（欧洲、西亚非、亚太、拉美等 140 多个国家）。</li>
+<li><strong>第一支柱：智慧电器（低压电器及仪表基本盘，营收占比 <code>38.44%</code>，毛利贡献约 <code>43%</code>）</strong><ul>
+<li><strong>卖什么与谁买单</strong>：涵盖配电电器（万能式断路器 ACB、塑壳断路器 MCCB）、终端电器（小型断路器 MCB、漏电保护器）、控制电器（接触器、继电器、变频器、软起动器）、电源电器（稳压电源、变压器、UPS）、电子电器、仪器仪表（智能电表、水气热表）及建筑电器（墙壁开关插座、智能家居面板），累计超 100 个系列、6 万余种规格。下游客户分为四大阵营：<strong>① 盘厂与建筑基础设施分销渠道</strong>（五金机电城经销商、成套设备厂）；<strong>② 工业 OEM 与高端大客户直销</strong>（机械制造、新能源车充电桩、通信基站及华为、阿里、字节跳动等 AIDC 数据中心机房）；<strong>③ 电力电网集采</strong>（国家电网、南方电网农网改造与智能电表招标）；<strong>④ 海外本土化渠道与项目</strong>（欧洲、西亚非、亚太、拉美等 140 多个国家）。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>盈利成色</strong>：2024 年智慧电器板块实现营收 <code>217.04亿元</code>（<code>+2.79%</code>，其中低压电器核心分部营收 <code>209.22亿元</code>、毛利率高达 <code>29.99%</code>）；2025 年在地产竣工低迷的逆风下依然实现营收 <code>227.36亿元</code>（<code>+4.76%</code>），毛利率保持在 <code>28.62%</code> 的高位。这是公司当之无愧的“现金奶牛”，款项结算以经销商先款后货或银行承兑汇票为主，坏账极低。</li>
 </ul>
 <ol start="2">
-<li><strong>第二支柱：正泰安能（户用分布式光伏开发、建设与运维，营收占比约 <code>48.57%</code>，归母净利贡献约 <code>45%</code>）</strong>
-   - <strong>商业模式闭环</strong>：正泰安能通过遍布山东、河南、河北、安徽、江苏及南方各省的数千家县乡级代理商，与农村农户签约屋顶合作（主流为“金顶宝”等屋顶租赁或合作共建模式：农户不出钱、不用背贷款，出让屋顶使用权 25 年，每年稳拿固定屋顶租金或发电收益分成）。正泰安能负责采购组件、逆变器、支架及自家低压并网箱，快速标准化建站并网。</li>
+<li><strong>第二支柱：正泰安能（户用分布式光伏开发、建设与运维，营收占比约 <code>48.57%</code>，归母净利贡献约 <code>45%</code>）</strong><ul>
+<li><strong>商业模式闭环</strong>：正泰安能通过遍布山东、河南、河北、安徽、江苏及南方各省的数千家县乡级代理商，与农村农户签约屋顶合作（主流为“金顶宝”等屋顶租赁或合作共建模式：农户不出钱、不用背贷款，出让屋顶使用权 25 年，每年稳拿固定屋顶租金或发电收益分成）。正泰安能负责采购组件、逆变器、支架及自家低压并网箱，快速标准化建站并网。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>会计核算与现金流密码</strong>：电站建成并网后，正泰安能并不打算自己苦熬 20 年收电费，而是将这些产权清晰、带有电网稳定电费现金流的户用电站打包，批量出售给国家电投、华能、越秀新能源、中核汇能等渴求优质绿电资产的央国企买方。在会计处理上，<strong>为出售而开发建设的电站直接计入流动资产中的“存货（开发成本/开发产品）”</strong>（2025 年末公司合并存货高达 <code>420.82亿元</code>，绝大部分正是这批待交割的屋顶电站）；一旦资产包完成交割过户，直接确认“电站销售收入”并一次性收回全款现金。2025 年正泰安能新增装机超 <code>14GW</code>，实现电站交易规模超 <code>7GW</code>，全年实现营收 <code>287.28亿元</code>，净利润逆势增长至 <code>30.40亿元</code>（净利率 <code>10.58%</code>），正泰电器于 2026 年中期将持股比例进一步提至 <code>71.24%</code> 后，这块高周转资产对归母利润的含金量进一步跃升。</li>
 </ul>
 <ol start="3">
-<li><strong>第三支柱：正泰电源 / 通润装备（002150.SZ）及存量电站运营（营收占比约 <code>13%</code>）</strong>
-   - <strong>业务定性</strong>：2023 年正泰电器通过协议受让控股 A 股上市公司通润装备（持股约 <code>29.99%</code>），并把旗下的组串式光伏逆变器与储能系统业务主体“正泰电源”注入其中。正泰电源在北美工商业光伏逆变器市场连续多年市占率稳居前二，并加速向全球大型地面电站储能（大储）与工商业储能系统扩张。此外，公司账上仍保留一部分早年自持的高补贴工商业、地面及户用运营光伏电站（2025 年电站运营电费收入达 <code>110.36亿元</code>，毛利率高达 <code>53.04%</code>），每年提供极其肥厚的电费现金流与折旧盾牌。</li>
+<li><strong>第三支柱：正泰电源 / 通润装备（002150.SZ）及存量电站运营（营收占比约 <code>13%</code>）</strong><ul>
+<li><strong>业务定性</strong>：2023 年正泰电器通过协议受让控股 A 股上市公司通润装备（持股约 <code>29.99%</code>），并把旗下的组串式光伏逆变器与储能系统业务主体“正泰电源”注入其中。正泰电源在北美工商业光伏逆变器市场连续多年市占率稳居前二，并加速向全球大型地面电站储能（大储）与工商业储能系统扩张。此外，公司账上仍保留一部分早年自持的高补贴工商业、地面及户用运营光伏电站（2025 年电站运营电费收入达 <code>110.36亿元</code>，毛利率高达 <code>53.04%</code>），每年提供极其肥厚的电费现金流与折旧盾牌。</li>
+</ul>
+</li>
 </ol>
 <p><strong>表 1：正泰电器合并报表三大核心业务板块营收、毛利率与现金流属性拆解总表（2024—2025年）</strong></p>
 <div class="table-scroll-wrap"><table class="wide-table">
@@ -2138,12 +2602,16 @@
 <h3 id="_5">五、 产业周期时钟、成本顺价权与客户转换代价测试</h3>
 <ol>
 <li>
-<p><strong>低压电器周期时钟：传统地产拖累出清尾声 <span class="math-inline"> → </span> 工业复苏、电网智能化与 AIDC 算力基建共振向上</strong>
-   - 过去三年（2022—2024），受国内房地产新开工面积腰斩拖累，建筑配电需求经历了长达三年的寒冬洗牌。大量年营收不足 5 亿元的温州柳市中小低压电器作坊因拿不到铜银锁价额度、无法承受数字化产线改造成本而批量出局。到了 2025—2026 年，传统住宅建筑占比在正泰低压电器收入中已降至约 <code>20%</code> 以下，而<strong>电网新能源并网改造、高端制造 OEM、AIDC 人工智能数据中心高密度配电</strong>以及<strong>海外新兴市场基建</strong>全面接棒。</p>
+<p><strong>低压电器周期时钟：传统地产拖累出清尾声 <span class="math-inline"> → </span> 工业复苏、电网智能化与 AIDC 算力基建共振向上</strong></p>
+<ul>
+<li>过去三年（2022—2024），受国内房地产新开工面积腰斩拖累，建筑配电需求经历了长达三年的寒冬洗牌。大量年营收不足 5 亿元的温州柳市中小低压电器作坊因拿不到铜银锁价额度、无法承受数字化产线改造成本而批量出局。到了 2025—2026 年，传统住宅建筑占比在正泰低压电器收入中已降至约 <code>20%</code> 以下，而<strong>电网新能源并网改造、高端制造 OEM、AIDC 人工智能数据中心高密度配电</strong>以及<strong>海外新兴市场基建</strong>全面接棒。</li>
+</ul>
 </li>
 <li>
-<p><strong>上游原材料涨价顺价测试（铜、银、工程塑料敏感性压力模型）</strong>
-   - 在低压电器制造本底中，原材料占生产成本高达 <strong><code>86.63%</code></strong>（2025 年报实数 <code>135.55亿元</code>），其中<strong>电解铜、白银（银触点）与钢材</strong>合计占直接材料成本的 <code>55%</code> 以上。2024—2026 年全球铜价与白银价格持续处于历史高位区间。正泰通过<strong>“上海期货交易所铜银套期保值 + 石墨烯复合触头以铜代银工艺 + 每年 3%—8% 的经销商价目表扣点上调 + 昆仑/诺雅克高端新品迭代”</strong>四道防线，将原材料暴涨冲击化于无形：</p>
+<p><strong>上游原材料涨价顺价测试（铜、银、工程塑料敏感性压力模型）</strong></p>
+<ul>
+<li>在低压电器制造本底中，原材料占生产成本高达 <strong><code>86.63%</code></strong>（2025 年报实数 <code>135.55亿元</code>），其中<strong>电解铜、白银（银触点）与钢材</strong>合计占直接材料成本的 <code>55%</code> 以上。2024—2026 年全球铜价与白银价格持续处于历史高位区间。正泰通过<strong>“上海期货交易所铜银套期保值 + 石墨烯复合触头以铜代银工艺 + 每年 3%—8% 的经销商价目表扣点上调 + 昆仑/诺雅克高端新品迭代”</strong>四道防线，将原材料暴涨冲击化于无形：</li>
+</ul>
 </li>
 </ol>
 <p><strong>表 15：大宗原材料（铜、银、工程塑料）价格波动对正泰低压电器毛利率的敏感性压力测试与顺价传导表</strong></p>
@@ -2378,16 +2846,22 @@
 <p>正泰四十年的发展史，本质上是浙商温州柳市草根创业者南存辉带领团队，在三次生死关头靠“制度分利、质量立命与断腕剥离”杀出来的进化史：</p>
 <ol>
 <li>
-<p><strong>第一次跃迁（1984—1998年）：从“柳市假冒伪劣重灾区”杀出全国第一张许可证与股份制合分家</strong>
-   - 1984 年南存辉与胡成中拿着 5 万元在温州乐清柳市镇创办求精开关厂（正泰前身）。彼时柳市低压电器因劣质作坊泛滥遭到国务院八部委联合打假封杀。南存辉反其道而行，砸下全部身家引进热继电器检测设备，拿到温州第一张国家生产许可证。1991 年与胡成中和平分家（分别创立正泰与德力西）后，南存辉开启了中国民企最早的“股权稀释聚才”实验——通过吸收上游配件厂与销售大户参股，将个人持股从 <code>100%</code> 主动稀释至不足 <code>30%</code>，用一张利益共享网在短短五年内吞并整合上百家小厂，一举奠定国内低压电器头把交椅。</p>
+<p><strong>第一次跃迁（1984—1998年）：从“柳市假冒伪劣重灾区”杀出全国第一张许可证与股份制合分家</strong></p>
+<ul>
+<li>1984 年南存辉与胡成中拿着 5 万元在温州乐清柳市镇创办求精开关厂（正泰前身）。彼时柳市低压电器因劣质作坊泛滥遭到国务院八部委联合打假封杀。南存辉反其道而行，砸下全部身家引进热继电器检测设备，拿到温州第一张国家生产许可证。1991 年与胡成中和平分家（分别创立正泰与德力西）后，南存辉开启了中国民企最早的“股权稀释聚才”实验——通过吸收上游配件厂与销售大户参股，将个人持股从 <code>100%</code> 主动稀释至不足 <code>30%</code>，用一张利益共享网在短短五年内吞并整合上百家小厂，一举奠定国内低压电器头把交椅。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二次跃迁（2007—2016年）：与施耐德的“3.3亿元天价专利世纪和解”与光伏大腾挪</strong>
-   - 2006—2009 年，面对跨国巨头施耐德在全球发起的专利围剿，正泰利用自身提前布局的实用新型专利发起反诉，一审迫使施耐德面临 3.3 亿元天价赔偿，最终于 2009 年达成全球和解（施耐德支付 1.575 亿元和解金并与正泰交叉许可）。这不仅帮正泰扫清了 2010 年 A 股 IPO 的最大障碍，更打响了出海名号。2016 年，公司完成重大资产重组，将正泰新能源注入上市公司，并在德国逆势抄底破产的 Conergy 太阳能工厂；更重要的是，2015 年底内部孵化成立“正泰安能”，在全行业还在死磕西北地面电站补贴拖欠时，率先杀入无需依赖国补拖欠、现金流极佳的农村户用屋顶蓝海。</p>
+<p><strong>第二次跃迁（2007—2016年）：与施耐德的“3.3亿元天价专利世纪和解”与光伏大腾挪</strong></p>
+<ul>
+<li>2006—2009 年，面对跨国巨头施耐德在全球发起的专利围剿，正泰利用自身提前布局的实用新型专利发起反诉，一审迫使施耐德面临 3.3 亿元天价赔偿，最终于 2009 年达成全球和解（施耐德支付 1.575 亿元和解金并与正泰交叉许可）。这不仅帮正泰扫清了 2010 年 A 股 IPO 的最大障碍，更打响了出海名号。2016 年，公司完成重大资产重组，将正泰新能源注入上市公司，并在德国逆势抄底破产的 Conergy 太阳能工厂；更重要的是，2015 年底内部孵化成立“正泰安能”，在全行业还在死磕西北地面电站补贴拖欠时，率先杀入无需依赖国补拖欠、现金流极佳的农村户用屋顶蓝海。</li>
+</ul>
 </li>
 <li>
-<p><strong>第三次生死裁决（2022—2026年）：果断剥离晶硅组件重资产，收回安能少数股权，冲刺 A+H 全球化</strong>
-   - 2022—2023 年光伏组件扩产狂潮巅峰期，各路玩家都在砸几百亿建 TOPCon 电池组件厂。正泰电器管理层做出了一个事后看堪称教科书级的逆向决策：<strong>将旗下重资产、强周期的光伏电池与组件制造业务（正泰新能）剥离出上市公司体系，上市公司只保留高毛利的低压电器、高周转的户用电站开发（正泰安能）以及高壁垒的逆变器/储能（正泰电源）！</strong> 正是这一刀，让正泰电器完美躲过了 2024—2025 年光伏制造全行业亏掉上千亿的灭顶之灾。</p>
+<p><strong>第三次生死裁决（2022—2026年）：果断剥离晶硅组件重资产，收回安能少数股权，冲刺 A+H 全球化</strong></p>
+<ul>
+<li>2022—2023 年光伏组件扩产狂潮巅峰期，各路玩家都在砸几百亿建 TOPCon 电池组件厂。正泰电器管理层做出了一个事后看堪称教科书级的逆向决策：<strong>将旗下重资产、强周期的光伏电池与组件制造业务（正泰新能）剥离出上市公司体系，上市公司只保留高毛利的低压电器、高周转的户用电站开发（正泰安能）以及高壁垒的逆变器/储能（正泰电源）！</strong> 正是这一刀，让正泰电器完美躲过了 2024—2025 年光伏制造全行业亏掉上千亿的灭顶之灾。</li>
+</ul>
 </li>
 </ol>
 <p><strong>表 19：正泰四十年三次生死跃迁、关键资本动作与商业基因演化编年史简表（1984—2026年）</strong></p>
@@ -2792,15 +3266,19 @@
 <h2 id="_16">【第七部分：穿透报表之外的真暗礁与周期博弈——区分“结构性死穴”与“危中之机”】</h2>
 <p>摒弃一切招股书套话，真正能对正泰电器未来三年利润与资产负债表造成实质冲击的核心暗礁只有以下 <strong>两项</strong>：</p>
 <ol>
-<li><strong>头号真暗礁：新能源全面入市（136号文）与配网红黄区扩容，导致央国企收购户用电站的“资产包收益率门槛上移与压价风险”</strong>
-   - 从 2025—2026 年起，随着国家发改委推进新能源上网电价全面市场化改革（午间光伏大发时段现货电价频繁出现深谷低价），叠加多省配电网容量受限被划入“红黄区”，央国企对收购分布式电站的 IRR 测算变得极其严苛。</li>
+<li><strong>头号真暗礁：新能源全面入市（136号文）与配网红黄区扩容，导致央国企收购户用电站的“资产包收益率门槛上移与压价风险”</strong><ul>
+<li>从 2025—2026 年起，随着国家发改委推进新能源上网电价全面市场化改革（午间光伏大发时段现货电价频繁出现深谷低价），叠加多省配电网容量受限被划入“红黄区”，央国企对收购分布式电站的 IRR 测算变得极其严苛。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>缓冲垫与临界死穴</strong>：上游组件跌破 <code>0.7元/瓦</code> 让正泰安能单瓦建站成本下降了逾 <code>1.0元/瓦</code>，为其向央企让利下调电站售价（从 <code>3.5元/W</code> 降至 <code>2.4—2.5元/W</code>）留出了充足毛利空间（2025 年安能净利仍创 <code>30.40亿</code> 新高）。但若未来全国超 <code>70%</code> 省份午间市场化结算电价跌破燃煤基准价的 <code>50%</code> 且无绿证或机制电价补偿，导致户用电站全投资 IRR 跌破央企 <code>5.5%</code> 底线，则账上 <strong><code>420.82亿元</code> 存货（待售电站）</strong> 周转期将面临拉长与减值压力。</li>
 </ul>
 <ol start="2">
-<li><strong>二号博弈点（危中之机）：控股子公司通润装备（正泰电源）面临的欧美贸易关税壁垒 vs 海外新兴市场电网收割</strong>
-   - 正泰电器自身的低压电器出海主战场在<strong>欧洲、西亚非（中东）、东南亚与拉美</strong>，对美国直接出口敞口极小；控股子公司 <strong>通润装备（正泰电源）</strong> 虽是北美商用逆变器主力供应商，但已布局泰国等海外产能，且正泰电器仅持有通润装备 <code>29.99%</code> 股权，极端关税冲击对正泰电器归母净利的最大影响不超过 <code>1.5亿—2.5亿元</code>。反过来，在中东、东南亚与拉美电网基建浪潮中，欧洲老牌对手节节败退，正泰海外份额正迎来黄金收割期。</li>
+<li><strong>二号博弈点（危中之机）：控股子公司通润装备（正泰电源）面临的欧美贸易关税壁垒 vs 海外新兴市场电网收割</strong><ul>
+<li>正泰电器自身的低压电器出海主战场在<strong>欧洲、西亚非（中东）、东南亚与拉美</strong>，对美国直接出口敞口极小；控股子公司 <strong>通润装备（正泰电源）</strong> 虽是北美商用逆变器主力供应商，但已布局泰国等海外产能，且正泰电器仅持有通润装备 <code>29.99%</code> 股权，极端关税冲击对正泰电器归母净利的最大影响不超过 <code>1.5亿—2.5亿元</code>。反过来，在中东、东南亚与拉美电网基建浪潮中，欧洲老牌对手节节败退，正泰海外份额正迎来黄金收割期。</li>
+</ul>
+</li>
 </ol>
 <hr/>
 <h2 id="_17">【第八部分：总结定性、可证伪跟踪路标与全局统一财务基准锁定表】</h2>
@@ -4727,17 +5205,21 @@
 <h4 id="1_2">1. 低压电器赛道：告别地产拖累，步入“结构性温和复苏 + 真实去库补库”周期</h4>
 <p>将正泰电器（低压板块）、良信股份、宏发股份、公牛集团与施耐德中国放在同一时间轴上审视，2025年至2026年前三季度的行业景气度真相清晰浮现：</p>
 <ul>
-<li><strong>营收增速全面走出谷底，2026年前三季度集体提速</strong>：</li>
-<li>2025年是国内建筑地产竣工端冲击最剧烈的一年，施耐德中国区仅录得低个位数增长，高度绑定民用家装的公牛集团营收下滑 4.78%（160.26亿元），但<strong>正泰电器低压板块依然实现营收 227.36亿元（+4.76%）</strong>，<strong>良信股份实现 44.85亿元（+5.82%）</strong>，而重仓全球化与汽车/新能源继电器的<strong>宏发股份更是大增 21.98%（172.02亿元）</strong>。</li>
 <li>
-<p>进入2026年前三季度，工业与电网、算力下游景气度显著升温：良信股份前三季度营收增速跳升至 <strong>+11.39%</strong>（其中Q3单季 <strong>+16.58%</strong>），宏发股份飙升至 <strong>+34.27%</strong>（Q3单季 <strong>+38.33%</strong>），正泰电器集团合并营收亦同比大增 <strong>+17.13%（543.67亿元）</strong>。</p>
+<p><strong>营收增速全面走出谷底，2026年前三季度集体提速</strong>：</p>
+<ul>
+<li>2025年是国内建筑地产竣工端冲击最剧烈的一年，施耐德中国区仅录得低个位数增长，高度绑定民用家装的公牛集团营收下滑 4.78%（160.26亿元），但<strong>正泰电器低压板块依然实现营收 227.36亿元（+4.76%）</strong>，<strong>良信股份实现 44.85亿元（+5.82%）</strong>，而重仓全球化与汽车/新能源继电器的<strong>宏发股份更是大增 21.98%（172.02亿元）</strong>。</li>
+<li>进入2026年前三季度，工业与电网、算力下游景气度显著升温：良信股份前三季度营收增速跳升至 <strong>+11.39%</strong>（其中Q3单季 <strong>+16.58%</strong>），宏发股份飙升至 <strong>+34.27%</strong>（Q3单季 <strong>+38.33%</strong>），正泰电器集团合并营收亦同比大增 <strong>+17.13%（543.67亿元）</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>是“向经销商压库”还是“终端真实复苏”？用合同负债、存货周转与经营现金流（OCF）三表验明正身</strong>：</p>
-</li>
+<ul>
 <li>如果低压电器企业靠向渠道压货虚增收入，必然表现为“应收账款暴涨、合同负债枯竭、经营现金流背离”。</li>
 <li>但事实恰恰相反：正泰电器在低压电器领域实行极其严苛的<strong>“先款后货 / 现款现货 + 季度返利”</strong>经销结算制度，2025年正泰电器整体经营活动现金流量净额（OCF）高达 <strong>230.90亿元（同比暴增+51.89%）</strong>，2026年前三季度 OCF 达 <strong>180.73亿元（+18.38%）</strong>，现金流增幅远超利润增幅；同时，正泰智能电器与电站业务的合同负债（预收货款）在2025Q3一度冲高至 <strong>55.28亿元</strong>，2026Q3末仍保持在 <strong>37.80亿元</strong> 的高位（较2024年末的34.25亿元稳步扩容）。</li>
 <li>驱动本轮温和复苏的并非传统住宅地产（地产占正泰低压营收比重已压缩至不足15%），而是<strong>三大新质增量</strong>：一是国内电网配网智能化改造（国网/南网投资创历史新高）；二是全球及国内 <strong>AIDC（人工智能数据中心）</strong> 对高可靠框架断路器（ACB）、塑壳断路器（MCCB）及智能配电柜的爆发式需求；三是锂电、风电、储能及工业出海OEM设备商的配套采购。</li>
+</ul>
+</li>
 </ul>
 <p><strong>表 C-6：全赛道核心玩家合同负债（预收经销商货款与电站/工程预收款）环比及同比变动验真表</strong></p>
 <div class="table-scroll-wrap"><table class="wide-table">
@@ -4947,23 +5429,27 @@
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把不同商业模式的公司放在一张表上比“存货周转天数”，如果不把底层的资产性质剥开，就会得出极其荒唐的结论。正泰电器那 295 天的合并存货周转天数里，低压断路器其实只要 60 多天就卖光了，真正沉淀在账上的是正泰安能替央企金主代建的 370 多亿屋顶光伏电站。这就好比一家公司左手开五金超市（2个月周转一次），右手给央企做定制工业园开发（10个月交割一次），你要是用超市的标准去骂工业园盖得慢，那就是还没搞懂会计科目的基本常识。</p></div></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_1">2. 分布式户用光伏赛道：正泰安能“主动缩表提质、加速周转”，同行深陷“制造亏损或垫资积压”</h4><p>在分布式光伏战场，2025年至2026年经历了“红区消纳受限、入市电价机制改革（136号文）、组件价格筑底”的惊涛骇浪，头部玩家的库存与周转策略呈现出云泥之别：</p><ul>
-<li><strong>正泰电器（正泰安能）：教科书式的“主动控规模、挑肥拣瘦保周转”</strong>：</li>
+<li>
+<p><strong>正泰电器（正泰安能）：教科书式的“主动控规模、挑肥拣瘦保周转”</strong>：</p>
+<ul>
 <li>2025年，正泰电器光伏板块营收主动收缩 <strong>15.62% 至 362.74亿元</strong>（其中正泰安能营收由 2024年的 318.26亿元主动下调 <strong>9.73% 至 287.28亿元</strong>）。</li>
 <li>外行看似营收下滑，内行看门道：正泰安能在2025年果断砍掉了北方消纳红区及低IRR省份的粗放开发，全面转向南方高电价、高消纳省份，并大举推行<strong>“合作开发/受托建设（轻资产滚动周转）”</strong>模式。</li>
-<li>
-<p>更具说服力的是现金流：正泰电器2025年高达 <strong>230.90亿元</strong> 的 OCF 中，核心贡献便来自正泰安能将存量“待售户用光伏电站（计入存货科目）”大批量打包出售给央国企发电集团及基础设施公募REITs/险资平台，实现了真金白银的闭环回笼！</p>
+<li>更具说服力的是现金流：正泰电器2025年高达 <strong>230.90亿元</strong> 的 OCF 中，核心贡献便来自正泰安能将存量“待售户用光伏电站（计入存货科目）”大批量打包出售给央国企发电集团及基础设施公募REITs/险资平台，实现了真金白银的闭环回笼！</li>
+</ul>
 </li>
 <li>
 <p><strong>天合光能（天合富家）：被上游重资产制造严重拖累，分布式独木难支</strong>：</p>
-</li>
+<ul>
 <li>天合光能因背负庞大的硅片、电池、组件垂直一体化重资产产能，在2024—2025年遭遇全行业价格战血洗，2024年归母净利亏损 <strong>-34.43亿元</strong>，2025年营收下滑 16.61% 至 669.75亿元，<strong>归母净利润巨亏 -70.31亿元</strong>（2026年前三季度再亏 <strong>-19.42亿元</strong>，扣非亏损 <strong>-41.05亿元</strong>）。</li>
-<li>
-<p>尽管旗下的“天合富家”作为国内户用光伏第二大龙头仍在贡献正向利润与现金流，但母公司制造端的巨额失血与组件存货跌价，迫使天合整体陷入收缩防线、全力减亏保现金流的被动防守局。</p>
+<li>尽管旗下的“天合富家”作为国内户用光伏第二大龙头仍在贡献正向利润与现金流，但母公司制造端的巨额失血与组件存货跌价，迫使天合整体陷入收缩防线、全力减亏保现金流的被动防守局。</li>
+</ul>
 </li>
 <li>
 <p><strong>创维集团新能源（创维光伏）：蒙眼狂奔后的“低毛利积压”阵痛与分拆自救</strong>：</p>
-</li>
+<ul>
 <li>创维新能源在2025年依然选择逆势冲规模，营业额增长 <strong>16.5% 至 236.85亿元</strong>（累计并网超29.3GW）。然而，由于其在早期过度依赖高返佣外部渠道商跑马圈地，在电网消纳门槛陡升、央国企收购电站审美变得极度挑剔的2025—2026年，创维账面上沉淀了大量待转让的在建电站资产，且毛利率被挤压至 <strong>8%左右</strong>，导致创维集团2025年归母溢利大跌 <strong>37.3% 至 3.56亿元</strong>，不得不于2026年初启动集团私有化退市及分拆创维光伏独立介绍上市的资本重组。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在商业世界里，最愚蠢的死法就是为了保住所谓“营收增长率”的面子，在周期下行期继续签下无数亏钱或收不回现金的烂合同。正泰安能在2025年敢于让营收主动下降近10%，换来净利润逆势增长到30.40亿元、经营现金流暴涨51.89%，这叫真正的“商业理智”。反观那些为了冲规模而在亏损边缘疯狂铺摊子的同行，他们账面上的营收越大，股东兜里的窟窿就越深。</p></div></div></div></div>
 
 
@@ -5228,14 +5714,18 @@
 </ul>
 <ol start="2">
 <li>
-<p><strong>研发与模具开支的规模分摊效应（2.24% vs 7.25%）</strong>：
-   - 低压电器本质上是“多品种、小批量、长寿命”的工业消费品。正泰低压电器一年营收 <strong>227.36亿元</strong>（是良信 44.85亿元 的 <strong>5.07倍</strong>），一款昆仑系列或 NM8N 塑壳断路器开模研发出来，可以在全球卖出数千万只，单只分摊的模具折旧与研发成本微乎其微（正泰2025年研发费用 13.26亿元，研发费用率仅 <strong>2.24%</strong>，低压本部分摊研发率约 <strong>3.80%</strong>）。
-   - 而良信股份为了伺候不同行业大客户的非标定制需求，不得不维持极高密度的研发人员配置（2025年研发费用 <strong>3.25亿元</strong>，<strong>研发费用率高达 7.25%</strong>）。一旦下游新能源或地产大客户需求放缓或要求年度降价 5%—10%，良信刚性的研发与销售人力成本根本无法压缩，直接导致其毛利率在2026前三季度滑落至 <strong>27.61%</strong>、扣非净利大跌 <strong>27.57%</strong>。</p>
+<p><strong>研发与模具开支的规模分摊效应（2.24% vs 7.25%）</strong>：</p>
+<ul>
+<li>低压电器本质上是“多品种、小批量、长寿命”的工业消费品。正泰低压电器一年营收 <strong>227.36亿元</strong>（是良信 44.85亿元 的 <strong>5.07倍</strong>），一款昆仑系列或 NM8N 塑壳断路器开模研发出来，可以在全球卖出数千万只，单只分摊的模具折旧与研发成本微乎其微（正泰2025年研发费用 13.26亿元，研发费用率仅 <strong>2.24%</strong>，低压本部分摊研发率约 <strong>3.80%</strong>）。</li>
+<li>而良信股份为了伺候不同行业大客户的非标定制需求，不得不维持极高密度的研发人员配置（2025年研发费用 <strong>3.25亿元</strong>，<strong>研发费用率高达 7.25%</strong>）。一旦下游新能源或地产大客户需求放缓或要求年度降价 5%—10%，良信刚性的研发与销售人力成本根本无法压缩，直接导致其毛利率在2026前三季度滑落至 <strong>27.61%</strong>、扣非净利大跌 <strong>27.57%</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>产业链纵向一体化与大宗商品议价权（对比宏发股份与良信股份）</strong>：
-   - 2025—2026年电解铜、白银价格大幅飙升（银触点与紫铜件占低压电器成本超 40%）。<strong>宏发股份</strong>之所以能维持 <strong>34.96%—35.07%</strong> 的超高毛利率和 <strong>10.22%—10.44%</strong> 的净利率，是因为宏发在继电器领域拥有全球超 30% 的绝对垄断份额及自制模具/自动化产线能力，具备极强的向下游顺价能力。
-   - 同样，<strong>正泰电器</strong>凭借 227亿元 的巨量采购规模、铜银套期保值机制以及上万个SKU的常规品提价能力，将2025年低压毛利率波动牢牢锁定在 <strong>28.62%</strong>（仅微降1.37pct）；而体量仅40余亿、面对强势大B端客户的良信股份，既难向上游锁价，又难向下游大客户提价，利润空间遭到双向挤压。</p>
+<p><strong>产业链纵向一体化与大宗商品议价权（对比宏发股份与良信股份）</strong>：</p>
+<ul>
+<li>2025—2026年电解铜、白银价格大幅飙升（银触点与紫铜件占低压电器成本超 40%）。<strong>宏发股份</strong>之所以能维持 <strong>34.96%—35.07%</strong> 的超高毛利率和 <strong>10.22%—10.44%</strong> 的净利率，是因为宏发在继电器领域拥有全球超 30% 的绝对垄断份额及自制模具/自动化产线能力，具备极强的向下游顺价能力。</li>
+<li>同样，<strong>正泰电器</strong>凭借 227亿元 的巨量采购规模、铜银套期保值机制以及上万个SKU的常规品提价能力，将2025年低压毛利率波动牢牢锁定在 <strong>28.62%</strong>（仅微降1.37pct）；而体量仅40余亿、面对强势大B端客户的良信股份，既难向上游锁价，又难向下游大客户提价，利润空间遭到双向挤压。</li>
+</ul>
 </li>
 </ol>
 <p><strong>表 C-12：低压电器“经销规模分摊模式（正泰）” vs “大客户直销定制模式（良信）”每 1 亿元营收利润留存模拟对质表</strong></p>
@@ -5305,14 +5795,18 @@
 <p>这是市场上最大的认知盲区之一：许多人看到正泰电器有 362.74亿元 光伏收入，就把它跟隆基、天合、通威混为一谈。通过交叉审讯，我们揭开正泰光伏板块在 2025 年逆势大赚的三大底层真相：</p>
 <ol>
 <li>
-<p><strong>“剥离重资产硅料/电池/组件制造”的战略神来之笔（正泰电器是组件暴跌的最大受益者，而非受害者！）</strong>：
-   - 早在 2022—2023 年，正泰电器便极具前瞻性地将高资本开支、强周期波动的<strong>光伏电池与组件制造业务（正泰新能）剥离出上市公司体系（转让予母公司正泰集团及外部投资人）</strong>，上市公司体内仅保留极少量海外/特定订单组件及逆变器业务，核心聚焦于下游<strong>正泰安能（户用分布式光伏电站开发、建设、出售与运维）</strong>。
-   - 当 2024—2025 年全行业光伏组件价格从 1.2元/W 暴跌至 0.65—0.70元/W 时，重仓制造端的<strong>天合光能</strong>遭受了毁灭性的存货跌价与毛利击穿，2025年巨亏 <strong>70.31亿元</strong>；
-   - 而处于产业链最下游的<strong>正泰安能</strong>，其建设一座户用光伏电站最大的原材料成本正是<strong>采购光伏组件</strong>！上游组件价格腰斩，直接导致正泰安能的<strong>单瓦建站造价（EPC开发成本）断崖式下降</strong>，而下游终端电价与售电/转售电站的定价相对刚性。上游制造业流的每一滴血，都化作了正泰安能毛利率逆势暴增的红利——这正是正泰光伏板块毛利率从 2024年的 <strong>20.26%</strong> 逆势跃升 <strong>4.03个百分点至 2025年 24.29%</strong>、正泰安能净利率从 <strong>8.99% 提升至 10.58%（净利30.40亿元）</strong> 的核心商业逻辑！</p>
+<p><strong>“剥离重资产硅料/电池/组件制造”的战略神来之笔（正泰电器是组件暴跌的最大受益者，而非受害者！）</strong>：</p>
+<ul>
+<li>早在 2022—2023 年，正泰电器便极具前瞻性地将高资本开支、强周期波动的<strong>光伏电池与组件制造业务（正泰新能）剥离出上市公司体系（转让予母公司正泰集团及外部投资人）</strong>，上市公司体内仅保留极少量海外/特定订单组件及逆变器业务，核心聚焦于下游<strong>正泰安能（户用分布式光伏电站开发、建设、出售与运维）</strong>。</li>
+<li>当 2024—2025 年全行业光伏组件价格从 1.2元/W 暴跌至 0.65—0.70元/W 时，重仓制造端的<strong>天合光能</strong>遭受了毁灭性的存货跌价与毛利击穿，2025年巨亏 <strong>70.31亿元</strong>；</li>
+<li>而处于产业链最下游的<strong>正泰安能</strong>，其建设一座户用光伏电站最大的原材料成本正是<strong>采购光伏组件</strong>！上游组件价格腰斩，直接导致正泰安能的<strong>单瓦建站造价（EPC开发成本）断崖式下降</strong>，而下游终端电价与售电/转售电站的定价相对刚性。上游制造业流的每一滴血，都化作了正泰安能毛利率逆势暴增的红利——这正是正泰光伏板块毛利率从 2024年的 <strong>20.26%</strong> 逆势跃升 <strong>4.03个百分点至 2025年 24.29%</strong>、正泰安能净利率从 <strong>8.99% 提升至 10.58%（净利30.40亿元）</strong> 的核心商业逻辑！</li>
+</ul>
 </li>
 <li>
-<p><strong>为什么同样做下游户用光伏，正泰安能净利率高达 10.58%，而创维光伏毛利率仅 8%左右？</strong>
-   - <strong>电气BOM自给率与系统集成能力代差</strong>：一座户用光伏电站除了组件，还需要<strong>光伏逆变器、并网配电箱、直流断路器、浪涌保护器、线缆及智能电表</strong>。创维集团是做彩电起家的，上述核心电气零部件全部需要外采，仅赚取微薄的渠道总包差价；而正泰电器自身就是中国最大的低压电器、并网箱、智能电表与逆变器（正泰电源）制造商！正泰安能建站所需的全套高低压配电设备与控制元器件全部内部协同供应，单瓦非组件BOM成本比创维等跨界玩家低 <strong>0.10—0.15元/W</strong> 以上，仅此一项便拉开 <strong>5—8个百分点</strong> 的毛利率差距！</p>
+<p><strong>为什么同样做下游户用光伏，正泰安能净利率高达 10.58%，而创维光伏毛利率仅 8%左右？</strong></p>
+<ul>
+<li><strong>电气BOM自给率与系统集成能力代差</strong>：一座户用光伏电站除了组件，还需要<strong>光伏逆变器、并网配电箱、直流断路器、浪涌保护器、线缆及智能电表</strong>。创维集团是做彩电起家的，上述核心电气零部件全部需要外采，仅赚取微薄的渠道总包差价；而正泰电器自身就是中国最大的低压电器、并网箱、智能电表与逆变器（正泰电源）制造商！正泰安能建站所需的全套高低压配电设备与控制元器件全部内部协同供应，单瓦非组件BOM成本比创维等跨界玩家低 <strong>0.10—0.15元/W</strong> 以上，仅此一项便拉开 <strong>5—8个百分点</strong> 的毛利率差距！</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -5562,13 +6056,17 @@
 </table></div>
 <ol>
 <li>
-<p><strong>战场一：中高端工业、电力电网与国产替代（抢施耐德/ABB的蛋糕）—— 正泰与宏发大胜，良信陷入价格肉搏</strong>
-   - 在国内工业企业降本增效与央国企供应链安全自主可控的铁律下，原来非施耐德、ABB不用的电网集采、石油化工、轨道交通及大型工业厂房，正在成建制地将中高端框架断路器（ACB）和塑壳断路器（MCCB）订单切换给国产头部品牌。
-   - 在这场替代浪潮中，<strong>正泰电器</strong>凭借“诺雅克（Noark）”高端品牌矩阵与主品牌昆仑升级版，以施耐德 <strong>60%—70% 的价格、95%以上的性能对标</strong>，拿走了最大块的存量替换蛋糕（驱动2025年低压板块逆势增长4.76%，2026前三季度显著提速）；而<strong>良信股份</strong>虽然在2026Q1-Q3实现了 11.39% 的营收反弹，但代价是毛利率跌至 27.61%、扣非净利下滑 27.57%，说明在中高端大客户直销战场上，正泰等巨头下场贴身肉搏后，良信被迫“以价换量、牺牲利润保份额”。</p>
+<p><strong>战场一：中高端工业、电力电网与国产替代（抢施耐德/ABB的蛋糕）—— 正泰与宏发大胜，良信陷入价格肉搏</strong></p>
+<ul>
+<li>在国内工业企业降本增效与央国企供应链安全自主可控的铁律下，原来非施耐德、ABB不用的电网集采、石油化工、轨道交通及大型工业厂房，正在成建制地将中高端框架断路器（ACB）和塑壳断路器（MCCB）订单切换给国产头部品牌。</li>
+<li>在这场替代浪潮中，<strong>正泰电器</strong>凭借“诺雅克（Noark）”高端品牌矩阵与主品牌昆仑升级版，以施耐德 <strong>60%—70% 的价格、95%以上的性能对标</strong>，拿走了最大块的存量替换蛋糕（驱动2025年低压板块逆势增长4.76%，2026前三季度显著提速）；而<strong>良信股份</strong>虽然在2026Q1-Q3实现了 11.39% 的营收反弹，但代价是毛利率跌至 27.61%、扣非净利下滑 27.57%，说明在中高端大客户直销战场上，正泰等巨头下场贴身肉搏后，良信被迫“以价换量、牺牲利润保份额”。</li>
+</ul>
 </li>
 <li>
-<p><strong>战场二：全球 AIDC 数据中心与电力基建出海 —— 宏发与正泰双雄并进</strong>
-   - AI算力爆发催生了海量的数据中心配电与海外变压器/开关柜需求。<strong>宏发股份</strong>凭借高压直流继电器与低压开关在全球大客户的深厚卡位，2026年前三季度营收狂飙 <strong>34.27%</strong>；</p>
+<p><strong>战场二：全球 AIDC 数据中心与电力基建出海 —— 宏发与正泰双雄并进</strong></p>
+<ul>
+<li>AI算力爆发催生了海量的数据中心配电与海外变压器/开关柜需求。<strong>宏发股份</strong>凭借高压直流继电器与低压开关在全球大客户的深厚卡位，2026年前三季度营收狂飙 <strong>34.27%</strong>；</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -5576,12 +6074,16 @@
 </ul>
 <ol start="3">
 <li>
-<p><strong>战场三：县域五金与下沉长尾市场 —— 正泰“降维清场”，中小白牌加速出清</strong>
-   - 2025—2026年铜价、银价高企且剧烈波动，温州柳市镇及珠三角数以千计的中小低压电器作坊因缺乏资金锁铜锁银、无法承受账期而大批倒闭退出。正泰依靠绝对的渠道统治力，在县域五金与工业园区长尾市场实现了兵不血刃的集中度收割（据弗若斯特沙利文数据，正泰稳居中国本土低压电器第一宝座，全球市占率3.9%位居第五）。</p>
+<p><strong>战场三：县域五金与下沉长尾市场 —— 正泰“降维清场”，中小白牌加速出清</strong></p>
+<ul>
+<li>2025—2026年铜价、银价高企且剧烈波动，温州柳市镇及珠三角数以千计的中小低压电器作坊因缺乏资金锁铜锁银、无法承受账期而大批倒闭退出。正泰依靠绝对的渠道统治力，在县域五金与工业园区长尾市场实现了兵不血刃的集中度收割（据弗若斯特沙利文数据，正泰稳居中国本土低压电器第一宝座，全球市占率3.9%位居第五）。</li>
+</ul>
 </li>
 <li>
-<p><strong>战场四：南方户用光伏与零碳园区屋顶 —— 正泰安能“一家独大（市占率约30%）”，跨界与制造系玩家全面战略收缩</strong>
-   - 随着北方容量红区锁定及分布式电力市场化交易（136号文）落地，缺乏电网接入消纳能力、缺乏虚拟电厂（VPP）聚合交易能力、缺乏央国企资产包买方通道的中小开发商彻底出局。</p>
+<p><strong>战场四：南方户用光伏与零碳园区屋顶 —— 正泰安能“一家独大（市占率约30%）”，跨界与制造系玩家全面战略收缩</strong></p>
+<ul>
+<li>随着北方容量红区锁定及分布式电力市场化交易（136号文）落地，缺乏电网接入消纳能力、缺乏虚拟电厂（VPP）聚合交易能力、缺乏央国企资产包买方通道的中小开发商彻底出局。</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -6303,8 +6805,10 @@
 <h3 id="3-85-owner-earnings">3. 标尺二【85 折新常态中枢标尺】归母 Owner Earnings 分步精算还原主表</h3>
 <p>我们将 <strong>标尺二（85 折新常态中枢标尺）</strong> 设定为买方核心主锚——即充分预留 2026 年底沪铜（约 <code>10.9万元/吨</code>）与白银（约 <code>12,200元/千克</code>）高位运行成本损耗，并充分计入国家发改委/能源局 <strong>新能源 136 号文（全面入市交易）</strong> 落地后，正泰安能向央国企买家让利 <code>10%—15%</code> 的安全垫。在此严苛但务实的基准下，正泰电器常态归母 Owner Earnings 为 <strong><code>52.00亿元/年</code></strong>，具体四步拆解如下：</p>
 <ol>
-<li><strong>第一步：常态化归母净利润基准 = <code>46.00亿元</code></strong>
-   - <strong>低压电器本部（100% 归母现金牛）</strong>：在国内电网配网升级、工业自动化国产替代及海外本土化渠道稳步放量支撑下，扣除高位铜银成本损耗后，本部每年稳态贡献归母净利润 <strong><code>26.50亿元</code></strong>（对应常态净利率约 <code>11.0%—11.5%</code>）。</li>
+<li><strong>第一步：常态化归母净利润基准 = <code>46.00亿元</code></strong><ul>
+<li><strong>低压电器本部（100% 归母现金牛）</strong>：在国内电网配网升级、工业自动化国产替代及海外本土化渠道稳步放量支撑下，扣除高位铜银成本损耗后，本部每年稳态贡献归母净利润 <strong><code>26.50亿元</code></strong>（对应常态净利率约 <code>11.0%—11.5%</code>）。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -6322,16 +6826,22 @@
 </ul>
 <ol start="2">
 <li>
-<p><strong>第二步：加回有效归母折旧与摊销（非现金支出盾牌） = <code>+21.50亿元</code></strong>
-   - 合并全口径折旧与摊销总额约为 <strong><code>28.50亿元</code></strong>（固定资产折旧 <code>25.43亿元</code> + 无形/使用权/长摊摊销 <code>3.07亿元</code>），剔除正泰安能（<code>28.76%</code>）与通润装备（<code>70.01%</code>）等少数股东分摊的折旧摊销合计约 <strong><code>7.00亿元</code></strong> 后，母公司股东真实享有的有效折旧盾牌为 <strong><code>+21.50亿元</code></strong>。</p>
+<p><strong>第二步：加回有效归母折旧与摊销（非现金支出盾牌） = <code>+21.50亿元</code></strong></p>
+<ul>
+<li>合并全口径折旧与摊销总额约为 <strong><code>28.50亿元</code></strong>（固定资产折旧 <code>25.43亿元</code> + 无形/使用权/长摊摊销 <code>3.07亿元</code>），剔除正泰安能（<code>28.76%</code>）与通润装备（<code>70.01%</code>）等少数股东分摊的折旧摊销合计约 <strong><code>7.00亿元</code></strong> 后，母公司股东真实享有的有效折旧盾牌为 <strong><code>+21.50亿元</code></strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>第三步：减去维持存量竞争力必需的归母防御性资本开支（Maintenance CapEx） = <code>-12.50亿元</code></strong>
-   - 剔除沙特、东南亚新建海外工厂及光储逆变器扩产的扩张性资本开支（<code>3.85亿元</code>）后，合并维持性 CapEx 为 <strong><code>15.00亿元/年</code></strong>；再剔除少数股东分摊的 <code>2.50亿元</code>，归母口径防御性资本开支严格锁定为 <strong><code>-12.50亿元/年</code></strong>。</p>
+<p><strong>第三步：减去维持存量竞争力必需的归母防御性资本开支（Maintenance CapEx） = <code>-12.50亿元</code></strong></p>
+<ul>
+<li>剔除沙特、东南亚新建海外工厂及光储逆变器扩产的扩张性资本开支（<code>3.85亿元</code>）后，合并维持性 CapEx 为 <strong><code>15.00亿元/年</code></strong>；再剔除少数股东分摊的 <code>2.50亿元</code>，归母口径防御性资本开支严格锁定为 <strong><code>-12.50亿元/年</code></strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>第四步：减去常态刚性营运资金占用（Working Capital） = <code>-3.00亿元</code></strong>
-   - 在正泰安能进入“年开发 12.5GW、年交割 12.5GW”的稳态周转后，光伏电站存货不再净吞噬现金；低压电器本部与海外分支机构每年刚性应收账款与备货净垫支约 <strong><code>-3.00亿元</code></strong>。</p>
+<p><strong>第四步：减去常态刚性营运资金占用（Working Capital） = <code>-3.00亿元</code></strong></p>
+<ul>
+<li>在正泰安能进入“年开发 12.5GW、年交割 12.5GW”的稳态周转后，光伏电站存货不再净吞噬现金；低压电器本部与海外分支机构每年刚性应收账款与备货净垫支约 <strong><code>-3.00亿元</code></strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>第五步：得出标尺二【85 折新常态中枢标尺】归母 Owner Earnings = <code>52.00亿元/年</code></strong>
@@ -6646,10 +7156,10 @@
 <li>
 <p><strong>静态税后归母利润弹性</strong>：
      <div class="math-display">\Delta <span class="math-text">NP</span><sub><span class="math-text">Cu,静态</span></sub> = - Q<sub><span class="math-text">Cu</span></sub>  ×  \frac{\Delta P<sub><span class="math-text">Cu</span></sub>}{1 + 13\%<span class="math-text">（增值税）</span>}  ×  (1 - 15\%<span class="math-text">（高新所得税）</span>) = -2.90  ×  <span class="math-frac"><span class="frac-num"><span class="math-inline">1.0<span class="math-text">万元/吨</span></span></span><span class="frac-den"><span class="math-inline">1.13</span></span></span>  ×  0.85 = <strong>-2.18<span class="math-text">亿元 / 万元</span></strong></div></p>
-</li>
-<li>
-<p><strong>动态实战净弹性（扣除 <span class="math-inline">42\%</span> 期货套保 + <span class="math-inline">28\%</span> 渠道调价顺价，净敞口率 <span class="math-inline">\alpha<sub><span class="math-text">Cu</span></sub> = 30\%</span>）</strong>：
-     <div class="math-display">\Delta <span class="math-text">OE</span><sub><span class="math-text">Cu,动态</span></sub> = \Delta <span class="math-text">NP</span><sub><span class="math-text">Cu,静态</span></sub>  ×  30\% = -2.18  ×  30\% = <strong>-0.65<span class="math-text">亿元 / 万元（毛利率净波动 </span>-0.34<span class="math-text">pct）</span></strong></div></p>
+<ul>
+<li><strong>动态实战净弹性（扣除 <span class="math-inline">42\%</span> 期货套保 + <span class="math-inline">28\%</span> 渠道调价顺价，净敞口率 <span class="math-inline">\alpha<sub><span class="math-text">Cu</span></sub> = 30\%</span>）</strong>：
+ <div class="math-display">\Delta <span class="math-text">OE</span><sub><span class="math-text">Cu,动态</span></sub> = \Delta <span class="math-text">NP</span><sub><span class="math-text">Cu,静态</span></sub>  ×  30\% = -2.18  ×  30\% = <strong>-0.65<span class="math-text">亿元 / 万元（毛利率净波动 </span>-0.34<span class="math-text">pct）</span></strong></div></li>
+</ul>
 </li>
 </ul>
 <ol start="2">
@@ -6659,10 +7169,10 @@
 <li>
 <p><strong>静态税后归母利润弹性</strong>：
      <div class="math-display">\Delta <span class="math-text">NP</span><sub><span class="math-text">Ag,静态</span></sub> = - Q<sub><span class="math-text">Ag</span></sub>  ×  \frac{\Delta P<sub><span class="math-text">Ag</span></sub>}{1 + 13\%}  ×  (1 - 15\%) = -11.5<span class="math-text">万千克</span>  ×  <span class="math-frac"><span class="frac-num"><span class="math-inline">1,000<span class="math-text">元/千克</span></span></span><span class="frac-den"><span class="math-inline">1.13</span></span></span>  ×  0.85 = <strong>-0.87<span class="math-text">亿元 / 千元</span></strong></div></p>
-</li>
-<li>
-<p><strong>动态实战净弹性（扣除 <span class="math-inline">35\%</span> 期货锁价 + <span class="math-inline">35\%</span> 复合微镀层节银工艺与提价传导，净敞口率 <span class="math-inline">\alpha<sub><span class="math-text">Ag</span></sub> = 30\%</span>）</strong>：
-     <div class="math-display">\Delta <span class="math-text">OE</span><sub><span class="math-text">Ag,动态</span></sub> = \Delta <span class="math-text">NP</span><sub><span class="math-text">Ag,静态</span></sub>  ×  30\% = -0.87  ×  30\% = <strong>-0.26<span class="math-text">亿元 / 千元（毛利率净波动 </span>-0.14<span class="math-text">pct）</span></strong></div></p>
+<ul>
+<li><strong>动态实战净弹性（扣除 <span class="math-inline">35\%</span> 期货锁价 + <span class="math-inline">35\%</span> 复合微镀层节银工艺与提价传导，净敞口率 <span class="math-inline">\alpha<sub><span class="math-text">Ag</span></sub> = 30\%</span>）</strong>：
+ <div class="math-display">\Delta <span class="math-text">OE</span><sub><span class="math-text">Ag,动态</span></sub> = \Delta <span class="math-text">NP</span><sub><span class="math-text">Ag,静态</span></sub>  ×  30\% = -0.87  ×  30\% = <strong>-0.26<span class="math-text">亿元 / 千元（毛利率净波动 </span>-0.14<span class="math-text">pct）</span></strong></div></li>
+</ul>
 </li>
 </ul>
 <ol start="3">
@@ -6991,29 +7501,37 @@
 <h2 id="aidc-650950">四、 海外制造基地（沙特、土耳其、越南、埃及）、松江光储基地与 AIDC 放量的增量垫高测算（<code>+6.50亿至+9.50亿元/年</code>）</h2>
 <p>上述三档标尺仅反映了正泰电器 <strong>存量业务底盘</strong> 的造血能力。事实上，公司过去两年已完成大部分前置资本开支（这正是 2025 年总 CapEx 从 <code>29.51亿元</code> 降至 <code>18.85亿元</code> 的原因），三大增量引擎正处于从“资本投入期”迈向“现金流收获期”的拐点：</p>
 <ol>
-<li><strong>全球本土化海外制造基地（沙特、土耳其、越南、埃及、欧洲等）全面投产</strong>：
-   - 正泰电器在 <strong>沙特吉达/利雅得</strong>（深度融入沙特“2030愿景”国家电网与新城基建，满足当地 40%+ 本土化制造强制门槛）、<strong>土耳其</strong>（辐射欧亚大陆桥与中东新能源 EPC 及配电网络）、<strong>越南与泰国</strong>（东盟供应链制造中心与规避欧美关税跳板）、<strong>埃及开罗/本班</strong>（辐射北非与中东市场）以及欧洲本土产线陆续达产。海外直销与本土化制造毛利率高达 <code>32%—36%</code>（显著高于国内经销渠道），且无需再追加大额基建 CapEx。</li>
+<li><strong>全球本土化海外制造基地（沙特、土耳其、越南、埃及、欧洲等）全面投产</strong>：<ul>
+<li>正泰电器在 <strong>沙特吉达/利雅得</strong>（深度融入沙特“2030愿景”国家电网与新城基建，满足当地 40%+ 本土化制造强制门槛）、<strong>土耳其</strong>（辐射欧亚大陆桥与中东新能源 EPC 及配电网络）、<strong>越南与泰国</strong>（东盟供应链制造中心与规避欧美关税跳板）、<strong>埃及开罗/本班</strong>（辐射北非与中东市场）以及欧洲本土产线陆续达产。海外直销与本土化制造毛利率高达 <code>32%—36%</code>（显著高于国内经销渠道），且无需再追加大额基建 CapEx。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>增量贡献</strong>：在标尺一（高景气顺价）下每年可新增归母净利润 <strong><code>+4.20亿元</code></strong>；在标尺二（85 折新常态）下扣除海外合规与爬坡摩擦后，稳态新增归母净利润 <strong><code>+3.00亿元</code></strong>。</li>
 </ul>
 <ol start="2">
-<li><strong>AIDC（人工智能算力数据中心）高毛利低压配电与固态断路器专供产线放量</strong>：
-   - 针对国内外智算中心（AIDC）单机柜功率跃升对高分断框架断路器（ACB）、塑壳断路器（MCCB）、智能母线槽及 <strong>IGBT 固态断路器（微秒级无电弧极速分断）</strong> 的高可靠性需求，公司高端“诺雅克（Noark）”与定制机柜配电产品加速切入头部云厂商与电信运营商供应链，单台机柜配电毛利率超过 <code>35%</code>。</li>
+<li><strong>AIDC（人工智能算力数据中心）高毛利低压配电与固态断路器专供产线放量</strong>：<ul>
+<li>针对国内外智算中心（AIDC）单机柜功率跃升对高分断框架断路器（ACB）、塑壳断路器（MCCB）、智能母线槽及 <strong>IGBT 固态断路器（微秒级无电弧极速分断）</strong> 的高可靠性需求，公司高端“诺雅克（Noark）”与定制机柜配电产品加速切入头部云厂商与电信运营商供应链，单台机柜配电毛利率超过 <code>35%</code>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>增量贡献</strong>：在标尺一下每年可新增归母净利润 <strong><code>+2.30亿元</code></strong>；在标尺二下稳态新增归母净利润 <strong><code>+1.50亿元</code></strong>。</li>
 </ul>
 <ol start="3">
-<li><strong>上海松江光储智能制造基地与通润装备（正泰电源）北美/欧洲大储放量</strong>：
-   - 依托长三角 G60 科创走廊的上海松江智电港高端光储基地全面达产，支撑通润装备（正泰电源）在北美工商业光储及欧洲、亚太大型储能逆变器市场的高毛利出货。按正泰电器对通润装备约 <code>30%</code> 持股比例及全资配套直流电气部件收益穿透计算：</li>
+<li><strong>上海松江光储智能制造基地与通润装备（正泰电源）北美/欧洲大储放量</strong>：<ul>
+<li>依托长三角 G60 科创走廊的上海松江智电港高端光储基地全面达产，支撑通润装备（正泰电源）在北美工商业光储及欧洲、亚太大型储能逆变器市场的高毛利出货。按正泰电器对通润装备约 <code>30%</code> 持股比例及全资配套直流电气部件收益穿透计算：</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>增量贡献</strong>：在标尺一下每年可新增归母净利润 <strong><code>+2.20亿元</code></strong>；在标尺二下稳态新增归母净利润 <strong><code>+1.50亿元</code></strong>。</li>
 </ul>
 <ol start="4">
-<li><strong>双标尺下的归母 Owner Earnings 增量垫高汇总</strong>：
-   - 叠加上述新投产基地带来的增量有效归母折旧盾牌与维持性 CapEx 净差额（标尺一下约 <code>+0.80亿元</code>，标尺二下约 <code>+0.50亿元</code>）：</li>
+<li><strong>双标尺下的归母 Owner Earnings 增量垫高汇总</strong>：<ul>
+<li>叠加上述新投产基地带来的增量有效归母折旧盾牌与维持性 CapEx 净差额（标尺一下约 <code>+0.80亿元</code>，标尺二下约 <code>+0.50亿元</code>）：</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -7791,23 +8309,25 @@
 </table></div>
 <p>穿透这 <strong>146.18亿元</strong> 纯应收账款及广义应收体系的底层明细，我们将其拆解为三大业务包进行排雷：</p>
 <ul>
-<li><strong>第一包：低压电器经销与电网/大客户集采应收款（极度健康，风险近乎为零）</strong></li>
-<li>正泰低压电器（227.36亿元营收）对全国一级经销商实行严格的“现款现货+授信额度抵押”制度，经销端几乎不产生长账龄应收款。</li>
 <li>
-<p>低压板块的应收账款及应收票据主要来自<strong>国家电网、南方电网、大型央国企基建集团及通信/工业OEM龙头</strong>。此类客户虽然习惯使用 6个月期的银行承兑汇票（体现在应收款项融资1.48亿元及应收票据中）或半年至一年期账款结算，但违约率极低，账龄绝大部分在 <strong>1年以内</strong>。</p>
+<p><strong>第一包：低压电器经销与电网/大客户集采应收款（极度健康，风险近乎为零）</strong></p>
+<ul>
+<li>正泰低压电器（227.36亿元营收）对全国一级经销商实行严格的“现款现货+授信额度抵押”制度，经销端几乎不产生长账龄应收款。</li>
+<li>低压板块的应收账款及应收票据主要来自<strong>国家电网、南方电网、大型央国企基建集团及通信/工业OEM龙头</strong>。此类客户虽然习惯使用 6个月期的银行承兑汇票（体现在应收款项融资1.48亿元及应收票据中）或半年至一年期账款结算，但违约率极低，账龄绝大部分在 <strong>1年以内</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>第二包：正泰安能户用光伏电站“滚动转让尾款”（回收周期明确，由央国企信用背书）</strong></p>
-</li>
+<ul>
 <li>正泰安能每年将数 GW 建成的户用光伏电站资产包转让给华电、国电投、中核、越秀等央国企及险资平台。根据行业交易惯例，央国企收购电站通常采取“交割付 70%—80% + 并网验收及质保期满付 20%—30%尾款”的分期付款模式。</li>
-<li>
-<p>这部分应收账款账龄基本在 <strong>1年以内（占比超75%）至1—2年之间</strong>，交易对手均为AAA级央国企发电集团，不存在恶意赖账风险，这也是正泰电器2025年 OCF 能够同比暴增 <strong>51.89% 至 230.90亿元</strong> 的核心底气。</p>
+<li>这部分应收账款账龄基本在 <strong>1年以内（占比超75%）至1—2年之间</strong>，交易对手均为AAA级央国企发电集团，不存在恶意赖账风险，这也是正泰电器2025年 OCF 能够同比暴增 <strong>51.89% 至 230.90亿元</strong> 的核心底气。</li>
+</ul>
 </li>
 <li>
 <p><strong>第三包（真正需要盯防的瑕疵点）：存量自持集中式/分布式光伏电站的“可再生能源国补拖欠电费”</strong></p>
-</li>
-<li>
-<p>正泰电器体内仍保留有一定体量的历史并网带补贴光伏电站，其应收账款中包含了应收电网公司的<strong>可再生能源电价附加补助资金（即“国补电费”）</strong>。由于国家可再生能源补贴基金发放存在全行业性的周期滞后，这部分国补应收款的账龄普遍拉长至 <strong>1—3年甚至3年以上</strong>。</p>
+<ul>
+<li>正泰电器体内仍保留有一定体量的历史并网带补贴光伏电站，其应收账款中包含了应收电网公司的<strong>可再生能源电价附加补助资金（即“国补电费”）</strong>。由于国家可再生能源补贴基金发放存在全行业性的周期滞后，这部分国补应收款的账龄普遍拉长至 <strong>1—3年甚至3年以上</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>坏账计提审慎度评估</strong>：在会计处理上，正泰电器将应收账款划分为“电网及电力公司组合（含国补）”与“一般工商业及非光伏组合”。对于一般商业组合，正泰严格执行 <strong>1年以内5%、1—2年15%、2—3年50%、3年以上100%全额计提</strong> 的严苛标准，并对存在破产违约风险的个别民企客户执行<strong>单项全额计提与核销</strong>；而对于电网国补电费组合，因债务人为国家电网/财政部专户、主权信用背书下不存在实质违约灭失风险，公司参照行业惯例按较低比例（1%—5%区间）计提预期信用损失。</p>
@@ -8005,14 +8525,16 @@
 </table></div>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
-<p><strong>第一刀：常规工业制造存货（仅占存货总额约 10%—12%，即 40亿—50亿元区间）</strong>
-   - 这部分包括正泰低压电器、智能电表、逆变器业务所需的<strong>电解铜、白银、工程塑料等原材料</strong>，以及正在流水线上的在产品和仓库里的<strong>断路器、接触器库存商品</strong>。
-   - 面对 227.36亿元 的低压电器年营收，40余亿元的工业制造存货对应的存货周转天数仅约 <strong>60—70天</strong>，处于极度健康的快消式工业品流转状态。更关键的是，2025—2026年全球铜价、银价处于历史高位震荡上行通道，正泰库房里的铜排和银触点不仅没有跌价风险，反而是实打实的“升值硬通货”！</p>
+<p><strong>第一刀：常规工业制造存货（仅占存货总额约 10%—12%，即 40亿—50亿元区间）</strong></p>
+<ul>
+<li>这部分包括正泰低压电器、智能电表、逆变器业务所需的<strong>电解铜、白银、工程塑料等原材料</strong>，以及正在流水线上的在产品和仓库里的<strong>断路器、接触器库存商品</strong>。</li>
+<li>面对 227.36亿元 的低压电器年营收，40余亿元的工业制造存货对应的存货周转天数仅约 <strong>60—70天</strong>，处于极度健康的快消式工业品流转状态。更关键的是，2025—2026年全球铜价、银价处于历史高位震荡上行通道，正泰库房里的铜排和银触点不仅没有跌价风险，反而是实打实的“升值硬通货”！</li>
+</ul>
 </li>
 <li>
-<p><strong>第二刀：正泰安能的“待售户用光伏电站开发成本 &amp; 开发产品”（占存货总额超 85%，约 360亿—375亿元！）</strong>
-   - <strong>为什么电站会记在“存货”里，而不是“固定资产”或“在建工程”？</strong></p>
+<p><strong>第二刀：正泰安能的“待售户用光伏电站开发成本 &amp; 开发产品”（占存货总额超 85%，约 360亿—375亿元！）</strong></p>
 <ul>
+<li><strong>为什么电站会记在“存货”里，而不是“固定资产”或“在建工程”？</strong></li>
 <li>这完全取决于正泰安能独特的<strong>“BT / 滚动开发转售（Build-Transfer）”商业模式</strong>！正泰安能从一开始建设这批户用屋顶光伏电站的目的，就不是为了自己持有25年慢慢收电费，而是<strong>为了建成并网后像卖商品房一样，成批打包出售给央国企发电集团赚取开发毛利</strong>！</li>
 <li>根据《企业会计准则第1号——存货》，企业以出售为目的而开发建设的户用光伏电站，在建设期内归集为存货项下的<strong>“开发成本（在建待售电站）”</strong>，并网建成等待交割过户期间归集为存货项下的<strong>“开发产品（已完工待售电站）”</strong>。</li>
 </ul>
@@ -8463,17 +8985,21 @@
 </li>
 <li>
 <p><strong>用利润表结果倒推真伪（最硬的证据！）</strong>：如果正泰电器通过高价向大股东旗下的正泰新能买组件来搞“利益输送”，那么在2025年组件暴跌期，正泰安能的建站成本必然居高不下、毛利率必然坍塌！但铁一般的事实是：<strong>2025年正泰电器光伏板块毛利率逆势暴增 4.03个百分点至 24.29%，正泰安能单体狂赚 30.40亿元（净利率高达 10.58%）！</strong></p>
-</li>
+<ol start="3">
 <li><strong>结论</strong>：这证明正泰新能在2024—2025年的行业寒冬中，自己独立扛下了上游组件制造业的价格血拼与利润挤压，而上市公司正泰电器不仅没有替大股东的组件厂“接盘输血”，反而结结实实地享受到了市场化低价采购组件带来的超额毛利红利！当年的“剥离组件制造、保留下游开发”决策，堪称保护上市公司中小股东免受光伏制造周期反噬的经典操作。</li>
+</ol>
+</li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>关联交易就像厨房里的蟑螂，你必须用最刺眼的强光去照它。怎么判断大股东是在占上市公司便宜，还是在帮上市公司挡子弹？不要听管理层在股东大会上发毒誓，去查它的毛利率和现金流！当全行业组件厂都在巨亏几十亿的时候，大股东把亏钱的重资产组件厂留在了自己兜里，而让上市公司里的正泰安能拿着便宜组件赚出了24.29%的高毛利和230亿的经营现金流——在这份铁证面前，任何无端怀疑利益输送的阴谋论都不攻自破。</p></div></div></div></div>
 
 
 <hr/>
 <h5 id="ipo-2026-1116-316-7124">审计焦点二：正泰安能撤回分拆 IPO，并在 2026 年以 11.16 亿元受让 3.16% 股权（持股提至 71.24%），小股东是赚了还是亏了？</h5>
 <ul>
-<li><strong>事件来龙去脉还原</strong>：</li>
+<li><strong>事件来龙去脉还原</strong>：<ul>
 <li>正泰安能作为正泰电器孵化的户用光伏超级独角兽，原计划分拆至上交所主板独立IPO上市。但在A股IPO阶段性收紧及光伏行业周期波动的背景下，公司审时度势，于 <strong>2025年9月主动撤回正泰安能分拆上市申请</strong>。</li>
 <li>随后在 <strong>2026年中</strong>，正泰电器发布公告，通过上海联合产权交易所参与竞拍，以 <strong>11.16亿元</strong> 的交易对价，受让了外部战略股东<strong>国家绿色发展基金股份有限公司</strong>持有的正泰安能 <strong>3.16% 股权（对应 7,714.29万股）</strong>。交易完成后，正泰电器直接及间接持有正泰安能的股权比例由 <strong>68.08%（早期直接持股62.54%加员工持股/一致行动平台合并控制口径）正式提升至 71.24%</strong>。</li>
+</ul>
+</li>
 </ul>
 <p><strong>表 E-15：正泰安能资本运作三部曲与正泰电器中小股东权益得失精算审计表</strong></p>
 <div class="table-scroll-wrap"><table>
@@ -9087,37 +9613,39 @@
 </ul>
 <h4 id="1-100">1. 核心内生回报率与静态回本年限验算（分子分母 100% 严守同口径对齐）</h4>
 <ol>
-<li><strong>主锚口径隐含真实内生回报率（归母 OE / 归母穿透 True EV —— 买方排行榜核心铁尺）</strong>：
+<li>
+<p><strong>主锚口径隐含真实内生回报率（归母 OE / 归母穿透 True EV —— 买方排行榜核心铁尺）</strong>：
  <br>
 <div class="math-display"><span class="math-text">归母穿透内生回报率</span> = <span class="math-frac"><span class="frac-num"><span class="math-inline"><span class="math-text">常态归母 Owner Earnings </span> 52.00<span class="math-text">亿元</span></span></span><span class="frac-den"><span class="math-inline"><span class="math-text">归母穿透 True EV </span> 565.06<span class="math-text">亿元</span></span></span></span> = <strong>9.20\%</strong></div>
-</br></li>
+</br></p>
+<ul>
+<li><strong>静态真实回本年限</strong>：<span class="math-inline">565.06  ÷  52.00 = <strong>10.87<span class="math-text">年</span></strong></span>。</li>
+</ul>
+</li>
 </ol>
 <ul>
-<li>
-<p><strong>静态真实回本年限</strong>：<span class="math-inline">565.06  ÷  52.00 = <strong>10.87<span class="math-text">年</span></strong></span>。</p>
-</li>
-<li>
-<p><strong>三档景气弹性</strong>：若按标尺一（即期高景气 <code>56.50亿元</code>）测算，真实内生回报率直接跃升至 <strong><code>10.00%</code></strong>（正好 <code>10.0年</code> 回本）；即便遭遇百年一遇的原材料与光伏双杀寒冬（标尺三 <code>41.50亿元</code>），保底内生回报率依然高达 <strong><code>7.34%</code></strong>，是无风险国债收益率（约 <code>2.0%—2.1%</code>）的 <strong>3.5 倍以上</strong>！</p>
-</li>
+<li><strong>三档景气弹性</strong>：若按标尺一（即期高景气 <code>56.50亿元</code>）测算，真实内生回报率直接跃升至 <strong><code>10.00%</code></strong>（正好 <code>10.0年</code> 回本）；即便遭遇百年一遇的原材料与光伏双杀寒冬（标尺三 <code>41.50亿元</code>），保底内生回报率依然高达 <strong><code>7.34%</code></strong>，是无风险国债收益率（约 <code>2.0%—2.1%</code>）的 <strong>3.5 倍以上</strong>！</li>
 </ul>
 <ol start="2">
-<li><strong>普通股市值口径股东盈余回报率（归母 OE / 普通股总市值）</strong>：
+<li>
+<p><strong>普通股市值口径股东盈余回报率（归母 OE / 普通股总市值）</strong>：
  <br>
 <div class="math-display"><span class="math-text">市值口径股东盈余率（OE Yield）</span> = <span class="math-frac"><span class="frac-num"><span class="math-inline">52.00<span class="math-text">亿元</span></span></span><span class="frac-den"><span class="math-inline">520.06<span class="math-text">亿元</span></span></span></span> = <strong>10.00\%</strong></div>
-</br></li>
-</ol>
+</br></p>
 <ul>
 <li>对应 <strong>P / Owner Earnings 倍数仅 <code>10.00倍</code></strong>，对应常态归母净利润（<code>46.00亿元</code>）的 <strong>常态 PE 仅 <code>11.31倍</code></strong>（当前 TTM 表观 PE 约 <code>10.4—10.8倍</code>，PB 约 <code>1.15倍</code>，处于正泰电器近十年历史估值 <strong>4%—5% 的绝对地板分位</strong>！）。</li>
 </ul>
-<ol start="3">
-<li><strong>严苛表观合并口径内生回报率（合并全口径息前 OE / 表观合并 True EV）</strong>：
+</li>
+<li>
+<p><strong>严苛表观合并口径内生回报率（合并全口径息前 OE / 表观合并 True EV）</strong>：
  <br>
 <div class="math-display"><span class="math-text">表观合并内生回报率</span> = <span class="math-frac"><span class="frac-num"><span class="math-inline"><span class="math-text">合并全口径息前 Owner Earnings </span> 81.00<span class="math-text">亿元</span></span></span><span class="frac-den"><span class="math-inline"><span class="math-text">表观合并 True EV </span> 935.01<span class="math-text">亿元</span></span></span></span> = <strong>8.66\%</strong></div>
-</br></li>
-</ol>
+</br></p>
 <ul>
 <li><strong>极端压力惩罚测试</strong>：哪怕我们用最不讲理、最苛刻的错配算法——把 <code>360亿元</code> 待售电站存货变现价值直接归零，拿只属于母公司股东的 <code>52.00亿元</code> 归母 OE 去硬除包含了少数股东和全部项目开发贷的 <code>935.01亿元</code> 表观合并 True EV，其极端底线回报率也达到了 <strong><code>5.56%</code></strong>！</li>
 </ul>
+</li>
+</ol>
 <h5 id="8-oe-yield">📊 表 8：三档景气标尺 × 三种企业价值口径下的隐含内生回报率（OE Yield）与静态回本年限全景矩阵表</h5>
 <div class="table-scroll-wrap"><table>
 <thead>
@@ -9426,22 +9954,24 @@
 </li>
 <li>
 <p><strong>国内外同行估值倍数横向对标</strong>：</p>
-</li>
+<ul>
 <li>全球低压配电与数据中心能效霸主 <strong>施耐德电气（Schneider Electric）</strong> 与 <strong>伊顿（Eaton）</strong>：2025—2026 年享受全球 AI 算力配电与电网改造重估，常年交易在 <strong><code>26—31倍 PE</code></strong>（常态中枢 <code>24—26倍 PE</code>，<code>17—20倍 EV/EBITDA</code>）；</li>
 <li>国内民用电工龙头 <strong>公牛集团（<code>603195.SH</code>）</strong>：哪怕在地产链承压的 2026 年底，依然维持 <strong><code>17—20倍 PE</code></strong>；</li>
 <li>继电器全球龙头 <strong>宏发股份（<code>600885.SH</code>）</strong>：当前交易在 <strong><code>22—24倍 PE</code></strong>；</li>
-<li>
-<p>国内低压电器同行 <strong>良信股份（<code>002706.SZ</code>）</strong>：常态估值 <strong><code>18—20倍 PE</code></strong>（2026年因利润阶段性基数较低，表观 PE 高达 <code>40—47倍</code>）。</p>
+<li>国内低压电器同行 <strong>良信股份（<code>002706.SZ</code>）</strong>：常态估值 <strong><code>18—20倍 PE</code></strong>（2026年因利润阶段性基数较低，表观 PE 高达 <code>40—47倍</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>买方极度保守拆骨定价</strong>：</p>
-</li>
+<ul>
 <li>
 <p>按<strong>买方核心主锚（常态归母净利 <code>26.50亿元</code> × 保守 <code>15.0倍 PE</code>）</strong>计算：
-    <div class="math-display"><span class="math-text">智慧电器基本盘保守主锚价值</span> = 26.50<span class="math-text">亿元</span>  ×  15.0<span class="math-text">倍 PE</span> = <strong>397.50<span class="math-text">亿元</span></strong></div></p>
+<div class="math-display"><span class="math-text">智慧电器基本盘保守主锚价值</span> = 26.50<span class="math-text">亿元</span>  ×  15.0<span class="math-text">倍 PE</span> = <strong>397.50<span class="math-text">亿元</span></strong></div></p>
 </li>
 <li>
 <p>若按<strong>独立业务稳态净利（<code>30.00亿—32.00亿元</code>）× 保守 <code>12.5x—15.0x PE</code></strong>（或主锚 <code>26.50亿元 × 14.5x—18.0x PE</code>）计算，智慧电器板块独立估值稳居 <strong><code>380.00亿—480.00亿元</code></strong> 区间！</p>
+</li>
+</ul>
 </li>
 </ul>
 <h5 id="13">📊 表 13：板块一（智慧电器/低压主业）与国内外同行财务成色及估值倍数横向对标大表</h5>
@@ -9577,24 +10107,28 @@
 <hr/>
 <h4 id="2-40gw-7124-25159-7-17425">2. 板块二：正泰安能（户用光伏开发与 40GW+ 运维绝对霸主，最新持股 <code>71.24%</code>）—— 国资公允锚 <code>251.59亿元</code> / 7折极限保底 <code>174.25亿元</code></h4>
 <ul>
-<li><strong>历史股比演进与归母利润跃升</strong>：</li>
-<li>在早期战投引入阶段（正泰电器直接持股约 <code>54.83%</code>—合计控制 <code>62.54%</code> 时期），正泰安能每年已为上市公司贡献约 <strong><code>14.00亿—18.00亿元</code></strong> 的归母净利润；</li>
 <li>
-<p>随着 2025 年 9 月公司主动撤回正泰安能 A 股分拆上市申请，并于 <strong>2026年7月</strong> 出资 <code>11.16亿元</code> 竞拍受让国家绿色发展基金所持 <code>3.16%</code> 股权，正泰电器对正泰安能的直接及间接合计持股比例已正式跃升至 <strong><code>71.24%</code></strong>！在标尺二（85折新常态主锚，安能合并净利 <code>28.80亿元/年</code>）下，每年为正泰电器贡献常态归母净利润高达 <strong><code>20.50亿元/年</code></strong>（2025年实际合并净利 <code>30.40亿元</code>，按最新股比折算更是高达 <code>21.66亿元</code>）！</p>
+<p><strong>历史股比演进与归母利润跃升</strong>：</p>
+<ul>
+<li>在早期战投引入阶段（正泰电器直接持股约 <code>54.83%</code>—合计控制 <code>62.54%</code> 时期），正泰安能每年已为上市公司贡献约 <strong><code>14.00亿—18.00亿元</code></strong> 的归母净利润；</li>
+<li>随着 2025 年 9 月公司主动撤回正泰安能 A 股分拆上市申请，并于 <strong>2026年7月</strong> 出资 <code>11.16亿元</code> 竞拍受让国家绿色发展基金所持 <code>3.16%</code> 股权，正泰电器对正泰安能的直接及间接合计持股比例已正式跃升至 <strong><code>71.24%</code></strong>！在标尺二（85折新常态主锚，安能合并净利 <code>28.80亿元/年</code>）下，每年为正泰电器贡献常态归母净利润高达 <strong><code>20.50亿元/年</code></strong>（2025年实际合并净利 <code>30.40亿元</code>，按最新股比折算更是高达 <code>21.66亿元</code>）！</li>
+</ul>
 </li>
 <li>
 <p><strong>一级市场国家级基金真金白银成交锚点（<code>353.16亿元</code> 整体估值）</strong>：</p>
-</li>
+<ul>
 <li>正泰安能到底值多少钱？不需要分析师拍脑袋！<strong>2026年7月</strong>，正泰电器在上海联合产权交易所公开竞拍受让<strong>国家绿色发展基金</strong>所持正泰安能 <code>3.16%</code> 股权时，真金白银交割作价 <strong><code>11.16亿元</code></strong>！</li>
 <li>这笔刚刚发生的国家级基金公开产权交易，直接锁死了正泰安能 <code>100%</code> 股权的一级市场公允估值 = <span class="math-inline">11.16  ÷  3.16\% = <strong>353.16<span class="math-text">亿元</span></strong></span>（对应安能常态合并净利 <code>28.80亿元</code> 约 <code>12.26倍 PE</code>）！</li>
-<li>
-<p>按此国资公允作价计算，正泰电器当前持有的 <strong><code>71.24%</code> 股权一级市场公允价值高达 <code>251.59亿元</code></strong>！</p>
+<li>按此国资公允作价计算，正泰电器当前持有的 <strong><code>71.24%</code> 股权一级市场公允价值高达 <code>251.59亿元</code></strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>买方再打 7 折的极限保守拆骨定价（<code>174.25亿元</code>）</strong>：</p>
-</li>
+<ul>
 <li>为了给二级市场投资人留出极致的安全边际，我们在国家绿色发展基金刚刚成交的公允估值基础上<strong>再狠狠砍掉 30.7%（打 7 折）</strong>——按正泰安能每年为上市公司贡献的常态归母净利润 <strong><code>20.50亿元</code></strong>，仅给予区区 <strong><code>8.5倍 PE</code></strong> 的白菜价：
-    <div class="math-display"><span class="math-text">正泰安能 71.24\% 股权 7 折保底价值</span> = 20.50<span class="math-text">亿元</span>  ×  8.5<span class="math-text">倍 PE</span> = <strong>174.25<span class="math-text">亿元</span></strong></div></li>
+<div class="math-display"><span class="math-text">正泰安能 71.24\% 股权 7 折保底价值</span> = 20.50<span class="math-text">亿元</span>  ×  8.5<span class="math-text">倍 PE</span> = <strong>174.25<span class="math-text">亿元</span></strong></div></li>
+</ul>
+</li>
 </ul>
 <h5 id="155483-6254-7124">📊 表 15：板块二（正泰安能）股权比例演进（54.83% <span class="math-inline"> → </span> 62.54% <span class="math-inline"> → </span> 71.24%）与一级市场国资交易锚穿透表</h5>
 <div class="table-scroll-wrap"><table class="wide-table">
@@ -9708,16 +10242,18 @@
 <hr/>
 <h4 id="3-002150sz-vs-000">3. 板块三：正泰电源 / 通润装备（<code>002150.SZ</code>）控股权 + 本部自持电站净残值 vs 母公司净债务 —— 完美对冲清零（<code>0.00亿元</code>）</h4>
 <ul>
-<li><strong>通润装备（正泰电源，<code>002150.SZ</code>）公开市场穿透价值</strong>：</li>
-<li>2023 年正泰电器收购 A 股上市公司通润装备控股权并将旗下逆变器与储能主体“正泰电源”注入其中（2026年证券简称已变更为“正泰电源”）。正泰电器直接持股 <code>24.99%</code>、一致行动人温州卓泰持股 <code>5.00%</code>，合计控制 <strong><code>29.99%</code> 股权</strong>。</li>
 <li>
-<p>截至 2026 年 11 月，通润装备（<code>002150.SZ</code>）二级市场总市值稳定在 <strong><code>67.00亿—68.00亿元</code></strong> 区间（2025年实现营收 <code>40.6亿元</code>、归母净利 <code>2.8亿元</code>）。按 <strong><code>29.99%</code></strong> 持股比例直接穿透计算，正泰电器所持上市股权的公开市场公允价值 = <strong><code>20.00亿元</code></strong>！</p>
+<p><strong>通润装备（正泰电源，<code>002150.SZ</code>）公开市场穿透价值</strong>：</p>
+<ul>
+<li>2023 年正泰电器收购 A 股上市公司通润装备控股权并将旗下逆变器与储能主体“正泰电源”注入其中（2026年证券简称已变更为“正泰电源”）。正泰电器直接持股 <code>24.99%</code>、一致行动人温州卓泰持股 <code>5.00%</code>，合计控制 <strong><code>29.99%</code> 股权</strong>。</li>
+<li>截至 2026 年 11 月，通润装备（<code>002150.SZ</code>）二级市场总市值稳定在 <strong><code>67.00亿—68.00亿元</code></strong> 区间（2025年实现营收 <code>40.6亿元</code>、归母净利 <code>2.8亿元</code>）。按 <strong><code>29.99%</code></strong> 持股比例直接穿透计算，正泰电器所持上市股权的公开市场公允价值 = <strong><code>20.00亿元</code></strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>本部存量自持工商业及地面并网电站净残值</strong>：</p>
-</li>
-<li>
-<p>除正泰安能外，正泰新能源本部账上仍保留一批早期建成、享有高电价补贴或高工商业电价的自持并网电站，扣除对应项目负债后的权益净资产残值约 <strong><code>25.00亿元</code></strong>（每年稳定贡献归母净利约 <code>1.60亿元</code>）。</p>
+<ul>
+<li>除正泰安能外，正泰新能源本部账上仍保留一批早期建成、享有高电价补贴或高工商业电价的自持并网电站，扣除对应项目负债后的权益净资产残值约 <strong><code>25.00亿元</code></strong>（每年稳定贡献归母净利约 <code>1.60亿元</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>与母公司 <code>45.00亿元</code> 归母有效净债务 100% 对冲清零</strong>：
@@ -10092,6 +10628,165 @@
 </table></div>
 <div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我这辈子都在实践“逆向思维（Inversion）”——在算自己能赚多少钱之前，先把哪三颗子弹能打死我写得清清楚楚贴在办公桌上。只要央企还在买安能的电站、南存辉没把集团那摊苦命的组件工厂塞回上市公司、低压电器的毛利率还稳稳站在 28%—30% 左右，那任何因为市场情绪抽风导致的股价下跌，都是在给你送钞票；反过来，一旦那三条红线亮起任何一盏红灯，别跟股票谈恋爱，立刻拎包走人！</p></div></div>
 <hr/>
+<h3 id="2026-11-22">⚔️ 【2026-11-22 物理隔离盲审做空 × 防“空头滑跪”三道铁闸二元对质终审实录】</h3>
+<blockquote>
+<p><strong>【终审庭审背景与核心原则】</strong>：为彻底消除单一多头视角下的财务宽容偏差与政策滞后错觉，买方投委会（IC）于 <code>2026年11月22日</code> 引入物理隔离盲审《独立盲审做空备忘录》（基准最新收盘价更新为 <strong><code>23.10元/股</code></strong>，总股本 <code>21.48969亿股</code>，总市值 <strong><code>496.41亿元</code></strong>，<code>PE-TTM 10.94x</code>，<code>PB 1.07x</code>），并严格执行<strong>防“空头滑跪”三道铁闸</strong>——针对四大核心红蓝争议发起 <strong><code>24次</code> 一手财报、公告与各省电价实况联网独立反查</strong>，严苛切割<strong>“事实层硬改”</strong>与<strong>“假设层反杀”</strong>，严禁空头三重悲观复利叠加，亦绝不替旧原稿护短和稀泥，最终结合过去 <code>5—10年</code> 历史估值极低分位完成现实校准与 Python 精确验算。</p>
+</blockquote>
+<h4 id="vs">一、 铁闸一 &amp; 铁闸二：红蓝核心交锋与“事实层硬改 vs 假设层反杀”二元裁决矩阵</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">红蓝交锋焦点</th>
+<th style="text-align: left;">红方做空核心指控</th>
+<th style="text-align: left;">投委会 <code>24次</code> 一手反查实证结果</th>
+<th style="text-align: left;">二元终审裁决与量化修正落地</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. <code>True EV 565亿 vs 956亿</code> × <code>544亿</code> 存货真相与 <code>OCF/CFF</code> 租赁错配</strong></td>
+<td style="text-align: left;">旧稿仅按 <code>565.06亿</code>（<code>ev_delta=+45亿</code>）算 EV 严重漏债；实际存货高达 <code>572.04亿</code>（<code>25A</code>）/<code>544.43亿</code>（<code>26Q3</code>），且 <code>25A</code> 支付其他筹资现金高达 <code>156.16亿</code>（<code>26H1</code> <code>108.48亿</code>），系新租赁准则（CAS 21）与“售后回租”下 <code>OCF</code> 假造血、<code>CFF</code> 狂还租赁本金；<code>26Q3</code> 现金骤降至 <code>130.61亿</code>（现金短债比仅 <code>0.52x</code>），全口径债 <code>482.64亿</code> + 少数股东 <code>98.52亿</code> 推升 <code>True EV</code> 至 <code>955.86亿</code>！</td>
+<td style="text-align: left;">① <strong>旧稿三大硬伤全部实锤</strong>：查实 <code>2025年报</code> 期末存货精确值为 <code>57,203,967,966.56元</code>（<strong><code>572.04亿元</code></strong>，远非旧稿误用的 <code>420.82亿</code>），<code>26H1</code> 为 <code>542.02亿</code>（含合同履约成本 <code>482.43亿</code>，减值准备极薄），<code>26Q3</code> 反弹至 <strong><code>544.43亿</code></strong>；<code>2025年报</code>“支付其他与筹资活动有关的现金”精确值为 <code>15,615,909,157.88元</code>（<strong><code>156.16亿元</code></strong>），确系融资租赁/售后回租及屋顶租赁本金流出；<code>26H1</code> 少数股东权益精确值为 <code>9,851,515,369.14元</code>（<strong><code>98.52亿元</code></strong>，且此时已反映 <code>71.24%</code> 安能股比）；<code>26Q3</code> 货币资金 <code>130.61亿</code>（非受限 <code>121.71亿</code>）对比短期刚性有息债 <code>235.81亿</code>（短借 <code>152.15</code>+一年内到期 <code>83.66</code>），现金短债比仅 <strong><code>0.52x</code></strong>，<code>26Q1-Q3</code> 财务费用确升至 <strong><code>18.60亿</code></strong>；② <strong>但反杀空头分子分母错配</strong>：<code>544亿</code> 待售电站存货与 <code>482.64亿</code> 有息债属于 BT 滚动周转的<strong>永续营运债务结构</strong>，确实<strong>不能</strong>像旧稿那样强行剔除 <code>280亿</code> 假装无债；但反过来，空头拿 <code>955.86亿</code> <strong>全合并无杠杆 EV</strong> 去对标“低压 <code>20亿</code> 归母净利”属于严重的<strong>分子分母张冠李戴</strong>！</td>
+<td style="text-align: left;"><strong>🩸 事实层100%认领硬改 + 🛡️ 口径严密配对</strong>：① 彻底废弃旧稿 <code>ev_delta=+45亿</code> 的乐观剔除法，全额纳入全口径有息债 <code>482.64亿</code>（含 <code>94.66亿</code> 租赁负债）与 <code>26H1</code> 少数股东权益 <code>98.52亿</code>，减非受限现金 <code>121.71亿</code>（中控技术等金融资产对冲营运底仓），硬性上修 <strong><code>ev_delta_a = +459.45亿元</code></strong>、锁定零遗漏 <strong><code>True EV = 955.86亿元</code></strong>；② 彻底抹平旧稿 <code>+9.00亿</code> 归母折旧现金盾（实被 CFF 租赁本金吞噬），并额外扣减 <code>-5.50亿/年</code> 租赁/减值/周转漏损，将归母常态 OE 由 <code>52.00亿</code> 暴砍 <code>-39.4%</code> 至 <strong><code>31.50亿</code></strong>；③ 严格执行分子分母同口径对齐：以<strong>合并无杠杆常态 OE <code>55.50亿元/年</code></strong>（归母 <code>31.50亿</code> + 少数股东 <code>6.40亿</code> + 税后债务利息 <code>17.60亿</code>）对标 <code>955.86亿</code> True EV！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. <code>136号文</code> 电价腰斩 × <code>2026Q3</code> 单季归母 <code>-32.79%</code> 穿底指控</strong></td>
+<td style="text-align: left;"><code>136号文</code> 落地后山东光伏机制电价暴跌 <code>-43%</code> 至 <code>0.225元/kWh</code>，单瓦 DCF 跌穿正泰 <code>2.43元/W</code> 账面成本，<code>773亿</code> 光伏重资产将爆 <code>78亿—104亿</code> 减值；<code>2026H1</code> 系最后透支 <code>531</code> 老政库存，<code>2026Q3</code> 单季归母暴跌 <strong><code>-32.79%</code></strong>（<code>10.95亿</code>）已拉响断崖穿底警报，正泰安能常态净利将腰斩至 <code>15亿</code>（极端 <code>8亿</code>）</td>
+<td style="text-align: left;">① <strong>增量毛利下台阶确系事实</strong>：<code>2026年</code> 广东新能源机制电价竞价出清价确降至 <strong><code>0.300元/kWh</code></strong>（低于预期）、山东仅 <strong><code>0.225元/kWh</code></strong>，叠加 <code>26Q1-Q3</code> 综合毛利率滑落至 <strong><code>24.22%</code></strong>（较 <code>25A</code> <code>25.96%</code> 降 <code>-1.74pct</code>），说明 <code>136号文</code> 后增量户用光伏暴利时代正式终结，旧稿拍安能稳态净利 <code>28.80亿</code>、<code>2.90—2.95元/W</code> 售价明显偏乐观；② <strong>三大一手铁证强势反杀空头三重悲观叠加</strong>：其一，<strong>戳破 <code>2026Q3</code> <code>-32.79%</code> 假摔真相</strong>——一手三季报显示 <code>2026Q3</code> 单季<strong>扣非归母净利润高达 <code>12.60亿元</code>，同比仅微降 <code>-1.30%</code></strong>（<code>Q1-Q3</code> 扣非 <code>39.61亿</code>，同比仍增 <strong><code>+3.79%</code></strong>）！归母单季少赚的 <code>-5.34亿</code> 中，高达 <strong><code>97%</code>（<code>-5.17亿</code>）系持有的中控技术（<code>688777.SH</code>）股价波动致非经常性损益由 <code>25Q3</code> <code>+3.52亿</code> 翻为 <code>26Q3</code> <code>-1.65亿</code></strong>，主业并未断崖；其二，<strong>反杀“全量追溯山东 <code>0.225元</code>”谬误</strong>——正泰账面 <code>~26—29.69GW</code> 持有电站中约 <strong><code>75%—80%</code> 为 <code>2025年5月31日</code> 前并网的存量老政电站</strong>，受国家政策衔接保护（如浙江存量锁 <code>0.4153元/kWh</code>、上海锁 <code>0.4155元/kWh</code>），且增量省份高度分化（江苏仍约 <code>0.36元</code>、浙江上限 <code>0.393元</code>）；其三，<strong><code>66.62亿</code> REITs 破冰证伪死库论</strong>——<code>2026年8月</code>“财通-正泰安能新能源基础设施碳中和绿色持有型不动产 ABS（机构间 REITs）”获上交所受理，拟发行 <strong><code>66.62亿元</code></strong>（创全国新能源最大规模），叠加 <code>26H1</code> 实卖 <strong><code>&gt;6GW</code></strong>，退出渠道并未锁死！</td>
+<td style="text-align: left;"><strong>🩸 事实层认领硬改 + 🛡️ 假设层反杀</strong>：① 将正泰安能 <code>100%</code> 常态合并净利由旧稿 <code>28.80亿</code> 硬砍 <code>-27.1%</code>（较 <code>25A</code> <code>30.40亿</code> 硬砍 <code>-30.9%</code>）至 <strong><code>21.00亿元</code></strong>（拆解：<code>531</code> 老政存量自持发电 <code>~9.5亿</code> + 新政薄利滚动开发 <code>~8.5亿</code> + <code>40GW+</code> 轻资产代运维 <code>~3.0亿</code>；按 <code>71.24%</code> 对应归母 <code>14.96亿</code>）；② 按 <code>75%</code> 存量老政微折 <code>4%</code> + <code>25%</code> 增量重折 <code>15%</code>（综合 <code>6.75%</code>）+ 应收补提 <code>5%</code> 重估，税后归母净资产净削减 <code>-34.67亿</code> 至 <strong><code>429.82亿元</code>（<code>Adjusted BVPS = 20.00元</code>）</strong>，坚决拒绝空头将全量电站一刀切按山东增量折价 <code>15%—20%</code> 的三重悲观叠加！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3. 正泰安能撤单 IPO × <code>11.16亿</code>（<code>2.14x PB</code>）接盘国资战投及治理折价</strong></td>
+<td style="text-align: left;"><code>2025年9月</code> 撤回分拆引爆 B 轮战投对赌回购；母公司在自身 <code>1.07x PB</code>、现金短债比 <code>0.52x</code> 时，按锁定于 <code>25-06-30</code> 的陈旧评估基准（<code>352.73亿</code>、<code>2.14x PB</code>）掏 <code>11.16亿</code> 现金接盘国家绿发基金 <code>3.16%</code> 股权属价值摧毁，剩余 <code>28.76%</code> 对应 <code>101.45亿</code> 隐性抽血黑洞；叠加对外担保超净资产 <code>60%</code> 及正泰新能关联组件采购上限升至 <code>35亿</code></td>
+<td style="text-align: left;">① <strong>资本配置与治理黄牌全部实锤</strong>：<code>2026年6月</code> <code>11.16亿</code> 摘牌绿发基金 <code>3.16%</code> 股权确对应 <code>352.73亿</code> 估值与 <strong><code>2.14x PB</code></strong>，在二级市场自身仅 <code>1.07x PB</code> 时高溢价承接战投退出，效率显著劣于回购注销母公司股票或压降短债，旧稿将其包装为“低位捡便宜”属多头滤镜；对外担保余额占净资产确长期处于 <strong><code>60%—62%</code></strong> 高位（虽以并表子公司为主、无逾期）；<code>2026年</code> 向关联方正泰新能采购组件上限确提至 <strong><code>35亿</code></strong>，且 <code>2026-08-28</code> 递表港交所存在 H 股折价增发摊薄隐忧；② <strong>反杀法律责任越界恐吓</strong>：一手信息核实，正泰安能 B 轮对赌协议（媒体测算直接触发敞口 <code>&gt;15亿</code>）的<strong>法定回购义务主体为控股股东正泰集团及实控人南存辉</strong>，并非上市公司法定表内负债；且剩余 <code>28.76%</code> 中含约 <code>~7.8%</code> 员工持股平台，其余机构多通过展期及集团整体资本运作缓释，将 <code>101.45亿</code> 全额算成上市公司必爆现金黑洞失之偏颇。</td>
+<td style="text-align: left;"><strong>🩸 事实层认领降级 + 🛡️ 边界清晰切割</strong>：① 剥离旧稿美化，在 Reverse SOTP 中单列 <strong><code>-20亿 ~ -25亿元</code></strong> 战投溢价回购/治理及总部摩擦折价缓冲；② 将质地加分（<code>quality_bonus_a</code>）由原榜 <code>+1.8</code> 实打实下修至 <strong><code>+0.8</code></strong>；③ 明确将“母公司再以 <code>&gt;1.5x PB</code> 大额现金兜底外部战投”增列为监控警报，但不重复在负债表里虚增 <code>101亿</code> 表外负债。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4. 智慧电器降速 × 正泰电源（<code>002150</code>）业绩滑坡 × <code>2.81%</code> 吝啬股息</strong></td>
+<td style="text-align: left;">低压主业 <code>26H1</code> 营收增速跌至 <code>+3.62%</code>，扣除安能与非经常损益后年化扣非仅 <code>~20亿</code>，且受铜银涨价压制；<code>25年</code> 分红率仅 <code>28.4%</code>、<code>26H1</code> 中期分红率惨至 <code>3.39%</code>（每股仅 <code>0.05元</code>），戳穿超级现金牛假象</td>
+<td style="text-align: left;">① <strong>三大失真精准纠偏</strong>：查实 <code>26H1</code> 智慧电器营收 <strong><code>125.43亿</code>（同比 <code>+3.62%</code>）</strong>，彻底证伪旧稿表 C-2 误写的“延续双位数加速扩张”；查实控股 <code>29.99%</code> 的<strong>正泰电源（原通润装备 <code>002150.SZ</code>）<code>26Q1-Q3</code> 营收 <code>28.64亿</code>（<code>+10.54%</code>），但归母净利暴跌 <code>-33.88%</code> 至 <code>0.904亿</code>、扣非暴跌 <code>-39.30%</code> 至 <code>0.697亿</code></strong>（Q3 单季净利仅 <code>2,208.8万</code>，<code>-43.95%</code>），全年归母贡献萎缩至 <code>~0.48亿</code>（好在其公开市值仍达 <code>71—79亿</code>，<code>29.99%</code> 值 <code>~22.2亿</code>）；查实 TTM 真实每股分红确为 <code>25年度 0.60元</code> + <code>26中期 0.05元</code> = <strong><code>0.65元</code></strong>（<code>23.10元</code> 现价股息率仅 <strong><code>2.81%</code></strong>，且 <code>0%</code> 注销回购）；② <strong>反杀基本盘死水论</strong>：智慧电器扣除总部前独立稳态净利仍达 <strong><code>~22.50亿</code></strong>（净归母底盘 <code>~20.0亿</code>），海外毛利率 <code>33.57%</code> 且“固态变压器 + 固态断路器”<code>800V</code> 直流 AIDC 预制电力方舱已实现海外头部科技巨头算力中心交付，具备真实第二曲线底座。</td>
+<td style="text-align: left;"><strong>🩸 事实层硬砍盈利预期</strong>：① 将智慧电器常态归母净利由旧稿 <code>26.50亿</code> 硬下修至 <strong><code>22.50亿</code></strong>（扣总部未分摊 <code>-2.50亿</code> 后净底盘 <code>20.00亿</code>），正泰电源常态净利由 <code>3.00亿</code> 砍至 <code>1.60亿</code>（归母 <code>0.48亿</code>），合计常态归母扣非净利由 <code>46.00亿</code> 硬下修 <code>-19.6%</code> 至 <strong><code>37.00亿元</code></strong>；② 增量引擎（海外+AIDC）达产贡献按旧稿 <code>+6.50亿</code> 打六折审慎计 <strong><code>+4.00亿/年</code></strong>（达产无杠杆 OE <code>59.50亿</code>）；③ 锁定 <code>ttm_dps = 0.65元</code>（<code>2.81%</code>）。</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="510-reality-check-reverse-sotp">二、 铁闸三：过去 <code>5—10年</code> 历史估值最低分位 Reality Check 与 Reverse SOTP 重校</h4>
+<p>为彻底杜绝“空头滑跪”将买点砍成一辈子买不到的 <code>8.87—13.34元</code> 空中楼阁，同时严防蓝方把挤干水分后已不便宜的 <code>23.10元</code> 错当黄金坑，我们用过去 <code>10年</code> 真实估值极底与无重复扣减 Reverse SOTP 完成刚性锚定：</p>
+<ol>
+<li>
+<p><strong>历史极端底部实测坐标</strong>：正泰电器 <code>52周</code> 波动区间约为 <strong><code>23.10元 — 42.13元</code></strong>（今日 <code>23.10元</code> 刚刷新 <code>52周</code> 新低）；回顾过去 <code>10年</code>（<code>2017—2026</code>），<code>2018年</code> 531 熊市大底最低 <code>PE ~12x</code> / <code>PB ~1.5x</code>，<code>2023—2025年初</code> 光伏与地产双杀历史极底曾下探 <code>~20—22元</code> 区域（<code>PE-TTM ~10x</code>，<code>PB ~1.0x—1.1x</code>，处于近十年 <code>5%—10%</code> 地板分位）。按 <code>2026Q3</code> 归母净资产 <code>464.49亿元</code> 折算，账面 <strong><code>BVPS = 21.61元/股</code></strong>，经 <code>531</code> 新老划断差异化折价重估后的真实净资产 <strong><code>Adjusted BVPS = 20.00元/股</code></strong>。空头目标价 <code>8.87—13.34元</code> 对应账面 <strong><code>PB 0.41x—0.62x</code></strong>，不仅远破上市 16 年历史极底，更相当于把国内第一低压电器印钞机之外的正泰安能与正泰电源全部按<strong>负数估值</strong>计价，显然违背常识；但反过来，现价 <code>23.10元</code> 在穿透 <code>955.86亿</code> True EV 与挤干租赁/减值水分后，<strong>无杠杆常态回报仅 <code>5.81%</code>（<code>17.2年</code> 回本）、归母 <code>P/OE</code> 高达 <code>15.76x</code>、真实 <code>Adj PB = 1.15x</code>、股息率仅 <code>2.81%</code></strong>，已明显缺乏左侧买方赔率！</p>
+</li>
+<li>
+<p><strong>Reverse SOTP 拆骨重校（严禁重复扣减，彻底粉碎旧稿“-51.69亿倒贴白送”幻觉）</strong>：</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><strong>板块一（智慧电器低压主业，含总部摩擦后净归母 <code>20.00亿</code>）</strong>：给予成熟制造业保守 <code>13.0x—14.0x PE</code> = <strong><code>260.0亿 — 280.0亿元</code></strong>（彻底淘汰旧稿 <code>26.5亿 × 15x = 397.5亿</code> 的高估）；</p>
+</li>
+<li>
+<p><strong>板块二（正泰安能 <code>71.24%</code> 权益，常态归母 <code>14.96亿</code>）</strong>：面对 <code>136号文</code> 重构与高杠杆压力，给予 <code>7.0x—8.0x PE</code>（对应 <code>100%</code> 估值 <code>147亿—168亿</code>，即 <code>0.89x—1.02x PB</code>，较绿发基金 <code>352.7亿</code> 估值直接打 <code>4.2—4.8折</code>！）= <strong><code>104.7亿 — 119.7亿元</code></strong>；</p>
+</li>
+<li>
+<p><strong>板块三（正泰电源 <code>002150.SZ</code> <code>29.99%</code> 公开股权 <code>~22.2亿</code> + 本部自持电站及中控技术等金融资产 <code>~25.0亿</code> - 战投高溢价接盘/治理及总部净负债缓冲 <code>-20.0亿 ~ -25.0亿</code>）</strong>：净残值 = <strong><code>+22.2亿 — +27.2亿元</code></strong>；</p>
+</li>
+<li>
+<p><strong>🔥 存量基本盘重校公允拆骨合计</strong>：底线 <strong><code>386.9亿元</code>（<code>18.00元/股</code>）</strong>，中性 <strong><code>426.9亿元</code>（<code>19.86元/股</code>）</strong>！这意味着：<strong>现价 <code>23.10元</code>（市值 <code>496.41亿</code>）根本不是“倒贴 52 亿白送期权”，反而暗中预支了 <code>+69.5亿 ~ +109.5亿元</code> 的海外/AIDC 与电站估值溢价！</strong> 唯有股价回踩至 <strong><code>17.00—20.00元</code></strong>（第二档正常买入区：正式跌破 <code>Adjusted BVPS 20.00元</code> 实现 <code>Adj PB ≤ 1.00x</code>、踩入 SOTP 拆骨中枢），特别是砸入 <strong><code>≤17.00元</code></strong>（第一档左侧重锤区：账面 <code>PB ≤ 0.79x</code> / <code>Adj PB ≤ 0.85x</code>、击穿 SOTP 极寒底线 <code>18.00元</code>、归母 <code>P/OE ≤ 11.6x</code>、TTM 息 <code>≥3.82%</code>）时，才真正具备买方不对称击球资格！</p>
+</li>
+</ul>
+<h4 id="2310">三、 【三联对照】核心量化坐标与两档击球区终审校准总表（基准价：<code>23.10元/股</code>）</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">买方核心估值与定价锚点</th>
+<th style="text-align: center;"><strong>旧原稿（2026-11-17 蓝方基准）</strong></th>
+<th style="text-align: center;"><strong>红方做空极寒口径（三重叠加）</strong></th>
+<th style="text-align: center;"><strong>🔥 今日三道铁闸终审重校（唯一主锚）</strong></th>
+<th style="text-align: left;">终审变动穿透说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>基准收盘价 / 总市值（<code>21.48969亿股</code>）</strong></td>
+<td style="text-align: center;"><code>24.20元</code> / <code>520.06亿</code></td>
+<td style="text-align: center;"><code>23.10元</code> / <code>496.41亿</code></td>
+<td style="text-align: center;"><strong><code>23.10元</code> / <code>496.41亿</code></strong></td>
+<td style="text-align: left;">对齐 <code>2026-11-22</code> 最新收盘（账面 <code>PB 1.07x</code> / <code>Adj PB 1.15x</code> / <code>PE-TTM 10.94x</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>广义净债+少数股东（<code>ev_delta</code>） / <code>True EV</code></strong></td>
+<td style="text-align: center;"><code>+45.00亿</code> / <code>565.06亿</code> <em>(剔除280亿债与MI)</em></td>
+<td style="text-align: center;"><code>+459.45亿</code> / <code>955.86亿</code> <em>(市场MI 958.8亿)</em></td>
+<td style="text-align: center;"><strong><code>+459.45亿</code> / <code>955.86亿</code></strong></td>
+<td style="text-align: left;">零遗漏纳入 <code>482.64亿</code> 全口径有息债（含 <code>94.66亿</code> 租赁）+ <code>98.52亿</code> 少数股东权益 - <code>121.71亿</code> 非受限现金</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>合并存货（<code>25A</code> → <code>26Q3</code>）与现金短债比</strong></td>
+<td style="text-align: center;">误记 <code>420.82亿 → ~395亿</code></td>
+<td style="text-align: center;"><code>572.04亿 → 544.43亿</code> / <code>0.52x</code></td>
+<td style="text-align: center;"><strong><code>572.04亿 → 544.43亿</code> / <code>0.52x</code></strong></td>
+<td style="text-align: left;">100% 认领实锤：存货超总市值，<code>25A</code> 支付其他筹资 <code>156.16亿</code> 证实 OCF/CFF 错配</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>常态归母扣非净利 / 归母常态 OE（亿元/年）</strong></td>
+<td style="text-align: center;"><code>46.00亿</code> / <code>52.00亿</code> <em>(含+9亿折旧盾)</em></td>
+<td style="text-align: center;"><code>30.70亿</code> / <code>22.80亿</code> <em>(安能腰斩至15亿)</em></td>
+<td style="text-align: center;"><strong><code>37.00亿</code> / <code>31.50亿</code></strong> <em>(归母OE较旧稿 <code>-39.4%</code>)</em></td>
+<td style="text-align: left;">低压下修至 <code>22.5亿</code>（扣总部 <code>20亿</code>）、安能砍至 <code>21亿</code>（归母 <code>14.96亿</code>）、正泰电源砍至 <code>1.6亿</code>；抹平 <code>+9亿</code> 伪折旧盾并扣 <code>-5.5亿</code> 租赁/减值漏损</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>合并全口径无杠杆常态 OE（对标 <code>True EV</code>）</strong></td>
+<td style="text-align: center;">息前合并 <code>81.00亿</code> <em>(未作主锚)</em></td>
+<td style="text-align: center;">未配对 <em>(错拿EV比归母)</em></td>
+<td style="text-align: center;"><strong><code>55.50亿</code> → 达产 <code>59.50亿</code></strong></td>
+<td style="text-align: left;">分子分母严密配对（归母 OE <code>31.50亿</code> + 少数股东 OE <code>6.40亿</code> + 税后债务利息 <code>17.60亿</code>；海外+AIDC 达产审慎计 <code>+4.00亿</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>现价 <code>23.10元</code> 隐含无杠杆 OE / <code>True EV</code></strong></td>
+<td style="text-align: center;"><code>9.20%</code> <em>(旧穿透口径)</em></td>
+<td style="text-align: center;">归母 <code>OE/市值 4.59%</code></td>
+<td style="text-align: center;"><strong><code>5.81%</code></strong> <em>(达产 <strong><code>6.22%</code></strong>；<code>17.2年</code> 回本；归母 <code>P/OE 15.76x</code>)</em></td>
+<td style="text-align: left;">挤干水分后现价真实内生回报跌破 <code>6%</code>，完全丧失左侧高赔率击球资格</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TTM 纯现金股息率（<code>ttm_dps</code> / 注销回购）</strong></td>
+<td style="text-align: center;"><code>2.69%</code>（<code>0.65元</code> / 现价 <code>24.20</code>）</td>
+<td style="text-align: center;"><code>2.57%</code> <em>(仅算25年度)</em></td>
+<td style="text-align: center;"><strong><code>2.81%</code>（<code>0.65元</code> = <code>25年0.60</code>+<code>26H1 0.05</code> / 注销 <code>0%</code>）</strong></td>
+<td style="text-align: left;">核实两次差异化派现合计 <code>13.83亿</code>，<code>26H1</code> 中期仅派 <code>0.05元</code> 印证真实自由现金流偏紧</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>存量基本盘 Reverse SOTP 拆骨公允区间</strong></td>
+<td style="text-align: center;"><code>571.75亿</code>（<code>26.60元</code>，倒贴 <code>-51.7亿</code>）</td>
+<td style="text-align: center;"><code>286.8亿</code>（<code>13.34元</code>）</td>
+<td style="text-align: center;"><strong><code>386.9亿 — 426.9亿</code>（<code>18.00—19.86元/股</code>）</strong></td>
+<td style="text-align: left;">现价 <code>23.10元</code> 暗含 <strong><code>+69.5亿 ~ +109.5亿</code></strong> 溢价，绝非“倒贴白送”</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第二档：正常买入区（左侧分批建仓）</strong></td>
+<td style="text-align: center;"><code>21.50—25.50元</code> <em>(旧榜 <code>22.5—25.5</code>)</em></td>
+<td style="text-align: center;">温和公允 <code>17.42元</code> / 核心 <code>13.34元</code></td>
+<td style="text-align: center;"><strong><code>17.00—20.00元</code></strong> <em>(较旧稿下移 <code>-21.6%</code>)</em></td>
+<td style="text-align: left;">破 <code>Adj BVPS 20.00元</code>（<code>Adj PB 0.85—1.00x</code> / 账面 <code>PB 0.79—0.93x</code>），归母 <code>P/OE 11.6—13.6x</code>，无杠杆回报 <code>6.24%—6.73%</code>（达产 <code>6.69%—7.21%</code>），TTM 息 <strong><code>3.25%—3.82%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第一档：左侧重锤区（Heavy Hammer）</strong></td>
+<td style="text-align: center;"><code>≤ 21.50元</code></td>
+<td style="text-align: center;">极端 <code>8.87元</code> <em>(破历史底空中楼阁)</em></td>
+<td style="text-align: center;"><strong><code>≤ 17.00元</code></strong> <em>(击穿 SOTP 极寒底线 <code>18元</code>)</em></td>
+<td style="text-align: left;">账面 <code>PB ≤ 0.79x</code> / <code>Adj PB ≤ 0.85x</code>，归母 <code>P/OE ≤ 11.6x</code>（回报 <code>≥8.62%</code>），无杠杆回报 <code>≥6.73%</code>（达产 <code>≥7.21%</code>），TTM 息 <strong><code>≥3.82%</code></strong>，低压+电源之外几乎白菜价抄底安能与 AIDC！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>现价 <code>23.10元</code> 终极水位定性与治理加分</strong></td>
+<td style="text-align: center;">左侧收集区（原榜 <code>NO.12</code> / 质地 <code>+1.8</code>）</td>
+<td style="text-align: center;">强烈看空（下行 <code>-42.2%</code>）</td>
+<td style="text-align: center;"><strong>⏳ 降级退出买区 · 观察等待破净（<code>T3</code> / 质地 <code>+0.8</code>）</strong></td>
+<td style="text-align: left;"><strong>不和稀泥</strong>：严禁在 <code>23.10元</code> 盲目抄底，耐心等存货/短债去化验证或股价回踩 <strong><code>≤20.00元</code></strong> 再分批出手！</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这场红蓝对质一刀捅破了正泰电器报表上最值钱的那个会计秘密——很多人盯着 `230亿` 经营现金流流口水，却从来不翻到下面筹资现金流那一行看看那 <strong>`156亿` 的“支付其他筹资现金”</strong> 去哪儿了！把电站发出的电费记进经营现金流、把还给金融租赁公司和农户的租赁本金藏进筹资现金流，这是会计准则允许的合法魔术，但现金余额不会说谎：账上现金不增反降、短债是现金的将近两倍、中期分红只敢给可怜的五分钱！当你把 `483亿` 全口径债和 `99亿` 少数股东权益原原本本放回秤盘，再把旧报告里虚加的 `+9亿` 折旧盾挤掉，你会猛然惊醒：`23.10元` 看似只有 `1.07倍 PB`，其实真实回报率还不到 `6%`，根本不是天上掉馅饼！</p></div></div>
+<div class="munger-note"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>可另一边，做空机构想把正泰电器砸到 `8块8毛` 或 `13块钱`，同样犯了用放大镜把局部溃疡当成全身癌症的毛病。`2026Q3` 单季归母大跌 `32.79%`，听着吓死人，翻开附注一看——扣非净利润其实高达 `12.60亿`，同比只微降了 `1.30%`，几乎全是中控技术股票浮盈变浮亏闹的假摔！而且正泰手里那二十多吉瓦电站大半是 `531` 前锁定老政电价的存量金砖，上交所刚刚受理了它 `66.62亿` 的全国最大新能源机构间 REITs，再加上国内第一的低压电器基本盘每年稳稳吐出二十多亿真金白银。做投资最怕两个极端：要么被多头滤镜忽悠在 `23块钱` 急着接飞刀，要么被空头鬼故事吓得幻想 `10块钱` 捡烟蒂——把买点踏踏实实钉在跌破重估净资产的 <strong>`17.00—20.00元`</strong>，既不替人高位扛雷，也不做白日梦！</p></div></div>
+<hr/>
 <h2 id="g">【终章模块 G：投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）】</h2>
 <blockquote>
 <p><strong>【闭门圆桌会背景】</strong>
@@ -10214,26 +10909,30 @@
 <h3 id="_34">🔥 圆桌加时赛：四位大师围绕三大核心分歧点的交叉质询与终极共识</h3>
 <p>在各自亮出底牌后，四位大师针对买方投委会最纠结的三个实战分歧点展开了针锋相对的闭门交锋：</p>
 <ul>
-<li><strong>交锋焦点一：账上 <code>420.82亿元</code> 存货与 <code>415.00亿元</code> 有息负债，遇到电网消纳红线收紧到底会不会变成吞噬现金的死局？</strong></li>
 <li>
-<p><strong>霍华德·马克斯发问</strong>：“彼得，你把那 <code>360.00亿元</code> 屋顶电站存货比作汽车经销商的库存，但如果全国配网红黄区扩容、136号文导致午间电价下跌，央国企突然停止买站半年，那绑在上面的 <code>280.00亿元</code> SPV 开发贷会不会直接把母公司现金流抽干？”</p>
+<p><strong>交锋焦点一：账上 <code>420.82亿元</code> 存货与 <code>415.00亿元</code> 有息负债，遇到电网消纳红线收紧到底会不会变成吞噬现金的死局？</strong></p>
+<ul>
+<li><strong>霍华德·马克斯发问</strong>：“彼得，你把那 <code>360.00亿元</code> 屋顶电站存货比作汽车经销商的库存，但如果全国配网红黄区扩容、136号文导致午间电价下跌，央国企突然停止买站半年，那绑在上面的 <code>280.00亿元</code> SPV 开发贷会不会直接把母公司现金流抽干？”</li>
+</ul>
 </li>
 <li>
 <p><strong>彼得·林奇 &amp; 查理·芒格联合回应</strong>：“霍华德，这就是户用分布式光伏和重资产地面大电站本质的区别！一座地面大电站一建就是两年、砸进去几十亿停不下来；而农村一户屋顶电站施工期只有 <strong>7—15 天</strong>！我们在【模块 D】的压力测试表 20 和表 21 里算得清清楚楚：哪怕遭遇装机暴跌 <code>30%</code>、单价下跌 <code>12%</code>、交割拉长半年的极端寒冬，正泰安能只需要立刻收紧给数千家县域代理商的开工授信、执行‘拿到央企锁定收购意向书才发货开工’的急刹车，当年少盖 <code>30%</code> 的新电站就能直接省下约 <code>25亿元</code> 的建安现金流出！再加上体内还有 <code>16GW+</code> 已经并网的自持屋顶电站每年稳收电费、贡献 <code>+13.89亿元</code> 归母折旧盾牌，哪怕在铜银涨 <code>25%</code> + 装机跌 <code>30%</code> + 关税加 <code>20%</code> 的世纪三杀极限情景（S5）下，公司全年依然能净吐 <strong><code>+38.65亿元</code></strong> 归母自由现金流！只要存货不突破 <code>500亿元</code> 且连续两年 OCF 转负，这台周转机器就绝不会失血。”</p>
 </li>
 <li>
 <p><strong>交锋焦点二：<code>2.69%</code> 的即期现金股息率，对于深度价值买家而言是不是偏低了？</strong></p>
-</li>
-<li>
-<p><strong>塞思·卡拉曼发问</strong>：“查理，正泰电器每年常态归母 Owner Earnings 高达 <code>52.00亿元</code>（对应 <code>520.06亿</code> 市值是 <code>10.00%</code> 的股东盈余率），但它目前每年分红约 <code>0.65元/股</code>（合计 <code>13.97亿元</code>），即期股息率只有 <code>2.69%</code>，留存了整整 <code>38.03亿元/年</code>（<code>73.1%</code>）在公司体内。我们怎么确保这留存的 <code>38亿元</code> 没有被管理层乱花掉？”</p>
+<ul>
+<li><strong>塞思·卡拉曼发问</strong>：“查理，正泰电器每年常态归母 Owner Earnings 高达 <code>52.00亿元</code>（对应 <code>520.06亿</code> 市值是 <code>10.00%</code> 的股东盈余率），但它目前每年分红约 <code>0.65元/股</code>（合计 <code>13.97亿元</code>），即期股息率只有 <code>2.69%</code>，留存了整整 <code>38.03亿元/年</code>（<code>73.1%</code>）在公司体内。我们怎么确保这留存的 <code>38亿元</code> 没有被管理层乱花掉？”</li>
+</ul>
 </li>
 <li>
 <p><strong>查理·芒格回应</strong>：“塞思，看管理层怎么花留存利润，比看表面股息率重要十倍！如果一家公司把留存的钱拿去建亏损的硅片厂，哪怕它分红 <code>5%</code> 我也一秒钟都不敢留；但你看南存辉在 2025—2026 年干了什么？他先把重资产资本开支从 <code>106.70亿元</code> 砍到了 <code>18.85亿元</code>，然后拿留存的 <code>11.16亿元</code> 真金白银去上海联交所，从国家绿色发展基金手里按 <code>12.26倍</code> PE 买回了正泰安能 <code>3.16%</code> 的股权（把持股比例从 <code>62.54%</code> 提到了 <strong><code>71.24%</code></strong>）——要知道正泰安能的 ROE 超过 <code>25%</code>！剩下的钱则投向了毛利率高达 <code>33%—35.5%</code> 的沙特、土耳其、越南本土化工厂和 AIDC 固态断路器产线（项目 ROIC 达 <code>18%—22%</code>）。当管理层能把留存现金投在 <code>15%—25%</code> 回报率的内部金矿上时，每一块钱留存利润都在帮股东免税复利滚雪球！”</p>
 </li>
 <li>
 <p><strong>交锋焦点三：现在是立刻重仓，还是等铜银跌下来、港股 H 股落地后再买？</strong></p>
-</li>
+<ul>
 <li><strong>斯坦利·德鲁肯米勒拍板总结</strong>：“如果你非要等沪铜从 <code>10.9万元/吨</code> 跌回 <code>7万元</code>、等 AIDC 固态断路器订单和沙特电网利润全部写进年报标题里再买，那时候正泰电器的股价早就不是 <code>24.20元</code>（<code>10倍</code> P/OE），而是像施耐德和宏发股份一样站在 <code>35元—40元</code>（<code>16—18倍</code> PE）之上了！在 <code>520.06亿元</code> 市值比存量拆骨保底价值（<code>571.75亿元</code>）还倒贴 <code>51.69亿元</code> 的时刻先拿住 <code>60%</code> 底仓，等于市场先生白送了你一张免赔金牌，让你免费等待右侧二阶导数引爆！”</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="_35">📋 附：《四位投资大师圆桌投票、核心算盘与量化评分总表》</h3>
@@ -10609,7 +11308,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《正泰电器 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/正泰电器 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《正泰电器(601877.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/正泰电器(601877.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -10806,6 +11505,553 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
