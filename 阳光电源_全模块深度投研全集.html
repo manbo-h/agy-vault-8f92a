@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>阳光电源 深度投研全集</title>
+<title>阳光电源(300274.SZ) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">阳光电源 深度投研全集</div>
+    <div class="report-title">阳光电源(300274.SZ) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-22</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -893,6 +1351,13 @@
   </div>
   <div class="report-content">
     <h1 id="300274sz">阳光电源（300274.SZ）企业基本面、产品硬实力、动态进化与长期商业价值深度研究（全模块终极全集）</h1>
+<blockquote>
+<p><strong>⚔️ 【2026-11-22 V4 终审裁决置顶声明】</strong><br/>
+本报告于 <code>2026-11-22</code> 经<strong>买方投委会首席独立裁判官（V4 官方原表法医验真 × 阶段一隔离做空备忘录红蓝二元极限对质 × 三道防滑跪铁闸终审）</strong>重校落盘，原 V1 估值模型（<code>@79.60 元 / True EV 1,542.06 亿 / 常态 OE 110.0 亿 / 买点 75—82 元</code>）<strong>已正式失效，全篇核心参数一律以模块 G 正上方《V4 终审裁决实录（单一真相区）》为准</strong>：
+- <strong>V4 终审基准（<code>2026-11-22</code>）</strong>：A 股现价 <strong><code>70.41 元</code></strong>（52 周 <code>57.14—85.72 元</code>），精确总股本 <code>20.732114 亿股</code>（<code>26Q3 P9</code>），总市值 <strong><code>1,459.75 亿元</code></strong>，PB <strong><code>2.95x</code></strong>（BVPS <code>23.85 元</code>）；
+- <strong>硬修正三大核心锚</strong>：① 扣除 <code>14.03 亿</code> 非现金权益工具投资（<code>26H1 P144/P190</code>）、补齐 <code>7.26 亿</code> 衍生/交易金融负债及 <code>0.73 亿</code> 漏计租赁债、并将营运备付底仓由 <code>65.66 亿</code> 上调至 <code>125.00 亿</code>（拒绝空头将 <code>58.46 亿</code> 质保预计负债双重计债），<strong>严苛均衡 True EV 重校为 <code>1,413.54 亿元</code></strong>（<code>ev_delta = -46.21 亿</code>，较 V1 <code>-108.22 亿</code> 硬上修 <strong><code>+62.01 亿</code></strong>）；② 充分吸收 <code>2027-01-01</code> 电池出口退税清零（<code>6%→0%</code>）、美国 <code>2026-07-28</code> FCC Covered List 禁令、阳光新能源巨亏 <code>-4.04 亿</code> 与 <code>16.5%</code> 有效税率，将<strong>跨周期合并无杠杆常态 OE 硬砍 <code>-27.3%</code> 至 <code>80.0 亿/年</code></strong>（归母常态净利 <code>84.1 亿</code> / 归母 OE <code>77.1 亿</code>；2028E 达产 <strong><code>106.0 亿/年</code></strong>）；③ 精确核定 TTM 纯现金股息 <strong><code>1.33 元/股</code></strong>（25年度 <code>0.69</code> + 26中期 <code>0.64</code>，股息率 <strong><code>1.89%</code></strong>，ESOP 回购 0 注销回报）；
+- <strong>V4 终审裁决与两档击球区</strong>：现价 <code>70.41 元</code> 对应 V4 True EV 常态回报仅 <strong><code>5.66%</code></strong>（<code>17.67x EV/OE</code>），拆骨隐含大储常态 PE 仍达 <code>21.5x</code>，叠加 <code>2027-01-01</code> 退税归零首季大考、26Q4 存货去化审计与港股 H 股摊薄隐忧，<strong>投委会 0 票追高 / 降级退出即期买区（质地加分下调至 <code>0.5</code>）</strong>；<strong>锁定 V4 两档击球区：第二档分批建仓 <code>52.00 — 60.00 元</code>（常态回报 <code>6.68%—7.75%</code>），第一档左侧重锤 <code>≤ 52.00 元</code>（常态回报 <code>≥7.75%</code> / 达产 <code>≥10.27%</code> / PB <code>≤2.18x</code>）</strong>！</p>
+</blockquote>
 <hr/>
 <h2 id="_1">【开篇破题：两段话直击生意灵魂与当期核心张力】</h2>
 <div class="annotated-row"><div class="main-col"><p>如果只扫一眼阳光电源的合并利润表，外行很容易犯两个致命的常识性错误：要么把它当成跟隆基、通威绑在同一条船上的“光伏周期苦力”，看到硅料、组件崩盘就吓得夺路而逃；要么看它买外采电芯组装储能柜、还带着一百多亿营收的电站开发（EPC），就傲慢地给它贴上“没有电芯制造能力的组装集成商+重资产垫资包工头”标签。掀开底牌看本质，阳光电源真正的看家本领绝不是造电池片或拉晶硅，而是卡在<strong>“弱电网与高比例新能源之间”的电力电子转换与大电网构网控制算法咽喉（IGBT/SiC拓扑控制 + Grid-Forming构网技术 + 交直流电热协同系统定义权）</strong>。不论上游硅料跌到几万块、碳酸锂暴涨还是暴跌，只要风光发电和储能并网，就必须经过逆变器（PCS）这颗“心脏与大脑”把狂躁不羁的直流电驯服成电网敢收的交流电。更绝的是，正是因为它不背负几十GWh重资产电芯厂的折旧包袱，它才能在宁德时代、亿纬锂能、中创新航等电芯产能过剩的买方市场里左右逢源、择优压价，把产业链最高附加值的“系统定义权、电网准入通行证与海外高溢价渠道”死死攥在自己手里。</p><p>然而，站在2026年三季报刚刚披露的当口，阳光电源正处在一场极其剧烈的<strong>“表面报表深蹲 vs 底层订单与技术跃迁”的冰火大分化</strong>之中：</p><ul>
@@ -911,8 +1376,10 @@
 <h2 id="_2">【第一部分：拆解业务账本、周期时钟与顺价能力——谁在挑大梁，谁在凑规模，谁在拖后腿？】</h2>
 <h3 id="_3">一、 三大板块真实账本：两头印钞王牌与一个正在被“主动瘦身”的垫资包袱</h3>
 <div class="annotated-row"><div class="main-col"><p>结合2025年年报、2026年半年报及2026年三季报，阳光电源的业务版图由以下三大核心板块构成，各自承担着截然不同的财务角色：</p><ol>
-<li><strong>第一增长极与利润顶梁柱：储能系统（2025年营收372.87亿元，占比41.81%，毛利率36.49%；2026H1营收154.56亿元，占比50.00%，毛利率32.43%；2026Q3单季毛利率21%）</strong>
-   - <strong>卖什么与谁买单</strong>：核心产品是以PowerTitan 2.0/3.0为代表的大型地面交直流一体化液冷储能系统，以及PowerStack工商业液冷储能系统。买单客户主要是中东主权基金与电力巨头（如沙特Algihaz 7.8GWh全球最大储能项目）、欧美独立发电商（IPP）及公用事业电网公司、澳洲与拉美矿企/电网，以及国内发电央企。</li>
+<li><strong>第一增长极与利润顶梁柱：储能系统（2025年营收372.87亿元，占比41.81%，毛利率36.49%；2026H1营收154.56亿元，占比50.00%，毛利率32.43%；2026Q3单季毛利率21%）</strong><ul>
+<li><strong>卖什么与谁买单</strong>：核心产品是以PowerTitan 2.0/3.0为代表的大型地面交直流一体化液冷储能系统，以及PowerStack工商业液冷储能系统。买单客户主要是中东主权基金与电力巨头（如沙特Algihaz 7.8GWh全球最大储能项目）、欧美独立发电商（IPP）及公用事业电网公司、澳洲与拉美矿企/电网，以及国内发电央企。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>商业痛点与盈利模式</strong>：大储绝不是“把电芯装进集装箱”那么简单。一台10MWh的储能柜里有上万颗电芯，如果电芯之间温差超过3°C、充放电环流控制不住，不仅衰减极快、三年后容量打八折，甚至直接起火爆炸；更重要的是，在中东沙漠、英国海岛、澳洲弱电网环境下，新能源占比超过50%后传统电网失去转动惯量，极易发生全网崩溃大停电。阳光电源卖的是<strong>“电芯温差控制在≤1.5°C/2°C的液冷热管理 + 干细胞构网技术（Grid-Forming，毫秒级提供虚拟惯量与黑启动能力） + 全球电网并网模型准入认证 + 15—20年全生命周期可用率兜底”</strong>。</p>
@@ -921,13 +1388,17 @@
 <p><strong>结算与现金流特征</strong>：海外大储订单普遍采取“签约预收10%—30%定金 + 发货/到港收款50%—60% + 并网调试验收尾款”模式，这也是公司合同负债从2025年末106.55亿元飙升至2026Q3末146.66亿元的核心引擎。但由于海外海运、清关、业主土建与电网并网验收周期长达6—9个月，<strong>发货量与报表确收之间存在天然的半年滞后期</strong>。</p>
 </li>
 </ul><ol start="2">
-<li><strong>高毛利现金牛底座：光伏逆变器等电力电子转换设备（2025年营收311.36亿元，占比34.91%，毛利率34.66%；2026H1营收123.90亿元，占比40.08%，毛利率飙升至42.72%）</strong>
-   - <strong>卖什么与盈利秘密</strong>：涵盖集中式逆变器、1+X模块化逆变器、组串式逆变器（3kW—400kW+）、户用光储逆变器及风电变流器（2025年风电变流器全球发货超38GW，市占率全球第一）。</li>
+<li><strong>高毛利现金牛底座：光伏逆变器等电力电子转换设备（2025年营收311.36亿元，占比34.91%，毛利率34.66%；2026H1营收123.90亿元，占比40.08%，毛利率飙升至42.72%）</strong><ul>
+<li><strong>卖什么与盈利秘密</strong>：涵盖集中式逆变器、1+X模块化逆变器、组串式逆变器（3kW—400kW+）、户用光储逆变器及风电变流器（2025年风电变流器全球发货超38GW，市占率全球第一）。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>为什么在全行业内卷中毛利率反而逆势冲上42.72%？</strong> 因为光伏逆变器仅占光伏电站总投资成本的<strong>3%—5%</strong>，却100%决定了整座电站25年的发电效率、MPPT追踪精度与电网并网安全！对于中东、欧美、印度的电站业主而言，为了省逆变器那0.01元/W的差价去换一个没经过严酷沙尘暴/高湿盐雾验证的二线品牌，一旦宕机停电一周，损失的电费就够买十台逆变器。叠加阳光电源2026H1高毛利海外大功率组串与1+X模块化机型占比大幅提升、IGBT/SiC功率器件国产化降本，使其逆变器毛利率在2026上半年创下<strong>42.72%（同比+6.98个百分点）</strong>的惊人纪录。</li>
 </ul><ol start="3">
-<li><strong>正在被主动砍水分的垫资业务：新能源投资开发（控股子公司阳光新能源，2025年营收165.59亿元，占比18.57%，毛利率14.50%；2026H1收入同比锐减超80%）</strong>
-   - <strong>生意本质与战略急刹车</strong>：主要是地面光伏/风电电站BT（建设-转让）、EPC总包及户用分布式光伏开发。这块业务天生毛利率低（12%—19%）、重度占用营运资金与存货（开发中的电站资产计入存货或合同资产），原本是为了带动自家逆变器和储能出货并筹划分拆A股上市。</li>
+<li><strong>正在被主动砍水分的垫资业务：新能源投资开发（控股子公司阳光新能源，2025年营收165.59亿元，占比18.57%，毛利率14.50%；2026H1收入同比锐减超80%）</strong><ul>
+<li><strong>生意本质与战略急刹车</strong>：主要是地面光伏/风电电站BT（建设-转让）、EPC总包及户用分布式光伏开发。这块业务天生毛利率低（12%—19%）、重度占用营运资金与存货（开发中的电站资产计入存货或合同资产），原本是为了带动自家逆变器和储能出货并筹划分拆A股上市。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>2025—2026年的断腕调仓</strong>：随着2025年国家发改委、能源局出台《关于深化新能源上网电价市场化改革促进新能源高质量发展的通知》（即行业剧震的“136号文”），新能源上网电量全面进入电力现货市场化交易，叠加多省分布式光伏红区消纳受限，国内电站开发的IRR确定性大幅下降。阳光电源果断在2025下半年至2026年对阳光新能源踩下急刹车，主动砍掉低收益、需垫资的国内开发项目，导致2026H1该板块收入断崖式缩水超80%——<strong>表面上看拖累了合并营收增速（2026年前三季度总营收-26.41%的头号元凶），实则是把低毛利、烧现金的“虚胖脂肪”主动割掉</strong>。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把毛利率只有14%、还得自己先掏钱垫资建电站的包工头生意砍掉八成，虽然会让合并营收看上去像泄了气的皮球，但这就像一个胖子切掉了身上的良性脂肪瘤——体重轻了，心脏（现金流和核心ROIC）反而更健康了。唯一让人不爽的是，在三季度这锅汤里，高价电芯和退税下调刚好一起砸进了储能的碗里。</p></div></div></div></div>
@@ -943,12 +1414,16 @@
 <p>当前光储行业到底处在周期时钟的几点钟方向？必须把<strong>“光伏逆变器”</strong>与<strong>“大储系统”</strong>拆开看，更要把2026Q3那份让市场震惊的季报放在显微镜下逐项还原：</p>
 <ol>
 <li>
-<p><strong>光伏逆变器周期位置：国内装机增速换挡 + 全球新兴市场与欧洲库存去化后的稳态寡头期</strong>
-   - 国内受“136号文”现货入市改革与配电网消纳瓶颈影响，2026年地面与分布式装机进入结构调整期（2026H1阳光逆变器发货66GW，同比-13%，主要受国内拖累）；但海外中东、拉美、东南亚、巴基斯坦及欧洲大电站需求依然坚挺，阳光电源与华为数字能源两大寡头合计拿走全球超50%份额，价格体系极度稳固，毛利率维持在35%—42%的黄金区间。</p>
+<p><strong>光伏逆变器周期位置：国内装机增速换挡 + 全球新兴市场与欧洲库存去化后的稳态寡头期</strong></p>
+<ul>
+<li>国内受“136号文”现货入市改革与配电网消纳瓶颈影响，2026年地面与分布式装机进入结构调整期（2026H1阳光逆变器发货66GW，同比-13%，主要受国内拖累）；但海外中东、拉美、东南亚、巴基斯坦及欧洲大电站需求依然坚挺，阳光电源与华为数字能源两大寡头合计拿走全球超50%份额，价格体系极度稳固，毛利率维持在35%—42%的黄金区间。</li>
+</ul>
 </li>
 <li>
-<p><strong>储能系统周期位置：需求端处于“全球电网刚需爆发期”，供给端处于“国内卷死、海外大单交付错配与成本/税费剧烈扰动期”</strong>
-   - <strong>需求端毫无悬念是高景气</strong>：2026年前三季度阳光电源储能发货量高达<strong>41GWh（同比+43%）</strong>，其中Q1约9GWh、Q2约15GWh、<strong>Q3单季高达17GWh（环比+24%）</strong>，且期末合同负债冲上146.66亿元、存货冲上409.72亿元（其中绝大部分是已发往海外港口或在客户端等待并网验收的发出商品）。</p>
+<p><strong>储能系统周期位置：需求端处于“全球电网刚需爆发期”，供给端处于“国内卷死、海外大单交付错配与成本/税费剧烈扰动期”</strong></p>
+<ul>
+<li><strong>需求端毫无悬念是高景气</strong>：2026年前三季度阳光电源储能发货量高达<strong>41GWh（同比+43%）</strong>，其中Q1约9GWh、Q2约15GWh、<strong>Q3单季高达17GWh（环比+24%）</strong>，且期末合同负债冲上146.66亿元、存货冲上409.72亿元（其中绝大部分是已发往海外港口或在客户端等待并网验收的发出商品）。</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -972,14 +1447,18 @@
 <h3 id="_4">三、 成本顺价权与客户转换代价测试</h3>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
-<p><strong>对上游的议价权（电芯与IGBT/SiC）</strong>：
-   - 阳光电源每年采购超40—60GWh储能电芯，是全球除了特斯拉之外最大的独立第三方储能电芯大买家。在电芯行业产能普遍过剩的格局下，阳光电源通过扶持中创新航、亿纬锂能、欣旺达、瑞浦兰钧等多家二线头部电芯厂，联合定制684Ah叠片大电芯（PowerTitan 3.0专用），成功打破了单一电芯巨头的垄断溢价。
-   - 但2026Q3也暴露了它的一个短板：<strong>对于签定固定总价（Fixed-Price）且交付期长达6—12个月的海外大储长单，如果签约后上游碳酸锂/电芯或出口退税率突然发生不利跳变，存量已签订单无法向海外业主二次提价，只能自己硬吞1—2个季度的毛利缩水，直到新签订单把涨价和退税成本重新计入报价模型</strong>。</p>
+<p><strong>对上游的议价权（电芯与IGBT/SiC）</strong>：</p>
+<ul>
+<li>阳光电源每年采购超40—60GWh储能电芯，是全球除了特斯拉之外最大的独立第三方储能电芯大买家。在电芯行业产能普遍过剩的格局下，阳光电源通过扶持中创新航、亿纬锂能、欣旺达、瑞浦兰钧等多家二线头部电芯厂，联合定制684Ah叠片大电芯（PowerTitan 3.0专用），成功打破了单一电芯巨头的垄断溢价。</li>
+<li>但2026Q3也暴露了它的一个短板：<strong>对于签定固定总价（Fixed-Price）且交付期长达6—12个月的海外大储长单，如果签约后上游碳酸锂/电芯或出口退税率突然发生不利跳变，存量已签订单无法向海外业主二次提价，只能自己硬吞1—2个季度的毛利缩水，直到新签订单把涨价和退税成本重新计入报价模型</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>对下游客户的转换代价</strong>：
-   - 在欧美、澳洲、英国、沙特等高门槛市场，一套百兆瓦级储能电站或吉瓦级光伏电站往往需要通过当地电网长达1—2年的<strong>机电暂态与电磁暂态仿真建模认证（PSCAD / PSS/E模型白名单）</strong>，并需要国际顶级保险公司（如慕尼黑再保险）与欧美银行团提供<strong>无追索权项目融资白名单（Bankability，可融资性）</strong>。
-   - 如果海外业主把阳光电源换成一家便宜15%但没有经过当地电网构网实证的中国二线集成商，银行团直接拒绝放贷，或者贷款利率上浮150—200个基点——<strong>光是多出来的财务利息，就是储能设备差价的2倍以上</strong>！这就是阳光电源在海外能维持30%+常态毛利率、而国内同行只能在国内卷6%—10%毛利率的根本商业壁垒。</p>
+<p><strong>对下游客户的转换代价</strong>：</p>
+<ul>
+<li>在欧美、澳洲、英国、沙特等高门槛市场，一套百兆瓦级储能电站或吉瓦级光伏电站往往需要通过当地电网长达1—2年的<strong>机电暂态与电磁暂态仿真建模认证（PSCAD / PSS/E模型白名单）</strong>，并需要国际顶级保险公司（如慕尼黑再保险）与欧美银行团提供<strong>无追索权项目融资白名单（Bankability，可融资性）</strong>。</li>
+<li>如果海外业主把阳光电源换成一家便宜15%但没有经过当地电网构网实证的中国二线集成商，银行团直接拒绝放贷，或者贷款利率上浮150—200个基点——<strong>光是多出来的财务利息，就是储能设备差价的2倍以上</strong>！这就是阳光电源在海外能维持30%+常态毛利率、而国内同行只能在国内卷6%—10%毛利率的根本商业壁垒。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>海外银行家是一群最胆小也最精明的动物，他们宁可让业主多付20%的钱买阳光或特斯拉的设备，也绝不肯把十亿美元贷款押在一个没听说过的便宜牌子上。但2026年三季度也给曹仁贤提了个醒：签半年后交货的固定价格合同时，如果不把电芯成本和退税风险完全锁死，就算你是老大，也会被上游和税单联手剃一回胡子。</p></div></div></div></div>
 
@@ -989,28 +1468,36 @@
 <p>在大型储能系统赛道，全球真正站在第一梯队食物链顶端的只有两家：<strong>特斯拉（Tesla Megapack）</strong>与<strong>阳光电源（Sungrow PowerTitan）</strong>。</p>
 <ol>
 <li>
-<p><strong>“交直流一体化（AC-Block）”与“叠片684Ah + 全液冷碳化硅PCS”工程迭代</strong>：
-   - 传统储能电站是“直流电池舱 + 外部集中式PCS升压舱”分离布置，现场需要铺设成百上千根粗重的直流高压电缆，不仅占地大、施工慢，而且多簇电池并联容易产生严重的“簇间环流（木桶效应）”，导致整站可用容量损失5%—8%。
-   - 阳光电源在<strong>PowerTitan 2.0（20尺标准集装箱10MWh）</strong>上率行业之先推出<strong>“交直流一体化”</strong>架构：把液冷电池模块与模块化液冷PCS直接集成在同一个标准柜内，“一簇一PCS”独立控制，出厂前在车间完成全部联调测试，运到沙特或英国工地现场“像插U盘一样”直接接交流电网，省去现场直流接线，安装时间缩短50%，簇间环流降为0，全生命周期放电量提升8%以上。
-   - 到了2025—2026年推出的<strong>PowerTitan 3.0智储平台</strong>，阳光电源进一步将电芯推向<strong>684Ah超大容量叠片电芯</strong>，搭配全液冷碳化硅（SiC）PCS，20尺单柜容量直接推高至<strong>12.5MWh</strong>（30尺Plus版更高），系统最高转换效率突破<strong>92%—93.5%</strong>，再次领先行业半个身位。</p>
+<p><strong>“交直流一体化（AC-Block）”与“叠片684Ah + 全液冷碳化硅PCS”工程迭代</strong>：</p>
+<ul>
+<li>传统储能电站是“直流电池舱 + 外部集中式PCS升压舱”分离布置，现场需要铺设成百上千根粗重的直流高压电缆，不仅占地大、施工慢，而且多簇电池并联容易产生严重的“簇间环流（木桶效应）”，导致整站可用容量损失5%—8%。</li>
+<li>阳光电源在<strong>PowerTitan 2.0（20尺标准集装箱10MWh）</strong>上率行业之先推出<strong>“交直流一体化”</strong>架构：把液冷电池模块与模块化液冷PCS直接集成在同一个标准柜内，“一簇一PCS”独立控制，出厂前在车间完成全部联调测试，运到沙特或英国工地现场“像插U盘一样”直接接交流电网，省去现场直流接线，安装时间缩短50%，簇间环流降为0，全生命周期放电量提升8%以上。</li>
+<li>到了2025—2026年推出的<strong>PowerTitan 3.0智储平台</strong>，阳光电源进一步将电芯推向<strong>684Ah超大容量叠片电芯</strong>，搭配全液冷碳化硅（SiC）PCS，20尺单柜容量直接推高至<strong>12.5MWh</strong>（30尺Plus版更高），系统最高转换效率突破<strong>92%—93.5%</strong>，再次领先行业半个身位。</li>
+</ul>
 </li>
 <li>
-<p><strong>“干细胞电网技术（Grid-Forming构网型储能）”——真正甩开二线集成商的护城河</strong>：
-   - 普通跟网型（Grid-Following）储能就像电网里的“搭便车乘客”，必须依赖火电/水电机组提供的稳定电压和频率波形才能并网，一旦电网波动它就脱网自保。
-   - 阳光电源自研的<strong>构网型储能技术</strong>，通过底层VSG（虚拟同步机）控制算法与毫秒级电力电子变流控制，让储能系统自己化身为一台“数字同步发电机”，具备<strong>短路比SCR低至1.0极弱电网稳定运行、毫秒级惯量响应、阻尼宽频振荡抑制以及全网瘫痪后的“黑启动（Black Start）”能力</strong>。在沙特红海新城100%新能源微网（全球首个GWh级100%风光储独立微网，已稳定运行超两年）与沙特Algihaz 7.8GWh项目中，正是靠这套真本事正面击败欧美老牌巨头。</p>
+<p><strong>“干细胞电网技术（Grid-Forming构网型储能）”——真正甩开二线集成商的护城河</strong>：</p>
+<ul>
+<li>普通跟网型（Grid-Following）储能就像电网里的“搭便车乘客”，必须依赖火电/水电机组提供的稳定电压和频率波形才能并网，一旦电网波动它就脱网自保。</li>
+<li>阳光电源自研的<strong>构网型储能技术</strong>，通过底层VSG（虚拟同步机）控制算法与毫秒级电力电子变流控制，让储能系统自己化身为一台“数字同步发电机”，具备<strong>短路比SCR低至1.0极弱电网稳定运行、毫秒级惯量响应、阻尼宽频振荡抑制以及全网瘫痪后的“黑启动（Black Start）”能力</strong>。在沙特红海新城100%新能源微网（全球首个GWh级100%风光储独立微网，已稳定运行超两年）与沙特Algihaz 7.8GWh项目中，正是靠这套真本事正面击败欧美老牌巨头。</li>
+</ul>
 </li>
 </ol>
 <hr/>
 <h3 id="1x-2000v">二、 硬核王牌二：全系列光伏逆变器（1+X模块化 + 2000V高压系统）</h3>
 <ol>
 <li>
-<p><strong>“1+X”模块化逆变器的架构革命</strong>：
-   - 传统集中式逆变器（单机3MW—5MW）虽然便宜，但一旦内部某一个功率模块故障，整机3—5MW方阵全部停机瘫痪；组串式逆变器（单机300kW）虽然发电精细，但在百兆瓦沙漠大基地里维护上千台小机器成本高昂。
-   - 阳光电源首创的<strong>“1+X”模块化逆变器</strong>（单机1.1MW，可像搭积木一样1—8台并联组成1.1MW—8.8MW子阵），每个1.1MW单元独立MPPT运行，某一台故障只影响八分之一容量，且核心模块支持现场2小时快速插拔更换，一举统合了集中式与组串式的优点，成为全球荒漠大基地的绝对统治机型。</p>
+<p><strong>“1+X”模块化逆变器的架构革命</strong>：</p>
+<ul>
+<li>传统集中式逆变器（单机3MW—5MW）虽然便宜，但一旦内部某一个功率模块故障，整机3—5MW方阵全部停机瘫痪；组串式逆变器（单机300kW）虽然发电精细，但在百兆瓦沙漠大基地里维护上千台小机器成本高昂。</li>
+<li>阳光电源首创的<strong>“1+X”模块化逆变器</strong>（单机1.1MW，可像搭积木一样1—8台并联组成1.1MW—8.8MW子阵），每个1.1MW单元独立MPPT运行，某一台故障只影响八分之一容量，且核心模块支持现场2小时快速插拔更换，一举统合了集中式与组串式的优点，成为全球荒漠大基地的绝对统治机型。</li>
+</ul>
 </li>
 <li>
-<p><strong>全球首创2000V高压光储系统</strong>：
-   - 将光伏系统直流侧电压从统治行业十年的1500V直接拉升33%至<strong>2000V</strong>（已在华能陕西孟家湾项目成功并网实证），在同等功率下电流降低25%，直接帮下游电站业主省下约30%的直流线缆铜铝用量与汇流设备，每瓦BOS（系统平衡）成本再降0.02—0.04元。</p>
+<p><strong>全球首创2000V高压光储系统</strong>：</p>
+<ul>
+<li>将光伏系统直流侧电压从统治行业十年的1500V直接拉升33%至<strong>2000V</strong>（已在华能陕西孟家湾项目成功并网实证），在同等功率下电流降低25%，直接帮下游电站业主省下约30%的直流线缆铜铝用量与汇流设备，每瓦BOS（系统平衡）成本再降0.02—0.04元。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -1115,16 +1602,22 @@
 <p>阳光电源的组织基因完全刻着创始人<strong>曹仁贤（合肥工业大学电力电子专业教师出身）</strong>的技术偏执与危机反脆弱本能。回望1997年创业至今的29年，真正决定它今天全球霸主身位的只有三次生死级转折：</p>
 <ol>
 <li>
-<p><strong>第一次生死劫（2011—2013年欧美“双反”寒冬）：全行业陪葬组件，唯独它死磕“逆变器转换效率99%”活成中国第一</strong>
-   - 2011年上市前夕及2012年，欧美对中国光伏组件发起毁灭性的“双反”制裁，无锡尚德、江西赛维等昔日巨头相继破产重整，国内90%的逆变器小厂倒闭。曹仁贤顶住诱惑，坚决不去赌上游多晶硅和电池片重资产，而是把IPO募来的钱全部砸进电力电子实验室，率先砍掉笨重的工频变压器、推出转换效率突破98%—99%的无变压器大功率逆变器，一举把德国老牌霸主SMA拉下马，在2015年首次登顶全球逆变器出货量第一。</p>
+<p><strong>第一次生死劫（2011—2013年欧美“双反”寒冬）：全行业陪葬组件，唯独它死磕“逆变器转换效率99%”活成中国第一</strong></p>
+<ul>
+<li>2011年上市前夕及2012年，欧美对中国光伏组件发起毁灭性的“双反”制裁，无锡尚德、江西赛维等昔日巨头相继破产重整，国内90%的逆变器小厂倒闭。曹仁贤顶住诱惑，坚决不去赌上游多晶硅和电池片重资产，而是把IPO募来的钱全部砸进电力电子实验室，率先砍掉笨重的工频变压器、推出转换效率突破98%—99%的无变压器大功率逆变器，一举把德国老牌霸主SMA拉下马，在2015年首次登顶全球逆变器出货量第一。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二次神级卡位（2014—2018年逆势押注储能）：在没人算得清账的荒漠里提前十年种树</strong>
-   - 早在2006年阳光电源就开始摸索储能变流器，2014年与三星SDI合资建立三星阳光储能电池有限公司（后回购为全资平台），成为国内最早把“PCS + BMS + EMS + 电芯集成”全链条打通的企业。当2021—2022年全球大储需求真正爆发时，国内同行还在临时拼凑PCS和温控团队，阳光电源已经在欧美、澳洲电网跑通了数千个项目的安全并网实证，顺理成章吃下了全球大储爆发的最大红利。</p>
+<p><strong>第二次神级卡位（2014—2018年逆势押注储能）：在没人算得清账的荒漠里提前十年种树</strong></p>
+<ul>
+<li>早在2006年阳光电源就开始摸索储能变流器，2014年与三星SDI合资建立三星阳光储能电池有限公司（后回购为全资平台），成为国内最早把“PCS + BMS + EMS + 电芯集成”全链条打通的企业。当2021—2022年全球大储需求真正爆发时，国内同行还在临时拼凑PCS和温控团队，阳光电源已经在欧美、澳洲电网跑通了数千个项目的安全并网实证，顺理成章吃下了全球大储爆发的最大红利。</li>
+</ul>
 </li>
 <li>
-<p><strong>第三次自我革命（2018年“531新政”与全球化铁军锻造）：被国内政策急刹车逼出的海外直营帝国</strong>
-   - 2018年国内光伏“531新政”一夜之间冻结补贴指标，国内市场腰斩。曹仁贤痛定思痛，强行把组织重心推向海外，不走廉价贴牌代工老路，而是在美国、欧洲、澳洲、印度、中东重金建立本地化直销、并网仿真工程师与售后服务中心（目前海外设有20+分子公司、520+服务网点）。</p>
+<p><strong>第三次自我革命（2018年“531新政”与全球化铁军锻造）：被国内政策急刹车逼出的海外直营帝国</strong></p>
+<ul>
+<li>2018年国内光伏“531新政”一夜之间冻结补贴指标，国内市场腰斩。曹仁贤痛定思痛，强行把组织重心推向海外，不走廉价贴牌代工老路，而是在美国、欧洲、澳洲、印度、中东重金建立本地化直销、并网仿真工程师与售后服务中心（目前海外设有20+分子公司、520+服务网点）。</li>
+</ul>
 </li>
 </ol>
 <p><strong>一句话定性组织基因</strong>：阳光电源过去的成功绝非单纯靠搭上中国新能源时代的顺风车，而是沉淀出了一套<strong>“以大功率电力电子同心圆（光→风→储→氢→车→AIDC算力电源）为技术底座、绝不盲目重资产赌大宗原材料、用全球本地化工程服务构建高可融资性壁垒”</strong>的跨周期迁移能力。</p>
@@ -1161,17 +1654,23 @@
 </li>
 </ul><ol start="2">
 <li>
-<p><strong>质押、杠杆与高点套现排查（无异常）</strong>：
-   - 曹仁贤持股约30.5%，截至2026年最新公告，其质押股份占其所持股份比例仅在<strong>2%—3%左右</strong>的极低水平，无任何平仓风险；且在2021—2026年公司市值跨越千亿至三千亿周期内，实控人曹仁贤从未进行过恶性大额减持套现，反而在2022—2026年间连续多次提议并实施每次5亿—10亿元真金白银的二级市场股份回购。</p>
+<p><strong>质押、杠杆与高点套现排查（无异常）</strong>：</p>
+<ul>
+<li>曹仁贤持股约30.5%，截至2026年最新公告，其质押股份占其所持股份比例仅在<strong>2%—3%左右</strong>的极低水平，无任何平仓风险；且在2021—2026年公司市值跨越千亿至三千亿周期内，实控人曹仁贤从未进行过恶性大额减持套现，反而在2022—2026年间连续多次提议并实施每次5亿—10亿元真金白银的二级市场股份回购。</li>
+</ul>
 </li>
 <li>
-<p><strong>商誉与减值审视（无商誉雷，但存货跌价与应收坏账计提需盯紧）</strong>：
-   - 公司坚持内生研发，从不搞跨界高溢价并购，账面商誉几乎为零。
-   - 会计计提总体审慎：对早期沉淀的老旧电站资产、越南项目及跌价电芯库存均按期足额计提资产减值与信用减值损失（如2024—2025年每年计提十余亿元减值准备夯实资产负债表）。</p>
+<p><strong>商誉与减值审视（无商誉雷，但存货跌价与应收坏账计提需盯紧）</strong>：</p>
+<ul>
+<li>公司坚持内生研发，从不搞跨界高溢价并购，账面商誉几乎为零。</li>
+<li>会计计提总体审慎：对早期沉淀的老旧电站资产、越南项目及跌价电芯库存均按期足额计提资产减值与信用减值损失（如2024—2025年每年计提十余亿元减值准备夯实资产负债表）。</li>
+</ul>
 </li>
 <li>
-<p><strong>关联交易与财务公司排查（干净透明）</strong>：
-   - 无控股股东体外关联公司截留核心原材料利润，亦无集团财务公司违规占用上市公司资金的黑历史。</p>
+<p><strong>关联交易与财务公司排查（干净透明）</strong>：</p>
+<ul>
+<li>无控股股东体外关联公司截留核心原材料利润，亦无集团财务公司违规占用上市公司资金的黑历史。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>我最喜欢两种管理层：一种是永远不犯错的神仙——可惜这种人只存在于童话书里；另一种是像曹仁贤这样，2021年踩了越南电站和电芯涨价的坑之后，低头认错、马上把风控补丁打好，随后四年把利润干翻8倍的实干家。至于把100GW工厂晚一年建完、把垫资建电站的子公司刹车，那不叫违约，那叫脑子清醒。</p></div></div></div></div>
 
@@ -1226,8 +1725,10 @@
 </li>
 </ul>
 <ol start="2">
-<li><strong>股份回购去向严苛审计（区分“注销”与“员工激励”）</strong>：
-   - 2022—2026年10月，阳光电源先后实施了四轮二级市场股份回购：2022年回购约5.2亿元、2023—2024年回购约9.8亿元+5.01亿元、2025年回购约3.0亿元、2026年8—10月最新一轮已回购3.55亿元（计划5亿—10亿元），<strong>累计二级市场真金白银回购耗资超26.5亿元</strong>。</li>
+<li><strong>股份回购去向严苛审计（区分“注销”与“员工激励”）</strong>：<ul>
+<li>2022—2026年10月，阳光电源先后实施了四轮二级市场股份回购：2022年回购约5.2亿元、2023—2024年回购约9.8亿元+5.01亿元、2025年回购约3.0亿元、2026年8—10月最新一轮已回购3.55亿元（计划5亿—10亿元），<strong>累计二级市场真金白银回购耗资超26.5亿元</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>严格按买方铁尺定性</strong>：除少量因激励对象离职触发的限制性股票回购注销外，阳光电源二级市场回购的股份<strong>绝大部分用于实施员工持股计划或股权激励计划，并非100%减资注销式回购</strong>。因此在后续模块计算真实股东即期回报率时，我们<strong>只计入实打实的现金分红，绝不把用于发员工奖金的回购混充作股东分红</strong>！</li>
@@ -1323,8 +1824,10 @@
 </table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="_15">打破“合并报表幻觉”两项深度穿透：</h4><ol>
 <li>
-<p><strong>少数股东权益 vs 少数股东损益核查（无纸面富贵幻觉）</strong>：
-   - 截至2025年末，公司归母净资产约380亿元+，<strong>少数股东权益为31.61亿元</strong>（占总净资产比例仅约7.6%，主要来自控股子公司阳光新能源引入外部战投）；2025年及2026年前三季度，由于阳光新能源主动收缩调整，少数股东损益极小甚至在2026年阶段性微亏（如2026Q1为-453万元），<strong>公司99%以上的核心利润（逆变器与储能）100%归属于母公司全体股东，不存在任何“肥了少数股东、瘦了母公司”的合并报表幻觉</strong>。</p>
+<p><strong>少数股东权益 vs 少数股东损益核查（无纸面富贵幻觉）</strong>：</p>
+<ul>
+<li>截至2025年末，公司归母净资产约380亿元+，<strong>少数股东权益为31.61亿元</strong>（占总净资产比例仅约7.6%，主要来自控股子公司阳光新能源引入外部战投）；2025年及2026年前三季度，由于阳光新能源主动收缩调整，少数股东损益极小甚至在2026年阶段性微亏（如2026Q1为-453万元），<strong>公司99%以上的核心利润（逆变器与储能）100%归属于母公司全体股东，不存在任何“肥了少数股东、瘦了母公司”的合并报表幻觉</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>账面现金成色与有息负债结构核验（极度充沛的净现金堡垒）</strong>：</p>
@@ -1350,13 +1853,17 @@
 <p>穿透2025年报、2026三季报及港股H股招股书，公司当下的真金白银主要砸向以下三大方向：</p>
 <ol>
 <li>
-<p><strong>国内合肥大本营与长三角高端制造升级（年产100GW新能源发电装备基地 + 株洲/惠州等基地）</strong>：
-   - 2021年定增募投的合肥“年产100GW新能源发电装备制造基地”（70GW光伏逆变器 + 15GW风电变流器 + 15GW储能变流器）已于2025年6月全面建成投产，配合合肥总部智慧储能集成工厂，构成了全球单厂规模最大、自动化率最高、单位制造成本最低的母基地。</p>
+<p><strong>国内合肥大本营与长三角高端制造升级（年产100GW新能源发电装备基地 + 株洲/惠州等基地）</strong>：</p>
+<ul>
+<li>2021年定增募投的合肥“年产100GW新能源发电装备制造基地”（70GW光伏逆变器 + 15GW风电变流器 + 15GW储能变流器）已于2025年6月全面建成投产，配合合肥总部智慧储能集成工厂，构成了全球单厂规模最大、自动化率最高、单位制造成本最低的母基地。</li>
+</ul>
 </li>
 <li>
-<p><strong>海外本地化制造基地（防关税与原产地围堵的战略先手棋——当前CapEx重中之重）</strong>：
-   - 存量海外基地：<strong>印度班加罗尔工厂（约10GW）</strong>与<strong>泰国工厂（约15GW）</strong>合计已形成超25GW/GWh海外逆变器与储能组装交付能力；
-   - 增量海外扩张（2025—2026年核心投向 + 港股H股募资主力投向）：加速推进<strong>中东（沙特/阿联酋本地化产能配套）</strong>、<strong>欧洲（波兰等东欧制造基地）</strong>及东南亚/美洲供应链节点建设，计划在海外新增数十GW逆变器与数十GWh储能系统本地化产能。</p>
+<p><strong>海外本地化制造基地（防关税与原产地围堵的战略先手棋——当前CapEx重中之重）</strong>：</p>
+<ul>
+<li>存量海外基地：<strong>印度班加罗尔工厂（约10GW）</strong>与<strong>泰国工厂（约15GW）</strong>合计已形成超25GW/GWh海外逆变器与储能组装交付能力；</li>
+<li>增量海外扩张（2025—2026年核心投向 + 港股H股募资主力投向）：加速推进<strong>中东（沙特/阿联酋本地化产能配套）</strong>、<strong>欧洲（波兰等东欧制造基地）</strong>及东南亚/美洲供应链节点建设，计划在海外新增数十GW逆变器与数十GWh储能系统本地化产能。</li>
+</ul>
 </li>
 <li>
 <p><strong>经济性质拆分</strong>：</p>
@@ -1375,18 +1882,24 @@
 <p>2025年阳光电源研发费用高达 <strong>41.75亿元（同比暴增31.97%）</strong>，7,625名研发工程师（占员工总数40.12%）正在推动公司发生三场深刻的内部进化：</p>
 <ol>
 <li>
-<p><strong>技术跃迁一：从“跟网型电力电子”向“全场景干细胞构网（Grid-Forming）+ AI电力交易”进化</strong>
-   - 以前卖逆变器和储能柜是卖“硬件参数（转换效率99%）”；现在通过PowerTitan 3.0搭载的构网算法与智慧能源管理平台，阳光电源直接帮海外业主解决<strong>“弱电网不掉线 + 电力现货市场自动低充高放套利”</strong>。硬件正在变成软件算法与电网服务的载体。</p>
+<p><strong>技术跃迁一：从“跟网型电力电子”向“全场景干细胞构网（Grid-Forming）+ AI电力交易”进化</strong></p>
+<ul>
+<li>以前卖逆变器和储能柜是卖“硬件参数（转换效率99%）”；现在通过PowerTitan 3.0搭载的构网算法与智慧能源管理平台，阳光电源直接帮海外业主解决<strong>“弱电网不掉线 + 电力现货市场自动低充高放套利”</strong>。硬件正在变成软件算法与电网服务的载体。</li>
+</ul>
 </li>
 <li>
-<p><strong>技术跃迁二：借“10kV中压直转800V直流”固态变压器（SST），从新能源跨界切入英伟达AIDC算力供电心脏</strong>
-   - AI大模型算力中心的单机柜功率密度正从传统的10—20kW狂飙至英伟达GB200/Rubin架构的120kW—600kW+，传统“中压工频变压器 + UPS不间断电源”占地极大、铜耗极高、转换级数多达4—5级。
-   - 阳光电源发现：<strong>AIDC数据中心供电的底层物理技术（高频碳化硅AC/DC与DC/DC变换、高压直流母线控制、毫秒级储能备电BBU平滑负载冲击），与自己干了29年的大功率光伏逆变器和储能PCS完全同源！</strong>
-   - 2026年7月，阳光电源正式发布<strong>EnerNeo系列固态变压器（SST）</strong>并亮相OCP全球峰会英伟达生态阵营，实现10kV—13.8kV中压交流电一步直转800V直流电，系统效率高达98.5%、占地面积砍半50%，同时配套智算中心绿电微网+构网型储能削峰填谷，打开了一个毛利率高达40%+的全新蓝海。</p>
+<p><strong>技术跃迁二：借“10kV中压直转800V直流”固态变压器（SST），从新能源跨界切入英伟达AIDC算力供电心脏</strong></p>
+<ul>
+<li>AI大模型算力中心的单机柜功率密度正从传统的10—20kW狂飙至英伟达GB200/Rubin架构的120kW—600kW+，传统“中压工频变压器 + UPS不间断电源”占地极大、铜耗极高、转换级数多达4—5级。</li>
+<li>阳光电源发现：<strong>AIDC数据中心供电的底层物理技术（高频碳化硅AC/DC与DC/DC变换、高压直流母线控制、毫秒级储能备电BBU平滑负载冲击），与自己干了29年的大功率光伏逆变器和储能PCS完全同源！</strong></li>
+<li>2026年7月，阳光电源正式发布<strong>EnerNeo系列固态变压器（SST）</strong>并亮相OCP全球峰会英伟达生态阵营，实现10kV—13.8kV中压交流电一步直转800V直流电，系统效率高达98.5%、占地面积砍半50%，同时配套智算中心绿电微网+构网型储能削峰填谷，打开了一个毛利率高达40%+的全新蓝海。</li>
+</ul>
 </li>
 <li>
-<p><strong>商业模式跃迁：主动砍掉重资产电站EPC（阳光新能源），向“高毛利纯技术装备 + 全球电网级系统方案商”提纯</strong>
-   - 2026年公司宁可忍受合并营收同比下滑26%，也要把低毛利垫资的国内新能源开发业务砍掉八成，把海外高附加值业务占比推高至73.40%，商业模式含金量不降反升。</p>
+<p><strong>商业模式跃迁：主动砍掉重资产电站EPC（阳光新能源），向“高毛利纯技术装备 + 全球电网级系统方案商”提纯</strong></p>
+<ul>
+<li>2026年公司宁可忍受合并营收同比下滑26%，也要把低毛利垫资的国内新能源开发业务砍掉八成，把海外高附加值业务占比推高至73.40%，商业模式含金量不降反升。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -1433,16 +1946,18 @@
 </li>
 <li>
 <p><strong>海外建厂防得住什么、防不住什么？</strong></p>
-</li>
+<ul>
 <li>阳光电源在泰国、印度、波兰、中东布局海外工厂，<strong>可以有效规避“按产品原产地（Made in China）征收的反倾销税与普通关税”</strong>；</li>
-<li>
-<p>但如果美国或欧洲个别国家未来出台<strong>“按母公司国籍/实控人控制权（FEOC / 国防安全黑名单）”一刀切禁止中国品牌接入公用事业主干电网</strong>的极端法案，那么海外建厂也无法绕开控制权穿透。</p>
+<li>但如果美国或欧洲个别国家未来出台<strong>“按母公司国籍/实控人控制权（FEOC / 国防安全黑名单）”一刀切禁止中国品牌接入公用事业主干电网</strong>的极端法案，那么海外建厂也无法绕开控制权穿透。</li>
+</ul>
 </li>
 <li>
 <p><strong>阳光电源的缓冲筹码与杀伤边界</strong>：</p>
-</li>
+<ul>
 <li>第一，阳光电源在全球非美市场（中东、拉美、亚太、非洲、欧洲大多数国家）已经形成深度绑定，目前美国市场占公司总营收约10%—15%左右（占储能利润约20%—25%），即使极端情况下美国市场完全关门，中东、欧洲与新兴市场的增量也能在1—2年内填补缺口，绝不会动摇公司生存根基；</li>
 <li>第二，公司已在欧美全面部署本地化独立云服务器、通过国际最高等级UL/TÜV网络安全认证，并支持客户本地物理断网运行。</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="40972">暗礁二：高达409.72亿元的存货洪峰与海外大储“固定价长单 + 成本/退税错配”的减值及毛利挤压风险</h3>
@@ -1472,20 +1987,28 @@
 <h3 id="4">二、 未来两到三年每次翻开财报必看的 4 个“硬核验证路标”</h3>
 <ol>
 <li>
-<p><strong>【路标一：409.72亿存货与146.66亿合同负债的结转兑现度 &amp; 储能毛利率修复刻度】（最紧迫短期路标）</strong>
-   - <strong>怎么看</strong>：紧盯2026年四季报与2027年一季报——看Q3发出的17GWh储能系统是否在2026Q4—2027Q1集中完成海外并网确收？随着高价电芯库存消化完毕及PowerTitan 3.0（684Ah叠片+SiC PCS）导入，<strong>储能系统单季毛利率能否从2026Q3的21%谷底重新爬升回28%—32%以上的常态健康区间</strong>？若连续三个季度储能毛利率跌破20%且存货周转天数持续恶化，则说明海外大储价格战已伤及长期商业模式。</p>
+<p><strong>【路标一：409.72亿存货与146.66亿合同负债的结转兑现度 &amp; 储能毛利率修复刻度】（最紧迫短期路标）</strong></p>
+<ul>
+<li><strong>怎么看</strong>：紧盯2026年四季报与2027年一季报——看Q3发出的17GWh储能系统是否在2026Q4—2027Q1集中完成海外并网确收？随着高价电芯库存消化完毕及PowerTitan 3.0（684Ah叠片+SiC PCS）导入，<strong>储能系统单季毛利率能否从2026Q3的21%谷底重新爬升回28%—32%以上的常态健康区间</strong>？若连续三个季度储能毛利率跌破20%且存货周转天数持续恶化，则说明海外大储价格战已伤及长期商业模式。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标二：新曲线AIDC算力电源（EnerNeo SST / HVDC）的头部云厂商订单突破与海外工厂投产进度】</strong>
-   - <strong>怎么看</strong>：追踪公司在北美及亚太头部CSP云厂商、英伟达生态智算中心的800V直流供电方案与SST固态变压器是否从“样机参展/测试”走向<strong>单笔亿级至十亿级人民币规模的商业化批量订单</strong>；同时紧盯中东、东欧等海外本地化制造基地的实际投产交付比例。</p>
+<p><strong>【路标二：新曲线AIDC算力电源（EnerNeo SST / HVDC）的头部云厂商订单突破与海外工厂投产进度】</strong></p>
+<ul>
+<li><strong>怎么看</strong>：追踪公司在北美及亚太头部CSP云厂商、英伟达生态智算中心的800V直流供电方案与SST固态变压器是否从“样机参展/测试”走向<strong>单笔亿级至十亿级人民币规模的商业化批量订单</strong>；同时紧盯中东、东欧等海外本地化制造基地的实际投产交付比例。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标三：核心财务与自由现金流健康底线】</strong>
-   - <strong>怎么看</strong>：随着阳光新能源垫资开发业务收缩到位及海外在途存货结转回款，核验公司<strong>全年经营活动现金流净额（OCF）与归母净利润的比值（净现比）是否恢复至80%—100%以上</strong>，全年自由现金流（FCF）是否稳居80亿—120亿元以上，以及港股H股发行落地后的股本摊薄幅度与资金使用效率。</p>
+<p><strong>【路标三：核心财务与自由现金流健康底线】</strong></p>
+<ul>
+<li><strong>怎么看</strong>：随着阳光新能源垫资开发业务收缩到位及海外在途存货结转回款，核验公司<strong>全年经营活动现金流净额（OCF）与归母净利润的比值（净现比）是否恢复至80%—100%以上</strong>，全年自由现金流（FCF）是否稳居80亿—120亿元以上，以及港股H股发行落地后的股本摊薄幅度与资金使用效率。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标四：美欧电网准入政策与关税/FEOC规则演变节点】</strong>
-   - <strong>怎么看</strong>：密切跟踪美国对华储能电池及东南亚转口产能的关税执行细则、IRA法案FEOC豁免边界，以及欧盟NIS2能源网络安全审查对联网逆变器的具体合规要求，验证阳光电源在北美与欧洲大储市场的份额是否保持稳固。</p>
+<p><strong>【路标四：美欧电网准入政策与关税/FEOC规则演变节点】</strong></p>
+<ul>
+<li><strong>怎么看</strong>：密切跟踪美国对华储能电池及东南亚转口产能的关税执行细则、IRA法案FEOC豁免边界，以及欧盟NIS2能源网络安全审查对联网逆变器的具体合规要求，验证阳光电源在北美与欧洲大储市场的份额是否保持稳固。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -1642,36 +2165,40 @@
 <hr/>
 <h3 id="_22">二、 审视消化能力：新产能是“雪中送炭”还是“投产即过剩”？</h3>
 <div class="annotated-row"><div class="main-col"><p>回答“新产能会不会过剩”，绝不能拿光伏硅料或国内低端储能组装的尺子去量，而必须将阳光电源的<strong>存量产能真实负荷、2026Q3在手订单蓄水池、以及海内外产区的结构性错配</strong>拆开来对表：</p><ol>
-<li><strong>存量产能真实稼动率核查：储能产线处于超负荷连轴转状态</strong></li>
+<li>
+<p><strong>存量产能真实稼动率核查：储能产线处于超负荷连轴转状态</strong></p>
+<ul>
+<li><strong>逆变器与电力电子端</strong>：2025年公司光伏逆变器出货 <strong>143GW</strong>、风电变流器出货 <strong>38GW</strong>，合计达 <strong>181GW</strong>；2026年上半年光伏逆变器发货 <strong>66GW</strong>（受国内“136号文”现货入市改革影响，国内发货阶段性回落，但海外高毛利市场依然稳健）。随着合肥100GW基地在2025年6月全面投产，公司国内+海外存量逆变器总产能已达约200GW量级，整体稼动率维持在 <strong>80%—90%</strong> 的健康充裕水位。这也解释了为什么管理层在2024年曾主动将合肥100GW基地的完工时间延期14个月至2025年6月——<strong>发现国内装机增速换挡，立刻放缓国内普通逆变器设备采购节奏，拒绝盲目堆砌冗余产能</strong>。</li>
+</ul>
+</li>
 </ol><ul>
-<li>
-<p><strong>逆变器与电力电子端</strong>：2025年公司光伏逆变器出货 <strong>143GW</strong>、风电变流器出货 <strong>38GW</strong>，合计达 <strong>181GW</strong>；2026年上半年光伏逆变器发货 <strong>66GW</strong>（受国内“136号文”现货入市改革影响，国内发货阶段性回落，但海外高毛利市场依然稳健）。随着合肥100GW基地在2025年6月全面投产，公司国内+海外存量逆变器总产能已达约200GW量级，整体稼动率维持在 <strong>80%—90%</strong> 的健康充裕水位。这也解释了为什么管理层在2024年曾主动将合肥100GW基地的完工时间延期14个月至2025年6月——<strong>发现国内装机增速换挡，立刻放缓国内普通逆变器设备采购节奏，拒绝盲目堆砌冗余产能</strong>。</p>
-</li>
-<li>
-<p><strong>大型储能系统端</strong>：2025年公司储能系统出货 <strong>43GWh</strong>（同比大增49.39%）；进入2026年前三季度，储能累计发货量已高达 <strong>41GWh（同比高增43%）</strong>，其中Q1约9GWh、Q2约15GWh、<strong>Q3单季发货量冲上17GWh（环比+24%，折合年化发货速率已逼近 68GWh）</strong>！在合肥20GWh新基地与海外15GWh扩建项目完全释放之前，公司存量储能总装与全功率联调测试产线在2026年三季度实际上处于 <strong>110%以上的三班倒超负荷运转状态</strong>。</p>
-</li>
+<li><strong>大型储能系统端</strong>：2025年公司储能系统出货 <strong>43GWh</strong>（同比大增49.39%）；进入2026年前三季度，储能累计发货量已高达 <strong>41GWh（同比高增43%）</strong>，其中Q1约9GWh、Q2约15GWh、<strong>Q3单季发货量冲上17GWh（环比+24%，折合年化发货速率已逼近 68GWh）</strong>！在合肥20GWh新基地与海外15GWh扩建项目完全释放之前，公司存量储能总装与全功率联调测试产线在2026年三季度实际上处于 <strong>110%以上的三班倒超负荷运转状态</strong>。</li>
 </ul><ol start="2">
-<li><strong>下游真实订单增量底牌：146.66亿预收款与409.72亿存货的铁证</strong></li>
-</ol><ul>
 <li>
-<p>截至2026年9月30日，尽管公司前三季度合并报表营收（488.63亿元，-26.41%）因主动砍掉超80%国内垫资电站开发业务及海外大储确收滞后而表面下滑，但资产负债表上的两个先行指标创下了历史极值：</p>
+<p><strong>下游真实订单增量底牌：146.66亿预收款与409.72亿存货的铁证</strong></p>
+<ul>
+<li>截至2026年9月30日，尽管公司前三季度合并报表营收（488.63亿元，-26.41%）因主动砍掉超80%国内垫资电站开发业务及海外大储确收滞后而表面下滑，但资产负债表上的两个先行指标创下了历史极值：</li>
+</ul>
 </li>
+</ol><ul>
 <li>
 <p><strong>合同负债（客户真金白银打入的预收定金）高达 <code>146.66亿元</code></strong>（较2025年末的106.55亿元激增 <strong>40.11亿元</strong>，增幅达 <strong>+37.64%</strong>）；</p>
 </li>
 <li>
 <p><strong>存货高达 <code>409.72亿元</code></strong>（较2025年末的272.55亿元激增 <strong>137.17亿元</strong>，增幅达 <strong>+50.33%</strong>，其中绝大部分为已发往中东、欧洲、澳洲、美洲港口或在客户端等待并网调试验收的在途发出商品）。</p>
-</li>
+<ul>
 <li>按照海外大型光储项目普遍收取20%—30%预收定金的商业惯例倒推，<strong>146.66亿元合同负债背后对应着高达 <code>500亿—700亿元</code> 的真实在手待交付订单</strong>（储能潜在在手订单储备超60—80GWh）。</li>
+</ul>
+</li>
 </ul><ol start="3">
-<li><strong>消化能力最终定性：“国内总量饱和结构升级，海外产能雪中送炭解交付与关税死结”</strong></li>
+<li>
+<p><strong>消化能力最终定性：“国内总量饱和结构升级，海外产能雪中送炭解交付与关税死结”</strong></p>
+<ul>
+<li><strong>国内产能</strong>：普通光伏逆变器产能已无需再扩，国内新增的合肥20GWh先进储能基地核心是为了承接 <strong>PowerTitan 3.0（搭载684Ah叠片大电芯 + 全液冷碳化硅PCS）</strong> 的产线换代升级，替换早期风冷及第一代液冷老旧产线；</li>
+</ul>
+</li>
 </ol><ul>
-<li>
-<p><strong>国内产能</strong>：普通光伏逆变器产能已无需再扩，国内新增的合肥20GWh先进储能基地核心是为了承接 <strong>PowerTitan 3.0（搭载684Ah叠片大电芯 + 全液冷碳化硅PCS）</strong> 的产线换代升级，替换早期风冷及第一代液冷老旧产线；</p>
-</li>
-<li>
-<p><strong>海外产能（50GW逆变器 + 15GWh储能）</strong>：2026年上半年公司海外收入占比已飙升至 <strong>73.40%</strong>（2025年为60.54%）。在欧美贸易壁垒高筑、中东主权基金强制要求本地化配套的背景下，现有印度（10GW）与泰国（15GW）合计25GW海外基地已远远无法满足海外70%以上的营收体量。因此，海外扩产绝非盲目扩张，而是<strong>保住海外30%—42%高毛利订单准入资格、规避单一中国原产地关税围堵的“救命先手棋”</strong>。</p>
-</li>
+<li><strong>海外产能（50GW逆变器 + 15GWh储能）</strong>：2026年上半年公司海外收入占比已飙升至 <strong>73.40%</strong>（2025年为60.54%）。在欧美贸易壁垒高筑、中东主权基金强制要求本地化配套的背景下，现有印度（10GW）与泰国（15GW）合计25GW海外基地已远远无法满足海外70%以上的营收体量。因此，海外扩产绝非盲目扩张，而是<strong>保住海外30%—42%高毛利订单准入资格、规避单一中国原产地关税围堵的“救命先手棋”</strong>。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>当一家公司账上趴着147亿客户预交的定金、三季度储能发货量跑出年化68GWh的极限速度时，担心它的新车间没人干活，就像在感恩节前夜担心火鸡店卖不出火鸡一样多余。真正值得操心的不是国内产线够不够用，而是怎么把产能平安搬到海外海关围墙的里面去。</p></div></div></div></div>
 
 
@@ -1683,34 +2210,36 @@
 <hr/>
 <h3 id="_23">三、 排查落地阻力：海外建厂（中东/东欧/东南亚/印度）的四块硬骨头</h3>
 <div class="annotated-row"><div class="main-col"><p>虽然海外建厂在战略上属于必选项，但在实际工程落地与跨国运营中，阳光电源正面临四道可能导致<strong>工期延误、预算超支或达产稼动率不及预期</strong>的现实硬骨头：</p><ol>
-<li><strong>硬骨头一：核心功率半导体（IGBT/SiC）与特种大电芯的跨国供应链“半散件”依赖症</strong></li>
-</ol><ul>
+<li>
+<p><strong>硬骨头一：核心功率半导体（IGBT/SiC）与特种大电芯的跨国供应链“半散件”依赖症</strong></p>
+<ul>
 <li>无论是泰国、印度基地，还是正在推进的波兰（东欧）与沙特/阿联酋（中东）工厂，当地均缺乏完备的电力电子上游生态。阳光电源海外工厂所需的 <strong>684Ah/314Ah储能电芯、车规/工业级IGBT与碳化硅（SiC）MOSFET功率模块、高精度电流传感器、多层印制电路板（PCB）以及液冷板散热器</strong>，仍有 <strong>80%—85%以上必须从中国长三角/珠三角供应链采购并通过海运发往海外组装厂</strong>。</li>
 <li>这意味着海外工厂本质上是“SKD/CKD（半散件/全散件组装）+ 终检测试基地”。一旦遭遇红海航运危机、苏伊士运河拥堵、集装箱海运费暴涨，或目的国海关对华核心零部件清关查验延迟，海外工厂就会陷入“厂房建好了、工人招齐了，但缺一颗核心芯片或一批电芯而全线停工待料”的供应链断裂风险。</li>
-</ul><ol start="2">
-<li><strong>硬骨头二：欧美原产地实质性改变（Substantial Transformation）认定与美国FEOC规则穿透</strong></li>
-</ol><ul>
+</ul>
+</li>
+<li>
+<p><strong>硬骨头二：欧美原产地实质性改变（Substantial Transformation）认定与美国FEOC规则穿透</strong></p>
+<ul>
 <li>美国商务部与海关（CBP）在近年针对东南亚光伏与储能产品的反规避调查中，不断收紧“原产地认定标准”：如果仅仅把中国生产的电芯和逆变器核心控制板运到泰国或东欧工厂进行简单的机柜拼装与接线测试，极易被裁定为<strong>“未发生实质性改变”</strong>，从而照样被征收高额301关税（2026年对华锂电池301关税已升至25%）或反倾销税。</li>
 <li>更严峻的是，美国《通胀削减法案》（IRA）的<strong>“受关注外国实体（FEOC）”条款</strong>与部分议员推动的《摆脱外国电池依赖法案》，是从<strong>“股权控制权（中国母公司持股≥25%）与核心知识产权来源”</strong>进行穿透限制。如果未来美国对接入公用事业主干网的储能系统全面执行FEOC控制权一刀切审查，哪怕阳光电源把工厂建在泰国、印度甚至墨西哥，只要控股股东仍是中国上市公司且电芯来自中国供应链，依然无法帮助下游美国业主拿到最高额的ITC税收抵免，甚至迫使海外工厂不得不采购价格贵出20%—30%的日韩电芯，直接侵蚀海外扩产的经济账。</li>
-</ul><ol start="3">
-<li><strong>硬骨头三：中东（IKTVA本地化强制绑定）与东欧/印度的劳工效率落差及工会合规成本</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>硬骨头三：中东（IKTVA本地化强制绑定）与东欧/印度的劳工效率落差及工会合规成本</strong></p>
+<ul>
+<li><strong>中东地区（沙特/阿联酋）</strong>：沙特公共投资基金（PIF）与沙特电力公司（SEC）在GWh级大储招标中，全面推行严苛的 <strong>IKTVA（沙特境内总价值增值计划）本地化率考核</strong>，要求中标商必须在当地设立组装厂并雇佣一定比例的本国公民（Saudization“沙化率”）。然而中东本土极度缺乏熟练的电力电子装配技工与高压测试工程师，外派中国工程师面临高昂的差旅津贴与工作签证配额限制；实测表明，中东与印度新工厂早期的单班人均装配效率仅为国内合肥基地的 <strong>50%—65%</strong>，且中东夏季50°C极端高温对大型储能充放电测试车间的空调环控能耗造成显著超支。</li>
+</ul>
+</li>
 </ol><ul>
-<li>
-<p><strong>中东地区（沙特/阿联酋）</strong>：沙特公共投资基金（PIF）与沙特电力公司（SEC）在GWh级大储招标中，全面推行严苛的 <strong>IKTVA（沙特境内总价值增值计划）本地化率考核</strong>，要求中标商必须在当地设立组装厂并雇佣一定比例的本国公民（Saudization“沙化率”）。然而中东本土极度缺乏熟练的电力电子装配技工与高压测试工程师，外派中国工程师面临高昂的差旅津贴与工作签证配额限制；实测表明，中东与印度新工厂早期的单班人均装配效率仅为国内合肥基地的 <strong>50%—65%</strong>，且中东夏季50°C极端高温对大型储能充放电测试车间的空调环控能耗造成显著超支。</p>
-</li>
-<li>
-<p><strong>东欧地区（波兰等）</strong>：虽然靠近欧洲腹地且工程师素质较高，但受欧盟严苛的劳动法、工会谈判、每周工时上限以及欧洲高昂的工业电价制约，无法像国内合肥基地那样在订单高峰期灵活启动“24小时两班/三班倒极限抢交期”，单位人工与能源制造费用比国内高出 <strong>80%—120%</strong>。</p>
-</li>
+<li><strong>东欧地区（波兰等）</strong>：虽然靠近欧洲腹地且工程师素质较高，但受欧盟严苛的劳动法、工会谈判、每周工时上限以及欧洲高昂的工业电价制约，无法像国内合肥基地那样在订单高峰期灵活启动“24小时两班/三班倒极限抢交期”，单位人工与能源制造费用比国内高出 <strong>80%—120%</strong>。</li>
 </ul><ol start="4">
-<li><strong>硬骨头四：海外园区“10kV—35kV大容量全功率并网实验变电站”的审批延误瓶颈</strong></li>
-</ol><ul>
+<li>
+<p><strong>硬骨头四：海外园区“10kV—35kV大容量全功率并网实验变电站”的审批延误瓶颈</strong></p>
+<ul>
 <li>造一台10MWh的PowerTitan储能柜或8.8MW的1+X逆变器，最卡脖子的不是拧螺丝组装，而是出厂前必须100%经历<strong>全功率充放电老化与高低压穿越（LVRT/HVRT）电网仿真冲击测试</strong>。这要求工厂园区必须配备数十兆瓦乃至上百兆瓦容量的10kV/35kV专用实验变电站与回馈式电网模拟器。在国内合肥，政府专班代办仅需3—6个月即可完成高压增容通电；而在印度、东欧或东南亚，当地老旧电网的工业增容审批与变电站施工往往拖延 <strong>12—18个月以上</strong>，极易导致“车间土建早已完工，但因高压测试电源未通而无法满负荷出货”的工期滞后。</li>
-</ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在合肥建厂，曹仁贤面对的是全世界最勤奋的熟练工、随叫随到的长三角零部件老板和三个月就能拉通高压电的工业园；到了沙特、波兰和印度，他得先学会跟当地工会、沙化率配额、慢吞吞的电网官僚和美国海关的原产地侦探打交道。海外建厂就像穿上一双夹脚的铁鞋去跳舞——虽然很痛、效率还打七折，但为了赚海外那35%的高毛利，这双铁鞋他还非穿不可。</p></div></div></div></div>
-
-
-
-
-
+</ul>
+</li>
+</ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在合肥建厂，曹仁贤面对的是全世界最勤奋的熟练工、随叫随到的长三角零部件老板和三个月就能拉通高压电的工业园；到了沙特、波兰和印度，他得先学会跟当地工会、沙化率配额、慢吞吞的电网官僚和美国海关的原产地侦探打交道。海外建厂就像穿上一双夹脚的铁鞋去跳舞——虽然很痛、效率还打七折，但为了赚海外那35%的高毛利，这双铁鞋他还非穿不可。</p></div></div></div></div>
 
 
 
@@ -1800,27 +2329,25 @@
 <ul>
 <li>
 <p><strong>第一关（物理工艺与初期BOM成本关）：“中压重电绝缘 × 50kHz高频碳化硅”的良率挑战与 4—5元/W 的成本生死线</strong></p>
-</li>
-<li>
-<p><strong>物理难点</strong>：传统10kV工频变压器工作在50Hz/60Hz低频下，依靠笨重的硅钢片和矿物油/环氧树脂就能轻松解决绝缘与散热；而固态变压器（SST）要想把体积砍半，必须利用高压碳化硅（SiC MOSFET）将开关频率拉升1000倍至 <strong>50kHz以上</strong>，再用高频纳米晶/铁氧体磁芯进行中低压隔离变换。在如此紧凑的体积内同时承受 <strong>10kV—13.8kV中压电场</strong> 与 <strong>50kHz高频高dv/dt电压跳变</strong>，极易在绝缘材料内部诱发致命的<strong>局部放电（Partial Discharge, PD）击穿、高频电磁干扰（EMI）以及局部热失控</strong>。</p>
+<ul>
+<li><strong>物理难点</strong>：传统10kV工频变压器工作在50Hz/60Hz低频下，依靠笨重的硅钢片和矿物油/环氧树脂就能轻松解决绝缘与散热；而固态变压器（SST）要想把体积砍半，必须利用高压碳化硅（SiC MOSFET）将开关频率拉升1000倍至 <strong>50kHz以上</strong>，再用高频纳米晶/铁氧体磁芯进行中低压隔离变换。在如此紧凑的体积内同时承受 <strong>10kV—13.8kV中压电场</strong> 与 <strong>50kHz高频高dv/dt电压跳变</strong>，极易在绝缘材料内部诱发致命的<strong>局部放电（Partial Discharge, PD）击穿、高频电磁干扰（EMI）以及局部热失控</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>成本账本</strong>：由于单台3MW的SST需要消耗数百颗耐压1700V—3300V的高压大功率SiC模块、特种高频真空浇注纳米晶变压器以及复杂的液冷/风冷均温结构，目前行业早期商业化SST的初始硬件售价高达 <strong><code>8—12元/W</code></strong>，而传统“10kV工频变压器 + 480V UPS + PDU”全套方案仅需 <strong><code>2.0—3.0元/W</code></strong>。虽然SST能帮机房省下40%—50%的配电房面积（多放20%的算力机柜）并提升约3.5个百分点的能效（PUE降至1.15—1.20以下），但在单机柜功率密度尚未全面超过200kW—400kW之前，下游客户对高出3倍的初始资本开支依然精打细算。行业测算表明，只有当2028—2029年上游高压SiC晶圆大幅降本、SST规模化出货将系统单价打到 <strong><code>4—5元/W</code></strong> 区间时，SST对传统工频变压器+UPS的全面替代才会迎来真正的暴力拐点。</p>
 </li>
 <li>
 <p><strong>第二关（客户认证与容错底线关）：北美CSP云巨头“五个九（99.999%）”的零容错生死状</strong></p>
-</li>
-<li>
-<p>这是阳光电源从“新能源沙漠电站”跨界到“AI金库机房”最大的商业认知鸿沟：在戈壁滩的光伏电站里，一台逆变器如果因为软件Bug或IGBT炸管停机2小时，业主损失的电费不过几千元人民币，派个售后工程师去插拔更换即可（容错率高）；但在一座斥资 <strong>50亿美元</strong>、塞满十万张英伟达B200/Rubin芯片的AIDC超算中心里，一旦主供电SST发生哪怕 <strong>20毫秒的电压跌落或单机炸管停电</strong>，整座算力集群正在运行数周的大模型训练任务瞬间崩溃清零，单次事故直接经济损失高达 <strong>数百万至上千万美元</strong>！</p>
-</li>
-<li>
-<p>因此，微软、谷歌、AWS、Meta等北美Tier-1云厂商的机房基础设施团队（Facility Engineering）是全球最保守的买家群体。一款新型中压电源从送样测试、实验室高加速寿命极限冲击（HALT）、边缘非核心机房挂网试运行12个月，到最终写进全球标准机房设计白皮书（POR）并下达十亿级集采订单，<strong>认证替换周期铁定长达 18—36 个月</strong>。</p>
+<ul>
+<li>这是阳光电源从“新能源沙漠电站”跨界到“AI金库机房”最大的商业认知鸿沟：在戈壁滩的光伏电站里，一台逆变器如果因为软件Bug或IGBT炸管停机2小时，业主损失的电费不过几千元人民币，派个售后工程师去插拔更换即可（容错率高）；但在一座斥资 <strong>50亿美元</strong>、塞满十万张英伟达B200/Rubin芯片的AIDC超算中心里，一旦主供电SST发生哪怕 <strong>20毫秒的电压跌落或单机炸管停电</strong>，整座算力集群正在运行数周的大模型训练任务瞬间崩溃清零，单次事故直接经济损失高达 <strong>数百万至上千万美元</strong>！</li>
+<li>因此，微软、谷歌、AWS、Meta等北美Tier-1云厂商的机房基础设施团队（Facility Engineering）是全球最保守的买家群体。一款新型中压电源从送样测试、实验室高加速寿命极限冲击（HALT）、边缘非核心机房挂网试运行12个月，到最终写进全球标准机房设计白皮书（POR）并下达十亿级集采订单，<strong>认证替换周期铁定长达 18—36 个月</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>第三关（生态标准与路线博弈关）：“中压SST一步到位” vs “巴拿马电源/低压HVDC渐进改良”的路线之争</strong></p>
-</li>
-<li>
-<p>面对SST对传统配电链条的降维打击，传统UPS与低压电源霸主（如维谛、台达、中恒电气）并不会坐以待毙。他们正大力联合部分云厂商推广<strong>“10kV移相工频变压器 + 800V HVDC整流柜（即第三代巴拿马电源架构）”</strong>——虽然占地面积比SST大25%、效率比SST低0.8%—1.0%，但它不需要昂贵的高压SiC器件和高频中压隔离变压器，初始造价仅 <strong>3.0—4.0元/W</strong>，且成熟可靠。这意味着在未来3年内，SST将首先垄断<strong>“寸土寸金的一线城市核心算力节点与单柜400kW—600kW+超密集群”</strong>，而在荒漠廉价土地机房中仍需与巴拿马电源展开激烈的性价比博弈。</p>
+<ul>
+<li>面对SST对传统配电链条的降维打击，传统UPS与低压电源霸主（如维谛、台达、中恒电气）并不会坐以待毙。他们正大力联合部分云厂商推广<strong>“10kV移相工频变压器 + 800V HVDC整流柜（即第三代巴拿马电源架构）”</strong>——虽然占地面积比SST大25%、效率比SST低0.8%—1.0%，但它不需要昂贵的高压SiC器件和高频中压隔离变压器，初始造价仅 <strong>3.0—4.0元/W</strong>，且成熟可靠。这意味着在未来3年内，SST将首先垄断<strong>“寸土寸金的一线城市核心算力节点与单柜400kW—600kW+超密集群”</strong>，而在荒漠廉价土地机房中仍需与巴拿马电源展开激烈的性价比博弈。</li>
+</ul>
 </li>
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="3">3. 竞争终局推演：面对维谛、伊顿、台达、麦格米特，阳光电源凭什么分一杯羹？</h4><p>在AIDC电源这条黄金赛道上，目前已集结了三路豪强：</p><ol>
@@ -1864,37 +2391,35 @@
 <li>
 <p><strong>冷峻的财务真相（占总营收不足1%，尚处战略微亏培育期）</strong>：
   为什么拿了全国35%的状元份额，在阳光电源的合并利润表里却几乎听不到水花？我们来算一笔极度残酷的行业总盘子账：</p>
-</li>
-<li>
-<p>受制于下游绿氨、绿色甲醇消纳不畅，2025—2026年中国全行业每年实际交付确收的电解槽总量仅在 <strong>1.5 GW—2.5 GW</strong> 左右；</p>
-</li>
+<ul>
+<li>受制于下游绿氨、绿色甲醇消纳不畅，2025—2026年中国全行业每年实际交付确收的电解槽总量仅在 <strong>1.5 GW—2.5 GW</strong> 左右；</li>
 <li>更致命的是价格内卷：国内主流1000 Nm³/h（对应约5MW功率）碱性电解槽系统的中标价格，已从2022年的800万—1000万元/套（约1600—2000元/kW），一路惨烈崩跌至2025—2026年的 <strong>300万—400万元/套（折合仅 <code>600—800元/kW</code>）</strong>！</li>
 <li>这意味着整个中国电解槽硬件市场一年的真实出货总产值不过 <strong>15亿—25亿元人民币</strong>！即便阳光氢能独占35%份额并加上高毛利的海外订单与制氢电源单独外销，其2025—2026年实际确认的营业收入也仅在 <strong><code>5亿—10亿元人民币</code> 量级</strong>——占阳光电源891.84亿元总营收的比重 <strong>不足 <code>1%</code></strong>！扣除每年持续投入的PEM贵金属催化剂研发、大型测试平台折旧与海外绿氢示范项目高昂的现场联调费用后，<strong>阳光氢能目前整体仍处于微亏至盈亏平衡边缘的“战略养兵期”，绝未跑通大规模商业造血闭环</strong>。</li>
+</ul>
+</li>
 </ul>
 <h4 id="2_2">2. 跨越鸿沟的三道生死关卡：为什么绿氢商业化比想象中慢得多？</h4>
 <p>阳光氢能要想真正为母公司贡献10%以上的核心毛利（即每年创造25亿—30亿元毛利、对应80亿—100亿元以上营收），光靠自己把电解槽做好毫无意义，必须等待整个绿氢产业链跨过三道物理与制度鸿沟：</p>
 <ul>
 <li>
 <p><strong>第一关（底层热力学与度电成本死结）：“45—50度电造1公斤氢” vs “煤制灰氢10元/kg”的残酷账本</strong></p>
-</li>
-<li>
-<p>根据电化学法拉第定律与热力学极限，即便阳光氢能把碱性与PEM电解槽的直流电耗优化到极致的 <strong>4.0—4.3 kWh/Nm³</strong>，生产1公斤氢气（约11.2标方）加上压缩纯化辅机能耗，依然铁定要消耗 <strong><code>48—52度电</code></strong>！</p>
-</li>
+<ul>
+<li>根据电化学法拉第定律与热力学极限，即便阳光氢能把碱性与PEM电解槽的直流电耗优化到极致的 <strong>4.0—4.3 kWh/Nm³</strong>，生产1公斤氢气（约11.2标方）加上压缩纯化辅机能耗，依然铁定要消耗 <strong><code>48—52度电</code></strong>！</li>
 <li>目前中国工业领域最主流的煤制氢（灰氢）与工业副产氢，完全成本仅为 <strong><code>9—12元/kg</code></strong>。这意味着，绿氢要想不靠政府补贴在合成氨、炼化脱硫、绿色甲醇领域替代灰氢，<strong>制氢端可承受的极限电价必须低于 <code>0.13—0.15元/kWh</code></strong>，且为了摊薄电解槽与后端化工合成塔高昂的固定资产折旧，<strong>系统年满负荷运行小时数必须达到 <code>4,000—5,000小时</code> 以上</strong>！</li>
-<li>
-<p>然而现实中的死结在于：如果纯粹用内蒙古、吉林、新疆的离网风光发电制氢，虽然弃风弃光电价能做到0.15元/度，但风光的天然间歇性导致<strong>离网电解槽全年的等效利用小时数只有 <code>2,000—2,800小时</code></strong>（后端化工合成氨装置更是因为频繁启停而无法稳定生产），单公斤氢气分摊的设备折旧直接翻倍；而如果为了凑够5000小时去向电网买网电补足，过网费加系统调节费立刻把电价拉高到0.35—0.45元/度，<strong>每造一公斤绿氢直接倒亏8—12元</strong>！这就是为什么国内过去三年立项规划了数百个绿氢大项目，但真正开工采购并投产运行的比例不足 <strong>15%—20%</strong> 的根本物理原因。</p>
+<li>然而现实中的死结在于：如果纯粹用内蒙古、吉林、新疆的离网风光发电制氢，虽然弃风弃光电价能做到0.15元/度，但风光的天然间歇性导致<strong>离网电解槽全年的等效利用小时数只有 <code>2,000—2,800小时</code></strong>（后端化工合成氨装置更是因为频繁启停而无法稳定生产），单公斤氢气分摊的设备折旧直接翻倍；而如果为了凑够5000小时去向电网买网电补足，过网费加系统调节费立刻把电价拉高到0.35—0.45元/度，<strong>每造一公斤绿氢直接倒亏8—12元</strong>！这就是为什么国内过去三年立项规划了数百个绿氢大项目，但真正开工采购并投产运行的比例不足 <strong>15%—20%</strong> 的根本物理原因。</li>
+</ul>
 </li>
 <li>
 <p><strong>第二关（工艺寿命与波动工况验证关）：宽负荷频繁启停下的隔膜衰减与氢氧互串安全红线</strong></p>
-</li>
-<li>
-<p>传统化工用电解槽都是在恒定电网电流下24小时平稳运行；而风光绿电制氢要求电解槽随着风速和云层变化，在 <strong>25%—110% 负荷区间内每分钟剧烈波动甚至一天启停数次</strong>。在低负荷（&lt;20%—25%）工况下，碱性电解槽极易发生氢气与氧气透过隔膜互相渗透（氢中氧或氧中氢浓度一旦超过2%—4%爆炸极限即引发剧烈爆炸），而在PEM电解槽中则面临高昂的贵金属铱（Ir）/铂（Pt）催化剂溶出衰减与质子膜机械穿孔问题。虽然阳光氢能通过自研PWM制氢电源与智慧管理系统将负荷下限拓宽至25%—30%，但风光离网耦合下长达5—10年的长周期催化剂寿命与隔膜可靠性，仍在接受首批示范项目的残酷大考。</p>
+<ul>
+<li>传统化工用电解槽都是在恒定电网电流下24小时平稳运行；而风光绿电制氢要求电解槽随着风速和云层变化，在 <strong>25%—110% 负荷区间内每分钟剧烈波动甚至一天启停数次</strong>。在低负荷（&lt;20%—25%）工况下，碱性电解槽极易发生氢气与氧气透过隔膜互相渗透（氢中氧或氧中氢浓度一旦超过2%—4%爆炸极限即引发剧烈爆炸），而在PEM电解槽中则面临高昂的贵金属铱（Ir）/铂（Pt）催化剂溶出衰减与质子膜机械穿孔问题。虽然阳光氢能通过自研PWM制氢电源与智慧管理系统将负荷下限拓宽至25%—30%，但风光离网耦合下长达5—10年的长周期催化剂寿命与隔膜可靠性，仍在接受首批示范项目的残酷大考。</li>
+</ul>
 </li>
 <li>
 <p><strong>第三关（制度与基础设施关）：欧盟RFNBO认证壁垒、绿氢管道缺失与强制碳税推迟</strong></p>
-</li>
-<li>
-<p>海外绿色合成氨与绿色航运甲醇（如马士基等航运巨头采购）是目前唯一愿意为绿氢支付高溢价的买单方，但欧盟《可再生能源指令》（RED III）下的 <strong>RFNBO（非生物源可再生燃料）法案</strong> 提出了极其苛刻的“额外性、时间相关性（按小时匹配绿电）与地理相关性”认证门槛；同时，国内三北地区生产的绿氢由于缺乏跨省纯氢长输管道，若用高压长管拖车运输，每百公里运费高达5—8元/kg，直接吃光全部经济性，只能就地转化为合成氨或甲醇外运。</p>
+<ul>
+<li>海外绿色合成氨与绿色航运甲醇（如马士基等航运巨头采购）是目前唯一愿意为绿氢支付高溢价的买单方，但欧盟《可再生能源指令》（RED III）下的 <strong>RFNBO（非生物源可再生燃料）法案</strong> 提出了极其苛刻的“额外性、时间相关性（按小时匹配绿电）与地理相关性”认证门槛；同时，国内三北地区生产的绿氢由于缺乏跨省纯氢长输管道，若用高压长管拖车运输，每百公里运费高达5—8元/kg，直接吃光全部经济性，只能就地转化为合成氨或甲醇外运。</li>
+</ul>
 </li>
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="3-718">3. 竞争终局推演：面对718所、隆基氢能与蒂森克虏伯，阳光氢能的筹码是什么？</h4><p>目前绿氢装备赛道同样拥挤不堪：</p><ol>
@@ -1920,26 +2445,28 @@
 <hr/>
 <h3 id="b_1">四、 模块 B 买方最终定性：究竟是“高赔率免费期权”还是“资本消耗陷阱”？</h3>
 <div class="annotated-row"><div class="main-col"><p>综合以上物理成本、认证壁垒与竞争格局的冷峻拆解，我们对阳光电源的三大新业务给出毫不妥协的买方最终定性：</p><ol>
-<li><strong>AIDC 算力中心电源（EnerNeo SST + 800V HVDC + 算力配储）</strong> —— <strong>【定性：低沉没成本、高赔率的真实免费期权，且正处于从0.5向1跃迁的商业兑现前夜】</strong></li>
+<li>
+<p><strong>AIDC 算力中心电源（EnerNeo SST + 800V HVDC + 算力配储）</strong> —— <strong>【定性：低沉没成本、高赔率的真实免费期权，且正处于从0.5向1跃迁的商业兑现前夜】</strong></p>
+<ul>
+<li><strong>为什么不是资本消耗陷阱？</strong> 因为它完美复用了阳光电源29年积累的10kV—35kV中压电力电子研发团队、合肥100GW基地现成的SiC封装测试产线以及全球光储大客户渠道，几乎不需要额外砸下数十亿重资产专厂。</li>
+</ul>
+</li>
 </ol><ul>
-<li>
-<p><strong>为什么不是资本消耗陷阱？</strong> 因为它完美复用了阳光电源29年积累的10kV—35kV中压电力电子研发团队、合肥100GW基地现成的SiC封装测试产线以及全球光储大客户渠道，几乎不需要额外砸下数十亿重资产专厂。</p>
-</li>
-<li>
-<p><strong>为什么赔率极高？</strong> 数据中心配电设备天生是毛利率高达 <strong>35%—45%</strong> 的高壁垒黄金赛道（参考维谛技术与伊顿的高盈利能力）。目前公司外围算力配储已拿GWh级大单，核心EnerNeo SST已拿下欧美双标系统认证并切入英伟达生态与国内头部IDC交付。一旦在2027—2028年突破1—2家北美/亚太头部CSP云巨头的机房内主供电白名单，完全有潜力在3—5年内成长为年营收百亿级、毛利30亿—40亿元的<strong>公司第三大利润支柱</strong>。</p>
-</li>
+<li><strong>为什么赔率极高？</strong> 数据中心配电设备天生是毛利率高达 <strong>35%—45%</strong> 的高壁垒黄金赛道（参考维谛技术与伊顿的高盈利能力）。目前公司外围算力配储已拿GWh级大单，核心EnerNeo SST已拿下欧美双标系统认证并切入英伟达生态与国内头部IDC交付。一旦在2027—2028年突破1—2家北美/亚太头部CSP云巨头的机房内主供电白名单，完全有潜力在3—5年内成长为年营收百亿级、毛利30亿—40亿元的<strong>公司第三大利润支柱</strong>。</li>
 </ul><ol start="2">
-<li><strong>阳光氢能（柔性制氢电源 + ALK/PEM 电解槽）</strong> —— <strong>【定性：技术与市占率卡位第一（35%份额），但受制于绿氢物理度电成本死结，短期3—5年内无法贡献显著核心利润的“远期战略防御彩票”】</strong></li>
-</ol><ul>
+<li>
+<p><strong>阳光氢能（柔性制氢电源 + ALK/PEM 电解槽）</strong> —— <strong>【定性：技术与市占率卡位第一（35%份额），但受制于绿氢物理度电成本死结，短期3—5年内无法贡献显著核心利润的“远期战略防御彩票”】</strong></p>
+<ul>
 <li><strong>客观裁决</strong>：它既不是未来两三年就能爆发的印钞机，也绝不是吞噬股东百亿现金的无底洞陷阱。阳光电源在氢能上的累计固定资产投入仅数亿元量级，每年的研发与运营净消耗控制在1亿—2亿元人民币以内（不到公司年自由现金流的1.5%）。曹仁贤用每年不到1.5%的零花钱，把中国电解槽35%的头号交椅和阿曼等中东海外绿氢入场券死死攥在手里——如果未来五年绿电价格跌破0.12元/度或全球碳税强制引爆绿氢平价，阳光电源就是现成的全球绿氢装备霸主；如果绿氢再冷五年，这点维持费用对公司现金流毫无伤筋动骨之虞。但在当下买方估值模型中，<strong>应当将其视为“零估值赠送的远期看涨彩票”，绝不可为其透支任何当期市值溢价</strong>。</li>
-</ul><ol start="3">
-<li><strong>新能源汽车电控与充电桩</strong> —— <strong>【定性：平庸的生态配套与车规练兵资产】</strong></li>
-</ol><ul>
+</ul>
+</li>
+<li>
+<p><strong>新能源汽车电控与充电桩</strong> —— <strong>【定性：平庸的生态配套与车规练兵资产】</strong></p>
+<ul>
 <li>身处主机厂自研与汇川技术统治的红海，永远不可能成为公司的利润核心，其唯一战略价值在于帮公司保持百万台级车规级功率模块的极限供应链降本嗅觉，并补齐海外“光储充一体化”微网的最后一块硬件拼图。</li>
-</ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>聪明的赌徒怎么买彩票？AIDC算力电源是那种直接用你家里现成的锅碗瓢盆就能做出来、卖给全世界最有钱的AI阔佬、一旦跑通就能赚大钱的生意；而绿氢则是花一点点小钱在冷门赛道里把头号座位先占上——只要别像某些昏了头的光伏老板那样借钱去豪赌上百亿的氢能重资产，每年花一两个亿零花钱买一张万一人类真用上绿氢的头等舱船票，我完全赞成。</p></div></div></div></div>
-
-
-
+</ul>
+</li>
+</ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>聪明的赌徒怎么买彩票？AIDC算力电源是那种直接用你家里现成的锅碗瓢盆就能做出来、卖给全世界最有钱的AI阔佬、一旦跑通就能赚大钱的生意；而绿氢则是花一点点小钱在冷门赛道里把头号座位先占上——只要别像某些昏了头的光伏老板那样借钱去豪赌上百亿的氢能重资产，每年花一两个亿零花钱买一张万一人类真用上绿氢的头等舱船票，我完全赞成。</p></div></div></div></div>
 
 
 
@@ -2069,14 +2596,18 @@
 <h3 id="2641">二、 景气度对质：为什么阳光电源表观营收跌 26.41%，合同负债与存货却双双暴增？全球到底在升温还是压库？</h3>
 <div class="annotated-row"><div class="main-col"><p>把上面这张十方对质大表摊在桌面上，原本扑朔迷离的“阳光电源 2026 三季报之谜”瞬间水落石出。我们用三组铁证完成交叉定案：</p><ol>
 <li>
-<p><strong>铁证一：上游电芯与同行发货量全线井喷，100% 证伪“全球光储需求萎缩论”</strong>
-   - 如果全球储能和逆变器需求真的在萎缩，上游卖电芯的宁德时代和亿纬锂能绝不可能交出如此炸裂的成绩单：<strong>宁德时代 2026Q3 单季储能电芯出货高达约 65GWh</strong>，前三季度总营收暴增 56.19%；<strong>亿纬锂能 2026 前三季度储能电芯出货高达 67.52GWh（同比高增 39.46%）</strong>，且明确宣告四季度储能产能“全部订满”。
-   - 再看下游同行：<strong>德业股份</strong> 2026 前三季度营收暴增 94.20%（171.80 亿元）、合同负债飙至 9.38 亿元；<strong>固德威</strong>营收大增 53.34%（94.98 亿元）、存货备货翻倍；<strong>海博思创</strong>营收增长 44.51%（114.34 亿元）、净利大增 85.65%；<strong>上能电气</strong>营收增长 33.05%（47.43 亿元）；<strong>阿特斯</strong>尽管被光伏组件拖入亏损，但其大储板块前 9 个月出货依然高达 9GWh（同比+55%）；<strong>特斯拉</strong>更是直接宣布 2027 年 Megapack 产能提前售罄。
-   - 回到<strong>阳光电源自身实物量</strong>：2026 年前三季度公司储能系统实际发货量高达 <strong>41GWh（同比大增 43%，已逼近 2025 全年的 43GWh）</strong>，其中 Q1 约 9GWh、Q2 约 15GWh、<strong>Q3 单季发货高达 17GWh（环比再增 24%）</strong>！全产业链从上游电芯到下游集成商的实物出货量无一例外处于历史最旺区间。</p>
+<p><strong>铁证一：上游电芯与同行发货量全线井喷，100% 证伪“全球光储需求萎缩论”</strong></p>
+<ul>
+<li>如果全球储能和逆变器需求真的在萎缩，上游卖电芯的宁德时代和亿纬锂能绝不可能交出如此炸裂的成绩单：<strong>宁德时代 2026Q3 单季储能电芯出货高达约 65GWh</strong>，前三季度总营收暴增 56.19%；<strong>亿纬锂能 2026 前三季度储能电芯出货高达 67.52GWh（同比高增 39.46%）</strong>，且明确宣告四季度储能产能“全部订满”。</li>
+<li>再看下游同行：<strong>德业股份</strong> 2026 前三季度营收暴增 94.20%（171.80 亿元）、合同负债飙至 9.38 亿元；<strong>固德威</strong>营收大增 53.34%（94.98 亿元）、存货备货翻倍；<strong>海博思创</strong>营收增长 44.51%（114.34 亿元）、净利大增 85.65%；<strong>上能电气</strong>营收增长 33.05%（47.43 亿元）；<strong>阿特斯</strong>尽管被光伏组件拖入亏损，但其大储板块前 9 个月出货依然高达 9GWh（同比+55%）；<strong>特斯拉</strong>更是直接宣布 2027 年 Megapack 产能提前售罄。</li>
+<li>回到<strong>阳光电源自身实物量</strong>：2026 年前三季度公司储能系统实际发货量高达 <strong>41GWh（同比大增 43%，已逼近 2025 全年的 43GWh）</strong>，其中 Q1 约 9GWh、Q2 约 15GWh、<strong>Q3 单季发货高达 17GWh（环比再增 24%）</strong>！全产业链从上游电芯到下游集成商的实物出货量无一例外处于历史最旺区间。</li>
+</ul>
 </li>
 <li>
-<p><strong>铁证二：解剖阳光电源“表观营收 -26.41% vs 合同负债 +37.64% &amp; 存货 +50.33%”的剪刀差真相</strong>
-   - 既然发货量暴涨 43%，为什么阳光电源 2026 年前三季度合并营收反而从去年同期的 664.02 亿元掉到了 488.63 亿元（减少约 175.39 亿元，同比 -26.41%）？</p>
+<p><strong>铁证二：解剖阳光电源“表观营收 -26.41% vs 合同负债 +37.64% &amp; 存货 +50.33%”的剪刀差真相</strong></p>
+<ul>
+<li>既然发货量暴涨 43%，为什么阳光电源 2026 年前三季度合并营收反而从去年同期的 664.02 亿元掉到了 488.63 亿元（减少约 175.39 亿元，同比 -26.41%）？</li>
+</ul>
 </li>
 </ol><ul>
 <li>
@@ -2084,8 +2615,8 @@
 </li>
 <li>
 <p><strong>第二刀（海外大储“发货 17GWh vs 确收 9—10GWh”的跨期会计错配，贡献了剩余 30%—35% 的营收滞后）</strong>：国内同行（如海博思创）主要做国内发电央企集采，货拉到国内工地很快就能初验确收，所以海博思创前三季度营收立刻体现为 +44.51%；而阳光电源 2026 年海外营收占比已飙升至 <strong>73.40%</strong>，中东、欧洲、英国、智利、澳洲的百兆瓦级构网大储项目，从合肥工厂装船出海、跨洋海运（1—2 个月）、目的港清关陆运、海外业主现场土建安装，到最终通过当地严苛的电网并网测试（Grid Code Compliance Test）拿到终验单确认收入，<strong>全周期普遍需要 6—9 个月</strong>！</p>
-</li>
-<li>换言之，阳光电源在 2026Q2（发货 15GWh）和 2026Q3（发货 17GWh）发出去的巨量海外大储柜子，在会计准则下<strong>根本还不允许确认为营业收入</strong>，而是全部变成了资产负债表上的两大科目：<ul>
+<ul>
+<li>换言之，阳光电源在 2026Q2（发货 15GWh）和 2026Q3（发货 17GWh）发出去的巨量海外大储柜子，在会计准则下<strong>根本还不允许确认为营业收入</strong>，而是全部变成了资产负债表上的两大科目：</li>
 <li>一头是客户按合同节点打过来的真金白银定金与提货款——直接把<strong>合同负债推高至历史巅峰的 <code>146.66 亿元</code>（较年初 106.55 亿元净增 40.11 亿元，增幅 +37.64%，是德业股份 9.38 亿的 15.6 倍、上能电气的近百倍）</strong>；</li>
 <li>另一头则是漂在赤道与苏伊士运河海船上、或堆在沙特与欧洲工地等待并网验收的“发出商品”与在产备货——直接把<strong>存货推高至 <code>409.72 亿元</code>（较年初 272.55 亿元净增 137.17 亿元，增幅 +50.33%）</strong>。</li>
 </ul>
@@ -2145,18 +2676,24 @@
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="2-1218">2. 穿透拆解：阳光电源比国内大储/逆变器同行高出的 12—18 个百分点毛利率从何而来？</h4><p>经过模块 E 的附注排雷（详见后文），阳光电源研发支出 <strong>100% 费用化（0 资本化）</strong>、机器设备折旧与坏账计提标准与同行完全一致甚至更严，<strong>会计水分贡献为 0%</strong>！其超额毛利率 100% 来自以下三层实打实的产业溢价：</p><ol>
 <li>
-<p><strong>第一层溢价（+8 至 +12 个百分点）：海外高门槛市场准入（Bankability）与区域定价鸿沟</strong>
-   - 海博思创自身的财报附注已经不小心泄露了天机：海博思创 2025 年境内大储毛利率只有约 16%—17%，而其小批量试水境外的储能毛利率立刻高达 <strong>29.52%</strong>（高出境内逾 12 个百分点）！
-   - 国内发电央企的强制配储招标是“谁便宜买谁”，储能系统单价已被卷到 0.45—0.55 元/Wh 的生理极限；而在欧美、澳洲、中东、英国、拉美市场，海外独立发电商（IPP）需要向欧美银团申请长达 15—20 年的无追索权项目融资，只有进入国际顶级银行与慕尼黑再保险白名单（Tier-1 Bankability）的特斯拉和阳光电源能拿到低息贷款，海外交钥匙系统单价普遍在 <strong>0.85—1.20 元/Wh（约 120—170 美元/kWh）</strong>。阳光电源海外营收占比高达 <strong>73.40%</strong>，仅海内外市场结构差异就天然拉开 <strong>10—12 个百分点</strong>的毛利空间。</p>
+<p><strong>第一层溢价（+8 至 +12 个百分点）：海外高门槛市场准入（Bankability）与区域定价鸿沟</strong></p>
+<ul>
+<li>海博思创自身的财报附注已经不小心泄露了天机：海博思创 2025 年境内大储毛利率只有约 16%—17%，而其小批量试水境外的储能毛利率立刻高达 <strong>29.52%</strong>（高出境内逾 12 个百分点）！</li>
+<li>国内发电央企的强制配储招标是“谁便宜买谁”，储能系统单价已被卷到 0.45—0.55 元/Wh 的生理极限；而在欧美、澳洲、中东、英国、拉美市场，海外独立发电商（IPP）需要向欧美银团申请长达 15—20 年的无追索权项目融资，只有进入国际顶级银行与慕尼黑再保险白名单（Tier-1 Bankability）的特斯拉和阳光电源能拿到低息贷款，海外交钥匙系统单价普遍在 <strong>0.85—1.20 元/Wh（约 120—170 美元/kWh）</strong>。阳光电源海外营收占比高达 <strong>73.40%</strong>，仅海内外市场结构差异就天然拉开 <strong>10—12 个百分点</strong>的毛利空间。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二层溢价（+3 至 +5 个百分点）：100% 自研碳化硅 PCS + 干细胞构网算法（Grid-Forming）的系统定义权</strong>
-   - 纯集成商（如早期海博思创或国内二线厂）需要外采电芯 + 外采 PCS 变流器，自己只做集装箱钣金、线束连接和基础 BMS，本质是“赚辛苦组装费”；
-   - 阳光电源 <strong>100% 自研占储能系统成本 15%—20% 且毛利率高达 40%+ 的核心变流器（PCS）、能量管理系统（EMS）与干细胞构网算法</strong>，并通过 PowerTitan 2.0/3.0 的“交直流一体化（一簇一 PCS）”架构消灭了簇间环流，让业主全生命周期多发 8% 的电。把 40%+ 毛利率的自研电力电子大脑装进自家储能柜，直接把整柜毛利率往上垫高了 <strong>3—5 个百分点</strong>。</p>
+<p><strong>第二层溢价（+3 至 +5 个百分点）：100% 自研碳化硅 PCS + 干细胞构网算法（Grid-Forming）的系统定义权</strong></p>
+<ul>
+<li>纯集成商（如早期海博思创或国内二线厂）需要外采电芯 + 外采 PCS 变流器，自己只做集装箱钣金、线束连接和基础 BMS，本质是“赚辛苦组装费”；</li>
+<li>阳光电源 <strong>100% 自研占储能系统成本 15%—20% 且毛利率高达 40%+ 的核心变流器（PCS）、能量管理系统（EMS）与干细胞构网算法</strong>，并通过 PowerTitan 2.0/3.0 的“交直流一体化（一簇一 PCS）”架构消灭了簇间环流，让业主全生命周期多发 8% 的电。把 40%+ 毛利率的自研电力电子大脑装进自家储能柜，直接把整柜毛利率往上垫高了 <strong>3—5 个百分点</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>第三层溢价（+2 至 +3 个百分点）：全球 40GWh+ 级超级买家的电芯定制集采压价权</strong>
-   - 年采购量超 40—60GWh 的体量，让阳光电源在面对亿纬锂能、中创新航、欣旺达等电芯厂时拥有极强的买方议价权（联合定制 684Ah 大叠片电芯），其单 Wh 电芯采购成本比年采购仅几个 GWh 的二三线集成商低 <strong>3%—5%</strong>。</p>
+<p><strong>第三层溢价（+2 至 +3 个百分点）：全球 40GWh+ 级超级买家的电芯定制集采压价权</strong></p>
+<ul>
+<li>年采购量超 40—60GWh 的体量，让阳光电源在面对亿纬锂能、中创新航、欣旺达等电芯厂时拥有极强的买方议价权（联合定制 684Ah 大叠片电芯），其单 Wh 电芯采购成本比年采购仅几个 GWh 的二三线集成商低 <strong>3%—5%</strong>。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>海博思创自己的年报就已经替阳光电源做了最好的辩护——连海博思创自己把货卖到海外去，毛利率都能从国内的 16% 跳到 29.5%。在国内央企最低价中标的泥潭里摔跤，你就算把衣服脱光了也只能赚 15% 的毛利；而阳光电源拿着欧美银行家的准入通行证和自研的构网大脑，在海外收 32%—36% 的毛利，客户还得排着队先交 147 亿定金。这就是“在鱼多的地方钓鱼”和“在澡盆里抢鱼刺”的区别。</p></div></div></div></div>
 
@@ -2165,18 +2702,24 @@
 <hr/>
 <h3 id="_25">四、 份额攻守终极裁决：过去一年半，到底是谁在抢谁的奶酪？</h3>
 <div class="annotated-row"><div class="main-col"><p>把全球光储棋盘划分为三大战区，过去 18 个月（2025 年初至 2026Q3）的份额攻守格局极为清晰：</p><ol>
-<li><strong>战区一：海外大型公用事业储能（中东 / 欧洲 / 澳洲 / 拉美 / 北美）——阳光电源与特斯拉双雄争霸，正在大举收割欧美老牌集成商（Fluence / 瓦锡兰 / 施耐德）的份额</strong>
-   - <strong>谁在赢</strong>：<strong>阳光电源</strong>（2025 年 43GWh，2026 前三季 41GWh、全年剑指 55—60GWh+，累计全球第一）与<strong>特斯拉 Megapack</strong>（2025 年 46.7GWh，2026 前三季 36GWh）。尤其在非美市场（沙特 Algihaz 7.8GWh 全球最大标杆、英国、欧洲大陸、智利、南非、澳洲），阳光电源凭借 PowerTitan 2.0/3.0 构网实证与比欧美同行快一倍的交付速度，拿走了超过 <strong>30%—35%</strong> 的增量大单；<strong>阿特斯（e-STORAGE）</strong>则在北美和英国市场稳扎稳打分走了一杯羹（前三季 9GWh）。</li>
+<li><strong>战区一：海外大型公用事业储能（中东 / 欧洲 / 澳洲 / 拉美 / 北美）——阳光电源与特斯拉双雄争霸，正在大举收割欧美老牌集成商（Fluence / 瓦锡兰 / 施耐德）的份额</strong><ul>
+<li><strong>谁在赢</strong>：<strong>阳光电源</strong>（2025 年 43GWh，2026 前三季 41GWh、全年剑指 55—60GWh+，累计全球第一）与<strong>特斯拉 Megapack</strong>（2025 年 46.7GWh，2026 前三季 36GWh）。尤其在非美市场（沙特 Algihaz 7.8GWh 全球最大标杆、英国、欧洲大陸、智利、南非、澳洲），阳光电源凭借 PowerTitan 2.0/3.0 构网实证与比欧美同行快一倍的交付速度，拿走了超过 <strong>30%—35%</strong> 的增量大单；<strong>阿特斯（e-STORAGE）</strong>则在北美和英国市场稳扎稳打分走了一杯羹（前三季 9GWh）。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>谁在丢份额</strong>：美国老牌储能集成巨头 <strong>Fluence</strong>、芬兰<strong>瓦锡兰（Wärtsilä）</strong>等缺乏中国本土高效供应链配套的传统集成商，在中东、拉美和欧洲的招标中屡屡因报价偏高、构网响应迭代慢而被阳光电源挤出前二。</li>
 </ul><ol start="2">
-<li><strong>战区二：国内大型储能与大基地逆变器市场——阳光电源“主动弃保低毛利肉搏”，海博思创与上能电气顺势吃下国内规模份额</strong>
-   - <strong>攻守真相</strong>：2025—2026 年，面对国内储能集采价格跌破 0.5 元/Wh 及“136 号文”后的国内电站洗牌，<strong>阳光电源主动战略性收缩了国内低毛利储能集采与垫资 EPC 业务</strong>（严守毛利率红线，拒绝亏损抢标）。</li>
+<li><strong>战区二：国内大型储能与大基地逆变器市场——阳光电源“主动弃保低毛利肉搏”，海博思创与上能电气顺势吃下国内规模份额</strong><ul>
+<li><strong>攻守真相</strong>：2025—2026 年，面对国内储能集采价格跌破 0.5 元/Wh 及“136 号文”后的国内电站洗牌，<strong>阳光电源主动战略性收缩了国内低毛利储能集采与垫资 EPC 业务</strong>（严守毛利率红线，拒绝亏损抢标）。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>谁接过了国内盘子</strong>：<strong>海博思创</strong>（2025 年 24GWh，2026 前三季营收 +44.51%）与<strong>中车株洲所</strong>凭借对国内五大六小发电央企的贴身绑定，吃下了国内大储最大的市场份额；<strong>上能电气</strong>（2026 前三季营收 +33.05%）则在地面大基地逆变器与国内/中东大功率 PCS 市场加速抢占份额。但需要注意的是，随着海博思创、上能电气、宁德时代纷纷在 2026 年加速组建海外团队杀向中东与欧洲，未来 2 年海外中端大储市场的报价竞争将明显加剧。</li>
 </ul><ol start="3">
-<li><strong>战区三：全球户用与工商业分布式光储战场——德业股份统领亚非拉新兴市场，固德威/锦浪在欧洲去库后底部复苏</strong>
-   - 在大型地面电站之外的“户用及中小型工商储”细分赛道，<strong>德业股份</strong>凭借极致成本控制与低压户储产品精准踩中巴基斯坦、东南亚、非洲、中东及乌克兰等弱电网缺电刚需，2026 前三季度营收狂飙 94.20%（171.80 亿元）、净利 42.72 亿元，成为分布式赛道的绝对赢家；<strong>固德威</strong>（前三季营收 +53.34%）与<strong>锦浪科技</strong>则从欧洲库存周期底部走出。阳光电源在户储领域并不与德业拼低端低压市场，而是主攻欧洲/澳洲高端三相户储与 PowerStack 工商业液冷储能，错位维持 40%+ 的高毛利。</li>
+<li><strong>战区三：全球户用与工商业分布式光储战场——德业股份统领亚非拉新兴市场，固德威/锦浪在欧洲去库后底部复苏</strong><ul>
+<li>在大型地面电站之外的“户用及中小型工商储”细分赛道，<strong>德业股份</strong>凭借极致成本控制与低压户储产品精准踩中巴基斯坦、东南亚、非洲、中东及乌克兰等弱电网缺电刚需，2026 前三季度营收狂飙 94.20%（171.80 亿元）、净利 42.72 亿元，成为分布式赛道的绝对赢家；<strong>固德威</strong>（前三季营收 +53.34%）与<strong>锦浪科技</strong>则从欧洲库存周期底部走出。阳光电源在户储领域并不与德业拼低端低压市场，而是主攻欧洲/澳洲高端三相户储与 PowerStack 工商业液冷储能，错位维持 40%+ 的高毛利。</li>
+</ul>
+</li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>聪明的将军从来不在每一条泥沟里跟所有人拼刺刀。阳光电源把国内五毛钱一瓦时的苦力集采让给海博思创，把巴基斯坦家庭屋顶的小逆变器让给德业股份，自己集中火力去中东沙漠和欧洲电网跟特斯拉抢百兆瓦级的大金矿——懂得“不做什么”，往往比懂得“做什么”更能保住你的净资产收益率。</p></div></div></div></div>
 
 
@@ -2430,18 +2973,24 @@
 <h3 id="40972-powertitan-30-aidc">三、 增量垫高测算：409.72 亿存货消化 + 海外基地 + PowerTitan 3.0 与 AIDC 放量后的造血跃迁</h3>
 <div class="annotated-row"><div class="main-col"><p>当前 <code>110.00 亿元/年</code> 的常态 Owner Earnings 仅仅是基于存量 55GWh 储能确收与传统光风逆变器底座的静态切面。随着以下三大高确定性催化在 2026Q4—2028 年相继兑现，公司的常态造血中枢将迎来显著的台阶式跃升：</p><ol>
 <li>
-<p><strong>账面 <code>409.72 亿元</code> 存货（对应 <code>146.66 亿元</code> 预收定金）结转消化 + 海外本地化制造基地（中东/东欧/东南亚）投产 + PowerTitan 3.0 放量</strong>：
-   - 截至 2026Q3 末，公司 <code>146.66 亿元</code> 合同负债背后锁定了高達 <strong>500 亿—700 亿元</strong> 的在手待交付订单。随着海外波兰（东欧）、沙特（中东）、泰国与印度基地扩产落地，海外产能直接规避原产地关税损耗，且搭载 684Ah 叠片大电芯与全液冷碳化硅（SiC）PCS 的 <strong>PowerTitan 3.0</strong> 将单柜容量从 10MWh 推高至 12.5MWh+，单位 BOM 成本再降 6%—8%。
-   - 当储能年稳态确收量从当前的 <code>55GWh</code> 跃升至 <strong><code>75—80GWh/年</code></strong> 时，储能板块将新增营收 <code>150 亿—180 亿元</code>，在 28% 常态毛利率下贡献增量归母净利润约 <strong><code>+22.00 亿—26.00 亿元</code></strong>。</p>
+<p><strong>账面 <code>409.72 亿元</code> 存货（对应 <code>146.66 亿元</code> 预收定金）结转消化 + 海外本地化制造基地（中东/东欧/东南亚）投产 + PowerTitan 3.0 放量</strong>：</p>
+<ul>
+<li>截至 2026Q3 末，公司 <code>146.66 亿元</code> 合同负债背后锁定了高達 <strong>500 亿—700 亿元</strong> 的在手待交付订单。随着海外波兰（东欧）、沙特（中东）、泰国与印度基地扩产落地，海外产能直接规避原产地关税损耗，且搭载 684Ah 叠片大电芯与全液冷碳化硅（SiC）PCS 的 <strong>PowerTitan 3.0</strong> 将单柜容量从 10MWh 推高至 12.5MWh+，单位 BOM 成本再降 6%—8%。</li>
+<li>当储能年稳态确收量从当前的 <code>55GWh</code> 跃升至 <strong><code>75—80GWh/年</code></strong> 时，储能板块将新增营收 <code>150 亿—180 亿元</code>，在 28% 常态毛利率下贡献增量归母净利润约 <strong><code>+22.00 亿—26.00 亿元</code></strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>AIDC 算力中心供电系统（EnerNeo 固态变压器 SST + 800V HVDC + 算力绿电微网）从 0 到 1 商业化放量</strong>：
-   - AI 智算中心单机柜功率突破 120kW—600kW，阳光电源推出的 <strong>10kV 中压直转 800V 直流固态变压器（SST）</strong> 效率达 98.5%、占地省 50%，已正式切入英伟达（NVIDIA）供电生态与头部 CSP 云厂商测试导入。
-   - 一旦在 2027—2028 年斩获全球智算中心供电与算力配储市场 8%—10% 份额，AIDC 电源业务有望形成 <strong><code>60 亿—100 亿元</code></strong> 营收体量（毛利率高达 <code>38%—45%</code>），贡献增量归母净利润 <strong><code>+10.00 亿—15.00 亿元</code></strong>。</p>
+<p><strong>AIDC 算力中心供电系统（EnerNeo 固态变压器 SST + 800V HVDC + 算力绿电微网）从 0 到 1 商业化放量</strong>：</p>
+<ul>
+<li>AI 智算中心单机柜功率突破 120kW—600kW，阳光电源推出的 <strong>10kV 中压直转 800V 直流固态变压器（SST）</strong> 效率达 98.5%、占地省 50%，已正式切入英伟达（NVIDIA）供电生态与头部 CSP 云厂商测试导入。</li>
+<li>一旦在 2027—2028 年斩获全球智算中心供电与算力配储市场 8%—10% 份额，AIDC 电源业务有望形成 <strong><code>60 亿—100 亿元</code></strong> 营收体量（毛利率高达 <code>38%—45%</code>），贡献增量归母净利润 <strong><code>+10.00 亿—15.00 亿元</code></strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>2000V 高压光储系统与构网软件升级溢价</strong>：
-   - 推动逆变器与风电变流器板块贡献增量归母净利润约 <strong><code>+4.00 亿—6.00 亿元</code></strong>。</p>
+<p><strong>2000V 高压光储系统与构网软件升级溢价</strong>：</p>
+<ul>
+<li>推动逆变器与风电变流器板块贡献增量归母净利润约 <strong><code>+4.00 亿—6.00 亿元</code></strong>。</li>
+</ul>
 </li>
 </ol><ul>
 <li><strong>增量垫高结论</strong>：上述三大增量消化达产后（预计 2027—2028 年稳态），阳光电源的常态归母净利润将跃升至 <strong><code>152.00 亿元</code></strong>（区间 <code>148 亿—158 亿元</code>），扣除同步增加的折旧摊销与维持性 CapEx 后，<strong>达产后常态 Owner Earnings 造血中枢将从当前的 <code>110.00 亿元/年</code> 往上垫高 <code>+40.00 亿元</code>（<code>+36.4%</code>），达到 <code>150.00 亿元/年</code>（区间 <code>142.00 亿—158.00 亿元/年</code>）</strong>！</li>
@@ -2453,15 +3002,19 @@
 <h3 id="vs_1">四、 双极限压力测试：价格战恶化 vs 原材料反扑与关税加码</h3>
 <p>为了检验阳光电源在极端恶劣环境下的生存底线，我们在跨周期常态底盘（营收 <code>850 亿元</code>、常态净利 <code>112 亿元</code>、常态 Owner Earnings <code>110 亿元</code>）基础上，施加两场残酷的双极限压力测试：</p>
 <ol>
-<li><strong>压力情景一（价格战恶化）：假设全球海外大储系统与逆变器终端售价在现有基础上再跌 <code>10%—15%</code>（取中值 <code>-12.5%</code>）</strong>
-   - <strong>子情景 1A（静态死扛：假设 0% 向上游传导，自己硬吞全部降价）</strong>：这属于脱离产业常识的纯数学极限测试。若终端跌价 12.5% 而电芯、IGBT 采购价分毫不降，公司合并营收缩水至 <code>754 亿元</code>，综合毛利率将从 <code>30.37%</code> 暴跌至 <code>20.25%</code>，全年归母净利润将锐减至 <strong><code>41.50 亿元</code></strong>，Owner Earnings 降至 <strong><code>39.50 亿元</code></strong>（依然保持近 40 亿元正向自由现金流，绝不亏损失血）。</li>
+<li><strong>压力情景一（价格战恶化）：假设全球海外大储系统与逆变器终端售价在现有基础上再跌 <code>10%—15%</code>（取中值 <code>-12.5%</code>）</strong><ul>
+<li><strong>子情景 1A（静态死扛：假设 0% 向上游传导，自己硬吞全部降价）</strong>：这属于脱离产业常识的纯数学极限测试。若终端跌价 12.5% 而电芯、IGBT 采购价分毫不降，公司合并营收缩水至 <code>754 亿元</code>，综合毛利率将从 <code>30.37%</code> 暴跌至 <code>20.25%</code>，全年归母净利润将锐减至 <strong><code>41.50 亿元</code></strong>，Owner Earnings 降至 <strong><code>39.50 亿元</code></strong>（依然保持近 40 亿元正向自由现金流，绝不亏损失血）。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>子情景 1B（动态产业博弈：向上游电芯/功率器件压价传导 <code>50%—60%</code> + PowerTitan 3.0 工程降本）</strong>：这才是符合真实商业世界的买方测试。阳光电源年采 55GWh+ 电芯，是全球除特斯拉外最大的独立第三方电芯买家。在锂电芯产能严重过剩的格局下，终端跌价 12.5% 时，公司完全有能力将 <strong>55%—60% 的降价压力传导给上游电芯厂与结构件商</strong>，叠加 684Ah 叠片与 2000V 系统自身 BOM 降本，<strong>实际净毛利率仅压缩约 <code>3.6—4.2 个百分点</code></strong>（综合毛利率守在 <code>26.5%</code> 左右，其中储能毛利率守在 <code>24.0%</code>、逆变器守在 <code>32.5%</code>）。在此情景下，公司全年归母净利润底线为 <strong><code>83.50 亿元</code></strong>（区间 <code>80 亿—88 亿元</code>），<strong>常态 Owner Earnings 稳守 <code>81.50 亿元/年</code></strong>！</li>
 </ul>
 <ol start="2">
-<li><strong>压力情景二（原材料反扑 + 关税加码）：假设上游碳酸锂/电芯价格暴涨 <code>20%</code> + 欧美关税/退税进一步恶化（额外增加 <code>3.5%</code> 综合税负成本）</strong>
-   - <strong>冲击传导机制解剖</strong>：</li>
+<li><strong>压力情景二（原材料反扑 + 关税加码）：假设上游碳酸锂/电芯价格暴涨 <code>20%</code> + 欧美关税/退税进一步恶化（额外增加 <code>3.5%</code> 综合税负成本）</strong><ul>
+<li><strong>冲击传导机制解剖</strong>：</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -2619,10 +3172,12 @@
 </li>
 <li>
 <p><strong>账龄结构与坏账计提充分度</strong>：</p>
-</li>
+<ul>
 <li>公司严格执行 <strong>“1 年以内 5%、1—2 年 10%、2—3 年 30%、3—4 年 50%、4—5 年 80%、5 年以上 100%”</strong> 的梯度计提矩阵，与上能电气、德业、锦浪、固德威、海博思创完全一致；</li>
 <li>针对历史上个别存在回款瑕疵的国内外电站业主或涉诉项目，公司在附注中直接采取<strong>单项计提法（计提比例高达 99%—100%）</strong>一刀切核销风险；</li>
 <li>至于市场曾担心的“早期自持/开发新能源电站国补拖欠款”，一方面公司自持运营电站规模极小（绝大部分为 BT/EPC 建成即转让给央企），另一方面对账龄超过 2—3 年的应收项目款已按 30%—80% 重手计提减值，2024—2025 年每年在利润表中确认的信用减值损失与资产减值损失合计均超过 <strong>15 亿—20 亿元</strong>，属于典型的“有脓包当期挤干净，绝不拖延挂账”。</li>
+</ul>
+</li>
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="2-40972">2. 409.72 亿元天量存货的解剖刀：到底藏了多少“烂电站”和“跌价电芯”？</h4><p>这是全场最核心的排雷焦点。我们先拿 <strong>2025 年报经审计的存货附注明细表</strong> 立下解剖基准，再追踪到 <strong>2026 年半年报（321.53 亿元）与 2026 三季报（409.72 亿元）</strong> 的演变：</p><ul>
 <li><strong>2025 年末存货底层解剖（账面余额 <code>287.49 亿元</code>，跌价准备 <code>14.94 亿元</code>，账面净值 <code>272.55 亿元</code>，综合计提率 <code>5.20%</code>）</strong>：</li>
@@ -2640,11 +3195,13 @@
 <p><strong>在产品</strong>：账面余额 <strong><code>10.64 亿元</code></strong>（占比 <strong>3.70%</strong>），计提跌价准备 <strong>0.29 亿元（计提率 2.70%）</strong>，账面净值 <strong>10.35 亿元</strong>。</p>
 </li>
 </ol><ul>
-<li><strong>追踪至 2026Q3 末 <code>409.72 亿元</code> 存货的真实成色判定</strong>：</li>
+<li>
+<p><strong>追踪至 2026Q3 末 <code>409.72 亿元</code> 存货的真实成色判定</strong>：</p>
+<ul>
 <li>从 2025 年末的 272.55 亿元，到 2026H1 末的 321.53 亿元，再到 2026Q3 末的 <strong>409.72 亿元（净增 137.17 亿元）</strong>，增量的钱去了哪？</li>
 <li>第一，由于阳光新能源在 2026 年主动踩刹车砍项目，<strong>“合同履约成本（国内电站开发资产）”并未扩张，反而处于持续结转压缩通道</strong>；</li>
-<li>
-<p>第二，新增的 137.17 亿元存货中，<strong>超过 85%—90% 是对应 2026Q2（发货 15GWh）与 2026Q3（发货 17GWh）已发往海外但尚未完成并网确收的“在途发出商品”，以及为 2026Q4—2027H1 在手订单（对应 146.66 亿元合同负债定金）锁定的定制 684Ah/314Ah 电芯与碳化硅模块原材料</strong>！</p>
+<li>第二，新增的 137.17 亿元存货中，<strong>超过 85%—90% 是对应 2026Q2（发货 15GWh）与 2026Q3（发货 17GWh）已发往海外但尚未完成并网确收的“在途发出商品”，以及为 2026Q4—2027H1 在手订单（对应 146.66 亿元合同负债定金）锁定的定制 684Ah/314Ah 电芯与碳化硅模块原材料</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>排雷结论</strong>：这 409.72 亿元存货绝不是卖不出去的“无主死库存”，而是有 <strong>146.66 亿元客户真金白银预收定金</strong> 护航的“准营业收入蓄水池”；而且公司对存量原材料（计提 8.34%）和国内电站成本（计提 9.57%）的减值计提极其充分，不存在隐藏巨额未计提坏死存货的财务地雷。</p>
@@ -2665,10 +3222,12 @@
 </li>
 <li>
 <p><strong>预计负债（售后质保金）——藏在负债表里的“隐形利润蓄水池”</strong>：</p>
-</li>
+<ul>
 <li>光伏逆变器海外质保期通常为 5—10 年（可延保至 20 年），大型储能系统通常提供 5 年整机质保及 10—15 年性能维护承诺。</li>
 <li>根据财政部会计准则，阳光电源将按销售收入一定比例计提的“保证类质量保证金”直接计入当期<strong>营业成本</strong>，同时在资产负债表负债端确认为<strong>“预计负债”</strong>。</li>
 <li>截至 2024 年末公司预计负债已高达 <strong>43.83 亿元</strong>，2025 年至 2026Q3 随光储出货放量进一步维持在 <strong>45 亿—55 亿元+</strong> 的庞大体量（约占核心光储设备年营收的 <strong>5%—6%</strong>，远高于国内同行 1.5%—3% 的计提比例）。这意味着公司每卖出 100 元光储产品，就先从毛利里扣下 5—6 元放进“预计负债池”防身；未来若实际海外售后返修率低于预期，这几十亿预计负债不仅完全兜得住质保风险，甚至会成为冲回利润的隐形安全垫！</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>每年花了 41.75 亿做研发，一分钱都不肯资本化全记成费用；每卖出 100 块钱的货，还要先扣下 5 到 6 块钱塞进预计负债的质保池子里防身，攒出了五十亿的售后准备金。在充斥着财务魔术师的资本市场里，这种“宁可把当期利润压低也要把防洪堤筑高”的保守会计习惯，比任何华丽的公关辞令都值得尊敬。</p></div></div></div></div>
 
 
@@ -2677,9 +3236,11 @@
 <p>再好的商业模式，如果管理层把上市公司当成自肥的提款机，小股东也喝不到汤。我们对阳光电源最近两期限制性股票激励计划（2023 年计划 vs 2025 年计划）、2026 年员工持股计划以及全员薪酬结构做一次冷酷的穿透审计：</p>
 <h4 id="1_1">1. 最近两期股权激励与员工持股计划考核门槛对表（“前硬后软”的真实算盘）</h4>
 <ul>
-<li><strong>第一期回顾：《2023 年限制性股票激励计划》——货真价实的硬仗，管理层凭真本事打穿</strong></li>
 <li>
-<p><strong>授予规模与价格</strong>：向 1,000 余名核心技术与业务骨干授予限制性股票，首次授予价格 <strong>43.22 元/股</strong>（半价折价激励）。</p>
+<p><strong>第一期回顾：《2023 年限制性股票激励计划》——货真价实的硬仗，管理层凭真本事打穿</strong></p>
+<ul>
+<li><strong>授予规模与价格</strong>：向 1,000 余名核心技术与业务骨干授予限制性股票，首次授予价格 <strong>43.22 元/股</strong>（半价折价激励）。</li>
+</ul>
 </li>
 <li>
 <p><strong>考核门槛（以 2022 年营收 402.57 亿、归母净利 35.93 亿为基数，营收或净利达标其一即可）</strong>：</p>
@@ -2696,9 +3257,9 @@
 </li>
 <li>
 <p><strong>第二期审讯：《2025 年限制性股票激励计划》与《2026 年员工持股计划》——高基数下的“低门槛留人福利包”</strong></p>
-</li>
-<li>
-<p><strong>授予价格</strong>：2025 年限制性股票首次授予价格为 <strong>35.27 元/股</strong>（2026 年 3 月预留授予调整为 <strong>33.24 元/股</strong>）；2026 年员工持股计划覆盖董事、高管及核心骨干不超过 147 人，资金来源为专项激励基金。</p>
+<ul>
+<li><strong>授予价格</strong>：2025 年限制性股票首次授予价格为 <strong>35.27 元/股</strong>（2026 年 3 月预留授予调整为 <strong>33.24 元/股</strong>）；2026 年员工持股计划覆盖董事、高管及核心骨干不超过 147 人，资金来源为专项激励基金。</li>
+</ul>
 </li>
 <li>
 <p><strong>考核门槛（以 2023 年高基数——营收 722.51 亿、归母净利 94.40 亿为基准，同样采取“营收或净利二选一达标即可”）</strong>：</p>
@@ -2782,12 +3343,16 @@
 <p>我们基于 <strong>2026 年三季报（截至 2026 年 9 月 30 日）</strong> 资产负债表及附注进行逐项严苛清算：</p>
 <ol>
 <li>
-<p><strong>普通股总市值（Market Cap）</strong>：
-   - <code>79.60 元/股 × 20.73211368 亿股 =</code> <strong><code>1,650.28 亿元</code></strong>。</p>
+<p><strong>普通股总市值（Market Cap）</strong>：</p>
+<ul>
+<li><code>79.60 元/股 × 20.73211368 亿股 =</code> <strong><code>1,650.28 亿元</code></strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong><code>+</code> 少数股东权益（Minority Interest）</strong>：
-   - 截至 2025 年末及 2026 年三季报，合并报表少数股东权益约为 <strong><code>+31.61 亿元</code></strong>（主要为控股子公司阳光新能源引入的外部股东权益，按 1.0x 账面价值刚性加回）。</p>
+<p><strong><code>+</code> 少数股东权益（Minority Interest）</strong>：</p>
+<ul>
+<li>截至 2025 年末及 2026 年三季报，合并报表少数股东权益约为 <strong><code>+31.61 亿元</code></strong>（主要为控股子公司阳光新能源引入的外部股东权益，按 1.0x 账面价值刚性加回）。</li>
+</ul>
 </li>
 <li>
 <p><strong><code>+</code> 全口径显性有息负债与长期应付款带息/回购义务部分（Total Debt）</strong>：</p>
@@ -2938,8 +3503,10 @@
 </li>
 </ul>
 <ol start="2">
-<li><strong>Reverse SOTP（反向分部拆骨倒推）：市场到底在给大储和 AIDC 算力电源标什么价？</strong>
-   - 我们在 <strong><code>1,542.06 亿元</code> True EV</strong>（对应 <strong><code>1,650.28 亿元</code> 市值</strong>）的总盘子里，用最保守的传统制造业标尺把确定性底座一块块剥离，看看剩下的核心资产被标了什么价格：</li>
+<li><strong>Reverse SOTP（反向分部拆骨倒推）：市场到底在给大储和 AIDC 算力电源标什么价？</strong><ul>
+<li>我们在 <strong><code>1,542.06 亿元</code> True EV</strong>（对应 <strong><code>1,650.28 亿元</code> 市值</strong>）的总盘子里，用最保守的传统制造业标尺把确定性底座一块块剥离，看看剩下的核心资产被标了什么价格：</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -3107,18 +3674,24 @@
 </table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_1">3. 三条“基本面死刑证伪红线”（一旦触发，无条件认错清仓，绝不死扛）</h4><p>价值投资绝不是蒙眼死拿。如果未来跟踪中出现以下任何一条触及商业模式根基的实质性恶化，说明我们的核心假设被证伪，无论当时股价跌到 65 元还是 50 元，必须无条件执行清仓纪律：</p><ol>
-<li><strong>【死刑红线一：409.72 亿存货结转逻辑崩塌 &amp; 储能毛利率永久性坍塌】</strong>
-   - <strong>量化触发标准</strong>：在 <strong>2026Q4 至 2027Q2 连续三个季度</strong>内，账面 <code>409.72 亿元</code> 存货未能转化为高毛利确收与经营现金流回笼，反而爆发<strong>单年存货跌价及合同资产减值超过 <code>30 亿元</code></strong>、<strong>合同负债（预收款）连续两个季度环比萎缩超 <code>25%</code></strong>，且<strong>储能系统单季毛利率连续三个季度跌破 <code>20.0%</code></strong> 无力回升。</li>
+<li><strong>【死刑红线一：409.72 亿存货结转逻辑崩塌 &amp; 储能毛利率永久性坍塌】</strong><ul>
+<li><strong>量化触发标准</strong>：在 <strong>2026Q4 至 2027Q2 连续三个季度</strong>内，账面 <code>409.72 亿元</code> 存货未能转化为高毛利确收与经营现金流回笼，反而爆发<strong>单年存货跌价及合同资产减值超过 <code>30 亿元</code></strong>、<strong>合同负债（预收款）连续两个季度环比萎缩超 <code>25%</code></strong>，且<strong>储能系统单季毛利率连续三个季度跌破 <code>20.0%</code></strong> 无力回升。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>证伪本质</strong>：这意味着 2026Q3 并非“发货与确收时间差 + 高价电芯批次错配”，而是海外大储市场也彻底沦为无差异低价血海，阳光电源的构网技术溢价被击穿。</li>
 </ul><ol start="2">
-<li><strong>【死刑红线二：海外核心高毛利市场电网准入（Bankability）资格遭连环封杀】</strong>
-   - <strong>量化触发标准</strong>：不仅美国市场，连欧洲、中东或澳洲等核心非美市场也跟进出台<strong>“按母公司实控人国籍（FEOC / 关键电网安全黑名单）一刀切禁止中国品牌逆变器与构网储能并网”</strong>的强制法案，或国际主流银行团取消阳光电源的无追索权融资白名单，导致公司<strong>海外营收占比从 <code>70%+</code> 断崖式跌破 <code>45%</code></strong>。</li>
+<li><strong>【死刑红线二：海外核心高毛利市场电网准入（Bankability）资格遭连环封杀】</strong><ul>
+<li><strong>量化触发标准</strong>：不仅美国市场，连欧洲、中东或澳洲等核心非美市场也跟进出台<strong>“按母公司实控人国籍（FEOC / 关键电网安全黑名单）一刀切禁止中国品牌逆变器与构网储能并网”</strong>的强制法案，或国际主流银行团取消阳光电源的无追索权融资白名单，导致公司<strong>海外营收占比从 <code>70%+</code> 断崖式跌破 <code>45%</code></strong>。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>证伪本质</strong>：失去海外高溢价护城河，被迫退回国内与二三线集成商卷 10% 毛利率的央企集采标。</li>
 </ul><ol start="3">
-<li><strong>【死刑红线三：管理层资本配置纪律叛变，重资产豪赌上游大宗制造】</strong>
-   - <strong>量化触发标准</strong>：曹仁贤团队违背 29 年来“死磕电力电子转换与控制算法、拒绝上游重资产”的组织基因，<strong>宣布斥资超 <code>150 亿—200 亿元</code> 自建数十 GWh 大规模锂电芯工厂或上游多晶硅/组件产能</strong>，导致公司年资本开支飙升至 <code>80 亿元</code> 以上、账面 <code>228 亿元</code> 超额现金耗尽并由净现金转为净负债。</li>
+<li><strong>【死刑红线三：管理层资本配置纪律叛变，重资产豪赌上游大宗制造】</strong><ul>
+<li><strong>量化触发标准</strong>：曹仁贤团队违背 29 年来“死磕电力电子转换与控制算法、拒绝上游重资产”的组织基因，<strong>宣布斥资超 <code>150 亿—200 亿元</code> 自建数十 GWh 大规模锂电芯工厂或上游多晶硅/组件产能</strong>，导致公司年资本开支飙升至 <code>80 亿元</code> 以上、账面 <code>228 亿元</code> 超额现金耗尽并由净现金转为净负债。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>证伪本质</strong>：从高 ROIC、高自由现金流的“电力电子大脑”退化为重资产周期苦力，估值逻辑彻底降维。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>聪明人买股票前会先写好两张纸：第一张纸写着“跌到 65 块钱时我要把老婆藏的私房钱也拿出来加仓”；第二张纸写着“如果那 410 亿存货真的烂在港口变成了坏账，或者曹仁贤突然发疯要去借两百亿造电芯，哪怕亏着钱我也要在五分钟内全部卖光”。这两张纸缺了哪一张，你都不配在股市里活过两个周期。</p></div></div></div></div>
@@ -3130,6 +3703,240 @@
 
 
 
+<hr/>
+<h3 id="v4-2026-11-22">✅ 【V4 终审裁决实录（2026-11-22 官方原表法医验真 · 三道铁闸终审单一真相区）】</h3>
+<blockquote>
+<p><strong>⚖️ 终审状态</strong>：<strong><code>REVISED</code>（红蓝极限对质硬修正 · 降级退出即期买区）</strong> ｜ <strong>裁判基准日</strong>：<code>2026-11-22</code><br>
+<strong>法定底稿</strong>：证监会巨潮资讯网三份原版 PDF（<code>26Q3 1225646130.PDF</code> / <code>26H1 1225526948.PDF</code> / <code>25AR 1225066678.PDF</code>）及交易所归集三表 + 16 项一手对等联网反查<br>
+<strong>核心基准锚定</strong>：A 股现价 <strong><code>70.41 元</code></strong>（较 V1 基准 <code>79.60 元</code> 已跌 <code>-11.55%</code>，52 周 <code>57.14 — 85.72 元</code>）｜ 精确总股本 <strong><code>2,073,211,424 股</code></strong>（含非注销激励回购专户 <code>15,384,014 股</code>，<code>26Q3 P6, P9</code>）｜ 普通股总市值 <strong><code>1,459.75 亿元</code></strong> ｜ 归母净资产 <strong><code>494.45 亿元</code></strong>（BVPS <code>23.85 元</code>，PB <strong><code>2.95x</code></strong>）｜ <strong>V4 严苛均衡 True EV = <code>1,413.54 亿元</code></strong>（<code>ev_delta = -46.21 亿元</code>）｜ <strong>跨周期合并无杠杆常态 OE = <code>80.0 亿元/年</code></strong>（归母常态净利 <code>84.1 亿</code> / 归母 OE <code>77.1 亿</code>）→ 2028E 达产 <strong><code>106.0 亿元/年</code></strong> ｜ <strong>TTM 纯现金股息 = <code>1.33 元/股</code></strong>（股息率 <strong><code>1.89%</code></strong>）</br></br></p>
+</blockquote>
+<h4 id="1-pdf">1. 官方原表与原版 PDF 逐科法医验真对照表</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">法医核查科目</th>
+<th style="text-align: left;">官方原表 / 原版 PDF 法定原数（页码直指）</th>
+<th style="text-align: left;">V1 原稿偏差 / 遗漏纠偏</th>
+<th style="text-align: left;">红方空头口径核查</th>
+<th style="text-align: left;">V4 裁判官终审裁定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>总股本与市值</strong></td>
+<td style="text-align: left;"><code>2,073,211,424 股</code>（<code>26Q3 P9</code>），<code>@70.41元</code> 市值 <code>1,459.75 亿</code></td>
+<td style="text-align: left;">V1 误录 <code>2,073,211,368 股</code>（差 56 股）且基价为 <code>79.60 元</code></td>
+<td style="text-align: left;">精确无误</td>
+<td style="text-align: left;">以 <code>20.732114 亿股 × 70.41 元 = 1,459.75 亿</code> 为准</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>26Q3 单季与 9M26 盈利</strong></td>
+<td style="text-align: left;">9M26 营收 <code>488.63 亿(-26.41%)</code>、归母 <code>65.99 亿(-44.46%)</code>、扣非 <code>59.68 亿(-48.04%)</code>、综合毛利率 <code>33.54%</code>；<strong>Q3 单季营收 <code>179.50 亿(-21.51%)</code>、毛利率骤降 <code>-9.17pct</code> 至 <code>29.45%</code>、归母 <code>13.41 亿(-67.67%)</code>、扣非 <code>16.93 亿(-57.58%)</code>、公允价值变动 <code>-5.50 亿</code>、归母综合收益仅 <code>7.91 亿</code></strong>（<code>26Q3 P2, P9-10</code>）</td>
+<td style="text-align: left;">V1 对 Q3 单季公允价值暴亏与 OCI <code>-13.57 亿</code>（外币折算 <code>-9.22 亿</code> + 套期储备 <code>-4.35 亿</code>）定性偏轻</td>
+<td style="text-align: left;">全部原数 100% 属实，实锤高盈利不可线性外推</td>
+<td style="text-align: left;"><strong>事实层 100% 认领</strong>：Q3 确为高价电芯库存结转 + 退税降 3pct + 发货 <code>17GWh</code> 仅确收 <code>9-10GWh</code> + 衍生套保/汇兑四重共振</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>现金流与出口退税依存度</strong></td>
+<td style="text-align: left;">9M26 OCF <strong><code>36.48 亿</code></strong>（<code>-63.21%</code>）、CapEx <code>20.37 亿</code>、FCF <code>16.10 亿</code>；Q3 单季 OCF <strong><code>-0.88 亿</code></strong> / FCF <strong><code>-9.50 亿</code></strong>；<strong>9M26 收到的税费返还高达 <code>26.18 亿</code>（同比 <code>+54.23%</code>，占 OCF 的 <code>71.78%</code>）</strong>（<code>26Q3 P4, P11-12</code>）</td>
+<td style="text-align: left;">V1 漏查出口退税占 OCF 高达七成，高估当期现金成色</td>
+<td style="text-align: left;">精准抓出 <code>26.18 亿</code> 退税输液管，但忽略单季 <code>+88.19 亿</code> 存货系海外在途备货垫资</td>
+<td style="text-align: left;"><strong>认领现金流恶化</strong>：2027 退税清零后经营现金流将失去年均 <code>25—30 亿</code> 退税缓冲，须硬抬常态 WC 扣减项</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>货币资金与交易性金融资产</strong></td>
+<td style="text-align: left;"><code>26Q3</code> 货币资金 <code>273.38 亿</code>、现金及等价物 <strong><code>266.23 亿</code></strong>（精准受限 <strong><code>7.15 亿</code></strong>，<code>26Q3 P7, P12</code>；<code>26H1 P166</code> 受限 <code>6.63 亿</code>）；<strong><code>45.28 亿</code> 交易性金融资产中暗藏 <code>14.03 亿</code> 权益工具投资（含 <code>9.76 亿</code> 第三层次非上市/电站股权，<code>26H1 P144, P190</code>）</strong>，纯银行理财仅余 <code>~31.25 亿</code></td>
+<td style="text-align: left;">V1 将 <code>45.28 亿</code> 全部视同理财经现金，且仅扣 <code>65.66 亿</code> 营运备付，严重虚增超额现金至 <code>228.00 亿</code></td>
+<td style="text-align: left;">空头打假 <code>14.03 亿</code> 权益投资立大功，但扣满整整一季度支出 <code>-184.00 亿</code> 过苛</td>
+<td style="text-align: left;"><strong>V4 均衡严苛口径</strong>：非受限类现金 <code>297.49 亿</code>（<code>266.23 + 31.25</code>）扣除 <strong><code>-125.00 亿</code></strong>（约 2 个月刚性付现周转底仓）= 真实超额现金 <strong><code>172.49 亿元</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>全口径有息及准有息负债</strong></td>
+<td style="text-align: left;">显性债：短借 <code>32.85</code> + 一年内到期非流动负债 <code>13.20</code>（含阳光新能源 <strong><code>8.94 亿</code></strong> 附回购条款战投款重分类，<code>26H1 P169-170 &amp; 26Q3 P4</code>）+ 长借 <code>28.76</code> + 租赁负债 <strong><code>4.46</code></strong> = <strong><code>79.27 亿</code></strong>；长期应付款（融资租赁等）<strong><code>9.63 亿</code></strong>；<strong>衍生金融负债 <code>6.46 亿</code></strong>（商品期货套保浮亏）+ <strong>交易性金融负债 <code>0.79 亿</code></strong>（泰禾智能股权收购义务）= <strong><code>7.26 亿</code></strong>；少数股东权益 <strong><code>30.12 亿</code></strong>（<code>26Q3 P8-9</code>）</td>
+<td style="text-align: left;">V1 误用 25AR 租赁负债 <code>3.73 亿</code>（漏 <code>0.73 亿</code>）与少数股东 <code>31.61 亿</code>，<strong>完全漏计 <code>7.26 亿</code> 衍生/交易金融负债</strong></td>
+<td style="text-align: left;">全部有息/衍生债核查精准，但将 <strong><code>58.46 亿</code> 预计负债按 70%（<code>+40.92 亿</code>）硬塞进 EV</strong> 构成双重计债</td>
+<td style="text-align: left;"><strong>补齐 <code>7.26 亿</code> 衍生/交易债 + <code>0.73 亿</code> 租赁债，严禁将质保预计负债双重计入 EV</strong>：总债务+MI = <code>126.28 亿</code>，<code>ev_delta = 126.28 - 172.49 =</code> <strong><code>-46.21 亿元</code></strong>（较 V1 <code>-108.22 亿</code> 硬上修 <strong><code>+62.01 亿</code></strong>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>存货 <code>409.72 亿</code> 与合同负债 <code>146.66 亿</code></strong></td>
+<td style="text-align: left;"><code>26Q3</code> 存货 <code>409.72 亿(+50.33%)</code>、预付款 <code>54.30 亿(+305.11%)</code>、合同负债 <strong><code>146.66 亿(+37.64%)</code></strong>；<code>26H1 P154</code> 存货结构：库存商品/发出商品 <code>182.44 亿</code>（跌价率 <code>2.86%</code>）、原材料 <code>73.15 亿</code>（<code>5.32%</code>）、合同履约成本 <code>69.01 亿</code>（<code>7.49%</code>）、在产品 <code>11.51 亿</code>，总跌价率 <code>4.34%</code></td>
+<td style="text-align: left;">V1 未充分警示 26H1 碳酸锂高位（20 万/吨）备货在 11 月跌至 9 万/吨下的通用库存跌价压力</td>
+<td style="text-align: left;">空头忽视 <code>146.66 亿</code> 预收定金与海外在途锁价合同会计测试原则（有合同售价兜底不按现货一刀切跌价）</td>
+<td style="text-align: left;"><strong>辩证定性</strong>：主体确系海外 6-9 月交付周期的发出商品，但仍须预留 <code>26Q4</code> 通用电芯跌价计提与常态减值 <code>-13.5 亿/年</code> 缓冲</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>阳光新能源与表外承诺</strong></td>
+<td style="text-align: left;">阳光新能源 <code>26H1</code> 营收暴跌 <strong><code>-76.48%</code> 至 <code>23.38 亿</code></strong>，净利由 <code>+5.96 亿</code> 巨亏 <strong><code>-4.04 亿</code></strong>，OCF <code>-4.08 亿</code>（<code>26H1 P185</code>）；<code>26H1 P196</code> 已开具未到期保函及信用证 <code>240.45 亿</code>、内部互保担保余额 <code>540.45 亿</code> + 光伏贷担保 <code>2.27 亿</code></td>
+<td style="text-align: left;">V1 过度美化“主动瘦身”，漏揭其已触发 <code>8.94 亿</code> 对赌回购一年内到期刚兑</td>
+<td style="text-align: left;">精准抓出新能源亏损与对赌重分类，但将常规履约保函等同表外暴雷略显夸张</td>
+<td style="text-align: left;">阳光新能源股权价值大幅打折（按 <code>0.35x—0.45x PB</code> 仅作价 <code>35 亿</code>），对赌债已 100% 计入 True EV</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TTM 真实分红与回购</strong></td>
+<td style="text-align: left;"><code>25AR P55-56</code>：25 中期 <code>0.95 元</code>（2025-10 派，已出 TTM 窗口）、<strong>25 年度 <code>0.69 元</code></strong>（2026-05 派 <code>14.16 亿</code>）；<code>26H1 P44, P197</code>：<strong>26 中期 <code>0.64 元</code></strong>（2026-09-21 除权派 <code>13.17 亿</code>）；回购全用于 ESOP（<code>26H1 P34, P172</code>）</td>
+<td style="text-align: left;">V1 沿用过期 2025 全年 <code>1.64 元</code>（误算股息率 <code>2.04%</code>）</td>
+<td style="text-align: left;">空头预估 <code>~1.42%</code>（按 <code>1.0 元</code> 偏低估计）</td>
+<td style="text-align: left;"><strong>法定精确 TTM 股息 = <code>0.69 + 0.64 = 1.33 元/股</code></strong>（<code>@70.41元</code> 实测股息率 <strong><code>1.89%</code></strong>，注销回购 <code>0%</code>）</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="2-vs">2. 铁闸一 &amp; 二：事实层硬修正 vs 悲观叠加层反杀裁决表</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">争议焦点</th>
+<th style="text-align: left;">🔴 红方（空头）核心指控</th>
+<th style="text-align: left;">🔵 蓝方（V1）核心主张</th>
+<th style="text-align: left;">⚖️ V4 裁判官铁闸终审裁决（16 次一手联网反查实锤）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>① 2027 退税清零与消费税</strong></td>
+<td style="text-align: left;">电池出口退税 <code>2027-01-01</code> 归零（<code>6%→0%</code>）+ 锂电消费税 <code>2%→4%</code> 双重绞杀出口盈利，年损 <code>6.6—12.6 亿</code></td>
+<td style="text-align: left;">V1 仅扣 <code>9%→6%</code> 的 3pct 退税，维持储能常态毛利率 <code>28.5%</code></td>
+<td style="text-align: left;"><strong>【认领退税清零 · 反杀消费税误读】</strong>：财政部/税务总局 <strong>2026 年第 2 号公告</strong> 实锤 <code>2027-01-01</code> 电池增值税出口退税彻底归零（<strong>必须硬砍储能常态毛利率 <code>-4.0pct</code> 至 <code>24.5%</code></strong>）；但 <strong>2026 年第 20 号公告与第 2 号公告原文</strong> 明确规定 <strong>“出口电池继续适用消费税退（免）税政策”</strong>！阳光海外占比 <code>73.40%</code>，空头把 <code>2%→4%</code> 消费税叠加进海外出口失血系税法硬伤！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>② 碳酸锂暴跌与 409 亿存货跌价</strong></td>
+<td style="text-align: left;">存货锁价于 26H1 碳酸锂 <code>20 万/吨</code> 高位，11 月腰斩至 <code>9 万/吨</code>，Q4 面临 <code>15—30 亿</code> 跌价大洗澡</td>
+<td style="text-align: left;">409 亿存货背后有 147 亿预收定金，全是在途“未结账金条”</td>
+<td style="text-align: left;"><strong>【事实双刃剑 · 拒绝单向悲观】</strong>：联网实锤 2026 年 5 月碳酸锂确曾冲至 <code>~20 万/吨</code>、11 月回落至 <code>8.6—9.2 万/吨</code>（314Ah 储能电芯回落至 <code>≤0.32 元/Wh</code>）。对无锁单通用原材料确有 Q4 跌价压力；但对已签不可撤销海外固定价合同的发出商品按合同售价测算可变现净值，且<strong>11 月低价电芯 + 2026-09-20 全行业集体提价 <code>5%—15%</code> 传导闭环</strong>反而是 26Q4—27H1 毛利率从 21% 深坑反弹的强引擎！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>③ 美国 FCC 禁令与海外大盘</strong></td>
+<td style="text-align: left;"><code>2026-07-28</code> FCC Covered List + 301 关税 <code>25%</code> + FEOC 封死美国市场，常态营收萎缩至 <code>750 亿</code>、净利腰斩至 <code>63.4 亿</code></td>
+<td style="text-align: left;">北美高毛利无虞，储能常态 55GWh、达产 80GWh</td>
+<td style="text-align: left;"><strong>【认领北美绝户折价 · 反杀全球崩塌外推】</strong>：联网实锤 <code>2026-07-28</code> FCC 将外国产联网逆变器列入 Covered List（<code>8月20日</code> 澄清<strong>不具追溯力</strong>，老型号可过渡、新型号禁入），北美（原占营收 <code>10%—20%</code>）失去增量，故下调逆变器常态营收至 <code>300 亿</code>；但全球 2026 储能需求逼近 <code>1,000GWh(+40%—80%)</code>，欧洲大储增 <code>~50%</code>，阳光泰国/印度工厂已运营、<strong>波兰工厂（20GW+12.5GWh）2027H1 投产、埃及 10GWh 落地</strong>，主流券商（华泰/东吴/西部/兴业）Q3 后 26E/27E 净利预期仍达 <code>98—103 亿 / 132—144 亿</code>，空头将常态营收压至 <code>750 亿</code>（低于 2024 年）属极端线性悲观！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>④ 58.46 亿预计负债与 True EV</strong></td>
+<td style="text-align: left;">将 <code>58.46 亿</code> 质保预计负债按 70%（<code>+40.92 亿</code>）计入准债，叠加扣整季现金支出 <code>-184 亿</code>，算出 True EV <code>1,513.47 亿</code>（净债 <code>+53.72 亿</code>）</td>
+<td style="text-align: left;">忽略衍生负债、交易金融资产内权益工具与营运占用，算出 <code>ev_delta = -108.22 亿</code></td>
+<td style="text-align: left;"><strong>【两头纠偏 · 杜绝双重计债】</strong>：V4 剔除 <code>14.03 亿</code> 权益投资、补齐 <code>7.26 亿</code> 衍生/交易债及 <code>0.73 亿</code> 租赁债、将营运底仓翻倍至 <code>-125 亿</code>；但铁面反杀将 <code>58.46 亿</code> 质保预计负债（97% 为已费用化计提的 10—15 年经营性售后拨备，且 26Q1-Q3 余额已由 <code>59.24→58.46 亿</code> 见顶回落）塞进 EV 的重复计债魔术，最终锁定 <strong><code>ev_delta = -46.21 亿</code> / True EV <code>1,413.54 亿</code></strong>！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>⑤ 衍生套保/阳光新能源/AIDC/H股</strong></td>
+<td style="text-align: left;">套保巨亏 <code>-5.50 亿</code>、阳光新能源亏 <code>-4.04 亿</code> 触发 <code>8.94 亿</code> 回购、AIDC 2028 才放量、H 股二次递表稀释 <code>+7.85%</code></td>
+<td style="text-align: left;">淡化套保与子公司亏损，给予 AIDC 2027-2028 高增量预期</td>
+<td style="text-align: left;"><strong>【100% 认领并下调质地加分】</strong>：AIDC EnerNeo 800V SST 虽已签约东阳光/中联数据 <code>130MW</code> 框架协议，但管理层明确 2026 示范验证、2027 小批交付、<strong>2028 规模化放量</strong>，严禁提前透支估值；叠加套保翻车、新能源对赌与 H 股潜在 <code>~6%—8%</code> 稀释，<strong>质地加分由 <code>1.6</code> 硬砍至 <code>0.5</code></strong>，并在 SOTP 与买点中预留稀释安全垫！</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-reality-check-reverse-sotp-v4">3. 铁闸三：历史估值分位 Reality Check、严苛重校 Reverse SOTP 与 V4 锁定两档击球区</h4>
+<ol>
+<li><strong>跨周期 V4 重校常态盈利与 Owner Earnings 精确账本（剔除 2025 峰值红利 &amp; 2026Q3 极端错配，硬吸收 2027 退税归零 + 美国 FCC 禁令 + <code>16.5%</code> 有效税率）</strong>：</li>
+</ol>
+<ul>
+<li>
+<p><strong>合并跨周期常态营收 <code>800.0 亿元</code></strong>（逆变器/变流器 <code>300 亿 @ 36.0% GM</code> + 储能 <code>440 亿 [~56GWh] @ 24.5% GM</code> + 瘦身电站及其他 <code>60 亿 @ 17.0% GM</code>）→ <strong>常态毛利 <code>226.0 亿元</code>（综合毛利率 <code>28.25%</code>）</strong>；</p>
+<ul>
+<li>扣除刚性费用与减值：税金 <code>-5.2 亿</code> + 销售 <code>-52.0 亿</code> + 管理 <code>-16.0 亿</code> + 研发 <code>-42.0 亿</code>（100% 费用化）+ 财务净支 <code>-0.5 亿</code>（含常态汇兑摩擦 <code>-2.5 亿</code> 抵消净利息正收益）+ 经常性软件退税 <code>+4.5 亿</code> + 常态减值 <code>-13.5 亿</code> → 税前利润 <code>101.3 亿</code> → 按 <strong><code>16.5%</code></strong> 实绩税率（纠偏 V1 的 <code>14%</code>）计税后，<strong>合并常态净利 <code>84.6 亿</code> / 归母常态净利 <code>84.1 亿元</code></strong>（净利率 <code>10.5%</code>）；</li>
+</ul>
+</li>
+<li>
+<p><strong>分子分母严格对齐（全合并 True EV ↔ 合并无杠杆 Firm OE）</strong>：加回税后利息 <code>+2.0 亿</code> + 实体 D&amp;A <code>+13.5 亿</code> - 严苛上调维持性 CapEx <strong><code>-13.5 亿</code></strong>（总 CapEx 30 亿的 45%，与 D&amp;A 1:1 抵消） - 上调常态 WC 与非注销 ESOP 稀释成本 <strong><code>-7.0 亿</code></strong>（<code>25AR P203</code> 实绩股权激励费即达 <code>5.86 亿/年</code>）= <strong>V4 合并无杠杆常态 OE <code>79.6 亿 ≈ 80.0 亿元/年</code></strong>（归母 OE <code>77.1 亿/年</code>，较 V1 <code>110.0 亿</code> 硬砍 <strong><code>-27.3%</code></strong>）；2028E 波兰/埃及投产 + 大储 <code>75—80GWh</code> + AIDC 初步放量达产 <strong><code>106.0 亿元/年</code></strong>（较 V1 <code>150.0 亿</code> 硬砍 <strong><code>-29.3%</code></strong>）。</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>历史 5—10 年估值分位 Reality Check（粉碎空头 <code>28.62—36.43 元</code> 虚空地板！）</strong>：<ul>
+<li>亿牛网/Choice 复权历史数据实锤：阳光电源 2023—2025 年历年 <strong>PB 最低值</strong>分别为 <code>4.42x / 3.32x / 3.17x</code>，<strong>PE 最低值</strong>分别为 <code>12.89x / 9.86x / 10.14x</code>（2018 年 531 极寒绝望底才见 <code>1.06x PB</code>）；</li>
+<li>当前 <code>70.41 元</code> 对应 <code>26Q3</code> BVPS <code>23.85 元</code> 的 <strong>PB 已降至 <code>2.95x</code></strong>（正式跌破 2023—2025 历年 <code>3.17x</code> PB 地板），而空头喊出的 <code>28.62—36.43 元</code> 仅对应 <code>1.20x—1.53x PB</code>（市值 <code>593—755 亿</code>，等同把净现金 + 年赚 45 亿的全球第一逆变器底座直接腰斩），属于典型的三重悲观复利幻觉；</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>但严苛重校后的 Reverse SOTP 同样证伪了 V1“现价便宜”的幻觉</strong>：按 V4 严苛口径，剥离净超额现金 <code>+46.21 亿</code>、按 <code>12x</code> 工业 PE 给逆变器/变流器底座 <strong><code>540 亿</code></strong>（常态独立净利 <code>45.0 亿</code>）、按 <code>0.4x PB</code> 给亏损收缩的阳光新能源清算价 <strong><code>35 亿</code></strong> 后，<strong>现价 <code>70.41 元</code>（True EV <code>1,413.54 亿</code>）给大储+AIDC 的隐含标价仍高达 <code>838.5 亿</code>（隐含大储常态 PE 高达 <code>21.5x</code> / 28E 仍 <code>15.0x</code>）</strong>，严苛无期权 SOTP 公允价值中枢实为 <strong><code>1,128—1,256 亿</code>（<code>54.41—60.58 元/股</code>，计入 7% H 股稀释缓冲为 <code>50.85—56.62 元/股</code>）</strong>！</li>
+</ul>
+<ol start="3">
+<li><strong>V4 最终锁定两档实战击球区（严守纪律，宁缺毋滥）</strong>：</li>
+</ol>
+<ul>
+<li>
+<p><strong>第二档（分批建底仓舒适击球区）：<code>52.00 — 60.00 元</code></strong>（上限 <code>60.00 元</code> 较现价回调 <code>-14.8%</code>，精准贴合 52 周低点 <code>57.14 元</code> 与 V4 无期权 SOTP 区间 <code>54.4—60.6 元</code>；对应 True EV <code>1,032—1,198 亿</code>、常态回报 <strong><code>6.68%—7.75%</code></strong>、达产回报 <strong><code>8.85%—10.27%</code></strong>、归母常态 PE <code>12.8x—14.8x</code>、PB <code>2.18x—2.52x</code>、TTM 股息 <code>2.22%—2.56%</code>，大储隐含常态 PE 回落至 <code>11.7x—15.9x</code>，AIDC 期权开始真正白送）；</p>
+</li>
+<li>
+<p><strong>第一档（左侧黄金重锤击球区）：<code>≤ 52.00 元</code></strong>（较现价回调 <code>-26.1%</code>，砸穿 52 周低点 <code>57.14 元</code> 约 <code>-9%</code> 并全额覆盖 H 股稀释缓冲；对应 True EV <code>≤ 1,032 亿</code>、常态回报 <strong><code>≥ 7.75%</code></strong>、达产回报 <strong><code>≥ 10.27%</code></strong>、归母常态 PE <code>≤ 12.8x</code>、PB <code>≤ 2.18x</code>、TTM 股息 <code>≥ 2.56%</code>，全球第一大储仅按 <code>≤ 11.7x</code> 常态 PE 甩卖，闭眼重锤！）。</p>
+</li>
+</ul>
+<h4 id="4-v1-v4">4. 📋 《V1 → V4 演进对照表》</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核心估值与决策指标</th>
+<th style="text-align: center;">V1 原多头报告 (<code>2026-11上旬</code>)</th>
+<th style="text-align: center;">🔴 阶段一做空备忘录 (<code>2026-11-22</code>)</th>
+<th style="text-align: center;">✅ <strong>V4 三道铁闸终审锁定 (<code>2026-11-22</code>)</strong></th>
+<th style="text-align: left;">变动幅度与终审逻辑说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>基准股价 / 总市值</strong></td>
+<td style="text-align: center;"><code>79.60 元</code> / <code>1,650.28 亿</code></td>
+<td style="text-align: center;"><code>70.41 元</code> / <code>1,459.75 亿</code></td>
+<td style="text-align: center;"><strong><code>70.41 元</code> / <code>1,459.75 亿</code></strong></td>
+<td style="text-align: left;">现价较 V1 回调 <code>-11.55%</code>；股本精确至 <code>20.732114 亿股</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>净债/准债差额 (<code>ev_delta</code>)</strong></td>
+<td style="text-align: center;"><code>-108.22 亿元</code></td>
+<td style="text-align: center;"><code>+53.72 亿元</code></td>
+<td style="text-align: center;"><strong><code>-46.21 亿元</code></strong></td>
+<td style="text-align: left;">硬上修 <strong><code>+62.01 亿</code></strong>（扣 <code>14.03 亿</code> 权益资产+补 <code>7.26 亿</code> 衍生债+营运底仓翻倍至 <code>125 亿</code>，反杀质保双扣）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>真实企业价值 (<code>True EV</code>)</strong></td>
+<td style="text-align: center;"><code>1,542.06 亿元</code> (<code>@79.60</code>)</td>
+<td style="text-align: center;"><code>1,513.47 亿元</code> (<code>@70.41</code>)</td>
+<td style="text-align: center;"><strong><code>1,413.54 亿元</code></strong> (<code>@70.41</code>)</td>
+<td style="text-align: left;">同价对比 V1（<code>1,351.5 亿</code>）硬上修 <code>+62.0 亿</code>，反杀空头虚增 <code>99.9 亿</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>跨周期常态 OE / 达产 OE</strong></td>
+<td style="text-align: center;"><code>110.0 亿</code> → <code>150.0 亿</code></td>
+<td style="text-align: center;"><code>53.9 亿</code>（压测 <code>24.8 亿</code>）</td>
+<td style="text-align: center;"><strong><code>80.0 亿</code> → <code>106.0 亿</code></strong></td>
+<td style="text-align: left;">较 V1 硬砍 <strong><code>-27.3% / -29.3%</code></strong>（吸收 2027 退税归零+FCC+16.5%税+7亿WC/ESOP）；反杀空头过度悲观</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>现价常态 / 达产内生回报</strong></td>
+<td style="text-align: center;"><code>7.13%</code> / <code>9.73%</code></td>
+<td style="text-align: center;"><code>3.56%</code> (<code>28.1x EV/OE</code>)</td>
+<td style="text-align: center;"><strong><code>5.66%</code> / <code>7.50%</code></strong> (<code>17.67x</code>)</td>
+<td style="text-align: left;"><strong>跌破 6.5% 买方底仓红线</strong>，现价绝非便宜击球区</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TTM 纯现金股息 / 股息率</strong></td>
+<td style="text-align: center;"><code>1.64 元</code> / <code>2.04%</code> (过期)</td>
+<td style="text-align: center;"><code>~1.00 元</code> / <code>~1.42%</code></td>
+<td style="text-align: center;"><strong><code>1.33 元</code> / <code>1.89%</code></strong></td>
+<td style="text-align: left;">25年度 <code>0.69</code> + 26中期 <code>0.64</code> 零误差核实，ESOP 回购 <code>0%</code> 注销</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第二档（正常建仓击球区）</strong></td>
+<td style="text-align: center;"><code>75.00 — 82.00 元</code></td>
+<td style="text-align: center;"><code>36.43 元</code> 中枢</td>
+<td style="text-align: center;"><strong><code>52.00 — 60.00 元</code></strong></td>
+<td style="text-align: left;">较 V1 下砍 <strong><code>-24%</code></strong>，精准踩实 V4 无期权 SOTP <code>54.4—60.6 元</code> 与 52 周低点 <code>57.14 元</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第一档（左侧黄金重锤区）</strong></td>
+<td style="text-align: center;"><code>62.00 — 68.00 元</code> (<code>≤68</code>)</td>
+<td style="text-align: center;"><code>28.62 — 42.84 元</code></td>
+<td style="text-align: center;"><strong><code>≤ 52.00 元</code></strong></td>
+<td style="text-align: left;">较 V1 重锤线下移 <code>-16 元</code>，全额覆盖 H 股稀释缓冲与 <code>≥10.27%</code> 达产回报</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>质地加分 / 圆桌投票裁决</strong></td>
+<td style="text-align: center;"><code>1.6</code> / 4票赞成即期建仓</td>
+<td style="text-align: center;">强烈看空</td>
+<td style="text-align: center;"><strong><code>0.5</code> / 🔴 0票追高（降级观望）</strong></td>
+<td style="text-align: left;">现价高出新买点上限 <strong><code>+17.4%</code></strong>，严守纪律等回踩或等 27Q1 退税落地证伪</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把交易性金融资产里 14 亿股票当成银行活期、把明年元旦就要清零的出口退税当成天上永远掉的馅饼、还把 17.7 倍企业价值的现价吹成打折甩卖——这叫多头的“选择性失明症”。但另一头，把已经在利润表扣完的 58 亿产品质保金再塞进负债表算一遍债、还连财政部公告里明明白白写着的“出口免消费税”都没读完就喊股价腰斩到 36 块——这叫空头的“恐慌复利症”。真正成熟的买方不做任何一边的拉拉队：承认好公司正在经历退税断奶和美国封锁的双重降档，把买点从 78 块干脆地砍到 52—60 块，然后搬张椅子坐下来喝茶等市场先生发脾气。</p></div></div>
 <hr/>
 <h2 id="g">【终章模块 G：投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）】</h2>
 <blockquote>
@@ -3265,26 +4072,43 @@
 </tr>
 </tbody>
 </table></div>
+<blockquote>
+<p><strong>🛡️ 【2026-11-22 V4 官方原表验真 × 三道铁闸终审圆桌合议修正投票】</strong><br>
+在逐页穿透 <code>26Q3 / 26H1 / 25AR</code> 原版 PDF 附注并直面红方隔离做空备忘录的六项客观铁证（<code>2027-01-01</code> 电池出口退税清零、美国 <code>2026-07-28</code> FCC 禁令、<code>26Q3</code> 毛利断崖与套保浮亏 <code>-5.50 亿</code>、阳光新能源巨亏 <code>-4.04 亿</code> 触发 <code>8.94 亿</code> 回购重分类、<code>14.03 亿</code> 交易性金融资产系权益投资及 TTM 股息实降至 <code>1.33 元</code>）后，四位大师推翻 V1 原表决（原 4 票赞成 <code>75—82 元</code> 即期建仓），<strong>在今日现价 <code>70.41 元</code>（V4 True EV <code>1,413.54 亿</code> / 常态 OE <code>80.0 亿</code> / 隐含回报仅 <code>5.66%</code> / 股息 <code>1.89%</code>）下全票达成 <code>0 票追高 · 降级退出即期买区</code> 一致裁决</strong>：
+- <strong>🥤 巴菲特（退守观望）</strong>：严苛重校后现价对应常态 OE 回报仅 <code>5.66%</code>（<code>17.67x EV/OE</code>）、股息不足 <code>2%</code>，且退税归零对无自产电芯集成商的真实利润底盘尚未经 <code>27Q1</code> 实战检验，绝不提前挥棒，耐心等 <strong><code>≤ 60.00 元</code></strong> 再出手、<strong><code>≤ 52.00 元</code></strong> 重仓；
+- <strong>👴🏻 芒格（退守观望）</strong>：反手打假空头把质保预计负债双扣进 EV 及误读出口免消费税的荒谬逻辑，但也绝不原谅 6.46 亿期货套保翻车、阳光新能源对赌重分类与非注销 ESOP 回购；质地加分硬砍至 <strong><code>0.5</code></strong>，现价 <code>70.41 元</code> 毫无安全边际，严等 <strong><code>52—60 元</code></strong>；
+- <strong>🛒 彼得·林奇（右侧等待验证）</strong>：409.72 亿存货背后的 146.66 亿预收款与 41GWh 发货量证明成长引擎未死，但 9M26 剔除退税后内生 OCF 仅 10.29 亿，必须看到 <code>26Q4/27Q1</code> 存货实质去化 + 储能毛利率重回 <code>≥ 26%</code> 再右侧确认，或价格主动跌入 <strong><code>≤ 60.00 元</code></strong>；
+- <strong>🕰️ 马克斯 &amp; 卡拉曼（严守拆骨铁尺）</strong>：V4 重校无期权 SOTP 公允价值仅 <strong><code>54.41—60.58 元/股</code></strong>（含 7% H 股稀释缓冲 <code>50.85—56.62 元</code>），现价 <code>70.41 元</code> 仍给大储隐含 <code>21.5x</code> 常态 PE，高出新买点上限 <strong><code>+17.4%</code></strong>，<strong>0 票追高，锁定 <code>52.00—60.00 元</code> 分批建底仓、<code>≤ 52.00 元</code>（<code>≤ 2.18x PB</code> / 常态回报 <code>≥ 7.75%</code> / 达产 <code>≥ 10.27%</code>）左侧重锤！</strong></br></p>
+</blockquote>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
 <blockquote>
-<p><strong>前面那十万字的财报细节和模型我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【阳光电源】这家企业，你只需要在脑子里记住这四件事：</strong></p>
+<p><strong>前面那十万字的财报细节、官方 PDF 法医穿透和红蓝终极对质我已经全部替你裁决完毕。现在你可以忘掉那些复杂的小数点，关于【阳光电源（V4 终审版）】这家企业，你只需要在脑子里记住这四件事：</strong></p>
 </blockquote>
 <h3 id="1_2">1. 它到底靠什么在行业里立身？（看家饭碗）</h3>
-<p>外行看阳光电源总犯两个错：要么把它跟隆基、通威绑在一起当光伏周期苦力，要么看它不造电芯就嘲笑它是“买电芯攒柜子的组装工”。说白了，它真正的看家饭碗是卡在“高比例新能源与脆弱大电网之间”的电力电子大脑与构网控制算法（逆变器与构网型大储系统）。不管硅料和碳酸锂跌成什么样，风光和储能的电想并入电网而不引起大停电，就必须靠它的构网算法和转换器来驯服。更绝的是，正因为它坚决不背几十GWh电芯厂的重资产折旧包袱，才能在电芯产能过剩的买方市场里压价采购，自己死死攥住利润最肥的“系统定义权、欧美中东电网准入牌照和海外银行可融资白名单”。</p>
-<h3 id="2_3">2. 它的财务家底和经营周期现在发生了什么本质变化？（为什么它是真印钞机还是苦力）</h3>
-<p>这是一家资本效率极高的真印钞机——过去五年只花了一百一十多亿建厂，却赚回两百三十多亿自由现金流，光纯现金分红就把上市以来A股募资额全额还清还有富余！目前业务底座刚完成历史性交接：储能系统正式超越光伏逆变器成为第一大主业，海外高毛利收入占比冲到七成以上。账上趴着三百一十多亿广义现金，扣除所有负债和日常备付后可随时抽走的超额净现金高达两百二十多亿；同时它还把高压碳化硅电力电子技术直接平移，带着固态变压器杀进了英伟达AI算力中心供电生态。</p>
-<h3 id="3_2">3. 市场担心的那些“软肋”，到底是真死穴还是纸老虎？（买方真伪辩证 &amp; 危中之机）</h3>
+<p>阳光电源真正的看家饭碗不是造电芯或拉硅片，而是卡在“高比例新能源与脆弱大电网之间”的<strong>电力电子大脑与构网控制算法（逆变器 + PowerTitan 构网大储系统 + 欧美中东澳银行可融资白名单 Bankability）</strong>。即便在 2026Q3 储能遭遇暴击的至暗季度，它那不用一克碳酸锂的光伏逆变器依然稳守 <strong>40%+</strong> 的超高毛利率（26H1 达 42.72%），这是整家公司最硬的压舱石。</p>
+<h3 id="2-v4">2. 它的财务家底和经营周期现在发生了什么本质变化？（V4 挤干水分后的真相）</h3>
+<p>过去五年它确实是一台轻固定资产的超级现金牛，但 <strong>2026Q3 宣告了“电芯通缩剪刀差 + 高出口退税”的暴利时代正式落幕</strong>：</p>
 <ul>
 <li>
-<p><strong>头号纸老虎/黄金买点制造机（三季报单季利润暴跌近七成、储能毛利率掉到两成一）</strong>：只看标题的人看到三季度利润大跌就割肉逃跑，剖开资产负债表一看真相大白：一是受国内新能源新政影响，管理层主动挥刀砍掉了八成低毛利还要垫资的国内电站开发包袱；二是三季度储能实际发货高达17GWh（同比大涨四成多），但因海运在途和海外并网验收有半年滞后期，当季只确收了9到10GWh，剩下没结账的“金条”全躺在创历史新高的四百多亿存货和近一百五十亿客户预收定金里！叠加消化高价电芯和出口退税下调，才砸出这个会计错配黄金坑。</p>
+<p><strong>盈利中枢硬下台阶</strong>：2026Q3 储能单季毛利率骤降至 21%、净利暴跌 68%，且 <strong><code>2027年1月1日</code> 电池增值税出口退税将从 6% 彻底归零</strong>（好在消费税出口仍免/退，未被空头说的那样双重绞杀），叠加美国 <code>2026年7月</code> FCC 禁令封死新型号增量、以及控股子公司阳光新能源上半年巨亏 4 亿元并触发近 9 亿元战投对赌回购进入一年内到期债，公司的跨周期真实造血底盘必须从 V1 幻想的 110 亿/年<strong>硬砍近三成至 <code>80 亿/年</code></strong>（2028 年波兰/埃及工厂及 AIDC 放量后达产约 <code>106 亿/年</code>）；</p>
 </li>
 <li>
-<p><strong>真硬约束/核心死穴（欧美电网安全禁令或海外大储丧失构网溢价）</strong>：真正要防的是欧美未来以“国家电网安全控制权”为由立法禁止中国逆变器与大储并入主干网；或者海外大储丧失构网溢价陷入纯价格战，导致储能毛利率连续三个季度跌破两成。</p>
+<p><strong>现金家底没老版本吹得那么厚，但也绝非空头吓唬的“净负债黑洞”</strong>：账上 45 亿交易性金融资产里藏了 14 亿非现金股权投资，且 410 亿存货+466 亿应付票据账款需要留足 125 亿日常周转底仓，扣掉全部有息债、7.3 亿衍生套保/收购负债及 30 亿少数股东权益后，真实净超额现金约 <strong>46 亿元</strong>（V1 的 108 亿水分被砍掉大半，但也没到空头靠重复计算质保金炮制的“缺口 54 亿”）。</p>
 </li>
 </ul>
-<h3 id="4_1">4. 咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
-<p>在八十块钱、总市值一千六百五十亿水位上，用拆骨法一算就明白赔率有多肥：扣掉两百二十多亿超额现金（真实企业价值约一千五百四十亿），再扣掉稳赚五十多亿、值七百四十亿的“逆变器现金牛+电站运维底座”，市场只收八百亿就把“全球第一的构网大储帝国（常态年赚五十多亿）”卖给你，同时把“英伟达AIDC算力电源、阳光氢能和电控”三大王牌期权零元白送！实战打法：趁市场为三季报会计错配恐慌，在七十五到八十二块直接建五到六成主力底仓，静待未来两季四百亿存货结转、毛利率重回两成八以上的双击；留三四成子弹防大盘动荡砸到六十二到六十八块黄金坑时闭眼打满！</p>
+<h3 id="3_2">3. 市场担心的那些“软肋”，到底是真硬伤还是纸老虎？（买方真伪辩证）</h3>
+<ul>
+<li>
+<p><strong>真硬伤（必须认账打折）</strong>：① <code>2027-01-01</code> 电池出口退税归零对毛利率的刚性冲击；② 美国高毛利市场因 FCC/FEOC/301 关税变成“无增量存量池”；③ 6.46 亿期货套保浮亏、阳光新能源对赌回购与二次递表港股 H 股的潜在 6%—8% 股权摊薄；④ 26H1 高价电芯库存叠加 9M26 剔除退税后真实内生 OCF 骤降，年报仍需防范局部跌价计提。</p>
+</li>
+<li>
+<p><strong>纸老虎/空头过度恐吓（绝不滑跪）</strong>：① 空头喊的“410 亿存货全要大洗澡跌价 30 亿”无视了右边创历史新高的 <strong>146.7 亿客户预收定金</strong> 与海外大储 6—9 个月海运并网验收周期（有锁价合同兜底），而且 11 月碳酸锂跌回 9 万/吨反而会让它明年新采购的电芯成本大降；② 空头把已费用化的 58 亿产品质保金当金融债再算一遍、还把出口免税的消费税硬算成出口亏损，喊出 28—36 元（1.2—1.5x PB）纯属脱离历史估值地心的恐慌幻觉。</p>
+</li>
+</ul>
+<h3 id="4-v4">4. 咱们到底该怎么买它、怎么赚它的钱？（V4 终审实战底线）</h3>
+<p>虽然现价 <strong><code>70.41 元</code></strong> 已经比上个月回调了 11.6%、PB 也破了近三年地板（2.95x），但按挤干水分后的 V4 严苛铁尺一算：<strong>当前 True EV 1,414 亿对应常态造血 80 亿，回报率只有 <code>5.66%</code>（17.7 倍），TTM 纯现金股息率只有 <code>1.89%</code>（1.33 元/股）</strong>，剥离净现金和逆变器底座（540 亿）后市场仍给大储标价 21.5 倍常态 PE，<strong>还不够便宜！</strong><br>
+<strong>实战铁律</strong>：当下 <strong><code>70.41 元</code> 坚决 0 票追高、退守观望</strong>！前方马上就是 <code>2027-01-01</code> 退税归零首季大考、26Q4 存货去化年报审计与港股 IPO 摊薄落地。耐心把子弹留好，等市场先生受利空惊吓把股价砸回 <strong><code>52.00 — 60.00 元</code></strong>（对应无期权拆骨公允区间、常态回报 6.7%—7.8%、达产 8.9%—10.3%）再分批建底仓；一旦给到 <strong><code>≤ 52.00 元</code></strong>（PB ≤ 2.18x、达产回报破 10.3%、全球第一大储仅按 11.7 倍甩卖且免费白送英伟达 AIDC 固态变压器期权），果断左侧重锤！</br></p>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -3476,7 +4300,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《阳光电源 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/阳光电源 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《阳光电源(300274.SZ) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/阳光电源(300274.SZ) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3673,6 +4497,553 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
