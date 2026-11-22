@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>淮北矿业 深度投研全集</title>
+<title>淮北矿业(600985.SH) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">淮北矿业 深度投研全集</div>
+    <div class="report-title">淮北矿业(600985.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-22</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -902,9 +1360,11 @@
 <hr/>
 <h3 id="_3">【第一部分：拆解业务账本、周期时钟与顺价能力——谁在挑大梁，谁在凑规模，谁在拖后腿？】</h3>
 <div class="annotated-row"><div class="main-col"><h4 id="1">1. 业务结构与利益链条：四层金字塔的真实成色</h4><p>要看懂淮北矿业的真实盈利引擎，必须将其2024年报、2025年报与2026年三季报的分部账本一层层剥开：</p><ul>
-<li><strong>第一层（绝对利润支柱·挑大梁）：煤炭采选业务（核心为炼焦精煤与配焦精煤，辅以混煤）</strong></li>
 <li>
-<p><strong>收入与毛利占比</strong>：2025年煤炭采选业实现对外营业收入<code>107.41亿元</code>（<code>10,740,941,232.85元</code>，不含内部自用转入煤化工部分），营业成本<code>63.09亿元</code>，实现毛利<code>44.32亿元</code>，分部毛利率高达<strong><code>41.26%</code></strong>（2024年为<code>49.77%</code>）；以占合并营收仅<code>26.12%</code>的体量，贡献了全公司合并毛利总额（<code>75.83亿元</code>）的<strong><code>58.45%</code></strong>。进入2026年前三季度，受益于信湖煤矿4月复产及三季度长协提价，商品煤均价回升至<code>947.15元/吨</code>（同比<code>+17.84%</code>），吨煤成本控制在<code>505.47元/吨</code>，吨煤毛利达<code>441.68元/吨</code>（煤炭分部毛利率回升至<strong><code>46.63%</code></strong>，其中2026Q3单季吨煤售价<code>1,102元/吨</code>、成本<code>540元/吨</code>、毛利<code>562元/吨</code>，单季毛利率高达<code>51.00%</code>）。</p>
+<p><strong>第一层（绝对利润支柱·挑大梁）：煤炭采选业务（核心为炼焦精煤与配焦精煤，辅以混煤）</strong></p>
+<ul>
+<li><strong>收入与毛利占比</strong>：2025年煤炭采选业实现对外营业收入<code>107.41亿元</code>（<code>10,740,941,232.85元</code>，不含内部自用转入煤化工部分），营业成本<code>63.09亿元</code>，实现毛利<code>44.32亿元</code>，分部毛利率高达<strong><code>41.26%</code></strong>（2024年为<code>49.77%</code>）；以占合并营收仅<code>26.12%</code>的体量，贡献了全公司合并毛利总额（<code>75.83亿元</code>）的<strong><code>58.45%</code></strong>。进入2026年前三季度，受益于信湖煤矿4月复产及三季度长协提价，商品煤均价回升至<code>947.15元/吨</code>（同比<code>+17.84%</code>），吨煤成本控制在<code>505.47元/吨</code>，吨煤毛利达<code>441.68元/吨</code>（煤炭分部毛利率回升至<strong><code>46.63%</code></strong>，其中2026Q3单季吨煤售价<code>1,102元/吨</code>、成本<code>540元/吨</code>、毛利<code>562元/吨</code>，单季毛利率高达<code>51.00%</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>客户与痛点</strong>：公司的精煤产品主攻主焦煤、肥煤、1/3焦煤、瘦煤，具有<strong>“低硫（硫分普遍低于0.5%—0.8%）、特低磷、中等挥发分、极强粘结性（G值与Y值优异）”</strong>的天然禀赋。在现代高炉大型化（2,500—5,000立方米高炉）背景下，高炉内部焦炭必须承担极高的料柱透气性与热态骨架支撑强度（CSR反应后强度），缺乏强粘结性肥煤和低硫主焦煤作为“骨架粘合剂”，高炉就会发生炉况失常甚至崩料。下游核心买单客户是宝武集团（马钢、宝钢）、沙钢、南钢、兴澄特钢等华东头部钢企及大型独立焦化厂。</p>
@@ -914,26 +1374,28 @@
 </li>
 <li>
 <p><strong>第二层（深加工延链器与周期减震垫）：现代煤化工业务（焦炭 + 甲醇 + 60万吨无水乙醇 + 焦炉煤气分质利用）</strong></p>
-</li>
-<li>
-<p><strong>收入与毛利表现</strong>：主要由临涣焦化（440万吨/年焦炭产能）与碳鑫科技（50万吨/年甲醇、60万吨/年无水乙醇、驰放气制备高纯氢等）构成。2025年煤化工板块实现营业收入<code>96.56亿元</code>（<code>9,656,214,526.12元</code>），营业成本<code>76.83亿元</code>，实现毛利<code>19.73亿元</code>，毛利率为<strong><code>20.43%</code></strong>（逆势较2024年的<code>19.34%</code>提升<code>1.09个百分点</code>），贡献全公司合并毛利的<strong><code>26.02%</code></strong>。</p>
+<ul>
+<li><strong>收入与毛利表现</strong>：主要由临涣焦化（440万吨/年焦炭产能）与碳鑫科技（50万吨/年甲醇、60万吨/年无水乙醇、驰放气制备高纯氢等）构成。2025年煤化工板块实现营业收入<code>96.56亿元</code>（<code>9,656,214,526.12元</code>），营业成本<code>76.83亿元</code>，实现毛利<code>19.73亿元</code>，毛利率为<strong><code>20.43%</code></strong>（逆势较2024年的<code>19.34%</code>提升<code>1.09个百分点</code>），贡献全公司合并毛利的<strong><code>26.02%</code></strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>板块内部结构分化（谁在拖后腿、谁在补位）</strong>：传统焦炭业务（2025年生产361.57万吨、销售365.13万吨）受下游钢厂压价挤压，处于微利甚至阶段性盈亏平衡边缘（这也是导致2025年及2026年前三季度少数股东损益分别为<code>-4.94亿元</code>和<code>-2.03亿元</code>的核心原因——临涣焦化等合资煤化工主体在焦炭低迷期出现亏损，由少数股东按比例分担）；但<strong>碳鑫科技60万吨/年煤制无水乙醇项目</strong>在2024年下半年投产后，2025年实现乙醇产量<code>54.68万吨</code>、销量<code>52.10万吨</code>，彻底跑通“合成气—二甲醚—醋酸甲酯—无水乙醇”低成本路线，单吨乙醇完全成本显著低于粮食法（玉米发酵法）乙醇，直接把煤化工板块的整体毛利率稳稳托在了20%以上。</p>
 </li>
 <li>
 <p><strong>第三层（高毛利隐形现金牛）：民爆器材 + 爆破工程服务 + 非煤矿山砂石骨料 + 煤电联营</strong></p>
-</li>
-<li>
-<p><strong>民爆与砂石骨料（雷鸣科化主体）</strong>：依托前身雷鸣科化的民爆牌照壁垒（工业炸药、数码电子雷管）向上下游延伸，在安徽、湖南、河南等地收储优质建筑石料用灰岩与玄武岩矿山，累计控制<strong>非煤矿山资源量超7亿吨</strong>，2025年生产砂石骨料<code>1,417万吨</code>。由于自备炸药爆破团队、紧靠淮河/长江水运通道，其砂石骨料毛利率常年高达<code>40%—50%</code>，是典型的区域牌照垄断型现金牛。</p>
+<ul>
+<li><strong>民爆与砂石骨料（雷鸣科化主体）</strong>：依托前身雷鸣科化的民爆牌照壁垒（工业炸药、数码电子雷管）向上下游延伸，在安徽、湖南、河南等地收储优质建筑石料用灰岩与玄武岩矿山，累计控制<strong>非煤矿山资源量超7亿吨</strong>，2025年生产砂石骨料<code>1,417万吨</code>。由于自备炸药爆破团队、紧靠淮河/长江水运通道，其砂石骨料毛利率常年高达<code>40%—50%</code>，是典型的区域牌照垄断型现金牛。</li>
+</ul>
 </li>
 <li>
 <p><strong>电力业务</strong>：原有煤矸石、煤泥综合利用电厂加上<strong>2026年新投产的聚能发电2×660MW超超临界燃煤机组</strong>，将矿区洗选剩下的低热值中煤、煤泥就地转化为电力直送华东高电价电网，实现“洗选废料零外运损耗”的内部循环。</p>
 </li>
 <li>
 <p><strong>第四层（凑规模的虚假繁荣·正在主动刮骨疗毒）：大宗商品物流贸易</strong></p>
-</li>
+<ul>
 <li>2023—2024年公司贸易及其他收入高达<code>300亿—400亿元</code>，但毛利率不足<code>0.5%—1.0%</code>，不仅拉低合并报表利润率，还占用营运授信并潜藏应收坏账风险。2025年管理层响应国资委“严禁虚假贸易、压降低毛利贸易”号令，果断转让信盛国际等主体，将自营贸易收入腰斩55.53%至<code>131.81亿元</code>，令资产负债表和利润率成色大幅提纯。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看这家公司的账本就像剥洋葱——最外面那层几百亿的贸易流水是充胖子的棉袄，脱掉了反而一身轻松；中间那层焦炭是在替钢厂打工受气，好在乙醇化学家们用煤造出了比玉米发酵还便宜的酒精；最里面那颗金光闪闪的核，是每年一千多万吨紧挨着江南钢厂高炉的优质主焦煤和肥煤，这才是真正替股东付账单的印钞机。</p></div></div></div></div>
 
 
@@ -1263,15 +1725,19 @@
 </table></div>
 <p><em>(注：2023年营收在2024年报中重述为733.87亿元，2024年OCF在2025年报中重述为90.57亿元，尾差仅0.06亿元；CapEx统一取自现金流量表“购建固定资产、无形资产和其他长期资产支付的现金”。)</em></p>
 <div class="annotated-row"><div class="main-col"><h4 id="4">4. 打破“合并报表幻觉”双项深度体检</h4><ol>
-<li><strong>少数股东损益 vs 少数股东权益倒挂核查（毫无“纸面合并富贵”，反而是少数股东替母公司扛亏损！）</strong>：
-   - 截至2026年9月30日，公司合并净资产为<code>474.09亿元</code>，其中归母净资产<code>432.45亿元</code>（占比<strong><code>91.22%</code></strong>），少数股东权益<code>41.65亿元</code>（占比<strong><code>8.78%</code></strong>）。
-   - 看利润表：2025年全年合并净利润为<code>10.12亿元</code>，其中归母净利润<code>15.06亿元</code>，<strong>少数股东损益为<code>-4.94亿元</code></strong>；2026年前三季度合并净利润为<code>19.43亿元</code>，其中归母净利润<code>21.46亿元</code>，<strong>少数股东损益为<code>-2.03亿元</code>（<code>-203,250,673.25元</code>）</strong>！</li>
+<li><strong>少数股东损益 vs 少数股东权益倒挂核查（毫无“纸面合并富贵”，反而是少数股东替母公司扛亏损！）</strong>：<ul>
+<li>截至2026年9月30日，公司合并净资产为<code>474.09亿元</code>，其中归母净资产<code>432.45亿元</code>（占比<strong><code>91.22%</code></strong>），少数股东权益<code>41.65亿元</code>（占比<strong><code>8.78%</code></strong>）。</li>
+<li>看利润表：2025年全年合并净利润为<code>10.12亿元</code>，其中归母净利润<code>15.06亿元</code>，<strong>少数股东损益为<code>-4.94亿元</code></strong>；2026年前三季度合并净利润为<code>19.43亿元</code>，其中归母净利润<code>21.46亿元</code>，<strong>少数股东损益为<code>-2.03亿元</code>（<code>-203,250,673.25元</code>）</strong>！</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>为什么少数股东损益是负数？</strong> 因为公司最赚钱的17座本部主力焦煤矿井几乎全是<strong>100%全资控股</strong>（利润100%归属母公司股东），而存在少数股东的合资子公司主要是临涣焦化（焦炭冶炼）以及尚处于基建投入期尚未出煤的陶忽图煤矿（成达矿业，公司持股50%并表）、初期爬坡的煤电/化工主体！在焦炭行业亏损和陶忽图基建费用化期间，少数股东实打实地按持股比例替上市公司分担了数亿元亏损；而一旦2027年陶忽图800万吨低成本煤矿投产大赚，少数股东权益才会转为正贡献。这与某些“母公司亏损、靠控股51%矿山装门面”的假富贵公司截然相反！</li>
 </ul><ol start="2">
-<li><strong>账面现金与有息负债结构核查</strong>：
-   - 截至2026年9月30日，公司账面<strong>货币资金<code>62.46亿元</code></strong>（较2025年末的<code>27.00亿元</code>猛增<code>131.32%</code>），加上<strong>交易性金融资产<code>19.81亿元</code></strong>（主要为财务公司持有的高流动性货币基金等），<strong>广义现金合计达<code>82.27亿元</code></strong>（受限保证金及法定准备金约<code>8.52亿元</code>）。
-   - 有息负债端：截至2026年9月30日，短期借款<code>34.38亿元</code>、一年内到期的非流动负债<code>12.60亿元</code>、长期借款<code>91.22亿元</code>、应付债券<code>0.00元</code>，<strong>传统五项有息负债合计<code>138.20亿元</code></strong>（若加上租赁负债<code>13.55亿元</code>，全口径带息债务为<code>151.75亿元</code>）。</li>
+<li><strong>账面现金与有息负债结构核查</strong>：<ul>
+<li>截至2026年9月30日，公司账面<strong>货币资金<code>62.46亿元</code></strong>（较2025年末的<code>27.00亿元</code>猛增<code>131.32%</code>），加上<strong>交易性金融资产<code>19.81亿元</code></strong>（主要为财务公司持有的高流动性货币基金等），<strong>广义现金合计达<code>82.27亿元</code></strong>（受限保证金及法定准备金约<code>8.52亿元</code>）。</li>
+<li>有息负债端：截至2026年9月30日，短期借款<code>34.38亿元</code>、一年内到期的非流动负债<code>12.60亿元</code>、长期借款<code>91.22亿元</code>、应付债券<code>0.00元</code>，<strong>传统五项有息负债合计<code>138.20亿元</code></strong>（若加上租赁负债<code>13.55亿元</code>，全口径带息债务为<code>151.75亿元</code>）。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>利息成本极低</strong>：2026年前三季度利息费用仅<code>3.69亿元</code>（2025年全年利息费用<code>5.15亿元</code>），折合年化综合债务融资成本仅<strong><code>3.2%—3.5%</code></strong>左右，且66%以上为匹配陶忽图煤矿和聚能电厂建设周期的低息长期项目贷款，完全不存在短债滚续危机。</li>
 </ul><p><strong>第五部分定性收口</strong>：过去五年（2021—2025年），淮北矿业累计创造了<strong><code>462.77亿元</code>经营现金流净额</strong>，在豪掷<strong><code>343.77亿元</code>巨额资本开支</strong>再造一个“新淮矿（陶忽图800万吨煤矿 + 60万吨乙醇 + 2×660MW电厂 + 7亿吨非煤矿山）”的同时，依然攒下了<strong><code>+119.00亿元</code>累计自由现金流</strong>，并把其中的<strong><code>97.28亿元</code>（占五年累计FCF的81.75%！）</strong>全部以真金白银分红发给了股东。它正处于<strong>从“重资产逆周期扩产尾声”向“自由现金流大丰收期”跨越的典型收获者拐点</strong>。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多重资产矿山老板赚了460亿现金，转头就花掉500亿去买私人飞机和烂矿，最后还得向股东伸手配股要钱。淮北矿业过去五年赚了462.77亿真金白银，砸了343.77亿把内蒙新大矿、乙醇工厂和超超临界电厂全建起来了，剩下的119亿自由现金流里，居然掏出97.28亿分给了股东！更绝的是，最肥的焦煤矿全是100%自己独吞，熬苦日子的焦化厂和基建期新矿还有合资伙伴帮忙分担亏损——这账本干净得像刚洗过的精煤。</p></div></div></div></div>
@@ -1325,12 +1791,16 @@
 <p>2026年前三季度，淮北矿业研发费用高达<strong><code>14.41亿元</code>（<code>1,440,709,988.68元</code>，占总营收4.12%）</strong>。一家传统煤企每年花近20亿元研发经费到底在干什么？穿透附注与项目实践，其技术与商业模式进化集中在两条硬核赛道：</p>
 <ol>
 <li>
-<p><strong>第一条进化链：复杂地质深井“地面超前治灾 + 透明地质智能开采”工艺迭代</strong>：
-   - 针对两淮矿区深部（<code>-800米</code>至<code>-1,000米</code>）高地应力、强突出煤层与底板高承压奥灰水三大死敌，公司联合中国矿业大学等科研机构，将过去“井下边掘边探、被动停产治灾”升级为<strong>“地面丛式水平井超前压裂抽采瓦斯 + 地面微震实时监测底板导水裂隙”</strong>。信湖煤矿2023年11月发生300m³/h涌水险情后，正是靠这套高精度地面定向注浆堵水与六大系统重构技术，实现了零人员伤亡并在2026年4月安全复产，保住了这座300万吨/年核定产能（可采储量超1.4亿吨）的核心矿井。</p>
+<p><strong>第一条进化链：复杂地质深井“地面超前治灾 + 透明地质智能开采”工艺迭代</strong>：</p>
+<ul>
+<li>针对两淮矿区深部（<code>-800米</code>至<code>-1,000米</code>）高地应力、强突出煤层与底板高承压奥灰水三大死敌，公司联合中国矿业大学等科研机构，将过去“井下边掘边探、被动停产治灾”升级为<strong>“地面丛式水平井超前压裂抽采瓦斯 + 地面微震实时监测底板导水裂隙”</strong>。信湖煤矿2023年11月发生300m³/h涌水险情后，正是靠这套高精度地面定向注浆堵水与六大系统重构技术，实现了零人员伤亡并在2026年4月安全复产，保住了这座300万吨/年核定产能（可采储量超1.4亿吨）的核心矿井。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二条进化链：从“卖初级焦炭/甲醇”向“煤基C1/C2高端新材料（无水乙醇 + 碳酸二甲酯DMC）”跃迁</strong>：
-   - 传统煤化工卖焦炭和甲醇，本质上还是跟大宗周期同呼吸共命运。淮北矿业依托碳鑫科技园区，将焦炉煤气制出的甲醇进一步通过中国科学院大连化物所DMTE二代技术转化为<strong>无水乙醇（60万吨/年）</strong>，不仅纯度达99.7%以上（可直接作为车用燃料乙醇调合组分或高端电子/医药溶剂），而且副产驰放气提纯制备高纯氢、二氧化碳捕集制备<strong>碳酸二甲酯（DMC，锂电池电解液核心溶剂）</strong>与乙醇脱水制乙烯下游新材料，真正把论吨卖几百元的煤炭变成了论吨卖5,000—6,000元的精细化学品。</p>
+<p><strong>第二条进化链：从“卖初级焦炭/甲醇”向“煤基C1/C2高端新材料（无水乙醇 + 碳酸二甲酯DMC）”跃迁</strong>：</p>
+<ul>
+<li>传统煤化工卖焦炭和甲醇，本质上还是跟大宗周期同呼吸共命运。淮北矿业依托碳鑫科技园区，将焦炉煤气制出的甲醇进一步通过中国科学院大连化物所DMTE二代技术转化为<strong>无水乙醇（60万吨/年）</strong>，不仅纯度达99.7%以上（可直接作为车用燃料乙醇调合组分或高端电子/医药溶剂），而且副产驰放气提纯制备高纯氢、二氧化碳捕集制备<strong>碳酸二甲酯（DMC，锂电池电解液核心溶剂）</strong>与乙醇脱水制乙烯下游新材料，真正把论吨卖几百元的煤炭变成了论吨卖5,000—6,000元的精细化学品。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -1418,20 +1888,28 @@
 <h4 id="2-4">2. 未来两到三年每次翻开财报必看的 4 个可量化、可证伪“硬核验证路标”</h4>
 <ol>
 <li>
-<p><strong>【路标一·核心工程投产转化】：信湖煤矿满产爬坡与陶忽图煤矿（800万吨/年）达产进度</strong>
-   - <strong>量化锚点</strong>：核查2026年报与2027年各季报——① <strong>信湖煤矿</strong>2026年是否顺利完成<code>138万吨</code>以上商品煤产量目标，并在2027年恢复至<code>220万—260万吨/年</code>以上常态产出；② <strong>陶忽图煤矿</strong>是否在2026年底至2027年一季度如期完成联合试运转并取得安全生产许可证，2027年是否贡献<code>300万—500万吨</code>以上增量原煤；③ 全公司合并商品煤年产量是否从2025年的<code>1,738万吨</code>谷底回升并突破<code>2,000万—2,400万吨</code>。</p>
+<p><strong>【路标一·核心工程投产转化】：信湖煤矿满产爬坡与陶忽图煤矿（800万吨/年）达产进度</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：核查2026年报与2027年各季报——① <strong>信湖煤矿</strong>2026年是否顺利完成<code>138万吨</code>以上商品煤产量目标，并在2027年恢复至<code>220万—260万吨/年</code>以上常态产出；② <strong>陶忽图煤矿</strong>是否在2026年底至2027年一季度如期完成联合试运转并取得安全生产许可证，2027年是否贡献<code>300万—500万吨</code>以上增量原煤；③ 全公司合并商品煤年产量是否从2025年的<code>1,738万吨</code>谷底回升并突破<code>2,000万—2,400万吨</code>。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标二·成本身位与煤化盈利】：省内吨煤销售成本红线与碳鑫科技乙醇毛利韧性</strong>
-   - <strong>量化锚点</strong>：① 省内本部吨煤销售成本必须牢牢控制在<strong><code>500—550元/吨</code>以内</strong>（若剔除陶忽图低成本煤摊薄后，本部吨煤成本连续两个季度突破<code>580元/吨</code>，说明深井老矿递减恶化超预期）；② 煤化工分部毛利率是否继续稳定在<strong><code>18%—22%</code>以上</strong>，且碳鑫科技60万吨无水乙醇年销量是否维持在<code>55万吨</code>以上满产水平。</p>
+<p><strong>【路标二·成本身位与煤化盈利】：省内吨煤销售成本红线与碳鑫科技乙醇毛利韧性</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：① 省内本部吨煤销售成本必须牢牢控制在<strong><code>500—550元/吨</code>以内</strong>（若剔除陶忽图低成本煤摊薄后，本部吨煤成本连续两个季度突破<code>580元/吨</code>，说明深井老矿递减恶化超预期）；② 煤化工分部毛利率是否继续稳定在<strong><code>18%—22%</code>以上</strong>，且碳鑫科技60万吨无水乙醇年销量是否维持在<code>55万吨</code>以上满产水平。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标三·自由现金流拐点与分红兑现度】：CapEx回落斜率与分红支付率底线</strong>
-   - <strong>量化锚点</strong>：① 随着聚能电厂与陶忽图矿相继转固，年度资本开支（CapEx）是否从2023—2025年的<code>71亿—85亿元/年</code>回落至2026年的<code>60亿元</code>左右、并在2027年进一步回落至<strong><code>40亿元/年</code>以下</strong>；② 年度自由现金流（FCF = OCF - CapEx）是否在2026年全年实现<code>+20亿元</code>以上正流入、2027年跃升至<code>+40亿元</code>以上；③ 年度现金分红比例是否严守<strong><code>40%—45%</code>以上</strong>的硬承诺（且关注少数股东损益是否在陶忽图投产后由负转正）。</p>
+<p><strong>【路标三·自由现金流拐点与分红兑现度】：CapEx回落斜率与分红支付率底线</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：① 随着聚能电厂与陶忽图矿相继转固，年度资本开支（CapEx）是否从2023—2025年的<code>71亿—85亿元/年</code>回落至2026年的<code>60亿元</code>左右、并在2027年进一步回落至<strong><code>40亿元/年</code>以下</strong>；② 年度自由现金流（FCF = OCF - CapEx）是否在2026年全年实现<code>+20亿元</code>以上正流入、2027年跃升至<code>+40亿元</code>以上；③ 年度现金分红比例是否严守<strong><code>40%—45%</code>以上</strong>的硬承诺（且关注少数股东损益是否在陶忽图投产后由负转正）。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标四·焦煤长协价差与下游库存周期】：季度长协价与山西主焦煤现货价差</strong>
-   - <strong>量化锚点</strong>：跟踪每季度初淮北矿业主焦煤长协调价幅度及资产负债表“合同负债”余额（守住<code>10亿—15亿元</code>以上高水位即为下游钢厂锁单强劲信号），验证其华东最短运距溢价是否持续稳固。</p>
+<p><strong>【路标四·焦煤长协价差与下游库存周期】：季度长协价与山西主焦煤现货价差</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：跟踪每季度初淮北矿业主焦煤长协调价幅度及资产负债表“合同负债”余额（守住<code>10亿—15亿元</code>以上高水位即为下游钢厂锁单强劲信号），验证其华东最短运距溢价是否持续稳固。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -1509,16 +1987,22 @@
 <p>市场研报在谈及陶忽图煤矿总投资时，常在“85亿”、“96亿”与“140亿”三个数字之间混用。我们必须从会计准则与矿业权政策底层将其拆分为三个严密口径：</p>
 <ol>
 <li>
-<p><strong>口径一（纯矿井及配套选煤厂工程建设投资口径）：<code>1,071.88 元/吨产能</code></strong>
-   - <strong>核算边界</strong>：仅包含井巷工程、土建工程、综采机电设备购置安装、配套800万吨/年选煤厂及矿区地面工程建设预算，合计 <strong><code>85.75亿元</code></strong>（该部分直接通过“在建工程”科目归集并在建成后转入“固定资产”）。按 <code>800万吨/年</code> 核定产能折算，纯工程建设单位产能投资额为 <strong><code>85.75亿元 ÷ 800万吨 = 1,071.88元/吨产能</code></strong>。</p>
+<p><strong>口径一（纯矿井及配套选煤厂工程建设投资口径）：<code>1,071.88 元/吨产能</code></strong></p>
+<ul>
+<li><strong>核算边界</strong>：仅包含井巷工程、土建工程、综采机电设备购置安装、配套800万吨/年选煤厂及矿区地面工程建设预算，合计 <strong><code>85.75亿元</code></strong>（该部分直接通过“在建工程”科目归集并在建成后转入“固定资产”）。按 <code>800万吨/年</code> 核定产能折算，纯工程建设单位产能投资额为 <strong><code>85.75亿元 ÷ 800万吨 = 1,071.88元/吨产能</code></strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>口径二（立项公告总投资口径·含首期20%矿业权价款）：<code>1,208.38 元/吨产能</code></strong>
-   - <strong>核算边界</strong>：公司对外投资公告披露的项目预计总投资为 <strong><code>96.67亿元</code></strong>，由“项目工程建设投资 <code>85.75亿元</code> + 首期缴纳20%探/采矿权出让收益 <code>10.92亿元</code>”构成。按此口径折算，单位产能投资额为 <strong><code>96.67亿元 ÷ 800万吨 = 1,208.38元/吨产能</code></strong>。</p>
+<p><strong>口径二（立项公告总投资口径·含首期20%矿业权价款）：<code>1,208.38 元/吨产能</code></strong></p>
+<ul>
+<li><strong>核算边界</strong>：公司对外投资公告披露的项目预计总投资为 <strong><code>96.67亿元</code></strong>，由“项目工程建设投资 <code>85.75亿元</code> + 首期缴纳20%探/采矿权出让收益 <code>10.92亿元</code>”构成。按此口径折算，单位产能投资额为 <strong><code>96.67亿元 ÷ 800万吨 = 1,208.38元/吨产能</code></strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>口径三（全周期含100%矿业权出让收益口径）：<code>1,754.38 元/吨产能</code></strong>
-   - <strong>核算边界</strong>：根据内蒙古自治区自然资源厅评估确认，陶忽图井田（资源储量 <code>14.29亿吨</code>、可采储量 <code>7.28亿吨</code>）全周期探矿权/采矿权总出让收益为 <strong><code>54.60亿元</code></strong>（折合吨资源储量矿权价款为 <code>3.82元/吨</code>，折合吨可采储量矿权价款为 <code>7.50元/吨</code>）。其中首期20%（<code>10.92亿元</code>）已缴纳，剩余80%（<strong><code>43.68亿元</code></strong>）在采矿许可证有效期内按年度分期缴纳（会计上按现值计入“无形资产—采矿权”与“长期应付款”）。若将工程建设投资（<code>85.75亿元</code>）与名义全额矿权价款（<code>54.60亿元</code>）相加，名义全周期总投入为 <code>140.35亿元</code>，折合 <strong><code>1,754.38元/吨产能</code></strong>。</p>
+<p><strong>口径三（全周期含100%矿业权出让收益口径）：<code>1,754.38 元/吨产能</code></strong></p>
+<ul>
+<li><strong>核算边界</strong>：根据内蒙古自治区自然资源厅评估确认，陶忽图井田（资源储量 <code>14.29亿吨</code>、可采储量 <code>7.28亿吨</code>）全周期探矿权/采矿权总出让收益为 <strong><code>54.60亿元</code></strong>（折合吨资源储量矿权价款为 <code>3.82元/吨</code>，折合吨可采储量矿权价款为 <code>7.50元/吨</code>）。其中首期20%（<code>10.92亿元</code>）已缴纳，剩余80%（<strong><code>43.68亿元</code></strong>）在采矿许可证有效期内按年度分期缴纳（会计上按现值计入“无形资产—采矿权”与“长期应付款”）。若将工程建设投资（<code>85.75亿元</code>）与名义全额矿权价款（<code>54.60亿元</code>）相加，名义全周期总投入为 <code>140.35亿元</code>，折合 <strong><code>1,754.38元/吨产能</code></strong>。</li>
+</ul>
 </li>
 </ol>
 <p><strong>横向对标同行新建同类现代化矿井，陶忽图的单位投资到底偏省还是偏贵？</strong></p>
@@ -1588,8 +2072,10 @@
 <p>我们通过 Python 财务模型对两大百亿级工程转固后的固定成本结构进行严格验算，并同步列示 <strong>100% 项目合并口径</strong> 与 <strong>归属上市公司母公司股东权益口径（陶忽图按 50% 归母权益 / 51% 工商控股双注，聚能发电按 80% 归母权益）</strong>：</p>
 <ul>
 <li>
-<p><strong>第一笔账：陶忽图煤矿（800万吨/年）转固后的折旧摊销与盈亏平衡点</strong>
-  1. <strong>新增折旧与采矿权摊销（D&amp;A）</strong>：</p>
+<p><strong>第一笔账：陶忽图煤矿（800万吨/年）转固后的折旧摊销与盈亏平衡点</strong></p>
+<ol>
+<li><strong>新增折旧与采矿权摊销（D&amp;A）</strong>：</li>
+</ol>
 </li>
 <li>
 <p><strong>固定资产折旧</strong>：纯工程建设预算 <code>85.75亿元</code>，扣除可抵扣增值税进项税及铺底流动资金后，预计转入固定资产及井巷工程原值约 <strong><code>78.89亿元</code></strong>。按煤炭行业综采设备（10—15年）、地面厂房（30年）与井巷工程加权综合折旧年限 <code>25年</code>（残值率 <code>5%</code>）测算，转固后 <strong>100%项目口径每年新增固定资产折旧约 <code>3.00亿元/年</code></strong>（折合满产吨煤折旧 <code>37.50元/吨</code>）。</p>
@@ -1621,12 +2107,12 @@
 <p><strong>情景 B（按项目可研报告极端保守煤价 <code>355.00元/吨</code> 测算，即满产营收28.40亿元、利润总额10.40亿元）</strong>：吨煤边际贡献 = <code>355.00 - 135.00 = 220.00元/吨</code>。此时<strong>盈亏平衡产量为 <code>308.99万吨/年</code></strong>，对应<strong>盈亏平衡产能利用率（稼动率）为 <code>38.62%</code></strong>，所需<strong>新增盈亏平衡营业收入为 <code>10.97亿元/年</code></strong>（100%合并口径；对应 <strong>50%归母权益口径为 <code>5.48亿元/年</code></strong>）。这意味着陶忽图煤矿只要在2027年投产首年开出4成产能，就已轻松跨过盈亏平衡线开始贡献正利润！</p>
 </li>
 <li>
-<p><strong>第二笔账：聚能发电 2×660MW 超超临界燃煤发电机组（2026年7月已转固）的折旧与盈亏平衡点</strong>
-  1. <strong>新增折旧与固定成本</strong>：</p>
-<ul>
-<li>项目总投资约 <code>52.00亿元</code>（折合单位千瓦投资 <code>3,939.39元/kW</code>），扣除增值税进项税后转入固定资产原值约 <strong><code>46.50亿元</code></strong>。按电力设备及厂房综合折旧年限 <code>20年</code>（残值率 <code>5%</code>）计算，<strong>100%合并口径每年新增固定资产折旧为 <code>2.21亿元/年</code></strong>；按公司持有的 <strong>80.00% 归母权益口径折算为 <code>1.77亿元/年</code></strong>（其余20%由参股方皖能电力承担）。</li>
-<li>加上电厂运维人员薪酬、保险费、检修固定费及项目贷款利息（扣减煤电容量电价固定补偿前净额）约 <code>1.99亿元/年</code>，<strong>100%项目口径年度总固定成本约为 <code>4.20亿元/年</code></strong>。</li>
-</ul>
+<p><strong>第二笔账：聚能发电 2×660MW 超超临界燃煤发电机组（2026年7月已转固）的折旧与盈亏平衡点</strong></p>
+<ol>
+<li><strong>新增折旧与固定成本</strong>：
+ - 项目总投资约 <code>52.00亿元</code>（折合单位千瓦投资 <code>3,939.39元/kW</code>），扣除增值税进项税后转入固定资产原值约 <strong><code>46.50亿元</code></strong>。按电力设备及厂房综合折旧年限 <code>20年</code>（残值率 <code>5%</code>）计算，<strong>100%合并口径每年新增固定资产折旧为 <code>2.21亿元/年</code></strong>；按公司持有的 <strong>80.00% 归母权益口径折算为 <code>1.77亿元/年</code></strong>（其余20%由参股方皖能电力承担）。
+ - 加上电厂运维人员薪酬、保险费、检修固定费及项目贷款利息（扣减煤电容量电价固定补偿前净额）约 <code>1.99亿元/年</code>，<strong>100%项目口径年度总固定成本约为 <code>4.20亿元/年</code></strong>。</li>
+</ol>
 </li>
 </ul>
 <ol start="2">
@@ -1642,8 +2128,10 @@
 </li>
 <li>
 <p><strong>附：存量矿井安全环保与采区接替“维持性 CapEx”刚性底数核验</strong></p>
-</li>
+<ul>
 <li>公司安徽省内17对生产矿井（核定产能 <code>3,585万吨/年</code>，年产原煤约 <code>2,800万—3,000万吨</code>、商品煤 <code>1,738万—2,100万吨</code>）每年按国家规定从生产成本中计提<strong>安全生产费（煤与瓦斯突出矿井按 <code>30—50元/吨原煤</code>）与维简费（<code>8.5—10元/吨原煤</code>）</strong>，每年成本端专项储备计提与使用额约 <code>12亿—15亿元</code>；此外，现金流量表“购建固定资产、无形资产和其他长期资产支付的现金”中，每年用于老矿井深部延深巷道、地面超前治水打钻及综采设备更新的<strong>资本化维持性 CapEx 约为 <code>25.00亿—30.00亿元/年</code>（100%归母口径，因本部17座主力矿井均为全资）</strong>。也就是说，当2026年底陶忽图煤矿建成转固后，公司每年只需维持 <code>25亿—30亿元</code> 的防御性 CapEx 即可保住全部存量产能，较2023—2025年 <code>71.60亿—85.59亿元/年</code> 的峰值每年将直接省出 <strong><code>45亿—55亿元</code> 的自由现金流</strong>！</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h4 id="3-800">3. 审视消化能力：陶忽图800万吨高热值煤卖向何方？聚能发电是“雪中送炭”还是“投产即过剩”？</h4>
@@ -1675,20 +2163,28 @@
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="4_1">4. 排查落地阻力：陶忽图煤矿的矿权缴纳、疏干水环评、合资方博弈与铁路配套隐患深挖</h4><p>拒绝报喜不报忧，我们对即将在2026年底至2027年初联合试运转的头号增量工程——<strong>陶忽图煤矿（成达矿业）</strong>进行四重落地阻力压力测试：</p><ol>
 <li>
-<p><strong>采矿权出让收益分期缴纳的现金流消耗排查</strong>：
-   - 如前所述，陶忽图井田采矿权总出让收益高达 <code>54.60亿元</code>，扣除首期已交的 <code>10.92亿元</code>（20%），剩余 <strong><code>43.68亿元</code>（80%）</strong> 需在采矿许可证有效期内按年度分期缴纳。虽然分期政策避免了建设期一次性掏空现金流，但意味着2027年投产后，成达矿业每年仍需承担约 <strong><code>1.8亿—2.5亿元</code></strong> 的矿权出让收益现金偿付及相应的资金成本（在资产负债表“长期应付款”及“一年内到期的非流动负债”中列示），投资者在测算陶忽图自由现金流时不可遗漏这一刚性现金流出。</p>
+<p><strong>采矿权出让收益分期缴纳的现金流消耗排查</strong>：</p>
+<ul>
+<li>如前所述，陶忽图井田采矿权总出让收益高达 <code>54.60亿元</code>，扣除首期已交的 <code>10.92亿元</code>（20%），剩余 <strong><code>43.68亿元</code>（80%）</strong> 需在采矿许可证有效期内按年度分期缴纳。虽然分期政策避免了建设期一次性掏空现金流，但意味着2027年投产后，成达矿业每年仍需承担约 <strong><code>1.8亿—2.5亿元</code></strong> 的矿权出让收益现金偿付及相应的资金成本（在资产负债表“长期应付款”及“一年内到期的非流动负债”中列示），投资者在测算陶忽图自由现金流时不可遗漏这一刚性现金流出。</li>
+</ul>
 </li>
 <li>
-<p><strong>纳林河矿区高矿化度疏干水治理与能耗双控环评阻力</strong>：
-   - 鄂尔多斯乌审旗纳林河矿区位于毛乌素沙地腹部，生态极其脆弱，且井田顶板白垩系志丹群砂岩含水层富水性较强，矿井正常涌水量较大且多为高矿化度矿井水。按照生态环境部与内蒙古自治区“矿井疏干水100%综合利用、严禁违规外排”的严苛环评红线，成达矿业必须配套建设高标准的深度水处理反渗透（RO）脱盐及零排放工程，并与周边白家海子煤矿及纳林河工业园区打通疏干水回用管网。若矿井水处理装置运行不稳或冬季防冻调蓄池容量不足，将在联合试运转环保验收阶段构成限产制约。</p>
+<p><strong>纳林河矿区高矿化度疏干水治理与能耗双控环评阻力</strong>：</p>
+<ul>
+<li>鄂尔多斯乌审旗纳林河矿区位于毛乌素沙地腹部，生态极其脆弱，且井田顶板白垩系志丹群砂岩含水层富水性较强，矿井正常涌水量较大且多为高矿化度矿井水。按照生态环境部与内蒙古自治区“矿井疏干水100%综合利用、严禁违规外排”的严苛环评红线，成达矿业必须配套建设高标准的深度水处理反渗透（RO）脱盐及零排放工程，并与周边白家海子煤矿及纳林河工业园区打通疏干水回用管网。若矿井水处理装置运行不稳或冬季防冻调蓄池容量不足，将在联合试运转环保验收阶段构成限产制约。</li>
+</ul>
 </li>
 <li>
-<p><strong>与合资方（奇瑞控股 49% / 约 50% 少数股东）的权责利益切分排查</strong>：
-   - 陶忽图井田最早系奇瑞控股在鄂尔多斯投资汽车产业配套获批的煤炭资源，后由淮北矿业介入控股主导开发（工商股权为淮矿投资持股 <code>51%</code>、奇瑞控股方持股 <code>49%</code>，财务模型常按 <code>50%</code> 归母权益口径折算）。目前双方按股权比例同步投入项目资本金（约 <code>30亿元</code> 资本金）并由成达矿业作为独立法人向银团申请低息项目贷款。由于煤矿井巷建设、洗选运维及煤炭销售完全仰仗淮北矿业的专业团队，双方权责清晰，不存在经营权争夺；但需明确的是，<strong>陶忽图投产后创造的丰厚净利润中，将有 49%—50% 计入合并利润表的“少数股东损益”被合资方分走</strong>（这也是公司2027年后少数股东损益将从目前的负值大幅反转为正数数亿元的原因）。</p>
+<p><strong>与合资方（奇瑞控股 49% / 约 50% 少数股东）的权责利益切分排查</strong>：</p>
+<ul>
+<li>陶忽图井田最早系奇瑞控股在鄂尔多斯投资汽车产业配套获批的煤炭资源，后由淮北矿业介入控股主导开发（工商股权为淮矿投资持股 <code>51%</code>、奇瑞控股方持股 <code>49%</code>，财务模型常按 <code>50%</code> 归母权益口径折算）。目前双方按股权比例同步投入项目资本金（约 <code>30亿元</code> 资本金）并由成达矿业作为独立法人向银团申请低息项目贷款。由于煤矿井巷建设、洗选运维及煤炭销售完全仰仗淮北矿业的专业团队，双方权责清晰，不存在经营权争夺；但需明确的是，<strong>陶忽图投产后创造的丰厚净利润中，将有 49%—50% 计入合并利润表的“少数股东损益”被合资方分走</strong>（这也是公司2027年后少数股东损益将从目前的负值大幅反转为正数数亿元的原因）。</li>
+</ul>
 </li>
 <li>
-<p><strong>外运铁路专用线接轨与产能爬坡节奏风险</strong>：
-   - 陶忽图煤矿2026年底至2027年初实现联合试运转后，首采工作面需经历地质磨合与产能爬坡，且配套的选煤厂及对接国铁干线（浩吉铁路/东乌铁路）的<strong>铁路专用线接轨工程</strong>审批涉及国铁集团路局施工窗口期。若铁路专用线接轨滞后于矿井出煤，2027年初期产出的原煤将不得不依赖短途汽车倒运至周边集运站，单吨短倒物流成本将临时增加 <code>20—35元/吨</code>，直至铁路专用线全线贯通并在 <strong>2028年实现800万吨全面达产</strong>。</p>
+<p><strong>外运铁路专用线接轨与产能爬坡节奏风险</strong>：</p>
+<ul>
+<li>陶忽图煤矿2026年底至2027年初实现联合试运转后，首采工作面需经历地质磨合与产能爬坡，且配套的选煤厂及对接国铁干线（浩吉铁路/东乌铁路）的<strong>铁路专用线接轨工程</strong>审批涉及国铁集团路局施工窗口期。若铁路专用线接轨滞后于矿井出煤，2027年初期产出的原煤将不得不依赖短途汽车倒运至周边集运站，单吨短倒物流成本将临时增加 <code>20—35元/吨</code>，直至铁路专用线全线贯通并在 <strong>2028年实现800万吨全面达产</strong>。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>去外省合伙挖一座年产800万吨的大煤矿，就像和邻居合伙种一片果园——果树还没结果子的时候，你们俩得按比例一起掏钱买树苗、交地租（54.6亿的采矿权费还得每年分期付）；等明年果树结出了又大又甜的苹果（每吨成本只要220块钱，哪怕只开三成产能都能保本），你也别忘了有差不多一半的苹果得装进合伙人奇瑞的篮子里。把50%的归母账算清楚，把每年分期交矿权费和修铁路支线的零钱扣掉，剩下的依然是一座足以让任何同行眼红的现金金山！</p></div></div></div></div>
 
@@ -1882,8 +2378,10 @@
 <p><strong>第三道壁垒（玄武岩高端铁路/高速路面骨料溢价 + 水运半径）</strong>：公司不仅产普通石灰石混凝土骨料（含税均价约 <code>38—50元/吨</code>），还在四川、海南、安徽等地布局了稀缺的<strong>高强度玄武岩骨料</strong>（高铁无砟轨道与高速公路沥青上面层必用耐磨防滑骨料，售价高达 <code>65—85元/吨</code>）。</p>
 </li>
 </ul><ol start="2">
-<li><strong>面临的现实增长阻力</strong>：
-   - 砂石骨料本质上是典型的<strong>“200公里水运/50公里汽运短腿商品”</strong>。受长三角及中西部地方政府基建财政收紧、房地产新开工下滑影响，华东沿江普通石灰石骨料价格已较2021年高点回落约30%。这意味着公司砂石骨料板块属于<strong>“高毛利率（40%—50%）、稳健现金流、但单吨价格弹性受地产基建压制”</strong>的防御型现金牛，其增长必须依赖新矿山（如向2,500万吨/年产能爬坡）的物理放量，而非价格暴涨。</li>
+<li><strong>面临的现实增长阻力</strong>：<ul>
+<li>砂石骨料本质上是典型的<strong>“200公里水运/50公里汽运短腿商品”</strong>。受长三角及中西部地方政府基建财政收紧、房地产新开工下滑影响，华东沿江普通石灰石骨料价格已较2021年高点回落约30%。这意味着公司砂石骨料板块属于<strong>“高毛利率（40%—50%）、稳健现金流、但单吨价格弹性受地产基建压制”</strong>的防御型现金牛，其增长必须依赖新矿山（如向2,500万吨/年产能爬坡）的物理放量，而非价格暴涨。</li>
+</ul>
+</li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>同样是搞新业务转型，有的项目是真金子，有的项目只是镀了金的铜扣子。你看碳鑫科技那60万吨煤制乙醇，用焦炉废气里的甲醇和一氧化碳造酒精，每吨成本只要3,600块，比东北用玉米酿酒精足足便宜了2,000多块——除非全中国的玉米白送或者国际油价跌到35美元以下，否则谁也抢不走它的饭碗！但反过来看那个碳酸二甲酯（DMC），全中国一窝蜂上了三百万吨产能去抢锂电池电解液的生意，那就是典型的“巴菲特最讨厌的纺织厂红海”，能保本把折旧赚回来就算烧高香了。</p></div></div></div></div>
 
 
@@ -1926,16 +2424,22 @@
 </table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="2_6">（2）三大新业务最终商业定性（一锤定音）</h5><ol>
 <li>
-<p><strong>碳鑫科技 60万吨/年煤制无水乙醇（及配套3万吨/年乙基胺）</strong> <span class="math-inline">\longrightarrow</span> <strong>🏆【已兑现的成本壁垒型现金牛】</strong>
-   - <strong>定性依据</strong>：它早已不是停留在PPT上的远期期权，而是2025年实打实产出 <code>54.68万吨</code>、销售 <code>52.10万吨</code>、凭借比传统玉米发酵法低出 <code>1,500—2,300元/吨</code> 的硬核成本差，在行业寒冬中独自扛起公司煤化工板块 <code>20.43%</code> 毛利率的功勋资产。只要中国“严控粮食制燃料乙醇”的国策不变、国际油价不长期跌破40美元/桶，它就是一台每年稳定产出数亿元自由现金流的工业印钞机。</p>
+<p><strong>碳鑫科技 60万吨/年煤制无水乙醇（及配套3万吨/年乙基胺）</strong> <span class="math-inline">\longrightarrow</span> <strong>🏆【已兑现的成本壁垒型现金牛】</strong></p>
+<ul>
+<li><strong>定性依据</strong>：它早已不是停留在PPT上的远期期权，而是2025年实打实产出 <code>54.68万吨</code>、销售 <code>52.10万吨</code>、凭借比传统玉米发酵法低出 <code>1,500—2,300元/吨</code> 的硬核成本差，在行业寒冬中独自扛起公司煤化工板块 <code>20.43%</code> 毛利率的功勋资产。只要中国“严控粮食制燃料乙醇”的国策不变、国际油价不长期跌破40美元/桶，它就是一台每年稳定产出数亿元自由现金流的工业印钞机。</li>
+</ul>
 </li>
 <li>
-<p><strong>雷鸣科化“民爆 + 超7亿吨非煤矿山砂石骨料”一体化</strong> <span class="math-inline">\longrightarrow</span> <strong>🛡️【低成本、高毛利的区域牌照型现金牛（兼具稳健扩容期权）】</strong>
-   - <strong>定性依据</strong>：国家严控新增民爆生产牌照，赋予了雷鸣科化天然的准入护城河；而“自产炸药 + 自营爆破 + 3—6元/吨低价矿权”构成的 <code>14—18元/吨</code> 极低开采成本，使其在地产基建下行周期中依然具备极强的抗跌韧性。它虽不会像科技股那样爆发式翻倍，但随着在建矿山向2,000万吨以上产能释放，是公司最稳固的“现金流压舱石”。</p>
+<p><strong>雷鸣科化“民爆 + 超7亿吨非煤矿山砂石骨料”一体化</strong> <span class="math-inline">\longrightarrow</span> <strong>🛡️【低成本、高毛利的区域牌照型现金牛（兼具稳健扩容期权）】</strong></p>
+<ul>
+<li><strong>定性依据</strong>：国家严控新增民爆生产牌照，赋予了雷鸣科化天然的准入护城河；而“自产炸药 + 自营爆破 + 3—6元/吨低价矿权”构成的 <code>14—18元/吨</code> 极低开采成本，使其在地产基建下行周期中依然具备极强的抗跌韧性。它虽不会像科技股那样爆发式翻倍，但随着在建矿山向2,000万吨以上产能释放，是公司最稳固的“现金流压舱石”。</li>
+</ul>
 </li>
 <li>
-<p><strong>临涣焦化 10万吨/年碳酸二甲酯（DMC）+ 3万吨/年碳酸酯及远期可降解塑料规划</strong> <span class="math-inline">\longrightarrow</span> <strong>⚠️【内卷红海里的平庸协同资产（严禁赋予新材料高成长光环）】</strong>
-   - <strong>定性依据</strong>：必须戳破“沾上锂电溶剂或可降解塑料就能享受新材料高回报”的幻想。在华鲁恒升等化工巨头数十万吨级装置的无情碾压下，DMC 与 EMC/DEC 已经彻底大宗商品化、微利化。这套装置对淮北矿业的唯一真实价值，在于<strong>“把焦化厂原本附加值极低的富余焦炉煤气、一氧化碳和甲醇就地转化为液态化学品卖出去”</strong>，赚的是内部物料吃干榨净的协同辛苦钱，绝不能将其作为高赔率成长型期权来定性。</p>
+<p><strong>临涣焦化 10万吨/年碳酸二甲酯（DMC）+ 3万吨/年碳酸酯及远期可降解塑料规划</strong> <span class="math-inline">\longrightarrow</span> <strong>⚠️【内卷红海里的平庸协同资产（严禁赋予新材料高成长光环）】</strong></p>
+<ul>
+<li><strong>定性依据</strong>：必须戳破“沾上锂电溶剂或可降解塑料就能享受新材料高回报”的幻想。在华鲁恒升等化工巨头数十万吨级装置的无情碾压下，DMC 与 EMC/DEC 已经彻底大宗商品化、微利化。这套装置对淮北矿业的唯一真实价值，在于<strong>“把焦化厂原本附加值极低的富余焦炉煤气、一氧化碳和甲醇就地转化为液态化学品卖出去”</strong>，赚的是内部物料吃干榨净的协同辛苦钱，绝不能将其作为高赔率成长型期权来定性。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这三门新生意放在秤上称一称，分量一清二楚：60万吨煤制乙醇是已经下金蛋的肥鹅，雷鸣科化的炸药配石头矿是旱涝保收的收租婆，至于那个做锂电池溶剂的碳酸二甲酯，就当是焦化厂为了不浪费煤气顺手开的副食店——替它鼓掌可以，但千万别因为听了“新能源溶剂”五个字就对它抱有暴利幻想！</p></div></div></div></div>
 
@@ -2159,10 +2663,12 @@
 <p><em>(注：上表2025年末数据均为2025年报经审计期末原列数，且与2026年三季报期初上年末数完全一致，期间三家公司均未发生重大同一控制下并表重述差异；平煤股份2026Q3末应收票据按期初1.78亿元及三季报披露降幅-53.68%精确折算为0.83亿元，合同负债按三季报披露增幅+168.22%对应期初约4.16亿元；山西焦煤三季报披露存货247,967万元较期初181,055万元算术增幅为+36.96%，三季报文字摘要简写为+35.30%。)</em></p>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2-22762-674">2. 景气度与议价权对质：为什么淮北矿业合同负债暴增 227.62%，存货反而下降 6.74%？</h4><p>将三家炼焦煤龙头与下游华东钢铁、焦化企业的资产负债表放在一起交叉审视，两组极具反差的数据直接撕开了2026年下半年焦煤产业链的真实供需底牌：</p><ul>
-<li><strong>第一组铁证：预收款（合同负债）全线井喷，淮北矿业以 <code>+227.62%</code> 的惊人增幅领跑全行业</strong></li>
-<li>截至2026年9月30日，淮北矿业账面合同负债从年初（2025年末）的 <code>5.36亿元</code>（<code>535,727,687.52元</code>）暴增 <strong><code>227.62%</code></strong> 至 <strong><code>17.55亿元</code></strong>（<code>1,755,157,528.05元</code>）；同期平煤股份合同负债较年初大增 <strong><code>168.22%</code></strong> 至约 <code>11.16亿元</code>，山西焦煤合同负债较年初增长 <strong><code>71.89%</code></strong> 至 <code>18.70亿元</code>。</li>
 <li>
-<p>严守“纯应收账款”与“三项广义应收总额（纯应收账款 + 应收票据 + 应收款项融资）”双轨覆盖率标尺进行检验：</p>
+<p><strong>第一组铁证：预收款（合同负债）全线井喷，淮北矿业以 <code>+227.62%</code> 的惊人增幅领跑全行业</strong></p>
+<ul>
+<li>截至2026年9月30日，淮北矿业账面合同负债从年初（2025年末）的 <code>5.36亿元</code>（<code>535,727,687.52元</code>）暴增 <strong><code>227.62%</code></strong> 至 <strong><code>17.55亿元</code></strong>（<code>1,755,157,528.05元</code>）；同期平煤股份合同负债较年初大增 <strong><code>168.22%</code></strong> 至约 <code>11.16亿元</code>，山西焦煤合同负债较年初增长 <strong><code>71.89%</code></strong> 至 <code>18.70亿元</code>。</li>
+<li>严守“纯应收账款”与“三项广义应收总额（纯应收账款 + 应收票据 + 应收款项融资）”双轨覆盖率标尺进行检验：</li>
+</ul>
 </li>
 <li>
 <p><strong>淮北矿业</strong>：2025年末纯应收账款为 <code>25.85亿元</code>，叠加应收票据 <code>3.48亿元</code> 与应收款项融资 <code>4.93亿元</code> 后，三项广义应收总额为 <strong><code>34.25亿元</code></strong>（<code>3,425,441,932.93元</code>），彼时合同负债（<code>5.36亿元</code>）对纯应收的覆盖率仅为 <strong><code>20.73%</code></strong>，对广义应收的覆盖率仅为 <strong><code>15.64%</code></strong>。而到了2026年9月30日，公司纯应收账款为 <code>36.27亿元</code>，应收票据压降至 <code>1.10亿元</code>（商业承兑汇票大幅减少68.48%），代表高信用等级银行承兑汇票的应收款项融资增至 <code>6.93亿元</code>，三项广义应收总额为 <strong><code>44.29亿元</code></strong>（<code>4,429,397,203.72元</code>）；在广义应收仅温和增长 <code>29.31%</code> 的背景下，<strong>合同负债对纯应收账款的覆盖率飙升至 <code>48.39%</code>（较年初跃升 <code>27.66个百分点</code>），对三项广义应收总额的覆盖率飙升至 <code>39.63%</code>（较年初跃升 <code>23.99个百分点</code>）</strong>！</p>
@@ -2172,9 +2678,9 @@
 </li>
 <li>
 <p><strong>第二组铁证：“预收暴增 + 存货下降”的剪刀差，揭示下游处于“低库存下的主动抢配补库”而非压库</strong></p>
-</li>
-<li>
-<p>如果下游需求低迷、煤企向渠道压货，财报必然呈现“应收暴增、预收萎缩、存货积压”的特征。但淮北矿业2026年三季报呈现的恰恰是完美的<strong>“预收暴增 <code>227.62%</code> + 存货逆势下降 <code>6.74%</code>（从年初 <code>19.73亿元</code> 降至 <code>18.40亿元</code>）”</strong>！平煤股份存货同样较年初下降 <code>28.19%</code> 至 <code>7.67亿元</code>（注：山西焦煤存货较年初上升 <code>36.96%</code> 至 <code>24.80亿元</code>，据其三季报附注披露，主因系控股子公司京唐焦化主动增加原料煤备货，而非矿井端精煤滞销积压）。</p>
+<ul>
+<li>如果下游需求低迷、煤企向渠道压货，财报必然呈现“应收暴增、预收萎缩、存货积压”的特征。但淮北矿业2026年三季报呈现的恰恰是完美的<strong>“预收暴增 <code>227.62%</code> + 存货逆势下降 <code>6.74%</code>（从年初 <code>19.73亿元</code> 降至 <code>18.40亿元</code>）”</strong>！平煤股份存货同样较年初下降 <code>28.19%</code> 至 <code>7.67亿元</code>（注：山西焦煤存货较年初上升 <code>36.96%</code> 至 <code>24.80亿元</code>，据其三季报附注披露，主因系控股子公司京唐焦化主动增加原料煤备货，而非矿井端精煤滞销积压）。</li>
+</ul>
 </li>
 <li>
 <p><strong>为什么华东钢厂和焦化厂会在2026年三季度拿着现金排队去淮北矿业抢煤？</strong></p>
@@ -2191,9 +2697,11 @@
 
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3-562">3. 盈利质量与单吨账本对质：表观毛利率的“障眼法”与单吨 562 元毛利的真实密码</h4><p>许多初级研究者翻开三季报，看到淮北矿业2026年前三季度的合并综合毛利率仅为 <strong><code>20.76%</code></strong>（2025年为 <code>18.44%</code>），远低于山西焦煤的 <strong><code>30.18%</code></strong>（2025年为 <code>30.52%</code>），只比平煤股份的 <strong><code>18.89%</code></strong> 略高一点，便误以为淮北矿业的煤矿盈利能力平庸。这正是典型的被合并报表业务结构欺骗的“障眼法”。当我们严守年报与季报披露的<strong>煤炭分部销售口径（销售收入÷销量、销售成本÷销量，严禁用生产成本倒推售价）</strong>把单吨账本拆开对质时，真相截然相反：</p><ul>
-<li><strong>第一层拆解：剥离贸易与焦化“分母干扰”后，淮北矿业煤炭主业毛利率高达 <code>46.63%</code>（2026Q3单季 <code>51.00%</code>）！</strong></li>
 <li>
-<p><strong>为什么合并毛利率只有 <code>20.76%</code>？</strong> 因为淮北矿业的合并营收（2025年 <code>411.25亿元</code>、2026Q1-Q3 <code>349.95亿元</code>）中，包含了体量庞大的自营物资贸易（2025年主动压降55.53%后仍有 <code>131.81亿元</code>，毛利率不足 <code>1%</code>）以及440万吨焦炭等现代煤化工业务（2025年营收 <code>96.56亿元</code>，毛利率 <code>20.43%</code>）。这两块中低毛利业务做大了营业收入的分母，把合并综合毛利率稀释到了 <code>20.76%</code>。</p>
+<p><strong>第一层拆解：剥离贸易与焦化“分母干扰”后，淮北矿业煤炭主业毛利率高达 <code>46.63%</code>（2026Q3单季 <code>51.00%</code>）！</strong></p>
+<ul>
+<li><strong>为什么合并毛利率只有 <code>20.76%</code>？</strong> 因为淮北矿业的合并营收（2025年 <code>411.25亿元</code>、2026Q1-Q3 <code>349.95亿元</code>）中，包含了体量庞大的自营物资贸易（2025年主动压降55.53%后仍有 <code>131.81亿元</code>，毛利率不足 <code>1%</code>）以及440万吨焦炭等现代煤化工业务（2025年营收 <code>96.56亿元</code>，毛利率 <code>20.43%</code>）。这两块中低毛利业务做大了营业收入的分母，把合并综合毛利率稀释到了 <code>20.76%</code>。</li>
+</ul>
 </li>
 <li>
 <p><strong>单独拎出煤炭采选主业看真章</strong>：</p>
@@ -2208,15 +2716,19 @@
 <p><strong>对比平煤股份的残酷差距</strong>：2026年前三季度平煤股份商品煤均价为 <code>893.00元/吨</code>，但吨煤销售成本高达 <strong><code>707.00元/吨</code></strong>，吨煤毛利仅 <code>186.00元/吨</code>（毛利率 <code>20.80%</code>）；即便是煤价大涨的 <strong>2026Q3单季</strong>，平煤股份吨煤售价升至 <code>1,071.00元/吨</code>，其吨煤销售成本却进一步攀升至 <strong><code>786.00元/吨</code></strong>，单季吨煤毛利仅 <strong><code>285.00元/吨</code></strong>（单季毛利率 <code>26.61%</code>）。也就是说，<strong>在吨煤售价仅相差 <code>31元/吨</code>（<code>1,102</code> vs <code>1,071元/吨</code>）的情况下，淮北矿业Q3单季的吨煤销售成本比平煤股份整整低了 <code>246.00元/吨</code>（<code>540</code> vs <code>786元/吨</code>），单吨毛利（<code>562元/吨</code>）几乎是平煤股份（<code>285元/吨</code>）的整整两倍（<code>1.97倍</code>）！</strong></p>
 </li>
 <li>
-<p><strong>第二层拆解：为什么同处深井高瓦斯复杂矿区，淮北矿业吨煤成本能比平煤股份低出 200—246 元/吨？</strong>
-  1. <strong>洗选精煤回收率与煤质溢价差异</strong>：淮北矿业拥有临涣选煤厂、涡北选煤厂等亚洲级智能化中心选煤厂群，通过重介旋流器与浮选智能配煤，将原煤精准洗选为低硫主焦煤与肥煤，并将洗选副产物（中煤、煤泥）100%通过矿区铁路直送自备坑口电厂（聚能发电2×660MW超超临界机组）就地发电，实现了“原煤零废弃损耗”，大幅摊薄了入选精煤的分摊成本。</p>
+<p><strong>第二层拆解：为什么同处深井高瓦斯复杂矿区，淮北矿业吨煤成本能比平煤股份低出 200—246 元/吨？</strong></p>
+<ol>
+<li><strong>洗选精煤回收率与煤质溢价差异</strong>：淮北矿业拥有临涣选煤厂、涡北选煤厂等亚洲级智能化中心选煤厂群，通过重介旋流器与浮选智能配煤，将原煤精准洗选为低硫主焦煤与肥煤，并将洗选副产物（中煤、煤泥）100%通过矿区铁路直送自备坑口电厂（聚能发电2×660MW超超临界机组）就地发电，实现了“原煤零废弃损耗”，大幅摊薄了入选精煤的分摊成本。</li>
+</ol>
 </li>
 </ul><ol start="2">
 <li><strong>地面超前治灾替代井下被动停工</strong>：平顶山矿区与淮北矿区采深均在 <code>-800米</code> 至 <code>-1,100米</code> 之间，但平煤股份近年受深井高瓦斯突出事故整顿、井下巷道高频维护及冗员负担影响，单工作面推进效率受阻，固定折旧与人工被严重摊高；而淮北矿业全面推行“地面L型定向长钻孔超前压裂抽采瓦斯 + 底板奥灰水超前高压注浆封堵”，在采煤工作面安装前就把瓦斯和水害消除在地面，保障了井下智能化综采工作面的高开机率与高推进度。</li>
 </ol><ul>
-<li><strong>第三层拆解：四项期间费用率横向解剖与“4.12%高研发费用率”背后的玄机</strong></li>
 <li>
-<p>我们对比三家公司2026年前三季度（1—9月）的四项期间费用率：</p>
+<p><strong>第三层拆解：四项期间费用率横向解剖与“4.12%高研发费用率”背后的玄机</strong></p>
+<ul>
+<li>我们对比三家公司2026年前三季度（1—9月）的四项期间费用率：</li>
+</ul>
 </li>
 <li>
 <p><strong>销售费用率</strong>：淮北矿业仅 <strong><code>0.43%</code></strong>（<code>1.51亿元</code> / <code>151,085,004.77元</code>），显著低于平煤股份的 <strong><code>0.80%</code></strong>（<code>1.54亿元</code>）和山西焦煤的 <strong><code>1.05%</code></strong>（<code>2.89亿元</code>）。这得益于淮北矿业紧贴长三角终端钢厂、80%以上长协大客户直销且由买方承担主要运杂费。</p>
@@ -2245,17 +2757,23 @@
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="4_2">4. 份额攻守终极结论：过去一年半里，华东与华中焦煤市场谁在攻城略地，谁在失血退缩？</h4><p>综合2025年寒冬洗牌至2026年三季报的完整攻守轨迹，三大炼焦煤龙头在华东与华中核心钢焦市场的地位已发生深刻分野：</p><ol>
 <li>
-<p><strong>淮北矿业（600985.SH）——先蹲后跳、全面收复并扩大华东高溢价长协领地</strong>：
-   - 在2024年至2025年一季度信湖煤矿停产治水期间，淮北矿业曾阶段性面临优质主焦煤产量缺口，但她没有靠低价倾销混煤凑数，而是主动砍掉 <code>55.53%</code> 的低效贸易，靠临涣选煤厂精煤配洗与碳鑫科技60万吨无水乙醇稳住了基本盘（2025年仍赚 <code>15.06亿元</code> 归母净利与 <code>54.28亿元</code> OCF）。
-   - 进入2026年4月信湖煤矿（300万吨/年）满血复产后，恰逢山西主产区安监限产与三季度下游钢厂补库，淮北矿业凭借 <strong><code>200—400公里</code> 华东最短运距优势</strong>与<strong>低硫强粘结性肥煤/主焦煤品质</strong>，迅速夺回宝武马钢、南钢、沙钢等华东核心钢厂的首选长协份额，2026年9月一次性提涨长协价 <code>260—350元/吨</code>，推动2026Q3单季归母净利同比暴增 <code>2,242.36%</code> 至 <code>9.07亿元</code>，前三季度归母净利（<code>21.46亿元</code>）一举反超体量更大的山西焦煤（<code>20.20亿元</code>），成为全行业盈利修复斜率最陡峭的领跑者。</p>
+<p><strong>淮北矿业（600985.SH）——先蹲后跳、全面收复并扩大华东高溢价长协领地</strong>：</p>
+<ul>
+<li>在2024年至2025年一季度信湖煤矿停产治水期间，淮北矿业曾阶段性面临优质主焦煤产量缺口，但她没有靠低价倾销混煤凑数，而是主动砍掉 <code>55.53%</code> 的低效贸易，靠临涣选煤厂精煤配洗与碳鑫科技60万吨无水乙醇稳住了基本盘（2025年仍赚 <code>15.06亿元</code> 归母净利与 <code>54.28亿元</code> OCF）。</li>
+<li>进入2026年4月信湖煤矿（300万吨/年）满血复产后，恰逢山西主产区安监限产与三季度下游钢厂补库，淮北矿业凭借 <strong><code>200—400公里</code> 华东最短运距优势</strong>与<strong>低硫强粘结性肥煤/主焦煤品质</strong>，迅速夺回宝武马钢、南钢、沙钢等华东核心钢厂的首选长协份额，2026年9月一次性提涨长协价 <code>260—350元/吨</code>，推动2026Q3单季归母净利同比暴增 <code>2,242.36%</code> 至 <code>9.07亿元</code>，前三季度归母净利（<code>21.46亿元</code>）一举反超体量更大的山西焦煤（<code>20.20亿元</code>），成为全行业盈利修复斜率最陡峭的领跑者。</li>
+</ul>
 </li>
 <li>
-<p><strong>山西焦煤（000983.SZ）——坐拥低成本大矿稳守基本盘，但受制于省内安监与运距半径</strong>：
-   - 山西焦煤凭借 <code>404.33元/吨</code> 的极低吨煤成本和全国最大的主焦煤储量，稳住了华北及沿海钢厂（如首钢京唐、河钢）的长协份额，2026年前三季度实现归母净利 <code>20.20亿元</code>（同比 <code>+40.89%</code>）。但由于山西省内矿井持续受安全监管核查制约，原煤与洗精煤产量释放偏慢（前三季度营收仅微增 <code>1.42%</code>），且南下华东市场面临每吨 <code>150—220元</code> 的铁路运费劣势，在长三角腹地无法撼动淮北矿业的贴身护城河。</p>
+<p><strong>山西焦煤（000983.SZ）——坐拥低成本大矿稳守基本盘，但受制于省内安监与运距半径</strong>：</p>
+<ul>
+<li>山西焦煤凭借 <code>404.33元/吨</code> 的极低吨煤成本和全国最大的主焦煤储量，稳住了华北及沿海钢厂（如首钢京唐、河钢）的长协份额，2026年前三季度实现归母净利 <code>20.20亿元</code>（同比 <code>+40.89%</code>）。但由于山西省内矿井持续受安全监管核查制约，原煤与洗精煤产量释放偏慢（前三季度营收仅微增 <code>1.42%</code>），且南下华东市场面临每吨 <code>150—220元</code> 的铁路运费劣势，在长三角腹地无法撼动淮北矿业的贴身护城河。</li>
+</ul>
 </li>
 <li>
-<p><strong>平煤股份（601666.SH）——被 <code>707—786元/吨</code> 高昂开采成本与沉重利息包袱双向锁喉，份额与利润弹性双双落伍</strong>：
-   - 平煤股份虽然在2026年三季度跟随行业涨价实现了单季 <code>3.53亿元</code> 归母净利的环比修复，但其深井开采完全成本已失控式攀升至 <strong><code>707元/吨</code>（Q3单季 <code>786元/吨</code>）</strong>，叠加高达 <code>4.06%</code> 的财务费用率（前三季度利息支出 <code>7.95亿元</code>），导致其2026年前三季度归母净利率仅为 <strong><code>3.47%</code></strong>（不足淮北矿业 <code>6.13%</code> 和山西焦煤 <code>7.33%</code> 的一半）。一旦未来煤价出现任何温和回调，处于成本曲线右端高位的平煤股份将率先面临利润归零压力，而位于成本曲线左端且手握内蒙陶忽图800万吨超低成本新矿的淮北矿业，将继续享受行业洗牌的集中度红利。</p>
+<p><strong>平煤股份（601666.SH）——被 <code>707—786元/吨</code> 高昂开采成本与沉重利息包袱双向锁喉，份额与利润弹性双双落伍</strong>：</p>
+<ul>
+<li>平煤股份虽然在2026年三季度跟随行业涨价实现了单季 <code>3.53亿元</code> 归母净利的环比修复，但其深井开采完全成本已失控式攀升至 <strong><code>707元/吨</code>（Q3单季 <code>786元/吨</code>）</strong>，叠加高达 <code>4.06%</code> 的财务费用率（前三季度利息支出 <code>7.95亿元</code>），导致其2026年前三季度归母净利率仅为 <strong><code>3.47%</code></strong>（不足淮北矿业 <code>6.13%</code> 和山西焦煤 <code>7.33%</code> 的一半）。一旦未来煤价出现任何温和回调，处于成本曲线右端高位的平煤股份将率先面临利润归零压力，而位于成本曲线左端且手握内蒙陶忽图800万吨超低成本新矿的淮北矿业，将继续享受行业洗牌的集中度红利。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>大宗商品行业的竞争就像在森林里遇到熊，你不需要跑得比熊快，你只需要跑得比身边那个背着沉重高利贷、每跑一步要花786块钱的同行快就行了。平煤股份被七百多块的吨煤成本和近十亿的年化利息死死拽住裤腿，山西焦煤隔着一千公里铁路远水救不了近火，唯有刚修好信湖煤矿、又马上要在内蒙点亮800万吨低成本新矿的淮北矿业，把长三角钢厂的饭碗端得稳稳当当。</p></div></div></div></div>
 
@@ -2266,9 +2784,11 @@
 <p>剥离表面的利润波动与资本开支高峰期噪音，本模块严格基于淮北矿业最新经审计的 <strong>2025年年度报告</strong>、<strong>2026年第三季度报告（1—9月）</strong> 附注数据，结合 <strong>2026年11月中旬最新联网核验的焦煤、焦炭、无水乙醇实时期现价格</strong>，对公司的真实内生造血底盘（Owner Earnings）、在建王牌工程增量弹性与极端周期抗压底线展开零尾差精算（本模块严格恪守基本面造血核算边界，不涉及二级市场估值与定价指标）。</p>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="owner-earnings">一、 剥离会计噪音与实时商品价格核验：三档价格标尺下的 Owner Earnings 矩阵</h4><h5 id="1-ifrs-capex">1. 历史非经常性噪音剥离、中国准则与 IFRS 少数股东口径辨析及折旧/维持性 CapEx 锚定</h5><p>要算准淮北矿业每年真正能揣进母公司股东口袋里的可自由支配现金（Owner Earnings），首先必须拆清四道会计账本边界：</p><ul>
-<li><strong>第一道边界：严格区分“历史已实现非经常性损益”与“全年买方模型常态假设”</strong></li>
 <li>
-<p><strong>2025年报已实现非经常性损益</strong>：2025年全年公司实现营业收入 <code>411.25亿元</code>（<code>41,124,547,995.33元</code>），归属于上市公司股东的净利润 <code>15.06亿元</code>（<code>1,505,991,672.15元</code>），扣除非经常性损益后的归母净利润约 <code>14.12亿元</code>，即 <strong>2025年全年已实现非经常性损益为 <code>+0.94亿元</code></strong>（主要系计入当期损益的政府补助及少量非流动资产处置损益）。</p>
+<p><strong>第一道边界：严格区分“历史已实现非经常性损益”与“全年买方模型常态假设”</strong></p>
+<ul>
+<li><strong>2025年报已实现非经常性损益</strong>：2025年全年公司实现营业收入 <code>411.25亿元</code>（<code>41,124,547,995.33元</code>），归属于上市公司股东的净利润 <code>15.06亿元</code>（<code>1,505,991,672.15元</code>），扣除非经常性损益后的归母净利润约 <code>14.12亿元</code>，即 <strong>2025年全年已实现非经常性损益为 <code>+0.94亿元</code></strong>（主要系计入当期损益的政府补助及少量非流动资产处置损益）。</li>
+</ul>
 </li>
 <li>
 <p><strong>2026年三季报（1—9月）已实现非经常性损益</strong>：2026年前三季度公司实现营业收入 <code>349.95亿元</code>（<code>34,994,625,226.92元</code>），归母净利润 <code>21.46亿元</code>（<code>2,146,106,287.89元</code>，同比大增 <code>+100.51%</code>），扣非归母净利润 <code>21.16亿元</code>（<code>2,116,341,244.84元</code>，同比大增 <code>+111.53%</code>），即 <strong>2026年前三季度实际已实现非经常性损益仅为 <code>+0.30亿元</code>（精确值为 <code>29,765,043.05元</code>）</strong>，主业经常性盈利成色高达 <code>98.61%</code>。</p>
@@ -2278,27 +2798,27 @@
 </li>
 <li>
 <p><strong>第二道边界：中国企业会计准则（CAS）与 IFRS 下的少数股东损益穿透及归母折算逻辑</strong></p>
-</li>
-<li>
-<p>在中国企业会计准则（CAS）及国际财务报告准则（IFRS）合并利润表框架下，“净利润（合并净利润）”包含“归属于母公司股东的净利润”与“少数股东损益”两部分。淮北矿业呈现出极为罕见的<strong>“归母净利显著高于合并净利、少数股东替母公司分担周期亏损”</strong>特征：2025年全年合并净利润为 <code>10.12亿元</code>，其中归母净利润 <code>15.06亿元</code>，<strong>少数股东损益为 <code>-4.94亿元</code></strong>；2026年前三季度合并净利润为 <code>19.43亿元</code>，其中归母净利润 <code>21.46亿元</code>，<strong>少数股东损益为 <code>-2.03亿元</code>（<code>-203,250,673.25元</code>）</strong>。</p>
+<ul>
+<li>在中国企业会计准则（CAS）及国际财务报告准则（IFRS）合并利润表框架下，“净利润（合并净利润）”包含“归属于母公司股东的净利润”与“少数股东损益”两部分。淮北矿业呈现出极为罕见的<strong>“归母净利显著高于合并净利、少数股东替母公司分担周期亏损”</strong>特征：2025年全年合并净利润为 <code>10.12亿元</code>，其中归母净利润 <code>15.06亿元</code>，<strong>少数股东损益为 <code>-4.94亿元</code></strong>；2026年前三季度合并净利润为 <code>19.43亿元</code>，其中归母净利润 <code>21.46亿元</code>，<strong>少数股东损益为 <code>-2.03亿元</code>（<code>-203,250,673.25元</code>）</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>底层资产股权结构穿透</strong>：公司盈利能力最强的安徽省内17对在产主力焦煤/肥煤矿井（核定总产能 <code>3,585万吨/年</code>）以及60万吨无水乙醇主体（碳鑫科技）均为 <strong>100%全资持有</strong>；而引入少数股东的合资主体主要集中在下游微利/亏损的临涣焦化（440万吨焦炭产能，受钢厂三轮提降挤压）以及尚处基建期未贡献煤炭收入的内蒙古陶忽图煤矿（成达矿业，公司持股 <code>50.00%</code> 并表）和初期爬坡电厂。截至2026年9月30日，公司归母净资产 <code>432.45亿元</code>，占合并净资产（<code>474.09亿元</code>）的比例高达 <strong><code>91.22%</code></strong>。因此，在买方模型中，我们必须同步列示 <strong>“归母口径 Owner Earnings”</strong> 与 <strong>“合并全口径无杠杆企业盈余（Unlevered Firm OE）”</strong> 双轨指标。</p>
 </li>
 <li>
 <p><strong>第三道边界：现金流量表补充资料四项折旧摊销穿透与常态化基准锁定（买方模型情景假设参数）</strong></p>
-</li>
-<li>
-<p><strong>2025年报经审计四项折旧摊销实绩</strong>：调取2025年报合并现金流量表补充资料，公司全年非付现折旧与摊销由四项构成：① 固定资产折旧、油气资产折耗、生产性生物资产折旧 <strong><code>36.14亿元</code>（<code>3,613,621,118.00元</code>）</strong>；② 无形资产摊销（主要为采矿权摊销） <strong><code>2.43亿元</code>（<code>242,503,917.79元</code>）</strong>；③ 长期待摊费用摊销 <strong><code>1.19亿元</code>（<code>119,003,225.40元</code>）</strong>；④ 使用权资产折旧约 <strong><code>1.80亿元</code></strong>。以上前三项合计 <code>39.75亿元</code>（<code>3,975,128,261.19元</code>），四项全口径合并折旧摊销合计约 <strong><code>41.56亿元</code></strong>（按归母资产权重折算，2025年买方模型还原归母有效折旧摊销约为 <strong><code>36.80亿元</code></strong>）。</p>
+<ul>
+<li><strong>2025年报经审计四项折旧摊销实绩</strong>：调取2025年报合并现金流量表补充资料，公司全年非付现折旧与摊销由四项构成：① 固定资产折旧、油气资产折耗、生产性生物资产折旧 <strong><code>36.14亿元</code>（<code>3,613,621,118.00元</code>）</strong>；② 无形资产摊销（主要为采矿权摊销） <strong><code>2.43亿元</code>（<code>242,503,917.79元</code>）</strong>；③ 长期待摊费用摊销 <strong><code>1.19亿元</code>（<code>119,003,225.40元</code>）</strong>；④ 使用权资产折旧约 <strong><code>1.80亿元</code></strong>。以上前三项合计 <code>39.75亿元</code>（<code>3,975,128,261.19元</code>），四项全口径合并折旧摊销合计约 <strong><code>41.56亿元</code></strong>（按归母资产权重折算，2025年买方模型还原归母有效折旧摊销约为 <strong><code>36.80亿元</code></strong>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>2026年常态化折旧摊销买方模型假设参数</strong>：鉴于2026年聚能发电 <code>2×660MW</code> 超超临界机组等工程陆续转入固定资产（推动在建工程从2025年末的 <code>79.75亿元</code> 降至2026Q3末的 <code>57.59亿元</code>），买方模型将存量资产 <strong>合并口径常态折旧摊销锚定为 <code>43.00亿元/年</code></strong>；结合归母净资产占比（<code>91.22%</code>）及核心高折旧矿井100%全资属性，将 <strong>常态归母有效折旧摊销锚定为 <code>38.50亿元/年</code></strong>（注：此参数为买方模型情景假设基准）。</p>
 </li>
 <li>
 <p><strong>第四道边界：防御性维持性 CapEx 与常态刚性营运资金占用锁定（买方模型情景假设参数）</strong></p>
-</li>
-<li>
-<p><strong>剥离扩张性 CapEx 后的防御性维持性 CapEx</strong>：2025年公司账面 CapEx 高达 <code>71.60亿元</code>、2026年前三季度为 <code>45.89亿元</code>（<code>4,588,996,073.03元</code>），其中过半资金投向了内蒙古陶忽图800万吨新建矿井、聚能发电二期等跨区域进攻性工程。若仅维持安徽省内17对存量生产矿井的深部采区接替、地面超前注浆治水、智能化综采设备更新（除已在吨煤成本中按规定计提的安全生产费与维简费之外需资本化支出的部分）以及煤化工装置常规大修，买方模型将 <strong>合并口径防御性维持性 CapEx 锚定为 <code>26.00亿元/年</code></strong>，<strong>归母口径防御性维持性 CapEx 锚定为 <code>24.50亿元/年</code></strong>。</p>
+<ul>
+<li><strong>剥离扩张性 CapEx 后的防御性维持性 CapEx</strong>：2025年公司账面 CapEx 高达 <code>71.60亿元</code>、2026年前三季度为 <code>45.89亿元</code>（<code>4,588,996,073.03元</code>），其中过半资金投向了内蒙古陶忽图800万吨新建矿井、聚能发电二期等跨区域进攻性工程。若仅维持安徽省内17对存量生产矿井的深部采区接替、地面超前注浆治水、智能化综采设备更新（除已在吨煤成本中按规定计提的安全生产费与维简费之外需资本化支出的部分）以及煤化工装置常规大修，买方模型将 <strong>合并口径防御性维持性 CapEx 锚定为 <code>26.00亿元/年</code></strong>，<strong>归母口径防御性维持性 CapEx 锚定为 <code>24.50亿元/年</code></strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>常态刚性营运资金新增占用</strong>：考虑到煤炭精煤直销执行“先款后货/承兑交割”，仅煤化工备煤与民爆工程存在温和周转占用，买方模型将 <strong>常态刚性营运资金新增占用锚定为：归母口径 <code>1.50亿元/年</code>、合并口径 <code>1.60亿元/年</code></strong>。</p>
@@ -2345,9 +2865,9 @@
 <div class="math-display">\Delta <span class="math-text">扣除从价资源税（约6\%）及城建教育附加后税前利润</span> = 16.50<span class="math-text">亿元</span>  ×  (1 - 6.97\%) = 15.35<span class="math-text">亿元</span></div>
 <div class="math-display">\Delta <span class="math-text">扣除25\%企业所得税后合并净利润</span> = 15.35<span class="math-text">亿元</span>  ×  (1 - 25\%) = 11.51<span class="math-text">亿元</span></div>
 <div class="math-display">\Delta <span class="math-text">归母净利润 / 归母 Owner Earnings（本部煤矿全资，有效归母权益占比约96.87\%）</span> = 11.51<span class="math-text">亿元</span>  ×  96.87\% = <strong>11.15<span class="math-text">亿元</span></strong></div></p>
-</li>
-<li>
-<p><strong>弹性结论</strong>：<strong>商品煤综合均价每涨跌 <code>100元/吨</code>，公司常态归母净利润与归母 Owner Earnings 同向净增/净减约 <code>11.15亿元</code>；即商品煤综合均价每涨跌 <code>10元/吨</code>，归母 Owner Earnings 同向变动约 <code>1.115亿元</code>！</strong></p>
+<ul>
+<li><strong>弹性结论</strong>：<strong>商品煤综合均价每涨跌 <code>100元/吨</code>，公司常态归母净利润与归母 Owner Earnings 同向净增/净减约 <code>11.15亿元</code>；即商品煤综合均价每涨跌 <code>10元/吨</code>，归母 Owner Earnings 同向变动约 <code>1.115亿元</code>！</strong></li>
+</ul>
 </li>
 </ul>
 <hr/>
@@ -2808,23 +3328,27 @@
 <p><em>(口径防呆特别声明：① 上表中“模型简化归母内生现金流 = 归母净利润 + 归母有效折旧摊销 + 营运资金释放/(占用)”，扣除“归母防御性维持性 CapEx”后得“模型简化归母 Owner Earnings”，两者均为买方模型归母口径精算指标，严禁与会计报表之合并经营活动现金流量净额 OCF 混同；② 主表第3行统一维持 <code>-1.50亿元</code> 常态刚性营运资金占用，以确保 S0 与标尺一 <code>54.00亿元</code>、S4 与标尺三 <code>25.70亿元</code> 100% 严丝合缝对齐；底部备查行额外展示了下行期应收票据与存货占用自然收缩带来的营运资金释放效应。)</em></p>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h5 id="3-s3s4-ocf">3. 行业残酷洗牌推演：当煤价跌至 S3/S4 极端水位，同行处境如何？（客观审视同行账面折旧与 OCF 韧性）</h5><p>将压力测试推向最严酷的 <strong>S3（商品煤均价跌25%至 <code>826.50元/吨</code>）</strong> 与 <strong>S4（商品煤均价跌近30%至 <code>780.00元/吨</code>）</strong> 时，行业供需格局将发生什么？</p><ul>
-<li><strong>高成本地方小煤矿与超深井老矿的亏损减产机制</strong>：</li>
 <li>
-<p>在华东、东北、西南及山西部分采深突破 <code>-1,000米</code>、地质构造破碎、洗出率偏低的老旧炼焦煤矿井中，其单吨完全成本普遍高达 <code>680—780元/吨</code> 以上。当商品煤综合均价跌至 <code>780元/吨</code> 时，这批处于全国成本曲线 <code>85%—90%</code> 分位的高成本矿井将陷入账面净利润深度亏损，甚至触及付现成本线而被迫缩减采掘班次、主动限产或停产整顿，从而从供给端托住焦煤价格底线。</p>
+<p><strong>高成本地方小煤矿与超深井老矿的亏损减产机制</strong>：</p>
+<ul>
+<li>在华东、东北、西南及山西部分采深突破 <code>-1,000米</code>、地质构造破碎、洗出率偏低的老旧炼焦煤矿井中，其单吨完全成本普遍高达 <code>680—780元/吨</code> 以上。当商品煤综合均价跌至 <code>780元/吨</code> 时，这批处于全国成本曲线 <code>85%—90%</code> 分位的高成本矿井将陷入账面净利润深度亏损，甚至触及付现成本线而被迫缩减采掘班次、主动限产或停产整顿，从而从供给端托住焦煤价格底线。</li>
+</ul>
 </li>
 <li>
 <p><strong>对头部可比上市公司（如平煤股份 601666.SH 等）的客观审慎评估（拒绝“机械断气”绝对化断言）</strong>：</p>
-</li>
-<li>
-<p>对比中南地区焦煤龙头 <strong>平煤股份（601666.SH）</strong>：其2025年吨煤销售成本约为 <code>563元/吨</code>、2026年前三季度吨煤成本升至约 <code>707元/吨</code>（比淮北矿业同期的 <code>505.47元/吨</code> 高出约 <code>201.53元/吨</code>），因此在 S3/S4 极端低煤价下，平煤股份等高成本同行的<strong>账面归母净利润</strong>确实会承受远大于淮北矿业的挤压甚至逼近盈亏平衡线。</p>
+<ul>
+<li>对比中南地区焦煤龙头 <strong>平煤股份（601666.SH）</strong>：其2025年吨煤销售成本约为 <code>563元/吨</code>、2026年前三季度吨煤成本升至约 <code>707元/吨</code>（比淮北矿业同期的 <code>505.47元/吨</code> 高出约 <code>201.53元/吨</code>），因此在 S3/S4 极端低煤价下，平煤股份等高成本同行的<strong>账面归母净利润</strong>确实会承受远大于淮北矿业的挤压甚至逼近盈亏平衡线。</li>
+</ul>
 </li>
 <li>
 <p><strong>但必须客观指出</strong>：以平煤股份为代表的大型国有煤炭上市公司同样拥有庞大的非付现账面折旧与摊销底座——根据最新披露的 <strong>2026年第三季度报告</strong>，平煤股份2026年前三季度实现归母净利润 <strong><code>6.70亿元</code></strong>（同比 <code>+139.45%</code>），而其同期 <strong>合并经营活动产生的现金流量净额（OCF）高达 <code>23.07亿元</code></strong>（同比大增 <code>+867.5%</code>，2025年寒冬期其全年合并 OCF 亦保持正数）。因此，即便在极端煤价下高成本上市同行出现账面微利或阶段性账面亏损，依托较高的账面折旧盾牌与银行授信支持，<strong>上市同行绝不会发生所谓“100%机械断气破产”</strong>，但其被迫削减资本开支、暂停高成本采区接替与收缩分红的能力将显著受限。</p>
 </li>
 <li>
 <p><strong>淮北矿业的“反脆弱收割”底牌</strong>：</p>
-</li>
+<ul>
 <li>在 S4（<code>780元/吨</code>）极限测试下，淮北矿业不仅毫无失血之虞，反而能凭借 <code>39.23%</code> 的煤炭分部毛利率、每年 <strong><code>50.20亿元</code></strong> 的模型简化归母内生现金流（含寒冬营运资金释放后达 <strong><code>53.50亿元</code></strong>）和 <strong><code>25.70亿元</code></strong> 的存量模型简化归母 Owner Earnings（叠加陶忽图后达 <strong><code>33.20亿元</code></strong>），从容覆盖全部维持性资本开支并维持稳健分红，在周期谷底静候高成本边际产能自然出清。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>压力测试不是为了吓唬自己夜不能寐，而是为了搞清楚当暴风雨把海面上的舢板全掀翻时，你坐的这艘装甲巡洋舰会不会漏水。就算煤价再从现在跌掉三成、外购运费涨两成，它靠着从价资源税自动降税、内部电厂和乙醇厂低价吃煤的天然对冲，一年照样能挣出25.7亿到40.1亿的纯自由股东盈余。别指望隔壁平煤股份这种大块头国企会一下子断气破产——人家账上也有二十几亿的经营现金流撑着——但当别人只能勉强喘气保命的时候，淮北矿业依然有大把余钱给股东发红包，这就叫成本曲线上的降维打击。</p></div></div></div></div>
 
 
@@ -2962,8 +3486,10 @@
 </table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_7">2. 资产质量与特种准备金排雷：保守藏富还是激进美化？</h4><h5 id="1_9">（1）应收账款账龄结构、坏账准备（严分存量与流量）与票据成色拆解</h5><p>穿透淮北矿业2025年年度报告财务报表附注【应收账款】章节与2026年三季报，公司的应收款项管理展现出极高的防御标准：</p><ul>
-<li><strong>账龄结构与高达 <code>21.87%</code> 的综合坏账准备计提率（期末存量口径）</strong>：</li>
+<li><strong>账龄结构与高达 <code>21.87%</code> 的综合坏账准备计提率（期末存量口径）</strong>：<ul>
 <li>截至2025年12月31日，公司应收账款账面原值（余额）合计为 <strong><code>33.08亿元</code></strong>（<code>3,308,140,749.15元</code>），按账龄结构精确拆解如下：</li>
+</ul>
+</li>
 </ul><ol>
 <li>
 <p><strong>1年以内（含1年）</strong>：<strong><code>24.48亿元</code></strong>（<code>2,447,509,379.75元</code>），占原值总额的 <strong><code>73.98%</code></strong>（主要为正常结算周期内的华东大型钢厂、电力集团及工程爆破客户款项）；</p>
@@ -2975,8 +3501,10 @@
 <p><strong>2至3年</strong>：<strong><code>2.10亿元</code></strong>（<code>210,213,041.08元</code>），占比 <strong><code>6.35%</code></strong>；</p>
 </li>
 <li>
-<p><strong>3年以上合计</strong>：<strong><code>3.24亿元</code></strong>（<code>323,802,036.36元</code>），占比 <strong><code>9.79%</code></strong>（其中：3至4年 <code>26,934,405.14元</code>、4至5年 <code>51,581,264.82元</code>、5年以上 <code>245,286,366.40元</code>，主要为历史遗留的工程劳务客户及个别老旧贸易往来尾款）。
-  - 针对上述 <code>33.08亿元</code> 应收账款原值，公司按单项计提及三大风险特征组合（工程及劳务客户组合、火工品爆破及矿山客户组合、其他客户组合）累计计提的<strong>资产负债表期末坏账准备存量余额高达 <code>7.24亿元</code>（<code>723,597,624.93元</code>）</strong>，扣减坏账准备后的应收账款期末账面价值（净值）为 <strong><code>25.85亿元</code></strong>（<code>2,584,543,124.22元</code>）。</p>
+<p><strong>3年以上合计</strong>：<strong><code>3.24亿元</code></strong>（<code>323,802,036.36元</code>），占比 <strong><code>9.79%</code></strong>（其中：3至4年 <code>26,934,405.14元</code>、4至5年 <code>51,581,264.82元</code>、5年以上 <code>245,286,366.40元</code>，主要为历史遗留的工程劳务客户及个别老旧贸易往来尾款）。</p>
+<ul>
+<li>针对上述 <code>33.08亿元</code> 应收账款原值，公司按单项计提及三大风险特征组合（工程及劳务客户组合、火工品爆破及矿山客户组合、其他客户组合）累计计提的<strong>资产负债表期末坏账准备存量余额高达 <code>7.24亿元</code>（<code>723,597,624.93元</code>）</strong>，扣减坏账准备后的应收账款期末账面价值（净值）为 <strong><code>25.85亿元</code></strong>（<code>2,584,543,124.22元</code>）。</li>
+</ul>
 </li>
 </ol><ul>
 <li>
@@ -2984,28 +3512,32 @@
 </li>
 <li>
 <p><strong>严格区分“资产负债表期末坏账存量”与“利润表当期减值发生额流量”（严禁跨表混加）</strong>：</p>
-</li>
-<li>
-<p>在利润表流量端，2025年全年公司确认<strong>信用减值损失为 <code>-2.88亿元</code>（<code>-287,610,366.57元</code>）</strong>，主动在2025年对贸易收缩过程中的潜在风险客户进行了集中减值出清；进入2026年前三季度（1—9月），随着低效贸易剥离完毕、煤炭直销长协预收款暴增，当期利润表<strong>信用减值损失流量大幅收敛至 <code>-0.52亿元</code>（<code>-51,656,624.51元</code>）</strong>。</p>
+<ul>
+<li>在利润表流量端，2025年全年公司确认<strong>信用减值损失为 <code>-2.88亿元</code>（<code>-287,610,366.57元</code>）</strong>，主动在2025年对贸易收缩过程中的潜在风险客户进行了集中减值出清；进入2026年前三季度（1—9月），随着低效贸易剥离完毕、煤炭直销长协预收款暴增，当期利润表<strong>信用减值损失流量大幅收敛至 <code>-0.52亿元</code>（<code>-51,656,624.51元</code>）</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>票据资产成色跃升（商业承兑汇票压降 <code>68.48%</code>，高信用银行承兑汇票占主导）</strong>：</p>
-</li>
+<ul>
 <li>截至2026年9月30日，公司三项广义应收总额为 <strong><code>44.29亿元</code></strong>（<code>4,429,397,203.72元</code>），其中除纯应收账款 <code>36.27亿元</code> 外，代表商业承兑汇票及一般票据的<strong>“应收票据”从年初的 <code>3.48亿元</code> 大幅压降 <code>68.48%</code> 至 <code>1.10亿元</code>（<code>109,624,578.56元</code>）</strong>；而代表国有大行及全国性股份制银行承兑、信用风险极低、可随时背书转让或贴现视同准现金的<strong>“应收款项融资”从年初的 <code>4.93亿元</code> 增长 <code>40.44%</code> 至 <code>6.93亿元</code>（<code>692,601,081.24元</code>）</strong>，在全部票据资产（<code>8.02亿元</code>）中的占比高达 <strong><code>86.34%</code></strong>。</li>
+</ul>
+</li>
 </ul><h5 id="220252026">（2）存货跌价准备审计：2025年寒冬期足额计提，2026年顺畅转回</h5><ul>
 <li>2025年受焦炭行业全线亏损及煤炭跌价冲击，许多焦化企业对高价原料煤和焦炭库存采取“硬扛不提跌价”的做法。而查阅淮北矿业2025年报附注【存货】明细表：截至2025年12月31日，公司存货账面净值为 <strong><code>19.73亿元</code></strong>（<code>1,972,736,081.62元</code>），其中核心的<strong>“库存商品”期末账面余额为 <code>9.38亿元</code>（<code>937,837,615.69元</code>），公司当期对其计提了高达 <code>8,511.66万元</code>（<code>85,116,578.21元</code>）的存货跌价准备（库存商品单项跌价准备计提比例高达 <code>9.08%</code>）</strong>，外加原材料跌价准备 <code>102.15万元</code>（<code>1,021,487.23元</code>），推动2025年利润表确认<strong>资产减值损失 <code>-1.07亿元</code>（<code>-106,840,022.33元</code>）</strong>。</li>
 <li>正因为2025年末对焦炭等库存商品计提了高达 <code>9.08%</code> 的严苛跌价准备，进入2026年前三季度，随着商品煤售价同比大涨 <code>17.84%</code>、期末存货净值进一步去化下降 <code>6.74%</code> 至 <strong><code>18.40亿元</code></strong>（<code>1,839,791,232.61元</code>），公司前期计提减值的存货实现顺畅高价销售转销/转回，带动2026年前三季度利润表<strong>资产减值损失实现正向冲回 <code>+0.12亿元</code>（<code>+11,934,656.26元</code>）</strong>，展现出极高质量的库存周转与减值纪律。</li>
 </ul><h5 id="3_5">（3）固定资产折旧与煤炭特种会计科目（专项储备：安全生产费与维简费）的“藏富与节税密码”</h5><p>在煤炭采掘业，最隐蔽也最核心的利润调节器，是固定资产折旧年限与所有者权益项下的特种科目——<strong>“专项储备（安全生产费、维简费与井巷费）”</strong>。我们将淮北矿业2025年报附注及2026年三季报的专项储备台账完整还原：</p><ul>
-<li><strong>第一重保守机制：机器设备折旧更快 + 井巷建筑物“0残值”加速摊销</strong></li>
 <li>
-<p>对比三家煤企：平煤股份机器设备折旧年限长达 <code>5—30年</code>，而淮北矿业生产机器设备折旧年限严格限定在 <strong><code>3—20年</code></strong>（最高年折旧率达 <code>31.67%</code>）；对于煤矿最核心的<strong>井巷建筑物</strong>，淮北矿业设定<strong>预计净残值率为 <code>0%</code></strong>，年折旧率高达 <strong><code>7.31%—11.88%</code></strong>（相当于8.4年至13.7年即全额折旧完毕，远短于公司矿井40—50年的实际剩余可采寿命）。</p>
+<p><strong>第一重保守机制：机器设备折旧更快 + 井巷建筑物“0残值”加速摊销</strong></p>
+<ul>
+<li>对比三家煤企：平煤股份机器设备折旧年限长达 <code>5—30年</code>，而淮北矿业生产机器设备折旧年限严格限定在 <strong><code>3—20年</code></strong>（最高年折旧率达 <code>31.67%</code>）；对于煤矿最核心的<strong>井巷建筑物</strong>，淮北矿业设定<strong>预计净残值率为 <code>0%</code></strong>，年折旧率高达 <strong><code>7.31%—11.88%</code></strong>（相当于8.4年至13.7年即全额折旧完毕，远短于公司矿井40—50年的实际剩余可采寿命）。</li>
+</ul>
 </li>
 <li>
 <p><strong>第二重保守机制：“专项储备（安全生产费 + 维简费 + 井巷费）”高标准计提与“一次性100%加速折旧”准则红利</strong></p>
-</li>
+<ul>
 <li>按照财政部、应急部《企业安全生产费用提取和使用管理办法》（财资〔2022〕136号）及安徽省批复标准，淮北矿业下属煤与瓦斯突出矿井、高瓦斯矿井按原煤产量逐月高标准提取安全生产费（煤与瓦斯突出矿井吨煤提取标准高达 <code>30—50元/吨</code>）、提取维简费（<code>11.00元/吨</code>，含井巷费）。</li>
-<li>
-<p>查阅公司2025年报附注【专项储备】精确台账：</p>
+<li>查阅公司2025年报附注【专项储备】精确台账：</li>
+</ul>
 </li>
 <li>
 <p><strong>安全生产费</strong>：2025年初余额 <code>9.75亿元</code>（<code>975,112,868.27元</code>） + 2025年本期计提进入成本 <strong><code>11.33亿元</code></strong>（<code>1,132,796,522.49元</code>） - 本期使用 <strong><code>14.45亿元</code></strong>（<code>1,444,743,947.63元</code>，含信湖煤矿治水修复及全矿区安全改造支出） = 2025年末余额 <strong><code>6.63亿元</code></strong>（<code>663,165,443.13元</code>）；</p>
@@ -3050,10 +3582,12 @@
 
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_6">3. 激励、薪酬客观审计与集团关联财务公司治理显微镜</h4><h5 id="1_10">（1）高管薪酬、限制性股票考核机制与全员薪酬现金流客观审计</h5><ul>
-<li><strong>高管薪酬约束与激励递延机制</strong>：</li>
-<li>查阅2025年年度报告公司治理章节，淮北矿业全体董事、监事及高级管理人员2025年度从公司实际获得的税前报酬总额仅为 <strong><code>811.67万元</code></strong>，在年营收超400亿元、归母净利15亿—21亿元的大型上市煤企中处于相当克制的水平。</li>
 <li>
-<p>考核与发放机制上，公司严格执行安徽省国资委业绩考核刚性约束：<strong>高管绩效年薪一律递延至年度审计报告正式披露并完成经济指标（归母净利、ROE、安全生产零重大事故、吨煤成本控制及重点工程进度）考核后方予兑现；任期激励收入则须待三年任期届满考核合格后，分三个年度递延兑现</strong>。对于历史期实施的限制性股票激励计划，当遇到行业周期极端波动或特定考核指标未达标时，公司均严格按章程对未达解锁条件的限制性股票予以回购注销，绝不搞“临时下调考核门槛硬发福利”的违规操作。</p>
+<p><strong>高管薪酬约束与激励递延机制</strong>：</p>
+<ul>
+<li>查阅2025年年度报告公司治理章节，淮北矿业全体董事、监事及高级管理人员2025年度从公司实际获得的税前报酬总额仅为 <strong><code>811.67万元</code></strong>，在年营收超400亿元、归母净利15亿—21亿元的大型上市煤企中处于相当克制的水平。</li>
+<li>考核与发放机制上，公司严格执行安徽省国资委业绩考核刚性约束：<strong>高管绩效年薪一律递延至年度审计报告正式披露并完成经济指标（归母净利、ROE、安全生产零重大事故、吨煤成本控制及重点工程进度）考核后方予兑现；任期激励收入则须待三年任期届满考核合格后，分三个年度递延兑现</strong>。对于历史期实施的限制性股票激励计划，当遇到行业周期极端波动或特定考核指标未达标时，公司均严格按章程对未达解锁条件的限制性股票予以回购注销，绝不搞“临时下调考核门槛硬发福利”的违规操作。</li>
+</ul>
 </li>
 <li>
 <p><strong>员工结构、人均效能与薪酬现金支出客观拆解</strong>：</p>
@@ -3072,23 +3606,29 @@
 <p><strong>历史包袱的稳步消化（长期应付职工薪酬）</strong>：由于国企改制历史原因，公司非流动负债项下存在一笔专门核算内退人员辞退福利及改制前“三类人员”（离退休、老工伤、遗属）生活补偿费的<strong>“长期应付职工薪酬”</strong>。该项负债已由精算机构严格封顶锁定并逐年自然衰减：从2025年末的 <strong><code>16.26亿元</code></strong>（<code>1,626,263,930.64元</code>）稳步下降至2026年9月30日的 <strong><code>15.74亿元</code></strong>（<code>1,574,206,925.20元</code>），随着时间推移和人员自然更替，这项历史负担将持续温和减轻（注：基于财报公开数据，我们对人员自然减员与薪酬总额变动保持客观审慎评估，不做“零裁员/零降薪”的绝对化断言，但数据清晰表明公司在严控人工总成本膨胀的同时实现了人均创利的大幅跃升）。</p>
 </li>
 </ul><h5 id="2_8">（2）集团关联财务公司深度审计：为什么淮北矿业的财务公司是“加分项”而非“抽血机”？</h5><p>在A股国企排雷中，“集团财务公司”往往是投资者谈之色变的重灾区——典型恶例如某些地方国企将上市公司的巨额货币资金强行存入由母公司集团控股的财务公司，拿着不到1%的活期利息，却被母公司拿去填补集团亏损窟窿甚至发生兑付暴雷。</p><p>然而，当我们穿透审计 <strong>淮北矿业集团财务有限公司</strong> 的股权结构与《金融服务协议》时，发现了与山西焦煤、平煤股份截然相反的治理架构：</p><ol>
-<li><strong>控制权倒置（上市公司控股 <code>51.01%</code> 并表，资金主权完全掌握在上市公司手中！）</strong>：
-   - 在山西焦煤和平煤股份体系中，财务公司均由母公司集团控股，上市公司只是参股方或存款客户；而<strong>淮北矿业集团财务有限公司是由上市公司淮北矿业（600985.SH）直接持有 <code>51.01%</code> 股权并纳入合并报表范围的控股子公司</strong>（控股股东淮北矿业集团仅持有 <code>48.99%</code> 股权）！
-   - 截至2025年12月31日，该财务公司资产总额为 <strong><code>125.32亿元</code></strong>，负债总额 <code>100.69亿元</code>，净资产 <strong><code>24.63亿元</code></strong>；2025年全年实现营业收入 <code>2.56亿—2.67亿元</code>，实现<strong>利润总额 <code>2.34亿元</code></strong>。</li>
+<li><strong>控制权倒置（上市公司控股 <code>51.01%</code> 并表，资金主权完全掌握在上市公司手中！）</strong>：<ul>
+<li>在山西焦煤和平煤股份体系中，财务公司均由母公司集团控股，上市公司只是参股方或存款客户；而<strong>淮北矿业集团财务有限公司是由上市公司淮北矿业（600985.SH）直接持有 <code>51.01%</code> 股权并纳入合并报表范围的控股子公司</strong>（控股股东淮北矿业集团仅持有 <code>48.99%</code> 股权）！</li>
+<li>截至2025年12月31日，该财务公司资产总额为 <strong><code>125.32亿元</code></strong>，负债总额 <code>100.69亿元</code>，净资产 <strong><code>24.63亿元</code></strong>；2025年全年实现营业收入 <code>2.56亿—2.67亿元</code>，实现<strong>利润总额 <code>2.34亿元</code></strong>。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>商业实质反转</strong>：因为财务公司是上市公司控股 <code>51.01%</code> 的并表子公司，不仅上市公司自己的钱存进去属于“左口袋进右口袋”的合并报表内部往来，而且控股股东淮北矿业集团及其下属非上市兄弟单位存进财务公司的几十亿资金，反而成了上市公司控股金融平台揽储放贷、赚取 <code>2.34亿元</code> 年度利润总额的生息筹码！</li>
 </ul><ol start="2">
-<li><strong>严格的存贷款防火墙（每日最高存款与授信双 <code>35亿元</code> 刚性上限）</strong>：
-   - 即便财务公司由上市公司控股，为彻底防范关联方过度占用财务公司信贷资源，上市公司与控股股东淮北矿业集团签署的《金融服务协议》及每半年出具的《关于对淮北矿业集团财务有限公司的风险持续评估报告》设立了极其严格的红线：<strong>控股股东淮北矿业集团及其下属关联方在财务公司的每日最高存款余额上限及综合授信额度上限均严格锁定在人民币 <code>35.00亿元</code> 以内</strong>，且关联方从财务公司获取贷款的利率严禁低于国内主要商业银行向其提供同种类贷款服务所定的利率。经核查2025年报及2026年半年报/三季报，财务公司资本充足率、流动性比例全部远高于国家金融监督管理总局监管红线，不良贷款率为 <strong><code>0.00%</code></strong>。</li>
+<li><strong>严格的存贷款防火墙（每日最高存款与授信双 <code>35亿元</code> 刚性上限）</strong>：<ul>
+<li>即便财务公司由上市公司控股，为彻底防范关联方过度占用财务公司信贷资源，上市公司与控股股东淮北矿业集团签署的《金融服务协议》及每半年出具的《关于对淮北矿业集团财务有限公司的风险持续评估报告》设立了极其严格的红线：<strong>控股股东淮北矿业集团及其下属关联方在财务公司的每日最高存款余额上限及综合授信额度上限均严格锁定在人民币 <code>35.00亿元</code> 以内</strong>，且关联方从财务公司获取贷款的利率严禁低于国内主要商业银行向其提供同种类贷款服务所定的利率。经核查2025年报及2026年半年报/三季报，财务公司资本充足率、流动性比例全部远高于国家金融监督管理总局监管红线，不良贷款率为 <strong><code>0.00%</code></strong>。</li>
+</ul>
+</li>
 </ol><h5 id="3_7">（3）同业竞争解决承诺与集团体外资产注入预期审计（兵能煤业 &amp; 涡北选煤厂）</h5><ul>
 <li>
 <p><strong>涡北选煤厂（已纳入上市公司体系高效协同）</strong>：位于安徽省亳州市涡阳县涡北工业园的涡北选煤厂，作为淮北矿业下属核心的智能化炼焦煤洗选基地（已完成煤泥重介系统与智能化工厂改造），直接承接涡北矿、信湖矿等周边矿井的原煤入洗，是公司保障“精煤战略”与50%以上精煤洗出率的核心功臣。</p>
 </li>
 <li>
 <p><strong>新疆兵能煤业有限公司（1,000万吨/年规划产能，清晰的同业竞争注入承诺）</strong>：</p>
-</li>
+<ul>
 <li>为响应国家能源西移战略并解决潜在同业竞争，控股股东淮北矿业集团与新疆天业集团等合作开发了<strong>新疆兵能煤业有限公司（控股股东持有其 <code>51.00%</code> 控股股权）</strong>，核心资产为新疆塔城白杨河矿区<strong>达拉布特一号井等项目（规划总产能高达 <code>1,000万吨/年</code>）</strong>。</li>
 <li>控股股东淮北矿业集团已出具具有法律约束力的《关于避免同业竞争的承诺函》：<strong>承诺在兵能煤业相关矿井建成投产、权属清晰且符合注入上市公司条件后，加快将其持有的兵能煤业 <code>51.00%</code> 股权优先转让注入上市公司（淮北矿业600985）</strong>。这意味着在2026年底至2027年初内蒙古陶忽图煤矿（800万吨/年）投产之后，淮北矿业在远期还储备着一座千万吨级的新疆低成本煤矿外延期权。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>查国企的治理底裤，最怕看到“肥水外流给母公司、烂账留给小股东”。淮北矿业交出的答卷却让人眼前一亮：高管一年总共只拿811万薪水还得延期考核兑现；33亿应收账款足足提了7.24亿坏账准备；连集团财务公司都是上市公司控股51.01%并表赚大股东的利差！再加上大股东手里那座1,000万吨的新疆兵能煤矿早早写下卖身契承诺修好后优先注入上市公司——这种把小股东和大股东绑在同一条船上的治理规矩，在煤炭行业里堪称凤毛麟角。</p></div></div></div></div>
 
 
@@ -3109,10 +3649,12 @@
 <p>普通散户买股票只看“股价 × 总股本”算出的普通股总市值（<code>385.67 亿元</code>），而真正的买方产业资本在评估重资产能源矿山时，必须算清<strong>“如果今天我把整家淮北矿业 100% 私有化买断，替它还清所有带息债务、买断少数股东手里的合资矿山与焦化厂权益，再拿走账上除日常刚性运转外能自由支配的超额现金，我到底要掏多少真金白银？”</strong>——这就是<strong>真实企业价值（True EV）</strong>。</p>
 <p>我们严格依据公司最新披露的 <strong>2026年第三季度报告（截至2026年9月30日）</strong> 与 <strong>2025年年度报告附注</strong>，逐项穿透核验股本、净资产、六项全口径有息负债与超额可支配现金：</p>
 <ul>
-<li><strong>股本与普通股总市值基准（零库存股、零转债潜在稀释）</strong>：</li>
-<li>股票代码：<code>600985.SH</code>（纯A股上市，无H股，不涉及跨市场汇率折算）。</li>
 <li>
-<p>扣除库存股/已注销股后的有效总股本：<strong><code>26.9326 亿股</code></strong>（精确值为 <code>2,693,258,716 股</code>；账面库存股为 <code>0 股</code>）。尤其需要强调的是，公司历史上发行的两期合计 <code>57.57 亿元</code> 可转债（2019年 <code>27.57 亿元</code>“淮矿转债”与2022年 <code>30.00 亿元</code>“淮22转债”）已分别于2021年7月和2024年4月 <strong>100% 触发强赎转股摘牌完毕</strong>，当前账面应付债券为 <code>0.00 元</code>，不存在任何潜在转债转股摊薄或到期兑付抽血隐患！</p>
+<p><strong>股本与普通股总市值基准（零库存股、零转债潜在稀释）</strong>：</p>
+<ul>
+<li>股票代码：<code>600985.SH</code>（纯A股上市，无H股，不涉及跨市场汇率折算）。</li>
+<li>扣除库存股/已注销股后的有效总股本：<strong><code>26.9326 亿股</code></strong>（精确值为 <code>2,693,258,716 股</code>；账面库存股为 <code>0 股</code>）。尤其需要强调的是，公司历史上发行的两期合计 <code>57.57 亿元</code> 可转债（2019年 <code>27.57 亿元</code>“淮矿转债”与2022年 <code>30.00 亿元</code>“淮22转债”）已分别于2021年7月和2024年4月 <strong>100% 触发强赎转股摘牌完毕</strong>，当前账面应付债券为 <code>0.00 元</code>，不存在任何潜在转债转股摊薄或到期兑付抽血隐患！</li>
+</ul>
 </li>
 <li>
 <p><strong>普通股总市值</strong> = <code>14.32 元/股 × 26.93258716 亿股</code> = <strong><code>385.67 亿元</code></strong>（精确值 <code>385.6746 亿元</code>）。</p>
@@ -3122,9 +3664,9 @@
 </li>
 <li>
 <p><strong>少数股东权益与合并口径边界声明</strong>：</p>
-</li>
-<li>
-<p>截至2026年9月30日，公司合并净资产为 <code>474.09 亿元</code>，其中<strong>少数股东权益为 <code>41.65 亿元</code></strong>（<code>4,164,881,222.21 元</code>，占合并净资产的 <code>8.78%</code>），主要对应控股50%并表的内蒙古陶忽图煤矿（鄂尔多斯市成达矿业）、控股51.01%并表的集团财务公司以及临涣焦化等合资煤化工/电力主体的少数股东权益。</p>
+<ul>
+<li>截至2026年9月30日，公司合并净资产为 <code>474.09 亿元</code>，其中<strong>少数股东权益为 <code>41.65 亿元</code></strong>（<code>4,164,881,222.21 元</code>，占合并净资产的 <code>8.78%</code>），主要对应控股50%并表的内蒙古陶忽图煤矿（鄂尔多斯市成达矿业）、控股51.01%并表的集团财务公司以及临涣焦化等合资煤化工/电力主体的少数股东权益。</li>
+</ul>
 </li>
 <li>
 <p><strong>会计口径防呆声明</strong>：由于A股季报与年报附注未逐家披露每一家非全资子公司的独立货币资金与有息负债明细，若直接用“普通股市值 + 合并报表净债务”计算，会犯下“漏算少数股东分占债务与现金”的口径错配错误。因此，本报告以<strong>合并口径真实企业价值（Consolidated True EV）</strong>作为第一主标尺，并在分子端严格通过“七项并表桥接公式”还原出匹配合并 True EV 的无杠杆全企业自由盈余（<code>Unlevered Firm OE</code>），绝不将“市值加减合并净现金”夸大为闭环归母 EV。</p>
@@ -3420,22 +3962,26 @@
 <h4 id="3-reverse-sotp">3. 逆向拆骨估值（Reverse SOTP）：市场究竟白送了多少免费期权？</h4>
 <p>如果我们把淮北矿业现有的四大业务板块拆开来，分别在<strong>【轨道一：合并分部 EV 主口径（对标严苛 True EV <code>525.32 亿元</code>）】</strong>与<strong>【轨道二：剔除少数股东权益及分部净债务后的归母纯股权口径（对标当前普通股总市值 <code>385.67 亿元</code>）】</strong>下用极度保守的买方标准称重，就能一眼看穿当前二级市场定价的荒谬之处：</p>
 <ol>
-<li><strong>板块①：安徽省内17对存量炼焦煤矿基本盘（核定产能 <code>3,585万吨/年</code>，含2026年4月已复产的信湖煤矿 <code>300万吨/年</code>）</strong>
-   * <strong>资产成色与常态造血</strong>：17对生产矿井几乎全为上市公司 100% 全资所有（无少数股东漏损），紧贴华东钢厂高炉，在85折新常态中枢（<code>937元/吨</code>）下，仅省内煤炭采选主业每年即可稳定贡献合并无杠杆自由盈余（<code>Firm OE</code>）约 <strong><code>35.50 亿元/年</code></strong>、归母真实股东盈余（<code>归母 OE</code>）约 <strong><code>33.50 亿元/年</code></strong>。</li>
+<li><strong>板块①：安徽省内17对存量炼焦煤矿基本盘（核定产能 <code>3,585万吨/年</code>，含2026年4月已复产的信湖煤矿 <code>300万吨/年</code>）</strong><ul>
+<li><strong>资产成色与常态造血</strong>：17对生产矿井几乎全为上市公司 100% 全资所有（无少数股东漏损），紧贴华东钢厂高炉，在85折新常态中枢（<code>937元/吨</code>）下，仅省内煤炭采选主业每年即可稳定贡献合并无杠杆自由盈余（<code>Firm OE</code>）约 <strong><code>35.50 亿元/年</code></strong>、归母真实股东盈余（<code>归母 OE</code>）约 <strong><code>33.50 亿元/年</code></strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>保守拆骨定价</strong>：对于华东腹地不可再生、剩余可采年限超40年的低硫主焦煤与肥煤核心矿井，我们仅给予归母股权端极度保守的 <strong><code>8.50 倍 P/OE</code></strong>（约合11.76%要求回报率），对应<strong>归母纯股权保守价值 = <code>33.50 × 8.50 = 284.75 亿元</code></strong>；加回省内煤矿分担的净债务 <code>37.25 亿元</code>（少数股东权益为 <code>0</code>），对应<strong>合并分部保守 EV = <code>322.00 亿元</code></strong>（折合仅 <code>9.07 倍 EV/Firm OE</code>）。</li>
 </ul>
 <ol start="2">
-<li><strong>板块②：现代煤化工板块（碳鑫科技60万吨/年无水乙醇 + 50万吨/年甲醇 + 临涣焦化440万吨/年焦炭）</strong>
-   * <strong>资产成色与常态造血</strong>：2025年实现营收 <code>96.56 亿元</code>、毛利 <code>19.73 亿元</code>（毛利率 <code>20.43%</code>）。其中总投资约37亿元的碳鑫科技60万吨无水乙醇已实现满产满销（年产销超52—55万吨），成本显著低于粮食发酵法。在85折新常态下，煤化工板块每年可稳定贡献合并 <code>Firm OE</code> 约 <strong><code>7.20 亿元/年</code></strong>、扣除合资焦化厂少数股东及分部利息后的 <code>归母 OE</code> 约 <strong><code>4.50 亿元/年</code></strong>。</li>
+<li><strong>板块②：现代煤化工板块（碳鑫科技60万吨/年无水乙醇 + 50万吨/年甲醇 + 临涣焦化440万吨/年焦炭）</strong><ul>
+<li><strong>资产成色与常态造血</strong>：2025年实现营收 <code>96.56 亿元</code>、毛利 <code>19.73 亿元</code>（毛利率 <code>20.43%</code>）。其中总投资约37亿元的碳鑫科技60万吨无水乙醇已实现满产满销（年产销超52—55万吨），成本显著低于粮食发酵法。在85折新常态下，煤化工板块每年可稳定贡献合并 <code>Firm OE</code> 约 <strong><code>7.20 亿元/年</code></strong>、扣除合资焦化厂少数股东及分部利息后的 <code>归母 OE</code> 约 <strong><code>4.50 亿元/年</code></strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>保守拆骨定价</strong>：按成熟煤化工资产 <code>1.0x PB</code> 重置打折及约 <code>11.5 倍 EV/Firm OE</code> 测算，对应<strong>合并分部保守 EV = <code>83.00 亿元</code></strong>；剔除临涣焦化等合资主体少数股东权益（约 <code>16.00 亿元</code>）及分部净债务（<code>26.75 亿元</code>）后，对应<strong>归母纯股权保守价值 = <code>40.25 亿元</code></strong>（约合 <code>8.94 倍 P/OE</code>）。</li>
 </ul>
 <ol start="3">
-<li><strong>板块③：非煤矿山（超7亿吨砂石骨料）+ 民爆（雷鸣科化牌照）+ 聚能发电（2×660MW超超临界机组）+ 控股财务公司（51.01%股权）</strong>
-   * <strong>资产成色与常态造血</strong>：<ul>
+<li><strong>板块③：非煤矿山（超7亿吨砂石骨料）+ 民爆（雷鸣科化牌照）+ 聚能发电（2×660MW超超临界机组）+ 控股财务公司（51.01%股权）</strong><ul>
+<li><strong>资产成色与常态造血</strong>：</li>
 <li>雷鸣科化民爆牌照与超7亿吨非煤矿山砂石骨料（年产1,417万吨向2,500万吨迈进，毛利率高达40%—50%）；</li>
 <li>2026年全新建成转固的聚能发电2×660MW超超临界燃煤机组（总投资约52亿元，坑口消纳洗选煤泥与中煤）；</li>
 <li>控股51.01%并表的淮北矿业集团财务公司（2025年末净资产 <code>24.63 亿元</code>、利润总额 <code>2.34 亿元</code>，归属上市公司净资产达 <code>12.56 亿元</code>）。</li>
@@ -3447,8 +3993,8 @@
 <li><strong>保守拆骨定价</strong>：对牌照垄断型民爆与砂石骨料给予10倍 P/OE，对全新投产的超超临界电厂与财务公司按 <code>0.95x—1.0x PB</code> 账面净资产保守作价，对应<strong>合并分部保守 EV = <code>107.00 亿元</code></strong>；剔除电厂与财务公司少数股东权益（约 <code>10.65 亿元</code>）及电厂项目长期净债务（<code>43.35 亿元</code>）后，对应<strong>归母纯股权保守价值 = <code>53.00 亿元</code></strong>。</li>
 </ul>
 <ol start="4">
-<li><strong>板块④（市场近乎0元白送的王牌增量）：在建内蒙古陶忽图煤矿（800万吨/年，50%权益并表）+ 远期兵能煤业（1,000万吨/年）注入期权 + 煤基新材料（DMC/PGA）期权</strong>
-   * <strong>隐含残差（Stub Value）倒推</strong>：<ul>
+<li><strong>板块④（市场近乎0元白送的王牌增量）：在建内蒙古陶忽图煤矿（800万吨/年，50%权益并表）+ 远期兵能煤业（1,000万吨/年）注入期权 + 煤基新材料（DMC/PGA）期权</strong><ul>
+<li><strong>隐含残差（Stub Value）倒推</strong>：</li>
 <li>在<strong>轨道一（合并 EV 主口径）</strong>下，仅存量三大成熟板块（①+②+③）的保守价值合计已达 <strong><code>322.00 + 83.00 + 107.00 = 512.00 亿元</code></strong>，直接覆盖了当前严苛 True EV（<code>525.32 亿元</code>）的 <strong><code>97.46%</code></strong>（若对标常规 True EV <code>491.77 亿元</code>，覆盖率更是高达 <strong><code>104.11%</code></strong>）！这意味着，当前严苛 True EV 留给板块④的<strong>隐含残差（Stub EV）仅为 <code>525.32 - 512.00 = 13.32 亿元</code></strong>！</li>
 <li>在<strong>轨道二（归母纯股权口径）</strong>下，存量三大成熟板块（①+②+③）的归母股权保守价值合计已达 <strong><code>284.75 + 40.25 + 53.00 = 378.00 亿元</code></strong>，直接覆盖了当前普通股总市值（<code>385.67 亿元</code>）的 <strong><code>98.01%</code></strong>！这意味着，当前市值留给板块④的<strong>隐含股权残差仅为 <code>385.67 - 378.00 = 7.67 亿元</code>（折合每股仅 <code>0.28 元/股</code>）</strong>！</li>
 </ul>
@@ -3699,21 +4245,178 @@
 </table></div>
 <div class="annotated-row"><div class="main-col"><h5 id="2_11">（2）一旦触发必须无条件认错离场的“三条基本面死刑证伪红线”</h5><p>买方投资永远把风控底线放在第一位。无论我们对淮北矿业的拆骨安全垫多么有信心，一旦未来跟踪期内出现以下任何一条<strong>“基本面死刑证伪信号”</strong>，意味着底层商业逻辑发生不可逆破坏，必须无条件止损认错离场：</p><ol>
 <li>
-<p><strong>【死刑红线一·地质水害连环失控】：省内主力焦煤矿井再次发生重大透水/瓦斯安全事故，导致单矿停产超 12 个月或全公司核定在产焦煤产能受损超 15% 以上</strong>
-   * <strong>证伪逻辑</strong>：2023年11月信湖煤矿出水停产29个月已是一次深刻的地质警示。若刚刚于2026年4月复产的信湖煤矿再次发生严重复发水害停产，或临涣、祁南、杨柳等其他省内主力焦煤矿井在深部（<code>-800米</code>至<code>-1,000米</code>）开采中爆发失控性奥灰水淹井事故，导致省内吨煤完全成本失控飙升并长期突破 <strong><code>600 元/吨</code></strong>，说明地面超前注浆治水技术未能压制深井地质恶化，必须果断离场。</p>
+<p><strong>【死刑红线一·地质水害连环失控】：省内主力焦煤矿井再次发生重大透水/瓦斯安全事故，导致单矿停产超 12 个月或全公司核定在产焦煤产能受损超 15% 以上</strong></p>
+<ul>
+<li><strong>证伪逻辑</strong>：2023年11月信湖煤矿出水停产29个月已是一次深刻的地质警示。若刚刚于2026年4月复产的信湖煤矿再次发生严重复发水害停产，或临涣、祁南、杨柳等其他省内主力焦煤矿井在深部（<code>-800米</code>至<code>-1,000米</code>）开采中爆发失控性奥灰水淹井事故，导致省内吨煤完全成本失控飙升并长期突破 <strong><code>600 元/吨</code></strong>，说明地面超前注浆治水技术未能压制深井地质恶化，必须果断离场。</li>
+</ul>
 </li>
 <li>
-<p><strong>【死刑红线二·王牌新矿投产或成本逻辑崩塌】：内蒙古陶忽图煤矿（800万吨/年）因重大工程地质缺陷、环评或矿权纠纷导致正式投产时间推迟至 2028 年以后，或达产后真实吨煤完全成本突破 <code>380 元/吨</code>（丧失低成本优势）</strong>
-   * <strong>证伪逻辑</strong>：淮北矿业对冲安徽省内老矿井自然衰减、实现自由现金流大跨越的头号胜负手就是陶忽图煤矿。若该矿迟迟无法联合试运转转固，或投产后因内蒙深部水害/冲击地压导致完全成本远超 <code>220—260元/吨</code> 的设计预期，公司将陷入“百亿资本开支沉没、高额有息负债无法靠新矿现金流偿还”的泥潭。</p>
+<p><strong>【死刑红线二·王牌新矿投产或成本逻辑崩塌】：内蒙古陶忽图煤矿（800万吨/年）因重大工程地质缺陷、环评或矿权纠纷导致正式投产时间推迟至 2028 年以后，或达产后真实吨煤完全成本突破 <code>380 元/吨</code>（丧失低成本优势）</strong></p>
+<ul>
+<li><strong>证伪逻辑</strong>：淮北矿业对冲安徽省内老矿井自然衰减、实现自由现金流大跨越的头号胜负手就是陶忽图煤矿。若该矿迟迟无法联合试运转转固，或投产后因内蒙深部水害/冲击地压导致完全成本远超 <code>220—260元/吨</code> 的设计预期，公司将陷入“百亿资本开支沉没、高额有息负债无法靠新矿现金流偿还”的泥潭。</li>
+</ul>
 </li>
 <li>
-<p><strong>【死刑红线三·资本配置纪律叛变（搞“多元恶化”）】：在陶忽图煤矿建成转固后，管理层未能如期将年度 CapEx 压降至 <code>40 亿元/年</code> 以下并兑现 <code>40%</code> 以上分红率，反而开启新一轮百亿级低回报跨界重资产盲目投资</strong>
-   * <strong>证伪逻辑</strong>：当前买方愿意在破净位置重仓的核心逻辑，是公司历时四年的百亿级 CapEx 即将撞线收官（2026Q3 在建工程已从 <code>79.75亿</code> 降至 <code>57.59亿</code>），自由现金流即将全面释放反哺股东。若管理层在陶忽图完工后患上“铁锤人综合征”，拒绝降低资本开支、拒绝提高分红，甚至去收购亏损累累的化工/新能源烂摊子，导致年度自由现金流持续为负且分红率跌破 <code>30%</code>，则“收获者逻辑”彻底证伪，无条件清仓。</p>
+<p><strong>【死刑红线三·资本配置纪律叛变（搞“多元恶化”）】：在陶忽图煤矿建成转固后，管理层未能如期将年度 CapEx 压降至 <code>40 亿元/年</code> 以下并兑现 <code>40%</code> 以上分红率，反而开启新一轮百亿级低回报跨界重资产盲目投资</strong></p>
+<ul>
+<li><strong>证伪逻辑</strong>：当前买方愿意在破净位置重仓的核心逻辑，是公司历时四年的百亿级 CapEx 即将撞线收官（2026Q3 在建工程已从 <code>79.75亿</code> 降至 <code>57.59亿</code>），自由现金流即将全面释放反哺股东。若管理层在陶忽图完工后患上“铁锤人综合征”，拒绝降低资本开支、拒绝提高分红，甚至去收购亏损累累的化工/新能源烂摊子，导致年度自由现金流持续为负且分红率跌破 <code>30%</code>，则“收获者逻辑”彻底证伪，无条件清仓。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>真正的投资大师不是从来不犯错的人，而是事先把“墓志铭”写好、一旦闻到焦糊味就拔腿先跑的人。14.32块钱、0.89倍市净率的淮北矿业，向下有378亿存量硬资产托底，向上有信湖矿复产和陶忽图800万吨新矿点火的双重引擎；只要井下抽水机稳稳当当、内蒙新矿按时出煤、管理层别乱花钱，你只管安心坐在船舱里收着股息，等市场先生带着1.2倍市净率的报价单来敲门！</p></div></div></div></div>
 
 
 
+<hr/>
+<h3 id="2026-11-22">⚔️ 【2026-11-22 物理隔离盲审做空 × 防“空头滑跪”三道铁闸二元对质终审实录】</h3>
+<blockquote>
+<p><strong>【终审庭审背景与核心原则】</strong>：为彻底挤干单一多头视角下的重资产资本错配盲区与折旧现金盾水分，买方投委会（IC）于 <code>2026年11月22日</code> 引入物理隔离《独立盲审做空备忘录》（基准最新收盘价更新为 <strong><code>13.98元/股</code></strong>，<code>-1.20%</code>，总股本 <code>26.9326亿股</code>，总市值 <strong><code>376.52亿元</code></strong>，<code>PE-TTM 14.58x</code> / <code>PB 0.87x</code>），并严格执行<strong>防“空头滑跪”三道铁闸</strong>——发起 <strong><code>17次</code> 一手联网独立反查</strong>，严苛切割<strong>“事实层无条件硬改”</strong>与<strong>“假设层反杀”</strong>，严禁红方将“低煤价 + Q3高点成本静态死锁 + 45亿维持CapEx + 债务双扣”进行四重悲观复利叠加，亦绝不姑息原稿偏高买点与煤化工盈利幻觉，最终以过去 <code>8年</code> 历史估值极低分位完成现实校准。</p>
+</blockquote>
+<h4 id="vs">一、 铁闸一 &amp; 铁闸二：红蓝核心交锋与“事实层硬改 vs 假设层反杀”二元裁决矩阵</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">红蓝交锋焦点</th>
+<th style="text-align: left;">红方做空核心指控</th>
+<th style="text-align: left;">投委会 <code>17次</code> 一手反查实证结果</th>
+<th style="text-align: left;">二元终审裁决与量化修正落地</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. <code>True EV</code> 隐性债务黑洞 × <code>26Q3</code> 短借暴增 <code>2,337%</code> 与“借债粉饰现金”</strong></td>
+<td style="text-align: left;"><code>26Q3</code> 货币资金暴增 <code>+131.3%</code> 至 <code>62.46亿</code> 实靠短长借 9 个月狂借 <code>+51.13亿</code>（短借飙 <code>+2,336.58%</code> 至 <code>34.38亿</code>、筹资净流入 <code>+476%</code>）；且原稿漏计采矿权长期应付款 <code>33.12亿</code>、财务公司关联存款 <code>14.72亿</code>、长期应付职工薪酬 <code>16.26亿</code>，全口径 <code>True EV</code> 高达 <code>579.92亿</code>！</td>
+<td style="text-align: left;">① <strong>漏债与举债全部实锤</strong>：<code>26Q3</code> 确含采矿权长期应付款 <strong><code>33.12亿</code></strong>（<code>3,312,414,129元</code>）、长期应付职工薪酬 <strong><code>15.33亿</code></strong>（<code>25年末 16.26亿</code> 被列为<strong>关键审计事项</strong>，系辞退福利与改制三类人员折现）及 <code>25年报</code> 财务公司吸收关联存款 <strong><code>14.72亿</code></strong>，且短长借 9 个月确增 <code>+51.13亿</code>；② <strong>但反查揭穿空头会计两头作弊</strong>：空头将财务公司负债 <code>14.72亿</code> 计入总债，却故意抹掉 <code>26Q3</code> 资产端高达 <strong><code>19.81亿元</code></strong> 的<strong>交易性金融资产</strong>（高流动性货基/理财），单笔虚增净债近 <code>20亿</code>！且短借大增同期伴随应付票据大降 <code>-15.09亿</code>（<code>-48.69%</code>）、合同负债（下游预收款）暴增 <code>+227.62%</code> 至 <strong><code>17.55亿</code></strong>，<code>26Q1–Q3</code> 利息费用仅 <code>3.69亿</code>（融资利率 <code>~3.3%–3.5%</code>），毫无流动性危机！</td>
+<td style="text-align: left;"><strong>🩸 事实层命中硬改 + 🛡️ 假设层反杀</strong>：全额补计采矿权长期应付款 <code>33.12亿</code> + 财务公司吸收关联存款 <code>14.72亿</code> + 税后长期应付职工薪酬 <code>11.50亿</code>（<code>15.33亿 × 75%</code>），总广义负债升至 <strong><code>211.09亿</code></strong>；公允还回 <code>19.81亿</code> 交易性金融资产（广义现金 <code>82.27亿</code>），严苛扣减受限 <code>8.52亿</code> + 营运底仓 <code>20.00亿</code> + 已宣告未派 <code>26中期分红 2.69亿</code> 得超额现金 <code>51.06亿</code> → 广义净债 <strong><code>160.03亿</code></strong>，叠加少数股东 <code>41.65亿</code> 锁定 <strong><code>ev_delta_a = +201.68亿</code></strong>、<strong>严苛 <code>True EV = 578.20亿元</code></strong>（较旧稿 <code>+139.65亿</code> 硬增 <strong><code>+62.03亿</code></strong>）！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. 过去 <code>4.75年</code> <code>356.6亿</code> 资本黑洞 × 碳鑫乙醇/临涣焦化/聚能火电低 <code>ROIC</code></strong></td>
+<td style="text-align: left;"><code>22–26Q3</code> 累计 CapEx 高达 <code>356.58亿</code>（为归母净利 <code>164%</code>），<code>24–26Q3</code> 累计 FCF 为 <code>-2.24亿</code>；煤化工板块临涣焦化持续亏损、碳鑫 <code>60万吨</code> 乙醇仅微利/盈亏平衡，聚能 <code>2×660MW</code>（投 <code>~52亿</code>）静态 <code>ROIC</code> 仅 <code>2.3%–3.9%</code></td>
+<td style="text-align: left;">① <strong>数据纠错与煤化工吹牛打脸实锤</strong>：一手核实 <code>22–25年</code> CapEx 确为 <code>71.60 / 80.04 / 85.59 / 73.46亿</code>（原稿表 5.3 存在年份错位），<code>24–26Q3</code> 累计 FCF 确为 <strong><code>-2.24亿</code></strong>；更致命的是《2025年报·主要子公司分析》实锤：<strong>碳鑫科技</strong>在乙醇满产 <code>54.68万吨</code> 下营收 <code>28.72亿</code>、<strong>净利润仅 <code>-0.10亿元</code>（微亏 1,000 万）</strong>，<strong>临涣焦化</strong>巨亏 <strong><code>-4.48亿</code></strong>、<strong>神源煤化工</strong>亏 <strong><code>-2.86亿</code></strong>（彻底击穿原稿“乙醇年赚 <code>4.5—7.5亿</code>”的乐观臆测）；聚能发电（持股 <code>80%</code>）确属 <code>~3%–4%</code> 低 <code>ROIC</code> 资产；② <strong>但反查挖出空头刻意隐瞒的超级反杀底牌</strong>：<code>2025年</code> <strong>淮矿股份本部净利仍高达 <code>26.13亿</code></strong>，雷鸣科化（<code>+2.18亿</code>）+ 雷鸣矿业（<code>+1.46亿</code>）实打实净赚 <strong><code>+3.64亿</code></strong>；2025年报归母净利砸至 <code>15.06亿</code> 的头号元凶，是信湖矿主体<strong>安徽亳州煤业一次性停产治水巨亏 <code>-8.35亿元</code></strong>！</td>
+<td style="text-align: left;"><strong>🩸 事实层命中硬改 + 🛡️ 假设层反杀</strong>：① 彻底剥离煤化工“高成长第二曲线”溢价，常态煤化工归母净利下修至 <strong><code>0.5亿元</code>（盈亏平衡微利）</strong>，Reverse SOTP 狠砍煤化工估值至仅 <code>15—18亿</code> 股权折价，治理质地加分下修至 <strong><code>+0.8</code></strong>；② 戳破空头拿 <code>2025年 15.06亿</code> 当熊市基准的选择性失明——信湖煤矿 <code>2026年4月16日</code> 复产后，仅消除亳州煤业 <code>-8.35亿</code> 停产黑洞并转为正常盈利，即构成超 <code>10亿元</code> 级结构性利润修复！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3. 朱庄矿关井衰减 × <code>26Q3</code> 量缩成本飙至 <code>539.54元</code> × 维持性 <code>CapEx</code> 水分</strong></td>
+<td style="text-align: left;"><code>22–25年</code> 商品煤产量四连降 <code>-24.1%</code>（朱庄 <code>220万t</code> 枯竭永久关井）；信湖 <code>4月</code> 复产后 <code>26Q3</code> 产量仍环比降 <code>-4.5%</code> 至 <code>440.84万t</code>、外销降 <code>-7.5%</code> 至 <code>317.27万t</code>，吨煤成本飙至 <code>539.54元</code>（<code>+20.9%</code>）；深井维持 <code>CapEx</code> 高达 <code>45–48亿/年</code>，归母常态 OE 仅 <code>22.0亿</code></td>
+<td style="text-align: left;">① <strong>物理衰减与折旧盾水分全部实锤</strong>：朱庄煤矿确于 <strong><code>2025年4月</code></strong> 获批永久闭坑退出；<code>26Q3</code> 产销量环比确下滑且吨煤成本升至 <strong><code>539.54元</code></strong>（前三季 <code>505.47元</code>），业绩说明会确认系“新掘进巷道/生产接替与安全投入回归正常”（反向证实 25年 <code>474元</code> 含动用专项储备 <code>4.9亿</code> 压降成本的临时水分）；原稿把合并维持性 CapEx 仅定为 <code>26亿</code> 创造 <code>+17亿</code> 折旧现金盾确实严重低估；② <strong>但反杀空头双重复利叠加</strong>：<code>26Q1–Q3</code> 均价 <code>947.14元</code>/成本 <code>505.47元</code> 下扣非净利已达 <strong><code>21.16亿</code></strong>（年化 <code>28.21亿</code>，且 <code>Q1–Q2</code> 信湖未满产）；空头既把煤价压回 <code>820—900元</code>，又死锁 <code>Q3</code> 掘进高峰成本 <code>525—540元</code>（无视资源税从价减免与工效联动），还将维持性 CapEx 夸大至超折旧的 <code>45—48亿/年</code>，属于典型四重悲观叠加！</td>
+<td style="text-align: left;"><strong>🩸 事实层命中硬改 + 🛡️ 假设层反杀</strong>：① 将安徽省内常产由 <code>1,950万t</code> 下修至 <strong><code>1,850万t</code></strong>（外销 <code>1,420万t</code>），常态售价按 <strong><code>915元/吨</code></strong>、常态成本上修至 <strong><code>520元/吨</code></strong>，锁定存量常态归母净利 <strong><code>27.00亿</code></strong>；② 将存量合并维持性 CapEx 由 <code>26.0亿</code> 硬提至 <strong><code>36.50亿</code></strong>（归母由 <code>24.5亿</code> 提至 <strong><code>33.50亿</code></strong>），硬砍掉原稿 <strong><code>8.0亿/年</code></strong> 虚胖折旧盾水分；重校<strong>存量归母 OE = <code>31.50亿</code></strong>（旧 <code>42.30亿</code> 硬砍 <code>-25.5%</code>）、<strong>无杠杆 Firm OE = <code>38.10亿</code></strong>（旧 <code>48.60亿</code> 硬砍 <code>-21.6%</code>），同时强力反杀空头 <code>22.0亿 / 29.3亿</code> 极寒值！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4. 陶忽图 <code>800万吨</code> 煤矿跳票 × 煤种降维 × 真实盈利重校</strong></td>
+<td style="text-align: left;">工期从 <code>2025年底</code> 跳票至 <code>2026底/2027初</code> 试运转、<code>2028年</code> 达产；非稀缺焦煤而是 <code>450米</code> 深井普通动力煤，按 5500K 坑口含税 <code>550元</code>、成本 <code>300元</code> 算满产净利仅 <code>11.2亿</code>（ROIC <code>11.6%</code>），仅够填补华东老矿窟窿</td>
+<td style="text-align: left;">① <strong>跳票、深井与权益归属实锤</strong>：确已推迟至 <strong><code>2026底/2027初</code></strong> 联合试运转、<strong><code>2028年</code></strong> 达产，平均埋深 <strong><code>456米</code></strong>，淮北矿业持股 <strong><code>51%</code></strong>（奇瑞方持股 <code>49%</code>）；原稿在测算陶忽图 OE 时把 <code>3.6亿</code> 吨煤安全维简计提当纯现金加回确属过度乐观；② <strong>但反杀煤质与坑口煤价双重恶意压低</strong>：地质与环评实锤陶忽图为 <strong><code>&gt;6,000大卡/千克</code> 特低硫高热值优质动力/化工煤</strong>（非 5500K 普通煤），而 <code>2026年11月中旬</code> 秦皇岛 5500K 现货仍高挂 <strong><code>1,010—1,022元/吨</code></strong>、鄂尔多斯 5500K 坑口含税价在 <strong><code>690—780元/吨</code></strong>，空头硬按 <code>500—550元</code> 含税价叠加 <code>300元</code> 成本算账明显过激！</td>
+<td style="text-align: left;"><strong>🩸 事实层命中硬改 + 🛡️ 假设层反杀</strong>：折衷采用极度保守的蒙西 <code>6,000大卡</code> 不含税坑口中枢 <strong><code>460元/吨</code></strong>（含税 <code>~520元</code>）、深井完全成本 <strong><code>265元/吨</code></strong>（折衷 <code>240</code> 与 <code>300</code>），并<strong>彻底砍掉原稿安全维简 <code>+3.6亿</code> 重复加回水分</strong>，测算 <code>2028年</code> 满产合并税后净利 <code>11.70亿</code>（归母 <code>51%</code> 约 <code>6.0亿</code>），重校陶忽图达产新增<strong>合并无杠杆 Firm OE <code>+13.80亿</code></strong>（旧 <code>+19.60亿</code>）、<strong>归母 OE <code>+6.80亿</code></strong>（旧 <code>+9.80亿</code>），全口径达产无杠杆 Firm OE 锁定 <strong><code>51.90亿</code></strong>（归母 <strong><code>38.30亿</code></strong>）！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>5. “高股息白马破产”(<code>0.25元/1.79%</code>) × <code>2026年11月</code> 双焦负反馈</strong></td>
+<td style="text-align: left;"><code>2025年</code> 分红暴砍 <code>-76%</code> 至 <code>0.25元</code>（股息率仅 <code>1.79%</code>），账上没钱可分；<code>10–11月</code> 发改委强推山西保供，焦炭遭 4 轮提降全行业亏损，统计局确认 11 月煤价转跌，<code>Q3</code> 即周期绝对顶</td>
+<td style="text-align: left;">① <strong>即期非高息与 <code>11月</code> 双焦走弱实锤</strong>：<code>2025年</code> 确仅派 <code>0.25元</code>；<code>2026年11月中旬</code> 焦炭确已落地 <strong>3 轮提降</strong>（存第 4 轮预期）、焦煤期货跌破 <code>1,400元</code> 报 <code>1,380—1,391元/吨</code>，产地竞拍流拍增多，短期 <code>Q4–27Q1</code> 存在长协回落压力；② <strong>但反查当场抓获空头漏报中期分红铁证</strong>：淮北矿业已于 <strong><code>2026年10月28日</code></strong> 董事会正式通过 <strong><code>2026年度中期分红方案</code>（经股东会授权无需再审），每股派 <code>0.10元</code>（合计 <code>2.69亿</code>）</strong>！真实 TTM 每股分红为 <strong><code>0.35元</code>（<code>2.50%</code>）</strong>，且 <code>26Q1–Q3</code> 已赚 <code>21.46亿</code>，2026 全年前瞻分红预计 <strong><code>0.48元</code>（<code>3.43%</code>）</strong>，彻底推翻“账上无钱分红”之极言！</td>
+<td style="text-align: left;"><strong>🩸 事实层命中硬改 + 🛡️ 假设层反杀</strong>：① 正式摘掉淮北矿业“即期高股息防御白马”标签，按一手核实的 <strong><code>ttm_dps = 0.35元</code></strong>（<code>2.50%</code>）入榜计分，拒绝拿历史 <code>1.00元</code> 或远期画饼冒充当期股息；② 承认 <code>11月</code> 双焦走弱印证了不可拿 <code>26Q3</code> <code>1,102元</code> 年化外推，将常态锚定在保守 <code>915元/吨</code> 并严卡回撤买点！</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="8-reality-check-reverse-sotp">二、 铁闸三：过去 <code>8年</code> 历史估值最低分位 Reality Check 与 Reverse SOTP 重校</h4>
+<p>为彻底杜绝“空头滑跪”将买点砍成一辈子买不到的虚空价（如空头 <code>6.80—8.20元</code>），同时坚决纠偏原稿把 <code>13.98—14.80元</code> 错当标准甜点区的乐观误判，我们用 <code>2018—2026年</code> 真实历史底部与重校拆骨模型进行刚性锚定：</p>
+<ol>
+<li>
+<p><strong>历史极端底部实测坐标</strong>：淮北矿业 <code>52周</code> 真实波动区间为 <strong><code>10.77元 — 18.77元</code></strong>；复盘过去 <strong><code>8年</code>（<code>2018—2026年</code>）</strong>历次煤炭超级熊市大底（含 <code>2020年</code> 疫情通缩大底、<code>2025年</code> 焦煤深熊且信湖停产巨亏大底），公司真实历史 <code>PB</code> 极限大底均稳定在 <strong><code>0.70x — 0.80x</code></strong>（历史 <code>10%</code> 分位约 <strong><code>0.80x — 0.88x</code></strong>），从未在正常经营状态下触及空头所称的 <code>0.42x — 0.51x PB</code>（<code>6.80—8.20元</code>）！按 <code>2026Q3</code> 每股净资产 <strong><code>BVPS = 16.06元/股</code></strong> 折算：<strong><code>PB = 0.75x</code> 精准对应 <code>12.05元</code>，<code>PB = 0.70x</code> 对应 <code>11.24元</code>，<code>PB = 0.65x</code> 对应 <code>10.44元</code></strong>（直接砸穿 <code>52周</code> 低点 <code>10.77元</code>！）。</p>
+</li>
+<li>
+<p><strong>Reverse SOTP 拆骨幻觉穿透（硬核翻案）</strong>：彻底挤干煤化工与电厂泡沫后重新称重——① 省内 <code>17对</code> 存量焦煤矿（常态归母 OE <code>26.50亿</code>，给审慎 <code>8.0x—8.5x</code>）= <strong><code>212.0—225.3亿</code></strong>；② 煤化工（临涣焦化 + 碳鑫乙醇低 ROIC 折价）狠砍至 <strong><code>15.0—18.0亿</code></strong>；③ 雷鸣民爆骨料（<code>3.64亿</code> 净利 × <code>9x</code> = <code>32.8亿</code>）+ 聚能发电（<code>80%</code> 权益 <code>0.75x PB</code> ≈ <code>10.0亿</code>）+ 财务公司（<code>51%</code> 权益 <code>0.85x PB</code> ≈ <code>10.7亿</code>）= <strong><code>53.5—55.0亿</code></strong> → <strong>存量三板块归母保底总值仅 <code>280.5—298.2亿元</code>（<code>10.41—11.07元/股</code>）</strong>！叠加陶忽图（<code>51%</code> 权益 <code>6.80亿</code> 归母 OE、考虑 <code>2028</code> 达产折现给 <code>6.5x—7.5x</code> = <strong><code>44.2—51.0亿</code></strong>），全集公允拆骨仅 <strong><code>324.7—349.2亿元</code>（<code>12.06—12.97元/股</code>）</strong>！这意味着：<strong>现价 <code>13.98元</code>（市值 <code>376.52亿</code>）根本不是旧稿吹捧的“0元白送陶忽图”，而是提前为尚未试运转的陶忽图标价了 <code>78.3—96.0亿</code>（较折现公允值透支 <code>+27.3亿 ~ +51.8亿</code> 溢价）</strong>！唯有回踩至 <strong><code>10.50—12.00元</code></strong>（第二档正常买入区，踩进全集拆骨下方），特别是砸入 <strong><code>≤10.50元</code></strong>（第一档重锤区：<code>PB ≤ 0.65x</code> 砸穿 52 周低点 <code>10.77元</code>、存量拆骨 <code>10.41—11.07元</code> 几乎 <code>100%</code> 覆灭市值）时，陶忽图 <code>800万吨</code> 大矿才真正回归 <strong><code>0元</code> 免费白送</strong>！</p>
+</li>
+</ol>
+<h4 id="1398">三、 【三联对照】核心量化坐标与两档击球区终审校准总表（基准价：<code>13.98元/股</code>）</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">买方核心估值与定价锚点</th>
+<th style="text-align: center;"><strong>旧原稿（蓝方原基准）</strong></th>
+<th style="text-align: center;"><strong>红方做空极寒口径（四重叠加）</strong></th>
+<th style="text-align: center;"><strong>🔥 今日三道铁闸终审重校（唯一主锚）</strong></th>
+<th style="text-align: left;">终审变动穿透说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>基准收盘价 / 总市值（<code>26.9326亿股</code>）</strong></td>
+<td style="text-align: center;"><code>14.32元</code> / <code>385.67亿</code></td>
+<td style="text-align: center;"><code>13.98元</code> / <code>376.52亿</code></td>
+<td style="text-align: center;"><strong><code>13.98元</code> / <code>376.52亿</code></strong></td>
+<td style="text-align: left;">对齐 <code>2026-11-22</code> 最新收盘（<code>PB 0.87x</code> / <code>PE-TTM 14.58x</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>广义净债+少数股东（<code>ev_delta</code>） / <code>True EV</code></strong></td>
+<td style="text-align: center;"><code>+139.65亿</code> / <code>525.32亿</code></td>
+<td style="text-align: center;"><code>+203.40亿</code> / <code>579.92亿</code></td>
+<td style="text-align: center;"><strong><code>+201.68亿</code> / <code>578.20亿</code></strong></td>
+<td style="text-align: left;">补计采矿权 <code>33.12亿</code>+关联存款 <code>14.72亿</code>+税后辞退 <code>11.50亿</code>+未派分红 <code>2.69亿</code>；还回 <code>19.81亿</code> 货基+锁 <code>20亿</code> 底仓</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>华东存量常态核心锚（产量 / 售价 / 成本）</strong></td>
+<td style="text-align: center;"><code>1,950万t</code> / <code>937元</code> / <code>505元</code></td>
+<td style="text-align: center;"><code>1,800万t</code> / <code>820-900元</code> / <code>525-540元</code></td>
+<td style="text-align: center;"><strong><code>1,850万t</code> / <code>915元</code> / <code>520元</code></strong></td>
+<td style="text-align: left;">认领朱庄关井与掘进接替成本回归，反杀 <code>Q3</code> 成本峰值静态死锁</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>存量常态归母 OE / 无杠杆 Firm OE（亿元）</strong></td>
+<td style="text-align: center;"><code>42.30亿</code> / <code>48.60亿</code></td>
+<td style="text-align: center;"><code>22.00亿</code> / <code>29.30亿</code></td>
+<td style="text-align: center;"><strong><code>31.50亿</code> / <code>38.10亿</code></strong> <em>(较旧 <code>-25.5%</code>/<code>-21.6%</code>)</em></td>
+<td style="text-align: left;">合并维持 CapEx 由 <code>26.0</code> 硬提至 <code>36.5亿</code> 挤干 <code>+8亿</code> 折旧盾水分，剔除碳鑫乙醇虚妄利润</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>陶忽图 <code>2028</code> 达产后归母 OE / 无杠杆 Firm OE</strong></td>
+<td style="text-align: center;"><code>52.10亿</code> / <code>68.20亿</code></td>
+<td style="text-align: center;">未单列满产达产</td>
+<td style="text-align: center;"><strong><code>38.30亿</code> / <code>51.90亿</code></strong> <em>(较旧 <code>-26.5%</code>/<code>-23.9%</code>)</em></td>
+<td style="text-align: left;">陶忽图按 <code>51%</code> 权益、6000K 不含税 <code>460元</code>、成本 <code>265元</code>、砍掉安全维简重复加回（新增 Firm OE <code>+13.8亿</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>现价 <code>13.98元</code> 隐含无杠杆 OE / <code>True EV</code></strong></td>
+<td style="text-align: center;"><code>9.25%</code> <em>(达产 <code>12.98%</code>)</em></td>
+<td style="text-align: center;"><code>5.05%</code> <em>(极端失真)</em></td>
+<td style="text-align: center;"><strong><code>6.59%</code></strong> <em>(达产 <strong><code>8.98%</code></strong>；归母 P/OE <code>11.95x</code>)</em></td>
+<td style="text-align: left;">现价存量回报跌破 <code>7%</code>、达产不足 <code>9%</code>，丧失左侧高赔率击球资格</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>即期 TTM 纯现金股息率（<code>2026-11-22</code>）</strong></td>
+<td style="text-align: center;">仅列 <code>25年 1.75%</code> / <code>26E 3.5%</code></td>
+<td style="text-align: center;"><code>1.79%</code> <em>(漏算26中期)</em></td>
+<td style="text-align: center;"><strong><code>2.50%</code>（<code>0.35元/股</code>）</strong> <em>(26E前瞻 <code>3.43%</code>)</em></td>
+<td style="text-align: left;">核实 <code>2025年度 0.25元</code> + <code>2026-10-28</code> 董事会已通过 <code>2026中期 0.10元</code>；摘掉即期高息标签</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Reverse SOTP 存量拆骨 / 陶忽图隐含标价</strong></td>
+<td style="text-align: center;">存量 <code>378亿</code> / 陶忽图近 <code>0元</code></td>
+<td style="text-align: center;">视多元化为纯黑洞</td>
+<td style="text-align: center;"><strong>存量 <code>280.5—298.2亿</code> / 隐含标价 <code>+78.3—96.0亿</code></strong></td>
+<td style="text-align: left;">全集折现拆骨仅 <code>12.06—12.97元</code>，现价已透支 <code>+27.3—51.8亿</code> 溢价；<code>≤10.50元</code> 方回归 <code>0元</code> 白送</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第二档：正常买入区（左侧分批建仓）</strong></td>
+<td style="text-align: center;"><code>13.20—14.80元</code> <em>(原稿 <code>12.50—14.80</code>)</em></td>
+<td style="text-align: center;">合理估值 <code>6.80—8.20元</code></td>
+<td style="text-align: center;"><strong><code>10.50—12.00元</code></strong> <em>(较旧中枢下移 <code>-19.6%</code>)</em></td>
+<td style="text-align: left;"><code>PB 0.65—0.75x</code> 踩进 8 年熊市底槽，归母 P/OE <code>8.98—10.26x</code>（达产 <code>7.38—8.44x</code>），达产无杠杆回报 <strong><code>9.89%—10.71%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第一档：左侧重锤区（Heavy Hammer）</strong></td>
+<td style="text-align: center;"><code>≤ 12.50元</code></td>
+<td style="text-align: center;">击穿 <code>6.80元</code> <em>(PB <code>0.42x</code> 空中楼阁)</em></td>
+<td style="text-align: center;"><strong><code>≤ 10.50元</code></strong> <em>(破 <code>52周</code> 低 <code>10.77元</code> / <code>PB≤0.65x</code>)</em></td>
+<td style="text-align: left;">存量拆骨 <code>10.41—11.07元</code> 几乎全覆灭市值、<strong>陶忽图 <code>0元</code> 白送</strong>，达产无杠杆回报 <strong><code>≥10.71%</code></strong>、常态息 <strong><code>≥5.24%</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>现价 <code>13.98元</code> 终极水位定性与治理加分</strong></td>
+<td style="text-align: center;">左侧甜点区建仓</td>
+<td style="text-align: center;">强烈做空（下行 <code>41%—51%</code>）</td>
+<td style="text-align: center;"><strong>⏳ 降级退出买区 · 偏贵观望（质地 <code>+0.8</code>）</strong></td>
+<td style="text-align: left;"><strong>不和稀泥</strong>：现价高于新买点上限 <code>+16.5%</code>，叠加 <code>11月</code> 双焦提降承压，严禁追高，静待回调 <strong><code>≤12.00元</code></strong> 分批出手！</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把年报附注翻到底朝天，多头和空头两张嘴里的谎话立马就现了原形。原报告最大的毛病是“帮管理层粉饰资本开支”——嘴上吹碳鑫 `60万吨` 乙醇一年能赚五七个亿，可一翻 2025 年报，满产乙醇竟然还微亏一千万，临涣焦化更是一年亏掉四个半亿！再加上漏算 `33亿` 采矿权分期债和 `14.7亿` 关联存款、又把深井老矿维持性开支压得太低，硬生生把一台真实回报只有 `6.6%` 的重资产机器算成了“0元白送新矿的超级白马”。今天挤完水分，真相冰冷而清晰：`13.98元` 根本不便宜，已经把内蒙陶忽图还没挖出来的煤提前收了你近九十亿门票钱！</p></div></div>
+<div class="munger-note"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>可反过来，空头同样在玩“挑着账本吓唬人”的老把戏——算负债时把财务公司 `14.7亿` 存款一分不差加进去，转头算现金却假装看不见账上 `19.8亿` 货币基金；拿 `2025年` `15亿` 利润当世界末日，却绝口不提其中光是信湖煤矿泡水停产的亳州煤业就一次性亏了 `8.35亿`；甚至把 `6000大卡` 内蒙高热值大矿按 `5500大卡` 贱卖，再用四重悲观叠出个八年没见过的 `0.45倍 PB` 虚空价！真正的买方猎人绝不跟任何极端情绪结婚：现在 `13.98元` 坚决管住手不接盘，把枪架稳在 <strong>`10.50—12.00元`</strong>（`0.65—0.75倍 PB`）的真实历史底部，等焦煤淡季回调把筹码砸进击球区再扣扳机！</p></div></div>
 <hr/>
 <hr/>
 <h2 id="g">阶段三：终章模块 G——投资大师闭门圆桌会（四位传奇大师结合毕生实战的终极会诊）</h2>
@@ -3977,13 +4680,17 @@
 <p>📌 <strong>原文摘录</strong>：“但碳鑫科技60万吨/年煤制无水乙醇项目在2024年下半年投产后，2025年实现乙醇产量54.68万吨、销量52.10万吨，彻底跑通“合成气—二甲醚—醋酸甲酯—无水乙醇”低成本路线，单吨乙醇完全成本显著低于粮食法（玉米发酵法）乙醇，直接把煤化工板块的整体毛利率稳稳托在了20%以上。”</p>
 </blockquote><p><strong>💡 深度解答</strong>：</p><p>您这一连串问题直接问到了淮北矿业“产业链延链增厚毛利”的核心密码上，我们按您的 5 个子问题逐一剥开：</p><ol>
 <li>
-<p><strong>属于煤化工吗？淮北矿业处于产业链什么位置？</strong>
-   - <strong>100% 属于现代煤化工（而且是从传统 C1 一碳化工向高端 C2 二碳化工跨越的行业标杆）！</strong>
-   - 在产业链位置上，淮北矿业处于<strong>“从最上游煤炭/焦炉煤气出发，向下游一体化打通大宗基础有机化工原料（甲醇、无水乙醇）与精细化工溶剂（DMC、电子级碳酸酯、乙基胺）的上游原料及中间体生产商”</strong>位置。</p>
+<p><strong>属于煤化工吗？淮北矿业处于产业链什么位置？</strong></p>
+<ul>
+<li><strong>100% 属于现代煤化工（而且是从传统 C1 一碳化工向高端 C2 二碳化工跨越的行业标杆）！</strong></li>
+<li>在产业链位置上，淮北矿业处于<strong>“从最上游煤炭/焦炉煤气出发，向下游一体化打通大宗基础有机化工原料（甲醇、无水乙醇）与精细化工溶剂（DMC、电子级碳酸酯、乙基胺）的上游原料及中间体生产商”</strong>位置。</li>
+</ul>
 </li>
 <li>
-<p><strong>工业上的“无水乙醇”到底是用来干嘛的？下游应用场景有哪些？</strong>
-   - 千万别把工业上的 <strong>“无水乙醇（纯度 <span class="math-inline"> ≥  99.5\%—99.7\%</span>，几乎不含水）”</strong> 只想成医院擦伤口的 75% 医用酒精或者餐桌上的白酒！在现代工业体系里，无水乙醇是仅次于水的<strong>“全球第二大通用有机溶剂与清洁液体燃料”</strong>，下游有两大百万吨级的刚需买单场景：</p>
+<p><strong>工业上的“无水乙醇”到底是用来干嘛的？下游应用场景有哪些？</strong></p>
+<ul>
+<li>千万别把工业上的 <strong>“无水乙醇（纯度 <span class="math-inline"> ≥  99.5\%—99.7\%</span>，几乎不含水）”</strong> 只想成医院擦伤口的 75% 医用酒精或者餐桌上的白酒！在现代工业体系里，无水乙醇是仅次于水的<strong>“全球第二大通用有机溶剂与清洁液体燃料”</strong>，下游有两大百万吨级的刚需买单场景：</li>
+</ul>
 </li>
 </ol><ul>
 <li>
@@ -4005,8 +4712,10 @@
 <p><strong>半导体面板清洗与日化</strong>：用于电子芯片精密清洗剂、医药萃取剂及日化香水溶剂。</p>
 </li>
 </ul><ol start="3">
-<li><strong>为什么一家挖煤的淮北矿业，会去开发“无水乙醇”这块业务？（被焦炉废气逼出来的神级算账逻辑）</strong>
-   - 这绝不是管理层拍脑袋乱搞跨界，而是为了解决自家焦化厂<strong>“焦炉煤气贱卖痛点”</strong>算出来的一笔绝妙经济账：</li>
+<li><strong>为什么一家挖煤的淮北矿业，会去开发“无水乙醇”这块业务？（被焦炉废气逼出来的神级算账逻辑）</strong><ul>
+<li>这绝不是管理层拍脑袋乱搞跨界，而是为了解决自家焦化厂<strong>“焦炉煤气贱卖痛点”</strong>算出来的一笔绝妙经济账：</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>第一步（痛点）</strong>：淮北矿业有 440 万吨/年焦炭产能（临涣焦化）。把精煤放进焦炉烤成焦炭的过程中，每吨焦炭会副产约 <code>400 立方米</code> 的<strong>焦炉煤气</strong>（里面含 55% 的氢气、25% 的甲烷、8% 的一氧化碳）。以前只能拿去合成<strong>甲醇（<span class="math-inline"><span class="math-text">CH</span><sub>3</sub><span class="math-text">OH</span></span>）</strong>，但全国甲醇产能严重过剩，一吨甲醇只能卖 <code>2,100 元/吨</code> 左右，除去成本根本赚不到几个钱。</p>
@@ -4018,8 +4727,8 @@
 <p><strong>第三步（降维打击）</strong>：淮北矿业果断联手中科院大连化物所，引进全球领先的 <strong>DMTE 二代技术</strong>，把自家原本廉价的甲醇、一氧化碳和氢气，通过 <code>合成气 → 甲醇 → 二甲醚 → 醋酸甲酯 → 无水乙醇</code> 路线，造出了纯度 99.7% 的无水乙醇，<strong>单吨不含税完全成本仅需 <code>3,599 元/吨</code>（比玉米发酵法足足便宜了 <code>1,500—2,300 元/吨</code>）</strong>！把每吨只卖两千块的甲醇变成卖五千多块的乙醇，一年 54 万吨产量直接创造数亿元纯利，一把将煤化工板块毛利率稳稳托在了 <code>20.43%</code> 以上！</p>
 </li>
 </ul><ol start="4">
-<li><strong>这块业务和化工龙头“万华化学（600309.SH）”有相关性吗？</strong>
-   - <strong>有底层碳一（C1）化学技术同源性与局部新能源下游交集，但在主航道上属于“错位无冲突”：</strong><ul>
+<li><strong>这块业务和化工龙头“万华化学（600309.SH）”有相关性吗？</strong><ul>
+<li><strong>有底层碳一（C1）化学技术同源性与局部新能源下游交集，但在主航道上属于“错位无冲突”：</strong></li>
 <li><strong>技术同源性</strong>：万华化学赖以成名的 MDI（聚氨酯核心原料）制造，底层核心也是<strong>煤气化合成气（<span class="math-inline"><span class="math-text">CO</span> + <span class="math-text">H</span><sub>2</sub></span>）与一氧化碳羰基化反应</strong>；淮北矿业碳鑫科技玩的“二甲醚羰基化制乙醇、甲醇氧化羰基化制 DMC”，在化学工程底层与万华化学同属高壁垒的“一氧化碳羰基化 C1/C2 现代煤化工”。</li>
 </ul>
 </li>
@@ -4092,20 +4801,26 @@
 <p>明明淮北矿业是用“煤炭（焦炉煤气）”造乙醇，一滴石油都不用，为什么它的印钞底线要看 <strong>“国际油价跌不跌破 40 美元/桶”</strong>？因为国际原油价格从 <strong>“下游天花板售价”</strong> 和 <strong>“竞争对手地板成本”</strong> 两个方向同时锚定了无水乙醇的护城河：</p>
 <ol>
 <li>
-<p><strong>第一重关系（决定乙醇的“天花板售价”）：乙醇是汽油的直接替代品（10% 掺混进汽油烧掉）！</strong>
-   - 中国一半以上的无水乙醇是作为 <strong>E10 车用燃料乙醇</strong> 卖给中石油、中石化，按 10% 的比例掺进 92 号/95 号汽油里卖给车主的，国家发改委制定的燃料乙醇结算价直接与<strong>国内 92 号汽油出厂价</strong>挂钩，而国内汽油价格又直接由<strong>国际原油价格</strong>决定！
-   - 当国际油价在 <strong><code>65—85 美元/桶</code></strong> 正常区间运行时，国内汽油价格高达 <code>7,500—8,500 元/吨</code>，炼油厂买 <code>5,400—5,800 元/吨</code> 的无水乙醇掺进去，既有油价差赚、又符合环保国策；
-   - 但如果国际油价长期崩盘跌破 <strong><code>40 美元/桶</code></strong>，国内汽油不含税成本就会暴跌到 <code>3,800—4,200 元/吨</code> 以下！这时候汽油比乙醇还要便宜得多，燃料乙醇的挂钩结算价就会被汽油一路往下拽，直接压缩乙醇的出厂售价。</p>
+<p><strong>第一重关系（决定乙醇的“天花板售价”）：乙醇是汽油的直接替代品（10% 掺混进汽油烧掉）！</strong></p>
+<ul>
+<li>中国一半以上的无水乙醇是作为 <strong>E10 车用燃料乙醇</strong> 卖给中石油、中石化，按 10% 的比例掺进 92 号/95 号汽油里卖给车主的，国家发改委制定的燃料乙醇结算价直接与<strong>国内 92 号汽油出厂价</strong>挂钩，而国内汽油价格又直接由<strong>国际原油价格</strong>决定！</li>
+<li>当国际油价在 <strong><code>65—85 美元/桶</code></strong> 正常区间运行时，国内汽油价格高达 <code>7,500—8,500 元/吨</code>，炼油厂买 <code>5,400—5,800 元/吨</code> 的无水乙醇掺进去，既有油价差赚、又符合环保国策；</li>
+<li>但如果国际油价长期崩盘跌破 <strong><code>40 美元/桶</code></strong>，国内汽油不含税成本就会暴跌到 <code>3,800—4,200 元/吨</code> 以下！这时候汽油比乙醇还要便宜得多，燃料乙醇的挂钩结算价就会被汽油一路往下拽，直接压缩乙醇的出厂售价。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二重关系（决定石化对手的“地板成本”）：石油裂解的乙烯也能直接加水合成乙醇！</strong>
-   - 工业上生产无水乙醇除了“玉米发酵法”和淮北矿业的“煤气 DMTE 法”，还有第三条路线叫 <strong>“石油乙烯直接水合法”</strong>——把石油裂解出来的<strong>乙烯（<span class="math-inline"><span class="math-text">C</span><sub>2</sub><span class="math-text">H</span><sub>4</sub></span>）</strong>加上水蒸气，在高温高压下直接合成无水乙醇（<span class="math-inline"><span class="math-text">C</span><sub>2</sub><span class="math-text">H</span><sub>4</sub> + <span class="math-text">H</span><sub>2</sub><span class="math-text">O</span>  →  <span class="math-text">C</span><sub>2</sub><span class="math-text">H</span><sub>5</sub><span class="math-text">OH</span></span>，每造 1 吨乙醇需消耗 <code>0.65 吨</code> 乙烯）。
-   - 平时为什么石化厂不敢用乙烯造乙醇？因为当国际油价在 <code>75 美元/桶</code> 时，乙烯价格高达 <code>6,800 元/吨</code>，用乙烯造 1 吨乙醇的不含税完全成本高达 <strong><code>5,720 元/吨</code></strong>（<code>0.65吨 × 6,800元 + 850元能耗 + 450元折旧</code>），比淮北矿业 <strong><code>3,599 元/吨</code></strong> 的煤制乙醇贵了整整 <code>2,121 元/吨</code>！</p>
+<p><strong>第二重关系（决定石化对手的“地板成本”）：石油裂解的乙烯也能直接加水合成乙醇！</strong></p>
+<ul>
+<li>工业上生产无水乙醇除了“玉米发酵法”和淮北矿业的“煤气 DMTE 法”，还有第三条路线叫 <strong>“石油乙烯直接水合法”</strong>——把石油裂解出来的<strong>乙烯（<span class="math-inline"><span class="math-text">C</span><sub>2</sub><span class="math-text">H</span><sub>4</sub></span>）</strong>加上水蒸气，在高温高压下直接合成无水乙醇（<span class="math-inline"><span class="math-text">C</span><sub>2</sub><span class="math-text">H</span><sub>4</sub> + <span class="math-text">H</span><sub>2</sub><span class="math-text">O</span>  →  <span class="math-text">C</span><sub>2</sub><span class="math-text">H</span><sub>5</sub><span class="math-text">OH</span></span>，每造 1 吨乙醇需消耗 <code>0.65 吨</code> 乙烯）。</li>
+<li>平时为什么石化厂不敢用乙烯造乙醇？因为当国际油价在 <code>75 美元/桶</code> 时，乙烯价格高达 <code>6,800 元/吨</code>，用乙烯造 1 吨乙醇的不含税完全成本高达 <strong><code>5,720 元/吨</code></strong>（<code>0.65吨 × 6,800元 + 850元能耗 + 450元折旧</code>），比淮北矿业 <strong><code>3,599 元/吨</code></strong> 的煤制乙醇贵了整整 <code>2,121 元/吨</code>！</li>
+</ul>
 </li>
 </ol>
 <ul>
-<li><strong>但如果国际油价长期跌破 <code>35—40 美元/桶</code> 呢？</strong> 石油裂解乙烯的价格就会腰斩跌破 <code>3,537 元/吨</code>，此时石化巨头用“乙烯加水”造乙醇的完全成本（<code>0.65 × 3,537 + 850 + 450 = 3,599 元/吨</code>）就会一举跌穿 <strong><code>3,600 元/吨</code></strong>，正面击穿淮北矿业煤制乙醇的成本防线！</li>
+<li><strong>但如果国际油价长期跌破 <code>35—40 美元/桶</code> 呢？</strong> 石油裂解乙烯的价格就会腰斩跌破 <code>3,537 元/吨</code>，此时石化巨头用“乙烯加水”造乙醇的完全成本（<code>0.65 × 3,537 + 850 + 450 = 3,599 元/吨</code>）就会一举跌穿 <strong><code>3,600 元/吨</code></strong>，正面击穿淮北矿业煤制乙醇的成本防线！<ul>
 <li>而在全球页岩油开采成本与 OPEC+ 财政平衡线已抬升至 <code>55—65 美元/桶</code> 的今天，国际油价长期跌破 40 美元的概率极低——这就是为什么碳鑫科技的煤制乙醇能稳坐“烧着煤气的成本、赚着高油价和高粮价的暴利”的宝座。</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="q5">Q5：钢铁产业现在处于什么周期？如果是周期底部，企业的稼动率低，不应该停止炼钢吗？为何钢厂现在会大幅采购煤炭去炼钢？这对钢铁产业的周期运作有什么启示吗？</h4><blockquote>
@@ -4114,23 +4829,27 @@
 <li><strong>结构分化</strong>：跟房地产绑定的“建筑螺纹钢”确实在周期底部磨底，但跟<strong>新能源汽车、造船、风电光伏、家电机械及钢材出海</strong>绑定的<strong>“制造业用钢（冷轧汽车板、硅钢、造船厚板、优特钢）”</strong>需求非常旺盛！</li>
 <li>而淮北矿业身处的<strong>华东长三角（宝武马钢、宝钢、南钢、沙钢、兴澄特钢）</strong>，恰恰是全中国高附加值制造业板材、特钢和沿江出海钢材占比最高、高炉开工率最坚挺的“富人区”！</li>
 </ul><h5 id="2_14">2. 核心解惑：既然钢铁处于周期底部区域，钢厂为什么不干脆关掉高炉停止炼钢？（三大重工业铁律！）</h5><p>很多人以为开钢铁厂就像开服装厂：“衣服卖不动，拉闸锁门放假两个月，等行情好了再开机”——<strong>在钢铁冶金工业里，随便关停一座高炉，等于当场自杀！</strong></p><ul>
-<li><strong>铁律一【物理死穴：高炉一旦点火，10—15 年寿命期内绝不能轻易熄火停炉】</strong>：</li>
+<li>
+<p><strong>铁律一【物理死穴：高炉一旦点火，10—15 年寿命期内绝不能轻易熄火停炉】</strong>：</p>
+<ul>
 <li>一座现代大型高炉（<code>2,500—5,000 立方米</code>）肚子里贴满了昂贵的特种耐火砖，炉膛里装满了高达 <code>1,500°C</code> 的液态铁水、熔融炉渣和焦炭。</li>
 <li>如果你敢把高炉彻底熄火停炉，炉膛里残留的铁水和炉渣一旦冷却到 <code>1,100°C</code> 以下，就会瞬间凝固成几千吨重的<strong>“超级大铁疙瘩（俗称死炉/冻炉）”</strong>，把整座高炉彻底焊死报废！同时炉温骤降带来的热胀冷缩会让上亿元的耐火砖内衬大面积炸裂坍塌。</li>
-<li>
-<p>即便采用复杂的“焖炉/休风保温”或停炉大修，<strong>一座大型高炉一停一开的直接经济损失、耐火砖重砌与几万吨焦炭烘炉费用就高达 <code>5,000 万—2 亿元人民币</code>！</strong> 因此，除非钢厂准备永久破产拆炉子，否则哪怕把高炉利用系数从 100% 调低到 85%，高炉也必须 <strong>365 天 × 24 小时</strong> 不停地往肚子里喂焦炭！</p>
+<li>即便采用复杂的“焖炉/休风保温”或停炉大修，<strong>一座大型高炉一停一开的直接经济损失、耐火砖重砌与几万吨焦炭烘炉费用就高达 <code>5,000 万—2 亿元人民币</code>！</strong> 因此，除非钢厂准备永久破产拆炉子，否则哪怕把高炉利用系数从 100% 调低到 85%，高炉也必须 <strong>365 天 × 24 小时</strong> 不停地往肚子里喂焦炭！</li>
+</ul>
 </li>
 <li>
 <p><strong>铁律二【微观经济学铁律：只要“钢价 &gt; 可变现金成本”，哪怕账面亏损，继续炼钢也比停产少亏钱！】</strong>：</p>
-</li>
+<ul>
 <li>钢厂的成本分为两块：一块是<strong>“就算一吨钢不炼也得照付的固定成本”</strong>（百亿高炉设备折旧、银行贷款利息、几万工人底薪社保，假设每吨钢分摊 <code>400 元</code>）；另一块是<strong>“炼一吨钢才掏一次钱的可变付现成本”</strong>（买铁矿石、买焦煤焦炭、水电费，假设每吨 <code>2,800 元</code>）。</li>
-<li>
-<p>假设周期底部钢价跌到了 <code>3,000 元/吨</code>：按全成本（<code>2,800 + 400 = 3,200 元</code>）算，钢厂每炼一吨钢<strong>账面净利润亏损 <code>200 元</code></strong>；但如果钢厂此时选择停产呢？一分钱收入没有，那 <code>400 元/吨</code> 的折旧、利息和底薪还得照付，<strong>停产等于每吨净亏 <code>400 元</code>（外加上亿元停炉损失）</strong>！相反，只要咬牙继续买煤炼钢，每卖出一吨钢还能收回 <code>3,000 - 2,800 = +200 元</code> 的<strong>正向现金边际贡献</strong>，用来帮老板付银行利息和工人工资！</p>
+<li>假设周期底部钢价跌到了 <code>3,000 元/吨</code>：按全成本（<code>2,800 + 400 = 3,200 元</code>）算，钢厂每炼一吨钢<strong>账面净利润亏损 <code>200 元</code></strong>；但如果钢厂此时选择停产呢？一分钱收入没有，那 <code>400 元/吨</code> 的折旧、利息和底薪还得照付，<strong>停产等于每吨净亏 <code>400 元</code>（外加上亿元停炉损失）</strong>！相反，只要咬牙继续买煤炼钢，每卖出一吨钢还能收回 <code>3,000 - 2,800 = +200 元</code> 的<strong>正向现金边际贡献</strong>，用来帮老板付银行利息和工人工资！</li>
+</ul>
 </li>
 <li>
 <p><strong>铁律三【银行抽贷红线与地方保就业的“囚徒困境”】</strong>：</p>
-</li>
+<ul>
 <li>钢铁厂动辄背着百亿银行贷款、养活当地几万个家庭。只要高炉还在冒烟、每天还有几千万卖钢材的现金流进出银行流水，银行就会继续给它展期续贷；一旦高炉熄火停产，银行风控系统立刻报警抽贷，上下游供应商连夜上门查封账户，企业当场猝死。所以所有钢厂都困在“谁先停炉谁先死”的博弈里，只能硬着头皮继续买煤炼铁。</li>
+</ul>
+</li>
 </ul><h5 id="3-2026">3. 为什么钢厂会在 2026 年三季度突然“大幅排队打预付款抢煤”？（库存弹簧的牛鞭效应）</h5><ul>
 <li>在 2024—2025 年煤价下跌期，华东钢厂为了省钱，把厂内炼焦煤库存从正常的 <code>20—25 天</code> 极致压缩到了 <strong><code>10—12 天</code></strong> 的生死红线边缘（一旦台风封航或铁路检修耽误几天，高炉就要断粮！）。</li>
 <li>到了 2026 年三季度，恰逢“金九银十”制造业旺季铁水排产回升，偏偏山西主产区加强煤矿安监导致现货焦煤吃紧。手里只有 <code>10 天</code> 存粮的江南钢厂厂长们瞬间慌了——为了防止自家百亿高炉断粮，纷纷拿着现款和银行承兑汇票冲到运距只有 <code>200—400 公里</code>、刚刚恢复信湖煤矿（300 万吨优质低硫焦煤）生产的淮北矿业大门口，提前全额预付货款锁死季度长协配额！这就直接导致淮北矿业 2026Q3 末的<strong>合同负债（预收款）较年初暴增 <code>+227.62%</code> 冲上 <code>17.55 亿元</code>，而矿山存货反而下降 <code>6.74%</code></strong>！</li>
@@ -4190,16 +4909,22 @@
 <h5 id="2-707786">2. 现实生存逻辑：既然成本高达 <code>707—786 元/吨</code>，平煤股份为什么没有倒闭，还能持续赚钱运营？</h5>
 <ol>
 <li>
-<p><strong>支柱一（它的煤卖得贵！<code>893—1,071 元/吨</code> 的售价依然稳稳包住成本）</strong>：
-   - 平煤挖的不是只卖四五百块钱的普通电煤，而是精洗出来的<strong>稀缺主焦煤和 1/3 焦煤</strong>！如模块 C 表所示，2026 年前三季度平煤股份的商品煤均价是 <strong><code>893 元/吨</code></strong>（成本 <code>707 元/吨</code>，每吨照样赚 <strong><code>186 元/吨</code></strong> 毛利）；2026Q3 单季售价涨到 <strong><code>1,071 元/吨</code></strong>（成本 <code>786 元/吨</code>，每吨照样赚 <strong><code>285 元/吨</code></strong> 毛利），前三季度照样实现了 <strong><code>6.70 亿元</code> 归母净利润</strong>！它只是利润率（<code>3.47%</code>）被淮北矿业（<code>6.13%</code>）和山西焦煤（<code>7.33%</code>）远远甩在身后，绝非亏损企业。</p>
+<p><strong>支柱一（它的煤卖得贵！<code>893—1,071 元/吨</code> 的售价依然稳稳包住成本）</strong>：</p>
+<ul>
+<li>平煤挖的不是只卖四五百块钱的普通电煤，而是精洗出来的<strong>稀缺主焦煤和 1/3 焦煤</strong>！如模块 C 表所示，2026 年前三季度平煤股份的商品煤均价是 <strong><code>893 元/吨</code></strong>（成本 <code>707 元/吨</code>，每吨照样赚 <strong><code>186 元/吨</code></strong> 毛利）；2026Q3 单季售价涨到 <strong><code>1,071 元/吨</code></strong>（成本 <code>786 元/吨</code>，每吨照样赚 <strong><code>285 元/吨</code></strong> 毛利），前三季度照样实现了 <strong><code>6.70 亿元</code> 归母净利润</strong>！它只是利润率（<code>3.47%</code>）被淮北矿业（<code>6.13%</code>）和山西焦煤（<code>7.33%</code>）远远甩在身后，绝非亏损企业。</li>
+</ul>
 </li>
 <li>
-<p><strong>支柱二（非付现折旧盾牌撑起 <code>23.07 亿元</code> 经营现金流）</strong>：
-   - 在平煤 <code>707 元/吨</code> 的账面销售成本里，有将近 <code>150—180 元/吨</code> 是以前年度花钱挖巷道的<strong>固定资产折旧、采矿权摊销与专项储备计提</strong>，并不需要当期掏现钞。因此 2026 年前三季度平煤股份的<strong>经营活动现金流净额（OCF）高达 <code>23.07 亿元</code></strong>，造血运转完全正常。</p>
+<p><strong>支柱二（非付现折旧盾牌撑起 <code>23.07 亿元</code> 经营现金流）</strong>：</p>
+<ul>
+<li>在平煤 <code>707 元/吨</code> 的账面销售成本里，有将近 <code>150—180 元/吨</code> 是以前年度花钱挖巷道的<strong>固定资产折旧、采矿权摊销与专项储备计提</strong>，并不需要当期掏现钞。因此 2026 年前三季度平煤股份的<strong>经营活动现金流净额（OCF）高达 <code>23.07 亿元</code></strong>，造血运转完全正常。</li>
+</ul>
 </li>
 <li>
-<p><strong>支柱三（华中与中南四省的“200 元运费护城河” + 母公司尼龙化工闭环）</strong>：
-   - 平煤地处河南平顶山，是<strong>河南、湖北（武钢）、湖南（华菱钢铁）、江西</strong>四省钢厂最近的炼焦煤基地。山西或内蒙古的低成本焦煤要想南下抢武钢、湘钢的生意，每吨铁路运费就要多花 <strong><code>150—250 元/吨</code></strong>，这笔运费差正好抵消了平煤的高开采成本！再加上母公司中国平煤神马集团拥有庞大的焦化与尼龙化工（神马股份）内部消纳链条，且平煤也正在新疆建设铁厂沟一号井（300 万吨/年）开辟低成本新矿自救。</p>
+<p><strong>支柱三（华中与中南四省的“200 元运费护城河” + 母公司尼龙化工闭环）</strong>：</p>
+<ul>
+<li>平煤地处河南平顶山，是<strong>河南、湖北（武钢）、湖南（华菱钢铁）、江西</strong>四省钢厂最近的炼焦煤基地。山西或内蒙古的低成本焦煤要想南下抢武钢、湘钢的生意，每吨铁路运费就要多花 <strong><code>150—250 元/吨</code></strong>，这笔运费差正好抵消了平煤的高开采成本！再加上母公司中国平煤神马集团拥有庞大的焦化与尼龙化工（神马股份）内部消纳链条，且平煤也正在新疆建设铁厂沟一号井（300 万吨/年）开辟低成本新矿自救。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -4540,7 +5265,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《淮北矿业 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/淮北矿业 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《淮北矿业(600985.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/淮北矿业(600985.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4737,6 +5462,553 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
