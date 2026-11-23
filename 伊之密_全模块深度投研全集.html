@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>伊之密 深度投研全集</title>
+<title>伊之密(300415.SZ) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,390 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1325,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">伊之密 深度投研全集</div>
+    <div class="report-title">伊之密(300415.SZ) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-23</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -894,6 +1352,7 @@
   <div class="report-content">
     <h1 id="300415sz-af-g">伊之密（300415.SZ）全模块深度投研全集（阶段一全景底座 + 阶段二模块 A—F + 终章模块 G 大师圆桌会）</h1>
 <blockquote>
+<p>📌 <strong>【V4 终审重校声明（2026-11-23）】</strong>：本报告已于 <code>2026-11-23</code> 依据巨潮资讯网（CNINFO）原版 PDF（<code>26Q3/26H1/25AR</code>）、交易所归集三表、16 次一手联网交叉反查及「独立盲审空头备忘录 vs 蓝方原多头报告」三道防滑跪铁闸完成 V4 独立终审重校（状态：<strong><code>REVISED</code></strong>）。实时基准更新为 <code>2026-11-23</code> 收盘价 <strong><code>16.28 元</code></strong>（实时市值 <code>76.28 亿</code>，52 周 <code>13.06–19.58 元</code>，PE-TTM <code>12.51x</code>，PB <code>2.21x</code>）。凡前文 V1 底座与模块 A–F 中关于有息负债（精确 <code>25.56 亿</code>）、佳全号融资租赁余额（精确 <code>7.95 亿</code> 而非 <code>2.5–3.0 亿</code>）、五年表观 FCF（精确 <code>-0.32 亿</code>）、商誉（精确 <code>64.74 万元</code>）、True EV（上修 <code>ev_delta</code> 至 <code>+20.87 亿</code>，严苛 True EV <strong><code>97.15 亿</code></strong>）、常态无杠杆 Firm OE（硬砍至 <strong><code>5.30 → 6.50 亿/年</code></strong>）、SOTP 拆骨与两档击球区（硬下修至 <strong><code>13.00 — 14.50 元</code></strong>，左侧重锤 <strong><code>≤ 13.00 元</code></strong>，现价 <code>16.28 元</code> <strong>0 票追高、退出即期买区</strong>）的任何表述，<strong>一律以模块 G 前方的 <code>【✅ V4 终审裁决实录（单一真相区）】</code> 及文末刷新后的 <code>模块 H</code> 为唯一最终准绳！</strong></p>
 <p><strong>基准锚定声明</strong>：本报告数据严格锚定伊之密（300415.SZ）截至 <strong>2026年第三季度报告（2026年10月披露）</strong>、<strong>2025年年度报告（2026年4月披露）</strong> 及历年经审计定期报告，并同步拉齐海天国际（01882.HK）、力劲科技（00558.HK）、泰瑞机器（603289.SH）等国内外同业最新财报与外部产业监管动态。本底座阶段严守“禁谈估值”铁律，聚焦真实商业账本、产品技术硬实力、现金流成色与动态进化能力。</p>
 </blockquote>
 <hr/>
@@ -1256,8 +1715,10 @@
 </li>
 <li>
 <p><strong>2025 年度</strong>：每 10 股派 <strong>6.00 元</strong>（含税，2026年年中已实施完毕），合计派现约 <strong>2.76 亿元</strong>（占 2025 年归母净利润 7.09 亿元的 <strong>38.9%</strong>）。</p>
-</li>
+<ul>
 <li>连同 2015—2019 年累计派现约 3.12 亿元，伊之密上市以来累计现金分红总额高达 <strong>14.91 亿元</strong>！</li>
+</ul>
+</li>
 </ul>
 <ol start="2">
 <li><strong>全口径分红融资比</strong>：
@@ -1439,18 +1900,24 @@
 <p>过去五年，伊之密累计研发投入超 <strong>11.5 亿元</strong>（2025 年研发费用 2.75 亿元，拥有研发人员超 900 人），其技术与商业模式正在发生三场静悄悄的质变：</p>
 <ol>
 <li>
-<p><strong>从“液压标准机组装”向“全电动精密化 + 超大型两板化”跃迁</strong>：
-   - 在中小吨位领域，医药耗材、光学透镜（AR/VR 导光板、车载 HUD 镜片）与精密连接器要求洁净无油污、微米级重复精度。过去这一市场被日本发那科（Fanuc）、住友、日精全电动注塑机垄断。伊之密研发的 <strong>FF 系列全电动注塑机与 FF30M 医疗专用机</strong>，实现核心伺服驱动算法自研，能耗较传统液压机降低 <strong>40%—60%</strong>，开合模位置重复精度达 <strong>±0.01mm</strong>，以日本进口机 65% 的价格在 2024—2026 年实现翻倍式替代放量。
-   - 在大吨位领域，公司推出 <strong>UN2400D1M MultiPro 七射多物料注塑机</strong> 与 <strong>8500T 超大型二板机</strong>，将汽车复杂多色车灯与超大型塑代钢前端模块的成型周期缩短 20%，单台售价与毛利率是普通肘杆机的 3—8 倍。</p>
+<p><strong>从“液压标准机组装”向“全电动精密化 + 超大型两板化”跃迁</strong>：</p>
+<ul>
+<li>在中小吨位领域，医药耗材、光学透镜（AR/VR 导光板、车载 HUD 镜片）与精密连接器要求洁净无油污、微米级重复精度。过去这一市场被日本发那科（Fanuc）、住友、日精全电动注塑机垄断。伊之密研发的 <strong>FF 系列全电动注塑机与 FF30M 医疗专用机</strong>，实现核心伺服驱动算法自研，能耗较传统液压机降低 <strong>40%—60%</strong>，开合模位置重复精度达 <strong>±0.01mm</strong>，以日本进口机 65% 的价格在 2024—2026 年实现翻倍式替代放量。</li>
+<li>在大吨位领域，公司推出 <strong>UN2400D1M MultiPro 七射多物料注塑机</strong> 与 <strong>8500T 超大型二板机</strong>，将汽车复杂多色车灯与超大型塑代钢前端模块的成型周期缩短 20%，单台售价与毛利率是普通肘杆机的 3—8 倍。</li>
+</ul>
 </li>
 <li>
-<p><strong>从“跟随铝合金一体化压铸”向“领跑半固态镁合金轻量化新物种”跃迁</strong>：
-   - 铝合金超大型压铸（6000T—10000T）虽然单机金额大，但力劲科技先发卡位深，且下游车企对底盘一体压铸碰撞维修成本高昂仍有顾虑，行业竞争趋于白热化。
-   - 伊之密敏锐抓住了<strong>“半固态镁合金注射成型（Thixomolding）”</strong>这一黄金侧翼：镁合金比铝合金再轻 33%，阻尼减震性能高出数倍，是新能源汽车超长贯穿式联屏背板、方向盘骨架、轻量化轮毂、低空飞行器（eVTOL）壳体及人形机器人骨骼的终极理想材料。伊之密不仅攻克了 <code>600°C</code> 高温镁合金糊状流体抗腐蚀螺杆料筒与高速注射闭环控制难题，更接连创下全球纪录——<strong>2024 年交付 3200T 半固态镁合金机，2025 年成功研制并交付全球最大 6600T 超大型半固态镁合金注射成型机</strong>，将镁合金成型从“3C 笔记本外壳小件”直接推向“汽车超大型结构件时代”。</p>
+<p><strong>从“跟随铝合金一体化压铸”向“领跑半固态镁合金轻量化新物种”跃迁</strong>：</p>
+<ul>
+<li>铝合金超大型压铸（6000T—10000T）虽然单机金额大，但力劲科技先发卡位深，且下游车企对底盘一体压铸碰撞维修成本高昂仍有顾虑，行业竞争趋于白热化。</li>
+<li>伊之密敏锐抓住了<strong>“半固态镁合金注射成型（Thixomolding）”</strong>这一黄金侧翼：镁合金比铝合金再轻 33%，阻尼减震性能高出数倍，是新能源汽车超长贯穿式联屏背板、方向盘骨架、轻量化轮毂、低空飞行器（eVTOL）壳体及人形机器人骨骼的终极理想材料。伊之密不仅攻克了 <code>600°C</code> 高温镁合金糊状流体抗腐蚀螺杆料筒与高速注射闭环控制难题，更接连创下全球纪录——<strong>2024 年交付 3200T 半固态镁合金机，2025 年成功研制并交付全球最大 6600T 超大型半固态镁合金注射成型机</strong>，将镁合金成型从“3C 笔记本外壳小件”直接推向“汽车超大型结构件时代”。</li>
+</ul>
 </li>
 <li>
-<p><strong>商业模式进化：从“FOB 离岸卖单机”向“海外本地组装 + Turnkey 工艺包交钥匙”升级</strong>：
-   - 早期中国塑机出海只是找当地贸易商卖裸机，售后跟不上、溢价极低。如今伊之密在印度古吉拉特邦工厂实现本地化制造（规避印度对中国注塑机征收的高额反倾销税），在美国俄亥俄 HPM 工厂实现北美本地总装与美标改造（对冲美国对华 301 关税），在德国、墨西哥、土耳其、泰国建立直属技术服务中心，向海外客户输出“主机 + 模具调试 + 自动化取件 + 远程 Yi+ 智造云平台”全套解决方案，使境外毛利率稳稳站在 <strong>36.2%</strong> 的高位。</p>
+<p><strong>商业模式进化：从“FOB 离岸卖单机”向“海外本地组装 + Turnkey 工艺包交钥匙”升级</strong>：</p>
+<ul>
+<li>早期中国塑机出海只是找当地贸易商卖裸机，售后跟不上、溢价极低。如今伊之密在印度古吉拉特邦工厂实现本地化制造（规避印度对中国注塑机征收的高额反倾销税），在美国俄亥俄 HPM 工厂实现北美本地总装与美标改造（对冲美国对华 301 关税），在德国、墨西哥、土耳其、泰国建立直属技术服务中心，向海外客户输出“主机 + 模具调试 + 自动化取件 + 远程 Yi+ 智造云平台”全套解决方案，使境外毛利率稳稳站在 <strong>36.2%</strong> 的高位。</li>
+</ul>
 </li>
 </ol>
 <h3 id="_19">三、 未来成长蓝图梯度与全球产业史正反双镜鉴</h3>
@@ -1538,8 +2005,10 @@
 </ul>
 <ol start="2">
 <li>
-<p><strong>【盈利质量与海外护城河路标】</strong>：
-   - 盯紧公司综合毛利率能否在 <strong>30.0%—32.0%</strong> 区间企稳止跌，且<strong>境外收入占比能否从 2025 年的 29.93% 稳步突破 35%</strong>、境外毛利率维持在 <strong>35% 以上</strong>（以此对冲国内通用机内卷）。</p>
+<p><strong>【盈利质量与海外护城河路标】</strong>：</p>
+<ul>
+<li>盯紧公司综合毛利率能否在 <strong>30.0%—32.0%</strong> 区间企稳止跌，且<strong>境外收入占比能否从 2025 年的 29.93% 稳步突破 35%</strong>、境外毛利率维持在 <strong>35% 以上</strong>（以此对冲国内通用机内卷）。</li>
+</ul>
 </li>
 <li>
 <p><strong>【核心现金流与资产负债表健康底线路标】</strong>：</p>
@@ -1554,8 +2023,10 @@
 </li>
 </ul>
 <ol start="4">
-<li><strong>【外部贸易政策与竞争格局演变路标】</strong>：
-   - 跟踪海天国际（01882.HK）与力劲科技（00558.HK）的半年报/年报毛利率走势，检验行业价格战是否见底；同时密切追踪欧美及拉美对华机械装备原产地规则变动，核验美国 HPM 工厂与印度工厂的本地化交付占比提升情况。</li>
+<li><strong>【外部贸易政策与竞争格局演变路标】</strong>：<ul>
+<li>跟踪海天国际（01882.HK）与力劲科技（00558.HK）的半年报/年报毛利率走势，检验行业价格战是否见底；同时密切追踪欧美及拉美对华机械装备原产地规则变动，核验美国 HPM 工厂与印度工厂的本地化交付占比提升情况。</li>
+</ul>
+</li>
 </ol>
 <hr/>
 <h1 id="300415sz-a-b">伊之密（300415.SZ）深度投研报告 —— 阶段二：追问模块 A &amp; 追问模块 B</h1>
@@ -1699,9 +2170,11 @@
 <p><strong>横向对质三大硬核结论</strong>：</p>
 <ol>
 <li>
-<p><strong>为什么伊之密南浔基地“单台投资额（70万元/台）”是泰瑞机器桐乡基地（15.87万元/台）的 4.4 倍，但“单位产值投资额（0.467元/元产值）”反而比泰瑞（0.525元）更省？</strong>
-   - 核心差异在于<strong>产品吨位结构与机加工深度</strong>。泰瑞桐乡项目规划的 5029 台产能中，绝大部分是单价 20万—35万元的中小型三板肘杆式注塑机，其模板尺寸小、用普通卧式加工中心即可加工；而伊之密南浔一期规划的 1000 台<strong>全部是 500T—4500T 乃至更大吨位的中大型两板式注塑机（DP/D1M系列）</strong>，单台出厂均价高达 150 万元！
-   - 造一台 2000T 两板机，单块球墨铸铁模板毛坯重达 25 吨以上，四根合金钢拉杆长逾 6 米，车间必须打设每平方米承重 15—25 吨的密集钢筋混凝土桩基，配置起吊能力 100T—200T 的重型桥式行车，并采购单台造价高达 <strong>1500万—2500万元</strong> 的进口大型五面体龙门镗铣加工中心。因此，按“台数”算单台投资必然昂贵，但按“每 1 元达产营收消耗的资本开支”算，伊之密南浔一期仅需 <strong>0.467 元 CapEx</strong>，不仅比泰瑞桐乡项目节省约 <strong>11%</strong>，甚至略优于海天华南总部（0.500元）与力劲深汕基地（0.538元）。</p>
+<p><strong>为什么伊之密南浔基地“单台投资额（70万元/台）”是泰瑞机器桐乡基地（15.87万元/台）的 4.4 倍，但“单位产值投资额（0.467元/元产值）”反而比泰瑞（0.525元）更省？</strong></p>
+<ul>
+<li>核心差异在于<strong>产品吨位结构与机加工深度</strong>。泰瑞桐乡项目规划的 5029 台产能中，绝大部分是单价 20万—35万元的中小型三板肘杆式注塑机，其模板尺寸小、用普通卧式加工中心即可加工；而伊之密南浔一期规划的 1000 台<strong>全部是 500T—4500T 乃至更大吨位的中大型两板式注塑机（DP/D1M系列）</strong>，单台出厂均价高达 150 万元！</li>
+<li>造一台 2000T 两板机，单块球墨铸铁模板毛坯重达 25 吨以上，四根合金钢拉杆长逾 6 米，车间必须打设每平方米承重 15—25 吨的密集钢筋混凝土桩基，配置起吊能力 100T—200T 的重型桥式行车，并采购单台造价高达 <strong>1500万—2500万元</strong> 的进口大型五面体龙门镗铣加工中心。因此，按“台数”算单台投资必然昂贵，但按“每 1 元达产营收消耗的资本开支”算，伊之密南浔一期仅需 <strong>0.467 元 CapEx</strong>，不仅比泰瑞桐乡项目节省约 <strong>11%</strong>，甚至略优于海天华南总部（0.500元）与力劲深汕基地（0.538元）。</li>
+</ul>
 </li>
 <li>
 <p><strong>海外扩产的“棕地/轻重分离”精明算盘</strong>：对比海天国际斥资 1 亿欧元（约 7.8 亿元人民币）在塞尔维亚平地起高楼搞重资产全工序建厂（单位产值投资高达 0.650 元），伊之密受限于自身体量，采取了极聪明的<strong>“顺德/南浔重资产精密机加工 + 海外棕地/轻资产总装（SKD/CKD）”</strong>策略——在印度仅花 1.35 亿元就建起年产 2000 台的组装厂（单位产值投资仅 0.245 元），在美国俄亥俄仅花 1100 万美元（0.80 亿元）扩建原有 HPM 厂房就撬动 4.5 亿元北美产值。这种“核心高精度母机留在国内吃工程师与供应链红利、总装与服务放到海外拿原产地证”的做法，将海外 CapEx 试错风险压到了最低。</p>
@@ -1753,13 +2226,15 @@
 </li>
 <li>
 <p><strong>变动销售与履约费用（销售提成佣金、整机平板车运费、驻厂调试差旅及 1%—1.5% 售后三包质保计提）</strong>：约占营收的 <strong>10.0%</strong>；</p>
-</li>
+<ul>
 <li>
 <p>由此得出，在扣除一切随产量线性变动的直接材料、直接人工能耗与变动销售费用后，<strong>南浔基地每卖出 100 元两板注塑机，能用来覆盖固定折旧与固定行政开支的真实边际贡献率（Contribution Margin Ratio）为</strong>：
-    <div class="math-display"><span class="math-text">真实边际贡献率 </span> (CM\%) = 100\% - 56.5\% - 6.5\% - 10.0\% = <strong>27.0\%</strong></div></p>
+<div class="math-display"><span class="math-text">真实边际贡献率 </span> (CM\%) = 100\% - 56.5\% - 6.5\% - 10.0\% = <strong>27.0\%</strong></div></p>
 </li>
 <li>
 <p>同时，南浔基地投产后除了每年 <strong>4,470 万元</strong> 的固定折旧摊销外，还需支付厂长及行政财务后勤人员底薪、基础安保物业、排污照明及常规维护等<strong>刚性付现固定成本（Cash Fixed Costs）约 3,030 万元/年</strong>，即南浔一期独立运转的<strong>年度总固定成本约为 7,500 万元（0.75 亿元）</strong>。</p>
+</li>
+</ul>
 </li>
 <li>
 <p><strong>【刻度一：南浔基地自身独立盈亏平衡点（净利润 = 0）】</strong>：
@@ -1803,11 +2278,11 @@
 </li>
 <li>
 <p><strong>长三角“超限大件物流费”与“交期剪刀差”是困扰伊之密十年的真痛点</strong>：</p>
-</li>
+<ul>
 <li>江浙沪皖（长三角）聚集了全国超过 <strong>45%</strong> 的新能源汽车整车厂（上汽、吉利、奇瑞、蔚来、理想、特斯拉上海）及超过 <strong>55%</strong> 的汽车内外饰/车灯/家电 Tier 1 注塑大厂（宁波敏实、拓普、华翔、双林、常州星宇车灯、合肥家电集群），是国内 <strong>1000T—4500T 中大型两板式注塑机</strong> 最大的单一消费市场。</li>
 <li>一台 1600T—3200T 的两板注塑机，整机净重高达 <strong>65吨—160吨</strong>，且锁模部与注射部超宽超高。过去伊之密在顺德五沙总装试机合格后，必须将整机拆解成三大块，租用 2—3 辆重型低平板半挂车并办理跨省大件超限运输通行证，跨越 <strong>1300—1500 公里</strong> 运往宁波、常州或芜湖。<strong>仅单台设备的长途超限运费与两端重型吊装费就高达 5万—12万元人民币（直接吃掉 3%—6% 的毛利率！）</strong>，且在途颠簸后到客户现场还需重新调平、耗时 10—15 天。</li>
-<li>
-<p>反观头号强敌<strong>海天国际</strong>（总部在浙江宁波，且在江苏无锡建有大型二板机基地）与<strong>泰瑞机器</strong>（总部在浙江杭州，新基地在嘉兴桐乡），它们发往长三角汽配厂的运费仅需几千元、朝发夕至。湖州南浔地处长三角几何中心（距上海、杭州、苏州、宁波、常州车程均在 <strong>1.5—2.5 小时</strong> 圈内），南浔基地投产后，伊之密发往华东大客户的单台重卡运费可直接砍掉 <strong>70% 以上（每台净省 3.5万—8万元）</strong>，交付响应周期缩短 10 天以上。</p>
+<li>反观头号强敌<strong>海天国际</strong>（总部在浙江宁波，且在江苏无锡建有大型二板机基地）与<strong>泰瑞机器</strong>（总部在浙江杭州，新基地在嘉兴桐乡），它们发往长三角汽配厂的运费仅需几千元、朝发夕至。湖州南浔地处长三角几何中心（距上海、杭州、苏州、宁波、常州车程均在 <strong>1.5—2.5 小时</strong> 圈内），南浔基地投产后，伊之密发往华东大客户的单台重卡运费可直接砍掉 <strong>70% 以上（每台净省 3.5万—8万元）</strong>，交付响应周期缩短 10 天以上。</li>
+</ul>
 </li>
 <li>
 <p><strong>先行财务指标验证</strong>：截至 2026 年三季报末，伊之密账面 <strong>合同负债（预收客户定金）高达 7.23 亿元</strong>（较 2024 年末的约 5.1 亿元逆势大幅增长超 40%），账面存货 <strong>23.98 亿元</strong> 中有相当比例是已收到 30%—50% 预付款、正在顺德车间排队总装或发往途中的大吨位定制机型。这证明在中大型高端两板机与海外定制线上，公司确实存在真实的<strong>“重型装配场地与跨区交付瓶颈”</strong>。</p>
@@ -1829,16 +2304,20 @@
 <hr/>
 <h3 id="_27">三、 排查落地阻力：供应链配套、技工培养与海外基地的“三块硬骨头”</h3>
 <div class="annotated-row"><div class="main-col"><p>穿透工程施工表象，伊之密在国内外新基地爬坡过程中，有 3 块可能导致成本超支或良率爬坡放缓的硬骨头必须重点盯防：</p><ol>
-<li><strong>【华东基地硬骨头】大型球墨铸铁件（QT450/QT500）的区域环保指标与铸造配套瓶颈</strong>：
-   - 两板式注塑机最核心的成本与质量命门是三大模板铸件（单件重 15—45 吨），要求球化率达到 2 级以上、内部无缩孔缩松，且需经过严格的热时效去应力。在顺德大本营，伊之密经过 20 年培育了佛山高明、肇庆、粤北及广西玉林构成的成熟低成本大铸件生态圈；
-   - 然而在长三角（江浙沪），受严苛的环保能耗双控与铸造产能置换指标限制，中小型铸造厂早已被大面积清退，仅存的具备 <strong>30吨—60吨级重型树脂砂球墨铸铁浇注能力</strong> 的大型铸造厂（主要集中在江苏常州/无锡、安徽宁国/宣城及浙江宁波周边），其优质产能长期被<strong>海天国际</strong>（年采购铸件数十万吨的绝对大金主）深度绑定甚至股权锁定。</li>
+<li><strong>【华东基地硬骨头】大型球墨铸铁件（QT450/QT500）的区域环保指标与铸造配套瓶颈</strong>：<ul>
+<li>两板式注塑机最核心的成本与质量命门是三大模板铸件（单件重 15—45 吨），要求球化率达到 2 级以上、内部无缩孔缩松，且需经过严格的热时效去应力。在顺德大本营，伊之密经过 20 年培育了佛山高明、肇庆、粤北及广西玉林构成的成熟低成本大铸件生态圈；</li>
+<li>然而在长三角（江浙沪），受严苛的环保能耗双控与铸造产能置换指标限制，中小型铸造厂早已被大面积清退，仅存的具备 <strong>30吨—60吨级重型树脂砂球墨铸铁浇注能力</strong> 的大型铸造厂（主要集中在江苏常州/无锡、安徽宁国/宣城及浙江宁波周边），其优质产能长期被<strong>海天国际</strong>（年采购铸件数十万吨的绝对大金主）深度绑定甚至股权锁定。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>潜在风险</strong>：南浔基地投产初期，若在华东周边 300 公里半径内无法锁定 3—5 家价格与沙眼缺陷率媲美珠三角的重型铸造厂，将面临<strong>“华东本地采购大铸件每吨贵 400—800 元（推高毛坯成本 5%—8%）”</strong>或<strong>“部分核心大铸件毛坯仍需从南方水运至湖州机加工”</strong>的供应链磨合阵痛。</li>
 </ul><ol start="2">
 <li>
-<p><strong>【跨区制造硬骨头】五面体龙门镗铣技师与重型装配钳工的良率爬坡时滞</strong>：
-   - 中大型两板机的核心技术壁垒在于四根拉杆高压抱闸锁模机构的微米级配合（动定模板平行度公差要求 <code>≤0.02mm—0.03mm</code>，拉杆抱闸同步响应误差要求毫秒级）。这不仅依赖进口五面体龙门加工中心的硬件精度，更高度依赖拥有 5 年以上经验的数控编程操机技师与高级装配刮研钳工。
-   - 湖州南浔本地传统产业以木业、电机和电梯为主，缺乏超大型精密模压装备熟练技工。伊之密必须从顺德五沙抽调 50—80 名核心工艺班组长常驻南浔“传帮带”，新招蓝领技工的熟练度磨合通常需要 <strong>6—9 个月</strong>，投产前两个季度可能面临一次装夹交检合格率（FTQ）偏低、返修工时偏高的初期摩擦。</p>
+<p><strong>【跨区制造硬骨头】五面体龙门镗铣技师与重型装配钳工的良率爬坡时滞</strong>：</p>
+<ul>
+<li>中大型两板机的核心技术壁垒在于四根拉杆高压抱闸锁模机构的微米级配合（动定模板平行度公差要求 <code>≤0.02mm—0.03mm</code>，拉杆抱闸同步响应误差要求毫秒级）。这不仅依赖进口五面体龙门加工中心的硬件精度，更高度依赖拥有 5 年以上经验的数控编程操机技师与高级装配刮研钳工。</li>
+<li>湖州南浔本地传统产业以木业、电机和电梯为主，缺乏超大型精密模压装备熟练技工。伊之密必须从顺德五沙抽调 50—80 名核心工艺班组长常驻南浔“传帮带”，新招蓝领技工的熟练度磨合通常需要 <strong>6—9 个月</strong>，投产前两个季度可能面临一次装夹交检合格率（FTQ）偏低、返修工时偏高的初期摩擦。</li>
+</ul>
 </li>
 <li>
 <p><strong>【海外基地硬骨头】美国俄亥俄 HPM 与印度古吉拉特邦工厂的本土化天花板</strong>：</p>
@@ -1908,9 +2387,11 @@
 <p>这两项新业务要想从“年入一两个亿的明星单品”真正长成“贡献数亿核心毛利的顶梁柱”，绝不是靠销售员多跑几家车企就能解决的，它们在<strong>底层物理与材料热力学成本、下游认证替换周期、安全与标准准入</strong>上正卡着三道极难跨越的硬门槛：</p>
 <h4 id="_30">关卡一：底层物理、热力学腐蚀磨损与残酷的“耗材/原料经济账”</h4>
 <ol>
-<li><strong>半固态镁合金机的物理死穴：<code>600°C</code> 高温镁浆对螺杆料筒的极速腐蚀冲刷与蠕变寿命极限</strong>
-   - <strong>热力学与冶金机理</strong>：普通塑料注塑机的工作温度仅 <code>200°C—300°C</code>，流体是无腐蚀性的高分子熔体，普通 38CrMoAl 渗氮钢螺杆料筒可稳定工作 <strong>300万—500万模次（3—5年）</strong>。而半固态镁合金注射成型（Thixomolding）必须将镁合金颗粒在料筒内精准加热至 <strong><code>580°C—610°C</code></strong> 的固液两相区（固相率 40%—60%），螺杆不仅要在高温下承受巨大扭矩做旋转剪切（打碎树枝晶形成球状晶粒），还要在 <strong>15毫秒</strong> 内以高达 <strong>100MPa—140MPa</strong> 的比压和 <strong>4—8m/s</strong> 的速度将高温镁浆射入模具！
-   - 在 <code>600°C</code> 的严酷热力学环境下，常规热作模具钢（如 H13 钢）会发生灾难性的<strong>高温回火软化与热蠕变</strong>（屈服强度暴跌 60% 以上）；更致命的是，高温液态镁化学活性极强，会与钢材中的镍（Ni）、钴（Co）发生共晶溶解腐蚀，同时半固态浆料中夹杂的 50% 高硬度固态镁晶粒与氧化物硬质点，在高速高压流经螺杆棱边、止逆环（Check Ring）与喷嘴时会产生极度剧烈的<strong>冲蚀磨损（Erosion）与热疲劳微裂纹</strong>。一旦止逆环磨损出现 <code>0.05mm</code> 以上的间隙，高压注射时高达 <code>600°C</code> 的镁浆就会瞬间向后倒流泄压（回流漏料），直接导致注射欠铸报废甚至抱死螺杆！</li>
+<li><strong>半固态镁合金机的物理死穴：<code>600°C</code> 高温镁浆对螺杆料筒的极速腐蚀冲刷与蠕变寿命极限</strong><ul>
+<li><strong>热力学与冶金机理</strong>：普通塑料注塑机的工作温度仅 <code>200°C—300°C</code>，流体是无腐蚀性的高分子熔体，普通 38CrMoAl 渗氮钢螺杆料筒可稳定工作 <strong>300万—500万模次（3—5年）</strong>。而半固态镁合金注射成型（Thixomolding）必须将镁合金颗粒在料筒内精准加热至 <strong><code>580°C—610°C</code></strong> 的固液两相区（固相率 40%—60%），螺杆不仅要在高温下承受巨大扭矩做旋转剪切（打碎树枝晶形成球状晶粒），还要在 <strong>15毫秒</strong> 内以高达 <strong>100MPa—140MPa</strong> 的比压和 <strong>4—8m/s</strong> 的速度将高温镁浆射入模具！</li>
+<li>在 <code>600°C</code> 的严酷热力学环境下，常规热作模具钢（如 H13 钢）会发生灾难性的<strong>高温回火软化与热蠕变</strong>（屈服强度暴跌 60% 以上）；更致命的是，高温液态镁化学活性极强，会与钢材中的镍（Ni）、钴（Co）发生共晶溶解腐蚀，同时半固态浆料中夹杂的 50% 高硬度固态镁晶粒与氧化物硬质点，在高速高压流经螺杆棱边、止逆环（Check Ring）与喷嘴时会产生极度剧烈的<strong>冲蚀磨损（Erosion）与热疲劳微裂纹</strong>。一旦止逆环磨损出现 <code>0.05mm</code> 以上的间隙，高压注射时高达 <code>600°C</code> 的镁浆就会瞬间向后倒流泄压（回流漏料），直接导致注射欠铸报废甚至抱死螺杆！</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>残酷的耗材经济账</strong>：为了抵抗 <code>600°C</code> 镁浆腐蚀与蠕变，半固态镁合金机的料筒内衬与螺杆必须采用天价的<strong>特种镍基/钴基高温合金（需做特殊抗镁蚀屏蔽层）、铌/钨/钼难熔合金或粉末冶金热等静压（HIP）双金属复合材料</strong>。<ul>
@@ -1922,16 +2403,20 @@
 </ul>
 <ol start="2">
 <li>
-<p><strong>原料端的隐形税：“镁合金切屑颗粒（Chips/Pellets）”加工费吃掉镁铝差价</strong>
-   - 许多研报欢呼“镁锭价格跌到 1.7 万元/吨，比铝锭还便宜，镁合金迎来全面替代”。但他们漏算了一个最致命的物理工艺事实：<strong>半固态镁合金注射成型机根本不能直接用廉价的镁合金铸锭（Ingot）！</strong>
-   - 它必须喂入直径 <code>2mm—4mm</code>、长径比均匀、无油无氧化皮的<strong>专用冷态机械切削镁合金颗粒（Magnesium Chips）</strong>。把原镁锭通过专用铣削造粒机在惰性气氛下切成颗粒、筛分去粉尘并做表面钝化包装，<strong>每吨要额外支付 3,500元—5,000元/吨 的切粒加工费</strong>（即当原镁锭 1.75 万元/吨时，下游买到的合格半固态镁颗粒到厂价高达 <strong>2.15万—2.25万元/吨</strong>，溢价高达 <strong>23%—28%</strong>！）。
-   - 更棘手的是<strong>浇道废料（水口料）无法车间闭环重熔</strong>：传统冷室铝/镁压铸，切下来的高达 30%—40% 的浇道料和废品，可以直接丢回旁边的熔炉重熔再用；而半固态镁合金机车间没有熔炉，切下来的 20%—30% 固态浇道料无法直接塞回料筒，必须低价卖回给上游镁业厂（如宝武镁业），经重熔铸锭后再重新机械切粒买回来，一进一出每吨又要白白损失 <strong>3,500元—4,500元/吨 的回炉切粒重加工费</strong>！这笔“颗粒制备税 + 水口料回炉税”，直接把原镁锭相对于铝锭的原料价格优势抵消了 70% 以上。</p>
+<p><strong>原料端的隐形税：“镁合金切屑颗粒（Chips/Pellets）”加工费吃掉镁铝差价</strong></p>
+<ul>
+<li>许多研报欢呼“镁锭价格跌到 1.7 万元/吨，比铝锭还便宜，镁合金迎来全面替代”。但他们漏算了一个最致命的物理工艺事实：<strong>半固态镁合金注射成型机根本不能直接用廉价的镁合金铸锭（Ingot）！</strong></li>
+<li>它必须喂入直径 <code>2mm—4mm</code>、长径比均匀、无油无氧化皮的<strong>专用冷态机械切削镁合金颗粒（Magnesium Chips）</strong>。把原镁锭通过专用铣削造粒机在惰性气氛下切成颗粒、筛分去粉尘并做表面钝化包装，<strong>每吨要额外支付 3,500元—5,000元/吨 的切粒加工费</strong>（即当原镁锭 1.75 万元/吨时，下游买到的合格半固态镁颗粒到厂价高达 <strong>2.15万—2.25万元/吨</strong>，溢价高达 <strong>23%—28%</strong>！）。</li>
+<li>更棘手的是<strong>浇道废料（水口料）无法车间闭环重熔</strong>：传统冷室铝/镁压铸，切下来的高达 30%—40% 的浇道料和废品，可以直接丢回旁边的熔炉重熔再用；而半固态镁合金机车间没有熔炉，切下来的 20%—30% 固态浇道料无法直接塞回料筒，必须低价卖回给上游镁业厂（如宝武镁业），经重熔铸锭后再重新机械切粒买回来，一进一出每吨又要白白损失 <strong>3,500元—4,500元/吨 的回炉切粒重加工费</strong>！这笔“颗粒制备税 + 水口料回炉税”，直接把原镁锭相对于铝锭的原料价格优势抵消了 70% 以上。</li>
+</ul>
 </li>
 <li>
-<p><strong>LEAP 超大型压铸机（7000T—10000T）的物理经济账死穴：天价模具折旧与碰撞拒保悖论</strong>
-   - 一套匹配 9000T 压铸机的汽车一体式后底板模具，重达 90—120 吨，必须使用昂贵的进口电渣重熔热作模具钢（如瑞典一胜百 Dievar），单套模具造价高达 <strong>1,200万—1,800万元人民币</strong>。
-   - 在 <code>680°C—700°C</code> 铝液、上百米每秒的浇口线速度冲刷下，模具型腔极易发生热龟裂，<strong>物理寿命仅约 8万—10万模次</strong>（且期间每隔 1.5 万模次需下线做激光熔覆修模）。这意味着<strong>每打一件一体压铸后底板，仅模具折旧成本就高达 150元—220元/件</strong>（还不算机器本身每年 400 万元的折旧与高达 25%—30% 的初期试模废品率）！
-   - 算总账：如果一款新能源车型的生命周期年销量达不到 <strong>10万—15万辆</strong>，采用 9000T 一体化压铸的单车真实综合成本反而比传统“冲压焊接 + 中小压铸件拼焊”贵 <strong>800元—1500元</strong>！叠加一体压铸底盘在发生追尾碰撞后无法局部钣金修复、只能花费数万元整体切割更换导致车险保费飙升，2025—2026 年除少数爆款车型外，大批主机厂已主动暂缓 9000T+ 超大型压铸岛的盲目采购，转而回归 <strong>3000T—4500T 分体式中型压铸件</strong>。</p>
+<p><strong>LEAP 超大型压铸机（7000T—10000T）的物理经济账死穴：天价模具折旧与碰撞拒保悖论</strong></p>
+<ul>
+<li>一套匹配 9000T 压铸机的汽车一体式后底板模具，重达 90—120 吨，必须使用昂贵的进口电渣重熔热作模具钢（如瑞典一胜百 Dievar），单套模具造价高达 <strong>1,200万—1,800万元人民币</strong>。</li>
+<li>在 <code>680°C—700°C</code> 铝液、上百米每秒的浇口线速度冲刷下，模具型腔极易发生热龟裂，<strong>物理寿命仅约 8万—10万模次</strong>（且期间每隔 1.5 万模次需下线做激光熔覆修模）。这意味着<strong>每打一件一体压铸后底板，仅模具折旧成本就高达 150元—220元/件</strong>（还不算机器本身每年 400 万元的折旧与高达 25%—30% 的初期试模废品率）！</li>
+<li>算总账：如果一款新能源车型的生命周期年销量达不到 <strong>10万—15万辆</strong>，采用 9000T 一体化压铸的单车真实综合成本反而比传统“冲压焊接 + 中小压铸件拼焊”贵 <strong>800元—1500元</strong>！叠加一体压铸底盘在发生追尾碰撞后无法局部钣金修复、只能花费数万元整体切割更换导致车险保费飙升，2025—2026 年除少数爆款车型外，大批主机厂已主动暂缓 9000T+ 超大型压铸岛的盲目采购，转而回归 <strong>3000T—4500T 分体式中型压铸件</strong>。</li>
+</ul>
 </li>
 </ol>
 <h4 id="tier-1">关卡二：下游整车厂 / Tier 1 严苛的认证替换周期与存量产能沉没成本</h4>
@@ -2039,22 +2524,26 @@
 <li><strong>对国内对手（伯乐、海天、力劲）的“15年工艺包沉淀 + 第一龙头客户深度绑定”</strong>：半固态镁合金成型最怕温度波动 <code>±3°C</code> 导致堵嘴或螺旋抱死。伊之密早自 2009 年起便埋头攻关，主导起草了国内《半固态镁合金注射成型机》行业标准，并深度绑定了国内镁合金汽车压铸绝对龙头——<strong>星源卓镁（301398.SZ）</strong>（从 800T、1600T、3200T 一路买到 6600T）及宝武镁业下游生态。上千套已量产模具积累的 <code>580°C—610°C</code> 多温区 PID 闭环控制参数库，构成了后来者短期内难以抄作业的“Know-how 护城河”。</li>
 </ol>
 <div class="annotated-row"><div class="main-col"><h4 id="2_1">2. 终局分层定性：拒绝一锅端，给两大新业务贴上精准买方标签</h4><p>穿透底层工程物理与财务账本后，我们对伊之密的远期新曲线做出如下冷峻定性：</p><ul>
-<li><strong>① 半固态镁合金注射成型机（HMM 系列）：定性为【低沉没成本、高技术壁垒、高赔率的真实免费期权（正加速蜕变为高毛利第二增长极）】</strong></li>
-<li><strong>为什么是“真实免费期权”而非资本陷阱？</strong> 因为半固态镁合金注射成型机在物理结构上是“70% 的重型两板注塑机锁模底盘 + 30% 的耐高温特种镁合金注射单元”。伊之密<strong>不需要为它单独花十几个亿新建专用工厂</strong>，直接复用顺德五沙三厂现有的重型龙门机床、铸件供应链与电液控制团队即可柔性共线生产！</li>
 <li>
-<p>这意味着：<strong>即使下游镁合金替代铝材的速度慢于预期，伊之密也几乎没有专用固定资产沉没损失；而一旦上游原镁切粒工艺降本（如直冷孕育颗粒技术成熟）、双金属螺杆寿命突破，叠加新能源车与人形机器人减重刚需将半固态镁合金机需求从年入 2 亿推向 6亿—10亿元，其高达 <code>36%—42%</code> 的高毛利率将直接为公司带来 2亿—3.5亿元的纯增量毛利！</strong> 这正是买方苦苦寻找的“下行风险已被主业垫底、上行赔率极高且身位全球第一”的黄金免费期权。</p>
+<p><strong>① 半固态镁合金注射成型机（HMM 系列）：定性为【低沉没成本、高技术壁垒、高赔率的真实免费期权（正加速蜕变为高毛利第二增长极）】</strong></p>
+<ul>
+<li><strong>为什么是“真实免费期权”而非资本陷阱？</strong> 因为半固态镁合金注射成型机在物理结构上是“70% 的重型两板注塑机锁模底盘 + 30% 的耐高温特种镁合金注射单元”。伊之密<strong>不需要为它单独花十几个亿新建专用工厂</strong>，直接复用顺德五沙三厂现有的重型龙门机床、铸件供应链与电液控制团队即可柔性共线生产！</li>
+<li>这意味着：<strong>即使下游镁合金替代铝材的速度慢于预期，伊之密也几乎没有专用固定资产沉没损失；而一旦上游原镁切粒工艺降本（如直冷孕育颗粒技术成熟）、双金属螺杆寿命突破，叠加新能源车与人形机器人减重刚需将半固态镁合金机需求从年入 2 亿推向 6亿—10亿元，其高达 <code>36%—42%</code> 的高毛利率将直接为公司带来 2亿—3.5亿元的纯增量毛利！</strong> 这正是买方苦苦寻找的“下行风险已被主业垫底、上行赔率极高且身位全球第一”的黄金免费期权。</li>
+</ul>
 </li>
 <li>
 <p><strong>② LEAP 系列 7000T—10000T 超大型一体化压铸机：定性为【不得不打但独立盈利平庸的“战略防御型重装灯塔”（切勿赋予过高暴利预期）】</strong></p>
-</li>
+<ul>
 <li>它既不是吞噬现金流的无底洞（因同样与五沙三厂重型注塑机共线，且公司严控买方信贷垫资，不像部分同行那样替压力山大的新势力车企垫资建厂），但也<strong>绝不是能躺赚暴利的印钞机</strong>。</li>
-<li>
-<p>受制于下游车企天价模具折旧与碰撞维修痛点，7000T—10000T 巨无霸机型的全球真实年需求量非常有限，且有力劲科技、布勒与海天金属贴身肉搏，毛利率仅 <code>22%—26%</code>。它对伊之密真正的商业价值在于<strong>“技术灯塔与降维带动效应”</strong>——证明伊之密连 10000T 顶级压铸机都能造并获一汽、长安认可，从而顺理成章地带动客户成批采购利润更稳、周转更快的 <strong>1250T—4500T 中大型 LEAP/HII 压铸机</strong>。</p>
+<li>受制于下游车企天价模具折旧与碰撞维修痛点，7000T—10000T 巨无霸机型的全球真实年需求量非常有限，且有力劲科技、布勒与海天金属贴身肉搏，毛利率仅 <code>22%—26%</code>。它对伊之密真正的商业价值在于<strong>“技术灯塔与降维带动效应”</strong>——证明伊之密连 10000T 顶级压铸机都能造并获一汽、长安认可，从而顺理成章地带动客户成批采购利润更稳、周转更快的 <strong>1250T—4500T 中大型 LEAP/HII 压铸机</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>③ 人形机器人 PEEK 精密成型方案：定性为【零额外成本、顺手捎带的“微型锦上添花期权”】</strong></p>
-</li>
+<ul>
 <li>它是现有 FF 全电动注塑机在特种高温工程塑料上的自然延伸，几乎不消耗额外研发与基建资本，但在可预见的未来三年内，其营收体量（数千万元级）相对于伊之密 60 亿+ 的基本盘而言只是九牛一毛，绝不可将其作为支撑核心商业价值的支柱。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把这三张彩票放在桌子上看清楚：九千吨的一体化压铸机就像百货大楼门口那座巨大的纯金雕塑，它的主要作用是向路人证明老板很有实力、吸引客人进店买普通尺寸的压铸机，指望靠卖门口那座大雕塑发财是不现实的；人形机器人 PEEK 注塑机只是一张面值五块钱的刮刮乐，中不中奖都不影响你吃晚饭；唯独半固态镁合金注射机，是用现成的五沙工厂机床顺手造出来的独门火炮，连傲慢的日本人（JSW）在三千吨以上都造不出来，卖一台赚四成毛利——这才是聪明投资者最喜欢的那种“不花冤枉钱、万一打响了就大赚一笔”的真期权！</p></div></div></div></div>
 
 
@@ -2285,23 +2774,23 @@
 <hr/>
 <h3 id="_35">四、 份额攻守结论：过去两三年，到底是谁在抢谁的客户和份额？</h3>
 <div class="annotated-row"><div class="main-col"><p>拉通 2023—2026 年全球成型装备市场格局，份额迁徙呈现清晰的三层食物链收割图景：</p><ol>
-<li><strong>注塑机赛道（国内市场 + 海外新兴市场）：“海天 + 伊之密”双雄联手，对内清剿二三线长尾小厂，对外血洗欧美日老牌贵族</strong></li>
+<li>
+<p><strong>注塑机赛道（国内市场 + 海外新兴市场）：“海天 + 伊之密”双雄联手，对内清剿二三线长尾小厂，对外血洗欧美日老牌贵族</strong></p>
+<ul>
+<li><strong>对外抢夺欧洲/日本巨头存量盘</strong>：欧洲塑机鼻祖克劳斯玛菲（KraussMaffei）深陷高成本泥潭连年巨亏，奥地利恩格尔（Engel）与日本住友德马格、发那科在东南亚、拉美（墨西哥/巴西）、土耳其及东欧市场因售价高出中国机器 60%—100%、交期长达 9—12 个月而节节败退。伊之密凭借 A6 智能液压机、FF 全电动注塑机与 D1M 二板机，在海外市场连续两年实现 <strong>30% 左右</strong> 的高速增长，直接把原本属于日本全电机（医疗/3C精密连接器）和欧洲二板机（汽车车灯/保险杠）的客户名单收入囊中。</li>
+</ul>
+</li>
 </ol><ul>
-<li>
-<p><strong>对外抢夺欧洲/日本巨头存量盘</strong>：欧洲塑机鼻祖克劳斯玛菲（KraussMaffei）深陷高成本泥潭连年巨亏，奥地利恩格尔（Engel）与日本住友德马格、发那科在东南亚、拉美（墨西哥/巴西）、土耳其及东欧市场因售价高出中国机器 60%—100%、交期长达 9—12 个月而节节败退。伊之密凭借 A6 智能液压机、FF 全电动注塑机与 D1M 二板机，在海外市场连续两年实现 <strong>30% 左右</strong> 的高速增长，直接把原本属于日本全电机（医疗/3C精密连接器）和欧洲二板机（汽车车灯/保险杠）的客户名单收入囊中。</p>
-</li>
-<li>
-<p><strong>对内挤压腰尾部同行</strong>：2024—2026年，伊之密注塑机增速（2025年 +21.39%）不仅显著跑赢泰瑞机器（+4.98%）、震雄集团等二线上市同行，更甚至快于老大海天国际（+9.70%）。在国内通用机价格战中，年营收 5 亿元以下的中小塑机厂正在加速出清，伊之密稳居国内注塑机第二把交椅，且与第三名的身位差距已拉开至 3 倍以上。</p>
-</li>
+<li><strong>对内挤压腰尾部同行</strong>：2024—2026年，伊之密注塑机增速（2025年 +21.39%）不仅显著跑赢泰瑞机器（+4.98%）、震雄集团等二线上市同行，更甚至快于老大海天国际（+9.70%）。在国内通用机价格战中，年营收 5 亿元以下的中小塑机厂正在加速出清，伊之密稳居国内注塑机第二把交椅，且与第三名的身位差距已拉开至 3 倍以上。</li>
 </ul><ol start="2">
-<li><strong>大型压铸机与半固态镁合金赛道：伊之密从力劲科技嘴里虎口夺食，并在半固态镁合金赛道建立“准垄断”统治区</strong></li>
+<li>
+<p><strong>大型压铸机与半固态镁合金赛道：伊之密从力劲科技嘴里虎口夺食，并在半固态镁合金赛道建立“准垄断”统治区</strong></p>
+<ul>
+<li><strong>冷室压铸机打破力劲独霸</strong>：在 2022 年之前，国内 6000T 以上超大型压铸机几乎是力劲科技的独角戏。但过去三年，伊之密依托德国亚琛研发中心打造的 <strong>LEAP 系列（7000T、9000T、10000T）</strong> 高响应闭环压铸机，成功打入一汽、长安、奇瑞及文灿等核心主机与压铸厂，2025 年伊之密压铸机营收逆势大涨 <strong>33.06% 至 11.89 亿元</strong>，而同期力劲科技压铸机业务却陷入停滞萎缩（36.6亿港元，毛利率跌至 24.5%），一攻一守高下立判。</li>
+</ul>
+</li>
 </ol><ul>
-<li>
-<p><strong>冷室压铸机打破力劲独霸</strong>：在 2022 年之前，国内 6000T 以上超大型压铸机几乎是力劲科技的独角戏。但过去三年，伊之密依托德国亚琛研发中心打造的 <strong>LEAP 系列（7000T、9000T、10000T）</strong> 高响应闭环压铸机，成功打入一汽、长安、奇瑞及文灿等核心主机与压铸厂，2025 年伊之密压铸机营收逆势大涨 <strong>33.06% 至 11.89 亿元</strong>，而同期力劲科技压铸机业务却陷入停滞萎缩（36.6亿港元，毛利率跌至 24.5%），一攻一守高下立判。</p>
-</li>
-<li>
-<p><strong>半固态镁合金注射成型机（Thixomolding）降维打击</strong>：当力劲与海天金属还在铝合金冷室压铸红海里贴身肉搏时，伊之密提前卡位 <strong>400T—6600T 半固态镁合金注射成型机</strong>，一举打破日本制钢所（JSW）在中小吨位的技术封锁，并全球首创交付 <strong>3200T、6600T 超大型半固态镁合金机</strong>，吃下国内 <strong>60% 以上</strong> 的新增市场份额，成为新能源汽车超长联屏背板、座椅骨架与人形机器人轻量化关节装备的最大赢家。</p>
-</li>
+<li><strong>半固态镁合金注射成型机（Thixomolding）降维打击</strong>：当力劲与海天金属还在铝合金冷室压铸红海里贴身肉搏时，伊之密提前卡位 <strong>400T—6600T 半固态镁合金注射成型机</strong>，一举打破日本制钢所（JSW）在中小吨位的技术封锁，并全球首创交付 <strong>3200T、6600T 超大型半固态镁合金机</strong>，吃下国内 <strong>60% 以上</strong> 的新增市场份额，成为新能源汽车超长联屏背板、座椅骨架与人形机器人轻量化关节装备的最大赢家。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>商业丛林里的食物链从来都很残酷：欧洲那些背着沉重工会包袱的老贵族（比如克劳斯玛菲）正在变成活化石，他们傲慢的价格和漫长的交货期，就是送给顺德和宁波工程师最好的圣诞礼物。而在国内牌桌上，力劲被自己开创的万吨压铸价格战拖得气喘吁吁，伊之密却像一条灵活的鲨鱼——左边跟着海天一起吃掉欧洲和日本注塑机的海外地盘，右边在半固态镁合金这片新海域里直接当上了霸主。</p></div></div></div></div>
 
 
@@ -2505,8 +2994,10 @@
 <hr/>
 <h3 id="_36">二、 增量垫高测算：湖州南浔一期与海外/半固态镁合金放量能把造血中枢再垫高多少？</h3>
 <div class="annotated-row"><div class="main-col"><p>当前伊之密账面高达 <strong>3.61 亿元</strong> 的在建工程与已建成爬坡的海外基地，绝非躺在账上睡大觉的死资产，而是即将在 2026 年底至 2028 年集中兑现的“新增造血机器”。我们按审慎打折原则，逐项测算其消化并扣除新增折旧后的净增量 Owner Earnings：</p><ol>
-<li><strong>增量引擎一：湖州南浔华东生产基地一期（确定性极高，2026 年底建成投产）</strong>
-   - <strong>产能与产值账本</strong>：首期规划年产 <strong>1000 台中大型两板式注塑机</strong>，满产设计产值 <strong>15 亿元以上</strong>。考虑到投产爬坡与市场消化节奏，我们不按 100% 满产拍脑袋，而是按 <strong>75%—80% 稳态合理稼动率</strong> 测算，对应新增有效年营收约 <strong>12.0 亿元</strong>。</li>
+<li><strong>增量引擎一：湖州南浔华东生产基地一期（确定性极高，2026 年底建成投产）</strong><ul>
+<li><strong>产能与产值账本</strong>：首期规划年产 <strong>1000 台中大型两板式注塑机</strong>，满产设计产值 <strong>15 亿元以上</strong>。考虑到投产爬坡与市场消化节奏，我们不按 100% 满产拍脑袋，而是按 <strong>75%—80% 稳态合理稼动率</strong> 测算，对应新增有效年营收约 <strong>12.0 亿元</strong>。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>运费节省与毛利率增厚</strong>：中大型二板机（1000T—8500T）单台自重达数十吨至数百吨，以往从广东顺德基地制造再通过重型低平板卡车长途运往江浙沪汽配厂（如拓普、敏实、继峰、新泉等），单台长途物流与吊装费高达 <strong>2万—4万元</strong>。湖州南浔基地紧邻长三角汽车零部件产业集群，就近交付不仅缩短交货期，更直接省下约 <strong>1.5—2.0 个百分点</strong> 的重卡运费率，使该项目稳态毛利率可达 <strong>32.5% 左右</strong>。</p>
@@ -2516,8 +3007,10 @@
      <div class="math-display"><span class="math-text">南浔一期增量 Owner Earnings</span> = <span class="math-text">新增净利 </span> 1.40<span class="math-text"> 亿</span> + <span class="math-text">新增折旧 </span> 0.40<span class="math-text"> 亿</span> - <span class="math-text">新增防御性维护 CapEx </span> 0.18<span class="math-text"> 亿</span> - <span class="math-text">新增稳态营运占用 </span> 0.12<span class="math-text"> 亿</span> = <strong>+1.50<span class="math-text"> 亿元/年</span></strong></div></p>
 </li>
 </ul><ol start="2">
-<li><strong>增量引擎二：海外美/印/墨/土产能释放 + 3200T—6600T 半固态镁合金注射机放量</strong>
-   - <strong>无需大额追加土建的“收获期红利”</strong>：美国俄亥俄州 HPM 扩建新厂（2024 年 10 月已落成）、印度古吉拉特邦工厂扩产、以及顺德五沙三厂的重型总装工位，前期重资产土建与龙门加工中心投入均已在 2022—2025 年付现完毕。</li>
+<li><strong>增量引擎二：海外美/印/墨/土产能释放 + 3200T—6600T 半固态镁合金注射机放量</strong><ul>
+<li><strong>无需大额追加土建的“收获期红利”</strong>：美国俄亥俄州 HPM 扩建新厂（2024 年 10 月已落成）、印度古吉拉特邦工厂扩产、以及顺德五沙三厂的重型总装工位，前期重资产土建与龙门加工中心投入均已在 2022—2025 年付现完毕。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>高毛利结构拉动</strong>：一方面，海外本土化组装与直销服务推动境外收入从 2025 年的 18.10 亿元向 <strong>24亿—26亿元</strong> 迈进（境外毛利率高达 <strong>36.2%</strong>）；另一方面，随着镁铝比价进入 <code>1.1:1</code> 黄金区间，公司全球独步的 <strong>HMM 系列半固态镁合金注射成型机（国内市占率超 60%，单机售价数百万至两千万元）</strong> 在新能源车三联屏支架、电驱壳体、人形机器人骨骼结构件上迎来批量复购，毛利率高达 <strong>35%—38%</strong>。</p>
@@ -2544,10 +3037,10 @@
 </li>
 <li>
 <p><strong>第一层推演（静态死扛，假设成本与三费一分钱不降）</strong>：</p>
-</li>
+<ul>
 <li>若上游采购成本（41.30 亿元）与销售、管理、研发费用完全刚性死扛，毛利额将从 19.18 亿元直接砸穿至 <strong>15.38 亿元</strong>，综合毛利率从 31.71% 暴跌 4.58 个百分点至 <strong>27.13%</strong>（其中境内业务毛利率将从 29.8% 跌至 <strong>21.6%</strong>）；</li>
-<li>
-<p>扣除 15% 高企所得税后，归母净利润将减少 <code>3.80 × 85% = 3.23 亿元</code>，从 7.09 亿元直接腰斩至 <strong>3.86 亿元</strong>！</p>
+<li>扣除 15% 高企所得税后，归母净利润将减少 <code>3.80 × 85% = 3.23 亿元</code>，从 7.09 亿元直接腰斩至 <strong>3.86 亿元</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>第二层推演（动态真实传导：启动顺德民企三大“内生减震垫”机制）</strong>：
@@ -2575,18 +3068,18 @@
 </li>
 <li>
 <p><strong>直接材料占比高达 82.0%</strong>，即年度直接材料总成本约为 <code>41.30 × 82% = 33.87 亿元</code>；</p>
-</li>
+<ul>
 <li>在直接材料中，<strong>生铁与大型球墨铸铁件（机架、头板、二板、动模板）以及特种合金钢（螺杆、料筒、哥林柱拉杆）合计占比达 45.0%</strong>（其余 35% 为伺服电机、液压阀泵、控制器等标准电气液压件，20% 为钣金及其他辅料）。</li>
 <li>由此算出：公司每年对生铁铸件与合金钢的真实采购基数约为 <code>33.87 × 45% = 15.24 亿元</code>（占总营业成本的 <strong>36.9%</strong>，占总营收的 <strong>25.2%</strong>）。</li>
-<li>
-<p>当上游生铁、铸件与合金钢全线暴涨 <strong>20%</strong> 时，年化满额新增原材料成本冲击为：<code>15.24 亿元 × 20% = 3.05 亿元</code>。</p>
+<li>当上游生铁、铸件与合金钢全线暴涨 <strong>20%</strong> 时，年化满额新增原材料成本冲击为：<code>15.24 亿元 × 20% = 3.05 亿元</code>。</li>
+</ul>
 </li>
 <li>
 <p><strong>第一层推演（静态死扛，下游一分钱不提价、无新机型切换）</strong>：</p>
-</li>
+<ul>
 <li>营业成本直接从 41.30 亿元飙升至 <strong>44.35 亿元</strong>，综合毛利率从 31.71% 下滑 <strong>5.04 个百分点</strong> 至 <strong>26.67%</strong>；</li>
-<li>
-<p>扣除 15% 所得税影响后，归母净利润减少 <code>3.05 × 85% = 2.59 亿元</code>，降至 <strong>4.50 亿元</strong>；但即便在这种最极端、最笨拙的静态死扛假设下，公司 <code>4.50 亿净利 + 2.08 亿折旧 - 1.15 亿防御性 CapEx - 0.50 亿营运占用</code> 算出的 <strong>极限 Owner Earnings 依然高达 4.93 亿元</strong>，离亏损失血线仍有十万八千里！</p>
+<li>扣除 15% 所得税影响后，归母净利润减少 <code>3.05 × 85% = 2.59 亿元</code>，降至 <strong>4.50 亿元</strong>；但即便在这种最极端、最笨拙的静态死扛假设下，公司 <code>4.50 亿净利 + 2.08 亿折旧 - 1.15 亿防御性 CapEx - 0.50 亿营运占用</code> 算出的 <strong>极限 Owner Earnings 依然高达 4.93 亿元</strong>，离亏损失血线仍有十万八千里！</li>
+</ul>
 </li>
 <li>
 <p><strong>第二层推演（动态真实传导：长协锁价缓冲 + 代数切换顺价 + 海外直接提价）</strong>：</p>
@@ -3021,8 +3514,10 @@
 </li>
 </ul>
 <ol start="5">
-<li><strong>= 真实企业价值（True EV）汇总</strong>：
-   - 净有息负债（Net Debt） = <code>24.50~25.56 亿元（有息负债） - 5.34 亿元（超额现金）</code> = <strong>19.16亿—20.22亿元</strong>；</li>
+<li><strong>= 真实企业价值（True EV）汇总</strong>：<ul>
+<li>净有息负债（Net Debt） = <code>24.50~25.56 亿元（有息负债） - 5.34 亿元（超额现金）</code> = <strong>19.16亿—20.22亿元</strong>；</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>True EV（真实买断总标价）</strong> = <code>84.90 亿元（市值） + 0.07~0.20 亿元（少数股东权益） + 19.16~20.22 亿元（真实净有息负债）</code> = <strong>104.13亿—105.19亿元</strong>（核心精确锚定 <strong>104.20 亿元</strong>！）。</li>
@@ -3124,9 +3619,9 @@
      我们将第 ① 块（中枢 <strong>34.50 亿元</strong>）与第 ② 块（中枢 <strong>49.60 亿元</strong>）相加，单单这两块存量成熟业务的保守公允股权价值就已经达到 <strong>84.10 亿元</strong>（区间 <strong>81.00亿—87.20亿元</strong>）！
      用当前普通股总市值 <strong>84.90 亿元</strong> 减去第 ①+② 块的保底价值 <strong>84.10 亿元</strong>：
      <div class="math-display"><span class="math-text">市场给第 ③ 块成长王牌与新产能的隐含股权出价</span> = 84.90<span class="math-text"> 亿元</span> - 84.10<span class="math-text"> 亿元</span> = <strong>+0.80<span class="math-text"> 亿元（区间 </span>-2.30<span class="math-text"> 亿 至 </span>+3.90<span class="math-text"> 亿元）</span></strong></div></p>
-</li>
-<li>
-<p><strong>【拆骨终极判词】</strong>：在 <strong>18.12 元/股（84.90 亿市值）</strong> 的当下，二级市场因为过度放大 2026 年前三季度的短期汇兑损失与国内通用机内卷，<strong>实际上只给伊之密的“境内外注塑机 + 橡胶机”存量基本盘付了公允本钱，而把年入近 12 亿的压铸机事业部、垄断国内 60% 份额的 6600T 半固态镁合金机王牌、以及年底马上投产的湖州南浔 15 亿产值新基地，按 0.80 亿元（几乎等同于 0 元免费白送！）的价格打包送给了今天的买方</strong>！（即便从 104.20 亿 True EV 视角审视，扣除第 ①、② 块业务匹配的常规运营债务后，市场对第 ③ 块资产的定价也仅仅等于其厂房设备的账面重置砖头钱，成长溢价预支为 0！）</p>
+<ul>
+<li><strong>【拆骨终极判词】</strong>：在 <strong>18.12 元/股（84.90 亿市值）</strong> 的当下，二级市场因为过度放大 2026 年前三季度的短期汇兑损失与国内通用机内卷，<strong>实际上只给伊之密的“境内外注塑机 + 橡胶机”存量基本盘付了公允本钱，而把年入近 12 亿的压铸机事业部、垄断国内 60% 份额的 6600T 半固态镁合金机王牌、以及年底马上投产的湖州南浔 15 亿产值新基地，按 0.80 亿元（几乎等同于 0 元免费白送！）的价格打包送给了今天的买方</strong>！（即便从 104.20 亿 True EV 视角审视，扣除第 ①、② 块业务匹配的常规运营债务后，市场对第 ③ 块资产的定价也仅仅等于其厂房设备的账面重置砖头钱，成长溢价预支为 0！）</li>
+</ul>
 </li>
 </ul>
 <h4 id="f-1-true-ev-reverse-sotp">📊 表 F-1：伊之密 True EV 审计与 Reverse SOTP（逆向拆骨估值）全景明细表</h4>
@@ -3305,19 +3800,21 @@
 <h4 id="2_2">2. 买方分档击球行动指南（精确到股价与市值坐标）</h4>
 <p>拒绝模棱两可的“逢低关注”，买方实战严格按以下三档价格与基本面条件执行仓位分配：</p>
 <ul>
-<li><strong>🎯 第一档：【左侧收息与免费期权底仓区】</strong></li>
-<li><strong>精确价格与市值区间</strong>：股价 <strong><code>16.80 元 — 18.50 元</code></strong>（对应普通股总市值 <strong><code>78.7 亿 — 86.7 亿元</code></strong>，True EV <strong><code>98.0 亿 — 106.0 亿元</code></strong>）。<strong>注：当前最新收盘价 <code>18.12 元</code>（市值 <code>84.90 亿元</code>）正稳稳落在本底仓区中轨！</strong></li>
 <li>
-<p><strong>买方算账逻辑</strong>：在此区间买入，对应 2025 常态净利润仅 <strong>11.1x — 12.2x PE</strong>，当前常态股权 Owner Earnings 回报率达 <strong>7.2% — 8.0%</strong>（南浔达产后稳态股权现金流回报率高达 <strong>9.3% — 10.3%</strong>），同时每年稳拿 <strong>3.20% — 3.55%</strong> 的现金股息回报，且白得半固态镁合金机与南浔基地期权。</p>
+<p><strong>🎯 第一档：【左侧收息与免费期权底仓区】</strong></p>
+<ul>
+<li><strong>精确价格与市值区间</strong>：股价 <strong><code>16.80 元 — 18.50 元</code></strong>（对应普通股总市值 <strong><code>78.7 亿 — 86.7 亿元</code></strong>，True EV <strong><code>98.0 亿 — 106.0 亿元</code></strong>）。<strong>注：当前最新收盘价 <code>18.12 元</code>（市值 <code>84.90 亿元</code>）正稳稳落在本底仓区中轨！</strong></li>
+<li><strong>买方算账逻辑</strong>：在此区间买入，对应 2025 常态净利润仅 <strong>11.1x — 12.2x PE</strong>，当前常态股权 Owner Earnings 回报率达 <strong>7.2% — 8.0%</strong>（南浔达产后稳态股权现金流回报率高达 <strong>9.3% — 10.3%</strong>），同时每年稳拿 <strong>3.20% — 3.55%</strong> 的现金股息回报，且白得半固态镁合金机与南浔基地期权。</li>
+</ul>
 </li>
 <li>
 <p><strong>仓位操作建议</strong>：直接建立目标总仓位的 <strong>35%—45% 作为左侧基础底仓</strong>，用收息心态屏蔽短期季度汇率波动噪音。</p>
 </li>
 <li>
 <p><strong>🔨 第二档：【黄金重锤击球区（极端市场恐慌错杀坑）】</strong></p>
-</li>
-<li>
-<p><strong>精确价格与市值区间</strong>：股价 <strong><code>14.00 元 — 16.00 元</code></strong>（对应普通股总市值 <strong><code>65.6 亿 — 75.0 亿元</code></strong>，True EV <strong><code>85.0 亿 — 94.3 亿元</code></strong>）。</p>
+<ul>
+<li><strong>精确价格与市值区间</strong>：股价 <strong><code>14.00 元 — 16.00 元</code></strong>（对应普通股总市值 <strong><code>65.6 亿 — 75.0 亿元</code></strong>，True EV <strong><code>85.0 亿 — 94.3 亿元</code></strong>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>触发条件与买方算账逻辑</strong>：若因宏观大盘系统性暴跌、或 2026 年报 / 2027 一季报受新基地转固折旧及淡季影响引发短视资金恐慌砸盘，使市值跌破 75 亿元。此时对应常态净利仅 <strong>9.2x — 10.6x PE</strong>，PB 跌至 <strong>1.9x — 2.1x</strong> 历史极值，常态股权 Owner Earnings 回报率飙升至 <strong>8.5% — 9.7%</strong>（达产稳态回报率突破 <strong>11.0% — 12.3%</strong>！），即期现金股息率超过 <strong>3.8% — 4.3%</strong>。此时连成熟存量业务（84.1亿保底价值）都打了八折甩卖。</p>
@@ -3327,9 +3824,9 @@
 </li>
 <li>
 <p><strong>🚀 第三档：【右侧基本面共振加仓区（戴维斯双击确认点）】</strong></p>
-</li>
-<li>
-<p><strong>触发价格与两大硬核基本面确认信号（缺一不可）</strong>：当股价向上突破 <strong><code>19.50 元</code></strong>（市值 <strong><code>91.4 亿元</code></strong>），且最新季报/半年报同时验证以下两个经营拐点：① <strong>综合毛利率重回 <code>31.0%</code> 以上</strong>（证明海外高毛利业务占比突破 33%+ 且国内新机型顺价成功抵消内卷）；② <strong>湖州南浔华东基地一期投产后产能利用率快速爬坡，带动单季营收同比增速重回 <code>15%+</code> 且单季扣非归母净利润增速由负转正（<code>&gt; +15%</code>）</strong>。</p>
+<ul>
+<li><strong>触发价格与两大硬核基本面确认信号（缺一不可）</strong>：当股价向上突破 <strong><code>19.50 元</code></strong>（市值 <strong><code>91.4 亿元</code></strong>），且最新季报/半年报同时验证以下两个经营拐点：① <strong>综合毛利率重回 <code>31.0%</code> 以上</strong>（证明海外高毛利业务占比突破 33%+ 且国内新机型顺价成功抵消内卷）；② <strong>湖州南浔华东基地一期投产后产能利用率快速爬坡，带动单季营收同比增速重回 <code>15%+</code> 且单季扣非归母净利润增速由负转正（<code>&gt; +15%</code>）</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>目标赔率空间</strong>：一旦右侧双拐点确认，市场将彻底摘掉“增收不增利”的悲观眼镜，按达产稳态净利（8.1亿—8.5亿元）给予历史常态中枢 <strong>16.0x — 18.0x PE</strong>，对应合理目标市值 <strong><code>130 亿 — 150 亿元</code></strong>（目标股价 <strong><code>27.70 元 — 32.00 元</code></strong>，较当前 <code>18.12 元</code> 具备 <strong><code>+53% 至 +76%</code></strong> 的主升浪赔率空间），届时可右侧顺势加仓 20%—30%。</p>
@@ -3338,21 +3835,203 @@
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_1">3. 三条无条件认错清仓的“基本面死刑证伪红线”</h4><p>买方投资永远把“万一我看错了怎么办”写在前面。一旦在后续跟踪中出现以下任意一条信号，说明伊之密的底层投资逻辑已发生不可逆的质变恶化，无论当时股价盈亏如何，必须<strong>无条件纪律性认错清仓</strong>：</p><ol>
 <li>
-<p><strong>💀 死刑红线一：【海外高毛利护城河坍塌】</strong>
-   - <strong>量化证伪标准</strong>：公司最核心的利润增长极——境外业务毛利率连续两个半年报跌破 <strong>31.0%</strong>（较 2025 年的 36.2% 暴跌超 5 个百分点），或境外营收增速连续两年停滞/萎缩。这说明欧美、拉美或印度出台了极端原产地穿透封锁导致美国 HPM 与印度本土工厂失效，或者中国同行在海外市场掀起了无底线自杀式价格战，“全球化拔高盈利中枢”的逻辑彻底破产。</p>
+<p><strong>💀 死刑红线一：【海外高毛利护城河坍塌】</strong></p>
+<ul>
+<li><strong>量化证伪标准</strong>：公司最核心的利润增长极——境外业务毛利率连续两个半年报跌破 <strong>31.0%</strong>（较 2025 年的 36.2% 暴跌超 5 个百分点），或境外营收增速连续两年停滞/萎缩。这说明欧美、拉美或印度出台了极端原产地穿透封锁导致美国 HPM 与印度本土工厂失效，或者中国同行在海外市场掀起了无底线自杀式价格战，“全球化拔高盈利中枢”的逻辑彻底破产。</li>
+</ul>
 </li>
 <li>
-<p><strong>💀 死刑红线二：【南浔新基地沦为过剩折旧黑洞 &amp; 资本开支停不下来】</strong>
-   - <strong>量化证伪标准</strong>：湖州南浔华东基地一期（2026年底投产）在投产满 18 个月后（即 2028 年半年报），产能利用率仍不足 <strong>40%</strong>；或者在 2027 年南浔一期与顺德总部大楼全部完工后，公司不仅没有如期将年度 CapEx 压降回 <strong>2.0亿—2.5亿元</strong> 以内，反而又宣布启动新的 20 亿级重资产拿地建厂计划，导致连续三年表观自由现金流（<code>OCF - CapEx</code>）为大额负数。这说明管理层染上了“盲目铺摊子扩产能”的苦命纺织厂恶习，真实股东盈余（Owner Earnings）永远只能停留在纸面上。</p>
+<p><strong>💀 死刑红线二：【南浔新基地沦为过剩折旧黑洞 &amp; 资本开支停不下来】</strong></p>
+<ul>
+<li><strong>量化证伪标准</strong>：湖州南浔华东基地一期（2026年底投产）在投产满 18 个月后（即 2028 年半年报），产能利用率仍不足 <strong>40%</strong>；或者在 2027 年南浔一期与顺德总部大楼全部完工后，公司不仅没有如期将年度 CapEx 压降回 <strong>2.0亿—2.5亿元</strong> 以内，反而又宣布启动新的 20 亿级重资产拿地建厂计划，导致连续三年表观自由现金流（<code>OCF - CapEx</code>）为大额负数。这说明管理层染上了“盲目铺摊子扩产能”的苦命纺织厂恶习，真实股东盈余（Owner Earnings）永远只能停留在纸面上。</li>
+</ul>
 </li>
 <li>
-<p><strong>💀 死刑红线三：【激进放宽信用垫资冲规模 &amp; 真实造血枯竭】</strong>
-   - <strong>量化证伪标准</strong>：公司在行业内卷中为保表面营收增速，向资质恶劣的客户大搞零首付或超长分期赊销，导致应收账款增速连续四个季度显著高于营收增速 15 个百分点以上、1 年以上长账龄应收款占比恶化，且全年经营活动现金流净额与归母净利润之比（净现比）再次跌破 <strong>50%</strong>，或全年扣除维持性 CapEx 后的真实 Owner Earnings 跌破 <strong>4.0 亿元</strong>，抑或以甄荣辉、张涛为核心的事业部合伙人团队发生内部分裂与清仓式减持。一旦触发，立即一键清仓离场。</p>
+<p><strong>💀 死刑红线三：【激进放宽信用垫资冲规模 &amp; 真实造血枯竭】</strong></p>
+<ul>
+<li><strong>量化证伪标准</strong>：公司在行业内卷中为保表面营收增速，向资质恶劣的客户大搞零首付或超长分期赊销，导致应收账款增速连续四个季度显著高于营收增速 15 个百分点以上、1 年以上长账龄应收款占比恶化，且全年经营活动现金流净额与归母净利润之比（净现比）再次跌破 <strong>50%</strong>，或全年扣除维持性 CapEx 后的真实 Owner Earnings 跌破 <strong>4.0 亿元</strong>，抑或以甄荣辉、张涛为核心的事业部合伙人团队发生内部分裂与清仓式减持。一旦触发，立即一键清仓离场。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>聪明人买股票前先写好遗嘱——如果海外那件 36% 毛利的防寒羽绒服被扒了、或者管理层盖完湖州工厂和总部大楼后还像染上赌瘾一样继续借钱盖新厂、又或者为了凑营业额把机器白送给赖账的骗子，那就赶紧撒腿跑路，别跟股票谈恋爱！但在这些坏事都没发生、而市场先生又把半固态镁合金机和湖州新厂白送给你的今天，坐在 18 块钱的椅子上一边拿 3.25% 的股息一边等果子熟透，是一笔让人睡得着觉的好买卖。</p></div></div></div></div>
 
 
 
+<hr/>
+<h2 id="v4">【✅ V4 终审裁决实录（单一真相区）】</h2>
+<blockquote>
+<p><strong>终审基准日</strong>：<code>2026-11-23</code> ｜ <strong>盘面基准</strong>：<code>16.28 元/股</code>（总股本 <code>468,562,084 股</code>，实时市值 <code>76.28 亿元</code>，52 周区间 <code>13.06—19.58 元</code>，表观 PE-TTM <code>12.51x</code>，PB <code>2.21x</code>）<br>
+<strong>终审结论状态</strong>：<strong><code>REVISED</code>（三道铁闸硬修正 · 降级退出即期买区）</strong> ｜ <strong>现价投票</strong>：<strong><code>🟡 0 票追高（等待回踩 13.00—14.50 元）</code></strong> ｜ <strong>一票否决（Veto）</strong>：<code>否</code> ｜ <strong>质地加分</strong>：<code>1.2 → 0.5</code></br></p>
+</blockquote>
+<hr/>
+<h3 id="1-pdf">1. 🧾 官方原表与巨潮原版 PDF 硬核验真（一锤定音裁决双方数字分歧）</h3>
+<p>核对证监会巨潮资讯网原版 PDF（<code>1225622909.PDF</code> 26Q3、<code>1225494165.PDF</code> 26H1、<code>1225111872.PDF</code> 25AR）及交易所官方归集三表，全部关键科目以分厘零误差锁定如下，并公开纠偏原 V1 报告与空头备忘录中的数字偏差：</p>
+<ul>
+<li>
+<p><strong>① 显性含租有息负债精确为 <code>25.56 亿元</code>（纠偏 V1 的 <code>24.16 / 24.57 亿</code>）</strong>：26Q3 资产负债表（<code>26Q3 P6–P7</code>）列示短期借款 <code>1.2943 亿</code> + 一年内到期非流动负债 <code>5.6378 亿</code> + 长期借款 <code>18.5206 亿</code> + 长期租赁负债 <code>0.1115 亿</code> = <strong><code>25.5642 亿元</code></strong>（应付债券、永续债、长期应付款均为 <code>0</code>），较 2021 年末 <code>4.61 亿元</code> 暴增 <strong><code>+454.5%</code></strong>；少数股东权益精确 <strong><code>0.0713 亿元</code></strong>（<code>0.07 亿</code>）。</p>
+</li>
+<li>
+<p><strong>② 现金“双层受限”与超额现金精确核算</strong>：26Q3 账面货币资金 <code>6.4424 亿</code> + 结构性存款（交易性金融资产）<code>2.4000 亿</code> = <code>8.8424 亿</code>；减现金流量表期末现金及现金等价物 <code>5.3650 亿</code>（<code>26Q3 P11</code>），得第一层保证金/存单受限资金 <strong><code>1.0773 亿</code>（<code>1.08 亿</code>）</strong>（纠偏 V1 估数 <code>0.90 亿</code>），即非受限现金及结构性存款 <strong><code>7.7650 亿</code></strong>。再据 <code>26H1 P126</code> 披露，现金及等价物内部另含 <strong><code>1.2771 亿</code>（<code>1.28 亿</code>）境外经营子公司受外汇管制现金</strong>（充当海外 30% 营收日常营运底仓，无法抽回境内还债）。在扣除海外受限 <code>1.28 亿</code> 后，按 15 天境内刚性付现工资/税费另留境内营运备付底仓 <strong><code>1.72 亿</code></strong>（全集团合计锁定底仓 <strong><code>3.00 亿</code></strong>，避免双重扣除），得 <strong>V4 严苛超额可自由支配现金 = <code>4.7650 亿元</code>（<code>4.77 亿</code>）</strong>！由此 <strong><code>ev_delta_a = +20.87 亿元</code></strong>（较 V1 <code>+19.30 亿</code> 硬上修 <code>+1.57 亿</code>，较空头漏扣境内营运底仓的 <code>+19.15 亿</code> 更严苛 <code>+1.72 亿</code>），现价 <code>16.28 元</code> 对应 <strong>严苛均衡全合并 True EV = <code>97.15 亿元</code></strong>。</p>
+</li>
+<li>
+<p><strong>③ 近六期表观 FCF 与筹资闭环纠偏（认领空头铁证、纠偏 V1 错数）</strong>：官方归集三表精确核算，2021—2025 五年累计归母净利 <code>27.15 亿</code>，累计 OCF <code>16.44 亿</code>，累计 CapEx <code>16.76 亿</code>，<strong>五年累计表观 FCF 为 <code>-0.32 亿元</code></strong>（纠偏 V1 错写的 <code>+1.19 亿</code>）；叠加 26Q1-Q3（OCF <code>3.30 亿</code> - CapEx <code>2.71 亿</code> = <code>+0.59 亿</code>），近六期累计归母 <code>31.80 亿</code> 而累计表观 FCF 仅 <strong><code>+0.27 亿元</code></strong>；同期分红付息及筹资流出（含 <code>2.12 亿</code> 现金收购橡胶机少数股权）合计 <strong><code>19.98 亿</code></strong>，几乎由 <strong><code>20.18 亿</code></strong> 银行净新增借款填补。</p>
+</li>
+<li>
+<p><strong>④ 佳全号融资租赁、资产抵押、担保与商誉硬纠偏</strong>：26Q3 <code>一年内到期非流动资产</code>（<code>5.67 亿</code>）+ <code>长期应收款</code>（<code>2.28 亿</code>）= <strong><code>7.95 亿元</code></strong>（<code>26Q3 P6</code>），均系佳全号融资租赁款（纠偏 V1 模块 E 错写的 <code>2.5–3.0 亿</code>！），全口径应收债权合计 <code>30.12 亿</code> + 存货 <code>23.98 亿</code> = <code>54.10 亿</code>（占总资产 <code>58.6%</code>）；<code>26H1 P15</code> 实锤固定资产/无形资产/在建工程综合抵押率 <strong><code>46.57%</code></strong>；<code>26H1 P41</code> 实锤对体内子公司担保余额飙至 <strong><code>22.29 亿</code>（占净资产 <code>67.36%</code>）</strong>，其中对负债率超 70% 子公司担保 <code>8.54 亿</code>（注：表外对外担保仅对参股江西江工 <code>680 万元</code>）；<code>25AR P188</code> 实锤商誉余额为 <strong><code>64.74 万元</code></strong>（收购意大利伊之密形成，纠偏 V1 所称“精确 0 元”，但金额极小）；<code>26Q3 P4</code> 实锤佳卓控股质押 <code>1,000 万股</code>（仅占其持股 <code>7.28%</code>，纠偏 V1 误称的 <code>30%–45%</code>）。</p>
+</li>
+<li>
+<p><strong>⑤ 精准 TTM 纯现金分红与经常性退税硬核验</strong>：2025 年度派息每 10 股 <code>6.00 元</code>（<code>2026-06-05</code> 除权，实派 <code>2.76 亿</code>），2026 中期 <code>0</code> 分红，回购股份全用于 ESOP <strong>零注销</strong> → <strong>精确 <code>ttm_dps = 0.60 元/股</code>，现价 <code>16.28 元</code> 对应纯现金股息率 <code>3.69%</code></strong>。另据 <code>25AR P13/P140</code> 与 <code>26Q3 P2</code> 法定审计明细，2025 年 <code>1.20 亿</code> 其他收益中仅 <code>1,800 万</code> 属非经常性政府补助，26Q1-Q3 <code>7,613 万</code> 中仅 <code>1,562 万</code> 属非经常性补助，高达 <strong>80%—85%</strong> 系国家长期法定《财税〔2011〕100 号》自研控制软件增值税超 3% 即征即退及先进制造业 5% 加计抵减，直接击穿空头凭 <code>26H1 P13</code> 固定表格勾选“否”便乱砍 <code>0.70 亿</code> 经常性退税的事实误判！</p>
+</li>
+</ul>
+<hr/>
+<h3 id="2-16">2. ⚔️ 红蓝二元极限对质逐条裁决表（16 次一手联网反查 × 三道铁闸）</h3>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">对质焦点</th>
+<th style="text-align: left;">🔴 红方盲审空头核心指控</th>
+<th style="text-align: left;">🔵 蓝方原多头报告立场</th>
+<th style="text-align: left;">⚖️ V4 终审裁判裁决与一手交叉证据（零滑跪 · 零叠加）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. 26Q3 业绩雪崩与毛利率跌破 29%</strong></td>
+<td style="text-align: left;">26Q3 营收停滞（<code>+2.31%</code>）、毛利率两季崩跌 <code>3.9pct</code> 至 <code>28.68%</code>、扣非暴跌 <code>-35.4%</code>，Q3 还反常转回信用减值 <code>+1,289 万</code> 托底，周期拐点已全面恶化。</td>
+<td style="text-align: left;">将利润下滑 80% 归咎于人民币升值一次性汇兑噪音，认为核心 EBIT 与 2025 峰值持平。</td>
+<td style="text-align: left;"><strong>【各打五十大板 · 硬砍常态毛利】</strong> ① <strong>100% 认领空头事实</strong>：26Q3 毛利率 <code>28.68%</code>、扣非 <code>-35.4%</code>、零外汇套保裸持 <code>8.59 亿</code> 外币应收炸出 <code>1.23 亿</code> 财费（26Q4 美元兑人民币续升至 <code>6.66–6.68</code>，央行 11 月已调升外汇存准率稳汇率，但 Q4 仍有小幅拖尾）及 Q3 坏账转回属实，V4 彻底剔除转回并把常态毛利由 <code>31.5%</code> 硬砍至 <strong><code>30.2%</code></strong>；② <strong>反杀空头个体崩塌论</strong>：一手联网实锤 2026 为全行业共振降温——<strong>泰瑞机器</strong> 26Q1-Q3 营收 <code>-12.6%</code>/全面转亏 <code>-1,141 万</code>（Q3 单季 <code>-2,049 万</code>）、<strong>力劲科技</strong> 25/26 财年毛利率崩至 <code>24.5%</code>/净利暴跌 <code>-89.2%</code>、<strong>震雄集团</strong> 26/27 中期净利 <code>-20%</code>、连霸主<strong>海天国际</strong> 26H1 海外收入亦跌 <code>-19.3%</code>/毛利 <code>-1.7pct</code>/净利 <code>-7.7%</code>！伊之密 26Q1-Q3 营收仍逆势 <code>+9.11%</code>、OCF 暴增 <code>+150%</code> 至 <code>3.30 亿</code>，展现次龙头阿尔法韧性。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. 佳全号 <code>7.95 亿</code> 高息融资租赁与长账龄恶化</strong></td>
+<td style="text-align: left;">折现率高达 <code>5.00%–19.08%</code> 实锤客群次级化，未逾期仅提 <code>0.50%</code> 坏账（长期应收综合仅 <code>0.91%</code>）搞会计套利；应收 2–3 年账龄半年暴增 <code>235%</code> 至 <code>5,746 万</code>。</td>
+<td style="text-align: left;">错把佳全号体量写为 <code>2.5–3.0 亿</code>，只强调普通应收 1 年内按 <code>5%</code> 计提严于海天与表外零担保。</td>
+<td style="text-align: left;"><strong>【红方重击命中 · 认领并补提拨备，拒绝消费次级贷类比】</strong> ① <strong>重锤纠偏蓝方</strong>：佳全号体量精确 <strong><code>7.95 亿</code></strong>（占净资产 <code>23%</code>），<code>19.08%</code> 高息区间与破产清算涉诉（如东莞超达）确证尾部小微客群信用下沉，<code>0.50%</code> 计提显著偏松，V4 在常态模型中硬增 <strong><code>+0.20 亿/年</code></strong> 额外坏账与跌价准备（总常态减值锁定 <code>0.70 亿/年</code>）并砍质地加分；② <strong>反杀空头过度妖魔化</strong>：不同于无抵押消费次级贷，佳全号标的为工业母机（保有所权、二手残值及远程锁机风控），<code>25AR P154</code> 实证 2025 年长期应收实际核销仅 <strong><code>66.08 万元</code></strong>，按 8%–10% 无抵押坏账率计提过于极端。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3. 6 年表观 FCF 近乎归零与高 CapEx 性质</strong></td>
+<td style="text-align: left;">6 年累计表观 FCF 仅 <code>+0.27 亿</code>，<code>20.18 亿</code> 净借债填平 <code>19.98 亿</code> 分红与收购缺口，属永不产现资本黑洞；<code>5.64 亿</code> 南浔+总部年底转固将引爆折旧悬崖。</td>
+<td style="text-align: left;">声称 72% 属一次性扩张基建，维持性 CapEx 仅需 <code>1.15 亿/年</code>（低于 D&amp;A 近 0.9 亿），2027 年即迎来 FCF 全面爆发。</td>
+<td style="text-align: left;"><strong>【双向硬修 · 严防双重扣减】</strong> ① <strong>硬挤干蓝方水分</strong>：V4 将维持性 CapEx 由 <code>1.15 亿</code> <strong>硬上调 <code>+0.90 亿</code> 至 <code>2.05 亿/年</code></strong>（与转固后 D&amp;A <code>2.10 亿</code> 基本 100% 抵平），同时将常态 WC/租赁垫资/非注销 ESOP 硬上调至 <code>-0.82 亿/年</code>；② <strong>反杀空头三重叠加</strong>：过去 6 年 <code>19.47 亿</code> CapEx 中确有绝大部分投向五沙三厂（已投产）、美/印工厂及南浔一期（年产 1000 台大型二板机，设计产值 15 亿）与总部大楼；空头在分母全额计入 <code>25.56 亿</code> 建厂债务，在分子既扣折旧又扣债息（归母 OE <code>3.85 亿</code> 错配含债 EV），还把新厂产出按 0 甚至缩表（营收砍回 <code>58 亿</code>）处理，违背起码的估值一致性！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4. 半固态镁合金与压铸板块真实成色</strong></td>
+<td style="text-align: left;">26H1 压铸机毛利率仍跌 <code>-1.34pct</code> 至 <code>30.16%</code>，且并入了机器人事业部凑口径；力劲净利跌 89% 说明一体化压铸已是血海。</td>
+<td style="text-align: left;">吹捧伊之密为“全球唯一交付 3000T–6600T 半固态镁合金机霸主、垄断国内 &gt;60% 份额”，视为高毛利独门王牌。</td>
+<td style="text-align: left;"><strong>【去伪存真 · 既证伪独家垄断，亦确认高增引擎】</strong> 一手联网核实：① 26H1 压铸板块同比暴增 <strong><code>+47.22%</code> 至 <code>8.18 亿</code></strong>（占营收升至 <code>26.4%</code>），半固态镁合金在赛力斯/博奥镁铝已连续稳定量产超 3 万模次、良品率 &gt;93%，确为真成长动能；② 但<strong>狠打蓝方吹牛</strong>——<strong>海天金属</strong>已交付投产全球首台 7000T 镁合金双注射机（HMG7000U），<strong>力劲</strong>推出 TPI 系列并联合辰致/博俊铺开，<strong>伯乐</strong>牵头中铸协团标，赛道已步入<strong>四强竞速</strong>而非独家垄断，故 V4 对 2028E 达产毛利仅给 <code>30.6%</code>、达产 Firm OE 硬砍 <code>-19.8%</code> 至 <code>6.50 亿</code>！</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>5. 海晟金租零分红、软件退税与橡胶机高溢价收购</strong></td>
+<td style="text-align: left;">海晟金租 84.3% 高杠杆且 25–26H1 零分红、其他收益自认不可持续（合计占税前利润 22%）；<code>2.12 亿</code>（<code>3.58x PB</code>）现金高溢价买内部人橡胶机 40% 股权次年即跌 <code>-20.8%</code>；实控人减持。</td>
+<td style="text-align: left;">夸赞合伙人团队近乎完美、零治理污点；忽略了橡胶机收购溢价与海晟金租零现金分红问题。</td>
+<td style="text-align: left;"><strong>【精准切割 · 认领治理扣分，反杀跨口径误导】</strong> ① <strong>100% 认领治理瑕疵</strong>：<code>2.12 亿</code> 现金（<code>3.58x PB</code>、零业绩承诺）向内部持股平台壹鎏公司收购橡胶机 40% 股权后即遇 26H1 营收 <code>-20.82%</code> 暴跌、以及实控人梁敬华/彭惠萍减持与 67.36% 担保占比，V4 将质地加分由 <code>1.2</code> 硬砍至 <strong><code>0.5</code></strong>；② <strong>反杀空头两处事实偏颇</strong>：(a) 海晟金租大股东为南海农商行（40%）、<strong>主体评级 AAA</strong>、25 年净利 <code>5.23 亿</code>/ROE&gt;10.5%，金融机构 <code>84.3%</code> 负债率（6.4x 杠杆）属极度健康水平，因留存补充资本暂停 25–26H1 分红，V4 主业 OE 剔除其纸面收益并在 SOTP 给予合理折价 <code>0.65x PB = 2.89 亿</code>；(b) 25 年/26Q3 <code>其他收益</code> 中 80%–85% 为法定持续软件增值税即征即退（<code>25AR P13/P140</code>），V4 审慎保留 <code>0.80 亿/年</code> 而非空头乱砍至 <code>0.45 亿</code>。</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h3 id="3-v4-sotp">3. 📐 V4 唯一最终财务锚、严苛 SOTP 拆骨与历史分位校准后两档击球区</h3>
+<blockquote>
+<p><em>全部算式基于 <code>2026-11-23</code> 现价 <code>16.28 元</code>（<code>4.6856 亿股</code>，市值 <code>76.28 亿</code>，26Q3 BVPS <code>7.38 元</code>）及 Python 零误差验算，分子全合并无杠杆 Firm OE 与分母严苛 True EV 100% 口径对齐。</em></p>
+</blockquote>
+<ul>
+<li>
+<p><strong>① V4 严苛均衡全合并 True EV</strong>：<strong><code>97.15 亿元</code></strong>（<code>ev_delta_a = +20.87 亿</code>：<code>25.56 亿</code> 显性含租有息债 + <code>0.07 亿</code> 少数股东权益 - <code>4.77 亿</code> 超额现金[<code>7.77 亿</code> 非受限现金及结构性存款 - <code>1.28 亿</code> 境外受限现金 - <code>1.72 亿</code> 境内 15 天营运备付底仓]）。</p>
+</li>
+<li>
+<p><strong>② V4 跨周期常态全合并无杠杆 Firm OE（<code>steady_oe</code>）</strong>：<strong><code>5.30 亿元/年</code></strong>（较 V1 无杠杆 <code>6.93 亿</code> 砍 <code>-23.5%</code>、较 V1 标称 <code>6.35 亿</code> 硬砍 <code>-16.5%</code>）</p>
+<ul>
+<li><em>逐行推导</em>：跨周期常态营收 <code>62.00 亿</code> × 常态毛利率 <code>30.20%</code> = 毛利 <code>18.72 亿</code> - 税金及三费 <code>11.55 亿</code>（研发 100% 费用化）- 硬上调常态减值 <code>0.70 亿</code>（含佳全号补提与跌价）+ 可持续政策软件退税 <code>0.80 亿</code>（剔一次性补助并对加计抵减打折；主业联营收益归零防重复）= 核心 EBIT <code>7.27 亿</code> - 常态财费 <code>0.80 亿</code>（含净息 <code>0.67 亿</code>+常态汇兑摩擦 <code>0.13 亿</code>）= EBT <code>6.47 亿</code> → 按 15% 税率得<strong>纯制造常态净利 <code>5.50 亿</code></strong>（若加回联营纸面收益全口径约 <code>6.05 亿</code>）；加回税后净利息 <code>+0.57 亿</code> + 转固后 D&amp;A <code>+2.10 亿</code> - <strong>硬上调维持性 CapEx <code>-2.05 亿</code></strong> - <strong>硬上调常态 WC/租赁垫资/非注销 ESOP <code>-0.82 亿</code></strong> = <strong><code>5.30 亿元/年</code></strong>（归母常态 Equity OE 为 <strong><code>4.73 亿元/年</code></strong>，可 <code>1.71x</code> 覆盖 <code>2.76 亿</code> 年度现金分红）。</li>
+<li><em>2028E 南浔一期+海外/镁合金达产稳态 Firm OE（<code>full_oe</code>）</em>：营收审慎爬坡至 <code>76.0 亿</code>、毛利微修至 <code>30.6%</code>，扣新增折旧与四强竞争摩擦 → <strong><code>6.50 亿元/年</code></strong>（较 V1 <code>8.10 亿</code> 硬砍 <strong><code>-19.8%</code></strong>）。</li>
+<li><em>现价 <code>16.28 元</code> 体检</em>：严苛 <code>True EV / 常态 Firm OE = 18.32x</code>（内生回报率仅 <strong><code>5.46%</code></strong>），<code>2028E 达产回报率 6.69%</code>，纯制造常态 PE <code>13.86x</code>（全口径 <code>12.60x</code>），TTM 纯现金股息率 <strong><code>3.69%</code></strong>（<code>0.60 元/股</code>）。</li>
+</ul>
+</li>
+<li>
+<p><strong>③ V4 零重复严苛 SOTP 拆骨估值</strong>：</p>
+<ul>
+<li>① 存量注塑机 + 橡胶机成熟盘（常态净利 <code>4.45 亿</code> × 周期杠杆折价 <code>10.5x—11.5x PE</code>）= <strong><code>46.73 — 51.18 亿</code></strong>（中枢 <code>48.95 亿</code>）；</li>
+<li>② 存量压铸机 + 半固态镁合金底盘（常态净利 <code>1.05 亿</code> × <code>12.5x—13.5x PE</code>）= <strong><code>13.12 — 14.18 亿</code></strong>（中枢 <code>13.65 亿</code>）；</li>
+<li>③ 非合并联营保守折价残值（AAA 海晟金租 <code>4.45 亿 × 0.65x PB = 2.89 亿</code> + 江西江工 <code>0.92 亿 × 0.85x = 0.78 亿</code> + 零壹基金 <code>0.05 亿</code>）= <strong><code>3.73 亿元</code></strong>；</li>
+</ul>
+</li>
+<li>
+<p><strong>= 纯存量无新厂期权公允股权价值</strong>：<strong><code>63.58 — 69.08 亿元</code>（中枢 <code>66.33 亿元</code> / <code>13.57 — 14.74 元/股</code>，中枢 <code>14.16 元/股</code>）</strong>！现价 <code>16.28 元</code>（<code>76.28 亿</code>）已对南浔新厂与镁合金爆发赋予 <strong><code>+9.95 亿元</code></strong> 正标价，彻底证伪 V1 “18.12 元 0 元白送期权”的幻觉！</p>
+</li>
+<li>
+<p><strong>④ 铁闸三：过去 10 年历史估值分位 Reality Check 与 V4 两档实战击球区</strong>：</p>
+</li>
+<li>
+<p><strong>10 年历史底部核查</strong>：2018-10 贸易战去杠杆极寒底（不复权 <code>5.52 元</code>，<strong><code>~2.08x PB</code></strong>）、2022-04 疫情底（<code>10.14 元</code>，<strong><code>~2.01x PB</code></strong>）、2024-02 微盘流动性危机底（<code>12.90 元</code>，<strong><code>2.36x PB</code></strong>）、近 52 周低点 <code>13.06 元</code>（<strong><code>1.77x PB</code></strong>）——上市 11 年从未破 <code>1.7x PB</code>！空头 <code>5.60—7.24 元</code>（<code>0.76x—0.98x PB</code>）与 <code>8.06—9.70 元</code>（<code>1.09x—1.31x PB</code>）纯属三重悲观叠加制造的永不成交破净虚空底！</p>
+</li>
+<li>
+<p><strong>🎯 V4 第二档（正常左侧分批建仓区）</strong>：<strong><code>13.00 — 14.50 元</code></strong>（较 V1 <code>16.80—18.50 元</code> 中枢硬下修 <strong><code>-22.1%</code></strong>！精准卡位 V4 纯存量 SOTP 区间并砸穿近十年 <code>2.0x</code> 熊市铁底：<code>PB 1.76x—1.96x</code>，市值 <code>60.91—67.94 亿</code>，严苛 EV <code>81.78—88.81 亿</code>，常态 EV 回报 <strong><code>5.97%—6.48%</code></strong> / 达产 <strong><code>7.32%—7.95%</code></strong>，全口径常态 PE <code>10.06x—11.22x</code>，TTM 纯现金股息率 <strong><code>4.14%—4.62%</code></strong>！）。</p>
+</li>
+<li>
+<p><strong>🔨 V4 第一档（左侧重锤击球区）</strong>：<strong><code>≤ 13.00 元</code></strong>（较 V1 <code>≤16.00 元</code> 硬下修 <strong><code>-18.8%</code></strong>！砸穿 52 周低点 <code>13.06 元</code> 与 10 年极值地板，<code>PB ≤ 1.76x</code>，严苛 EV <code>≤ 81.78 亿</code>，常态 EV 回报 <strong><code>≥ 6.48%</code></strong> / 达产 <strong><code>≥ 7.95%</code></strong>，全口径常态 PE <code>≤ 10.06x</code>，TTM 纯现金股息率 <strong><code>≥ 4.62%</code></strong>，南浔 15 亿新厂与半固态镁合金远期爆发真正 0 元白送！）。</p>
+</li>
+</ul>
+<hr/>
+<h4 id="4-v1-v4">4. 📋 《V1 → V4 演进对照表》</h4>
+<div class="table-scroll-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">核心估值与判断锚点</th>
+<th style="text-align: center;">🔵 原 V1 多头基准</th>
+<th style="text-align: center;">🔴 盲审空头极寒锚</th>
+<th style="text-align: center;">✅ V4 三道铁闸终审唯一锚</th>
+<th style="text-align: left;">关键硬修正幅度与依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>盘面基准价 / 实时市值</strong></td>
+<td style="text-align: center;"><code>18.12 元</code> / <code>84.90 亿</code></td>
+<td style="text-align: center;"><code>16.28 元</code> / <code>76.28 亿</code></td>
+<td style="text-align: center;"><strong><code>16.28 元</code> / <code>76.28 亿</code></strong></td>
+<td style="text-align: left;">同步至 <code>2026-11-23</code> 实时收盘（PB <code>2.21x</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>净负债增量 (<code>ev_delta</code>) / True EV</strong></td>
+<td style="text-align: center;"><code>+19.30 亿</code> / <code>104.20 亿</code></td>
+<td style="text-align: center;"><code>+19.15 亿</code> / <code>95.43 亿</code></td>
+<td style="text-align: center;"><strong><code>+20.87 亿</code> / <code>97.15 亿</code></strong></td>
+<td style="text-align: left;"><code>ev_delta</code> 较 V1 硬上修 <code>+1.57 亿</code>（含租债 <code>25.56 亿</code>+双层受限及底仓）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>常态 → 达产 OE（亿元/年）</strong></td>
+<td style="text-align: center;"><code>6.35 → 8.10</code>（归母混用）</td>
+<td style="text-align: center;"><code>3.85</code>（扣息错配 EV）</td>
+<td style="text-align: center;"><strong><code>5.30 → 6.50</code>（无杠杆 Firm OE）</strong></td>
+<td style="text-align: left;">较 V1 硬砍 <code>-16.5% / -19.8%</code>；归母常态 OE <code>4.73 亿</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>现价严苛 EV 回报率 / 股息率</strong></td>
+<td style="text-align: center;"><code>6.09%</code> / <code>3.25%</code></td>
+<td style="text-align: center;"><code>4.03%</code> / —</td>
+<td style="text-align: center;"><strong><code>5.46%</code>（达产 <code>6.69%</code>）/ <code>3.69%</code></strong></td>
+<td style="text-align: left;">精确 <code>ttm_dps = 0.60 元</code>，ESOP 零注销</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>纯存量 SOTP 公允价值</strong></td>
+<td style="text-align: center;"><code>84.10 亿</code>（<code>17.95 元</code>）</td>
+<td style="text-align: center;"><code>37.77—45.47 亿</code>（<code>8.06—9.70</code>）</td>
+<td style="text-align: center;"><strong><code>63.58—69.08 亿</code>（中枢 <code>14.16 元</code>）</strong></td>
+<td style="text-align: left;">现价 <code>16.28 元</code> 含 <code>+9.95 亿</code> 期权溢价，绝非 0 元白送</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>两档实战买点（正常 / 重锤）</strong></td>
+<td style="text-align: center;"><code>16.80—18.50</code> / <code>≤16.00</code></td>
+<td style="text-align: center;"><code>8.06—9.70</code> / <code>5.60—7.24</code></td>
+<td style="text-align: center;"><strong><code>13.00—14.50 元</code> / <code>≤13.00 元</code></strong></td>
+<td style="text-align: left;">买区中枢硬下修 <code>-22.1%</code>，兼顾 4.1%–4.6% 息与 10 年 PB 铁底</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>质地加分 / 现价 IC 投票</strong></td>
+<td style="text-align: center;"><code>1.2</code> / <code>🟢 4 票全数买入</code></td>
+<td style="text-align: center;">— / <code>🔴 坚决做空</code></td>
+<td style="text-align: center;"><strong><code>0.5</code> / <code>🟡 0 票追高（退出买区）</code></strong></td>
+<td style="text-align: left;">认领高负债、佳全号坏账松弛与橡胶机高溢价收购折价</td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>一份诚实的终审账本既不能像多头推销员那样把 `7.95 亿` 高息融资租赁缩写成“两三亿”还假装借钱盖厂不用还债，也不能像歇斯底里的空头那样把全行业寒冬里照样逆势涨 9% 营收的次龙头当成破产垃圾、幻想着破净七折天上掉馅饼。伊之密底子不错，但负债率、应收存货和刚踩的橡胶机高价收购坑都在提醒你：<strong>好手艺也得配好价钱——16 块多的现价已经把新厂的糖提前算进账单里了，收起枪管，耐心等市场先生吓破胆砸到 13 块到 14 块半（1.8 倍 PB、4% 以上股息）再去捡便宜！</strong></p></div></div>
 <hr/>
 <h1 id="g-300415sz">终章模块 G：投资大师闭门圆桌会 —— 四位传奇买方巨擘对伊之密（300415.SZ）的终极会诊</h1>
 <blockquote>
@@ -3441,10 +4120,12 @@
 <p>现在，让我们用 <strong>逆向拆骨法（Reverse SOTP）</strong> 算一算，市场在 <strong>84.90 亿市值（104 亿 True EV）</strong> 下到底是怎么给伊之密定价的：</p>
 <ol>
 <li>
-<p><strong>第一块骨头：稳态注塑机 + 海外高毛利基本盘 + 隐形冠军橡胶机</strong>
-   - 2025 年注塑机营收 <strong>43.16 亿元</strong>，橡胶注射成型机营收 <strong>3.00 亿元</strong>（全球前三、国内第一，毛利率高达 <strong>40.76%</strong>！），其中海外收入 <strong>18.10 亿元</strong>（毛利率 <strong>36.2%</strong>）。
-   - 即便我们假设国内通用注塑机永远处于微利内卷状态，仅凭“18 亿海外高毛利业务 + 3 亿暴利橡胶机 + 国内中高端汽车二板机存量替换”，这三块压舱石业务在常态年份也能稳稳贡献 <strong>5.5 亿—6.0 亿元</strong> 的税后核心净利润。
-   - 在全球工业母机市场上，哪怕给这样一个拥有印度、美国本土工厂和全球经销网络、分红融资比高达 <strong>245%</strong> 的现金牛业务极度保守的 <strong>14 倍—15 倍 PE</strong>，仅这一块基石业务的合理股权价值就已经达到 <strong>77 亿—90 亿元人民币</strong>！</p>
+<p><strong>第一块骨头：稳态注塑机 + 海外高毛利基本盘 + 隐形冠军橡胶机</strong></p>
+<ul>
+<li>2025 年注塑机营收 <strong>43.16 亿元</strong>，橡胶注射成型机营收 <strong>3.00 亿元</strong>（全球前三、国内第一，毛利率高达 <strong>40.76%</strong>！），其中海外收入 <strong>18.10 亿元</strong>（毛利率 <strong>36.2%</strong>）。</li>
+<li>即便我们假设国内通用注塑机永远处于微利内卷状态，仅凭“18 亿海外高毛利业务 + 3 亿暴利橡胶机 + 国内中高端汽车二板机存量替换”，这三块压舱石业务在常态年份也能稳稳贡献 <strong>5.5 亿—6.0 亿元</strong> 的税后核心净利润。</li>
+<li>在全球工业母机市场上，哪怕给这样一个拥有印度、美国本土工厂和全球经销网络、分红融资比高达 <strong>245%</strong> 的现金牛业务极度保守的 <strong>14 倍—15 倍 PE</strong>，仅这一块基石业务的合理股权价值就已经达到 <strong>77 亿—90 亿元人民币</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>第二块骨头（市场白送的 0 元免费期权 Stub Value）</strong>：
@@ -3512,32 +4193,25 @@
 伊之密（300415.SZ）绝非一家平庸的强周期铁壳组装厂，而是中国高端装备领域极其罕见的 <strong>“拥有超过 65% 底层工艺复用度的跨赛道工业母机次龙头 + 半固态镁合金与特种橡胶机隐形冠军 + 言行合一的高分红合伙人企业”</strong>。在 <strong>18.12 元 / 84.90 亿元市值（True EV 约 104 亿元，静态 PE 11.98x，股息率 3.25%）</strong> 的当下刻度，市场因 2026 年前三季度短期汇兑损失与通用机价格战而给出了显著的悲观折价，不仅让投资者能够以超过 <strong>7.1%—7.6%</strong> 的常态股权现金流回报率买入其稳固的“注塑+橡胶+海外本土化”现金牛底座，更将即将爆发的 <strong>“3200T—6600T 半固态镁合金轻量化新物种”</strong> 与 <strong>“2026 年底投产的湖州南浔 15 亿+ 二板机新基地”</strong> 作为 <strong>0 元免费期权</strong> 拱手相送。只要盯紧 <strong>“长账龄应收款回收、存货订单转化率与 2027 年资本开支回落”</strong> 三条底线纪律，当下正是赔率与胜率高度共振的左侧黄金击球区。</p>
 </blockquote>
 <hr/>
-<h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
+<h2 id="h-1-v4">【模块 H：💼 专属买方研究员的 1 分钟闭门交底（✅ V4 终审重校同步版）】</h2>
 <blockquote>
-<p><strong>前面那十万字的财报细节和模型我已经全部替你核实完了。现在你可以忘掉那些复杂的小数点，关于【伊之密】这家企业，你只需要在脑子里记住这四件事：</strong></p>
+<p><strong>前面十几万字的官方三表、巨潮原版 PDF、红蓝对质和 16 次同行反查我都替你终审落定了。忘掉繁琐的小数点，站在 <code>2026-11-23</code>（现价 <code>16.28 元</code>）这个时点，关于【伊之密】你只需牢记这四句大实话：</strong></p>
 </blockquote>
 <h3 id="1_4">1. 它到底靠什么在行业里立身？（看家饭碗）</h3>
-<p>千万别把伊之密简单当成一家“卖铁壳子、看天吃饭”的普通机械厂。它最聪明的看家本领，是<strong>用同一套精密铸件供应链和电液伺服控制大脑，同时干了“塑料注塑机、轻金属压铸机、特种橡胶机、半固态镁合金成型机”四门生意</strong>——在工程师眼里，把融化的塑料挤进模具和把半融化的镁合金挤进模具，超过六成的底层零部件和算法是完全相通的！更绝的是它在行业里的卡位身法：在占七成收入的注塑机上，它不去跟老大海天国际死磕极低端的走量标准机，而是靠灵活定制抢下了“海天嫌太碎不愿干、欧洲恩格尔嫌太贵卖不动”的全球中高端腰部市场；而在新赛道上，它的特种橡胶机做到了全球前三（毛利率高达四成），更在新能源汽车和机器人减重急需的<strong>半固态镁合金注射成型机</strong>上拿下了国内超六成的统治级垄断身位。</p>
-<h3 id="2_3">2. 它的财务家底和经营周期现在发生了什么本质变化？（为什么它是真印钞机还是苦力）</h3>
-<p>这是一家极其罕见的“工程派老实人团队”管出来的现金牛：上市十一年来，它给股东发的真金白银分红是它从股市融资额的两倍半还多，早年仅花五百万美元破产抄底美国百年品牌HPM更是零商誉并购的教科书。看它眼下的财务周期，正处在一个非常有意思的<strong>“表观利润受委屈、真实造血和产能蓄势待发”</strong>的错位拐点上：表面看，今年前三季度它的净利润下滑了一成多，吓跑了不少只看利润表的散户；但掀开底牌一看，它的营收还在稳步增长，预收客户的合同负债高达七个多亿，经营现金流更是同比暴增了一倍半！利润下滑纯粹是因为人民币升值带来了短期汇兑损失，加上新厂房提前计提了折旧。而它在湖州南浔新建的大型二板机基地年底马上投产，重资产投入期即将收尾，正站在产能释放与现金流收获的前夜。</p>
-<h3 id="3_2">3. 市场担心的那些“软肋”，到底是真死穴还是纸老虎？（买方真伪辩证 &amp; 危中之机）</h3>
-<p>市场先生现在因为三个担忧给它只标了十来倍市盈率的低价，我替你逐一做了真伪鉴定，<strong>前两个其实是错杀带来的“危中之机”，只有第三个是需要按季盯防的真软肋</strong>：</p>
+<p>别被“卖铁壳子”的表面标签骗了，伊之密的真本事是<strong>用一套高度复用的大型精密铸件供应链与电液伺服控制大脑，同时做大了注塑机（国内第二）、压铸机（含半固态镁合金）与特种橡胶机（毛利四成）三块成型装备盘子</strong>。在 2026 年全行业大降温的硬考里——泰瑞机器三季度转亏、力劲净利暴跌近九成、连全球霸主海天国际上半年海外也跌了近两成——伊之密前三季度营收依然逆势涨了 <code>9.11%</code>、压铸与半固态镁合金上半年更是大涨 <code>47%</code>，证明它确实是具备阿尔法韧性的工程派次龙头。但也要摘掉玫瑰眼镜：半固态镁合金绝非它一家独大，海天金属（7000T）、力劲和伯乐都已重兵杀入，这是一场四强竞速而非躺赢垄断。</p>
+<h3 id="2-12-pe">2. 它的财务家底和经营周期发生了什么本质变化？（别再被“表观 12 倍 PE”晃花眼）</h3>
+<p>原多头报告最大的问题是把账本画得太温柔了！V4 法医穿透原版 PDF 后，必须给你交实底：<strong>过去六年（2021–2026Q3）伊之密账面赚了 <code>31.8 亿</code> 利润，但因为连年盖五沙三厂、海外厂、湖州南浔基地和总部大楼，叠加应收和存货大膨胀，六年累计表观自由现金流几乎归零（仅 <code>+0.27 亿</code>），<code>20 亿</code> 分红、付息和高价买橡胶机少数股权几乎全是靠净借 <code>20 亿</code> 银行贷款填上的！</strong> 眼下账上有息债务已飙到 <code>25.56 亿</code>（核心资产近半已抵押、对体内子公司担保占净资产冲到 <code>67.36%</code>），买断整家公司的严苛真实企业价值（True EV）高达 <strong><code>97.15 亿元</code></strong>，而不是表面上看起来很便宜的 <code>76.28 亿</code> 市值！</p>
+<h3 id="3-v4">3. 市场担心的那些“软肋”，到底是真死穴还是纸老虎？（V4 真伪终裁）</h3>
 <ul>
 <li>
-<p><strong>第一，所谓“国内通用注塑机打价格战叠加汇率波动导致增收不增利”的软肋 $
-ightarrow$ 【制造逆向买点的纸老虎】</strong>：国内中小吨位标准机确实在卷价格，汇率波动也确实咬掉了几千万账面利润。但你要看清，伊之密已经有三成收入来自海外（毛利率比国内高出一大截），而且它在印度、美国、墨西哥、泰国早就铺好了本土制造与服务网点。市场因为单季度的汇兑损益和国内低端机内卷把它一棍子打死，恰恰给了买方捡便宜货的黄金错杀机会。</p>
+<p><strong>真硬伤 ①（必须扣分并预留安全垫）</strong>：账上全口径应收高达 <code>30.12 亿</code> + 存货 <code>23.98 亿</code>（吃掉近六成总资产），其中体内 <strong>佳全号融资租赁已膨胀至 <code>7.95 亿</code></strong>、最高利率达 <code>19.08%</code> 却只按 <code>0.5%</code> 提未逾期坏账；加上 26Q3 单季毛利率跌破 29%（<code>28.68%</code>）、扣非暴跌 <code>-35.4%</code>、零外汇套保裸奔炸出 <code>1.23 亿</code> 财务费用、以及 <code>2.12 亿</code>（3.58x PB，零业绩承诺）高溢价现金向内部人收购橡胶机少数股权次年即遇收入大跌 20%，这些全都是实打实的经营与资本配置硬伤，容不得洗白！</p>
 </li>
 <li>
-<p><strong>第二，所谓“车企一体压铸热潮退烧拖累压铸机业务”的软肋 $
-ightarrow$ 【已被半固态镁合金技术跃迁反转的危中之机】<strong>：前两年大家炒概念的一万两千吨超大型底盘一体压铸确实因为撞车维修太贵而放缓了；但与此同时，随着镁价跌到跟铝价差不多，不炸膛、精度极高的</strong>半固态镁合金成型机</strong>在汽车大屏支架、电驱壳体和人形机器人关节骨骼上迎来了真爆发！伊之密是全球唯一交付过三千吨到六千吨级超大型半固态镁合金机的霸主，原本被当成包袱的金属成型部门，反而握着全行业最亮眼的王牌。</p>
-</li>
-<li>
-<p><strong>第三，“账上四十亿的应收账款与存货，外加二十多亿银行贷款” $
-ightarrow$ 【唯一必须严防的经营硬约束】</strong>：工业母机卖给下游成千上万家中小汽配厂和塑料厂，免不了要给账期、按订单备货。一旦未来宏观经济走弱导致下游二三线小加工厂成批倒闭，账上那十几个亿的应收账款和二十多个亿的存货就会面临坏账和弃单跌价风险，这是持有它必须每季核查的真底线。</p>
+<p><strong>被空头夸大的纸老虎 ②（绝不跟着恐慌割肉或幻想破净底）</strong>：空头把 80% 属国家长期法定软件退税的“其他收益”乱砍成一次性补贴、把 AAA 级海晟金租的金融负债当工业高危债、又拿扣息后的归母现金流去配含全额建厂债务的 True EV 算出 <code>5.60—7.24 元</code> 的破净极寒底——这完全违背了伊之密上市 11 年熊市铁底从未跌破 <code>1.7x PB</code> 的历史现实。只要 2027 年南浔基地和总部大楼完工后真正踩住基建刹车，它每年仍具备 <strong><code>5.30 亿</code> 常态无杠杆 Firm OE（归母 OE <code>4.73 亿</code>）</strong> 的真实造血能力，足以覆盖 <code>2.76 亿</code> 分红。</p>
 </li>
 </ul>
-<h3 id="4_2">4. 咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
-<p>用买方拆骨法算一笔最简单的账：在当前八十多亿总市值的位置买进伊之密，你掏的钱仅仅相当于按十四五倍市盈率的批发价买下了它稳赚五六个亿的“注塑机 + 暴利橡胶机 + 海外高毛利基本盘”，而市场先生等于把<strong>“全国垄断的半固态镁合金机王牌 + 马上投产的湖州南浔十五亿新产能 + 美国百年HPM品牌”这三样大礼按零元免费送给了你</strong>！所以，现在的打法非常明确：趁着市场还在嫌弃它三季报汇兑损失和短期净利下滑，在十来倍市盈率、三个多点股息率的底部区间大胆分批建仓；平时只要盯紧它的长账龄应收款回收和明年新厂投产后资本开支回落这两个路标，耐心等半固态镁合金放量和制造业周期回暖带它迎来业绩与估值的戴维斯双击。</p>
+<h3 id="4-v4">4. 咱们到底该怎么买它、怎么赚它的钱？（V4 实战纪律底线）</h3>
+<p>用 V4 严苛拆骨法重算总账：剥离新厂期权后，伊之密现有存量业务加联营残值的纯公允价值中枢在 <strong><code>14.16 元</code></strong>（<code>13.57—14.74 元</code>）。现价 <strong><code>16.28 元</code></strong> 对应严苛 True EV 回报率仅 <strong><code>5.46%</code>（<code>18.3x</code>）</strong>，依然多付了近 10 亿元的新厂溢价，前方还要熬过 26Q4 汇兑小幅拖尾与年底 <code>5.64 亿</code> 在建工程集中转固的折旧大考！因此 V4 终审 <strong>0 票追高，正式降级退出即期买区</strong>——管住手，耐心等市场情绪把股价砸回 <strong><code>13.00 — 14.50 元</code></strong>（砸穿十年 2 倍 PB 铁底、TTM 纯现金股息率站上 <code>4.14%—4.62%</code>）再分批左侧建仓；若极端恐慌砸穿 52 周低点跌到 <strong><code>≤ 13.00 元</code></strong>（<code>PB ≤ 1.76x</code>、股息率 <code>≥ 4.62%</code>、南浔 15 亿新厂与半固态镁合金真正 0 元白送），再果断挥出重锤！同时每季死盯三条生死线：<strong>2027 年 CapEx 必须显著回落使表观 FCF 转正、有息债掉头向下、佳全号 <code>7.95 亿</code> 租赁池不爆大额坏账</strong>！</p>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -3729,7 +4403,7 @@ ightarrow$ 【唯一必须严防的经营硬约束】</strong>：工业母机卖
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《伊之密 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/伊之密 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《伊之密(300415.SZ) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/伊之密(300415.SZ) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3926,6 +4600,553 @@ ightarrow$ 【唯一必须严防的经营硬约束】</strong>：工业母机卖
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = hTexts.some(function(h){ return h.indexOf('实时排名') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报率') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买入') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报率') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买入') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var hasHkOnlyInA = false;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /客观\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var isHkOnly = false;
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) {
+                isHkOnly = true;
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /今日\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /常态回报\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /实时股息(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (!isHMaster && pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0) {
+                isHkOnly = true;
+              }
+            }
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+            if (isHkOnly) hasHkOnlyInA = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              isHkOnly: isHkOnly,
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 2) return;
+
+          var state = { key: 'rank', dir: 'asc', aOnly: false, factor: 'ALL' };
+
+          function applyFilters() {
+            rowData.forEach(function(d){
+              var hideByA = state.aOnly && d.isHkOnly;
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              d.tr.style.display = (hideByA || hideByF) ? 'none' : '';
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若包含港股（如腾讯控股），在 A 股主表添加“仅看纯A股”一键筛选开关
+          if (hasHkOnlyInA && !isHMaster) {
+            var fBtn = document.createElement('button');
+            fBtn.type = 'button';
+            fBtn.className = 'agy-sort-btn agy-filter-btn';
+            fBtn.textContent = '🇨🇳 仅看纯A股';
+            fBtn.addEventListener('click', function(){
+              state.aOnly = !state.aOnly;
+              fBtn.classList.toggle('active', state.aOnly);
+              fBtn.textContent = state.aOnly ? '🇨🇳 已隐藏纯港股 (点击恢复)' : '🇨🇳 仅看纯A股';
+              applyFilters();
+            });
+            bar.appendChild(fBtn);
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+          }
+
+          updateUI();
+        });
+      })();
     })();
   </script>
 </body>
