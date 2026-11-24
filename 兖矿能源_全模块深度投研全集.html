@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,473 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    /* 全球市场三态切换开关（AH股一起显示 / 只显示A股 / 只显示H股） */
+    .agy-market-global-bar {
+      position: sticky;
+      top: 8px;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0 16px 0;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #f8fafc;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+      font-size: 13px;
+    }
+    .agy-market-global-title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e2e8f0;
+    }
+    .agy-market-seg {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+    .agy-market-seg-inline {
+      display: inline-flex;
+      align-items: center;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 2px;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .agy-market-btn {
+      background: transparent;
+      color: #cbd5e1;
+      border: none;
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.16s ease;
+    }
+    .agy-market-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .agy-market-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+    }
+    .agy-market-seg-inline .agy-market-btn {
+      color: #334155;
+      padding: 3px 10px;
+      font-size: 12px;
+    }
+    .agy-market-seg-inline .agy-market-btn:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+    .agy-market-seg-inline .agy-market-btn.active {
+      background: #1e3a8a;
+      color: #ffffff;
+    }
+    .agy-market-count-badge {
+      font-size: 12px;
+      color: #bae6fd;
+      font-weight: 600;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -869,7 +1410,7 @@
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
     <div class="report-title">兖矿能源 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-24</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -895,6 +1436,7 @@
     <h1 id="600188sh-01171hk">兖矿能源（600188.SH / 01171.HK）全模块深度投研全集</h1>
 <blockquote>
 <p><strong>报告基准声明</strong>：本报告基于截至 <strong>2026年11月11日</strong> 最新披露的《2025年年度报告》、《2026年半年度报告》、《2026年第三季度报告》及境内外监管与工程公告编制，涵盖全景八步底座、追问模块 A—F 及终章模块 G（四位投资大师闭门圆桌会）。</p>
+<p><strong>📌 主榜终审买点对齐声明（<code>2026-11-24</code> 同步）</strong>：本报告全部历史财报底稿、常态归母 OE（<code>173.88亿元</code> → 达产 <code>208.00亿元</code>）与定稿日历史价格快照（A 股 <code>17.29元</code> / H 股 <code>11.26港元</code>）保持不变，A/H 股两档实战买入击球区已精准对齐当前《企业深度投研性价比排行榜》最新终审生效口径：<strong>A 股（<code>600188.SH</code>）第一档左侧重锤 <code>≤13.50元</code></strong>（股权常态 OE 回报 <code>&gt;12.8%</code>，五彩湾+煤化工倒贴）、<strong>第二档正常建仓 <code>14.50—15.80元</code></strong>（新疆 <code>77元/吨</code> 露天矿 + 煤化工 <code>26Q3</code> 暴增 <code>+88%</code>）；<strong>附 H 股（<code>01171.HK</code>）第一档左侧重锤 <code>≤9.50港元</code></strong>、<strong>第二档正常建仓 <code>10.20—12.00港元</code></strong>（较 A 股折价约 <code>40%</code>；原稿曾标 A 股 <code>≤13.80 / 13.80—15.80元</code>、H 股 <code>≤9.50 / 9.50—11.80港元</code>）。</p>
 </blockquote>
 <hr/>
 <h2 id="_1">阶段一：全景基本面八步底座（生意本质、成本分位、言行审计与动态进化）</h2>
@@ -951,34 +1493,36 @@
 <h4 id="1-2025">1. 兖矿能源内部五大基地成本阶梯大起底（2025年年报硬核穿透）</h4>
 <p>很多投资者好奇：为什么兖矿能源综合自产煤吨煤销售成本是<strong>321.09元/吨</strong>（2026H1为<strong>348.04元/吨</strong>），既比中国神华（157.5元/吨）贵，又比山西老矿便宜？因为它的内部资产包是一个跨越“全球成本最左端1%分位”到“国内成本右端75%分位”的巨大哑铃：</p>
 <ul>
-<li><strong>第一梯队（印钞机级极低成本，全国成本曲线最左端5%分位）：新疆基地 &amp; 陕西榆林基地</strong></li>
 <li>
-<p><strong>新疆能化</strong>：2025年吨煤销售成本仅<strong>77.41元/吨</strong>（同比再降21.91%）！准东五彩湾四号露天矿煤层极其深厚、剥采比极低，一铲子下去全是煤，几乎不需要井下巷道支护与高昂人工。</p>
+<p><strong>第一梯队（印钞机级极低成本，全国成本曲线最左端5%分位）：新疆基地 &amp; 陕西榆林基地</strong></p>
+<ul>
+<li><strong>新疆能化</strong>：2025年吨煤销售成本仅<strong>77.41元/吨</strong>（同比再降21.91%）！准东五彩湾四号露天矿煤层极其深厚、剥采比极低，一铲子下去全是煤，几乎不需要井下巷道支护与高昂人工。</li>
+</ul>
 </li>
 <li>
 <p><strong>陕西未来能源（金鸡滩煤矿等）</strong>：2025年吨煤销售成本仅<strong>127.75元/吨</strong>（同比下降6.16%）。属于陕北侏罗纪优质不粘煤/气煤，煤层平缓、地质构造简单，千万吨级智能化综采工作面单班只需几个人，完全成本比神华均值还低。</p>
 </li>
 <li>
 <p><strong>第二梯队（高产现金牛，全国成本曲线前15%—30%分位）：内蒙古鄂尔多斯基地 &amp; 西北矿业</strong></p>
-</li>
-<li>
-<p><strong>鄂尔多斯公司（转龙湾、营盘壕等）</strong>：2025年吨煤销售成本<strong>175.10元/吨</strong>（同比-4.42%）；<strong>昊盛煤业（石拉乌素煤矿）</strong>随着产能释放，吨煤成本暴降27.95%至<strong>236.73元/吨</strong>；<strong>内蒙古矿业</strong>吨煤成本<strong>241.92元/吨</strong>（同比-10.65%）。2025年整个陕蒙基地商品煤产量达<strong>4,666万吨</strong>，贡献了全集团高达<strong>56%的煤炭利润</strong>！</p>
+<ul>
+<li><strong>鄂尔多斯公司（转龙湾、营盘壕等）</strong>：2025年吨煤销售成本<strong>175.10元/吨</strong>（同比-4.42%）；<strong>昊盛煤业（石拉乌素煤矿）</strong>随着产能释放，吨煤成本暴降27.95%至<strong>236.73元/吨</strong>；<strong>内蒙古矿业</strong>吨煤成本<strong>241.92元/吨</strong>（同比-10.65%）。2025年整个陕蒙基地商品煤产量达<strong>4,666万吨</strong>，贡献了全集团高达<strong>56%的煤炭利润</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>西北矿业（2025年7月并表，横跨陕甘晋蒙，含亭南、大恒、正通、巴彦高勒等12座矿井）</strong>：2025年贡献商品煤产量<strong>3,381万吨</strong>，吨煤销售成本<strong>280.11元/吨</strong>（同比大降14.15%），2026H1实现净利润<strong>9.45亿元</strong>（+37.0%）。</p>
 </li>
 <li>
 <p><strong>第三梯队（高价高成本特种兵，全球海运煤前35%分位）：澳洲基地（兖煤澳洲 YAL.AX / 03668.HK，持股62.26%）</strong></p>
-</li>
+<ul>
 <li>拥有莫拉本（Moolarben）、沃克沃斯与塔罗谷（MTW）、亨特谷（HVO）三大世界级露天矿。2025年权益商品煤产量创历史新高达到<strong>4,402万吨</strong>（100%口径原煤6,700万吨），2026H1商品煤销量<strong>1,984万吨</strong>（+19.6%）。</li>
-<li>
-<p>2025年兖煤澳洲现金运营成本为<strong>92澳元/吨</strong>（折合人民币销售成本<strong>500.71元/吨</strong>）。表面看500元/吨的成本不低（主要受澳洲新南威尔士州调升矿产特许权使用费Royalty、通胀人工及铁路港口费影响），但它卖的是发热量6000大卡以上的国际顶级海运动力煤与半软焦煤，2025年实现营收<strong>59.5亿澳元</strong>，经营性EBITDA利润率仍达<strong>24%</strong>。</p>
+<li>2025年兖煤澳洲现金运营成本为<strong>92澳元/吨</strong>（折合人民币销售成本<strong>500.71元/吨</strong>）。表面看500元/吨的成本不低（主要受澳洲新南威尔士州调升矿产特许权使用费Royalty、通胀人工及铁路港口费影响），但它卖的是发热量6000大卡以上的国际顶级海运动力煤与半软焦煤，2025年实现营收<strong>59.5亿澳元</strong>，经营性EBITDA利润率仍达<strong>24%</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>第四梯队（深井高成本老革命，全国成本曲线60%—80%分位）：山东本部 &amp; 鲁西矿业 &amp; 菏泽能化</strong></p>
-</li>
-<li>
-<p><strong>山东本部（兴隆庄、鲍店、南屯、东滩等）</strong>：吨煤销售成本<strong>381.17元/吨</strong>（+5.82%）；<strong>鲁西矿业</strong>：吨煤成本<strong>473.36元/吨</strong>（-14.03%）；<strong>菏泽能化（赵楼、万福煤矿）</strong>：因千米深井冲击地压防治、高温降温与初期转固折旧，吨煤成本高达<strong>629.09元/吨</strong>（-19.76%）。</p>
+<ul>
+<li><strong>山东本部（兴隆庄、鲍店、南屯、东滩等）</strong>：吨煤销售成本<strong>381.17元/吨</strong>（+5.82%）；<strong>鲁西矿业</strong>：吨煤成本<strong>473.36元/吨</strong>（-14.03%）；<strong>菏泽能化（赵楼、万福煤矿）</strong>：因千米深井冲击地压防治、高温降温与初期转固折旧，吨煤成本高达<strong>629.09元/吨</strong>（-19.76%）。</li>
+</ul>
 </li>
 <li>
 <p><strong>为什么山东老矿成本这么高还能赚钱？</strong> 第一，它紧贴华东钢铁与工业负荷中心，省去了每吨200—300元的蒙煤南下铁路运费，坑口即终端；第二，它出产的是稀缺的气精煤与1/3焦煤，吨煤售价比动力煤高出300—500元/吨。</p>
@@ -1121,12 +1665,10 @@
 <li>
 <p><strong>关联交易与大股东抽血排查（全文最大的治理扣分项与争议焦点）</strong>：
   虽然大股东无高比例质押、无高管违规减持、商誉极低，但<strong>2023—2025年连续三笔向母公司山东能源集团的巨额现金关联并购</strong>必须拿放大镜审视：</p>
-</li>
-<li>
-<p>2023年：掏现金<strong>183.19亿元</strong>买鲁西矿业51%股权 + 掏现金<strong>81.12亿元</strong>买新疆能化51%股权（合计<strong>264.31亿元</strong>）；</p>
-</li>
-<li>
-<p>2025年：掏现金<strong>140.66亿元</strong>（47.48亿受让老股 + 93.18亿增资）买西北矿业51%股权。</p>
+<ul>
+<li>2023年：掏现金<strong>183.19亿元</strong>买鲁西矿业51%股权 + 掏现金<strong>81.12亿元</strong>买新疆能化51%股权（合计<strong>264.31亿元</strong>）；</li>
+<li>2025年：掏现金<strong>140.66亿元</strong>（47.48亿受让老股 + 93.18亿增资）买西北矿业51%股权。</li>
+</ul>
 </li>
 <li>
 <p><strong>算清关联交易的得失账</strong>：好的一面是，新疆能化（拥有五彩湾四号40亿吨级露天矿，吨煤成本77元）和西北矿业（拥有36.52亿吨可采储量、年产3,381万吨煤）确实是真金白银的优质资源，且2025年西北矿业93.18亿元增资款留在了标的公司内部用于降债建矿；但让人如鲠在喉的一面是，<strong>这三笔交易全部只买51%控股权、留下49%少数股东权益给大股东及关联方，且累计掏走了上市公司超400亿元现金（导致上市公司有息负债膨胀至1,477.76亿元）</strong>！此外，上市公司在<strong>山东能源集团财务有限公司</strong>常年存放大额存款（2026Q3末货币资金升至565.25亿元即含山能财司吸收存款变动），虽有存贷款限额协议约束，但仍需持续盯紧集团层面的资金占用风险。</p>
@@ -1313,8 +1855,10 @@
 </li>
 </ol>
 <ul>
-<li><strong>第三笔：就地吃掉廉价煤、向高端新材料跃迁的“煤化一体化开支”（占比约25%—30%）</strong>
-  1. <strong>内蒙古荣信化工年产80万吨烯烃项目</strong>：计划总投资<strong>95.74亿元</strong>（环评批复约98.3亿元），利用现有甲醇及新增气化装置生产40万吨聚乙烯、40万吨聚丙烯，<strong>已进入最后冲刺阶段，定于2026年12月投料试车</strong>！</li>
+<li><strong>第三笔：就地吃掉廉价煤、向高端新材料跃迁的“煤化一体化开支”（占比约25%—30%）</strong><ol>
+<li><strong>内蒙古荣信化工年产80万吨烯烃项目</strong>：计划总投资<strong>95.74亿元</strong>（环评批复约98.3亿元），利用现有甲醇及新增气化装置生产40万吨聚乙烯、40万吨聚丙烯，<strong>已进入最后冲刺阶段，定于2026年12月投料试车</strong>！</li>
+</ol>
+</li>
 </ul>
 <ol start="2">
 <li>
@@ -1528,9 +2072,11 @@
 <p><strong>准东80万吨煤制烯烃（198亿元）</strong>：按185亿元固定资产转固测算，每年新增刚性折旧高达<strong>12.55亿元</strong>（折合吨烯烃折旧<strong>1,569元/吨</strong>，比荣信化工高出约805元/吨）。<strong>但它的绝杀武器在于“77元/吨的坑口自产原料煤”</strong>！生产1吨聚烯烃约消耗4.2—4.5吨原料煤及燃料煤，准东项目单吨烯烃的煤炭原料成本仅需<strong>350—400元/吨</strong>，比陕蒙基地（单吨烯烃用煤成本约1,500—1,700元）足足省下<strong>1,150—1,300元/吨</strong>！算上疆内产品外运华东/西南的每吨400—500元铁路运费劣势后，准东烯烃的完全成本依然处于全国煤制烯烃成本曲线最左端10%分位，<strong>盈亏平衡稼动率约为62%（对应年产50万吨、新增营收约33亿元）</strong>。</p>
 </li>
 </ul><ol start="3">
-<li><strong>万福煤矿（60亿元）与鲁南化工30万吨己内酰胺（37.55亿元）</strong>：
-   * 万福煤矿每年新增折旧及维简安全费高达<strong>3.8亿—4.2亿元</strong>（折合吨煤折旧摊销超210元/吨），叠加深井人工与支护成本，完全成本约600—630元/吨；但由于其产出的是华东极度紧缺的低硫主焦煤与肥煤（不含税售价在1,150—1,400元/吨），在当前100%满产（180万吨）状态下，每年仍可贡献营收约<strong>21亿—24亿元</strong>、毛利约<strong>8亿—10亿元</strong>，盈亏平衡稼动率约为<strong>55%</strong>。
-   * 鲁南化工己内酰胺每年新增折旧约<strong>2.4亿元</strong>，目前装置稼动率已达<strong>100%以上</strong>，年新增营收约<strong>36亿元</strong>，在尼龙6切片顺价微利周期中已跨过约<strong>70%稼动率</strong>的盈亏平衡线。</li>
+<li><strong>万福煤矿（60亿元）与鲁南化工30万吨己内酰胺（37.55亿元）</strong>：<ul>
+<li>万福煤矿每年新增折旧及维简安全费高达<strong>3.8亿—4.2亿元</strong>（折合吨煤折旧摊销超210元/吨），叠加深井人工与支护成本，完全成本约600—630元/吨；但由于其产出的是华东极度紧缺的低硫主焦煤与肥煤（不含税售价在1,150—1,400元/吨），在当前100%满产（180万吨）状态下，每年仍可贡献营收约<strong>21亿—24亿元</strong>、毛利约<strong>8亿—10亿元</strong>，盈亏平衡稼动率约为<strong>55%</strong>。</li>
+<li>鲁南化工己内酰胺每年新增折旧约<strong>2.4亿元</strong>，目前装置稼动率已达<strong>100%以上</strong>，年新增营收约<strong>36亿元</strong>，在尼龙6切片顺价微利周期中已跨过约<strong>70%稼动率</strong>的盈亏平衡线。</li>
+</ul>
+</li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在山东千米井下挖一吨焦煤要砸3,300块钱基建费，在新疆准东戈壁滩拿大铲子露天挖一吨煤只要550块钱基建费、每吨开采成本才77块钱——这就好比一个人在石头缝里用镊子夹金沙，另一个人在金矿窝子里开推土机。更妙的是，管理层没有傻乎乎地把77块钱的新疆煤交350块钱火车运费拉到山东卖，而是就地盖座大锅煮成塑料颗粒。只要原料比别人便宜一半，哪怕锅盖得贵一点，这口锅也是台印钞机。</p></div></div></div></div>
 
 
@@ -1545,13 +2091,17 @@
 
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_5">2. 审视消化能力：“疆煤就地转化+低成本置换”还是“投产即过剩”？</h4><p>将兖矿能源这批新产能放到2026—2028年全国煤炭与聚烯烃供需大棋局中审视，必须把<strong>“煤炭矿井扩产”</strong>与<strong>“聚烯烃化工扩产”</strong>拆开算两本完全不同的消化账：</p><ul>
-<li><strong>煤炭端（五彩湾四号1,000<span class="math-inline"> → </span>2,300万吨 + 陕蒙三矿2,900万吨）：典型的“雪中送炭解瓶颈 + 内部成本置换”</strong>
-  1. <strong>内部存量接续刚需</strong>：兖矿能源山东本部的兴隆庄、鲍店、南屯、东滩等功勋老矿已连续高强度开采35—45年，受深部冲击地压防治与资源自然递减影响，未来5—10年山东老矿产能必然稳步温和收缩；万福煤矿（180万吨）与陕蒙刘三圪旦、嘎鲁图、霍林河一号（合计2,900万吨）的投产，本质上是用吨煤成本180—220元的陕蒙新矿去接替吨煤成本381—629元的山东老矿，属于100%确定性的“高成本产能置换”。</li>
+<li><strong>煤炭端（五彩湾四号1,000<span class="math-inline"> → </span>2,300万吨 + 陕蒙三矿2,900万吨）：典型的“雪中送炭解瓶颈 + 内部成本置换”</strong><ol>
+<li><strong>内部存量接续刚需</strong>：兖矿能源山东本部的兴隆庄、鲍店、南屯、东滩等功勋老矿已连续高强度开采35—45年，受深部冲击地压防治与资源自然递减影响，未来5—10年山东老矿产能必然稳步温和收缩；万福煤矿（180万吨）与陕蒙刘三圪旦、嘎鲁图、霍林河一号（合计2,900万吨）的投产，本质上是用吨煤成本180—220元的陕蒙新矿去接替吨煤成本381—629元的山东老矿，属于100%确定性的“高成本产能置换”。</li>
+</ol>
+</li>
 </ul><ol start="2">
 <li><strong>坑口自用锁死销路</strong>：新疆五彩湾四号露天矿一期1,000万吨（及二期扩建至2,300万吨），其中约400—450万吨原料煤与燃料煤直接通过皮带走廊送进隔壁自家的准东80万吨煤制烯烃工厂“内部消化”，其余产能依托将军庙至哈密铁路及兰新线直供疆内电厂与川渝甘青工业用户，根本不存在卖不出去的库存积压问题。</li>
 </ol><ul>
-<li><strong>煤化工端（荣信80万吨 + 准东80万吨 = 新增160万吨聚烯烃）：行业确实面临“产能洪峰价格战”，但兖矿凭借煤化一体站在“不死身位”</strong>
-  1. <strong>直面行业残酷真相</strong>：2025—2027年是中国聚乙烯（PE）与聚丙烯（PP）的扩产洪峰期——不仅有宝丰能源内蒙300万吨煤制烯烃（已于2025年2月投产）、中煤榆林二期90万吨，还有沿海裕龙石化、镇海炼化、埃克森美孚惠州等千万吨级原油大炼化项目密集投产。国内通用料PP/PE注定处于阶段性产能过剩与低毛利肉搏战中。</li>
+<li><strong>煤化工端（荣信80万吨 + 准东80万吨 = 新增160万吨聚烯烃）：行业确实面临“产能洪峰价格战”，但兖矿凭借煤化一体站在“不死身位”</strong><ol>
+<li><strong>直面行业残酷真相</strong>：2025—2027年是中国聚乙烯（PE）与聚丙烯（PP）的扩产洪峰期——不仅有宝丰能源内蒙300万吨煤制烯烃（已于2025年2月投产）、中煤榆林二期90万吨，还有沿海裕龙石化、镇海炼化、埃克森美孚惠州等千万吨级原油大炼化项目密集投产。国内通用料PP/PE注定处于阶段性产能过剩与低毛利肉搏战中。</li>
+</ol>
+</li>
 </ul><ol start="2">
 <li><strong>为什么兖矿能源的两座80万吨烯烃敢在红海里亮剑？</strong> 因为聚烯烃价格战打到最后，拼的是<strong>“原油石脑油路线 vs 外购煤MTO路线 vs 坑口自产煤一体化路线”</strong>的成本底线！当国际布伦特原油维持在70—80美元/桶以上时，沿海石脑油制烯烃的现金成本高达7,200—7,800元/吨，外购甲醇制烯烃（MTO）更是全线亏损停工；而兖矿能源荣信化工（棕地低折旧+鄂尔多斯自产煤）和新疆准东（77元/吨超低成本露天煤）的聚烯烃完全成本分别仅有<strong>5,400元/吨</strong>和<strong>5,100元/吨</strong>左右！也就是说，哪怕全行业聚烯烃价格跌到6,200—6,500元/吨把沿海炼化厂和外购甲醇厂逼到停产减产，兖矿能源的两座烯烃厂依然能保持100%满负荷运转并赚取每吨800—1,200元的超额毛利。</li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>当十几个大胖子同时往一个游泳池里跳的时候，水肯定会溢出来——未来三年中国的塑料颗粒（聚烯烃）绝对不缺。但在大宗商品屠宰场里，你不需要祈祷市场没有价格战，你只需要确保自己的成本比那个靠买高价中东石油做塑料的对手便宜2,000块钱一吨。只要你的刀够快，别人的产能过剩就是帮你清场的免费推土机。</p></div></div></div></div>
@@ -1566,21 +2116,29 @@
 <p>剥离公司研报里的报喜套话，这四大工程集群在未来2—3年的落地兑现过程中，横亘着四块必须紧盯的现实硬骨头：</p>
 <ol>
 <li>
-<p><strong>新疆准东基地的“水资源指标硬约束”与“出疆铁路运力博弈”</strong>：
-   * 准东戈壁极度缺水，而生产1吨煤制烯烃通常需耗水7—10吨。新疆能化准东80万吨烯烃项目虽然通过空气冷却与高浓盐水零排放技术大幅压降耗水，但仍高度依赖引额济克工程的水权调配指标；若后续推进二期化工扩建，水权指标将成为最刚性的物理天花板。
-   * 在煤炭外运端，五彩湾四号矿从1,000万吨向2,300万吨跃升后，除450万吨化工自用外，每年有近1,850万吨商品煤需外销。目前准东专用线正加速接轨乌将铁路，但在冬季用煤高峰期，出疆铁路车皮配额与运费折扣仍受国铁集团调度制约。</p>
+<p><strong>新疆准东基地的“水资源指标硬约束”与“出疆铁路运力博弈”</strong>：</p>
+<ul>
+<li>准东戈壁极度缺水，而生产1吨煤制烯烃通常需耗水7—10吨。新疆能化准东80万吨烯烃项目虽然通过空气冷却与高浓盐水零排放技术大幅压降耗水，但仍高度依赖引额济克工程的水权调配指标；若后续推进二期化工扩建，水权指标将成为最刚性的物理天花板。</li>
+<li>在煤炭外运端，五彩湾四号矿从1,000万吨向2,300万吨跃升后，除450万吨化工自用外，每年有近1,850万吨商品煤需外销。目前准东专用线正加速接轨乌将铁路，但在冬季用煤高峰期，出疆铁路车皮配额与运费折扣仍受国铁集团调度制约。</li>
+</ul>
 </li>
 <li>
-<p><strong>少数股东切走49%红利的“产权漏出硬伤”（新疆能化、鲁西矿业、西北矿业均仅持股51%）</strong>：
-   * 这是算细账时绝不能忽略的产权结构：荣信化工（80万吨烯烃）和鲁南化工（30万吨己内酰胺）是兖矿能源<strong>100%全资</strong>控股，赚的每一分钱都100%归属于上市公司普通股股东；但新疆准东五彩湾四号露天矿与准东80万吨煤制烯烃的投资主体<strong>新疆能化</strong>，上市公司在2023年关联并购中仅收购了<strong>51%股权</strong>（其余49%仍掌握在山东能源集团关联方及少数股东手中）！这意味着准东338亿元煤化一体化工程建成后，上市公司合并报表虽然合并100%的营收、产量与有息负债，但真正落进归母净利润口袋的只有<strong>51%</strong>。</p>
+<p><strong>少数股东切走49%红利的“产权漏出硬伤”（新疆能化、鲁西矿业、西北矿业均仅持股51%）</strong>：</p>
+<ul>
+<li>这是算细账时绝不能忽略的产权结构：荣信化工（80万吨烯烃）和鲁南化工（30万吨己内酰胺）是兖矿能源<strong>100%全资</strong>控股，赚的每一分钱都100%归属于上市公司普通股股东；但新疆准东五彩湾四号露天矿与准东80万吨煤制烯烃的投资主体<strong>新疆能化</strong>，上市公司在2023年关联并购中仅收购了<strong>51%股权</strong>（其余49%仍掌握在山东能源集团关联方及少数股东手中）！这意味着准东338亿元煤化一体化工程建成后，上市公司合并报表虽然合并100%的营收、产量与有息负债，但真正落进归母净利润口袋的只有<strong>51%</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>鄂尔多斯刘三圪旦（1,000万吨）与嘎鲁图（1,200万吨）的产能置换指标与核准建设周期</strong>：
-   * 虽然霍林河一号（700万吨）与刘三圪旦（1,000万吨）已取得采矿许可证，嘎鲁图（800—1,200万吨）正全力冲刺核准，但国家发改委对新建特大型井工煤矿严守“产能置换指标购买+高标准环评水保+超深立井开拓”铁律。从全面开工到立井掘砌到底、巷道贯通、首采工作面联合试运转，大型井工矿客观物理建设周期长达<strong>48—60个月</strong>。这意味着刘三圪旦与嘎鲁图是典型的“2028—2030年远期接力棒”，无法在2026—2027年立即贡献产量。</p>
+<p><strong>鄂尔多斯刘三圪旦（1,000万吨）与嘎鲁图（1,200万吨）的产能置换指标与核准建设周期</strong>：</p>
+<ul>
+<li>虽然霍林河一号（700万吨）与刘三圪旦（1,000万吨）已取得采矿许可证，嘎鲁图（800—1,200万吨）正全力冲刺核准，但国家发改委对新建特大型井工煤矿严守“产能置换指标购买+高标准环评水保+超深立井开拓”铁律。从全面开工到立井掘砌到底、巷道贯通、首采工作面联合试运转，大型井工矿客观物理建设周期长达<strong>48—60个月</strong>。这意味着刘三圪旦与嘎鲁图是典型的“2028—2030年远期接力棒”，无法在2026—2027年立即贡献产量。</li>
+</ul>
 </li>
 <li>
-<p><strong>山东深部矿井（万福煤矿、赵楼煤矿）的冲击地压动态监管限产风险</strong>：
-   * 万福煤矿虽已投产达产，但作为冲积层超650米的千米深部冲击地压矿井，国家矿山安全监察局对其执行最高等级的防冲监测标准（微震监测一旦超标必须立即停面卸压），导致其单面推进速度存在刚性上限，无法像陕蒙煤矿那样超能力组织生产。</p>
+<p><strong>山东深部矿井（万福煤矿、赵楼煤矿）的冲击地压动态监管限产风险</strong>：</p>
+<ul>
+<li>万福煤矿虽已投产达产，但作为冲积层超650米的千米深部冲击地压矿井，国家矿山安全监察局对其执行最高等级的防冲监测标准（微震监测一旦超标必须立即停面卸压），导致其单面推进速度存在刚性上限，无法像陕蒙煤矿那样超能力组织生产。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -2082,44 +2640,48 @@
 <p>算清了存量 173.88 亿元的归母常态 Owner Earnings 底盘后，更关键的问题来了：公司目前每年额外砸下去的 <strong>95—110 亿元扩产性 CapEx</strong>，究竟是在烧钱打水漂，还是在修筑下一座印钞厂？</p>
 <p>我们拒绝把远期还没影的规划算进底盘，只挑出目前<strong>已经拿到核准/采矿证、工程进度过半或已进入投料试车倒计时的四大高确定性增量项目 + 存量债务降杠杆节息红利</strong>，逐一测算它们在达产消化后对归母常态盈利底盘的垫高幅度：</p>
 <ul>
-<li><strong>增量引擎 ①：新疆准东·五彩湾四号露天矿（一期 1,000 万吨满产并向二期 2,300 万吨/年爬坡，持股 51%）</strong></li>
 <li>
-<p><strong>硬核参数</strong>：探明地质储量超 41 亿吨，一期 1,000 万吨已于 2025 年见煤试运转并在 2026 年放量，二期扩建至 2,300 万吨/年为国家首批产能储备示范矿井。依托极低剥采比，新疆能化 2025 年吨煤销售成本仅 <strong>77.41 元/吨</strong>。</p>
+<p><strong>增量引擎 ①：新疆准东·五彩湾四号露天矿（一期 1,000 万吨满产并向二期 2,300 万吨/年爬坡，持股 51%）</strong></p>
+<ul>
+<li><strong>硬核参数</strong>：探明地质储量超 41 亿吨，一期 1,000 万吨已于 2025 年见煤试运转并在 2026 年放量，二期扩建至 2,300 万吨/年为国家首批产能储备示范矿井。依托极低剥采比，新疆能化 2025 年吨煤销售成本仅 <strong>77.41 元/吨</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>增量贡献精算</strong>：相比 2025 年初见煤基数，五彩湾四号全面达产后将净增约 <strong>1,800—2,000 万吨/年</strong> 超低成本商品煤。按坑口及疆内配套转化均价 205 元/吨、完全成本 85 元/吨测算，单吨税前利润达 120 元/吨，单吨净利约 <strong>95—100 元/吨</strong>，100% 口径年新增净利润约 <strong>18.5 亿元</strong>；按 51% 持股比例，每年新增<strong>归母净利润约 9.4 亿元</strong>，加回露天矿折旧扣除极低维持性开支后，<strong>垫高归母常态 Owner Earnings 约 +11.5 亿元/年</strong>。</p>
 </li>
 <li>
 <p><strong>增量引擎 ②：内蒙古荣信化工年产 80 万吨烯烃项目（2026 年 12 月投料试车，100% 权益）</strong></p>
-</li>
-<li>
-<p><strong>硬核参数</strong>：总投资 <strong>95.74 亿元</strong>，采用公司自主研发的超大型多喷嘴对置式（OMB）粉煤气化技术，年产 40 万吨高密度聚乙烯（HDPE）+ 40 万吨聚丙烯（PP），定于 <strong>2026 年 12 月正式投料试车</strong>，2027 年全面释放业绩。</p>
+<ul>
+<li><strong>硬核参数</strong>：总投资 <strong>95.74 亿元</strong>，采用公司自主研发的超大型多喷嘴对置式（OMB）粉煤气化技术，年产 40 万吨高密度聚乙烯（HDPE）+ 40 万吨聚丙烯（PP），定于 <strong>2026 年 12 月正式投料试车</strong>，2027 年全面释放业绩。</li>
+</ul>
 </li>
 <li>
 <p><strong>增量贡献精算</strong>：该项目就地吃掉内蒙基地廉价原料煤与自产甲醇。对标同处内蒙/宁东的宝丰能源与中煤蒙大烯烃项目，在常态油价（65—75 美元/桶）下，煤制聚烯烃单吨净利中枢约为 <strong>1,350—1,500 元/吨</strong>，80 万吨满产年化贡献<strong>归母净利润约 11.2 亿元</strong>；叠加每年约 6.0 亿元新建化工装置折旧、扣除仅约 1.5 亿元日常维护开支，<strong>垫高归母常态 Owner Earnings 约 +15.7 亿元/年</strong>。</p>
 </li>
 <li>
 <p><strong>增量引擎 ③：新疆准东年产 80 万吨煤制烯烃项目（总投资 198 亿元，直接吃 77 元/吨露天煤，持股 51%）</strong></p>
-</li>
-<li>
-<p><strong>硬核参数</strong>：直接建在五彩湾四号露天矿坑口旁，把 77 元/吨的准东煤就地转化为 7,000 元/吨的聚烯烃颗粒，彻底省去每吨 300 多元的“疆煤外运”铁路运费。其原料煤成本比宁东基地还要低 150—200 元/吨（折合每吨烯烃生产成本比全国同行低 <strong>500—700 元/吨</strong>，处于全球烯烃成本曲线最左端 1% 分位）。</p>
+<ul>
+<li><strong>硬核参数</strong>：直接建在五彩湾四号露天矿坑口旁，把 77 元/吨的准东煤就地转化为 7,000 元/吨的聚烯烃颗粒，彻底省去每吨 300 多元的“疆煤外运”铁路运费。其原料煤成本比宁东基地还要低 150—200 元/吨（折合每吨烯烃生产成本比全国同行低 <strong>500—700 元/吨</strong>，处于全球烯烃成本曲线最左端 1% 分位）。</li>
+</ul>
 </li>
 <li>
 <p><strong>增量贡献精算</strong>：达产后单吨烯烃净利可达 <strong>1,900—2,100 元/吨</strong>，100% 口径年净利润约 <strong>16.0 亿元</strong>；按 51% 持股比例贡献<strong>归母净利润约 8.2 亿元</strong>，加回归母折旧净额后，<strong>垫高归母常态 Owner Earnings 约 +11.0 亿元/年</strong>。</p>
 </li>
 <li>
 <p><strong>增量引擎 ④：陕蒙三大特大型低成本接力煤矿——霍林河一号（700 万吨）+ 鄂尔多斯刘三圪旦（1,000 万吨）+ 嘎鲁图（1,200 万吨）及兴和曹四夭特大型钼矿（持股 75%）</strong></p>
-</li>
-<li>
-<p><strong>硬核参数</strong>：三大现代化井工矿合计新增产能 <strong>2,900 万吨/年</strong>（预计吨煤完全成本仅 180—220 元/吨），扣除未来 5 年山东千米老矿自然衰减减产（约 500 万吨/年）后，全集团净增约 <strong>2,400 万吨/年</strong> 高毛利优质煤；同时亚洲最大单体钼矿之一的<strong>兴和曹四夭钼矿（100 万吨钼金属量）</strong>已于 2026 年 5 月取得采矿证并全面动工。</p>
+<ul>
+<li><strong>硬核参数</strong>：三大现代化井工矿合计新增产能 <strong>2,900 万吨/年</strong>（预计吨煤完全成本仅 180—220 元/吨），扣除未来 5 年山东千米老矿自然衰减减产（约 500 万吨/年）后，全集团净增约 <strong>2,400 万吨/年</strong> 高毛利优质煤；同时亚洲最大单体钼矿之一的<strong>兴和曹四夭钼矿（100 万吨钼金属量）</strong>已于 2026 年 5 月取得采矿证并全面动工。</li>
+</ul>
 </li>
 <li>
 <p><strong>增量贡献精算</strong>：陕蒙净增 2,400 万吨商品煤（单吨净利约 150 元/吨）叠加曹四夭钼矿一期投产，按加权权益（约 75%—80%）每年可新增<strong>归母净利润约 31.5 亿元</strong>，<strong>垫高归母常态 Owner Earnings 约 +37.0 亿元/年</strong>。</p>
 </li>
 <li>
 <p><strong>增量引擎 ⑤：资本开支下台阶后的“百亿降债节息红利”</strong></p>
-</li>
+<ul>
 <li><strong>硬核参数</strong>：当上述在建大矿与烯烃项目在 2027—2029 年陆续建成投产，公司扩产性 CapEx 将自然回落，每年超百亿自由现金流将优先用于偿还母公司层面存量并购贷款与债券。按未来 3—4 年累计净压降归母有息负债 <strong>350—400 亿元</strong>、平均债务利率 3.0% 测算，每年可直接节省税前财务费用约 11.5 亿元，增厚<strong>归母税后净利润与 Owner Earnings 约 +8.8 亿元/年</strong>。</li>
+</ul>
+</li>
 </ul>
 <h4 id="_12">增量垫高三级台阶汇总表</h4>
 <div class="table-scroll-wrap"><table>
@@ -2388,19 +2950,27 @@
 </table></div>
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="2_6">2. 资产质量与采掘业特殊会计科目排雷：严苛保守藏富，还是激进美化？</h4><p>拿着放大镜逐项审视兖矿能源的底层会计账本，我们排查了煤炭采掘业最容易用来操纵利润的四大敏感科目，得出了极其硬核的审计证据：</p><ol>
-<li><strong>排雷一：固定资产折旧年限与安全生产费/维简费计提——煤价低谷期有没有通过少提安全费或拉长折旧来“粉饰利润”？</strong>
-   * <strong>机器折旧年限全行业最严苛</strong>：翻开附注，兖矿能源对房屋建筑物按10—30年折旧，运输工具按6—18年（远短于中国神华房屋10—55年、船舶25年的上限）；最关键的<strong>机器设备折旧年限设定为 2.5—25年</strong>！为什么要把下限设到罕见的 <strong>2.5年</strong>？因为山东千米深井与高强度综采工作面的截齿、刮板输送机、液压支架配件磨损极快，公司在会计上采取了近似加速折旧的严苛年限，绝不把报废铁疙瘩留在账上充资产。</li>
+<li><strong>排雷一：固定资产折旧年限与安全生产费/维简费计提——煤价低谷期有没有通过少提安全费或拉长折旧来“粉饰利润”？</strong><ul>
+<li><strong>机器折旧年限全行业最严苛</strong>：翻开附注，兖矿能源对房屋建筑物按10—30年折旧，运输工具按6—18年（远短于中国神华房屋10—55年、船舶25年的上限）；最关键的<strong>机器设备折旧年限设定为 2.5—25年</strong>！为什么要把下限设到罕见的 <strong>2.5年</strong>？因为山东千米深井与高强度综采工作面的截齿、刮板输送机、液压支架配件磨损极快，公司在会计上采取了近似加速折旧的严苛年限，绝不把报废铁疙瘩留在账上充资产。</li>
+</ul>
+</li>
 </ol><ul>
-<li><strong>安全费与维简费顶格提取，专项储备揭示“A股比H股藏富”的秘密</strong>：按照财政部与应急管理部规定，山东本部、鲁西矿业、菏泽能化（赵楼、万福）多座矿井属于千米深井、冲击地压或高瓦斯矿井，安全生产费提取标准高达 <strong>30—50元/吨</strong>（陕蒙及新疆露天矿为15—30元/吨），外加 <strong>8.5—10.5元/吨</strong> 的维简费。在2025年煤价下跌20%的寒冬里，公司有没有少提安全费？<strong>分文未少！</strong> 2025年公司按产量刚性计提的安全费与维简费超过60亿元，期末所有者权益中的 <strong>“专项储备”</strong> 保持在数十亿元充裕水位（境内外会计准则差异调节表显示，2024年末与2025年末专项储备准则调节项稳定在-2,470万元与-2,298万元）。</li>
+<li><strong>安全费与维简费顶格提取，专项储备揭示“A股比H股藏富”的秘密</strong>：按照财政部与应急管理部规定，山东本部、鲁西矿业、菏泽能化（赵楼、万福）多座矿井属于千米深井、冲击地压或高瓦斯矿井，安全生产费提取标准高达 <strong>30—50元/吨</strong>（陕蒙及新疆露天矿为15—30元/吨），外加 <strong>8.5—10.5元/吨</strong> 的维简费。在2025年煤价下跌20%的寒冬里，公司有没有少提安全费？<strong>分文未少！</strong> 2025年公司按产量刚性计提的安全费与维简费超过60亿元，期末所有者权益中的 <strong>“专项储备”</strong> 保持在数十亿元充裕水位（境内外会计准则差异调节表显示，2024年末与2025年末专项储备准则调节项稳定在-2,470万元与-2,298万元）。<ul>
 <li>更值得买方高度重视的是 <strong>中国会计准则（CAS，A股）与国际财务报告准则（IFRS，H股）的折旧记账铁律差异</strong>：在A股准则下，兖矿能源每挖一吨煤提取的安全费和维简费直接计入当期成本，当拿这笔专项储备去买井下安全设备形成固定资产时，<strong>在转固当月一次性100%全额计提累计折旧（账面净值瞬间归零）</strong>！而在H股（IFRS）准则下，只有实际发生安全费用时才计入损益，形成设备则按正常年限慢慢折旧。这直接导致<strong>兖矿能源A股报表里的成本比H股更高、利润比H股更保守</strong>！</li>
+</ul>
+</li>
 </ul><ol start="2">
-<li><strong>排雷二：采矿权无形资产摊销与百亿级“预计负债（矿山弃置与塌陷复垦）”计提充分度</strong>
-   * <strong>采矿权产量法摊销与2025年销售费用大降41.33%的真相</strong>：公司对主力矿井采矿权严格采用 <strong>“产量法”</strong> 摊销，产量越高摊销越多。细心的投资者会发现，2025年兖矿能源销售费用从47.13亿元暴降 <strong>41.33%</strong> 至 <strong>28.86亿元</strong>——这难道是人为砍费用调节利润？穿透附注第6注释可知：这是由于国家矿业权出让收益征收新规出台，公司依据法定新规冲回了以前年度超额预提的采矿权出让收益（以前年度计提时进销售费用，冲回时按原路径冲减销售费用），并在年报显著位置做了全透明专项说明。这恰恰证明了公司以前年度计提之保守！</li>
+<li><strong>排雷二：采矿权无形资产摊销与百亿级“预计负债（矿山弃置与塌陷复垦）”计提充分度</strong><ul>
+<li><strong>采矿权产量法摊销与2025年销售费用大降41.33%的真相</strong>：公司对主力矿井采矿权严格采用 <strong>“产量法”</strong> 摊销，产量越高摊销越多。细心的投资者会发现，2025年兖矿能源销售费用从47.13亿元暴降 <strong>41.33%</strong> 至 <strong>28.86亿元</strong>——这难道是人为砍费用调节利润？穿透附注第6注释可知：这是由于国家矿业权出让收益征收新规出台，公司依据法定新规冲回了以前年度超额预提的采矿权出让收益（以前年度计提时进销售费用，冲回时按原路径冲减销售费用），并在年报显著位置做了全透明专项说明。这恰恰证明了公司以前年度计提之保守！</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>预计负债（弃置费用）全行业最严</strong>：煤矿挖空后必须填平塌陷区、恢复植被。兖矿能源横跨全球两个环保复垦要求最严苛的地区：一是<strong>山东济宁、菏泽高人口密度基本农田保护区</strong>（地面每一亩耕地塌陷都必须支付真金白银的青苗补偿与生态复垦费），二是<strong>澳大利亚猎人谷矿区</strong>（受新南威尔士州严苛的《矿山闭坑生态恢复法案》约束）。公司在资产初始确认时，严格按折现模型将未来几十年的闭坑弃置支出确认为 <strong>“预计负债”（合并资产负债表上常年高达80亿—110亿元量级，仅兖煤澳洲账面闭坑复垦拨备就超过10亿澳元/约48亿元人民币）</strong>，且每年计提数亿元复垦折现利息计入财务费用，不存在任何隐瞒表外环保黑洞的行为。</li>
 </ul><ol start="3">
-<li><strong>排雷三：应收账款账龄、存货跌价与“零新增商誉”的干净底盘</strong>
-   * <strong>应收账款与坏账计提</strong>：公司煤炭销售严格执行“先款后货”或银行承兑汇票结算（2026Q3末合同负债高达83.98亿元即为明证），账面应收账款主要为大型国有火电厂、宝武山钢等直供钢厂的月度正常结算款，<strong>1年以内账龄占比超88%—90%</strong>；公司对500万元以上单项款项逐一独立测试，预期信用损失计提充分。</li>
+<li><strong>排雷三：应收账款账龄、存货跌价与“零新增商誉”的干净底盘</strong><ul>
+<li><strong>应收账款与坏账计提</strong>：公司煤炭销售严格执行“先款后货”或银行承兑汇票结算（2026Q3末合同负债高达83.98亿元即为明证），账面应收账款主要为大型国有火电厂、宝武山钢等直供钢厂的月度正常结算款，<strong>1年以内账龄占比超88%—90%</strong>；公司对500万元以上单项款项逐一独立测试，预期信用损失计提充分。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>商誉排雷</strong>：2023—2025年公司斥资超400亿元收购鲁西矿业、新疆能化、西北矿业，由于交易对手均为控股股东山东能源集团，在会计上100%适用 <strong>“同一控制下企业合并”</strong> 准则——全部按标的公司账面净资产入账，溢价部分直接冲减资本公积，<strong>没有在资产负债表上产生一分钱新增商誉</strong>！全集团账面商誉余额极小，未来绝无百亿商誉集中暴雷减值的风险。</li>
 </ul><ol start="4">
@@ -2416,9 +2986,9 @@
 </li>
 <li>
 <p><strong>兖矿能源</strong>：2024年研发费用 <strong>27.35亿元</strong>，2025年研发费用 <strong>33.98亿元</strong>——尽管手握大型OMB粉煤气化炉、高温费托合成催化剂、千米深井智能综采等大量完全符合资本化条件的国家级工程项目，但兖矿能源采取了近乎洁癖的会计政策：<strong>当期研发投入资本化率接近 0%，33.98亿元研发支出几乎100%全额费用化，当场从当年利润表里硬生生扣掉！</strong></p>
-</li>
-<li>
-<p><strong>算一笔还原账</strong>：如果兖矿能源学中煤能源和陕西煤业，把25%的研发投入（约 <strong>8.5亿元</strong>）做资本化处理，那么2025年兖矿能源的税前利润将直接增加8.5亿元，归母净利润将凭空多出约 <strong>6.5亿—7.0亿元</strong>！</p>
+<ul>
+<li><strong>算一笔还原账</strong>：如果兖矿能源学中煤能源和陕西煤业，把25%的研发投入（约 <strong>8.5亿元</strong>）做资本化处理，那么2025年兖矿能源的税前利润将直接增加8.5亿元，归母净利润将凭空多出约 <strong>6.5亿—7.0亿元</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>【会计成色终极定性结论】</strong>：
@@ -2780,36 +3350,40 @@
 <h4 id="2-reverse-sotp">2. Reverse SOTP 拆骨估值法：在当前的股价里，哪些资产是白送的“免费期权”？</h4>
 <p>为了让估值推演彻底落地，我们用最严苛的一级市场并购视角，把兖矿能源拆成<strong>五块独立的骨头</strong>，逐一称量它们的<strong>无负债归母企业价值（Unlevered Attributable EV，即不含现金与有息债务的纯经营资产归母价值）</strong>，最后一次性扣除全集团归母净债务及永续债（<strong>1,084.05 亿元</strong>），看看当前二级市场到底是怎么给这五块资产标价的：</p>
 <ul>
-<li><strong>第一块骨头：兖煤澳洲（03668.HK / YAL.AX，持股 62.26%）——亚太海运煤公开市场明牌资产</strong></li>
 <li>
-<p><strong>交叉验证与拆骨称重</strong>：截至 2026 年 11 月，兖煤澳洲（总股本 13.20 亿股）港股股价约 <strong>30.00 港元/股</strong>（澳交所约 5.56 澳元/股），100% 公开市场总市值约 <strong>396.0 亿港元（折合人民币 363.50 亿元）</strong>。兖矿能源持有 <strong>62.26%</strong> 控股权，对应<strong>公开市场持股市值为 226.32 亿元人民币</strong>。</p>
+<p><strong>第一块骨头：兖煤澳洲（03668.HK / YAL.AX，持股 62.26%）——亚太海运煤公开市场明牌资产</strong></p>
+<ul>
+<li><strong>交叉验证与拆骨称重</strong>：截至 2026 年 11 月，兖煤澳洲（总股本 13.20 亿股）港股股价约 <strong>30.00 港元/股</strong>（澳交所约 5.56 澳元/股），100% 公开市场总市值约 <strong>396.0 亿港元（折合人民币 363.50 亿元）</strong>。兖矿能源持有 <strong>62.26%</strong> 控股权，对应<strong>公开市场持股市值为 226.32 亿元人民币</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>防重复计算校准</strong>：由于兖煤澳洲账上躺着约 20.3 亿澳元（约 93 亿元人民币）净现金，其中归属于兖矿能源母公司的 <strong>58.00 亿元</strong> 净现金已经被我们算进了集团的“198.00 亿元归母超额现金”里。因此，为严防一女二嫁重复计算，剔除这 58.00 亿元现金后，市场给兖煤澳洲三大世界级露天矿（Moolarben、MTW、HVO，年产 4,402 万吨权益商品煤）标出的<strong>无负债纯矿山归母经营价值仅为 168.32 亿元</strong>（仅相当于其常态归母 EBITDA 约 55 亿元的 <strong>3.1 倍 EV/EBITDA</strong>，本身就已被极度低估；若按保守 5.5 倍 EV/EBITDA 重估则价值 <strong>302.50 亿元</strong>）。</p>
 </li>
 <li>
 <p><strong>第二块骨头：陕蒙基地 + 西北矿业低成本现金牛煤矿群（存量年产 8,047 万吨 + 在建 2,900 万吨）——全集团最值钱的“压舱皇冠”</strong></p>
-</li>
+<ul>
 <li><strong>拆骨称重</strong>：涵盖陕西未来能源金鸡滩煤矿（持股 74%，吨煤成本 127.75 元）、鄂尔多斯转龙湾与营盘壕煤矿（持股 100%，成本 175.10 元）、昊盛石拉乌素与内蒙矿业（成本 237—242 元）、西北矿业 12 座主力矿井（持股 51%，产量 3,381 万吨，成本 280.11 元），以及正在核准建设的刘三圪旦（1,000 万吨）、嘎鲁图（1,200 万吨）、霍林河一号（700 万吨）。</li>
-<li>
-<p>这块资产包拥有近百亿吨优质动力煤与配焦煤储量，存量常态每年贡献<strong>归母无杠杆 EBITDA 高达 135.00 亿元</strong>（归母净利超 82 亿元）。参照陕西煤业（601225.SH）估值倍数及近年内蒙古、陕西一级市场采矿权挂牌成交价（仅 2025 年收购西北矿业 51% 股权现金对价即达 140.66 亿元、对应承债 EV 超 300 亿元），按存量 <strong>10 倍归母 EBITDA（1,350 亿元）+ 三座在建特大新矿采矿权及已投工程保守作价（220 亿元）</strong>，该板块<strong>无负债归母企业价值保守达 1,570.00 亿元</strong>。</p>
+<li>这块资产包拥有近百亿吨优质动力煤与配焦煤储量，存量常态每年贡献<strong>归母无杠杆 EBITDA 高达 135.00 亿元</strong>（归母净利超 82 亿元）。参照陕西煤业（601225.SH）估值倍数及近年内蒙古、陕西一级市场采矿权挂牌成交价（仅 2025 年收购西北矿业 51% 股权现金对价即达 140.66 亿元、对应承债 EV 超 300 亿元），按存量 <strong>10 倍归母 EBITDA（1,350 亿元）+ 三座在建特大新矿采矿权及已投工程保守作价（220 亿元）</strong>，该板块<strong>无负债归母企业价值保守达 1,570.00 亿元</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>第三块骨头：新疆能化（五彩湾四号 2,300 万吨级超低成本露天矿 + 存量矿井，持股 51%）——全国成本曲线前 1% 的百年煤海</strong></p>
-</li>
-<li>
-<p><strong>拆骨称重</strong>：手握准东五彩湾四号露天矿（探明储量 41 亿吨，吨煤销售成本仅 <strong>77.41 元/吨</strong>，一期 1,000 万吨已投产放量并向 2,300 万吨扩建）。2023 年收购新疆能化 51% 股权时仅按早期账面评估就付了 <strong>81.12 亿元</strong> 现金；如今五彩湾四号已正式见煤出效益，达产后仅此一矿可采逾百年、年贡献归母 EBITDA 超 16 亿元。按一级市场准东露天矿权重置价值与 15 倍稳态现金流保守称重，<strong>51% 归母无负债企业价值至少为 240.00 亿元</strong>。</p>
+<ul>
+<li><strong>拆骨称重</strong>：手握准东五彩湾四号露天矿（探明储量 41 亿吨，吨煤销售成本仅 <strong>77.41 元/吨</strong>，一期 1,000 万吨已投产放量并向 2,300 万吨扩建）。2023 年收购新疆能化 51% 股权时仅按早期账面评估就付了 <strong>81.12 亿元</strong> 现金；如今五彩湾四号已正式见煤出效益，达产后仅此一矿可采逾百年、年贡献归母 EBITDA 超 16 亿元。按一级市场准东露天矿权重置价值与 15 倍稳态现金流保守称重，<strong>51% 归母无负债企业价值至少为 240.00 亿元</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>第四块骨头：近 1,000 万吨现代煤化工集群（鲁南化工 100% + 未来能源煤制油 74% + 荣信 80 万吨烯烃 100% + 准东烯烃 51% 在建）</strong></p>
-</li>
-<li>
-<p><strong>拆骨称重</strong>：存量 977.5 万吨产能（2025 年逆势净赚 15.8 亿元，2026H1 半年净赚 11.4 亿元）加上 2026 年 12 月正式投料的荣信化工 80 万吨聚烯烃（总投资 95.74 亿元），稳态每年可贡献<strong>归母无杠杆 EBITDA 约 58.00 亿元</strong>（归母净利约 30 亿元）。仅按化工装置账面固定资产与在建工程净值（约 1.0 倍 PB 重置成本 / 7.8 倍 EV/EBITDA）保守称重，<strong>无负债归母企业价值为 450.00 亿元</strong>。</p>
+<ul>
+<li><strong>拆骨称重</strong>：存量 977.5 万吨产能（2025 年逆势净赚 15.8 亿元，2026H1 半年净赚 11.4 亿元）加上 2026 年 12 月正式投料的荣信化工 80 万吨聚烯烃（总投资 95.74 亿元），稳态每年可贡献<strong>归母无杠杆 EBITDA 约 58.00 亿元</strong>（归母净利约 30 亿元）。仅按化工装置账面固定资产与在建工程净值（约 1.0 倍 PB 重置成本 / 7.8 倍 EV/EBITDA）保守称重，<strong>无负债归母企业价值为 450.00 亿元</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>第五块骨头：山东本部及鲁西/菏泽稀缺精煤基地 + 兴和曹四夭 100 万吨级特大钼矿（持股 75%）+ 加拿大钾矿 + 德国沙尔夫 &amp; 物泊科技（拟港股分拆）</strong></p>
-</li>
+<ul>
 <li><strong>拆骨称重</strong>：</li>
+</ul>
+</li>
 </ul>
 <ol>
 <li>
@@ -2938,7 +3512,7 @@
   相比<strong>中国神华</strong>（A 股约 13—14 倍 PE、1.85 倍 PB，胜在低负债与煤电路港一体化极高确定性，但产能增量有限）、<strong>陕西煤业</strong>（A 股约 11—12 倍 PE、2.1 倍 PB，胜在陕北纯低成本煤矿与高分红，但缺乏化工与新疆/海外增量弹性）、<strong>中煤能源</strong>（A 股约 9—10 倍 PE、1.1 倍 PB，H 股约 0.7 倍 PB），兖矿能源当前的独特身位是：<strong>“短期资产负债表因 400 亿现金并购显得最重、但未来 3—5 年低成本产能（新疆五彩湾+陕蒙三矿+荣信/准东烯烃）释放弹性最大、且 H 股真实股东盈余回报率（16.76%）冠绝全场”的高赔率进攻型龙头</strong>。</p>
 </li>
 </ul>
-<h4 id="2-a-h">2. A 股与 H 股分档击球操作锚点（精确到价格区间与触发条件）</h4>
+<h4 id="2-a-h">2. A 股与 H 股分档击球操作锚点（对齐主榜最新终审口径）</h4>
 <p>基于“严守安全边际、优先击打高赔率 H 股、在 A 股坚持左侧苛刻出价”的买方原则，制定如下四档实战击球坐标：</p>
 <div class="table-scroll-wrap"><table>
 <thead>
@@ -2953,21 +3527,21 @@
 <tbody>
 <tr>
 <td style="text-align: left;"><strong>🥇 第一档：黄金重锤区 (闭眼重仓 / 极度低估)</strong></td>
-<td style="text-align: center;"><strong>≤ 9.50 港元/股</strong> <em>(折合人民币 ≤ 8.72 元，隐含总市值 ≤ 875 亿元)</em></td>
-<td style="text-align: center;"><strong>≤ 13.80 元/股</strong> <em>(隐含总市值 ≤ 1,385 亿元，真实 PB ≤ 1.39 倍)</em></td>
-<td style="text-align: left;"><strong>H 股</strong>：常态归母 OE 回报率 <strong>≥ 19.9%</strong>（5年回本），常态保底股息率 <strong>≥ 6.88%</strong>（税前），连陕蒙煤矿都打八折甩卖；<br/><strong>A 股</strong>：常态归母 OE 回报率 <strong>≥ 12.5%</strong>，常态保底股息率 <strong>≥ 4.35%</strong>，连存量拆骨底线都打出 22% 折价安全垫</td>
+<td style="text-align: center;"><strong>≤ 9.50 港元/股</strong> <em>(折合人民币 ≤ 8.72 元，隐含总市值 ≤ 876 亿元)</em></td>
+<td style="text-align: center;"><strong>≤ 13.50 元/股</strong> <em>(隐含总市值 ≤ 1,355 亿元，真实 PB ≤ 1.36 倍)</em></td>
+<td style="text-align: left;"><strong>H 股</strong>：股权常态归母 OE 回报率 <strong>≥ 19.86%</strong>（5年回本，归母 EV 回报 ≥ 8.87%），常态保底股息率 <strong>≥ 6.88%</strong>（税前）；<br/><strong>A 股</strong>：股权常态归母 OE 回报率 <strong>≥ 12.83%</strong>（归母 EV 回报 ≥ 7.13%），常态保底股息率 <strong>≥ 4.44%</strong>，五彩湾+煤化工全面倒贴</td>
 <td style="text-align: left;"><strong>重锤击球</strong>：通常在宏观恐慌或煤价季节性淡季砸盘时出现，此时双极限压力测试底线已彻底封死下行空间，果断分批打满核心重仓</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🥈 第二档：左侧收息底仓区 (当前 H 股所处水位！)</strong></td>
-<td style="text-align: center;"><strong>9.50 — 11.80 港元/股</strong> <em>(当前 <strong>11.26 港元</strong> 正处该区间中轨)</em></td>
-<td style="text-align: center;"><strong>13.80 — 15.80 元/股</strong> <em>(需等待 A 股较当前 17.29 元回调 8%—15%)</em></td>
-<td style="text-align: left;"><strong>H 股（当前水位）</strong>：常态归母 OE 回报率 <strong>16.0%—19.9%</strong>（当前 <strong>16.76%</strong>），常态股息率 <strong>5.5%—6.8%</strong>（2026 全年预期股息率近 <strong>7.0%</strong>），煤化工与山东本部及大钼矿全白送；<br/><strong>A 股</strong>：常态 PE 11.5—13.1 倍</td>
-<td style="text-align: left;"><strong>H 股可直接建立标准底仓</strong>，边拿近 6%—7% 股息边等新疆与荣信烯烃增量兑现；<strong>A 股当前（17.29元）高于本区间，坚持“不回调至 15.8 元以下不轻易重仓追高”</strong></td>
+<td style="text-align: center;"><strong>10.20 — 12.00 港元/股</strong> <em>(当前 <strong>11.26 港元</strong> 正处该区间中轨，较A股折价40%)</em></td>
+<td style="text-align: center;"><strong>14.50 — 15.80 元/股</strong> <em>(需等待 A 股较当前 17.29 元回调 8.6%—16.1%)</em></td>
+<td style="text-align: left;"><strong>H 股（当前水位）</strong>：股权常态归母 OE 回报率 <strong>15.72%—18.50%</strong>（当前 <strong>16.76%</strong>），常态股息率 <strong>5.44%—6.41%</strong>（2026 全年预期股息率近 <strong>7.0%</strong>），煤化工与山东本部及大钼矿全白送；<br/><strong>A 股</strong>：股权常态 OE 回报 <strong>10.96%—11.95%</strong>（新疆 77 元/吨露天矿 + 煤化工 26Q3 暴增 +88%）</td>
+<td style="text-align: left;"><strong>H 股可直接建立标准底仓</strong>，边拿近 6%—7% 股息边等新疆与荣信烯烃增量兑现；<strong>A 股当前（17.29元）高于本区间，坚持“不回调至 14.50—15.80 元不轻易重仓追高”</strong></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🥉 第三档：右侧基本面共振加仓区 (当前 A 股所处观察水位)</strong></td>
-<td style="text-align: center;"><strong>11.80 — 14.00 港元/股</strong></td>
+<td style="text-align: center;"><strong>12.00 — 14.00 港元/股</strong></td>
 <td style="text-align: center;"><strong>15.80 — 18.00 元/股</strong> <em>(当前 <strong>17.29 元</strong> 处于该档位)</em></td>
 <td style="text-align: left;">存量拆骨价值在 A 股已平价反映，此时不再赚“低估修复”的钱，而是赚“增量工程投产 + 煤价/化工顺周期向上”的业绩跃迁钱</td>
 <td style="text-align: left;"><strong>右侧加仓必须满足两项硬条件之一</strong>：① 2026年12月荣信80万吨烯烃顺利投产满负荷且五彩湾四号放量带动单季扣非净利站稳 <strong>42亿元+</strong>；② 资产负债表全口径有息负债单季净压降超 <strong>50亿元</strong></td>
@@ -2982,20 +3556,24 @@
 </tbody>
 </table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3_8">3. 一旦触发必须无条件清仓离场的“三条基本面死刑证伪红线”</h4><p>买方投资不仅要知道什么时候买，更要在进场第一天就把“认错逃生门”焊死。在未来持有跟踪过程中，只要出现以下任何一条基本面证伪信号，说明我们的核心投资逻辑已遭破坏，必须<strong>无条件清仓离场，绝不抱侥幸心理补仓</strong>：</p><ul>
-<li><strong>☠️ 死刑红线一：【大股东抽血失控】母公司山东能源集团再次发起“超 50 亿元纯现金 + 只卖 51% 股权 + 高成本老旧煤矿或亏损新能源资产”的关联并购，或山能财务公司出现存款提取受限征兆</strong></li>
 <li>
-<p><strong>证伪逻辑</strong>：目前公司 1,415 亿元有息负债与 758 亿元少数股东权益已是承压上限，好在之前买的鲁西、新疆、西北矿业资源底子够硬。如果管理层在 2026—2028 年准东煤化与陕蒙新矿资本开支高峰期，不顾小股东死活，继续掏上百亿真金白银去接盘集团体内剩余的衰老高成本矿井或低效非煤资产，导致有息负债不降反升突破 <strong>1,600 亿元</strong>，说明公司沦为大股东的“提款机”，治理底线彻底崩塌，立即清仓！</p>
+<p><strong>☠️ 死刑红线一：【大股东抽血失控】母公司山东能源集团再次发起“超 50 亿元纯现金 + 只卖 51% 股权 + 高成本老旧煤矿或亏损新能源资产”的关联并购，或山能财务公司出现存款提取受限征兆</strong></p>
+<ul>
+<li><strong>证伪逻辑</strong>：目前公司 1,415 亿元有息负债与 758 亿元少数股东权益已是承压上限，好在之前买的鲁西、新疆、西北矿业资源底子够硬。如果管理层在 2026—2028 年准东煤化与陕蒙新矿资本开支高峰期，不顾小股东死活，继续掏上百亿真金白银去接盘集团体内剩余的衰老高成本矿井或低效非煤资产，导致有息负债不降反升突破 <strong>1,600 亿元</strong>，说明公司沦为大股东的“提款机”，治理底线彻底崩塌，立即清仓！</li>
+</ul>
 </li>
 <li>
 <p><strong>☠️ 死刑红线二：【分红契约违约与造血崩塌】公司在非极端不可抗力下公然打破《2026—2028年股东回报规划》中“现金分红不低于扣除法定储备后净利润 50%”的底线承诺，或连续两年“剔除财务公司口径的实体自由现金流（OCF - CapEx）”为负且无法覆盖刚性利息</strong></p>
-</li>
-<li>
-<p><strong>证伪逻辑</strong>：兖矿能源过去 28 年最赢得买方信任的勋章就是累计分红超 940 亿元、分红融资比高达 9.7 倍。如果公司在没有遭遇全行业亏损的情况下单方面撕毁 50% 分红底线，或者新疆准东煤制烯烃（198 亿投资）、加拿大钾矿出现严重工程超支烂尾，吞噬掉全部经营现金流甚至迫使公司在低位启动大额股权配售摊薄，说明资本配置能力彻底证伪，立即清仓！</p>
+<ul>
+<li><strong>证伪逻辑</strong>：兖矿能源过去 28 年最赢得买方信任的勋章就是累计分红超 940 亿元、分红融资比高达 9.7 倍。如果公司在没有遭遇全行业亏损的情况下单方面撕毁 50% 分红底线，或者新疆准东煤制烯烃（198 亿投资）、加拿大钾矿出现严重工程超支烂尾，吞噬掉全部经营现金流甚至迫使公司在低位启动大额股权配售摊薄，说明资本配置能力彻底证伪，立即清仓！</li>
+</ul>
 </li>
 <li>
 <p><strong>☠️ 死刑红线三：【核心低成本资产物理与政策毁损】澳大利亚联邦/州政府对兖煤澳洲开征惩罚性“暴利没收税”或吊销莫拉本（Moolarben）/MTW 采矿权，或陕蒙/新疆核心主力大矿发生特大安全事故导致全集团吨煤销售成本永久性跳升至 400 元/吨以上</strong></p>
-</li>
+<ul>
 <li><strong>证伪逻辑</strong>：兖矿能源抗击周期寒冬的唯一真盾牌，就是新疆 77 元/吨、陕西 128 元/吨、内蒙 175—240 元/吨的极致低成本矿群加上兖煤澳洲的高弹性现金流。一旦这两大支柱因海外极端排华/环保法案或国内特大矿难遭遇不可逆的产能瘫痪与成本暴增，其相对于神华、陕煤的进攻弹性将荡然无存，1,415 亿债务将从杠杆变成绞索，立即清仓！</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>聪明人买股票前，总是先拿红笔把“怎么死”写在大门上——对于兖矿能源来说，煤价跌个百八十块钱根本要不了它的命，真正能要它命的只有一件事：大股东把手伸进上市公司的钱袋子里停不下来，逼着它一边借新债替母公司擦屁股、一边在沙漠里乱铺烂尾工程。只要大股东管住手、新疆和内蒙的大铲子继续挖出 77 块和 150 块一吨的黑金，坐在 H 股每年收着六七个点股息的股东，夜里是可以把枕头垫高睡大觉的。</p></div></div></div></div>
 
 
@@ -3119,22 +3697,22 @@
 <td style="text-align: left;"><strong>正面</strong>：沃尔沃 / 福特（子公司市值与隐蔽资产白送）+ 克莱斯勒（单季利润爆发拐点）<br/><strong>反面</strong>：埃克森美孚当年的“多元恶化”</td>
 <td style="text-align: left;"><strong>【周期反转 + 隐蔽资产 + 成本左移成长】三合一</strong>！2026Q3 单季扣非净利 39.37 亿元（同比+88.44%）；62.26% 兖煤澳洲股权值 226.3 亿，鑫泰煤炭拍出 30.5 亿印证矿权巨大重估价值；煤化一体属真协同</td>
 <td style="text-align: left;">需警惕曹四夭特大型钼矿后续百亿级跨界开发开支超支，严防任何偏离煤化主航道的“多元恶化”苗头</td>
-<td style="text-align: left;"><strong>【直接重锤 H 股 / A 股等回调至 15.8 元以下】</strong><br/>强烈看多 2026Q4 荣信 80 万吨烯烃投产与新疆五彩湾四号放量带来的业绩+估值双击，首选高弹性 H 股</td>
+<td style="text-align: left;"><strong>【直接重锤 H 股（<code>10.20—12.00港元</code>建仓/<code>≤9.50港元</code>重锤） / A 股等 <code>14.50—15.80元</code>建仓、<code>≤13.50元</code>重锤】</strong><br/>强烈看多 2026Q4 荣信 80 万吨烯烃投产与新疆五彩湾四号放量带来的业绩+估值双击，首选高弹性 H 股</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🕰️ 霍华德·马克斯 &amp; 塞思·卡拉曼</strong><br/><em>(Marks &amp; Klarman)</em></td>
 <td style="text-align: left;"><strong>正面</strong>：周期出清后的剥离残值（Stub Value）套利与低息法币负债正利差杠铃</td>
 <td style="text-align: left;">2025 年煤价跌 20% 极限测试下仍赚 83.8 亿、分红 50.2 亿；1,415 亿境内 2.5%—3.0% 低息人民币债务无逼仓风险；H 股三大煤炭基地已覆盖 93.25% True EV，白送 746.8 亿化工+山东精煤+钼矿</td>
 <td style="text-align: left;">若在准东烯烃与内蒙新矿 CapEx 峰值期（每年 180—200 亿）遭遇全球煤价二次崩盘且母公司继续抽血，自由现金流将阶段性承压</td>
-<td style="text-align: left;"><strong>【直接重锤 H 股（跨市场折价套利首选）】</strong><br/>0.91x 表观 PB 破净 H 股较 A 股折价 40.20%，下有 5%—7% 股息与矿权重置价值托底，上有 746.8 亿免费期权，赔率极度不对称</td>
+<td style="text-align: left;"><strong>【直接重锤 H 股（跨市场折价套利首选）】</strong><br/>0.91x 表观 PB 破净 H 股较 A 股折价 40.20%，落入 <strong><code>10.20—12.00港元</code></strong> 建仓区（<code>≤9.50港元</code> 重锤），下有 5%—7% 股息与矿权重置价值托底，上有 746.8 亿免费期权，赔率极度不对称</td>
 </tr>
 </tbody>
 </table></div>
 <blockquote>
-<p>🏆 <strong>【圆桌会终极合议裁决（4 票全票通过看多 H 股，其中 2 票“直接重锤 H 股”、2 票“左侧收息建仓 H 股”；对 A 股合议为“合理偏保守、等回调至 15.8 元以下或去杠杆右侧信号”）】</strong>
+<p>🏆 <strong>【圆桌会终极合议裁决（4 票全票通过看多：H 股折价更大、<code>10.20—12.00港元</code> 直接建仓/<code>≤9.50港元</code> 重锤；A 股严守 <code>14.50—15.80元</code> 建仓 / <code>≤13.50元</code> 重锤）】</strong>
 四位大师虽然视角各异，但在两项核心结论上达成了高度共识：
 1. <strong>生意本质与内生进化获全票认可</strong>：兖矿能源绝非坐吃山空的山东老煤矿，而是用<strong>新疆（77 元/吨）与陕蒙（128—175 元/吨）顶级增量矿井置换千米深井老矿</strong>、用<strong>千万吨级自主现代煤化工锁死坑口劣质煤转化利润</strong>、手握<strong>兖煤澳洲国际高卡现货王牌</strong>的跨国能源资源寡头。2026Q3 单季扣非净利暴增 <strong>88.44%</strong> 与前三季度 <strong>+84.25 亿元自由现金流</strong>，已吹响“产能收获+成本左移”的号角。
-2. <strong>最佳击球工具毫无疑问指向 H 股（01171.HK）</strong>：面对母公司过去三年 400 亿现金关联并购留下的 <strong>1,415.06 亿元有息负债</strong> 与 <strong>32%—35% 少数股东损益漏出</strong>，A 股（17.29 元，1,735.4 亿市值，与存量拆骨净值 1,784.3 亿基本平价）给出的安全边际属于合理偏保守；而大幅折价 <strong>40.20%</strong>、表观破净交易（0.91x PB）、<strong>股权端常态归母 Owner Earnings 收益率高达 16.76%（归母穿透 True EV 回报率 8.20%、合并无杠杆 True EV 回报率 8.90%）</strong>、常态税前股息率达 <strong>5.8%—7.0%</strong>、且免费白送 <strong>746.77 亿元</strong> 现代煤化工+山东精煤+特大钼矿期权的 <strong>兖矿能源 H 股（01171.HK，11.26 港元）</strong>，已经将高负债与少数股东折价充分计入股价，是当前兼具高息防御底垫与资源成长进攻弹性的黄金击球标的！</p>
+2. <strong>最佳击球工具毫无疑问指向 H 股（01171.HK）</strong>：面对母公司过去三年 400 亿现金关联并购留下的 <strong>1,415.06 亿元有息负债</strong> 与 <strong>32%—35% 少数股东损益漏出</strong>，A 股（17.29 元，1,735.4 亿市值）高于第二档建仓区（<code>14.50—15.80元</code>），应坚持不回调至 <strong><code>≤15.80元</code></strong> 不追高（回踩 <strong><code>≤13.50元</code></strong> 第一档再重锤）；而大幅折价 <strong>40.20%</strong>、表观破净交易（0.91x PB）、正处第二档建仓区（<strong><code>10.20—12.00港元</code></strong>，重锤区 <strong><code>≤9.50港元</code></strong>）、<strong>股权端常态归母 Owner Earnings 收益率高达 16.76%</strong>、常态税前股息率达 <strong>5.8%—7.0%</strong>、且免费白送 <strong>746.77 亿元</strong> 现代煤化工+山东精煤+特大钼矿期权的 <strong>兖矿能源 H 股（01171.HK，11.26 港元）</strong>，是当前兼具高息防御底垫与资源成长进攻弹性的黄金击球标的！</p>
 </blockquote>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
@@ -3161,8 +3739,8 @@ ightarrow$ 【加速淘汰高成本对手、触发煤化工对冲的危中之机
 ightarrow$ 【唯一无法回避的真实硬约束】</strong>：过去三年母公司山东能源集团拿走了上市公司四百多亿现金，把鲁西矿业、新疆能化、西北矿业装进来，但每次都只卖五成多股权、自己留四成多。这导致兖矿能源合并报表每赚十块钱，就有三块多被“少数股东”分走；再加上山东千米深井每年必须花几十亿做冲击地压安全维护，这两块成本是实打实要从估值里扣掉的。</p>
 </li>
 </ul>
-<h3 id="4_2">4. 咱们到底该怎么买它、怎么赚它的钱？（实战操作底线）</h3>
-<p>怎么把“少数股东分钱”和“千亿负债”这两个硬约束彻底变成咱们的安全垫？答案简单到极致：<strong>坚决不买十七块多的A股，直接去买常年比A股打六折、还在破净交易的港股（H股，01171.HK）！</strong> 在港股一千亿出头的总市值下，扣掉它持有的两百多亿兖煤澳洲上市股权后，市场给它国内全部亿吨级煤矿、千万吨煤化工、山东精煤和百万吨特大型钼矿的合计标价只有八百亿出头——相当于买三大主力煤矿，直接零元白送你七百多亿的煤化工帝国和钼矿期权！哪怕在煤价谷底，港股也能给你提供五到七个点的丰厚股息率托底；平时拿着港股安心吃高息，唯一要盯紧的底线就是管理层必须兑现“每年净还债一百亿、不再搞大额纯现金关联收购”的承诺。</p>
+<h3 id="4_2">4. 咱们到底该怎么买它、怎么赚它的钱？（实战操作底线 · 主榜口径对齐）</h3>
+<p>怎么把“少数股东分钱”和“千亿负债”这两个硬约束彻底变成咱们的安全垫？答案简单到极致：<strong>坚决不追十七块多的 A 股，优先去买常年比 A 股打六折（折价约 40%）、还在破净交易的港股（H 股，01171.HK）！</strong> 在港股一千亿出头的总市值下，扣掉它持有的两百多亿兖煤澳洲上市股权后，市场给它国内全部亿吨级煤矿、千万吨煤化工、山东精煤和百万吨特大型钼矿的合计标价只有八百亿出头——相当于买三大主力煤矿，直接零元白送你七百多亿的煤化工帝国和钼矿期权！实战价格严格对齐主榜两档终审口径：<strong>H 股第二档正常建仓区 <code>10.20—12.00港元</code>（当前 <code>11.26港元</code> 正处中轨，可直接建底仓吃五到七个点税前股息），若砸破 <code>≤9.50港元</code> 第一档则重锤满仓；A 股（<code>600188.SH</code>）严守第二档 <code>14.50—15.80元</code> 才建仓、回踩 <code>≤13.50元</code> 第一档（股权常态 OE 回报超 <code>12.8%</code>、五彩湾与煤化工倒贴）再重手满配</strong>；平时拿着高息筹码，死盯管理层“每年净还债百亿、不再搞大额纯现金关联收购”的底线承诺即可。</p>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -3354,7 +3932,7 @@ ightarrow$ 【唯一无法回避的真实硬约束】</strong>：过去三年母
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《兖矿能源 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/兖矿能源 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《兖矿能源 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/兖矿能源 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3551,6 +4129,677 @@ ightarrow$ 【唯一无法回避的真实硬约束】</strong>：过去三年母
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        var globalMarketControllers = [];
+        var globalMarketMode = 'ALL';
+        try {
+          var savedMkt = localStorage.getItem('agy_lb_market_mode_v1');
+          if (savedMkt === 'ALL' || savedMkt === 'A' || savedMkt === 'H') globalMarketMode = savedMkt;
+        } catch(e) {}
+        var globalBarRefs = [];
+        var globalStats = { maxTotal: 0, maxA: 0, maxH: 0 };
+
+        function setGlobalMarketMode(mode) {
+          globalMarketMode = mode;
+          try { localStorage.setItem('agy_lb_market_mode_v1', mode); } catch(e) {}
+          globalMarketControllers.forEach(function(fn){ fn(mode); });
+          globalBarRefs.forEach(function(ref){
+            Object.keys(ref.btns).forEach(function(k){
+              ref.btns[k].classList.toggle('active', k === mode);
+            });
+            if (ref.badge) {
+              var labelMap = {
+                'ALL': '当前显示：A+H 统一全榜 (' + (globalStats.maxA + globalStats.maxH) + ' 席)',
+                'A': '当前显示：🇨🇳 仅 A 股 (' + globalStats.maxA + ' 席)',
+                'H': '当前显示：🇭🇰 仅 H 股/港股 (' + globalStats.maxH + ' 席)'
+              };
+              ref.badge.textContent = labelMap[mode] || '';
+            }
+          });
+        }
+
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = (hTexts.some(function(h){ return h.indexOf('实时排名') >= 0 || h.indexOf('市场与排名') >= 0 || h.indexOf('统一排名') >= 0; })) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('严苛排名') >= 0 || hTexts[0].indexOf('统一排名') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var countA = 0, countH = 0;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🛢️ 周期资源与能源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '⚙️ 高端制造与出海',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /(?:客观|客)\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var market = 'A';
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) || pxTxt.indexOf('港元') >= 0) {
+                market = 'H';
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /(?:今日\s*|\()([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /(?:常态回报|严苛EV常态回报|港股常态回报)\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (isNaN(oe)) oe = parseNum(oeTxt2, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /(?:实时股息|纯现金股息|TTM股息)(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (isHMaster || rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || pxTxt2.indexOf('H股现价') >= 0 || pxTxt2.indexOf('港元`') >= 0 || (pxTxt2.indexOf('实时现价:') >= 0 && pxTxt2.split('实时现价')[1].slice(0, 20).indexOf('港元') >= 0) || (pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0)) {
+                market = 'H';
+              }
+            }
+
+            if (market === 'H') countH++; else countA++;
+            tr.setAttribute('data-market', market);
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              market: market,
+              isHkOnly: market === 'H',
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 1) return;
+          if (countA + countH > globalStats.maxTotal && countA > 0 && countH > 0) {
+            globalStats.maxTotal = countA + countH;
+            globalStats.maxA = countA;
+            globalStats.maxH = countH;
+          }
+
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL' };
+          var inlineMarketBtns = {};
+
+          function applyFilters() {
+            var visIdx = 0;
+            // 遍历当前 tbody 真实 DOM 顺序以保证重排后序号依然严格递增
+            var domTrs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var trMap = new Map();
+            rowData.forEach(function(d){ trMap.set(d.tr, d); });
+            domTrs.forEach(function(tr){
+              var d = trMap.get(tr);
+              if (!d) return;
+              var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              var hidden = hideByMkt || hideByF;
+              d.tr.style.display = hidden ? 'none' : '';
+              if (!hidden) {
+                visIdx++;
+                if (d.td0) {
+                  var dynSpan = d.td0.querySelector('.agy-dyn-rank');
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.key !== 'rank') {
+                    if (!dynSpan) {
+                      dynSpan = document.createElement('div');
+                      dynSpan.className = 'agy-dyn-rank no-print';
+                      dynSpan.style.cssText = 'font-size:11px;font-weight:700;color:#0284c7;margin-bottom:2px;';
+                      d.td0.insertBefore(dynSpan, d.td0.firstChild);
+                    }
+                    dynSpan.textContent = '#' + visIdx;
+                  } else if (dynSpan) {
+                    dynSpan.remove();
+                  }
+                }
+              }
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若表格同时包含 A 股与 H 股，挂载三态市场切换开关（AH股一起显示 / 只显示A股 / 只显示H股），并与全页顶栏联动
+          if (countA > 0 && countH > 0) {
+            var seg = document.createElement('div');
+            seg.className = 'agy-market-seg-inline';
+            var mDefs = [
+              { m: 'ALL', text: '🌐 AH一起 (' + (countA + countH) + ')' },
+              { m: 'A', text: '🇨🇳 只看A股 (' + countA + ')' },
+              { m: 'H', text: '🇭🇰 只看H股 (' + countH + ')' }
+            ];
+            mDefs.forEach(function(md){
+              var mb = document.createElement('button');
+              mb.type = 'button';
+              mb.className = 'agy-market-btn' + (md.m === globalMarketMode ? ' active' : '');
+              mb.textContent = md.text;
+              mb.addEventListener('click', function(){
+                setGlobalMarketMode(md.m);
+              });
+              seg.appendChild(mb);
+              inlineMarketBtns[md.m] = mb;
+            });
+            bar.appendChild(seg);
+            globalMarketControllers.push(function(mode){
+              state.market = mode;
+              Object.keys(inlineMarketBtns).forEach(function(k){
+                inlineMarketBtns[k].classList.toggle('active', k === mode);
+              });
+              applyFilters();
+            });
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+            applyFilters();
+          }
+
+          updateUI();
+        });
+
+        // 若页面存在 A+H 统一榜单表，在正文最顶部挂载吸顶全局三态市场开关，一键同步切换全页全部雷达与总表
+        if (globalMarketControllers.length > 0) {
+          var rc = document.querySelector('.report-content');
+          if (rc) {
+            var gBar = document.createElement('div');
+            gBar.className = 'agy-market-global-bar no-print';
+            var gTitle = document.createElement('div');
+            gTitle.className = 'agy-market-global-title';
+            gTitle.innerHTML = '🎛️ <span>A+H 统一榜单市场视图开关</span>';
+            var gSeg = document.createElement('div');
+            gSeg.className = 'agy-market-seg';
+            var gBtns = {};
+            [
+              { m: 'ALL', text: '🌐 AH股一起显示 (' + (globalStats.maxA + globalStats.maxH) + ')' },
+              { m: 'A', text: '🇨🇳 只显示A股 (' + globalStats.maxA + ')' },
+              { m: 'H', text: '🇭🇰 只显示H股 (' + globalStats.maxH + ')' }
+            ].forEach(function(item){
+              var gb = document.createElement('button');
+              gb.type = 'button';
+              gb.className = 'agy-market-btn';
+              gb.textContent = item.text;
+              gb.addEventListener('click', function(){
+                setGlobalMarketMode(item.m);
+              });
+              gSeg.appendChild(gb);
+              gBtns[item.m] = gb;
+            });
+            var gBadge = document.createElement('span');
+            gBadge.className = 'agy-market-count-badge';
+            gBar.appendChild(gTitle);
+            gBar.appendChild(gSeg);
+            gBar.appendChild(gBadge);
+            var h1El = rc.querySelector('h1');
+            if (h1El && h1El.nextSibling) {
+              rc.insertBefore(gBar, h1El.nextSibling);
+            } else {
+              rc.insertBefore(gBar, rc.firstChild);
+            }
+            globalBarRefs.push({ btns: gBtns, badge: gBadge });
+            setGlobalMarketMode(globalMarketMode);
+          }
+        }
+      })();
     })();
   </script>
 </body>
