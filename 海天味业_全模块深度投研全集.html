@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>海天味业(603288.SH/03288.HK) 深度投研全集</title>
+<title>海天味业(603288.SH) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -750,6 +750,473 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    /* 全球市场三态切换开关（AH股一起显示 / 只显示A股 / 只显示H股） */
+    .agy-market-global-bar {
+      position: sticky;
+      top: 8px;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0 16px 0;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #f8fafc;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+      font-size: 13px;
+    }
+    .agy-market-global-title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e2e8f0;
+    }
+    .agy-market-seg {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+    .agy-market-seg-inline {
+      display: inline-flex;
+      align-items: center;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 2px;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .agy-market-btn {
+      background: transparent;
+      color: #cbd5e1;
+      border: none;
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.16s ease;
+    }
+    .agy-market-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .agy-market-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+    }
+    .agy-market-seg-inline .agy-market-btn {
+      color: #334155;
+      padding: 3px 10px;
+      font-size: 12px;
+    }
+    .agy-market-seg-inline .agy-market-btn:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+    .agy-market-seg-inline .agy-market-btn.active {
+      background: #1e3a8a;
+      color: #ffffff;
+    }
+    .agy-market-count-badge {
+      font-size: 12px;
+      color: #bae6fd;
+      font-weight: 600;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -941,9 +1408,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">海天味业(603288.SH/03288.HK) 深度投研全集</div>
+    <div class="report-title">海天味业(603288.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-19</span>
+      <span>📅 导出日期：2026-11-24</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -967,6 +1434,15 @@
   </div>
   <div class="report-content">
     <h1 id="603288sh-03288hk">海天味业（603288.SH / 03288.HK）深度基本面投研与商业价值解剖全集</h1>
+<!--V4_AUDIT_BANNER_START-->
+<blockquote>
+<p><strong>⚔️ 2026-11-24 V4 官方原表验真 × 物理隔离独立红蓝盲审终审声明（<code>CORRECTED</code>）</strong>：
+- <strong>终审核心估值锚</strong>：常态 OE <strong><code>59.50亿/年</code></strong> → 达产 <strong><code>66.50亿/年</code></strong> ｜ 新买点：<strong><code>A股 ≤22.00 / 22.00—26.50元；H股 ≤19.20 / 19.20—23.10港元(双尺取严)</code></strong>（原：<code>A股 ≤25.00 / 25.00—31.00元；H股 ≤25.00 / 25.00—30.00港元</code>）
+- <strong>🔴 空头命中硬约束（实打实认领）</strong>：🩸 命中4处实锤死穴：(1) 2022年OCF/CapEx/FCF重大历史错录导致五年CapEx低估；(2) 26Q3 30.04亿应付票据实为筹资性融资须计入广义刚性债+漏计0.10亿长贷；(3) 26Q3单季营收停滞+0.12%、扣非大跌-16.61%、毛利率跌至37.27%被中炬反超；(4) 外币募资未对冲砸出6.34亿汇兑损益及18.07亿关联保理披露不足。
+- <strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：🛡️ 反杀3处过度恐慌指控：(1) 356亿长短期现金真实且受限仅0.14亿、零财务公司占款，粉碎假现金与存贷双高疑云；(2) 26Q3 OCF下滑系春节高基数合同负债消化(还原常态OCF 52.37亿)，应收占比仅1.5%、存货周转49天吊打同行，粉碎渠道压库崩盘论；(3) 剔除红队对汇兑坑与冗余现金利息的隐蔽双扣，且GB 7718-2025新国标与PET瓶片回落提供中期托底。
+- <strong>📋 V4 官方对账附注</strong>：经V4官方三表硬对账与红蓝对质终审，确认海天现金家底与先款后货主业无造假，但原稿存在四项硬伤须实打实纠偏：一是2022年OCF/CapEx/FCF严重错录（FCF高估101.3%），五年年均CapEx实为14.67亿而非13.44亿；二是漏计0.10亿长期借款且未将30.04亿筹资性应付票据计入广义负债；三是26Q3扣非大跌16.61%、毛利率滑至37.27%被中炬反超，证实步入低速成熟期；四是H股原买点25-30港元违背A+H双尺取严铁律。裁判对称纳入59.34亿长期存单并全额扣回30.04亿票据债后，True EV锁定1841.02亿，去息常态OE下修至59.50亿，A股买点收紧至22.0-26.5元，H股双尺取严收紧至19.2-23.1港元，两市现价均暂不追高。</p>
+</blockquote>
+<!--V4_AUDIT_BANNER_END-->
 <hr/>
 <h1 id="_1">阶段一：全景基本面八步底座</h1>
 <h2 id="_2">【开篇破题：掀开“酱油茅”表象，直击周期换挡与全球化博弈底牌】</h2>
@@ -1592,12 +2068,12 @@
 <p><strong>路标四（海外并购“淘大”整合与属地工厂变现进度 · 2027—2028年报）</strong>：盯紧 <strong>海外业务营收绝对额、增速及占比是否突破 <code>5%</code> 并形成实质性利润贡献</strong>，同时核查收购淘大后的 <strong>账面商誉（当前 <code>2.81亿元</code>）是否零减值</strong>、以及印尼等东南亚工厂产能释放与当地渠道铺货进展，判断海天究竟能不能跑出中国版“龟甲万”的全球化长坡厚雪。</p>
 </li>
 </ol>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="a">【追问模块 A：资本开支与重点工程解剖】</h2>
 <blockquote>
 <p><strong>模块核心定调</strong>：海天味业（<code>603288.SH</code> / <code>03288.HK</code>）过去五年（<code>2021—2025年</code>）累计砸下 <code>67.22亿元</code> 资本开支（<code>2025年</code> 单年 <code>12.84亿元</code>，<code>2026Q1-Q3</code> 进一步放缓至 <code>8.20亿元</code>），在手还握有 <code>2025年6月19日</code> H股上市净募得的 <code>100.10亿港元</code>（约 <code>95.43亿元</code> 人民币）巨额现金弹药。穿透 <code>2025年报</code> 与 <code>2026半年报</code> 在建工程附注以及 <code>2026三季报</code> 资产负债表可见：公司本轮国内重资产扩产已迈入 <strong><code>集中转固收尾期</code></strong>——固定资产账面价值从 <code>2025年末</code> 的 <code>52.23亿元</code> 跃升至 <code>2026年9月末</code> 的 <code>63.13亿元</code>（净增 <code>+10.90亿元</code>），在建工程则从 <code>16.49亿元</code> 回落至 <code>11.08亿元</code>（压降 <code>-5.41亿元</code>）。但真正决定未来五年盈利质量的，绝非账面总投入有多大，而是这批新产能内部的 <strong><code>冰火两重天</code></strong>——酱油/蚝油超级基地（南宁、宿迁）只需 <code>5.9%—7.9%</code> 的低稼动率即可覆盖全部新增折旧，堪称降运费、解旺季瓶颈的印钞配套；而醋酒第二曲线基地（嘉兴、武汉）因品类毛利率仅 <code>~22.54%</code>，纯折旧保本稼动率飙升至 <code>24.7%—25.1%</code>（完全盈利保本线超 <code>44%</code>），在行业存量内卷与 <code>2026Q3</code> 酱油/蚝油单季微降的背景下，存在显著的 <strong><code>低毛利折旧拖累与局部过剩风险</code></strong>。</p>
 </blockquote>
-<hr>
+<hr/>
 <h3 id="_22">一、 资本开支周期与四大核心在建工程全口径穿透</h3>
 <p>要看懂海天的资本开支账本，必须先破除两个新手最容易踩的 <strong><code>财务防呆陷阱</code></strong>：</p>
 <ol>
@@ -2009,10 +2485,10 @@
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>检验一家成熟消费巨头是否开始腐朽，就看它怎么花手里那近百亿闲钱。当年跑去做苹果醋饮料和大米，是典型的中年危机胡乱折腾；如今砍掉杂耍、死磕膜脱盐薄盐酱油借新国标清场对手，再花区区 `1.68亿元` 商誉捡漏百年淘大的海外船票——这说明海天的掌舵人终究还是醒了。唯一要盯紧的警报器，是别让毛利率只有 `22.5%` 的醋酒工厂变成吞噬折旧的无底洞。</p></div></div></div></div>
 
 
-<hr class="module-sep"/>
+<hr/>
 <h2 id="c">追问模块 C：同行与上下游“三方交叉审讯”</h2>
 <p>判断一家消费品龙头业绩增速放缓的真实成因，最忌讳关起门来只听公司管理层的单方面说辞。海天味业 <code>2026Q1-Q3</code> 营收增速收窄至 <code>+4.27%</code>、单 Q3 营收仅微增 <code>+0.12%</code> 且归母净利润同比回落 <code>-15.41%</code>，究竟是自身渠道失灵、品牌老化导致的“独弱”，还是全行业在宏观餐饮降速与新国标切换双重绞杀下的“共振过冬”？要撕开这层迷雾，必须把国内外的核心直接竞争对手、上游原材料包材供应商、以及下游餐饮与经销商全部拉到同一张审讯桌上，按 <strong><code>2026年三季报（2026Q1-Q3）</code></strong> 同一最新报告期的一手官方财报逐行对质，还原过去十二个月里真实发生的份额攻防战。</p>
-<hr>
+<hr/>
 <h3 id="_27">一、 景气度“三方对质”：全行业同步收缩蓄水池，谁在真增长、谁在失血？</h3>
 <p>先通过原生可视化图谱直观锁定全球调味品五大上市核心玩家在最新报告期内的盈利能力与费用效率剪刀差，再展开全维度财报明细对质。</p>
 <div class="agy-chart-card"><div class="agy-chart-header"><div class="agy-chart-title">📊 图 5：2026Q1-Q3 调味品核心玩家盈利能力（柱：%）vs 四项期间费用率（线：%）横向对质</div><div class="agy-chart-subtitle">数据来源：各公司 2026 年三季报（龟甲万为 FY2027 H1 = 2026年4—9月 IFRS 合并报表）</div></div><div class="agy-chart-single"><svg height="auto" style="display:block;font-family:'Microsoft YaHei UI','Microsoft YaHei',sans-serif;" viewbox="0 0 780 275" width="100%" xmlns="http://www.w3.org/2000/svg"><rect fill="#1e3a8a" height="12" rx="2.5" width="12" x="52" y="12"></rect><text fill="#1e293b" font-size="10.6" font-weight="700" x="70" y="22">综合毛利率</text><rect fill="#0284c7" height="12" rx="2.5" width="12" x="132" y="12"></rect><text fill="#1e293b" font-size="10.6" font-weight="700" x="150" y="22">归母净利率</text><line stroke="#be123c" stroke-width="2.5" x1="212" x2="228" y1="18" y2="18"></line><circle cx="220" cy="18" fill="#ffffff" r="3.5" stroke="#be123c" stroke-width="2"></circle><text fill="#1e293b" font-size="10.6" font-weight="700" x="230" y="22">四项费用率</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="728" y1="241.0" y2="241.0"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="245.0">0%</text><text fill="#64748b" font-size="9.6" text-anchor="start" x="734" y="245.0">8.9%</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="728" y1="191.8" y2="191.8"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="195.8">13%</text><text fill="#64748b" font-size="9.6" text-anchor="start" x="734" y="195.8">13.5%</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="728" y1="142.5" y2="142.5"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="146.5">26%</text><text fill="#64748b" font-size="9.6" text-anchor="start" x="734" y="146.5">18.2%</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="728" y1="93.2" y2="93.2"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="97.2">39%</text><text fill="#64748b" font-size="9.6" text-anchor="start" x="734" y="97.2">22.9%</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="728" y1="44.0" y2="44.0"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="48.0">52%</text><text fill="#64748b" font-size="9.6" text-anchor="start" x="734" y="48.0">27.5%</text><line stroke="#94a3b8" stroke-width="1.3" x1="52" x2="728" y1="241.0" y2="241.0"></line><rect fill="#1e3a8a" height="150.8" rx="3.5" width="30.5" x="85.6" y="90.2"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="100.8" y="85.2">39.97%</text><rect fill="#1e3a8a" height="158.9" rx="3.5" width="30.5" x="220.8" y="82.1"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="236.0" y="77.1">42.12%</text><rect fill="#1e3a8a" height="144.0" rx="3.5" width="30.5" x="356.0" y="97.0"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="371.2" y="92.0">38.18%</text><rect fill="#1e3a8a" height="155.9" rx="3.5" width="30.5" x="491.2" y="85.1"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="506.4" y="80.1">41.33%</text><rect fill="#1e3a8a" height="134.4" rx="3.5" width="30.5" x="626.4" y="106.6"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="641.6" y="101.6">35.64%</text><rect fill="#0284c7" height="90.0" rx="3.5" width="30.5" x="119.6" y="151.0"></rect><text fill="#0284c7" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="134.8" y="146.0">23.85%</text><rect fill="#0284c7" height="62.0" rx="3.5" width="30.5" x="254.8" y="179.0"></rect><text fill="#0284c7" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="270.0" y="174.0">16.44%</text><rect fill="#0284c7" height="46.2" rx="3.5" width="30.5" x="390.0" y="194.8"></rect><text fill="#0284c7" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="405.2" y="189.8">12.25%</text><rect fill="#0284c7" height="67.4" rx="3.5" width="30.5" x="525.2" y="173.6"></rect><text fill="#0284c7" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="540.4" y="168.6">17.88%</text><rect fill="#0284c7" height="35.6" rx="3.5" width="30.5" x="660.4" y="205.4"></rect><text fill="#0284c7" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="675.6" y="200.4">9.43%</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="119.6" y="256.0">海天(26Q3)</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="254.8" y="256.0">中炬(26Q3)</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="390.0" y="256.0">千禾(26Q3)</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="525.2" y="256.0">天味(26Q3)</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="660.4" y="256.0">龟甲万(H1)</text><polyline fill="none" points="119.6,200.4 254.8,89.9 390.0,84.6 525.2,135.8 660.4,90.4" stroke="#be123c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8"></polyline><circle cx="119.6" cy="200.4" fill="#ffffff" r="4.2" stroke="#be123c" stroke-width="2.4"></circle><rect fill="#ffffff" height="15.5" opacity="0.96" rx="4" stroke="#be123c" stroke-width="1.2" width="40.6" x="99.3" y="178.4"></rect><text fill="#be123c" font-size="9.6" font-weight="800" text-anchor="middle" x="119.6" y="189.4">12.7%</text><circle cx="254.8" cy="89.9" fill="#ffffff" r="4.2" stroke="#be123c" stroke-width="2.4"></circle><rect fill="#ffffff" height="15.5" opacity="0.96" rx="4" stroke="#be123c" stroke-width="1.2" width="46.3" x="231.7" y="67.9"></rect><text fill="#be123c" font-size="9.6" font-weight="800" text-anchor="middle" x="254.8" y="78.9">23.18%</text><circle cx="390.0" cy="84.6" fill="#ffffff" r="4.2" stroke="#be123c" stroke-width="2.4"></circle><rect fill="#ffffff" height="15.5" opacity="0.96" rx="4" stroke="#be123c" stroke-width="1.2" width="46.3" x="366.9" y="62.6"></rect><text fill="#be123c" font-size="9.6" font-weight="800" text-anchor="middle" x="390.0" y="73.6">23.69%</text><circle cx="525.2" cy="135.8" fill="#ffffff" r="4.2" stroke="#be123c" stroke-width="2.4"></circle><rect fill="#ffffff" height="15.5" opacity="0.96" rx="4" stroke="#be123c" stroke-width="1.2" width="46.3" x="502.1" y="113.8"></rect><text fill="#be123c" font-size="9.6" font-weight="800" text-anchor="middle" x="525.2" y="124.8">18.83%</text><circle cx="660.4" cy="90.4" fill="#ffffff" r="4.2" stroke="#be123c" stroke-width="2.4"></circle><rect fill="#ffffff" height="15.5" opacity="0.96" rx="4" stroke="#be123c" stroke-width="1.2" width="46.3" x="637.3" y="68.4"></rect><text fill="#be123c" font-size="9.6" font-weight="800" text-anchor="middle" x="660.4" y="79.4">23.14%</text></svg></div><div class="agy-chart-footer">📌 核心洞察：海天 2026Q1-Q3 综合毛利率（39.97%）虽被中炬与天味反超 1.36—2.15 pct，但凭 12.70% 的极致期间费用率（低同行 6.13—10.99 pct），归母净利率高达 23.85%，仍稳居全球调味品盈利金字塔尖。</div></div>
@@ -2380,13 +2856,13 @@
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>做完这一圈三方交叉审讯，整张牌桌上的底牌已经全亮出来了——海天现在像一头在旱季里被换毛（新国标换装）和蚊虫叮咬（PET涨价）折腾得有点烦躁的成年大象，走得慢了点，甚至三季度崴了一下脚；但你抬头看看四周，原本骑在它头上抢风头的概念羚羊（千禾）已经快断气了，真正重新磨亮獠牙凑上来的只有刚养好内伤的厨邦。买大象不怕旱季走得慢，最怕的是大象忘了自己是大象，非要学猴子去树上抢复调的果子吃。</p></div></div></div></div>
 
-<hr class="module-sep"/>
+<hr/>
 <h2 id="downer-earnings">【追问模块 D：常态盈利底盘（Owner Earnings）、三档成本/情景标尺与极限抗压测算】</h2>
 <p>在消费品制造的世界里，账面净利润常常像一面被擦拭过度的哈哈镜：顺风周期时，高息现金理财与渠道压货预收款会把利润表吹得红光满面；逆风周期时，一笔外币募资沉淀引发的汇率折算损益，或是某项大宗包材单季飙升 <code>45%</code> 的脉冲冲击，又能瞬间把单季表观利润砸出双位数深坑。对于海天味业（<code>603288.SH / 03288.HK</code>）这样一家跨越四十余年周期、年产销超 <code>400万吨</code>、账面常年坐拥近 <code>300亿元</code> 金融现金的调味品霸主而言，买方真正要算清的根本不是“下个季度表观净利润增减几个百分点”，而是剥去所有会计粉饰、汇率杂音与短期原料脉冲之后，这套庞大的酿造机器每年到底能稳定往股东口袋里泵出多少 <strong>“可自由支配的真实股东盈余（Owner Earnings）”</strong>。</p>
 <p>更要命的是，面对 <code>2026Q3</code> 单季归母净利润同比骤降 <code>-15.41%</code>、扣非净利润同比大跌 <code>-16.61%</code>、以及 <code>2026Q1-Q3</code> 经营现金流净额骤降至 <code>20.86亿元</code> 的财报冲击，市场很容易陷入两种截然相反的认知误区：要么把短期汇兑损失与 PET 瓶片暴涨线性外推成“商业模式永久崩塌”，要么盲目拿着 <code>2025年报</code> 创纪录的 <code>70.38亿元</code> 归母净利润与 <code>64.62亿元</code> 自由现金流去刻舟求剑。本模块基于 <code>2025年报</code> 现金流量表补充资料附注、<code>2026半年报</code> 与 <code>2026三季报</code> 最新科目明细、以及截至 <code>2026年11月19日</code> 的国内大宗农产品与包材实时现货价格，通过全套底层物理单耗模型与精确算式验算，彻底拆穿短期业绩迷雾，锁死海天味业跨周期的真实造血底盘与极限抗压底线。</p>
 <div class="agy-chart-card"><div class="agy-chart-header"><div class="agy-chart-title">📊 图 6：海天味业六档情景归母 Owner Earnings 阶梯底盘（亿元）</div><div class="agy-chart-subtitle">口径说明：前四档除历史FCF外均为去息纯主业归母口径，后两档含稳态超额现金理财收益（4.29亿元/年）</div></div><div class="agy-chart-single"><svg height="auto" style="display:block;font-family:'Microsoft YaHei UI','Microsoft YaHei',sans-serif;" viewbox="0 0 780 275" width="100%" xmlns="http://www.w3.org/2000/svg"><rect fill="#1e3a8a" height="12" rx="2.5" width="12" x="52" y="12"></rect><text fill="#1e293b" font-size="10.6" font-weight="700" x="70" y="22">归母 Owner Earnings / 现金流底盘</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="756" y1="241.0" y2="241.0"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="245.0">0亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="756" y1="191.8" y2="191.8"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="195.8">24亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="756" y1="142.5" y2="142.5"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="146.5">47亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="756" y1="93.2" y2="93.2"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="97.2">71亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="756" y1="44.0" y2="44.0"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="48.0">94亿</text><line stroke="#94a3b8" stroke-width="1.3" x1="52" x2="756" y1="241.0" y2="241.0"></line><rect fill="#1e3a8a" height="81.6" rx="3.5" width="30.5" x="93.7" y="159.4"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="108.9" y="154.4">39.1亿</text><rect fill="#1e3a8a" height="113.1" rx="3.5" width="30.5" x="211.0" y="127.9"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="226.2" y="122.9">54.22亿</text><rect fill="#1e3a8a" height="122.5" rx="3.5" width="30.5" x="328.3" y="118.5"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="343.6" y="113.5">58.72亿</text><rect fill="#1e3a8a" height="137.2" rx="3.5" width="30.5" x="445.7" y="103.8"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="460.9" y="98.8">65.78亿</text><rect fill="#1e3a8a" height="146.1" rx="3.5" width="30.5" x="563.0" y="94.9"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="578.2" y="89.9">70.07亿</text><rect fill="#1e3a8a" height="158.9" rx="3.5" width="30.5" x="680.3" y="82.1"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="695.6" y="77.1">76.17亿</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="110.7" y="256.0">极寒双杀:动态去息</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="228.0" y="256.0">五年历史:FCF均值</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="345.3" y="256.0">标尺一:现价去息</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="462.7" y="256.0">标尺二:主业去息</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="580.0" y="256.0">标尺二:含息全口</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="697.3" y="256.0">达产跃升:含息稳态</text></svg></div><div class="agy-chart-footer">📌 核心洞察：即便在餐饮萎缩10%叠加大豆/PET/白糖/运费全面再暴涨20%的末日双杀下，去息纯主业仍能守住39.10亿元（含息43.39亿元）不失血底线；标尺二常态主锚锁死去息65.78亿元与含息70.07亿元，四大在建基地与淘大整合达产后可稳健跃升至76.17亿元。</div></div>
 <p>从图 6 展示的六档造血阶梯可以一眼建立最底层的买方直觉：海天味业当下的真实内生造血底盘呈现极强的 <strong>“下有铁底、中枢厚实、上有温和垫高”</strong> 的纺锤形结构。即使把 <code>2026年11月</code> 处于历史极高位的 PET 聚酯瓶片（<code>8,600元/吨</code>）与反弹中的国产非转基因大豆（<code>5,200元/吨</code>）直接全额按全年 12 个月强行传导进成本表（标尺一），其纯主业去息归母 Owner Earnings 依然稳稳站在 <code>58.72亿元</code>（含稳态现金息为 <code>63.01亿元</code>），显著高出 <code>2021—2025</code> 五年历史自由现金流均值 <code>54.22亿元</code>。真正制造 <code>2026Q3</code> 利润表惊悚跌幅的，绝非主业护城河塌方，而是 <strong>“高价 PET 脉冲冲击 + 港股外币募资汇兑重锤 + 餐饮弱复苏短期共振”</strong> 的三重叠加效应。下面我们从最底层的财务附注一笔一笔把账算透。</p>
-<hr>
+<hr/>
 <h3 id="owner-earnings">一、 剥离会计噪音：穿透现金流附注与双口径 Owner Earnings 桥接还原</h3>
 <p>在买方精算体系中，计算真实股东盈余必须死守沃伦·巴菲特在 1986 年致股东信中确立的底层铁律：</p>
 <p><code>Owner Earnings = 经调整常态归母核心经营净利 + 有效归母折旧与摊销（D&amp;A） - 维持存量竞争力必需的防御性维护 CapEx - 常态刚性营运资金占用（ΔNWC）</code></p>
@@ -2949,10 +3425,10 @@
 <p><strong>末日极寒双杀铁底（标尺三 · 毛利率砸穿至 <code>30.41%</code>）</strong>：静态死扛守住去息 <strong><code>34.32亿元</code></strong> / 含息 <strong><code>38.61亿元</code></strong>，启动费用动态减震垫后守住去息 <strong><code>39.10亿元</code></strong> / 含息 <strong><code>43.39亿元</code></strong>（紧缩 CapEx 可达 <code>45.39亿元</code>），全场景实现 <strong><code>122%+</code></strong> 覆盖 <code>80%</code> 承诺分红底线，具备钢铁般的下行抗毁灭能力。</p>
 </li>
 </ol>
-<hr class="module-sep"/>
+<hr/>
 <h2 id="e">追问模块 E：会计成色与治理细节显微镜</h2>
 <p>在消费品长期价值研究里，利润表的表面繁荣往往只是化妆后的剧照，真正决定利润含金量与管理层诚实度的，藏在财务报表附注的微小数字与股权激励草案的细则条款里。海天味业作为全球盈利能力断层领先的调味品霸主，其长期高净利率究竟是靠真金白银的效率砸出来的“藏富于表”，还是暗藏折旧注水、存货压库、研发资本化或返利腾挪的“会计魔术”？新老掌舵人交接之后，连续三年滚动推出的员工持股计划，究竟是倒逼管理层啃硬骨头的“铁血军令状”，还是变相低价派发股东红利的“内部福利社”？本模块拿财务法医级显微镜，对海天味业、中炬高新与千禾味业的 <strong><code>2025年报附注</code></strong>、<strong><code>2026年半年报/三季报</code></strong> 及最新激励公告逐项拆解排雷。</p>
-<hr>
+<hr/>
 <h3 id="_34">一、 应收账款与存货资产质量排雷：严苛保守藏富，还是暗藏坏账跌价雷区？</h3>
 <h4 id="1-1-a">1. 应收款项显微镜：逾期 1 年即全额计提，A 股快消“天花板级严苛”</h4>
 <p>审视消费品企业的渠道含金量，不能只看单一的“应收账款”绝对值，必须<strong>同时列示“纯应收账款”与“含应收票据及应收款项融资的广义应收口径”</strong>，防止企业把卖不动的货变成商业承兑汇票藏进表内其他科目；同时在核验减值准备时，必须<strong>严格区分资产负债表的“期末坏账准备存量余额”与利润表的“当期信用减值损失流量”</strong>，绝不允许将存量与流量错误相加。</p>
@@ -3258,12 +3734,12 @@
 
 
 
-<hr class="module-sep"/>
+<hr/>
 <h1 id="ftrue-evreverse-sotp">【追问模块 F：解锁估值定价、True EV、Reverse SOTP 拆骨、隐含预期与分档击球区推演】</h1>
 <blockquote>
 <p><strong>【估值正式解锁声明】</strong>：截至本模块，前序全景底座与模块 A—E 已将海天味业（<code>603288.SH</code> / <code>03288.HK</code>）的护城河、资本开支、出海与健康升级期权、同行对质及常态造血底盘全部摊开。现锚定 <strong>2026年11月19日</strong> 实时报价、汇率与国债利率，以 <strong>真实企业价值（<code>True EV</code>）</strong>、<strong>口径严格对齐的隐含内生回报率与股东现金回报</strong>、<strong>全球同行与十年分位对标</strong>、<strong>逆向拆骨估值（<code>Reverse SOTP</code>）</strong> 四把尺子，算清安全垫厚度及 <code>A股</code> 与 <code>H股</code> 间的“双城记”套利真相。</p>
 </blockquote>
-<hr>
+<hr/>
 <h2 id="true-evah-58">一、 真实企业价值（True EV）精确核算：剥开市值表象，看穿“A/H 双城记”与 58 亿隐形存单</h2>
 <p>在给海天味业称重之前，必须先解决绝大多数普通研报直接糊弄过去的三个底层口径陷阱：<strong>第一，A+H 双重上市后的精确总股本与库存股扣减逻辑；第二，A 股与 H 股高达 <code>37%</code> 以上的巨额折价撕裂；第三，表内 <code>296.72亿元</code> 流动类现金之外，附注里还藏着近 <code>60亿元</code> 长期大额存单。</strong> 任何一项含糊其辞，算出来的 <code>True EV</code> 都会谬以千里。</p>
 <h3 id="1-2026-11-19">1. 唯一股本、实时报价与三重视角总市值锁死（截至 2026 年 11 月 19 日）</h3>
@@ -3866,12 +4342,12 @@
 
 
 
-<hr class="module-sep"/>
+<hr/>
 <h1 id="g">【终章模块 G：投资大师闭门圆桌会（三位传奇大师结合毕生实战的终极会诊）】</h1>
 <blockquote>
 <p><strong>【圆桌闭门背景】</strong>：<code>2026年11月19日</code>，全景底座与模块 A—F 的附注穿透、单耗建模与双市场拆骨全部落定。三位传奇大师围坐闭门会议室，面对一份极度撕裂的账本：一边是全球首座酱油“灯塔工厂”、账面 <strong><code>296.72亿元</code></strong> 流动类现金外加附注 <strong><code>58亿元</code></strong> 长期大额存单、以及 <code>80%+</code> 分红底线叠加真注销回购的超级印钞机；另一边却是 <code>2026Q3</code> 营收骤降至 <code>+0.12%</code>、净利下挫 <code>-15.41%</code>，叠加 A 股（<code>36.20元</code>）与 H 股（<code>26.58港元</code>，折 <code>22.74元</code>，约 <strong><code>6.3折</code></strong>）高达 <code>-37.18%</code> 的跨市大分裂。三位大师结合毕生战例，展开终极交锋。</p>
 </blockquote>
-<hr>
+<hr/>
 <h2 id="peter-lynch">一、 🛒 彼得·林奇（Peter Lynch）：麦哲伦基金的货架侦探、存货体检与“六类股票”定性</h2>
 <div class="annotated-row"><div class="main-col"><blockquote>
 <p><strong>“别对着宏观模型叹气，去菜市场和大排档后厨看看——灶台边那排大桶酱油，比一百份卖方研报都诚实。”</strong></p>
@@ -4031,7 +4507,7 @@
 </li>
 </ul>
 <h3 id="_42">第四件事：咱们到底该怎么买它、怎么赚它的钱？</h3>
-<p>打法直截了当：<strong>别在 A 股为低速现金奶牛掏高成长溢价，要么死等 A 股砸进左侧打折坑，要么直接走港股通道以六折多捡同一只鸡的便宜筹码。</strong> 当前在 A 股买海天，市场逼着你提前为未来故事交一大笔门票钱，眼下餐饮磨底、成本还在结转，极易沦为耗费时间的死钱。但同股同权的 H 股现在已经便宜到离谱——剥掉账上厚重的现金垫后，出海和健康升级期权不仅全部白送，市场还倒贴了一大块安全边际。最从容的赚法，就是在港股情绪冰点分批建立打折底仓，舒舒服服拿高分红加真注销当时间的朋友；同时盯紧年底管理层是否克制不压货、明年春天新国标清场后动销是否提速、以及塑料瓶片成本何时回落——一旦拐点亮灯，果断加仓吃满估值与盈利的双击。</p></hr></hr></hr></hr></hr></hr>
+<p>打法直截了当：<strong>别在 A 股为低速现金奶牛掏高成长溢价，要么死等 A 股砸进左侧打折坑，要么直接走港股通道以六折多捡同一只鸡的便宜筹码。</strong> 当前在 A 股买海天，市场逼着你提前为未来故事交一大笔门票钱，眼下餐饮磨底、成本还在结转，极易沦为耗费时间的死钱。但同股同权的 H 股现在已经便宜到离谱——剥掉账上厚重的现金垫后，出海和健康升级期权不仅全部白送，市场还倒贴了一大块安全边际。最从容的赚法，就是在港股情绪冰点分批建立打折底仓，舒舒服服拿高分红加真注销当时间的朋友；同时盯紧年底管理层是否克制不压货、明年春天新国标清场后动销是否提速、以及塑料瓶片成本何时回落——一旦拐点亮灯，果断加仓吃满估值与盈利的双击。</p>
   </div>
 
   <!-- 左侧悬浮电梯章节导航（打印 PDF 自动隐藏，内嵌快捷字号与版式调节） -->
@@ -4223,7 +4699,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《海天味业(603288.SH/03288.HK) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/海天味业(603288.SH/03288.HK) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《海天味业(603288.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/海天味业(603288.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -4420,6 +4896,677 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        var globalMarketControllers = [];
+        var globalMarketMode = 'ALL';
+        try {
+          var savedMkt = localStorage.getItem('agy_lb_market_mode_v1');
+          if (savedMkt === 'ALL' || savedMkt === 'A' || savedMkt === 'H') globalMarketMode = savedMkt;
+        } catch(e) {}
+        var globalBarRefs = [];
+        var globalStats = { maxTotal: 0, maxA: 0, maxH: 0 };
+
+        function setGlobalMarketMode(mode) {
+          globalMarketMode = mode;
+          try { localStorage.setItem('agy_lb_market_mode_v1', mode); } catch(e) {}
+          globalMarketControllers.forEach(function(fn){ fn(mode); });
+          globalBarRefs.forEach(function(ref){
+            Object.keys(ref.btns).forEach(function(k){
+              ref.btns[k].classList.toggle('active', k === mode);
+            });
+            if (ref.badge) {
+              var labelMap = {
+                'ALL': '当前显示：A+H 统一全榜 (' + (globalStats.maxA + globalStats.maxH) + ' 席)',
+                'A': '当前显示：🇨🇳 仅 A 股 (' + globalStats.maxA + ' 席)',
+                'H': '当前显示：🇭🇰 仅 H 股/港股 (' + globalStats.maxH + ' 席)'
+              };
+              ref.badge.textContent = labelMap[mode] || '';
+            }
+          });
+        }
+
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = (hTexts.some(function(h){ return h.indexOf('实时排名') >= 0 || h.indexOf('市场与排名') >= 0 || h.indexOf('统一排名') >= 0; })) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('严苛排名') >= 0 || hTexts[0].indexOf('统一排名') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var countA = 0, countH = 0;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🛢️ 周期资源与能源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '⚙️ 高端制造与出海',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /(?:客观|客)\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var market = 'A';
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) || pxTxt.indexOf('港元') >= 0) {
+                market = 'H';
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /(?:今日\s*|\()([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /(?:常态回报|严苛EV常态回报|港股常态回报)\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (isNaN(oe)) oe = parseNum(oeTxt2, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /(?:实时股息|纯现金股息|TTM股息)(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (isHMaster || rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || pxTxt2.indexOf('H股现价') >= 0 || pxTxt2.indexOf('港元`') >= 0 || (pxTxt2.indexOf('实时现价:') >= 0 && pxTxt2.split('实时现价')[1].slice(0, 20).indexOf('港元') >= 0) || (pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0)) {
+                market = 'H';
+              }
+            }
+
+            if (market === 'H') countH++; else countA++;
+            tr.setAttribute('data-market', market);
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              market: market,
+              isHkOnly: market === 'H',
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 1) return;
+          if (countA + countH > globalStats.maxTotal && countA > 0 && countH > 0) {
+            globalStats.maxTotal = countA + countH;
+            globalStats.maxA = countA;
+            globalStats.maxH = countH;
+          }
+
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL' };
+          var inlineMarketBtns = {};
+
+          function applyFilters() {
+            var visIdx = 0;
+            // 遍历当前 tbody 真实 DOM 顺序以保证重排后序号依然严格递增
+            var domTrs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var trMap = new Map();
+            rowData.forEach(function(d){ trMap.set(d.tr, d); });
+            domTrs.forEach(function(tr){
+              var d = trMap.get(tr);
+              if (!d) return;
+              var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              var hidden = hideByMkt || hideByF;
+              d.tr.style.display = hidden ? 'none' : '';
+              if (!hidden) {
+                visIdx++;
+                if (d.td0) {
+                  var dynSpan = d.td0.querySelector('.agy-dyn-rank');
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.key !== 'rank') {
+                    if (!dynSpan) {
+                      dynSpan = document.createElement('div');
+                      dynSpan.className = 'agy-dyn-rank no-print';
+                      dynSpan.style.cssText = 'font-size:11px;font-weight:700;color:#0284c7;margin-bottom:2px;';
+                      d.td0.insertBefore(dynSpan, d.td0.firstChild);
+                    }
+                    dynSpan.textContent = '#' + visIdx;
+                  } else if (dynSpan) {
+                    dynSpan.remove();
+                  }
+                }
+              }
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若表格同时包含 A 股与 H 股，挂载三态市场切换开关（AH股一起显示 / 只显示A股 / 只显示H股），并与全页顶栏联动
+          if (countA > 0 && countH > 0) {
+            var seg = document.createElement('div');
+            seg.className = 'agy-market-seg-inline';
+            var mDefs = [
+              { m: 'ALL', text: '🌐 AH一起 (' + (countA + countH) + ')' },
+              { m: 'A', text: '🇨🇳 只看A股 (' + countA + ')' },
+              { m: 'H', text: '🇭🇰 只看H股 (' + countH + ')' }
+            ];
+            mDefs.forEach(function(md){
+              var mb = document.createElement('button');
+              mb.type = 'button';
+              mb.className = 'agy-market-btn' + (md.m === globalMarketMode ? ' active' : '');
+              mb.textContent = md.text;
+              mb.addEventListener('click', function(){
+                setGlobalMarketMode(md.m);
+              });
+              seg.appendChild(mb);
+              inlineMarketBtns[md.m] = mb;
+            });
+            bar.appendChild(seg);
+            globalMarketControllers.push(function(mode){
+              state.market = mode;
+              Object.keys(inlineMarketBtns).forEach(function(k){
+                inlineMarketBtns[k].classList.toggle('active', k === mode);
+              });
+              applyFilters();
+            });
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+            applyFilters();
+          }
+
+          updateUI();
+        });
+
+        // 若页面存在 A+H 统一榜单表，在正文最顶部挂载吸顶全局三态市场开关，一键同步切换全页全部雷达与总表
+        if (globalMarketControllers.length > 0) {
+          var rc = document.querySelector('.report-content');
+          if (rc) {
+            var gBar = document.createElement('div');
+            gBar.className = 'agy-market-global-bar no-print';
+            var gTitle = document.createElement('div');
+            gTitle.className = 'agy-market-global-title';
+            gTitle.innerHTML = '🎛️ <span>A+H 统一榜单市场视图开关</span>';
+            var gSeg = document.createElement('div');
+            gSeg.className = 'agy-market-seg';
+            var gBtns = {};
+            [
+              { m: 'ALL', text: '🌐 AH股一起显示 (' + (globalStats.maxA + globalStats.maxH) + ')' },
+              { m: 'A', text: '🇨🇳 只显示A股 (' + globalStats.maxA + ')' },
+              { m: 'H', text: '🇭🇰 只显示H股 (' + globalStats.maxH + ')' }
+            ].forEach(function(item){
+              var gb = document.createElement('button');
+              gb.type = 'button';
+              gb.className = 'agy-market-btn';
+              gb.textContent = item.text;
+              gb.addEventListener('click', function(){
+                setGlobalMarketMode(item.m);
+              });
+              gSeg.appendChild(gb);
+              gBtns[item.m] = gb;
+            });
+            var gBadge = document.createElement('span');
+            gBadge.className = 'agy-market-count-badge';
+            gBar.appendChild(gTitle);
+            gBar.appendChild(gSeg);
+            gBar.appendChild(gBadge);
+            var h1El = rc.querySelector('h1');
+            if (h1El && h1El.nextSibling) {
+              rc.insertBefore(gBar, h1El.nextSibling);
+            } else {
+              rc.insertBefore(gBar, rc.firstChild);
+            }
+            globalBarRefs.push({ btns: gBtns, badge: gBadge });
+            setGlobalMarketMode(globalMarketMode);
+          }
+        }
+      })();
     })();
   </script>
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>贵州茅台 深度投研全集</title>
+<title>贵州茅台(600519.SH) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,473 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    /* 全球市场三态切换开关（AH股一起显示 / 只显示A股 / 只显示H股） */
+    .agy-market-global-bar {
+      position: sticky;
+      top: 8px;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0 16px 0;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #f8fafc;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+      font-size: 13px;
+    }
+    .agy-market-global-title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e2e8f0;
+    }
+    .agy-market-seg {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+    .agy-market-seg-inline {
+      display: inline-flex;
+      align-items: center;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 2px;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .agy-market-btn {
+      background: transparent;
+      color: #cbd5e1;
+      border: none;
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.16s ease;
+    }
+    .agy-market-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .agy-market-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+    }
+    .agy-market-seg-inline .agy-market-btn {
+      color: #334155;
+      padding: 3px 10px;
+      font-size: 12px;
+    }
+    .agy-market-seg-inline .agy-market-btn:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+    .agy-market-seg-inline .agy-market-btn.active {
+      background: #1e3a8a;
+      color: #ffffff;
+    }
+    .agy-market-count-badge {
+      font-size: 12px;
+      color: #bae6fd;
+      font-weight: 600;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1408,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">贵州茅台 深度投研全集</div>
+    <div class="report-title">贵州茅台(600519.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-24</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -893,6 +1434,15 @@
   </div>
   <div class="report-content">
     <h1 id="600519sh-ag">贵州茅台（600519.SH）全模块深度投研全集（全景八步底座 + 追问模块 A—G + 芒格随身旁批）</h1>
+<!--V4_AUDIT_BANNER_START-->
+<blockquote>
+<p><strong>⚔️ 2026-11-24 V4 官方原表验真 × 物理隔离独立红蓝盲审终审声明（<code>CORRECTED</code>）</strong>：
+- <strong>终审核心估值锚</strong>：常态 OE <strong><code>800.00亿/年</code></strong> → 达产 <strong><code>880.00亿/年</code></strong> ｜ 新买点：<strong><code>重锤≤1050元（950—1050元） / 正常1120—1220元（纯现金股息率校回3.59%）</code></strong>（原：<code>重锤≤1100元（1000—1100元） / 正常1180—1280元（纯股息率原误混回购写3.85%）</code>）
+- <strong>🔴 空头命中硬约束（实打实认领）</strong>：毛利率失血235bp跌穿90%至89.58%；高毛利非标滞销改全天补货且系列酒跌9.76%；财务公司存款利息塌方超13亿/年且26Q3表观OCF暴增120%系定存到期会计噪音；财务总监兼董秘任上被留置（临2026-004）及75%分红承诺年底到期，实打实下砍常态OE、达产OE、品质加分（2.0→1.5）与买点
+- <strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：合同负债降74%系i茅台T+1现汇飙至585.62亿（直销占比56.36%）取代传统压货蓄水池，且广义应收较25年末骤降76.8%至仅10.35亿、Q3单季净利+3.78%逆势转正；财务公司对外贷款压降至仅4.09亿彻底证伪输血论；34万吨90元/瓶账面老基酒+20年严苛加速折旧+TTM实派51.98元/股构筑极硬底盘；预检商誉/永续债/诉讼红灯全为假阳性
+- <strong>📋 V4 官方对账附注</strong>：V4官方三表核对完成：红蓝穿透完全合拢至精准True EV=16537.41亿元（纠正原稿对1959.91亿现金等价物再扣180亿准备金的重复扣减，按26Q3精确吸收存款172.72亿、租赁债2.62亿、少数股东92.17亿、营运底仓150亿重算）。蓝方硬证据反杀“合同负债暴跌压库论”与“财务公司输血论”（i茅台现汇585.62亿、对外贷款骤降至4.09亿、Q3净利+3.78%转正）；但空头精准击中毛利率跌破90%至89.58%、系列酒缩水9.76%、利息收入腰斩及CFO留置治理摩擦。据此实打实下修常态OE至800亿、达产OE至880亿，剔除回购虚增将纯现金股息率校回3.59%，品质加分由2.0降至1.5，两档买点同步收严至1120—1220元与≤1050元。</p>
+</blockquote>
+<!--V4_AUDIT_BANNER_END-->
 <blockquote>
 <p><strong>档案基准锚定声明</strong>：本报告全部财务、产销、在建工程、行业对质与市值估值数据均严格锚定截至 <strong>2026年11月11日</strong> 已公开披露的最新权威资料，核心涵盖贵州茅台《2025年年度报告》、《2026年半年度报告》、《2026年第三季度报告》（截至2026年9月30日）及回溯至2021年的五年一期完整财报序列，同步拉齐五粮液（000858.SZ）、山西汾酒（600809.SH）、泸州老窖（000568.SZ）最新2025年报与2026年三季报进行同口径交叉对质。全篇包含 <strong>「阶段一：全景基本面八步底座」</strong>、<strong>「阶段二：六大单点微创追问模块（A—F）」</strong> 与 <strong>「终章模块 G：四位投资大师闭门圆桌会」</strong>，并在核心密集推导段旁随身嵌入 <strong>26 处「👴🏻 芒格毒舌旁批」</strong>。</p>
 </blockquote>
@@ -907,27 +1457,29 @@
 <h3 id="1">1. 业务结构与利益链条：两座印钞引擎与一场渠道革命</h3>
 <p>把贵州茅台的合并报表拆开，它的营收由“酒类主业（占总营收约 <code>98%</code>）”与“茅台集团财务公司利息及手续费收入（占总营收约 <code>2%</code>）”构成。在真正挑大梁的酒类主业内部，产品端与渠道端正在发生极其深刻的利益重构：</p>
 <ul>
-<li><strong>第一大支柱（绝对王牌）：茅台酒（飞天茅台 + 精品/生肖/年份等非标茅台）</strong></li>
 <li>
-<p><strong>规模与盈利成色</strong>：2024年实现营收 <code>1,459.28亿元</code>（毛利率 <code>94.06%</code>）；2025年行业寒冬下依然实现营收 <code>1,465.00亿元</code>（同比增长 <code>0.39%</code>），占酒类收入的 <code>86.80%</code>，毛利率高达 <code>93.53%</code>；2026年1—9月进一步实现营收 <code>1,129.25亿元</code>（同比增长 <code>2.18%</code>），占比提升至 <code>86.27%</code>。</p>
+<p><strong>第一大支柱（绝对王牌）：茅台酒（飞天茅台 + 精品/生肖/年份等非标茅台）</strong></p>
+<ul>
+<li><strong>规模与盈利成色</strong>：2024年实现营收 <code>1,459.28亿元</code>（毛利率 <code>94.06%</code>）；2025年行业寒冬下依然实现营收 <code>1,465.00亿元</code>（同比增长 <code>0.39%</code>），占酒类收入的 <code>86.80%</code>，毛利率高达 <code>93.53%</code>；2026年1—9月进一步实现营收 <code>1,129.25亿元</code>（同比增长 <code>2.18%</code>），占比提升至 <code>86.27%</code>。</li>
+</ul>
 </li>
 <li>
 <p><strong>商业实质</strong>：按2025年茅台酒销量 <code>4.68万吨</code>（<code>46,750.66吨</code>）折算，单吨不含税出厂均价高达 <code>313.36万元/吨</code>（折合每500ml瓶装不含税均价约 <code>1,567元</code>，含13%增值税约 <code>1,771元/瓶</code>），而单吨直接营业成本（高粱小麦、人工、折旧、包材）仅约 <code>20.28万元/吨</code>（折合每瓶生产成本仅约 <strong><code>101.4元</code></strong>）。一瓶生产成本刚过百元的酒，以一千五百多元不含税均价出厂，这就是茅台一切现金流神话的物理原点。</p>
 </li>
 <li>
 <p><strong>第二大支柱（腰部护城河与弹性侧翼）：茅台酱香系列酒（茅台1935、茅台王子酒、汉酱、赖茅、贵州大曲等）</strong></p>
-</li>
-<li>
-<p><strong>规模与盈利成色</strong>：2024年系列酒冲上历史高点 <code>246.84亿元</code>（同比增长 <code>19.65%</code>，毛利率 <code>79.87%</code>）；2025年因千元价格带商务需求萎缩，核心单品“茅台1935”批价从早期千元以上回落至650—750元区间，公司主动控货重塑价格带，全年系列酒营收回调 <code>9.76%</code> 至 <code>222.75亿元</code>（销量 <code>3.84万吨</code> 仍微增 <code>3.88%</code>，但吨酒均价下移导致毛利率回落 <code>3.76个百分点</code> 至 <code>76.11%</code>）；2026年前三季度系列酒实现营收 <code>179.69亿元</code>，其中第三季度单季在大众宴席与自饮需求恢复带动下同比增长超 <code>20%</code>，重新找回放量节奏。</p>
+<ul>
+<li><strong>规模与盈利成色</strong>：2024年系列酒冲上历史高点 <code>246.84亿元</code>（同比增长 <code>19.65%</code>，毛利率 <code>79.87%</code>）；2025年因千元价格带商务需求萎缩，核心单品“茅台1935”批价从早期千元以上回落至650—750元区间，公司主动控货重塑价格带，全年系列酒营收回调 <code>9.76%</code> 至 <code>222.75亿元</code>（销量 <code>3.84万吨</code> 仍微增 <code>3.88%</code>，但吨酒均价下移导致毛利率回落 <code>3.76个百分点</code> 至 <code>76.11%</code>）；2026年前三季度系列酒实现营收 <code>179.69亿元</code>，其中第三季度单季在大众宴席与自饮需求恢复带动下同比增长超 <code>20%</code>，重新找回放量节奏。</li>
+</ul>
 </li>
 <li>
 <p><strong>战略分工</strong>：系列酒绝不是可有可无的添头——它一方面消化了核心产区周边的外延产能与不同轮次基酒，另一方面在 <code>200元—800元</code> 价格带筑起了一道厚实的防火墙，防止竞争对手从次高端向上偷袭飞天茅台的腹地。</p>
 </li>
 <li>
 <p><strong>渠道利益链条的乾坤大挪移（批发代理 vs 直销 &amp; i茅台）</strong></p>
-</li>
-<li>
-<p><strong>历史旧账本</strong>：过去传统经销商以 <code>969元/瓶</code>（2023年11月提价至 <code>1,169元/瓶</code>）拿到飞天茅台配额，转手以 <code>2,500元—3,000元/瓶</code> 批发出货，单瓶躺赚上千元差价，而上市公司只能干瞪眼看着渠道暴利流向体外。</p>
+<ul>
+<li><strong>历史旧账本</strong>：过去传统经销商以 <code>969元/瓶</code>（2023年11月提价至 <code>1,169元/瓶</code>）拿到飞天茅台配额，转手以 <code>2,500元—3,000元/瓶</code> 批发出货，单瓶躺赚上千元差价，而上市公司只能干瞪眼看着渠道暴利流向体外。</li>
+</ul>
 </li>
 <li>
 <p><strong>2025—2026新账本</strong>：2025年，茅台<strong>直销渠道收入（<code>845.43亿元</code>，同比增长 <code>12.96%</code>，毛利率 <code>94.58%</code>）在公司历史上首次超越批发代理渠道（<code>842.32亿元</code>，同比下降 <code>12.05%</code>，毛利率 <code>87.86%</code>）</strong>。到了2026年前三季度，随着53度飞天茅台正式上线“i茅台”并实施动态调价（<code>1,499元</code> <span class="math-inline"> → </span> <code>1,539元</code> <span class="math-inline"> → </span> <code>1,639元/瓶</code>），<strong>直销渠道收入进一步暴增 <code>32.79%</code> 至 <code>737.74亿元</code>，占酒类收入比重跃升至 <code>56.36%</code></strong>（其中“i茅台”单平台前三季度不含税收入达 <strong><code>585.62亿元</code></strong>），而传统批发代理渠道继续压缩 <code>21.58%</code> 至 <code>571.20亿元</code>。同时，公司废除了向经销商提前收取数月预收货款的旧规，推行“物权不转移代售”与按动销实时配货，账面合同负债从2025年末的 <code>80.07亿元</code> 主动降至2026年三季末的 <code>20.84亿元</code>。</p>
@@ -1018,28 +1570,30 @@
 <h2 id="_4">【第二部分：核心产品、成本身位与同行横向硬核比拼（三大核心支柱之一）】</h2>
 <h3 id="1_1">1. 酿造理化壁垒与产品硬实力解剖：为什么资本砸不出第二个茅台？</h3>
 <div class="annotated-row"><div class="main-col"><p>在过去十年的“酱酒狂潮”中，无数地产商、煤老板、药企甚至互联网巨头带着几百亿资金涌入仁怀茅台镇，试图复刻飞天茅台，最终在2024—2026年迎来全线溃败与基酒甩卖潮。为什么重金砸不出第二个飞天？把酿造工艺与理化账本扒开，核心卡在四道硬门槛上：</p><ul>
-<li><strong>第一道墙：15.03平方公里核心产区的微生态不可迁移性</strong></li>
 <li>
-<p>茅台酒厂所处的赤水河谷仁怀段（海拔420—550米），三面环山形成特殊河谷微气候（冬暖、夏热、少雨、少风，年均温 <code>16.3°C—18.5°C</code>，相对湿度 <code>78%</code> 左右）。经过数百年不间断酿造，空气、土壤与紫红泥窖池中富集了超过 <strong>1,000余种酿造微生物菌群</strong>（茅台研发团队近年已分离鉴定出数百种酵母菌、细菌与霉菌）。1974年国家曾立项“茅台酒易地生产试验（即后来的珍酒）”，把茅台的老窖泥、大曲、技师、原料原封不动搬到距离茅台镇仅百公里外的遵义十字铺，历时十余年64个轮次试验，酿出的酒依然无法达到本厂飞天茅台的风味醇厚度。</p>
+<p><strong>第一道墙：15.03平方公里核心产区的微生态不可迁移性</strong></p>
+<ul>
+<li>茅台酒厂所处的赤水河谷仁怀段（海拔420—550米），三面环山形成特殊河谷微气候（冬暖、夏热、少雨、少风，年均温 <code>16.3°C—18.5°C</code>，相对湿度 <code>78%</code> 左右）。经过数百年不间断酿造，空气、土壤与紫红泥窖池中富集了超过 <strong>1,000余种酿造微生物菌群</strong>（茅台研发团队近年已分离鉴定出数百种酵母菌、细菌与霉菌）。1974年国家曾立项“茅台酒易地生产试验（即后来的珍酒）”，把茅台的老窖泥、大曲、技师、原料原封不动搬到距离茅台镇仅百公里外的遵义十字铺，历时十余年64个轮次试验，酿出的酒依然无法达到本厂飞天茅台的风味醇厚度。</li>
+</ul>
 </li>
 <li>
 <p><strong>第二道墙：“12987”坤沙工艺与本地红缨子高粱的物理损耗账</strong></p>
-</li>
+<ul>
 <li>正宗飞天茅台恪守大曲酱香“12987”工艺：<strong>1年生产周期、2次投料（端午制曲、重阳下沙与糙沙）、9次高温蒸煮、8次加曲堆积入池发酵（高温制曲达 <code>60°C</code> 以上、高温堆积达 <code>50°C</code> 左右、高温馏酒达 <code>40°C</code> 以上，有效挥发低沸点醛类有害物质并富集高沸点芳香酯类）、7次取酒</strong>。</li>
-<li>
-<p>只有仁怀及周边特产的<strong>红缨子糯高粱</strong>（支链淀粉含量高达 <code>88%—90%</code> 以上，颗粒小、皮厚、单宁含量适中约 <code>1.68%</code>），才能经受住九次高压蒸煮而不烂成糊状。约 <strong>5斤高粱+5斤小麦（制曲用）才能产出1斤合格基酒</strong>，且七个轮次原酒风味截然不同（一二轮次酸涩辛辣、三四五轮次醇厚丰满为“大回酒”黄金轮次、六七轮次带焦香糊香），必须按严格比例盘勾。</p>
+<li>只有仁怀及周边特产的<strong>红缨子糯高粱</strong>（支链淀粉含量高达 <code>88%—90%</code> 以上，颗粒小、皮厚、单宁含量适中约 <code>1.68%</code>），才能经受住九次高压蒸煮而不烂成糊状。约 <strong>5斤高粱+5斤小麦（制曲用）才能产出1斤合格基酒</strong>，且七个轮次原酒风味截然不同（一二轮次酸涩辛辣、三四五轮次醇厚丰满为“大回酒”黄金轮次、六七轮次带焦香糊香），必须按严格比例盘勾。</li>
+</ul>
 </li>
 <li>
 <p><strong>第三道墙：至少5年陶坛陈化带来的巨额“时间沉没成本”</strong></p>
-</li>
-<li>
-<p>当年耗费1年酿出的七轮次基酒，绝不能直接装瓶出售，必须分轮次、分等级装入透气不透液的紫砂陶坛中，在恒温酒库里经历<strong>至少4年以上的自然陈化老熟</strong>（通过陶坛微孔呼吸作用及微量金属离子催化，促使游离乙醇分子与水分子缔合、低沸点硫化物挥发），最后由勾调大师用不同轮次、不同年份的老酒进行“以酒勾酒（零添加外源香料与食用酒精）”，勾调后再陈放半年至一年方能出厂。这意味着：<strong>每新增1吨茅台酒成品销售，背后必须在仓库里常年垫底锁定至少 <code>4.5吨—5.5吨</code> 的各年份在库基酒！</strong> 截至2025年末，茅台账面半成品基酒与成品酒库存高达 <strong><code>34.00万吨</code>（账面成本价值 <code>613.91亿元</code>，若按终端市值折算超过8,500亿—10,000亿元）</strong>——任何新入局者想要在老酒储能上追平茅台，不仅要拿出数百亿现金连续五年只投不卖，还得苦等二十年才能攒出同等比例的年份调味老酒。</p>
+<ul>
+<li>当年耗费1年酿出的七轮次基酒，绝不能直接装瓶出售，必须分轮次、分等级装入透气不透液的紫砂陶坛中，在恒温酒库里经历<strong>至少4年以上的自然陈化老熟</strong>（通过陶坛微孔呼吸作用及微量金属离子催化，促使游离乙醇分子与水分子缔合、低沸点硫化物挥发），最后由勾调大师用不同轮次、不同年份的老酒进行“以酒勾酒（零添加外源香料与食用酒精）”，勾调后再陈放半年至一年方能出厂。这意味着：<strong>每新增1吨茅台酒成品销售，背后必须在仓库里常年垫底锁定至少 <code>4.5吨—5.5吨</code> 的各年份在库基酒！</strong> 截至2025年末，茅台账面半成品基酒与成品酒库存高达 <strong><code>34.00万吨</code>（账面成本价值 <code>613.91亿元</code>，若按终端市值折算超过8,500亿—10,000亿元）</strong>——任何新入局者想要在老酒储能上追平茅台，不仅要拿出数百亿现金连续五年只投不卖，还得苦等二十年才能攒出同等比例的年份调味老酒。</li>
+</ul>
 </li>
 <li>
 <p><strong>第四道墙：王牌与边缘品种的清醒切分</strong></p>
-</li>
-<li>
-<p><strong>决定生死的硬核王牌</strong>：<strong>53度飞天茅台</strong>（含五星茅台，贡献茅台酒销量约 <code>75%—80%</code>）是定海神针；<strong>精品茅台、生肖茅台、15年/30年/50年年份茅台</strong>则是高毛利金字塔尖（吨价可达飞天的 <code>1.5—5倍</code>）；系列酒中的 <strong>茅台1935</strong>（卡位600—800元宴席商务核心带）与 <strong>茅台王子酒</strong>（卡位200—400元大众酱香口粮带）是已被市场验证的两大百亿/准百亿级腰部单品。</p>
+<ul>
+<li><strong>决定生死的硬核王牌</strong>：<strong>53度飞天茅台</strong>（含五星茅台，贡献茅台酒销量约 <code>75%—80%</code>）是定海神针；<strong>精品茅台、生肖茅台、15年/30年/50年年份茅台</strong>则是高毛利金字塔尖（吨价可达飞天的 <code>1.5—5倍</code>）；系列酒中的 <strong>茅台1935</strong>（卡位600—800元宴席商务核心带）与 <strong>茅台王子酒</strong>（卡位200—400元大众酱香口粮带）是已被市场验证的两大百亿/准百亿级腰部单品。</li>
+</ul>
 </li>
 <li>
 <p><strong>边缘与试错品种</strong>：集团层面的保健酒、葡萄酒、生态农业蓝莓酒属于体量极小的补充品种；而前几年高调推出的<strong>茅台冰淇淋、酱香拿铁、酒心巧克力</strong>等年轻化跨界产品，营收占比不足 <code>0.3%</code>，且已被管理层在2026年定性为稀释品牌高级感的“战略失误”，正在有序退出。</p>
@@ -1230,9 +1784,9 @@
 </li>
 <li>
 <p><strong>唯一需持续盯防的治理敏感点——“茅台集团财务有限公司”关联资金往来</strong>：</p>
-</li>
-<li>
-<p>贵州茅台持股 <code>51%</code> 的控股子公司“贵州茅台集团财务有限公司”（其余49%由茅台集团及关联方持有），长期承担集团内部银行职能。截至2026年三季末，公司合并报表里的现金类资产合计约 <strong><code>1,959.91亿元</code></strong>（其中报表“货币资金”科目为 <code>499.27亿元</code>，其余约 <code>1,460.64亿元</code> 体现为财务公司项下的“拆出资金”及“存放中央银行和同业款项”）。</p>
+<ul>
+<li>贵州茅台持股 <code>51%</code> 的控股子公司“贵州茅台集团财务有限公司”（其余49%由茅台集团及关联方持有），长期承担集团内部银行职能。截至2026年三季末，公司合并报表里的现金类资产合计约 <strong><code>1,959.91亿元</code></strong>（其中报表“货币资金”科目为 <code>499.27亿元</code>，其余约 <code>1,460.64亿元</code> 体现为财务公司项下的“拆出资金”及“存放中央银行和同业款项”）。</li>
+</ul>
 </li>
 <li>
 <p><strong>排雷结论</strong>：市场曾担忧茅台集团通过财务公司变相占用上市公司巨额现金或拿去买贵州城投债。经穿透核查2025年报及2026三季报附注，财务公司资金主要配置于国有大行及全国性股份制商业银行的定期同业存款与央行法定准备金，且上市公司每年派发 <code>650亿元+</code> 现金分红与 <code>90亿元</code> 回购注销均实现了100%真金白银划转出表，证明资金真实在账且流动性充沛；但财务公司吸收集团成员单位存款与不可随时支取同业存款的进出，确实会导致合并报表“经营活动现金流净额（OCF）”出现剧烈季节性失真（如2025年OCF表面下降33.46%，2026年前三季度又暴增120.07%），且综合利息收益率仅约 <code>1.8%—2.2%</code>，拉低了整体净资产回报率。</p>
@@ -1243,9 +1797,11 @@
 <h3 id="1-vs-200">1. 上市以来全口径股权融资 vs 股东真实回报：近200倍分红融资比的现金圣殿</h3>
 <p>算清贵州茅台自2001年8月27日上市以来的全生命周期资本总账，数据堪称惊世骇俗：</p>
 <ul>
-<li><strong>累计向市场伸手要了多少钱？（全口径股权融资 = <code>22.44亿元</code>）</strong>：</li>
 <li>
-<p>2001年8月IPO首发募集资金总额 <code>22.44亿元</code>（扣除发行费用后净额约 <code>19.98亿元</code>）。</p>
+<p><strong>累计向市场伸手要了多少钱？（全口径股权融资 = <code>22.44亿元</code>）</strong>：</p>
+<ul>
+<li>2001年8月IPO首发募集资金总额 <code>22.44亿元</code>（扣除发行费用后净额约 <code>19.98亿元</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>自2001年上市至今整整25年间，贵州茅台实施了 <code>0次</code> 增发、<code>0次</code> 配股、<code>0次</code> 可转债、<code>0次</code> 优先股、<code>0次</code> 分拆抽血！</strong> 也就是说，它一辈子只向A股股民要过一笔22.44亿元的启动资金。</p>
@@ -1373,11 +1929,15 @@
 </table></div>
 <h3 id="3_2">3. 打破“合并报表幻觉”双项穿透体检</h3>
 <div class="annotated-row"><div class="main-col"><ul>
-<li><strong>体检一：少数股东损益 vs 少数股东权益是否倒挂？</strong></li>
+<li><strong>体检一：少数股东损益 vs 少数股东权益是否倒挂？</strong><ul>
 <li>截至2025年末，公司归母股东权益 <code>2,446.38亿元</code>，少数股东权益 <code>93.21亿元</code>（占总权益 <code>3.67%</code>，主要来自持股51%的茅台财务公司及部分包装物流合资子公司）；2025年全年合并净利润约 <code>856.9亿元</code>，其中少数股东损益约 <code>33.7亿元</code>（占合并净利润 <code>3.93%</code>）。<strong>少数股东权益占比（<code>3.67%</code>）与少数股东损益占比（<code>3.93%</code>）高度匹配，对应的ROE同在33%—36%高水平，完全不存在“肥了少数股东、瘦了母公司”的合并报表幻觉。</strong></li>
-<li><strong>体检二：账面巨额现金成色与有息负债结构</strong></li>
+</ul>
+</li>
 <li>
-<p><strong>真正意义上的“零有息负债”</strong>：公司资产负债表上短期借款为 <code>0</code>、应付债券为 <code>0</code>、长期借款为 <code>0</code>、一年内到期非流动负债仅含极少量门店租赁负债（约 <code>2.8亿元</code>）。</p>
+<p><strong>体检二：账面巨额现金成色与有息负债结构</strong></p>
+<ul>
+<li><strong>真正意义上的“零有息负债”</strong>：公司资产负债表上短期借款为 <code>0</code>、应付债券为 <code>0</code>、长期借款为 <code>0</code>、一年内到期非流动负债仅含极少量门店租赁负债（约 <code>2.8亿元</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>还原酒类主业真实造血力</strong>：如前所述，合并现金流量表中的 OCF 受到茅台财务公司“存放央行及不可随时支取同业存款净增加额”与“吸收集团成员单位存款净增加额”的会计重分类干扰（例如2025年财务公司增加了不可随时支取的同业定期存款，在会计上被扣减了经营现金流；2026年前三季度该批同业定期存款到期收回，又使 OCF 暴增至 <code>840.59亿元</code>）。如果我们直接看硬核指标 <strong>“销售商品、提供劳务收到的现金”</strong>，2021—2025五年累计收现高达 <strong><code>7,832.55亿元</code></strong>（是同期狭义营业收入 <code>7,177.21亿元</code> 的 <strong><code>109.13%</code></strong>），而五年累计资本开支（CapEx）仅 <strong><code>190.84亿元</code></strong>（仅占五年归母净利润的 <strong><code>5.32%</code></strong>）！</p>
@@ -1487,17 +2047,21 @@
 <p>拒绝罗列“宏观波动、食品安全”等招股书套话，站在2026年11月的产业纵深处，贵州茅台真正值得长期投资者用放大镜审视的核心博弈只有两件事——一件是<strong>“周期洗牌期的双向博弈（危中之机）”</strong>，另一件是<strong>“十年维度的结构性真暗礁”</strong>：</p>
 <h3 id="1-1700">1. 周期博弈一体两面：飞天批价回落至 1,700 元与“去金融化”的危与机</h3>
 <ul>
-<li><strong>“危”的真实边界在哪？</strong></li>
 <li>
-<p>过去十年，飞天茅台有相当一部分需求来自“买新喝旧、买酒存着等升值”的社会金融囤货盘（民间估算社会渠道与藏家手中沉淀了数以十万吨计的陈年茅台）。当2025—2026年批价从 <code>2,700元+</code> 跌破 <code>2,000元</code> 并来到 <code>1,700元—1,750元</code> 区间时，投资囤货预期彻底熄火。</p>
+<p><strong>“危”的真实边界在哪？</strong></p>
+<ul>
+<li>过去十年，飞天茅台有相当一部分需求来自“买新喝旧、买酒存着等升值”的社会金融囤货盘（民间估算社会渠道与藏家手中沉淀了数以十万吨计的陈年茅台）。当2025—2026年批价从 <code>2,700元+</code> 跌破 <code>2,000元</code> 并来到 <code>1,700元—1,750元</code> 区间时，投资囤货预期彻底熄火。</li>
+</ul>
 </li>
 <li>
 <p><strong>触发伤筋动骨的临界红线</strong>：如果未来宏观通缩加剧，导致社会屯酒客出现恐慌性集中抛售，将飞天茅台市场批价砸穿 <strong><code>1,550元/瓶</code></strong> 甚至逼近 <strong><code>1,369元/瓶</code></strong>（经销合同价），那么不仅i茅台 <code>1,639元/瓶</code> 的线上直营体系将瞬间丧失价格吸引力（消费者会转去线下找黄牛买更便宜的散瓶），传统经销商也会首次面临零毛利甚至倒挂出逃的危机。</p>
 </li>
 <li>
 <p><strong>“机”的反身性红利在哪？</strong></p>
-</li>
+<ul>
 <li>只要飞天批价稳守在 <strong><code>1,650元—1,800元</code></strong> 的黄金舒适区（当前为 <code>1,700元—1,750元</code>），这恰恰是对茅台最有利的<strong>“精准清场水位”</strong>：第一，这个价格挤爆了黄牛炒客的杠杆泡沫，让真正喝酒的企业家与中产阶层觉得“比前两年便宜了一千多块，开瓶喝掉太划算了”，开瓶率大幅飙升，加速消耗社会存量库存；第二，1700元的飞天直接对千元价格带的五粮液（普五）、国窖1573形成了降维打击（消费者多加几百元就能把整桌宴席档次拉升到顶格的茅台），帮助茅台在行业寒冬期兵不血刃地虹吸高端白酒存量份额；第三，上市公司借机通过i茅台（<code>1,639元</code>）将渠道价差合法合规地收归国有与全体股东。</li>
+</ul>
+</li>
 </ul>
 <h3 id="2_2">2. 唯一真正的长期结构性暗礁：世代人口代际更替与“酒桌权力文化”的远期消退</h3>
 <ul>
@@ -1506,9 +2070,9 @@
 </li>
 <li>
 <p><strong>企业手里的缓冲筹码与杀伤边界</strong>：</p>
-</li>
-<li>
-<p>茅台管理层并非没有看到这一远期灰犀牛（这也是前任管理层急于尝试冰淇淋和咖啡联名的焦虑根源）。茅台手里最大的缓冲筹码在于<strong>“极致的稀缺配额”</strong>——按2025年茅台酒销量 <code>4.68万吨</code> 折算，全年仅有约 <strong><code>9,350万瓶</code></strong>（500ml折算），平均到全国14亿人口中，每年人均不到 <code>0.07瓶</code>（即便只算全国前5%的高净值与商务人群，每人每年也仅分到1.3瓶）。</p>
+<ul>
+<li>茅台管理层并非没有看到这一远期灰犀牛（这也是前任管理层急于尝试冰淇淋和咖啡联名的焦虑根源）。茅台手里最大的缓冲筹码在于<strong>“极致的稀缺配额”</strong>——按2025年茅台酒销量 <code>4.68万吨</code> 折算，全年仅有约 <strong><code>9,350万瓶</code></strong>（500ml折算），平均到全国14亿人口中，每年人均不到 <code>0.07瓶</code>（即便只算全国前5%的高净值与商务人群，每人每年也仅分到1.3瓶）。</li>
+</ul>
 </li>
 <li>
 <p><strong>长期推演结论</strong>：只要茅台严守每年5万吨左右的成品酒投放纪律，即便未来十年中国整体白酒消费总量再萎缩 <code>30%—40%</code>，金字塔尖那 <code>1%</code> 的最核心庆典、外交、家宴与礼赠需求，依然足以消化这区区9000多万瓶飞天茅台；但这道代际文化变迁的天花板，将永久封死茅台酒未来靠“大幅放量”或“重回3000元天价泡沫”驱动高增长的可能，使其彻底从“高成长倍增股”蜕变为“靠直营提价跑赢通胀的顶级现金流收息资产”。</p>
@@ -1691,18 +2255,22 @@
 <hr/>
 <h3 id="vs">二、 审视消化能力：茅台酒“雪中送炭” vs 系列酒“产能堰塞湖”</h3>
 <div class="annotated-row"><div class="main-col"><p>虽然财务上的折旧盈亏平衡点极低，但从产业供需与价格生态视角审视，<strong>茅台酒与酱香系列酒的扩产正面临截然相反的消化命运</strong>：</p><ul>
-<li><strong>1. 茅台酒（5.85万吨基酒产量 vs 4.68万吨销量）：跨越5年陈化时滞的“稀缺老酒锁仓”</strong></li>
+<li>
+<p><strong>1. 茅台酒（5.85万吨基酒产量 vs 4.68万吨销量）：跨越5年陈化时滞的“稀缺老酒锁仓”</strong></p>
+<ul>
 <li>表面上看，2025年茅台酒基酒产量已达 <code>5.85万吨</code>，而当年实际销量为 <code>4.68万吨</code>，产销差达 <code>1.17万吨</code>。但必须深刻理解茅台酒的<strong>“五年工艺铁律”</strong>：2025年出厂销售的 <code>4.68万吨</code> 成品茅台酒，其使用的基酒源自 <strong>2020—2021年</strong> 的产量（当年基酒产量约 <code>5.02万吨</code>，扣除五年陶坛陈酿约3%—5%的自然挥发损耗及留存约10%作为老酒勾调底酒后，实际可供2025年出厂的成品酒上限恰在4.5—4.7万吨左右）。</li>
 <li>同理，预算155.16亿元的茅台酒“十四五”技改（截至2025年末进度33%），即便在2027—2028年陆续建成投料，其酿造出的 <code>1.98万吨</code> 新增基酒，真正完成五年陈化、走上消费者餐桌的时间窗口是 <strong>2032—2034年</strong>。</li>
-<li>
-<p>更关键的是，截至2025年末，茅台在库基酒与成品酒库存高达 <strong><code>34.00万吨</code></strong>，账面存货金额仅 <strong><code>613.91亿元</code></strong>（折合每吨老酒账面成本仅 <code>18.06万元/吨</code>，不足其市场出厂价值的十六分之一）。即便未来几年终端消费增速放缓，茅台酒多产出的基酒无需降价倾销，直接留在陶坛酒库中自然升格为15年、30年陈年茅台酒或高附加值年份勾调基酒。因此，茅台酒扩产绝无跌价去库存风险，而是为十年后的老酒护城河“雪中送炭”。</p>
+<li>更关键的是，截至2025年末，茅台在库基酒与成品酒库存高达 <strong><code>34.00万吨</code></strong>，账面存货金额仅 <strong><code>613.91亿元</code></strong>（折合每吨老酒账面成本仅 <code>18.06万元/吨</code>，不足其市场出厂价值的十六分之一）。即便未来几年终端消费增速放缓，茅台酒多产出的基酒无需降价倾销，直接留在陶坛酒库中自然升格为15年、30年陈年茅台酒或高附加值年份勾调基酒。因此，茅台酒扩产绝无跌价去库存风险，而是为十年后的老酒护城河“雪中送炭”。</li>
+</ul>
 </li>
 <li>
 <p><strong>2. 酱香系列酒（5.76万吨基酒产量 + 同民坝1.2万吨在途 vs 3.84万吨销量）：次高端退潮期的消化警报</strong></p>
-</li>
+<ul>
 <li>与茅台酒的从容不同，酱香系列酒正面临真实的<strong>阶段性产能消化压力与价格带下移风险</strong>。随着3万吨系列酒技改陆续投产，2025年系列酒基酒产量已跃升至 <strong><code>5.76万吨</code></strong>（同比大增 <code>19.8%</code>），叠加工程进度已达 <code>85%</code> 的习水同民坝一期（新增 <code>1.2万吨</code>）在2026年收尾投产，系列酒总基酒产能已站上 <strong><code>6.5—7.0万吨/年</code></strong> 的历史峰值。</li>
 <li>然而在需求端，受商务宴请萎缩与整个酱酒热潮退却冲击，2025年系列酒实际销量仅为 <strong><code>3.84万吨</code></strong>，系列酒营收 <strong><code>222.75亿元</code></strong>（同比下滑 <code>9.76%</code>）。昔日千元价格带的百亿大单品“茅台1935”市场批价已回落至600—700元区间。</li>
 <li>当年产近7万吨基酒撞上不到4万吨的年销量，系列酒在未来3—5年将不可避免地出现<strong>基酒库存快速累积</strong>。公司要么主动延长系列酒基酒的陈酿年份（从3年拉长至4—5年以提升酒质口碑），要么推动产品结构向150—400元大众宴席价格带（茅台王子酒、汉酱、迎宾酒）战略下沉，这意味着系列酒板块 <code>76.11%</code> 的高毛利率在未来几年将面临一定程度的均值回归压力。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把飞天茅台和系列酒混为一谈，就像把爱马仕铂金包和百货大楼里的轻奢皮带当成同一种生意。飞天茅台卖不完放进山洞里叫“时间的朋友”，越放越贵；系列酒要是敞开造上七万吨，在商务宴请缩水的年景里，那就得老老实实去和各路名酒在三四百块钱的酒桌上拼刺刀了。</p></div></div></div></div>
 
 
@@ -1803,29 +2371,33 @@
 <hr/>
 <h3 id="_13">三、 竞争终局推演与最终定性：谁才是真正的“第二印钞机”？</h3>
 <div class="annotated-row"><div class="main-col"><p>穿透四大新业务的迷雾，我们对贵州茅台远期期权与模式变革的竞争终局做出如下盖棺定论：</p><ul>
-<li><strong>1. 【已跑通并正在重塑主业利润分配的超级印钞抓手】——“i茅台”数字化直营改革（含普飞上线动态调价与日常售卖转型）</strong></li>
 <li>
-<p>这是茅台过去五年唯一真正跑通、且威力足以媲美再造一个五粮液的史诗级变革。2026年，随着53度500ml飞天茅台（普飞）正式上线“i茅台”并动态调价至 <code>1,639元/瓶</code>，且运营策略在2026年下半年果断从过去的“定时饥饿抢购”转向<strong>“常态化日常售卖与动态补货”</strong>，<strong>2026年前三季度i茅台单平台实现酒类不含税收入高达 <code>585.62亿元</code>（同比暴增约 <code>360%</code>）</strong>，占同期公司狭义酒类总收入（<code>1,309.71亿元</code>）的比重直接跃升至 <strong><code>44.71%</code></strong>！</p>
+<p><strong>1. 【已跑通并正在重塑主业利润分配的超级印钞抓手】——“i茅台”数字化直营改革（含普飞上线动态调价与日常售卖转型）</strong></p>
+<ul>
+<li>这是茅台过去五年唯一真正跑通、且威力足以媲美再造一个五粮液的史诗级变革。2026年，随着53度500ml飞天茅台（普飞）正式上线“i茅台”并动态调价至 <code>1,639元/瓶</code>，且运营策略在2026年下半年果断从过去的“定时饥饿抢购”转向<strong>“常态化日常售卖与动态补货”</strong>，<strong>2026年前三季度i茅台单平台实现酒类不含税收入高达 <code>585.62亿元</code>（同比暴增约 <code>360%</code>）</strong>，占同期公司狭义酒类总收入（<code>1,309.71亿元</code>）的比重直接跃升至 <strong><code>44.71%</code></strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>商业本质穿透</strong>：过去传统经销模式下，普飞出厂价 <code>1,169元/瓶</code>（2026年调至 <code>1,369元/瓶</code>），而市场批价在 <code>1,700—2,000元+</code>，中间每瓶数百乃至上千元的暴利被社会渠道与黄牛截留；如今通过“i茅台”直接以 <code>1,639元/瓶</code> 或精品/生肖直营价卖给真实C端消费者，茅台在不引起舆论反弹的前提下，<strong>单瓶酒直接增厚了数百元的归母净利</strong>，同时彻底击碎了囤货炒作的金融泡沫，让茅台在2026年行业寒冬中稳住了 <code>1,332.84亿元</code>（+1.82%）的营收正增长底盘。</p>
 </li>
 <li>
 <p><strong>2. 【低成本长期慢热期权】——国际化出海（挤干水分后的伴随式渗透）</strong></p>
-</li>
-<li>
-<p>2026年主动刺破“出口回流酒”泡沫后，海外业务回到十几个亿的真实基底。未来5—10年，茅台国际化的正确姿势不是去和帝亚吉欧（Diageo）、保乐力加（Pernod Ricard）争夺欧美白人夜店，而是紧跟中国新能源、基建、跨境电商与制造业出海浪潮，在东南亚、中东、拉美及欧美核心商贸枢纽服务海外中资商圈与政商礼赠。它是一张成本极低、不亏钱但需要十年以上慢火熬煮的远期期权。</p>
+<ul>
+<li>2026年主动刺破“出口回流酒”泡沫后，海外业务回到十几个亿的真实基底。未来5—10年，茅台国际化的正确姿势不是去和帝亚吉欧（Diageo）、保乐力加（Pernod Ricard）争夺欧美白人夜店，而是紧跟中国新能源、基建、跨境电商与制造业出海浪潮，在东南亚、中东、拉美及欧美核心商贸枢纽服务海外中资商圈与政商礼赠。它是一张成本极低、不亏钱但需要十年以上慢火熬煮的远期期权。</li>
+</ul>
 </li>
 <li>
 <p><strong>3. 【财务现金管理与防守型技术护栏】——百亿产业基金与生物科技</strong></p>
-</li>
-<li>
-<p>将 <code>110.20亿元</code> 产业基金严格视作账面冗余现金的LP财务配置（按1.0x账面净值或适度折价看待），将酿造微生物研究视作主业品控的防御盾牌，不给予任何科技成长股估值溢价。</p>
+<ul>
+<li>将 <code>110.20亿元</code> 产业基金严格视作账面冗余现金的LP财务配置（按1.0x账面净值或适度折价看待），将酿造微生物研究视作主业品控的防御盾牌，不给予任何科技成长股估值溢价。</li>
+</ul>
 </li>
 <li>
 <p><strong>4. 【已证伪并及时止损切除的品牌消耗陷阱】——年轻化网红跨界联名（冰淇淋/拿铁/巧克力）</strong></p>
-</li>
+<ul>
 <li>年轻人不是因为不喜欢茅台而不喝茅台，而是因为还没到消费得起2,000元商务烈酒的年龄与社会阶层；等他们到了40岁坐上商务主桌，不需要靠20岁时吃过茅台冰淇淋也会自然拿起茅台酒杯。2025—2026年公司果断关闭亏损的冰淇淋门店、管理层在股东大会上坦诚定性其为“战略失误”并全面回归酒类主业，标志着茅台彻底告别了浮躁的网红营销幻觉，重新守住了顶奢消费品的克制与尊严。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>无数伟大企业的衰落，都是从管理层觉得主业赚钱太容易、非要去自己一窍不通的新领域证明自己有多聪明开始的。茅台最让我放心的一点，不是它以前没犯过傻——去卖雪糕就是犯傻——而是它发现犯傻之后，能拉下脸来当众认错、立刻砍掉蠢项目，然后专心用“i茅台”把原本被中间商赚走的几百亿利润装回自己兜里。知错能改，而且手握天下第一的印钞机，这就够了。</p></div></div></div></div>
 
 
@@ -1972,20 +2544,26 @@
 <h3 id="7430">二、 景气度与合同负债“真假蓄水池”对质：为什么茅台合同负债降74%是渠道革命，而同行降30%是动销休克？</h3>
 <div class="annotated-row"><div class="main-col"><p>如果只看表面财务指标，2026年三季报似乎呈现出一个共同现象——四大名酒的合同负债（预收账款）较年初全线大幅下滑：贵州茅台下降 <code>73.97%</code>（从 <code>80.07亿元</code> 降至 <code>20.84亿元</code>），五粮液下降 <code>33.68%</code>（从 <code>134.60亿元</code> 降至 <code>89.27亿元</code>），泸州老窖下降 <code>31.21%</code>（从 <code>33.67亿元</code> 降至 <code>23.16亿元</code>），山西汾酒下降 <code>19.89%</code>（从 <code>70.07亿元</code> 降至 <code>56.13亿元</code>）。</p><p>然而，如果把合同负债变动与 <strong>当期营收增速、直销收入结构、终端批价与出厂价顺差/倒挂关系</strong> 放在一起交叉审讯，就会发现茅台与另外三家同行完全处于两个平行世界：</p><ol>
 <li>
-<p><strong>五粮液“303亿前期会计差错更正”撕开了行业压货模式的皇帝新衣</strong>：
-   - 在传统经销模式下，酒企为了完成年度增长考核，往往在岁末年初通过“银票贴息、返利承诺、配额捆绑”倒逼经销商打款压货，只要货物发往经销商仓库（或第三方监管仓）即确认营业收入。
-   - 当2025年商务宴请需求承压，第八代五粮液（普五）出厂价 <code>1,019元/瓶</code> 而批价跌破 <code>820—850元/瓶</code>、国窖1573结算价 <code>980元/瓶</code> 而批价跌至 <code>780—800元/瓶</code> 时，经销商每进一箱货就净亏数百元。
-   - 2026年4月，五粮液在2025年报中罕见发布《关于前期会计差错更正的公告》，基于实质重于形式原则收紧收入确认口径（要求控制权实质转移并挂钩真实终端动销），<strong>一次性将2025年前三季度已公布的累计营收从 <code>609.45亿元</code> 下修至 <code>306.38亿元</code>，冲回虚增压货营收高达 <code>303.08亿元</code>，归母净利冲回逾 <code>150亿元</code>（下修幅度达70%）</strong>！
-   - 这一震惊资本市场的重述事件铁证如山地表明：在批价倒挂背景下，五粮液、老窖、汾酒2026Q3合同负债缩水 <code>20%—34%</code>，且伴随2026Q3单季营收分别暴跌 <code>-37.68%</code>、<code>-37.14%</code>、<code>-18.11%</code>，本质是 <strong>“社会库存堰塞湖未消、经销商卖一瓶亏一瓶、打款意愿彻底枯竭的被动缩水”</strong>。</p>
+<p><strong>五粮液“303亿前期会计差错更正”撕开了行业压货模式的皇帝新衣</strong>：</p>
+<ul>
+<li>在传统经销模式下，酒企为了完成年度增长考核，往往在岁末年初通过“银票贴息、返利承诺、配额捆绑”倒逼经销商打款压货，只要货物发往经销商仓库（或第三方监管仓）即确认营业收入。</li>
+<li>当2025年商务宴请需求承压，第八代五粮液（普五）出厂价 <code>1,019元/瓶</code> 而批价跌破 <code>820—850元/瓶</code>、国窖1573结算价 <code>980元/瓶</code> 而批价跌至 <code>780—800元/瓶</code> 时，经销商每进一箱货就净亏数百元。</li>
+<li>2026年4月，五粮液在2025年报中罕见发布《关于前期会计差错更正的公告》，基于实质重于形式原则收紧收入确认口径（要求控制权实质转移并挂钩真实终端动销），<strong>一次性将2025年前三季度已公布的累计营收从 <code>609.45亿元</code> 下修至 <code>306.38亿元</code>，冲回虚增压货营收高达 <code>303.08亿元</code>，归母净利冲回逾 <code>150亿元</code>（下修幅度达70%）</strong>！</li>
+<li>这一震惊资本市场的重述事件铁证如山地表明：在批价倒挂背景下，五粮液、老窖、汾酒2026Q3合同负债缩水 <code>20%—34%</code>，且伴随2026Q3单季营收分别暴跌 <code>-37.68%</code>、<code>-37.14%</code>、<code>-18.11%</code>，本质是 <strong>“社会库存堰塞湖未消、经销商卖一瓶亏一瓶、打款意愿彻底枯竭的被动缩水”</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>茅台合同负债锐减73.97%的真相：从“压迫经销商提前垫资”转向“i茅台现款现货C端直营”</strong>：
-   - 与同行营收坍塌截然相反，茅台在合同负债从 <code>80.07亿元</code> 锐减至 <code>20.84亿元</code> 的同时，2026年前三季度狭义营收逆势增长 <code>+1.96%</code> 至 <code>1,309.71亿元</code>（Q3单季增长 <code>+3.08%</code> 至 <code>402.67亿元</code>），经营活动现金流净额更是暴增 <code>+120.07%</code> 达 <code>840.59亿元</code>！
-   - 拆解渠道结构即可豁然开朗：2026年前三季度，茅台 <strong>直销渠道收入暴增 <code>+32.79%</code> 达到 <code>737.74亿元</code></strong>（占主营酒类收入比重跃升至 <strong><code>56.36%</code></strong>），其中数字营销平台 <strong>“i茅台”不含税销售收入狂揽 <code>585.62亿元</code></strong>（同比暴增逾3倍）；而传统批发代理渠道收入主动压降 <code>-21.58%</code> 至 <code>571.20亿元</code>。</p>
+<p><strong>茅台合同负债锐减73.97%的真相：从“压迫经销商提前垫资”转向“i茅台现款现货C端直营”</strong>：</p>
+<ul>
+<li>与同行营收坍塌截然相反，茅台在合同负债从 <code>80.07亿元</code> 锐减至 <code>20.84亿元</code> 的同时，2026年前三季度狭义营收逆势增长 <code>+1.96%</code> 至 <code>1,309.71亿元</code>（Q3单季增长 <code>+3.08%</code> 至 <code>402.67亿元</code>），经营活动现金流净额更是暴增 <code>+120.07%</code> 达 <code>840.59亿元</code>！</li>
+<li>拆解渠道结构即可豁然开朗：2026年前三季度，茅台 <strong>直销渠道收入暴增 <code>+32.79%</code> 达到 <code>737.74亿元</code></strong>（占主营酒类收入比重跃升至 <strong><code>56.36%</code></strong>），其中数字营销平台 <strong>“i茅台”不含税销售收入狂揽 <code>585.62亿元</code></strong>（同比暴增逾3倍）；而传统批发代理渠道收入主动压降 <code>-21.58%</code> 至 <code>571.20亿元</code>。</li>
+</ul>
 </li>
 </ol><ul>
-<li><strong>底层会计逻辑</strong>：过去传统经销商按季/按月提前一个月打款排队等配额，资金趴在账上形成80亿—100亿元的合同负债；而在2026年1月500ml普通飞天茅台正式上线“i茅台”并动态调价至 <code>1,639元/瓶</code> 敞开售卖后，消费者在App下单付款、次日顺丰发货或门店自提，<strong>从付款到确认收入仅间隔24—72小时（现款现货、T+1交割），根本不会跨季度沉淀为期末合同负债</strong>！</li>
+<li><strong>底层会计逻辑</strong>：过去传统经销商按季/按月提前一个月打款排队等配额，资金趴在账上形成80亿—100亿元的合同负债；而在2026年1月500ml普通飞天茅台正式上线“i茅台”并动态调价至 <code>1,639元/瓶</code> 敞开售卖后，消费者在App下单付款、次日顺丰发货或门店自提，<strong>从付款到确认收入仅间隔24—72小时（现款现货、T+1交割），根本不会跨季度沉淀为期末合同负债</strong>！<ul>
 <li>同时，面对系列酒（如茅台1935）和部分非标产品的社会库存压力，茅台管理层在2026年主动取消了对传统经销商的强制跨季预收打款要求，允许经销商“按实际动销节奏进货”，从而将社会渠道库存控制在极低水位，守住了普飞批价 <code>1,700元+</code> 与i茅台 <code>1,639元</code> 的铁底。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把经销商的脖子掐住、逼人家借银行承兑汇票提前三个月打款，那不叫本事，那叫寅吃卯粮的高利贷把戏。茅台把那80亿预收款砍掉，直接换成i茅台上585亿真金白银的消费者现款，就像把欠条换成了金条——只有死读会计课本的书呆子才会对着减少的欠条哭天抢地。</p></div></div></div></div>
 
 
@@ -1996,15 +2574,19 @@
 <p>在2026年前三季度，贵州茅台的归母净利率高达 <strong><code>48.37%</code></strong>，而同期五粮液为 <strong><code>29.55%</code></strong>（2025全年仅 <code>22.09%</code>，2026Q3单季仅 <code>21.57%</code>）、山西汾酒为 <strong><code>29.38%</code></strong>（2026Q3单季 <code>25.88%</code>）、泸州老窖为 <strong><code>38.66%</code></strong>（2026Q3单季 <code>31.75%</code>）。为什么同样是酿酒，茅台的净利率能比同行高出 <strong>10—26个百分点</strong>？我们将其逐层拆解为“三大溢价与成本剪刀差”：</p>
 <ol>
 <li>
-<p><strong>第一层剪刀差：吨酒出厂/直营单价溢价带来的毛利率绝对鸿沟（贡献约 +5 至 +15 个百分点税前利润率差）</strong>
-   - 酿造一瓶500ml顶级粮食酒的直接物料与人工制造成本其实相差不大：茅台酒2025年营业成本仅约 <code>94.8亿元</code>，对应 <code>4.68万吨</code> 销量，<strong>单吨直接营业成本约 <code>20.28万元/吨</code>（折合每瓶500ml生产成本仅约 <code>101.4元</code>）</strong>；而五粮液、国窖1573的单瓶直接生产与包装成本同样在 <code>60—90元/瓶</code> 之间。
-   - 真正的差距在于分子（不含税实现均价）：茅台普飞批发合同价提至 <code>1,369元/瓶</code>，i茅台直营直接吃满 <code>1,639元/瓶</code>（含税），使得茅台酒毛利率高达 <strong><code>93.53%</code></strong>，拉动公司综合毛利率常年稳定在 <strong><code>90%—91.2%</code></strong>。
-   - 反观五粮液（综合毛利率 <code>77.54%</code>，酒类毛利率 <code>83.75%</code>）和山西汾酒（毛利率 <code>74.01%—76.50%</code>），一方面主力单品出厂价低于茅台，另一方面在行业调整期不得不向经销商提供高达 <code>10%—20%</code> 的货折返利或搭赠，直接侵蚀了表观毛利率；泸州老窖虽凭借国窖1573死守 <code>85.5%—86.6%</code> 的毛利率，但代价是销量与营收断崖式萎缩 <code>-36.58%</code>。</p>
+<p><strong>第一层剪刀差：吨酒出厂/直营单价溢价带来的毛利率绝对鸿沟（贡献约 +5 至 +15 个百分点税前利润率差）</strong></p>
+<ul>
+<li>酿造一瓶500ml顶级粮食酒的直接物料与人工制造成本其实相差不大：茅台酒2025年营业成本仅约 <code>94.8亿元</code>，对应 <code>4.68万吨</code> 销量，<strong>单吨直接营业成本约 <code>20.28万元/吨</code>（折合每瓶500ml生产成本仅约 <code>101.4元</code>）</strong>；而五粮液、国窖1573的单瓶直接生产与包装成本同样在 <code>60—90元/瓶</code> 之间。</li>
+<li>真正的差距在于分子（不含税实现均价）：茅台普飞批发合同价提至 <code>1,369元/瓶</code>，i茅台直营直接吃满 <code>1,639元/瓶</code>（含税），使得茅台酒毛利率高达 <strong><code>93.53%</code></strong>，拉动公司综合毛利率常年稳定在 <strong><code>90%—91.2%</code></strong>。</li>
+<li>反观五粮液（综合毛利率 <code>77.54%</code>，酒类毛利率 <code>83.75%</code>）和山西汾酒（毛利率 <code>74.01%—76.50%</code>），一方面主力单品出厂价低于茅台，另一方面在行业调整期不得不向经销商提供高达 <code>10%—20%</code> 的货折返利或搭赠，直接侵蚀了表观毛利率；泸州老窖虽凭借国窖1573死守 <code>85.5%—86.6%</code> 的毛利率，但代价是销量与营收断崖式萎缩 <code>-36.58%</code>。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二层剪刀差：i茅台“零中间商直营”省下的巨额销售费用（贡献约 +8 至 +20 个百分点税前利润率差）</strong>
-   - 这是2025—2026年四家酒企分化最剧烈的一张底牌！<strong>茅台2025年销售费用率仅 <code>4.22%</code>（72.53亿元），2026年前三季度进一步压降至约 <code>3.1%</code></strong>。因为飞天茅台拥有全中国最强的自发社交货币属性，上线i茅台后无需找明星代言、无需买天价综艺冠名、无需给烟酒店老板发开瓶红包，每年近600亿的i茅台营收仅需极低的IT运维与门店履约费用。
-   - 反观三大同行，在批价倒挂、终端动销迟滞的2025—2026年，陷入了惨烈的“费用换动销”内卷泥潭：</p>
+<p><strong>第二层剪刀差：i茅台“零中间商直营”省下的巨额销售费用（贡献约 +8 至 +20 个百分点税前利润率差）</strong></p>
+<ul>
+<li>这是2025—2026年四家酒企分化最剧烈的一张底牌！<strong>茅台2025年销售费用率仅 <code>4.22%</code>（72.53亿元），2026年前三季度进一步压降至约 <code>3.1%</code></strong>。因为飞天茅台拥有全中国最强的自发社交货币属性，上线i茅台后无需找明星代言、无需买天价综艺冠名、无需给烟酒店老板发开瓶红包，每年近600亿的i茅台营收仅需极低的IT运维与门店履约费用。</li>
+<li>反观三大同行，在批价倒挂、终端动销迟滞的2025—2026年，陷入了惨烈的“费用换动销”内卷泥潭：</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -2019,10 +2601,12 @@
 </li>
 </ul>
 <ol start="3">
-<li><strong>第三层剪刀差：消费税从价计征基准与压货反噬效应（贡献约 +1.5 至 +6.5 个百分点差异）</strong>
-   - 我国白酒消费税实行“20%从价定率 + 0.5元/500ml从量定额”，通常在生产厂移送给销售公司环节按核定计税价格（约60%—70%比例）征收。
-   - 在正常年份，茅台因终端单价最高、且不搞体外销售公司截留避税，其税金及附加占营收比例稳定在 <strong><code>15.8%—15.9%</code></strong>，高于老窖正常年份的 <code>11%—13%</code>。
-   - 但在2025—2026年下行期，同行遭遇了惨重的 <strong>“消费税刚性反噬”</strong>：五粮液2025年税金及附加高达 <code>91.16亿元</code>，占重述后营收（405.29亿）的比例飙升至 <strong><code>22.49%</code></strong>；老窖2026年前三季度税金及附加率也升至 <strong><code>17.13%</code></strong>。原因在于：消费税在酒水出厂移送给销售公司时就已经刚性缴纳给税务局，但当这批酒压在渠道卖不出去、甚至像五粮液一样被会计审计冲回303亿营业收入时，已交的消费税无法退回，导致分母（确认营收）缩水而分子（税金）刚性，大幅吞噬了净利率！</li>
+<li><strong>第三层剪刀差：消费税从价计征基准与压货反噬效应（贡献约 +1.5 至 +6.5 个百分点差异）</strong><ul>
+<li>我国白酒消费税实行“20%从价定率 + 0.5元/500ml从量定额”，通常在生产厂移送给销售公司环节按核定计税价格（约60%—70%比例）征收。</li>
+<li>在正常年份，茅台因终端单价最高、且不搞体外销售公司截留避税，其税金及附加占营收比例稳定在 <strong><code>15.8%—15.9%</code></strong>，高于老窖正常年份的 <code>11%—13%</code>。</li>
+<li>但在2025—2026年下行期，同行遭遇了惨重的 <strong>“消费税刚性反噬”</strong>：五粮液2025年税金及附加高达 <code>91.16亿元</code>，占重述后营收（405.29亿）的比例飙升至 <strong><code>22.49%</code></strong>；老窖2026年前三季度税金及附加率也升至 <strong><code>17.13%</code></strong>。原因在于：消费税在酒水出厂移送给销售公司时就已经刚性缴纳给税务局，但当这批酒压在渠道卖不出去、甚至像五粮液一样被会计审计冲回303亿营业收入时，已交的消费税无法退回，导致分母（确认营收）缩水而分子（税金）刚性，大幅吞噬了净利率！</li>
+</ul>
+</li>
 </ol>
 <hr/>
 <h3 id="_14">四、 份额攻守终极结论：高端酒池子缩水，茅台完成了历史性的“虹吸式清场”</h3>
@@ -2172,9 +2756,11 @@
 <hr/>
 <h3 id="35-i">二、 未来3—5年内生增量垫高测算（存量老酒释放 + i茅台直营满血 + 技改达产）</h3>
 <div class="annotated-row"><div class="main-col"><p>算出当前 <strong><code>840.00亿元/年</code></strong> 的静态常态底盘后，更关键的买方追问是：<strong>在不假设宏观经济大放水、不假设终端批价重回2,500元泡沫的保守前提下，仅凭已经锁定的物理基酒库存与渠道改革，未来3—5年（2027—2030年）茅台的常态 Owner Earnings 会自然垫高到什么水位？</strong></p><p>我们逐一拆解已经装填进枪膛的<strong>三大高确定性内生增量引擎</strong>：</p><ul>
-<li><strong>1. 引擎一：2021—2025年已入库陈化的新增茅台酒基酒“五年期满”自然释放（预计净增 OE <code>+65.00亿—82.00亿元/年</code>）</strong></li>
 <li>
-<p><strong>底层物理铁律</strong>：任何一年可对外销售的53度茅台成品酒上限，100%取决于5年前的基酒产量。</p>
+<p><strong>1. 引擎一：2021—2025年已入库陈化的新增茅台酒基酒“五年期满”自然释放（预计净增 OE <code>+65.00亿—82.00亿元/年</code>）</strong></p>
+<ul>
+<li><strong>底层物理铁律</strong>：任何一年可对外销售的53度茅台成品酒上限，100%取决于5年前的基酒产量。</li>
+</ul>
 </li>
 <li>
 <p><strong>库存释放台账</strong>：在2016—2020年（“十三五”期间），茅台酒基酒年产量从 <code>3.93万吨</code> 爬坡至 <code>5.02万吨</code>，对应2021—2025年的成品茅台酒可售量长期受制于 <code>4.2万—4.7万吨</code> 的紧平衡天花板；而在2021—2025年，茅台酒基酒年产量一举跃升并稳居 <strong><code>5.65万吨—5.85万吨/年</code></strong> 的历史高位！</p>
@@ -2184,18 +2770,18 @@
 </li>
 <li>
 <p><strong>2. 引擎二：2026年价格双轨改革（i茅台 <code>1,639元</code> 动态直营 + 经销合同价调至 <code>1,369元</code>）全年满血运行红利（预计净增 OE <code>+45.00亿—55.00亿元/年</code>）</strong></p>
-</li>
-<li>
-<p><strong>渠道利润回收账</strong>：2026年，贵州茅台正式打响了载入中国商业史册的“价格市场化双轨改革”——一方面将传统经销商的53度飞天计划内合同出厂价从 <code>1,169元/瓶</code> 上调 <code>200元</code> 至 <strong><code>1,369元/瓶</code></strong>（提幅 <code>+17.1%</code>）；另一方面打破飞天不上线App的惯例，将53度500ml飞天茅台正式推上“i茅台”数字平台，按 <strong><code>1,639元/瓶</code></strong>（随行就市动态指导价）向全国实名C端消费者直接敞开售卖，将直营渠道营收占比一举推升至 <strong><code>56.36%</code></strong>！</p>
+<ul>
+<li><strong>渠道利润回收账</strong>：2026年，贵州茅台正式打响了载入中国商业史册的“价格市场化双轨改革”——一方面将传统经销商的53度飞天计划内合同出厂价从 <code>1,169元/瓶</code> 上调 <code>200元</code> 至 <strong><code>1,369元/瓶</code></strong>（提幅 <code>+17.1%</code>）；另一方面打破飞天不上线App的惯例，将53度500ml飞天茅台正式推上“i茅台”数字平台，按 <strong><code>1,639元/瓶</code></strong>（随行就市动态指导价）向全国实名C端消费者直接敞开售卖，将直营渠道营收占比一举推升至 <strong><code>56.36%</code></strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>全年满血化增量</strong>：由于该项改革在2026年分步推进（3月1,539元、7月18日1,639元），2026年财报仅体现了约半年的提价与直营扩量红利。展望2027—2029年，随着 <code>1,369元</code> 经销合同价与 <code>1,639元</code> i茅台直营价进入<strong>全年12个月满血运行状态</strong>，且新增的 <code>4,000—5,000吨</code> 飞天配额中预计有70%以上直接投放在i茅台与自营店（单瓶不含税收入比传统经销渠道高出约 <code>239元/瓶</code>），在完全不增加终端消费者实际买酒负担（甚至比过去黄牛炒作价更便宜）的前提下，上市公司将从中间黄牛与二批商手中顺理成章收回 <strong><code>45.00亿—55.00亿元/年</code></strong>（取中枢 <strong><code>+50.00亿元/年</code></strong>）的常态归母净利与 Owner Earnings！</p>
 </li>
 <li>
 <p><strong>3. 引擎三：3万吨酱香系列酒技改与习水同民坝一期达产消化（预计净增 OE <code>+15.00亿—25.00亿元/年</code>）</strong></p>
-</li>
-<li>
-<p><strong>次高端与大众酱香底座</strong>：随着“3万吨酱香系列酒技改工程”全面建成投产以及习水同民坝一期1.2万吨项目分批达产，公司系列酒基酒产能已站稳 <code>5.76万吨/年</code> 以上。经历2025—2026年茅台1935主动顺价清库、稳定在 <code>650—800元</code> 喜宴与商务主流价格带后，叠加茅台王子酒在 <code>200—400元</code> 大众口粮酱香市场的绝对统治力，系列酒板块在未来3—5年平稳消化新增产能，每年可保守贡献 <strong><code>15.00亿—25.00亿元</code></strong>（取中枢 <strong><code>+20.00亿元/年</code></strong>）的增量净利。</p>
+<ul>
+<li><strong>次高端与大众酱香底座</strong>：随着“3万吨酱香系列酒技改工程”全面建成投产以及习水同民坝一期1.2万吨项目分批达产，公司系列酒基酒产能已站稳 <code>5.76万吨/年</code> 以上。经历2025—2026年茅台1935主动顺价清库、稳定在 <code>650—800元</code> 喜宴与商务主流价格带后，叠加茅台王子酒在 <code>200—400元</code> 大众口粮酱香市场的绝对统治力，系列酒板块在未来3—5年平稳消化新增产能，每年可保守贡献 <strong><code>15.00亿—25.00亿元</code></strong>（取中枢 <strong><code>+20.00亿元/年</code></strong>）的增量净利。</li>
+</ul>
 </li>
 <li>
 <p><strong>三大内生引擎合流结论</strong>：
@@ -2211,10 +2797,12 @@
 <h4 id="1-1500i-1499-12">1. 极限情景一：价格极限寒冬（飞天社会批价跌至 <code>1,500元/瓶</code>，倒逼i茅台直营价退守 <code>1,499元</code>，非标与系列酒均价全面下跌 <code>12%</code>）</h4>
 <ul>
 <li>
-<p><strong>假设设定</strong>：假设宏观经济陷入深度通缩或商务宴请需求再度发生断崖式冰封，市面上53度飞天茅台散瓶批发价从当前的 <code>1,700—1,750元</code> 一路杀跌至 <strong><code>1,500元/瓶</code></strong>。在此极端寒冬下：
-  1. 为维护渠道生态，i茅台App上的53度飞天直营价被迫从 <code>1,639元/瓶</code> 全面退回 <strong><code>1,499元/瓶</code></strong>（直接降价 <code>8.54%</code>），传统经销合同价维持 <code>1,369元/瓶</code>（渠道仍保有 <code>130元/瓶</code> 顺差毛利，不发生大面积违约弃购）；
-  2. 精品茅台、生肖茅台、年份酒等高毛利非标产品，以及茅台1935等系列酒终端需求承压，出厂及直营结算均价全面下挫 <strong><code>12.00%</code></strong>；
-  3. 全年成品酒总销量零增长（维持现有存量配额）。</p>
+<p><strong>假设设定</strong>：假设宏观经济陷入深度通缩或商务宴请需求再度发生断崖式冰封，市面上53度飞天茅台散瓶批发价从当前的 <code>1,700—1,750元</code> 一路杀跌至 <strong><code>1,500元/瓶</code></strong>。在此极端寒冬下：</p>
+<ol>
+<li>为维护渠道生态，i茅台App上的53度飞天直营价被迫从 <code>1,639元/瓶</code> 全面退回 <strong><code>1,499元/瓶</code></strong>（直接降价 <code>8.54%</code>），传统经销合同价维持 <code>1,369元/瓶</code>（渠道仍保有 <code>130元/瓶</code> 顺差毛利，不发生大面积违约弃购）；</li>
+<li>精品茅台、生肖茅台、年份酒等高毛利非标产品，以及茅台1935等系列酒终端需求承压，出厂及直营结算均价全面下挫 <strong><code>12.00%</code></strong>；</li>
+<li>全年成品酒总销量零增长（维持现有存量配额）。</li>
+</ol>
 </li>
 <li>
 <p><strong>刚性传导与“双重税盾缓冲”推演</strong>：</p>
@@ -2234,18 +2822,22 @@
 </ul>
 <h4 id="2-30">2. 极限情景二：原料与税制双重冲击（红缨子糯高粱及包材暴涨 <code>30%</code> + 消费税征收环节后移至零售端试点落地）</h4>
 <ul>
-<li><strong>第一重冲击：原粮（红缨子高粱、小麦）与包材采购价全面暴涨 <code>30%</code> 的单位经济账</strong></li>
 <li>
-<p>翻开茅台年报成本构成，全公司近 <code>1,700亿元</code> 营收对应的全部营业成本仅约 <code>140亿元</code>。在全部营业成本中，<strong>直接材料成本（仁怀本地有机红缨子糯高粱、优质小麦、陶坛、乳白玻璃瓶、飘带及外包装彩盒）合计仅约 <code>62.00亿元/年</code></strong>，占公司狭义营业收入的比重仅为 <strong><code>3.64%</code></strong>！折算到每一瓶售价 <code>1,499—1,639元</code> 的53度飞天茅台酒上，其直接耗用的约5斤高粱小麦原粮及瓶盒包材成本合计仅约 <strong><code>48元/瓶</code></strong>（占售价比重仅 <strong><code>3.1%—3.3%</code></strong>）。</p>
+<p><strong>第一重冲击：原粮（红缨子高粱、小麦）与包材采购价全面暴涨 <code>30%</code> 的单位经济账</strong></p>
+<ul>
+<li>翻开茅台年报成本构成，全公司近 <code>1,700亿元</code> 营收对应的全部营业成本仅约 <code>140亿元</code>。在全部营业成本中，<strong>直接材料成本（仁怀本地有机红缨子糯高粱、优质小麦、陶坛、乳白玻璃瓶、飘带及外包装彩盒）合计仅约 <code>62.00亿元/年</code></strong>，占公司狭义营业收入的比重仅为 <strong><code>3.64%</code></strong>！折算到每一瓶售价 <code>1,499—1,639元</code> 的53度飞天茅台酒上，其直接耗用的约5斤高粱小麦原粮及瓶盒包材成本合计仅约 <strong><code>48元/瓶</code></strong>（占售价比重仅 <strong><code>3.1%—3.3%</code></strong>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>量化冲击</strong>：即便遭遇极端气候灾害，导致红缨子糯高粱收购保护价、小麦及包材成本在一夜之间全面暴涨 <strong><code>30.00%</code></strong>，公司全年新增的直接材料成本也仅为：<code>62.00亿元 × 30% = 18.60亿元</code>。假设公司一分钱都不向消费者提价转嫁，扣除25%企业所得税后，<strong>对全年归母净利润与 Owner Earnings 的最大侵蚀仅为 <code>-6.90亿元</code>（不到7亿元，占840亿常态Owner Earnings的比重仅 <code>0.82%</code>）</strong>！</p>
 </li>
 <li>
 <p><strong>第二重冲击：白酒消费税征收环节后移至批发/零售端的真实影响推演</strong></p>
-</li>
+<ul>
 <li><strong>直营化改革已提前拆掉56%以上的炸弹</strong>：截至2026年三季报，茅台通过i茅台App与自营店构建的<strong>直营渠道营收占比已高达 <code>56.36%</code></strong>！在直营模式下，茅台本来就是直接按 <code>1,639元</code> 的终端零售价向消费者开具发票并足额缴纳消费税的——这意味着公司<strong>超过56%的营收税基早已100%暴露在零售端阳光下，消费税后移对这部分业务的新增税负严格为 <code>0</code>！</strong></li>
 <li><strong>传统经销渠道批零顺差已大幅收敛</strong>：对于剩余 <code>43.64%</code> 的传统经销渠道，自2026年合同出厂价提至 <code>1,369元/瓶</code>、社会批价稳在 <code>1,700—1,750元/瓶</code> 后，经销端的批零毛利顺差已从历史上的上千元大幅收窄至 <strong><code>330—380元/瓶</code></strong>。即便假设终端消费者与经销商仅分担 <code>55%</code> 的新增税负、剩余 <code>45%</code> 被迫由茅台酒厂通过渠道补贴承担，扣除25%企业所得税抵扣后，<strong>对贵州茅台常态归母净利润与 Owner Earnings 的实际净损耗仅约 <code>-15.00亿至 -18.00亿元/年</code></strong>！</li>
+</ul>
+</li>
 </ul>
 <h4 id="3_5">3. 贵州茅台双极限抗压测试量化汇总表</h4>
 <div class="table-scroll-wrap"><table>
@@ -2458,15 +3050,19 @@
 <hr/>
 <h3 id="35">三、 激励、薪酬与人均效能审计：3.5万酿造大军是包袱，还是无法工业化替代的深沟高墙？</h3>
 <div class="annotated-row"><div class="main-col"><ol>
-<li><strong>国企股权激励缺位与高管限薪审计</strong>：
-   - 作为贵州省国资委旗下的特大型省属国有控股企业，受限于国资监管红线与极其敏感的社会舆论关注度，<strong>贵州茅台上市至今从未实施过任何管理层股权激励或员工持股计划</strong>（相比之下，五粮液和山西汾酒在早年曾搞过小规模员工持股或限制性股票，泸州老窖则在2021年推出过覆盖高管与核心骨干的限制性股票激励计划）。
-   - 核查茅台2025年报披露的高管薪酬：公司董事长、总经理及核心副总等省管干部的税前报酬严格执行贵州省属国企负责人薪酬制度改革标准，<strong>核心高管年薪普遍在 <code>80万—130万元</code> 区间</strong>，与公司每年超800亿元的净利润规模相比可谓“极度廉价”。</li>
+<li><strong>国企股权激励缺位与高管限薪审计</strong>：<ul>
+<li>作为贵州省国资委旗下的特大型省属国有控股企业，受限于国资监管红线与极其敏感的社会舆论关注度，<strong>贵州茅台上市至今从未实施过任何管理层股权激励或员工持股计划</strong>（相比之下，五粮液和山西汾酒在早年曾搞过小规模员工持股或限制性股票，泸州老窖则在2021年推出过覆盖高管与核心骨干的限制性股票激励计划）。</li>
+<li>核查茅台2025年报披露的高管薪酬：公司董事长、总经理及核心副总等省管干部的税前报酬严格执行贵州省属国企负责人薪酬制度改革标准，<strong>核心高管年薪普遍在 <code>80万—130万元</code> 区间</strong>，与公司每年超800亿元的净利润规模相比可谓“极度廉价”。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>治理双刃剑辨析</strong>：没有股权激励、高管拿死工资且任期轮换，一方面彻底杜绝了民企高管为了行权套现而疯狂向渠道压货造假（如五粮液前期差错更正所暴露的激进压货乱象）或低价向自己人输送股权利益的道德风险；但另一方面，也容易滋生“不求有功、但求无过”的官僚守成心态。所幸2026年现任管理层展现出了罕见的市场化魄力——果断砍掉分销高价配额利益链、将普飞推上i茅台直面C端，用制度化的数字直营锁死了寻租空间。</li>
 </ul><ol start="2">
-<li><strong>人均效能与3.5万人工成本的护城河算账</strong>：
-   - 根据2025年报，贵州茅台在职员工总数达 <strong><code>34,992人</code></strong>（外加需承担费用的离退休职工 <code>2,547人</code>），其中 <strong>一线生产人员高达 <code>29,092人</code>（占全员比例高达 <code>83.14%</code>）</strong>，销售人员仅 <code>1,205人</code>，技术人员 <code>1,098人</code>。
-   - 2025年茅台“支付给职工及为职工支付的现金”高达 <strong><code>154.73亿元</code></strong>（期末应付职工薪酬余额 <code>55.23亿元</code>），以此实算 <strong>茅台全员人均现金薪酬福利成本高达 <code>44.22万元/年</code></strong>（即便扣除五险二金与企业年金等单位缴纳部分，一线酿造工人平均到手年薪亦在 <code>20万—25万元</code> 以上），在贵州仁怀当地属于绝对的金饭碗。</li>
+<li><strong>人均效能与3.5万人工成本的护城河算账</strong>：<ul>
+<li>根据2025年报，贵州茅台在职员工总数达 <strong><code>34,992人</code></strong>（外加需承担费用的离退休职工 <code>2,547人</code>），其中 <strong>一线生产人员高达 <code>29,092人</code>（占全员比例高达 <code>83.14%</code>）</strong>，销售人员仅 <code>1,205人</code>，技术人员 <code>1,098人</code>。</li>
+<li>2025年茅台“支付给职工及为职工支付的现金”高达 <strong><code>154.73亿元</code></strong>（期末应付职工薪酬余额 <code>55.23亿元</code>），以此实算 <strong>茅台全员人均现金薪酬福利成本高达 <code>44.22万元/年</code></strong>（即便扣除五险二金与企业年金等单位缴纳部分，一线酿造工人平均到手年薪亦在 <code>20万—25万元</code> 以上），在贵州仁怀当地属于绝对的金饭碗。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>横向对比四大名酒人均效能（2025年口径）</strong>：</p>
@@ -2607,22 +3203,24 @@
 <p>算清了买断整座茅台的实际净出价（<strong>True EV = <code>16,654.66亿元</code></strong>）以及这台机器每年能吐出的真实股东盈余（静态常态 <strong><code>840.00亿元</code></strong> / 中期满血 <strong><code>980.00亿元</code></strong>），我们用买方四把核心铁尺来丈量当前 <code>1,439.00元/股</code> 的真实性价比：</p>
 <h4 id="1-vs">1. 核心买方标尺计算：内生回报率 vs 即期落袋安全垫</h4>
 <ul>
-<li><strong>标尺一：当前静态常态真实内生回报率（Current Owner Earnings Yield） = <code>5.04%</code></strong></li>
-<li>计算公式：<code>静态常态 Owner Earnings 840.00亿元 ÷ 当前 True EV 16,654.66亿元</code> = <strong><code>5.04%</code></strong>（对应静态真实企业价值倍数 <strong>True EV / OE = <code>19.83倍</code></strong>，即静态回本年限为 <strong><code>19.8年</code></strong>）。</li>
 <li>
-<p>表观估值对比：若不扣除超额净现金、直接按表面总市值 <code>17,988.65亿元</code> 计算，当前表观静态 PE 为 <strong><code>21.42倍</code></strong>（按2025年实绩823.20亿计为 <code>21.85倍</code>），处于贵州茅台过去10年历史PE估值分位的 <strong><code>12%</code> 极低水位</strong>（远低于过去10年约32倍的中位数，更较2021年65—70倍的泡沫巅峰削去了近70%的估值水分）。</p>
+<p><strong>标尺一：当前静态常态真实内生回报率（Current Owner Earnings Yield） = <code>5.04%</code></strong></p>
+<ul>
+<li>计算公式：<code>静态常态 Owner Earnings 840.00亿元 ÷ 当前 True EV 16,654.66亿元</code> = <strong><code>5.04%</code></strong>（对应静态真实企业价值倍数 <strong>True EV / OE = <code>19.83倍</code></strong>，即静态回本年限为 <strong><code>19.8年</code></strong>）。</li>
+<li>表观估值对比：若不扣除超额净现金、直接按表面总市值 <code>17,988.65亿元</code> 计算，当前表观静态 PE 为 <strong><code>21.42倍</code></strong>（按2025年实绩823.20亿计为 <code>21.85倍</code>），处于贵州茅台过去10年历史PE估值分位的 <strong><code>12%</code> 极低水位</strong>（远低于过去10年约32倍的中位数，更较2021年65—70倍的泡沫巅峰削去了近70%的估值水分）。</li>
+</ul>
 </li>
 <li>
 <p><strong>标尺二：中期达产与直营满血后内生回报率（Normalized Mid-term Yield） = <code>5.88%</code></strong></p>
-</li>
-<li>
-<p>计算公式：<code>中期稳态 Owner Earnings 980.00亿元 ÷ 当前 True EV 16,654.66亿元</code> = <strong><code>5.88%</code></strong>（对应中期 <strong>True EV / OE = <code>16.99倍</code></strong>，真实回本年限缩短至 <strong><code>17.0年</code></strong>）。</p>
+<ul>
+<li>计算公式：<code>中期稳态 Owner Earnings 980.00亿元 ÷ 当前 True EV 16,654.66亿元</code> = <strong><code>5.88%</code></strong>（对应中期 <strong>True EV / OE = <code>16.99倍</code></strong>，真实回本年限缩短至 <strong><code>17.0年</code></strong>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>标尺三：即期真金白银落袋安全垫（现金股息率 + 注销式回购率） = <code>3.84%—3.87%</code></strong></p>
-</li>
-<li>
-<p><strong>即期现金股息率（<code>3.62%</code>）</strong>：2025年度公司实派现金分红总额高达 <strong><code>650.33亿元</code></strong>（分红率 <code>79.00%</code>，高于75%承诺底线），除以当前表面总市值 <code>17,988.65亿元</code>，即期税前现金股息率稳居 <strong><code>3.62%</code></strong>（若按2026E归母净利840亿、78%—80%分红率测算，预期现金股息率达 <strong><code>3.65%—3.74%</code></strong>）。</p>
+<ul>
+<li><strong>即期现金股息率（<code>3.62%</code>）</strong>：2025年度公司实派现金分红总额高达 <strong><code>650.33亿元</code></strong>（分红率 <code>79.00%</code>，高于75%承诺底线），除以当前表面总市值 <code>17,988.65亿元</code>，即期税前现金股息率稳居 <strong><code>3.62%</code></strong>（若按2026E归母净利840亿、78%—80%分红率测算，预期现金股息率达 <strong><code>3.65%—3.74%</code></strong>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>常态化注销式回购增厚（<code>+0.22%—0.25%</code>）</strong>：继2024—2025年完成首轮60亿元注销回购、2025—2026年5月完成第二轮30亿元注销回购（累计已注销611.62万股、缩减总股本约 <code>0.49%</code>）后，管理层已将“多余现金常态化回购注销”确立为长效市值管理工具。按年均 <strong><code>35.00亿—45.00亿元</code></strong> 注销式回购测算，每年可直接为留存股东额外增厚 <strong><code>0.22%—0.25%</code></strong> 的每股含金量。</p>
@@ -2640,8 +3238,10 @@
   <em>(注：在永续经营视角下，由于这34万吨基酒是未来每年产生840亿—980亿 Owner Earnings 的必要生产底座，为严防“既算清算资产、又算永续现金流”的双重计算错误，我们在下面的永续经营拆骨中不单独扣除3,500亿存货价值，而是将其视为零边际成本的超级安全垫。)</em></p>
 </li>
 <li>
-<p><strong>第二层剥离：切出“超额净现金”与“酱香系列酒业务”</strong>
-  1. <strong>超额净现金与负债对冲</strong>：如前表所算，从 <code>17,988.65亿元</code> 表面总市值中扣除 <code>1,430.00亿元</code> 超额净现金、并加回 <code>96.01亿元</code> 租赁负债及少数股东权益后，市场给茅台全部经营性酒类业务包标出的 True EV 为 <strong><code>16,654.66亿元</code></strong>。</p>
+<p><strong>第二层剥离：切出“超额净现金”与“酱香系列酒业务”</strong></p>
+<ol>
+<li><strong>超额净现金与负债对冲</strong>：如前表所算，从 <code>17,988.65亿元</code> 表面总市值中扣除 <code>1,430.00亿元</code> 超额净现金、并加回 <code>96.01亿元</code> 租赁负债及少数股东权益后，市场给茅台全部经营性酒类业务包标出的 True EV 为 <strong><code>16,654.66亿元</code></strong>。</li>
+</ol>
 </li>
 </ul>
 <ol start="2">
@@ -2836,18 +3436,24 @@
 </tbody>
 </table></div>
 <div class="annotated-row"><div class="main-col"><h4 id="3_6">3. 三条基本面死刑证伪红线（一旦触发，无条件认错清仓！）</h4><p>价值投资绝不是盲目死扛。如果未来任何一天，贵州茅台出现以下 <strong>“三条基本面死刑证伪红线”</strong> 中的任意一条，说明我们赖以立论的底层护城河已发生不可逆的坍塌，无论当时股价跌到多便宜、账面浮亏多少，都必须无条件执行铁血清仓纪律：</p><ol>
-<li><strong>红线一：终端定价权与社交硬通货信仰坍塌（批价击穿 <code>1,450元</code> + i茅台长期流拍倒挂）</strong>
-   - <strong>量化监控指标</strong>：53度飞天茅台社会真实散瓶批发价有效跌破 <strong><code>1,450元/瓶</code></strong>（即逼近 <code>1,369元</code> 传统经销合同出厂价 + 经销商最低物流资金生存成本线），<strong>且</strong>“i茅台”App上按 <code>1,639元 / 1,499元</code> 投放的53度飞天及核心非标产品出现<strong>连续两个季度以上的大面积无人申购、常态化滞销流拍与全渠道价格倒挂</strong>。</li>
+<li><strong>红线一：终端定价权与社交硬通货信仰坍塌（批价击穿 <code>1,450元</code> + i茅台长期流拍倒挂）</strong><ul>
+<li><strong>量化监控指标</strong>：53度飞天茅台社会真实散瓶批发价有效跌破 <strong><code>1,450元/瓶</code></strong>（即逼近 <code>1,369元</code> 传统经销合同出厂价 + 经销商最低物流资金生存成本线），<strong>且</strong>“i茅台”App上按 <code>1,639元 / 1,499元</code> 投放的53度飞天及核心非标产品出现<strong>连续两个季度以上的大面积无人申购、常态化滞销流拍与全渠道价格倒挂</strong>。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>证伪本质</strong>：这不再是周期性的购买力波动，而是证明中国新一代富裕阶层与商务宴请彻底抛弃了高度酱香白酒，茅台的“社交面子货币”信仰发生不可逆崩塌。</li>
 </ul><ol start="2">
-<li><strong>红线二：公司治理掠夺与现金流截留（财务公司存款被违规挪用爆雷 / 撕毁 <code>75%</code> 分红底线）</strong>
-   - <strong>量化监控指标</strong>：控股股东茅台集团或地方财政突破上市公司独立治理防火墙，通过贵州茅台集团财务有限公司向地方高风险城投平台或集团亏损非酒业务违规拆借资金、导致上市公司超千亿同业存款出现大额逾期坏账计提；<strong>或者</strong>管理层在无重大主业并购的情况下，单方面撕毁《三年股东分红回报规划》，将常规现金分红率强行砍回 <strong><code>75.00%</code></strong> 底线以下。</li>
+<li><strong>红线二：公司治理掠夺与现金流截留（财务公司存款被违规挪用爆雷 / 撕毁 <code>75%</code> 分红底线）</strong><ul>
+<li><strong>量化监控指标</strong>：控股股东茅台集团或地方财政突破上市公司独立治理防火墙，通过贵州茅台集团财务有限公司向地方高风险城投平台或集团亏损非酒业务违规拆借资金、导致上市公司超千亿同业存款出现大额逾期坏账计提；<strong>或者</strong>管理层在无重大主业并购的情况下，单方面撕毁《三年股东分红回报规划》，将常规现金分红率强行砍回 <strong><code>75.00%</code></strong> 底线以下。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>证伪本质</strong>：一旦印钞机赚来的真金白银不再归属全体流通股东，再高的账面 Owner Earnings 对中小股东而言也只是镜花水月。</li>
 </ul><ol start="3">
-<li><strong>红线三：赤水河核心产区微生态毁灭或重大食品安全造假丑闻</strong>
-   - <strong>量化监控指标</strong>：茅台镇核心15.03平方公里产区或赤水河上游发生不可逆的工业化学水源污染、极端气候突变导致紫红泥老窖池中的核心酿造微生物菌群大面积退化死亡，使得新产基酒风味品质发生断崖式劣化；<strong>或者</strong>公司爆发类似当年塑化剂危机以上级别的重大食品安全事故、年份基酒造假丑闻。</li>
+<li><strong>红线三：赤水河核心产区微生态毁灭或重大食品安全造假丑闻</strong><ul>
+<li><strong>量化监控指标</strong>：茅台镇核心15.03平方公里产区或赤水河上游发生不可逆的工业化学水源污染、极端气候突变导致紫红泥老窖池中的核心酿造微生物菌群大面积退化死亡，使得新产基酒风味品质发生断崖式劣化；<strong>或者</strong>公司爆发类似当年塑化剂危机以上级别的重大食品安全事故、年份基酒造假丑闻。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>证伪本质</strong>：茅台94%毛利率的物理根基在于“离开茅台镇就酿不出茅台酒”的产区微生物垄断与百年品质信誉，根基一旦被毁，奢侈品溢价将瞬间归零。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>投资的秘诀其实就两条：第一，搞清楚一台印钞机到底值多少钱，现在1439块的茅台能给你接近4%的即期分红和5%以上的真实内生回报，拿着它比拿着2%利息的国债舒服得多；第二，手里留点现金耐心等着市场先生发疯——如果哪天华尔街或者陆家嘴那帮神经病因为几句鬼故事把它砸到1200块甚至1000块以下，记得拿上你最大的洗脸盆去接金子！</p></div></div></div></div>
@@ -3198,7 +3804,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《贵州茅台 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/贵州茅台 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《贵州茅台(600519.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/贵州茅台(600519.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3395,6 +4001,677 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        var globalMarketControllers = [];
+        var globalMarketMode = 'ALL';
+        try {
+          var savedMkt = localStorage.getItem('agy_lb_market_mode_v1');
+          if (savedMkt === 'ALL' || savedMkt === 'A' || savedMkt === 'H') globalMarketMode = savedMkt;
+        } catch(e) {}
+        var globalBarRefs = [];
+        var globalStats = { maxTotal: 0, maxA: 0, maxH: 0 };
+
+        function setGlobalMarketMode(mode) {
+          globalMarketMode = mode;
+          try { localStorage.setItem('agy_lb_market_mode_v1', mode); } catch(e) {}
+          globalMarketControllers.forEach(function(fn){ fn(mode); });
+          globalBarRefs.forEach(function(ref){
+            Object.keys(ref.btns).forEach(function(k){
+              ref.btns[k].classList.toggle('active', k === mode);
+            });
+            if (ref.badge) {
+              var labelMap = {
+                'ALL': '当前显示：A+H 统一全榜 (' + (globalStats.maxA + globalStats.maxH) + ' 席)',
+                'A': '当前显示：🇨🇳 仅 A 股 (' + globalStats.maxA + ' 席)',
+                'H': '当前显示：🇭🇰 仅 H 股/港股 (' + globalStats.maxH + ' 席)'
+              };
+              ref.badge.textContent = labelMap[mode] || '';
+            }
+          });
+        }
+
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = (hTexts.some(function(h){ return h.indexOf('实时排名') >= 0 || h.indexOf('市场与排名') >= 0 || h.indexOf('统一排名') >= 0; })) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('严苛排名') >= 0 || hTexts[0].indexOf('统一排名') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var countA = 0, countH = 0;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🛢️ 周期资源与能源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '⚙️ 高端制造与出海',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /(?:客观|客)\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var market = 'A';
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) || pxTxt.indexOf('港元') >= 0) {
+                market = 'H';
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /(?:今日\s*|\()([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /(?:常态回报|严苛EV常态回报|港股常态回报)\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (isNaN(oe)) oe = parseNum(oeTxt2, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /(?:实时股息|纯现金股息|TTM股息)(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (isHMaster || rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || pxTxt2.indexOf('H股现价') >= 0 || pxTxt2.indexOf('港元`') >= 0 || (pxTxt2.indexOf('实时现价:') >= 0 && pxTxt2.split('实时现价')[1].slice(0, 20).indexOf('港元') >= 0) || (pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0)) {
+                market = 'H';
+              }
+            }
+
+            if (market === 'H') countH++; else countA++;
+            tr.setAttribute('data-market', market);
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              market: market,
+              isHkOnly: market === 'H',
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 1) return;
+          if (countA + countH > globalStats.maxTotal && countA > 0 && countH > 0) {
+            globalStats.maxTotal = countA + countH;
+            globalStats.maxA = countA;
+            globalStats.maxH = countH;
+          }
+
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL' };
+          var inlineMarketBtns = {};
+
+          function applyFilters() {
+            var visIdx = 0;
+            // 遍历当前 tbody 真实 DOM 顺序以保证重排后序号依然严格递增
+            var domTrs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var trMap = new Map();
+            rowData.forEach(function(d){ trMap.set(d.tr, d); });
+            domTrs.forEach(function(tr){
+              var d = trMap.get(tr);
+              if (!d) return;
+              var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              var hidden = hideByMkt || hideByF;
+              d.tr.style.display = hidden ? 'none' : '';
+              if (!hidden) {
+                visIdx++;
+                if (d.td0) {
+                  var dynSpan = d.td0.querySelector('.agy-dyn-rank');
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.key !== 'rank') {
+                    if (!dynSpan) {
+                      dynSpan = document.createElement('div');
+                      dynSpan.className = 'agy-dyn-rank no-print';
+                      dynSpan.style.cssText = 'font-size:11px;font-weight:700;color:#0284c7;margin-bottom:2px;';
+                      d.td0.insertBefore(dynSpan, d.td0.firstChild);
+                    }
+                    dynSpan.textContent = '#' + visIdx;
+                  } else if (dynSpan) {
+                    dynSpan.remove();
+                  }
+                }
+              }
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若表格同时包含 A 股与 H 股，挂载三态市场切换开关（AH股一起显示 / 只显示A股 / 只显示H股），并与全页顶栏联动
+          if (countA > 0 && countH > 0) {
+            var seg = document.createElement('div');
+            seg.className = 'agy-market-seg-inline';
+            var mDefs = [
+              { m: 'ALL', text: '🌐 AH一起 (' + (countA + countH) + ')' },
+              { m: 'A', text: '🇨🇳 只看A股 (' + countA + ')' },
+              { m: 'H', text: '🇭🇰 只看H股 (' + countH + ')' }
+            ];
+            mDefs.forEach(function(md){
+              var mb = document.createElement('button');
+              mb.type = 'button';
+              mb.className = 'agy-market-btn' + (md.m === globalMarketMode ? ' active' : '');
+              mb.textContent = md.text;
+              mb.addEventListener('click', function(){
+                setGlobalMarketMode(md.m);
+              });
+              seg.appendChild(mb);
+              inlineMarketBtns[md.m] = mb;
+            });
+            bar.appendChild(seg);
+            globalMarketControllers.push(function(mode){
+              state.market = mode;
+              Object.keys(inlineMarketBtns).forEach(function(k){
+                inlineMarketBtns[k].classList.toggle('active', k === mode);
+              });
+              applyFilters();
+            });
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+            applyFilters();
+          }
+
+          updateUI();
+        });
+
+        // 若页面存在 A+H 统一榜单表，在正文最顶部挂载吸顶全局三态市场开关，一键同步切换全页全部雷达与总表
+        if (globalMarketControllers.length > 0) {
+          var rc = document.querySelector('.report-content');
+          if (rc) {
+            var gBar = document.createElement('div');
+            gBar.className = 'agy-market-global-bar no-print';
+            var gTitle = document.createElement('div');
+            gTitle.className = 'agy-market-global-title';
+            gTitle.innerHTML = '🎛️ <span>A+H 统一榜单市场视图开关</span>';
+            var gSeg = document.createElement('div');
+            gSeg.className = 'agy-market-seg';
+            var gBtns = {};
+            [
+              { m: 'ALL', text: '🌐 AH股一起显示 (' + (globalStats.maxA + globalStats.maxH) + ')' },
+              { m: 'A', text: '🇨🇳 只显示A股 (' + globalStats.maxA + ')' },
+              { m: 'H', text: '🇭🇰 只显示H股 (' + globalStats.maxH + ')' }
+            ].forEach(function(item){
+              var gb = document.createElement('button');
+              gb.type = 'button';
+              gb.className = 'agy-market-btn';
+              gb.textContent = item.text;
+              gb.addEventListener('click', function(){
+                setGlobalMarketMode(item.m);
+              });
+              gSeg.appendChild(gb);
+              gBtns[item.m] = gb;
+            });
+            var gBadge = document.createElement('span');
+            gBadge.className = 'agy-market-count-badge';
+            gBar.appendChild(gTitle);
+            gBar.appendChild(gSeg);
+            gBar.appendChild(gBadge);
+            var h1El = rc.querySelector('h1');
+            if (h1El && h1El.nextSibling) {
+              rc.insertBefore(gBar, h1El.nextSibling);
+            } else {
+              rc.insertBefore(gBar, rc.firstChild);
+            }
+            globalBarRefs.push({ btns: gBtns, badge: gBadge });
+            setGlobalMarketMode(globalMarketMode);
+          }
+        }
+      })();
     })();
   </script>
 </body>
