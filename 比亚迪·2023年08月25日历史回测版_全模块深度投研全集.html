@@ -1902,34 +1902,93 @@
 
 <hr class="module-sep"/>
 <hr>
-<h2 id="true-evreverse-sotp">四、 揭盲定价：True EV、Reverse SOTP 拆骨估值与四档击球区</h2>
-<p>盲测底盘与三档 <code>Owner Earnings</code> 已经落盘锁死，现在正式拆封 <code>2023年8月25日</code>（星期五）收盘加密行情信封，检验市场先生此刻究竟是在打折甩卖，还是仍在向未来高增长收取昂贵的预付费。</p>
-<h3 id="41">4.1 基准日真实未复权盘面与反复权陷阱核验</h3>
-<blockquote>
-<p><strong>🚨 反复权价陷阱强校验（Unadjusted Price Guard）</strong>：本回测严格调取基准日当天的交易所真实未复权盘面价，绝不混用后续年份因送转或分红除权倒算出的前复权价（如数据库前复权折算的 <code>74.818元</code> 陷阱价）。一切市值、股息率与击球区均 100% 锚定 <code>2023年8月25日</code> 交易屏幕上的真实报价。</p>
-</blockquote>
+<h2 id="f-blindf-unseal">四、 物理蒙眼盲定锁盘（F-Blind）与揭盲定价对照（F-Unseal）</h2>
+<p>为彻底消灭传统回测中“先看历史现价、再潜意识往现价靠拢定倍数”的<strong>现价锚定偏误（Anchoring Bias）</strong>，本回测严格执行升级版 <strong>「三段式物理双盲估值协议」</strong>：在拆封 <code>2023年8月25日</code> 行情信封之前，先将上卷全部财务、销量、周期、风险与 <code>Owner Earnings</code> 底稿进行<strong>名称脱敏（替换为 Alpha 公司）+ 秘密等比缩放（<code>k = 0.63</code>，总股本另乘错位系数阻断任何股价记忆）</strong>，交由完全独立、零上下文污染的买方估值裁判子智能体闭眼锁盘生成 <code>blind_valuation_lock.json</code>，再还原揭盲对照当日真实未复权盘面价（严禁看到现价后回头篡改一分钱的主业倍数！）。</p>
+<h3 id="41">4.1 物理双盲锁盘结果（零股价暴露 · 代码防反悔锁）</h3>
+<p>独立双盲估值裁判在<strong>完全不知晓公司名称与任何股价/历史高低点</strong>的情况下，严格锚定基准日宏观无风险利率（本土 10Y 国债 <code>2.55%</code> / 美元 10Y 国债 <code>4.24%</code>）与常态归母 <code>Owner Earnings</code> 主锚（<code>230.0亿元</code>，其中汽车+电池主业 <code>213.0亿元</code>、比亚迪电子 <code>17.0亿元</code>），基于以下冷酷逻辑独立锁死了估值倍数：</p>
+<ol>
+<li>
+<p><strong>给绝对龙头溢价，但绝不给轻资产科技股倍数</strong>：认可公司 <code>35%</code> 绝对市占率、国补归零后 Q2 单车反杀的硬实力及极严苛折旧/费用化会计质量，因此给予高于传统燃油车企（<code>5×—8×</code>）的显著溢价；</p>
+</li>
+<li>
+<p><strong>硬性扣除重资产周期与高利率折价</strong>：面对 <code>4.24%</code> 高企的美债无风险利率、<code>1,298亿</code> 狂飙扩产后的 <code>340亿</code> 刚性折旧悬崖、<code>3,056亿</code> 应付高杠杆（流动比率 <code>0.687</code>）、<code>20%</code> 低分红率、价格战二次恶化担忧、高阶智驾短板以及第一大外资股东仍握 <code>8.98%</code> 筹码的持续减持压力，<strong>独立锁死汽车+电池核心主业保底倍数仅 <code>8.0×—10.0×</code> 常态 OE、合理公允倍数仅 <code>13.0×—16.0×</code> 常态 OE</strong>，所有未证伪新曲线（海外建厂、方程豹、仰望、智驾）严格按 <code>0元</code> 免费期权处理！</p>
+</li>
+</ol>
+<p>将双盲裁判的输出严格按缩放因子 <code>÷ 0.63</code> 原封还原后，同时列示<strong>「纯盲定原封锁盘版（1分钱不改）」</strong>与<strong>「仅补足上市子公司比亚迪电子及盛新锂能当日实时盯市价差 <code>+224.70亿元</code>（约 <code>+7.72元/股</code>）、主业 <code>8—10×</code> / <code>13—16×</code> 倍数 100% 不动的 SOTP 盯市还原版」</strong>：</p>
+<div class="table-scroll-wrap"><table class="wide-table">
+<thead>
+<tr>
+<th style="text-align: left;">买方实战档位（主业倍数 100% 双盲锁死）</th>
+<th style="text-align: center;">纯盲定原封锁盘（A股 · 未复权）</th>
+<th style="text-align: center;">盯市还原校准版（A股 · 未复权）</th>
+<th style="text-align: center;">对应总市值（盯市还原版）</th>
+<th style="text-align: center;">对应常态 OE / True EV 回报率</th>
+<th style="text-align: center;">H 股双尺取严区间（<code>01211.HK</code> · 盯市还原）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>拆骨保底铁底（主业 <code>8×—10×</code>）</strong></td>
+<td style="text-align: center;"><code>72.43 — 87.06元</code></td>
+<td style="text-align: center;"><strong><code>80.15 — 94.78元</code></strong></td>
+<td style="text-align: center;"><code>2,333 — 2,759亿元</code></td>
+<td style="text-align: center;"><code>8.6% — 10.2%</code></td>
+<td style="text-align: center;"><code>74.3 — 87.9港元</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第一档 · 左侧重锤区（极端错杀）</strong></td>
+<td style="text-align: center;"><code>68.16 — 81.79元</code></td>
+<td style="text-align: center;"><strong><code>75.88 — 89.51元</code></strong></td>
+<td style="text-align: center;"><code>2,209 — 2,606亿元</code></td>
+<td style="text-align: center;"><strong><code>9.1% — 10.8%</code></strong>（纯盲 <code>10%—12.1%</code>）</td>
+<td style="text-align: center;"><strong><code>70.4 — 83.0港元</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第二档 · 正常建仓区（底仓击球）</strong></td>
+<td style="text-align: center;"><code>81.79 — 98.14元</code></td>
+<td style="text-align: center;"><strong><code>89.51 — 105.86元</code></strong></td>
+<td style="text-align: center;"><code>2,606 — 3,082亿元</code></td>
+<td style="text-align: center;"><strong><code>7.7% — 9.1%</code></strong>（纯盲 <code>8.3%—10.0%</code>）</td>
+<td style="text-align: center;"><strong><code>83.0 — 98.2港元</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第三档 · 合理公允 / 持股观望区</strong></td>
+<td style="text-align: center;"><code>109.05 — 130.86元</code></td>
+<td style="text-align: center;"><strong><code>116.77 — 138.58元</code></strong></td>
+<td style="text-align: center;"><code>3,399 — 4,034亿元</code></td>
+<td style="text-align: center;"><strong><code>5.8% — 6.9%</code></strong>（主业 <code>13×—16×</code>）</td>
+<td style="text-align: center;"><strong><code>108.3 — 128.5港元</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>第四档 · 偏贵透支 / 减仓预警线</strong></td>
+<td style="text-align: center;"><code>≥ 149.94元</code></td>
+<td style="text-align: center;"><strong><code>≥ 157.66元</code></strong></td>
+<td style="text-align: center;"><code>≥ 4,590亿元</code></td>
+<td style="text-align: center;"><strong><code>≤ 5.10%</code></strong>（公允中枢 <code>1.25×</code>）</td>
+<td style="text-align: center;"><strong><code>≥ 146.2港元</code></strong></td>
+</tr>
+</tbody>
+</table></div>
+<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把双眼真正蒙死之后，结果才真正叫人脊背发凉——如果不先偷看市场先生挂出的牌价，一个坚持 `4.24%` 美债折现锚、不给重资产车企编童话的清醒买方，给这套 `300万辆` 规模、背着 `3,056亿` 应付款和 `340亿` 折旧悬崖的工业印钞机开出的合理公允价，其实只有 <strong>`117—139元`</strong>（安全建仓区 <strong>`90—106元`</strong>）！任何先看现价再算估值的分析，都很容易不知不觉被市场报价牵着鼻子往上飘出 `40%—50%` 的“锚定水分”。</p></div></div>
+<h3 id="42-2023825">4.2 拆封 <code>2023年8月25日</code> 加密行情与买方四把铁尺实测</h3>
+<p>现在正式拆封 <code>2023年8月25日</code>（星期五）加密行情信封，把当日交易所<strong>真实未复权盘面价</strong>（绝不采用后续除权折算的 <code>74.818元</code> 前复权陷阱价）贴到上述已锁死的双盲标尺上：</p>
 <ul>
 <li>
-<p><strong>A 股真实报价（<code>002594.SZ</code>）</strong>：<code>2023年8月25日</code> 开盘 <code>233.28元</code>，最高 <code>234.33元</code>，最低 <code>231.50元</code>，<strong>收盘 <code>232.60元</code></strong>。此前两天（<code>2023年8月23日</code>）盘中刚创下 <code>230.03元</code> 的 52 周新低（52 周高点 <code>318.50元</code>，3 年高点 <code>358.86元</code>，3 年低点 <code>140.97元</code>）。</p>
+<p><strong>A 股真实收盘价（<code>002594.SZ</code>）</strong>：<strong><code>232.60元</code></strong>（开盘 <code>233.28</code> / 最高 <code>234.33</code> / 最低 <code>231.50</code>；52周区间 <code>230.03—318.50元</code>；3年区间 <code>140.97—358.86元</code>）。按总股本 <code>29.1114亿股</code> 折算 A 股统一标尺总市值 <strong><code>6,771.32亿元</code></strong>。</p>
 </li>
 <li>
-<p><strong>H 股真实报价（<code>01211.HK</code>）</strong>：<code>2023年8月25日</code> 开盘 <code>225.80港元</code>，最高 <code>225.80港元</code>，最低 <code>222.40港元</code>，<strong>收盘 <code>223.60港元</code></strong>（52 周高点 <code>280.60港元</code>，52 周低点 <code>161.70港元</code>，3 年低点 <code>138.40港元</code>）。按当日央行港币兑人民币中间价 <code>0.91653</code> 折算，H 股折合人民币 <strong><code>204.94元</code></strong>，对应真实 AH 折价率 <strong><code>11.89%</code></strong>（A/H 溢价率 <code>13.50%</code>）。</p>
+<p><strong>H 股真实收盘价（<code>01211.HK</code>）</strong>：<strong><code>223.60港元</code></strong>（52周区间 <code>161.70—280.60港元</code>；3年区间 <code>138.40—333.00港元</code>）。按当日央行中间价 <code>1港币 = 0.91653人民币</code> 折算合人民币 <code>204.94元</code>，真实 AH 折价 <code>11.89%</code>（A+H 混合实际总市值 <code>6,467.57亿元</code>）。H 股双尺取严映射按公式 <code>clamp(11.89% × 0.75, 15%, 28%) = 15.0%</code> 计入港股通 <code>20%</code> 红利税及巴菲特抛压折价。</p>
 </li>
 <li>
-<p><strong>总股本与双口径总市值</strong>：截至 <code>2023年一季报</code>，总股本为 <code>29.1114亿股</code>（A 股 <code>18.1314亿股</code> + H 股 <code>10.9800亿股</code>）。</p>
+<p><strong>当日上市股权盯市重算（Mark-to-Market）</strong>：</p>
 </li>
 <li>
-<p><strong>A 股统一标尺总市值</strong>（主榜及单股定价标尺）：<code>29.1114亿股 × 232.60元</code> = <strong><code>6,771.32亿元</code></strong>；</p>
+<p><strong>比亚迪电子（<code>00285.HK</code>，持股 <code>65.76%</code>）</strong>：<code>2023年8月25日</code> 收盘 <code>32.85港元</code>，总市值 <code>678.39亿元</code>，母公司持股盯市 <code>446.11亿元</code>，打 <code>85折</code> 控股折价后计 <strong><code>379.19亿元</code></strong>（较双盲裁判独立按 <code>12×</code> 代工 PE 估出的 <code>190.48亿元</code> 高出 <code>+188.71亿元</code>）；</p>
 </li>
 <li>
-<p><strong>A+H 混合实际总市值</strong>：<code>18.1314 × 232.60 + 10.9800 × 204.94</code> = <strong><code>6,467.57亿元</code></strong>。</p>
-</li>
-<li>
-<p><strong>当日宏观与无风险利率锚</strong>：<code>2023年8月25日</code> 正值杰克逊霍尔全球央行年会，<strong>10 年期美债收益率高悬 <code>4.23%—4.25%</code></strong>，<strong>10 年期中国国债收益率约 <code>2.55%</code></strong>，人民币兑美元中间价 <code>7.1883</code>（贬值压力显著，外资持续流出中资资产）。</p>
+<p><strong>非核心股权及金融资产</strong>：比亚迪汽车金融（<code>88.45亿元</code> 按 <code>1.0× PB</code>）+ 盛新锂能（<code>002240.SZ</code> 当日收盘 <code>22.96元</code>，20亿定增成本已浮亏 <code>-46.6%</code> 缩水至 <strong><code>10.68亿元</code></strong>）+ 其他联营权益投资打 6 折（<code>71.78亿元</code>）= <strong><code>170.91亿元</code></strong>（较双盲裁判估算的 <code>134.92亿元</code> 高出 <code>+35.99亿元</code>）。</p>
 </li>
 </ul>
-<h3 id="42-true-ev">4.2 True EV 精算与买方四把铁尺冷血体检</h3>
-<p>在计算 <code>True EV</code> 时，必须对制造业的账面现金保持十二分警惕：比亚迪 <code>2023Q1</code> 账面货币资金 <code>562.83亿元</code>（剔除受限约 <code>13.91亿</code> 后现金及现金等价物 <code>548.92亿</code>）+ 交易性金融资产 <code>104.31亿元</code> = 可用广义现金 <code>653.23亿元</code>。但由于公司同时背负 <code>3,055.72亿元</code> 应付账款与其他应付款、流动比率仅 <code>0.687</code>，账面现金绝大部分是维系供应链周转的“营运底仓钱”，<strong>绝不能 100% 视为可自由分配的闲置超额现金</strong>！本模型严格按买方纪律对可用现金<strong>打 7 折（<code>457.26亿元</code>）</strong>，并同步列示“扣除 <code>400亿元</code> 营运最低现金底仓”的超严苛口径对照；负债端除 <code>347.35亿元</code> 显性有息债（含租赁负债 <code>26.62亿</code>）外，<strong>强制加回 <code>30.80亿元</code> 比亚迪半导体战投股权回购对赌负债</strong>（<code>2022年报</code> 附注七、39），锁定广义刚性债 <strong><code>378.15亿元</code></strong>（因分子 <code>OE</code> 已严格按归母口径剔除少数股东损益，分母不重复加回少数股东权益）。</p>
 <div class="table-scroll-wrap"><table>
 <thead>
 <tr>
@@ -1942,174 +2001,100 @@
 <tbody>
 <tr>
 <td style="text-align: left;"><strong>A 股统一标尺 True EV（现金7折）</strong></td>
-<td style="text-align: left;"><code>6,771.32 + 378.15 - 457.26</code></td>
+<td style="text-align: left;"><code>6,771.32 + 378.15（含30.8亿半导体回购债） - 457.26</code></td>
 <td style="text-align: center;"><strong><code>6,692.21亿元</code></strong></td>
-<td style="text-align: left;">超严苛扣400亿营运现金口径为 <code>6,896.24亿元</code>（AH混合 <code>6,388.46亿</code>）</td>
+<td style="text-align: left;">超严苛扣400亿营运现金口径为 <code>6,896.24亿</code>（AH混合 <code>6,388.46亿</code>）</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>铁尺一（主锚）：常态 <code>OE ÷ True EV</code></strong></td>
 <td style="text-align: left;"><code>230.0亿 ÷ 6,692.21亿</code></td>
 <td style="text-align: center;"><strong><code>3.44%</code>（<code>29.10×</code>）</strong></td>
-<td style="text-align: left;"><strong>偏贵</strong>：仅比10Y中债高 <code>+89bps</code>，且低于10Y美债 <code>4.24%</code>！</td>
+<td style="text-align: left;"><strong>深度偏贵</strong>：仅比10Y中债高 <code>+89bps</code>，<strong>倒挂低于10Y美债 <code>4.24%</code> 达 <code>-80bps</code>！</strong></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>铁尺一（严苛无折旧红利）</strong></td>
-<td style="text-align: left;"><code>210.0亿 ÷ 6,692.21亿</code></td>
-<td style="text-align: center;"><strong><code>3.14%</code>（<code>31.87×</code>）</strong></td>
-<td style="text-align: left;">彻底剥离加速折旧红利后，隐含回报率跌向 3%</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>铁尺一（即期高景气年化）</strong></td>
-<td style="text-align: left;"><code>290.0亿 ÷ 6,692.21亿</code></td>
-<td style="text-align: center;"><strong><code>4.33%</code>（<code>23.08×</code>）</strong></td>
-<td style="text-align: left;">即便把Q2高景气线性外推全年，也远非白菜价</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>铁尺一（极限双杀底线）</strong></td>
-<td style="text-align: left;"><code>158.4亿 ÷ 6,692.21亿</code></td>
-<td style="text-align: center;"><strong><code>2.37%</code>（<code>42.25×</code>）</strong></td>
-<td style="text-align: left;">一旦价格战失控，将遭遇“戴维斯双杀”</td>
+<td style="text-align: left;"><strong>铁尺一（即期高景气 / 极限双杀）</strong></td>
+<td style="text-align: left;"><code>290.0亿</code> / <code>158.4亿 ÷ 6,692.21亿</code></td>
+<td style="text-align: center;"><strong><code>4.33%</code>（<code>23.08×</code>）</strong> / <strong><code>2.37%</code>（<code>42.25×</code>）</strong></td>
+<td style="text-align: left;">即便拿最乐观高景气年化也刚平齐美债无风险利率</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>铁尺二：即期分红+注销回购率</strong></td>
-<td style="text-align: left;"><code>1.142元 ÷ 232.60元</code>（回购为员工持股计0）</td>
+<td style="text-align: left;"><code>1.142元 ÷ 232.60元</code>（员工持股回购计0）</td>
 <td style="text-align: center;"><strong>A股 <code>0.49%</code></strong> / <strong>H股税后 <code>0.45%</code></strong></td>
-<td style="text-align: left;">极低现金回馈，属于纯粹的“利润滚投扩张型”成长股</td>
+<td style="text-align: left;">极低现金回馈，毫无债券替代托底能力</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>铁尺三：Reverse SOTP 免费期权厚度</strong></td>
-<td style="text-align: left;">当日市值 <code>6,771亿</code> vs 拆骨保底 <code>3,824—4,463亿</code></td>
-<td style="text-align: center;"><strong>负厚度（预支溢价 <code>2,308—2,947亿</code>）</strong></td>
-<td style="text-align: left;"><strong>非免费白嫖</strong>！股价已提前为出海/高端化买单超两千亿</td>
+<td style="text-align: left;"><strong>铁尺三：Reverse SOTP 隐含主业倍数</strong></td>
+<td style="text-align: left;"><code>(6,692.21 - 379.19 - 170.91) ÷ 213.0亿</code></td>
+<td style="text-align: center;"><strong><code>28.84×</code> 汽车常态 OE</strong></td>
+<td style="text-align: left;">相对双盲拆骨铁底（<code>2,333—2,759亿</code>），<strong>现价预支了 <code>4,012—4,438亿元</code> 高成长溢价！</strong></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>铁尺四：当日现价所处买方击球区</strong></td>
-<td style="text-align: left;">A股 <code>232.60元</code> / H股 <code>223.60港元</code></td>
-<td style="text-align: center;"><strong><code>T3 偏贵观望 / 轻度透支区</code></strong></td>
-<td style="text-align: left;">A股高出正常建仓上限 <code>+36.8%</code>；H股高出 <code>+41.8%</code></td>
+<td style="text-align: left;"><strong>铁尺四：相对双盲标尺的水位差距</strong></td>
+<td style="text-align: left;">A股 <code>232.60元</code> vs 盯市还原建仓上限 <code>105.86元</code></td>
+<td style="text-align: center;"><strong><code>T4 深度估值透支区</code></strong></td>
+<td style="text-align: left;">高出建仓上限 <strong><code>+119.7%</code></strong>、高出公允上限 <strong><code>+67.8%</code></strong>、高出止盈线 <strong><code>+47.5%</code></strong></td>
 </tr>
 </tbody>
 </table></div>
-<div class="munger-note-table"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把加密信封撕开的那一瞬间，真相就毫无遮拦地摆在眼前了——很多散户看到比亚迪从 `358元` 跌到 `232.60元`、刚创 `52周新低`，就觉得已经跌出了“黄金坑”。但把 Python 算盘敲响一看：在 `232.60元` 的位置，买方常态真实内生回报率只有可怜的 <strong>`3.44%`</strong>（比美国十年期国债的无风险利息还低 `80个基点`！），即期股息率只有 `0.49%`。跌得多不等于便宜，从珠穆朗玛峰山顶滚到半山腰，依然在海拔五千米！</p></div></div>
-<h3 id="43-reverse-sotp">4.3 Reverse SOTP（拆骨保底估值）与当日上市股权盯市重算</h3>
-<p>按照零未来函数防火墙要求，我们对比亚迪持有的全部重要上市股权与金融资产，全部按 <strong><code>2023年8月25日</code> 当日真实收盘价</strong> 重新盯市（Mark-to-Market）：</p>
-<ol>
-<li>
-<p><strong>比亚迪电子（<code>00285.HK</code>，持股 <code>65.76%</code>）</strong>：<code>2023年8月25日</code> 收盘 <code>32.85港元</code>（总股本 <code>22.532亿股</code>），当日总市值 <code>740.18亿港元</code> 折合人民币 <code>678.39亿元</code>，比亚迪持股对应盯市市值 <strong><code>446.11亿元</code></strong>；计入 <code>15%</code> 控股变现折价后，拆骨保底价值 <strong><code>379.19亿元</code></strong>。</p>
-</li>
-<li>
-<p><strong>非核心股权与汽车金融资产</strong>：</p>
-</li>
-</ol>
+<div class="agy-chart-card"><div class="agy-chart-header"><div class="agy-chart-title">📊 图 2：比亚迪（2023-08-25）物理双盲锁盘估值 vs 当日真实未复权现价</div><div class="agy-chart-subtitle">基准日未复权收盘：A股 232.60元（6,771亿元）｜ H股 223.60港元 ｜ 主业倍数 100% 物理双盲锁死</div></div><div class="agy-chart-grid"><div class="agy-chart-subcard"><div class="agy-chart-subheading">双盲估值体系 vs 当日总市值（亿元 · 盯市还原）</div><svg height="auto" style="display:block;font-family:'Microsoft YaHei UI','Microsoft YaHei',sans-serif;" viewbox="0 0 440 255" width="100%" xmlns="http://www.w3.org/2000/svg"><rect fill="#1e3a8a" height="12" rx="2.5" width="12" x="52" y="12"></rect><text fill="#1e293b" font-size="10.6" font-weight="700" x="70" y="22">对应市值规模</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="416" y1="221.0" y2="221.0"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="225.0">0亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="416" y1="176.8" y2="176.8"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="180.8">2099亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="416" y1="132.5" y2="132.5"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="136.5">4198亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="416" y1="88.2" y2="88.2"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="92.2">6297亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="416" y1="44.0" y2="44.0"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="48.0">8396亿</text><line stroke="#94a3b8" stroke-width="1.3" x1="52" x2="416" y1="221.0" y2="221.0"></line><rect fill="#1e3a8a" height="58.2" rx="3.5" width="30.5" x="71.4" y="162.8"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="86.7" y="157.8">2759亿</text><rect fill="#1e3a8a" height="65.0" rx="3.5" width="30.5" x="144.2" y="156.0"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="159.4" y="151.0">3082亿</text><rect fill="#1e3a8a" height="85.0" rx="3.5" width="30.5" x="217.0" y="136.0"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="232.2" y="131.0">4034亿</text><rect fill="#1e3a8a" height="96.8" rx="3.5" width="30.5" x="289.8" y="124.2"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="305.0" y="119.2">4590亿</text><rect fill="#1e3a8a" height="142.7" rx="3.5" width="30.5" x="362.6" y="78.3"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="377.8" y="73.3">6771亿</text><text fill="#0f172a" font-size="9.8" font-weight="700" text-anchor="middle" x="88.4" y="236.0">拆骨铁底</text><text fill="#0f172a" font-size="9.8" font-weight="700" text-anchor="middle" x="161.2" y="236.0">建仓上限</text><text fill="#0f172a" font-size="9.8" font-weight="700" text-anchor="middle" x="234.0" y="236.0">公允上限</text><text fill="#0f172a" font-size="9.8" font-weight="700" text-anchor="middle" x="306.8" y="236.0">止盈红线</text><text fill="#0f172a" font-size="9.8" font-weight="700" text-anchor="middle" x="379.6" y="236.0">当日市值</text></svg></div><div class="agy-chart-subcard"><div class="agy-chart-subheading">A股物理双盲四档标尺上限 vs 当日现价（元/股）</div><svg height="auto" style="display:block;font-family:'Microsoft YaHei UI','Microsoft YaHei',sans-serif;" viewbox="0 0 440 255" width="100%" xmlns="http://www.w3.org/2000/svg"><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="130.0" x2="130.0" y1="28" y2="231"></line><text fill="#94a3b8" font-size="9.8" text-anchor="middle" x="130.0" y="247">0元</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="188.0" x2="188.0" y1="28" y2="231"></line><text fill="#94a3b8" font-size="9.8" text-anchor="middle" x="188.0" y="247">72元</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="246.0" x2="246.0" y1="28" y2="231"></line><text fill="#94a3b8" font-size="9.8" text-anchor="middle" x="246.0" y="247">144元</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="304.0" x2="304.0" y1="28" y2="231"></line><text fill="#94a3b8" font-size="9.8" text-anchor="middle" x="304.0" y="247">217元</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="362.0" x2="362.0" y1="28" y2="231"></line><text fill="#94a3b8" font-size="9.8" text-anchor="middle" x="362.0" y="247">289元</text><text fill="#1e293b" font-size="11.2" font-weight="700" text-anchor="end" x="120" y="55.8">第一档:左侧重锤上限</text><rect fill="#15803d" height="21" rx="4" width="71.9" x="130" y="41.3"></rect><text fill="#15803d" font-size="10.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2.5" x="209.9" y="55.8">89.5元</text><text fill="#1e293b" font-size="11.2" font-weight="700" text-anchor="end" x="120" y="99.8">第二档:正常建仓上限</text><rect fill="#0284c7" height="21" rx="4" width="85.0" x="130" y="85.3"></rect><text fill="#0284c7" font-size="10.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2.5" x="223.0" y="99.8">105.9元</text><text fill="#1e293b" font-size="11.2" font-weight="700" text-anchor="end" x="120" y="143.8">第三档:合理公允上限</text><rect fill="#0369a1" height="21" rx="4" width="111.3" x="130" y="129.3"></rect><text fill="#0369a1" font-size="10.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2.5" x="249.3" y="143.8">138.6元</text><text fill="#1e293b" font-size="11.2" font-weight="700" text-anchor="end" x="120" y="187.8">第四档:偏贵止盈红线</text><rect fill="#d97706" height="21" rx="4" width="126.6" x="130" y="173.3"></rect><text fill="#d97706" font-size="10.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2.5" x="264.6" y="187.8">157.7元</text><line stroke="#be123c" stroke-dasharray="5,3" stroke-width="1.8" x1="316.8" x2="316.8" y1="20" y2="231"></line><rect fill="#be123c" height="18" rx="4.5" width="103.3" x="265.2" y="2"></rect><text fill="#ffffff" font-size="9.8" font-weight="700" text-anchor="middle" x="316.8" y="14.5">当日现价 232.6元</text></svg></div></div><div class="agy-chart-footer">📌 核心洞察：物理双盲锁盘彻底剥离现价锚定后，A股232.60元高出纯价值公允上限（138.6元）达+67.8%，反映市场正在为未来数年的高成长与出海曲线支付超4,000亿元预支溢价。</div></div>
+<h3 id="43-90139vs">4.3 方法论坦诚辨析：纯价值双盲铁底（<code>90—139元</code>）vs 成长溢价的边界</h3>
+<p>站在买方投委会高度，我们必须客观指出双盲锁盘价格（<code>公允 117—139元 / 建仓 90—106元</code>）的<strong>硬核价值与适用边界</strong>：</p>
 <ul>
 <li>
-<p><strong>比亚迪汽车金融（持股80%合营）</strong>：账面净值 <code>88.45亿元</code>，盈利稳健，按 <code>1.0× PB</code> 计 <strong><code>88.45亿元</code></strong>；</p>
+<p><strong>它代表什么？</strong> 它代表的是<strong>“零成长幻想、零出海/高端预支、严格用 <code>4.24%</code> 美债 + <code>4%</code> 风险溢价去折现存量 <code>300万辆</code> 重资产印钞机”的纯粹价值铁底</strong>。在这个价格带买入，哪怕未来比亚迪彻底停滞不前、永远只卖 300 万辆中低端车，买方也能靠实打实的现金流吃回本金并战胜无风险利率。</p>
 </li>
 <li>
-<p><strong>盛新锂能（<code>002240.SZ</code>）</strong>：<code>2022年12月</code> 以 <code>42.99元</code> 定增入股耗资 <code>20.00亿元</code>，截至 <code>2023年8月25日</code> 收盘暴跌至 <strong><code>22.96元</code></strong>，盯市价值大幅缩水至 <strong><code>10.68亿元</code></strong>（浮亏 <code>-46.6%</code>）；</p>
-</li>
-<li>
-<p><strong>西藏扎布耶锂业及其他联营/权益工具投资</strong>：账面合计约 <code>119.63亿元</code>，考虑锂矿与一级股权流动性折价打 6 折计 <strong><code>71.78亿元</code></strong>；</p>
-<ul>
-<li>三项非核心股权资产保底合计 <strong><code>170.91亿元</code></strong>。</li>
-</ul>
+<p><strong>它的代价是什么？</strong> 对于一家正处于 <code>+88.8%</code> 销量狂飙期、国内市占率 <code>35%</code> 的绝对霸主，市场在非系统性股灾年份往往愿意额外支付“高成长溢价”（例如把 3 年后 <code>400万—500万辆</code> 规模或高毛利海外增量提前折现）。<strong>双盲锁盘的价值不在于断言股价一定会跌到 <code>100元</code>，而在于用一把绝对诚实的尺子告诉你：在 <code>232.60元</code> 的位置，你付的每一分钱里有接近一半（超过 <code>4,000亿元</code>）买的都不是当下的存量印钞机，而是对未来几年高增速永不失速、出海大获全胜的昂贵信仰！</strong></p>
 </li>
 </ul>
-<ol start="3">
-<li><strong>主业反推与拆骨保底底线</strong>：<ul>
-<li>从 <code>True EV (6,692.21亿元)</code> 中剥离比亚迪电子保底价值 <code>379.19亿元</code> 及非核心股权 <code>170.91亿元</code>，得出 <strong><code>232.60元</code> 股价隐含市场给比亚迪核心汽车+刀片电池主业的估值高达 <code>6,142.10亿元</code></strong>！对应汽车主业常态 <code>OE（213.0亿元）</code> 的 <strong><code>28.84倍</code></strong>！</li>
-<li>若按买方重资产制造业龙头的严苛保底标尺，给予核心汽车+电池存量 <code>300万辆</code> 主业 <strong><code>15×—18×</code> 常态 <code>OE</code></strong>（<code>3,195亿—3,834亿元</code>），加回比亚迪电子 <code>379.19亿</code> + 非核心股权 <code>170.91亿</code> + 净现金7折盈余 <code>79.11亿</code> = <strong>存量成熟资产拆骨保底总市值 <code>3,824亿—4,463亿元</code>（折合 A 股 <code>131.4元—153.3元</code>）</strong>。</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><strong>冷酷结论</strong>：在 <code>232.60元</code> 买入，你不仅没有“白嫖”方程豹、仰望、海外建厂与智驾的远期期权，反而实打实提前预支了 <strong><code>2,308亿—2,947亿元</code></strong> 的远期成长溢价！</li>
-</ul>
-<div class="agy-chart-card"><div class="agy-chart-header"><div class="agy-chart-title">📊 图 2：2023年8月25日比亚迪 Reverse SOTP 拆骨价值 vs A股四档击球区标尺</div><div class="agy-chart-subtitle">基准日未复权收盘：A股 232.60元（6,771亿元）｜ H股 223.60港元 ｜ 汇率 0.91653</div></div><div class="agy-chart-grid"><div class="agy-chart-subcard"><div class="agy-chart-subheading">Reverse SOTP 拆骨保底 vs 当日市值（亿元）</div><svg height="auto" style="display:block;font-family:'Microsoft YaHei UI','Microsoft YaHei',sans-serif;" viewbox="0 0 440 255" width="100%" xmlns="http://www.w3.org/2000/svg"><rect fill="#1e3a8a" height="12" rx="2.5" width="12" x="52" y="12"></rect><text fill="#1e293b" font-size="10.6" font-weight="700" x="70" y="22">对应估值规模</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="416" y1="221.0" y2="221.0"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="225.0">0亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="416" y1="176.8" y2="176.8"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="180.8">2099亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="416" y1="132.5" y2="132.5"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="136.5">4198亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="416" y1="88.2" y2="88.2"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="92.2">6297亿</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="52" x2="416" y1="44.0" y2="44.0"></line><text fill="#64748b" font-size="9.6" text-anchor="end" x="46" y="48.0">8396亿</text><line stroke="#94a3b8" stroke-width="1.3" x1="52" x2="416" y1="221.0" y2="221.0"></line><rect fill="#1e3a8a" height="80.6" rx="3.5" width="30.5" x="80.5" y="140.4"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="95.8" y="135.4">3824亿</text><rect fill="#1e3a8a" height="94.1" rx="3.5" width="30.5" x="171.5" y="126.9"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="186.8" y="121.9">4463亿</text><rect fill="#1e3a8a" height="116.6" rx="3.5" width="30.5" x="262.5" y="104.4"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="277.8" y="99.4">5530亿</text><rect fill="#1e3a8a" height="142.7" rx="3.5" width="30.5" x="353.5" y="78.3"></rect><text fill="#1e3a8a" font-size="9.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2" text-anchor="middle" x="368.8" y="73.3">6771亿</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="97.5" y="236.0">拆骨下限</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="188.5" y="236.0">拆骨上限</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="279.5" y="236.0">合理公允中枢</text><text fill="#0f172a" font-size="10.6" font-weight="700" text-anchor="middle" x="370.5" y="236.0">当日总市值</text></svg></div><div class="agy-chart-subcard"><div class="agy-chart-subheading">A股四档实战击球区上限 vs 当日收盘（元/股）</div><svg height="auto" style="display:block;font-family:'Microsoft YaHei UI','Microsoft YaHei',sans-serif;" viewbox="0 0 440 255" width="100%" xmlns="http://www.w3.org/2000/svg"><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="130.0" x2="130.0" y1="28" y2="231"></line><text fill="#94a3b8" font-size="9.8" text-anchor="middle" x="130.0" y="247">0元</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="188.0" x2="188.0" y1="28" y2="231"></line><text fill="#94a3b8" font-size="9.8" text-anchor="middle" x="188.0" y="247">72元</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="246.0" x2="246.0" y1="28" y2="231"></line><text fill="#94a3b8" font-size="9.8" text-anchor="middle" x="246.0" y="247">144元</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="304.0" x2="304.0" y1="28" y2="231"></line><text fill="#94a3b8" font-size="9.8" text-anchor="middle" x="304.0" y="247">217元</text><line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="362.0" x2="362.0" y1="28" y2="231"></line><text fill="#94a3b8" font-size="9.8" text-anchor="middle" x="362.0" y="247">289元</text><text fill="#1e293b" font-size="11.2" font-weight="700" text-anchor="end" x="120" y="53.5">第一档:左侧重锤上限</text><rect fill="#15803d" height="21" rx="4" width="112.4" x="130" y="39.0"></rect><text fill="#15803d" font-size="10.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2.5" x="250.4" y="53.5">140元</text><text fill="#1e293b" font-size="11.2" font-weight="700" text-anchor="end" x="120" y="92.5">拆骨保底上限</text><rect fill="#0284c7" height="21" rx="4" width="123.1" x="130" y="78.0"></rect><text fill="#0284c7" font-size="10.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2.5" x="261.1" y="92.5">153.3元</text><text fill="#1e293b" font-size="11.2" font-weight="700" text-anchor="end" x="120" y="131.6">第二档:正常建仓上限</text><rect fill="#0369a1" height="21" rx="4" width="136.5" x="130" y="117.0"></rect><text fill="#0369a1" font-size="10.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2.5" x="274.5" y="131.6">170元</text><text fill="#1e293b" font-size="11.2" font-weight="700" text-anchor="end" x="120" y="170.6">第三档:合理公允上限</text><rect fill="#d97706" height="21" rx="4" width="164.6" x="130" y="156.1"></rect><text fill="#d97706" font-size="10.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2.5" x="302.6" y="170.6">205元</text><text fill="#1e293b" font-size="11.2" font-weight="700" text-anchor="end" x="120" y="209.6">第四档:溢价透支线</text><rect fill="#be123c" height="21" rx="4" width="172.7" x="130" y="195.1"></rect><text fill="#be123c" font-size="10.8" font-weight="800" paint-order="stroke fill" stroke="#ffffff" stroke-width="2.5" x="310.7" y="209.6">215元</text><line stroke="#be123c" stroke-dasharray="5,3" stroke-width="1.8" x1="316.8" x2="316.8" y1="20" y2="231"></line><rect fill="#be123c" height="18" rx="4.5" width="103.3" x="265.2" y="2"></rect><text fill="#ffffff" font-size="9.8" font-weight="700" text-anchor="middle" x="316.8" y="14.5">当日现价 232.6元</text></svg></div></div><div class="agy-chart-footer">📌 核心洞察：2023年8月25日收盘价232.60元高出第二档正常建仓上限（170元）达+36.8%，高出拆骨保底上限+51.7%，隐含超2,300亿元远期期权预支。</div></div>
-<h3 id="44-ah">4.4 合理公允价值区间与 A+H 双尺取严实战击球区</h3>
-<p>结合比亚迪全球新能源绝对龙头的产业地位与汽车重资产制造业的估值天花板，站在 <code>2023年8月25日</code> 锚定四档买方实战击球区；H 股严格执行<strong>「A+H 双尺取严铁律」</strong>——当日真实 AH 折价 <code>11.89%</code>，按公式 <code>clamp(11.89% × 0.75, 15%, 28%) = 15.0%</code> 充分计入港股通 <code>20%</code> 红利税、离岸流动性折价及巴菲特剩余 <code>8.98%</code> H 股悬顶抛压，并与 H 股历史底部独立锚（52周低点 <code>161.70港元</code> / 3年低点 <code>138.40港元</code>）交叉取严：</p>
-<div class="table-scroll-wrap"><table>
-<thead>
-<tr>
-<th style="text-align: left;">买方实战档位</th>
-<th style="text-align: center;">A 股价格区间（<code>002594.SZ</code> · 未复权）</th>
-<th style="text-align: center;">对应总市值 &amp; 常态 OE 倍数</th>
-<th style="text-align: center;">H 股双尺取严区间（<code>01211.HK</code> · 未复权）</th>
-<th style="text-align: left;">隐含商业逻辑与安全边际</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>第一档：左侧重锤区</strong>（极端错杀）</td>
-<td style="text-align: center;"><strong><code>120元—140元</code></strong></td>
-<td style="text-align: center;"><code>3,493亿—4,075亿</code>（<code>15×—17.4×</code>）</td>
-<td style="text-align: center;"><strong><code>111—130港元</code></strong>（击穿3年低点 <code>138.4</code>）</td>
-<td style="text-align: left;">砸穿存量拆骨保底价，出海/高端化彻底打成 <code>0元</code> 白送，敢上重仓</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>第二档：正常建仓区</strong>（底仓击球）</td>
-<td style="text-align: center;"><strong><code>145元—170元</code></strong></td>
-<td style="text-align: center;"><code>4,221亿—4,949亿</code>（<code>18×—21.2×</code>）</td>
-<td style="text-align: center;"><strong><code>135—158港元</code></strong>（低于52周低点 <code>161.7</code>）</td>
-<td style="text-align: left;">对应即期/380万达产 OE 约 <code>14.5×—17×</code>，赔率与胜率开始共振</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>第三档：合理公允 / 观望区</strong></td>
-<td style="text-align: center;"><strong><code>175元—205元</code></strong></td>
-<td style="text-align: center;"><code>5,095亿—5,968亿</code>（<code>21.8×—25.6×</code>）</td>
-<td style="text-align: center;"><strong><code>162—190港元</code></strong></td>
-<td style="text-align: left;">反映 300万辆 龙头地位及温和出海预期，无显著折价，只宜持有观察</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>第四档：偏贵透支 / 减仓区</strong></td>
-<td style="text-align: center;"><strong><code>&gt; 215元</code></strong>（<strong>当日 <code>232.60元</code></strong>）</td>
-<td style="text-align: center;"><code>&gt; 6,259亿</code>（<strong>当日 <code>29.1×</code></strong>）</td>
-<td style="text-align: center;"><strong><code>&gt; 200港元</code></strong>（<strong>当日 <code>223.60港元</code></strong>）</td>
-<td style="text-align: left;">提前透支两年以上增长红利，价格战与巴菲特减持随时引发杀估值</td>
-</tr>
-</tbody>
-</table></div>
 <hr/>
 <h2 id="2023825">五、 当时买方投委会终审裁决与操作底线（2023年8月25日现场）</h2>
-<h3 id="51-3056">5.1 空头一剑狙击与二元裁决：3,056亿占款杠杆 + 价格战盈利见顶</h3>
+<h3 id="51-3056-29-oe">5.1 空头一剑狙击与二元裁决：3,056亿占款杠杆 + 29倍常态 OE 的高处不胜寒</h3>
 <blockquote>
-<p><strong>⚔️ 空头核心指控（2023年8月25日现场）</strong>：“比亚迪此刻就是一座建在流沙上的重资产帝国！一、账面流动比率跌破 <code>0.69</code>、背着 <code>3,056亿</code> 应付账款和其他应付款，一旦销量增速放缓立刻爆发流动性反噬；二、碳酸锂已经从 <code>56万</code> 跌到 <code>22.5万</code>，往下暴跌红利耗尽，而吉利银河、长城 Hi4、特斯拉八月降价才刚把价格战推向高潮，2023Q2 单车 <code>8,971元</code> 就是本轮盈利大顶；三、智驾严重落后华为与小鹏，在 <code>232.60元</code>（<code>29倍</code> 常态 OE）买一只汽车股，无异于在景气顶点接巴菲特的盘！”</p>
+<p><strong>⚔️ 空头核心指控（2023年8月25日现场）</strong>：“比亚迪此刻就是一座建在流沙上的重资产帝国！一、账面流动比率跌破 <code>0.69</code>、背着 <code>3,056亿</code> 应付账款和其他应付款，一旦销量增速放缓立刻爆发流动性反噬；二、碳酸锂已经从 <code>56万</code> 跌到 <code>22.5万</code>，往下暴跌红利耗尽，而吉利银河、长城 Hi4、特斯拉八月降价才刚把价格战推向高潮，2023Q2 单车 <code>8,971元</code> 就是本轮盈利大顶；三、智驾严重落后华为与小鹏，在 <code>232.60元</code>（<code>29.1倍</code> 常态 OE、高出双盲公允上限 <code>+67.8%</code>）买一只汽车股，无异于在景气顶点替巴菲特接盘！”</p>
 </blockquote>
-<p><strong>⚖️ 投委会二元裁决</strong>：<strong><code>🩸 命中估值与周期死穴（坚决维持 T3 偏贵观望评级，不给估值妥协）</code></strong>！</p>
+<p><strong>⚖️ 投委会二元裁决</strong>：<strong><code>🩸 命中估值与周期死穴（由偏贵观察直接定性为 T4 深度透支回避，坚决不给估值妥协）</code></strong>！</p>
 <ul>
 <li>
 <p><strong>反杀部分</strong>：空头关于“立刻爆雷断链”的指控过度夸张——比亚迪 <code>2023年1—7月</code> 销量仍同比暴增 <code>+88.8%</code>、国补归零后 Q2 单车净利反杀回升、且加速折旧藏着极厚的现金流护城河，即便极限双杀年造血仍能守住 <code>158亿元</code> 不失血。</p>
 </li>
 <li>
-<p><strong>命中死穴部分</strong>：空头关于<strong>“2023Q2 碳酸锂红利难以线性复制 + 自主围剿下 2024年利润率承压 + 3,056亿应付款与 340亿刚性折旧封死逆风容错空间 + 232.60元（29倍常态OE）毫无估值安全边际”</strong>的狙击一针见血！好公司与好价格之间此刻横亘着 <code>+37%</code> 的估值鸿沟，买方绝不可因迷恋其工业霸权而降低安全边际红线。</p>
+<p><strong>命中死穴部分</strong>：双盲估值一锤定音地验证了空头最致命的估值指控——在 <code>4.24%</code> 美债收益率与重资产制造业属性面前，<code>232.60元</code>（<code>29.1×</code> 常态 OE、<code>3.44%</code> 内生回报、<code>0.49%</code> 股息率）把未来数年的成长与出海溢价透支得太满，一旦价格战引发单车盈利下滑或巴菲特继续减持，将面临剧烈的“杀估值”风险！</p>
 </li>
 </ul>
 <h3 id="52-2023825">5.2 三位投资大师闭门圆桌会（严格锁定 <code>2023年8月25日</code> 历史现场）</h3>
 <div class="annotated-row"><div class="main-col"><ul>
 <li>
-<p><strong>👔 彼得·林奇（成长与草根调研派）—— 投票：<code>🟡 极轻仓观察 / 逢回调买（建议仓位 ≤ 3%—5%，不追高）</code></strong></p>
+<p><strong>👔 彼得·林奇（成长与草根调研派）—— 投票：<code>🟡 仅放观察名单 / 极轻仓追踪（建议仓位 ≤ 2%—3%，绝不追高）</code></strong></p>
 <blockquote>
-<p>“伙计们，今天走出成都车展展馆看看中国大街上的绿牌车吧，每三辆新能源车里就有一辆挂着比亚迪的标！1—7月狂卖 <code>151.8万辆</code>、增速 <code>+88.8%</code>，国补一分钱没了的二季度单车净利居然反杀到近 <code>9,000元</code>，把吉利和长城打得喘不过气来，这就是典型的‘超级工业赢家’。我承认 <code>232.60元</code> 换算成常态 <code>Owner Earnings</code> 是 <code>29倍</code>，放在传统汽车股里确实太贵了；但如果一家公司正把合资燃油车几十年盘踞的千万辆江山连根拔起，而且泰国工厂已经在建、海外出口刚开始冒头，我绝不会把它踢出视野。我的打法很简单：现在价格偏贵绝不重仓，最多放 <code>3%</code> 的‘追踪观察仓’逼自己盯紧每个月产销快报，真正的大钱留到市场因为价格战恐慌把它砸到 <code>170元</code> 以下时再重拳出击！”</p>
+<p>“伙计们，双盲裁判算出的 <code>117—139元</code> 固然是铁板一块的纯价值底，但我得提醒大家别把‘超级成长工业巨头’完全当成零增长的福特或通用去算死账！今天走出成都车展看看中国大街上的绿牌车，每三辆新能源车里就有一辆比亚迪；1—7月暴增 <code>+88.8%</code>，国补清零的二季度单车净利反杀回近 <code>9,000元</code>，把合资燃油车打得丢盔弃甲。按照成长股的 PEG 逻辑，如果未来两年销量真能冲上 <code>400万辆+</code> 且海外出口起飞，它大概率跌不到双盲派要求的 <code>90—106元</code>。不过即便站在我这个成长派的立场上，今天 <code>232.60元</code> 已经比即期年化 OE 贵出 <code>23倍</code>、且刚进入价格战白热化中场，确实没有立刻重仓的性价比——我最多只留个观察哨，等市场恐慌杀估值把预期打低到合理成长估值带（如 <code>160—180元</code> 以下）再考虑成长股试探，真正重仓得等绝望情绪彻底释放！”</p>
 </blockquote>
 </li>
 <li>
-<p><strong>⚖️ 霍华德·马克斯 &amp; 塞思·卡拉曼（安全边际与逆向拆骨派）—— 投票：<code>🔴 坚决空仓观望（建议仓位 0%，耐心等跌进击球区）</code></strong></p>
+<p><strong>⚖️ 霍华德·马克斯 &amp; 塞思·卡拉曼（安全边际与逆向拆骨派）—— 投票：<code>🔴 坚决空仓回避（建议仓位 0%，铁血严守双盲纪律）</code></strong></p>
 <blockquote>
-<p>“彼得看到的繁荣，市场里的每一个基金经理同样看在眼里，并且已经把这份乐观足足标价了 <code>6,771亿元</code>！做价值投资最致命的错误，就是在一家周期制造巨头的盈利斜率最漂亮、全市场欢呼‘第500万辆下线’的时候，去支付 <code>29倍</code> 常态内生盈利和 <code>0.49%</code> 股息率的昂贵门票。请看我们的拆骨底稿：哪怕给汽车主业 <code>18倍</code> 丰厚估值，比亚迪存量资产保底也就值 <code>153元</code>，此刻 <code>232.60元</code> 里藏着超过 <code>2,300亿元</code> 的远期期权预支！别忘了，沃伦·巴菲特过去一年从 <code>20.49%</code> 一路砸盘卖到了 <code>8.98%</code>，手里还握着近一亿股 H 股随时准备兑现，长城举报的常压油箱还没出官方结案，流动比率只有 <code>0.687</code>。在没有把出海和高端化打折到 <code>0元</code> 白送之前——也就是 A 股回到 <strong><code>145—170元</code></strong>（H 股 <strong><code>135—158港元</code></strong>）之前，最赚钱的操作就是把双手绑在背后，一分钱也不买！”</p>
+<p>“这次双盲估值实验太精彩了，它狠狠抽了所有被市场价格催眠的分析师一记耳光！在不知道股价的时候，我们明明算得清清楚楚：面对 <code>4.24%</code> 美债收益率、<code>0.687</code> 流动比率、<code>3,056亿</code> 应付高杠杆和即将到来的 <code>340亿</code> 折旧悬崖，这家重资产车企的存量公允价值就是 <strong><code>117—139元</code></strong>（安全建仓 <strong><code>90—106元</code></strong>），超过 <strong><code>158元</code></strong> 就已经进入透支止盈区！可市场先生今天竟然挂出了 <strong><code>232.60元</code></strong> 的高价——比我们的止盈红线还高出 <strong><code>+47.5%</code></strong>，相当于要求你白白掏出超过 <strong><code>4,000亿元</code></strong> 为还没交付的仰望、今天刚盲订的方程豹和刚占 7% 的出口提前买单！别忘了，沃伦·巴菲特过去一年从 <code>20.49%</code> 一路砸卖到 <code>8.98%</code> 还没停手。如果一只股票跌不到我们的安全边际区间，那就让别人去赚那份承担高估值风险的钱，我们的铁律永远是：<strong>宁可错过，绝不在 <code>T4 深度透支区</code> 买贵货！</strong>”</p>
 </blockquote>
 </li>
 <li>
 <p><strong>🦅 斯坦利·德鲁肯米勒（宏观流动性与右侧二阶导数派）—— 投票：<code>🔴 坚决回避，拒绝接飞刀（建议仓位 0%）</code></strong></p>
 <blockquote>
-<p>“从我的交易纪律看，今天（<code>2023年8月25日</code>）去左侧抄底比亚迪简直是拿头撞墙！看看今天的宏观大盘吧：鲍威尔正在杰克逊霍尔发表鹰派演说，10 年期美债收益率死死压在 <code>4.24%</code> 高位，人民币汇率一路贬向 <code>7.30</code>，全球美元流动性正在疯狂抽血新兴市场与港股——就像我在 <code>2022年</code> 美联储暴力加息周期里反复强调的，当无风险利率飙升且全球资金外流时，任何没有高股息托底的成长股都会持续杀估值。再看微观二阶导数：比亚迪 A 股前天刚破 <code>230.03元</code> 的 52 周新低，完全处于下降通道；而业绩增速的二阶导数在 <code>2023Q2</code> 碳酸锂暴跌红利释放后，下半年大概率迎来增速放缓与竞争加剧。宏观逆风 + 趋势破位 + 巴菲特持续筹码供给，此时绝无右侧主升浪信号。要么等美债见顶且公司出海/高端车放量重新拉起盈利二阶导数，要么就让价值派去 <code>150元</code> 以下捡尸，我现在绝不动手！”</p>
+<p>“今天（<code>2023年8月25日</code>）没有任何理由去做多比亚迪！看看今天的宏观大盘：鲍威尔正在杰克逊霍尔发表鹰派演说，10 年期美债收益率死死压在 <code>4.24%</code> 高位，人民币汇率一路贬向 <code>7.30</code>，全球美元流动性正在疯狂抽血新兴市场与港股——就像我在 <code>2022年</code> 美联储暴力加息周期里反复验证过的，当无风险利率飙升且全球资金外流时，任何 <code>29倍</code> 盈利、<code>0.49%</code> 股息率的重资产成长股都是杀估值的重灾区。再看微观二阶导数：比亚迪 A 股前天刚破 <code>230.03元</code> 的 52 周新低，完全处于下降通道；而碳酸锂暴跌带来的盈利环比脉冲在 <code>2023Q2</code> 释放后，下半年大概率面临增速二阶导数钝化与惨烈价格战。宏观逆风 + 趋势破位 + 巴菲特持续筹码供给 + 估值严重高于双盲公允锚，此时绝无右侧主升浪信号，坚决空仓观望！”</p>
 </blockquote>
 </li>
-</ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>这才是真正值钱的投委会吵架——没有任何一个大师在事后开天眼齐声喊抄底！林奇爱它的生意霸权，马克斯嫌它贵了 `37%` 没安全边际，德鲁肯米勒看着 `4.24%` 美债和破位走势直接转身离场。三人达成了一个铁血共识：<strong>比亚迪是极少数值得放进“终身核心备选池”的工业巨兽，但在 `2023年8月25日` `232.60元`（H股 `223.60港元`）的报价下，买方纪律是“空仓耐心等击球区”，绝不在此刻透支下注！</strong></p></div></div></div></div>
+</ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把双盲锁盘和投委会投票摆在一起，你就能看到买方体系最迷人的地方：<strong>它彻底分清了“好生意”与“好价格”</strong>。比亚迪的垂直整合制造霸权无可挑剔，但在 `2023年8月25日` `232.60元`（H股 `223.60港元`）的位置，双盲铁尺冷酷判定为 <strong>`T4 深度估值透支区`</strong>——马克斯与德鲁肯米勒联手投出 `0%` 空仓回避，连最偏爱成长的林奇也拒绝此刻追高。记住这句话：<strong>绝不要因为害怕错过一家好公司，就在看了一眼市场高价后偷偷调高自己的估值尺！</strong></p></div></div></div></div>
 
 <h3 id="53-2023825">5.3 2023年8月25日买方终审指令、四大跟踪路标与三条死刑红线</h3>
 <ul>
 <li>
-<p><strong>最终评级与仓位指令</strong>：<strong><code>T3 偏贵观望级（核心备选池重度跟踪）</code></strong>｜当日建议仓位：<strong><code>0%</code>（激进成长风格最多 <code>3%</code> 观察仓）</strong>。挂单守株待兔区间：<strong>A 股 <code>145—170元</code> 分批建底仓、<code>120—140元</code> 左侧重锤满弓；H 股（港股通双尺取严）<code>135—158港元</code> 建底仓、<code>111—130港元</code> 重锤满弓</strong>。</p>
+<p><strong>最终评级与仓位指令</strong>：<strong><code>T4 深度估值透支级（核心工业霸主观察池 · 坚决不追高）</code></strong>｜当日建议仓位：<strong><code>0%</code></strong>。</p>
+</li>
+<li>
+<p><strong>纯价值双盲铁血挂单区（零成长幻想铁底）</strong>：A 股 <strong><code>89.5—105.9元</code></strong> 分批建底仓、<strong><code>75.9—89.5元</code></strong> 左侧重锤满弓（H 股双尺取严 <strong><code>83.0—98.2港元</code></strong> 建底仓、<strong><code>70.4—83.0港元</code></strong> 重锤）；</p>
+</li>
+<li>
+<p><strong>成长型右侧重估前提</strong>：若未来海外出口暴增与高端车型真正打破单车盈利天花板、推动常态 <code>Owner Earnings</code> 从 <code>230亿元</code> 实打实跃升至 <code>350亿—400亿元+</code>，届时才按新财报硬数据上调公允区间，绝不在此刻提前透支。</p>
 </li>
 <li>
 <p><strong>四大季度验收路标（决定未来何时上调中枢或触发右侧信号）</strong>：</p>
