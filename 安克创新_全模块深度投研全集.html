@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>安克创新 深度投研全集</title>
+<title>安克创新(300866.SZ) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,473 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    /* 全球市场三态切换开关（AH股一起显示 / 只显示A股 / 只显示H股） */
+    .agy-market-global-bar {
+      position: sticky;
+      top: 8px;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0 16px 0;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #f8fafc;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+      font-size: 13px;
+    }
+    .agy-market-global-title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e2e8f0;
+    }
+    .agy-market-seg {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+    .agy-market-seg-inline {
+      display: inline-flex;
+      align-items: center;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 2px;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .agy-market-btn {
+      background: transparent;
+      color: #cbd5e1;
+      border: none;
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.16s ease;
+    }
+    .agy-market-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .agy-market-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+    }
+    .agy-market-seg-inline .agy-market-btn {
+      color: #334155;
+      padding: 3px 10px;
+      font-size: 12px;
+    }
+    .agy-market-seg-inline .agy-market-btn:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+    .agy-market-seg-inline .agy-market-btn.active {
+      background: #1e3a8a;
+      color: #ffffff;
+    }
+    .agy-market-count-badge {
+      font-size: 12px;
+      color: #bae6fd;
+      font-weight: 600;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1408,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">安克创新 深度投研全集</div>
+    <div class="report-title">安克创新(300866.SZ) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-24</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -893,6 +1434,15 @@
   </div>
   <div class="report-content">
     <h1 id="300866sz-00668hk">安克创新（300866.SZ / 00668.HK）企业基本面、产品硬实力、动态进化能力、治理可靠度与长期商业价值研究——全景基本面八步底座</h1>
+<!--V4_AUDIT_BANNER_START-->
+<blockquote>
+<p><strong>⚔️ 2026-11-24 V4 官方原表验真 × 物理隔离独立红蓝盲审终审声明（<code>CORRECTED</code>）</strong>：
+- <strong>终审核心估值锚</strong>：常态 OE <strong><code>23.50亿/年</code></strong> → 达产 <strong><code>29.50亿/年</code></strong> ｜ 新买点：<strong><code>A股：≤70.00元 / 72.00—80.00元；H股：≤64.50港元 / 66.00—73.50港元</code></strong>（原：<code>A股：78.00—85.00元 / 90.00—98.00元（H股未设双尺买点）</code>）
+- <strong>🔴 空头命中硬约束（实打实认领）</strong>：🩸①揭穿26Q3合同负债6.8亿幻觉（官方实为2.44亿，-55.87%）；🩸②揪出全口径有息债少算6.00亿（实32.50亿）及5年CapEx漏计总部建楼；🩸③精准锁定IEEPA一次性关税退税注水26H1毛利（Q3已回落至46.02%）与支柱二15.18%全球最低税永久落地，实砍常态OE 4亿元；🩸④揭露炒股浮亏（Q3公允价值亏3.54亿）与1亿信托踩雷及H股真实高折价。
+- <strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：🛡️①官方附注铁证零商誉、零财司存款、零永续债，受限保证金仅1.83亿，42.13亿差额系港股募资3个月以上定存而非冻结，并新挖出10亿隐藏银行存单彻底反杀伪净现金论；🛡️②应付账款与票据共担52.2%存货增量且递延所得税资产暴增89.7%证实海外仓旺季备货非死货；🛡️③拒绝空头对少数股东按8倍重估10亿（违反铁闸一双扣）及13x极端地板价的三重悲观叠加。
+- <strong>📋 V4 官方对账附注</strong>：V4对账揪出老稿8处硬偏差，裁定CORRECTED。🩸空头命中4刺：①26Q3合同负债原稿臆测6.8亿，官方仅2.44亿(-55.9%)；②漏算有息债6亿(实32.50亿)；③漏析IEEPA一次性退税注水毛利及支柱二15%最低税落地，实砍常态OE(27.5→23.5亿、达产29.5亿)；④补齐H股双尺买点(折价28.3%)。🛡️蓝方反杀伪现金与死货论：受限金仅1.83亿、零商誉零财司且挖出10亿存单；应付共担52%存货增量，拒绝空头少数股东10亿双扣。</p>
+</blockquote>
+<!--V4_AUDIT_BANNER_END-->
 <hr/>
 <h2 id="_1">【开篇破题：两段话直击生意灵魂与当期核心张力】</h2>
 <div class="annotated-row"><div class="main-col"><p><strong>第一段（掀开表象看底牌）</strong>：很多刚翻开安克创新财报的投资人，看一眼它前五大业务里排第一的充电宝、数据线和充电头，再看一眼超过 52% 的亚马逊平台收入占比，很容易顺手给它贴上一个“华强北跨境电商大卖”或“高级版代工贴牌商”的标签。这个定性恰恰漏掉了安克最值钱的底牌。华强北铺货型卖家赚的是“中国廉价供应链与欧美零售价差”的流量快钱，生命周期通常只有两三年；而安克真正做的是一门<strong>“以 VOC（Voice of Customer，消费者痛点洞察）驱动微创新定义产品 + 委外轻资产制造 + 全球全渠道品牌溢价收割”</strong>的消费级硬件生态生意。它在产业链里卡住的不是工厂车间里的注塑机，而是海外中产家庭书桌、背包、屋顶阳台和庭院门廊里的“高频用电与智能感知入口”——靠着把常规 3C 配件做出比同行高出 10 到 15 个百分点的品牌毛利率（2025 年综合毛利率 45.07%，2026 年上半年进一步跃升至 49.82%），再用老品类的丰沛现金流孵化出 Anker SOLIX（消费级与阳台储能）、eufy（智能安防与清洁）、Soundcore（声学音频）乃至 eufyMake（桌面级 3D 纹理 UV 打印机）四个十亿到百亿级独立品牌矩阵，这是中国出海硬件企业里极少数真正跑通“多品类矩阵孵化飞轮”的样本。</p><p><strong>第二段（锚定最新财报、进化主线与外部“冰与火”）</strong>：将视线拉回截至 2026 年三季报的最新经营切面，安克正处在一场极为剧烈的“冰火交织与脱胎换骨”之中。火热的一面是基本盘与第二曲线的全面爆发：2025 年全年营收一举跨过三百亿大关达到 305.14 亿元（同比增长 23.49%），归母净利润 25.45 亿元（同比增长 20.37%）；2026 年前三季度营收继续狂奔至 261.40 亿元（同比增长 24.36%），剔除持有的参股公司股票及外汇衍生品公允价值波动后，<strong>前三季度扣非归母净利润高达 22.79 亿元（同比暴增 53.72%），其中单三季度扣非净利 8.40 亿元（同比大增 61.23%）</strong>，阳台光伏储能（Solarbank 系列）在欧洲攻城略地、桌面级 UV 打印机创下全球众筹纪录，2026 年 7 月公司更成功登陆港交所主板（00668.HK）完成 A+H 双资本平台搭建。但冰冷与警醒的一面同样刺眼：2025 年因上游电芯供应商私自篡改核心材料引发全球逾 235 万台充电宝主动召回，公司为此付出数亿元直接赔付、减值与垫付代价；同时为应对北美关税博弈与海外旺季备货，存货从 2024 年末的 32.34 亿元一路飙升至 2025 年末的 49.97 亿元，到 2026 年三季度末更推高至 83.90 亿元，导致经营性现金流与账面利润之间出现阶段性张力。当一家年入三百亿的轻资产硬件巨头开始往家用储能、桌面工业母机和具身智能机器人等“深水区”重兵突进时，它的品控防线、存货周转效率与研发转化率究竟能否扛住体量膨胀的重力？这正是我们今天要穿透财务表象、算清每一笔商业细账的核心命题。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把安克当成卖数据线的淘宝店主，就像当年把苹果当成组装 MP3 的工厂一样近视；但反过来，如果因为看见它扣非利润涨了五成，就对账上飙到 84 亿的存货和召回两百多万个充电宝的教训视而不见，那就是把头埋进沙子里的鸵鸟。好生意的秘密永远藏在毛利率为什么能接近 50%，以及赚来的真金白银为什么变成了仓库里的货里。</p></div></div></div></div>
@@ -966,9 +1516,11 @@
 <p><strong>终端提价与结构顺价能力（已验证极强）</strong>：2025 年至 2026 年上半年，面对美国 301 关税及芬太尼相关附加关税扰动、国际海运运价波动以及上游铜材、高端电芯成本上行，安克没有采取降价保量的自杀策略，而是通过<strong>“老品温和提价 5%—10% + 新品（如 Anker Prime、Solarbank 2、eufy S1 Pro、Soundcore AeroFit）以更高首发定价上市”</strong>的双轮顺价动作，硬生生把综合毛利率从 2024 年的 43.67% 推升至 2025 年的 45.07%，再到 2026 年上半年的 49.82%。这直接证明在欧美日主流消费者心智中，Anker 已具备显著的价格非敏感度。</p>
 </li>
 <li>
-<p><strong>客户转换代价的真实分层（客观看待，不吹牛）</strong>：
-   - 在 <strong>单品充电宝、数据线、普通蓝牙耳机</strong> 上，消费者的物理转换成本几乎为零——今天买 Anker，明天完全可以买绿联（Ugreen）或贝尔金（Belkin）。安克在这里的壁垒不是“锁死用户”，而是<strong>亚马逊上积累了十年的数百万条真实高分评论（Review 权重）、线下沃尔玛/Best Buy 的黄金排面，以及高于同行一个身位的安全信任度</strong>。
-   - 但在 <strong>eufy 智能安防生态与 Anker SOLIX 家庭/阳台光储系统</strong> 上，转换代价呈指数级跃升：一旦欧美家庭在别墅门锁、车库、后院装上了 4 个 eufy 太阳能摄像头并配好 HomeBase 3 本地 AI 基站，或者在阳台上铺好了光伏板、并网微逆与 Solarbank 储能电池包，想要换品牌的拆卸成本、布线兼容成本与软件习惯迁移成本极高，且后续每扩充一个摄像头或一块加电包（Expansion Battery），都成了高毛利的排他性复购。</p>
+<p><strong>客户转换代价的真实分层（客观看待，不吹牛）</strong>：</p>
+<ul>
+<li>在 <strong>单品充电宝、数据线、普通蓝牙耳机</strong> 上，消费者的物理转换成本几乎为零——今天买 Anker，明天完全可以买绿联（Ugreen）或贝尔金（Belkin）。安克在这里的壁垒不是“锁死用户”，而是<strong>亚马逊上积累了十年的数百万条真实高分评论（Review 权重）、线下沃尔玛/Best Buy 的黄金排面，以及高于同行一个身位的安全信任度</strong>。</li>
+<li>但在 <strong>eufy 智能安防生态与 Anker SOLIX 家庭/阳台光储系统</strong> 上，转换代价呈指数级跃升：一旦欧美家庭在别墅门锁、车库、后院装上了 4 个 eufy 太阳能摄像头并配好 HomeBase 3 本地 AI 基站，或者在阳台上铺好了光伏板、并网微逆与 Solarbank 储能电池包，想要换品牌的拆卸成本、布线兼容成本与软件习惯迁移成本极高，且后续每扩充一个摄像头或一块加电包（Expansion Battery），都成了高毛利的排他性复购。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>测试一家消费品公司有没有真定价权，不用听管理层在发布会上吹牛，你就看关税和原材料涨价的时候，它的毛利率是往下掉还是往上走。安克在关税大棒底下把毛利率干到了 49.8%，说明老美宁可多掏十美金也要买它的充电头和摄像头。更聪明的是用 HomeBase 基站和储能主控把老外家里变成“排他性插座”，一旦装上第一台，后面买配件就只能乖乖交过路费了。</p></div></div></div></div>
 
@@ -978,29 +1530,37 @@
 <p>在消费电子与智能硬件行业，绝不能拿笼统的“品牌力强”糊弄过去。因为安克横跨三大赛道，它的每个子品牌面对的都是截然不同的海内外凶悍对手。我们把安克的四大核心产品线拉出来，跟 <strong>绿联科技（301606.SZ）</strong>、<strong>华宝新能（301327.SZ，Jackery 电小二）</strong>、<strong>石头科技（688169.SH）</strong> 以及海外巨头 <strong>贝尔金（Belkin）/ 亚马逊 Ring</strong> 做一场刀刀见肉的横向比拼。</p>
 <h3 id="_7">一、 四大核心产品线硬核拆解：谁是王牌，谁在肉搏？</h3>
 <ol>
-<li><strong>【硬核王牌 1】数码快充（Anker）：GaN 功率密度与私有协议破壁者</strong>
-   - <strong>技术与产品力差异</strong>：充电头看似门槛低，但要把 140W—250W 的大功率塞进比苹果原装 70W 还要小的体积里，且连续满载不烫手、不触发过温降功率，核心在于<strong>高频氮化镓（GaNPrime）拓扑架构、平面变压器磁集成设计以及自研 PowerIQ 4.0 动态功率分配算法</strong>。普通白牌或二线品牌多口充电器在插上第二台设备时会发生“断连重握手”，且各口分配死板；Anker Prime 系列不仅做到了毫秒级无感动态分流，还配备了智能交互屏、蓝牙 App 功率监控与 ActiveShield 每天数百万次测温保护。</li>
+<li><strong>【硬核王牌 1】数码快充（Anker）：GaN 功率密度与私有协议破壁者</strong><ul>
+<li><strong>技术与产品力差异</strong>：充电头看似门槛低，但要把 140W—250W 的大功率塞进比苹果原装 70W 还要小的体积里，且连续满载不烫手、不触发过温降功率，核心在于<strong>高频氮化镓（GaNPrime）拓扑架构、平面变压器磁集成设计以及自研 PowerIQ 4.0 动态功率分配算法</strong>。普通白牌或二线品牌多口充电器在插上第二台设备时会发生“断连重握手”，且各口分配死板；Anker Prime 系列不仅做到了毫秒级无感动态分流，还配备了智能交互屏、蓝牙 App 功率监控与 ActiveShield 每天数百万次测温保护。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>对手身位对比</strong>：相比海外老牌 <strong>Belkin（贝尔金，苹果官方店长期合作品牌）</strong>，Anker 的新品迭代速度快出 2—3 倍，同功率体积小 30% 以上，价格却比 Belkin 便宜 15%—20%；相比国内强劲对手 <strong>绿联科技（Ugreen）</strong> 与 <strong>倍思（Baseus）</strong>，绿联靠极高性价比和全品类线材扩展坞在 20—50 美元价格带凶猛追赶，但在欧美 80 美元以上的高端旗舰桌面充市场、苹果官方渠道及北美四大线下商超的货架统治力上，Anker 仍领先至少一个身位。</li>
 </ul>
 <ol start="2">
-<li><strong>【硬核王牌 2】消费级与阳台光储（Anker SOLIX）：精准切中欧洲痛点的后发奇兵</strong>
-   - <strong>产品痛点卡位</strong>：便携储能鼻祖 <strong>华宝新能（Jackery）</strong> 早期靠轻便锂电户外电源吃尽美国露营红利，但在向磷酸铁锂（LiFePO4）电芯切换及欧洲户用光储转型时动作偏慢；<strong>正浩创新（EcoFlow）</strong> 强在极客快充与大功率户外电源。安克 2022 年才全面发力储能，2023 年整合推出独立品牌 <strong>Anker SOLIX</strong>，没有在拥挤的美国露营电源里死磕价格战，而是抓住了欧洲电价高企但德国等地人工安装费极贵（装一套传统户储人工费高达 2000—3000 欧元）的痛点，推出 <strong>Solarbank 系列一体化阳台光储系统</strong>。</li>
+<li><strong>【硬核王牌 2】消费级与阳台光储（Anker SOLIX）：精准切中欧洲痛点的后发奇兵</strong><ul>
+<li><strong>产品痛点卡位</strong>：便携储能鼻祖 <strong>华宝新能（Jackery）</strong> 早期靠轻便锂电户外电源吃尽美国露营红利，但在向磷酸铁锂（LiFePO4）电芯切换及欧洲户用光储转型时动作偏慢；<strong>正浩创新（EcoFlow）</strong> 强在极客快充与大功率户外电源。安克 2022 年才全面发力储能，2023 年整合推出独立品牌 <strong>Anker SOLIX</strong>，没有在拥挤的美国露营电源里死磕价格战，而是抓住了欧洲电价高企但德国等地人工安装费极贵（装一套传统户储人工费高达 2000—3000 欧元）的痛点，推出 <strong>Solarbank 系列一体化阳台光储系统</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>硬核经济账对比</strong>：普通德国住户买一套 Anker SOLIX Solarbank 2 Pro（内置微逆、双向控制器与磷酸铁锂电池，支持 IP65 防水和零下 20°C 加热），自己花 15 分钟像插家电一样接上阳台光伏板和家里插座就能并网发电储电，整套花费仅 1500—2500 欧元，每年省电费 400—600 欧元，<strong>静态回本周期仅 3—4 年</strong>（而传统重型户储回本周期长达 8—10 年）。凭借这一单品爆破，Anker SOLIX 在欧洲阳台光储市场迅速登顶市占率第一，推动安克储能营收在 2025 年突破 30 亿元，并在 2026 年上半年继续高速放量。</li>
 </ul>
 <ol start="3">
-<li><strong>【硬核王牌 3】智能安防（eufy Security）：用“边缘算力 0 月费”打穿亚马逊 Ring 的订阅铁幕</strong>
-   - <strong>商业模式降维打击</strong>：在北美家用安防摄像头与可视门铃市场，亚马逊旗下的 <strong>Ring</strong> 和老牌巨头 <strong>Arlo</strong> 长期占据主导，但它们的商业模式是“硬件微利卖 99—199 美元，强制用户每年交 100—200 美元云端录像订阅费（不交钱就只能看实时画面、不能回放和 AI 识别）”。eufy Security 直接掀了桌子：推出搭载自研 <strong>BionicMind™ 本地边缘 AI 芯片的 HomeBase 3 家庭基站</strong>，配合自带太阳能充电板（Forever Power，每天晒 2 小时太阳即可全年免拆卸充电）的 4K 双摄安防相机（eufyCam S3 Pro），<strong>承诺终身 0 月租费、录像加密存储在家里基站硬碟中</strong>。</li>
+<li><strong>【硬核王牌 3】智能安防（eufy Security）：用“边缘算力 0 月费”打穿亚马逊 Ring 的订阅铁幕</strong><ul>
+<li><strong>商业模式降维打击</strong>：在北美家用安防摄像头与可视门铃市场，亚马逊旗下的 <strong>Ring</strong> 和老牌巨头 <strong>Arlo</strong> 长期占据主导，但它们的商业模式是“硬件微利卖 99—199 美元，强制用户每年交 100—200 美元云端录像订阅费（不交钱就只能看实时画面、不能回放和 AI 识别）”。eufy Security 直接掀了桌子：推出搭载自研 <strong>BionicMind™ 本地边缘 AI 芯片的 HomeBase 3 家庭基站</strong>，配合自带太阳能充电板（Forever Power，每天晒 2 小时太阳即可全年免拆卸充电）的 4K 双摄安防相机（eufyCam S3 Pro），<strong>承诺终身 0 月租费、录像加密存储在家里基站硬碟中</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>客户账本算盘</strong>：一个北美家庭装 4 个摄像头用 3 年，买 Ring 硬件加订阅费总成本（TCO）超过 1100 美元；买 eufy 旗舰套装一次性花 550—700 美元，三年省下 400 多美元且不用担心自家后院视频上传云端被黑客或警方调阅。这种“硬件高溢价 + 零订阅费”的打法，让 eufy Security 稳居北美与欧洲中高端无线安防前三，毛利率常年维持在 50% 上下。</li>
 </ul>
 <ol start="4">
-<li><strong>【攻守拉锯与新物种】智能清洁（eufy Clean）与桌面 UV 打印（eufyMake）</strong>
-   - <strong>eufy Clean（扫地机）——从被动挨打到差异化反击</strong>：早年 eufy 扫地机主打 150—250 美元的随机碰撞式入门机（靠极致性价比抢 iRobot 低端份额），但在激光导航与全能基站时代一度被 <strong>石头科技（Roborock）</strong>、<strong>追觅（Dreame）</strong> 甩在身后。2024—2026 年，安克痛定思痛，避开石头擅长的常规圆盘拖布内卷，推出搭载 <strong>HydroJet™ 实时活水洗地滚筒技术</strong> 的旗舰扫地机 eufy Omni S1 Pro（众筹及首发定价高达 1499 美元），成功在高端洗地机器人细分站稳脚跟，但在全价格带算法与供应链纵深上，仍与石头科技处于贴身拉锯状态。</li>
+<li><strong>【攻守拉锯与新物种】智能清洁（eufy Clean）与桌面 UV 打印（eufyMake）</strong><ul>
+<li><strong>eufy Clean（扫地机）——从被动挨打到差异化反击</strong>：早年 eufy 扫地机主打 150—250 美元的随机碰撞式入门机（靠极致性价比抢 iRobot 低端份额），但在激光导航与全能基站时代一度被 <strong>石头科技（Roborock）</strong>、<strong>追觅（Dreame）</strong> 甩在身后。2024—2026 年，安克痛定思痛，避开石头擅长的常规圆盘拖布内卷，推出搭载 <strong>HydroJet™ 实时活水洗地滚筒技术</strong> 的旗舰扫地机 eufy Omni S1 Pro（众筹及首发定价高达 1499 美元），成功在高端洗地机器人细分站稳脚跟，但在全价格带算法与供应链纵深上，仍与石头科技处于贴身拉锯状态。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>eufyMake（UV 打印机 E1）——把数万美元工业设备塞进书房的破界者</strong>：传统 UV 平板打印机重达数百公斤、售价 1 万—5 万美元，只能在工厂里由专业技工操作。安克在 2025—2026 年推出的 <strong>eufyMake E1 消费级 3D 纹理 UV 打印机</strong>，通过汽车级一体化压铸龙门架构将体积缩小 90%，搭载自研 <code>Amass3D™</code> 立体浮雕技术（最高 5mm 凹凸纹理）与 <code>ColorMaestro™</code> 色彩引擎，售价拉低至 1600—2200 美元区间，在 Kickstarter 斩获超 4600 万美元创下全球全品类众筹历史第一纪录，并衍生出专用 UV 墨水耗材的高毛利复购生意。</li>
@@ -1092,16 +1652,22 @@
 <p>安克从 2011 年阳萌在湖南长沙创立海翼电商算起，15 年间真正改写企业基因的只有<strong>三次生死跃迁</strong>：</p>
 <ol>
 <li>
-<p><strong>第一次跃迁（2011—2016 年）：从“亚马逊倒爷”到“VOC 微创新定义者”的基因确立</strong>
-   - 北大计算机系毕业、前谷歌高级算法工程师阳萌创业之初，发现亚马逊上只有昂贵的原装配件和劣质白牌。他没有走铺货模式，而是用谷歌工程师写代码的思维开发了一套抓取亚马逊差评的 <strong>VOC（客户之声）系统</strong>——发现苹果原装数据线接口极易折断，就用防弹衣凯夫拉纤维（Kevlar）做了一条能拉动小汽车的 PowerLine 数据线；发现充电口不兼容不同手机，就自研 PowerIQ 智速充芯片。这一仗让 Anker 坐稳北美线上充电头把交椅，确立了“痛点微创新 + 品牌溢价”的起家基因。</p>
+<p><strong>第一次跃迁（2011—2016 年）：从“亚马逊倒爷”到“VOC 微创新定义者”的基因确立</strong></p>
+<ul>
+<li>北大计算机系毕业、前谷歌高级算法工程师阳萌创业之初，发现亚马逊上只有昂贵的原装配件和劣质白牌。他没有走铺货模式，而是用谷歌工程师写代码的思维开发了一套抓取亚马逊差评的 <strong>VOC（客户之声）系统</strong>——发现苹果原装数据线接口极易折断，就用防弹衣凯夫拉纤维（Kevlar）做了一条能拉动小汽车的 PowerLine 数据线；发现充电口不兼容不同手机，就自研 PowerIQ 智速充芯片。这一仗让 Anker 坐稳北美线上充电头把交椅，确立了“痛点微创新 + 品牌溢价”的起家基因。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二次跃迁（2016—2020 年）：突破单一充电天花板，孵化 eufy 与 Soundcore</strong>
-   - 2016 年前后，手机无线充电兴起、原装快充普及，市场质疑充电宝和充电头迟早消亡。阳萌与联合创始人赵东平（前谷歌中国高管）果断从华为、索尼、哈曼卡顿重金挖来声学与智能硬件老兵（如祝芳浩等），启动内部多品牌创业，硬是从零孵化出智能家居品牌 <strong>eufy</strong> 和声学品牌 <strong>Soundcore</strong>，在 2020 年创业板上市前将非充电业务占比拉升至近一半，证明了其渠道、供应链与 VOC 能力具备跨品类迁移性。</p>
+<p><strong>第二次跃迁（2016—2020 年）：突破单一充电天花板，孵化 eufy 与 Soundcore</strong></p>
+<ul>
+<li>2016 年前后，手机无线充电兴起、原装快充普及，市场质疑充电宝和充电头迟早消亡。阳萌与联合创始人赵东平（前谷歌中国高管）果断从华为、索尼、哈曼卡顿重金挖来声学与智能硬件老兵（如祝芳浩等），启动内部多品牌创业，硬是从零孵化出智能家居品牌 <strong>eufy</strong> 和声学品牌 <strong>Soundcore</strong>，在 2020 年创业板上市前将非充电业务占比拉升至近一半，证明了其渠道、供应链与 VOC 能力具备跨品类迁移性。</li>
+</ul>
 </li>
 <li>
-<p><strong>第三次生死劫与进化（2021—2025 年）：“浅海战略”膨胀受挫后的断腕自救与深海突围</strong>
-   - 2020 年上市募资后，阳萌提出著名的 <strong>“浅海战略”</strong>——避开手机、汽车等千亿美元深海，同时扑向割草机、手持洗地机、3D 打印、智能母婴、电子烟结构件等 <strong>27 个百亿级“浅海”细分赛道</strong>，员工从 1600 人激增至近 4000 人。结果 2021—2022 年遭遇当头棒喝：很多只有几十人的小团队在面对追觅、科沃斯、拓竹（Bambu Lab）等全情投入数十亿的垂直独角兽时根本打不赢，沦为平庸陪跑。</p>
+<p><strong>第三次生死劫与进化（2021—2025 年）：“浅海战略”膨胀受挫后的断腕自救与深海突围</strong></p>
+<ul>
+<li>2020 年上市募资后，阳萌提出著名的 <strong>“浅海战略”</strong>——避开手机、汽车等千亿美元深海，同时扑向割草机、手持洗地机、3D 打印、智能母婴、电子烟结构件等 <strong>27 个百亿级“浅海”细分赛道</strong>，员工从 1600 人激增至近 4000 人。结果 2021—2022 年遭遇当头棒喝：很多只有几十人的小团队在面对追觅、科沃斯、拓竹（Bambu Lab）等全情投入数十亿的垂直独角兽时根本打不赢，沦为平庸陪跑。</li>
+</ul>
 </li>
 </ol>
 <ul>
@@ -1284,17 +1850,23 @@
 <div class="annotated-row"><div class="main-col"><p><em>(注：2026H1 购建固定资产等支付现金阶段性统计为 5.02 亿元，三季报合并口径调整后前三季度购建长期资产现金流出约为 1.31—5.0 亿元区间，即便按较高的 5 亿元扣除，五年一期合计 CapEx 也极轻。)</em></p><p><strong>【核心财务侦探追问：为什么 2025 年归母净利 25.45 亿、2026 前三季度净利 22.61 亿，但经营现金流（OCF）却只有 4.81 亿和 3.78 亿？钱去哪儿了？】</strong>
 如果只看 2022—2024 年，安克的净现比常年超过 100%（2024 年净利 21.14 亿，OCF 高达 27.45 亿，FCF 高达 26.47 亿）。但 2025 年和 2026 年前三季度，OCF 明显低于净利润，穿透报表附注，吞噬当期经营现金流的“三头大象”水落石出：</p><ol>
 <li>
-<p><strong>第一头大象（最核心原因）：海运周期拉长 + 关税前置抢运 + 高单价储能备货导致的存货飙升</strong>：
-   - 2024 年末公司存货为 32.34 亿元，2025 年末飙升 54.53% 至 <strong>49.97 亿元</strong>（单年净增 17.63 亿元存货占用），2026 年 9 月 30 日更进一步飙升至 <strong>83.90 亿元</strong>（较年初又净增 33.93 亿元）！
-   - 为什么要囤这么多货？一是安克 96.6% 收入在海外，四季度（10—12 月）是欧美“黑五网一（Black Friday / Cyber Monday）”和圣诞季的绝对出货高峰，三季度末（9 月 30 日）恰恰是大批货物飘在太平洋与红海集装箱船上、或刚进欧美亚马逊 FBA 海外仓等待四季度售卖的时点；二是 2025—2026 年面对美国关税政策不确定性与上游电芯/存储芯片涨价预期，管理层主动加大了海外本土安全库存前置备货；三是单台价值上千美元的 Anker SOLIX 储能与 UV 打印机占比提升，天然推高了在途与在库货值。</p>
+<p><strong>第一头大象（最核心原因）：海运周期拉长 + 关税前置抢运 + 高单价储能备货导致的存货飙升</strong>：</p>
+<ul>
+<li>2024 年末公司存货为 32.34 亿元，2025 年末飙升 54.53% 至 <strong>49.97 亿元</strong>（单年净增 17.63 亿元存货占用），2026 年 9 月 30 日更进一步飙升至 <strong>83.90 亿元</strong>（较年初又净增 33.93 亿元）！</li>
+<li>为什么要囤这么多货？一是安克 96.6% 收入在海外，四季度（10—12 月）是欧美“黑五网一（Black Friday / Cyber Monday）”和圣诞季的绝对出货高峰，三季度末（9 月 30 日）恰恰是大批货物飘在太平洋与红海集装箱船上、或刚进欧美亚马逊 FBA 海外仓等待四季度售卖的时点；二是 2025—2026 年面对美国关税政策不确定性与上游电芯/存储芯片涨价预期，管理层主动加大了海外本土安全库存前置备货；三是单台价值上千美元的 Anker SOLIX 储能与 UV 打印机占比提升，天然推高了在途与在库货值。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二头大象：2025 年充电宝全球召回的真金白银赔付垫支</strong>：
-   - 2025 年超过 235 万台充电宝主动召回，公司当期直接垫付召回及退款资金高达 <strong>3.92 亿元</strong>，直接从经营活动现金流出中扣减。</p>
+<p><strong>第二头大象：2025 年充电宝全球召回的真金白银赔付垫支</strong>：</p>
+<ul>
+<li>2025 年超过 235 万台充电宝主动召回，公司当期直接垫付召回及退款资金高达 <strong>3.92 亿元</strong>，直接从经营活动现金流出中扣减。</li>
+</ul>
 </li>
 <li>
-<p><strong>第三头大象：线下商超占比提升至 30% 带来的正常账期垫资</strong>：
-   - 沃尔玛、Best Buy、Costco 等线下零售巨头进场规模从 71 亿涨到 91 亿，线下 60—90 天账期自然增加了应收账款占用。</p>
+<p><strong>第三头大象：线下商超占比提升至 30% 带来的正常账期垫资</strong>：</p>
+<ul>
+<li>沃尔玛、Best Buy、Costco 等线下零售巨头进场规模从 71 亿涨到 91 亿，线下 60—90 天账期自然增加了应收账款占用。</li>
+</ul>
 </li>
 </ol><p><strong>打破“合并报表幻觉”体检</strong>：</p><ul>
 <li>
@@ -1315,8 +1887,10 @@
 <p>一家自己不开工厂的公司，一年花近 30 亿研发费、几亿资本开支，又去港股募了 45 亿港元，钱到底砸向了哪里？</p>
 <h3 id="capex">一、 资本开支（CapEx）、在建工程与募投资金真实流向全景拆解</h3>
 <ol>
-<li><strong>存量在建工程的完美收官（防御与研发底座巩固）</strong>：
-   - 翻开 2025 年报，安克的<strong>在建工程期末余额从期初的 14.92 亿元骤降 99.64% 至仅剩 530.48 万元</strong>，而<strong>固定资产从期初的 1.27 亿元暴增 1301.30% 至 17.84 亿元</strong>。</li>
+<li><strong>存量在建工程的完美收官（防御与研发底座巩固）</strong>：<ul>
+<li>翻开 2025 年报，安克的<strong>在建工程期末余额从期初的 14.92 亿元骤降 99.64% 至仅剩 530.48 万元</strong>，而<strong>固定资产从期初的 1.27 亿元暴增 1301.30% 至 17.84 亿元</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>钱去哪儿了？</strong> 核心正是位于深圳宝安/留仙洞片区的 <strong>深圳总部大厦及产品技术研发中心升级项目</strong> 正式竣工交付转固。这笔约 15 亿元的长期资产投入，一次性解决了深圳超过 2600 名研发与核心运营人员的自有办公与声学、电力电子、光学、EMC（电磁兼容）顶级实验室场地需求，未来不再需要为此进行大规模基建投入，每年新增折旧仅约 5000 万—7000 万元，对 300 亿营收体量几乎九牛一毛。</li>
@@ -1340,10 +1914,12 @@
 <p>过去市场总觉得安克的研发只是“改改外观模具、调调软件 UI”。但纵向对比 2021 年（研发费用 7.78 亿元，研发率 6.19%）到 <strong>2025 年（研发费用 28.93 亿元，同比增长 37.20%，研发率提升至 9.48%）</strong>，安克的技术底座正在发生三场质的跃迁：</p>
 <ol>
 <li>
-<p><strong>第一层跃迁：从通用方案采购走向底层定制芯片与核心模组自研</strong>：
-   - 在充电领域，深度参股并联合 <strong>南芯科技</strong> 等上游芯片商定制高压氮化镓合封芯片与数字电源控制芯片；
-   - 在音频领域，推出自研存算一体 <strong>Thus™ 端侧 AI 音频芯片</strong> 与 ACAA 同轴双单元声学架构，将开放式耳机的漏音抑制与主动降噪推向行业天花板；
-   - 在安防领域，自研 <strong>BionicMind™ 本地边缘 AI 视觉算法与基站算力架构</strong>，在无云端算力辅助下实现 99% 精度的家人/陌生人/包裹/宠物跨镜头轨迹追踪。</p>
+<p><strong>第一层跃迁：从通用方案采购走向底层定制芯片与核心模组自研</strong>：</p>
+<ul>
+<li>在充电领域，深度参股并联合 <strong>南芯科技</strong> 等上游芯片商定制高压氮化镓合封芯片与数字电源控制芯片；</li>
+<li>在音频领域，推出自研存算一体 <strong>Thus™ 端侧 AI 音频芯片</strong> 与 ACAA 同轴双单元声学架构，将开放式耳机的漏音抑制与主动降噪推向行业天花板；</li>
+<li>在安防领域，自研 <strong>BionicMind™ 本地边缘 AI 视觉算法与基站算力架构</strong>，在无云端算力辅助下实现 99% 精度的家人/陌生人/包裹/宠物跨镜头轨迹追踪。</li>
+</ul>
 </li>
 <li>
 <p><strong>第二层跃迁：从“卖一次性硬件”向“硬件 + 专用耗材/扩容模块 + 能源管理生态”演进</strong>：</p>
@@ -1358,8 +1934,10 @@
 </li>
 </ul>
 <ol start="3">
-<li><strong>第三层跃迁：具身智能（Embodied AI）与机器人的三阶梯度布局</strong>：
-   - 由原智驾与机器人领域大牛领衔，安克将机器人研发明确切分为三个梯度：<strong>第一阶（二维基础移动机器人）</strong>——扫地机与无线泳池清洁机器人、无边界割草机器人（已在欧美大规模商业化放量）；<strong>第二阶（三维移动巡检机器人）</strong>——结合 eufy 安防生态的家庭/庭院三维移动看护形态；<strong>第三阶（三维交互人形/类人形具身智能）</strong>——搭建底层视觉-语言-动作（VLA）模型与关节执行器平台，保持对家庭通用机器人的长线卡位。</li>
+<li><strong>第三层跃迁：具身智能（Embodied AI）与机器人的三阶梯度布局</strong>：<ul>
+<li>由原智驾与机器人领域大牛领衔，安克将机器人研发明确切分为三个梯度：<strong>第一阶（二维基础移动机器人）</strong>——扫地机与无线泳池清洁机器人、无边界割草机器人（已在欧美大规模商业化放量）；<strong>第二阶（三维移动巡检机器人）</strong>——结合 eufy 安防生态的家庭/庭院三维移动看护形态；<strong>第三阶（三维交互人形/类人形具身智能）</strong>——搭建底层视觉-语言-动作（VLA）模型与关节执行器平台，保持对家庭通用机器人的长线卡位。</li>
+</ul>
+</li>
 </ol>
 <hr/>
 <h3 id="_19">三、 未来成长蓝图梯度审视与产业史正反双镜鉴</h3>
@@ -1432,20 +2010,28 @@
 <p>每次翻开安克创新的定期报告与产业动态时，请自动过滤掉公关宣传，直接核对以下四把硬尺子：</p>
 <ol>
 <li>
-<p><strong>【路标一：83.9 亿存货去化与经营现金流（OCF）回正验真（头号财务底线）】</strong>
-   - <strong>量化锚点</strong>：紧盯即将披露的 <strong>2026 年年报（截至 2026 年 12 月 31 日）及 2027 年一季报</strong>——在经历四季度欧美黑五与圣诞大促出货后，<strong>2026 年四季度单季经营活动现金流净额（OCF）必须大幅转正并回流 15—25 亿元以上</strong>，期末存货周转天数须从三季度的峰值明显回落，且全年存货跌价准备计提占营收比例不得超过 1.2%。若旺季过后存货依然死水微澜甚至继续被动攀升，说明终端动销受阻，须立即拉响压库警报。</p>
+<p><strong>【路标一：83.9 亿存货去化与经营现金流（OCF）回正验真（头号财务底线）】</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：紧盯即将披露的 <strong>2026 年年报（截至 2026 年 12 月 31 日）及 2027 年一季报</strong>——在经历四季度欧美黑五与圣诞大促出货后，<strong>2026 年四季度单季经营活动现金流净额（OCF）必须大幅转正并回流 15—25 亿元以上</strong>，期末存货周转天数须从三季度的峰值明显回落，且全年存货跌价准备计提占营收比例不得超过 1.2%。若旺季过后存货依然死水微澜甚至继续被动攀升，说明终端动销受阻，须立即拉响压库警报。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标二：新曲线进化兑现度——Anker SOLIX 储能与 eufyMake 打印耗材复购率】</strong>
-   - <strong>量化锚点</strong>：跟踪充电储能板块毛利率能否站稳 <strong>45%—48% 以上</strong>，储能业务（Anker SOLIX）年营收在突破 30 亿元基数上能否保持 <strong>35% 以上增速</strong>向 50—60 亿元迈进；同时观察 <strong>eufyMake E1 UV 打印机</strong> 在完成众筹集中交付后，日常零售月销能否稳住，以及专用 UV 墨水耗材的复购收入占比能否跑通“剃须刀+刀片”模型。</p>
+<p><strong>【路标二：新曲线进化兑现度——Anker SOLIX 储能与 eufyMake 打印耗材复购率】</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：跟踪充电储能板块毛利率能否站稳 <strong>45%—48% 以上</strong>，储能业务（Anker SOLIX）年营收在突破 30 亿元基数上能否保持 <strong>35% 以上增速</strong>向 50—60 亿元迈进；同时观察 <strong>eufyMake E1 UV 打印机</strong> 在完成众筹集中交付后，日常零售月销能否稳住，以及专用 UV 墨水耗材的复购收入占比能否跑通“剃须刀+刀片”模型。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标三：品控安全零重大召回与净利率费用剪刀差（治理与盈利质量锚）】</strong>
-   - <strong>量化锚点</strong>：在 2025 年全面切换宁德新能源（ATL）等头部电芯双供体系后，<strong>2026—2027 年全球范围内不得再发生单批次超 10 万台级别的充电宝或任何批次的户用储能电池起火召回事件</strong>（财报附注中“预计负债—产品质量保证”计提额应回落至正常水平）；同时观察销售费用率能否稳步控制在 <strong>22%—23% 以内</strong>，确保扣非销售净利率稳定在 <strong>8.5%—10.5%</strong> 的健康走廊。</p>
+<p><strong>【路标三：品控安全零重大召回与净利率费用剪刀差（治理与盈利质量锚）】</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：在 2025 年全面切换宁德新能源（ATL）等头部电芯双供体系后，<strong>2026—2027 年全球范围内不得再发生单批次超 10 万台级别的充电宝或任何批次的户用储能电池起火召回事件</strong>（财报附注中“预计负债—产品质量保证”计提额应回落至正常水平）；同时观察销售费用率能否稳步控制在 <strong>22%—23% 以内</strong>，确保扣非销售净利率稳定在 <strong>8.5%—10.5%</strong> 的健康走廊。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标四：跨国关税顺价韧性与欧美监管清单动态（外部地缘防线）】</strong>
-   - <strong>量化锚点</strong>：跟踪北美市场营收增速能否维持在 <strong>15% 以上</strong>、综合毛利率在东南亚产能切换与关税波动下能否守住 <strong>44% 铁底</strong>；同时每季度核查美国 FCC、商务部 BIS 及 CPSC 公告，确认 <strong>eufy 智能安防与 Anker SOLIX 联网储能未被纳入任何限制销售或强制下架的行政安全清单</strong>。</p>
+<p><strong>【路标四：跨国关税顺价韧性与欧美监管清单动态（外部地缘防线）】</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：跟踪北美市场营收增速能否维持在 <strong>15% 以上</strong>、综合毛利率在东南亚产能切换与关税波动下能否守住 <strong>44% 铁底</strong>；同时每季度核查美国 FCC、商务部 BIS 及 CPSC 公告，确认 <strong>eufy 智能安防与 Anker SOLIX 联网储能未被纳入任何限制销售或强制下架的行政安全清单</strong>。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -1669,18 +2255,20 @@
 <h3 id="_25">一、 商业化刻度定位：三大新曲线的真实生命周期与冷峻证伪</h3>
 <p>我们将安克创新的三大新曲线置于统一的商业化标尺下进行测量，三者所处的真实刻度截然不同：</p>
 <ul>
-<li><strong>曲线 ①：Anker SOLIX 阳台光储与户用大储 —— 处于【已跑通单点盈利模型并规模放量（阳台光储全球第一）+ 重度本地安装渠道攻坚（北美/澳洲户用大储）】阶段</strong>：</li>
+<li>
+<p><strong>曲线 ①：Anker SOLIX 阳台光储与户用大储 —— 处于【已跑通单点盈利模型并规模放量（阳台光储全球第一）+ 重度本地安装渠道攻坚（北美/澳洲户用大储）】阶段</strong>：</p>
+<ul>
 <li>储能业务整体营收已从 2024 年的 <strong>30.2 亿元</strong>（+184%）跃升至 2025 年的 <strong>45 亿元以上</strong>，并在 2026H1 助力充电储能大板块斩获 <strong>89.30 亿元</strong>营收与 <strong>49.01%</strong> 的惊人毛利率。</li>
 <li>在<strong>欧洲阳台光伏储能（Balcony Solar）</strong>细分赛道，据弗若斯特沙利文与亚琛工业大学统计，2025 年 Anker SOLIX 按全球出货量计市占率高达约 <strong>50%</strong>，按全球收入计以 <strong>14.6%</strong> 位居全球第一，在核心标杆市场德国的装机容量份额更是高达 <strong>55%</strong>。这一子赛道已彻底跑通“高客单价（1,000—2,500 欧元）+ 亚马逊/独立站 DTC 免安装直销 + 近 50% 毛利率”的印钞机闭环。</li>
-<li>
-<p>但在<strong>北美与澳洲全屋户用大储（X1/XE 系列，7kWh—42kWh）</strong>领域，业务刚跨过产品工程验证并进入与本地分销商（如 2026 年 7 月与澳洲 OSW 签署 3GWh 合作协议）结盟铺货的爬坡期，尚未达到阳台光储那样的统治级利润兑现度。</p>
+<li>但在<strong>北美与澳洲全屋户用大储（X1/XE 系列，7kWh—42kWh）</strong>领域，业务刚跨过产品工程验证并进入与本地分销商（如 2026 年 7 月与澳洲 OSW 签署 3GWh 合作协议）结盟铺货的爬坡期，尚未达到阳台光储那样的统治级利润兑现度。</li>
+</ul>
 </li>
 <li>
 <p><strong>曲线 ②：eufyMake 消费级 3D 纹理 UV 打印机（E1） —— 处于【爆款众筹交付收官，向常态化大众零售与专用耗材复购过渡】阶段</strong>：</p>
-</li>
+<ul>
 <li>2025 年 4 月底至 6 月底，安克旗下独立创意智造品牌 eufyMake 推出的全球首款个人消费级 3D 纹理 UV 打印机 <strong>eufyMake E1</strong> 在 Kickstarter 上线，1 分钟破百万美元，最终以 <strong>4,676 万美元</strong>（约合人民币 3.3 亿元，吸引近 <strong>1.8 万名</strong>全球支持者）一举刷新 Kickstarter 平台诞生以来<strong>全品类最高众筹金额世界纪录</strong>。</li>
-<li>
-<p>经过 2025 下半年至 2026 年初的量产爬坡（期间曾克服万级规模量产中因模具公差导致漏液、被迫重新开模置换零部件的工程阵痛），目前已基本完成海外众筹订单交付，并在全球独立站、亚马逊及中国国内市场转入常态化零售（单机及套装售价区间约 1,699—2,500+ 美元），正处于检验“非极客大众复购率与原装 UV 墨水消耗频次”的关键十字路口。</p>
+<li>经过 2025 下半年至 2026 年初的量产爬坡（期间曾克服万级规模量产中因模具公差导致漏液、被迫重新开模置换零部件的工程阵痛），目前已基本完成海外众筹订单交付，并在全球独立站、亚马逊及中国国内市场转入常态化零售（单机及套装售价区间约 1,699—2,500+ 美元），正处于检验“非极客大众复购率与原装 UV 墨水消耗频次”的关键十字路口。</li>
+</ul>
 </li>
 <li>
 <p><strong>曲线 ③：具身智能与家庭机器人 —— 处于【二维清洁/庭院割草机器人规模变现 vs 前沿通用具身智能团队动荡收缩、早期预研烧钱孵化】的二元分化阶段</strong>：</p>
@@ -1988,8 +2576,10 @@
 <hr/>
 <h3 id="8390">二、 景气度与存货对质：83.90亿存货背后，到底哪些是旺季备货，哪些是压库隐患？</h3>
 <div class="annotated-row"><div class="main-col"><p>2026年三季报披露后，市场对安克创新最大的质疑集中在其资产负债表端：<strong>期末存货由2024年末的32.34亿元、2025年末的49.97亿元（+54.53%），一路飙升至2026Q3末的83.90亿元（较年初再增+67.91%），导致2026年前三季度经营活动现金流净额（OCF）仅录得3.78亿元</strong>。将这一数据放入同行与上下游的“三方交叉审讯室”，我们可以拆解出三层真相：</p><ol>
-<li><strong>横向同行对质：不是安克一家在备货，但备货的驱动力截然不同</strong>
-   - <strong>石头科技（688169.SH）的存货膨胀更为剧烈</strong>：石头科技2025年末存货账面价值为26.55亿元（较2024年末的14.90亿元激增+78.19%），到了2026H1跳升至43.11亿元，<strong>2026Q3末更是暴涨至62.63亿元（较年初飙升+135.88%）</strong>。石头科技的存货占前三季度营收（156.99亿元）比重高达 <strong>39.89%</strong>，而安克创新83.90亿元存货占前三季度营收（261.40亿元）比重为 <strong>32.10%</strong>。石头科技存货翻倍的核心原因是2025—2026年推进全价格段机海战术、大力开拓北美线下Target/Best Buy商超渠道以及提前囤积存储芯片与传感器物料。</li>
+<li><strong>横向同行对质：不是安克一家在备货，但备货的驱动力截然不同</strong><ul>
+<li><strong>石头科技（688169.SH）的存货膨胀更为剧烈</strong>：石头科技2025年末存货账面价值为26.55亿元（较2024年末的14.90亿元激增+78.19%），到了2026H1跳升至43.11亿元，<strong>2026Q3末更是暴涨至62.63亿元（较年初飙升+135.88%）</strong>。石头科技的存货占前三季度营收（156.99亿元）比重高达 <strong>39.89%</strong>，而安克创新83.90亿元存货占前三季度营收（261.40亿元）比重为 <strong>32.10%</strong>。石头科技存货翻倍的核心原因是2025—2026年推进全价格段机海战术、大力开拓北美线下Target/Best Buy商超渠道以及提前囤积存储芯片与传感器物料。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>绿联科技（301606.SZ）的轻装快周转特征</strong>：绿联2026Q3末存货为25.03亿元（较年初20.01亿元温和增长+25.10%），占前三季度营收（91.81亿元）比重仅为 <strong>27.26%</strong>。绿联存货增幅较低，一方面是因为其境内收入占比约25%—30%（国内电商无需漫长的跨洋海运），另一方面在于绿联尚未大规模涉足单机售价高达1,000—5,000美元的户用/阳台储能重资产业务。</p>
@@ -1998,8 +2588,10 @@
 <p><strong>华宝新能（301327.SZ）的慢周转困境</strong>：华宝新能2025年末存货11.49亿元，在全年营收仅41.42亿元、毛利率37.64%的背景下，其存货周转天数长期高达170—185天，反映出单一便携储能品类在北美传统户外渠道去库缓慢的滞胀状态。</p>
 </li>
 </ul><ol start="2">
-<li><strong>合同负债（预收款）与上游排产的交叉印证：真需求还是假压货？</strong>
-   - <strong>合同负债暴增印证下游提货意愿</strong>：检验存货是不是“卖不动的死货”，最硬的先行指标是合同负债（客户预付货款及未交付订单）。2025年末，安克创新合同负债从年初的1.55亿元暴增 <strong>+257.22%</strong> 至 <strong>5.52亿元</strong>，2026Q3末继续维持在约6.8亿元高位；反观石头科技2025年末合同负债同比下滑46.69%。安克合同负债的成倍增长，直接证明欧洲阳台光储安装商、北美沃尔玛/Best Buy等线下KA巨头以及独立站黑五预售订单正在排队打款拿货。</li>
+<li><strong>合同负债（预收款）与上游排产的交叉印证：真需求还是假压货？</strong><ul>
+<li><strong>合同负债暴增印证下游提货意愿</strong>：检验存货是不是“卖不动的死货”，最硬的先行指标是合同负债（客户预付货款及未交付订单）。2025年末，安克创新合同负债从年初的1.55亿元暴增 <strong>+257.22%</strong> 至 <strong>5.52亿元</strong>，2026Q3末继续维持在约6.8亿元高位；反观石头科技2025年末合同负债同比下滑46.69%。安克合同负债的成倍增长，直接证明欧洲阳台光储安装商、北美沃尔玛/Best Buy等线下KA巨头以及独立站黑五预售订单正在排队打款拿货。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>上游芯片与电芯厂数据验真</strong>：</p>
@@ -2011,8 +2603,10 @@
 <p><strong>电源管理芯片端</strong>：安克快充与储能BMS核心供应商<strong>南芯科技（688484.SH）</strong>2025年营收大涨61.06%至32.61亿元（反映2025下半年安克等大客户集中备货拉动），而2026年前三季度南芯科技营收增速放缓至+3.19%（24.56亿元），说明安克在2026Q2—Q3已经完成了上游IC元器件的高峰备料，当前83.90亿元存货主要沉淀在<strong>产成品海运在途与海外前置仓</strong>，而非盲目囤积上游原材料。</p>
 </li>
 </ul><ol start="3">
-<li><strong>穿透拆解83.90亿存货的构成：约75%为良性旺季备货，约25%需警惕周转钝化与滞销减值</strong>
-   - <strong>良性备货部分（约62—65亿元，占比~75%）</strong>：</li>
+<li><strong>穿透拆解83.90亿存货的构成：约75%为良性旺季备货，约25%需警惕周转钝化与滞销减值</strong><ul>
+<li><strong>良性备货部分（约62—65亿元，占比~75%）</strong>：</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>四季度Prime秋季大促与黑五网一（BFCM）海运在途</strong>：安克境外收入占比超94%，Q4历来占全年营收的30%—35%。按照2026Q4预计115—125亿元营收、约50%毛利率测算，仅满足Q4正常动销所需的账面成本备货就高达 <strong>58—62亿元</strong>。红海危机常态化导致亚欧航线海运周期从30天拉长至45—55天，大量发往德国、英国FBA仓及海外自营仓的“在途物资+前置库存商品”在9月30日截表时点集中体现为账面存货。</p>
@@ -2093,18 +2687,20 @@
 <li><strong>穿透结论</strong>：如果把绿联科技的境内低毛利业务（27.55%毛利率）剔除，仅对比双方在欧美亚马逊等海外渠道的同口径毛利率，绿联境外毛利率为 <strong>43.00%</strong>，而安克境外毛利率高达 <strong>46.5%—50.2%</strong>。这多出来的 <strong>4—7个百分点純海外毛利溢价</strong>，正是安克过去十年累计超百亿研发投入铸就的工业设计、快充温控协议与品牌心智溢价；而安克之所以没有把这10个点的毛利优势全部转化为当期净利率，是因为阳萌将多赚出来的毛利中的 <strong>~5个百分点</strong> 重新砸进了研发人员薪酬（3,549名研发工程师），用于孵化阳台光储、3D纹理UV打印机（eufyMake）与具身智能等高壁垒新品类。</li>
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="2-vs-vs">2. 安克创新 vs 石头科技 vs 华宝新能：从“净利率跑输”到“攻守逆转”的底层逻辑</h4><ul>
-<li><strong>为什么安克净利率长期比巅峰期的石头科技低4—6个百分点？</strong></li>
 <li>
-<p><strong>单品爆款模式 vs 浅海多品类矩阵的规模效应差异</strong>：在2023—2024年，石头科技依靠扫地机器人这一单一大品类、20—30个核心SKU就能撑起百亿营收，单一品类的研发分摊极薄（研发费用率仅7%左右），且早期海外经销商（线下B2B买断制）占比高，无需承担全额亚马逊FBA佣金（8%—15%）与站内CPC竞价投流费，因此石头巅峰期销售费用率仅20%左右、净利率高达15%—17%。</p>
+<p><strong>为什么安克净利率长期比巅峰期的石头科技低4—6个百分点？</strong></p>
+<ul>
+<li><strong>单品爆款模式 vs 浅海多品类矩阵的规模效应差异</strong>：在2023—2024年，石头科技依靠扫地机器人这一单一大品类、20—30个核心SKU就能撑起百亿营收，单一品类的研发分摊极薄（研发费用率仅7%左右），且早期海外经销商（线下B2B买断制）占比高，无需承担全额亚马逊FBA佣金（8%—15%）与站内CPC竞价投流费，因此石头巅峰期销售费用率仅20%左右、净利率高达15%—17%。</li>
+</ul>
 </li>
 <li>
 <p><strong>安克“20多个产品团队+数千个SKU”的组织摩擦成本</strong>：安克同时横跨数码充电、便携/阳台储能、智能安防、扫地机、TWS耳机、无线音箱、3D打印等十余个细分赛道，每个新赛道在0到1孵化期都需要独立配备研发、工业设计、亚马逊运营与站外种草团队。加上安克线上B2C直营占比极高（约70%通过亚马逊、独立站、京东天猫直达C端），必须硬刚平台佣金与广告买量费，导致其销售费用率刚性锁定在 <strong>22%左右</strong>，研发费用率刚性锁定在 <strong>9.5%左右</strong>，两项合计吃掉近32%的营收。</p>
 </li>
 <li>
 <p><strong>2025—2026年的戏剧性逆转：当石头与华宝陷入买量内卷，安克的“飞轮复利”显现</strong></p>
-</li>
-<li>
-<p><strong>石头科技的“增收不增利”阵痛</strong>：2025年石头科技为了抢夺全球份额，激进推行全价格段降价与海外自营渠道扩张，导致2025年毛利率暴跌 <strong>7.98个百分点</strong> 至 <strong>42.38%</strong>，销售费用飙升64.95%至48.94亿元（<strong>销售费用率冲高至26.18%</strong>），全年扣非净利率腰斩至 <strong>5.84%</strong>（首次被安克的7.22%反超！）。直到2026年前三季度石头主动收缩低效广告投放（销售费用率降至21.95%），扣非净利率才修复至 <strong>7.68%</strong>，但依然低于安克创新2026年前三季度的 <strong>8.72%</strong>（单Q3扣非净利率更达 <strong>9.1%</strong>）。</p>
+<ul>
+<li><strong>石头科技的“增收不增利”阵痛</strong>：2025年石头科技为了抢夺全球份额，激进推行全价格段降价与海外自营渠道扩张，导致2025年毛利率暴跌 <strong>7.98个百分点</strong> 至 <strong>42.38%</strong>，销售费用飙升64.95%至48.94亿元（<strong>销售费用率冲高至26.18%</strong>），全年扣非净利率腰斩至 <strong>5.84%</strong>（首次被安克的7.22%反超！）。直到2026年前三季度石头主动收缩低效广告投放（销售费用率降至21.95%），扣非净利率才修复至 <strong>7.68%</strong>，但依然低于安克创新2026年前三季度的 <strong>8.72%</strong>（单Q3扣非净利率更达 <strong>9.1%</strong>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>华宝新能的“M2C买量陷阱”</strong>：华宝新能2025年销售费用率高达 <strong>28.54%</strong>（11.82亿元），而毛利率跌至37.64%，直接导致全年扣非净利润亏损 <strong>-6,849万元</strong>；2026年前三季度即便引入AI降本将销售费用率压降3.52个百分点，前三季度归母净利也仅有4,339万元（净利率仅 <strong>1.18%</strong>）。这证明缺乏高频消费电子复购支撑、纯靠独立站与亚马逊高价买量卖低频大件户外电源的商业模式，获客成本（CAC）极易吞噬全部毛利。</p>
@@ -2115,23 +2711,31 @@
 <hr/>
 <h3 id="2025-2026q3">四、 四大战场份额攻守结论（2025 — 2026Q3）：到底是谁在抢谁的份额？</h3>
 <div class="annotated-row"><div class="main-col"><p>结合四家公司分部营收增速、海外海关出口数据及第三方渠道监测（Stackline / GfK / 久谦数据），过去一年半在四大核心战场的份额攻守格局已水落石出：</p><ol>
-<li><strong>战场一：全球数码快充与桌面配件（安克创新 vs 绿联科技 vs 白牌厂商）——“双雄联手清剿白牌，绿联用NAS斜刺突袭”</strong>
-   - <strong>攻守态势</strong>：2025年安克遭遇235万台充电宝召回风波，市场曾担忧绿联科技会趁机在欧美抢走安克的快充头把交椅。但2026H1数据显示，安克充电储能板块毛利率反而逆势跃升至 <strong>49.01%</strong>，Prime高端桌面充与磁吸无线充（Qi2认证）在亚马逊美/德站点均价（ASP）在50—120美元区间稳居统治地位。</li>
+<li><strong>战场一：全球数码快充与桌面配件（安克创新 vs 绿联科技 vs 白牌厂商）——“双雄联手清剿白牌，绿联用NAS斜刺突袭”</strong><ul>
+<li><strong>攻守态势</strong>：2025年安克遭遇235万台充电宝召回风波，市场曾担忧绿联科技会趁机在欧美抢走安克的快充头把交椅。但2026H1数据显示，安克充电储能板块毛利率反而逆势跃升至 <strong>49.01%</strong>，Prime高端桌面充与磁吸无线充（Qi2认证）在亚马逊美/德站点均价（ASP）在50—120美元区间稳居统治地位。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>份额流向</strong>：2025—2026年中国落地实施严苛的《移动电源安全技术规范》新国标，叠加亚马逊对锂电池UL认证与合规审查全面收紧，<strong>大批深圳华强北中小白牌跨境卖家因无力承担ATL电芯成本与合规检测费被直接清退</strong>。安克抢占了60美元以上的高端创新溢价盘，绿联科技（2025营收+53.83%、2026Q1-Q3营收+44.26%）则承接了20—50美元大众性价比快充盘，并依靠<strong>NAS私有云存储</strong>（打破群晖Synology垄断）开辟了爆发式增长的第二战场。</li>
 </ul><ol start="2">
-<li><strong>战场二：欧洲阳台光储与便携储能（安克SOLIX vs 华宝新能Jackery vs 正浩EcoFlow）——“安克降维横扫欧洲阳台，华宝固守美日户外苦战”</strong>
-   - <strong>攻守态势</strong>：这是过去一年半份额转移最剧烈的战场！安克旗下 <strong>Anker SOLIX</strong> 抓住德国《Solarpaket I》简化800W阳台光伏并网审批的政策东风，推出“即插即用、15分钟DIY安装”的 <strong>Solarbank 2 / 3 Pro</strong> 一体化阳台光储系统，将工业储能彻底“小家电化”。</li>
+<li><strong>战场二：欧洲阳台光储与便携储能（安克SOLIX vs 华宝新能Jackery vs 正浩EcoFlow）——“安克降维横扫欧洲阳台，华宝固守美日户外苦战”</strong><ul>
+<li><strong>攻守态势</strong>：这是过去一年半份额转移最剧烈的战场！安克旗下 <strong>Anker SOLIX</strong> 抓住德国《Solarpaket I》简化800W阳台光伏并网审批的政策东风，推出“即插即用、15分钟DIY安装”的 <strong>Solarbank 2 / 3 Pro</strong> 一体化阳台光储系统，将工业储能彻底“小家电化”。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>份额流向</strong>：安克储能业务年化营收已突破45—55亿元大关，在<strong>全球阳台光储市场斩获14.6%的收入份额与约50%的出货量份额，在德国市场更是拿下超50%的统治级市占率，稳居全球第一</strong>。相比之下，华宝新能（Jackery）因早期押注美日传统便携户外电源（露营/应急备电），在欧洲阳台光储转型上慢了半拍，2025年营收仅增14.87%且扣非转亏，在欧洲市场的增量份额被安克SOLIX与正浩EcoFlow大幅蚕食。</li>
 </ul><ol start="3">
-<li><strong>战场三：北美与欧洲智能安防（安克eufy Security vs 亚马逊Ring / 谷歌Nest）——“靠‘零月费本地存储’持续蚕食欧美巨头份额”</strong>
-   - <strong>攻守态势</strong>：欧美家庭安防长期被亚马逊Ring和谷歌Nest主导，但后两者强制捆绑每月10—20美元的云存储订阅费，引发欧美中产消费者强烈的“订阅疲劳（Subscription Fatigue）”与隐私焦虑。</li>
+<li><strong>战场三：北美与欧洲智能安防（安克eufy Security vs 亚马逊Ring / 谷歌Nest）——“靠‘零月费本地存储’持续蚕食欧美巨头份额”</strong><ul>
+<li><strong>攻守态势</strong>：欧美家庭安防长期被亚马逊Ring和谷歌Nest主导，但后两者强制捆绑每月10—20美元的云存储订阅费，引发欧美中产消费者强烈的“订阅疲劳（Subscription Fatigue）”与隐私焦虑。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>份额流向</strong>：安克 <strong>eufy Security</strong> 死磕 <strong>HomeBase 3 本地AI基站（BionicMind人脸与移动识别 + 本地硬盘扩容 + 零月费）</strong>，精准击中痛点。2025—2026年eufy智能门铃、太阳能无线摄像机（SoloCam）在北美亚马逊及Best Buy线下渠道持续抢夺Ring与Arlo的存量替换用户，带动安克智能创新板块2026H1毛利率提升至 <strong>47.41%</strong>。</li>
 </ul><ol start="4">
-<li><strong>战场四：全球扫地机器人（石头科技Roborock vs 安克eufy Clean vs 科沃斯/追觅）——“石头统治高端王座，安克收缩战线错位防守”</strong>
-   - <strong>攻守态势</strong>：在800美元以上的全球高端全能基站扫地机市场，<strong>石头科技（2025营收186.95亿/+56.51%，2026Q1-Q3营收156.99亿/+30.10%）与追觅（Dreame）形成了绝对的技术与品牌双寡头压制</strong>，彻底击溃了美国老牌鼻祖iRobot。</li>
+<li><strong>战场四：全球扫地机器人（石头科技Roborock vs 安克eufy Clean vs 科沃斯/追觅）——“石头统治高端王座，安克收缩战线错位防守”</strong><ul>
+<li><strong>攻守态势</strong>：在800美元以上的全球高端全能基站扫地机市场，<strong>石头科技（2025营收186.95亿/+56.51%，2026Q1-Q3营收156.99亿/+30.10%）与追觅（Dreame）形成了绝对的技术与品牌双寡头压制</strong>，彻底击溃了美国老牌鼻祖iRobot。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>份额流向</strong>：面对石头科技每年超14亿元（研发人员超千人）全部聚焦在清洁电器单赛道的重兵饱和攻击，安克旗下的 <strong>eufy Clean</strong> 在2023—2024年一度在高端全能基站机型上跟进迟缓、份额受挤压。2025—2026年安克果断调整策略，不再与石头在1,200美元以上超旗舰机海战中硬拼参数，而是聚焦400—800美元中高端爆款（如eufy X10 Pro Omni与S1 Pro洗地机器人），复用eufy安防在欧美庞大的家庭会员渠道实现盈利性防守，但全球扫地机头把交椅已被石头科技牢牢焊死。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>安克在四个战场的攻守战果证明了一条古老的自然法则：当你在别人睡觉的阳台上发明了能直接插插座省电费的太阳能盒子（SOLIX），你就能躺着数钱；但当你闯进石头科技和追觅已经拿机枪互相扫射的扫地机巷战里，哪怕你穿了防弹衣，也得做好膝盖中两枪的心理准备。</p></div></div></div></div>
@@ -2233,11 +2837,11 @@
 </li>
 <li>
 <p><strong>动态流转审讯（最关键的防造假证据）</strong>：</p>
-</li>
+<ul>
 <li>2024年末，安克存货跌价准备余额为 <strong>1.24亿元（124,100,391.17元）</strong>；</li>
 <li>2025年全年，安克因将以前年度计提跌价的旧货在期内打折出售清理，<strong>本期转销减少金额恰好为 1.24亿元（124,100,391.17元）</strong>——意味着2024年底留下的瑕疵/滞销老库存，在2025年内实现了 <strong>100%物理出清</strong>，没有任何一分钱万年不动的“僵尸库存”留在账上！</li>
-<li>
-<p>同时，2025年当年新计提存货跌价准备 <strong>3.65亿元</strong>（较2024年计提额1.48亿元翻了2.47倍），不仅将涉事召回型号的在库充电宝全额核销，还对库龄超过180天的扫地机、老款安防及初代便携储能产品执行了极其严厉的可变现净值测试。</p>
+<li>同时，2025年当年新计提存货跌价准备 <strong>3.65亿元</strong>（较2024年计提额1.48亿元翻了2.47倍），不仅将涉事召回型号的在库充电宝全额核销，还对库龄超过180天的扫地机、老款安防及初代便携储能产品执行了极其严厉的可变现净值测试。</li>
+</ul>
 </li>
 <li>
 <p><strong>对比绿联科技</strong>：绿联2025年末存货账面余额20.69亿元，仅计提跌价准备0.69亿元（计提率 <strong>3.31%</strong>）。如果安克按绿联3.31%的标准计提，2025年可少提跌价准备 <strong>1.87亿元</strong>，直接多出近1.9亿元税前利润！这铁证如山地表明，安克管理层在存货减值上采取了“宁可当期利润挨刀，绝不留隔夜隐患”的极度审慎态度。</p>
@@ -2273,16 +2877,18 @@
 </ul>
 <h4 id="4_1">4. 应收账款坏账与固定资产折旧：藏在折旧年限里的“利润蓄水池”</h4>
 <ul>
-<li><strong>应收账款账龄与坏账计提</strong>：</li>
-<li>截至2025年末，安克创新应收账款账面余额为 <strong>19.72亿元</strong>，其中账龄在 <strong>1年以内（含1年）的金额高达 19.685亿元（1,968,537,336.05元），占比高达 99.82%</strong>！1—2年账龄仅331.64万元，2—3年账龄仅30.96万元。</li>
 <li>
-<p>即便面对亚马逊、沃尔玛、Best Buy这样信用等级极高、账期仅14—60天的全球顶级零售商，安克依然严格按照 <strong>5.00%</strong> 的比例计提了近1亿元坏账准备（期末账面净值18.73亿元），而对比同行<strong>石头科技</strong>对1年以内应收账款仅按 <strong>0.02%—0.77%</strong> 计提坏账，安克的坏账准备计提标准堪称严苛。</p>
+<p><strong>应收账款账龄与坏账计提</strong>：</p>
+<ul>
+<li>截至2025年末，安克创新应收账款账面余额为 <strong>19.72亿元</strong>，其中账龄在 <strong>1年以内（含1年）的金额高达 19.685亿元（1,968,537,336.05元），占比高达 99.82%</strong>！1—2年账龄仅331.64万元，2—3年账龄仅30.96万元。</li>
+<li>即便面对亚马逊、沃尔玛、Best Buy这样信用等级极高、账期仅14—60天的全球顶级零售商，安克依然严格按照 <strong>5.00%</strong> 的比例计提了近1亿元坏账准备（期末账面净值18.73亿元），而对比同行<strong>石头科技</strong>对1年以内应收账款仅按 <strong>0.02%—0.77%</strong> 计提坏账，安克的坏账准备计提标准堪称严苛。</li>
+</ul>
 </li>
 <li>
 <p><strong>总部大厦转固与固定资产折旧政策</strong>：</p>
-</li>
-<li>
-<p>随着安克创新总部大厦达到预定可使用状态并由在建工程转入固定资产“房屋及建筑物”，我们核查其折旧政策发现：安克对房屋及建筑物采用 <strong>20年折旧年限、0%预计净残值率，年折旧率高达 5.00%</strong>！</p>
+<ul>
+<li>随着安克创新总部大厦达到预定可使用状态并由在建工程转入固定资产“房屋及建筑物”，我们核查其折旧政策发现：安克对房屋及建筑物采用 <strong>20年折旧年限、0%预计净残值率，年折旧率高达 5.00%</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>横向对比</strong>：石头科技对房屋建筑物采用 <strong>40年折旧年限、5%预计净残值率，年折旧率仅为 2.375%</strong>；绿联科技采用20年折旧、5%残值率（年折旧率4.75%）。同样一栋价值15亿元的研发办公大楼，安克每年计提折旧 <strong>7,500万元</strong>，而按石头科技的会计政策每年仅需计提 <strong>3,562.5万元</strong>——安克仅在房产折旧年限与零残值率这一项上，就比同行主动多承担了超过1倍的折旧费用，会计政策极度保守。</p>
@@ -2429,51 +3035,61 @@
 <p>要看清安克创新在当前 <strong>300 亿—340 亿元人民币</strong> 营收量级下的真实造血能力，绝不能直接拿利润表上的“表观归母净利润”或现金流量表上的“单期经营活动现金流净额（OCF）”生搬硬套。2025 年至 2026 年前三季度的财务报表，恰好同时经历了<strong>三大剧烈的非经常性或阶段性脉冲干扰</strong>：</p>
 <ol>
 <li>
-<p><strong>2025 年罕见的“235 万台移动电源全球主动召回”一次性损益与现金流冲击</strong>：
-   - 因上游电芯供应商某批次隔膜瑕疵，安克于 2025 年主动发起全球召回，直接导致 2025 年计提<strong>资产减值损失 3.65 亿元</strong>、计提<strong>预计负债 1.04 亿元</strong>，并在经营现金流端产生高达 <strong>3.92 亿元</strong> 的召回赔付及退换货垫付现金流出。
-   - 若不剔除这一十年一遇的供应链黑天鹅尾款冲击，会严重低估充电基本盘的常态净利率。</p>
+<p><strong>2025 年罕见的“235 万台移动电源全球主动召回”一次性损益与现金流冲击</strong>：</p>
+<ul>
+<li>因上游电芯供应商某批次隔膜瑕疵，安克于 2025 年主动发起全球召回，直接导致 2025 年计提<strong>资产减值损失 3.65 亿元</strong>、计提<strong>预计负债 1.04 亿元</strong>，并在经营现金流端产生高达 <strong>3.92 亿元</strong> 的召回赔付及退换货垫付现金流出。</li>
+<li>若不剔除这一十年一遇的供应链黑天鹅尾款冲击，会严重低估充电基本盘的常态净利率。</li>
+</ul>
 </li>
 <li>
-<p><strong>2025—2026Q3 参股芯片公司（如南芯科技等）公允价值变动的“非现金账面噪音”</strong>：
-   - 2025 年公司非经常性损益高达 <strong>+3.66 亿元</strong>（其中金融资产公允价值变动及衍生品处置收益达 <strong>+2.90 亿元</strong>，理财收益 <strong>+1.00 亿元</strong>），导致 2025 年表观归母净利润（25.45 亿元）高于扣非归母净利润（21.79 亿元）。
-   - 到了 2026 年前三季度，伴随一级半与二级市场参股半导体标的股价回调，金融资产公允价值变动损益转为 <strong>-1.16 亿元</strong>（主要集中在 2026Q3 单季爆发），导致 2026Q3 单季表观归母净利润同比下降 27.04% 至 <strong>5.59 亿元</strong>，而代表核心主业真实盈利的 <strong>2026Q3 单季扣非归母净利润实则狂飙 +61.23% 至 8.40 亿元</strong>（前三季度累计扣非归母净利润达 <strong>22.79 亿元，同比大增 +53.72%</strong>，首次出现扣非净利反超表观归母净利 22.61 亿元的剪刀差）。</p>
+<p><strong>2025—2026Q3 参股芯片公司（如南芯科技等）公允价值变动的“非现金账面噪音”</strong>：</p>
+<ul>
+<li>2025 年公司非经常性损益高达 <strong>+3.66 亿元</strong>（其中金融资产公允价值变动及衍生品处置收益达 <strong>+2.90 亿元</strong>，理财收益 <strong>+1.00 亿元</strong>），导致 2025 年表观归母净利润（25.45 亿元）高于扣非归母净利润（21.79 亿元）。</li>
+<li>到了 2026 年前三季度，伴随一级半与二级市场参股半导体标的股价回调，金融资产公允价值变动损益转为 <strong>-1.16 亿元</strong>（主要集中在 2026Q3 单季爆发），导致 2026Q3 单季表观归母净利润同比下降 27.04% 至 <strong>5.59 亿元</strong>，而代表核心主业真实盈利的 <strong>2026Q3 单季扣非归母净利润实则狂飙 +61.23% 至 8.40 亿元</strong>（前三季度累计扣非归母净利润达 <strong>22.79 亿元，同比大增 +53.72%</strong>，首次出现扣非净利反超表观归母净利 22.61 亿元的剪刀差）。</li>
+</ul>
 </li>
 <li>
-<p><strong>关税抢运与战略锁料导致的“存货与营运资金阶段性脉冲”</strong>：
-   - 2025 年公司 OCF 骤降至 <strong>4.81 亿元</strong>（2024 年为 27.45 亿元），2026 年前三季度 OCF 为 <strong>3.78 亿元</strong>（其中 2026H1 为 7.23 亿元），核心原因并非产品滞销，而是期末存货从 2024 年末的 32.34 亿元、2025 年末的 49.97 亿元，一路主动拉升至 2026H1 末的 <strong>67.34 亿元</strong> 及 2026Q3 末的 <strong>83.90 亿元（较年初激增 +67.91%）</strong>。
-   - 这一罕见的存货蓄水池扩张，本质上是管理层为应对① 北美潜在关税落地前的海外仓提前抢运、② 上游优质锂电芯与功率芯片涨价周期的提前锁料、以及③ 亚马逊 Prime Day 与 Q4 黑五/圣诞超级旺季（叠加红海绕行拉长海运在途时间）而进行的<strong>战略性营运资金前置投放</strong>。</p>
+<p><strong>关税抢运与战略锁料导致的“存货与营运资金阶段性脉冲”</strong>：</p>
+<ul>
+<li>2025 年公司 OCF 骤降至 <strong>4.81 亿元</strong>（2024 年为 27.45 亿元），2026 年前三季度 OCF 为 <strong>3.78 亿元</strong>（其中 2026H1 为 7.23 亿元），核心原因并非产品滞销，而是期末存货从 2024 年末的 32.34 亿元、2025 年末的 49.97 亿元，一路主动拉升至 2026H1 末的 <strong>67.34 亿元</strong> 及 2026Q3 末的 <strong>83.90 亿元（较年初激增 +67.91%）</strong>。</li>
+<li>这一罕见的存货蓄水池扩张，本质上是管理层为应对① 北美潜在关税落地前的海外仓提前抢运、② 上游优质锂电芯与功率芯片涨价周期的提前锁料、以及③ 亚马逊 Prime Day 与 Q4 黑五/圣诞超级旺季（叠加红海绕行拉长海运在途时间）而进行的<strong>战略性营运资金前置投放</strong>。</li>
+</ul>
 </li>
 </ol>
 <p>为了穿透上述三重噪音，我们严格遵循巴菲特定义真实股东盈余（Owner Earnings）的底层还原公式：</p>
 <div class="math-display"><span class="math-text">Owner Earnings</span> = <span class="math-text">常态化归母净利润</span> + <span class="math-text">有效归母折旧摊销 (D\&amp;A)</span> - <span class="math-text">防御性维护资本开支 (Maintenance CapEx \&amp; 刚性租赁)</span> - \text{常态化刚性营运资金占用 (\Delta WC<sub><span class="math-text">norm</span></sub>)}</div>
 <h3 id="1_1">1. 各项核心参数的逐项拆解与实证校准</h3>
 <div class="annotated-row"><div class="main-col"><ul>
-<li><strong>参数 ①：2026 常态化归母净利润（Normalized Net Income） = 29.50 亿元</strong></li>
+<li>
+<p><strong>参数 ①：2026 常态化归母净利润（Normalized Net Income） = 29.50 亿元</strong></p>
+<ul>
 <li>2026 年前三季度，安克已实现营业收入 <strong>261.40 亿元（+24.36%）</strong>，实现完全剥离股票波动噪音的<strong>扣非归母净利润 22.79 亿元（+53.72%）</strong>，主业净利率已修复至 <strong>8.72%</strong>（2026H1 综合毛利率更是高达 <strong>49.82%</strong>）。</li>
 <li>考虑到第四季度系欧美感恩节“黑色星期五”、“网购星期一”及圣诞节传统消费电子最旺季（历史 Q4 营收占比约 28%—32%），即便充分预留年底“价值创造奖金池”集中计提与旺季平台促销费率上升的影响，Q4 单季常态扣非归母净利润底盘亦稳居 <strong>6.50 亿—7.20 亿元</strong>。</li>
-<li>
-<p>由此锚定安克在当前 <strong>330 亿—340 亿元</strong> 年化营收体量下的 <strong>2026 常态化归母净利润中枢为 29.50 亿元</strong>（核心区间 29.00 亿—30.50 亿元）。</p>
+<li>由此锚定安克在当前 <strong>330 亿—340 亿元</strong> 年化营收体量下的 <strong>2026 常态化归母净利润中枢为 29.50 亿元</strong>（核心区间 29.00 亿—30.50 亿元）。</li>
+</ul>
 </li>
 <li>
 <p><strong>参数 ②：有效归母折旧与摊销（Effective Parent D&amp;A） = +2.35 亿元</strong></p>
-</li>
+<ul>
 <li>经核查安克创新《2025 年年度报告》财务报表附注“现金流量表补充资料”，2025 全年折旧与摊销精确构成为：<strong>固定资产折旧 7,731.91 万元（0.77 亿元） + 使用权资产折旧 9,434.47 万元（0.94 亿元） + 无形资产摊销 588.56 万元（0.06 亿元） + 长期待摊费用摊销 2,068.02 万元（0.21 亿元） + 投资性房地产折旧 89.70 万元（0.01 亿元） = 合计 19,912.66 万元（约 1.99 亿元）</strong>。</li>
-<li>
-<p>进入 2026 年，随着深圳与长沙研发实验检测设备添置、海外本土化仓储及办公场地使用权资产增加，2026 全年合并口径折旧与摊销总额约 <strong>2.45 亿元</strong>；扣除少数股东损益占比（2026Q1-Q3 少数股东损益 0.94 亿元，仅占净利润的 <strong>3.99%</strong>，归母权益比例高达 <strong>96.01%</strong>），折算<strong>有效归母折旧与摊销为 +2.35 亿元</strong>。</p>
+<li>进入 2026 年，随着深圳与长沙研发实验检测设备添置、海外本土化仓储及办公场地使用权资产增加，2026 全年合并口径折旧与摊销总额约 <strong>2.45 亿元</strong>；扣除少数股东损益占比（2026Q1-Q3 少数股东损益 0.94 亿元，仅占净利润的 <strong>3.99%</strong>，归母权益比例高达 <strong>96.01%</strong>），折算<strong>有效归母折旧与摊销为 +2.35 亿元</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>参数 ③：维持存量竞争力必需的防御性支出（Maintenance CapEx + 刚性租赁偿付） = -2.15 亿元</strong></p>
-</li>
+<ul>
 <li>安克秉承“微笑曲线两端（研发立项 + 品牌渠道）”的极致轻资产模式，生产制造绝大部分委外代工。2024 年公司购建固定资产、无形资产和其他长期资产支付的现金（CapEx）仅 <strong>0.98 亿元</strong>，2025 年上升至 <strong>2.73 亿元</strong>（其中包含办公研发大楼建设及新兴品类产线扩张性资本开支）。</li>
 <li>剥离纯扩张性基建后，维持存量 330 亿营收产品竞争力所必需的<strong>精密私模更新（充电器/安防摄像头外壳模具）、声学与安规实验室设备迭代、数字化 ERP/AI 软件采购等防御性 CapEx 约为 1.15 亿元/年</strong>。</li>
-<li>
-<p>此外，由于会计准则（IFRS 16 / 新租赁准则）将全球办公楼与自营海外仓租金计入“使用权资产折旧（约 1.00 亿元/年）”，这部分折旧并非可留存给股东的自由现金，而是每年必须向房东刚性支付的真金白银。因此，我们将 <strong>1.00 亿元刚性租赁现金偿付</strong>一并纳入维持性支出扣除，合计防御性资本与租赁支出为 <strong>-2.15 亿元</strong>。</p>
+<li>此外，由于会计准则（IFRS 16 / 新租赁准则）将全球办公楼与自营海外仓租金计入“使用权资产折旧（约 1.00 亿元/年）”，这部分折旧并非可留存给股东的自由现金，而是每年必须向房东刚性支付的真金白银。因此，我们将 <strong>1.00 亿元刚性租赁现金偿付</strong>一并纳入维持性支出扣除，合计防御性资本与租赁支出为 <strong>-2.15 亿元</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>参数 ④：常态化刚性营运资金占用（Normalized <span class="math-inline">\Delta <span class="math-text">WC</span></span>） = -2.20 亿元</strong></p>
-</li>
+<ul>
 <li>2025 年存货增加 17.63 亿元、2026Q1-Q3 存货再增 33.93 亿元至 83.90 亿元，属于典型的“关税抢运 + 锁料备货 + 旺季在途”脉冲。在常态稳态经营下（如 2023—2024 年），安克凭借对上游代工厂 60—90 天的应付账款及票据账期，以及亚马逊 C 端近乎“T+14 天”的极速回款，净现金周转周期（CCC）常年控制在 <strong>45—50 天</strong> 左右。</li>
 <li>按存量业务每年 12%—15% 的稳态内生增长测算，剔除非常态抢运囤货脉冲后，匹配供应链正常备货与渠道铺货所需的<strong>常态化刚性净营运资金新增占用（存货与应收常态增量减去应付账款与预收款自然增量）约为 -2.20 亿元/年</strong>。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>会计报表上的净利润就像比基尼，展露出来的部分很诱人，但藏起来的地方才要命。安克在 2026 年三季度因为炒芯片股（参股南芯科技）账面浮亏了一个多亿，把表观利润砸出个窟窿，华尔街那帮只看标题党的傻瓜居然以为它主业不行了；但反过来，它仓库里堆着的 83.9 亿存货也是真金白银垫出去的，如果不把常态垫资扣掉，你就会把“纸面富贵”当成能揣进兜里的钞票。</p></div></div></div></div>
 
 <hr/>
@@ -2573,19 +3189,25 @@
 <p>当前的 <strong>27.50 亿元</strong> 常态 Owner Earnings，仅仅反映了安克创新“存量现金牛（数码充电 + eufy 安防清洁 + soundcore 影音）全面发力，而第二、第三曲线仍在高强度烧钱铺渠道、且 83.9 亿高点存货尚未释放”的截面状态。展望未来 <strong>2—3 年（2028E 中期稳态）</strong>，伴随三大核心经营拐点兑现，安克的内生造血底盘将迎来显著的台阶式垫高：</p>
 <ol>
 <li>
-<p><strong>拐点一：Anker SOLIX 家用光伏与储能业务跨越规模盈亏平衡点，从“吞金兽”变身“第二台印钞机”</strong>：
-   - 2025 年 Anker SOLIX 储能营收已突破 <strong>30 亿元</strong>（带动充电储能板块在 2026H1 实现营收 <strong>89.30 亿元/+31.02%</strong>，板块毛利率同比暴增 <strong>+8.40 个百分点至 49.01%</strong>）。
-   - 当前储能业务因前期高昂的逆变器/BMS 研发投入、欧美本土化安装售后网络搭建及展会营销，净利率仅约 4%—5%。当 Anker SOLIX 营收从 30 亿元向 <strong>55 亿—65 亿元</strong> 规模兑现（欧洲阳台光伏 Solarbank 系列稳居市占率第一梯队、北美户用储能 X1 放量），研发与渠道固定费用率将被大幅摊薄，板块营业利润率有望向 <strong>12%—14%</strong> 收敛，单板块即可贡献 <strong>6.5 亿—8.0 亿元</strong> 增量归母净利润（较当前净增 <strong>+4.5 亿—5.5 亿元</strong>）。</p>
+<p><strong>拐点一：Anker SOLIX 家用光伏与储能业务跨越规模盈亏平衡点，从“吞金兽”变身“第二台印钞机”</strong>：</p>
+<ul>
+<li>2025 年 Anker SOLIX 储能营收已突破 <strong>30 亿元</strong>（带动充电储能板块在 2026H1 实现营收 <strong>89.30 亿元/+31.02%</strong>，板块毛利率同比暴增 <strong>+8.40 个百分点至 49.01%</strong>）。</li>
+<li>当前储能业务因前期高昂的逆变器/BMS 研发投入、欧美本土化安装售后网络搭建及展会营销，净利率仅约 4%—5%。当 Anker SOLIX 营收从 30 亿元向 <strong>55 亿—65 亿元</strong> 规模兑现（欧洲阳台光伏 Solarbank 系列稳居市占率第一梯队、北美户用储能 X1 放量），研发与渠道固定费用率将被大幅摊薄，板块营业利润率有望向 <strong>12%—14%</strong> 收敛，单板块即可贡献 <strong>6.5 亿—8.0 亿元</strong> 增量归母净利润（较当前净增 <strong>+4.5 亿—5.5 亿元</strong>）。</li>
+</ul>
 </li>
 <li>
-<p><strong>拐点二：eufyMake 消费级 3D 纹理 UV 打印机开启“硬件 + 高毛利专用耗材”剃须刀飞轮</strong>：
-   - eufyMake E1 在 Kickstarter 创下 <strong>4,676 万美元</strong> 全球众筹纪录后，正从首批极客交付迈向全球独立站与线下渠道常态化放量。
-   - 相比一次性硬件销售，UV 打印机真正的暴利在于<strong>专用 UV 墨水、浮雕光油、清洗液及定型涂层耗材的高频复购（耗材毛利率高达 65%—70%+）</strong>。随着全球保有量突破 10 万—20 万台量级，耗材复购将持续垫高智能创新板块的经常性现金流约 <strong>+1.5 亿—2.5 亿元/年</strong>。</p>
+<p><strong>拐点二：eufyMake 消费级 3D 纹理 UV 打印机开启“硬件 + 高毛利专用耗材”剃须刀飞轮</strong>：</p>
+<ul>
+<li>eufyMake E1 在 Kickstarter 创下 <strong>4,676 万美元</strong> 全球众筹纪录后，正从首批极客交付迈向全球独立站与线下渠道常态化放量。</li>
+<li>相比一次性硬件销售，UV 打印机真正的暴利在于<strong>专用 UV 墨水、浮雕光油、清洗液及定型涂层耗材的高频复购（耗材毛利率高达 65%—70%+）</strong>。随着全球保有量突破 10 万—20 万台量级，耗材复购将持续垫高智能创新板块的经常性现金流约 <strong>+1.5 亿—2.5 亿元/年</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>拐点三：H 股 45.23 亿港元募投产能（东南亚供应链）顺畅运转 &amp; 83.90 亿高水位存货回归常态周转</strong>：
-   - 2026 年 7 月 H 股上市募资净额约 41.6 亿元人民币，核心投向全球供应链柔性升级（越南、泰国、马来西亚等东南亚合规产能扩建）与海外智能仓网。
-   - 当东南亚产能彻底跑通、对冲掉中美关税抢运需求，且 83.90 亿元存货蓄水池回归 <strong>60 亿—65 亿元</strong> 的健康周转水位时，不仅每年可节省约 <strong>1.0 亿—1.5 亿元</strong> 的冗余仓储与跨区调拨损耗，前期锁定的超额存货更将直接回笼 <strong>15 亿—20 亿元</strong> 一次性自由现金流，使稳态营运资金占用率进一步下降。</p>
+<p><strong>拐点三：H 股 45.23 亿港元募投产能（东南亚供应链）顺畅运转 &amp; 83.90 亿高水位存货回归常态周转</strong>：</p>
+<ul>
+<li>2026 年 7 月 H 股上市募资净额约 41.6 亿元人民币，核心投向全球供应链柔性升级（越南、泰国、马来西亚等东南亚合规产能扩建）与海外智能仓网。</li>
+<li>当东南亚产能彻底跑通、对冲掉中美关税抢运需求，且 83.90 亿元存货蓄水池回归 <strong>60 亿—65 亿元</strong> 的健康周转水位时，不仅每年可节省约 <strong>1.0 亿—1.5 亿元</strong> 的冗余仓储与跨区调拨损耗，前期锁定的超额存货更将直接回笼 <strong>15 亿—20 亿元</strong> 一次性自由现金流，使稳态营运资金占用率进一步下降。</li>
+</ul>
 </li>
 </ol>
 <h3 id="2028e-owner-earnings">中期达产消化后（2028E 稳态）Owner Earnings 进阶测算表</h3>
@@ -2649,21 +3271,27 @@
 <p>消费电子出海企业最令买方机构忌惮的两大命门，一是<strong>“地缘关税与渠道价格战引发的毛利率坍塌”</strong>，二是<strong>“重仓备货遭遇上游涨价或下游滞销引发的存货跌价暴雷”</strong>。截至 2026Q3 末，安克创新账面存货高达 <strong>83.90 亿元</strong>（占总资产 280.69 亿元的 <strong>29.89%</strong>），一旦外部环境恶化，这台造血机器是否会瞬间失血休克？</p>
 <p>我们设计两大极端残酷的定量压力测试情景，并深度拆解安克独有的<strong>“双层财务减震器”</strong>：</p>
 <ul>
-<li><strong>第一层减震器：高达 49.82% 的全球品牌定价权毛利缓冲垫（2026H1 实绩）</strong></li>
-<li>不同于早期华强北白牌跨境电商（毛利率 25%—30%，净利率 3%—5%，关税一加即刻亏损），安克通过 Prime 会员核心人群心智占领与微创新溢价（如带屏智显 GaN 充电器、Solarbank 阳台光伏、HomeBase 本地 AI 安防、54.78% 毛利率的 soundcore 音频），已将主业综合毛利率推升至 <strong>49.82%</strong>。</li>
 <li>
-<p>这意味着在终端 100 美元售价中，出厂 BOM 制造成本仅占约 <strong>35—38 美元</strong>（其余约 12—15 美元为头程海运、关税及仓储履约费）。厚达近 50 个百分点的毛利空间，是抵御外部成本冲击的第一道防波堤。</p>
+<p><strong>第一层减震器：高达 49.82% 的全球品牌定价权毛利缓冲垫（2026H1 实绩）</strong></p>
+<ul>
+<li>不同于早期华强北白牌跨境电商（毛利率 25%—30%，净利率 3%—5%，关税一加即刻亏损），安克通过 Prime 会员核心人群心智占领与微创新溢价（如带屏智显 GaN 充电器、Solarbank 阳台光伏、HomeBase 本地 AI 安防、54.78% 毛利率的 soundcore 音频），已将主业综合毛利率推升至 <strong>49.82%</strong>。</li>
+<li>这意味着在终端 100 美元售价中，出厂 BOM 制造成本仅占约 <strong>35—38 美元</strong>（其余约 12—15 美元为头程海运、关税及仓储履约费）。厚达近 50 个百分点的毛利空间，是抵御外部成本冲击的第一道防波堤。</li>
+</ul>
 </li>
 <li>
 <p><strong>第二层减震器：安克独创的“价值创造奖金池（VOC 经营利润分享机制）”弹性调节阀</strong></p>
-</li>
+<ul>
 <li>这是极少被外部卖方研报算透的内部治理玄机。安克创新对研发、产品经理（PDT）及全球销售团队实行<strong>“固定宽带薪酬 + 强挂钩增量经营利润的价值创造奖金池（Value Creation Bonus Pool）”</strong>制度。</li>
 <li>在景气大年（如 2025—2026 年），公司从超额毛利中提取高达 <strong>12 亿—16 亿元</strong> 的浮动奖金包分发给核心奋斗者（这也是安克研发费用率高达 8.5%—9.0%、销售费用率达 21%—22% 的重要构成）；但<strong>一旦遭遇极端关税冲击、价格战或存货减值导致当期经营利润（Operating Profit）跌破阈值，该浮动奖金池将依据预设契约公式自动按比例刚性收缩 35%—55%</strong>，无需经历痛苦的大规模裁员赔偿，即可在报表端自动释放 <strong>4.0 亿—6.5 亿元</strong> 的刚性人工费用缓冲垫！</li>
 </ul>
+</li>
+</ul>
 <h3 id="1_2">1. 极限压力情景设定与传导推演</h3>
 <ol>
-<li><strong>压力情景一：关税壁垒与价格战双杀（终端被迫降价 10%，或北美加征关税导致综合毛利率静态受损 -4.5 个百分点）</strong>
-   - <strong>冲击假设</strong>：假设北美市场（占营收约 45%—48%）全面加征高额关税且无法继续向消费者提价转嫁，或者亚马逊渠道爆发惨烈价格战，导致全集团综合毛利率从 <strong>49.5%</strong> 直接静态硬摔 <strong>4.5 个百分点</strong> 至 <strong>45.0%</strong>。</li>
+<li><strong>压力情景一：关税壁垒与价格战双杀（终端被迫降价 10%，或北美加征关税导致综合毛利率静态受损 -4.5 个百分点）</strong><ul>
+<li><strong>冲击假设</strong>：假设北美市场（占营收约 45%—48%）全面加征高额关税且无法继续向消费者提价转嫁，或者亚马逊渠道爆发惨烈价格战，导致全集团综合毛利率从 <strong>49.5%</strong> 直接静态硬摔 <strong>4.5 个百分点</strong> 至 <strong>45.0%</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -2682,8 +3310,10 @@
 </li>
 </ul>
 <ol start="2">
-<li><strong>压力情景二：上游锂电芯/功率芯片暴涨 20% + 83.90 亿期末存货计提 5% 额外跌价损失</strong>
-   - <strong>冲击假设</strong>：上游碳酸锂/电芯及存储/功率半导体价格突然暴涨 <strong>+20%</strong>（传导至综合生产 BOM 成本上升约 6%，拉低综合毛利率 <strong>-3.0 个百分点</strong>，蒸发毛利 <strong>-10.05 亿元</strong>）；同时，高达 <strong>83.90 亿元</strong> 的期末存货因部分老款型号迭代滞销，在常规跌价准备之外<strong>额外暴力计提 5% 的存货跌价损失（即一次性吞噬利润 -4.20 亿元）</strong>，两项合计静态冲击利润 <strong>-14.25 亿元</strong>。</li>
+<li><strong>压力情景二：上游锂电芯/功率芯片暴涨 20% + 83.90 亿期末存货计提 5% 额外跌价损失</strong><ul>
+<li><strong>冲击假设</strong>：上游碳酸锂/电芯及存储/功率半导体价格突然暴涨 <strong>+20%</strong>（传导至综合生产 BOM 成本上升约 6%，拉低综合毛利率 <strong>-3.0 个百分点</strong>，蒸发毛利 <strong>-10.05 亿元</strong>）；同时，高达 <strong>83.90 亿元</strong> 的期末存货因部分老款型号迭代滞销，在常规跌价准备之外<strong>额外暴力计提 5% 的存货跌价损失（即一次性吞噬利润 -4.20 亿元）</strong>，两项合计静态冲击利润 <strong>-14.25 亿元</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -2698,8 +3328,10 @@
 </li>
 </ul>
 <ol start="3">
-<li><strong>压力情景三（地狱级双杀叠加）：关税/降价毛利大跌 4.5% + 83.9 亿存货额外跌价 5% 同时引爆</strong>
-   - <strong>冲击假设</strong>：外部关税/价格战砍掉 <strong>-15.08 亿元</strong> 毛利，内部 83.90 亿存货再砍 <strong>-4.20 亿元</strong> 额外减值，静态毛利与资产减值双重暴击高达 <strong>-19.28 亿元</strong>。</li>
+<li><strong>压力情景三（地狱级双杀叠加）：关税/降价毛利大跌 4.5% + 83.9 亿存货额外跌价 5% 同时引爆</strong><ul>
+<li><strong>冲击假设</strong>：外部关税/价格战砍掉 <strong>-15.08 亿元</strong> 毛利，内部 83.90 亿存货再砍 <strong>-4.20 亿元</strong> 额外减值，静态毛利与资产减值双重暴击高达 <strong>-19.28 亿元</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -2968,25 +3600,27 @@
 <h3 id="1_3">1. 四把买方铁尺：内生回报率与即期股东现金回报率核算</h3>
 <p>将模块 D 算出的真实造血底盘（Owner Earnings）与模块 F 算出的真实企业价值（True EV = <strong>595.0 亿元</strong>）及总市值（<strong>635.0 亿元</strong>）直接对撞，安克创新在当前 <strong>107.98 元/股</strong> 价位下的买方硬核回报率指标如下：</p>
 <ol>
-<li><strong>常态化真实内生回报率（Normalized OE Yield = 常态 OE / True EV）</strong>：
+<li>
+<p><strong>常态化真实内生回报率（Normalized OE Yield = 常态 OE / True EV）</strong>：
  <br>
 <div class="math-display"><span class="math-text">常态内生回报率</span> = <span class="math-frac"><span class="frac-num"><span class="math-inline">27.50<span class="math-text"> 亿元</span></span></span><span class="frac-den"><span class="math-inline">595.0<span class="math-text"> 亿元</span></span></span></span> = <strong>4.62\%</strong>    (<span class="math-text">审慎区间 </span> 26.5<span class="math-text">—</span>28.5<span class="math-text"> 亿对应 </span> <strong>4.45\%<span class="math-text">—</span>4.79\%</strong>)</div>
-</br></li>
-</ol>
+</br></p>
 <ul>
 <li><strong>静态回本年限</strong>：约 <strong>21.6 年</strong>（剔除 68.5 亿超额现金后的 <strong>Ex-Cash 常态扣非 PE 约为 19.2 倍</strong>，表观常态 PE 约 <strong>21.5 倍</strong>）。</li>
 </ul>
-<ol start="2">
-<li><strong>达产消化后内生回报率（Post-Ramp-Up OE Yield = 达产后 OE / True EV）</strong>：
+</li>
+<li>
+<p><strong>达产消化后内生回报率（Post-Ramp-Up OE Yield = 达产后 OE / True EV）</strong>：
  <br>
 <div class="math-display"><span class="math-text">达产后内生回报率</span> = <span class="math-frac"><span class="frac-num"><span class="math-inline">34.50<span class="math-text"> 亿元</span></span></span><span class="frac-den"><span class="math-inline">595.0<span class="math-text"> 亿元</span></span></span></span> = <strong>5.80\%</strong>    (<span class="math-text">审慎区间 </span> 33.0<span class="math-text">—</span>36.0<span class="math-text"> 亿对应 </span> <strong>5.55\%<span class="math-text">—</span>6.05\%</strong>)</div>
-</br></li>
-</ol>
+</br></p>
 <ul>
 <li><strong>动态回本年限</strong>：一旦 Anker SOLIX 储能跨过 50—60 亿规模拐点且高点存货消化完毕，静态回本年限将快速缩短至 <strong>17.2 年</strong>。</li>
 </ul>
-<ol start="3">
-<li><strong>即期现金分红 + 注销回购率（Immediate Shareholder Cash Yield）</strong>：</li>
+</li>
+<li>
+<p><strong>即期现金分红 + 注销回购率（Immediate Shareholder Cash Yield）</strong>：</p>
+</li>
 </ol>
 <ul>
 <li>
@@ -3007,29 +3641,39 @@
 <h3 id="2-reverse-sotp595-true-ev">2. Reverse SOTP（反向分部拆骨定价）：595 亿 True EV 里到底预支了多少预期？</h3>
 <p>为什么一家常态内生回报率 4.62%（Ex-Cash PE 19.2 倍）的消费电子公司，既没有显得像煤炭银行那样便宜，也没有显得像 AI 概念股那样泡沫化？我们用 <strong>Reverse SOTP（反向分部加总拆骨法）</strong> 将 <strong>595.0 亿元 True EV</strong> 拆成四块骨头，看看如果先按最保守的消费品估值买下它的存量现金牛，剩下的市值到底给第二、第三曲线赋予了多少溢价：</p>
 <ol>
-<li><strong>第一块骨头：Anker 数码充电现金牛底座（移动电源、GaN 桌面快充、无线充及高耐久线材）</strong>
-   - <strong>经营实绩</strong>：剔除储能后，狭义数码充电业务 2026 年化营收约 <strong>142 亿元</strong>，受益于与苹果/三星生态深度绑定及带屏智显 Prime 高端系列热销，毛利率高达 <strong>49%+</strong>，常态归母净利/OE 贡献约 <strong>15.00 亿元</strong>（净利率约 10.6%）。</li>
+<li><strong>第一块骨头：Anker 数码充电现金牛底座（移动电源、GaN 桌面快充、无线充及高耐久线材）</strong><ul>
+<li><strong>经营实绩</strong>：剔除储能后，狭义数码充电业务 2026 年化营收约 <strong>142 亿元</strong>，受益于与苹果/三星生态深度绑定及带屏智显 Prime 高端系列热销，毛利率高达 <strong>49%+</strong>，常态归母净利/OE 贡献约 <strong>15.00 亿元</strong>（净利率约 10.6%）。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>保守拆骨定价</strong>：作为全球充电品类断层第一的消费品霸主（具备极强复购与渠道垄断力），给予极其克制的 <strong>14.0 倍 EV/OE（或 PE）</strong> 成熟消费品估值，该底座独立支撑企业价值 <strong>210.0 亿元</strong>。</li>
 </ul>
 <ol start="2">
-<li><strong>第二块骨头：eufy 智能安防/清洁 &amp; soundcore 智能影音高毛利基本盘</strong>
-   - <strong>经营实绩</strong>：2026H1 智能创新类（eufy）营收 41.86 亿元（+28.77%，毛利率 47.41%），智能影音类（soundcore）营收 34.85 亿元（+24.53%，<strong>毛利率高达惊人的 54.78%</strong>）。剔除尚在投入期的 UV 打印机后，eufy 安防/清洁与 soundcore 音频 2026 年化营收合计约 <strong>148 亿元</strong>，常态归母净利/OE 贡献约 <strong>10.50 亿元</strong>。</li>
+<li><strong>第二块骨头：eufy 智能安防/清洁 &amp; soundcore 智能影音高毛利基本盘</strong><ul>
+<li><strong>经营实绩</strong>：2026H1 智能创新类（eufy）营收 41.86 亿元（+28.77%，毛利率 47.41%），智能影音类（soundcore）营收 34.85 亿元（+24.53%，<strong>毛利率高达惊人的 54.78%</strong>）。剔除尚在投入期的 UV 打印机后，eufy 安防/清洁与 soundcore 音频 2026 年化营收合计约 <strong>148 亿元</strong>，常态归母净利/OE 贡献约 <strong>10.50 亿元</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
-<li><strong>保守拆骨定价</strong>：鉴于 eufy Security 在欧美家庭安防市场凭借“HomeBase 本地隐私存储 + 免月费 AI 识别”建立的高转换成本护城河，以及 soundcore 媲美 Bose/Sony 的 54.8% 超高毛利率，给予公允的 <strong>18.0 倍 EV/OE</strong>，该基本盘独立支撑企业价值 <strong>189.0 亿元</strong>。</li>
+<li><strong>保守拆骨定价</strong>：鉴于 eufy Security 在欧美家庭安防市场凭借“HomeBase 本地隐私存储 + 免月费 AI 识别”建立的高转换成本护城河，以及 soundcore 媲美 Bose/Sony 的 54.8% 超高毛利率，给予公允的 <strong>18.0 倍 EV/OE</strong>，该基本盘独立支撑企业价值 <strong>189.0 亿元</strong>。<ul>
 <li>👉 <strong>【存量基本盘铁底合计】</strong>：上述两大存量成熟业务合计贡献常态 OE <strong>25.50 亿元</strong>（占全公司 27.50 亿 OE 的 <strong>92.7%</strong>），按保守公允倍数合计支撑企业价值 <strong><code>210.0 + 189.0 =</code> 399.0 亿元（约 400 亿元，占当前 True EV 595.0 亿元的 67.1%）</strong>！</li>
+</ul>
+</li>
 </ul>
 <ol start="3">
 <li>
-<p><strong>第三块骨头：Anker SOLIX 家用光伏与储能第二曲线（阳台光伏 Solarbank + 户用储能 X1 + 便携储能）</strong>
-   - <strong>经营实绩与隐含定价</strong>：2025 年营收已突破 <strong>30 亿元</strong>，2026 年正向 <strong>42 亿—45 亿元</strong> 狂飙（同比增速 &gt;40%）。由于仍在重金投入欧美安装商渠道与大容量新品研发，2026 年当期仅贡献常态 OE 约 <strong>2.00 亿元</strong>，但中期达产稳态利润可达 <strong>6.5 亿—8.0 亿元</strong>。
-   - 在 <strong>595.0 亿元 True EV</strong> 扣除 <strong>399.0 亿元</strong> 存量基本盘后，剩余的 <strong>196.0 亿元</strong> 溢价中，市场实质上为 Anker SOLIX 储能赋予了约 <strong>155.0 亿元</strong> 的独立估值（相当于 <strong>2026E 储能营收的 3.5 倍 EV/Sales</strong>，或中期达产稳态利润的 <strong>20x—22x 远期 PE</strong>）。</p>
+<p><strong>第三块骨头：Anker SOLIX 家用光伏与储能第二曲线（阳台光伏 Solarbank + 户用储能 X1 + 便携储能）</strong></p>
+<ul>
+<li><strong>经营实绩与隐含定价</strong>：2025 年营收已突破 <strong>30 亿元</strong>，2026 年正向 <strong>42 亿—45 亿元</strong> 狂飙（同比增速 &gt;40%）。由于仍在重金投入欧美安装商渠道与大容量新品研发，2026 年当期仅贡献常态 OE 约 <strong>2.00 亿元</strong>，但中期达产稳态利润可达 <strong>6.5 亿—8.0 亿元</strong>。</li>
+<li>在 <strong>595.0 亿元 True EV</strong> 扣除 <strong>399.0 亿元</strong> 存量基本盘后，剩余的 <strong>196.0 亿元</strong> 溢价中，市场实质上为 Anker SOLIX 储能赋予了约 <strong>155.0 亿元</strong> 的独立估值（相当于 <strong>2026E 储能营收的 3.5 倍 EV/Sales</strong>，或中期达产稳态利润的 <strong>20x—22x 远期 PE</strong>）。</li>
+</ul>
 </li>
 <li>
-<p><strong>第四块骨头：eufyMake 消费级 3D 纹理 UV 打印机 + 具身智能/机器人远期期权</strong>
-   - <strong>隐含期权定价</strong>：扣除上述三项后，595.0 亿元 True EV 中仅剩下 <strong>41.0 亿元</strong>（占 True EV 的 <strong>6.9%</strong>），对应市场为全球众筹破 4,676 万美元的 eufyMake UV 打印机及耗材生态、以及具身智能硬件孵化所支付的远期看涨期权费。</p>
+<p><strong>第四块骨头：eufyMake 消费级 3D 纹理 UV 打印机 + 具身智能/机器人远期期权</strong></p>
+<ul>
+<li><strong>隐含期权定价</strong>：扣除上述三项后，595.0 亿元 True EV 中仅剩下 <strong>41.0 亿元</strong>（占 True EV 的 <strong>6.9%</strong>），对应市场为全球众筹破 4,676 万美元的 eufyMake UV 打印机及耗材生态、以及具身智能硬件孵化所支付的远期看涨期权费。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -3231,22 +3875,28 @@
 <h3 id="3_3">3. 三条基本面死刑证伪红线（一旦触发，无论股价多便宜立即清仓）</h3>
 <p>低位重锤的前提是“短期情绪错杀而非护城河永久坍塌”。在未来的持续跟踪中，一旦安克创新触发以下<strong>三条定量/定性死刑红线中的任意一条</strong>，意味着本报告的核心投资逻辑彻底证伪，必须无条件执行清仓止损纪律：</p>
 <ol>
-<li><strong>💀 死刑红线一：83.90 亿存货蓄水池沦为“滞销堰塞湖”（周转失灵证伪）</strong>
-   - <strong>量化触发阈值</strong>：在经历 2026Q4 黑五/圣诞旺季及 2027H1 消化后，公司账面存货不仅未能回落，反而导致<strong>存货周转天数突破 140 天（历史常态为 95—105 天）</strong>，且单年度被迫计提<strong>存货跌价损失超过 6.0 亿元</strong>，同时综合毛利率跌破 <strong>44.0%</strong>。</li>
+<li><strong>💀 死刑红线一：83.90 亿存货蓄水池沦为“滞销堰塞湖”（周转失灵证伪）</strong><ul>
+<li><strong>量化触发阈值</strong>：在经历 2026Q4 黑五/圣诞旺季及 2027H1 消化后，公司账面存货不仅未能回落，反而导致<strong>存货周转天数突破 140 天（历史常态为 95—105 天）</strong>，且单年度被迫计提<strong>存货跌价损失超过 6.0 亿元</strong>，同时综合毛利率跌破 <strong>44.0%</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>证伪本质</strong>：这证明管理层宣称的“应对旺季与原材料涨价主动战略备货”纯属掩盖产品滞销的借口，浅海多品类选品引擎失灵，高存货开始反噬吞噬真实现金流。</li>
 </ul>
 <ol start="2">
-<li><strong>💀 死刑红线二：Anker SOLIX 家用储能或核心充电产品爆发系统性恶性安全召回（品牌信用崩塌证伪）</strong>
-   - <strong>定性/定量触发阈值</strong>：继 2025 年 235 万台移动电源召回事件后，若公司核心第二曲线 <strong>Anker SOLIX 家用光伏储能系统（Solarbank / 户储 X1 锂电池包）在欧美家庭发生多起严重起火爆炸事故</strong>，被美国 CPSC 或欧盟监管机构下达<strong>强制全面禁售与召回令</strong>，或单次召回直接损失超过 <strong>8.0 亿元</strong>。</li>
+<li><strong>💀 死刑红线二：Anker SOLIX 家用储能或核心充电产品爆发系统性恶性安全召回（品牌信用崩塌证伪）</strong><ul>
+<li><strong>定性/定量触发阈值</strong>：继 2025 年 235 万台移动电源召回事件后，若公司核心第二曲线 <strong>Anker SOLIX 家用光伏储能系统（Solarbank / 户储 X1 锂电池包）在欧美家庭发生多起严重起火爆炸事故</strong>，被美国 CPSC 或欧盟监管机构下达<strong>强制全面禁售与召回令</strong>，或单次召回直接损失超过 <strong>8.0 亿元</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>证伪本质</strong>：家用储能不同于几十美元的充电宝，一旦在欧美独立屋引发火灾，面临的是天文数字的集体诉讼赔偿与安装商渠道的彻底拉黑，Anker 十余年积累的“安全品质”品牌溢价将一夜归零。</li>
 </ul>
 <ol start="3">
-<li><strong>💀 死刑红线三：北美核心市场遭遇“母公司级穿透禁售”或亚马逊主站封店（生存底盘坍塌证伪）</strong>
-   - <strong>定性/定量触发阈值</strong>：美国政府将针对个别安防子品牌的贸易摩擦，升级为对<strong>安克创新母公司全品类的穿透式实体清单制裁（SDN / FCC 全面撤销设备授权 / 海关全面扣留）</strong>，或因重大合规事故被亚马逊北美主站清退旗舰店，导致北美大区营收单年暴跌超过 <strong>30%</strong>。</li>
+<li><strong>💀 死刑红线三：北美核心市场遭遇“母公司级穿透禁售”或亚马逊主站封店（生存底盘坍塌证伪）</strong><ul>
+<li><strong>定性/定量触发阈值</strong>：美国政府将针对个别安防子品牌的贸易摩擦，升级为对<strong>安克创新母公司全品类的穿透式实体清单制裁（SDN / FCC 全面撤销设备授权 / 海关全面扣留）</strong>，或因重大合规事故被亚马逊北美主站清退旗舰店，导致北美大区营收单年暴跌超过 <strong>30%</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>证伪本质</strong>：北美市场贡献了安克近一半的营收与更高比例的高毛利增量，一旦遭遇不可逆的行政禁售或主流线上渠道物理断流，东南亚产能转移亦无法挽救其全球利润基本盘。</li>
@@ -3568,7 +4218,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《安克创新 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/安克创新 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《安克创新(300866.SZ) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/安克创新(300866.SZ) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3765,6 +4415,677 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        var globalMarketControllers = [];
+        var globalMarketMode = 'ALL';
+        try {
+          var savedMkt = localStorage.getItem('agy_lb_market_mode_v1');
+          if (savedMkt === 'ALL' || savedMkt === 'A' || savedMkt === 'H') globalMarketMode = savedMkt;
+        } catch(e) {}
+        var globalBarRefs = [];
+        var globalStats = { maxTotal: 0, maxA: 0, maxH: 0 };
+
+        function setGlobalMarketMode(mode) {
+          globalMarketMode = mode;
+          try { localStorage.setItem('agy_lb_market_mode_v1', mode); } catch(e) {}
+          globalMarketControllers.forEach(function(fn){ fn(mode); });
+          globalBarRefs.forEach(function(ref){
+            Object.keys(ref.btns).forEach(function(k){
+              ref.btns[k].classList.toggle('active', k === mode);
+            });
+            if (ref.badge) {
+              var labelMap = {
+                'ALL': '当前显示：A+H 统一全榜 (' + (globalStats.maxA + globalStats.maxH) + ' 席)',
+                'A': '当前显示：🇨🇳 仅 A 股 (' + globalStats.maxA + ' 席)',
+                'H': '当前显示：🇭🇰 仅 H 股/港股 (' + globalStats.maxH + ' 席)'
+              };
+              ref.badge.textContent = labelMap[mode] || '';
+            }
+          });
+        }
+
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = (hTexts.some(function(h){ return h.indexOf('实时排名') >= 0 || h.indexOf('市场与排名') >= 0 || h.indexOf('统一排名') >= 0; })) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('严苛排名') >= 0 || hTexts[0].indexOf('统一排名') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var countA = 0, countH = 0;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🛢️ 周期资源与能源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '⚙️ 高端制造与出海',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /(?:客观|客)\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var market = 'A';
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) || pxTxt.indexOf('港元') >= 0) {
+                market = 'H';
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /(?:今日\s*|\()([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /(?:常态回报|严苛EV常态回报|港股常态回报)\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (isNaN(oe)) oe = parseNum(oeTxt2, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /(?:实时股息|纯现金股息|TTM股息)(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (isHMaster || rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || pxTxt2.indexOf('H股现价') >= 0 || pxTxt2.indexOf('港元`') >= 0 || (pxTxt2.indexOf('实时现价:') >= 0 && pxTxt2.split('实时现价')[1].slice(0, 20).indexOf('港元') >= 0) || (pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0)) {
+                market = 'H';
+              }
+            }
+
+            if (market === 'H') countH++; else countA++;
+            tr.setAttribute('data-market', market);
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              market: market,
+              isHkOnly: market === 'H',
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 1) return;
+          if (countA + countH > globalStats.maxTotal && countA > 0 && countH > 0) {
+            globalStats.maxTotal = countA + countH;
+            globalStats.maxA = countA;
+            globalStats.maxH = countH;
+          }
+
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL' };
+          var inlineMarketBtns = {};
+
+          function applyFilters() {
+            var visIdx = 0;
+            // 遍历当前 tbody 真实 DOM 顺序以保证重排后序号依然严格递增
+            var domTrs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var trMap = new Map();
+            rowData.forEach(function(d){ trMap.set(d.tr, d); });
+            domTrs.forEach(function(tr){
+              var d = trMap.get(tr);
+              if (!d) return;
+              var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              var hidden = hideByMkt || hideByF;
+              d.tr.style.display = hidden ? 'none' : '';
+              if (!hidden) {
+                visIdx++;
+                if (d.td0) {
+                  var dynSpan = d.td0.querySelector('.agy-dyn-rank');
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.key !== 'rank') {
+                    if (!dynSpan) {
+                      dynSpan = document.createElement('div');
+                      dynSpan.className = 'agy-dyn-rank no-print';
+                      dynSpan.style.cssText = 'font-size:11px;font-weight:700;color:#0284c7;margin-bottom:2px;';
+                      d.td0.insertBefore(dynSpan, d.td0.firstChild);
+                    }
+                    dynSpan.textContent = '#' + visIdx;
+                  } else if (dynSpan) {
+                    dynSpan.remove();
+                  }
+                }
+              }
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若表格同时包含 A 股与 H 股，挂载三态市场切换开关（AH股一起显示 / 只显示A股 / 只显示H股），并与全页顶栏联动
+          if (countA > 0 && countH > 0) {
+            var seg = document.createElement('div');
+            seg.className = 'agy-market-seg-inline';
+            var mDefs = [
+              { m: 'ALL', text: '🌐 AH一起 (' + (countA + countH) + ')' },
+              { m: 'A', text: '🇨🇳 只看A股 (' + countA + ')' },
+              { m: 'H', text: '🇭🇰 只看H股 (' + countH + ')' }
+            ];
+            mDefs.forEach(function(md){
+              var mb = document.createElement('button');
+              mb.type = 'button';
+              mb.className = 'agy-market-btn' + (md.m === globalMarketMode ? ' active' : '');
+              mb.textContent = md.text;
+              mb.addEventListener('click', function(){
+                setGlobalMarketMode(md.m);
+              });
+              seg.appendChild(mb);
+              inlineMarketBtns[md.m] = mb;
+            });
+            bar.appendChild(seg);
+            globalMarketControllers.push(function(mode){
+              state.market = mode;
+              Object.keys(inlineMarketBtns).forEach(function(k){
+                inlineMarketBtns[k].classList.toggle('active', k === mode);
+              });
+              applyFilters();
+            });
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+            applyFilters();
+          }
+
+          updateUI();
+        });
+
+        // 若页面存在 A+H 统一榜单表，在正文最顶部挂载吸顶全局三态市场开关，一键同步切换全页全部雷达与总表
+        if (globalMarketControllers.length > 0) {
+          var rc = document.querySelector('.report-content');
+          if (rc) {
+            var gBar = document.createElement('div');
+            gBar.className = 'agy-market-global-bar no-print';
+            var gTitle = document.createElement('div');
+            gTitle.className = 'agy-market-global-title';
+            gTitle.innerHTML = '🎛️ <span>A+H 统一榜单市场视图开关</span>';
+            var gSeg = document.createElement('div');
+            gSeg.className = 'agy-market-seg';
+            var gBtns = {};
+            [
+              { m: 'ALL', text: '🌐 AH股一起显示 (' + (globalStats.maxA + globalStats.maxH) + ')' },
+              { m: 'A', text: '🇨🇳 只显示A股 (' + globalStats.maxA + ')' },
+              { m: 'H', text: '🇭🇰 只显示H股 (' + globalStats.maxH + ')' }
+            ].forEach(function(item){
+              var gb = document.createElement('button');
+              gb.type = 'button';
+              gb.className = 'agy-market-btn';
+              gb.textContent = item.text;
+              gb.addEventListener('click', function(){
+                setGlobalMarketMode(item.m);
+              });
+              gSeg.appendChild(gb);
+              gBtns[item.m] = gb;
+            });
+            var gBadge = document.createElement('span');
+            gBadge.className = 'agy-market-count-badge';
+            gBar.appendChild(gTitle);
+            gBar.appendChild(gSeg);
+            gBar.appendChild(gBadge);
+            var h1El = rc.querySelector('h1');
+            if (h1El && h1El.nextSibling) {
+              rc.insertBefore(gBar, h1El.nextSibling);
+            } else {
+              rc.insertBefore(gBar, rc.firstChild);
+            }
+            globalBarRefs.push({ btns: gBtns, badge: gBadge });
+            setGlobalMarketMode(globalMarketMode);
+          }
+        }
+      })();
     })();
   </script>
 </body>

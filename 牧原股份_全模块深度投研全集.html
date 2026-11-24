@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>牧原股份 深度投研全集</title>
+<title>牧原股份(002714.SZ) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,473 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    /* 全球市场三态切换开关（AH股一起显示 / 只显示A股 / 只显示H股） */
+    .agy-market-global-bar {
+      position: sticky;
+      top: 8px;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0 16px 0;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #f8fafc;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+      font-size: 13px;
+    }
+    .agy-market-global-title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e2e8f0;
+    }
+    .agy-market-seg {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+    .agy-market-seg-inline {
+      display: inline-flex;
+      align-items: center;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 2px;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .agy-market-btn {
+      background: transparent;
+      color: #cbd5e1;
+      border: none;
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.16s ease;
+    }
+    .agy-market-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .agy-market-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+    }
+    .agy-market-seg-inline .agy-market-btn {
+      color: #334155;
+      padding: 3px 10px;
+      font-size: 12px;
+    }
+    .agy-market-seg-inline .agy-market-btn:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+    .agy-market-seg-inline .agy-market-btn.active {
+      background: #1e3a8a;
+      color: #ffffff;
+    }
+    .agy-market-count-badge {
+      font-size: 12px;
+      color: #bae6fd;
+      font-weight: 600;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1408,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">牧原股份 深度投研全集</div>
+    <div class="report-title">牧原股份(002714.SZ) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-24</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -893,6 +1434,15 @@
   </div>
   <div class="report-content">
     <h1 id="002714sz-02714hk-ag">牧原股份（002714.SZ / 02714.HK）全模块深度投研全集（全景八步底座 + 追问模块 A—G 满血原稿 + 大师注解版）</h1>
+<!--V4_AUDIT_BANNER_START-->
+<blockquote>
+<p><strong>⚔️ 2026-11-24 V4 官方原表验真 × 物理隔离独立红蓝盲审终审声明（<code>CORRECTED</code>）</strong>：
+- <strong>终审核心估值锚</strong>：常态 OE <strong><code>140.00亿/年</code></strong> → 达产 <strong><code>175.00亿/年</code></strong> ｜ 新买点：<strong><code>A股≤32.0 / 33.5—36.0元；H股≤27.0 / 29.5—33.5港元</code></strong>（原：<code>A股≤35.0 / 37.5—39.5元；H股≤33.0 / 35.0—38.5港元</code>）
+- <strong>🔴 空头命中硬约束（实打实认领）</strong>：🩸 精准击穿4大死穴：①广义债漏计超短融23亿+长付1.95亿+反向保理9.38亿及730亿一年内短债悬崖（95.4亿转债9个月到期）；②原稿拿24-25肥年当常态且严重低估百亿刚性CapEx（26前三季巨亏仍投87.2亿、关联建场暴涨90%）；③26H1分红归零、30亿回购零注销及秦英林26年6月交棒漏报；④港币汇率错用0.92与H股买点过松。
+- <strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：🛡️ 蓝方硬数据反杀3点：①极寒期折旧现金盾真实有效（26Q3账面亏32.4亿但单季OCF高达+52.1亿，10月完全成本压至11.4元/kg）；②财务洁净零压库（收现比104.8%、合同负债+19.3%、种猪30%残值藏富、零财务公司雷、质押清零、漏计22.45亿银行理财与少数股东降至0.16亿）；③屠宰满产逆势盈利超2亿，港股募资百亿后现金池223亿，流动性崩盘论被证伪。
+- <strong>📋 V4 官方对账附注</strong>：V4官方底稿对账确认主表原数无误，但原稿存在三大硬伤，裁决大幅重校：①补齐附注漏计的超短融23亿、融资租赁长付1.95亿与反向保理9.38亿（同时纳入22.45亿银行理财并更新少数股东至0.16亿、扣50亿营运底仓），净债务增至644.19亿元，A股True EV升至3,262.24亿元；②空头精准击穿原稿把景气肥年当常态及低估刚性维持CapEx（26年前三季亏损仍逆势投87.18亿）的漏洞，常态OE由207.2亿硬砍至140.0亿（保留35亿真实折旧净现金盾，不与空头极端105亿双扣）；③补认2026年6月秦英林交棒、当年分红归零风险与30亿回购零注销，并按0.855实时汇率及双尺取严大幅收紧A/H两档买点。</p>
+</blockquote>
+<!--V4_AUDIT_BANNER_END-->
 <div class="callout callout-important"><div class="callout-title">⚡ 核心结论 (IMPORTANT)</div><div class="callout-body"><p><strong>投研时间基准与数据锚点</strong>：本报告数据严格锚定截至 <strong>2026年11月8日</strong> 最新公开披露的《2025年年度报告》、《2026年第三季度报告》、港交所主板上市招股书（02714.HK，2026年2月6日挂牌）及同行（温氏股份、神农集团、新希望、双汇发展、海大集团）最新定期报告。全文由 <strong>「第一阶段：全景八步基本面底座」</strong>、<strong>「第二阶段：追问模块 A—F 专项穿透」</strong>、<strong>「全篇21处随身芒格毒舌旁批」</strong> 与 <strong>「终章模块 G：四位投资大师闭门圆桌会」</strong> 完整合集构成，100%零缩水呈现。</p></div></div>
 <hr/>
 <h1 id="_1">第一阶段：全景基本面八步底座</h1>
@@ -1341,8 +1891,10 @@
 </li>
 <li>
 <p><strong>低稼动率压力测试（假设产能利用率跌至70%，即年出栏降至5,600万头）</strong>：</p>
-</li>
+<ul>
 <li>如果因为疫病或过度去产能导致出栏量跌至5,600万头，108亿元的刚性猪舍折旧不会因为少养猪而减少一分钱，分摊到5,600万头猪身上，单头固定资产折旧将从138元飙升至 <strong>193元/头</strong>（折合 <strong>1.61元/kg</strong>），再加上空置猪舍的基础防疫、保底电费与管理人员分摊，完全成本将直接反弹 <strong>0.55 ~ 0.65元/kg</strong> 至 <strong>12.1元/kg</strong> 以上。因此，<strong>维持90%以上的高产能利用率（年出栏7,200万~7,800万头），是牧原锁死11.5元/kg低成本护城河的物理前提。</strong></li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>重资产工业品最大的宿命就是“绝对不能停机”！每年145亿元的固定资产加种猪折旧就像架在脖子上的重力钟摆——满负荷出栏7,800万头时，每公斤猪肉只摊1块1毛5的折旧；一旦猪舍空置三成，单位成本立马跳涨6毛钱。所以牧原的猪舍天生就是为了满负荷运转设计的。</p></div></div></div></div>
 
 
@@ -1365,25 +1917,27 @@
 </ol>
 <p>现在，我们把2024年、2025年和2026年前三季度的真实经营数据代入模型，立刻就能看清盈亏反转的微观齿轮：</p>
 <ul>
-<li><strong>2024年（屠宰1,252万头，产能利用率43%，头均亏约50元）</strong>：</li>
+<li>
+<p><strong>2024年（屠宰1,252万头，产能利用率43%，头均亏约50元）</strong>：</p>
+<ul>
 <li>8.2亿元刚性固定成本分摊到1,252万头生猪上，<strong>单头固定成本分摊高达 65.5元/头</strong>（其中仅单头折旧就达35.1元/头）；叠加低稼动率下的单头可变成本 <strong>45.0元/头</strong>，<strong>单头屠宰完全加工成本高达 110.5元/头</strong>。</li>
 <li>而在收入端，2024年牧原屠宰尚处市场开拓期，大宗白条肉走货占比高、高毛利分割品占比低，扣除活猪采购成本后的<strong>头均屠宰毛利（含头蹄内脏副产品收益）仅约 60.5元/头</strong>。</li>
-<li>
-<p>算总账：头均毛利 60.5元 - 头均完全加工成本 110.5元 = <strong>头均净亏损 -50.0元/头</strong>（全年屠宰板块亏损约6.26亿元；直到2024年12月春节备货旺季单月屠宰冲高、稼动率突破80%，才首次实现单月扭亏）。</p>
+<li>算总账：头均毛利 60.5元 - 头均完全加工成本 110.5元 = <strong>头均净亏损 -50.0元/头</strong>（全年屠宰板块亏损约6.26亿元；直到2024年12月春节备货旺季单月屠宰冲高、稼动率突破80%，才首次实现单月扭亏）。</li>
+</ul>
 </li>
 <li>
 <p><strong>2025年（屠宰2,866.3万头，产能利用率跃升至98.8%，首次实现年度整体盈利）</strong>：</p>
-</li>
+<ul>
 <li>2025年屠宰量同比暴增128.9%至 <strong>2,866.3万头</strong>，屠宰肉食营收飙升86.32%至 <strong>452.28亿元</strong>。在98.8%的满负荷稼动率下，8.2亿元刚性固定成本被瞬间摊薄至 <strong>28.6元/头</strong>（单此一项就比2024年省下了36.9元/头！），同时连续满产将单头可变加工成本压降至 <strong>34.0元/头</strong>，<strong>单头屠宰完全加工成本骤降至 62.6元/头</strong>。</li>
-<li>
-<p>同期，随着商超、连锁餐饮及农贸直营渠道打通，头均屠宰毛利稳步提升至 <strong>65 ~ 68元/头</strong>，从而一举跨过盈亏平衡线，首次实现年度整体盈利！</p>
+<li>同期，随着商超、连锁餐饮及农贸直营渠道打通，头均屠宰毛利稳步提升至 <strong>65 ~ 68元/头</strong>，从而一举跨过盈亏平衡线，首次实现年度整体盈利！</li>
+</ul>
 </li>
 <li>
 <p><strong>2026年前三季度（1-9月屠宰2,583万头，同比+35%，盈利超2亿元，头均盈利约10元）</strong>：</p>
-</li>
+<ul>
 <li>2026年前三季度屠宰量达 <strong>2,583万头</strong>（折合年化屠宰量达3,444万头，相当于在2,900万~3,100万头单班产能基础上实现了超100%满负荷乃至部分产线双班运转）。</li>
-<li>
-<p>年化超3,400万头的吞吐量，将单头固定成本进一步摊薄至 <strong>24.0元/头</strong>，单头可变成本压至 <strong>33.0元/头</strong>，<strong>单头完全加工成本仅 57.0元/头</strong>；而分割品及小包装客户占比提升使头均毛利达到 <strong>67.0元/头</strong>，稳稳跑出 <strong>67.0 - 57.0 = +10.0元/头</strong> 的头均净利润（2,583万头对应净利润超2亿元，与三季报披露严丝合缝）。</p>
+<li>年化超3,400万头的吞吐量，将单头固定成本进一步摊薄至 <strong>24.0元/头</strong>，单头可变成本压至 <strong>33.0元/头</strong>，<strong>单头完全加工成本仅 57.0元/头</strong>；而分割品及小包装客户占比提升使头均毛利达到 <strong>67.0元/头</strong>，稳稳跑出 <strong>67.0 - 57.0 = +10.0元/头</strong> 的头均净利润（2,583万头对应净利润超2亿元，与三季报披露严丝合缝）。</li>
+</ul>
 </li>
 <li>
 <p><strong>屠宰板块盈亏平衡点定锚</strong>：假设稳态头均毛利为65元/头、单头可变成本为35元/头，则每头猪可贡献边际贡献为 <code>65 - 35 = 30元/头</code>。要覆盖每年8.2亿元的刚性固定成本，需要的保本屠宰量为 <code>8.2亿元 / 30元/头 ≈ 2,733万头</code>（若头均毛利通过精细分割提升至68元/头，则保本屠宰量约为 <strong>2,300万~2,400万头</strong>，对应2,900万~3,100万头总产能的 <strong>盈亏平衡稼动率约为 78% ~ 82%</strong>）。</p>
@@ -2802,7 +3356,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《牧原股份 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/牧原股份 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《牧原股份(002714.SZ) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/牧原股份(002714.SZ) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -2999,6 +3553,677 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        var globalMarketControllers = [];
+        var globalMarketMode = 'ALL';
+        try {
+          var savedMkt = localStorage.getItem('agy_lb_market_mode_v1');
+          if (savedMkt === 'ALL' || savedMkt === 'A' || savedMkt === 'H') globalMarketMode = savedMkt;
+        } catch(e) {}
+        var globalBarRefs = [];
+        var globalStats = { maxTotal: 0, maxA: 0, maxH: 0 };
+
+        function setGlobalMarketMode(mode) {
+          globalMarketMode = mode;
+          try { localStorage.setItem('agy_lb_market_mode_v1', mode); } catch(e) {}
+          globalMarketControllers.forEach(function(fn){ fn(mode); });
+          globalBarRefs.forEach(function(ref){
+            Object.keys(ref.btns).forEach(function(k){
+              ref.btns[k].classList.toggle('active', k === mode);
+            });
+            if (ref.badge) {
+              var labelMap = {
+                'ALL': '当前显示：A+H 统一全榜 (' + (globalStats.maxA + globalStats.maxH) + ' 席)',
+                'A': '当前显示：🇨🇳 仅 A 股 (' + globalStats.maxA + ' 席)',
+                'H': '当前显示：🇭🇰 仅 H 股/港股 (' + globalStats.maxH + ' 席)'
+              };
+              ref.badge.textContent = labelMap[mode] || '';
+            }
+          });
+        }
+
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = (hTexts.some(function(h){ return h.indexOf('实时排名') >= 0 || h.indexOf('市场与排名') >= 0 || h.indexOf('统一排名') >= 0; })) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('严苛排名') >= 0 || hTexts[0].indexOf('统一排名') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var countA = 0, countH = 0;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🛢️ 周期资源与能源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '⚙️ 高端制造与出海',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /(?:客观|客)\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var market = 'A';
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) || pxTxt.indexOf('港元') >= 0) {
+                market = 'H';
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /(?:今日\s*|\()([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /(?:常态回报|严苛EV常态回报|港股常态回报)\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (isNaN(oe)) oe = parseNum(oeTxt2, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /(?:实时股息|纯现金股息|TTM股息)(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (isHMaster || rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || pxTxt2.indexOf('H股现价') >= 0 || pxTxt2.indexOf('港元`') >= 0 || (pxTxt2.indexOf('实时现价:') >= 0 && pxTxt2.split('实时现价')[1].slice(0, 20).indexOf('港元') >= 0) || (pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0)) {
+                market = 'H';
+              }
+            }
+
+            if (market === 'H') countH++; else countA++;
+            tr.setAttribute('data-market', market);
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              market: market,
+              isHkOnly: market === 'H',
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 1) return;
+          if (countA + countH > globalStats.maxTotal && countA > 0 && countH > 0) {
+            globalStats.maxTotal = countA + countH;
+            globalStats.maxA = countA;
+            globalStats.maxH = countH;
+          }
+
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL' };
+          var inlineMarketBtns = {};
+
+          function applyFilters() {
+            var visIdx = 0;
+            // 遍历当前 tbody 真实 DOM 顺序以保证重排后序号依然严格递增
+            var domTrs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var trMap = new Map();
+            rowData.forEach(function(d){ trMap.set(d.tr, d); });
+            domTrs.forEach(function(tr){
+              var d = trMap.get(tr);
+              if (!d) return;
+              var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              var hidden = hideByMkt || hideByF;
+              d.tr.style.display = hidden ? 'none' : '';
+              if (!hidden) {
+                visIdx++;
+                if (d.td0) {
+                  var dynSpan = d.td0.querySelector('.agy-dyn-rank');
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.key !== 'rank') {
+                    if (!dynSpan) {
+                      dynSpan = document.createElement('div');
+                      dynSpan.className = 'agy-dyn-rank no-print';
+                      dynSpan.style.cssText = 'font-size:11px;font-weight:700;color:#0284c7;margin-bottom:2px;';
+                      d.td0.insertBefore(dynSpan, d.td0.firstChild);
+                    }
+                    dynSpan.textContent = '#' + visIdx;
+                  } else if (dynSpan) {
+                    dynSpan.remove();
+                  }
+                }
+              }
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若表格同时包含 A 股与 H 股，挂载三态市场切换开关（AH股一起显示 / 只显示A股 / 只显示H股），并与全页顶栏联动
+          if (countA > 0 && countH > 0) {
+            var seg = document.createElement('div');
+            seg.className = 'agy-market-seg-inline';
+            var mDefs = [
+              { m: 'ALL', text: '🌐 AH一起 (' + (countA + countH) + ')' },
+              { m: 'A', text: '🇨🇳 只看A股 (' + countA + ')' },
+              { m: 'H', text: '🇭🇰 只看H股 (' + countH + ')' }
+            ];
+            mDefs.forEach(function(md){
+              var mb = document.createElement('button');
+              mb.type = 'button';
+              mb.className = 'agy-market-btn' + (md.m === globalMarketMode ? ' active' : '');
+              mb.textContent = md.text;
+              mb.addEventListener('click', function(){
+                setGlobalMarketMode(md.m);
+              });
+              seg.appendChild(mb);
+              inlineMarketBtns[md.m] = mb;
+            });
+            bar.appendChild(seg);
+            globalMarketControllers.push(function(mode){
+              state.market = mode;
+              Object.keys(inlineMarketBtns).forEach(function(k){
+                inlineMarketBtns[k].classList.toggle('active', k === mode);
+              });
+              applyFilters();
+            });
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+            applyFilters();
+          }
+
+          updateUI();
+        });
+
+        // 若页面存在 A+H 统一榜单表，在正文最顶部挂载吸顶全局三态市场开关，一键同步切换全页全部雷达与总表
+        if (globalMarketControllers.length > 0) {
+          var rc = document.querySelector('.report-content');
+          if (rc) {
+            var gBar = document.createElement('div');
+            gBar.className = 'agy-market-global-bar no-print';
+            var gTitle = document.createElement('div');
+            gTitle.className = 'agy-market-global-title';
+            gTitle.innerHTML = '🎛️ <span>A+H 统一榜单市场视图开关</span>';
+            var gSeg = document.createElement('div');
+            gSeg.className = 'agy-market-seg';
+            var gBtns = {};
+            [
+              { m: 'ALL', text: '🌐 AH股一起显示 (' + (globalStats.maxA + globalStats.maxH) + ')' },
+              { m: 'A', text: '🇨🇳 只显示A股 (' + globalStats.maxA + ')' },
+              { m: 'H', text: '🇭🇰 只显示H股 (' + globalStats.maxH + ')' }
+            ].forEach(function(item){
+              var gb = document.createElement('button');
+              gb.type = 'button';
+              gb.className = 'agy-market-btn';
+              gb.textContent = item.text;
+              gb.addEventListener('click', function(){
+                setGlobalMarketMode(item.m);
+              });
+              gSeg.appendChild(gb);
+              gBtns[item.m] = gb;
+            });
+            var gBadge = document.createElement('span');
+            gBadge.className = 'agy-market-count-badge';
+            gBar.appendChild(gTitle);
+            gBar.appendChild(gSeg);
+            gBar.appendChild(gBadge);
+            var h1El = rc.querySelector('h1');
+            if (h1El && h1El.nextSibling) {
+              rc.insertBefore(gBar, h1El.nextSibling);
+            } else {
+              rc.insertBefore(gBar, rc.firstChild);
+            }
+            globalBarRefs.push({ btns: gBtns, badge: gBadge });
+            setGlobalMarketMode(globalMarketMode);
+          }
+        }
+      })();
     })();
   </script>
 </body>

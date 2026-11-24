@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>中国中免 深度投研全集</title>
+<title>中国中免(601888.SH) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,473 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    /* 全球市场三态切换开关（AH股一起显示 / 只显示A股 / 只显示H股） */
+    .agy-market-global-bar {
+      position: sticky;
+      top: 8px;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0 16px 0;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #f8fafc;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+      font-size: 13px;
+    }
+    .agy-market-global-title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e2e8f0;
+    }
+    .agy-market-seg {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+    .agy-market-seg-inline {
+      display: inline-flex;
+      align-items: center;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 2px;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .agy-market-btn {
+      background: transparent;
+      color: #cbd5e1;
+      border: none;
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.16s ease;
+    }
+    .agy-market-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .agy-market-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+    }
+    .agy-market-seg-inline .agy-market-btn {
+      color: #334155;
+      padding: 3px 10px;
+      font-size: 12px;
+    }
+    .agy-market-seg-inline .agy-market-btn:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+    .agy-market-seg-inline .agy-market-btn.active {
+      background: #1e3a8a;
+      color: #ffffff;
+    }
+    .agy-market-count-badge {
+      font-size: 12px;
+      color: #bae6fd;
+      font-weight: 600;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1408,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">中国中免 深度投研全集</div>
+    <div class="report-title">中国中免(601888.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-24</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -893,6 +1434,15 @@
   </div>
   <div class="report-content">
     <h1 id="601888sh-01880hk-ag">中国中免（601888.SH / 01880.HK）全模块深度投研全集（全景八步 + 模块 A—G 大师圆桌会）</h1>
+<!--V4_AUDIT_BANNER_START-->
+<blockquote>
+<p><strong>⚔️ 2026-11-24 V4 官方原表验真 × 物理隔离独立红蓝盲审终审声明（<code>CORRECTED</code>）</strong>：
+- <strong>终审核心估值锚</strong>：常态 OE <strong><code>42.00亿/年</code></strong> → 达产 <strong><code>54.00亿/年</code></strong> ｜ 新买点：<strong><code>A股 ≤36.00 / 36.00—41.50元；H股 ≤31.90 / 31.90—36.80港元（双尺取严）</code></strong>（原：<code>A股 ≤48.0 / 50.0—55.0元；H股 ≤42.0 / 44.0—48.0港元</code>）
+- <strong>🔴 空头命中硬约束（实打实认领）</strong>：1. 原稿投资性房地产折旧虚增431%（2.45亿实仅0.46亿）且维持性CapEx 4亿过低，致OE大幅虚高；2. 21.13亿现金吞下净资产仅17.14万元、净利率仅1.45%且无业绩承诺的DFS港澳资产，资本配置扣分；3. 浦东T1+S1与首都T2被对手夺走，彻底打破机场独占幻想；4. 160.32亿存款集中于中旅集团财务公司，叠加2025分红率降至40.5%、原榜股息率2.55%严重失真（TTM实仅1.71%）；5. 9M26利息收入下滑25%及海南15%税惠2027年底到期续期不确定性。
+- <strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：1. 彻底反杀“渠道压库/利润崩盘假象”：应收账款仅1.12亿（&lt;0.29%营收）、综合毛利率三连升至33.93%、100%控股的三亚单店净利暴增142%且海口扭亏，利润向归母集中属真结构换血；2. 附注挖出90.27亿已审计定期存款（26Q3推算逾113亿），驳斥现金流失血恐慌，且永续债严格为0、银行刚性债仅35.91亿无存贷双高；3. 驳回空头将68.58亿租赁负债计入EV却在OE不加回使用权折旧的双重扣减错误，并驳回空头0.78—0.95倍破净PB的脱离历史地板极端假设；4. 海南封关首年离岛免税大盘逆势增13.8%，H股现价较LVMH入股价折价49%且拆骨安全垫显著。
+- <strong>📋 V4 官方对账附注</strong>：V4官方原表对账及红蓝终审重校：蓝方硬数据反杀“渠道压库/利润造假”指控（应收仅1.12亿占营收0.29%、毛利率三连升至33.93%、三亚单店净利暴增142%且海口扭亏，并挖出90.27亿已审计隐形定期存款），同时裁判驳回空头将68.58亿租赁负债计入EV却在OE不加回使用权折旧的双重扣减。但空头精准击穿原报告硬伤：2025投资性房地产折旧虚增431%（实仅0.46亿）、维持性CapEx过低、21.13亿现金收购17万元净资产低利DFS且无业绩承诺、京沪机场失去独占、160.32亿存中旅财务公司及TTM分红率降至40.5%（股息0.85元）。终审砍掉常态OE至42.0亿（-20.8%）、达产OE至54.0亿，严苛重算True EV（A股881.09亿/H股549.76亿），并下修A股买点至36.00—41.50元、H股双尺取严至31.90—36.80港元。</p>
+</blockquote>
+<!--V4_AUDIT_BANNER_END-->
 <blockquote>
 <p><strong>全景八步基本面底座 × 六大单点微创追问模块（A—F） × 终章四位投资大师闭门圆桌会（模块 G）</strong>
 <strong>数据基准</strong>：截至 2026 年 11 月 11 日最新收盘市值与《2026 年第三季度报告》《2025 年年度报告》及海南封关/机场重签/DFS 并购全套公告</p>
@@ -954,14 +1504,18 @@
 <h3 id="_4">三、 成本顺价权与客户转换代价测试：对上游品牌商与下游机场的双向议价力重构</h3>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
-<p><strong>对上游国际品牌商与下游消费者的顺价能力</strong>：
-   - 免税零售采用的是“买断经销为主、联营扣点为辅”的结算模式。当上游国际奢侈品或高端香化品牌在全球范围提价（如每年固定提价5%—10%），中免的免税指导价会自动同步上调，维持固定的免税折算价差与毛利率空间，不仅没有任何上游涨价挤压毛利的苦恼，反而能享受存货重估的顺价红利。
-   - 反过来，如果国际奢侈品牌想绕开中免自己在海南或中国机场开免税店行不行？<strong>完全不行</strong>——中国免税品经营资质由国务院与财政部严格审批特许，外资品牌商本身没有中国免税经营牌照，且2026年LVMH集团之所以选择将经营了数十年的DFS港澳门店卖给中免并换股成为中免H股股东，恰恰证明了连全球第一大奢侈品帝国都承认：在大中华区旅游零售市场，与中免深度合资绑定远比自己单打独斗划算得多。</p>
+<p><strong>对上游国际品牌商与下游消费者的顺价能力</strong>：</p>
+<ul>
+<li>免税零售采用的是“买断经销为主、联营扣点为辅”的结算模式。当上游国际奢侈品或高端香化品牌在全球范围提价（如每年固定提价5%—10%），中免的免税指导价会自动同步上调，维持固定的免税折算价差与毛利率空间，不仅没有任何上游涨价挤压毛利的苦恼，反而能享受存货重估的顺价红利。</li>
+<li>反过来，如果国际奢侈品牌想绕开中免自己在海南或中国机场开免税店行不行？<strong>完全不行</strong>——中国免税品经营资质由国务院与财政部严格审批特许，外资品牌商本身没有中国免税经营牌照，且2026年LVMH集团之所以选择将经营了数十年的DFS港澳门店卖给中免并换股成为中免H股股东，恰恰证明了连全球第一大奢侈品帝国都承认：在大中华区旅游零售市场，与中免深度合资绑定远比自己单打独斗划算得多。</li>
+</ul>
 </li>
 <li>
-<p><strong>对下游枢纽机场的议价权逆转</strong>：
-   - 2019年以前，上海机场、首都机场等凭借唯一物理流量入口，利用多家免税商竞标把保底租金和扣点率推高到42.5%—47.5%，机场拿走了免税行业70%以上的利润。
-   - 但经历过去五年的洗礼，各大机场深刻意识到：缺乏中免强大的全球供应链备货能力、线上预订中台与会员引流能力，单靠二线免税商根本撑不起机场坪效。因此在2023年底及2025年底的两轮历史性重签中，主动权彻底向免税运营商倾斜——上海机场不仅将固定租金降至约3090—3141元/平方米/月、扣点率大幅降至8%—24%，更通过成立中免持股51%、上机持股49%的合资公司实现了利益捆绑。</p>
+<p><strong>对下游枢纽机场的议价权逆转</strong>：</p>
+<ul>
+<li>2019年以前，上海机场、首都机场等凭借唯一物理流量入口，利用多家免税商竞标把保底租金和扣点率推高到42.5%—47.5%，机场拿走了免税行业70%以上的利润。</li>
+<li>但经历过去五年的洗礼，各大机场深刻意识到：缺乏中免强大的全球供应链备货能力、线上预订中台与会员引流能力，单靠二线免税商根本撑不起机场坪效。因此在2023年底及2025年底的两轮历史性重签中，主动权彻底向免税运营商倾斜——上海机场不仅将固定租金降至约3090—3141元/平方米/月、扣点率大幅降至8%—24%，更通过成立中免持股51%、上机持股49%的合资公司实现了利益捆绑。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>以前上海机场和首都机场把中免当成拉磨的驴，自己坐在磨盘上拿走四成五的麦子；一场大旱灾下来，地主终于明白要是把唯一能挑水的壮劳力饿死了，自己的磨盘只能长草。现在改成五五开搭伙过日子，这才是能长久运转的商业契约。</p></div></div></div></div>
 
@@ -1034,19 +1588,25 @@
 <h3 id="_7">二、 穿透表象看胜负手：为什么同行抄不走中免的“三道铁闸”？</h3>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
-<p><strong>第一道铁闸：采购规模带来的“5—8个百分点源头进货价差”与买手配货特权</strong>
-   - 在国际香化与奢侈品供应链里，雅诗兰黛、欧莱雅、LVMH、历峰等巨头实行极其森严的阶梯返利与配货制度。中免一年仅免税商品销售额就接近400亿元人民币，是全球最大的单一免税采购商之一。
-   - 这意味着同一瓶神仙水或小棕瓶，中免直接从品牌总部大宗直采的到岸成本，比年销几十亿的国内二线免税商低出<strong>5%—8%</strong>；更重要的是，当畅销单品（如热门色号口红、限量版威士忌、经典款腕表）全球缺货时，品牌商优先保供中免三亚海棠湾和海口新海港大店，而二线免税商要么拿不到畅销货，要么只能被迫搭售大量滞销冷门款，最终在期末变成存货跌价准备。</p>
+<p><strong>第一道铁闸：采购规模带来的“5—8个百分点源头进货价差”与买手配货特权</strong></p>
+<ul>
+<li>在国际香化与奢侈品供应链里，雅诗兰黛、欧莱雅、LVMH、历峰等巨头实行极其森严的阶梯返利与配货制度。中免一年仅免税商品销售额就接近400亿元人民币，是全球最大的单一免税采购商之一。</li>
+<li>这意味着同一瓶神仙水或小棕瓶，中免直接从品牌总部大宗直采的到岸成本，比年销几十亿的国内二线免税商低出<strong>5%—8%</strong>；更重要的是，当畅销单品（如热门色号口红、限量版威士忌、经典款腕表）全球缺货时，品牌商优先保供中免三亚海棠湾和海口新海港大店，而二线免税商要么拿不到畅销货，要么只能被迫搭售大量滞销冷门款，最终在期末变成存货跌价准备。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二道铁闸：三亚海棠湾与海口新海港的“重奢商业综合体”物理生态位垄断</strong>
-   - 很多外行以为去海南开免税店只要租栋楼就行。但国际顶奢品牌（LV、Dior、Chanel、Hermès、Cartier）对入驻物业有着近乎苛刻的硬性要求：不仅要求单店面积动辄上千平米、挑高与外立面由国际顶级建筑事务所定制（如三亚一期二号地法式独栋建筑、三亚三期与太古地产合建的度假型街区），更要求周边必须配齐华尔道夫、艾迪逊、瑞吉等顶奢五星级酒店群以及千万级高净值客流密度。
-   - 中免在三亚海棠湾深耕十余年，已连片建成<strong>一期1号地、一期2号地（高端酒店+重奢商业）、二期河心岛以及正在收尾的三期“三亚中免太古里”</strong>，合计商业面积逾50万平方米；在海口新海港建成28万平方米的全球最大单体免税城。这种“百亿级重资产集群+太古地产商业运营+LVMH资本入股”构筑的顶奢生态场，后来者就算拿到免税牌照，在海南也根本找不到第二块同等能级的土地和顶奢招商号召力。</p>
+<p><strong>第二道铁闸：三亚海棠湾与海口新海港的“重奢商业综合体”物理生态位垄断</strong></p>
+<ul>
+<li>很多外行以为去海南开免税店只要租栋楼就行。但国际顶奢品牌（LV、Dior、Chanel、Hermès、Cartier）对入驻物业有着近乎苛刻的硬性要求：不仅要求单店面积动辄上千平米、挑高与外立面由国际顶级建筑事务所定制（如三亚一期二号地法式独栋建筑、三亚三期与太古地产合建的度假型街区），更要求周边必须配齐华尔道夫、艾迪逊、瑞吉等顶奢五星级酒店群以及千万级高净值客流密度。</li>
+<li>中免在三亚海棠湾深耕十余年，已连片建成<strong>一期1号地、一期2号地（高端酒店+重奢商业）、二期河心岛以及正在收尾的三期“三亚中免太古里”</strong>，合计商业面积逾50万平方米；在海口新海港建成28万平方米的全球最大单体免税城。这种“百亿级重资产集群+太古地产商业运营+LVMH资本入股”构筑的顶奢生态场，后来者就算拿到免税牌照，在海南也根本找不到第二块同等能级的土地和顶奢招商号召力。</li>
+</ul>
 </li>
 <li>
-<p><strong>第三道铁闸：与韩国免税店及国际对手相比，“C端真实旅客直营 vs B端代购寄生”的质变</strong>
-   - 为什么曾经风光无限的韩国乐天、新罗免税店在2024—2026年陷入惨烈亏损甚至关店潮？因为韩国免税店过去70%以上的销售额建立在中国职业代购（Daigou）身上，为了争抢代购团，乐天和新罗被迫把35%的毛利里切出20%—30%作为返点佣金补贴给旅行社和代购头子，不仅自己净利率归零，还惹怒了香奈儿、LV等顶奢品牌（嫌代购砸盘破坏品牌形象而集体撤柜）。
-   - 相比之下，中国中免在2023—2025年配合海关“套代购”严打，坚决清理了低毛利的黄牛代购流水，全面转向服务真实的C端高净值度假旅客——截至2026年，<strong>中免会员总数已突破6000万人</strong>，叠加2026年并表DFS大中华区高净值黑钻会员体系，实现了“离岛+机场+港澳+市内店+线上预订”全链路C端直达。这就是为什么2026年前三季度中免营收微降2.61%，归母净利润却能大涨20.25%的底层原因！</p>
+<p><strong>第三道铁闸：与韩国免税店及国际对手相比，“C端真实旅客直营 vs B端代购寄生”的质变</strong></p>
+<ul>
+<li>为什么曾经风光无限的韩国乐天、新罗免税店在2024—2026年陷入惨烈亏损甚至关店潮？因为韩国免税店过去70%以上的销售额建立在中国职业代购（Daigou）身上，为了争抢代购团，乐天和新罗被迫把35%的毛利里切出20%—30%作为返点佣金补贴给旅行社和代购头子，不仅自己净利率归零，还惹怒了香奈儿、LV等顶奢品牌（嫌代购砸盘破坏品牌形象而集体撤柜）。</li>
+<li>相比之下，中国中免在2023—2025年配合海关“套代购”严打，坚决清理了低毛利的黄牛代购流水，全面转向服务真实的C端高净值度假旅客——截至2026年，<strong>中免会员总数已突破6000万人</strong>，叠加2026年并表DFS大中华区高净值黑钻会员体系，实现了“离岛+机场+港澳+市内店+线上预订”全链路C端直达。这就是为什么2026年前三季度中免营收微降2.61%，归母净利润却能大涨20.25%的底层原因！</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>韩国人当年为了凑销售额，把免税店开成了给中国黄牛发补贴的批发菜市场，最后黄牛跑了、奢侈品大牌撤柜了，只剩下一地鸡毛。中免聪明就聪明在及时戒掉了“代购毒瘾”，哪怕账面流水瘦一圈，也要守住大牌专柜的体面和每卖一单赚三成毛利的真本事。</p></div></div></div></div>
 
@@ -1055,16 +1615,22 @@
 <p>回看中国中免自1984年成立以来的42年历史，它之所以能从一家只有零星边境小店、年赚几千万的部委下属小企业，长成今天年赚数十亿的全球免税霸主，全靠在<strong>三个决定生死的重大历史关口</strong>打赢了硬仗：</p>
 <ol>
 <li>
-<p><strong>第一次跃迁（2009—2014年）：押注三亚海棠湾重资产，无中生有开辟“离岛免税”新大陆</strong>
-   - 2009年A股上市时，中免的口岸店都是几百平米的边境小铺，北京、上海两大最肥的国际机场免税店全被日上免税行（Sunrise）牢牢把控。2011年国家试点海南离岛免税政策，中免管理层展现出极强的战略魄力——没有停留在三亚大东海狭窄的市区老店，而是咬牙在当时还是一片荒滩的三亚海棠湾砸下数十亿元，于2014年建成7.2万平方米的全球最大单体免税店（三亚国际免税城）。这一把重资产豪赌，直接奠定了此后十年中免吃尽海南消费回流红利的物理根基。</p>
+<p><strong>第一次跃迁（2009—2014年）：押注三亚海棠湾重资产，无中生有开辟“离岛免税”新大陆</strong></p>
+<ul>
+<li>2009年A股上市时，中免的口岸店都是几百平米的边境小铺，北京、上海两大最肥的国际机场免税店全被日上免税行（Sunrise）牢牢把控。2011年国家试点海南离岛免税政策，中免管理层展现出极强的战略魄力——没有停留在三亚大东海狭窄的市区老店，而是咬牙在当时还是一片荒滩的三亚海棠湾砸下数十亿元，于2014年建成7.2万平方米的全球最大单体免税店（三亚国际免税城）。这一把重资产豪赌，直接奠定了此后十年中免吃尽海南消费回流红利的物理根基。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二次跃迁（2017—2020年）：连吞日上中国、日上上海与海免公司，一统全国免税江山</strong>
-   - 2016年中国国旅集团与港中旅集团合并组建中国旅游集团后，中免开启了教科书级的产业整合：2017年收购<strong>日上中国（首都机场免税运营商）</strong>51%股权，2018年乘胜追击收购<strong>日上上海（上海浦东、虹桥机场免税运营商）</strong>51%股权，2020年又将<strong>海南省免税品有限公司（海免）</strong>51%股权收入囊中，同时彻底剥离了低毛利、不赚钱的国旅总社旅行社业务。短短三年内，中免不仅拿下了京沪港澳穗全部核心枢纽机场，更实现了全国采购供应链的大一统，一举超越Dufry登顶全球第一。</p>
+<p><strong>第二次跃迁（2017—2020年）：连吞日上中国、日上上海与海免公司，一统全国免税江山</strong></p>
+<ul>
+<li>2016年中国国旅集团与港中旅集团合并组建中国旅游集团后，中免开启了教科书级的产业整合：2017年收购<strong>日上中国（首都机场免税运营商）</strong>51%股权，2018年乘胜追击收购<strong>日上上海（上海浦东、虹桥机场免税运营商）</strong>51%股权，2020年又将<strong>海南省免税品有限公司（海免）</strong>51%股权收入囊中，同时彻底剥离了低毛利、不赚钱的国旅总社旅行社业务。短短三年内，中免不仅拿下了京沪港澳穗全部核心枢纽机场，更实现了全国采购供应链的大一统，一举超越Dufry登顶全球第一。</li>
+</ul>
 </li>
 <li>
-<p><strong>第三次生死考验与自我革命（2023—2026年）：熬过“机场高扣点反噬+代购退潮”，靠机场重签与并购DFS完成国际化蝶变</strong>
-   - 2022—2024年，中免遭遇上市以来最严峻的顺逆风切换：出境游放开分流海南客源、打击代购导致香化销量下滑、早期签下的机场天价保底协议随时可能吞噬利润。管理层没有饮鸩止渴打价格战，而是干了三件硬事：① 2023年底与2025年底两度与京沪机场重签协议，将机场扣点率从42.5%—47.5%永久性砍至8%—36%；② 砍掉低毛利有税批发，2026年上半年推动海口国际免税城扭亏、三亚店净利率翻倍；③ 2026年3月趁全球奢侈品行业低谷，仅花约2.94亿美元抄底收购LVMH旗下DFS大中华区港澳门店及品牌权，并拉LVMH入股中免H股。</p>
+<p><strong>第三次生死考验与自我革命（2023—2026年）：熬过“机场高扣点反噬+代购退潮”，靠机场重签与并购DFS完成国际化蝶变</strong></p>
+<ul>
+<li>2022—2024年，中免遭遇上市以来最严峻的顺逆风切换：出境游放开分流海南客源、打击代购导致香化销量下滑、早期签下的机场天价保底协议随时可能吞噬利润。管理层没有饮鸩止渴打价格战，而是干了三件硬事：① 2023年底与2025年底两度与京沪机场重签协议，将机场扣点率从42.5%—47.5%永久性砍至8%—36%；② 砍掉低毛利有税批发，2026年上半年推动海口国际免税城扭亏、三亚店净利率翻倍；③ 2026年3月趁全球奢侈品行业低谷，仅花约2.94亿美元抄底收购LVMH旗下DFS大中华区港澳门店及品牌权，并拉LVMH入股中免H股。</li>
+</ul>
 </li>
 </ol>
 <p><strong>一句话收口组织基因</strong>：中免早年的崛起确实吃到了国家免税特许牌照与海南政策红利，但过去十年通过<strong>“剥离旅行社聚焦高毛利免税 + 并购日上与DFS打通全球供应链 + 海棠湾/新海港百亿地标运营”</strong>，它已经将政策红利彻底固化为了对手无法复制的规模成本壁垒与顶奢渠道统治力。</p>
@@ -1121,8 +1687,10 @@
 </table></div>
 <div class="annotated-row"><div class="main-col"><ol start="2">
 <li>
-<p><strong>质押、杠杆与高点套现排查（无异常）</strong>：
-   - 控股股东中国旅游集团持股50.30%，<strong>零质押、零冻结</strong>，且在历史股价高点从未减持套现一股。</p>
+<p><strong>质押、杠杆与高点套现排查（无异常）</strong>：</p>
+<ul>
+<li>控股股东中国旅游集团持股50.30%，<strong>零质押、零冻结</strong>，且在历史股价高点从未减持套现一股。</li>
+</ul>
 </li>
 <li>
 <p><strong>商誉与存货跌价计提审慎度排查</strong>：</p>
@@ -1135,8 +1703,10 @@
 <p><strong>存货</strong>：截至2026年9月30日，存货账面价值为<strong>190.73亿元</strong>（较2025年末的153.02亿元增长24.6%，主要系DFS港澳门店并表及迎接海南封关首个旺季与第四季度大促备货所致）。公司对库龄超过1年的临期香化产品执行严格的跌价准备计提制度（2024—2025年每年均足额计提数亿元存货跌价准备），随着库存周转天数优化，资产包袱已大幅出清。</p>
 </li>
 </ul><ol start="4">
-<li><strong>利益切分与集团财务公司关联存款排查（核心关注项）</strong>：
-   - 作为央企控股上市公司，中免与控股股东旗下的<strong>中旅集团财务有限公司（中旅财务）</strong>签有《金融服务协议》（2025年4月董事会续签，关联董事范云军等严格回避表决）。</li>
+<li><strong>利益切分与集团财务公司关联存款排查（核心关注项）</strong>：<ul>
+<li>作为央企控股上市公司，中免与控股股东旗下的<strong>中旅集团财务有限公司（中旅财务）</strong>签有《金融服务协议》（2025年4月董事会续签，关联董事范云军等严格回避表决）。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>核心核查</strong>：过去部分央企曾出现“集团财务公司吸存上市公司巨额现金却给极低利息、甚至违规挪用”的治理隐患。经核查中免2024—2026年关联交易公告与《风险持续评估报告》，中免在中旅财务的每日最高存款余额受到严格上限管制，存款利率不低于国内主要商业银行同期同档次存款利率，且中免账上高达234亿—338亿元的货币资金中，绝大部分存放于外部国有大型商业银行及H股募集资金专户，2024—2025年每年产生高达8亿—12亿元的真实财务利息收入，资金完全真实可动用。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看一家国有企业的管理层老不老实，别看他们在年报致辞里写了多少排比句，就看两件事：一是日上上海赚少了，他们有没有老老实实把那3亿多商誉减值掉；二是账上两三百亿现金，到底是存在集团小金库里吃哑巴亏，还是真能每年拿回十来亿利息并大方掏出五成利润分给股东。中免在这两道考题上都是实打实的优等生。</p></div></div></div></div>
@@ -1168,23 +1738,31 @@
 </ul>
 <h3 id="_14">二、 上市以来实际向股东回报了多少钱？</h3>
 <ol>
-<li><strong>历史累计现金分红总额</strong>：
-   - 自2009年上市以来，公司年年坚持现金分红，从未间断。截至2025年度利润分配实施完毕，公司累计现金分红已接近<strong>195亿元人民币</strong>。</li>
+<li><strong>历史累计现金分红总额</strong>：<ul>
+<li>自2009年上市以来，公司年年坚持现金分红，从未间断。截至2025年度利润分配实施完毕，公司累计现金分红已接近<strong>195亿元人民币</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
-<li><strong>2026年三季报首次开启中期（前三季度）现金分红</strong>：2026年10月31日，公司董事会审议通过《2026年前三季度利润分配方案》，拟向全体股东每10股派发现金红利4.00元（含税），<strong>合计拟派发现金红利约8.31亿元</strong>！</li>
+<li><strong>2026年三季报首次开启中期（前三季度）现金分红</strong>：2026年10月31日，公司董事会审议通过《2026年前三季度利润分配方案》，拟向全体股东每10股派发现金红利4.00元（含税），<strong>合计拟派发现金红利约8.31亿元</strong>！<ul>
 <li>算上本次2026年前三季度分红，中国中免上市以来<strong>累计现金分红总额已突破203亿元人民币</strong>！</li>
+</ul>
+</li>
 </ul>
 <ol start="2">
 <li>
-<p><strong>分红支付率跃升</strong>：
-   - 在2022年以前，由于公司处于三亚店、海口店建设及并购日上的扩张期，年度分红率维持在30%—35%左右。
-   - 从<strong>2023年度起，公司将现金分红比例一举大幅提升至50.85%</strong>（每10股派16.5元，分红34.14亿元）；2024年度与2025年度即便面对行业逆风，分红率依然稳稳保持在<strong>48%—50%以上</strong>的高位，彻底兑现了重资产高峰期过后回馈股东的承诺。</p>
+<p><strong>分红支付率跃升</strong>：</p>
+<ul>
+<li>在2022年以前，由于公司处于三亚店、海口店建设及并购日上的扩张期，年度分红率维持在30%—35%左右。</li>
+<li>从<strong>2023年度起，公司将现金分红比例一举大幅提升至50.85%</strong>（每10股派16.5元，分红34.14亿元）；2024年度与2025年度即便面对行业逆风，分红率依然稳稳保持在<strong>48%—50%以上</strong>的高位，彻底兑现了重资产高峰期过后回馈股东的承诺。</li>
+</ul>
 </li>
 <li>
-<p><strong>全口径分红融资比</strong>：
-   - 若单看A股股东口径，累计分红超203亿元 vs A股累计募资50.55亿元，<strong>A股分红融资比高达401.6%</strong>！
-   - 即便按包含2022年H股IPO在内的全口径计算，累计现金分红（&gt;203亿元）也已<strong>超过</strong>A+H历史全口径股权融资总额（约198.8亿元），全口径分红融资比跨越<strong>102%</strong>分水岭！</p>
+<p><strong>全口径分红融资比</strong>：</p>
+<ul>
+<li>若单看A股股东口径，累计分红超203亿元 vs A股累计募资50.55亿元，<strong>A股分红融资比高达401.6%</strong>！</li>
+<li>即便按包含2022年H股IPO在内的全口径计算，累计现金分红（&gt;203亿元）也已<strong>超过</strong>A+H历史全口径股权融资总额（约198.8亿元），全口径分红融资比跨越<strong>102%</strong>分水岭！</li>
+</ul>
 </li>
 </ol>
 <h3 id="20212026q1-q3">三、 五年一期现金流硬账本与防合并报表幻觉穿透（2021—2026Q1-Q3）</h3>
@@ -1287,8 +1865,10 @@
 </ul>
 <h3 id="_15">四、 打破“合并报表幻觉”两项深度体检</h3>
 <div class="annotated-row"><div class="main-col"><ol>
-<li><strong>体检一：“少数股东损益占比 vs 少数股东权益占比”是否倒挂？（历史最大痛点已在2026年彻底逆转！）</strong>
-   - <strong>过去几年的痛点</strong>：在2018—2021年期间，中免通过持股51%的日上上海（少数股东持股49%）和持股51%的海免公司赚取了巨额利润，导致当年合并报表里虽然总净利润很高，但少数股东损益往往切走20%—30%的利润（而少数股东权益占比仅10%左右），存在一定的“少数股东分走肥肉”现象。</li>
+<li><strong>体检一：“少数股东损益占比 vs 少数股东权益占比”是否倒挂？（历史最大痛点已在2026年彻底逆转！）</strong><ul>
+<li><strong>过去几年的痛点</strong>：在2018—2021年期间，中免通过持股51%的日上上海（少数股东持股49%）和持股51%的海免公司赚取了巨额利润，导致当年合并报表里虽然总净利润很高，但少数股东损益往往切走20%—30%的利润（而少数股东权益占比仅10%左右），存在一定的“少数股东分走肥肉”现象。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>2026年的历史性反转</strong>：随着2020年以后三亚国际免税城（中免100%全资）、海口国际免税城（中免100%全资）成为绝对主力，叠加日上上海收缩低毛利线上业务及2026年上海机场新合资架构切换，<strong>2026年上半年公司少数股东损益从上年同期的盈利3.07亿元直接转为亏损-0.62亿元（2026年前三季度累计少数股东损益为-0.61亿元）</strong>！</p>
@@ -1297,9 +1877,11 @@
 <p><strong>商业含义</strong>：这意味着现在全资子公司（三亚店、海口店）在狂赚几十亿真金白银，100%全部装进上市公司归母股东口袋；而处于转型磨合期的非全资合资公司微亏由少数股东共同分担，<strong>彻底终结了过去“合资子公司赚钱分给少数股东”的报表漏损，归母净利润含金量达到历史最高水平</strong>！</p>
 </li>
 </ul><ol start="2">
-<li><strong>体检二：账面现金真实性与“存贷双高”排查</strong>
-   - 截至2026年9月30日，公司账面<strong>货币资金高达234.08亿元</strong>（2025年末为337.81亿元，2026年前三季度减少约103.7亿元，主要系支付约2.94亿美元现金收购DFS港澳业务、派发2025年度现金分红约17.9亿元、偿还部分到期借款及旺季备货所致）。
-   - 同期有息负债是多少？<strong>短期借款仅4.08亿元，长期借款27.90亿元</strong>（主要为三亚、海口长周期项目专项低息基建贷款），全口径银行有息债务合计仅约<strong>32亿元</strong>（另有因执行新租赁准则将未来多年机场及门店租金折现确认的租赁负债非流动部分46.82亿元，属经营性分期付租而非刚性金融借贷）。</li>
+<li><strong>体检二：账面现金真实性与“存贷双高”排查</strong><ul>
+<li>截至2026年9月30日，公司账面<strong>货币资金高达234.08亿元</strong>（2025年末为337.81亿元，2026年前三季度减少约103.7亿元，主要系支付约2.94亿美元现金收购DFS港澳业务、派发2025年度现金分红约17.9亿元、偿还部分到期借款及旺季备货所致）。</li>
+<li>同期有息负债是多少？<strong>短期借款仅4.08亿元，长期借款27.90亿元</strong>（主要为三亚、海口长周期项目专项低息基建贷款），全口径银行有息债务合计仅约<strong>32亿元</strong>（另有因执行新租赁准则将未来多年机场及门店租金折现确认的租赁负债非流动部分46.82亿元，属经营性分期付租而非刚性金融借贷）。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>净现金厚度</strong>：扣除全部银行有息负债后，公司账上仍趴着<strong>超过200亿元的纯粹净现金</strong>，完全不存在“存贷双高”隐患。</li>
 </ul><p><strong>第五部分定性收口</strong>：中国中免是一台<strong>“已经跨过重资产资本开支峰值、五年累计创造257亿元自由现金流、账上躺着超200亿净现金且分红率高达50%的顶级资本创造者与收获者”</strong>。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多连锁零售店表面上看着风光，赚的钱全变成卖不掉的过季衣服和还不完的银行贷款。中免完全是另一个物种——买东西的客人当场刷卡付现，五年下来刨掉盖大楼的钱还净剩257亿真金白银，现在连合资伙伴分走的那块肉都省下来全归大股东了，这种账本在老夫眼里比印钞厂还顺眼。</p></div></div></div></div>
@@ -1314,8 +1896,10 @@
 <h3 id="capex">一、 资本开支（CapEx）、在建工程与并购资金真实流向全景拆解</h3>
 <p>当前中免的每一分资本投入，高度聚焦在以下<strong>三大物理与网络节点</strong>上：</p>
 <ol>
-<li><strong>头号重头戏：三亚国际免税城三期——“三亚中免太古里”项目（合资权益投入 + 工程收尾）</strong>
-   - <strong>项目底牌</strong>：由中国中免与香港顶级重奢商业地产霸主<strong>太古地产（Swire Properties）</strong>各持股50%组建合资公司（中免棠畔投资），于2022年10月以13.08亿元拍下三亚海棠湾核心地块，总投资额预计约70亿—80亿元人民币（双方按股比出资及项目贷款解决），总建筑面积超过<strong>40万平方米</strong>，通过景观廊桥与三亚国际免税城一期、二期无缝连通。</li>
+<li><strong>头号重头戏：三亚国际免税城三期——“三亚中免太古里”项目（合资权益投入 + 工程收尾）</strong><ul>
+<li><strong>项目底牌</strong>：由中国中免与香港顶级重奢商业地产霸主<strong>太古地产（Swire Properties）</strong>各持股50%组建合资公司（中免棠畔投资），于2022年10月以13.08亿元拍下三亚海棠湾核心地块，总投资额预计约70亿—80亿元人民币（双方按股比出资及项目贷款解决），总建筑面积超过<strong>40万平方米</strong>，通过景观廊桥与三亚国际免税城一期、二期无缝连通。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -1326,8 +1910,10 @@
 </li>
 </ul>
 <ol start="2">
-<li><strong>已投产项目的纵深强化：三亚一期2号地（高端酒店部分）与海口国际免税城地块配套</strong>
-   - <strong>在建工程穿透</strong>：公司账面24.77亿元在建工程中，核心构成为<strong>三亚国际免税城一期2号地的高端配套酒店工程</strong>及<strong>海口国际免税城项目的后续地块开发（酒店、办公及商业配套）</strong>。</li>
+<li><strong>已投产项目的纵深强化：三亚一期2号地（高端酒店部分）与海口国际免税城地块配套</strong><ul>
+<li><strong>在建工程穿透</strong>：公司账面24.77亿元在建工程中，核心构成为<strong>三亚国际免税城一期2号地的高端配套酒店工程</strong>及<strong>海口国际免税城项目的后续地块开发（酒店、办公及商业配套）</strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>已转固项目的盈利转化检验</strong>：<ul>
@@ -1337,8 +1923,10 @@
 </li>
 </ul>
 <ol start="3">
-<li><strong>2026年神来之笔的外延投资：2.94亿美元抄底LVMH旗下DFS大中华区（港澳）核心业务</strong>
-   - <strong>算清并购经济账</strong>：2026年1月19日签约、3月19日闪电交割，中免仅动用约<strong>2.94亿美元（折合人民币约21亿元，扣除LVMH与米勒家族反向认购H股回流的约6.4亿—8.3亿元资金后，净现金流出仅约13亿—15亿元人民币！）</strong>，就拿下了DFS在香港、澳门经营数十年的核心旅游零售门店网络、大中华区DFS品牌独家使用权及高净值会员体系（同时精明地剔除了租金高昂、条件未满足的香港广东道新太阳广场店，避开了高租包袱）。</li>
+<li><strong>2026年神来之笔的外延投资：2.94亿美元抄底LVMH旗下DFS大中华区（港澳）核心业务</strong><ul>
+<li><strong>算清并购经济账</strong>：2026年1月19日签约、3月19日闪电交割，中免仅动用约<strong>2.94亿美元（折合人民币约21亿元，扣除LVMH与米勒家族反向认购H股回流的约6.4亿—8.3亿元资金后，净现金流出仅约13亿—15亿元人民币！）</strong>，就拿下了DFS在香港、澳门经营数十年的核心旅游零售门店网络、大中华区DFS品牌独家使用权及高净值会员体系（同时精明地剔除了租金高昂、条件未满足的香港广东道新太阳广场店，避开了高租包袱）。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>经济性质界定</strong>：在公司当前的全部资本支出中，<strong>维持存量门店翻新与IT升级的防御性CapEx仅占约20%（每年约2.5亿—3亿元）</strong>；而<strong>三亚一期2号地/三期太古里（把海南重奢壁垒推向极致）与并购DFS港澳+拓展市内店（打开大湾区与全球化新空间）的纵深强化与进攻性开支占到了80%以上</strong>！</li>
@@ -1347,16 +1935,22 @@
 <p>千万不要以为免税店还是十年前那种“导游举着小旗子带团进去抢货”的传统柜台生意，过去三年中免在内部运营与商业模式上完成了三场脱胎换骨的进化：</p>
 <ol>
 <li>
-<p><strong>从“单点离岛/机场收租”向“免税+有税+顶奢度假综合体（Destination Retail）”跃迁</strong>：
-   - 面对2025年12月18日海南全岛封关运作后“零关税商品范围扩大”的长期演进趋势，中免早在三年前就开始布局“有税重奢（如爱马仕、LV有税专柜、三亚中免太古里）+ 离岛免税（香化、酒水、腕表、47类扩容数码无人机等）+ 顶奢酒店餐饮”的一体化商业体。哪怕未来某一天普通日用消费品在海南全岛零关税，全球顶奢品牌依然只会聚集在中免的海棠湾与新海港综合体里！</p>
+<p><strong>从“单点离岛/机场收租”向“免税+有税+顶奢度假综合体（Destination Retail）”跃迁</strong>：</p>
+<ul>
+<li>面对2025年12月18日海南全岛封关运作后“零关税商品范围扩大”的长期演进趋势，中免早在三年前就开始布局“有税重奢（如爱马仕、LV有税专柜、三亚中免太古里）+ 离岛免税（香化、酒水、腕表、47类扩容数码无人机等）+ 顶奢酒店餐饮”的一体化商业体。哪怕未来某一天普通日用消费品在海南全岛零关税，全球顶奢品牌依然只会聚集在中免的海棠湾与新海港综合体里！</li>
+</ul>
 </li>
 <li>
-<p><strong>6000万会员数字化中台与“即购即提 / 离岛且离境”全链路体验升级</strong>：
-   - 公司持续投入数字化研发，将全国机场口岸、海南离岛、港澳门店及线上预购平台彻底打通，会员总数突破6000万人，并引入AI智能导购与精准营销算法。配合2025年11月1日起实施的离岛免税新政（允许海南居民一年内有离岛记录即可不限次数购买“即购即提”商品、打通从海南离境旅客的10万元免税额度），中免的海南六店迅速承接了岛民高频即时消费与国际出境客流双重增量。</p>
+<p><strong>6000万会员数字化中台与“即购即提 / 离岛且离境”全链路体验升级</strong>：</p>
+<ul>
+<li>公司持续投入数字化研发，将全国机场口岸、海南离岛、港澳门店及线上预购平台彻底打通，会员总数突破6000万人，并引入AI智能导购与精准营销算法。配合2025年11月1日起实施的离岛免税新政（允许海南居民一年内有离岛记录即可不限次数购买“即购即提”商品、打通从海南离境旅客的10万元免税额度），中免的海南六店迅速承接了岛民高频即时消费与国际出境客流双重增量。</li>
+</ul>
 </li>
 <li>
-<p><strong>从“把洋货卖给中国人”向“携国潮出海 + 绑定LVMH全球化”进化</strong>：
-   - 借助2026年收购DFS港澳平台及与LVMH签署的《战略合作谅解备忘录》，中免不仅巩固了国际品牌采购特权，还在上海浦东机场、香港、澳门及新加坡、柬埔寨、斯里兰卡等海外网点大规模开设<strong>“国潮免税专区”</strong>（带动茅台、五粮液、中华烟、华为数码、大疆无人机、中式黄金珠宝及国货美妆免税出海）。</p>
+<p><strong>从“把洋货卖给中国人”向“携国潮出海 + 绑定LVMH全球化”进化</strong>：</p>
+<ul>
+<li>借助2026年收购DFS港澳平台及与LVMH签署的《战略合作谅解备忘录》，中免不仅巩固了国际品牌采购特权，还在上海浦东机场、香港、澳门及新加坡、柬埔寨、斯里兰卡等海外网点大规模开设<strong>“国潮免税专区”</strong>（带动茅台、五粮液、中华烟、华为数码、大疆无人机、中式黄金珠宝及国货美妆免税出海）。</li>
+</ul>
 </li>
 </ol>
 <h3 id="_18">三、 未来成长蓝图梯度审视与国内外同行正反镜鉴</h3>
@@ -1392,8 +1986,10 @@
 <h3 id="2025">一、 核心博弈一：海南2025年底全岛封关运作后，“零关税普及”究竟会稀释离岛免税，还是会成就海棠湾超级消费中心？（危与机的一体两面）</h3>
 <ol>
 <li>
-<p><strong>市场最大の恐惧（“危”的表象）</strong>：
-   - 长期以来，资本市场压制中免估值最核心的鬼故事就是：“2025年12月18日海南自贸港启动全岛封关运作、实行‘一线放开、二线管住、岛内自由’之后，是不是全海南岛随便一家商场、甚至街边小店卖进口商品都免税了？那中免的离岛免税牌照岂不是变成一张废纸？”</p>
+<p><strong>市场最大の恐惧（“危”的表象）</strong>：</p>
+<ul>
+<li>长期以来，资本市场压制中免估值最核心的鬼故事就是：“2025年12月18日海南自贸港启动全岛封关运作、实行‘一线放开、二线管住、岛内自由’之后，是不是全海南岛随便一家商场、甚至街边小店卖进口商品都免税了？那中免的离岛免税牌照岂不是变成一张废纸？”</li>
+</ul>
 </li>
 <li>
 <p><strong>穿透法律文本与商业现实的真相（区分已生效规则与误读）</strong>：</p>
@@ -1412,13 +2008,17 @@
 </ul>
 <h3 id="kt1">二、 真暗礁排查：消费力K型分化下，国际大牌专柜/跨境电商的价格挤压与上海机场T1分流</h3>
 <div class="annotated-row"><div class="main-col"><p>如果说封关是伪鬼故事，那么真正需要警惕的现实经营暗礁在哪里？在于<strong>“有税专柜/线上大促对香化品类的价格挤压”与“枢纽机场引入二供的局部切蛋糕”</strong>：</p><ol>
-<li><strong>香化品类的“跨境电商+直播间大促”价差收窄挑战</strong>：
-   - 客观事实依据：在雅诗兰黛、欧莱雅等大众高端香化领域，每逢双11、618大促，品牌官方旗舰店在抖音、天猫通过“买正装送等量小样”变相打5—6折，同时跨境电商保税仓也在低价倾销尾货，这在客观上削弱了消费者专门跑一趟免税店买普通护肤品的紧迫感。</li>
+<li><strong>香化品类的“跨境电商+直播间大促”价差收窄挑战</strong>：<ul>
+<li>客观事实依据：在雅诗兰黛、欧莱雅等大众高端香化领域，每逢双11、618大促，品牌官方旗舰店在抖音、天猫通过“买正装送等量小样”变相打5—6折，同时跨境电商保税仓也在低价倾销尾货，这在客观上削弱了消费者专门跑一趟免税店买普通护肤品的紧迫感。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>中免手里的缓冲筹码与临界点</strong>：中免的对策是主动收缩线上有税低毛利混战，将海南与机场门店的货盘重心向<strong>“高奢精品、高端腕表珠宝、定制酒水、47类新增数码无人机及独家旅游套装”</strong>转移。但如果未来国际美妆巨头在完税渠道长期维持极端买赠折扣，或者国内中产对高奢箱包腕表的消费意愿进一步萎缩，中免的客单价与同店坪效仍将面临持续的爬坡天花板。</li>
 </ul><ol start="2">
-<li><strong>上海浦东机场T1引入杜福睿（Dufry）带来的局部竞争分流</strong>：
-   - 客观事实依据：在2025年12月落定的上海机场新一轮8年免税招标中，为了打破单一运营商垄断，上海机场将<strong>浦东T1航站楼及S1卫星厅</strong>交给了国际巨头杜福睿（Dufry），而中国中免（日上上海）则守住了体量更大的<strong>浦东T2航站楼、S2卫星厅及虹桥T1航站楼</strong>。</li>
+<li><strong>上海浦东机场T1引入杜福睿（Dufry）带来的局部竞争分流</strong>：<ul>
+<li>客观事实依据：在2025年12月落定的上海机场新一轮8年免税招标中，为了打破单一运营商垄断，上海机场将<strong>浦东T1航站楼及S1卫星厅</strong>交给了国际巨头杜福睿（Dufry），而中国中免（日上上海）则守住了体量更大的<strong>浦东T2航站楼、S2卫星厅及虹桥T1航站楼</strong>。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>真实杀伤范围评估</strong>：表面上看中免丢掉了浦东T1的半壁江山，但算清底账就会发现——过去日上上海虽然包揽浦东T1+T2，却背着42.5%的超高扣点替机场打工；如今虽然让出了T1，但在守住的浦东T2/S2和虹桥T1上，扣点率大幅降至8%—24%，且甩掉了线上低毛利包袱。只要中免守住首都机场、大兴机场、白云机场、港澳DFS及浦东T2的基本盘，浦东T1的局部分流对公司归母净利润的实质冲击完全可控（小于5%）。</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>华尔街和陆家嘴最喜欢编造那种“政策一变、全军覆没”的恐怖故事来吓唬散户。稍微动动脑子想想，难道海南封关以后，爱马仕和路易威登会去海口菜市场旁边摆地摊吗？真正该盯紧的不是红头文件，而是中国有钱人兜里的钱包鼓不鼓，以及天猫直播间送的那些小样会不会把姑娘们留在家里不来海南了。</p></div></div></div></div>
@@ -1434,20 +2034,28 @@
 <h3 id="4">二、 未来两到三年每次翻开财报必看的 4 个可量化、可证伪“硬核验证路标”</h3>
 <ol>
 <li>
-<p><strong>【路标一：重点工程与新并购转化兑现度】盯紧海口店净利率爬坡、DFS港澳并表贡献与“三亚中免太古里”开业节点</strong>
-   - <strong>量化锚点</strong>：① <strong>海口国际免税城</strong>在2026年上半年实现0.11亿元扭亏的基础上，2026全年及2027年净利率能否稳步爬升至<strong>3%—6%以上</strong>（验证28万平米重资产折旧消化能力）；② <strong>三亚中免太古里（三亚三期）</strong>能否在2026年底至2027年如期分阶段亮相并引入不少于20家国际顶奢旗舰店；③ <strong>DFS港澳业务</strong>并表后，国际及港澳分部能否保持<strong>10%以上</strong>的营业利润率且不产生新的商誉减值。</p>
+<p><strong>【路标一：重点工程与新并购转化兑现度】盯紧海口店净利率爬坡、DFS港澳并表贡献与“三亚中免太古里”开业节点</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：① <strong>海口国际免税城</strong>在2026年上半年实现0.11亿元扭亏的基础上，2026全年及2027年净利率能否稳步爬升至<strong>3%—6%以上</strong>（验证28万平米重资产折旧消化能力）；② <strong>三亚中免太古里（三亚三期）</strong>能否在2026年底至2027年如期分阶段亮相并引入不少于20家国际顶奢旗舰店；③ <strong>DFS港澳业务</strong>并表后，国际及港澳分部能否保持<strong>10%以上</strong>的营业利润率且不产生新的商誉减值。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标二：盈利成色与毛利率底线】盯紧免税商品毛利率与销售费用率差值（营业利润率走廊）</strong>
-   - <strong>量化锚点</strong>：核查每期财报的<strong>综合毛利率是否稳守在33.0%以上</strong>（其中免税商品毛利率不低于36.5%），且归母净利率在剔除汇兑波动后能否稳固在<strong>8.5%—11.0%</strong>的健康走廊内；一旦发现为了冲营收规模重新大搞线上有税低价倾销导致综合毛利率跌破30%，即构成经营纪律倒退信号。</p>
+<p><strong>【路标二：盈利成色与毛利率底线】盯紧免税商品毛利率与销售费用率差值（营业利润率走廊）</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：核查每期财报的<strong>综合毛利率是否稳守在33.0%以上</strong>（其中免税商品毛利率不低于36.5%），且归母净利率在剔除汇兑波动后能否稳固在<strong>8.5%—11.0%</strong>的健康走廊内；一旦发现为了冲营收规模重新大搞线上有税低价倾销导致综合毛利率跌破30%，即构成经营纪律倒退信号。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标三：现金流健康度、存货周转与分红兑现底线】盯紧190亿存货去化与50%分红承诺</strong>
-   - <strong>量化锚点</strong>：① 跟踪2026年三季报末<strong>190.73亿元存货</strong>在第四季度及2027年一季度春节旺季后的去化情况，正常状态下年末存货应回落至<strong>140亿—165亿元</strong>区间，存货周转天数控制在<strong>160—185天以内</strong>，且全年经营活动现金流净额（OCF）与归母净利润之比（净现比）必须保持在<strong>100%以上</strong>；② 年度现金分红比例（含中期分红）底线不得低于<strong>45%—50%</strong>，全年资本开支（CapEx）继续控制在<strong>15亿元以内</strong>。</p>
+<p><strong>【路标三：现金流健康度、存货周转与分红兑现底线】盯紧190亿存货去化与50%分红承诺</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：① 跟踪2026年三季报末<strong>190.73亿元存货</strong>在第四季度及2027年一季度春节旺季后的去化情况，正常状态下年末存货应回落至<strong>140亿—165亿元</strong>区间，存货周转天数控制在<strong>160—185天以内</strong>，且全年经营活动现金流净额（OCF）与归母净利润之比（净现比）必须保持在<strong>100%以上</strong>；② 年度现金分红比例（含中期分红）底线不得低于<strong>45%—50%</strong>，全年资本开支（CapEx）继续控制在<strong>15亿元以内</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>【路标四：行业竞争身位与政策红利转化】盯紧海南离岛免税市占率与新型市内免税店单店盈亏平衡</strong>
-   - <strong>量化锚点</strong>：对照海口海关每月披露的海南离岛免税总销售额，验证中免海南六店（三亚店、海口国际免税城、美兰机场店、日月广场店等）的合计销售额市占率是否牢牢守在<strong>78%—82%以上</strong>；同时观察广州、深圳、成都等新开市内免税店能否在开业后<strong>18—24个月内</strong>跑通单店盈亏平衡模型。</p>
+<p><strong>【路标四：行业竞争身位与政策红利转化】盯紧海南离岛免税市占率与新型市内免税店单店盈亏平衡</strong></p>
+<ul>
+<li><strong>量化锚点</strong>：对照海口海关每月披露的海南离岛免税总销售额，验证中免海南六店（三亚店、海口国际免税城、美兰机场店、日月广场店等）的合计销售额市占率是否牢牢守在<strong>78%—82%以上</strong>；同时观察广州、深圳、成都等新开市内免税店能否在开业后<strong>18—24个月内</strong>跑通单店盈亏平衡模型。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -1467,9 +2075,11 @@
 <h3 id="2-m2">2. 三大核心工程“单位建筑面积投资额（元/㎡）”微创拆解与同行对标</h3>
 <p>为了穿透重资产项目的真实造价水分，我们将中国中免当前最核心的三大工程（<strong>海口国际免税城综合体、三亚国际免税城一期2号地、三亚三期“中免太古里”</strong>）与中免历史标杆项目及同行同类免税/重奢商业综合体进行单方造价（元/㎡）横向拉通比对：</p>
 <ul>
-<li><strong>项目一：海口国际免税城综合体（总建面约93万㎡，总投资约128.60亿元）</strong></li>
 <li>
-<p><strong>整体与分地块造价</strong>：整个海口国际免税城项目位于海口西海岸新海港片区，涵盖6个地块（免税商业、有税商业、高档办公、高端酒店及人才社区），总建筑面积约 <strong>92.6—93.0万㎡</strong>，规划总投资约 <strong>128.0—128.6亿元</strong>，折合综合单位建筑面积投资额约为 <strong>13,828元/㎡</strong>。</p>
+<p><strong>项目一：海口国际免税城综合体（总建面约93万㎡，总投资约128.60亿元）</strong></p>
+<ul>
+<li><strong>整体与分地块造价</strong>：整个海口国际免税城项目位于海口西海岸新海港片区，涵盖6个地块（免税商业、有税商业、高档办公、高端酒店及人才社区），总建筑面积约 <strong>92.6—93.0万㎡</strong>，规划总投资约 <strong>128.0—128.6亿元</strong>，折合综合单位建筑面积投资额约为 <strong>13,828元/㎡</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>核心地块五（免税商业中心）单方造价</strong>：已于2022年10月28日率先投运转固的地块五（全球最大单体免税店），总建筑面积约 <strong>28.3万㎡</strong>，单体投资预算约 <strong>50.12亿元</strong>，折合单位建筑面积投资额为 <strong>17,710元/㎡</strong>。考虑到该项目采用了超大跨度双曲屋面钢结构（斩获中国建筑最高荣誉“鲁班奖”）以及内部“AURA天际秘林”定制化沉浸式中庭场景，1.77万元/㎡的单方造价在顶级商业综合体中属于扎实可控水平。</p>
@@ -1479,18 +2089,18 @@
 </li>
 <li>
 <p><strong>项目二：三亚国际免税城一期2号地（C区全球美妆广场+地标双奢酒店，总建面约17.25万㎡，追加后总投资约47.60亿元）</strong></p>
-</li>
-<li>
-<p><strong>预算追加前后的单方跃升</strong>：该项目总用地面积10.88万㎡，总建筑面积约 <strong>17.25万㎡</strong>。2021年3月立项时初始投资预算为 <strong>36.90亿元</strong>（对应初始单方造价 <strong>21,391元/㎡</strong>）；2024年2月，公司正式公告追加投资 <strong>10.70亿元</strong>（专项用于扩增停车与局部建筑面积、外立面双曲玻璃幕墙品质升级、机电及电力系统高规格配置），追加后总投资额攀升至 <strong>47.60亿元</strong>，折合单位建筑面积投资额高达 <strong>27,594元/㎡</strong>！</p>
+<ul>
+<li><strong>预算追加前后的单方跃升</strong>：该项目总用地面积10.88万㎡，总建筑面积约 <strong>17.25万㎡</strong>。2021年3月立项时初始投资预算为 <strong>36.90亿元</strong>（对应初始单方造价 <strong>21,391元/㎡</strong>）；2024年2月，公司正式公告追加投资 <strong>10.70亿元</strong>（专项用于扩增停车与局部建筑面积、外立面双曲玻璃幕墙品质升级、机电及电力系统高规格配置），追加后总投资额攀升至 <strong>47.60亿元</strong>，折合单位建筑面积投资额高达 <strong>27,594元/㎡</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>商业与酒店内部分拆</strong>：其中商业部分即已于2023年12月开业转固的三亚国际免税城C区（全球首家独栋美妆综合体“全球美妆广场”），建筑面积约 <strong>7.80万㎡</strong>，估算单方投入约 <strong>23,000元/㎡</strong>（对应原值约18亿元）；而在建收尾的高端酒店部分（引入洲际集团顶奢品牌“丽晶Regent”与生活方式潮牌“英迪格Indigo”），建筑面积约 <strong>9.45万㎡</strong>（连同地下配套及连廊），对应预算高达 <strong>29.6亿元</strong>，折合单位建筑面积投资额突破 <strong>31,300元/㎡</strong>。</p>
 </li>
 <li>
 <p><strong>项目三：三亚国际免税城三期——“三亚中免太古里”（中免50% : 太古地产50%合资，总建面约40万㎡，总投资约70—80亿元）</strong></p>
-</li>
-<li>
-<p><strong>单方造价水位</strong>：项目总占地面积约20.75万㎡，总建筑面积超 <strong>40万㎡</strong>（其中地上低密度开放式热带街区商业建面约18—20万㎡，地下车库及配套建面约20万㎡），总投资约 <strong>70—80亿元</strong>（中免按50%权益承担约35—40亿元资本金及股东借款支持，其中拿地成本约13.08亿元）。按总建面40万㎡折算，单位建筑面积投资额约为 <strong>17,500—20,000元/㎡</strong>。目前项目首开区及核心主体工程已全面封顶，正冲刺2026年底试营业至2027年春节期间分阶段落成开放。</p>
+<ul>
+<li><strong>单方造价水位</strong>：项目总占地面积约20.75万㎡，总建筑面积超 <strong>40万㎡</strong>（其中地上低密度开放式热带街区商业建面约18—20万㎡，地下车库及配套建面约20万㎡），总投资约 <strong>70—80亿元</strong>（中免按50%权益承担约35—40亿元资本金及股东借款支持，其中拿地成本约13.08亿元）。按总建面40万㎡折算，单位建筑面积投资额约为 <strong>17,500—20,000元/㎡</strong>。目前项目首开区及核心主体工程已全面封顶，正冲刺2026年底试营业至2027年春节期间分阶段落成开放。</li>
+</ul>
 </li>
 <li>
 <p><strong>横向对标 verdict（偏省还是偏贵？）</strong>：</p>
@@ -1609,9 +2219,11 @@
 </table></div>
 <h3 id="3-3666">3. 转固折旧摊销精算与海口免税城“36.66亿扭亏”的真实盈亏平衡实证</h3>
 <div class="annotated-row"><div class="main-col"><p>商业地产与重资产免税店的盈利模型本质是一场<strong>“有效毛利额 vs 刚性固定成本（折旧摊销+基础运维）”</strong>的跨栏赛。2026年半年报披露的一组关键数据，为我们提供了极其珍贵的真实世界实证标尺：</p><ul>
-<li><strong>实证锚点：海口国际免税城跨过盈亏平衡点的精确刻度</strong></li>
 <li>
-<p><strong>财报实证数据</strong>：2026年上半年（1—6月），海口国际免税城实现营业收入 <strong>36.66亿元</strong>（同比增长20%），实现净利润 <strong>0.11亿元</strong>（而2025年上半年同期为亏损 <strong>4.24亿元</strong>），开业三年半后首次在半年度维度正式跨过盈亏平衡线！</p>
+<p><strong>实证锚点：海口国际免税城跨过盈亏平衡点的精确刻度</strong></p>
+<ul>
+<li><strong>财报实证数据</strong>：2026年上半年（1—6月），海口国际免税城实现营业收入 <strong>36.66亿元</strong>（同比增长20%），实现净利润 <strong>0.11亿元</strong>（而2025年上半年同期为亏损 <strong>4.24亿元</strong>），开业三年半后首次在半年度维度正式跨过盈亏平衡线！</li>
+</ul>
 </li>
 <li>
 <p><strong>固定成本底牌还原</strong>：海口国际免税城地块五（28.3万㎡，总投50.12亿元）转固后，按房屋建筑物20—35年、高规格内装及机电设备5—10年加权平均折旧率（综合年折旧率约4.8%—5.0%）及土地摊销计算，<strong>每年刚性折旧摊销高达2.45—2.60亿元</strong>（折合每半年约1.25亿元）。叠加28万㎡超大室内空间的中央空调能耗、物业安保保洁、上千名驻店及后台运营人员薪酬、常规营销引流等付现固定费用约 <strong>9.8—10.2亿元/年</strong>（折合每半年约5.0亿元），海口店每半年的<strong>全口径刚性固定成本约为6.25—6.30亿元</strong>（全年约12.5亿元）。</p>
@@ -1641,9 +2253,11 @@
 <p>面对三亚一期2号地（17.25万㎡）与三亚三期“中免太古里”（40万㎡）陆续投产，加上原有的三亚一期A/B区（12万㎡）、二期河心岛（6.5万㎡）以及海口国际免税城（93万㎡），市场最核心的恐惧在于：<strong>中免在海南狂造上百万平方米商业体，究竟能不能被现有客流消化？</strong> 剥离表象后，三亚海棠湾与海口新海港呈现出截然不同的供需真相：</p>
 <h3 id="1">1. 三亚海棠湾集群：对顶奢大牌是“雪中送炭破除物理瓶颈”，对中端有税商业则是“内部洗牌与优胜劣汰”</h3>
 <ul>
-<li><strong>为什么说对顶奢矩阵是“雪中送炭”？</strong></li>
 <li>
-<p><strong>A/B区坪效过载与物理空间窒息</strong>：2026年上半年，三亚国际免税城实现营收 <strong>132.56亿元（+28.16%）</strong>，年化营收高达265亿元以上。在C区开业前，仅靠一期A/B区12万㎡建筑面积（实际营业面积仅约7万㎡）承载如此庞大的客流，单平年化坪效超过 <strong>22万元/㎡（营业面积坪效超35万元/㎡）</strong>，黄金时段热门香化与精品柜台前排起数十米长队，购物环境接近“豪华版菜市场”。</p>
+<p><strong>为什么说对顶奢矩阵是“雪中送炭”？</strong></p>
+<ul>
+<li><strong>A/B区坪效过载与物理空间窒息</strong>：2026年上半年，三亚国际免税城实现营收 <strong>132.56亿元（+28.16%）</strong>，年化营收高达265亿元以上。在C区开业前，仅靠一期A/B区12万㎡建筑面积（实际营业面积仅约7万㎡）承载如此庞大的客流，单平年化坪效超过 <strong>22万元/㎡（营业面积坪效超35万元/㎡）</strong>，黄金时段热门香化与精品柜台前排起数十米长队，购物环境接近“豪华版菜市场”。</li>
+</ul>
 </li>
 <li>
 <p><strong>顶奢三巨头（LV、爱马仕、香奈儿）的入驻死结</strong>：长期以来，路易威登（LV）、爱马仕（Hermès）、香奈儿（Chanel）等硬奢顶流之所以迟迟未在三亚免税城A/B区开出全品类免税旗舰店，一方面受制于品牌全球价格管控红线（严防免税折扣冲击内地有税专柜价格体系），另一方面正是因为<strong>顶奢大牌极度看重独栋建筑外立面展示面、私密VIP沙龙空间及毗邻的顶奢酒店配套</strong>，绝不肯屈尊挤在局促的百货楼层里。</p>
@@ -1653,9 +2267,9 @@
 </li>
 <li>
 <p><strong>哪里存在真实的“过剩与分流风险”？</strong></p>
-</li>
-<li>
-<p><strong>内部边缘资产虹吸</strong>：三亚中免太古里（40万㎡）一旦在2026年底至2027年全面开业，最先被抽干客流的不是一期A/B/C免税区，而是中免自己旗下的<strong>三亚国际免税城二期（河心岛项目，建面6.5万㎡，原定位有税餐饮与轻奢商业街）</strong>。太古里在品牌级次、建筑审美与运营水准上对二期河心岛构成降维打击，若二期不能迅速转型为纯餐饮娱乐或奥特莱斯折扣配套，极易沦为空置包袱。</p>
+<ul>
+<li><strong>内部边缘资产虹吸</strong>：三亚中免太古里（40万㎡）一旦在2026年底至2027年全面开业，最先被抽干客流的不是一期A/B/C免税区，而是中免自己旗下的<strong>三亚国际免税城二期（河心岛项目，建面6.5万㎡，原定位有税餐饮与轻奢商业街）</strong>。太古里在品牌级次、建筑审美与运营水准上对二期河心岛构成降维打击，若二期不能迅速转型为纯餐饮娱乐或奥特莱斯折扣配套，极易沦为空置包袱。</li>
+</ul>
 </li>
 <li>
 <p><strong>外部区域分流博弈</strong>：在三亚市场，三亚市区迎宾路商圈的<strong>海旅免税城（9.5万㎡）</strong>与<strong>国药中服三亚免税店（4.3万㎡）</strong>凭借距离凤凰机场与三亚湾更近的地理优势，持续用高折扣积分抢夺价格敏感型代购与大众游客；此外华润置地也在积极推进三亚商业布局。因此，三亚太古里能消化高净值顶奢客群的增量需求，但大众中端餐饮与普通有税零售必将面临客流摊薄。</p>
@@ -1747,9 +2361,9 @@
 </li>
 <li>
 <p><strong>海外自建及口岸扩张（樟宜/斯里兰卡/柬埔寨/东京银座）</strong>：</p>
-</li>
-<li>
-<p>在港澳之外，中免通过“中免国际”在<strong>新加坡樟宜机场</strong>（开设Qeelin麒麟珠宝、MCM精品店等）、<strong>斯里兰卡科伦坡港口城</strong>（开设大型市内免税店，覆盖出境游客与入境本国居民）、<strong>柬埔寨</strong>（金边/暹粒/西港市内店）及<strong>日本东京银座</strong>（周大福免税专柜等）开展多点布局，并签约数百家中国品牌推进“国潮出海”。</p>
+<ul>
+<li>在港澳之外，中免通过“中免国际”在<strong>新加坡樟宜机场</strong>（开设Qeelin麒麟珠宝、MCM精品店等）、<strong>斯里兰卡科伦坡港口城</strong>（开设大型市内免税店，覆盖出境游客与入境本国居民）、<strong>柬埔寨</strong>（金边/暹粒/西港市内店）及<strong>日本东京银座</strong>（周大福免税专柜等）开展多点布局，并签约数百家中国品牌推进“国潮出海”。</li>
+</ul>
 </li>
 <li>
 <p><strong>刻度定位</strong>：这一子板块采取“小步快跑、单点专柜与局部特许经营”策略，目前处于<strong>局部单点跑通盈亏平衡、但整体体量尚小（合计年营收十余亿元级别）的战略探路期</strong>。</p>
@@ -1893,8 +2507,10 @@
 </ol>
 <h3 id="2_2">2. 买方终局定性裁决：到底哪块是高赔率真期权？哪块是战略占位鸡肋？</h3>
 <div class="annotated-row"><div class="main-col"><p>站在严谨的买方资本配置视角，我们对这两大新曲线给出冷峻、明确、绝不含糊的最终定性：</p><ul>
-<li><strong>裁决一：【收购DFS港澳核心资产 + LVMH股权战略绑定】 ➔ 属于教科书级的“低成本、高赔率真实高价值期权（且兼具即期高确定性现金牛属性）”！</strong></li>
+<li><strong>裁决一：【收购DFS港澳核心资产 + LVMH股权战略绑定】 ➔ 属于教科书级的“低成本、高赔率真实高价值期权（且兼具即期高确定性现金牛属性）”！</strong><ul>
 <li><strong>定量与定性铁证</strong>：</li>
+</ul>
+</li>
 </ul><ol>
 <li>
 <p><strong>价格极度便宜，安全边际极厚</strong>：净现金流出仅约 <strong>14.8亿元人民币</strong>（2.94亿美元交割价减去LVMH及米勒家族认购H股回笼的6.9亿港元），且在交割最后一刻精准切除了香港广东道高租亏损毒瘤。以留存的澳门7大赌场核心店+香港铜锣湾店年化 <strong>2.0—2.5亿元以上</strong> 的稳态净利潜力计算，中免这笔并购的<strong>静态净现金投资回报率（ROIC）高达13.5%—17.0%，投资回收期仅需6—7年</strong>，远优于国内新建重资产商业体（回收期12—15年）。</p>
@@ -1903,8 +2519,10 @@
 <p><strong>赔率极高</strong>：向下有澳门博彩旅游中场客流与四季名店/永利皇宫成熟柜台现金流托底；向上则锁死了DFS大中华区品牌独家使用权，并拿到LVMH集团股权背书，为海南封关后重奢供应链升级及中免国际（cdf International）未来在港股或国际资本市场独立运作埋下了高赔率伏笔。</p>
 </li>
 </ol><ul>
-<li><strong>裁决二：【国内新型出境市内免税店（广州/深圳/成都等19城）】 ➔ 在现行政策框架下，属于典型的“需要长期熬时间的防御性占位资产（战略卡位鸡肋）”！</strong></li>
+<li><strong>裁决二：【国内新型出境市内免税店（广州/深圳/成都等19城）】 ➔ 在现行政策框架下，属于典型的“需要长期熬时间的防御性占位资产（战略卡位鸡肋）”！</strong><ul>
 <li><strong>定量与定性铁证</strong>：</li>
+</ul>
+</li>
 </ul><ol>
 <li>
 <p><strong>短期业绩贡献可忽略不计</strong>：只要<strong>“仅限60天内出境旅客购买 + 市内付款口岸隔离区提货 + 国人无市内即购即提免税额度”</strong>这三道制度紧箍咒不解除，国内市内免税店就注定无法跑通高坪效单店模型，未来2—3年内对中免530亿元营收和35—45亿元净利大盘的实质贡献将长期停留在 <strong>1%以内</strong> 的噪音级别。</p>
@@ -2012,8 +2630,10 @@
 <hr/>
 <h3 id="2344">二、 景气度对质：真实复苏还是渠道压库？为什么中免海南大涨23.44%远抛全岛大盘？</h3>
 <div class="annotated-row"><div class="main-col"><p>将中国中免的资产负债表先行指标与海口海关、上海机场及王府井的数据放在同一张显微镜下，可以清晰还原高端旅游零售的真实水温：</p><ol>
-<li><strong>全行业真实需求定性：高净值散客驱动的“结构性温和复苏”，绝非向下游压库</strong>
-   - <strong>排雷“压库造假”可能</strong>：免税零售是典型的 <strong>B2C 现款现货生意</strong>（除极少量线上平台合作外，几乎不存在向经销商赊销压货的链条）。核查中免应收账款，2025年末仅 <strong>0.73亿元</strong>，2026年三季报末仅 <strong>1.12亿元</strong>，占388.21亿元营收的比重不到 <strong>0.29%</strong>；再看代表会员积分池与预收礼品卡的<strong>合同负债</strong>，中免从2025年末的 <strong>10.17亿元—11.63亿元</strong>（其中客户消费奖励积分余额高达 <strong>6.21亿元</strong>）稳步运行至2026年9月末的 <strong>11.56亿元</strong>，说明终端会员复购粘性扎实。</li>
+<li><strong>全行业真实需求定性：高净值散客驱动的“结构性温和复苏”，绝非向下游压库</strong><ul>
+<li><strong>排雷“压库造假”可能</strong>：免税零售是典型的 <strong>B2C 现款现货生意</strong>（除极少量线上平台合作外，几乎不存在向经销商赊销压货的链条）。核查中免应收账款，2025年末仅 <strong>0.73亿元</strong>，2026年三季报末仅 <strong>1.12亿元</strong>，占388.21亿元营收的比重不到 <strong>0.29%</strong>；再看代表会员积分池与预收礼品卡的<strong>合同负债</strong>，中免从2025年末的 <strong>10.17亿元—11.63亿元</strong>（其中客户消费奖励积分余额高达 <strong>6.21亿元</strong>）稳步运行至2026年9月末的 <strong>11.56亿元</strong>，说明终端会员复购粘性扎实。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>存货从153.02亿升至190.73亿的真实去向</strong>：中免2026Q3末存货较年初增加 <strong>37.71亿元</strong>（+24.64%），并非终端滞销积压，而是由两大主动战略动作叠加所致：一是2026年完成对<strong>DFS大中华区（港澳）零售业务的并购并表</strong>，直接并入了港澳核心门店的高价值现货库存；二是针对2025年11月离岛免税新政红利释放及2026年第四季度（海南全岛封关运作节点、双十一及春节旺季）进行的<strong>硬奢与畅销香化主动备货</strong>。</p>
@@ -2022,8 +2642,10 @@
 <p><strong>上下游数据交叉印证</strong>：海口海关数据显示，自2025年11月1日离岛免税政策第十次优化调整（新增岛内居民一年一次离岛后不限次“即购即提”、把离岛且离境旅客纳入免税额度、扩容电子消费与国潮品类）后，海南免税彻底扭转了2025年全年的微跌态势（-1.8%），<strong>2026年上半年全岛免税购物金额达199.2亿元（+18.8%），1—9月累计达254.6亿元（+14.9%），新政一周年（2025.11—2026.10）达334.5亿元（+13.8%）</strong>；与此同时，上海机场2025年旅客吞吐量突破 <strong>1.35亿人次</strong>（+8.3%）创历史新高，2026上半年免税合同收入环比2025下半年激增 <strong>1.4倍</strong> 至 <strong>4.29亿元</strong>。海关流水与枢纽机场客流双重验证：真实高端出行与免税消费正在稳步复苏。</p>
 </li>
 </ul><ol start="2">
-<li><strong>核心悬念拆解：为什么2026H1海口海关全岛免税增长18.8%，而中免海南营收却暴涨23.44%、三亚店净利飙升142.33%？</strong>
-   - <strong>第一重真相：价格战终结与“套代购”出清引发的龙头马太效应</strong>。在2022—2024年期间，海南本土二线持牌方（海旅免税、海控免税等）为了抢夺市场份额，曾采取激进的“香化深折大促 + 导游/黄牛高额返点”策略，一度将中免在海南的市占率从90%以上挤压至80%左右。但进入2025—2026年，一方面海口海关持续保持对“套代购”走私的高压精准打击，另一方面雅诗兰黛、欧莱雅、资生堂等国际美妆巨头为维护全球品牌价盘，全面收紧了对二线免税商的低价供货与促销返利支持。失去“低价倾销”筹码后，海旅免税与海控免税客流明显流失，而<strong>中免2026年前三季度在海南离岛免税市场的份额同比逆势提升逾2个百分点，重新巩固了85%以上的绝对统治地位</strong>。</li>
+<li><strong>核心悬念拆解：为什么2026H1海口海关全岛免税增长18.8%，而中免海南营收却暴涨23.44%、三亚店净利飙升142.33%？</strong><ul>
+<li><strong>第一重真相：价格战终结与“套代购”出清引发的龙头马太效应</strong>。在2022—2024年期间，海南本土二线持牌方（海旅免税、海控免税等）为了抢夺市场份额，曾采取激进的“香化深折大促 + 导游/黄牛高额返点”策略，一度将中免在海南的市占率从90%以上挤压至80%左右。但进入2025—2026年，一方面海口海关持续保持对“套代购”走私的高压精准打击，另一方面雅诗兰黛、欧莱雅、资生堂等国际美妆巨头为维护全球品牌价盘，全面收紧了对二线免税商的低价供货与促销返利支持。失去“低价倾销”筹码后，海旅免税与海控免税客流明显流失，而<strong>中免2026年前三季度在海南离岛免税市场的份额同比逆势提升逾2个百分点，重新巩固了85%以上的绝对统治地位</strong>。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>第二重真相：重奢与高客单价精品矩阵的独占壁垒</strong>。海关统计显示，2026年1—9月海南离岛免税购物金额增长 <strong>14.9%</strong>，购物人次增长约 <strong>9%—12%</strong>，但购物件数仅微增 <strong>4.4%</strong>——这意味着<strong>“件单价与客单价的显著抬升”</strong>是本轮复苏的核心引擎！而在海南全岛，路易威登（LV）、迪奥（Dior）、爱马仕（Hermès）、卡地亚（Cartier）、梵克雅宝（Van Cleef &amp; Arpels）等顶级重奢门店及独家首发腕表珠宝，几乎100%集中在中免旗下的<strong>三亚国际免税城（26H1营收132.56亿元，+28.16%；净利14.67亿元，+142.33%）</strong>与<strong>海口国际免税城（26H1营收36.66亿元，+20.00%；净利0.11亿元，成功扭亏为盈）</strong>。当高净值自由行散客重返海南，高单价精品消费天然向中免两大旗舰综合体高度富集。</p>
@@ -2042,8 +2664,10 @@
 <p>为什么在全球旅游零售行业普遍沦为“微利苦力”的当下——全球老大 <strong>Avolta</strong> 核心净利率仅 <strong>4.70%</strong>（IFRS归母净利率仅 <strong>2%—3.2%</strong>）、亚洲老牌巨头 <strong>韩国新罗免税店</strong> 2025年净利率为 <strong>-4.3%</strong>（2026年砍掉仁川机场亏损标段后营业利润率也才 <strong>3.6%—4.7%</strong>）、国内对手 <strong>王府井</strong> 扣非净利率为 <strong>-0.37%</strong>——唯独<strong>中国中免</strong>能在2026年前三季度交出 <strong>9.45%</strong> 的归母净利率？</p>
 <p>我们通过财务报表同口径还原，将这高出的 <strong>5—7个百分点超额净利率</strong> 拆解为三大硬核来源：</p>
 <ol>
-<li><strong>采购端拆解：免税毛利率比王府井高出 17.59 个百分点的“源头一级直采霸权”</strong>
-   - <strong>揭穿表面毛利率的会计错觉</strong>：初看财报，Avolta 综合毛利率高达 <strong>62.6%</strong>，王府井整体毛利率也有 <strong>38.82%</strong>，似乎都比中免的综合毛利率（2025年 <strong>32.75%</strong>、2026H1 <strong>33.90%</strong>）更高。但这完全是会计核算方法与业务结构差异造成的假象：</li>
+<li><strong>采购端拆解：免税毛利率比王府井高出 17.59 个百分点的“源头一级直采霸权”</strong><ul>
+<li><strong>揭穿表面毛利率的会计错觉</strong>：初看财报，Avolta 综合毛利率高达 <strong>62.6%</strong>，王府井整体毛利率也有 <strong>38.82%</strong>，似乎都比中免的综合毛利率（2025年 <strong>32.75%</strong>、2026H1 <strong>33.90%</strong>）更高。但这完全是会计核算方法与业务结构差异造成的假象：</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -2054,8 +2678,10 @@
 </li>
 </ul>
 <ol start="2">
-<li><strong>渠道费用端拆解：海南“自有重资产物业”对比国际同行“天价机场过路费”的降维打击</strong>
-   - <strong>国际巨头的死穴在租金</strong>：Avolta 虽然手握 62.6% 的毛利率，但旗下上千家门店绝大多数租赁于全球各大国际机场，每年必须向机场业主缴纳高达营收 <strong>28%—32% 的特许经营租金（Concession Fees）</strong>，再加上欧美刚性的工会人工成本（占营收 <strong>14%—16%</strong>），直接把62.6%的毛利啃食殆尽；韩国新罗免税店更是被仁川机场按客流人头挂钩的固定保底租金（MAG）逼到2025年巨亏逾1700亿韩元，最终在2026年4月16日宁可赔付违约金也要逃离仁川机场DF1标段。</li>
+<li><strong>渠道费用端拆解：海南“自有重资产物业”对比国际同行“天价机场过路费”的降维打击</strong><ul>
+<li><strong>国际巨头的死穴在租金</strong>：Avolta 虽然手握 62.6% 的毛利率，但旗下上千家门店绝大多数租赁于全球各大国际机场，每年必须向机场业主缴纳高达营收 <strong>28%—32% 的特许经营租金（Concession Fees）</strong>，再加上欧美刚性的工会人工成本（占营收 <strong>14%—16%</strong>），直接把62.6%的毛利啃食殆尽；韩国新罗免税店更是被仁川机场按客流人头挂钩的固定保底租金（MAG）逼到2025年巨亏逾1700亿韩元，最终在2026年4月16日宁可赔付违约金也要逃离仁川机场DF1标段。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -2066,24 +2692,32 @@
 </li>
 </ul>
 <ol start="3">
-<li><strong>财务费用端拆解：百亿净现金躺赚利息 vs 同行债务付息</strong>
-   - Avolta 因历史上多次杠杆并购（收购 World Duty Free、Hudson、Autogrill）背负沉重有息债务，每年需支付巨额债券利息；王府井2026年前三季度财务费用也高达 <strong>2.51亿元</strong>（占营收3.53%）。
-   - 反观中国中免，账面常年趴着 <strong>234.08亿—337.81亿元</strong> 的充沛货币资金，几乎零有息长债，2026年前三季度财务费用为 <strong>-3.60亿元</strong>（净利息收入为正，增厚净利率 <strong>+0.93个百分点</strong>）。“源头直采高毛利 + 海南自有物业免交机场暴利租 + 机场新约降扣点 + 账面巨额净现金生息”，四大齿轮咬合，铸就了中免傲视全球同行的 <strong>9.45%</strong> 归母净利率。</li>
+<li><strong>财务费用端拆解：百亿净现金躺赚利息 vs 同行债务付息</strong><ul>
+<li>Avolta 因历史上多次杠杆并购（收购 World Duty Free、Hudson、Autogrill）背负沉重有息债务，每年需支付巨额债券利息；王府井2026年前三季度财务费用也高达 <strong>2.51亿元</strong>（占营收3.53%）。</li>
+<li>反观中国中免，账面常年趴着 <strong>234.08亿—337.81亿元</strong> 的充沛货币资金，几乎零有息长债，2026年前三季度财务费用为 <strong>-3.60亿元</strong>（净利息收入为正，增厚净利率 <strong>+0.93个百分点</strong>）。“源头直采高毛利 + 海南自有物业免交机场暴利租 + 机场新约降扣点 + 账面巨额净现金生息”，四大齿轮咬合，铸就了中免傲视全球同行的 <strong>9.45%</strong> 归母净利率。</li>
+</ul>
+</li>
 </ol>
 <hr/>
 <h3 id="_27">四、 份额攻守结论：过去一年半，三大核心战场究竟谁在抢谁的蛋糕？</h3>
 <div class="annotated-row"><div class="main-col"><p>综合2025年至2026年三季报的三方数据，中国高端旅游零售的版图重构已尘埃落定：</p><ol>
 <li>
-<p><strong>海南离岛主战场：中免全面反攻，收复二线对手城池</strong>
-   - <strong>攻守态势</strong>：<strong>中免攻、海旅/海控/王府井守</strong>。2026H1中免海南营收大涨 <strong>23.44%</strong>（185.54亿元），显著跑赢海口海关全岛大盘（+18.8%），2026年前三季度全岛市占率同比提升逾 <strong>2个百分点</strong>（重回85%+统治水位）。二线对手因丧失价格战返点空间及缺乏重奢配货，份额被中免实质性收回；王府井旗下的万宁国际免税港虽带动其免税分部前三季度实现3.17亿元营收，但体量尚不及中免三亚单店零头的零头（三亚店半年即达132.56亿元），且受困于19.38%的低毛利率无法形成威胁。</p>
+<p><strong>海南离岛主战场：中免全面反攻，收复二线对手城池</strong></p>
+<ul>
+<li><strong>攻守态势</strong>：<strong>中免攻、海旅/海控/王府井守</strong>。2026H1中免海南营收大涨 <strong>23.44%</strong>（185.54亿元），显著跑赢海口海关全岛大盘（+18.8%），2026年前三季度全岛市占率同比提升逾 <strong>2个百分点</strong>（重回85%+统治水位）。二线对手因丧失价格战返点空间及缺乏重奢配货，份额被中免实质性收回；王府井旗下的万宁国际免税港虽带动其免税分部前三季度实现3.17亿元营收，但体量尚不及中免三亚单店零头的零头（三亚店半年即达132.56亿元），且受困于19.38%的低毛利率无法形成威胁。</li>
+</ul>
 </li>
 <li>
-<p><strong>京沪核心枢纽机场战场：中免主动“以空间换利润”，与杜福睿（Avolta）合资分治上海两场</strong>
-   - <strong>攻守态势</strong>：<strong>打破独家垄断，进入“中免 + 杜福睿 + 上海机场参股49%”的理性共赢时代</strong>。在2026年1月1日启幕的上海机场新8年周期中，运营26年的“日上上海”单一主体退场，<strong>杜福睿（Avolta）拿下了浦东T1航站楼及S1卫星厅</strong>，而<strong>中国中免守住了基本盘最肥厚的浦东T2航站楼、S2卫星厅及虹桥T1航站楼</strong>，且上海机场在两家运营合资公司中均持股 <strong>49%</strong>。表面上看，中免让出了浦东T1/S1的流水份额给外资巨头杜福睿；但实质上，中免借此彻底终结了过往被机场单一高保底租金绑架的宿命，将提成率锁死在 <strong>8%—24%</strong> 的盈利安全区内，实现了从“赔本赚吆喝保垄断”向“高质量利润契约”的惊险一跃。</p>
+<p><strong>京沪核心枢纽机场战场：中免主动“以空间换利润”，与杜福睿（Avolta）合资分治上海两场</strong></p>
+<ul>
+<li><strong>攻守态势</strong>：<strong>打破独家垄断，进入“中免 + 杜福睿 + 上海机场参股49%”的理性共赢时代</strong>。在2026年1月1日启幕的上海机场新8年周期中，运营26年的“日上上海”单一主体退场，<strong>杜福睿（Avolta）拿下了浦东T1航站楼及S1卫星厅</strong>，而<strong>中国中免守住了基本盘最肥厚的浦东T2航站楼、S2卫星厅及虹桥T1航站楼</strong>，且上海机场在两家运营合资公司中均持股 <strong>49%</strong>。表面上看，中免让出了浦东T1/S1的流水份额给外资巨头杜福睿；但实质上，中免借此彻底终结了过往被机场单一高保底租金绑架的宿命，将提成率锁死在 <strong>8%—24%</strong> 的盈利安全区内，实现了从“赔本赚吆喝保垄断”向“高质量利润契约”的惊险一跃。</li>
+</ul>
 </li>
 <li>
-<p><strong>粤港澳大湾区与海外战场：中免抄底收编 LVMH 旗下 DFS 港澳核心资产</strong>
-   - <strong>攻守态势</strong>：<strong>中免强势出海鲸吞，外资老牌免税商战略撤退</strong>。2026年中免抓住国际奢侈品旅游零售洗牌窗口，果断完成对 <strong>DFS大中华区（港澳）核心零售业务</strong> 的收购与并表，直接推动中免2026年前三季度国际业务收入同比暴增 <strong>71%</strong>。此举不仅将港澳核心市中心免税大店收入囊中，更打通了大湾区与海南封关后的跨境供应链与高净值会员池。</p>
+<p><strong>粤港澳大湾区与海外战场：中免抄底收编 LVMH 旗下 DFS 港澳核心资产</strong></p>
+<ul>
+<li><strong>攻守态势</strong>：<strong>中免强势出海鲸吞，外资老牌免税商战略撤退</strong>。2026年中免抓住国际奢侈品旅游零售洗牌窗口，果断完成对 <strong>DFS大中华区（港澳）核心零售业务</strong> 的收购与并表，直接推动中免2026年前三季度国际业务收入同比暴增 <strong>71%</strong>。此举不仅将港澳核心市中心免税大店收入囊中，更打通了大湾区与海南封关后的跨境供应链与高净值会员池。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>懂得在什么时候放弃那些“看起来很威风、实际上倒贴钱”的市场份额，是管理层走向成熟的标志。中免在上海机场让出半个航站楼给欧洲人，换来未来8年极其温和的租金抽成，转头又去港澳把DFS的黄金店面买进自己口袋——这就像一个精明的德州扑克老手，果断弃掉赔率极差的鸡肋牌，把筹码全推向赢面最大的主池。</p></div></div></div></div>
 
@@ -2157,16 +2791,20 @@
 <hr/>
 <h3 id="_29">二、 资产质量排雷：四大核心会计科目深挖</h3>
 <div class="annotated-row"><div class="main-col"><h4 id="1-15319073">1. 存货跌价准备排雷：153亿—190.73亿存货背后，临期香化是“少提藏雷”还是“严苛藏富”？</h4><p>对于任何一家手握近两百亿存货的零售企业，买方投资者最恐惧的噩梦就是“仓库里堆满了快过期的护肤品，管理层为了保利润迟迟不提减值”。我们直接穿透中国中免年报附注与审计师（安永华明会计师事务所）的“关键审计事项”底稿，进行三层交叉验算：</p><ul>
-<li><strong>第一层：计提比例与同行横向对标</strong></li>
-<li>截至2025年12月31日，中国中免存货账面原值为 <strong>157.83亿元</strong>（15,783,298,972.78元），累计计提存货跌价准备 <strong>4.82亿元</strong>（481,676,783.24元），存货账面净值为 <strong>153.02亿元</strong>，综合存货跌价准备计提比例为 <strong>3.05%</strong>（<span class="math-inline">4.82  ÷  157.83</span>）。</li>
 <li>
-<p>横向对比国内自营与联营结合的零售同行<strong>王府井（600859.SH）</strong>：2025年末王府井存货账面余额为 <strong>15.57亿元</strong>，计提存货跌价准备 <strong>0.52亿元</strong>（5,152.84万元），综合计提比例为 <strong>3.31%—3.34%</strong>（2025年当年计提2,639.36万元，转回或转销2,202.56万元）。两者的跌价准备计提水位几乎处于同一水平线（3.05% vs 3.31%）。</p>
+<p><strong>第一层：计提比例与同行横向对标</strong></p>
+<ul>
+<li>截至2025年12月31日，中国中免存货账面原值为 <strong>157.83亿元</strong>（15,783,298,972.78元），累计计提存货跌价准备 <strong>4.82亿元</strong>（481,676,783.24元），存货账面净值为 <strong>153.02亿元</strong>，综合存货跌价准备计提比例为 <strong>3.05%</strong>（<span class="math-inline">4.82  ÷  157.83</span>）。</li>
+<li>横向对比国内自营与联营结合的零售同行<strong>王府井（600859.SH）</strong>：2025年末王府井存货账面余额为 <strong>15.57亿元</strong>，计提存货跌价准备 <strong>0.52亿元</strong>（5,152.84万元），综合计提比例为 <strong>3.31%—3.34%</strong>（2025年当年计提2,639.36万元，转回或转销2,202.56万元）。两者的跌价准备计提水位几乎处于同一水平线（3.05% vs 3.31%）。</li>
+</ul>
 </li>
 <li>
 <p><strong>第二层：商品物理属性与保质期结构穿透</strong></p>
-</li>
+<ul>
 <li>为什么中免3.05%的计提比例不仅不激进，反而比普通百货同行更加严苛保守？关键在于<strong>免税存货的品类物理结构</strong>！</li>
 <li>中免的存货主要由三大板块构成：</li>
+</ul>
+</li>
 </ul><ol>
 <li>
 <p><strong>高端烟酒（轩尼诗、马爹利、麦卡伦等洋酒及茅台、五粮液等国酒）与硬奢腕表珠宝</strong>：这类商品<strong>完全没有物理保质期</strong>（高端烈酒与年份茅台甚至越陈越贵，硬奢名表与黄金珠宝每年随品牌方全球提价5%—10%而自然升值），其可变现净值远高于历史进货成本，实质跌价风险趋近于零！</p>
@@ -2175,13 +2813,17 @@
 <p><strong>精品皮具箱包与时尚配饰</strong>：无物理保质期，仅有季节性款式更替风险，通常通过奥莱折扣区或季末特卖即可顺畅高于成本出清。</p>
 </li>
 <li>
-<p><strong>香水与化妆品（香化品类）</strong>：这是唯一受物理保质期硬约束的品类（国际美妆保质期通常为 <strong>36个月 / 3年</strong>，距离到期不足6—12个月即需进入临期促销通道）。
-  - 若将占存货总额约35%—45%的“无保质期/升值型烟酒腕表硬奢”剔除，4.82亿元的存货跌价准备几乎全部集中覆盖在香化及过季时尚单品之上，相当于<strong>对香化品类的实际有效跌价计提率高达 5.5%—7.0% 以上</strong>！</p>
+<p><strong>香水与化妆品（香化品类）</strong>：这是唯一受物理保质期硬约束的品类（国际美妆保质期通常为 <strong>36个月 / 3年</strong>，距离到期不足6—12个月即需进入临期促销通道）。</p>
+<ul>
+<li>若将占存货总额约35%—45%的“无保质期/升值型烟酒腕表硬奢”剔除，4.82亿元的存货跌价准备几乎全部集中覆盖在香化及过季时尚单品之上，相当于<strong>对香化品类的实际有效跌价计提率高达 5.5%—7.0% 以上</strong>！</li>
+</ul>
 </li>
 </ol><ul>
-<li><strong>第三层：计提、转回与转销的动态闭环验证</strong></li>
 <li>
-<p>根据中免会计政策，资产负债表日管理层严格按单品库龄、历史动销率及预计售价减去估计销售费用和相关税费后的<strong>可变现净值（NRV）</strong>计提跌价准备；一旦临期香化通过会员积分换购、线上有税商城（cdf会员购）或促销专区售出，原先计提的跌价准备随即执行<strong>“转销（Write-off）”</strong>冲减当期主营业务成本；若市场回暖、折扣收窄导致可变现净值回升，则在原计提范围内予以<strong>“转回”</strong>。</p>
+<p><strong>第三层：计提、转回与转销的动态闭环验证</strong></p>
+<ul>
+<li>根据中免会计政策，资产负债表日管理层严格按单品库龄、历史动销率及预计售价减去估计销售费用和相关税费后的<strong>可变现净值（NRV）</strong>计提跌价准备；一旦临期香化通过会员积分换购、线上有税商城（cdf会员购）或促销专区售出，原先计提的跌价准备随即执行<strong>“转销（Write-off）”</strong>冲减当期主营业务成本；若市场回暖、折扣收窄导致可变现净值回升，则在原计提范围内予以<strong>“转回”</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>铁证验证</strong>：如果中免仓库里真藏着未计提的临期香化地雷，那么到了2026年，公司必然被迫大甩卖清仓，导致毛利率断崖式暴跌。但事实恰恰相反——<strong>2026年上半年中免综合毛利率从2025年的 32.75% 逆势抬升 1.15个百分点至 33.90%！</strong> 这铁证如山地说明：2022—2024年疫情期间积累的高库龄香化包袱，早已在2024—2025年（2025全年资产减值损失合计高达8.79亿元）被彻底计提并消化完毕；而2026年三季报末存货净值从 <strong>153.02亿元</strong> 升至 <strong>190.73亿元</strong>，完全是因为<strong>并表DFS港澳门店优质现货</strong>以及为<strong>2026年四季度海南封关旺季主动备货</strong>所致，库龄结构处于近五年最健康的黄金状态。</p>
@@ -2195,8 +2837,10 @@
 <hr/>
 <h4 id="2-1162-4682">2. 固定资产折旧与租赁负债深挖：非流动租赁负债从 11.62亿 激增至 46.82亿 的会计玄机</h4>
 <ol>
-<li><strong>固定资产折旧年限与装修摊销审视：规矩老实的央企账本</strong>
-   - 核查2025年报附注，中免固定资产采用年限平均法（直线法）计提折旧，预计净残值率通常为 <strong>5%</strong>。核心类别折旧年限如下：</li>
+<li><strong>固定资产折旧年限与装修摊销审视：规矩老实的央企账本</strong><ul>
+<li>核查2025年报附注，中免固定资产采用年限平均法（直线法）计提折旧，预计净残值率通常为 <strong>5%</strong>。核心类别折旧年限如下：</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -2213,8 +2857,10 @@
 </li>
 </ul>
 <ol start="2">
-<li><strong>使用权资产与非流动租赁负债暴增 300%+ 的穿透还原</strong>
-   - <strong>异常数据捕捉</strong>：对比2025年报与2026年三季报资产负债表，中免的<strong>使用权资产</strong>从2025年末的 <strong>14.29亿元</strong>（1,428,618,881.20元）暴增 <strong>360.5%</strong> 至2026年9月30日的 <strong>65.81亿元</strong>（6,580,952,981.40元）；与此同时，<strong>非流动租赁负债</strong>从2025年末的 <strong>11.62亿元</strong> 激增 <strong>302.9%</strong> 至2026年9月30日的 <strong>46.82亿元</strong>！</li>
+<li><strong>使用权资产与非流动租赁负债暴增 300%+ 的穿透还原</strong><ul>
+<li><strong>异常数据捕捉</strong>：对比2025年报与2026年三季报资产负债表，中免的<strong>使用权资产</strong>从2025年末的 <strong>14.29亿元</strong>（1,428,618,881.20元）暴增 <strong>360.5%</strong> 至2026年9月30日的 <strong>65.81亿元</strong>（6,580,952,981.40元）；与此同时，<strong>非流动租赁负债</strong>从2025年末的 <strong>11.62亿元</strong> 激增 <strong>302.9%</strong> 至2026年9月30日的 <strong>46.82亿元</strong>！</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -2238,13 +2884,17 @@
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3-338-784-dfs">3. 应收账款与商誉减值深挖：3.38亿日上减值“刮骨疗毒”与 7.84亿 DFS 新增商誉审视</h4><ol>
 <li>
-<p><strong>应收账款（1.12亿元）：零售界罕见的零坏账体质</strong>
-   - 2024年末、2025年末及2026年三季报末，中免应收账款账面价值分别为 <strong>0.98亿元</strong>、<strong>0.73亿元</strong> 和 <strong>1.12亿元</strong>。面对每年四五百亿的流水，1.12亿元应收账款占比仅 <strong>0.29%</strong>，周转天数不足 <strong>1天</strong>。
-   - 穿透账龄结构，90%以上均在1年以内，主要为机场业主代收银联/信用卡跨月清算的在途款项及极少量外交人员、远洋船员免税B端结算款，按预期信用损失模型计提坏账准备后，资产质量可谓滴水不漏。</p>
+<p><strong>应收账款（1.12亿元）：零售界罕见的零坏账体质</strong></p>
+<ul>
+<li>2024年末、2025年末及2026年三季报末，中免应收账款账面价值分别为 <strong>0.98亿元</strong>、<strong>0.73亿元</strong> 和 <strong>1.12亿元</strong>。面对每年四五百亿的流水，1.12亿元应收账款占比仅 <strong>0.29%</strong>，周转天数不足 <strong>1天</strong>。</li>
+<li>穿透账龄结构，90%以上均在1年以内，主要为机场业主代收银联/信用卡跨月清算的在途款项及极少量外交人员、远洋船员免税B端结算款，按预期信用损失模型计提坏账准备后，资产质量可谓滴水不漏。</li>
+</ul>
 </li>
 <li>
-<p><strong>商誉减值与并购商誉（4.85亿元 → 12.69亿元）：旧雷已排，新棋可控</strong>
-   - <strong>2025年计提日上上海 3.38亿元商誉减值（主动排雷）</strong>：中免于2018年收购日上上海51%股权时曾形成大额商誉。2025年12月，上海机场免税招标结果出炉，运营26年的日上上海不再作为单一垄断主体续约，而是改由中免新设合资公司（运营浦东T2/S2与虹桥T1）与杜福睿分治。面对日上上海原有主体经营范围的缩减，中免管理层与安永审计师没有采取任何粉饰递延手段，而是在 <strong>2025年报中果断对日上上海计提了 3.38亿元商誉减值准备</strong>，使2025年末账面商誉净值一举降至 <strong>4.85亿元</strong>。这一“刮骨疗毒”式的会计处理，虽然拉低了2025年当期归母净利润（35.86亿元），却让2026年的利润表彻底卸下了历史商誉包袱。</p>
+<p><strong>商誉减值与并购商誉（4.85亿元 → 12.69亿元）：旧雷已排，新棋可控</strong></p>
+<ul>
+<li><strong>2025年计提日上上海 3.38亿元商誉减值（主动排雷）</strong>：中免于2018年收购日上上海51%股权时曾形成大额商誉。2025年12月，上海机场免税招标结果出炉，运营26年的日上上海不再作为单一垄断主体续约，而是改由中免新设合资公司（运营浦东T2/S2与虹桥T1）与杜福睿分治。面对日上上海原有主体经营范围的缩减，中免管理层与安永审计师没有采取任何粉饰递延手段，而是在 <strong>2025年报中果断对日上上海计提了 3.38亿元商誉减值准备</strong>，使2025年末账面商誉净值一举降至 <strong>4.85亿元</strong>。这一“刮骨疗毒”式的会计处理，虽然拉低了2025年当期归母净利润（35.86亿元），却让2026年的利润表彻底卸下了历史商誉包袱。</li>
+</ul>
 </li>
 </ol><ul>
 <li>
@@ -2260,8 +2910,10 @@
 <hr/>
 <h3 id="962-1629">三、 激励与薪酬审计：央企高管递延考核机制与“减员 9.62% + 研发增 16.29%”的人效蝶变</h3>
 <div class="annotated-row"><div class="main-col"><ol>
-<li><strong>高管薪酬总额与央企任期契约化考核审计</strong>
-   - <strong>薪酬总额变动</strong>：根据2025年报披露，中国中免全体董事、监事及高级管理人员在2025年度实际获得的税前报酬合计为 <strong>2,123.11万元</strong>。面对536.94亿元营收与35.86亿元归母净利润的庞大体量，整个核心管理团队薪酬总额仅占归母净利润的 <strong>0.59%</strong>，远低于国际同行（如 Avolta 仅首席执行官一人的年薪加长期股票激励即折合人民币数千万元）。</li>
+<li><strong>高管薪酬总额与央企任期契约化考核审计</strong><ul>
+<li><strong>薪酬总额变动</strong>：根据2025年报披露，中国中免全体董事、监事及高级管理人员在2025年度实际获得的税前报酬合计为 <strong>2,123.11万元</strong>。面对536.94亿元营收与35.86亿元归母净利润的庞大体量，整个核心管理团队薪酬总额仅占归母净利润的 <strong>0.59%</strong>，远低于国际同行（如 Avolta 仅首席执行官一人的年薪加长期股票激励即折合人民币数千万元）。</li>
+</ul>
+</li>
 </ol><ul>
 <li>
 <p><strong>刚性挂钩与“7:2:1”递延支付锁扣</strong>：作为控股股东中国旅游集团旗下的旗舰央企，中免全面执行《经理层成员任期制和契约化管理办法》。高管薪酬由“基本年薪 + 绩效年薪 + 任期激励”三部分构成，其中绩效年薪与当年<strong>利润总额、归母净利润、净资产收益率（ROE）及国际化战略指标</strong>硬性挂钩，且严格实行<strong>递延支付制度（通常按当年发放70%、次年发放20%、第三年发放10%的 7:2:1 比例分三年兑现，并设有业绩下滑或重大风险追索扣回条款）</strong>。</p>
@@ -2270,8 +2922,8 @@
 <p><strong>股权激励缺失的利弊权衡</strong>：核查上市以来公告，中国中免截至2026年三季报<strong>尚未实施过管理层股票期权或限制性股票激励计划</strong>。客观而言，缺乏股权激励使高管团队少了一层与二级市场股东同步暴富的期权弹性；但在免税这种高度依赖国家特许经营牌照与海关政策红利的垄断型行业中，央企高管的“政治晋升锦标赛”与“任期利润硬考核”反而构成了强大的正向鞭策，同时彻底杜绝了欧美职业经理人（如早年 Dufry 管理层）为了短期行权而盲目举债高价并购、掏空公司资产负债表的道德风险。</p>
 </li>
 </ul><ol start="2">
-<li><strong>员工结构优化与人效（人均创收、人均创利）交叉验证</strong>
-   - <strong>果断瘦身 1,542 人，向数字化与高人效要利润</strong>：<ul>
+<li><strong>员工结构优化与人效（人均创收、人均创利）交叉验证</strong><ul>
+<li><strong>果断瘦身 1,542 人，向数字化与高人效要利润</strong>：</li>
 <li>穿透2024—2025年报员工结构表，中免在职员工总数从2024年末的 <strong>16,027人</strong> 大幅精简至2025年末的 <strong>14,485人</strong>，一年之内净减少 <strong>1,542人</strong>（减员幅度达 <strong>9.62%</strong>）！</li>
 <li>在14,485名在职员工中，人员结构高度精干：<strong>一线销售人员 8,129人</strong>（占比56.12%），<strong>采购供应链、数字化研发及运营支撑等人员 5,314人</strong>（占比36.69%），<strong>总部及分子公司管理人员仅 632人</strong>（占比仅 <strong>4.36%</strong>！对比传统国企动辄10%—15%的行政管理冗员率，中免后台极度扁平），<strong>财务人员 410人</strong>（占比2.83%）；全员中硕士及以上高学历人才达 <strong>692人</strong>。</li>
 </ul>
@@ -2661,9 +3313,11 @@
 </li>
 <li>
 <p><strong>静态死扛 vs 动态减震</strong>：</p>
-</li>
+<ul>
 <li>若管理层像木头人一样<strong>静态死扛</strong>（不削减任何营销返点、不调整销售绩效、不启动品牌方返利补偿）：毛利率每下跌1个百分点，税前毛利直接减少 <code>5.30亿元</code>，扣税及少数股东损益后归母净利减少约 <code>3.70亿—3.90亿元</code>。</li>
 <li>但在<strong>真实商业动态减震机制</strong>下：① 毛利率下跌源于促销让利或联营单价下调，机场扣点提成与商场联营分成随终端净销售额自动减少；② 公司同步冻结非必要广告投放、下调会员双倍积分活动频次（如2025—2026年销售费用率已成功优化控制）、并触发上游香化巨头（雅诗兰黛/欧莱雅）的年度保毛利阶梯返利条款（Rebate），可对冲掉约 <strong>35%—40%</strong> 的毛利跌幅冲击。</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h4 id="2-10-15">2. 压力情景二：人民币汇率大幅贬值导致进口采购成本飙升 10%，或海南离岛客流突发下滑 15%</h4>
@@ -2679,8 +3333,10 @@
 </li>
 <li>
 <p><strong>冲击设定 B（客流冲击：海南离岛免税客流突发下滑 15%）</strong>：假设因极端台风季或宏观出行紧缩，海南离岛免税客流突发下滑 <code>15%</code>（带动全公司总营收下滑约 <code>10.5%</code> 至 <code>474亿元</code>）：</p>
-</li>
+<ul>
 <li>在三亚与海口免税城，自有物业折旧（约 <code>6亿元</code>）属于固定成本，但导购提成、物流包装、海关监管费及机场提货点扣点（按离岛提货额的一定比例支付给美兰/凤凰机场）均属于<strong>完全变动成本</strong>，随营收下滑 <code>15%</code> 而同步自动缩减；同时公司可通过放缓季节性采购将存货转化为约 <code>15亿—20亿元</code> 的正向营运现金流入，使当期自由现金流（FCF）反而保持高度充沛！</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h4 id="3_2">3. 双极限压力测试全景量化推演表（单位：亿元人民币）</h4>
@@ -2829,10 +3485,12 @@
 <p>在二级市场上，平庸的交易员只看“总市值（Market Cap）”和表观市盈率（PE），而真正的买方并购者看的是 <strong>真实企业价值（True Enterprise Value, True EV）</strong>——即如果我们今天按二级市场价格把全流通股票100%买断私有化，同时承接公司账上所有的银行刚性债务，并把公司账上超出日常经营所需的“超额自由现金”直接装进自己口袋，我们实际掏出的净买断成本到底是多少？</p>
 <h4 id="1-ah-202611">1. 股本结构与 A/H 双市场最新市值基准（截至2026年11月上旬）</h4>
 <ul>
-<li><strong>最新总股本精确还原</strong>：</li>
-<li>2026年3月前原总股本为 <code>20.6886亿股</code>（其中 A股 <code>19.5248亿股</code>，原 H股 <code>1.1638亿股</code>）。</li>
 <li>
-<p>2026年3月19日完成交割收购 DFS 港澳业务后，公司向 LVMH 集团旗下全资附属公司 Delphine SAS 定向增发 <code>733.01万股</code> H股、向 DFS 联合创始人 Miller 家族信托旗下 Shoppers Holdings 定向增发 <code>463.74万股</code> H股，合计增发新 H股 <code>1,196.75万股</code>（约 <code>0.1197亿股</code>）。</p>
+<p><strong>最新总股本精确还原</strong>：</p>
+<ul>
+<li>2026年3月前原总股本为 <code>20.6886亿股</code>（其中 A股 <code>19.5248亿股</code>，原 H股 <code>1.1638亿股</code>）。</li>
+<li>2026年3月19日完成交割收购 DFS 港澳业务后，公司向 LVMH 集团旗下全资附属公司 Delphine SAS 定向增发 <code>733.01万股</code> H股、向 DFS 联合创始人 Miller 家族信托旗下 Shoppers Holdings 定向增发 <code>463.74万股</code> H股，合计增发新 H股 <code>1,196.75万股</code>（约 <code>0.1197亿股</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>最新总股本 = 20.8083亿股（约 20.81亿股）</strong>，其中 <strong>A股 19.5248亿股（占总股本 93.83%）</strong>，<strong>H股 1.2835亿股（占总股本 6.17%）</strong>。</p>
@@ -3110,20 +3768,26 @@
 <p>为了彻底扒开市场先生在恐慌与偏见中给出的荒谬定价，我们采用 <strong>Reverse SOTP（反向拆骨倒推法）</strong>——从当前二级市场总市值（A股 <code>1,109.08亿元</code> / H股隐含 <code>866.46亿元</code>）中，依次剥离出 <strong>① 账面净超额现金</strong> 与 <strong>② 仅三亚国际免税城一/二期单店价值</strong>，看看市场给中国中免麾下其余所有万亿级垄断牌照与重资产地标合计标了多少钱：</p>
 <ol>
 <li>
-<p><strong>第一刀：剥离账上可随时提走的“净超额现金（167.10亿元）”</strong>
-   - 如前表精确核算，2026Q3末账面货币资金 <code>234.08亿元</code>，扣除 <code>35.00亿元</code> 受限资金与日常营运备付底仓，再全额还清账上 <code>31.98亿元</code> 银行短期及长期借款后，剩余 <strong>167.10亿元净超额现金</strong>（占A股总市值的 <strong>15.07%</strong>，占H股隐含总市值的 <strong>19.29%</strong>）。这笔钱是100%无风险的真金白银。</p>
+<p><strong>第一刀：剥离账上可随时提走的“净超额现金（167.10亿元）”</strong></p>
+<ul>
+<li>如前表精确核算，2026Q3末账面货币资金 <code>234.08亿元</code>，扣除 <code>35.00亿元</code> 受限资金与日常营运备付底仓，再全额还清账上 <code>31.98亿元</code> 银行短期及长期借款后，剩余 <strong>167.10亿元净超额现金</strong>（占A股总市值的 <strong>15.07%</strong>，占H股隐含总市值的 <strong>19.29%</strong>）。这笔钱是100%无风险的真金白银。</li>
+</ul>
 </li>
 <li>
-<p><strong>第二刀：剥离“三亚国际免税城（海棠湾一/二期单店）”这台超级印钞机</strong>
-   - <strong>单店真实盈利底盘</strong>：根据2026年半年报实锤数据，仅2026年上半年（1—6月），三亚国际免税城单店即实现营业收入 <code>132.56亿元</code>（同比 <code>+28.16%</code>），实现净利润 <strong>14.67亿元</strong>（同比暴增 <code>+142.33%</code>），单店净利率高达 <strong>11.07%</strong>！结合下半年（尤其是Q4冬季海棠湾旅游旺季），2026年三亚国际免税城全年单店净利润稳稳落在 <strong>28.0亿—31.0亿元</strong>，加回单店自有建筑折旧与装修摊销（约 <code>3.8亿元</code>）并扣除日常维护CapEx（约 <code>1.3亿元</code>）后，<strong>三亚国际免税城单店每年的常态 Owner Earnings 高达 30.5亿—33.5亿元（取中枢 32.00亿元）</strong>！</p>
+<p><strong>第二刀：剥离“三亚国际免税城（海棠湾一/二期单店）”这台超级印钞机</strong></p>
+<ul>
+<li><strong>单店真实盈利底盘</strong>：根据2026年半年报实锤数据，仅2026年上半年（1—6月），三亚国际免税城单店即实现营业收入 <code>132.56亿元</code>（同比 <code>+28.16%</code>），实现净利润 <strong>14.67亿元</strong>（同比暴增 <code>+142.33%</code>），单店净利率高达 <strong>11.07%</strong>！结合下半年（尤其是Q4冬季海棠湾旅游旺季），2026年三亚国际免税城全年单店净利润稳稳落在 <strong>28.0亿—31.0亿元</strong>，加回单店自有建筑折旧与装修摊销（约 <code>3.8亿元</code>）并扣除日常维护CapEx（约 <code>1.3亿元</code>）后，<strong>三亚国际免税城单店每年的常态 Owner Earnings 高达 30.5亿—33.5亿元（取中枢 32.00亿元）</strong>！</li>
+</ul>
 </li>
 </ol>
 <ul>
 <li><strong>单店保守公允估值</strong>：作为拥有自有产权土地与商业综合体、坐拥海棠湾核心垄断区位、无需向外部房东交保底租金、ROIC超过 <code>30%</code> 的全球第一大免税地标，即便我们按极其严苛的 <strong>18倍—20倍 PE / Owner Earnings（对应内生回报率 5.0%—5.5%，低于Costco的40倍与LVMH的22倍）</strong> 给三亚国际免税城单店定价，仅这一座门店的独立公允价值就高达 <strong>576.00亿—640.00亿元（取基准 600.00亿元）</strong>！</li>
 </ul>
 <ol start="3">
-<li><strong>第三刀：看看剥离完“净现金 + 三亚单店”后，剩余全部核心资产的隐含标价是多少？</strong>
-   - <strong>A股市场隐含剩余资产标价</strong>：<code>1,109.08亿元（A股总市值） - 167.10亿元（净超额现金） - 600.00亿元（三亚免税城单店价值） =</code> <strong>341.98亿元</strong>（若扣除25.69亿一年内到期非流动负债及58.22亿少数股东权益，则剩余标价仅 <strong>258.07亿元</strong>）！</li>
+<li><strong>第三刀：看看剥离完“净现金 + 三亚单店”后，剩余全部核心资产的隐含标价是多少？</strong><ul>
+<li><strong>A股市场隐含剩余资产标价</strong>：<code>1,109.08亿元（A股总市值） - 167.10亿元（净超额现金） - 600.00亿元（三亚免税城单店价值） =</code> <strong>341.98亿元</strong>（若扣除25.69亿一年内到期非流动负债及58.22亿少数股东权益，则剩余标价仅 <strong>258.07亿元</strong>）！</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>H股市场隐含剩余资产标价</strong>：<code>866.46亿元（H股隐含总市值） - 167.10亿元（净超额现金） - 600.00亿元（三亚免税城单店价值） =</code> <strong>99.36亿元</strong>（若扣除一年内到期非流动负债及少数股东权益，则H股给剩余全部资产的标价是 <strong>15.45亿元</strong>，<strong>几乎等于 0元白送</strong>！）</li>
@@ -3394,16 +4058,22 @@
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3_3">3. 无条件认错离场的“三条基本面死刑证伪红线”</h4><p>真正的价值投资者从不死扛基本面已经变质的股票。一旦未来跟踪过程中出现以下 <strong>任意一条“基本面死刑证伪信号”</strong>，无论当时股价跌到多便宜，必须无条件推翻本报告的多头逻辑，立刻清仓认错离场：</p><ol>
 <li>
-<p><strong>证伪红线一（政策护城河崩塌）：国家全面放开国内普通百货商场与本土电商平台的“无额度、无出入境限制”香化与精品零关税/免消费税零售权，或海南全岛封关后取消“离岛免税额度与岛内居民正面清单限制”，允许任何无免税牌照的普通商业体在岛内自由向游客免税售卖香化与轻奢品</strong>。
-   - <em>底层逻辑</em>：中免高达 <code>33.90%</code> 的毛利率和 <code>26%+</code> 的核心业务 ROIC，根基在于“财政部等五部委核发的特许免税牌照 + 海关封闭监管体系”。若全岛封关演变为“全岛无门槛零关税大超市”（尽管目前政策已明确封关后仅对38类岛内居民日用品实施零关税，香化/精品仍严格锁定在离岛免税牌照渠道内），一旦未来政策底层发生颠覆性转向，中免的特许垄断溢价将永久性归零，沦为普通百货商场，必须立即清仓。</p>
+<p><strong>证伪红线一（政策护城河崩塌）：国家全面放开国内普通百货商场与本土电商平台的“无额度、无出入境限制”香化与精品零关税/免消费税零售权，或海南全岛封关后取消“离岛免税额度与岛内居民正面清单限制”，允许任何无免税牌照的普通商业体在岛内自由向游客免税售卖香化与轻奢品</strong>。</p>
+<ul>
+<li><em>底层逻辑</em>：中免高达 <code>33.90%</code> 的毛利率和 <code>26%+</code> 的核心业务 ROIC，根基在于“财政部等五部委核发的特许免税牌照 + 海关封闭监管体系”。若全岛封关演变为“全岛无门槛零关税大超市”（尽管目前政策已明确封关后仅对38类岛内居民日用品实施零关税，香化/精品仍严格锁定在离岛免税牌照渠道内），一旦未来政策底层发生颠覆性转向，中免的特许垄断溢价将永久性归零，沦为普通百货商场，必须立即清仓。</li>
+</ul>
 </li>
 <li>
-<p><strong>证伪红线二（资本配置纪律恶化 / 现金黑洞）：管理层违背轻资产与高分红承诺，将账上近 200亿元超额自由现金大规模挪用去开发非免税核心商圈的纯重资产文旅地产/主题公园/低效酒店群（导致年度总 CapEx 再次失控飙升至 40亿元以上），或向控股股东（中国旅游集团）进行大额低效不良资产关联收购，且连续两年分红率跌破 30%</strong>。
-   - <em>底层逻辑</em>：我们给予中免高估值的核心前提，是百亿级免税城基建已彻底进入尾声，账上 <code>167.10亿元</code> 净超额现金与每年 <code>53亿—70亿元</code> 的 Owner Earnings 属于全体股东。如果管理层染上“帝国建造癖（Empire Building）”，把印钞机吐出来的真金白银重新填进回报率低于5%的文旅重资产无底洞，那么 <code>167亿元</code> 净现金就不再是安全垫，而是毁灭价值的温床。</p>
+<p><strong>证伪红线二（资本配置纪律恶化 / 现金黑洞）：管理层违背轻资产与高分红承诺，将账上近 200亿元超额自由现金大规模挪用去开发非免税核心商圈的纯重资产文旅地产/主题公园/低效酒店群（导致年度总 CapEx 再次失控飙升至 40亿元以上），或向控股股东（中国旅游集团）进行大额低效不良资产关联收购，且连续两年分红率跌破 30%</strong>。</p>
+<ul>
+<li><em>底层逻辑</em>：我们给予中免高估值的核心前提，是百亿级免税城基建已彻底进入尾声，账上 <code>167.10亿元</code> 净超额现金与每年 <code>53亿—70亿元</code> 的 Owner Earnings 属于全体股东。如果管理层染上“帝国建造癖（Empire Building）”，把印钞机吐出来的真金白银重新填进回报率低于5%的文旅重资产无底洞，那么 <code>167亿元</code> 净现金就不再是安全垫，而是毁灭价值的温床。</li>
+</ul>
 </li>
 <li>
-<p><strong>证伪红线三（核心印钞机失守 / 品牌商集体抛弃）：在宏观客流正常的情况下，三亚国际免税城单店净利率连续四个季度跌破 6.0%（当前为 11.07%），全集团综合毛利率连续四个季度跌破 28.5%，或出现两大以上国际顶奢/美妆集团（如LVMH、雅诗兰黛、欧莱雅、历峰）终止与中免的直采总代合作、导致常态 Owner Earnings 连续两年跌破 35亿元底线</strong>。
-   - <em>底层逻辑</em>：三亚国际免税城是中免的命脉所在。如果海棠湾三期太古里开业后，三亚单店不仅没有实现客单价与转化率提升，反而因为线上无序代购冲击或品牌方撤柜导致综合毛利率永久性跌穿 <code>28.5%</code>，说明免税渠道对上游品牌商和下游高净值消费者的双向议价权已出现结构性瓦解，必须果断止损。</p>
+<p><strong>证伪红线三（核心印钞机失守 / 品牌商集体抛弃）：在宏观客流正常的情况下，三亚国际免税城单店净利率连续四个季度跌破 6.0%（当前为 11.07%），全集团综合毛利率连续四个季度跌破 28.5%，或出现两大以上国际顶奢/美妆集团（如LVMH、雅诗兰黛、欧莱雅、历峰）终止与中免的直采总代合作、导致常态 Owner Earnings 连续两年跌破 35亿元底线</strong>。</p>
+<ul>
+<li><em>底层逻辑</em>：三亚国际免税城是中免的命脉所在。如果海棠湾三期太古里开业后，三亚单店不仅没有实现客单价与转化率提升，反而因为线上无序代购冲击或品牌方撤柜导致综合毛利率永久性跌穿 <code>28.5%</code>，说明免税渠道对上游品牌商和下游高净值消费者的双向议价权已出现结构性瓦解，必须果断止损。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>聪明的飞行员上天前不仅要看燃油表，还得先想好哪台发动机起火时该往哪个备用机场迫降。在四十五块港币、五十三块人民币的位置买入一家账上揣着一百六十七亿净现金、每年能稳赚五十多亿自由现金流的垄断印钞机，只要政府没把牌照当废纸发、管理层没拿现金去盖烂尾楼，这就是一场赔率极度向你倾斜的聪明赌局。</p></div></div></div></div>
 
@@ -3755,7 +4425,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《中国中免 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国中免 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《中国中免(601888.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国中免(601888.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3952,6 +4622,677 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        var globalMarketControllers = [];
+        var globalMarketMode = 'ALL';
+        try {
+          var savedMkt = localStorage.getItem('agy_lb_market_mode_v1');
+          if (savedMkt === 'ALL' || savedMkt === 'A' || savedMkt === 'H') globalMarketMode = savedMkt;
+        } catch(e) {}
+        var globalBarRefs = [];
+        var globalStats = { maxTotal: 0, maxA: 0, maxH: 0 };
+
+        function setGlobalMarketMode(mode) {
+          globalMarketMode = mode;
+          try { localStorage.setItem('agy_lb_market_mode_v1', mode); } catch(e) {}
+          globalMarketControllers.forEach(function(fn){ fn(mode); });
+          globalBarRefs.forEach(function(ref){
+            Object.keys(ref.btns).forEach(function(k){
+              ref.btns[k].classList.toggle('active', k === mode);
+            });
+            if (ref.badge) {
+              var labelMap = {
+                'ALL': '当前显示：A+H 统一全榜 (' + (globalStats.maxA + globalStats.maxH) + ' 席)',
+                'A': '当前显示：🇨🇳 仅 A 股 (' + globalStats.maxA + ' 席)',
+                'H': '当前显示：🇭🇰 仅 H 股/港股 (' + globalStats.maxH + ' 席)'
+              };
+              ref.badge.textContent = labelMap[mode] || '';
+            }
+          });
+        }
+
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = (hTexts.some(function(h){ return h.indexOf('实时排名') >= 0 || h.indexOf('市场与排名') >= 0 || h.indexOf('统一排名') >= 0; })) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('严苛排名') >= 0 || hTexts[0].indexOf('统一排名') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var countA = 0, countH = 0;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🛢️ 周期资源与能源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '⚙️ 高端制造与出海',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /(?:客观|客)\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var market = 'A';
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) || pxTxt.indexOf('港元') >= 0) {
+                market = 'H';
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /(?:今日\s*|\()([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /(?:常态回报|严苛EV常态回报|港股常态回报)\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (isNaN(oe)) oe = parseNum(oeTxt2, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /(?:实时股息|纯现金股息|TTM股息)(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (isHMaster || rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || pxTxt2.indexOf('H股现价') >= 0 || pxTxt2.indexOf('港元`') >= 0 || (pxTxt2.indexOf('实时现价:') >= 0 && pxTxt2.split('实时现价')[1].slice(0, 20).indexOf('港元') >= 0) || (pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0)) {
+                market = 'H';
+              }
+            }
+
+            if (market === 'H') countH++; else countA++;
+            tr.setAttribute('data-market', market);
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              market: market,
+              isHkOnly: market === 'H',
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 1) return;
+          if (countA + countH > globalStats.maxTotal && countA > 0 && countH > 0) {
+            globalStats.maxTotal = countA + countH;
+            globalStats.maxA = countA;
+            globalStats.maxH = countH;
+          }
+
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL' };
+          var inlineMarketBtns = {};
+
+          function applyFilters() {
+            var visIdx = 0;
+            // 遍历当前 tbody 真实 DOM 顺序以保证重排后序号依然严格递增
+            var domTrs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var trMap = new Map();
+            rowData.forEach(function(d){ trMap.set(d.tr, d); });
+            domTrs.forEach(function(tr){
+              var d = trMap.get(tr);
+              if (!d) return;
+              var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              var hidden = hideByMkt || hideByF;
+              d.tr.style.display = hidden ? 'none' : '';
+              if (!hidden) {
+                visIdx++;
+                if (d.td0) {
+                  var dynSpan = d.td0.querySelector('.agy-dyn-rank');
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.key !== 'rank') {
+                    if (!dynSpan) {
+                      dynSpan = document.createElement('div');
+                      dynSpan.className = 'agy-dyn-rank no-print';
+                      dynSpan.style.cssText = 'font-size:11px;font-weight:700;color:#0284c7;margin-bottom:2px;';
+                      d.td0.insertBefore(dynSpan, d.td0.firstChild);
+                    }
+                    dynSpan.textContent = '#' + visIdx;
+                  } else if (dynSpan) {
+                    dynSpan.remove();
+                  }
+                }
+              }
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若表格同时包含 A 股与 H 股，挂载三态市场切换开关（AH股一起显示 / 只显示A股 / 只显示H股），并与全页顶栏联动
+          if (countA > 0 && countH > 0) {
+            var seg = document.createElement('div');
+            seg.className = 'agy-market-seg-inline';
+            var mDefs = [
+              { m: 'ALL', text: '🌐 AH一起 (' + (countA + countH) + ')' },
+              { m: 'A', text: '🇨🇳 只看A股 (' + countA + ')' },
+              { m: 'H', text: '🇭🇰 只看H股 (' + countH + ')' }
+            ];
+            mDefs.forEach(function(md){
+              var mb = document.createElement('button');
+              mb.type = 'button';
+              mb.className = 'agy-market-btn' + (md.m === globalMarketMode ? ' active' : '');
+              mb.textContent = md.text;
+              mb.addEventListener('click', function(){
+                setGlobalMarketMode(md.m);
+              });
+              seg.appendChild(mb);
+              inlineMarketBtns[md.m] = mb;
+            });
+            bar.appendChild(seg);
+            globalMarketControllers.push(function(mode){
+              state.market = mode;
+              Object.keys(inlineMarketBtns).forEach(function(k){
+                inlineMarketBtns[k].classList.toggle('active', k === mode);
+              });
+              applyFilters();
+            });
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+            applyFilters();
+          }
+
+          updateUI();
+        });
+
+        // 若页面存在 A+H 统一榜单表，在正文最顶部挂载吸顶全局三态市场开关，一键同步切换全页全部雷达与总表
+        if (globalMarketControllers.length > 0) {
+          var rc = document.querySelector('.report-content');
+          if (rc) {
+            var gBar = document.createElement('div');
+            gBar.className = 'agy-market-global-bar no-print';
+            var gTitle = document.createElement('div');
+            gTitle.className = 'agy-market-global-title';
+            gTitle.innerHTML = '🎛️ <span>A+H 统一榜单市场视图开关</span>';
+            var gSeg = document.createElement('div');
+            gSeg.className = 'agy-market-seg';
+            var gBtns = {};
+            [
+              { m: 'ALL', text: '🌐 AH股一起显示 (' + (globalStats.maxA + globalStats.maxH) + ')' },
+              { m: 'A', text: '🇨🇳 只显示A股 (' + globalStats.maxA + ')' },
+              { m: 'H', text: '🇭🇰 只显示H股 (' + globalStats.maxH + ')' }
+            ].forEach(function(item){
+              var gb = document.createElement('button');
+              gb.type = 'button';
+              gb.className = 'agy-market-btn';
+              gb.textContent = item.text;
+              gb.addEventListener('click', function(){
+                setGlobalMarketMode(item.m);
+              });
+              gSeg.appendChild(gb);
+              gBtns[item.m] = gb;
+            });
+            var gBadge = document.createElement('span');
+            gBadge.className = 'agy-market-count-badge';
+            gBar.appendChild(gTitle);
+            gBar.appendChild(gSeg);
+            gBar.appendChild(gBadge);
+            var h1El = rc.querySelector('h1');
+            if (h1El && h1El.nextSibling) {
+              rc.insertBefore(gBar, h1El.nextSibling);
+            } else {
+              rc.insertBefore(gBar, rc.firstChild);
+            }
+            globalBarRefs.push({ btns: gBtns, badge: gBadge });
+            setGlobalMarketMode(globalMarketMode);
+          }
+        }
+      })();
     })();
   </script>
 </body>

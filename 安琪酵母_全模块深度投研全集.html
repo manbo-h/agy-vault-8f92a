@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>安琪酵母 深度投研全集</title>
+<title>安琪酵母(600298.SH) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,473 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    /* 全球市场三态切换开关（AH股一起显示 / 只显示A股 / 只显示H股） */
+    .agy-market-global-bar {
+      position: sticky;
+      top: 8px;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0 16px 0;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #f8fafc;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+      font-size: 13px;
+    }
+    .agy-market-global-title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e2e8f0;
+    }
+    .agy-market-seg {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+    .agy-market-seg-inline {
+      display: inline-flex;
+      align-items: center;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 2px;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .agy-market-btn {
+      background: transparent;
+      color: #cbd5e1;
+      border: none;
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.16s ease;
+    }
+    .agy-market-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .agy-market-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+    }
+    .agy-market-seg-inline .agy-market-btn {
+      color: #334155;
+      padding: 3px 10px;
+      font-size: 12px;
+    }
+    .agy-market-seg-inline .agy-market-btn:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+    .agy-market-seg-inline .agy-market-btn.active {
+      background: #1e3a8a;
+      color: #ffffff;
+    }
+    .agy-market-count-badge {
+      font-size: 12px;
+      color: #bae6fd;
+      font-weight: 600;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1408,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">安琪酵母 深度投研全集</div>
+    <div class="report-title">安琪酵母(600298.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-24</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -893,6 +1434,15 @@
   </div>
   <div class="report-content">
     <h1 id="600298sh-ag">安琪酵母（600298.SH）长期价值深度投研全集（全景八步底座 + 追问模块 A—G + 芒格随身旁批）</h1>
+<!--V4_AUDIT_BANNER_START-->
+<blockquote>
+<p><strong>⚔️ 2026-11-24 V4 官方原表验真 × 物理隔离独立红蓝盲审终审声明（<code>CORRECTED</code>）</strong>：
+- <strong>终审核心估值锚</strong>：常态 OE <strong><code>15.11亿/年</code></strong> → 达产 <strong><code>17.51亿/年</code></strong> ｜ 新买点：<strong><code>≤26.00元 / 27.00—31.00元</code></strong>（原：<code>≤33.00元 / 34.00—38.50元</code>）
+- <strong>🔴 空头命中硬约束（实打实认领）</strong>：🩸 击穿原稿漏债26.9亿与1.74亿并购尾款；击穿五年投88.7亿增量ROIC仅3.98%、分红率30.9%/股息率1.42%的重资产扩产惯性；击穿26Q3单季毛利骤降4.86pct、扣非环比腰斩45.7%及汇兑反噬；实锤合同负债实为2.66亿(非6-7亿)、负毛利晟通糖业(-4.86%)及12.68亿低拨备(0.57%)融资租赁暗雷。
+- <strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：🛡️ 铁证反杀“平庸毛利/渠道压库/财务粉饰”：核心酵母及深加工毛利率32.21%贡献93.12%毛利；25年酵母产销率102.6%、年末酵母库存大降17.89%，26Q1-Q3营收增15.45%而纯应收仅增0.76%；25年FCF+7.77亿、26Q1-Q3官方实数FCF+4.07亿连正；在建工程降至5.21亿(占固资4.48%)、研发6.77亿100%费用化、财务公司存款及永续债均为0、债务综合利率仅约2.2%。
+- <strong>📋 V4 官方对账附注</strong>：V4官方对账实锤原稿7项重大偏差：26Q3显性有息债实为87.40亿（漏计26.9亿）、另补晟通1.74亿并购尾款与8.63亿少数股东权益，严苛True EV由388.32亿调增至419.54亿；TTM股息率实为1.42%（原报2.00%）、合同负债实为2.66亿（原吹6-7亿）。红队击穿高CapEx低增量ROIC与26Q3扣非滑坡，蓝方以酵母93.1%毛利占比、库存降17.9%、FCF连正及零粉饰反杀压库指控。现价EV回报仅3.60%，买点严降为27-31元/≤26元。</p>
+</blockquote>
+<!--V4_AUDIT_BANNER_END-->
 <blockquote>
 <p><strong>数据锚定基准</strong>：截至 2026 年 11 月 10 日最新公开披露定期报告（《2025年年度报告》《2026年第三季度报告》《2026年前三季度与行业相关的定期经营数据公告》及《2026年9月向不特定对象发行可转换公司债券预案》）。</p>
 </blockquote>
@@ -1244,8 +1794,10 @@
 </tbody>
 </table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>穿透这张五年一期总账，两大真相跃然纸上</strong>：</p><ol>
-<li><strong>从“重资产扩张失血期”正式跨入“自由现金流收获拐点”</strong>：
-   - 在 2021—2024 年间，安琪为了抢占全球产能身位并建设 60 万吨水解糖产线，每年硬砸 17 亿—20 亿元 CapEx，导致连续四年自由现金流为负（四年累计净流出 20.55 亿元），分红与扩产缺口主要靠增加低息银行借款与 2022 年那笔 14.1 亿定增填补。</li>
+<li><strong>从“重资产扩张失血期”正式跨入“自由现金流收获拐点”</strong>：<ul>
+<li>在 2021—2024 年间，安琪为了抢占全球产能身位并建设 60 万吨水解糖产线，每年硬砸 17 亿—20 亿元 CapEx，导致连续四年自由现金流为负（四年累计净流出 20.55 亿元），分红与扩产缺口主要靠增加低息银行借款与 2022 年那笔 14.1 亿定增填补。</li>
+</ul>
+</li>
 </ol><ul>
 <li><strong>2025 年迎来历史性分水岭</strong>：随着前期产能投产放量与糖蜜成本回落，2025 年经营活动现金流净额飙升至 <strong>24.78 亿元</strong>（净现比高达 <strong>1.60 倍</strong>），扣除 17.01 亿元 CapEx 后，全年<strong>自由现金流强劲转正至 +7.77 亿元</strong>，不仅轻松全额覆盖 4.77 亿元现金分红，还富余出 3 亿元净现金！2026 年前 9 个月在继续投入 14.09 亿元 CapEx 的情况下，自由现金流依然保持 <strong>+3.03 亿元</strong>正向盈余。</li>
 </ul><ol start="2">
@@ -1411,20 +1963,28 @@
 <p>安琪酵母是中国食品生物发酵工业中极少数的<strong>“已走通全球化重资产降维打击的隐形冠军”</strong>——它靠国内 60% 市占率的烘焙面食酵母与全球第一的酵母抽提物（YE）筑起了年产 24 亿+ 经营现金流的防波堤，靠“60 万吨自产酶水解糖 + 环保母液变有机肥”把生产成本焊死在全球成本曲线最左端，并正在埃及、俄罗斯、印尼用当地廉价糖蜜复制高毛利印钞机；它值得长期信任的前提，是管理层能克制无限度的重资产扩产冲动，让 2025 年刚迎来的自由现金流正拐点持续变厚；而眼下最需盯紧的真命门，在于 <strong>35 亿元可转债押注的酵母蛋白新产能能否拿到真实的全球 B 端大单，以及海外新兴市场汇率与地缘结算的安全边际</strong>。</p>
 <div class="annotated-row"><div class="main-col"><h4 id="4">未来两到三年翻开财报必看的 4 个可量化、可证伪“硬核验证路标”</h4><ol>
 <li>
-<p><strong>【成本与毛利护城河路标】“酵母及深加工主业”毛利率能否稳守 31.5%—34.0% 中枢</strong>：
-   - 每次年报与半年报披露时，剥离制糖与包装干扰，直接盯紧主业毛利率及海外分部毛利率（基准线 32%）。若在糖蜜平稳期主业毛利率跌破 30%，说明海外价格战加剧或新增折旧未能被规模效应摊薄。</p>
+<p><strong>【成本与毛利护城河路标】“酵母及深加工主业”毛利率能否稳守 31.5%—34.0% 中枢</strong>：</p>
+<ul>
+<li>每次年报与半年报披露时，剥离制糖与包装干扰，直接盯紧主业毛利率及海外分部毛利率（基准线 32%）。若在糖蜜平稳期主业毛利率跌破 30%，说明海外价格战加剧或新增折旧未能被规模效应摊薄。</li>
+</ul>
 </li>
 <li>
-<p><strong>【新曲线商业化证伪路标】酵母蛋白年销量突破 1 万吨→3 万吨刻度及白洋二期稼动率</strong>：
-   - 跟踪公司定期报告与交流纪要中酵母蛋白在蛋白粉、肉制品、素食餐饮领域的真实吨销量与毛利率，验证 35 亿元可转债募投项目投产后的真实产能利用率是否达到 <strong>70% 以上盈亏平衡线</strong>。</p>
+<p><strong>【新曲线商业化证伪路标】酵母蛋白年销量突破 1 万吨→3 万吨刻度及白洋二期稼动率</strong>：</p>
+<ul>
+<li>跟踪公司定期报告与交流纪要中酵母蛋白在蛋白粉、肉制品、素食餐饮领域的真实吨销量与毛利率，验证 35 亿元可转债募投项目投产后的真实产能利用率是否达到 <strong>70% 以上盈亏平衡线</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>【自由现金流与分红诚意路标】年度自由现金流（OCF - CapEx）持续为正且不低于 5 亿—8 亿元</strong>：
-   - 检验 2025 年 +7.77 亿元的自由现金流转正究竟是昙花一现，还是结构性收获期的开始；同时紧盯现金分红支付率是否守住 <strong>30%—35%</strong> 底线，以及短期借款规模能否随着可转债落地与内生造血而实质性压降。</p>
+<p><strong>【自由现金流与分红诚意路标】年度自由现金流（OCF - CapEx）持续为正且不低于 5 亿—8 亿元</strong>：</p>
+<ul>
+<li>检验 2025 年 +7.77 亿元的自由现金流转正究竟是昙花一现，还是结构性收获期的开始；同时紧盯现金分红支付率是否守住 <strong>30%—35%</strong> 底线，以及短期借款规模能否随着可转债落地与内生造血而实质性压降。</li>
+</ul>
 </li>
 <li>
-<p><strong>【海外基地扩张交卷路标】俄罗斯 2.2 万吨扩建与印尼 2 万吨新厂（2027 年节点）按期投产率</strong>：
-   - 验证印尼楠榜工厂能否在 2027 年如期点火并复制埃及工厂的高盈利模型，同时观察海外业务收入占比向 <strong>45%—50%</strong> 迈进过程中的汇兑损益控制水平。</p>
+<p><strong>【海外基地扩张交卷路标】俄罗斯 2.2 万吨扩建与印尼 2 万吨新厂（2027 年节点）按期投产率</strong>：</p>
+<ul>
+<li>验证印尼楠榜工厂能否在 2027 年如期点火并复制埃及工厂的高盈利模型，同时观察海外业务收入占比向 <strong>45%—50%</strong> 迈进过程中的汇兑损益控制水平。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>别去听券商分析师在电话会里瞎猜下个季度海运费涨几百美金——盯死它的自由现金流是不是继续往口袋里流、海外新厂有没有按时点火、以及那三十五亿砸下去造出来的酵母蛋白到底有没有大客户真掏钱买，这就够了。</p></div></div></div></div>
 
@@ -1581,9 +2141,9 @@
      <div class="math-display"><span class="math-text">房屋年折旧</span> = 14.61  ×  3.80\% = <strong>0.555<span class="math-text"> 亿元/年</span></strong></div>
 <div class="math-display"><span class="math-text">设备年折旧</span> = 31.06  ×  7.92\% = <strong>2.460<span class="math-text"> 亿元/年</span></strong></div>
 <div class="math-display"><span class="math-text">叠加土地摊销与环保特种膜组件短周期更换摊销（约 0.35 亿元/年）</span> \implies <span class="math-text">合计新增刚性折旧摊销</span>  ≈  <strong>3.37<span class="math-text"> 亿元/年</span></strong></div></p>
-</li>
-<li>
-<p><strong>结构切分</strong>：在这每年 <strong>3.37 亿元</strong> 的新增刚性折旧摊销中，<strong>35 亿可转债募投工程包（31.33 亿元）</strong> 建成后每年新增折旧约 <strong>2.08 亿元</strong>；<strong>俄罗斯与印尼两大海外项目（19.42 亿元）</strong> 建成后每年新增折旧约 <strong>1.29 亿元</strong>。</p>
+<ul>
+<li><strong>结构切分</strong>：在这每年 <strong>3.37 亿元</strong> 的新增刚性折旧摊销中，<strong>35 亿可转债募投工程包（31.33 亿元）</strong> 建成后每年新增折旧约 <strong>2.08 亿元</strong>；<strong>俄罗斯与印尼两大海外项目（19.42 亿元）</strong> 建成后每年新增折旧约 <strong>1.29 亿元</strong>。</li>
+</ul>
 </li>
 </ul><ol start="2">
 <li><strong>满产营收体量与盈亏平衡稼动率（Breakeven Point）推导</strong>：</li>
@@ -1668,8 +2228,10 @@
 </ol><ul>
 <li><strong>合资方利益捆绑体检</strong>：印尼项目并非安琪 100% 独资，而是与印尼老牌农业及糖业财团森吉布迪（Sungai Budi Group）旗下的上市公司 <strong>PT Tunas Baru Lampung Tbk（TBLA）</strong> 合资设立 <strong>PT ANGEL YEAST BUDI INDONESIA</strong>（安琪持股 <strong>80%</strong>、出资约 3.05 亿元；印尼方持股 <strong>20%</strong>、出资约 7600 万元）。拉 TBLA 入伙的核心战略意图是用 20% 股权换取其在楠榜省甘蔗糖厂的<strong>长期低价糖蜜排他性供应协议</strong>与当地政商清关庇护。但潜在风险在于：关联采购定价公式若未锁死上限，当国际糖价异动时合资小股东可能在糖蜜供应质量（锤度/含糖量）或转移定价上与大股东博弈；此外，印尼自 2024 年底起全面推行强制性官方 BPJPH 清真（Halal）认证与严苛的外籍劳工工作签配额限制，从中国派驻宜昌工程安装团队赴楠榜省施工的签证审批与雨季施工，是决定 <strong>2027 年能否如期点火</strong> 的最大变量。</li>
 </ul><ol start="3">
-<li><strong>长江大保护红线下的宜昌白洋基地环评与高浓度氮磷排污硬约束</strong>：
-   - 宜昌高新区白洋生物科技园紧邻长江干流生态保护带。酵母蛋白提纯过程中需要消耗大量酸碱、盐类与酶制剂，产生的超滤膜洗脱废水含盐量与总氮、总磷负荷高于传统干酵母工艺。在“长江大保护”环保终身问责制下，白洋二期（3.2 万吨）与本部攻关项目（2 万吨）的环保配套MVR浓缩及生化处理设施一旦在调试期出现极端天气或菌群失活导致在线监测超标，将面临立刻停产限产整顿的刚性约束。</li>
+<li><strong>长江大保护红线下的宜昌白洋基地环评与高浓度氮磷排污硬约束</strong>：<ul>
+<li>宜昌高新区白洋生物科技园紧邻长江干流生态保护带。酵母蛋白提纯过程中需要消耗大量酸碱、盐类与酶制剂，产生的超滤膜洗脱废水含盐量与总氮、总磷负荷高于传统干酵母工艺。在“长江大保护”环保终身问责制下，白洋二期（3.2 万吨）与本部攻关项目（2 万吨）的环保配套MVR浓缩及生化处理设施一旦在调试期出现极端天气或菌群失活导致在线监测超标，将面临立刻停产限产整顿的刚性约束。</li>
+</ul>
+</li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在莫斯科借利息百分之十八的卢布盖厂子，就像向高利贷借钱去买慢牛股；而在印尼跟当地糖王合伙开店，你得先看清合同里写没写死“绝不允许把掺水的臭糖蜜高价卖给合资厂”——跨国做生意，魔鬼全藏在银行汇票和合资合同的小字里。</p></div></div></div></div>
 
 
@@ -1687,18 +2249,20 @@
 <h4 id="1_5">1. 商业化刻度精准定位：究竟在实验室、送样期，还是已跑通单点盈利？</h4>
 <p>我们将安琪酵母当前重点押注的两大新曲线放在产业生命周期坐标尺上做精准刻度定位：</p>
 <ul>
-<li><strong>第一新曲线：酵母蛋白（蛋白含量 70%—85%）——处于【法规准入已全线打通 + 头部 B 端客户小批量放量期（从 1 到 10 早期爬坡阶段）】</strong></li>
 <li>
-<p><strong>法规门票已拿齐（非 PPT 概念）</strong>：安琪酵母蛋白已先后拿下美国 FDA <strong>GRAS（公认安全）认证</strong>、于 2023 年 12 月正式获批中国国家卫健委 <strong>“新食品原料”</strong>（打破了此前只能作为酵母抽提物或调味配料添加的法规紧箍咒，可合法作为主蛋白原料大比例添加于运动营养品、乳制品、肉制品与代餐中），并在 2025—2026 年入选工信部首批<strong>生物制造标志性产品名单</strong>。</p>
+<p><strong>第一新曲线：酵母蛋白（蛋白含量 70%—85%）——处于【法规准入已全线打通 + 头部 B 端客户小批量放量期（从 1 到 10 早期爬坡阶段）】</strong></p>
+<ul>
+<li><strong>法规门票已拿齐（非 PPT 概念）</strong>：安琪酵母蛋白已先后拿下美国 FDA <strong>GRAS（公认安全）认证</strong>、于 2023 年 12 月正式获批中国国家卫健委 <strong>“新食品原料”</strong>（打破了此前只能作为酵母抽提物或调味配料添加的法规紧箍咒，可合法作为主蛋白原料大比例添加于运动营养品、乳制品、肉制品与代餐中），并在 2025—2026 年入选工信部首批<strong>生物制造标志性产品名单</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>真实营收与吨销量刻度</strong>：2026 年上半年，公司酵母蛋白业务实现销售收入<strong>近 2 亿元（同比增速超 100%）</strong>，处于现有产线“满产满销”状态。但必须清醒换算物理量级：2 亿元半年收入（全年约 4 亿元），按吨售价 5 万—7 万元折算，<strong>目前全年真实出货量仅在 6000 吨—8000 吨量级</strong>（主要客户为国内蛋白粉品牌、能量棒代工厂、低温肉制品厂及公司自有保健品牌“安琪纽特”）。这证明它已在细分 B 端跑通了单点盈利模型，但距离消化在建及规划中 <strong>5 万—7 万吨级</strong> 的宏大产能，中间还隔着 <strong>6—8 倍的放量鸿沟</strong>！</p>
 </li>
 <li>
 <p><strong>第二新曲线：合成生物学 PHA（聚羟基脂肪酸酯）——处于【万吨级工程中试放大完成 + 下游商业化艰难寻客期（从 0 到 1 早期验证阶段）】</strong></p>
-</li>
-<li>
-<p><strong>合资架构与技术底盘</strong>：2022 年安琪酵母与清华大学陈国强教授团队孵化的合成生物明星企业<strong>北京微构工场</strong>合资成立<strong>湖北微琪生物科技有限公司</strong>（落户宜昌白洋园区，安琪提供糖蜜/水解糖碳源、蒸汽公辅与万吨级发酵工程管理，微构工场提供底层“嗜盐菌 Halomonas”基因工程菌株）。</p>
+<ul>
+<li><strong>合资架构与技术底盘</strong>：2022 年安琪酵母与清华大学陈国强教授团队孵化的合成生物明星企业<strong>北京微构工场</strong>合资成立<strong>湖北微琪生物科技有限公司</strong>（落户宜昌白洋园区，安琪提供糖蜜/水解糖碳源、蒸汽公辅与万吨级发酵工程管理，微构工场提供底层“嗜盐菌 Halomonas”基因工程菌株）。</li>
+</ul>
 </li>
 <li>
 <p><strong>真实进度刻度</strong>：微琪生物一期 <strong>年产 1 万吨 PHA 产线</strong>已于 2025—2026 年正式建成投产（号称全球首条采用“下一代工业生物技术 NGIB”开放式不灭菌连续发酵的万吨级 PHA 产线）。然而在商业化变现端，由于 PHA 吨成本远高于传统塑料与普通生物降解塑料（PLA/PBAT），目前仅在高端医疗缝合线、高溢价欧美美妆包材、特种淋膜纸杯等极窄领域进行小批量送样与示范订单交付，<strong>产能利用率处于较低爬坡水位，尚未对安琪上市公司贡献具有财务意义的归母净利润</strong>。</p>
@@ -2007,20 +2571,26 @@
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="_13">三、 盈利质量对质：揭开“合并毛利率假象”与“大宗周期陷阱”</h4><p>表面上看，安琪酵母 2025 年综合毛利率（24.71%）与 2026 年前三季度综合毛利率（25.32%，单 Q3 因辅料包材运费及制糖拖累为 22.26%），似乎显著低于海天味业（37%—41%）和立高食品（28%—29%）。但如果把合并报表的“障眼法”剥开，做一场盈利质量与费用效率的深度对质，结论将彻底反转：</p><ol>
 <li>
-<p><strong>剥离副业噪音后，安琪核心主业（32.21% 毛利率）实为高端生物制造水准</strong>：
-   - 在安琪 2025 年的营收结构中，包含 13.39 亿元的<strong>制糖业务（毛利率为 -4.86%）</strong>、3.60 亿元的<strong>包装业务（毛利率约 2.60%）</strong>以及 22.18 亿元的<strong>食品原料贸易与复配业务（毛利率约 10%—13%）</strong>。这些业务本质上是为保障糖蜜上游供应链安全（与糖厂深度绑定）或复用烘焙渠道的配套业务。
-   - 一旦将上述低毛利配套业务剥离，2025 年安琪核心的<strong>酵母及深加工主业（营收 119.49 亿元）真实毛利率高达 32.21%（同比提升 2.67 个百分点）</strong>，<strong>海外业务（营收 68.48 亿元）毛利率更是高达 32.07%</strong>！这一主业毛利率不仅全面超越立高食品（29.67%）和莲花控股（27.17%），且与国际巨头乐斯福、英联马利（30%—35%）处于同一黄金身位。</p>
+<p><strong>剥离副业噪音后，安琪核心主业（32.21% 毛利率）实为高端生物制造水准</strong>：</p>
+<ul>
+<li>在安琪 2025 年的营收结构中，包含 13.39 亿元的<strong>制糖业务（毛利率为 -4.86%）</strong>、3.60 亿元的<strong>包装业务（毛利率约 2.60%）</strong>以及 22.18 亿元的<strong>食品原料贸易与复配业务（毛利率约 10%—13%）</strong>。这些业务本质上是为保障糖蜜上游供应链安全（与糖厂深度绑定）或复用烘焙渠道的配套业务。</li>
+<li>一旦将上述低毛利配套业务剥离，2025 年安琪核心的<strong>酵母及深加工主业（营收 119.49 亿元）真实毛利率高达 32.21%（同比提升 2.67 个百分点）</strong>，<strong>海外业务（营收 68.48 亿元）毛利率更是高达 32.07%</strong>！这一主业毛利率不仅全面超越立高食品（29.67%）和莲花控股（27.17%），且与国际巨头乐斯福、英联马利（30%—35%）处于同一黄金身位。</li>
+</ul>
 </li>
 <li>
-<p><strong>对比梅花生物：品牌小B端粘性 vs 大宗商品残酷周期</strong>：
-   - 梅花生物作为玉米生物发酵龙头，其期间费用率极低（2026 年前三季度销售、管理、财务三费合计仅占营收 5.33%），在 2025 年顺风期净利率高达 13.55%。但因为味精、赖氨酸、苏氨酸属于高度同质化的大宗工业品，面对的是饲料厂和大型食品厂的冷酷比价，毫无终端品牌溢价。一旦 2026 年行业新增产能释放叠加玉米煤炭成本微幅波动，梅花生物单 Q3 毛利率立刻从 21%+ 崩塌至 <strong>8.01%</strong>，单季扣非直接陷入亏损。
-   - 反观安琪酵母，干酵母在面包、馒头、包子中的成本占比不足 <strong>1%—2%</strong>，但一旦发酵失败，整锅面团全部报废！这种<strong>“极低成本占比 + 极高失败惩罚”</strong>的产品属性，赋予了安琪在数百万家中小烘焙坊、面点铺（小 B 端）与家庭 C 端极强的品牌粘性与提价留存能力。即便在糖蜜与海运费剧烈波动的年份，安琪酵母主业毛利率波动幅度也控制在极窄区间，绝不会出现梅花生物式的“盈利断崖”。</p>
+<p><strong>对比梅花生物：品牌小B端粘性 vs 大宗商品残酷周期</strong>：</p>
+<ul>
+<li>梅花生物作为玉米生物发酵龙头，其期间费用率极低（2026 年前三季度销售、管理、财务三费合计仅占营收 5.33%），在 2025 年顺风期净利率高达 13.55%。但因为味精、赖氨酸、苏氨酸属于高度同质化的大宗工业品，面对的是饲料厂和大型食品厂的冷酷比价，毫无终端品牌溢价。一旦 2026 年行业新增产能释放叠加玉米煤炭成本微幅波动，梅花生物单 Q3 毛利率立刻从 21%+ 崩塌至 <strong>8.01%</strong>，单季扣非直接陷入亏损。</li>
+<li>反观安琪酵母，干酵母在面包、馒头、包子中的成本占比不足 <strong>1%—2%</strong>，但一旦发酵失败，整锅面团全部报废！这种<strong>“极低成本占比 + 极高失败惩罚”</strong>的产品属性，赋予了安琪在数百万家中小烘焙坊、面点铺（小 B 端）与家庭 C 端极强的品牌粘性与提价留存能力。即便在糖蜜与海运费剧烈波动的年份，安琪酵母主业毛利率波动幅度也控制在极窄区间，绝不会出现梅花生物式的“盈利断崖”。</li>
+</ul>
 </li>
 <li>
-<p><strong>对比立高食品与海天味业：极致的 B 端渠道杠杆与高强度研发护城河</strong>：
-   - 立高食品毛利率虽有 29.39%，但由于冷冻面团需要全程零下 18 度冷链仓储配送，且面临商超、茶饮、烘焙店的激烈推新内卷，其 2026 年前三季度三项费用率高达 <strong>18.84%</strong>，吞噬了绝大部分毛利，导致净利率仅剩 <strong>4.54%</strong>（单 Q3 仅 2.10%）。
-   - 安琪酵母的核心产品<strong>高活性干酵母</strong>无需冷链即可常温跨洋运输、保质期长达 18—24 个月！这使得安琪仅凭 <strong>5.2%—5.6% 的销售费用率</strong>和 <strong>3.1%—3.3% 的管理费用率</strong>，就能支撑起覆盖全球 170 多个国家和地区的庞大营销网络。
-   - 同时，安琪将省下来的渠道费用重仓砸向底层生物技术：2025 年研发费用 <strong>6.77 亿元（研发费用率 4.05%）</strong>、2026 年前三季度研发费用 <strong>5.46 亿元（研发费用率 4.01%）</strong>，研发强度在五家可比公司中<strong>高居榜首</strong>（远超梅花生物与立高食品的 2.99%、海天味业的约 2.7%）。</p>
+<p><strong>对比立高食品与海天味业：极致的 B 端渠道杠杆与高强度研发护城河</strong>：</p>
+<ul>
+<li>立高食品毛利率虽有 29.39%，但由于冷冻面团需要全程零下 18 度冷链仓储配送，且面临商超、茶饮、烘焙店的激烈推新内卷，其 2026 年前三季度三项费用率高达 <strong>18.84%</strong>，吞噬了绝大部分毛利，导致净利率仅剩 <strong>4.54%</strong>（单 Q3 仅 2.10%）。</li>
+<li>安琪酵母的核心产品<strong>高活性干酵母</strong>无需冷链即可常温跨洋运输、保质期长达 18—24 个月！这使得安琪仅凭 <strong>5.2%—5.6% 的销售费用率</strong>和 <strong>3.1%—3.3% 的管理费用率</strong>，就能支撑起覆盖全球 170 多个国家和地区的庞大营销网络。</li>
+<li>同时，安琪将省下来的渠道费用重仓砸向底层生物技术：2025 年研发费用 <strong>6.77 亿元（研发费用率 4.05%）</strong>、2026 年前三季度研发费用 <strong>5.46 亿元（研发费用率 4.01%）</strong>，研发强度在五家可比公司中<strong>高居榜首</strong>（远超梅花生物与立高食品的 2.99%、海天味业的约 2.7%）。</li>
+</ul>
 </li>
 </ol></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>看安琪的合并毛利率就像看一个穿了件破棉袄的富翁——那件叫“制糖”的破棉袄（毛利率负4.86%）是为了跟广西、云南的糖厂搞好关系拿糖蜜才穿上的，你把棉袄脱掉一看，里面的“酵母主业”和“海外业务”全是32%毛利率的纯金内衣！更妙的是，干酵母不用像立高的冷冻面团那样一路吹着昂贵的冷气空调去见客户，省下10个点的物流推销费，拿去搞合成生物和特种菌株研发，这才是精明的算盘。</p></div></div></div></div>
 
@@ -2030,20 +2600,26 @@
 <h4 id="_14">四、 份额攻守结论：过去两年，到底是谁在抢谁的碗里肉？</h4>
 <p>综合国内外产销台账与竞争对手财报，过去两年（2025—2026 年）三大细分战场的份额攻守态势已毫无悬念：</p>
 <ol>
-<li><strong>全球烘焙酵母战场（安琪 vs 乐斯福 / 英联马利 / 圣琪）：安琪在国内守住约 55%—60% 铁桶江山，在海外新兴市场全面抢夺乐斯福与英联马利份额</strong>
-   - <strong>国内战场</strong>：安琪国内市场份额稳居 <strong>55%—60%</strong> 绝对统治地位，小包装家用及中式面点渠道市占率更是超过 70%。山东圣琪生物等本土二线厂商在安琪的水解糖技术托底与规模成本碾压下，仅能在局部低端工业粉或区域市场维生；外资乐斯福（燕牌）与英联马利（梅山/马利牌）被挤压在部分高端连锁欧包工坊内，国内份额持续萎缩。</li>
+<li><strong>全球烘焙酵母战场（安琪 vs 乐斯福 / 英联马利 / 圣琪）：安琪在国内守住约 55%—60% 铁桶江山，在海外新兴市场全面抢夺乐斯福与英联马利份额</strong><ul>
+<li><strong>国内战场</strong>：安琪国内市场份额稳居 <strong>55%—60%</strong> 绝对统治地位，小包装家用及中式面点渠道市占率更是超过 70%。山东圣琪生物等本土二线厂商在安琪的水解糖技术托底与规模成本碾压下，仅能在局部低端工业粉或区域市场维生；外资乐斯福（燕牌）与英联马利（梅山/马利牌）被挤压在部分高端连锁欧包工坊内，国内份额持续萎缩。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li><strong>海外战场</strong>：全球酵母 CR3（乐斯福、安琪、英联马利）合计占据超 70% 份额。过去两年，受欧洲能源危机后遗症、高通胀及跨国供应链成本拖累，法国乐斯福与英国英联马利（ABF Ingredients）在欧洲本土停止激进扩产，在中东、非洲、东南亚等价格敏感型新兴市场且战且退；安琪则凭借<strong>埃及工厂扩建投产、俄罗斯工厂满产、印尼基地落地</strong>以及高性价比的耐高糖/耐低温干酵母，在全球发酵总产能突破 <strong>45 万吨</strong>的支撑下，全球市占率从五年前的 12% 强势跃升至 <strong>18%—20% 以上</strong>，直接从乐斯福和英联马利手中夺走了中东非、独联体及东南亚近半数的增量订单。</li>
 </ul>
 <ol start="2">
 <li>
-<p><strong>鲜味剂战场（安琪 YE vs 梅花生物 / 莲花控股）：天然 YE 正在对传统味精与化学核苷酸（I+G）实施“结构性高维替代”</strong>
-   - 全球存量高达数百万吨的味精（梅花、阜丰、莲花主导）在餐饮端虽仍有极高性价比，但在中高端酱油、零添加调味汁、方便面调味包、膨化休闲零食领域，各大品牌商正用安琪的 <strong>YE（酵母抽提物，兼具增鲜、降盐、掩盖异味且属清洁标签食品属性）</strong> 替代“味精 + I+G”组合。安琪目前 YE 产能已稳居<strong>全球第一（国内市占率超 50%，全球市占率超 20%）</strong>，在鲜味升级赛道对传统味精厂商形成了降维截胡。</p>
+<p><strong>鲜味剂战场（安琪 YE vs 梅花生物 / 莲花控股）：天然 YE 正在对传统味精与化学核苷酸（I+G）实施“结构性高维替代”</strong></p>
+<ul>
+<li>全球存量高达数百万吨的味精（梅花、阜丰、莲花主导）在餐饮端虽仍有极高性价比，但在中高端酱油、零添加调味汁、方便面调味包、膨化休闲零食领域，各大品牌商正用安琪的 <strong>YE（酵母抽提物，兼具增鲜、降盐、掩盖异味且属清洁标签食品属性）</strong> 替代“味精 + I+G”组合。安琪目前 YE 产能已稳居<strong>全球第一（国内市占率超 50%，全球市占率超 20%）</strong>，在鲜味升级赛道对传统味精厂商形成了降维截胡。</li>
+</ul>
 </li>
 <li>
-<p><strong>烘焙原料渠道战场（安琪 vs 立高食品 / 南侨食品）：渠道复用型的“降维渗透”</strong>
-   - 安琪并未去和立高食品硬碰硬卷高损耗的冷链冷冻面团，而是利用自身在数十万家烘焙门店的酵母高频刚需配送权，切入常温/冷藏烘焙油脂、面包改良剂、预拌粉、特种糖浆等配料（2025 年食品原料营收 22.18 亿元，2026 年前三季度 16.80 亿元），兵不血刃地抢占了中小型烘焙配料商的市场份额。</p>
+<p><strong>烘焙原料渠道战场（安琪 vs 立高食品 / 南侨食品）：渠道复用型的“降维渗透”</strong></p>
+<ul>
+<li>安琪并未去和立高食品硬碰硬卷高损耗的冷链冷冻面团，而是利用自身在数十万家烘焙门店的酵母高频刚需配送权，切入常温/冷藏烘焙油脂、面包改良剂、预拌粉、特种糖浆等配料（2025 年食品原料营收 22.18 亿元，2026 年前三季度 16.80 亿元），兵不血刃地抢占了中小型烘焙配料商的市场份额。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -2058,35 +2634,39 @@
 <div class="math-display"><span class="math-text">常态真实股东盈余 (Owner Earnings)</span> = <span class="math-text">常态化归母净利润</span> + <span class="math-text">有效归母折旧与摊销</span> - <span class="math-text">维持存量竞争力必需的防御性 CapEx</span> - <span class="math-text">常态刚性营运资金追加占用</span></div>
 <h5 id="1_8">（1）四项核心参数的附注穿透与工程对账</h5>
 <ul>
-<li><strong>第一项：常态化归母净利润中枢（15.00 亿—16.00 亿元，基准取 15.50 亿元）</strong></li>
 <li>
-<p><strong>财报原始底座</strong>：2025 年公司实现归母净利润 <strong>15.44 亿元</strong>（同比 +16.60%），扣除非经常性损益后的归母净利润为 <strong>13.59 亿元</strong>（精确值为 1,359,139,575.38 元，同比 +16.19%），全年非经常性损益净额为 1.85 亿元（其中计入当期损益的政府补助总额为 <strong>2.26 亿元</strong>）；2026 年前三季度实现归母净利润 <strong>11.71 亿元</strong>（其中 26Q3 单季受人民币阶段性升值汇兑损失及海运费脉冲拖累微降 8.46%）。</p>
+<p><strong>第一项：常态化归母净利润中枢（15.00 亿—16.00 亿元，基准取 15.50 亿元）</strong></p>
+<ul>
+<li><strong>财报原始底座</strong>：2025 年公司实现归母净利润 <strong>15.44 亿元</strong>（同比 +16.60%），扣除非经常性损益后的归母净利润为 <strong>13.59 亿元</strong>（精确值为 1,359,139,575.38 元，同比 +16.19%），全年非经常性损益净额为 1.85 亿元（其中计入当期损益的政府补助总额为 <strong>2.26 亿元</strong>）；2026 年前三季度实现归母净利润 <strong>11.71 亿元</strong>（其中 26Q3 单季受人民币阶段性升值汇兑损失及海运费脉冲拖累微降 8.46%）。</li>
+</ul>
 </li>
 <li>
 <p><strong>周期与噪音剥离还原</strong>：第一，安琪账面上每年约 2.26 亿元的政府补助中，有超过 <strong>60%—65%（约 1.4 亿元/年）</strong> 并非偶发性“天上掉馅饼”，而是过去十年在宜昌、崇左、普洱、柳州、可克达拉等地投建重资产园区时，地方政府配套拨付的基建与环保技改专项资金（计入资产负债表“递延收益”科目，随固定资产折旧年限按年匀速转入其他收益），在存量工厂寿命周期内属于高度可持续的准经营性现金补偿；第二，剔除一次性偶发奖励泡沫，并抚平 2026Q3 因汇率短期急升带来的约 0.8 亿—1.0 亿元非经常性账面汇兑减值，在当前 49 万吨存量产能合理稼动率（国内 85%—90%、海外满产）与常态碳源成本下，存量业务的<strong>常态化归母净利润中枢稳立于 15.00 亿—16.00 亿元（基准取 15.50 亿元）</strong>。</p>
 </li>
 <li>
 <p><strong>第二项：有效归母折旧与摊销（11.00 亿—11.80 亿元，基准取 11.25 亿元）</strong></p>
-</li>
-<li>
-<p><strong>现金流量表补充资料核查</strong>：翻开《2025年年度报告》合并现金流量表补充资料，2025 年度计提的“固定资产折旧、油气资产折耗、生产性生物资产折旧”为 <strong>8.89 亿元</strong>（888,751,480.36 元，较 2024 年的 8.06 亿元增长 10.30%）、“使用权资产折旧”为 <strong>0.17 亿元</strong>（17,067,304.29 元）、“无形资产摊销”为 <strong>0.25 亿元</strong>（25,433,376.78 元）、“长期待摊费用摊销”为 <strong>0.02 亿元</strong>（2,024,354.07 元），2025 年表内四项基础折旧摊销合计为 <strong>9.33 亿元</strong>。</p>
+<ul>
+<li><strong>现金流量表补充资料核查</strong>：翻开《2025年年度报告》合并现金流量表补充资料，2025 年度计提的“固定资产折旧、油气资产折耗、生产性生物资产折旧”为 <strong>8.89 亿元</strong>（888,751,480.36 元，较 2024 年的 8.06 亿元增长 10.30%）、“使用权资产折旧”为 <strong>0.17 亿元</strong>（17,067,304.29 元）、“无形资产摊销”为 <strong>0.25 亿元</strong>（25,433,376.78 元）、“长期待摊费用摊销”为 <strong>0.02 亿元</strong>（2,024,354.07 元），2025 年表内四项基础折旧摊销合计为 <strong>9.33 亿元</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>2026 年转固翘尾与全口径运行折旧</strong>：2024 年末至 2026 年三季度，随着埃及二期扩建、云南普洱 1.2 万吨酵母产线、宜昌园区特种酶及全国 60 万吨水解糖产线密集完成竣工决算转入固定资产（截至 2026Q3 固定资产及在建工程账面原值已迈过 160 亿元大关），叠加环保多效蒸发浓缩设施与海外基地专项摊销，<strong>2026 年末存量 49 万吨产能满负荷运行状态下的全口径年化折旧与摊销已达 11.20 亿—12.00 亿元</strong>。扣除少数股东损益占比（约 2.15%）后，归属于母公司股东的<strong>有效归母折旧与摊销为 11.00 亿—11.80 亿元（基准中枢取 11.25 亿元）</strong>。</p>
 </li>
 <li>
 <p><strong>第三项：维持存量 49 万吨产能运转与环保安全必需的防御性/维持性 CapEx（4.50 亿—5.50 亿元/年，基准取 4.50 亿元）</strong></p>
-</li>
-<li>
-<p><strong>为什么账面折旧超 11 亿，而真实维持性 CapEx 只需 4.5 亿—5.5 亿元？</strong> 这是理解安琪酵母商业模式含金量的核心密码。2025 年公司账面总 CapEx 为 <strong>17.01 亿元</strong>（2026 年前 9 个月为 14.09 亿元），但穿透在建工程附注可见，其中超过 <strong>70%（约 12.0 亿—12.5 亿元）</strong> 全部砸向了俄罗斯 2.2 万吨扩建、印尼 2 万吨绿地建厂、白洋生物园酵母蛋白等<strong>纯增量扩张项目</strong>。</p>
+<ul>
+<li><strong>为什么账面折旧超 11 亿，而真实维持性 CapEx 只需 4.5 亿—5.5 亿元？</strong> 这是理解安琪酵母商业模式含金量的核心密码。2025 年公司账面总 CapEx 为 <strong>17.01 亿元</strong>（2026 年前 9 个月为 14.09 亿元），但穿透在建工程附注可见，其中超过 <strong>70%（约 12.0 亿—12.5 亿元）</strong> 全部砸向了俄罗斯 2.2 万吨扩建、印尼 2 万吨绿地建厂、白洋生物园酵母蛋白等<strong>纯增量扩张项目</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>工程寿命错配带来的“折旧藏富效应”</strong>：在发酵工业中，核心重资产是成百上千吨重的 <strong>304/316L 食品级奥氏体不锈钢通风发酵罐、储罐、CIP 原位清洗管网以及混凝土厂房</strong>。在安琪的会计账本上，机器设备严格按 <strong>10—14 年</strong> 计提直线折旧（残值率仅留 3%—5%）；但在真实物理世界中，酵母发酵属于 30°C—33°C 常温弱酸性生物反应，既无高温高压裂解，也无强酸强碱腐蚀，一套优质不锈钢发酵罐体的<strong>真实物理服役寿命长达 20—25 年以上</strong>！要维持现有 49 万吨产能每年不掉链子，真正需要掏现金更换的只是高速离心分离机转鼓轴承、无菌空气压缩机气阀、喷雾干燥塔喷嘴、自动化 DCS 传感器升级以及环保污水处理站的 RO 反渗透膜组件。按全球发酵工业每万吨存量产能每年 900 万—1100 万元的维保技改定额测算，49 万吨存量产能对应的<strong>全口径防御性/维持性 CapEx 仅为 4.50 亿—5.50 亿元/年（基准取 4.50 亿元）</strong>。这意味着每年有 <strong>6.00 亿—6.75 亿元</strong> 被计入成本的账面折旧，实际上并不需要再花出去，而是沉淀为了自由现金流！</p>
 </li>
 <li>
 <p><strong>第四项：常态刚性营运资金追加占用（1.00 亿—1.50 亿元/年，基准取 1.25 亿元）</strong></p>
-</li>
+<ul>
 <li>得益于国内烘焙与小包装经销商“先款后货”制度（合同负债常年锁住 6 亿—7 亿元免息现金），安琪在国内传统主业上几乎不需要追加营运资金。但考虑到每年四季度甘蔗与甜菜榨季集中收购糖蜜的季节性备货，以及高毛利 YE（面对海天、雀巢等工业巨头需给予 30—60 天账期）和海外跨洋集装箱在途存货的稳步自然增长，存量业务每年保持正常通胀与结构升级所需的<strong>常态刚性营运资金追加占用约为 1.00 亿—1.50 亿元（基准取 1.25 亿元）</strong>。</li>
+</ul>
+</li>
 </ul>
 <h5 id="2owner-earnings">（2）安琪酵母存量常态真实股东盈余（Owner Earnings）分步还原总表</h5>
 <div class="table-scroll-wrap"><table>
@@ -2444,10 +3024,12 @@
 <p><strong>数据核验</strong>：截至 2025 年末，安琪酵母应收账款账面价值为 <strong>18.44 亿元</strong>（1,843,548,354.08 元），占全年营收（167.29 亿元）比重为 <strong>11.02%</strong>；截至 2026 年三季度末，在营收同比大增 15.45% 的背景下，应收账款期末余额仅为 <strong>18.58 亿元</strong>（1,858,293,874.84 元），较上年末仅微增 <strong>1,475 万元（+0.80%）</strong>，配合 2025 年高达 <strong>24.78 亿元（净现比 1.60）</strong>、2026 年前三季度 <strong>17.12 亿元（净现比 1.46）</strong> 的经营性现金流净额，直接证明公司营收增长的现金含金量极高。</p>
 </li>
 <li>
-<p><strong>海外信用风险排查</strong>：针对市场担忧的俄罗斯、埃及、中东等新兴市场客户违约与汇率贬值风险，安琪在操作层面建立了三道防火墙：
-  1. 在埃及和俄罗斯属于<strong>“当地建厂、本币购料发薪、向周边辐射出口创汇（收美元/欧元）”</strong>模式，不仅天然对冲了埃镑和卢布贬值敞口，反而享受了本地制造低成本出口的汇率红利；
-  2. 对海外经销商普遍采取<strong>“预收定金 + 不可撤销信用证（L/C）+ 中国信保（出口信用保险）全覆盖”</strong>机制；
-  3. 账龄结构中 <strong>1 年以内应收账款占比常年高达 90% 以上</strong>，且对 1 年以内账龄一律按 <strong>5%</strong> 计提坏账准备，不存在长账龄烂账挂账不核销的隐患。</p>
+<p><strong>海外信用风险排查</strong>：针对市场担忧的俄罗斯、埃及、中东等新兴市场客户违约与汇率贬值风险，安琪在操作层面建立了三道防火墙：</p>
+<ol>
+<li>在埃及和俄罗斯属于<strong>“当地建厂、本币购料发薪、向周边辐射出口创汇（收美元/欧元）”</strong>模式，不仅天然对冲了埃镑和卢布贬值敞口，反而享受了本地制造低成本出口的汇率红利；</li>
+<li>对海外经销商普遍采取<strong>“预收定金 + 不可撤销信用证（L/C）+ 中国信保（出口信用保险）全覆盖”</strong>机制；</li>
+<li>账龄结构中 <strong>1 年以内应收账款占比常年高达 90% 以上</strong>，且对 1 年以内账龄一律按 <strong>5%</strong> 计提坏账准备，不存在长账龄烂账挂账不核销的隐患。</li>
+</ol>
 </li>
 </ul><h5 id="2-50">2. 存货暴增至 50 亿级的真相拆解与跌价测试</h5><ul>
 <li><strong>为什么存货从历史上的 30 亿—35 亿元跃升至 2025 年末的 51.05 亿元（2026Q3 末为 49.10 亿元）？</strong>
@@ -2500,12 +3082,12 @@
 <li>
 <p><strong>实事求是的“未达标/异动股份回购注销”铁腕记录</strong>：
   在计划执行过程中，安琪酵母绝不搞“大锅饭式全员放行”。凡是出现个人绩效考核未达标、职务调整、退休或离职等不符合解锁条件的情形，董事会与监事会均严格按授予价（扣减分红后）执行<strong>強制回购注销</strong>：</p>
-</li>
-<li>
-<p>2025 年年度利润分配时，公司总股本中专门扣减并回购注销了不符合条件的限制性股票 <strong>129,800 股</strong>；</p>
-</li>
+<ul>
+<li>2025 年年度利润分配时，公司总股本中专门扣减并回购注销了不符合条件的限制性股票 <strong>129,800 股</strong>；</li>
 <li>2026 年 5 月 26 日，公司对 4 名离职或调动人员持有的 <strong>80,000 股</strong> 限制性股票予以回购注销；</li>
 <li>2026 年 10 月 28 日（第十届董事会第二十三次会议），公司再次审议通过回购注销 2 名异动激励对象未解锁的 <strong>16,750 股</strong>（回购价调整为 14.31 元/股）。这种高频、透明、制度化的进退机制，证明其股权激励绝非无条件送福利，而是真正绑定了近千名技术与海外营销中坚力量的“金手铐”。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>很多公司的股权激励计划就像给站在扶梯上的人发跑步奖章——只要电梯往上走，人人都有份；而安琪的考核表里专门用了一个叫“EOE（净资产现金回报率）”的聪明指标，它的潜台词是：“我允许你花几十亿去建水解糖厂和海外基地，折旧增加我不怪你，但你建好的铁罐子必须立刻给我吐出真金白银的现金流（EBITDA），而且必须跑赢同行前25%（75分位值）！”</p></div></div></div></div>
 
 
@@ -2515,10 +3097,12 @@
 
 
 <div class="annotated-row"><div class="main-col"><h5 id="2-127">2. 高管限薪体制与 1.27 万名员工的人均创收、创利匹配度审计</h5><p>查阅《2025年年度报告》披露的董事、高管报酬及员工结构明细，可以清晰看到一家地方国企制造业龙头的组织效率图谱：</p><ul>
-<li><strong>高管薪酬极度克制，无天价高管掏空股东现象</strong>：</li>
-<li>董事长 <strong>熊涛</strong>：在关联方领薪，在上市公司领取的税前报酬为 <strong>0.00 元</strong>；</li>
 <li>
-<p>董事、总经理 <strong>肖明华</strong>：作为统领年营收 167.29 亿元、跨国运营十余座工厂的核心高管，2025 年度从公司领取的税前报酬总额仅为 <strong>83.83 万元</strong>，其余副总经理、董秘、财务负责人等高管年薪均严格受制于国企负责人薪酬管理体制（普遍在 60 万—100 万元区间）。高管层真正的财富增量寄托于自身持有的限制性股票随业绩达标而解锁，利益与中小股东高度对齐。</p>
+<p><strong>高管薪酬极度克制，无天价高管掏空股东现象</strong>：</p>
+<ul>
+<li>董事长 <strong>熊涛</strong>：在关联方领薪，在上市公司领取的税前报酬为 <strong>0.00 元</strong>；</li>
+<li>董事、总经理 <strong>肖明华</strong>：作为统领年营收 167.29 亿元、跨国运营十余座工厂的核心高管，2025 年度从公司领取的税前报酬总额仅为 <strong>83.83 万元</strong>，其余副总经理、董秘、财务负责人等高管年薪均严格受制于国企负责人薪酬管理体制（普遍在 60 万—100 万元区间）。高管层真正的财富增量寄托于自身持有的限制性股票随业绩达标而解锁，利益与中小股东高度对齐。</li>
+</ul>
 </li>
 <li>
 <p><strong>员工专业结构与人效变动匹配度（截至 2025 年末）</strong>：</p>
@@ -2597,13 +3181,17 @@
   细心的财务研究者翻开《2026年第三季度报告》会发现：截至 2026 年 9 月 30 日，公司账面短期借款为 39.69 亿元、长期借款 21.62 亿元、一年内到期非流动负债 5.08 亿元、应付债券增至 19.95 亿元（含发行的“25安琪K1”等科技创新公司债券）、租赁负债 1.06 亿元，表内毛有息负债一度冲高至约 87.4 亿元；但与此同时，<strong>账面货币资金也从基准期的 23.18 亿元同步暴增至 31.42 亿元（连同阶段性存放的待置换募集资金与大额存单）</strong>！这是因为公司在三季度刚刚发债募资、资金尚趴在账上等待偿还到期短贷及支付四季度工程款。在扣除对应待偿债专户现金后，公司的<strong>真实刚性净有息负债（Net Debt = 有效有息负债 60.50 亿元 - 超额可动用现金 7.18 亿元 = 53.32 亿元）</strong>保持高度稳定，全款买断整家生意的 <strong>True EV 稳固锚定在 388.3 亿元</strong>。</li>
 </ul><h5 id="22026-9-35">（2）2026 年 9 月“35 亿元可转债预案”的转股摊薄与债务替代双情景推演</h5><p>2026 年 9 月 24 日，公司发布《向不特定对象发行可转换公司债券预案》，拟募资不超过 <strong>35.00 亿元</strong> 投向宜昌白洋生物科技园二期、酵母蛋白核心技术攻关及新疆可克达拉 2 万吨酵母项目。这笔 35 亿元准股权融资一旦落地，对现有股东意味着什么？我们拆解两种终局情景：</p><ol>
 <li>
-<p><strong>情景 A（未来未转股，作为极低息长债置换高息短债——优化负债结构）</strong>：
-   - A 股 AAA 级国企 6 年期可转债的票面利率通常第一年仅 <strong>0.20%</strong>、第二年 <strong>0.40%</strong>，6 年平均票面利息成本不足 <strong>1.0%—1.2%</strong>！如果可转债在存续期内未转股，安琪相当于借到了一笔 35 亿元的超低息长期资金，不仅能直接置换掉账面上利率 2.5%—2.8% 的短期银行借款、彻底消除“短贷长投”期限错配，每年还能比普通银行贷款节省约 <strong>4500 万—5500 万元</strong> 的真实付现利息，且<strong>总股本零摊薄</strong>。</p>
+<p><strong>情景 A（未来未转股，作为极低息长债置换高息短债——优化负债结构）</strong>：</p>
+<ul>
+<li>A 股 AAA 级国企 6 年期可转债的票面利率通常第一年仅 <strong>0.20%</strong>、第二年 <strong>0.40%</strong>，6 年平均票面利息成本不足 <strong>1.0%—1.2%</strong>！如果可转债在存续期内未转股，安琪相当于借到了一笔 35 亿元的超低息长期资金，不仅能直接置换掉账面上利率 2.5%—2.8% 的短期银行借款、彻底消除“短贷长投”期限错配，每年还能比普通银行贷款节省约 <strong>4500 万—5500 万元</strong> 的真实付现利息，且<strong>总股本零摊薄</strong>。</li>
+</ul>
 </li>
 <li>
-<p><strong>情景 B（未来全额转股——股本摊薄约 8.5%—9.5%，但净负债同步消减）</strong>：
-   - 假设该笔 35 亿元可转债在 2027 年上半年完成发行，初始转股价按当前股价微幅溢价设定在 <strong>39.00—42.00 元/股</strong> 区间：
-   - 若未来全部转股，将新增普通股约 <strong>0.83 亿—0.90 亿股</strong>，公司总股本将从当前的 <strong>8.68 亿股</strong> 扩张至 <strong>9.51 亿—9.58 亿股</strong>，对老股东的<strong>静态股本摊薄率约为 8.7%—9.4%（约 8%—9% 区间）</strong>；</p>
+<p><strong>情景 B（未来全额转股——股本摊薄约 8.5%—9.5%，但净负债同步消减）</strong>：</p>
+<ul>
+<li>假设该笔 35 亿元可转债在 2027 年上半年完成发行，初始转股价按当前股价微幅溢价设定在 <strong>39.00—42.00 元/股</strong> 区间：</li>
+<li>若未来全部转股，将新增普通股约 <strong>0.83 亿—0.90 亿股</strong>，公司总股本将从当前的 <strong>8.68 亿股</strong> 扩张至 <strong>9.51 亿—9.58 亿股</strong>，对老股东的<strong>静态股本摊薄率约为 8.7%—9.4%（约 8%—9% 区间）</strong>；</li>
+</ul>
 </li>
 </ol><ul>
 <li><strong>关键对冲账</strong>：转股虽然摊薄了约 9% 的股本分母，但一方面公司无需再偿还这 35 亿元本金及后续利息（相当于净债务直接减少 35 亿元，在相同 True EV 下股权价值自动增厚 35 亿元）；另一方面，这 35 亿元投向的可克达拉与白洋二期项目只要实现 <strong>10% 以上</strong> 的资本回报率（ROIC），其创造的新增 Owner Earnings 分子增速（&gt;15%）就会完全覆盖 8%—9% 的股本摊薄分母，实现每股真实股东盈余（Owner Earnings Per Share）的净增厚！</li>
@@ -3176,7 +3764,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《安琪酵母 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/安琪酵母 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《安琪酵母(600298.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/安琪酵母(600298.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -3373,6 +3961,677 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        var globalMarketControllers = [];
+        var globalMarketMode = 'ALL';
+        try {
+          var savedMkt = localStorage.getItem('agy_lb_market_mode_v1');
+          if (savedMkt === 'ALL' || savedMkt === 'A' || savedMkt === 'H') globalMarketMode = savedMkt;
+        } catch(e) {}
+        var globalBarRefs = [];
+        var globalStats = { maxTotal: 0, maxA: 0, maxH: 0 };
+
+        function setGlobalMarketMode(mode) {
+          globalMarketMode = mode;
+          try { localStorage.setItem('agy_lb_market_mode_v1', mode); } catch(e) {}
+          globalMarketControllers.forEach(function(fn){ fn(mode); });
+          globalBarRefs.forEach(function(ref){
+            Object.keys(ref.btns).forEach(function(k){
+              ref.btns[k].classList.toggle('active', k === mode);
+            });
+            if (ref.badge) {
+              var labelMap = {
+                'ALL': '当前显示：A+H 统一全榜 (' + (globalStats.maxA + globalStats.maxH) + ' 席)',
+                'A': '当前显示：🇨🇳 仅 A 股 (' + globalStats.maxA + ' 席)',
+                'H': '当前显示：🇭🇰 仅 H 股/港股 (' + globalStats.maxH + ' 席)'
+              };
+              ref.badge.textContent = labelMap[mode] || '';
+            }
+          });
+        }
+
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = (hTexts.some(function(h){ return h.indexOf('实时排名') >= 0 || h.indexOf('市场与排名') >= 0 || h.indexOf('统一排名') >= 0; })) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('严苛排名') >= 0 || hTexts[0].indexOf('统一排名') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var countA = 0, countH = 0;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🛢️ 周期资源与能源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '⚙️ 高端制造与出海',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /(?:客观|客)\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var market = 'A';
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) || pxTxt.indexOf('港元') >= 0) {
+                market = 'H';
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /(?:今日\s*|\()([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /(?:常态回报|严苛EV常态回报|港股常态回报)\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (isNaN(oe)) oe = parseNum(oeTxt2, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /(?:实时股息|纯现金股息|TTM股息)(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (isHMaster || rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || pxTxt2.indexOf('H股现价') >= 0 || pxTxt2.indexOf('港元`') >= 0 || (pxTxt2.indexOf('实时现价:') >= 0 && pxTxt2.split('实时现价')[1].slice(0, 20).indexOf('港元') >= 0) || (pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0)) {
+                market = 'H';
+              }
+            }
+
+            if (market === 'H') countH++; else countA++;
+            tr.setAttribute('data-market', market);
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              market: market,
+              isHkOnly: market === 'H',
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 1) return;
+          if (countA + countH > globalStats.maxTotal && countA > 0 && countH > 0) {
+            globalStats.maxTotal = countA + countH;
+            globalStats.maxA = countA;
+            globalStats.maxH = countH;
+          }
+
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL' };
+          var inlineMarketBtns = {};
+
+          function applyFilters() {
+            var visIdx = 0;
+            // 遍历当前 tbody 真实 DOM 顺序以保证重排后序号依然严格递增
+            var domTrs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var trMap = new Map();
+            rowData.forEach(function(d){ trMap.set(d.tr, d); });
+            domTrs.forEach(function(tr){
+              var d = trMap.get(tr);
+              if (!d) return;
+              var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              var hidden = hideByMkt || hideByF;
+              d.tr.style.display = hidden ? 'none' : '';
+              if (!hidden) {
+                visIdx++;
+                if (d.td0) {
+                  var dynSpan = d.td0.querySelector('.agy-dyn-rank');
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.key !== 'rank') {
+                    if (!dynSpan) {
+                      dynSpan = document.createElement('div');
+                      dynSpan.className = 'agy-dyn-rank no-print';
+                      dynSpan.style.cssText = 'font-size:11px;font-weight:700;color:#0284c7;margin-bottom:2px;';
+                      d.td0.insertBefore(dynSpan, d.td0.firstChild);
+                    }
+                    dynSpan.textContent = '#' + visIdx;
+                  } else if (dynSpan) {
+                    dynSpan.remove();
+                  }
+                }
+              }
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若表格同时包含 A 股与 H 股，挂载三态市场切换开关（AH股一起显示 / 只显示A股 / 只显示H股），并与全页顶栏联动
+          if (countA > 0 && countH > 0) {
+            var seg = document.createElement('div');
+            seg.className = 'agy-market-seg-inline';
+            var mDefs = [
+              { m: 'ALL', text: '🌐 AH一起 (' + (countA + countH) + ')' },
+              { m: 'A', text: '🇨🇳 只看A股 (' + countA + ')' },
+              { m: 'H', text: '🇭🇰 只看H股 (' + countH + ')' }
+            ];
+            mDefs.forEach(function(md){
+              var mb = document.createElement('button');
+              mb.type = 'button';
+              mb.className = 'agy-market-btn' + (md.m === globalMarketMode ? ' active' : '');
+              mb.textContent = md.text;
+              mb.addEventListener('click', function(){
+                setGlobalMarketMode(md.m);
+              });
+              seg.appendChild(mb);
+              inlineMarketBtns[md.m] = mb;
+            });
+            bar.appendChild(seg);
+            globalMarketControllers.push(function(mode){
+              state.market = mode;
+              Object.keys(inlineMarketBtns).forEach(function(k){
+                inlineMarketBtns[k].classList.toggle('active', k === mode);
+              });
+              applyFilters();
+            });
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+            applyFilters();
+          }
+
+          updateUI();
+        });
+
+        // 若页面存在 A+H 统一榜单表，在正文最顶部挂载吸顶全局三态市场开关，一键同步切换全页全部雷达与总表
+        if (globalMarketControllers.length > 0) {
+          var rc = document.querySelector('.report-content');
+          if (rc) {
+            var gBar = document.createElement('div');
+            gBar.className = 'agy-market-global-bar no-print';
+            var gTitle = document.createElement('div');
+            gTitle.className = 'agy-market-global-title';
+            gTitle.innerHTML = '🎛️ <span>A+H 统一榜单市场视图开关</span>';
+            var gSeg = document.createElement('div');
+            gSeg.className = 'agy-market-seg';
+            var gBtns = {};
+            [
+              { m: 'ALL', text: '🌐 AH股一起显示 (' + (globalStats.maxA + globalStats.maxH) + ')' },
+              { m: 'A', text: '🇨🇳 只显示A股 (' + globalStats.maxA + ')' },
+              { m: 'H', text: '🇭🇰 只显示H股 (' + globalStats.maxH + ')' }
+            ].forEach(function(item){
+              var gb = document.createElement('button');
+              gb.type = 'button';
+              gb.className = 'agy-market-btn';
+              gb.textContent = item.text;
+              gb.addEventListener('click', function(){
+                setGlobalMarketMode(item.m);
+              });
+              gSeg.appendChild(gb);
+              gBtns[item.m] = gb;
+            });
+            var gBadge = document.createElement('span');
+            gBadge.className = 'agy-market-count-badge';
+            gBar.appendChild(gTitle);
+            gBar.appendChild(gSeg);
+            gBar.appendChild(gBadge);
+            var h1El = rc.querySelector('h1');
+            if (h1El && h1El.nextSibling) {
+              rc.insertBefore(gBar, h1El.nextSibling);
+            } else {
+              rc.insertBefore(gBar, rc.firstChild);
+            }
+            globalBarRefs.push({ btns: gBtns, badge: gBadge });
+            setGlobalMarketMode(globalMarketMode);
+          }
+        }
+      })();
     })();
   </script>
 </body>

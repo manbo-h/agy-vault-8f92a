@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>东鹏饮料 深度投研全集</title>
+<title>东鹏饮料(605499.SH) 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -386,6 +386,80 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
+
+  /* 机构级原生 SVG 可视化图表卡片（支持单图与左右双联看板） */
+  .agy-chart-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1;
+    border-top: 3.5px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 12px 16px 10px 16px;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .agy-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+  }
+  .agy-chart-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .agy-chart-subtitle {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .agy-chart-grid {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .agy-chart-subcard {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px 4px 10px;
+  }
+  .agy-chart-subheading {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid #f59e0b;
+  }
+  .agy-chart-single {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px 4px 12px;
+  }
+  .agy-chart-footer {
+    font-size: 8.2pt;
+    color: #475569;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+    line-height: 1.45;
+  }
+  @media (max-width: 720px) {
+    .agy-chart-grid {
+      flex-direction: column;
+    }
+  }
   /* 屏幕交互式阅读与划词提问组件（打印 PDF 时自动隐藏） */
   @media print {
     .no-print { display: none !important; }
@@ -676,6 +750,473 @@
       color: #ffffff;
       border-color: #38bdf8;
     }
+    /* 排行榜表格交互表头排序与快捷排序栏（仅屏幕交互显示，打印 PDF 自动隐藏） */
+    .agy-sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 6px 0;
+      padding: 8px 11px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .agy-sort-label {
+      font-weight: 700;
+      color: #334155;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .agy-sort-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .agy-sort-btn:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0369a1;
+    }
+    .agy-sort-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    .agy-sort-btn.agy-filter-btn {
+      margin-left: auto;
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      border-color: #b45309;
+      color: #ffffff;
+    }
+    /* 全球市场三态切换开关（AH股一起显示 / 只显示A股 / 只显示H股） */
+    .agy-market-global-bar {
+      position: sticky;
+      top: 8px;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0 16px 0;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #f8fafc;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+      font-size: 13px;
+    }
+    .agy-market-global-title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e2e8f0;
+    }
+    .agy-market-seg {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+    .agy-market-seg-inline {
+      display: inline-flex;
+      align-items: center;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 2px;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .agy-market-btn {
+      background: transparent;
+      color: #cbd5e1;
+      border: none;
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.16s ease;
+    }
+    .agy-market-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .agy-market-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+    }
+    .agy-market-seg-inline .agy-market-btn {
+      color: #334155;
+      padding: 3px 10px;
+      font-size: 12px;
+    }
+    .agy-market-seg-inline .agy-market-btn:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+    .agy-market-seg-inline .agy-market-btn.active {
+      background: #1e3a8a;
+      color: #ffffff;
+    }
+    .agy-market-count-badge {
+      font-size: 12px;
+      color: #bae6fd;
+      font-weight: 600;
+    }
+    .report-content th.agy-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      position: relative;
+    }
+    .report-content th.agy-sortable:hover {
+      background-color: #dbeafe !important;
+    }
+    .report-content th.agy-sortable.agy-sort-active {
+      background-color: #e0f2fe !important;
+      color: #0c4a6e !important;
+    }
+    .agy-sort-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .report-content th.agy-sort-active .agy-sort-arrow {
+      opacity: 1;
+      color: #0284c7;
+    }
+    .agy-dist-pill {
+      display: inline-block;
+      margin: 2px 0 3px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+    .agy-dist-hit {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .agy-dist-near {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+    .agy-dist-mid {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .agy-dist-far {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    body.agy-theme-sepia .agy-sort-bar {
+      background: #ece3cc;
+      border-color: #d6c8a8;
+    }
+    body.agy-theme-sepia .agy-sort-btn {
+      background: #f7f1e1;
+      border-color: #cfc09f;
+      color: #3d3326;
+    }
+    body.agy-theme-dark .agy-sort-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-sort-label {
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-sort-btn {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    body.agy-theme-dark .agy-sort-btn:hover {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn {
+      background: #271f10;
+      border-color: #b45309;
+      color: #fcd34d;
+    }
+    body.agy-theme-dark .agy-sort-btn.agy-filter-btn.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable:hover {
+      background-color: #334155 !important;
+    }
+    body.agy-theme-dark .report-content th.agy-sortable.agy-sort-active {
+      background-color: #1e3a5f !important;
+      color: #7dd3fc !important;
+    }
+    body.agy-theme-dark .agy-dist-hit {
+      background: #14532d;
+      color: #bbf7d0;
+      border-color: #22c55e;
+    }
+    body.agy-theme-dark .agy-dist-near {
+      background: #431407;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    body.agy-theme-dark .agy-dist-mid {
+      background: #0c4a6e;
+      color: #bae6fd;
+      border-color: #38bdf8;
+    }
+    body.agy-theme-dark .agy-dist-far {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    /* 宏观因子筛选栏与实盘组合因子体检器（仅屏幕显示） */
+    .agy-factor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px 0;
+      padding: 7px 11px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .agy-pf-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+    .agy-pf-pick input {
+      margin: 0;
+      cursor: pointer;
+    }
+    #agy-portfolio-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 99980;
+      width: min(560px, calc(100vw - 32px));
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+      font-size: 12.5px;
+      overflow: hidden;
+      display: none;
+    }
+    #agy-portfolio-dock .pf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 13px;
+      background: #1e293b;
+      cursor: pointer;
+      user-select: none;
+    }
+    #agy-portfolio-dock .pf-title {
+      font-weight: 700;
+      color: #38bdf8;
+      font-size: 13px;
+    }
+    #agy-portfolio-dock .pf-body {
+      padding: 11px 13px 13px 13px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    #agy-portfolio-dock.collapsed .pf-body {
+      display: none;
+    }
+    .pf-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pf-metric-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 7px;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .pf-metric-box .k {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .pf-metric-box .v {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    .pf-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-alert {
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pf-alert.red { background: rgba(220, 38, 38, 0.22); border: 1px solid #ef4444; color: #fecaca; }
+    .pf-alert.amber { background: rgba(217, 119, 6, 0.22); border: 1px solid #f59e0b; color: #fde68a; }
+    .pf-alert.green { background: rgba(22, 163, 74, 0.22); border: 1px solid #22c55e; color: #bbf7d0; }
+    .pf-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .pf-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+    }
+    .pf-bar-name {
+      width: 126px;
+      flex-shrink: 0;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pf-bar-track {
+      flex: 1;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .pf-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: #38bdf8;
+    }
+    .pf-bar-fill.warn { background: #ef4444; }
+    .pf-bar-pct {
+      width: 44px;
+      text-align: right;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .pf-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed #334155;
+      padding-top: 8px;
+    }
+    .pf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #1e293b;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pf-item input {
+      width: 62px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 5px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pf-mini-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .pf-mini-btn:hover { color: #ffffff; border-color: #94a3b8; }
+    body.agy-theme-dark .agy-factor-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.agy-theme-dark .agy-pf-pick {
+      background: #1e293b;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.agy-theme-dark .agy-pf-pick.checked {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    body.agy-theme-sepia .agy-factor-bar {
+      background: #f2ead7;
+      border-color: #d6c8a8;
+    }
     #agy-toc-sidebar.collapsed #agy-toc-reader-box {
       display: none !important;
     }
@@ -867,9 +1408,9 @@
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">东鹏饮料 深度投研全集</div>
+    <div class="report-title">东鹏饮料(605499.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-17</span>
+      <span>📅 导出日期：2026-11-24</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -893,6 +1434,15 @@
   </div>
   <div class="report-content">
     <h1 id="605499sh-09980hk">阶段一：全景基本面八步底座——东鹏饮料（605499.SH / 09980.HK）深度投研报告</h1>
+<!--V4_AUDIT_BANNER_START-->
+<blockquote>
+<p><strong>⚔️ 2026-11-24 V4 官方原表验真 × 物理隔离独立红蓝盲审终审声明（<code>CORRECTED</code>）</strong>：
+- <strong>终审核心估值锚</strong>：常态 OE <strong><code>39.00亿/年</code></strong> → 达产 <strong><code>48.00亿/年</code></strong> ｜ 新买点：<strong><code>A股 ≤78.50元 / 84.00—92.00元；H股 ≤73.50港元 / 78.70—86.20港元</code></strong>（原：<code>A股 ≤86.17元 / 92.00—100.03元；H股 ≤88.0港元 / 92.0—101.3港元</code>）
+- <strong>🔴 空头命中硬约束（实打实认领）</strong>：1）26Q3旺季双引擎失速（特饮单季-8.56%、补水啦+0.49%）、低毛利茶饮占比提升叠加PET反弹与固资大增36.23%带来的折旧与维护CapEx压力，击穿原榜44.97亿OE高估；2）原稿漏扣1.75亿H股应付股利、未扣8.54亿应付工程款且在主锚忽视50.90亿合同负债履约备付；3）原稿H股买点违背A+H双尺取严铁律；4）鲲鹏高位套现19亿、港股募资汇兑损益-2.08亿及145.8元高位回购浮亏，下调品质加分至0.5。
+- <strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：1）官方附注证伪存贷双高造假：62.73亿短借中97%为0.55%–2.08%内部低息票据贴现套利，受限金仅0.10亿，上市累计现金分红超101.93亿；2）零白条应收（应收仅1.74亿、票据0.00）、18.3天极致存货周转及50.90亿合同负债（含预扣返利池，对广义应收覆盖29.2倍）证伪渠道恶性压货崩盘；3）拒绝空头将50.90亿合同负债100%按清算扣光及10亿维护CapEx双重压测，守住102.65亿严苛净现金与39.00亿实业造血底座。
+- <strong>📋 V4 官方对账附注</strong>：V4官方底稿对账与红蓝终审裁决（CORRECTED）：1）蓝方硬核反杀两项假警报——62.73亿短借中97%系0.55%至2.08%超低息内部票据贴现套利、受限金仅约0.10亿且上市累计真金分红超101.93亿，零白条应收与18.3天周转及50.90亿合同负债证伪造假与恶性压库；2）空头精准击穿四项硬伤并实打实下修——补扣1.75亿未付H股股利、8.54亿应付工程款与30亿合同负债履约备付，严苛True EV调升40.29亿（A股697.35亿/H股485.43亿）；正视26Q3特饮下滑8.56%、补水啦骤降至0.49%、PET反弹与67.39亿固资折旧爬坡，将常态实业OE由44.97亿下砍至39.00亿（含7.90亿真实维持性开支），达产OE由56.40亿下修至48.00亿；因鲲鹏高位套现19亿与港股募资汇兑失血，品质加分由1.5降至0.5；严格按A+H双尺取严铁律（折价26.49%对应19.87%结构折价）将H股买点大幅下修至73.50/78.70—86.20港元，纠偏原稿误判H股已进黄金区的问题。注：TTM实派现金分红4.92元（25年报复权1.92元+26中报3.00元），25完整年度归属常态DPS为3.73元。</p>
+</blockquote>
+<!--V4_AUDIT_BANNER_END-->
 <h2 id="_1">【开篇破题：两段话直击生意灵魂与当期核心张力】</h2>
 <div class="annotated-row"><div class="main-col"><p>很多人看东鹏饮料，第一反应是“卖廉价山寨红牛的夫妻店”，或者把它简单归类为靠蓝领货车司机熬夜续命的功能饮料公司。这种流于表面的印象恰恰漏掉了它最可怕的商业底牌：<strong>东鹏从来不是一家靠神秘配方赚溢价的实验室公司，而是一台把“极致大包装性价比 + 五码合一数字化渠道推力 + 区域贴身建厂锁死运费极限”拧成一股绳的快消品地面收割机。</strong> 在软饮料这个看似毫无技术门槛的红海里，它用“500ml金瓶卖5块钱（每百毫升单价仅为红牛的35%—40%）”切中中国三亿蓝领、外卖骑手、网约车司机与基层白领的“高频刚需抗疲劳口粮”，再用行业首创的“一物一码/五码合一”二维码红包系统，跳过层层经销商黑箱，把每一分促销费用精准塞进全国超400万家夫妻老婆店老板和终端消费者的微信零钱里。它真正卡住的，是中国毛细血管级下沉渠道里“周转最快、终端推力最强、单吨物流与包装成本最低”的生态身位。</p><p>然而，站在2026年11月中旬的时间节点翻开最新成绩单，这家过去五年营收从69.78亿元狂飙至208.75亿元、并于2026年2月成功登陆港交所主板（09980.HK，募资净额合计达109.43亿港元）的行业霸主，正迎来上市以来最刺眼的一次“冰与火大考”：<strong>火的一面，是原材料PET锁价红利推动2026年前三季度综合毛利率冲上47.47%（同比再增2.30个百分点），茶饮料板块前三季度暴涨182.99%至16.38亿元，账面广义现金储备因港股募资暴涨至225.20亿元；冰的一面，则是2026年第三季度（7—9月传统旺季）业绩突发“急刹车”——Q3单季营收仅微增0.75%至61.53亿元，归母净利润同比下滑7.80%至12.78亿元！</strong> 其中，看家王牌“东鹏特饮”Q3单季罕见下滑8.56%，被寄予厚望的第二增长曲线“东鹏补水啦”Q3单季增速也从翻倍狂飙骤降至0.49%。这究竟是极端降雨天气、姆巴佩代言舆情中止与高基数引发的短期渠道洗胃，还是能量饮料触及天花板、电解质水陷入巨头价格战泥潭的长期拐点？这正是我们穿透整份财报与产业链最核心的审视主线。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>把糖、香精、牛磺酸和咖啡因兑进水里卖给困得睁不开眼的卡车司机，这门生意的物理配方连高中化学老师都能抄出来。但能把5块钱一瓶的甜水铺进全国400万个村口小卖部、让老板拼命帮你往冰柜第一排塞，还顺手从香港股市拎回一百亿港币现金——别瞧不起卖苦力水的，这台地面推土机的齿轮咬合得比大多数高科技公司都紧。只不过，当一台连续五年踩死油门狂奔的卡车突然在三季度旺季踩了一脚急刹，你最好先趴下看看是路上有块石头，还是发动机拉缸了。</p></div></div></div></div>
 
@@ -902,27 +1452,29 @@
 <h3 id="1">1. 业务结构与利益链条：看清“一超多强”的真实利润底座</h3>
 <p>东鹏饮料的账本极度纯粹，主营业务100%围绕软饮料研发、生产与销售展开，但在内部正经历从“东鹏特饮单腿跳”向“1+6多品类矩阵”的结构性裂变。结合《2025年年度报告》与《2026年前三季度主要经营数据的公告》，我们可以把它的产品矩阵拆解为三个盈利梯队：</p>
 <ul>
-<li><strong>第一梯队（绝对利润压舱石——能量饮料“东鹏特饮”）：</strong></li>
 <li>
-<p><strong>营收与销量体量</strong>：2025年全年实现营收155.99亿元（同比增长17.25%），占总营收的74.78%，全年销量高达367.57万吨（折合单吨出厂价约4,244元/吨）。2026年前三季度实现营收127.80亿元（同比增长1.72%），占比由上年同期的74.63%回落至68.80%（其中2026Q3单季收入约38.43亿元，同比下滑8.56%）。</p>
+<p><strong>第一梯队（绝对利润压舱石——能量饮料“东鹏特饮”）：</strong></p>
+<ul>
+<li><strong>营收与销量体量</strong>：2025年全年实现营收155.99亿元（同比增长17.25%），占总营收的74.78%，全年销量高达367.57万吨（折合单吨出厂价约4,244元/吨）。2026年前三季度实现营收127.80亿元（同比增长1.72%），占比由上年同期的74.63%回落至68.80%（其中2026Q3单季收入约38.43亿元，同比下滑8.56%）。</li>
+</ul>
 </li>
 <li>
 <p><strong>盈利统治力</strong>：2025年能量饮料毛利率高达 <strong>50.79%</strong>（同比提升2.54个百分点），贡献了全公司84.5%以上的毛利额！为什么一瓶终端卖4—5块钱的饮料能有超50%的毛利率？因为它的核心有效成分（牛磺酸、咖啡因、B族维生素、赖氨酸）单瓶添加成本以分厘计，成本大头集中在聚酯切片（PET瓶坯）、白砂糖与纸箱包装上，一旦规模突破360万吨，固定折旧与采购议价被摊薄到了极致。</p>
 </li>
 <li>
 <p><strong>第二梯队（跑通规模但遭遇红海肉搏的第二曲线——电解质饮料“东鹏补水啦”）：</strong></p>
-</li>
-<li>
-<p><strong>营收与放量速度</strong>：2023年推出后借运动流汗与健康补水风口狂飙，2025年全年营收暴涨118.99%至 <strong>32.74亿元</strong>，销量达146.62万吨（单吨出厂价约2,233元/吨），营收占比跃升至15.70%。2026年前三季度实现营收30.32亿元（同比增长6.51%），占比16.32%，但2026Q3单季收入约13.61亿元，同比仅微增0.49%。</p>
+<ul>
+<li><strong>营收与放量速度</strong>：2023年推出后借运动流汗与健康补水风口狂飙，2025年全年营收暴涨118.99%至 <strong>32.74亿元</strong>，销量达146.62万吨（单吨出厂价约2,233元/吨），营收占比跃升至15.70%。2026年前三季度实现营收30.32亿元（同比增长6.51%），占比16.32%，但2026Q3单季收入约13.61亿元，同比仅微增0.49%。</li>
+</ul>
 </li>
 <li>
 <p><strong>盈利成色</strong>：2025年“补水啦”毛利率为 <strong>34.77%</strong>（同比提升约4.8个百分点）。虽然已跨过盈亏平衡线并产生正向经营利润，但因其出厂吨价仅为东鹏特饮的52.6%（1L大包装终端仅售5—6元，555ml售4元），且瓶体耗用更多PET树脂、单箱物流重量更大，其毛利率比东鹏特饮天然低了16个百分点。</p>
 </li>
 <li>
 <p><strong>第三梯队（冲锋凑规模与孵化期的第三曲线——茶饮料、即饮咖啡、植物蛋白及果蔬汁等）：</strong></p>
-</li>
-<li>
-<p><strong>营收表现</strong>：2025年其他饮料合计实现营收19.86亿元（同比增长94.08%），其中“果之茶”（1L大包装果味茶）与“东鹏大咖”（即饮咖啡）双双突破5亿元大关。进入2026年前三季度，公司将<strong>茶饮料</strong>单独列报，1—9月茶饮料狂砍 <strong>16.38亿元</strong>（同比暴增182.99%，占比升至8.82%），其余饮料（大咖、海岛椰、VIVI鸡尾酒等）实现11.24亿元（同比增长32.93%，占比6.06%）。</p>
+<ul>
+<li><strong>营收表现</strong>：2025年其他饮料合计实现营收19.86亿元（同比增长94.08%），其中“果之茶”（1L大包装果味茶）与“东鹏大咖”（即饮咖啡）双双突破5亿元大关。进入2026年前三季度，公司将<strong>茶饮料</strong>单独列报，1—9月茶饮料狂砍 <strong>16.38亿元</strong>（同比暴增182.99%，占比升至8.82%），其余饮料（大咖、海岛椰、VIVI鸡尾酒等）实现11.24亿元（同比增长32.93%，占比6.06%）。</li>
+</ul>
 </li>
 <li>
 <p><strong>盈利定位</strong>：2025年其他饮料综合毛利率仅约 <strong>14.7%—20%</strong> 左右。这块业务目前的核心使命不是赚净利，而是<strong>“填满全国新建生产基地的淡季富余产能 + 抢占终端冰柜陈列排面 + 分摊业务员单店拜访费用”</strong>。</p>
@@ -1024,9 +1576,9 @@
 </li>
 <li>
 <p><strong>成本顺价权与客户转换代价测试：</strong></p>
-</li>
-<li>
-<p><strong>直接提价能力偏弱，但隐性顺价与成本吸收能力极强：</strong> 500ml金瓶特饮“5元零售价”是蓝领心智的铁锚，一旦贸然将终端指导价提到6元，极易给体质能量、乐虎等低价竞品留出偷袭缝隙。因此，当上游白砂糖或PET暴涨时（如2022—2023年白糖周期高点），东鹏不会轻易直接提终端标价，而是通过<strong>“调节箱内‘再来一瓶/扫码红包’的中奖率与金额（变相微调终端实付价与渠道返利）”</strong>，配合全国自建基地缩短物流半径（单吨运费连年下降），在内部消化成本冲击。</p>
+<ul>
+<li><strong>直接提价能力偏弱，但隐性顺价与成本吸收能力极强：</strong> 500ml金瓶特饮“5元零售价”是蓝领心智的铁锚，一旦贸然将终端指导价提到6元，极易给体质能量、乐虎等低价竞品留出偷袭缝隙。因此，当上游白砂糖或PET暴涨时（如2022—2023年白糖周期高点），东鹏不会轻易直接提终端标价，而是通过<strong>“调节箱内‘再来一瓶/扫码红包’的中奖率与金额（变相微调终端实付价与渠道返利）”</strong>，配合全国自建基地缩短物流半径（单吨运费连年下降），在内部消化成本冲击。</li>
+</ul>
 </li>
 <li>
 <p><strong>消费者与小店老板的转换代价：</strong> 对消费者而言，能量饮料具有轻度咖啡因与糖分生理依赖，且500ml带防尘盖的便携性在跑车工地场景无可替代；对小店老板而言，卖一箱东鹏特饮不仅周转比杂牌快3—5倍，还能通过扫箱内码实时秒到账赚取3—5元微信现金红包，换掉东鹏等于直接少赚现金流。</p>
@@ -1110,13 +1662,17 @@
 <h3 id="2_1">2. 穿透产品与成本曲线的三大残酷真相</h3>
 <div class="annotated-row"><div class="main-col"><ol>
 <li>
-<p><strong>为什么红牛打不死东鹏，低价杂牌也抢不走东鹏？——“金罐太贵且不封口，杂牌没码且不周转”：</strong>
-   - 往上比，红牛250ml马口铁金罐卖6块钱，不仅每百毫升价格是东鹏500ml金瓶（5元）的 <strong>2.4倍</strong>，而且存在两个致命的物理与成本软肋：一是马口铁罐单罐包材成本（0.65元以上）远高于东鹏自吹的PET瓶坯+瓶盖（约0.35—0.40元），导致红牛降价空间被锁死；二是货车司机在颠簸驾驶室或工地干活时，易拉罐一旦拉开没法盖上，既容易洒漏又容易进灰，而东鹏一个小小的<strong>塑料防尘盖+旋盖PET瓶</strong>，精准解决了分次饮用和卫生防尘的痛点。
-   - 往下比，河南中沃“体质能量”等低价模仿者虽然把500ml卖到3.5—4元，但它们没有东鹏覆盖全国的“五码合一”微信红包系统。对消费者来说，花5块钱买东鹏有高概率扫出“壹元乐享”或微信红包；对小店老板来说，扫东鹏箱内码立得现金返利且周转快，卖杂牌虽然标称进货差价多几毛钱，但压在货架上三个月卖不动就是死钱。</p>
+<p><strong>为什么红牛打不死东鹏，低价杂牌也抢不走东鹏？——“金罐太贵且不封口，杂牌没码且不周转”：</strong></p>
+<ul>
+<li>往上比，红牛250ml马口铁金罐卖6块钱，不仅每百毫升价格是东鹏500ml金瓶（5元）的 <strong>2.4倍</strong>，而且存在两个致命的物理与成本软肋：一是马口铁罐单罐包材成本（0.65元以上）远高于东鹏自吹的PET瓶坯+瓶盖（约0.35—0.40元），导致红牛降价空间被锁死；二是货车司机在颠簸驾驶室或工地干活时，易拉罐一旦拉开没法盖上，既容易洒漏又容易进灰，而东鹏一个小小的<strong>塑料防尘盖+旋盖PET瓶</strong>，精准解决了分次饮用和卫生防尘的痛点。</li>
+<li>往下比，河南中沃“体质能量”等低价模仿者虽然把500ml卖到3.5—4元，但它们没有东鹏覆盖全国的“五码合一”微信红包系统。对消费者来说，花5块钱买东鹏有高概率扫出“壹元乐享”或微信红包；对小店老板来说，扫东鹏箱内码立得现金返利且周转快，卖杂牌虽然标称进货差价多几毛钱，但压在货架上三个月卖不动就是死钱。</li>
+</ul>
 </li>
 <li>
-<p><strong>在“补水啦”与“果之茶”新战场，东鹏凭什么虎口夺食，又为何在2026Q3撞上南墙？</strong>
-   - <strong>虎口夺食的套路（像素级复刻大包装性价比+渠道红包轰炸）：</strong> 面对元气森林“外星人”（6元/500ml）教育好的电解质水市场，东鹏直接甩出“4元/555ml、6元/1L”的“补水啦”，不仅把单毫升价格砍掉一半，更给夫妻店开出远高于外星人的箱内扫码返利，短短两年硬生生干出超32亿营收。2025—2026年推出的1L装“果之茶”同样用4—5元的超大碗规格，在下沉市场横扫传统冰红茶。</p>
+<p><strong>在“补水啦”与“果之茶”新战场，东鹏凭什么虎口夺食，又为何在2026Q3撞上南墙？</strong></p>
+<ul>
+<li><strong>虎口夺食的套路（像素级复刻大包装性价比+渠道红包轰炸）：</strong> 面对元气森林“外星人”（6元/500ml）教育好的电解质水市场，东鹏直接甩出“4元/555ml、6元/1L”的“补水啦”，不仅把单毫升价格砍掉一半，更给夫妻店开出远高于外星人的箱内扫码返利，短短两年硬生生干出超32亿营收。2025—2026年推出的1L装“果之茶”同样用4—5元的超大碗规格，在下沉市场横扫传统冰红茶。</li>
+</ul>
 </li>
 </ol><ul>
 <li><strong>2026Q3撞墙的真相（遇上了真正的硬茬——农夫山泉与全行业价格混战）：</strong> 在能量饮料市场，东鹏面对的是陷入商标官司内乱的红牛；但在电解质水和茶饮料市场，东鹏迎头撞上了管理极其彪悍、同样掌控全国300万网点与百万台冰柜、且拥有顶级无菌冷灌装成本优势的<strong>农夫山泉</strong>，以及拼命反扑的元气森林、康师傅和统一。2026年盛夏，各大巨头在电解质水和1L茶饮上全面发动“一元换购/买赠”价格战，叠加东鹏上半年重金押注球星姆巴佩代言“补水啦”却因舆情风波被迫撤换物料，直接导致“补水啦”在2026Q3单季增速从100%+断崖式跌至0.49%！</li>
@@ -1197,8 +1753,10 @@
 <p><strong>大股东质押与关联交易（无异常）：</strong> 林木勤直接持有的45.80%股份无高比例质押风险；旗下核心生产子公司基本为全资控股（2026年9月末少数股东权益仅4,167.58万元，占净资产0.22%），不存在实控人体外截留包材或香精利润的关联利益输送。</p>
 </li>
 <li>
-<p><strong>🚨 治理层最刺眼的两大争议点（重要股东与高管密集减持套现 + 家族高分红落袋）：</strong>
-   - <strong>君正投资“清仓式”提款：</strong> 作为IPO前潜伏的唯一外部财务投资机构，天津君正投资自2022年5月解禁以来，先后发起六轮以上大规模减持，累计从二级市场套现金额<strong>高达38亿—41亿元人民币</strong>，赚走逾十倍回报。虽然财务投资人退出属商业常态，但高频公告一度成为压制市场情绪的阴影。</p>
+<p><strong>🚨 治理层最刺眼的两大争议点（重要股东与高管密集减持套现 + 家族高分红落袋）：</strong></p>
+<ul>
+<li><strong>君正投资“清仓式”提款：</strong> 作为IPO前潜伏的唯一外部财务投资机构，天津君正投资自2022年5月解禁以来，先后发起六轮以上大规模减持，累计从二级市场套现金额<strong>高达38亿—41亿元人民币</strong>，赚走逾十倍回报。虽然财务投资人退出属商业常态，但高频公告一度成为压制市场情绪的阴影。</li>
+</ul>
 </li>
 </ol><ul>
 <li><strong>实控人关联平台（鲲鹏投资）与董监高集体减持：</strong> 2023年至2025年初，除林木勤本人未直接减持名下股份外，公司十余位董监高及由林木勤、林煜鹏父子参股的员工/家族持股平台<strong>鲲鹏投资</strong>，曾多次高位减持套现合计超20亿元（如2025年初鲲鹏投资再度公告拟减持不超过1.378%股份）。与此同时，林木勤家族凭借超60%的持股比例，在公司上市以来超88亿元的累计分红中，合法分走了<strong>超过53亿元的税前真金白银</strong>。</li>
@@ -1222,9 +1780,11 @@
 </ul>
 <h3 id="2_2">2. 上市以来实际向股东回报了多少钱？（分红与回购去向穿透）</h3>
 <ul>
-<li><strong>历年现金分红硬账本（2021—2026年中报已实施）：</strong></li>
 <li>
-<p><strong>2021年度</strong>（含中报+年报）：合计派发现金红利 <strong>12.00亿元</strong>（2021中报10派15元共6亿 + 2021年报10派15元共6亿）；</p>
+<p><strong>历年现金分红硬账本（2021—2026年中报已实施）：</strong></p>
+<ul>
+<li><strong>2021年度</strong>（含中报+年报）：合计派发现金红利 <strong>12.00亿元</strong>（2021中报10派15元共6亿 + 2021年报10派15元共6亿）；</li>
+</ul>
 </li>
 <li>
 <p><strong>2022年度</strong>：派发现金红利 <strong>8.00亿元</strong>（10派20元）；</p>
@@ -1342,14 +1902,18 @@
 <p><em>(注：2022年CapEx经年报现金流量表核对为约6.57亿元，五年累计OCF达193.47亿元，五年累计CapEx为60.15亿元，五年累计创造真实自由现金流高达 <strong>133.32亿元</strong>！2026年1-9月OCF净现比阶段性回落至85.5%，主要系三季度末合同负债较年初高点季节性消化8.84亿元所致。)</em></p>
 <h3 id="4-225-vs-63">4. 打破“合并报表幻觉”体检：深度扒皮“225亿现金 vs 63亿短债”的存贷双高之谜！</h3>
 <div class="annotated-row"><div class="main-col"><p>翻开东鹏饮料2026年三季报（截至2026年9月30日），任何一个懂财务的投资人都会立刻盯上一组极其诡异的数字：</p><ul>
-<li><strong>广义现金储备高达 225.20 亿元：</strong>
-  1. 货币资金：<strong>141.52 亿元</strong>（其中受限保函/保证金仅约0.10亿元）；
-  2. 交易性金融资产（银行结构性存款及短期理财）：<strong>65.66 亿元</strong>；
-  3. 一年内到期的非流动资产（重分类至一年内到期的大额存单及定期存款）：<strong>18.02 亿元</strong>；
-  4. 债权投资（一年以上大额存单）：<strong>0.00 亿元</strong>（2025年末为17.57亿元，已全部进入一年内到期重分类）；
+<li><strong>广义现金储备高达 225.20 亿元：</strong><ol>
+<li>货币资金：<strong>141.52 亿元</strong>（其中受限保函/保证金仅约0.10亿元）；</li>
+<li>交易性金融资产（银行结构性存款及短期理财）：<strong>65.66 亿元</strong>；</li>
+<li>一年内到期的非流动资产（重分类至一年内到期的大额存单及定期存款）：<strong>18.02 亿元</strong>；</li>
+<li>债权投资（一年以上大额存单）：<strong>0.00 亿元</strong>（2025年末为17.57亿元，已全部进入一年内到期重分类）；
   <em>(另：其他流动资产7.24亿元中主要为待抵扣进项税及少量短期收益凭证，保守不计入广义现金；若按2025年末口径，货币资金56.80亿 + 交易性金融资产63.09亿 + 一年内到期非流动资产13.79亿 + 债权投资17.57亿 = <strong>151.25亿元</strong>。)</em></li>
-<li><strong>与此同时，五项有息负债合计高达 66.74 亿元（2025年末为 70.10 亿元）：</strong>
-  1. <strong>短期借款：62.73 亿元</strong>（2025年末为66.30亿元）；</li>
+</ol>
+</li>
+<li><strong>与此同时，五项有息负债合计高达 66.74 亿元（2025年末为 70.10 亿元）：</strong><ol>
+<li><strong>短期借款：62.73 亿元</strong>（2025年末为66.30亿元）；</li>
+</ol>
+</li>
 </ul><ol start="2">
 <li>
 <p><strong>一年内到期的非流动负债：0.17 亿元</strong>；</p>
@@ -1365,21 +1929,27 @@
 </li>
 </ol><p><strong>核心拷问：一家账上趴着225亿真金白银、每年净赚40多亿现金的公司，为什么还要向银行借62.73亿元的短期借款？甚至在2026年初还要跑去香港IPO再融109亿港元？难道账上的钱是假的（像当年康美药业、康得新那样被大股东偷偷挪用质押了）？</strong></p><p>我们穿透2025年报附注与现金流量表明细，给出还原真相的<strong>三层拆解</strong>：</p><ol>
 <li>
-<p><strong>排雷第一层（钱是不是真的？）：100%是真钱，绝非康得新式假账。</strong>
-   - 证据一（真金白银分红检验）：假钱分不出真股息。东鹏过去五年加2026年中报累计向股东真刀真枪派发了 <strong>101.93亿元现金红利</strong>，外加2026年掏出10.39亿元现金回购股票，每一分钱都经过中登公司和港交所划转。
-   - 证据二（受限资金极低）：2025年报附注明确披露，不属于现金及现金等价物的受限其他货币资金（保函保证金及燃气保证金）期末仅 <strong>1,025.46万元</strong>，其余28.32亿元为原定存期超过3个月的真实定期存款（计息年利率 <strong>1.20%—4.72%</strong>）。</p>
+<p><strong>排雷第一层（钱是不是真的？）：100%是真钱，绝非康得新式假账。</strong></p>
+<ul>
+<li>证据一（真金白银分红检验）：假钱分不出真股息。东鹏过去五年加2026年中报累计向股东真刀真枪派发了 <strong>101.93亿元现金红利</strong>，外加2026年掏出10.39亿元现金回购股票，每一分钱都经过中登公司和港交所划转。</li>
+<li>证据二（受限资金极低）：2025年报附注明确披露，不属于现金及现金等价物的受限其他货币资金（保函保证金及燃气保证金）期末仅 <strong>1,025.46万元</strong>，其余28.32亿元为原定存期超过3个月的真实定期存款（计息年利率 <strong>1.20%—4.72%</strong>）。</li>
+</ul>
 </li>
 <li>
-<p><strong>排雷第二层（为什么要借62.73亿短期借款？）：这是中国优势现金流企业常见的“银行票据贴现 + 大额存单无风险利差套利”游戏！</strong>
-   - 东鹏在采购白糖、PET瓶坯、支付工程款时，并非直接付现钞，而是先把账上几十亿现金存进银行锁定3年期高息大额存单（前几年锁定的年化利率高达3.5%—4.72%）或购买年化2.8%—3.2%的结构性存款；
-   - 然后以此为授信背景，向银行开具低成本承兑汇票或申请年化利率仅 <strong>1.6%—2.2%</strong> 的集团内部供应链票据贴现/短期流动资金贷款（计入“短期借款”科目）。</p>
+<p><strong>排雷第二层（为什么要借62.73亿短期借款？）：这是中国优势现金流企业常见的“银行票据贴现 + 大额存单无风险利差套利”游戏！</strong></p>
+<ul>
+<li>东鹏在采购白糖、PET瓶坯、支付工程款时，并非直接付现钞，而是先把账上几十亿现金存进银行锁定3年期高息大额存单（前几年锁定的年化利率高达3.5%—4.72%）或购买年化2.8%—3.2%的结构性存款；</li>
+<li>然后以此为授信背景，向银行开具低成本承兑汇票或申请年化利率仅 <strong>1.6%—2.2%</strong> 的集团内部供应链票据贴现/短期流动资金贷款（计入“短期借款”科目）。</li>
+</ul>
 </li>
 </ol><ul>
 <li><strong>一存一贷之间，白捡 1.0%—1.8% 的无风险净利差</strong>！所以你会看到，虽然2025年账面挂着66.30亿短期借款，但2025年全年公司的<strong>财务费用却是 -1.00亿元（净赚1个亿利息收益）</strong>！</li>
 </ul><ol start="3">
-<li><strong>排雷第三层（2026年的边际变化与隐忧）：套利空间正在收窄，港股募资带来短期汇兑损益波动。</strong>
-   - 随着国内银行存款挂牌利率连年下调，高息大额存单陆续到期（表现为债权投资17.57亿元全部转入一年内到期非流动资产），2025年财务费用净收益已从2024年的1.91亿元收窄至1.00亿元；
-   - 到了2026年前三季度，由于2月港股IPO募集了109.43亿港元外币资金，受港元/人民币汇率波动产生的账面汇兑损失影响，2026年1—9月财务费用由负转正为 <strong>1.45亿元净支出</strong>。</li>
+<li><strong>排雷第三层（2026年的边际变化与隐忧）：套利空间正在收窄，港股募资带来短期汇兑损益波动。</strong><ul>
+<li>随着国内银行存款挂牌利率连年下调，高息大额存单陆续到期（表现为债权投资17.57亿元全部转入一年内到期非流动资产），2025年财务费用净收益已从2024年的1.91亿元收窄至1.00亿元；</li>
+<li>到了2026年前三季度，由于2月港股IPO募集了109.43亿港元外币资金，受港元/人民币汇率波动产生的账面汇兑损失影响，2026年1—9月财务费用由负转正为 <strong>1.45亿元净支出</strong>。</li>
+</ul>
+</li>
 </ol><p><strong>第五部分定性收口：</strong> 东鹏饮料是一台<strong>成色极高的自由现金流印钞机（资本创造者）</strong>，少数股东权益与损益占比几乎为零（无合并报表纸面富贵幻觉），但管理层在资金管理上带有浓重的“潮商算盘精明感”——喜欢通过大额存单与低息短贷对倒套利，且在账面极度充裕的情况下依然趁市场高点赴港募资百亿港元囤积弹药。</p></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>账上放着两百多亿现金还去借六十多亿短期贷款，外行人一看以为抓到了安然造假，内行人一看才知道这是潮州老板在薅中国商业银行的羊毛——左手存3.5%的大额存单，右手借1.8%的贴现贷款，躺着白赚一个多亿利差。钱是千真万确的真钱，因为骗子是绝对舍不得掏出一百多亿真金白银分红的。但靠存贷利差薅羊毛的日子已经到头了，现在账上躺着两百多亿现金，要是管理层手痒拿去乱买烂公司，那才叫真正的灾难。</p></div></div></div></div>
 
 
@@ -1397,9 +1967,11 @@
 <p>截至2026年9月30日，随着 <strong>中山生产基地</strong> 与 <strong>昆明生产基地</strong> 在2026年前三季度集中建成转固，公司账面<strong>固定资产净值由2025年末的49.47亿元跃升36.23%至 67.39亿元</strong>，而<strong>在建工程余额则由2025年末的14.14亿元回落38.45%至 8.70亿元</strong>——这标志着东鹏本轮国内主干产能建设已跨过投资最高峰，正式步入<strong>“产能集中释放与折旧爬坡检验期”</strong>。</p>
 <p>我们算清这60多亿元CapEx背后的<strong>经济性质与商业逻辑</strong>：</p>
 <ul>
-<li><strong>约80%属于“贴身建厂砍运费 + 支撑多品类放量的纵深进攻性开支”：</strong></li>
 <li>
-<p><strong>算清饮料生意的物理死穴（300—500公里运输半径定律）：</strong> 一瓶555ml的“补水啦”或1L的“果之茶”，里面95%以上是水，出厂价每吨只有2,200—2,300元（每瓶仅1.2—2.3元）。如果从广东增城工厂生产出来，用重卡拉2,000公里运到天津、沈阳或昆明，单吨公路运费高达350—500元，仅运费就会吃掉15%—20%的出厂收入，毛利直接被啃光！</p>
+<p><strong>约80%属于“贴身建厂砍运费 + 支撑多品类放量的纵深进攻性开支”：</strong></p>
+<ul>
+<li><strong>算清饮料生意的物理死穴（300—500公里运输半径定律）：</strong> 一瓶555ml的“补水啦”或1L的“果之茶”，里面95%以上是水，出厂价每吨只有2,200—2,300元（每瓶仅1.2—2.3元）。如果从广东增城工厂生产出来，用重卡拉2,000公里运到天津、沈阳或昆明，单吨公路运费高达350—500元，仅运费就会吃掉15%—20%的出厂收入，毛利直接被啃光！</li>
+</ul>
 </li>
 <li>
 <p><strong>全国14—15大基地网格化锁死成本：</strong> 因此，东鹏砸下重金把生产基地像围棋星位一样钉死在全国核心消费腹地——除早期的广东（增城、东莞、华南）、安徽滁州、广西南宁、重庆西彭外，近年密集建成了<strong>湖南长沙基地（辐射华中）、浙江衢州基地（2023年11月投产，辐射华东）、天津基地（2025年12月投产，彻底打通京津冀与北方短板）、广东中山基地與云南昆明基地（2026年转固，加密大湾区并辐射西南与东南亚边境）</strong>，目前在建工程（8.70亿元）主要流向<strong>海南基地、成都基地、郑州基地及各基地新增高速无菌/热灌装产线</strong>。</p>
@@ -1429,8 +2001,10 @@
 </ol>
 <h3 id="3_2">3. 未来成长蓝图梯度审视与正反历史镜鉴</h3>
 <div class="annotated-row"><div class="main-col"><ul>
-<li><strong>三层成长梯度定位：</strong>
-  1. <strong>已跨过盈亏平衡、挑大梁的增长主力：</strong> <strong>“东鹏补水啦”（年收超32亿，毛利率34.77%）</strong>与<strong>1L大包装“果之茶”（2026年前三季度茶饮斩获16.38亿，同比+182.99%）</strong>。它们已彻底跑通下沉市场“大碗便宜+高返利”的单点模型，但眼下正面临从“渠道铺货红利”向“终端自然复购”惊险一跃的考验。</li>
+<li><strong>三层成长梯度定位：</strong><ol>
+<li><strong>已跨过盈亏平衡、挑大梁的增长主力：</strong> <strong>“东鹏补水啦”（年收超32亿，毛利率34.77%）</strong>与<strong>1L大包装“果之茶”（2026年前三季度茶饮斩获16.38亿，同比+182.99%）</strong>。它们已彻底跑通下沉市场“大碗便宜+高返利”的单点模型，但眼下正面临从“渠道铺货红利”向“终端自然复购”惊险一跃的考验。</li>
+</ol>
+</li>
 </ul><ol start="2">
 <li>
 <p><strong>处于爬坡验证期的接力梯队：</strong> <strong>“东鹏大咖”（即饮咖啡，年收超5亿）</strong>、<strong>“海岛椰”（餐饮渠道椰汁）</strong>与<strong>无糖茶“鹏友上茶”</strong>。其中餐饮渠道（海岛椰）需要重新建立与传统烟酒店/夫妻店不同的餐饮二批网络，尚在攻坚期。</p>
@@ -1439,9 +2013,11 @@
 <p><strong>尚处早期探索的远期期权：</strong> <strong>东南亚等海外市场出海</strong>（H股募资中专门划拨约11.99亿港元用于拓展海外业务及潜在并购，依托海南与昆明基地辐射越南、印尼、马来西亚）。东南亚气候炎热、年轻蓝领人口密集且同样有浓厚的能量饮料消费习惯（红牛发源地），但当地盘踞着天丝红牛、力保健（Lipovitan）与卡拉宝（Carabao），目前东鹏海外收入占比尚不足1%，属于典型的早期探索期权。</p>
 </li>
 </ol><ul>
-<li><strong>产业史正反双镜鉴：</strong></li>
 <li>
-<p><strong>正面进化参照系——美国怪兽饮料（Monster Beverage）与本土农夫山泉：</strong> Monster当年正是靠“16盎司（473ml）大罐装卖跟红牛8.4盎司（250ml）一样的价格”切入美国蓝领与年轻人市场，随后借可口可乐全球渠道网络与多口味矩阵成为美股三十年千倍大牛股；而农夫山泉则证明了在中国只要掌控300万终端网点与冰柜，就能在包装水之上长出超百亿的“东方树叶”第二帝国。</p>
+<p><strong>产业史正反双镜鉴：</strong></p>
+<ul>
+<li><strong>正面进化参照系——美国怪兽饮料（Monster Beverage）与本土农夫山泉：</strong> Monster当年正是靠“16盎司（473ml）大罐装卖跟红牛8.4盎司（250ml）一样的价格”切入美国蓝领与年轻人市场，随后借可口可乐全球渠道网络与多口味矩阵成为美股三十年千倍大牛股；而农夫山泉则证明了在中国只要掌控300万终端网点与冰柜，就能在包装水之上长出超百亿的“东方树叶”第二帝国。</li>
+</ul>
 </li>
 <li>
 <p><strong>反面踩坑警示录——达利食品与娃哈哈的“跟风铺货退潮症”：</strong> 中国饮料史上有无数靠给经销商高返利、用“五码合一”或压货政策在第一年轰出20亿—30亿流水的爆款（如当年的格瓦斯、豆本豆、各种网红果茶），一旦第二年渠道铺满、竞争对手跟进杀价、终端真实复购跟不上，就会在第三年遭遇剧烈的渠道退货与业绩断崖。<strong>东鹏2026Q3“补水啦”单季增速骤降至0.49%，正是敲响了从“压货铺渠道”转向“拼终端真动销”的警钟！</strong></p>
@@ -1460,12 +2036,12 @@
   2026年第三季度，公司单季营收仅微增0.75%（61.53亿元），归母净利下滑7.80%（12.78亿元）；其中东鹏特饮单季下滑8.56%，补水啦单季仅增0.49%，合同负债环比及较年初（59.74亿 <span class="math-inline"> → </span> 50.90亿）消化了8.84亿元。</p>
 </li>
 <li>
-<p><strong>冷酷拆解“真病灶” vs “假恐慌”（危与机一体两面）：</strong>
-  1. <strong>“危”的真实边界（两大结构性压力）：</strong></p>
-<ul>
-<li>第一，<strong>东鹏特饮在传统蓝领人群中的渗透率已逼近物理极限</strong>。全国367万吨销量意味着平均每个中国蓝领每年已经喝掉几十瓶，随着国内建筑基建用工减少、网约车与外卖骑手数量见顶，特饮在华南与华东成熟市场已从“抢增量”进入“存量守江山”，未来很难再维持过去15%—20%的年化高增，常态增速中枢大概率回落至5%—10%区间。</li>
-<li>第二，<strong>电解质水与大包装茶饮的毛利上限与竞争烈度远不如能量饮料</strong>。能量饮料有轻度成瘾性与红牛6元价格伞保护，而电解质水和果茶毫无成瘾门槛，农夫山泉、元气森林、康师傅、统一全部杀入1L装4—5元价格带肉搏。当非特饮业务占比从2024年的15.9%跨过31.2%（2026年前三季度）并继续向40%迈进时，若规模效应无法继续对冲品类结构下移，公司长期高达21%以上的净利率将面临结构性稀释压力。</li>
-</ul>
+<p><strong>冷酷拆解“真病灶” vs “假恐慌”（危与机一体两面）：</strong></p>
+<ol>
+<li><strong>“危”的真实边界（两大结构性压力）：</strong>
+ - 第一，<strong>东鹏特饮在传统蓝领人群中的渗透率已逼近物理极限</strong>。全国367万吨销量意味着平均每个中国蓝领每年已经喝掉几十瓶，随着国内建筑基建用工减少、网约车与外卖骑手数量见顶，特饮在华南与华东成熟市场已从“抢增量”进入“存量守江山”，未来很难再维持过去15%—20%的年化高增，常态增速中枢大概率回落至5%—10%区间。
+ - 第二，<strong>电解质水与大包装茶饮的毛利上限与竞争烈度远不如能量饮料</strong>。能量饮料有轻度成瘾性与红牛6元价格伞保护，而电解质水和果茶毫无成瘾门槛，农夫山泉、元气森林、康师傅、统一全部杀入1L装4—5元价格带肉搏。当非特饮业务占比从2024年的15.9%跨过31.2%（2026年前三季度）并继续向40%迈进时，若规模效应无法继续对冲品类结构下移，公司长期高达21%以上的净利率将面临结构性稀释压力。</li>
+</ol>
 </li>
 </ul>
 <ol start="2">
@@ -1846,12 +2422,12 @@
 <br>
 <div class="math-display"><span class="math-text">新建基地综合加权年折旧率</span> = 40\%  ×  4.75\% + 60\%  ×  9.50\% = 7.60\%</div>
 </br></p>
-</li>
-<li>
-<p>若按基准新增转固原值 <strong><code>20.00亿元</code></strong> 测算，每年将刚性新增固定资产折旧 <strong><code>1.5200亿元</code></strong>（其中厂房折旧 <code>0.3800亿元/年</code> + 机器设备折旧 <code>1.1400亿元/年</code>）；</p>
-</li>
+<ul>
+<li>若按基准新增转固原值 <strong><code>20.00亿元</code></strong> 测算，每年将刚性新增固定资产折旧 <strong><code>1.5200亿元</code></strong>（其中厂房折旧 <code>0.3800亿元/年</code> + 机器设备折旧 <code>1.1400亿元/年</code>）；</li>
 <li>若按还原当期折旧后的完整新增转固原值 <strong><code>21.82亿元</code></strong> 测算，每年将刚性新增固定资产折旧 <strong><code>1.6586亿元</code></strong>（约 <strong><code>1.66亿元</code></strong>）。</li>
 <li>对比 2025 年全年公司全部固定资产折旧 <code>4.2654亿元</code>（四项折旧摊销合计 <code>4.9589亿元</code>），仅 2026 年前三季度这一波转固，就使公司未来的年化固定资产折旧盘子直接膨胀了 <strong><code>35.6%—38.9%</code></strong>！</li>
+</ul>
+</li>
 </ul>
 <h5 id="2breakeven-point-vs">（2）新增产能盈亏平衡点（Breakeven Point）双情景精算：特饮基准 vs 新品真实口径</h5>
 <p>要覆盖这每年 <strong><code>1.52亿—1.66亿元</code></strong> 的纯新增折旧（乃至包含新厂底数固定人工、基础能耗与房产税在内的全口径新增固定成本约 <strong><code>2.15亿元/年</code></strong>），究竟需要卖出多少吨饮料、实现多少亿营收、达到百分之几的稼动率？
@@ -1862,23 +2438,25 @@
 </li>
 <li>
 <p><strong>【情景一：按集团综合毛利率基准测算（假设新厂按现有产品比例同构生产）】</strong></p>
-</li>
+<ul>
 <li>按 2026 年 1–9 月综合毛利率 <code>47.47%</code> 扣除 <code>12.00%</code> 变动费用率，<strong>综合边际贡献率（Contribution Margin Ratio）为 <code>35.47%</code></strong>（若按 2025 全年综合毛利率 <code>44.91%</code> 则边际贡献率为 <code>32.91%</code>）。</li>
 <li>
 <p>覆盖 <strong><code>1.52亿—1.66亿元</code></strong> 新增折旧所需的 <strong>盈亏平衡新增营业收入</strong>：
-    <div class="math-display"><span class="math-text">盈亏平衡营收（综合口径）</span> = <span class="math-frac"><span class="frac-num"><span class="math-inline">1.52 \sim 1.66<span class="math-text"> 亿元</span></span></span><span class="frac-den"><span class="math-inline">35.47\%</span></span></span> = <strong>4.29<span class="math-text"> 亿元</span> \sim 4.68<span class="math-text"> 亿元</span></strong></div>
-    （若按 2025 年毛利率基准则为 <strong><code>4.62亿元—5.04亿元</code></strong>）。</p>
+<div class="math-display"><span class="math-text">盈亏平衡营收（综合口径）</span> = <span class="math-frac"><span class="frac-num"><span class="math-inline">1.52 \sim 1.66<span class="math-text"> 亿元</span></span></span><span class="frac-den"><span class="math-inline">35.47\%</span></span></span> = <strong>4.29<span class="math-text"> 亿元</span> \sim 4.68<span class="math-text"> 亿元</span></strong></div>
+（若按 2025 年毛利率基准则为 <strong><code>4.62亿元—5.04亿元</code></strong>）。</p>
 </li>
 <li>
 <p>按 2025 年集团综合吨均价 <strong><code>3,463.8元/吨</code></strong>（总营收 <code>208.75亿元</code> / 总销量 <code>602.67万吨</code>）折算，对应需新增综合销量 <strong><code>12.37万吨—13.50万吨</code></strong>。对比本轮集中转固的三大基地合计新增设计产能约 <strong><code>152.00万吨</code></strong>（天津约 <code>40万吨</code> + 中山 <code>72万吨</code> + 昆明约 <code>40万吨</code>），<strong>仅覆盖折旧的账面盈亏平衡稼动率看似仅需 <code>8.14%—8.88%</code></strong>。</p>
 </li>
+</ul>
+</li>
 <li>
 <p><strong>【情景二：按新建无菌线实际承载的“第二/第三曲线新品”真实口径测算（残酷真相）】</strong></p>
-</li>
+<ul>
 <li>为什么情景一的 <code>8.88%</code> 稼动率具有极大欺骗性？因为 2026Q3 东鹏特饮单季收入已同比下滑 <strong><code>-8.56%</code></strong>，存量特饮产线本身产能充裕；<strong>中山、昆明、天津新增的无菌冷灌装线与大包装高速线，在实际排产中绝大部分要用来灌装“东鹏补水啦”、“果之茶”、“鹏友上茶”等新业务品类！</strong></li>
 <li>用 Python 穿透 2025 年报分品类量价底稿可见：<strong>东鹏特饮吨均价高达 <code>4,243.8元/吨</code>（<code>155.99亿 / 367.57万吨</code>），毛利率 <code>50.79%</code>；而“东鹏补水啦”吨均价仅为 <code>2,233.0元/吨</code>（<code>32.74亿 / 146.62万吨</code>），毛利率 <code>34.77%</code>；“其他饮料（果之茶/大咖/海岛椰等）”吨均价仅为 <code>2,244.6元/吨</code>（<code>19.86亿 / 88.48万吨</code>），精算毛利率更是低至 <code>15.53%</code>（<code>(19.86 - 16.7748) / 19.86</code>）！</strong></li>
 <li>换言之，新品矩阵（补水啦 + 茶饮 + 其他）的综合加权毛利率仅约 <strong><code>30.00%</code></strong>，扣除新品推广期 <code>12.00%</code> 的变动渠道费用率后，<strong>新品真实边际贡献率暴跌至 <code>18.00%</code>（几乎只有特饮边际贡献率 <code>38.79%</code> 的零头）</strong>，且新品综合吨售价仅约 <strong><code>2,300元/吨</code></strong>！</li>
-<li>在此真实排产口径下重新运行 Python 算式：<ul>
+<li>在此真实排产口径下重新运行 Python 算式：</li>
 <li>仅覆盖 <strong><code>1.52亿—1.66亿元</code></strong> 纯新增折旧：需新增新品营业收入 <strong><code>8.44亿元—9.21亿元</code></strong>，对应必须多卖出 <strong><code>36.71万吨—40.06万吨</code></strong> 的补水啦或果之茶，<strong>占 152 万吨新增设计产能的盈亏平衡稼动率瞬间翻了三倍，跳升至 <code>24.15%—26.36%</code>！</strong></li>
 <li>若进一步将三大新基地投产后不可避免的 <strong>车间底数固定人工、基础空压制冷待机能耗、房产税及土地使用税（合计约 <code>0.50亿元/年</code>，与 <code>1.65亿元</code> 新增折旧共同构成 <code>2.15亿元/年</code> 的全口径新增刚性固定成本）</strong> 纳入分母：在新品 <code>18.00%</code> 边际贡献率与 <code>2,240元/吨</code> 吨价下，<strong>全口径盈亏平衡点需要新增新品营收 <code>11.94亿元</code>、新增销量 <code>53.32万吨</code>，对应 152 万吨新产能的物理盈亏平衡稼动率高达 <code>35.08%</code>！</strong></li>
 </ul>
@@ -1919,20 +2497,22 @@
 </li>
 <li>
 <p><strong>电解质水（东鹏补水啦）</strong>：2025 年营收 <code>32.74亿元</code>，销量 <code>146.62万吨</code>，运费总额高达 <strong><code>2.2780亿元</code></strong> —— 折算 <strong>补水啦单吨运费为 <code>155.37元/吨</code>，但因为补水啦售价低（吨价仅 <code>2,233元/吨</code>，特别是 1L 大包装“一元乐享”拉低均价），运费占补水啦营业收入的比例高达 <code>6.96%</code>（占补水啦成本的比例更高达 <code>10.67%</code>）！</strong></p>
-</li>
-<li>
-<p><strong>核心发现</strong>：卖一吨补水啦或 1L 装果之茶，物理重量跟卖一吨东鹏特饮一模一样（甚至因 1L 大瓶装满箱体积更大，单吨运费还贵出 <code>15.34元/吨</code>），但货值却只有特饮的一半！如果把广东或安徽生产的 1L 装补水啦/果之茶拉到北方（京津冀/东北）或大西南（云南/四川）去卖，超远途干线物流会让运费占营收比飙升至 <code>10%—12%</code>，直接把本就微薄的新品毛利吃干抹净！</p>
+<ul>
+<li><strong>核心发现</strong>：卖一吨补水啦或 1L 装果之茶，物理重量跟卖一吨东鹏特饮一模一样（甚至因 1L 大瓶装满箱体积更大，单吨运费还贵出 <code>15.34元/吨</code>），但货值却只有特饮的一半！如果把广东或安徽生产的 1L 装补水啦/果之茶拉到北方（京津冀/东北）或大西南（云南/四川）去卖，超远途干线物流会让运费占营收比飙升至 <code>10%—12%</code>，直接把本就微薄的新品毛利吃干抹净！</li>
+</ul>
 </li>
 <li>
 <p><strong>对冲测算结论（雪中送炭与折旧反噬的分水岭）</strong>：</p>
-</li>
-<li>
-<p>天津基地、昆明基地、成都基地和郑州基地的投产，确实能将北方与西南市场的干线运输半径从 <code>800—1,200公里</code> 压缩至 <code>300公里</code> 以内，预计可使该区域销售产品的 <strong>单吨运费下降约 <code>35—50元/吨</code>（即每百万吨区域销量可节省运费 <code>0.35亿—0.50亿元</code>）</strong>。</p>
+<ul>
+<li>天津基地、昆明基地、成都基地和郑州基地的投产，确实能将北方与西南市场的干线运输半径从 <code>800—1,200公里</code> 压缩至 <code>300公里</code> 以内，预计可使该区域销售产品的 <strong>单吨运费下降约 <code>35—50元/吨</code>（即每百万吨区域销量可节省运费 <code>0.35亿—0.50亿元</code>）</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>但是，省运费的前提是“得有真实的终端动销吨数”！</strong> 在 2026Q1–Q2 渠道大举压货、带动前三季度茶饮暴增 <code>+182.99%</code> 之后，<strong>2026Q3 单季总营收增速突然断崖式回落至 <code>+0.75%</code>，单季归母净利润更是同比倒退 <code>-7.80%</code></strong>。背后的财务机理正是：<strong>中山、昆明、天津三大基地集中转固带来了刚性的折旧跃升与管理费用激增（2026 年前三季度管理费用同比暴增 <code>+36.83%</code>，三季报明确点名系“管理人员薪酬、折旧与摊销增加所致”），而 Q3 旺季终端动销失速（特饮 <code>-8.56%</code>、补水啦 <code>+0.49%</code>），导致新增产能在 Q3 未能释放出足够的增量吨数去摊薄固定折旧与新厂底数人工，正式触发了“重资产转固期遇上需求换挡期”的折旧反噬效应！</strong></p>
-</li>
+<ul>
 <li>更严峻的是，除了已转固的天津、中山、昆明（合计约 <code>152万吨</code>）外，在建及新签的 <strong>成都基地（<code>36万吨</code>）、郑州基地（<code>37万吨</code>）、海南新基地（约 <code>40万吨</code>）及 H 股募资拟继续扩建的产线</strong>，将在 2027—2028 年再向市场倾泻超 <strong><code>120万—150万吨</code></strong> 产能。届时东鹏总设计产能将突破 <strong><code>950万吨/年</code></strong>。若 2026Q3 的动销降速不是短期渠道去库存、而是需求触顶的长期拐点，这批后发产能将面临严峻的“投产即闲置、稼动率跌破 65% 警戒线”的盈利侵蚀风险。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>卖两千块钱一吨的电解质糖水，运费占收入比重比四千块钱一吨的功能饮料整整高出一倍多，所以管理层必须到处拿地建厂来省路费——这叫“被低毛利产品绑架的重资产宿命”。当顺风顺水时，这叫供应链壁垒；一旦像 2026 年三季度这样营收只涨 `0.75%`，那刚转固的 67 亿固定资产和暴涨 `36.83%` 的管理费用就会立刻给你上一堂生动的物理学课：运费只跟卖出去的瓶子走，而折旧跟日历走，日历从不因为你卖不动货就停下一秒钟。</p></div></div></div></div>
 
 
@@ -1957,16 +2537,18 @@
 </li>
 </ul>
 <ol start="2">
-<li><strong>地下水/地表水取水许可指标与高标准排污能耗紧箍咒</strong>：
-   软饮料是典型的耗水大户，每生产 <code>1吨</code> 成品饮料，算上前处理调配、UHT 冷却、无菌线 CIP 酸碱清洗及反渗透水处理浓水排放，实际综合取水消耗约为 <strong><code>1.6—2.2吨水</code></strong>。</li>
-</ol>
+<li>
+<p><strong>地下水/地表水取水许可指标与高标准排污能耗紧箍咒</strong>：
+   软饮料是典型的耗水大户，每生产 <code>1吨</code> 成品饮料，算上前处理调配、UHT 冷却、无菌线 CIP 酸碱清洗及反渗透水处理浓水排放，实际综合取水消耗约为 <strong><code>1.6—2.2吨水</code></strong>。</p>
 <ul>
 <li>一座设计产能 <code>40万—72万吨</code> 的基地，年取水量高达 <strong><code>70万—150万立方米</code></strong>。在华北缺水重镇（<strong>天津西青、河南郑州</strong>）以及生态红线极严的西南高原（<strong>云南滇中新区昆明基地</strong>），大额工业取水指标（尤其是优质深层地下水或市政工业专供水源配额）审批日趋严苛，且工业水资源税与阶梯水价持续上调；</li>
 <li>同时，由于东鹏新基地大量引入 <strong>含乳咖啡（大咖）、椰汁（海岛椰）及茶饮萃取工艺</strong>，其清洗废水的 <strong>COD（化学需氧量）与 BOD 浓度远高于传统的维生素功能饮料线</strong>，新基地必须配套建设高标准厌氧+好氧生化污水处理站，环保合规运营成本显著高于老厂。</li>
 </ul>
-<ol start="3">
-<li><strong>海南基地与昆明基地“辐射东南亚”的地理与关税伪命题</strong>：
-   公司在公告中反复将 <strong>海南基地（12亿）</strong> 与 <strong>昆明基地（10亿）</strong> 拔高为“辐射东南亚海外市场的双支点”。但从工业物流与贸易规则算细账，这一叙事存在明显硬伤：</li>
+</li>
+<li>
+<p><strong>海南基地与昆明基地“辐射东南亚”的地理与关税伪命题</strong>：
+   公司在公告中反复将 <strong>海南基地（12亿）</strong> 与 <strong>昆明基地（10亿）</strong> 拔高为“辐射东南亚海外市场的双支点”。但从工业物流与贸易规则算细账，这一叙事存在明显硬伤：</p>
+</li>
 </ol>
 <ul>
 <li>
@@ -2319,10 +2901,12 @@
 </li>
 <li>
 <p><strong>第三层底牌：用“广义应收覆盖率”与“存货周转”测谎，东鹏既未放宽账期塞货，也未向工厂堆栈，Q3减速是典型的“良性控货去库”</strong>。判断一家快消品公司是否在业绩承压期“硬压渠道（Channel Stuffing）”，最狠的两把尺子是<strong>广义应收账款敞口</strong>与<strong>存货周转天数</strong>：</p>
-</li>
+<ul>
 <li>看应收端：截至2026年9月30日，东鹏饮料纯应收账款仅为 <code>1.74亿元</code>（<code>174,208,969.99元</code>，占前三季度营收比重仅 <code>0.94%</code>），且<strong>应收票据为 <code>0.00元</code>、应收款项融资为 <code>0.00元</code></strong>——这意味着东鹏在2026Q3动销放缓时，<strong>坚决拒绝接收一张银行承兑汇票或商业承兑汇票来冲刺虚假营收</strong>！其合同负债（<code>50.90亿元</code>）对纯应收账款及三项广义应收总额（<code>1.74亿元</code>）的覆盖率均高达惊人的 <strong><code>2,921.89%</code>（<code>29.22倍</code>）</strong>，远超农夫山泉（<code>381.69%</code>）、统一（<code>226.15%</code>）和康师傅（<code>112.95%</code>）。</li>
 <li>看存货端：截至2026年9月30日，东鹏饮料期末存货仅 <code>6.65亿元</code>（<code>665,364,210.24元</code>），较2025年末的 <code>6.57亿元</code>（<code>656,962,778.37元</code>）仅微增 <code>0.08亿元</code>，存货周转天数常年锁死在 <strong><code>18.3天</code></strong> 左右的极致水平（对比农夫山泉因囤积茶叶与果汁原料高达 <code>94.7天</code>、统一 <code>35.0天</code>、养元 <code>55.4天</code>）。</li>
 <li>结合渠道调研可知，2026年夏季华南与华东连续台风多雨压制了户外蓝领与运动流汗场景，外加电解质水赛道价格战白热化，东鹏管理层在2026Q3主动刹住了向经销商强压发货的油门（单季营收控制在 <code>+0.75%</code>），通过加大终端冰柜陈列与扫码核销力度帮助渠道消化社会库存，为2026Q4大寒潮前的春节开门红腾挪库容。这种“宁可单季报表难看，绝不拿承兑汇票塞爆经销商仓库”的做法，是极为清醒的良性去库。</li>
+</ul>
+</li>
 </ul></div><div class="side-col"><div class="munger-card-inner"><div class="munger-title">👴🏻 芒格毒舌旁批</div><div class="munger-body"><p>在商业世界里，当遇到一场罕见的暴雨或冷夏时，愚蠢的经理人会拿着枪逼经销商签下厚厚的承兑汇票，把卖不掉的汽水塞满批发商的地下室，只为了在华尔街或A股的三季报里凑出一个体面的增长数字——这叫“往未来的自己脚下埋地雷”。看看东鹏账上那 `0.00元` 的应收票据、`0.00元` 的应收款项融资，以及 `29.22倍` 的合同负债覆盖率吧！林木勤是个精明得像老狐狸一样的潮汕生意人，他比谁都清楚：只要不赊账、不收票据，哪怕单季营收只增长 `0.75%`，生意模式的底裤就是干爽的。</p></div></div></div></div>
 
 
@@ -2615,24 +3199,24 @@
 <p>在巴菲特与芒格的买方算盘上，利润表上的“表观归母净利润”只是会计准则加工后的半成品，而合并现金流量表上的“经营活动现金流净额（OCF）”在实行“先款后货”预收账款制的中国快消品企业中，又极易受单年渠道压货节奏（合同负债脉冲）的人为扭曲。要看清东鹏饮料（605499.SH / 09980.HK）真正的内生造血底盘，必须拿起手术刀，沿着<strong>「剥离非经常性噪音与汇兑扰动 <span class="math-inline"> → </span> 复核全口径折旧摊销 <span class="math-inline"> → </span> 切分扩张性与防御性维持性 CapEx <span class="math-inline"> → </span> 烫平预收款营运资金脉冲」</strong>四道工序，对 2025 年经审计年报与 2026 年最新经营基准进行双轨穿透还原。</p>
 <h4 id="1_7">1. 四道会计还原工序与底层参数拆解</h4>
 <ul>
-<li><strong>工序一：严格区分“2025经审计已实现非经常性损益”与“2026模型预测非经常性损益”，剔除理财及汇率噪音</strong></li>
 <li>
-<p><strong>2025年报经审计实绩</strong>：2025年全年公司实现营业总收入 <code>208.75亿元</code>（<code>20,875,416,641.90元</code>），表观归母净利润 <code>44.15亿元</code>（<code>4,415,221,410.63元</code>），少数股东损益 <code>-124.46万元</code>（<code>-1,244,612.09元</code>），年末少数股东权益为 <code>0.00元</code>（归母比例 <code>100.00%</code>）。其中，<strong>2025年报经审计已实现非经常性损益净额为 <code>+2.31亿元</code></strong>（主要系计入当期损益的政府补助，以及公司利用百亿级现金池购买结构性存款、大额存单及理财产品产生的公允价值变动损益与投资收益），剥离后 <strong>2025年经审计扣非归母净利润为 <code>41.84亿元</code></strong>。</p>
+<p><strong>工序一：严格区分“2025经审计已实现非经常性损益”与“2026模型预测非经常性损益”，剔除理财及汇率噪音</strong></p>
+<ul>
+<li><strong>2025年报经审计实绩</strong>：2025年全年公司实现营业总收入 <code>208.75亿元</code>（<code>20,875,416,641.90元</code>），表观归母净利润 <code>44.15亿元</code>（<code>4,415,221,410.63元</code>），少数股东损益 <code>-124.46万元</code>（<code>-1,244,612.09元</code>），年末少数股东权益为 <code>0.00元</code>（归母比例 <code>100.00%</code>）。其中，<strong>2025年报经审计已实现非经常性损益净额为 <code>+2.31亿元</code></strong>（主要系计入当期损益的政府补助，以及公司利用百亿级现金池购买结构性存款、大额存单及理财产品产生的公允价值变动损益与投资收益），剥离后 <strong>2025年经审计扣非归母净利润为 <code>41.84亿元</code></strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>2026年三季报实绩与全年预测拆解</strong>：2026年1-9月公司实现营业总收入 <code>185.96亿元</code>（同比 <code>+10.40%</code>，其中Q3单季 <code>61.53亿元</code>、同比 <code>+0.75%</code>），表观归母净利润 <code>41.45亿元</code>（<code>4,144,814,697.59元</code>，同比 <code>+10.21%</code>，其中Q3单季 <code>12.78亿元</code>、同比 <code>-7.80%</code>）。但穿透非经常性损益表可见，2026年1-9月已实现非经常性损益合计 <code>+2.94亿元</code>（<code>293,858,046.39元</code>，含政府补助 <code>0.71亿元</code>、金融资产公允价值变动及处置收益 <code>3.18亿元</code>，扣减所得税影响 <code>-0.94亿元</code> 及其他 <code>-0.01亿元</code>），1-9月扣非归母净利润实为 <code>38.51亿元</code>（<code>3,850,956,651.20元</code>，同比 <code>+8.79%</code>）；尤为关键的是，<strong>2026Q3单季扣非归母净利润为 <code>12.53亿元</code>（<code>1,253,357,266.62元</code>），同比仅微降 <code>-1.26%</code></strong>，远好于表观归母净利 <code>-7.80%</code> 的降幅——表观降幅扩大的核心会计噪音在于 H 股募集外币资金受汇率波动影响产生账面汇兑损失，导致1-9月财务费用同比由负转正升至 <code>1.45亿元</code>。在买方全年还原中，我们将 <strong>2026全年模型预测非经常性损益设定为 <code>+3.30亿元</code>（买方模型情景假设参数）</strong> 并予以100%剥离，同时将财务费用还原为剔除单季汇率脉冲后的常态净利息收益（<code>-0.80亿元/年</code>）。</p>
 </li>
 <li>
 <p><strong>工序二：全口径复核四项折旧与摊销（D&amp;A），对齐使用权资产租赁现金流出</strong></p>
-</li>
-<li>
-<p><strong>2025年报经审计四项折旧摊销明细</strong>：穿透2025年现金流量表补充资料，公司全年非付现折旧与摊销由四项严谨咬合构成：</p>
-<ol>
-<li>固定资产折旧：<code>4.2654亿元</code>（<code>426,543,579.46元</code>）；</li>
-<li>使用权资产折旧（摊销）：<code>0.2888亿元</code>（<code>28,878,241.38元</code>）；</li>
-<li>无形资产摊销：<code>0.2332亿元</code>（<code>23,322,925.02元</code>）；</li>
-<li>长期待摊费用摊销：<code>0.1715亿元</code>（<code>17,148,362.55元</code>）。</li>
-</ol>
+<ul>
+<li><strong>2025年报经审计四项折旧摊销明细</strong>：穿透2025年现金流量表补充资料，公司全年非付现折旧与摊销由四项严谨咬合构成：
+1. 固定资产折旧：<code>4.2654亿元</code>（<code>426,543,579.46元</code>）；
+2. 使用权资产折旧（摊销）：<code>0.2888亿元</code>（<code>28,878,241.38元</code>）；
+3. 无形资产摊销：<code>0.2332亿元</code>（<code>23,322,925.02元</code>）；
+4. 长期待摊费用摊销：<code>0.1715亿元</code>（<code>17,148,362.55元</code>）。</li>
+</ul>
 </li>
 <li>
 <p><strong>四项折旧摊销合计 = <code>4.9589亿元</code>（<code>495,893,108.41元</code>，四舍五入为 <code>4.96亿元</code>）</strong>。因2025年末少数股东权益为 <code>0.00元</code>，全额归属于母公司股东（其中自有资产折旧摊销 <code>4.6701亿元</code>，使用权资产折旧 <code>0.2888亿元</code>）。</p>
@@ -2645,9 +3229,9 @@
 </li>
 <li>
 <p><strong>工序三：解剖 22.69 亿与 14.29 亿账面 CapEx——切分 80%+ 的基地扩张性投资与防御性维持性 CapEx</strong></p>
-</li>
-<li>
-<p><strong>为什么账面 CapEx 居高不下？</strong> 2025年公司购建固定资产、无形资产和其他长期资产支付的现金（CapEx）高达 <code>22.69亿元</code>（<code>2,269,157,969.98元</code>），2026年1-9月 CapEx 为 <code>14.29亿元</code>（全年预计约 <code>18.50亿元</code>）。若机械照搬 <code>OCF - 账面总CapEx</code> 计算传统自由现金流，会严重低估东鹏的常态内生造血力。原因在于：2024—2026年是东鹏饮料完成全国 <strong>14大生产基地</strong>（增城、华南、东莞、安徽、广西、重庆、海丰、浙江、长沙、天津、中山、昆明、海南、成都）拼图的资本开支洪峰期！2025年的 <code>22.69亿元</code> 与2026年前三季度的 <code>14.29亿元</code> CapEx 中，<strong>高达 80%—83% 的资金全部投向了天津基地（2025.12投产）、中山基地（2026转固）、昆明基地（2026转固）、海南基地及成都基地等纯增量扩张性工程</strong>。</p>
+<ul>
+<li><strong>为什么账面 CapEx 居高不下？</strong> 2025年公司购建固定资产、无形资产和其他长期资产支付的现金（CapEx）高达 <code>22.69亿元</code>（<code>2,269,157,969.98元</code>），2026年1-9月 CapEx 为 <code>14.29亿元</code>（全年预计约 <code>18.50亿元</code>）。若机械照搬 <code>OCF - 账面总CapEx</code> 计算传统自由现金流，会严重低估东鹏的常态内生造血力。原因在于：2024—2026年是东鹏饮料完成全国 <strong>14大生产基地</strong>（增城、华南、东莞、安徽、广西、重庆、海丰、浙江、长沙、天津、中山、昆明、海南、成都）拼图的资本开支洪峰期！2025年的 <code>22.69亿元</code> 与2026年前三季度的 <code>14.29亿元</code> CapEx 中，<strong>高达 80%—83% 的资金全部投向了天津基地（2025.12投产）、中山基地（2026转固）、昆明基地（2026转固）、海南基地及成都基地等纯增量扩张性工程</strong>。</li>
+</ul>
 </li>
 <li>
 <p><strong>防御性维持性 CapEx（Maintenance CapEx，买方模型情景假设参数）精准拆解</strong>：假设公司停止扩张新基地、仅维持既有已投产基地约600万—665万吨产能正常运转及450万家活跃终端网点的排面竞争地位，每年必需的防御性资本支出由两部分构成：</p>
@@ -2665,9 +3249,11 @@
 </li>
 </ol>
 <ul>
-<li><strong>工序四：烫平“先款后货”预收款脉冲，还原常态营运资金（Working Capital）变动</strong></li>
+<li><strong>工序四：烫平“先款后货”预收款脉冲，还原常态营运资金（Working Capital）变动</strong><ul>
 <li>2025年公司经营活动现金流净额（OCF）高达 <code>61.74亿元</code>（<code>6,174,239,879.74元</code>），比当年归母净利润（<code>44.15亿元</code>）加折旧摊销（<code>4.96亿元</code>）之和（<code>49.11亿元</code>）足足高出 <code>+12.63亿元</code>（剔除少数股东损益后营运资金等净流入 <code>+12.64亿元</code>）。这并非利润率突变，而是年末春节旺季前置备货、经销商集中打款导致“合同负债（预收货款）”与“应付返利/应付票据”脉冲式暴增所致。</li>
 <li>反观 2026年1-9月，公司实现 OCF <code>35.42亿元</code>（同比 <code>+13.06%</code>），阶段性低于同期归母净利润 <code>41.45亿元</code>，正是因为前三季度在发货消化年初庞大的合同负债蓄水池。因此，在买方常态化 Owner Earnings 还原中，<strong>绝不能把2025年 <code>+12.64亿元</code> 的单年预收款脉冲当成永续现金流入</strong>！在业务规模温和增长的稳态下，依托对上游包材/糖商60—90天账期及下游先款后货机制，我们将 <strong>常态化营运资金净变动设定为 <code>+1.20亿元/年</code>（买方模型情景假设参数）</strong>，并同步列出更为严苛的 <strong>“零营运资金增量（WC变动 = <code>0.00亿元</code>）”</strong> 对照底线。</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h4 id="2-owner-earnings">2. 《东鹏饮料分步还原归母 Owner Earnings 明细表》</h4>
@@ -2823,8 +3409,10 @@
 <li>
 <p><strong>2026年11月中旬实时边际异动（关键预警！）</strong>：值得注意的是，进入 2026 年下半年至 11 月中旬，受万凯、逸盛、三房巷等瓶片大厂“反内卷”联合自律减产、出口高增及上游 PTA/乙二醇成本抬升推动，近期郑商所瓶片期货主力合约（PR）已反弹至 <strong><code>7,500 ~ 7,750元/吨</code></strong>，华东水瓶级 PET 现货报价回升至 <strong><code>8,200 ~ 8,350元/吨</code></strong> 区间。这一实时现货数据的反弹铁证如山地提醒买方：<strong>2026年前三季度 <code>47.47%</code> 的综合毛利率包含了不可持续的极低价 PET 锁价红利，一旦低价锁价库存消化完毕并重新签订新一轮采购合同，毛利率必将向 <code>45.0%—45.5%</code> 的新常态中枢回归！</strong>
 3. <strong>瓦楞原纸（包装纸箱上游）</strong>：</p>
-</li>
+<ul>
 <li>2026年国内主流140g高强瓦楞原纸均价在 <strong><code>2,900 ~ 3,100元/吨</code></strong> 区间窄幅波动（Q4旺季后部分跌破 <code>3,000元/吨</code>），纸箱包材成本整体保持平稳偏弱，未构成通胀威胁。</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h4 id="2-oe">2. 单位原料价格与产品结构税后归母利润（OE）弹性公式</h4>
@@ -3039,8 +3627,10 @@
 <li><strong>五大基地设计总产能与纯增量产销空间</strong>：</li>
 </ol>
 <ul>
-<li><strong>天津基地</strong>（辐射华北、京津冀及东北，设计产能约 <code>80.00万吨/年</code>）、<strong>中山基地</strong>（巩固大湾区腹地，设计产能约 <code>90.00万吨/年</code>）、<strong>昆明基地</strong>（辐射云贵西南及东南亚边贸，设计产能约 <code>80.00万吨/年</code>）、<strong>海南基地</strong>（辐射海南自贸港及东南亚出海枢纽，设计产能约 <code>60.00万吨/年</code>）、<strong>成都基地及西南/中原配套产线</strong>（深化川渝腹地，设计产能约 <code>70.00万吨/年</code>），<strong>五大基地合计规划设计总产能达 <code>380.00万吨/年</code></strong>。</li>
+<li><strong>天津基地</strong>（辐射华北、京津冀及东北，设计产能约 <code>80.00万吨/年</code>）、<strong>中山基地</strong>（巩固大湾区腹地，设计产能约 <code>90.00万吨/年</code>）、<strong>昆明基地</strong>（辐射云贵西南及东南亚边贸，设计产能约 <code>80.00万吨/年</code>）、<strong>海南基地</strong>（辐射海南自贸港及东南亚出海枢纽，设计产能约 <code>60.00万吨/年</code>）、<strong>成都基地及西南/中原配套产线</strong>（深化川渝腹地，设计产能约 <code>70.00万吨/年</code>），<strong>五大基地合计规划设计总产能达 <code>380.00万吨/年</code></strong>。<ul>
 <li>在 2026 年全年基准销量（<code>665.00万吨</code>）中，天津、中山、昆明初期爬坡已贡献约 <code>75.00万吨</code> 产出。当五大基地全部建成并达到行业合理的 <strong><code>65.0%—75.0%</code> 稳态稼动率</strong>（中枢 <strong><code>70.0%</code></strong>，对应总产出 <code>266.00万吨/年</code>）时，较 2026 年基准可额外释放 <strong>纯增量产销量 <code>172.00万 ~ 210.00万吨/年</code>（70%稼动率中枢为 <code>191.00万吨/年</code>）</strong>。</li>
+</ul>
+</li>
 </ul>
 <ol start="2">
 <li><strong>品类结构、贴身基地运费节约与新增折旧扣减</strong>：</li>
@@ -3212,8 +3802,10 @@
 </li>
 <li>
 <p><strong>情景 5【极端双重暴击 · 动态减震护盘模式（同上双重暴击 + 启动三大独门经营减震垫）】</strong>：</p>
-</li>
+<ul>
 <li>在与情景 4 完全相同的外部双杀地狱模式下，林木勤及管理层立即拉响警报，启动东鹏独有的 <strong>三大动态费用与供应链减震器（Dynamic Shock Absorbers）</strong>：</li>
+</ul>
+</li>
 </ul>
 <ol>
 <li>
@@ -3408,14 +4000,18 @@
 <hr/>
 <div class="annotated-row"><div class="main-col"><h4 id="3-ocf-vs">3. 终极抗压拷问：双杀极限下谁先出局？（上市龙头 OCF 实证核查 vs 网红代工品牌出清推演）</h4><ol>
 <li>
-<p><strong>底线回答一：在最惨烈的双杀极限下，东鹏的自由现金流底线能否守住不失血？</strong>
-   * <strong>绝对守得住，距离现金流断气或亏损失血有着逾 20 亿元的铁壁安全垫！</strong>
-   * 如上表所示，哪怕在 <strong>情景 4（特饮销量跌10% + 新业务降价10% + PET与白糖暴涨20% + 预收款倒流4.50亿 + 管理层死扛不砍一分钱广告费）</strong> 的非理性极端静态压力下，东鹏饮料一年依然能产生 <strong><code>27.48亿元</code> 的模型简化归母内生现金流</strong>；在全额支付完 <code>4.52亿元</code> 的厂房设备维持性 CapEx 与仓库租金后，依然净剩 <strong><code>22.96亿元</code> 的模型简化归母 Owner Earnings</strong>！
-   * 一旦切换至符合商业常识的 <strong>情景 5（动态减震模式）</strong>，仅凭“后台微调扫码红包中奖率 + 削减非刚性广宣 + 贴身基地省运费”三招，公司就能在同等外部暴击下将模型简化归母 Owner Earnings 强行拉回 <strong><code>33.11亿元</code></strong>（较静态死扛多挽回 <strong><code>+10.15亿元</code></strong> 真金白银），抗打击韧性冠绝A股与港股软饮板块。</p>
+<p><strong>底线回答一：在最惨烈的双杀极限下，东鹏的自由现金流底线能否守住不失血？</strong></p>
+<ul>
+<li><strong>绝对守得住，距离现金流断气或亏损失血有着逾 20 亿元的铁壁安全垫！</strong></li>
+<li>如上表所示，哪怕在 <strong>情景 4（特饮销量跌10% + 新业务降价10% + PET与白糖暴涨20% + 预收款倒流4.50亿 + 管理层死扛不砍一分钱广告费）</strong> 的非理性极端静态压力下，东鹏饮料一年依然能产生 <strong><code>27.48亿元</code> 的模型简化归母内生现金流</strong>；在全额支付完 <code>4.52亿元</code> 的厂房设备维持性 CapEx 与仓库租金后，依然净剩 <strong><code>22.96亿元</code> 的模型简化归母 Owner Earnings</strong>！</li>
+<li>一旦切换至符合商业常识的 <strong>情景 5（动态减震模式）</strong>，仅凭“后台微调扫码红包中奖率 + 削减非刚性广宣 + 贴身基地省运费”三招，公司就能在同等外部暴击下将模型简化归母 Owner Earnings 强行拉回 <strong><code>33.11亿元</code></strong>（较静态死扛多挽回 <strong><code>+10.15亿元</code></strong> 真金白银），抗打击韧性冠绝A股与港股软饮板块。</li>
+</ul>
 </li>
 <li>
-<p><strong>底线回答二：行业惨烈价格战与成本暴涨中，同行与东鹏谁先出局？（基于2025—2026年上市同行财报实证）</strong>
-   * 在推演行业出清格局时，买方必须秉持零信任实证原则，严禁作出“同行100%机械断气”的绝对化臆断。我们调取国内主要上市软饮同行的最新经营活动现金流净额（OCF）进行交叉核验：</p>
+<p><strong>底线回答二：行业惨烈价格战与成本暴涨中，同行与东鹏谁先出局？（基于2025—2026年上市同行财报实证）</strong></p>
+<ul>
+<li>在推演行业出清格局时，买方必须秉持零信任实证原则，严禁作出“同行100%机械断气”的绝对化臆断。我们调取国内主要上市软饮同行的最新经营活动现金流净额（OCF）进行交叉核验：</li>
+</ul>
 </li>
 </ol><ul>
 <li>
@@ -3509,10 +4105,12 @@
 </tbody>
 </table></div>
 <div class="annotated-row"><div class="main-col"><p><strong>深度排雷结论（一）：是否存在利用“返利预提比例”跨期平滑季度利润（如2026H1 vs 2026Q3）的空间？</strong></p><ul>
-<li><strong>客观机制审视：31.85亿返利池确实是管理层手中的“天然利润减震器（Cookie Jar Reserves）”</strong>。根据新收入准则，当东鹏向经销商发出一箱东鹏特饮时，管理层必须根据“经销商全年销量目标预计完成度”以及“终端消费者/门店对壹元乐享、箱内扫码红包的预计参与率（Redemption Rate）”，在当期预提销售返利与折扣——<strong>借记（冲减）当期营业收入，贷记合同负债</strong>。这意味着：</li>
-<li>在业绩爆发的上行期（如2025全年营收大增 <code>+31.80%</code>、2026H1净利大增 <code>+20.72%</code>），管理层完全有动力采取<strong>最严苛、最顶格的估计假设</strong>（例如假设几乎所有经销商都能拿满最高档阶梯返利、假设瓶盖扫码兑付率处于上限），从而在账上超额计提高达 <code>31.85亿元</code> 的应付返利负债，主动压低当期表观营收与毛利率，把利润“藏”进合同负债里；</li>
 <li>
-<p>而在遭遇外部逆风期（如2026Q3单季营收仅增 <code>+0.75%</code>），一方面部分区域经销商若未能完成季度挑战目标，前期多计提的阶梯返利便可合法冲回（或减少当期新计提比例），这也在一定程度上解释了为何2026年前三季度东鹏在补水啦大打价格战的背景下，<strong>综合毛利率反而逆势大幅提升 <code>+2.30 pct</code> 至 <code>47.47%</code></strong>（除PET瓶片与白砂糖跌价贡献外，返利冲减率的结构性微调亦是潜在缓冲垫）；另一方面，2026Q3末合同负债仍高达 <code>50.90亿元</code>（较6月末的 <code>51.29亿元</code> 仅微降 <code>0.39亿元</code>），说明这口接近51亿元的“预收+返利蓄水池”丝毫没有见底枯竭。</p>
+<p><strong>客观机制审视：31.85亿返利池确实是管理层手中的“天然利润减震器（Cookie Jar Reserves）”</strong>。根据新收入准则，当东鹏向经销商发出一箱东鹏特饮时，管理层必须根据“经销商全年销量目标预计完成度”以及“终端消费者/门店对壹元乐享、箱内扫码红包的预计参与率（Redemption Rate）”，在当期预提销售返利与折扣——<strong>借记（冲减）当期营业收入，贷记合同负债</strong>。这意味着：</p>
+<ul>
+<li>在业绩爆发的上行期（如2025全年营收大增 <code>+31.80%</code>、2026H1净利大增 <code>+20.72%</code>），管理层完全有动力采取<strong>最严苛、最顶格的估计假设</strong>（例如假设几乎所有经销商都能拿满最高档阶梯返利、假设瓶盖扫码兑付率处于上限），从而在账上超额计提高达 <code>31.85亿元</code> 的应付返利负债，主动压低当期表观营收与毛利率，把利润“藏”进合同负债里；</li>
+<li>而在遭遇外部逆风期（如2026Q3单季营收仅增 <code>+0.75%</code>），一方面部分区域经销商若未能完成季度挑战目标，前期多计提的阶梯返利便可合法冲回（或减少当期新计提比例），这也在一定程度上解释了为何2026年前三季度东鹏在补水啦大打价格战的背景下，<strong>综合毛利率反而逆势大幅提升 <code>+2.30 pct</code> 至 <code>47.47%</code></strong>（除PET瓶片与白砂糖跌价贡献外，返利冲减率的结构性微调亦是潜在缓冲垫）；另一方面，2026Q3末合同负债仍高达 <code>50.90亿元</code>（较6月末的 <code>51.29亿元</code> 仅微降 <code>0.39亿元</code>），说明这口接近51亿元的“预收+返利蓄水池”丝毫没有见底枯竭。</li>
+</ul>
 </li>
 <li>
 <p><strong>定性裁决：这是“严苛藏富”而非“造假虚增”</strong>。财务造假的核心特征是“少提负债、虚增应收、透支未来收入”；而东鹏账上高达 <code>34.49亿元</code>（合同负债 <code>31.85亿</code> + 其他应付款 <code>2.63亿</code>）的应付返利池，全都是在过去的利润表里<strong>已经真刀真枪扣减过营业收入</strong>的计提项！换言之，东鹏的利润表是“先扣完最狠的返利预算后剩下的净肉”，哪怕未来全部100%兑付给经销商和门店，也只会消耗合同负债而不再冲击当期利润表；一旦有哪怕5%—10%的瓶盖被消费者随手扔掉未扫码，或者部分经销商未达标，沉淀下来的都是未来的净利增量。</p>
@@ -3783,14 +4381,14 @@
      <div class="math-display"><span class="math-text">A股有效市值</span> = 668,894,349  ×  110.22 = 73,725,535,146.78<span class="math-text"> 元</span>  ≈  <strong>737.26<span class="math-text"> 亿元</span></strong></div>
 <div class="math-display"><span class="math-text">H股有效市值</span> = 58,182,410  ×  (99.45  ×  0.8504) = 4,920,621,150.01<span class="math-text"> 元</span>  ≈  <strong>49.21<span class="math-text"> 亿元</span></strong></div>
 <div class="math-display"><span class="math-text">A+H 有效总市值合计</span> = 737.26 + 49.21 = <strong>786.47<span class="math-text"> 亿元人民币</span></strong>   (<span class="math-text">未四舍五入精确元数合计为 </span> 786.46<span class="math-text"> 亿元</span>)</div></p>
-</li>
-<li>
-<p><strong>口径二【全股本按A股同股同权计价有效总市值（常规终端对标口径）】</strong>：
-     <div class="math-display"><span class="math-text">全A计价有效总市值</span> = 727,076,759  ×  110.22 = <strong>801.38<span class="math-text"> 亿元人民币</span></strong></div>
-<em>(注：若不扣除库存股、直接按法定总股本 <code>734,199,310 股 × 110.22 元</code> 计算，即为普通行情软件展示的表面总市值 <strong><code>809.23 亿元</code></strong>。)</em></p>
-</li>
+<ul>
+<li><strong>口径二【全股本按A股同股同权计价有效总市值（常规终端对标口径）】</strong>：
+ <div class="math-display"><span class="math-text">全A计价有效总市值</span> = 727,076,759  ×  110.22 = <strong>801.38<span class="math-text"> 亿元人民币</span></strong></div>
+<em>(注：若不扣除库存股、直接按法定总股本 <code>734,199,310 股 × 110.22 元</code> 计算，即为普通行情软件展示的表面总市值 <strong><code>809.23 亿元</code></strong>。)</em></li>
 <li><strong>口径三【全股本按H股同股同权计价隐含总市值（港股买方独立视角）】</strong>：
-     <div class="math-display"><span class="math-text">全H计价有效隐含市值</span> = 727,076,759  ×  84.57228 = <strong>614.91<span class="math-text"> 亿元人民币</span></strong>   (<span class="math-text">含库存股法定口径为 </span> 620.93<span class="math-text"> 亿元</span>)</div></li>
+ <div class="math-display"><span class="math-text">全H计价有效隐含市值</span> = 727,076,759  ×  84.57228 = <strong>614.91<span class="math-text"> 亿元人民币</span></strong>   (<span class="math-text">含库存股法定口径为 </span> 620.93<span class="math-text"> 亿元</span>)</div></li>
+</ul>
+</li>
 </ul>
 <div class="annotated-row"><div class="main-col"><h4 id="12">1.2 广义现金、五项有息负债与“双层次超额现金”深度审视</h4><p>截至 2026 年 9 月 30 日（三季报合并资产负债表），东鹏饮料账面资金与债务结构拆解如下：</p><ul>
 <li><strong>账面广义现金合计 = <code>225.20 亿元</code></strong>（精确元数合计 <code>22,519,261,766.00 元</code>）：</li>
@@ -4383,8 +4981,10 @@
 <h4 id="51-unlevered-firm-oe-4030-oe-4250">5.1 四档击球区推演全景表（基于 Unlevered Firm OE = <code>40.30亿</code> 与常态归母 OE = <code>42.50亿</code>）</h4>
 <p>为了给实战建仓与仓位管理提供毫不含糊的价格标尺，我们以 <strong>扣除库存股后的有效流通总股本 <code>7.27076759 亿股</code></strong>、<strong>常规净现金头寸 <code>+142.94 亿元</code>（折合每股净现金 <code>19.66 元/股</code>；严苛净现金头寸 <code>+112.94 亿元</code>，折合 <code>15.53 元/股</code>）</strong> 以及实时汇率 <strong><code>1 港元 = 0.8504 元人民币</code></strong> 为基准，精确推演四大分档击球区：</p>
 <ol>
-<li><strong>🎯 第一档：【黄金击球区（闭眼重仓锚）】—— 常规 True EV <span class="math-inline"> ≤  12.0<span class="math-text">x</span></span> Firm OE（即 True EV <span class="math-inline"> ≤  483.60<span class="math-text"> 亿元</span></span>）</strong>
-   - <strong>定价逻辑</strong>：彻底按“零增长纯收息债券”给存量东鹏特饮定价，第二曲线“补水啦”、第三曲线与出海期权 100% 免费白送，实业无杠杆真实内生回报率高达 <strong><code>8.33%+</code></strong>，静态股息率超过 <strong><code>4.33%</code></strong>。</li>
+<li><strong>🎯 第一档：【黄金击球区（闭眼重仓锚）】—— 常规 True EV <span class="math-inline"> ≤  12.0<span class="math-text">x</span></span> Firm OE（即 True EV <span class="math-inline"> ≤  483.60<span class="math-text"> 亿元</span></span>）</strong><ul>
+<li><strong>定价逻辑</strong>：彻底按“零增长纯收息债券”给存量东鹏特饮定价，第二曲线“补水啦”、第三曲线与出海期权 100% 免费白送，实业无杠杆真实内生回报率高达 <strong><code>8.33%+</code></strong>，静态股息率超过 <strong><code>4.33%</code></strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -4404,8 +5004,10 @@
 </li>
 </ul>
 <ol start="2">
-<li><strong>🥈 第二档：【白银建仓区（左侧分批吸纳锚）】—— 常规 True EV 介于 <code>12.0x — 15.0x</code> Firm OE（主锚 <code>14.5x = 584.35 亿元</code>）</strong>
-   - <strong>定价逻辑</strong>：给存量特饮合理 13x—14x 估值，给“补水啦”约 8—10 倍保守折价估值，完全不为远期出海期权支付溢价；实业内生回报率 <strong><code>6.90%</code></strong>（区间 <code>6.67%—8.33%</code>），静态股息率 <strong><code>3.73%</code></strong>。</li>
+<li><strong>🥈 第二档：【白银建仓区（左侧分批吸纳锚）】—— 常规 True EV 介于 <code>12.0x — 15.0x</code> Firm OE（主锚 <code>14.5x = 584.35 亿元</code>）</strong><ul>
+<li><strong>定价逻辑</strong>：给存量特饮合理 13x—14x 估值，给“补水啦”约 8—10 倍保守折价估值，完全不为远期出海期权支付溢价；实业内生回报率 <strong><code>6.90%</code></strong>（区间 <code>6.67%—8.33%</code>），静态股息率 <strong><code>3.73%</code></strong>。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -4425,8 +5027,10 @@
 </li>
 </ul>
 <ol start="3">
-<li><strong>⚖️ 第三档：【合理持有区（内生价值中枢锚）】—— 常规 True EV 介于 <code>15.0x — 18.5x</code> Firm OE（主锚 <code>17.5x = 705.25 亿元</code>）</strong>
-   - <strong>定价逻辑</strong>：充分反映三大业务矩阵的内生稳态价值与合理的行业龙头地位，实业内生回报率 <strong><code>5.71%</code></strong>，股权 P / 常态归母 OE 为 <strong><code>19.96 倍</code></strong>（约 20 倍 PE），股东每年稳健赚取业绩增长（<code>10%—12%</code>）+ 分红（<code>3.2%+</code>）的复利回报。</li>
+<li><strong>⚖️ 第三档：【合理持有区（内生价值中枢锚）】—— 常规 True EV 介于 <code>15.0x — 18.5x</code> Firm OE（主锚 <code>17.5x = 705.25 亿元</code>）</strong><ul>
+<li><strong>定价逻辑</strong>：充分反映三大业务矩阵的内生稳态价值与合理的行业龙头地位，实业内生回报率 <strong><code>5.71%</code></strong>，股权 P / 常态归母 OE 为 <strong><code>19.96 倍</code></strong>（约 20 倍 PE），股东每年稳健赚取业绩增长（<code>10%—12%</code>）+ 分红（<code>3.2%+</code>）的复利回报。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -4449,8 +5053,10 @@
 </li>
 </ul>
 <ol start="4">
-<li><strong>🚨 第四档：【情绪过热兑现区（右侧止盈减持锚）】—— 常规 True EV <span class="math-inline"> ≥  22.0<span class="math-text">x</span></span> Firm OE（即 True EV <span class="math-inline"> ≥  886.60<span class="math-text"> 亿元</span></span>）</strong>
-   - <strong>定价逻辑</strong>：市场再次陷入亢奋，将“补水啦”或东南亚出海线性外推为再造一个东鹏，实业内生回报率跌破 <strong><code>4.55%</code></strong>，股权 P / 常态归母 OE 突破 <strong><code>24.22 倍</code></strong>（静态股息率跌至 <code>2.63%</code> 以下），安全边际耗尽，启动分批右侧止盈。</li>
+<li><strong>🚨 第四档：【情绪过热兑现区（右侧止盈减持锚）】—— 常规 True EV <span class="math-inline"> ≥  22.0<span class="math-text">x</span></span> Firm OE（即 True EV <span class="math-inline"> ≥  886.60<span class="math-text"> 亿元</span></span>）</strong><ul>
+<li><strong>定价逻辑</strong>：市场再次陷入亢奋，将“补水啦”或东南亚出海线性外推为再造一个东鹏，实业内生回报率跌破 <strong><code>4.55%</code></strong>，股权 P / 常态归母 OE 突破 <strong><code>24.22 倍</code></strong>（静态股息率跌至 <code>2.63%</code> 以下），安全边际耗尽，启动分批右侧止盈。</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -4547,16 +5153,22 @@
 <p>买方低估值建仓绝不意味着盲目死扛。如果未来财报或草根调研出现以下<strong>三条结构性恶化信号中的任意一条</strong>，说明“低估值高收息现金牛”的底层逻辑已被证伪（即掉入价值陷阱），不论股价多便宜，必须<strong>无条件执行纪律清仓</strong>：</p>
 <ol>
 <li>
-<p><strong>☠️ 死刑红线一：【渠道蓄水池崩塌与先款后货护城河失守】—— 合同负债连续两个同口径季度同比暴跌超 <code>30%</code>，且应收账款周转天数突破 <code>15 天</code>（或渠道库存周期突破 <code>2.5 个月</code>）</strong>
-   - <strong>证伪本质</strong>：东鹏饮料超额 ROE 与巨额浮存金的命根子在于“经销商抢着打预付款 + 数字化扫码高频动销”。若排除春节错期影响后，合同负债从 <code>40—50亿元</code> 中枢出现断崖式坍塌（如跌破 <code>28亿元</code>），同时账面开始大量出现给经销商放账的应收账款（当前几乎为零），或者终端大面积出现过期超 3 个月的甩货乱价，说明“一元乐享/五码合一”数字化渠道飞轮已经失效、主业正在重演传统饮料压货崩盘的死局。</p>
+<p><strong>☠️ 死刑红线一：【渠道蓄水池崩塌与先款后货护城河失守】—— 合同负债连续两个同口径季度同比暴跌超 <code>30%</code>，且应收账款周转天数突破 <code>15 天</code>（或渠道库存周期突破 <code>2.5 个月</code>）</strong></p>
+<ul>
+<li><strong>证伪本质</strong>：东鹏饮料超额 ROE 与巨额浮存金的命根子在于“经销商抢着打预付款 + 数字化扫码高频动销”。若排除春节错期影响后，合同负债从 <code>40—50亿元</code> 中枢出现断崖式坍塌（如跌破 <code>28亿元</code>），同时账面开始大量出现给经销商放账的应收账款（当前几乎为零），或者终端大面积出现过期超 3 个月的甩货乱价，说明“一元乐享/五码合一”数字化渠道飞轮已经失效、主业正在重演传统饮料压货崩盘的死局。</li>
+</ul>
 </li>
 <li>
-<p><strong>☠️ 死刑红线二：【基本盘价格战失血与第二曲线彻底哑火】—— 东鹏特饮单品毛利率因恶性买赠跌破 <code>42.0%</code>（2025年报实绩高达 <code>50.79%</code>），且“东鹏补水啦”连续两个旺季（Q2/Q3）营收同比负增长</strong>
-   - <strong>证伪本质</strong>：若在白砂糖与 PET 瓶片成本平稳的背景下，特饮毛利率较 <code>50.79%</code> 暴跌超过 8 个百分点，说明天丝红牛、乐虎或新兴低价白牌在蓝领基本盘发起了足以摧毁东鹏定价权的恶性价格战（买一送一常态化）；若与此同时“补水啦”在夏季旺季出现负增长，则证明公司“全国冰冻化网点复用孵化第二曲线”的逻辑破产，常态 Unlevered Firm OE 将无法守住 <code>32.80 亿元</code> 悲观底线。</p>
+<p><strong>☠️ 死刑红线二：【基本盘价格战失血与第二曲线彻底哑火】—— 东鹏特饮单品毛利率因恶性买赠跌破 <code>42.0%</code>（2025年报实绩高达 <code>50.79%</code>），且“东鹏补水啦”连续两个旺季（Q2/Q3）营收同比负增长</strong></p>
+<ul>
+<li><strong>证伪本质</strong>：若在白砂糖与 PET 瓶片成本平稳的背景下，特饮毛利率较 <code>50.79%</code> 暴跌超过 8 个百分点，说明天丝红牛、乐虎或新兴低价白牌在蓝领基本盘发起了足以摧毁东鹏定价权的恶性价格战（买一送一常态化）；若与此同时“补水啦”在夏季旺季出现负增长，则证明公司“全国冰冻化网点复用孵化第二曲线”的逻辑破产，常态 Unlevered Firm OE 将无法守住 <code>32.80 亿元</code> 悲观底线。</li>
+</ul>
 </li>
 <li>
-<p><strong>☠️ 死刑红线三：【自由现金流与分红纪律背叛（存贷双高暴雷或乱搞跨界并购）】—— 现金分红率无故从 <code>60%+</code> 骤降至 <code>30%</code> 以下，或公司动用超 <code>50 亿元</code> 账面现金去跨界收购高溢价亏损资产 / 出现大额存单受限无法兑付</strong>
-   - <strong>证伪本质</strong>：当前估值最大的安全垫来自账面 <code>210.10 亿元</code> 常规超额现金与每年 <code>60%+</code> 的真金白银派息。一旦管理层停止高派息、将巨额净现金挥霍于偏离软饮主业的低效资本开支或盲目海外高溢价并购，或者“存贷双高（225亿现金 vs 63亿短借）”在年报审计中暴露出隐性大股东资金占用/质押担保受限，则 <code>142.94 亿元</code> 净现金安全垫瞬间归零，买方必须第一时间无条件斩仓离场。</p>
+<p><strong>☠️ 死刑红线三：【自由现金流与分红纪律背叛（存贷双高暴雷或乱搞跨界并购）】—— 现金分红率无故从 <code>60%+</code> 骤降至 <code>30%</code> 以下，或公司动用超 <code>50 亿元</code> 账面现金去跨界收购高溢价亏损资产 / 出现大额存单受限无法兑付</strong></p>
+<ul>
+<li><strong>证伪本质</strong>：当前估值最大的安全垫来自账面 <code>210.10 亿元</code> 常规超额现金与每年 <code>60%+</code> 的真金白银派息。一旦管理层停止高派息、将巨额净现金挥霍于偏离软饮主业的低效资本开支或盲目海外高溢价并购，或者“存贷双高（225亿现金 vs 63亿短借）”在年报审计中暴露出隐性大股东资金占用/质押担保受限，则 <code>142.94 亿元</code> 净现金安全垫瞬间归零，买方必须第一时间无条件斩仓离场。</li>
+</ul>
 </li>
 </ol>
 <hr/>
@@ -4687,8 +5299,10 @@
 </li>
 </ol>
 <ul>
-<li><strong>港股（09980.HK，<code>99.45港元</code>）—— 罕见的【黄金击球区】错杀标的</strong>：较A股折价<code>-23.27%</code>且同样享有每股<code>19.66元</code>净现金，隐含实业True EV仅<code>471.97亿元</code>（对应保守存量OE仅<code>11.71x</code>、2026扩产中枢OE仅<code>10.50x</code>，实业内生回报率高达<code>8.54%—9.53%</code>，即期股息率<code>4.41%—4.88%</code>）。仅“东鹏特饮”存量价值（<code>483.00亿元</code>）便已覆盖全部企业价值并倒贴<code>11.03亿元</code>安全垫，“补水啦”（<code>96.00亿元</code>）、“果之茶”（<code>15.00亿元</code>）与印尼出海期权100%免费白送。<strong>实战指令：立即在H股建立核心主仓收息，待2026Q4/2027Q1合同负债重返<code>55亿元+</code>、特饮单季增速转正至<code>+5%</code>以上时加满右侧仓位！</strong></li>
+<li><strong>港股（09980.HK，<code>99.45港元</code>）—— 罕见的【黄金击球区】错杀标的</strong>：较A股折价<code>-23.27%</code>且同样享有每股<code>19.66元</code>净现金，隐含实业True EV仅<code>471.97亿元</code>（对应保守存量OE仅<code>11.71x</code>、2026扩产中枢OE仅<code>10.50x</code>，实业内生回报率高达<code>8.54%—9.53%</code>，即期股息率<code>4.41%—4.88%</code>）。仅“东鹏特饮”存量价值（<code>483.00亿元</code>）便已覆盖全部企业价值并倒贴<code>11.03亿元</code>安全垫，“补水啦”（<code>96.00亿元</code>）、“果之茶”（<code>15.00亿元</code>）与印尼出海期权100%免费白送。<strong>实战指令：立即在H股建立核心主仓收息，待2026Q4/2027Q1合同负债重返<code>55亿元+</code>、特饮单季增速转正至<code>+5%</code>以上时加满右侧仓位！</strong><ul>
 <li><strong>A股（605499.SH，<code>110.22元</code>）—— 【白银建仓区外沿 / 合理持有区下沿】</strong>：对应常规True EV <code>16.34x</code>（2026中枢下<code>14.31x</code>），估值已挤掉八成泡沫但仍含约<code>49.53亿元</code>新业务期权溢价。<strong>实战指令：有港股通权限者优先换仓H股套利；纯A股账户保持观察底仓，待回调破<code>100.03—102.80元</code>白银建仓线或右侧动销拐点确认后再行重手加仓，同时严密监控“合同负债、特饮毛利率、225亿现金并购纪律”三条死刑红线。</strong></li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h2 id="h-1">【模块 H：💼 专属买方研究员的 1 分钟闭门交底】</h2>
@@ -4798,9 +5412,11 @@
 </li>
 <li>
 <p><strong>小厂的死穴 vs 东鹏的规模魔术</strong>：</p>
-</li>
+<ul>
 <li>一家区域二线饮料厂（比如年销 20 万吨、约 4 亿瓶），不仅总产量分母小，而且因为单品卖不动，一条产线今天灌果汁、明天灌茶水、后天灌功能饮料——每次换品种都必须停机半天，用大量酸碱热水和蒸汽把几百米长的管道彻底清洗杀菌（业内叫 CIP 清洗），一年下来真正有效开机时间不到 50%，<strong>每瓶饮料分摊的机器折旧和人工高达 <code>0.25 — 0.35 元/瓶</code></strong>；</li>
 <li>而东鹏特饮单品一年狂卖 <strong><code>367.57 万吨</code>（73.5 亿瓶）</strong>，全公司总销量近 <strong>600 万吨（超 100 亿瓶）</strong>！这意味着东鹏的几十条高速产线全年 300 多天可以 <strong>24 小时不间断只灌装同一种 500ml 金瓶特饮，零换线停机损耗、零模具切换浪费</strong>！把全公司每年 <code>4.27 亿元</code> 的固定资产折旧和 <code>2.32 亿元</code> 的产线工人工资，除以 <strong>100 亿瓶</strong> 的天文数字分母，每瓶分摊的折旧和人工直接被碾碎到了 <strong><code>0.116 元 + 0.021 元 = 0.137 元/瓶</code></strong> 的物理极限！</li>
+</ul>
+</li>
 </ul><h5 id="3_4">3. 原理二：“自注塑 + 自吹瓶”垂直一体化，砍掉中间商毛利与“运空气的运费”</h5><ul>
 <li>当一家饮料厂年销量只有几十万吨时，单厂产量养不起昂贵的“PET 注塑机 + 高速吹瓶机”，只能向外部包装厂直接采购“吹好的空塑料瓶”。但空塑料瓶体积巨大、里面装的全是空气，一辆大货车拉不了几万个空瓶，<strong>“运空气的物流费”加上制瓶厂赚走的 15% 毛利</strong>，让小厂每个瓶子要花 <code>0.50 元</code> 以上；</li>
 <li>当东鹏规模突破 <code>360 万吨</code>、单个生产基地年产高达 <code>50 万—100 万吨</code> 后，东鹏直接在每个工厂车间里实现了 <strong>“直接买石化厂的 PET 塑料颗粒 → 自己注塑成小拇指粗的试管状瓶坯 → 在灌装线上瞬间吹成瓶子并灌入饮料（吹灌旋一体机）”</strong>！一举砍掉了外部制瓶厂的中间利润和空瓶运输费，每个瓶子直接省下 <code>0.10 — 0.15 元</code>，73 亿瓶就是每年多赚 <strong>7 亿—10 亿元</strong> 纯利润！</li>
@@ -4828,9 +5444,11 @@
 <p><strong>分子（东鹏特饮自己的销售额）并没有崩盘</strong>：2026 年前三季度（1—9 月），东鹏特饮一共卖了 <strong><code>127.80 亿元</code></strong>，比 2025 年前三季度其实还增长了 <strong><code>+1.72%</code></strong>；</p>
 </li>
 <li>
-<p><strong>为什么占比反而从 <code>74.63%</code> 掉到了 <code>68.80%</code>？因为分母（全公司其他新饮料）今年长得太猛了！</strong>
-   - 2025 年前三季度时，公司 100 块钱收入里，有 <strong>74.63 块钱</strong> 是靠卖“东鹏特饮”赚来的，其余新饮料（补水啦、果之茶、大咖等）加起来只占 <strong>25.37 块钱</strong>；
-   - 到了 2026 年前三季度，虽然东鹏特饮只慢悠悠增长了 <code>+1.72%</code>（<code>127.80 亿元</code>），但三弟 <strong>“茶饮料（果之茶）”同比暴涨了 <code>+182.99%</code> 冲到 <code>16.38 亿元</code></strong>，二弟 <strong>“东鹏补水啦”卖了 <code>30.32 亿元</code></strong>，四弟 <strong>“东鹏大咖/椰汁等”增长 <code>+32.93%</code> 卖了 <code>11.24 亿元</code></strong>——这三个新业务兄弟加起来的收入占比，直接从去年的 <strong><code>25.37%</code> 飙升到了 <code>31.20%</code></strong>，把全公司主营总收入推高到了 <strong><code>185.74 亿元</code>（同比增长 <code>+10.33%</code>）</strong>！</p>
+<p><strong>为什么占比反而从 <code>74.63%</code> 掉到了 <code>68.80%</code>？因为分母（全公司其他新饮料）今年长得太猛了！</strong></p>
+<ul>
+<li>2025 年前三季度时，公司 100 块钱收入里，有 <strong>74.63 块钱</strong> 是靠卖“东鹏特饮”赚来的，其余新饮料（补水啦、果之茶、大咖等）加起来只占 <strong>25.37 块钱</strong>；</li>
+<li>到了 2026 年前三季度，虽然东鹏特饮只慢悠悠增长了 <code>+1.72%</code>（<code>127.80 亿元</code>），但三弟 <strong>“茶饮料（果之茶）”同比暴涨了 <code>+182.99%</code> 冲到 <code>16.38 亿元</code></strong>，二弟 <strong>“东鹏补水啦”卖了 <code>30.32 亿元</code></strong>，四弟 <strong>“东鹏大咖/椰汁等”增长 <code>+32.93%</code> 卖了 <code>11.24 亿元</code></strong>——这三个新业务兄弟加起来的收入占比，直接从去年的 <strong><code>25.37%</code> 飙升到了 <code>31.20%</code></strong>，把全公司主营总收入推高到了 <strong><code>185.74 亿元</code>（同比增长 <code>+10.33%</code>）</strong>！</li>
+</ul>
 </li>
 <li>
 <p><strong>买方视角一句话总结</strong>：这就好比一个家庭，以前全靠大哥一个人赚钱养家（占全家收入的 <code>74.63%</code>）；今年大哥工资没怎么涨，但二弟和三弟突然发财赚回了几十亿，于是大哥工资占全家总收入的比例自然降到了 <code>68.80%</code>。这说明东鹏正在从“单条腿走路”向“多品类平台”转型（当然，由于新饮料毛利率低于特饮，我们需要关注产品结构变化对整体利润率的稀释效应）。</p>
@@ -4896,8 +5514,10 @@
 <p><strong>💡 深度解答</strong>：</p>
 <p>您的直觉非常敏锐！但作为冷酷的买方研究员，我们必须用“两分法”把这件事切开看：<strong>“单季跌到 <code>+0.49%</code> 的急刹车休克”确实是 100% 的短期一次性扰动；但扰动过去之后，“补水啦”也回不到过去 100%+ 的翻倍暴涨期了，而是会换挡进入 <code>15%—30%</code> 的常态化中高速增长期。</strong></p>
 <ol>
-<li><strong>为什么说 Q3 跌到 <code>+0.49%</code> 是短期一次性冲击？（三大短期偶发因素叠满）</strong>
-   - <strong>① 上半年世界杯压货透支 + Q3 撤换姆巴佩包装的“渠道洗胃”</strong>：2026 年是美加墨世界杯大年，东鹏在 2026 年上半年重金签下法国球星姆巴佩代言“补水啦”，并在 Q1—Q2 向全国经销商大举压货印有姆巴佩形象的瓶标与冰柜贴纸。随后因突发赛事舆情争议，公司出于稳健考虑在 Q3 紧急撤换终端宣传物料。由于经销商仓库里上半年已经塞满了印有旧包装的货，Q3 必须先消化旧库存、暂停向厂家打款进新货；</li>
+<li><strong>为什么说 Q3 跌到 <code>+0.49%</code> 是短期一次性冲击？（三大短期偶发因素叠满）</strong><ul>
+<li><strong>① 上半年世界杯压货透支 + Q3 撤换姆巴佩包装的“渠道洗胃”</strong>：2026 年是美加墨世界杯大年，东鹏在 2026 年上半年重金签下法国球星姆巴佩代言“补水啦”，并在 Q1—Q2 向全国经销商大举压货印有姆巴佩形象的瓶标与冰柜贴纸。随后因突发赛事舆情争议，公司出于稳健考虑在 Q3 紧急撤换终端宣传物料。由于经销商仓库里上半年已经塞满了印有旧包装的货，Q3 必须先消化旧库存、暂停向厂家打款进新货；</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -4908,8 +5528,10 @@
 </li>
 </ul>
 <ol start="2">
-<li><strong>但为什么洗胃结束后，不能再按“每年翻一倍（100%+）”去给它算账？（中期成长换挡真相）</strong>
-   - <strong>第一，首轮铺货红利已完成</strong>：补水啦从 0 冲到 32.74 亿元（2025 年），吃的是“把货第一次塞进全国 400 万家小卖部冰柜”的渠道扩容红利；当体量跨过 30 亿—35 亿元后，全国网点已基本铺满，未来只能靠单店自然复购驱动；</li>
+<li><strong>但为什么洗胃结束后，不能再按“每年翻一倍（100%+）”去给它算账？（中期成长换挡真相）</strong><ul>
+<li><strong>第一，首轮铺货红利已完成</strong>：补水啦从 0 冲到 32.74 亿元（2025 年），吃的是“把货第一次塞进全国 400 万家小卖部冰柜”的渠道扩容红利；当体量跨过 30 亿—35 亿元后，全国网点已基本铺满，未来只能靠单店自然复购驱动；</li>
+</ul>
+</li>
 </ol>
 <ul>
 <li>
@@ -4938,12 +5560,10 @@
   为了帮大商把货往下游推，总厂每年批出几亿元的“渠道推广费”（比如：给每家小卖部老板 100 块钱“堆头陈列费”，或者每进 10 箱送小店老板 1 箱免费赠品）。
   但总厂老板坐在深圳办公室里，怎么可能去查全国 300 万家小卖部到底拿没拿到那 1 箱赠品？
   于是，<strong>一线业务员和经销商老板联手开启“截留贪墨”模式</strong>：</p>
-</li>
-<li>
-<p>业务员找几家关系好的小店，把 10 箱饮料搬过去摆拍 20 张不同角度的照片上传给总部交差，把总部批下来的“100 元陈列费”直接揣进自己腰包；</p>
-</li>
-<li>
-<p>总部发下来用来送给小卖部老板的“100 万箱免费促销赠饮”，被一级大商和业务员私下截留下来，直接当成正常正品卖给二批商换现金分赃！</p>
+<ul>
+<li>业务员找几家关系好的小店，把 10 箱饮料搬过去摆拍 20 张不同角度的照片上传给总部交差，把总部批下来的“100 元陈列费”直接揣进自己腰包；</li>
+<li>总部发下来用来送给小卖部老板的“100 万箱免费促销赠饮”，被一级大商和业务员私下截留下来，直接当成正常正品卖给二批商换现金分赃！</li>
+</ul>
 </li>
 <li>
 <p><strong>结果</strong>：总部账上花了 5 个亿促销费，经过省区、业代、大商、二批四道手“雁过拔毛”，真正落到村口小卖部老板手里的连 5,000 万都不到！小店老板没拿到返利，自然不肯卖力推销。</p>
@@ -4952,10 +5572,10 @@
 <p><strong>第三步：【仓库爆仓逼出致命的“跨区恶意窜货（砸价崩盘）”】</strong>
   既然终端小店卖不动，而一级大商为了拿总厂年底那 <code>12%</code> 的高额阶梯返利，仓库里已经塞满了快要过期的饮料，眼看资金链要断了怎么办？
   <strong>“恶意窜货”登场！</strong> 假设正常出厂价是 <code>40 元/箱</code>：</p>
-</li>
+<ul>
 <li>A 省大商算了一笔账：只要我今年凑够 100 万箱进货量，总厂年底就会返给我 <code>5 元/箱</code>（我的真实底价只有 <code>35 元/箱</code>）；</li>
-<li>
-<p>既然在本省卖不掉，A 省大商就在半夜雇几辆大货车，把仓库里积压的 30 万箱饮料，以 <strong><code>37 元/箱</code>（比正常出厂价还便宜 3 块钱！）</strong> 的跳楼价，偷偷拉到隔壁 B 省的批发市场甩卖套现！</p>
+<li>既然在本省卖不掉，A 省大商就在半夜雇几辆大货车，把仓库里积压的 30 万箱饮料，以 <strong><code>37 元/箱</code>（比正常出厂价还便宜 3 块钱！）</strong> 的跳楼价，偷偷拉到隔壁 B 省的批发市场甩卖套现！</li>
+</ul>
 </li>
 <li>
 <p><strong>灾难降临</strong>：B 省老老实实做生意的经销商，从总厂进货都要 <code>40 元/箱</code>，结果市场上突然涌入大批 <code>37 元/箱</code> 的真货（窜货），B 省价格体系瞬间雪崩，B 省经销商亏得倾家荡产，直接集体找总厂退网闹事！——<strong>这就是为什么 2015 年林木勤拼死也要搞“五码合一”：直接用微信红包跳过所有经销商和业务员把钱打给小店老板（消灭截留），同时只要 A 省的码在 B 省被扫开，系统自动报警扣光 A 省大商的保证金（消灭窜货）！</strong></p>
@@ -5270,7 +5890,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《东鹏饮料 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/东鹏饮料 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 HTML 与 PDF）：',
+          '针对报告《东鹏饮料(605499.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/东鹏饮料(605499.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -5467,6 +6087,677 @@
         };
         tocList.appendChild(a);
       });
+
+      // =========================================================================
+      // 排行榜交互式表头排序 & 快捷排序栏（距第一档重锤点距离 / 内含回报率 / 股息率 / 涨跌幅）
+      // =========================================================================
+      (function initLeaderboardSorting(){
+        function parseNum(str, regex, groupIdx) {
+          if (!str) return NaN;
+          var m = str.match(regex);
+          if (!m) return NaN;
+          var v = parseFloat(m[groupIdx || 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function parseLastNum(str) {
+          if (!str) return NaN;
+          var ms = str.match(/[0-9]+(?:\.[0-9]+)?/g);
+          if (!ms || !ms.length) return NaN;
+          var v = parseFloat(ms[ms.length - 1]);
+          return isNaN(v) ? NaN : v;
+        }
+        function makeDistPill(dist) {
+          if (isNaN(dist)) return null;
+          var span = document.createElement('span');
+          span.className = 'agy-dist-pill no-print ' + (
+            dist <= 0 ? 'agy-dist-hit' :
+            dist <= 5 ? 'agy-dist-near' :
+            dist <= 15 ? 'agy-dist-mid' : 'agy-dist-far'
+          );
+          var sign = dist > 0 ? '+' : '';
+          var prefix = dist <= 0 ? '🔥 低于重锤 ' : (dist <= 5 ? '🎯 距重锤 ' : '距重锤 ');
+          span.textContent = prefix + sign + dist.toFixed(1) + '%';
+          return span;
+        }
+
+        var tables = document.querySelectorAll('.report-content table');
+        var globalMarketControllers = [];
+        var globalMarketMode = 'ALL';
+        try {
+          var savedMkt = localStorage.getItem('agy_lb_market_mode_v1');
+          if (savedMkt === 'ALL' || savedMkt === 'A' || savedMkt === 'H') globalMarketMode = savedMkt;
+        } catch(e) {}
+        var globalBarRefs = [];
+        var globalStats = { maxTotal: 0, maxA: 0, maxH: 0 };
+
+        function setGlobalMarketMode(mode) {
+          globalMarketMode = mode;
+          try { localStorage.setItem('agy_lb_market_mode_v1', mode); } catch(e) {}
+          globalMarketControllers.forEach(function(fn){ fn(mode); });
+          globalBarRefs.forEach(function(ref){
+            Object.keys(ref.btns).forEach(function(k){
+              ref.btns[k].classList.toggle('active', k === mode);
+            });
+            if (ref.badge) {
+              var labelMap = {
+                'ALL': '当前显示：A+H 统一全榜 (' + (globalStats.maxA + globalStats.maxH) + ' 席)',
+                'A': '当前显示：🇨🇳 仅 A 股 (' + globalStats.maxA + ' 席)',
+                'H': '当前显示：🇭🇰 仅 H 股/港股 (' + globalStats.maxH + ' 席)'
+              };
+              ref.badge.textContent = labelMap[mode] || '';
+            }
+          });
+        }
+
+        tables.forEach(function(tbl){
+          var thead = tbl.querySelector('thead');
+          var tbody = tbl.querySelector('tbody');
+          if (!thead || !tbody) return;
+          var ths = Array.prototype.slice.call(thead.querySelectorAll('th'));
+          var trs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          if (ths.length < 5 || trs.length < 1) return;
+
+          var hTexts = ths.map(function(th){ return (th.textContent || '').trim(); });
+          var isRadar = (hTexts.some(function(h){ return h.indexOf('实时排名') >= 0 || h.indexOf('市场与排名') >= 0 || h.indexOf('统一排名') >= 0; })) &&
+                        hTexts.some(function(h){ return h.indexOf('第一档') >= 0; }) &&
+                        hTexts.some(function(h){ return h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0; });
+          var isMaster = (hTexts[0].indexOf('排名与梯队') >= 0 || hTexts[0].indexOf('严苛排名') >= 0 || hTexts[0].indexOf('统一排名') >= 0 || hTexts[0].indexOf('H股独立排名') >= 0) &&
+                         hTexts.some(function(h){ return h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0; }) &&
+                         hTexts.some(function(h){ return h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0; });
+          if (!isRadar && !isMaster) return;
+
+          var isHMaster = isMaster && hTexts[0].indexOf('H股') >= 0;
+
+          // 定位各关键列索引
+          var colRank = 0;
+          var colPx = -1, colT1 = -1, colOe = -1, colDiv = -1, colStatus = -1, colDisc = -1;
+          if (isRadar) {
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('实时现价') >= 0) colPx = idx;
+              if (h.indexOf('第一档') >= 0) colT1 = idx;
+              if (h.indexOf('OE/EV') >= 0 || h.indexOf('回报') >= 0) colOe = idx;
+              if (h.indexOf('股息') >= 0) colDiv = idx;
+            });
+            colStatus = ths.length - 1;
+          } else {
+            colPx = 1;
+            hTexts.forEach(function(h, idx){
+              if (h.indexOf('内生回报') >= 0 || h.indexOf('常态回报') >= 0 || h.indexOf('严苛回报') >= 0) colOe = idx;
+              if (h.indexOf('折溢价') >= 0) colDisc = idx;
+              if (h.indexOf('两档买') >= 0 || h.indexOf('买点') >= 0) colStatus = idx;
+            });
+          }
+
+          // 提取每行精确排序指标
+          var hasFullOe = false;
+          var hasDiv = false;
+          var hasObjScore = false;
+          var countA = 0, countH = 0;
+          var factorCounts = {};
+          var knownFactors = [
+            '⛏️ 大宗周期与资源',
+            '🛢️ 周期资源与能源',
+            '🏦 顺周期金融',
+            '🔋 新能源与高端制造',
+            '⚙️ 高端制造与出海',
+            '💻 科技算力与半导体',
+            '💊 医药与医疗健康',
+            '🛒 内需消费与公用红利'
+          ];
+          var rowData = trs.map(function(tr, origIdx){
+            var tds = Array.prototype.slice.call(tr.querySelectorAll('td'));
+            var getTxt = function(i){ return (i >= 0 && tds[i]) ? (tds[i].textContent || '').replace(/\s+/g, ' ').trim() : ''; };
+            var rankTxt = getTxt(colRank);
+            var rank = parseNum(rankTxt, /NO\.(\d+)/i, 1);
+            if (isNaN(rank)) rank = origIdx + 1;
+            var objScore = parseNum(rankTxt, /(?:客观|客)\s*(-?[0-9]+(?:\.[0-9]+)?)/, 1);
+            if (!isNaN(objScore)) hasObjScore = true;
+
+            var macroFactor = '';
+            for (var fi = 0; fi < knownFactors.length; fi++) {
+              if (rankTxt.indexOf(knownFactors[fi]) >= 0) {
+                macroFactor = knownFactors[fi];
+                break;
+              }
+            }
+            if (macroFactor) factorCounts[macroFactor] = (factorCounts[macroFactor] || 0) + 1;
+
+            var px = NaN, chg = NaN, t1 = NaN, oe = NaN, fullOe = NaN, divRate = NaN, disc = NaN;
+            var market = 'A';
+            var isStale = false;
+            var stockName = '';
+
+            if (isRadar) {
+              var pxTxt = getTxt(colPx);
+              px = parseNum(pxTxt, /([0-9]+(?:\.[0-9]+)?)\s*(?:元|港元)/, 1);
+              chg = parseNum(pxTxt, /([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              t1 = parseLastNum(getTxt(colT1));
+              var oeTxt = getTxt(colOe);
+              oe = parseNum(oeTxt, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDiv >= 0) divRate = parseNum(getTxt(colDiv), /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              var nameTxt = getTxt(1);
+              stockName = nameTxt.split(/[\s(（]/)[0];
+              if (rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || (nameTxt.indexOf('.HK') >= 0 && nameTxt.indexOf('.SH') < 0 && nameTxt.indexOf('.SZ') < 0) || pxTxt.indexOf('港元') >= 0) {
+                market = 'H';
+              }
+            } else {
+              var pxTxt2 = getTxt(colPx);
+              stockName = pxTxt2.split(/\s+/)[0];
+              px = parseNum(pxTxt2, /实时现价\s*[:：]\s*([0-9]+(?:\.[0-9]+)?)/, 1);
+              chg = parseNum(pxTxt2, /(?:今日\s*|\()([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              isStale = pxTxt2.indexOf('过期') >= 0;
+              var oeTxt2 = getTxt(colOe);
+              oe = parseNum(oeTxt2, /(?:常态回报|严苛EV常态回报|港股常态回报)\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (isNaN(oe)) oe = parseNum(oeTxt2, /(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              fullOe = parseNum(oeTxt2, /达产\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              divRate = parseNum(oeTxt2, /(?:实时股息|纯现金股息|TTM股息)(?:\(TTM\))?\s*[:：]\s*(-?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              if (colDisc >= 0) {
+                var discTxt = getTxt(colDisc);
+                disc = parseNum(discTxt, /(?:折价|溢价)\s*([+-]?[0-9]+(?:\.[0-9]+)?)%/, 1);
+              }
+              var stTxt = getTxt(colStatus);
+              var mT1 = stTxt.match(/第一档[^:：]*[:：]\s*([^•\n(（]+)/);
+              if (mT1) t1 = parseLastNum(mT1[1]);
+              if (isHMaster || rankTxt.indexOf('H-NO.') >= 0 || rankTxt.indexOf('🇭🇰') >= 0 || pxTxt2.indexOf('H股现价') >= 0 || pxTxt2.indexOf('港元`') >= 0 || (pxTxt2.indexOf('实时现价:') >= 0 && pxTxt2.split('实时现价')[1].slice(0, 20).indexOf('港元') >= 0) || (pxTxt2.indexOf('港股') >= 0 && pxTxt2.indexOf('A股') < 0)) {
+                market = 'H';
+              }
+            }
+
+            if (market === 'H') countH++; else countA++;
+            tr.setAttribute('data-market', market);
+
+            var dist = (!isNaN(px) && !isNaN(t1) && t1 > 0) ? ((px - t1) / t1 * 100) : NaN;
+            if (!isNaN(fullOe)) hasFullOe = true;
+            if (!isNaN(divRate)) hasDiv = true;
+
+            // 在重锤列/状态列注入轻量距重锤百分比小徽章（打印时隐藏）
+            var badge = makeDistPill(dist);
+            if (badge) {
+              var targetCell = isRadar ? (tds[colT1] || tds[colStatus]) : tds[colStatus];
+              if (targetCell) {
+                if (isRadar) {
+                  var br = document.createElement('br');
+                  br.className = 'no-print';
+                  targetCell.appendChild(br);
+                  targetCell.appendChild(badge);
+                } else {
+                  var wrap = document.createElement('div');
+                  wrap.className = 'no-print';
+                  wrap.appendChild(badge);
+                  targetCell.insertBefore(wrap, targetCell.firstChild);
+                }
+              }
+            }
+
+            return {
+              tr: tr,
+              td0: tds[0],
+              origIdx: origIdx,
+              rank: rank,
+              objScore: objScore,
+              macroFactor: macroFactor,
+              name: stockName,
+              dist: dist,
+              oe: oe,
+              fullOe: fullOe,
+              div: divRate,
+              chg: chg,
+              disc: disc,
+              market: market,
+              isHkOnly: market === 'H',
+              isStale: isStale
+            };
+          });
+
+          if (trs.length < 1) return;
+          if (countA + countH > globalStats.maxTotal && countA > 0 && countH > 0) {
+            globalStats.maxTotal = countA + countH;
+            globalStats.maxA = countA;
+            globalStats.maxH = countH;
+          }
+
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL' };
+          var inlineMarketBtns = {};
+
+          function applyFilters() {
+            var visIdx = 0;
+            // 遍历当前 tbody 真实 DOM 顺序以保证重排后序号依然严格递增
+            var domTrs = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var trMap = new Map();
+            rowData.forEach(function(d){ trMap.set(d.tr, d); });
+            domTrs.forEach(function(tr){
+              var d = trMap.get(tr);
+              if (!d) return;
+              var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
+              var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              var hidden = hideByMkt || hideByF;
+              d.tr.style.display = hidden ? 'none' : '';
+              if (!hidden) {
+                visIdx++;
+                if (d.td0) {
+                  var dynSpan = d.td0.querySelector('.agy-dyn-rank');
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.key !== 'rank') {
+                    if (!dynSpan) {
+                      dynSpan = document.createElement('div');
+                      dynSpan.className = 'agy-dyn-rank no-print';
+                      dynSpan.style.cssText = 'font-size:11px;font-weight:700;color:#0284c7;margin-bottom:2px;';
+                      d.td0.insertBefore(dynSpan, d.td0.firstChild);
+                    }
+                    dynSpan.textContent = '#' + visIdx;
+                  } else if (dynSpan) {
+                    dynSpan.remove();
+                  }
+                }
+              }
+            });
+          }
+
+          // 定义每列表头点击对应的排序键与默认方向
+          var colMap = {};
+          colMap[colRank] = { key: 'rank', defaultDir: 'asc', tip: '点击按综合排名排序' };
+          if (colPx >= 0) colMap[colPx] = { key: 'chg', defaultDir: 'asc', tip: '点击按今日涨跌幅排序' };
+          if (colOe >= 0) colMap[colOe] = { key: 'oe', defaultDir: 'desc', tip: '点击按实时常态内含回报率排序' };
+          if (colDiv >= 0) colMap[colDiv] = { key: 'div', defaultDir: 'desc', tip: '点击按实时股息率排序' };
+          if (colT1 >= 0) colMap[colT1] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colStatus >= 0) colMap[colStatus] = { key: 'dist', defaultDir: 'asc', tip: '点击按距离第一档重锤点远近排序' };
+          if (colDisc >= 0) colMap[colDisc] = { key: 'disc', defaultDir: 'asc', tip: '点击按H股较A股折溢价率排序' };
+
+          // 给可排序表头加上箭头与点击事件
+          var thArrows = {};
+          Object.keys(colMap).forEach(function(cStr){
+            var cIdx = Number(cStr);
+            var th = ths[cIdx];
+            if (!th) return;
+            var cfg = colMap[cIdx];
+            th.classList.add('agy-sortable');
+            th.title = cfg.tip;
+            var arr = document.createElement('span');
+            arr.className = 'agy-sort-arrow no-print';
+            arr.textContent = '⇅';
+            th.appendChild(arr);
+            thArrows[cIdx] = arr;
+            th.addEventListener('click', function(){
+              triggerSort(cfg.key, cfg.defaultDir);
+            });
+          });
+
+          // 创建顶部快捷排序条（插在 table-scroll-wrap 或 table 之前）
+          var bar = document.createElement('div');
+          bar.className = 'agy-sort-bar no-print';
+          var lbl = document.createElement('span');
+          lbl.className = 'agy-sort-label';
+          lbl.textContent = '⚡ 交互排序：';
+          bar.appendChild(lbl);
+
+          var btnDefs = [
+            { key: 'rank', defaultDir: 'asc', label: '默认综合排名' },
+            { key: 'dist', defaultDir: 'asc', label: '🎯 距重锤点最近' },
+            { key: 'oe', defaultDir: 'desc', label: '💰 常态内含回报' }
+          ];
+          if (hasObjScore) btnDefs.splice(1, 0, { key: 'objScore', defaultDir: 'desc', label: '⚖️ 纯客观财务排榜' });
+          if (hasFullOe) btnDefs.push({ key: 'fullOe', defaultDir: 'desc', label: '🚀 达产内含回报' });
+          if (hasDiv) btnDefs.push({ key: 'div', defaultDir: 'desc', label: '💵 实时股息率' });
+          if (colDisc >= 0) btnDefs.push({ key: 'disc', defaultDir: 'asc', label: '🏷️ H股折价最大' });
+          btnDefs.push({ key: 'chg', defaultDir: 'asc', label: '📉 今日涨跌幅' });
+
+          var barBtns = {};
+          btnDefs.forEach(function(def){
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'agy-sort-btn';
+            b.textContent = def.label;
+            b.addEventListener('click', function(){
+              triggerSort(def.key, def.defaultDir);
+            });
+            bar.appendChild(b);
+            barBtns[def.key] = { el: b, baseLabel: def.label };
+          });
+
+          // 若表格同时包含 A 股与 H 股，挂载三态市场切换开关（AH股一起显示 / 只显示A股 / 只显示H股），并与全页顶栏联动
+          if (countA > 0 && countH > 0) {
+            var seg = document.createElement('div');
+            seg.className = 'agy-market-seg-inline';
+            var mDefs = [
+              { m: 'ALL', text: '🌐 AH一起 (' + (countA + countH) + ')' },
+              { m: 'A', text: '🇨🇳 只看A股 (' + countA + ')' },
+              { m: 'H', text: '🇭🇰 只看H股 (' + countH + ')' }
+            ];
+            mDefs.forEach(function(md){
+              var mb = document.createElement('button');
+              mb.type = 'button';
+              mb.className = 'agy-market-btn' + (md.m === globalMarketMode ? ' active' : '');
+              mb.textContent = md.text;
+              mb.addEventListener('click', function(){
+                setGlobalMarketMode(md.m);
+              });
+              seg.appendChild(mb);
+              inlineMarketBtns[md.m] = mb;
+            });
+            bar.appendChild(seg);
+            globalMarketControllers.push(function(mode){
+              state.market = mode;
+              Object.keys(inlineMarketBtns).forEach(function(k){
+                inlineMarketBtns[k].classList.toggle('active', k === mode);
+              });
+              applyFilters();
+            });
+          }
+
+          var anchor = (tbl.parentElement && tbl.parentElement.classList.contains('table-scroll-wrap')) ? tbl.parentElement : tbl;
+          anchor.parentNode.insertBefore(bar, anchor);
+
+          // 若为 A 股大总表且带有宏观因子标签，插入「宏观因子筛选条」并启用「🛡️ 实盘组合因子体检器」
+          if (isMaster && !isHMaster && Object.keys(factorCounts).length > 0) {
+            var fBar = document.createElement('div');
+            fBar.className = 'agy-factor-bar no-print';
+            var fLbl = document.createElement('span');
+            fLbl.className = 'agy-sort-label';
+            fLbl.textContent = '🧭 宏观因子筛选：';
+            fBar.appendChild(fLbl);
+
+            var fBtns = {};
+            function addFactorBtn(fKey, fLabel) {
+              var fb = document.createElement('button');
+              fb.type = 'button';
+              fb.className = 'agy-sort-btn' + (fKey === 'ALL' ? ' active' : '');
+              fb.textContent = fLabel;
+              fb.addEventListener('click', function(){
+                state.factor = fKey;
+                Object.keys(fBtns).forEach(function(k){ fBtns[k].classList.toggle('active', k === fKey); });
+                applyFilters();
+              });
+              fBar.appendChild(fb);
+              fBtns[fKey] = fb;
+            }
+            addFactorBtn('ALL', '全部 (' + rowData.length + ')');
+            knownFactors.forEach(function(fk){
+              if (factorCounts[fk]) addFactorBtn(fk, fk + ' (' + factorCounts[fk] + ')');
+            });
+            anchor.parentNode.insertBefore(fBar, anchor);
+
+            // 初始化实盘组合因子体检器（支持勾选 + 输入计划金额 + 本地持久化）
+            var pfStoreKey = 'agy_pf_checker_v1';
+            var pfMap = {};
+            try {
+              var savedPf = localStorage.getItem(pfStoreKey);
+              if (savedPf) pfMap = JSON.parse(savedPf) || {};
+            } catch(e) { pfMap = {}; }
+
+            function savePf() {
+              try { localStorage.setItem(pfStoreKey, JSON.stringify(pfMap)); } catch(e) {}
+            }
+
+            var dock = document.getElementById('agy-portfolio-dock');
+            if (!dock) {
+              dock = document.createElement('div');
+              dock.id = 'agy-portfolio-dock';
+              dock.className = 'no-print';
+              dock.innerHTML =
+                '<div class="pf-head" id="agy-pf-head">' +
+                  '<span class="pf-title" id="agy-pf-title">🛡️ 实盘组合因子体检器</span>' +
+                  '<div style="display:flex;gap:6px;align-items:center;">' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-clear">清空</button>' +
+                    '<button type="button" class="pf-mini-btn" id="agy-pf-toggle">收起</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pf-body" id="agy-pf-body"></div>';
+              document.body.appendChild(dock);
+
+              document.getElementById('agy-pf-toggle').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                dock.classList.toggle('collapsed');
+                this.textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-head').addEventListener('click', function(){
+                dock.classList.toggle('collapsed');
+                document.getElementById('agy-pf-toggle').textContent = dock.classList.contains('collapsed') ? '展开体检' : '收起';
+              });
+              document.getElementById('agy-pf-clear').addEventListener('click', function(ev){
+                ev.stopPropagation();
+                pfMap = {};
+                savePf();
+                rowData.forEach(function(d){
+                  if (d.pfChk) {
+                    d.pfChk.checked = false;
+                    d.pfLbl.classList.remove('checked');
+                  }
+                });
+                renderPortfolioDock();
+              });
+            }
+
+            var rowByName = {};
+            rowData.forEach(function(d){
+              rowByName[d.name] = d;
+              if (!d.td0) return;
+              var pickWrap = document.createElement('div');
+              pickWrap.className = 'no-print';
+              var pickLbl = document.createElement('label');
+              pickLbl.className = 'agy-pf-pick' + (pfMap[d.name] ? ' checked' : '');
+              var chk = document.createElement('input');
+              chk.type = 'checkbox';
+              chk.checked = !!pfMap[d.name];
+              chk.addEventListener('change', function(){
+                if (chk.checked) {
+                  pfMap[d.name] = pfMap[d.name] || 10;
+                  pickLbl.classList.add('checked');
+                } else {
+                  delete pfMap[d.name];
+                  pickLbl.classList.remove('checked');
+                }
+                savePf();
+                renderPortfolioDock();
+              });
+              pickLbl.appendChild(chk);
+              pickLbl.appendChild(document.createTextNode('组合体检'));
+              pickWrap.appendChild(pickLbl);
+              d.td0.appendChild(pickWrap);
+              d.pfChk = chk;
+              d.pfLbl = pickLbl;
+            });
+
+            function renderPortfolioDock() {
+              var names = Object.keys(pfMap).filter(function(n){ return !!rowByName[n]; });
+              if (!names.length) {
+                dock.style.display = 'none';
+                return;
+              }
+              dock.style.display = 'block';
+              var totalAmt = 0;
+              var wOe = 0, wDiv = 0, wDist = 0, wDistAmt = 0;
+              var fAmt = {};
+              var maxSingleAmt = 0, maxSingleName = '';
+              var staleList = [];
+
+              names.forEach(function(n){
+                var amt = Math.max(0, Number(pfMap[n]) || 0);
+                var d = rowByName[n];
+                totalAmt += amt;
+                if (amt > maxSingleAmt) { maxSingleAmt = amt; maxSingleName = n; }
+                if (!isNaN(d.oe)) wOe += d.oe * amt;
+                if (!isNaN(d.div)) wDiv += d.div * amt;
+                if (!isNaN(d.dist)) { wDist += d.dist * amt; wDistAmt += amt; }
+                var fk = d.macroFactor || '未分类';
+                fAmt[fk] = (fAmt[fk] || 0) + amt;
+                if (d.isStale) staleList.push(n);
+              });
+
+              var avgOe = totalAmt > 0 ? (wOe / totalAmt) : 0;
+              var avgDiv = totalAmt > 0 ? (wDiv / totalAmt) : 0;
+              var avgDist = wDistAmt > 0 ? (wDist / wDistAmt) : 0;
+              var cycPct = totalAmt > 0 ? (((fAmt['⛏️ 大宗周期与资源'] || 0) + (fAmt['🏦 顺周期金融'] || 0)) / totalAmt * 100) : 0;
+
+              document.getElementById('agy-pf-title').textContent =
+                '🛡️ 实盘组合因子体检 (' + names.length + '只 · 共 ' + totalAmt.toFixed(0) + ' 万元)';
+
+              var alerts = [];
+              Object.keys(fAmt).forEach(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                if (pct > 35) {
+                  alerts.push('<div class="pf-alert red">🔴 因子过集中：【' + fk + '】占比高达 ' + pct.toFixed(1) + '%（警戒线 ≤35%），谨防同涨同跌！</div>');
+                }
+              });
+              if (cycPct > 55) {
+                alerts.push('<div class="pf-alert red">🔴 顺周期宏观共振警告：「大宗周期 + 顺周期金融」合计占比 ' + cycPct.toFixed(1) + '%（建议 ≤55%），若通缩/商品大跌将同步回撤！</div>');
+              }
+              if (totalAmt > 0 && (maxSingleAmt / totalAmt * 100) > 25 && names.length >= 2) {
+                alerts.push('<div class="pf-alert amber">🟡 单标偏重：【' + maxSingleName + '】占组合 ' + (maxSingleAmt / totalAmt * 100).toFixed(1) + '%（建议单一标的上限 ≤25%）。</div>');
+              }
+              if (staleList.length > 0) {
+                alerts.push('<div class="pf-alert amber">🟡 财报锚过期提醒：' + staleList.join('、') + ' 的估值锚已过期，下单前建议用最新季报复核！</div>');
+              }
+              if (!alerts.length) {
+                alerts.push('<div class="pf-alert green">🟢 组合体检健康：各底层宏观因子分布均衡（单因子 ≤35%、强周期合计 ' + cycPct.toFixed(1) + '%），具备抗单一宏观冲击韧性！</div>');
+              }
+
+              var barsHtml = Object.keys(fAmt).sort(function(a, b){ return fAmt[b] - fAmt[a]; }).map(function(fk){
+                var pct = totalAmt > 0 ? (fAmt[fk] / totalAmt * 100) : 0;
+                return '<div class="pf-bar-row">' +
+                  '<span class="pf-bar-name">' + fk + '</span>' +
+                  '<div class="pf-bar-track"><div class="pf-bar-fill' + (pct > 35 ? ' warn' : '') + '" style="width:' + Math.min(100, pct).toFixed(1) + '%"></div></div>' +
+                  '<span class="pf-bar-pct">' + pct.toFixed(1) + '%</span>' +
+                '</div>';
+              }).join('');
+
+              var itemsHtml = names.map(function(n){
+                var d = rowByName[n];
+                var amt = Number(pfMap[n]) || 0;
+                var pct = totalAmt > 0 ? (amt / totalAmt * 100) : 0;
+                return '<div class="pf-item">' +
+                  '<span><strong>' + n + '</strong> <span style="color:#94a3b8;font-size:11px;">(' + (d.macroFactor || '').slice(0, 6) + ' · ' + pct.toFixed(0) + '%)</span></span>' +
+                  '<span style="display:flex;align-items:center;gap:5px;">' +
+                    '<input type="number" min="0" step="5" data-pf-name="' + n + '" value="' + amt + '" /> 万' +
+                    '<button type="button" class="pf-mini-btn" data-pf-del="' + n + '">✕</button>' +
+                  '</span>' +
+                '</div>';
+              }).join('');
+
+              var body = document.getElementById('agy-pf-body');
+              body.innerHTML =
+                '<div class="pf-metrics">' +
+                  '<div class="pf-metric-box"><div class="k">总计划投入</div><div class="v">' + totalAmt.toFixed(0) + '万</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权常态回报</div><div class="v" style="color:#38bdf8;">' + avgOe.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权TTM股息</div><div class="v" style="color:#4ade80;">' + avgDiv.toFixed(2) + '%</div></div>' +
+                  '<div class="pf-metric-box"><div class="k">加权距重锤线</div><div class="v" style="color:' + (avgDist <= 5 ? '#fbbf24' : '#f8fafc') + ';">' + (avgDist > 0 ? '+' : '') + avgDist.toFixed(1) + '%</div></div>' +
+                '</div>' +
+                '<div class="pf-alerts">' + alerts.join('') + '</div>' +
+                '<div class="pf-bars">' + barsHtml + '</div>' +
+                '<div class="pf-items">' + itemsHtml + '</div>';
+
+              body.querySelectorAll('input[data-pf-name]').forEach(function(inp){
+                inp.addEventListener('change', function(){
+                  var nm = inp.getAttribute('data-pf-name');
+                  pfMap[nm] = Math.max(0, parseFloat(inp.value) || 0);
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+              body.querySelectorAll('button[data-pf-del]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var nm = btn.getAttribute('data-pf-del');
+                  delete pfMap[nm];
+                  if (rowByName[nm] && rowByName[nm].pfChk) {
+                    rowByName[nm].pfChk.checked = false;
+                    rowByName[nm].pfLbl.classList.remove('checked');
+                  }
+                  savePf();
+                  renderPortfolioDock();
+                });
+              });
+            }
+
+            renderPortfolioDock();
+          }
+
+          function updateUI() {
+            Object.keys(colMap).forEach(function(cStr){
+              var cIdx = Number(cStr);
+              var th = ths[cIdx];
+              var arr = thArrows[cIdx];
+              var isMatch = (colMap[cIdx].key === state.key);
+              th.classList.toggle('agy-sort-active', isMatch);
+              if (arr) arr.textContent = isMatch ? (state.dir === 'asc' ? '▲' : '▼') : '⇅';
+            });
+            Object.keys(barBtns).forEach(function(k){
+              var item = barBtns[k];
+              var isMatch = (k === state.key);
+              item.el.classList.toggle('active', isMatch);
+              item.el.textContent = isMatch ? (item.baseLabel + (state.dir === 'asc' ? ' ↑' : ' ↓')) : item.baseLabel;
+            });
+          }
+
+          function triggerSort(key, defaultDir) {
+            if (state.key === key) {
+              state.dir = (state.dir === 'asc') ? 'desc' : 'asc';
+            } else {
+              state.key = key;
+              state.dir = defaultDir;
+            }
+            var mult = (state.dir === 'asc') ? 1 : -1;
+            var sorted = rowData.slice().sort(function(a, b){
+              var va = a[key], vb = b[key];
+              var aBad = (va === undefined || va === null || isNaN(va));
+              var bBad = (vb === undefined || vb === null || isNaN(vb));
+              if (aBad && bBad) return a.origIdx - b.origIdx;
+              if (aBad) return 1;
+              if (bBad) return -1;
+              if (va === vb) return a.rank - b.rank;
+              return (va - vb) * mult;
+            });
+            var frag = document.createDocumentFragment();
+            sorted.forEach(function(item){ frag.appendChild(item.tr); });
+            tbody.appendChild(frag);
+            updateUI();
+            applyFilters();
+          }
+
+          updateUI();
+        });
+
+        // 若页面存在 A+H 统一榜单表，在正文最顶部挂载吸顶全局三态市场开关，一键同步切换全页全部雷达与总表
+        if (globalMarketControllers.length > 0) {
+          var rc = document.querySelector('.report-content');
+          if (rc) {
+            var gBar = document.createElement('div');
+            gBar.className = 'agy-market-global-bar no-print';
+            var gTitle = document.createElement('div');
+            gTitle.className = 'agy-market-global-title';
+            gTitle.innerHTML = '🎛️ <span>A+H 统一榜单市场视图开关</span>';
+            var gSeg = document.createElement('div');
+            gSeg.className = 'agy-market-seg';
+            var gBtns = {};
+            [
+              { m: 'ALL', text: '🌐 AH股一起显示 (' + (globalStats.maxA + globalStats.maxH) + ')' },
+              { m: 'A', text: '🇨🇳 只显示A股 (' + globalStats.maxA + ')' },
+              { m: 'H', text: '🇭🇰 只显示H股 (' + globalStats.maxH + ')' }
+            ].forEach(function(item){
+              var gb = document.createElement('button');
+              gb.type = 'button';
+              gb.className = 'agy-market-btn';
+              gb.textContent = item.text;
+              gb.addEventListener('click', function(){
+                setGlobalMarketMode(item.m);
+              });
+              gSeg.appendChild(gb);
+              gBtns[item.m] = gb;
+            });
+            var gBadge = document.createElement('span');
+            gBadge.className = 'agy-market-count-badge';
+            gBar.appendChild(gTitle);
+            gBar.appendChild(gSeg);
+            gBar.appendChild(gBadge);
+            var h1El = rc.querySelector('h1');
+            if (h1El && h1El.nextSibling) {
+              rc.insertBefore(gBar, h1El.nextSibling);
+            } else {
+              rc.insertBefore(gBar, rc.firstChild);
+            }
+            globalBarRefs.push({ btns: gBtns, badge: gBadge });
+            setGlobalMarketMode(globalMarketMode);
+          }
+        }
+      })();
     })();
   </script>
 </body>
