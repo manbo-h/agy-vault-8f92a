@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+<title>腾讯控股（00700.HK）· 2.0 模块化深度投研驾驶舱</title>
+<style>
+:root {
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --ink: #0f172a;
+  --ink-2: #334155;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --navy: #0f172a;
+  --navy-2: #1e293b;
+  --blue: #0284c7;
+  --indigo: #1e3a8a;
+  --green: #059669;
+  --amber: #d97706;
+  --red: #be123c;
+  --purple: #7c3aed;
+  --radius: 14px;
+  --shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+}
+.topbar {
+  position: sticky; top: 0; z-index: 200;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #f8fafc; border-bottom: 1px solid #334155;
+  box-shadow: 0 6px 24px rgba(15,23,42,0.28);
+}
+.topbar-inner { max-width: 1320px; margin: 0 auto; padding: 12px 18px 0 18px; }
+.top-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.back-btn {
+  color: #cbd5e1; text-decoration: none; font-size: 12px; padding: 4px 10px;
+  border: 1px solid #475569; border-radius: 8px; background: rgba(255,255,255,0.05);
+}
+.back-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+.brand-title { font-size: 19px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.v2-pill { background: linear-gradient(90deg, #0284c7, #6366f1); color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 999px; font-weight: 700; }
+.meta-pill { background: rgba(255,255,255,0.1); color: #cbd5e1; font-size: 11px; padding: 2px 8px; border-radius: 6px; }
+.top-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.preset-select {
+  background: #0f172a; color: #f8fafc; border: 1px solid #38bdf8;
+  border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; max-width: 290px; cursor: pointer;
+}
+.mode-toggle { display: inline-flex; background: #0f172a; border: 1px solid #475569; border-radius: 999px; padding: 2px; }
+.mode-btn { border: none; background: transparent; color: #94a3b8; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+.mode-btn.active { background: #38bdf8; color: #0f172a; }
+.glossary-btn {
+  border: 1px solid #475569; background: rgba(255,255,255,0.07); color: #e2e8f0;
+  font-size: 12px; font-weight: 600; padding: 5px 11px; border-radius: 8px; cursor: pointer;
+}
+.glossary-btn:hover { background: rgba(56,189,248,0.2); border-color: #38bdf8; }
+.tabbar { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.tabbar::-webkit-scrollbar { display: none; }
+.tab-btn {
+  border: none; background: transparent; color: #94a3b8; font-size: 13px; font-weight: 700;
+  padding: 10px 16px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap;
+}
+.tab-btn:hover { color: #e2e8f0; }
+.tab-btn.active { color: #38bdf8; border-bottom-color: #38bdf8; background: rgba(56,189,248,0.08); border-radius: 8px 8px 0 0; }
+.main { max-width: 1320px; margin: 0 auto; padding: 18px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeIn .18s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow); margin-bottom: 16px;
+}
+.card-title { margin: 0 0 12px 0; font-size: 16px; font-weight: 800; color: var(--ink); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.card-sub { font-size: 12px; font-weight: 500; color: var(--muted); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 980px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .grid-2 { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .grid-4 { grid-template-columns: 1fr; } }
+.verdict-banner {
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 16px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  color: #fff; box-shadow: 0 6px 20px rgba(2,132,199,0.18);
+}
+.vb-left { flex: 1; min-width: 260px; }
+.vb-badge { display: inline-block; font-size: 12px; font-weight: 800; background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 999px; margin-bottom: 4px; }
+.vb-text { font-size: 14px; font-weight: 600; }
+.vb-right { text-align: right; font-size: 12px; background: rgba(15,23,42,0.28); padding: 8px 14px; border-radius: 10px; }
+.vb-price { font-size: 22px; font-weight: 900; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+.kpi::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent, var(--blue)); }
+.kpi-label { font-size: 12px; color: var(--muted); font-weight: 600; }
+.kpi-val { font-size: 24px; font-weight: 900; color: var(--ink); margin: 4px 0; }
+.kpi-sub { font-size: 12px; color: var(--ink-2); }
+.tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+.tag-green { background: #dcfce7; color: #166534; }
+.tag-blue { background: #e0f2fe; color: #075985; }
+.tag-amber { background: #fef3c7; color: #92400e; }
+.tag-red { background: #ffe4e6; color: #9f1239; }
+.tag-purple { background: #f3e8ff; color: #6b21a8; }
+.ah-strip {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  color: #e0e7ff; border-radius: 12px; padding: 12px 16px; margin-bottom: 16px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px;
+}
+.sliders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.slider-box { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+.slider-head { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+.slider-num { color: var(--blue); font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.slider-box input[type=range] { width: 100%; accent-color: var(--blue); cursor: pointer; }
+.slider-hint { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.reset-btn { background: #0f172a; color: #fff; border: none; border-radius: 8px; padding: 6px 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+.reset-btn:hover { background: #0284c7; }
+.sotp-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px; }
+@media (max-width: 760px) { .sotp-list { grid-template-columns: 1fr; } }
+.sotp-item { border: 2px solid var(--border); border-radius: 12px; padding: 12px 14px; cursor: pointer; background: var(--surface-alt); display: flex; gap: 10px; align-items: flex-start; }
+.sotp-item.checked { border-color: var(--blk-color, var(--blue)); background: #fff; box-shadow: 0 3px 12px rgba(15,23,42,0.06); }
+.sotp-item input { margin-top: 4px; width: 16px; height: 16px; accent-color: var(--blk-color, var(--blue)); cursor: pointer; }
+.sotp-body { flex: 1; }
+.sotp-name { font-size: 13px; font-weight: 800; color: var(--ink); }
+.sotp-val { font-size: 16px; font-weight: 900; color: var(--blk-color, var(--blue)); margin: 2px 0; }
+.sotp-desc { font-size: 12px; color: var(--muted); }
+.ruler-wrap { padding: 14px 4px 6px 4px; }
+.ruler-bar { position: relative; height: 36px; border-radius: 10px; display: flex; overflow: hidden; border: 1px solid #cbd5e1; }
+.r-seg { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; }
+.ruler-marker { position: relative; height: 34px; }
+.marker-pin {
+  position: absolute; top: 2px; transform: translateX(-50%); background: #0f172a; color: #fff;
+  font-size: 12px; font-weight: 800; padding: 3px 9px; border-radius: 999px; white-space: nowrap; box-shadow: 0 3px 10px rgba(0,0,0,0.22);
+}
+.marker-pin::after { content: ""; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #0f172a; }
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 9px 10px; border-bottom: 1px solid var(--border); text-align: left; }
+th { background: var(--surface-alt); color: var(--ink-2); font-weight: 700; font-size: 12px; white-space: nowrap; }
+tr.row-hl { background: #eff6ff; font-weight: 700; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.thesis-layout { display: grid; grid-template-columns: 230px 1fr; gap: 18px; align-items: start; }
+@media (max-width: 900px) { .thesis-layout { grid-template-columns: 1fr; } .thesis-toc { position: static !important; } }
+.thesis-toc { position: sticky; top: 118px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
+.toc-title { font-size: 12px; font-weight: 800; color: var(--muted); margin-bottom: 8px; }
+.toc-link { display: block; font-size: 12.5px; color: var(--ink-2); text-decoration: none; padding: 6px 8px; border-radius: 7px; margin-bottom: 2px; }
+.toc-link:hover { background: #e0f2fe; color: #0369a1; font-weight: 700; }
+.thesis-doc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; box-shadow: var(--shadow); }
+.thesis-h1 { font-size: 22px; margin: 0 0 12px 0; color: var(--navy); }
+.thesis-h2 { font-size: 18px; margin: 26px 0 10px 0; padding-bottom: 6px; border-bottom: 2px solid #e2e8f0; color: var(--indigo); scroll-margin-top: 120px; }
+.thesis-h3 { font-size: 15px; margin: 16px 0 8px 0; color: var(--ink); }
+.thesis-p { margin: 0 0 12px 0; font-size: 14.5px; color: var(--ink-2); }
+.thesis-ul { margin: 0 0 14px 0; padding-left: 20px; }
+.thesis-ul li { margin-bottom: 8px; font-size: 14px; color: var(--ink-2); }
+.thesis-hr { border: none; border-top: 1px dashed #cbd5e1; margin: 20px 0; }
+.inline-code { background: #f1f5f9; color: #be123c; padding: 1px 5px; border-radius: 5px; font-size: 13px; font-weight: 700; }
+.callout-info { background: #eff6ff; border-left: 4px solid #0284c7; padding: 12px 15px; border-radius: 0 10px 10px 0; margin: 14px 0; font-size: 13.5px; color: #1e3a8a; }
+.callout-munger { background: #fffbeb; border-left: 4px solid #d97706; padding: 12px 15px; border-radius: 0 10px 10px 0; margin: 14px 0; font-size: 13.5px; color: #78350f; }
+.svg-box { width: 100%; overflow-x: auto; }
+svg { max-width: 100%; height: auto; display: block; }
+.topic-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.topic-pill { border: 1px solid var(--border); background: var(--surface-alt); color: var(--ink-2); font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px; cursor: pointer; }
+.topic-pill.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.chat-stream { display: flex; flex-direction: column; gap: 12px; }
+.msg-row { display: flex; gap: 10px; align-items: flex-start; }
+.msg-row.role-bear { flex-direction: row-reverse; }
+.msg-avatar { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; color: #fff; font-weight: 800; }
+.msg-bubble { max-width: 82%; background: var(--surface-alt); border: 1px solid var(--border); border-radius: 12px; padding: 11px 14px; }
+.msg-row.role-bull .msg-bubble { background: #f0fdf4; border-color: #bbf7d0; }
+.msg-row.role-bear .msg-bubble { background: #fff1f2; border-color: #fecdd3; }
+.msg-row.role-judge .msg-bubble { background: #eff6ff; border-color: #bfdbfe; }
+.msg-meta { font-size: 11.5px; color: var(--muted); margin-bottom: 4px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.msg-name { font-weight: 800; color: var(--ink); }
+.msg-text { font-size: 13.5px; color: var(--ink-2); white-space: pre-line; }
+.clash-card { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 12px; }
+.clash-head { background: var(--navy-2); color: #fff; padding: 9px 14px; font-size: 13.5px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.clash-cols { display: grid; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 860px) { .clash-cols { grid-template-columns: 1fr; } }
+.clash-col { padding: 12px 14px; font-size: 13px; border-right: 1px solid var(--border); }
+.clash-col:last-child { border-right: none; }
+.clash-col h4 { margin: 0 0 6px 0; font-size: 12px; }
+.ms-card { border: 1px solid var(--border); border-left: 4px solid var(--blue); border-radius: 10px; padding: 13px 15px; background: var(--surface-alt); margin-bottom: 10px; }
+.ms-card.green { border-left-color: var(--green); }
+.ms-card.watch { border-left-color: var(--purple); }
+.redline-card { border: 1px solid #fecdd3; border-left: 4px solid var(--red); background: #fff1f2; border-radius: 10px; padding: 13px 15px; margin-bottom: 10px; }
+.load-preset-btn { border: 1px solid var(--blue); background: #eff6ff; color: var(--blue); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; cursor: pointer; }
+.load-preset-btn:hover { background: var(--blue); color: #fff; }
+.drawer-mask { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.45); z-index: 300; }
+.drawer-mask.open { display: block; }
+.drawer { position: fixed; top: 0; right: -420px; bottom: 0; width: min(400px, 92vw); background: #fff; z-index: 310; box-shadow: -8px 0 30px rgba(15,23,42,0.2); transition: right .22s ease; display: flex; flex-direction: column; }
+.drawer.open { right: 0; }
+.drawer-head { padding: 14px 16px; background: var(--navy); color: #fff; display: flex; justify-content: space-between; align-items: center; }
+.drawer-search { margin: 10px 14px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; }
+.drawer-body { flex: 1; overflow-y: auto; padding: 0 14px 18px 14px; }
+.gloss-item { border-bottom: 1px solid var(--border); padding: 10px 0; }
+.gloss-term { font-size: 13.5px; font-weight: 800; color: var(--indigo); }
+.gloss-plain { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; }
+.gloss-use { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="top-row">
+      <div class="brand">
+        <a href="./index.html" class="back-btn">← 书架</a>
+        <div class="brand-title">
+          <span>腾讯控股</span>
+          <span style="font-size:13px;color:#94a3b8;font-weight:600">00700.HK</span>
+          <span class="v2-pill">2.0 模块化驾驶舱</span>
+        </div>
+        <span class="meta-pill">T0 · 上限 20%</span>
+        <span class="meta-pill">财报基准 2026Q3</span>
+      </div>
+      <div class="top-controls">
+        <select id="presetSelect" class="preset-select" title="切换估值标准版本"><option value="v5.1_swarm_v22" selected>v5.1 Swarm V2.2 跨模型三轮物理双盲（唯一生效）</option>
+<option value="v5.0_flow_b">v5.0 流程B 单家族物理双盲版（历史对照）</option>
+<option value="v4.0_forensic">v4.0 官方原表法医验真版（历史对照）</option></select>
+        <div class="mode-toggle" title="切换小白大白话 / 专业硬核模式">
+          <button class="mode-btn active" data-mode="plain">🐣 小白版</button>
+          <button class="mode-btn" data-mode="pro">🎓 专业版</button>
+        </div>
+        <button id="openGlossary" class="glossary-btn">📖 术语词典 (8)</button>
+      </div>
+    </div>
+    <nav class="tabbar">
+      <button class="tab-btn active" data-tab="tab1">📊 实时估值与拆骨驾驶舱</button>
+      <button class="tab-btn" data-tab="tab2">📖 商业本质与核心底座</button>
+      <button class="tab-btn" data-tab="tab3">📈 财务与资产可视化图谱</button>
+      <button class="tab-btn" data-tab="tab4">💬 投委会 Swarm 辩论 & 流程B</button>
+      <button class="tab-btn" data-tab="tab5">🧭 季度路标 & 版本演进</button>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <section id="tab1" class="tab-panel active">
+    <div id="verdictBanner" class="verdict-banner"></div>
+    <div id="ahStripWrap"></div>
+    <div id="kpiGrid" class="grid-4"></div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>🎛️ 可热插拔估值引擎试算台 <span class="card-sub" id="presetBadgeSub"></span></span>
+        <button id="resetSliders" class="reset-btn">↺ 重置为当前版本基准</button>
+      </div>
+      <div id="slidersGrid" class="sliders-grid"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">
+          <span>🧱 模块化拆骨法（Reverse SOTP）互动积木</span>
+          <span class="card-sub">勾选开关积木 · 自由组合估值</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;font-size:12.5px">
+          <label style="font-weight:700">永续折现率（要求回报率）：<span id="valSotpRate" style="color:var(--blue)">10.0%</span></label>
+          <input type="range" id="slSotpRate" min="7.0" max="13.0" step="0.5" value="10.0" style="width:160px;accent-color:var(--blue)">
+        </div>
+        <div id="sotpBlocks" class="sotp-list"></div>
+        <div id="sotpSvgWrap" class="svg-box"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span>🎯 四档击球区标尺 & 5年 PB 铁底双向校验</span>
+          <span id="pbGateBadge"></span>
+        </div>
+        <div id="rulerWrap" class="ruler-wrap"></div>
+        <div id="zoneTableWrap" class="tbl-wrap" style="margin-top:10px"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>🌡️ 跨周期多情景压力测试矩阵（随滑块实时重算）</span>
+        <span class="card-sub">验证“寒冬不失血，常态高回报，景气不盲追”</span>
+      </div>
+      <div id="stressTableWrap" class="tbl-wrap"></div>
+    </div>
+  </section>
+
+  <section id="tab2" class="tab-panel">
+    <div class="card" style="padding:12px 16px;margin-bottom:14px">
+      <div style="font-size:12px;font-weight:800;color:var(--muted);margin-bottom:8px">📂 按基本面模块精准切片查看（完整保留资本开支、折旧详情、潜在期权、同行审讯与会计排雷，一字不删）</div>
+      <div class="topic-pills" style="margin-bottom:0"><button class="topic-pill active chap-pill" data-chap="all">📚 全部模块展开</button><button class="topic-pill chap-pill" data-chap="thesis-sec-1">一、生意灵魂：不是“流量收租婆”，而是中国数字经济的操作系统</button><button class="topic-pill chap-pill" data-chap="thesis-sec-2">二、终极护城河检验：连苹果都低头的生态顺价权</button><button class="topic-pill chap-pill" data-chap="thesis-sec-3">三、全球五大科技巨头手术刀硬核对比</button><button class="topic-pill chap-pill" data-chap="thesis-sec-4">四、AI 算力闪电战：从“轻资产印钞机”向“AI 生产力基础设施”的惊险一跃</button><button class="topic-pill chap-pill" data-chap="thesis-sec-5">五、管理层功过录与资本配置基因</button><button class="topic-pill chap-pill" data-chap="thesis-sec-6">六、结构性暗礁</button></div>
+    </div>
+    <div class="thesis-layout">
+      <aside class="thesis-toc">
+        <div class="toc-title">商业底座章节导航</div>
+        <button class="toc-link chap-btn" data-chap="all" style="width:100%;text-align:left;border:none;background:#e0f2fe;color:#0369a1;font-weight:700;cursor:pointer">📚 全部模块展开</button>
+        <button class="toc-link chap-btn" data-chap="thesis-sec-1" style="width:100%;text-align:left;border:none;background:transparent;cursor:pointer">一、生意灵魂：不是“流量收租婆”，而是中国数字经济的操作系统</button>
+<button class="toc-link chap-btn" data-chap="thesis-sec-2" style="width:100%;text-align:left;border:none;background:transparent;cursor:pointer">二、终极护城河检验：连苹果都低头的生态顺价权</button>
+<button class="toc-link chap-btn" data-chap="thesis-sec-3" style="width:100%;text-align:left;border:none;background:transparent;cursor:pointer">三、全球五大科技巨头手术刀硬核对比</button>
+<button class="toc-link chap-btn" data-chap="thesis-sec-4" style="width:100%;text-align:left;border:none;background:transparent;cursor:pointer">四、AI 算力闪电战：从“轻资产印钞机”向“AI 生产力基础设施”的惊险一跃</button>
+<button class="toc-link chap-btn" data-chap="thesis-sec-5" style="width:100%;text-align:left;border:none;background:transparent;cursor:pointer">五、管理层功过录与资本配置基因</button>
+<button class="toc-link chap-btn" data-chap="thesis-sec-6" style="width:100%;text-align:left;border:none;background:transparent;cursor:pointer">六、结构性暗礁（区分真硬伤与假鬼故事）</button>
+        <hr class="thesis-hr" style="margin:12px 0">
+        <div style="font-size:11.5px;color:var(--muted)">
+          ✅ <strong>2.0 无损动静分离</strong><br>
+          基本面 100% 满血保留；所有随标准变动的估值/买点由 <strong>Tab 1</strong> 实时计算，永不打架。
+        </div>
+      </aside>
+      <article class="thesis-doc"><h1 class="thesis-h1">腾讯控股（00700.HK）· 静态商业底座（2.0 动静分离版）</h1>
+<div class="callout-info"><strong>声明</strong>：本文严格遵守买方 2.0「动静分离」原则，仅沉淀腾讯控股的商业本质、三级飞轮护城河、全球科技巨头手术刀对比、AI 重资产跃迁逻辑、管理层功过录与结构性暗礁，<strong>全文不写死任何目标价、估值倍数与买点</strong>；一切动态估值、敏感度压测、拆骨积木与买点判定请见 Tab 1 实时引擎与 Tab 4 投委会终审交锋。</div>
+<hr class="thesis-hr">
+<div class="thesis-chapter" data-chap="thesis-sec-1">
+<h2 id="thesis-sec-1" class="thesis-h2">一、生意灵魂：不是“流量收租婆”，而是中国数字经济的操作系统</h2>
+<p class="thesis-p">掀开腾讯控股表面庞杂的合并财务报表，普通投资者最容易陷入两重误判：一是把这家手握 <code class="inline-code">14.49 亿</code> 微信及 WeChat 合并月活账户的超级平台，简单看成靠卖游戏皮肤和收广告过路费吃老本的流量收租婆；二是看到 2026 年三季报单季高达 <code class="inline-code">814 亿元</code> 的资本开支、超千亿算力长期预付款以及账面由净现金逆转为净债务，就误以为这台印钞机已经熄火失血。</p>
+<p class="thesis-p">腾讯真正立于不败之地的底层商业逻辑，是在中国互联网基础设施层构筑了一套<strong>“高频通信关系链（微信/QQ）零成本蓄水 → 数字内容（全球长青游戏/小游戏/音乐/影视）与闭环商业生态（视频号/小程序/微信小店/搜一搜）高毛利变现 → 金融科技（微信支付/理财通）与企业云（腾讯云/混元大模型/WorkBuddy）沉淀交易与算力底座”</strong>的三级火箭飞轮：</p>
+<ul class="thesis-ul">
+<li><strong>第一级火箭（增值服务 · 预收款高毛利压舱石）</strong>：本土以《王者荣耀》《和平精英》《金铲铲之战》及跨端射击新作《三角洲行动》《无畏契约：源能行动》构筑 15+ 款长青游戏矩阵，国际以全资拳头游戏（Riot Games）、控股 Supercell 与出海工作室群站稳百亿美元级海外大盘。商业模式呈现“先收全款形成千亿级递延收入、研发全额费用化、边际复制成本趋近于零”的极致现金牛特征。</li>
+<li><strong>第二级火箭（营销服务 · 微信内循环变现富矿）</strong>：视频号、微信搜一搜、小程序与升级后的<strong>微信小店</strong>彻底打通了“看内容 → 搜比价 → 社交送礼/卡包下单 → 企业微信与私域群零买量复购”的交易闭环。全行业电商与 AI 应用越是内卷买量，就越要向广告加载率仍显著低于短视频同行的微信生态缴纳竞价广告费。</li>
+<li><strong>第三级火箭（金融科技与企业服务 · 轻资本支付 + AI 算力外溢器）</strong>：微信支付与理财/消费信贷分润严守轻资本克制路线，不良敞口极低；腾讯云在主动砍掉低毛利政务集成后已实现规模盈利，并借助混元大模型 API（MaaS）、GPU 算力租赁与国民级办公 AI 助手 <code class="inline-code">WorkBuddy</code> 打开第二轮高增长曲线。</li>
+</ul>
+<div class="callout-munger">👴🏻 <strong>【芒格旁批】</strong>：全世界的软件公司见了苹果都得乖乖交 30% 的买路钱，唯独腾讯把腰一叉，苹果算完账发现真跟微信翻脸的话中国人宁可换手机也绝不会删微信，最后乖乖把中国内地微信小游戏抽成从 30% 砍到 12%。这才是不用公关吹牛就能看懂的终极护城河——谈判桌上谁先咽口水，一目了然！</div>
+<hr class="thesis-hr">
+</div>
+<div class="thesis-chapter" data-chap="thesis-sec-2">
+<h2 id="thesis-sec-2" class="thesis-h2">二、终极护城河检验：连苹果都低头的生态顺价权</h2>
+<p class="thesis-p">衡量一家互联网平台护城河的终极试金石，不是顺风期赚多少钱，而是当上游操作系统霸主试图卡脖子收重税时谁向谁低头：</p>
+<ul class="thesis-ul">
+<li>1. <strong>微信小游戏“苹果税”历史性破冰（30% → 15% → 12%）</strong>：2025 年 11 月苹果与腾讯达成小程序合作伙伴计划将抽成腰斩至 15%，2026 年 3 月中国内地新政进一步降至 <strong>12%</strong>。这一里程碑不仅将 iOS 端微信小游戏变现全面阳光化、助推 3Q2026 增值服务毛利率飙升至 <code class="inline-code">64.09%</code> 历史极值，更坐实了微信在中国数字生态中的底层定价权。</li>
+<li>2. <strong>零获客成本特权（销售费用率 5.6%—5.9% vs 竞争对手 19%—25%）</strong>：在存量肉搏战中，电商与短视频平台不得不将营收的近五分之一甚至四分之一砸向买量补贴，而腾讯与 Meta 作为全球唯二垄断全民通信关系链的超级平台，销售费用率常年锁定在不足 6% 的公用事业级低位。无论是新游戏推广、微信小店“送礼物蓝包”社交裂变，还是将 <code class="inline-code">WorkBuddy</code> 无缝嵌入企业微信/腾讯文档/腾讯会议干出千万级日活，腾讯每年仅靠“免交买量税”就比竞争对手多出逾千亿元的盈利安全垫。</li>
+</ul>
+<hr class="thesis-hr">
+</div>
+<div class="thesis-chapter" data-chap="thesis-sec-3">
+<h2 id="thesis-sec-3" class="thesis-h2">三、全球五大科技巨头手术刀硬核对比</h2>
+<p class="thesis-p">将腾讯置于全球互联网与 AI 竞争格局中，与网易、阿里巴巴、字节跳动及海外社交标杆 Meta 同报告期对质，商业模式的高下清晰可见：</p>
+<div class="tbl-wrap" style="margin:14px 0"><table><thead><tr><th>对比维度</th><th>腾讯控股（微信+游戏+云+AI）</th><th>网易（纯精品游戏）</th><th>阿里巴巴（淘天+云+闪购）</th><th>字节跳动（抖音+电商+豆包）</th><th>Meta Platforms（全球社交+AI广告）</th></tr></thead><tbody><tr><td><strong>盈利底盘特征</strong></td><td>社交垄断 + 全球游戏 + 内循环广告 + 支付云协同</td><td>纯游戏高毛利但营收体量仅为腾讯约七分之一</td><td>直营零售与即时零售重履约拉低综合毛利</td><td>营收高增但受电商补贴与海外买量摊薄净利</td><td>纯数字广告轻资产变现，全球最高毛利标杆</td></tr><tr><td><strong>获客与买量成本</strong></td><td><strong>极低（销售费用率 5.6%—5.9%）</strong>，关系链自带免费裂变</td><td>较高（12.8%—14.0%），新游依赖宣发买量</td><td>极高（23.9%），存量电商与闪购持续重金投流</td><td>较高（19%—20.5%），电商补贴与豆包全网买量</td><td><strong>极低（6.0%）</strong>，33 亿全球社交关系链蓄水</td></tr><tr><td><strong>研发与 AI 强度</strong></td><td>研发 100% 费用化，2026 进入 AI 算力重投入峰值</td><td>研发聚焦游戏管线，无通用大模型重算力基建</td><td>重金投入阿里云与千问，三年规划超 3,800 亿</td><td>算力预算激进飙升，压低整体经营利润率</td><td>AI 与元宇宙双高烧钱，但服务器折旧延寿至 5.5 年</td></tr><tr><td><strong>核心风险敞口</strong></td><td>2026–2027 高资本开支与算力折旧爬坡、芯片管制</td><td>单款爆品周期波动、缺乏底层社交与云生态</td><td>电商货架份额守擂战、即时零售长期补贴压力</td><td>海外地缘合规风险、流量见顶后买量边际递减</td><td>纯广告顺周期波动大、Reality Labs 巨额亏损</td></tr></tbody></table></div>
+<hr class="thesis-hr">
+</div>
+<div class="thesis-chapter" data-chap="thesis-sec-4">
+<h2 id="thesis-sec-4" class="thesis-h2">四、AI 算力闪电战：从“轻资产印钞机”向“AI 生产力基础设施”的惊险一跃</h2>
+<p class="thesis-p">2025—2026 年是腾讯商业史上最重大的资本配置拐点：</p>
+<ul class="thesis-ul">
+<li><strong>投入端（冰）</strong>：管理层将 AI 革命定调为生死存亡之战，2026 年前三季度资本开支同比暴增至 <code class="inline-code">1,661.5 亿元</code>（3Q2026 单季 <code class="inline-code">814 亿元</code>），叠加提前锁定稀缺芯片与算力供应链支付的 <code class="inline-code">1,374 亿元</code> 算力长期预付款，以及单季约 <code class="inline-code">152 亿元</code> 的新 AI 原生产品净投入，直接导致账面由净现金逆转为小额净负债，且 2026–2027 年现金资本开支处于持续高位平台期。</li>
+<li><strong>变现端（火）</strong>：与纯烧钱讲故事不同，腾讯的 AI 投入已在三个维度跑出可验证的商业化闭环——① <strong>算力外溢</strong>：3Q2026 腾讯云收入同比暴增 <code class="inline-code">+35%</code>；② <strong>广告提效</strong>：混元广告推荐模型驱动营销服务在宏观平淡期连续保持近 <code class="inline-code">+20%</code> 增长；③ <strong>国民级 AI 工作台</strong>：<code class="inline-code">WorkBuddy</code> 依托企业微信与办公套件免买量实现千万级日活，近 7 日年化毛收入运行率（ARR）已突破 <code class="inline-code">5 亿美元</code>。</li>
+<li><strong>会计成色提醒</strong>：2025 年报附注显示公司将部分服务器折旧年限由 4 年延长至 6 年。买方在评估长期盈利能力时必须<strong>坚决拒收会计延寿红利</strong>，按 AI 算力 4.5–5 年真实经济寿命与传统机房/网络翻新需求全额计提刚性维持性资本开支，严防未来折旧悬崖吞噬账面利润。</li>
+</ul>
+<hr class="thesis-hr">
+</div>
+<div class="thesis-chapter" data-chap="thesis-sec-5">
+<h2 id="thesis-sec-5" class="thesis-h2">五、管理层功过录与资本配置基因</h2>
+<ul class="thesis-ul">
+<li>1. <strong>三大硬核功绩</strong>：</li>
+<li><strong>克制且极致的股东回馈史</strong>：上市 22 年几乎不再向二级市场伸手圈钱，累计通过现金分红、京东/美团实物派息及数千亿港元注销式回购向股东返还巨额真金白银，且自 2021 至 2025 年度每股现金股息连年大增。</li>
+<li><strong>逆周期战略定力</strong>：2021–2022 监管寒冬期果断砍掉数十个亏损边缘项目、退出低毛利政务云集成，用三年时间把集团综合毛利率硬生生拔高逾 13 个百分点；在长青游戏与微信小店上展现极强的耐心与执行力。</li>
+<li><strong>财务结构审慎</strong>：境内外双币种现金与低息长期债务匹配，研发坚持 100% 费用化，少数股东损益占比仅约 2%，核心印钞资产几乎全部归属母公司股东。</li>
+<li>2. <strong>三点必须保持警惕的客观短板与治理扣分项</strong>：</li>
+<li><strong>股权激励（SBC）绝对额庞大</strong>：年化约 <code class="inline-code">285 亿元</code> 的股权激励是实打实的员工薪酬成本，在 2026 年三季度回购缩减至单季 <code class="inline-code">70 亿港元</code> 后，回购已阶段性低于激励摊薄，必须全额当现金成本扣除。</li>
+<li><strong>9,026 亿元庞大外部投资组合波动</strong>：历史上腾讯通过生态投资创造了巨额财富，但庞大的上市与非上市投资包（合计逾九千亿）存在资本利得税、大宗变现折价与净资产剧烈波动风险，且投资净收益不可计入纯主业常态盈利。</li>
+<li><strong>算力资本开支久期与节奏考验</strong>：2026–2027 年连续两年处于重资本开支周期，若 AI 商业化变现速度跑不赢服务器折旧爬坡，将阶段性压制账面利润与股东净回馈节奏。</li>
+</ul>
+<hr class="thesis-hr">
+</div>
+<div class="thesis-chapter" data-chap="thesis-sec-6">
+<h2 id="thesis-sec-6" class="thesis-h2">六、结构性暗礁（区分真硬伤与假鬼故事）</h2>
+<ul class="thesis-ul">
+<li><strong>真风险一（高资本开支久期与折旧悬崖）</strong>：现金资本开支高位延续至 2027 年底，若 2028 年仍不能如期见顶回落，或新 AI 业务年化净亏损持续扩大且无法收敛，将把轻资产印钞机拖入重资产泥潭。</li>
+<li><strong>真风险二（芯片出口管制与算力供应链约束）</strong>：高端 AI 训练/推理芯片获取若进一步受地缘限制，可能推高算力采购成本并拖慢混元大模型迭代效率。</li>
+<li><strong>真风险三（营销毛利率与游戏长青寿命）</strong>：AI 推理成本与微短剧内容分成已使 3Q2026 营销服务毛利率阶段性回落 5 个百分点；核心长青游戏亦需持续追踪留存与版号监管节奏。</li>
+<li><strong>假鬼故事澄清（南非大股东 Prosus 减持）</strong>：Prosus 持续有序减持属于二级市场存量筹码换手，<strong>零增加公司总股本、零损害内在价值</strong>；只要腾讯自身保持强劲自由现金流并在低位重启注销式回购，大股东减持反而为留存股东提供了廉价吸收筹码的长期机遇。</li>
+</ul>
+</div></article>
+    </div>
+  </section>
+
+  <section id="tab3" class="tab-panel">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">
+          <span id="wfTitle">💧 真实企业价值（True EV）现金穿透瀑布图</span>
+          <span class="card-sub">与 Tab 1 滑块实时联动</span>
+        </div>
+        <div id="waterfallSvg" class="svg-box"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span>🏭 近年自由现金流与去杠杆演进图</span>
+          <span class="card-sub">经营现金流 OCF / 自由现金流 FCF / CapEx / 负债率</span>
+        </div>
+        <div id="historySvg" class="svg-box"></div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">
+          <span id="peerDualTitle">⚡ 同行双维度手术刀对比</span>
+          <span class="card-sub" id="peerDualSub"></span>
+        </div>
+        <div id="peerDualSvg" class="svg-box"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span id="peerDupontTitle">🏆 同行毛利率 vs ROE vs 负债率杜邦图</span>
+          <span class="card-sub" id="peerDupontSub"></span>
+        </div>
+        <div id="peerDupontSvg" class="svg-box"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>📋 行业龙头核心指标横向对质表</span></div>
+      <div id="peerTableWrap" class="tbl-wrap"></div>
+    </div>
+  </section>
+
+  <section id="tab4" class="tab-panel">
+    <div id="auditReconWrap"></div>
+    <div id="swarmSectionWrap"></div>
+  </section>
+
+  <section id="tab5" class="tab-panel">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><span>🎯 未来 2—3 年可量化验证路标（财报季打卡清单）</span></div>
+        <div id="milestonesWrap"></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>🚨 一票否决「死刑红线」（触发即认错清仓）</span></div>
+        <div id="redlinesWrap"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span>📜 估值标准演进全史与版本 Diff 对照</span>
+        <span class="card-sub">每一版改了什么、为什么改，支持一键载入 Tab 1 复现</span>
+      </div>
+      <div id="changelogWrap" class="tbl-wrap"></div>
+    </div>
+  </section>
+</main>
+
+<div id="drawerMask" class="drawer-mask"></div>
+<aside id="glossaryDrawer" class="drawer">
+  <div class="drawer-head">
+    <strong>📖 买方投研术语大白话小词典</strong>
+    <button id="closeGlossary" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer">&times;</button>
+  </div>
+  <input id="glossSearch" class="drawer-search" type="text" placeholder="搜索术语（如 OE、True EV、拆骨法、PB...）">
+  <div id="glossList" class="drawer-body"></div>
+</aside>
+
+<script>
+const APP = {"facts": {"schema_version": "2.0", "archetype": "sotp_conglomerate", "company": "腾讯控股", "code": "00700.HK", "primary_code": "hk00700", "currency_unit": "港元", "sector": "互联网超级生态 / 全球游戏 / AI 与云基础设施", "macro_factor": "💻 科技算力与半导体", "tier": "T0", "position_cap_pct": 20, "fin_period": "2026Q3", "updated_at": "2026-11-25", "active_preset": "v5.1_swarm_v22", "one_liner": "14.49亿微信月活超级生态垄断者（12%苹果税坐实顺价权 + 全球长青游戏 + 视频号/微信小店 + 腾讯云/WorkBuddy AI 变现）；Swarm V2.2 三轮物理双盲实扣285亿SBC、1,030亿刚性维持与AI亏损锁公允491.02港元，现价337.40港元已击穿一档重锤线(≤345港元，纯主业仅11.04×OE/回报9.05%/2.17×PB铁底)。", "one_liner_plain": "微信是14.5亿人的数字水电煤，连苹果都低头把抽成从30%砍到12%；哪怕扣光员工发股、每年1,030亿换新设备钱和500亿AI亏损，纯主业一年照样净赚1,850亿人民币！买腾讯还自带打69折后值5,799亿人民币的股票赠品；今天337.40港元已一脚踩穿345港元重锤抄底线，纯主业只卖11倍！", "market": {"shares_yi": 91.3252, "price": 337.4, "price_date": "2026-11-25", "week52_low": 335.0, "week52_high": 639.0}, "h_market": null, "balance_sheet": {"cash": 6175.26, "trading_financial_assets": 0.0, "restricted_cash": 0.0, "minority_div_payable": 0.0, "finance_co_deposit": 0.0, "post_period_parent_div": 0.0, "parent_rigid_debt": 6678.55, "liquid_equity_investments_net": 10602.61, "parent_equity_ratio": 1.0, "parent_profit_ratio": 1.0, "debt_ratio_pct": 44.69}, "dividends": {"ttm_dps": 5.3, "ttm_breakdown": "2025年度末期 5.30港元/股（折4.5315元人民币，2026年已实派；2026Q3单季回购70亿港元让路AI算力，仅按纯现金股息计分）", "steady_payout_ratio": 0.25}, "pb_history": {"reported_bvps": 155.84, "ex_div_bvps": 155.84, "pb_6y_floor": 2.1, "pb_2y_floor": 2.35, "pb_5y_range": "2.10x — 5.80x"}, "drivers": [{"id": "core_rev_yi", "label": "集团常态年营收（人民币）", "unit": "亿RMB", "min": 7000, "max": 9600, "step": 100, "anchor": 8200, "current": 8200, "decimals": 0, "np_sensitivity_per_unit": 0.28, "hint": "基准8,200亿RMB（9M26已达6,086亿）；每增100亿RMB营收，纯主业常态税后利润增厚约28亿港元（24亿RMB）"}, {"id": "ai_opex_drag_yi", "label": "新AI产品年化净亏损拖累（人民币）", "unit": "亿RMB", "min": 150, "max": 800, "step": 25, "anchor": 520, "current": 520, "decimals": 0, "np_sensitivity_per_unit": -0.97, "hint": "3Q26单季152亿（年化450–600亿已全扣）；AI亏损每收窄100亿RMB，纯主业自由盈余增厚约97亿港元（82.5亿RMB）"}, {"id": "sbc_yi", "label": "年化股权激励全额实扣（人民币）", "unit": "亿RMB", "min": 220, "max": 380, "step": 5, "anchor": 285, "current": 285, "decimals": 0, "np_sensitivity_per_unit": -1.1747, "hint": "3Q26年化285亿RMB全额当真钱扣减；每多发10亿RMB激励，自由盈余直降11.75亿港元"}], "operations": {"anchor_parent_net_profit": 2455.07, "hist_5y_peak_bridged_np": 2641.16, "maint_capex": 1209.91, "dep_annual": 927.99, "capex_slider_min": 900.0, "capex_slider_max": 1600.0, "capex_hint": "全币种按实时汇率 1港元=0.8513人民币折算：刚性维持1,209.91亿港元(=1,030亿RMB：传统基建180+AI机队540+版权240+租赁70) vs 全口径D&A 927.99亿港元(=790亿RMB) → 预扣折旧缺口-281.92亿港元(-240亿RMB)，精准输出常态OE 2,173.15亿港元(=1,850亿RMB)", "stress_scenarios": [{"id": "bull", "name": "2028E AI减亏收敛 + 腾讯云/广告放量", "plain_name": "2028年AI止血收敛、云与视频号开花（对应满血达产）", "driver_summary": "营收8800亿RMB / AI亏损收窄至300亿 / 激励285亿", "driver_overrides": {"core_rev_yi": 8800, "ai_opex_drag_yi": 300, "sbc_yi": 285}, "note": "对应纯主业满血OE突破2,550亿港元（约2,170–2,200亿RMB）"}, {"id": "steady", "name": "★ Swarm V2.2 三轮物理双盲主锚（唯一生效）", "plain_name": "Gemini × Claude Opus 三轮吵完后的最硬核常态底账", "driver_summary": "随滑块实时联动（全扣285亿SBC + 1,030亿维持 + 520亿AI亏损）", "driver_overrides": {}, "note": "纯主业常态OE 2,173.15亿港元（=1,850亿RMB），零联营/零投资收益"}, {"id": "bear", "name": "宏观消费走弱 + AI亏损扩大压测", "plain_name": "经济偏冷且AI继续多烧钱200亿的逆风测试", "driver_summary": "营收7800亿RMB / AI亏损扩至670亿 / 激励300亿", "driver_overrides": {"core_rev_yi": 7800, "ai_opex_drag_yi": 670, "sbc_yi": 300}, "note": "逆风下仍保近1,900亿港元（1,615亿RMB）造血，现价回报率仍超7.9%"}, {"id": "extreme", "name": "极寒压测（AI年亏800亿死刑红线边缘）", "plain_name": "最惨情况：AI亏损逼近800亿红线、营收停滞", "driver_summary": "营收7500亿RMB / AI亏损800亿 / 激励310亿", "driver_overrides": {"core_rev_yi": 7500, "ai_opex_drag_yi": 800, "sbc_yi": 310}, "note": "极端寒冬仍保1,676亿港元（1,427亿RMB）纯自由盈余，绝不失血"}]}, "sotp_blocks": [{"id": "net_cash", "kind": "net_cash", "name": "积木① 31%折价外部投资包扣合并净债（净赠品）", "plain": "9,026亿RMB投资包打69折值6,228亿RMB(7,316亿港元)减去428亿RMB合并净债 = 净赠品+6,812亿港元(+5,799亿RMB)", "default_on": true, "color": "#059669"}, {"id": "core_biz", "kind": "core_perpetuity", "name": "积木② 纯主业超级印钞机永续价值（微信+游戏+广告+支付）", "plain": "按跨模型终审1,850亿RMB(2,173亿港元)纯主业常态盈余、5.71%资本化率(17.5×)折算的核心底座", "default_on": true, "color": "#1e3a8a"}, {"id": "ai_payoff", "kind": "buyout_net", "name": "积木③ 2028E AI止血达产净弹性（已扣800亿RMB过渡净债）", "plain": "未来达产增厚+350亿RMB(+411亿港元)扣除+800亿RMB(+940亿港元)净债爬坡后的净现值，主估值默认按0元白送", "default_on": false, "color": "#0284c7"}, {"id": "workbuddy_opt", "kind": "fixed_yi", "value_yi": 3500.0, "name": "积木④ WorkBuddy(ARR 5亿$) + 微信小店(+407%) + 视频号Ad Load翻倍期权", "plain": "国民级AI工作台与视频号广告加载率(4%-6%→10%)未释放的额外成长红包，主估值严守按0元算", "default_on": false, "color": "#7c3aed"}], "floor_benchmark": {"kind": "replacement", "label": "5年极端2.10× PB历史铁底", "fixed_floor_yi": 29887.0, "operating_assets_floor_yi": 23075.0, "note": "归母每股净资产155.84港元 × 近5年极端历史PB铁底2.10× = 327.26港元/股（29,887亿港元），叠加5,799亿RMB打折股票净赠品，当前337.40港元几乎平价踩在5年极寒铁底上"}, "presets": {"v5.1_swarm_v22": {"version": "v5.1", "name": "v5.1 Swarm V2.2 跨模型三轮物理双盲（唯一生效）", "date": "2026-11-25", "badge": "唯一生效", "summary": "Gemini 4 Neon × Claude Opus 5.5 打满3轮(含R2.5破案264.7亿投资收益盲区)：纠偏863.6亿少数股东双扣锁净赠品+5,799亿RMB(6,812亿港元)；全扣285亿SBC+1,030亿刚性维持+AI亏损锁steady_oe 1,850亿RMB(2,173亿港元)；17.5×定公允491.02港元、二档345—405、一档≤345港元。", "ev_rules": {"ev_mode": "equity_ratio", "deduct_restricted_cash_pct": 1.0, "deduct_minority_div_payable_pct": 1.0, "operating_cash_floor": 0.0, "finance_co_discount_pct": 0.0, "deduct_parent_rigid_debt_pct": 1.0, "equity_inv_credit_pct": 0.689985}, "oe_rules": {"drivers": {"core_rev_yi": 8200, "ai_opex_drag_yi": 520, "sbc_yi": 285}, "maint_capex": 1209.91, "dep_annual": 927.99, "growth_wc_yi": 0.0, "other_np_adj_yi": 0.0, "full_oe_ratio": 1.0, "full_oe_delta_yi": 411.14, "extra_carbon_or_opt_yi": 0.0, "full_cash_cost_yi": 939.74}, "sotp_rules": {"core_perpetuity_discount_rate": 0.05714}, "zone_rules": {"fair_ev_oe_multiple": 17.5, "tier2_max_ev_oe_multiple": 13.8851, "tier1_max_ev_oe_multiple": 11.3636}}, "v5.0_flow_b": {"version": "v5.0", "name": "v5.0 流程B 单家族物理双盲版（历史对照）", "date": "2026-11-24", "badge": "历史对照", "summary": "2026-11-24 单家族流程B：含863.6亿少数股东分母双扣与368亿理财清零、投资包打51.8折得净赠品仅3,015亿RMB(3,542亿港元)，steady_oe 1,900亿RMB(2,232亿港元)，18.0×定公允478港元、二档326—388、一档≤326港元。", "ev_rules": {"ev_mode": "equity_ratio", "deduct_restricted_cash_pct": 1.0, "deduct_minority_div_payable_pct": 1.0, "operating_cash_floor": 1446.89, "finance_co_discount_pct": 0.0, "deduct_parent_rigid_debt_pct": 1.0, "equity_inv_credit_pct": 0.51798}, "oe_rules": {"drivers": {"core_rev_yi": 8200, "ai_opex_drag_yi": 520, "sbc_yi": 285}, "maint_capex": 1209.91, "dep_annual": 927.99, "growth_wc_yi": 0.0, "other_np_adj_yi": 58.73, "full_oe_ratio": 1.0, "full_oe_delta_yi": 681.31, "extra_carbon_or_opt_yi": 0.0, "full_cash_cost_yi": 0.0}, "sotp_rules": {"core_perpetuity_discount_rate": 0.0556}, "zone_rules": {"fair_ev_oe_multiple": 18.0, "tier2_max_ev_oe_multiple": 14.294, "tier1_max_ev_oe_multiple": 11.758}}, "v4.0_forensic": {"version": "v4.0", "name": "v4.0 官方原表法医验真版（历史对照）", "date": "2026-11-22", "badge": "历史对照", "summary": "2026-11-22 V4法医验真版：尚未剥离264.7亿投资收益与新AI常态拖累，steady_oe定2,200亿RMB(2,584亿港元)，64折投资包得净赠品4,219亿RMB(4,956亿港元)，16.6×定公允535港元、二档310—360、一档≤310港元。", "ev_rules": {"ev_mode": "equity_ratio", "deduct_restricted_cash_pct": 1.0, "deduct_minority_div_payable_pct": 1.0, "operating_cash_floor": 1326.0, "finance_co_discount_pct": 0.0, "deduct_parent_rigid_debt_pct": 1.0, "equity_inv_credit_pct": 0.64}, "oe_rules": {"drivers": {"core_rev_yi": 8200, "ai_opex_drag_yi": 520, "sbc_yi": 285}, "maint_capex": 1198.17, "dep_annual": 927.99, "growth_wc_yi": 0.0, "other_np_adj_yi": 399.39, "full_oe_ratio": 1.0, "full_oe_delta_yi": 681.31, "extra_carbon_or_opt_yi": 0.0, "full_cash_cost_yi": 0.0}, "sotp_rules": {"core_perpetuity_discount_rate": 0.06}, "zone_rules": {"fair_ev_oe_multiple": 16.99, "tier2_max_ev_oe_multiple": 10.8, "tier1_max_ev_oe_multiple": 9.04}}}, "history_5y": [{"period": "2021", "rev": 5601.18, "np": 1237.88, "ocf": 1751.86, "capex": 344.0, "fcf": 1081.0, "debt_ratio": 45.6, "gm": 43.9}, {"period": "2022", "rev": 5545.52, "np": 1156.49, "ocf": 1941.19, "capex": 195.0, "fcf": 884.0, "debt_ratio": 50.4, "gm": 43.1}, {"period": "2023", "rev": 6090.15, "np": 1576.88, "ocf": 2219.62, "capex": 238.93, "fcf": 1670.0, "debt_ratio": 44.6, "gm": 48.1}, {"period": "2024", "rev": 6602.57, "np": 2227.03, "ocf": 2585.21, "capex": 767.6, "fcf": 1553.0, "debt_ratio": 40.8, "gm": 52.9}, {"period": "2025", "rev": 7517.66, "np": 2596.26, "ocf": 3030.52, "capex": 791.98, "fcf": 1826.0, "debt_ratio": 39.1, "gm": 56.2}, {"period": "9M26*", "rev": 6085.79, "np": 2028.39, "ocf": 2427.13, "capex": 1661.53, "fcf": 601.7, "debt_ratio": 44.7, "gm": 56.8}], "peer_chart_config": {"title": "⚡ 全球五大科技巨头「经调整营业利润率（赚钱纯度）」vs「销售买量费用率（越低越垄断）」", "subtitle": "2025—2026最新同报告期手术刀对决（注：9M26* 腾讯OCF/FCF为剔除算力预付款还原口径，单位人民币亿元）", "left_label": "经调整营业利润率（%，越高越强）", "left_unit": "%", "left_max": 48.0, "right_label": "销售及市场买量费用率（%，越低越垄断）", "right_unit": "%", "right_max": 28.0, "extra_col_label": "核心AI/生态护城河", "dupont_title": "🏆 全球四大上市科技巨头「综合毛利率 vs Non-IFRS净利率 vs 资产负债率」对质图", "dupont_sub": "微信零获客特权（销售费率5.6% vs 阿里23.9%/字节20%）每年白送腾讯逾千亿安全垫"}, "peers": [{"name": "腾讯控股", "highlight": true, "m1": 37.8, "m2": 5.55, "extra": "14.5亿微信+12%苹果税", "gm": 56.2, "roe": 21.8, "debt_ratio": 44.7, "expense_ratio": 23.7, "note": "传统主业OPM高达40.2%，销售费率仅5.55%碾压国内同行，VAS毛利64.1%反超网易"}, {"name": "Meta", "highlight": false, "m1": 41.4, "m2": 5.97, "extra": "33亿全球社交广告", "gm": 82.0, "roe": 34.5, "debt_ratio": 34.0, "expense_ratio": 40.6, "note": "纯广告全球毛利标杆，但研发+元宇宙费用率高达40.6%，且服务器折旧延至5.5年"}, {"name": "网易", "highlight": false, "m1": 34.5, "m2": 13.4, "extra": "精品游戏工作室", "gm": 64.3, "roe": 26.2, "debt_ratio": 28.5, "expense_ratio": 30.2, "note": "纯游戏高毛利但营收仅为腾讯1/7，缺底层社交与AI云基础设施"}, {"name": "字节跳动", "highlight": false, "m1": 20.5, "m2": 19.8, "extra": "抖音+TikTok+豆包", "gm": 55.0, "roe": 24.0, "debt_ratio": 42.0, "expense_ratio": 35.5, "note": "营收体量反超腾讯但受电商补贴、豆包全网买量与海外投入压低利润率"}, {"name": "阿里巴巴", "highlight": false, "m1": 13.0, "m2": 23.94, "extra": "淘天+阿里云+千问", "gm": 39.8, "roe": 11.5, "debt_ratio": 38.2, "expense_ratio": 33.7, "note": "受直营零售与即时零售高达23.9%销售买量费拖累，盈利效率与腾讯拉开代差"}], "audit_reconciliation": {"title": "⚖️ Swarm V2.2 跨模型三轮物理双盲校准对照（Gemini 4 Neon × Claude Opus 5.5）", "badge": "<0.8% 极限收口 · R2.5 惊天破案", "left_title": "🩸 Claude Opus 空头 & R2.5 法庭命中死穴（终审实砍）：", "left_items": ["① 1,374 亿算力预付款属准 CapEx 且高位延至 2027 年底，拒绝 6 年服务器延寿红利并补入传统机房维持，实砍刚性维持总开支至 1,030 亿/年（并在达产偏移中加扣 +800 亿过渡期净债爬坡）；", "② R2.5 法庭抓获双边共同漏剥官方三表溢利其他项目（TTM +264.72 亿投资净收益）盲区，彻底改用天然零投资收益的经营溢利与正常化现金流双路径重算，压实 steady_oe = 1,850 亿 RMB；", "③ 3Q26 单季回购骤降至 70 亿港元已低于 71.15 亿 SBC，终审全额实扣 285 亿/年 SBC 且拒绝给回购任何额外溢价；", "④ 去画饼将 2028E 达产 full_oe 由 2,480 亿压实至 2,200 亿 RMB，纯主业公允倍数由 18.5× 收紧至 17.5×（公允 491.02 港元）。"], "right_title": "🛡️ Gemini 多头反杀 & 双方体面纠偏（修复旧版双扣）：", "right_items": ["① 纠偏旧版流程 B 两大分母错配：Claude Opus 爽快撤回归母分子下分母重扣 863.6 亿少数股东权益的双扣错误，且 R2.5 双方核实 368.24 亿银行理财与 3,972 亿非上市股权零重叠，纯主业净赠品合意锁死 +5,799.35 亿 RMB；", "② 裁判点破分子已把年化 450–600 亿新 AI 亏损按常态 100% 扣死，空头爽快撤回 RONIC 再投资双重惩罚，消除分子分母双杀；", "③ 12% 苹果税、VAS 毛利率 64.09%、腾讯云 +35% 与 WorkBuddy ARR 破 5 亿美元坐实顶级垄断与 AI 商业化闭环，双方终版惊人收敛在 491.0 vs 494.7 港元！"]}, "milestones": [{"id": "M1", "category": "AI算力投入向现金流兑现", "title": "腾讯云增速 ≥+25%、WorkBuddy 放量与 2028 CapEx 回落", "metric": "2027 年腾讯云维持 ≥+25% 增长；2027H2 算力预付款停止净增、2028 现金 CapEx 回落、FCF 重回 >1,500 亿/年", "status": "tracking", "status_label": "头号核心路标", "latest_note": "3Q26 腾讯云已跃升至 +35%，WorkBuddy 日活破千万、近 7 日 ARR 破 5 亿美元；现金 CapEx 高位将持续至 2027 年底。"}, {"id": "M2", "category": "传统印钞机毛利率防线", "title": "VAS 毛利率守住 ≥60% & 营销毛利率于 ≥50% 企稳回升", "metric": "本土游戏正增长且 VAS 毛利率 ≥60%；广告消化短剧与推理成本后毛利率 ≥50%，传统核心 OP 正增长", "status": "green", "status_label": "阶段绿灯", "latest_note": "3Q26 VAS 毛利率达 64.09% 历史极值（12% 苹果税助力），剔除新 AI 后传统核心 Non-IFRS OP 稳达 833 亿（+8%）。"}, {"id": "M3", "category": "股东净回馈修复与负债封顶", "title": "2027–2028 净回购转正 & 净负债峰值严控 <2,000 亿 RMB", "metric": "注销式回购重回并显著高于 ~285 亿/年 SBC，分红稳增，有息净负债峰值 <2,000 亿（净负债/EBITDA <0.7×）", "status": "tracking", "status_label": "过渡期盯防", "latest_note": "3Q26 合并审慎净债 +428.5 亿（官方口径 -137 亿），单季回购阶段性缩至 70 亿港元，需紧盯 2027 净债爬坡斜率。"}, {"id": "M4", "category": "生态内循环免费期权", "title": "微信小店 GMV 与视频号广告加载率温和释放（4–6% → 8–10%）", "metric": "微信小店交易闭环持续放量，AI 小微灰度转正带动搜一搜与广告 eCPM/CTR 提升（主估值按 0 元白送）", "status": "watch", "status_label": "免费期权（估值按0元）", "latest_note": "2026 双 11 微信小店与卡包成交额同比暴增 +407%，视频号用户时长仍增超 +20%。"}], "red_lines": [{"id": "R1", "title": "AI 资本开支沦为无底洞失血", "trigger": "至 2028 年中现金资本开支仍未见顶回落，连续 8 季扣预付款后真实自由现金流为负，同时 AI 业务年化净亏损突破 800 亿元且无收敛路径。", "plain": "AI 烧钱一直刹不住车、连亏八个季度真现金，而且越亏越多看不见赚钱影子。"}, {"id": "R2", "title": "微信护城河与顺价权破裂", "trigger": "营销服务毛利率跌破 45% 且收入增速失速至 <+5%，或核心游戏/小游戏遭遇监管重拳或生态分流致传统主业 Non-IFRS OP 连续 2 季跌超 -10%。", "plain": "微信广告卖不动了、或者游戏老本行连续两季大滑坡，说明核心印钞机真出故障了。"}, {"id": "R3", "title": "资本配置背叛股东", "trigger": "净负债持续攀升背景下停止注销式回购、大幅下调现金分红，或重启大规模无序高溢价并购及对外烧钱补贴。", "plain": "欠债越来越多还不肯分红回购，反而跑去乱高价买公司瞎烧钱。"}], "changelog": [{"date": "2026-11-22", "version": "v4.0 官方原表法医验真", "preset_key": "v4.0_forensic", "oe": "2,200 亿 RMB", "ev_delta": "-4,219 亿 RMB", "fair": "535.00 港元", "buy_zone": "≤310 / 310—360 港元", "reason": "直连港交所三表+10份官方原版PDF全科验真，但尚未剔除264.7亿投资净收益与新AI常态拖累。"}, {"date": "2026-11-24", "version": "v5.0 流程B 单家族物理双盲", "preset_key": "v5.0_flow_b", "oe": "1,900 亿 RMB", "ev_delta": "-3,015 亿 RMB", "fair": "478.00 港元", "buy_zone": "≤326 / 326—388 港元", "reason": "单家族流程B压实SBC与AI维持，但分母误将863.6亿少数股东权益双扣且把368亿银行理财清零，外部投资包苛刻打至51.8折。"}, {"date": "2026-11-25", "version": "v5.1 Swarm V2.2 三轮物理双盲（唯一生效）", "preset_key": "v5.1_swarm_v22", "oe": "1,850 亿 RMB", "ev_delta": "-5,799 亿 RMB", "fair": "491.02 港元", "buy_zone": "≤345 / 345—405 港元", "reason": "Gemini 4 Neon × Claude Opus 5.5 打满3轮含R2.5裁判质询：纠偏863.6亿少数股东双扣与368亿理财误删(净赠品+5,799亿RMB)，抓出264.7亿投资收益盲区+实砍1,030亿维持+撤回RONIC双罚，多空在491–495港元极限收口！揭盲337.40港元已踩穿345重锤线(9.05%纯主业回报/2.17×PB铁底)。"}]}, "rules": {"schema_version": "2.0", "engine_version": "v5.0", "updated_at": "2026-11-25", "description": "买方投研 2.0 全局可热插拔估值宪法与四行业通用模板（改此处即全库 100% 统一口径重算）", "global_laws": {"risk_free_rate_pct": 1.75, "overvalued_fair_ratio": 1.25, "pb_floor_max_premium_pct": 15.0, "finance_co_discount_pct": 0.25, "ah_corridor_p50_weight": 0.65, "ah_corridor_live_weight": 0.35, "ah_corridor_min_floor_pct": 8.0, "ah_veto_premium_pct": 5.0}, "archetypes": {"cyclical_commodity": {"label": "⛏️ 大宗周期与资源（矿业/冶炼/油气/化工/煤）", "ev_mode": "equity_ratio", "default_fair_mult": 11.5, "default_t2_mult": 9.5, "default_t1_mult": 7.0, "default_sotp_rate_pct": 10.0, "use_true_ev": true, "reality_check_max_pct": 15.0, "notes": "采用成本曲线三段式（矿业>1.25x / 冶炼>1.12x）× 期现取严 × 5年历史实绩+15%双闸门 × 5年PB铁底双向校验"}, "quality_compounder": {"label": "🏆 优质白马与制造科技（消费/医药/高端制造/互联网）", "ev_mode": "equity_ratio", "default_fair_mult": 16.0, "default_t2_mult": 13.0, "default_t1_mult": 10.5, "default_sotp_rate_pct": 9.0, "use_true_ev": true, "reality_check_max_pct": 25.0, "notes": "常态 Owner Earnings = 常态归母净利 + 折旧摊销 - 维持性CapEx - 成长ΔWC；严格对齐无风险利率 1.75% 防止过度杀估值"}, "financial_insurer": {"label": "🏦 金融与保险（银行/险企/券商）", "ev_mode": "financial_no_ev", "default_fair_mult": 10.0, "default_t2_mult": 8.2, "default_t1_mult": 6.8, "default_sotp_rate_pct": 10.0, "use_true_ev": false, "reality_check_max_pct": 15.0, "notes": "金融股以归母市值直接锚定常态自由盈余/可分配利润与 PB/PEV，严禁把客户存款或准备金当超额现金冲减 EV"}, "sotp_conglomerate": {"label": "🧩 多业务平台与控股集团（SOTP 拆骨主导）", "ev_mode": "equity_ratio", "default_fair_mult": 14.0, "default_t2_mult": 11.2, "default_t1_mult": 9.0, "default_sotp_rate_pct": 9.5, "use_true_ev": true, "reality_check_max_pct": 20.0, "notes": "核心现金牛主业 + 净现金/上市股权包（按流动性折价）+ 新业务期权独立拼装，防核心资产与股权投资双算"}}}, "archetype": {"label": "🧩 多业务平台与控股集团（SOTP 拆骨主导）", "ev_mode": "equity_ratio", "default_fair_mult": 14.0, "default_t2_mult": 11.2, "default_t1_mult": 9.0, "default_sotp_rate_pct": 9.5, "use_true_ev": true, "reality_check_max_pct": 20.0, "notes": "核心现金牛主业 + 净现金/上市股权包（按流动性折价）+ 新业务期权独立拼装，防核心资产与股权投资双算"}, "presets": {"v5.1_swarm_v22": {"version": "v5.1", "name": "v5.1 Swarm V2.2 跨模型三轮物理双盲（唯一生效）", "date": "2026-11-25", "badge": "唯一生效", "summary": "Gemini 4 Neon × Claude Opus 5.5 打满3轮(含R2.5破案264.7亿投资收益盲区)：纠偏863.6亿少数股东双扣锁净赠品+5,799亿RMB(6,812亿港元)；全扣285亿SBC+1,030亿刚性维持+AI亏损锁steady_oe 1,850亿RMB(2,173亿港元)；17.5×定公允491.02港元、二档345—405、一档≤345港元。", "ev_rules": {"ev_mode": "equity_ratio", "deduct_restricted_cash_pct": 1.0, "deduct_minority_div_payable_pct": 1.0, "operating_cash_floor": 0.0, "finance_co_discount_pct": 0.0, "deduct_parent_rigid_debt_pct": 1.0, "equity_inv_credit_pct": 0.689985}, "oe_rules": {"drivers": {"core_rev_yi": 8200, "ai_opex_drag_yi": 520, "sbc_yi": 285}, "maint_capex": 1209.91, "dep_annual": 927.99, "growth_wc_yi": 0.0, "other_np_adj_yi": 0.0, "full_oe_ratio": 1.0, "full_oe_delta_yi": 411.14, "extra_carbon_or_opt_yi": 0.0, "full_cash_cost_yi": 939.74}, "sotp_rules": {"core_perpetuity_discount_rate": 0.05714}, "zone_rules": {"fair_ev_oe_multiple": 17.5, "tier2_max_ev_oe_multiple": 13.8851, "tier1_max_ev_oe_multiple": 11.3636, "overvalued_fair_ratio": 1.25, "pb_floor_max_premium_pct": 15.0}}, "v5.0_flow_b": {"version": "v5.0", "name": "v5.0 流程B 单家族物理双盲版（历史对照）", "date": "2026-11-24", "badge": "历史对照", "summary": "2026-11-24 单家族流程B：含863.6亿少数股东分母双扣与368亿理财清零、投资包打51.8折得净赠品仅3,015亿RMB(3,542亿港元)，steady_oe 1,900亿RMB(2,232亿港元)，18.0×定公允478港元、二档326—388、一档≤326港元。", "ev_rules": {"ev_mode": "equity_ratio", "deduct_restricted_cash_pct": 1.0, "deduct_minority_div_payable_pct": 1.0, "operating_cash_floor": 1446.89, "finance_co_discount_pct": 0.0, "deduct_parent_rigid_debt_pct": 1.0, "equity_inv_credit_pct": 0.51798}, "oe_rules": {"drivers": {"core_rev_yi": 8200, "ai_opex_drag_yi": 520, "sbc_yi": 285}, "maint_capex": 1209.91, "dep_annual": 927.99, "growth_wc_yi": 0.0, "other_np_adj_yi": 58.73, "full_oe_ratio": 1.0, "full_oe_delta_yi": 681.31, "extra_carbon_or_opt_yi": 0.0, "full_cash_cost_yi": 0.0}, "sotp_rules": {"core_perpetuity_discount_rate": 0.0556}, "zone_rules": {"fair_ev_oe_multiple": 18.0, "tier2_max_ev_oe_multiple": 14.294, "tier1_max_ev_oe_multiple": 11.758, "overvalued_fair_ratio": 1.25, "pb_floor_max_premium_pct": 15.0}}, "v4.0_forensic": {"version": "v4.0", "name": "v4.0 官方原表法医验真版（历史对照）", "date": "2026-11-22", "badge": "历史对照", "summary": "2026-11-22 V4法医验真版：尚未剥离264.7亿投资收益与新AI常态拖累，steady_oe定2,200亿RMB(2,584亿港元)，64折投资包得净赠品4,219亿RMB(4,956亿港元)，16.6×定公允535港元、二档310—360、一档≤310港元。", "ev_rules": {"ev_mode": "equity_ratio", "deduct_restricted_cash_pct": 1.0, "deduct_minority_div_payable_pct": 1.0, "operating_cash_floor": 1326.0, "finance_co_discount_pct": 0.0, "deduct_parent_rigid_debt_pct": 1.0, "equity_inv_credit_pct": 0.64}, "oe_rules": {"drivers": {"core_rev_yi": 8200, "ai_opex_drag_yi": 520, "sbc_yi": 285}, "maint_capex": 1198.17, "dep_annual": 927.99, "growth_wc_yi": 0.0, "other_np_adj_yi": 399.39, "full_oe_ratio": 1.0, "full_oe_delta_yi": 681.31, "extra_carbon_or_opt_yi": 0.0, "full_cash_cost_yi": 0.0}, "sotp_rules": {"core_perpetuity_discount_rate": 0.06}, "zone_rules": {"fair_ev_oe_multiple": 16.99, "tier2_max_ev_oe_multiple": 10.8, "tier1_max_ev_oe_multiple": 9.04, "overvalued_fair_ratio": 1.25, "pb_floor_max_premium_pct": 15.0}}}, "activePreset": "v5.1_swarm_v22", "evaluated": {"v5.1_swarm_v22": {"preset_key": "v5.1_swarm_v22", "preset_meta": {"version": "v5.1", "name": "v5.1 Swarm V2.2 跨模型三轮物理双盲（唯一生效）", "date": "2026-11-25", "badge": "唯一生效", "summary": "Gemini 4 Neon × Claude Opus 5.5 打满3轮(含R2.5破案264.7亿投资收益盲区)：纠偏863.6亿少数股东双扣锁净赠品+5,799亿RMB(6,812亿港元)；全扣285亿SBC+1,030亿刚性维持+AI亏损锁steady_oe 1,850亿RMB(2,173亿港元)；17.5×定公允491.02港元、二档345—405、一档≤345港元。"}, "ev": {"price": 337.4, "shares_yi": 91.3252, "mcap": 30813.12, "gross_cash": 6175.26, "fin_co_haircut": 0.0, "minority_share": 0.0, "parent_net_cash": 6812.35, "net_cash_per_share": 74.59, "ev_delta": -6812.35, "true_ev": 24000.77, "is_financial": false, "waterfall": [{"step": "账面广义现金", "delta": 6175.26, "cum": 6175.26, "type": "pos"}, {"step": "受限与应付股利", "delta": -0.0, "cum": 6175.26, "type": "neg"}, {"step": "营运周转底仓", "delta": -0.0, "cum": 6175.26, "type": "neg"}, {"step": "母公司刚性债", "delta": -6678.55, "cum": -503.29, "type": "neg"}, {"step": "可售金融资产", "delta": 7315.64, "cum": 6812.35, "type": "pos"}, {"step": "归母净现金", "delta": 6812.35, "cum": 6812.35, "type": "total"}]}, "oe": {"drivers": {"core_rev_yi": 8200, "ai_opex_drag_yi": 520, "sbc_yi": 285}, "maint_capex": 1209.91, "dep_annual": 927.99, "growth_wc_yi": 0.0, "steady_np": 2455.07, "dep_shield_parent": -281.92, "steady_oe": 2173.15, "steady_oe_per_share": 23.8, "full_oe": 2584.29, "full_cash_cost_yi": 939.74, "full_ev_delta": -5872.61, "full_true_ev": 24940.51, "extra_opt": 0.0, "steady_ev_yield_pct": 9.05, "full_ev_yield_pct": 10.36, "steady_ev_oe": 11.04, "vs_bridge_pct": -7.05, "reality_pass": true, "stress_matrix": [{"id": "bull", "name": "2028E AI减亏收敛 + 腾讯云/广告放量", "plain_name": "2028年AI止血收敛、云与视频号开花（对应满血达产）", "driver_summary": "营收8800亿RMB / AI亏损收窄至300亿 / 激励285亿", "parent_np": 2836.47, "oe": 2554.55, "ev_yield_pct": 10.64, "steady_div_pct": 2.3, "note": "对应纯主业满血OE突破2,550亿港元（约2,170–2,200亿RMB）"}, {"id": "steady", "name": "★ Swarm V2.2 三轮物理双盲主锚（唯一生效）", "plain_name": "Gemini × Claude Opus 三轮吵完后的最硬核常态底账", "driver_summary": "随滑块实时联动（全扣285亿SBC + 1,030亿维持 + 520亿AI亏损）", "parent_np": 2455.07, "oe": 2173.15, "ev_yield_pct": 9.05, "steady_div_pct": 1.99, "note": "纯主业常态OE 2,173.15亿港元（=1,850亿RMB），零联营/零投资收益"}, {"id": "bear", "name": "宏观消费走弱 + AI亏损扩大压测", "plain_name": "经济偏冷且AI继续多烧钱200亿的逆风测试", "driver_summary": "营收7800亿RMB / AI亏损扩至670亿 / 激励300亿", "parent_np": 2179.95, "oe": 1898.03, "ev_yield_pct": 7.91, "steady_div_pct": 1.77, "note": "逆风下仍保近1,900亿港元（1,615亿RMB）造血，现价回报率仍超7.9%"}, {"id": "extreme", "name": "极寒压测（AI年亏800亿死刑红线边缘）", "plain_name": "最惨情况：AI亏损逼近800亿红线、营收停滞", "driver_summary": "营收7500亿RMB / AI亏损800亿 / 激励310亿", "parent_np": 1958.1, "oe": 1676.18, "ev_yield_pct": 6.98, "steady_div_pct": 1.59, "note": "极端寒冬仍保1,676亿港元（1,427亿RMB）纯自由盈余，绝不失血"}]}, "sotp": {"discount_rate_pct": 5.7, "blocks": [{"id": "net_cash", "name": "积木① 31%折价外部投资包扣合并净债（净赠品）", "plain": "9,026亿RMB投资包打69折值6,228亿RMB(7,316亿港元)减去428亿RMB合并净债 = 净赠品+6,812亿港元(+5,799亿RMB)", "kind": "net_cash", "value_yi": 6812.35, "per_share": 74.59, "default_on": true, "color": "#059669"}, {"id": "core_biz", "name": "积木② 纯主业超级印钞机永续价值（微信+游戏+广告+支付）", "plain": "按跨模型终审1,850亿RMB(2,173亿港元)纯主业常态盈余、5.71%资本化率(17.5×)折算的核心底座", "kind": "core_perpetuity", "value_yi": 38032.03, "per_share": 416.45, "default_on": true, "color": "#1e3a8a"}, {"id": "ai_payoff", "name": "积木③ 2028E AI止血达产净弹性（已扣800亿RMB过渡净债）", "plain": "未来达产增厚+350亿RMB(+411亿港元)扣除+800亿RMB(+940亿港元)净债爬坡后的净现值，主估值默认按0元白送", "kind": "buyout_net", "value_yi": 6255.57, "per_share": 68.5, "default_on": false, "color": "#0284c7"}, {"id": "workbuddy_opt", "name": "积木④ WorkBuddy(ARR 5亿$) + 微信小店(+407%) + 视频号Ad Load翻倍期权", "plain": "国民级AI工作台与视频号广告加载率(4%-6%→10%)未释放的额外成长红包，主估值严守按0元算", "kind": "fixed_yi", "value_yi": 3500.0, "per_share": 38.32, "default_on": false, "color": "#7c3aed"}], "sotp_base_total": 44844.38, "sotp_base_per_share": 491.04, "floor_label": "5年极端2.10× PB历史铁底", "floor_note": "归母每股净资产155.84港元 × 近5年极端历史PB铁底2.10× = 327.26港元/股（29,887亿港元），叠加5,799亿RMB打折股票净赠品，当前337.40港元几乎平价踩在5年极寒铁底上", "floor_total_yi": 29887.35, "floor_per_share": 327.26}, "zones": {"fair_price": 491.02, "tier2_max": 405.0, "tier1_max": 345.0, "overvalued_price": 613.77, "fair_mult": 17.5, "tier2_max_mult": 13.8851, "tier1_max_mult": 11.3636, "ttm_dps": 5.3, "steady_dps": 6.721, "ttm_div_now_pct": 1.57, "steady_div_now_pct": 1.99, "pb_check": {"now_rep_pb": 2.17, "now_ex_pb": 2.17, "t1_rep_pb": 2.21, "t1_ex_pb": 2.21, "pb_6y_floor": 2.1, "t1_vs_floor_pct": 5.2, "pass": true}, "ah_corridor": null}}, "v5.0_flow_b": {"preset_key": "v5.0_flow_b", "preset_meta": {"version": "v5.0", "name": "v5.0 流程B 单家族物理双盲版（历史对照）", "date": "2026-11-24", "badge": "历史对照", "summary": "2026-11-24 单家族流程B：含863.6亿少数股东分母双扣与368亿理财清零、投资包打51.8折得净赠品仅3,015亿RMB(3,542亿港元)，steady_oe 1,900亿RMB(2,232亿港元)，18.0×定公允478港元、二档326—388、一档≤326港元。"}, "ev": {"price": 337.4, "shares_yi": 91.3252, "mcap": 30813.12, "gross_cash": 6175.26, "fin_co_haircut": 0.0, "minority_share": 0.0, "parent_net_cash": 3541.76, "net_cash_per_share": 38.78, "ev_delta": -3541.76, "true_ev": 27271.36, "is_financial": false, "waterfall": [{"step": "账面广义现金", "delta": 6175.26, "cum": 6175.26, "type": "pos"}, {"step": "受限与应付股利", "delta": -0.0, "cum": 6175.26, "type": "neg"}, {"step": "营运周转底仓", "delta": -1446.89, "cum": 4728.37, "type": "neg"}, {"step": "母公司刚性债", "delta": -6678.55, "cum": -1950.18, "type": "neg"}, {"step": "可售金融资产", "delta": 5491.94, "cum": 3541.76, "type": "pos"}, {"step": "归母净现金", "delta": 3541.76, "cum": 3541.76, "type": "total"}]}, "oe": {"drivers": {"core_rev_yi": 8200, "ai_opex_drag_yi": 520, "sbc_yi": 285}, "maint_capex": 1209.91, "dep_annual": 927.99, "growth_wc_yi": 0.0, "steady_np": 2513.8, "dep_shield_parent": -281.92, "steady_oe": 2231.88, "steady_oe_per_share": 24.44, "full_oe": 2913.19, "full_cash_cost_yi": 0.0, "full_ev_delta": -3541.76, "full_true_ev": 27271.36, "extra_opt": 0.0, "steady_ev_yield_pct": 8.18, "full_ev_yield_pct": 10.68, "steady_ev_oe": 12.22, "vs_bridge_pct": -4.82, "reality_pass": true, "stress_matrix": [{"id": "bull", "name": "2028E AI减亏收敛 + 腾讯云/广告放量", "plain_name": "2028年AI止血收敛、云与视频号开花（对应满血达产）", "driver_summary": "营收8800亿RMB / AI亏损收窄至300亿 / 激励285亿", "parent_np": 2836.47, "oe": 2554.55, "ev_yield_pct": 9.37, "steady_div_pct": 2.3, "note": "对应纯主业满血OE突破2,550亿港元（约2,170–2,200亿RMB）"}, {"id": "steady", "name": "★ Swarm V2.2 三轮物理双盲主锚（唯一生效）", "plain_name": "Gemini × Claude Opus 三轮吵完后的最硬核常态底账", "driver_summary": "随滑块实时联动（全扣285亿SBC + 1,030亿维持 + 520亿AI亏损）", "parent_np": 2513.8, "oe": 2231.88, "ev_yield_pct": 8.18, "steady_div_pct": 2.04, "note": "纯主业常态OE 2,173.15亿港元（=1,850亿RMB），零联营/零投资收益"}, {"id": "bear", "name": "宏观消费走弱 + AI亏损扩大压测", "plain_name": "经济偏冷且AI继续多烧钱200亿的逆风测试", "driver_summary": "营收7800亿RMB / AI亏损扩至670亿 / 激励300亿", "parent_np": 2179.95, "oe": 1898.03, "ev_yield_pct": 6.96, "steady_div_pct": 1.77, "note": "逆风下仍保近1,900亿港元（1,615亿RMB）造血，现价回报率仍超7.9%"}, {"id": "extreme", "name": "极寒压测（AI年亏800亿死刑红线边缘）", "plain_name": "最惨情况：AI亏损逼近800亿红线、营收停滞", "driver_summary": "营收7500亿RMB / AI亏损800亿 / 激励310亿", "parent_np": 1958.1, "oe": 1676.18, "ev_yield_pct": 6.15, "steady_div_pct": 1.59, "note": "极端寒冬仍保1,676亿港元（1,427亿RMB）纯自由盈余，绝不失血"}]}, "sotp": {"discount_rate_pct": 5.6, "blocks": [{"id": "net_cash", "name": "积木① 31%折价外部投资包扣合并净债（净赠品）", "plain": "9,026亿RMB投资包打69折值6,228亿RMB(7,316亿港元)减去428亿RMB合并净债 = 净赠品+6,812亿港元(+5,799亿RMB)", "kind": "net_cash", "value_yi": 3541.76, "per_share": 38.78, "default_on": true, "color": "#059669"}, {"id": "core_biz", "name": "积木② 纯主业超级印钞机永续价值（微信+游戏+广告+支付）", "plain": "按跨模型终审1,850亿RMB(2,173亿港元)纯主业常态盈余、5.71%资本化率(17.5×)折算的核心底座", "kind": "core_perpetuity", "value_yi": 40141.73, "per_share": 439.55, "default_on": true, "color": "#1e3a8a"}, {"id": "ai_payoff", "name": "积木③ 2028E AI止血达产净弹性（已扣800亿RMB过渡净债）", "plain": "未来达产增厚+350亿RMB(+411亿港元)扣除+800亿RMB(+940亿港元)净债爬坡后的净现值，主估值默认按0元白送", "kind": "buyout_net", "value_yi": 12253.78, "per_share": 134.18, "default_on": false, "color": "#0284c7"}, {"id": "workbuddy_opt", "name": "积木④ WorkBuddy(ARR 5亿$) + 微信小店(+407%) + 视频号Ad Load翻倍期权", "plain": "国民级AI工作台与视频号广告加载率(4%-6%→10%)未释放的额外成长红包，主估值严守按0元算", "kind": "fixed_yi", "value_yi": 3500.0, "per_share": 38.32, "default_on": false, "color": "#7c3aed"}], "sotp_base_total": 43683.49, "sotp_base_per_share": 478.33, "floor_label": "5年极端2.10× PB历史铁底", "floor_note": "归母每股净资产155.84港元 × 近5年极端历史PB铁底2.10× = 327.26港元/股（29,887亿港元），叠加5,799亿RMB打折股票净赠品，当前337.40港元几乎平价踩在5年极寒铁底上", "floor_total_yi": 26616.76, "floor_per_share": 291.45}, "zones": {"fair_price": 478.68, "tier2_max": 388.11, "tier1_max": 326.13, "overvalued_price": 598.35, "fair_mult": 18.0, "tier2_max_mult": 14.294, "tier1_max_mult": 11.758, "ttm_dps": 5.3, "steady_dps": 6.881, "ttm_div_now_pct": 1.57, "steady_div_now_pct": 2.04, "pb_check": {"now_rep_pb": 2.17, "now_ex_pb": 2.17, "t1_rep_pb": 2.09, "t1_ex_pb": 2.09, "pb_6y_floor": 2.1, "t1_vs_floor_pct": -0.5, "pass": true}, "ah_corridor": null}}, "v4.0_forensic": {"preset_key": "v4.0_forensic", "preset_meta": {"version": "v4.0", "name": "v4.0 官方原表法医验真版（历史对照）", "date": "2026-11-22", "badge": "历史对照", "summary": "2026-11-22 V4法医验真版：尚未剥离264.7亿投资收益与新AI常态拖累，steady_oe定2,200亿RMB(2,584亿港元)，64折投资包得净赠品4,219亿RMB(4,956亿港元)，16.6×定公允535港元、二档310—360、一档≤310港元。"}, "ev": {"price": 337.4, "shares_yi": 91.3252, "mcap": 30813.12, "gross_cash": 6175.26, "fin_co_haircut": 0.0, "minority_share": 0.0, "parent_net_cash": 4956.38, "net_cash_per_share": 54.27, "ev_delta": -4956.38, "true_ev": 25856.74, "is_financial": false, "waterfall": [{"step": "账面广义现金", "delta": 6175.26, "cum": 6175.26, "type": "pos"}, {"step": "受限与应付股利", "delta": -0.0, "cum": 6175.26, "type": "neg"}, {"step": "营运周转底仓", "delta": -1326.0, "cum": 4849.26, "type": "neg"}, {"step": "母公司刚性债", "delta": -6678.55, "cum": -1829.29, "type": "neg"}, {"step": "可售金融资产", "delta": 6785.67, "cum": 4956.38, "type": "pos"}, {"step": "归母净现金", "delta": 4956.38, "cum": 4956.38, "type": "total"}]}, "oe": {"drivers": {"core_rev_yi": 8200, "ai_opex_drag_yi": 520, "sbc_yi": 285}, "maint_capex": 1198.17, "dep_annual": 927.99, "growth_wc_yi": 0.0, "steady_np": 2854.46, "dep_shield_parent": -270.18, "steady_oe": 2584.28, "steady_oe_per_share": 28.3, "full_oe": 3265.59, "full_cash_cost_yi": 0.0, "full_ev_delta": -4956.38, "full_true_ev": 25856.74, "extra_opt": 0.0, "steady_ev_yield_pct": 9.99, "full_ev_yield_pct": 12.63, "steady_ev_oe": 10.01, "vs_bridge_pct": 8.08, "reality_pass": true, "stress_matrix": [{"id": "bull", "name": "2028E AI减亏收敛 + 腾讯云/广告放量", "plain_name": "2028年AI止血收敛、云与视频号开花（对应满血达产）", "driver_summary": "营收8800亿RMB / AI亏损收窄至300亿 / 激励285亿", "parent_np": 2836.47, "oe": 2566.29, "ev_yield_pct": 9.93, "steady_div_pct": 2.3, "note": "对应纯主业满血OE突破2,550亿港元（约2,170–2,200亿RMB）"}, {"id": "steady", "name": "★ Swarm V2.2 三轮物理双盲主锚（唯一生效）", "plain_name": "Gemini × Claude Opus 三轮吵完后的最硬核常态底账", "driver_summary": "随滑块实时联动（全扣285亿SBC + 1,030亿维持 + 520亿AI亏损）", "parent_np": 2854.46, "oe": 2584.28, "ev_yield_pct": 9.99, "steady_div_pct": 2.32, "note": "纯主业常态OE 2,173.15亿港元（=1,850亿RMB），零联营/零投资收益"}, {"id": "bear", "name": "宏观消费走弱 + AI亏损扩大压测", "plain_name": "经济偏冷且AI继续多烧钱200亿的逆风测试", "driver_summary": "营收7800亿RMB / AI亏损扩至670亿 / 激励300亿", "parent_np": 2179.95, "oe": 1909.77, "ev_yield_pct": 7.39, "steady_div_pct": 1.77, "note": "逆风下仍保近1,900亿港元（1,615亿RMB）造血，现价回报率仍超7.9%"}, {"id": "extreme", "name": "极寒压测（AI年亏800亿死刑红线边缘）", "plain_name": "最惨情况：AI亏损逼近800亿红线、营收停滞", "driver_summary": "营收7500亿RMB / AI亏损800亿 / 激励310亿", "parent_np": 1958.1, "oe": 1687.92, "ev_yield_pct": 6.53, "steady_div_pct": 1.59, "note": "极端寒冬仍保1,676亿港元（1,427亿RMB）纯自由盈余，绝不失血"}]}, "sotp": {"discount_rate_pct": 6.0, "blocks": [{"id": "net_cash", "name": "积木① 31%折价外部投资包扣合并净债（净赠品）", "plain": "9,026亿RMB投资包打69折值6,228亿RMB(7,316亿港元)减去428亿RMB合并净债 = 净赠品+6,812亿港元(+5,799亿RMB)", "kind": "net_cash", "value_yi": 4956.38, "per_share": 54.27, "default_on": true, "color": "#059669"}, {"id": "core_biz", "name": "积木② 纯主业超级印钞机永续价值（微信+游戏+广告+支付）", "plain": "按跨模型终审1,850亿RMB(2,173亿港元)纯主业常态盈余、5.71%资本化率(17.5×)折算的核心底座", "kind": "core_perpetuity", "value_yi": 43071.33, "per_share": 471.63, "default_on": true, "color": "#1e3a8a"}, {"id": "ai_payoff", "name": "积木③ 2028E AI止血达产净弹性（已扣800亿RMB过渡净债）", "plain": "未来达产增厚+350亿RMB(+411亿港元)扣除+800亿RMB(+940亿港元)净债爬坡后的净现值，主估值默认按0元白送", "kind": "buyout_net", "value_yi": 11355.17, "per_share": 124.34, "default_on": false, "color": "#0284c7"}, {"id": "workbuddy_opt", "name": "积木④ WorkBuddy(ARR 5亿$) + 微信小店(+407%) + 视频号Ad Load翻倍期权", "plain": "国民级AI工作台与视频号广告加载率(4%-6%→10%)未释放的额外成长红包，主估值严守按0元算", "kind": "fixed_yi", "value_yi": 3500.0, "per_share": 38.32, "default_on": false, "color": "#7c3aed"}], "sotp_base_total": 48027.71, "sotp_base_per_share": 525.9, "floor_label": "5年极端2.10× PB历史铁底", "floor_note": "归母每股净资产155.84港元 × 近5年极端历史PB铁底2.10× = 327.26港元/股（29,887亿港元），叠加5,799亿RMB打折股票净赠品，当前337.40港元几乎平价踩在5年极寒铁底上", "floor_total_yi": 28031.38, "floor_per_share": 306.94}, "zones": {"fair_price": 535.05, "tier2_max": 359.89, "tier1_max": 310.08, "overvalued_price": 668.81, "fair_mult": 16.99, "tier2_max_mult": 10.8, "tier1_max_mult": 9.04, "ttm_dps": 5.3, "steady_dps": 7.814, "ttm_div_now_pct": 1.57, "steady_div_now_pct": 2.32, "pb_check": {"now_rep_pb": 2.17, "now_ex_pb": 2.17, "t1_rep_pb": 1.99, "t1_ex_pb": 1.99, "pb_6y_floor": 2.1, "t1_vs_floor_pct": -5.2, "pass": true}, "ah_corridor": null}}}, "swarm": {"company": "腾讯控股", "code": "00700.HK", "date": "2026-11-25", "default_mode": "plain", "badge": "V2.2 跨模型物理双盲 · 三轮打满 R2.5 极限收口", "subtitle": "Gemini 4 Neon（多头 & 裁判） vs Claude Opus 5.5（零信任空头）｜裁判破案 264.7 亿投资收益盲区 × 实砍 1,030 亿刚性维持 × 纠偏分母双扣与再投资双罚", "roles": {"host": {"name": "投委会主席", "model": "宿主中枢", "avatar": "🎙️", "cls": "host", "side": "left"}, "bull": {"name": "多头猎手（林奇）", "model": "Gemini 4 Neon", "avatar": "🐂", "cls": "bull", "side": "left"}, "bear": {"name": "做空审计官", "model": "Claude Opus 5.5", "avatar": "🐻", "cls": "bear", "side": "right"}, "judge": {"name": "安全边际裁判（马克斯）", "model": "Gemini 4 Neon", "avatar": "⚖️", "cls": "judge", "side": "left"}}, "convergence": [{"label": "多头 R1 盲定纯主业常态自由盈余（steady_oe）", "label_plain": "多头第一轮估算（预扣 600 亿 AI 硬件维持）", "value": "1,950 亿｜纯主业偏移 -5,888 亿｜19.0× → 552.3 港元", "value_plain": "常态赚 1,950 亿｜剥离投资包折后值 5,888 亿｜估 552.3 港元", "color": "bull"}, {"label": "空头 R1 独立亮四刺（双重物理隔离）", "label_plain": "空头第一轮挥出四把尖刀（严扣算力折旧与投资包）", "value": "2,151 亿｜纯主业偏移 -4,712 亿｜14.3× → 455.9 港元", "value_plain": "常态算 2,151 亿，但只给 14.3 倍、狠扣负债 → 估 455.9 港元", "color": "bear"}, {"label": "R2 针锋相对：分母 100% 合意对齐", "label_plain": "第二轮空头爽快撤回少数股东双扣，双方家底账完全对齐！", "value": "分母锁定 -5,799.35 亿｜公允缩窄至 489.6 vs 538.6 港元", "value_plain": "家底净资产完全握手！但还在吵老机房维护和估值倍数", "color": "bull"}, {"label": "R2.5 裁判法庭限时质询：抓出 264.7 亿双边共同盲区！", "label_plain": "加时赛！裁判抓出两边都漏掉的 265 亿投资收益，逼出底牌！", "value": "空头撤回再投资双罚 → 491.0 港元｜多头认账下修 → 494.7 港元", "value_plain": "两边齐认错纠偏，算出的合理价竟然神奇重合在 491–495 港元！", "color": "bear"}, {"label": "裁判 R3 物理双盲落锤终审", "label_plain": "裁判蒙眼一锤定音：打完所有折，合理价 491 港元、抄底 ≤345", "value": "1,850 亿｜偏移 -5,799.35 亿｜公允 491.02｜重锤 ≤345 港元", "value_plain": "真赚 1,850 亿｜家底 +5,799 亿｜合理 491 港元｜抄底 ≤345", "color": "judge"}, {"label": "宿主拆封 2026-11-25 实时现价（零偏见揭盲）", "label_plain": "拆开黑信封：今天只卖 337.40 港元，一脚踩进重锤抄底区！", "value": "现价 337.40 港元（打 6.87 折 / 纯主业回报 9.05% / 2.17×PB）", "value_plain": "今天 337.40 港元（打 6.9 折！主业年回报 9.1%，踩进 5 年铁底）", "color": "gold"}], "topics": [{"id": "all", "icon": "💬", "name": "全部发言", "badge": "18条"}, {"id": "capex", "icon": "🖥️", "name": "AI算力开支与折旧", "badge": "1,030亿"}, {"id": "sbc", "icon": "🎁", "name": "股权激励与回购/Prosus", "badge": "285亿"}, {"id": "portfolio", "icon": "🏦", "name": "9,026亿投资包与净债", "badge": "31%折价"}, {"id": "moat", "icon": "🚀", "name": "游戏广告天花板与倍数", "badge": "17.5×"}, {"id": "verdict", "icon": "⚖️", "name": "R2.5破案与揭盲开箱", "badge": "重锤区"}], "glossary": [{"key": "算力预付款", "match": ["算力预付款", "1,374", "860", "准资本开支", "自由现金流"], "term": "算力采购长期预付款（1,374 亿元）与“准资本开支”", "plain": "腾讯为了提前锁死未来两年的稀缺 AI 显卡和算力，二、三季度一口气预付了 1,374 亿订金。按会计记账这笔钱算进日常经营支出，导致三季度账面自由现金流变成 -691 亿；其实这笔钱本质上是“提前付的买设备钱（准资本开支）”，并非老业务亏钱失血。", "usage": "本次辩论第一大战场：多头认领它确实耗真钱且高位延到 2027 年底，裁判在中期达产模型里专门扣了 800 亿净债爬坡。"}, {"key": "刚性维持开支", "match": ["维持性", "1,030", "老机房", "258", "延寿", "折旧年限"], "term": "AI 时代刚性维持性总开支（1,030 亿元/年）与服务器延寿", "plain": "腾讯 2025 年把部分服务器折旧年限从 4 年拉长到 6 年，让账面利润显得更好看。但买方绝不吃这套会计红利，反手把每年必须换新的 AI 显卡（540 亿）+ 老机房网络（180 亿）+ 影视音乐版权（240 亿）+ 机房房租（70 亿）全算进去，一年硬扣 1,030 亿才叫真利润！", "usage": "空头 R2 精准抓住多头漏算老机房 258 亿，裁判终审铁面锁死 1,030 亿/年。"}, {"key": "股权激励与回购", "match": ["股权激励", "SBC", "回购", "Prosus", "70 亿港元", "285"], "term": "股权激励（SBC）真实成本 vs 注销式回购与 Prosus 减持", "plain": "腾讯每年发给员工约 285 亿股票奖励（这就是真的人工工资成本，必须从利润里实扣）。过去腾讯一年花上千亿港元回购注销股票，远超发给员工的数量；但 2026 年三季度为了砸钱买 AI 显卡，单季回购缩到了 70 亿港元（比发给员工的还少）。至于南非大股东 Prosus 卖股，只是老股东倒手，不会让总股本变多。", "usage": "铁律：利润里全额实扣 285 亿股权激励，同时不给过往回购额外估值溢价，杜绝两头占便宜。"}, {"key": "外部投资包折价", "match": ["投资包", "9,026", "6,227.8", "31%", "上市投资", "非上市"], "term": "外部投资组合折价（9,026 亿 → 6,227.8 亿，综合 31% 折价）", "plain": "腾讯手里除了微信和游戏，还拿着价值 9,026 亿的其他公司股票（比如拼多多、美团系以外的上市企业 5,054 亿，以及 Epic Games、微众银行等未上市股权 3,972 亿）。考虑到卖股要交税且大宗变现难，咱们给上市股打 8 折、未上市股打 55 折，只认 6,227.8 亿当“随房附送的保险柜股票”。", "usage": "防双算铁律：既然在买价里扣掉了这 6,228 亿股票，算主业每年赚多少钱时就必须把联营利润、投资收益和股票分红全清零！"}, {"key": "投资收益盲区", "match": ["264.72", "231.69", "溢利其他项目", "投资净收益", "盲区"], "term": "R2.5 裁判破案：264.72 亿「投资净收益」双边共同盲区", "plain": "多空前两轮都在算纯主业利润时扣掉了联营公司利润，却双双漏掉利润表里另一行不起眼的“溢利其他项目（主要是卖股票赚的钱和收的投资分红）”，过去一年高达 264.72 亿！裁判一眼揪出这个漏洞，逼着两边重新把这笔卖股票赚的钱剔干净，才算出了最纯净的主业赚钱力。", "usage": "本次强制开启 R2.5 法庭限时质询的最大含金量所在，直接促使双方公允价在 491–495 港元极限收口！"}, {"key": "再投资双重惩罚", "match": ["RONIC", "再投资", "双重惩罚", "152 亿", "450–600"], "term": "AI 费用化亏损与新增资本回报率（RONIC）双重惩罚", "plain": "腾讯今年每个季度都在利润表里硬扛着约 152 亿的新 AI 研发与推理净亏损（一年 450–600 亿），这笔钱已经提前从常态利润里扣死、等于预付了未来增长的学费。如果算倍数时再用“未来想增长 2% 还得另外扣钱（RONIC 打折）”把估值再砍一刀，就把同一笔 AI 投入惩罚了两遍！", "usage": "R2.5 裁判点破后，Claude Opus 空头爽快撤回 RONIC 额外打折，体现顶级买方公正度。"}, {"key": "苹果税12%", "match": ["苹果税", "12%", "64.09%", "顺价权", "WorkBuddy"], "term": "12% 苹果税与微信超级生态终极顺价权", "plain": "全世界软件公司见了苹果都得交 30% 抽成，唯独腾讯靠 14.5 亿微信用户的不可替代性，逼得苹果在 2026 年 3 月把中国内地微信小游戏抽成从 30% 砍到 12%，直接把腾讯增值服务毛利率推上 64.09% 历史新高——这就是用真金白银验出来的顶级护城河。", "usage": "支撑腾讯 T0 皇冠基石定位与纯主业 17.5 倍公允倍数的底层商业逻辑。"}, {"key": "纯主业CoreEV", "match": ["core_ev_delta", "Core EV", "5,799.35", "20,431", "11.04"], "term": "纯主业企业价值（Core EV）与 11.04 倍极端错杀", "plain": "按今天 337.40 港元买下整家腾讯要花 2.62 万亿人民币，加上 428 亿净债，再减去屋里保险柜自带的 6,228 亿打折股票（净减 5,799 亿），你买下“微信 + 游戏 + 广告 + 微信支付 + 腾讯云 + AI”全部主业实际只花了 2.04 万亿！而这套超级主业扣光所有 AI 亏损和折旧后一年还能净赚 1,850 亿，只卖 11 倍（年化回报 9.05%）！", "usage": "剥离投资包后才能看清腾讯当下到底被市场错杀到了什么惊人程度。"}], "messages": [{"id": "M01", "role": "host", "topic": "capex", "round": "🔒 V2.2 物理双盲开庭 · 封箱港股现价（打满 3 轮）", "round_plain": "🔒 蒙眼投委会开庭 · 今天港股股价彻底锁进黑信封！", "time": "21:03", "act": {"text": "🔒 双盲封箱", "cls": "act-host"}, "text": "欢迎进入 <b>腾讯控股（00700.HK）V2.2 跨模型物理双盲投委会</b>！最新基准 <b>2026 年三季报（2026-09-30）</b>，法定总股本 <b>91.3252 亿股</b>，汇率 <b>1 港元 = 0.8513 人民币</b>，每股净资产 <b>155.84 港元</b>（近 5 年极端市净率铁底 <b>2.1×—2.3×</b>）。实时股价与旧买点已物理封存，本次强制开启 <b>R2.5 法庭限时质询</b> 打满 3 轮，请 <b>Gemini 4 Neon（多头）</b> 与 <b>Claude Opus 5.5（零信任空头）</b> 刺刀见红死磕四大焦点：AI 资本开支与折旧、股权激励与回购、9,026 亿投资包折价、游戏与广告天花板！", "plain": "今天请来两大顶级 AI 家族硬碰硬：<b>Gemini 4 Neon 当多头和裁判</b>，<b>Claude Opus 5.5 当冷血做空审计官</b>！全程蒙眼不准偷看今天股价，而且强制打满 3 轮加裁判加时赛，重点算清腾讯四笔大账：AI 狂砸钱是不是无底洞、给员工发股票和回购怎么抵账、账上 9,000 亿投资组合值多少钱、游戏广告还能不能接着印钞！"}, {"id": "M02", "role": "bull", "topic": "capex", "round": "⚔️ 第一轮（R1）· 多头亮四大支柱 vs 空头独立挥出四把尖刀", "round_plain": "⚔️ 第一轮 · 多头抢先亮牌，空头双盲隔离反手刺出四把尖刀！", "time": "21:07", "act": {"text": "🐂 立论 1 · 穿透 AI 资本开支与预付错配", "cls": "act-bull"}, "text": "<b>支柱一【负自由现金流系预付错配，已前置扣足 600 亿 AI 硬件维持】</b>：2026 年三季度自由现金流（FCF）账面为 <b>-691 亿元</b>，实因经营现金流（OCF）内计入了 <b>860 亿元算力采购预付款</b>；剔除后单季自由现金流仍为 <b>+169 亿元</b>，全年稳态经营现金流锚定 <b>3,200 亿元</b>！2025 年报附注虽将部分服务器折旧年限由 4 年延至 6 年，但我<b>拒收会计红利</b>，按 2,500–3,000 亿算力底盘及 4.5–5 年真实寿命直接前置扣除 <b>600 亿/年硬件维持 + 240 亿版权 + 70 亿租赁</b>，叠加利润表剔除联营后纯主业 9 个月暴增 <b>+20.0%</b>，双路径锁死纯主业常态自由盈余（steady_oe）<b>1,950 亿元</b>！", "plain": "<b>多头第一张牌：别被三季度 -691 亿自由现金流吓破胆！</b>那里面有 <b>860 亿</b>是提前付出去抢 AI 显卡的订金，把订金剔掉，腾讯三季度照样净赚 <b>+169 亿</b>真现金！而且我绝不占服务器拉长折旧的会计便宜，直接按 5 年寿命提前狠扣 <b>600 亿</b>硬件换新钱、再扣版权和房租，算下来纯主业正常一年稳赚 <b>1,950 亿</b>！", "cites": ["3Q2026 业绩公告", "2025 年报折旧附注"]}, {"id": "M03", "role": "bull", "topic": "sbc", "round": "⚔️ 第一轮（R1）· 多头亮四大支柱 vs 空头独立挥出四把尖刀", "round_plain": "⚔️ 第一轮 · 多头抢先亮牌，空头双盲隔离反手刺出四把尖刀！", "time": "21:07", "act": {"text": "🐂 立论 2 · 实扣激励、31% 投资折价与 12% 苹果税", "cls": "act-bull"}, "text": "<b>支柱二至四【实扣股权激励 + 31% 投资包折价 + 生态顺价霸权】</b>：① 3Q26 股权激励（SBC）已降至 71.15 亿（年化 284.6 亿），我在常态盈余里<b>全额实扣 280 亿</b>，南非大股东 Prosus 卖股仅属存量换手、零增总股本；② 外部投资组合 <b>9,026 亿</b>按上市 8 折（5,054×0.8）+ 非上市 55 折（3,972×0.55）折后 <b>6,227.8 亿</b>（综合折价 31%），扣合并含租赁净债 339.39 亿得纯主业偏移 <b>-5,888.41 亿</b>；③ 苹果将内地微信小游戏抽成从 30% 砍至 <b>12%</b>，3Q26 增值服务毛利率飙至 <b>64.09%</b>、腾讯云暴增 <b>+35%</b>、微信小店双 11 暴增 +407%！按纯主业 <b>19.0 倍</b>（内生回报 5.26%），盲定公允中枢 <b>552.30 港元/股</b>！", "plain": "<b>多头连出三张王牌：</b>发给员工的 280 亿股票奖励我全额当真钱扣了；账上 9,026 亿投资股票我狠狠打 69 折只认 <b>6,228 亿</b>；最硬的是苹果都低头把微信小游戏抽成从 30% 砍到 <b>12%</b>，腾讯云暴涨 35%！给纯主业 <b>19 倍</b>，我盲定合理价 <b>552.30 港元/股</b>！", "cites": ["上市 5,054 亿 / 非上市 3,972 亿", "3Q26 VAS 毛利率 64.09%"], "impact": {"text": "多头 R1：steady_oe 1,950 亿｜偏移 -5,888 亿｜公允 552.30 港元", "plain": "多头开价：常态赚 1,950 亿、家底 +5,888 亿、合理价 552.30 港元", "pos": true}}, {"id": "M04", "role": "bear", "topic": "capex", "round": "⚔️ 第一轮（R1）· 多头亮四大支柱 vs 空头独立挥出四把尖刀", "round_plain": "⚔️ 第一轮 · 多头抢先亮牌，空头双盲隔离反手刺出四把尖刀！", "time": "21:07", "act": {"text": "🗡️ 刺 1 · 1,374 亿预付就是换马甲的资本开支", "cls": "act-bear"}, "text": "<b>刺 1【算力预付款 = 换了马甲的资本开支 + 折旧悬崖】</b>：2026 年前三季资本开支从 Q1 319 亿一路飙至 Q3 814 亿（全年推算 2,475 亿，是 2025 年 3 倍多），经营现金流单季从 1,013.5 亿骤降至 <b>26.5 亿</b>！二、三季合计 <b>1,374 亿算力预付款</b>本质就是未来的显卡服务器，不能轻描淡写成“错配”，Q2+Q3 真实自由现金流合计 <b>-829 亿</b>，单季有息负债猛增 <b>864.7 亿</b>！等 AI 新机队全投用，年折旧摊销会从 ~558 亿翻倍冲向 <b>1,169 亿</b>，哪怕一半算维持性开支也要 <b>863.4 亿</b>，必须从常态利润里硬砍折旧缺口！", "plain": "<b>空头第一刀直刺要害：</b>别拿“预付款错配”自我安慰！1,374 亿预付款买的就是未来显卡，本质就是花出去的真钱，一个季度有息负债就暴涨 <b>865 亿</b>！等这批天价显卡陆续进账开始提折旧，每年折旧费会直接翻倍，正常年份的维护开支绝对不止你拍的那点钱！", "cites": ["2Q+3Q 算力预付款 1,374 亿", "单季有息债 +864.7 亿"]}, {"id": "M05", "role": "bear", "topic": "sbc", "round": "⚔️ 第一轮（R1）· 多头亮四大支柱 vs 空头独立挥出四把尖刀", "round_plain": "⚔️ 第一轮 · 多头抢先亮牌，空头双盲隔离反手刺出四把尖刀！", "time": "21:07", "act": {"text": "🗡️ 刺 2 · 单季回购已缩到不够填股权激励的坑", "cls": "act-bear"}, "text": "<b>刺 2【回购断崖缩水，净回馈几乎打平激励】</b>：2025 年注销式回购 800 亿港元（注销 1.68% 股本）的风光已经一去不复返！2026 年前三季回购骤降至 <b>315 亿港元</b>（约 268.2 亿人民币，仅注销 0.72%），<b>三季度单季更是缩到 70 亿港元（~59.6 亿人民币），已经低于单季股权激励（SBC）</b>，加权股本同比只缩了 0.79%！请多头讲清楚：绝对不准一边把激励加回利润、一边又把回购吹成额外收益！南非大股东 Prosus 卖股确实只算换手，但腾讯回购弹药已经被 AI 抽干了！", "plain": "<b>空头第二刀砍向回购神话：</b>去年花 800 亿港元大回购的好日子结束了！今年三季度单季只回购了 <b>70 亿港元</b>，连给员工发股票激励的坑都填不平！钱全被 AI 算力吸走了，休想再拿“高回购”给腾讯加估值溢价！", "cites": ["3Q26 单季回购 70 亿港元", "9M26 股本溢价 +148.4 亿"]}, {"id": "M06", "role": "bear", "topic": "portfolio", "round": "⚔️ 第一轮（R1）· 多头亮四大支柱 vs 空头独立挥出四把尖刀", "round_plain": "⚔️ 第一轮 · 多头抢先亮牌，空头双盲隔离反手刺出四把尖刀！", "time": "21:07", "act": {"text": "🗡️ 刺 3&4 · 严口径净债 + 广告毛利跌 5 个点 → 455.9 港元", "cls": "act-bear"}, "text": "<b>刺 3&4【严口径负债穿透 + 广告毛利率滑坡】</b>：① 三表现金及定存 4,888.8 亿减借款票据 5,394.3 亿、租赁 202.1 亿、其他金融负债 89.1 亿及<b>少数股东权益 863.6 亿</b>，合并偏移高达 <b>+1,660.3 亿</b>；投资包按上市 75 折+非上市 65 折计 6,372.3 亿，纯主业偏移仅 <b>-4,712.0 亿</b>（分子同步剔除联营/分红/利息 144.3 亿）；② 3Q26 国际游戏同比 <b>-9%</b>，营销服务毛利率从 <b>57% 跌到 52%</b>，AI 推理是长期持续成本！我算出常态自由盈余 <b>2,151 亿</b>，但纯主业只给 <b>7.0% 收益率（14.3 倍）</b>，空头盲定公允 <b>455.9 港元</b>（重锤 ≤319.1 港元）！", "plain": "<b>空头第三、四刀一起落：</b>我按最严口径把少数股东和金融负债全扣完，只认纯主业家底 <b>4,712 亿</b>！而且三季度国际游戏跌了 9%、广告毛利率从 57% 掉到 52%，说明 AI 推理在持续啃食利润！虽然我算主业常态能赚 <b>2,151 亿</b>，但我只愿给 <b>14.3 倍</b>，合理价只有 <b>455.9 港元</b>！", "cites": ["3Q26 广告毛利率 57%→52%", "国际游戏 -9%"], "impact": {"text": "空头 R1：steady_oe 2,151 亿｜偏移 -4,712 亿｜公允 455.9 港元", "plain": "空头砍价：家底少算 1,176 亿、只给 14.3 倍 → 合理价 455.9 港元", "pos": false}}, {"id": "M07", "role": "bull", "topic": "capex", "round": "🔥 第二轮（R2）· 多头认领 3 处硬伤 + 铁证反杀分母 1,232 亿双扣", "round_plain": "🔥 第二轮 · 多头先爽快认错 3 件事，再抓出空头 1,232 亿账目错配！", "time": "21:09", "act": {"text": "🤝 认领 3 处硬伤 · 承认高开支延至 2027 年底", "cls": "act-bull"}, "replyTo": "M04", "text": "面对空头精准审计，我先<b>坦诚认领三处硬伤</b>：① 认领 <b>1,374 亿算力预付款本质属准资本开支</b>，R1 轻描淡写为“错配”不妥，且 3Q26 电话会已明示现金资本开支高位会延续到 <b>2027 年底</b>（2028 年回落）；② 认领 3Q26 单季回购 70 亿港元确已阶段性低于单季股权激励（71.15 亿）；③ 接纳将 <b>89.06 亿其他金融负债</b>并入审慎债务！但我反杀你的折旧推算：3Q26 全口径折旧摊销实数为 <b>197.5 亿/季（年化 790 亿）</b>，2025 物业设备折旧仅 327.99 亿，且你把 2026 资本开支和预付款叠算成 3,057 亿属跨期双算！", "plain": "空头查得很准，我先<b>老老实实认错 3 件事</b>：1,374 亿预付款确实就是提前买设备，而且高烧钱要一直扛到 <b>2027 年底</b>；三季度回购确实降到连股权激励都不够填；89 亿其他金融负债我也认账扣进债里！但你把今年花销和预付款叠起来算 3,057 亿机队属于重复算账！"}, {"id": "M08", "role": "bull", "topic": "portfolio", "round": "🔥 第二轮（R2）· 多头认领 3 处硬伤 + 铁证反杀分母 1,232 亿双扣", "round_plain": "🔥 第二轮 · 多头先爽快认错 3 件事，再抓出空头 1,232 亿账目错配！", "time": "21:09", "act": {"text": "🛡️ 铁证反杀 · 抓获空头分母 1,232 亿双扣与过度杀倍数", "cls": "act-bull"}, "replyTo": "M06", "text": "<b>反杀两大致命错配与 AI 商业化铁证</b>：① 你分子用归母净利（早已扣完少数股东损益），分母却把 <b>863.6 亿少数股东权益</b>当成母公司负债再扣一遍，属典型双扣！又把官方总现金 5,257 亿里合法的 <b>368.2 亿资金管理存款</b>直接清零，两项凭空蒸发 <b>1,231.8 亿（15.8 港元/股）</b>！② AI 变现已见真金白银：腾讯云增速从 Q2 +21% 飙至 <b>+35%</b>，<b>WorkBuddy 日活破千万、近 7 天年化收入运行率（ARR）破 5 亿美元</b>，传统主业经营利润稳达 833 亿（+8%）！在 10 年国债 1.75% 环境下给零成长 14.3 倍严重过度杀估值！我微调至 <b>18.5 倍</b>，公允 <b>538.61 港元</b>。", "plain": "<b>但空头你这两刀砍冤了，抓个现行！</b>第一，利润表里早就把小股东那份扣干净了，你又在买价里把 <b>863.6 亿少数股东权益</b>当债重扣一遍，还把 <b>368 亿银行理财现金</b>直接归零，凭空砍掉 <b>1,232 亿</b>！第二，AI 早就开始赚钱了：腾讯云暴涨 35%，AI 工作台 WorkBuddy 日活破千万、年化收入破 <b>5 亿美元</b>，绝不是零成长死公司！我微调公允至 <b>538.61 港元</b>。", "cites": ["WorkBuddy ARR 破 5 亿美元", "腾讯云 Q3 +35%"], "impact": {"text": "反杀分母 1,232 亿误扣，多头 R2 修正公允 538.61 港元", "plain": "抓出空头 1,232 亿重复扣减，多头微调合理价至 538.61 港元", "pos": true}}, {"id": "M09", "role": "bear", "topic": "portfolio", "round": "⚡ 第二轮（R2）· 空头体面撤回分母误杀，反手补刀老机房与再投资", "round_plain": "⚡ 第二轮 · Opus 空头极度体面：爽快认错对齐家底，再祭出两记致命补刀！", "time": "21:11", "act": {"text": "🏳️ 撤回三项 · 分母与多头 100% 握手对齐", "cls": "act-bear"}, "replyTo": "M08", "text": "<b>爽快撤回三项（证据成立，我认错！）</b>：① <b>少数股东权益 863.6 亿撤回</b>：归母分子下分母再扣确属双扣；② <b>368.2 亿资金管理存款撤回</b>：接受计入总现金，合并净债与多头 100% 对齐至 <b>+428.45 亿</b>，投资组合采用多头更保守的 6,227.8 亿，纯主业偏移彻底锁定 <b>-5,799.35 亿</b>；③ <b>股权激励基数纠偏</b>：改用年化 284.6 亿（我利润法起算已扣，常态盈余暂不变）。", "plain": "<b>空头爽快认输三处：</b>多头抓得对！利润里已扣过小股东，分母再扣 863.6 亿确实重复了，我撤回！368 亿银行理财现金我也认！咱俩在“欠债与打折投资包”这笔家底账上 <b>100% 握手对齐在 +5,799.35 亿</b>！", "impact": {"text": "分母 100% 合意对齐：ev_delta +428.45 亿 / core_ev_delta -5,799.35 亿", "plain": "多空在家底账上完全握手：纯主业净减项锁死 5,799.35 亿元！", "pos": true}}, {"id": "M10", "role": "bear", "topic": "capex", "round": "⚡ 第二轮（R2）· 空头体面撤回分母误杀，反手补刀老机房与再投资", "round_plain": "⚡ 第二轮 · Opus 空头极度体面：爽快认错对齐家底，再祭出两记致命补刀！", "time": "21:11", "act": {"text": "🗡️ 精准补刀 · 漏扣老机房 258 亿 + 成长不是免费的", "cls": "act-bear"}, "replyTo": "M07", "text": "<b>但两把致命补刀请裁判裁定！</b>① <b>多头维持性开支漏扣 258 亿</b>：你扣的 600 亿只够换新 AI 机队，可 2025 年 AI 还没大铺开时，老机房、网络等物业设备折旧扣掉租赁就已经有 <b>258 亿</b>，你压根没算！补扣后你现金流法利润跌至 1,682 亿，自己两条线打架！② <b>18.5 倍里的 2% 永续增长不是免费的</b>：按新增资本回报率（RONIC）20% 扣掉再投资率（1 - 2%÷20%），叠加芯片出口管制与由净现金转净债的 <b>8.0% 股权要求回报率</b>，合理倍数封顶 <b>15.0 倍</b>！空头修正盲定公允 <b>489.6 港元</b>（重锤 ≤342.7 港元），请裁判开庭！", "plain": "<b>家底对齐了，但这两道死结我绝不退让！</b>第一，你扣的 600 亿只够换 AI 显卡，把每年 <b>258 亿老机房老网络维护钱</b>漏掉了！第二，想让利润每年永续涨 2% 是要继续掏钱再投资的，加上芯片禁令和负债上升，最多只配给 <b>15 倍</b>！我修完家底后合理价升到 <b>489.6 港元</b>，请裁判开庭决断！", "cites": ["2025 传统设备折旧 ~258 亿", "RONIC 20% / Ke 8.0% → 15.0×"], "impact": {"text": "空头 R2 修正公允升至 489.6 港元（重锤 ≤342.7 港元）", "plain": "家底纠偏后，空头合理价大涨至 489.6 港元，但死守 15 倍！", "pos": false}}, {"id": "M11", "role": "judge", "topic": "verdict", "round": "⚡ 加时赛（R2.5）· 裁判法庭限时质询：一剑挑穿 264.7 亿双边盲区！", "round_plain": "⚡ 加时赛开打！裁判亮出官方三表铁证，一眼揪出两边共同漏掉的 265 亿！", "time": "21:14", "act": {"text": "⚖️ 裁判点题 · 质询 1：双边漏剥 264.72 亿投资收益", "cls": "act-judge"}, "replyTo": "M10", "text": "<b>【R2.5 法庭限时质询 · 死结一与二】</b>本庭核验官方三表后，抓出<b>双方共同硬核盲区</b>：① 利润表“溢利其他项目（投资净收益及其他）”过去 12 个月高达 <b>+264.72 亿</b>（9M26 +231.69 亿）！既然分母已剥离 6,227.8 亿投资包，<b>为何双方利润表路径都只剥了联营、漏剥这 264.7 亿投资收益？</b>剔除后真实主业利润是多少？② 空头 R2 误扣利息收入 39.92 亿高估了折旧（实数全口径约 790 亿/年），但追问<b>老机房 258 亿是否被 AI 替代还是叠加</b>切中要害，请双方给最终刚性维持开支精算数！", "plain": "<b>裁判敲法槌启动加时赛！</b>我核对官方财报抓到个大漏洞：过去一年腾讯靠卖股票和收股息赚了 <b>264.72 亿（溢利其他项目）</b>，你们俩一边把 9,000 亿股票包单独算钱，一边又把这 265 亿炒股盈利留在主业利润里，<b>全算重了！</b>赶紧剔干净重新报数，顺便把老机房 258 亿是不是重复算账说清楚！", "cites": ["官方三表溢利其他项目 TTM +264.72 亿", "3Q26 D&A 实数 ~790 亿/年"]}, {"id": "M12", "role": "judge", "topic": "moat", "round": "⚡ 加时赛（R2.5）· 裁判法庭限时质询：一剑挑穿 264.7 亿双边盲区！", "round_plain": "⚡ 加时赛开打！裁判亮出官方三表铁证，一眼揪出两边共同漏掉的 265 亿！", "time": "21:14", "act": {"text": "⚖️ 裁判点题 · 质询 2&3：拷问再投资双罚与过渡期净债", "cls": "act-judge"}, "replyTo": "M11", "text": "<b>【R2.5 法庭限时质询 · 死结三】</b>① <b>拷问空头</b>：3Q26 腾讯新 AI 产品单季净拖累已高达 <b>152 亿</b>（年化 450–600 亿）并已全额扣死在常态利润里，分母再套新增资本回报率（RONIC）20% 打折到 15 倍，<b>是否对 AI 投入构成双重惩罚？</b>② <b>拷问多头</b>：广告毛利率降 5 个点，18.5 倍怎么消化？③ <b>共答两问</b>：368.24 亿银行理财是否 100% 不与 3,972 亿非上市股权重叠？4Q26–2027 过渡期超额资本开支爬升的净债如何入价？各限 600 字短答！", "plain": "<b>再逼问两边最后三道死题：</b>问空头——腾讯一年 <b>450–600 亿</b>的 AI 新业务亏损已经全从利润里扣死了，分母再扣再投资折价是不是把 AI 罚了两遍？问多头——广告毛利率掉了 5 个点凭啥给 18.5 倍？最后一起确认：368 亿理财跟非上市股权有没有算重，以及 2027 年继续烧钱涨出来的欠债怎么算账！"}, {"id": "M13", "role": "bear", "topic": "verdict", "round": "🎯 加时短答 · 空头撤回再投资双罚，多空惊人收口 491 vs 495 港元！", "round_plain": "🎯 加时赛高能名场面！空头多头双双认账，合理价竟然奇迹重合！", "time": "21:15", "act": {"text": "🐻 R2.5 短答 · 认领盲区 & 爽快撤回 RONIC 双罚", "cls": "act-bear"}, "replyTo": "M12", "text": "<b>空头 R2.5 短答（两处认账 + 一处爽快撤回）：</b>① <b>认领 264.72 亿投资收益盲区与折旧误扣</b>：剔除投资收益、撤回重复扣的 65 亿分红，并按刚性维持 <b>1,173.4 亿</b>对照 790 亿折旧实数重算，我的纯主业常态自由盈余（steady_oe）精准下修至 <b>1,942.4 亿</b>（分子之争结束！）；② <b>裁判说得对，撤回 RONIC 额外打折！</b>年化 ~608 亿新 AI 亏损远大于 2% 增长所需再投资，再打折确属双罚！改回戈登模型守 <b>8.0% 股权成本 → 16.67 倍</b>；③ 确认 368.24 亿属债权类理财与股权零重叠；过渡期净超额开支扣预付款后约 <b>760.8 亿</b>（只在给 AI 溢价时扣）。<b>空头终版公允：491.0 港元（重锤 ≤343.7 港元）！</b>", "plain": "<b>空头服气认账，打出满分格局：</b>第一，265 亿炒股盈利确实该剔，算完我认可纯主业正常赚 <b>1,942 亿</b>！第二，裁判说得对，一年 600 亿 AI 亏损已经在利润里扣死了，分母再扣再投资确实罚了两遍，我爽快撤掉，按 8% 门槛给 <b>16.67 倍</b>！第三，确认 368 亿理财和股权零重叠！<b>空头终版合理价：491.0 港元（重锤 ≤343.7 港元）！</b>", "impact": {"text": "空头撤回 RONIC 双罚，终版公允定格 491.0 港元", "plain": "空头撤回双罚，合理价精准定格在 491.0 港元！", "pos": true}}, {"id": "M14", "role": "bull", "topic": "verdict", "round": "🎯 加时短答 · 空头撤回再投资双罚，多空惊人收口 491 vs 495 港元！", "round_plain": "🎯 加时赛高能名场面！空头多头双双认账，合理价竟然奇迹重合！", "time": "21:16", "act": {"text": "🐂 R2.5 短答 · 认领盲区补老机房，公允降至 494.7 港元", "cls": "act-bull"}, "replyTo": "M11", "text": "<b>多头 R2.5 短答（全面收口）：</b>① <b>认领 264.72 亿投资收益盲区 + 补入老机房维持</b>：扣除税后投资收益 221.8 亿后，纯主业 TTM 净利为 2,055.3 亿；考虑到新算力部分替代旧集群，老机房净增维持取 170 亿 + AI 500 亿 + 版权 240 亿 + 租赁 70 亿 = <b>980 亿/年刚性维持</b>，现金流法（1,870 亿）与利润表法（1,875 亿）误差 <0.3%，<b>steady_oe 锁死 1,870 亿</b>！② 广告毛利率下滑主因微短剧内容分成（广告毛利额仍增 +9.2%，集团毛利率反升至 56.8%），倍数微调至 <b>18.0 倍</b>；③ 确认 368 亿银行理财与非上市股权物理隔离，并主动在估值预扣 <b>1,000 亿过渡期净债准备金</b> → <b>多头终版公允：494.68 港元！</b>", "plain": "<b>多头也全面认账收口：</b>我把 265 亿投资收益剔干净，又补上 170 亿老机房维护，每年刚性换新钱提至 <b>980 亿</b>，算下来纯主业正常赚 <b>1,870 亿</b>！广告毛利额其实还在涨 9.2%，但为了稳妥我把倍数微调到 <b>18 倍</b>，还主动多扣了 <b>1,000 亿</b>过渡期欠债准备金 → <b>多头终版合理价：494.68 港元！</b>", "impact": {"text": "奇迹收口！多空终版公允仅差 3.68 港元（491.0 vs 494.7 港元，分歧 <0.8%）", "plain": "奇迹收口！吵了三轮，多头和空头算出的合理价只差 3.7 港元（不到 0.8%）！", "pos": true}}, {"id": "M15", "role": "judge", "topic": "capex", "round": "⚖️ 第三轮（R3）· 裁判零偏见独立验算与物理双盲落锤", "round_plain": "⚖️ 第三轮终审 · 多空只差 0.8%，裁判独立复算一锤定音！", "time": "21:20", "act": {"text": "⚖️ 终审分子分母 · 1,030 亿维持锁死 steady_oe 1,850 亿", "cls": "act-judge"}, "replyTo": "M14", "text": "<b>【R3 物理双盲终审 · 分子与分母唯一裁决】</b>多空经三轮质证已高度收敛至 491—495 港元！本庭直接从天然零联营/零投资收益的 <b>IFRS 经营溢利</b> 与 <b>正常化经营现金流</b> 双路径独立 Python 验算：<br>① <b>分母合意锁死</b>：合并审慎净债 <b>+428.45 亿</b>（含租赁 202.1 亿、其他金融负债 89.06 亿，不含单列受限现金 84.06 亿），扣 31% 折价外部投资包 <b>6,227.80 亿</b> → 纯主业偏移 <b>core_ev_delta = -5,799.35 亿元</b>；中期达产计入 4Q26–2027 净债爬坡 +800 亿 → <b>full_ev_delta = -4,999.35 亿元</b>。<br>② <b>分子严苛锁死</b>：拒绝 6 年服务器延寿红利，裁定刚性维持总开支 <b>1,030 亿/年</b>（传统基建 180 + AI 机队 540 + 版权 240 + 租赁 70），全额实扣 <b>285 亿股权激励</b>、已扣死年化 450–600 亿新 AI 亏损，综合利润法（1,758–1,803 亿）与现金流法（1,850 亿，含递延收入浮存），落锤 <b>steady_oe = 1,850 亿元</b>、2028E 达产 <b>full_oe = 2,200 亿元</b>！", "plain": "<b>裁判开宣：多头和空头吵满三轮只差 3.7 港元，我用最干净的官方原数独立重算一遍拍板！</b><br>① <b>家底账</b>：扣掉所有真欠债和房租净欠 428 亿，但手里握着打完 69 折还值 <b>6,228 亿</b>的股票包，算下来买腾讯纯主业自带 <b>5,799 亿元净赠品</b>！<br>② <b>赚钱力</b>：每年狠扣 <b>1,030 亿</b>换新设备/版权费、扣完 <b>285 亿</b>员工股票激励、再把现在一年 <b>500 多亿</b> AI 亏损全算死，纯主业照样稳稳净赚 <b>1,850 亿元</b>（2028 年 AI 止血后看 <b>2,200 亿元</b>）！", "cites": ["刚性维持 1,030 亿/年", "steady_oe 1,850 亿 / full_oe 2,200 亿"]}, {"id": "M16", "role": "judge", "topic": "moat", "round": "⚖️ 第三轮（R3）· 裁判零偏见独立验算与物理双盲落锤", "round_plain": "⚖️ 第三轮终审 · 多空只差 0.8%，裁判独立复算一锤定音！", "time": "21:20", "act": {"text": "⚖️ 终审倍数 · 17.5× 锁死公允 491.02 港元", "cls": "act-judge"}, "replyTo": "M15", "text": "<b>【R3 倍数与过渡期折现交叉验证】</b>锚定国内 10 年期国债 <b>1.75%</b> + 约 <b>600 基点</b> 股权风险溢价（兼顾芯片管制与由净现金转净债，股权要求回报率 7.71%、永续增长 2.0%，绝不重复加 RONIC 双罚），裁定纯主业合理公允倍数 <b>17.5×</b>（实扣后内生自由盈余收益率 <b>5.71%</b>）！<br>由此算得总股权价值 <b>38,174 亿人民币</b> → <b>公允价值中枢 = 491.02 港元/股（418.00 元人民币/股，3.15× 市净率）</b>！用 2028 年达产 2,200 亿配 -4,999.35 亿偏移按 7.75% 折现回今天加两年分红，交叉验算现值为 <b>489.17 港元/股</b>，误差小于 0.4%！", "plain": "<b>给多少倍最公道？</b>现在存 10 年国债利息只有 1.75%，腾讯既有 14.5 亿微信用户的绝对垄断，又有芯片管制和 AI 烧钱的短期压力，咱们要求比国债高出 6 个点的风险回报，裁定纯主业给 <b>17.5 倍</b>（实扣所有花销后年回报 5.71%），算出合理公允价 = <b>491.02 港元/股</b>！拿 2028 年达产往回折现算出来也是 489 港元，两边严丝合缝！", "cites": ["10Y 国债 1.75% + 600bps", "纯主业 17.5× / 交叉验证误差 <0.4%"], "impact": {"text": "裁判终审锁死：公允中枢 491.02 港元/股（418.00 元人民币/股）", "plain": "裁判一锤定音：腾讯合理公允价 = 491.02 港元/股！", "pos": true}}, {"id": "M17", "role": "judge", "topic": "verdict", "round": "⚖️ 第三轮（R3）· 裁判零偏见独立验算与物理双盲落锤", "round_plain": "⚖️ 第三轮终审 · 多空只差 0.8%，裁判独立复算一锤定音！", "time": "21:20", "act": {"text": "🔨 盲定落锤 · 二档 345-405 / 重锤 ≤345 港元", "cls": "act-judge"}, "text": "<b>严守安全边际带宽与近 5 年极端 PB 铁底（2.1×—2.3×）盲定击球区：</b><br>① <b>第一档 · 左侧重锤区：≤ 345.00 港元</b>（公允 70.3%，市净率 <b>2.21× PB</b> 正中近 5 年极端铁底靶心！纯主业常态收益率 <b>≥ 8.80%</b>、达产 <b>≥ 10.08%</b>）；<br>② <b>第二档 · 正常建仓区：345.00 — 405.00 港元</b>（公允 70.3%—82.5%，市净率 2.21×—2.60×，纯主业常态收益率 7.20%—8.80%）；<br>③ <b>梯队与仓位纪律</b>：<b>T0 皇冠级核心基石</b>，常态上限严守 <b>15%</b>，仅跌入 <b>≤ 345 港元</b> 极端错杀重锤区可触及 <b>20%</b> 宪法顶格！终审完毕，请主席拆封实时股价！", "plain": "<b>对照过去 5 年最恐慌的市净率地板（2.1–2.3 倍），蒙眼画出两道黄金买点：</b><br>① <b>闭眼左侧重锤抄底价：345.00 港元以下</b>（合理价打 7 折，市净率 2.21 倍正踩 5 年历史铁底，纯主业一年赚 8.8%—10.1%！）；<br>② <b>正常分批买点：345.00 — 405.00 港元</b>；<br>③ 评级 <b>T0 皇冠基石</b>，平时最多买 <b>15%</b>，跌进 345 港元以下可以顶格拉满 <b>20%</b>！请主席拆开黑信封揭晓今天股价！", "table": {"headers": ["物理双盲终审核心指标", "唯一落锤数值", "校验与纪律说明"], "rows": [["合并审慎净债（ev_delta）", "<b>+428.45 亿人民币</b>", "含租赁 202.1 亿 + 其他金融负债 89.06 亿（不含受限 84.06 亿）"], ["纯主业偏移（core_ev_delta）", "<b>-5,799.35 亿人民币</b>", "剥离 31% 折价外部投资包 6,227.80 亿（达产 -4,999.35 亿）"], ["常态 / 达产自由盈余（OE）", "<b>1,850 / 2,200 亿人民币</b>", "零投资收益、全扣 285 亿激励、1,030 亿维持及新 AI 亏损"], ["公允价值中枢（纯主业 17.5×）", "<b>491.02 港元/股</b>（418.00 元）", "对应 3.15× PB，2028E 达产折现交叉验证 489.17 港元"], ["正常建仓区 / 左侧重锤区", "<b>345—405 港元 / ≤ 345 港元</b>", "重锤线 2.21× PB 正中 5 年极端铁底，T0 上限 15%（极值 20%）"]]}, "table_plain": {"headers": ["专家蒙眼算出的总账", "最终拍板数字", "大白话解释"], "rows": [["欠债净额 vs 附赠打折股票包", "<b>净赠品 5,799 亿人民币</b>", "扣光欠债后，保险柜里打 69 折的股票还多出 5,799 亿"], ["纯主业正常每年真赚多少钱", "<b>1,850 亿元</b>（2028 年 2,200 亿）", "剔光炒股收入，全扣换新设备、员工发股和 AI 亏损后的真钱"], ["合理公允价（纯主业 17.5 倍）", "<b>491.02 港元/股</b>", "涨回这里才算不便宜也不贵，对应 3.15 倍市净率"], ["正常买点 / 闭眼重锤抄底价", "<b>345–405 / 345 港元以下</b>", "345 港元正踩 5 年历史铁底，属于极难得的皇冠级打折价"]]}}, {"id": "M18", "role": "host", "topic": "verdict", "round": "🔓 宿主揭盲开箱 · 港股现价一脚踩穿第一档左侧重锤区！", "round_plain": "🔓 拆封黑信封！点击下方金色按钮揭晓今日真实港股现价！", "time": "21:21", "act": {"text": "🔓 宿主揭盲 · 拆封实时港股现价", "cls": "act-concede"}, "replyTo": "M17", "isUnblindBox": true, "text": "三席在 <b>0 现价、0 市值、0 旧买点</b> 的绝对物理隔离下打满三轮（含 R2.5 裁判破案 264.72 亿投资收益盲区），独立锁定腾讯控股公允中枢 <b>491.02 港元</b>、正常建仓区 <b>345.00—405.00 港元</b>、第一档左侧重锤区 <b>≤ 345.00 港元</b>（T0 皇冠基石）。点击下方金色按钮，现场拆封 <b>2026-11-25 16:08</b> 港股收盘信封，查看六维揭盲仪表盘与四档挂单实战图谱：", "plain": "Gemini 和 Claude Opus 蒙眼吵满三轮奇迹般收口，锁死合理价 <b>491.02 港元</b>、正常买 <b>345–405 港元</b>、闭眼重锤抄底 <b>345 港元以下</b>！点击下面金色按钮，立刻拆开黑信封看今天腾讯真实港股现价掉进了哪一档：", "impact": {"text": "点击下方「🔓 拆封现价」查看 6 维揭盲仪表盘与 4 档挂单网", "plain": "点下方按钮拆封信封！揭晓今天腾讯到底有多便宜", "pos": true}}], "clash_cards": [{"topic": "capex", "title": "争点 1：AI 资本开支（CapEx）激增、1,374 亿算力预付款与折旧悬崖", "title_plain": "争点 1：AI 狂砸钱和 1,374 亿算力预付款是不是无底洞？每年真要扣多少折旧？", "verdictBadge": "🩸 命中死穴 · 实砍刚性维持至 1,030 亿/年", "bear": "9M26 资本开支飙至 1,661 亿，<b>1,374 亿算力预付款</b>本质系换了马甲的资本开支，单季负债暴增 864.7 亿；多头 600 亿硬件维持<b>漏扣 258 亿老机房/网络折旧</b>，且服务器延寿至 6 年压低账面折旧。", "bear_plain": "1,374 亿预付款就是提前买显卡，一个季度债就涨了 865 亿！而且你只扣了换 AI 显卡的 600 亿，把每年 <b>258 亿老机房维护钱</b>漏掉了！", "bull": "坦诚认领 1,374 亿预付款属准资本开支且高位延至 2027 年底；反杀空头跨期叠算机队与误扣利息收入高估折旧（实数全口径 790 亿/年），R2.5 补入老机房维持将刚性开支提至 <b>980 亿/年</b>。", "bull_plain": "我认账预付款就是买设备且要烧到 2027 年底，也补上了老机房维护把每年换新钱提到 <b>980 亿</b>；但你把今年开支和预付款重复叠算也不公道！", "rebuttal": "双方均拒绝采信服务器 6 年延寿会计红利，争议聚焦在旧机房被新集群部分替代后的净增维持开支（170 亿 vs 258 亿）与过渡期净债爬坡幅度。", "rebuttal_plain": "两边都拒绝吃延寿的会计红利，最后只差老机房维护该补 170 亿还是 258 亿。", "judge": "<b>⚖️ 终审落锤：</b>裁定稳态刚性维持总开支 <b>1,030 亿/年</b>（传统基建 180 + AI 机队 540 + 媒体版权 240 + 租赁 70），较当前经营性折旧多预扣 357 亿；并在 2028E 达产偏移中额外计入 <b>+800 亿</b> 过渡期净债爬坡！", "judge_plain": "<b>⚖️ 裁判拍板：</b>绝不手软！每年硬扣 <b>1,030 亿</b>换新设备版权钱，再在未来达产账里多扣 <b>800 亿</b>欠债爬坡，把 AI 折旧风险彻底封死！"}, {"topic": "verdict", "title": "争点 2：R2.5 裁判破案「264.72 亿投资净收益」双边共同盲区", "title_plain": "争点 2：加时赛惊天破案！两边竟然都漏剔了 265 亿炒股盈利？", "verdictBadge": "🩸 命中死穴 · 双边同步剥离杜绝双算", "bear": "前两轮利润表路径从 TTM 国际准则归母 2,359.87 亿起算，仅剥离联营利润 49.4 亿与分红 65 亿，漏剥了 264.72 亿投资净收益；R2.5 立即认领下修常态盈余至 <b>1,942.4 亿</b>。", "bear_plain": "我前两轮漏看了利润表里这笔 265 亿卖股收益，裁判揪得太准了，我立刻剔干净重算到 <b>1,942 亿</b>！", "bull": "前两轮利润表法同样只剔了联营损益、未剥离 9M26 溢利其他项目 +231.69 亿；R2.5 立即认领扣掉税后 221.8 亿，将常态盈余严谨锁死至 <b>1,870 亿</b>。", "bull_plain": "我也漏掉了这笔炒股收益！剔掉后现金流法和利润表法误差不到 0.3%，我立刻下修到 <b>1,870 亿</b>！", "rebuttal": "裁判 R2.5 一记铁证让双方彻底告别“分母剥离投资包、分子残留投资收益”的双算隐患，分子分歧瞬间收敛至不足 4%。", "rebuttal_plain": "裁判这一槌太值钱，把两边藏在利润表里的 265 亿炒股盈利全洗干净了！", "judge": "<b>⚖️ 终审落锤：</b>直接改用天然零联营/零投资收益的 <b>IFRS 经营溢利</b>（1,758–1,803 亿）与 <b>正常化经营现金流</b>（1,850 亿）双路径验算，终审锁死纯主业常态自由盈余 <b>1,850 亿元</b>！", "judge_plain": "<b>⚖️ 裁判拍板：</b>直接抛开投资收益，从最纯净的经营利润和经营现金流双线重算，锁死纯主业一年真赚 <b>1,850 亿元</b>！"}, {"topic": "sbc", "title": "争点 3：股权激励（SBC）真实成本与“注销式回购 vs Prosus 减持”", "title_plain": "争点 3：回购缩水连员工发股都不够填？大股东减持到底算不算利空？", "verdictBadge": "🩸 命中死穴 · 全额实扣 285 亿，零回购溢价", "bear": "3Q26 单季回购骤降至 <b>70 亿港元（~59.6 亿）</b>，已低于单季股权激励 71.15 亿，9M26 净回购仅约 55 亿；绝不能一边用非国际准则加回激励、一边把回购吹成额外收益。", "bear_plain": "三季度回购缩到 70 亿港元，连给员工发股票的坑都填不平！钱全去买显卡了，别再拿高回购当溢价理由！", "bull": "R1 起即全额实扣股权激励、从未用非国际准则利润加回，亦未给回购加额外倍数；Prosus 卖股仅属二级市场存量换手、零增总股本，2028 年资本开支回落后净回购将重启。", "bull_plain": "我从第一轮就把 280 亿员工发股当真成本全扣了，也没吹回购溢价；大股东卖股不增加总股本，只是换手！", "rebuttal": "双方对“全额实扣 ~285 亿股权激励 + Prosus 减持不增总股本 + 2026–2027 净回购承压”100% 达成共识。", "rebuttal_plain": "两边完全达成一致：员工发股全扣、大股东卖股不算稀释、过渡期不指望高回购。", "judge": "<b>⚖️ 终审落锤：</b>在常态自由盈余中全额实扣 <b>285 亿/年</b> 股权激励现金等价成本，拒绝给予过往回购任何额外倍数溢价，主榜严格按 <b>1.57%</b> 纯现金股息率计分！", "judge_plain": "<b>⚖️ 裁判拍板：</b>285 亿员工发股铁打不动全扣，一分钱回购溢价都不给，只按 1.57% 真现金分红打分！"}, {"topic": "portfolio", "title": "争点 4：9,026 亿外部投资组合折价与净债务分母穿透", "title_plain": "争点 4：账上 9,026 亿投资股票该打几折？少数股东和理财现金怎么算？", "verdictBadge": "🛡️ 证据反杀 · 纠偏双扣，合意锁死 -5,799.35 亿", "bear": "投资组合波动大（9M26 其他储备缩水 740 亿），须大幅扣除资本利得税与变现折价；R1 误将 863.6 亿少数股东权益压进分母并清零 368.2 亿资金管理存款。", "bear_plain": "投资股票波动太大必须狠打折！不过 R2 我承认把 863.6 亿小股东权益和 368 亿银行理财扣错了，爽快撤回！", "bull": "外部投资包采纳更保守的 <b>31% 综合折价</b>（上市 8 折 + 非上市 55 折 = <b>6,227.8 亿</b>）；反杀空头分母双扣并核实 368.24 亿属债权类银行理财，与非上市企业股权（3,972 亿）零重叠。", "bull_plain": "我给股票包打了更狠的 69 折只认 6,228 亿，也核清 368 亿银行理财跟股权完全不重，并认账扣掉 89 亿其他金融负债！", "rebuttal": "R2 空头爽快撤回 1,232 亿分母误扣，R2.5 双方核清 368.24 亿银行理财零重叠，分母家底账 100% 握手对齐！", "rebuttal_plain": "两大高手在最难算的家底账上实现 100% 零分歧握手！", "judge": "<b>⚖️ 终审落锤：</b>合并审慎净债 <b>+428.45 亿</b>（不含单列受限现金 84.06 亿），剥离 31% 折价外部投资包 <b>6,227.80 亿</b> → 纯主业偏移锁死 <b>core_ev_delta = -5,799.35 亿元</b>！", "judge_plain": "<b>⚖️ 裁判拍板：</b>欠债 428 亿减去打 69 折后的 6,228 亿股票包，买腾讯纯主业等于屋里自带 <b>5,799 亿净赠品</b>！"}, {"topic": "moat", "title": "争点 5：广告毛利下滑、AI 商业化与估值倍数死结（15× vs 18.5×）", "title_plain": "争点 5：广告毛利率掉了 5 个点，纯主业到底该给 15 倍还是 18.5 倍？", "verdictBadge": "🛡️ 证据反杀 · 撤回再投资双罚，锁死 17.5×", "bear": "3Q26 营销毛利率从 57% 降至 52%、国际游戏 -9%；R2 套新增资本回报率（RONIC）20% 压至 15.0×，R2.5 接受裁判指正撤回双罚，仍以芯片管制守 <b>8.0% 股权成本（16.67×）</b>。", "bear_plain": "广告毛利掉了 5 个点，虽然我同意撤回再投资双罚，但芯片禁令风险摆在眼前，我最多给 <b>16.67 倍</b>！", "bull": "3Q26 广告毛利率下滑主因微短剧分成及算力折旧（广告毛利额仍增 +9.2%，集团毛利率反升至 56.8%），苹果税砍至 12%、腾讯云 +35%、WorkBuddy 年化 ARR 破 5 亿美元；分子已扣死 450–600 亿 AI 亏损，应给 <b>18.0×</b>。", "bull_plain": "苹果都把抽成砍到 12%，腾讯云涨 35%，AI 工具年化收入破 5 亿美元，分子还把 500 亿 AI 亏损扣死了，给 <b>18 倍</b>一点不过分！", "rebuttal": "空头 R2.5 撤回 RONIC 双罚后，双方纯主业倍数分歧从 4.2 倍剧烈收敛至仅 1.3 倍（16.67× vs 18.0×），公允价仅差 3.7 港元！", "rebuttal_plain": "撤掉双罚后，两边只差 1.3 倍估值，公允价几乎完全重合！", "judge": "<b>⚖️ 终审落锤：</b>驳回 RONIC 双重惩罚与多头 18.5× 溢价，锚定 10Y 国债 1.75% + ~600 基点风险溢价裁定 <b>17.5×</b> → 公允 <b>491.02 港元</b>、二档 <b>345—405 港元</b>、重锤 <b>≤ 345 港元（2.21× PB）</b>！", "judge_plain": "<b>⚖️ 裁判拍板：</b>既不双重惩罚 AI 也不给虚高溢价，最公道给 <b>17.5 倍</b>，合理价 <b>491.02 港元</b>，闭眼重锤线 <b>≤ 345 港元</b>！"}], "unblind": {"sealed_title": "🔒 2026-11-25 腾讯控股（00700.HK）实时港股现价信封已封存（物理双盲零泄露）", "sealed_desc": "三席跨模型打满三轮（含 R2.5 裁判破案 264.72 亿投资收益盲区）独立锁定：纯主业常态自由盈余 1,850 亿、达产 2,200 亿、纯主业偏移 -5,799.35 亿（含 31% 折价外部投资包 6,227.8 亿），17.5× 定公允中枢 491.02 港元、正常建仓区 345.00—405.00 港元、第一档左侧重锤区 ≤ 345.00 港元（2.21× PB 正踩 5 年铁底）。点击拆封今日真实港股现价：", "sealed_desc_plain": "Gemini 和 Claude Opus 蒙眼吵满三轮奇迹般在 491 港元握手！拍板合理价 491.02 港元、正常买 345–405 港元、闭眼重锤抄底 345 港元以下！点击下面拆开黑信封看今天真实港股现价：", "header_title": "🔓 揭盲开箱！2026-11-25 港股现价 337.40 港元（总市值 30,813 亿港元 / 26,231 亿人民币）", "header_badge": "🔥 正式击穿第一档左侧重锤线（较 345 港元还低 -2.20%，砸进 5 年 2.17× PB 铁底！）", "stats": [{"k": "港股现价 / 盲定公允 491.02 港元", "v": "337.40 港元（折价 -31.29% / 上行 +45.53%）", "color": "gold"}, {"k": "剥离 31% 折价投资包后纯主业 Core EV", "v": "20,431.86 亿人民币（仅 11.04× OE！）", "color": "bull"}, {"k": "纯主业常态 / 2028E 达产内生回报率", "v": "9.05% / 10.36%（全扣激励与 AI 亏损！）", "color": "bull"}, {"k": "当前市净率（PB）vs 5 年极端铁底", "v": "2.17×（正中 2.1×—2.3× 历史大底靶心）", "color": "judge"}, {"k": "即期 TTM 现金股息率（5.30 港元/股）", "v": "1.57%（2026–27 算力峰值回购让路）", "color": "host"}, {"k": "梯队定级与宪法重锤仓位上限", "v": "T0 皇冠基石（常态 15% / 重锤极值 20%）", "color": "bull"}], "stats_plain": [{"k": "今天真实港股股价 vs 合理公允价", "v": "337.40 港元（打 6.87 折！涨回合理价赚 +45.5%）", "color": "gold"}, {"k": "扣掉 5,799 亿打折股票赠品后，纯主业卖多少钱？", "v": "2.04 万亿人民币（仅 11 年回本！）", "color": "bull"}, {"k": "扣光员工发股、换新设备和 500 亿 AI 亏损后年回报", "v": "9.05% / 年（2028 年 AI 止血后高达 10.36%）", "color": "bull"}, {"k": "现在市净率离过去 5 年最恐慌地板有多近？", "v": "2.17 倍（一脚踩进 2.1–2.3 倍 5 年历史大底！）", "color": "judge"}, {"k": "每年实打实收到的现金分红率", "v": "1.57%（每股 5.30 港元，大钱正砸向 AI 显卡）", "color": "host"}, {"k": "买方评级与这笔仓位最多能买多少？", "v": "T0 皇冠基石（平时 15%，跌破 345 可顶格 20%）", "color": "bull"}], "grid_headers": ["实战击球档位（Swarm V2.2 三轮终审）", "港股价格区间", "纯主业 Core EV/OE", "常态 / 达产回报率", "分批挂单纪律（T0 常态 15% / 极值 20%）"], "grid_rows": [["<b>🔥 第一档 · 左侧重锤区</b>", "<b>≤ 345.00 港元</b>", "≤ 11.36×", "≥ 8.80% / ≥ 10.08%", "<b>📍 现价 337.40 港元已击穿重锤线（9.05% 回报 / 2.17× PB）！</b>分批建 10%—15% 主仓，若极端砸至 310–325 港元（2.0× PB）拉满 20%"], ["<b>✅ 第二档 · 正常建仓区</b>", "<b>345.00 — 405.00 港元</b>", "11.36 — 13.89×", "7.20%–8.80% / 8.31%–10.08%", "优质安全垫建仓区（2.21×—2.60× PB），适合分批建 5%—10% 底仓"], ["<b>⚖️ 公允价值中枢</b>", "491.02 港元", "17.50×", "5.71% / 6.63%", "对应 3.15× PB，较现价 +45.5% 修复空间，回归后持股享复利不追买"], ["<b>🚨 1.25× 高估止盈红线</b>", "≥ 613.77 港元", "≥ 22.71×", "≤ 4.40% / ≤ 5.14%", "触发 1.25× 公允高估红线（3.94× PB），果断分批止盈高切低换马"]], "grid_headers_plain": ["买点档位（三轮跨模型双盲终审）", "港股价格区间", "纯主业几年回本", "一年赚多少（扣完AI亏损）", "老百姓怎么分批买？（皇冠基石上限 20%）"], "grid_rows_plain": [["<b>🔥 左侧重锤抄底区</b>", "<b>345.00 港元以下</b>", "不到 11.4 年", "8.8% 以上（达产 10%+）", "<b>📍 今天 337.40 港元就在重锤区里！</b>先分批买 10%–15%，若恐慌砸到 310–325 港元果断顶格打满 20%"], ["<b>✅ 正常建仓区</b>", "<b>345.00 — 405.00 港元</b>", "11.4 到 13.9 年", "7.2%–8.8%（达产 8.3%–10.1%）", "非常舒服的买点区，适合分批买 5%–10% 底仓"], ["<b>⚖️ 合理公允价</b>", "491.02 港元", "17.5 年", "5.71%（达产 6.63%）", "涨回这里就值这个价了，稳稳拿着让微信和 AI 帮你复利"], ["<b>🚨 偏贵止盈线</b>", "613.77 港元以上", "超 22.7 年", "不到 4.4%", "明显偏贵了，分批落袋为安换更便宜的好公司"]]}}, "glossary": [{"key": "算力预付款", "match": ["算力预付款", "1,374", "860", "准资本开支", "自由现金流"], "term": "算力采购长期预付款（1,374 亿元）与“准资本开支”", "plain": "腾讯为了提前锁死未来两年的稀缺 AI 显卡和算力，二、三季度一口气预付了 1,374 亿订金。按会计记账这笔钱算进日常经营支出，导致三季度账面自由现金流变成 -691 亿；其实这笔钱本质上是“提前付的买设备钱（准资本开支）”，并非老业务亏钱失血。", "usage": "本次辩论第一大战场：多头认领它确实耗真钱且高位延到 2027 年底，裁判在中期达产模型里专门扣了 800 亿净债爬坡。"}, {"key": "刚性维持开支", "match": ["维持性", "1,030", "老机房", "258", "延寿", "折旧年限"], "term": "AI 时代刚性维持性总开支（1,030 亿元/年）与服务器延寿", "plain": "腾讯 2025 年把部分服务器折旧年限从 4 年拉长到 6 年，让账面利润显得更好看。但买方绝不吃这套会计红利，反手把每年必须换新的 AI 显卡（540 亿）+ 老机房网络（180 亿）+ 影视音乐版权（240 亿）+ 机房房租（70 亿）全算进去，一年硬扣 1,030 亿才叫真利润！", "usage": "空头 R2 精准抓住多头漏算老机房 258 亿，裁判终审铁面锁死 1,030 亿/年。"}, {"key": "股权激励与回购", "match": ["股权激励", "SBC", "回购", "Prosus", "70 亿港元", "285"], "term": "股权激励（SBC）真实成本 vs 注销式回购与 Prosus 减持", "plain": "腾讯每年发给员工约 285 亿股票奖励（这就是真的人工工资成本，必须从利润里实扣）。过去腾讯一年花上千亿港元回购注销股票，远超发给员工的数量；但 2026 年三季度为了砸钱买 AI 显卡，单季回购缩到了 70 亿港元（比发给员工的还少）。至于南非大股东 Prosus 卖股，只是老股东倒手，不会让总股本变多。", "usage": "铁律：利润里全额实扣 285 亿股权激励，同时不给过往回购额外估值溢价，杜绝两头占便宜。"}, {"key": "外部投资包折价", "match": ["投资包", "9,026", "6,227.8", "31%", "上市投资", "非上市"], "term": "外部投资组合折价（9,026 亿 → 6,227.8 亿，综合 31% 折价）", "plain": "腾讯手里除了微信和游戏，还拿着价值 9,026 亿的其他公司股票（比如拼多多、美团系以外的上市企业 5,054 亿，以及 Epic Games、微众银行等未上市股权 3,972 亿）。考虑到卖股要交税且大宗变现难，咱们给上市股打 8 折、未上市股打 55 折，只认 6,227.8 亿当“随房附送的保险柜股票”。", "usage": "防双算铁律：既然在买价里扣掉了这 6,228 亿股票，算主业每年赚多少钱时就必须把联营利润、投资收益和股票分红全清零！"}, {"key": "投资收益盲区", "match": ["264.72", "231.69", "溢利其他项目", "投资净收益", "盲区"], "term": "R2.5 裁判破案：264.72 亿「投资净收益」双边共同盲区", "plain": "多空前两轮都在算纯主业利润时扣掉了联营公司利润，却双双漏掉利润表里另一行不起眼的“溢利其他项目（主要是卖股票赚的钱和收的投资分红）”，过去一年高达 264.72 亿！裁判一眼揪出这个漏洞，逼着两边重新把这笔卖股票赚的钱剔干净，才算出了最纯净的主业赚钱力。", "usage": "本次强制开启 R2.5 法庭限时质询的最大含金量所在，直接促使双方公允价在 491–495 港元极限收口！"}, {"key": "再投资双重惩罚", "match": ["RONIC", "再投资", "双重惩罚", "152 亿", "450–600"], "term": "AI 费用化亏损与新增资本回报率（RONIC）双重惩罚", "plain": "腾讯今年每个季度都在利润表里硬扛着约 152 亿的新 AI 研发与推理净亏损（一年 450–600 亿），这笔钱已经提前从常态利润里扣死、等于预付了未来增长的学费。如果算倍数时再用“未来想增长 2% 还得另外扣钱（RONIC 打折）”把估值再砍一刀，就把同一笔 AI 投入惩罚了两遍！", "usage": "R2.5 裁判点破后，Claude Opus 空头爽快撤回 RONIC 额外打折，体现顶级买方公正度。"}, {"key": "苹果税12%", "match": ["苹果税", "12%", "64.09%", "顺价权", "WorkBuddy"], "term": "12% 苹果税与微信超级生态终极顺价权", "plain": "全世界软件公司见了苹果都得交 30% 抽成，唯独腾讯靠 14.5 亿微信用户的不可替代性，逼得苹果在 2026 年 3 月把中国内地微信小游戏抽成从 30% 砍到 12%，直接把腾讯增值服务毛利率推上 64.09% 历史新高——这就是用真金白银验出来的顶级护城河。", "usage": "支撑腾讯 T0 皇冠基石定位与纯主业 17.5 倍公允倍数的底层商业逻辑。"}, {"key": "纯主业CoreEV", "match": ["core_ev_delta", "Core EV", "5,799.35", "20,431", "11.04"], "term": "纯主业企业价值（Core EV）与 11.04 倍极端错杀", "plain": "按今天 337.40 港元买下整家腾讯要花 2.62 万亿人民币，加上 428 亿净债，再减去屋里保险柜自带的 6,228 亿打折股票（净减 5,799 亿），你买下“微信 + 游戏 + 广告 + 微信支付 + 腾讯云 + AI”全部主业实际只花了 2.04 万亿！而这套超级主业扣光所有 AI 亏损和折旧后一年还能净赚 1,850 亿，只卖 11 倍（年化回报 9.05%）！", "usage": "剥离投资包后才能看清腾讯当下到底被市场错杀到了什么惊人程度。"}]};
+const UNIT = APP.facts.currency_unit || '元';
+
+const state = {
+  mode: 'plain',
+  presetKey: APP.activePreset,
+  activeTopic: 'all',
+  sotpChecks: {},
+  sotpRatePct: 10.0,
+  params: {}
+};
+
+function initSotpChecks() {
+  state.sotpChecks = {};
+  (APP.facts.sotp_blocks || []).forEach(b => { state.sotpChecks[b.id] = !!b.default_on; });
+}
+
+function loadPresetParams(key) {
+  const p = APP.presets[key];
+  state.presetKey = key;
+  const drv = {};
+  (APP.facts.drivers || []).forEach(d => {
+    drv[d.id] = (p.oe_rules.drivers && p.oe_rules.drivers[d.id] !== undefined) ? p.oe_rules.drivers[d.id] : d.current;
+  });
+  state.sotpRatePct = Math.round(((p.sotp_rules && p.sotp_rules.core_perpetuity_discount_rate) || 0.10) * 1000) / 10;
+  state.params = {
+    price: APP.facts.market.price,
+    drivers: drv,
+    maint_capex: p.oe_rules.maint_capex ?? APP.facts.operations.maint_capex ?? 0,
+    dep_annual: p.oe_rules.dep_annual ?? APP.facts.operations.dep_annual ?? 0,
+    growth_wc_yi: p.oe_rules.growth_wc_yi ?? 0,
+    other_np_adj_yi: p.oe_rules.other_np_adj_yi ?? 0,
+    full_oe_ratio: p.oe_rules.full_oe_ratio ?? 1.0,
+    full_oe_delta_yi: p.oe_rules.full_oe_delta_yi ?? 0.0,
+    extra_opt: p.oe_rules.extra_carbon_or_opt_yi ?? 0.0,
+    full_cash_cost_yi: p.oe_rules.full_cash_cost_yi ?? 0.0,
+    fin_disc_pct: Math.round((p.ev_rules.finance_co_discount_pct ?? 0.25) * 100),
+    op_floor: p.ev_rules.operating_cash_floor ?? 0,
+    ev_mode: p.ev_rules.ev_mode || 'equity_ratio',
+    deduct_min_div: p.ev_rules.deduct_minority_div_payable_pct ?? 1.0,
+    deduct_debt_pct: p.ev_rules.deduct_parent_rigid_debt_pct ?? 1.0,
+    eq_inv_credit_pct: p.ev_rules.equity_inv_credit_pct ?? 0.0,
+    fair_mult: p.zone_rules.fair_ev_oe_multiple,
+  };
+  buildSlidersUI();
+}
+
+function buildSlidersUI() {
+  const f = APP.facts;
+  const pm = state.params;
+  const pMin = Math.max(1, +(f.market.price * 0.55).toFixed(1));
+  const pMax = +(f.market.price * 1.85).toFixed(1);
+  const pStep = f.market.price >= 100 ? 0.5 : 0.01;
+  let html = `
+    <div class="slider-box">
+      <div class="slider-head"><span>模拟股价（${UNIT}/股）</span><span class="slider-num" id="valPrice">${Number(pm.price).toFixed(2)} ${UNIT}</span></div>
+      <input type="range" id="slPrice" min="${pMin}" max="${pMax}" step="${pStep}" value="${pm.price}">
+      <div class="slider-hint">拖动测试任意挂单价位的内生回报率与股息率</div>
+    </div>
+  `;
+  (f.drivers || []).forEach(d => {
+    const v = pm.drivers[d.id];
+    const dec = d.decimals ?? 1;
+    html += `
+      <div class="slider-box">
+        <div class="slider-head"><span>${d.label}（${d.unit}）</span><span class="slider-num" id="valDrv_${d.id}">${Number(v).toFixed(dec)} ${d.unit}</span></div>
+        <input type="range" data-drv="${d.id}" min="${d.min}" max="${d.max}" step="${d.step}" value="${v}">
+        <div class="slider-hint">${d.hint || ''}</div>
+      </div>
+    `;
+  });
+  if (pm.ev_mode !== 'financial_no_ev') {
+    const cMin = f.operations.capex_slider_min ?? Math.max(0, +(pm.maint_capex * 0.5).toFixed(1));
+    const cMax = f.operations.capex_slider_max ?? Math.max(5, +(Math.max(pm.maint_capex, pm.dep_annual) * 1.4).toFixed(1));
+    html += `
+      <div class="slider-box">
+        <div class="slider-head"><span>维持性资本开支（亿/年）</span><span class="slider-num" id="valCapex">${Number(pm.maint_capex).toFixed(1)} 亿</span></div>
+        <input type="range" id="slCapex" min="${cMin}" max="${cMax}" step="0.1" value="${pm.maint_capex}">
+        <div class="slider-hint">${f.operations.capex_hint || '维持现有竞争力的常态资本开支'}</div>
+      </div>
+    `;
+    if ((f.balance_sheet.finance_co_deposit || 0) > 0) {
+      html += `
+        <div class="slider-box">
+          <div class="slider-head"><span>关联财司存款折价（%）</span><span class="slider-num" id="valFinDisc">${pm.fin_disc_pct}%</span></div>
+          <input type="range" id="slFinDisc" min="0" max="50" step="1" value="${pm.fin_disc_pct}">
+          <div class="slider-hint">关联财务公司 ${f.balance_sheet.finance_co_deposit} 亿存款治理折价（同步重算瀑布图）</div>
+        </div>
+      `;
+    }
+  }
+  const mMin = Math.max(5, +(pm.fair_mult * 0.65).toFixed(1));
+  const mMax = +(pm.fair_mult * 1.35).toFixed(1);
+  html += `
+    <div class="slider-box">
+      <div class="slider-head"><span>公允 EV/OE 倍数（倍）</span><span class="slider-num" id="valFairMult">${Number(pm.fair_mult).toFixed(2)}x</span></div>
+      <input type="range" id="slFairMult" min="${mMin}" max="${mMax}" step="0.1" value="${pm.fair_mult}">
+      <div class="slider-hint">同步联动公允中枢、两档买点与 1.25× 高估止盈红线</div>
+    </div>
+  `;
+  document.getElementById('slidersGrid').innerHTML = html;
+
+  document.getElementById('slPrice').addEventListener('input', e => { state.params.price = parseFloat(e.target.value); renderAllDynamic(); });
+  document.querySelectorAll('[data-drv]').forEach(el => {
+    el.addEventListener('input', e => { state.params.drivers[e.target.dataset.drv] = parseFloat(e.target.value); renderAllDynamic(); });
+  });
+  const sc = document.getElementById('slCapex');
+  if (sc) sc.addEventListener('input', e => { state.params.maint_capex = parseFloat(e.target.value); renderAllDynamic(); });
+  const sf = document.getElementById('slFinDisc');
+  if (sf) sf.addEventListener('input', e => { state.params.fin_disc_pct = parseInt(e.target.value); renderAllDynamic(); });
+  document.getElementById('slFairMult').addEventListener('input', e => { state.params.fair_mult = parseFloat(e.target.value); renderAllDynamic(); });
+  document.getElementById('slSotpRate').value = state.sotpRatePct;
+}
+
+function updateSliderLabels() {
+  const pm = state.params;
+  const vp = document.getElementById('valPrice');
+  if (vp) vp.textContent = Number(pm.price).toFixed(2) + ' ' + UNIT;
+  (APP.facts.drivers || []).forEach(d => {
+    const el = document.getElementById('valDrv_' + d.id);
+    if (el) el.textContent = Number(pm.drivers[d.id]).toFixed(d.decimals ?? 1) + ' ' + d.unit;
+  });
+  const vc = document.getElementById('valCapex');
+  if (vc) vc.textContent = Number(pm.maint_capex).toFixed(1) + ' 亿';
+  const vf = document.getElementById('valFinDisc');
+  if (vf) vf.textContent = pm.fin_disc_pct + '%';
+  const vm = document.getElementById('valFairMult');
+  if (vm) vm.textContent = Number(pm.fair_mult).toFixed(2) + 'x';
+  document.getElementById('valSotpRate').textContent = Number(state.sotpRatePct).toFixed(1) + '%';
+}
+
+function computeLive() {
+  const f = APP.facts;
+  const pm = state.params;
+  const shares = f.market.shares_yi;
+  const price = Number(pm.price);
+  const mcap = shares * price;
+  const bs = f.balance_sheet;
+  const isFin = pm.ev_mode === 'financial_no_ev';
+
+  let grossCash = 0, finHaircut = 0, minShare = 0, parentNetCash = 0, waterfall = [];
+  if (isFin) {
+    waterfall = [{ label: '金融股总市值', val: mcap, delta: mcap, type: 'total' }];
+  } else {
+    grossCash = (bs.cash || 0) + (bs.trading_financial_assets || 0);
+    const restricted = bs.restricted_cash || 0;
+    const minDiv = (bs.minority_div_payable || 0) * pm.deduct_min_div;
+    const opFloor = pm.op_floor || 0;
+    const finDep = bs.finance_co_deposit || 0;
+    const finDisc = pm.fin_disc_pct / 100.0;
+    const postDiv = bs.post_period_parent_div || 0;
+    const rigidDebt = (bs.parent_rigid_debt || 0) * pm.deduct_debt_pct;
+    const eqInv = (bs.liquid_equity_investments_net || 0) * pm.eq_inv_credit_pct;
+    const peq = bs.parent_equity_ratio ?? 1.0;
+    const pprof = bs.parent_profit_ratio ?? 1.0;
+
+    if (pm.ev_mode === 'equity_ratio') {
+      finHaircut = finDep * finDisc;
+      const pool = grossCash - restricted - minDiv - opFloor - finHaircut;
+      minShare = pool * (1 - peq);
+      parentNetCash = pool * peq - postDiv - rigidDebt + eqInv;
+    } else if (pm.ev_mode === 'profit_ratio_post_div') {
+      finHaircut = finDep * finDisc;
+      const pool = grossCash - restricted - postDiv - finHaircut - opFloor;
+      minShare = pool * 0.125;
+      parentNetCash = pool * 0.875 - rigidDebt + eqInv;
+    } else {
+      const consolNet = grossCash - restricted - opFloor - rigidDebt;
+      minShare = consolNet * (1 - pprof);
+      finHaircut = (finDep * pprof) * finDisc;
+      parentNetCash = consolNet * pprof - postDiv - finHaircut + eqInv;
+    }
+    waterfall.push({ label: '账面广义现金', val: grossCash, delta: grossCash, type: 'pos' });
+    if (restricted + minDiv > 0.01) waterfall.push({ label: '受限与应付股利', val: grossCash - restricted - minDiv, delta: -(restricted + minDiv), type: 'neg' });
+    if (opFloor > 0.01) waterfall.push({ label: '营运周转底仓', val: grossCash - restricted - minDiv - opFloor, delta: -opFloor, type: 'neg' });
+    if (finDep > 0.01) waterfall.push({ label: `财司${pm.fin_disc_pct}%折价`, val: grossCash - restricted - minDiv - opFloor - finHaircut, delta: -finHaircut, type: 'neg' });
+    if (Math.abs(minShare) > 0.01) waterfall.push({ label: '少数股东份额', val: parentNetCash + postDiv + rigidDebt - eqInv, delta: -minShare, type: 'neg' });
+    if (postDiv > 0.01) waterfall.push({ label: '期后已派分红', val: parentNetCash + rigidDebt - eqInv, delta: -postDiv, type: 'neg' });
+    waterfall.push({ label: '母公司刚性债', val: parentNetCash - eqInv, delta: -rigidDebt, type: 'neg' });
+    if (eqInv > 0.01) waterfall.push({ label: '可售股权折价', val: parentNetCash, delta: eqInv, type: 'pos' });
+    waterfall.push({ label: '归母净现金', val: parentNetCash, delta: parentNetCash, type: 'total' });
+  }
+
+  const evDelta = -parentNetCash;
+  const trueEv = mcap + evDelta;
+  const netCashPs = parentNetCash / shares;
+
+  function npFromDrv(dvals, adj) {
+    let np = f.operations.anchor_parent_net_profit;
+    (f.drivers || []).forEach(d => {
+      const v = dvals[d.id] !== undefined ? dvals[d.id] : d.current;
+      np += (v - d.anchor) * d.np_sensitivity_per_unit;
+    });
+    return np + (adj || 0);
+  }
+  const pRatio = bs.parent_profit_ratio ?? 1.0;
+  const steadyNp = npFromDrv(pm.drivers, pm.other_np_adj_yi);
+  const depShield = isFin ? 0 : ((pm.dep_annual - pm.maint_capex) * pRatio - pm.growth_wc_yi);
+  const steadyOe = steadyNp + depShield;
+  const fullOe = steadyOe * pm.full_oe_ratio + pm.full_oe_delta_yi + pm.extra_opt;
+  const fullTrueEv = mcap + evDelta + pm.full_cash_cost_yi;
+  const steadyEvYield = trueEv > 0 ? steadyOe / trueEv * 100 : 0;
+  const evOeMult = steadyOe > 0 ? trueEv / steadyOe : 0;
+
+  const baseZ = APP.presets[state.presetKey].zone_rules;
+  const scale = pm.fair_mult / baseZ.fair_ev_oe_multiple;
+  const fairMult = pm.fair_mult;
+  const t2Mult = baseZ.tier2_max_ev_oe_multiple * scale;
+  const t1Mult = baseZ.tier1_max_ev_oe_multiple * scale;
+
+  const fairPrice = (fairMult * steadyOe + parentNetCash) / shares;
+  const t2Max = (t2Mult * steadyOe + parentNetCash) / shares;
+  const t1Max = (t1Mult * steadyOe + parentNetCash) / shares;
+  const overPrice = fairPrice * (APP.rules.global_laws.overvalued_fair_ratio || 1.25);
+
+  const ttmDps = f.dividends.ttm_dps;
+  const steadyDps = Math.max(0, steadyNp) * f.dividends.steady_payout_ratio / shares;
+  const ttmDivNow = ttmDps / price * 100;
+  const steadyDivNow = steadyDps / price * 100;
+
+  const pb = f.pb_history || { reported_bvps: 1, ex_div_bvps: 1, pb_6y_floor: 1 };
+  const nowExPb = price / (pb.ex_div_bvps || pb.reported_bvps);
+  const t1RepPb = t1Max / pb.reported_bvps;
+  const t1VsFloorPct = (t1RepPb / pb.pb_6y_floor - 1) * 100;
+  const pbPass = t1VsFloorPct <= (APP.rules.global_laws.pb_floor_max_premium_pct || 15.0);
+
+  const histBridge = f.operations.hist_5y_peak_bridged_np || steadyNp;
+  const vsBridgePct = (steadyNp / histBridge - 1) * 100;
+  const realityPass = vsBridgePct <= (APP.archetype.reality_check_max_pct || 15.0);
+
+  // SOTP
+  const discRate = state.sotpRatePct / 100.0;
+  const deltaBuyoutOe = Math.max(0, fullOe - steadyOe - pm.extra_opt);
+  const sotpBlocks = (f.sotp_blocks || []).map(b => {
+    let yi = 0;
+    if (b.kind === 'net_cash') yi = parentNetCash;
+    else if (b.kind === 'core_perpetuity') yi = Math.max(0, steadyOe) / discRate;
+    else if (b.kind === 'buyout_net') yi = deltaBuyoutOe / discRate - pm.full_cash_cost_yi;
+    else yi = b.value_yi || 0;
+    return { ...b, yi, ps: yi / shares };
+  });
+  const fl = f.floor_benchmark || { kind: 'fixed', fixed_floor_yi: 0, label: '资产托底' };
+  const floorYi = fl.kind === 'replacement' ? (parentNetCash + (fl.operating_assets_floor_yi || 0)) : (fl.fixed_floor_yi || 0);
+  const floorPs = floorYi / shares;
+
+  // A+H Corridor
+  let ah = null;
+  if (f.h_market) {
+    const hm = f.h_market;
+    const laws = APP.rules.global_laws;
+    const liveDisc = (1 - hm.price_hkd / (price / hm.fx_hkd_to_cny)) * 100;
+    const vetoH = liveDisc < -laws.ah_veto_premium_pct;
+    const rawC = laws.ah_corridor_p50_weight * hm.disc_5y_p50_pct + laws.ah_corridor_live_weight * liveDisc;
+    const effDisc = Math.max(Math.max(laws.ah_corridor_min_floor_pct, hm.disc_5y_p25_pct), Math.min(hm.disc_5y_p75_pct, rawC));
+    const fac = (1 - effDisc / 100) / hm.fx_hkd_to_cny;
+    ah = {
+      h_code: hm.code, price_hkd: hm.price_hkd, liveDisc, effDisc, vetoH,
+      fair_hkd: fairPrice * fac, t2_hkd: t2Max * fac, t1_hkd: t1Max * fac
+    };
+  }
+
+  const stress = (f.operations.stress_scenarios || []).map(s => {
+    const sd = { ...pm.drivers, ...(s.id === 'steady' ? {} : (s.driver_overrides || {})) };
+    const sNp = npFromDrv(sd, s.id === 'steady' ? pm.other_np_adj_yi : 0);
+    const sOe = sNp + depShield;
+    return {
+      ...s, np: sNp, oe: sOe,
+      evYield: trueEv > 0 ? sOe / trueEv * 100 : 0,
+      divPct: Math.max(0, sNp) * f.dividends.steady_payout_ratio / mcap * 100
+    };
+  });
+
+  let zoneLabel, zoneBg, actionPlain, actionPro;
+  if (price <= t1Max) {
+    zoneLabel = '🔥 第一档 · 左侧重锤区'; zoneBg = 'linear-gradient(135deg, #065f46 0%, #059669 100%)';
+    actionPlain = `模拟股价 ${price.toFixed(2)} ${UNIT}已跌进「闭眼重锤区」（≤${t1Max.toFixed(2)}），按纪律分批打满至 ${f.position_cap_pct}% 上限！`;
+    actionPro = `现价 ≤ 一档重锤线 ${t1Max.toFixed(2)} ${UNIT}（EV/OE ${evOeMult.toFixed(2)}x / 常态回报 ${steadyEvYield.toFixed(2)}%），重锤满弓。`;
+  } else if (price <= t2Max) {
+    zoneLabel = '✅ 第二档 · 正常建仓区'; zoneBg = 'linear-gradient(135deg, #0369a1 0%, #0284c7 100%)';
+    actionPlain = `模拟股价 ${price.toFixed(2)} ${UNIT}落入「正常买点区」（${t1Max.toFixed(2)}—${t2Max.toFixed(2)}），先轻仓分批建底仓，留重兵等 ≤${t1Max.toFixed(2)} 大跌重锤！`;
+    actionPro = `现价落入二档（EV/OE ${evOeMult.toFixed(2)}x / 常态回报 ${steadyEvYield.toFixed(2)}% / TTM息 ${ttmDivNow.toFixed(2)}%），分批建底仓。`;
+  } else if (price <= fairPrice) {
+    zoneLabel = '⏳ 第三档 · 合理持有观察区'; zoneBg = 'linear-gradient(135deg, #b45309 0%, #d97706 100%)';
+    actionPlain = `模拟股价 ${price.toFixed(2)} ${UNIT}略贵于买点、但仍低于公允中枢（${fairPrice.toFixed(2)}），持股收息不追买。`;
+    actionPro = `现价高于二档上限但较公允折价 ${((price/fairPrice-1)*100).toFixed(1)}%，持股观察。`;
+  } else if (price < overPrice) {
+    zoneLabel = '⚠️ 溢价观察带'; zoneBg = 'linear-gradient(135deg, #c2410c 0%, #ea580c 100%)';
+    actionPlain = `模拟股价已贵过公允价 ${fairPrice.toFixed(2)} ${UNIT}，严禁追高，临近 ${overPrice.toFixed(2)} 分批止盈。`;
+    actionPro = `溢价公允中枢 +${((price/fairPrice-1)*100).toFixed(1)}%，临近 1.25× 红线分批减仓。`;
+  } else {
+    zoneLabel = '🚨 高估止盈红线区'; zoneBg = 'linear-gradient(135deg, #9f1239 0%, #be123c 100%)';
+    actionPlain = `冲破 1.25 倍高估止盈红线（≥${overPrice.toFixed(2)} ${UNIT}），果断高切低换马！`;
+    actionPro = `触发 1.25× 公允高估红线，执行止盈换仓。`;
+  }
+
+  return {
+    isFin, price, shares, mcap, parentNetCash, netCashPs, evDelta, trueEv,
+    steadyNp, steadyOe, fullOe, steadyEvYield, evOeMult,
+    fairMult, t2Mult, t1Mult, fairPrice, t2Max, t1Max, overPrice,
+    ttmDps, ttmDivNow, steadyDivNow, nowExPb, t1RepPb, t1VsFloorPct, pbPass,
+    vsBridgePct, realityPass, sotpBlocks, floorYi, floorPs, floorLabel: fl.label, floorNote: fl.note || '',
+    ah, stress, zoneLabel, zoneBg, actionPlain, actionPro, waterfall
+  };
+}
+
+function renderTab1(res) {
+  const isPlain = state.mode === 'plain';
+  const preset = APP.presets[state.presetKey];
+  document.getElementById('presetBadgeSub').textContent = `${APP.archetype.label} ｜ 当前标准：${preset.version} · ${preset.date}`;
+
+  document.getElementById('verdictBanner').style.background = res.zoneBg;
+  document.getElementById('verdictBanner').innerHTML = `
+    <div class="vb-left">
+      <div class="vb-badge">${res.zoneLabel} · ${preset.version}</div>
+      <div class="vb-text">${isPlain ? res.actionPlain : res.actionPro}</div>
+    </div>
+    <div class="vb-right">
+      <div>模拟 / 实时股价</div>
+      <div class="vb-price">${res.price.toFixed(2)} ${UNIT}</div>
+      <div>距公允 ${res.fairPrice.toFixed(2)} ${UNIT}：${((res.price/res.fairPrice-1)*100).toFixed(1)}%</div>
+    </div>
+  `;
+
+  // A+H Dual Corridor Strip (if present)
+  if (res.ah) {
+    const ah = res.ah;
+    document.getElementById('ahStripWrap').innerHTML = `
+      <div class="ah-strip">
+        <div>
+          <strong>🇭🇰 A+H 5年折价走廊联动（${ah.h_code} @ ${ah.price_hkd.toFixed(2)} 港元）</strong><br>
+          <span>实时折价 ${ah.liveDisc.toFixed(1)}% ｜ 5年走廊映射折价 ${ah.effDisc.toFixed(1)}%</span>
+        </div>
+        <div style="text-align:right">
+          ${ah.vetoH ? '<span class="tag tag-red">🚫 H股溢价超5% · 一票否决锁A股</span>' :
+            `<strong>H股公允 ${ah.fair_hkd.toFixed(2)} 港元</strong> ｜ 二档 ${ah.t1_hkd.toFixed(2)}—${ah.t2_hkd.toFixed(2)} ｜ 重锤 ≤${ah.t1_hkd.toFixed(2)} 港元`}
+        </div>
+      </div>
+    `;
+  } else {
+    document.getElementById('ahStripWrap').innerHTML = '';
+  }
+
+  const realityTag = res.realityPass
+    ? `<span class="tag tag-green">5年实绩闸门通过 (${res.vsBridgePct >= 0 ? '+' : ''}${res.vsBridgePct.toFixed(1)}%)</span>`
+    : `<span class="tag tag-red">超5年实绩红线 (${res.vsBridgePct.toFixed(1)}%)</span>`;
+
+  document.getElementById('kpiGrid').innerHTML = `
+    <div class="kpi" style="--accent:var(--blue)">
+      <div class="kpi-label">${isPlain ? '这家公司今天合理值多少钱（公允中枢）' : '盲定公允中枢（Fair Value）'}</div>
+      <div class="kpi-val">${res.fairPrice.toFixed(2)} <span style="font-size:14px">${UNIT}/股</span></div>
+      <div class="kpi-sub">${res.fairMult.toFixed(2)}× EV/OE ｜ 止盈红线 ≥ <strong>${res.overPrice.toFixed(2)} ${UNIT}</strong></div>
+    </div>
+    <div class="kpi" style="--accent:var(--green)">
+      <div class="kpi-label">${isPlain ? '正常年份能装进股东口袋的真利润（常态OE）' : '跨周期常态自由盈余（steady_oe）'}</div>
+      <div class="kpi-val">${res.steadyOe.toFixed(2)} <span style="font-size:14px">亿/年</span></div>
+      <div class="kpi-sub">满血达产 <strong>${res.fullOe.toFixed(2)} 亿</strong> ｜ ${realityTag}</div>
+    </div>
+    <div class="kpi" style="--accent:var(--indigo)">
+      <div class="kpi-label">${res.isFin ? '金融股归母总市值（不扣存款）' : (res.parentNetCash >= 0 ? (isPlain ? '扣光债与分红后保险柜里真净现金' : '审慎归母净现金 / True EV') : (isPlain ? '扣光可动现金后还背着多少真净负债' : '审慎归母净负债 / True EV'))}</div>
+      <div class="kpi-val" style="color:${!res.isFin && res.parentNetCash < 0 ? 'var(--red)' : 'var(--ink)'}">${res.isFin ? res.mcap.toFixed(1) + ' <span style="font-size:14px">亿</span>' : (res.parentNetCash >= 0 ? '+' + res.parentNetCash.toFixed(2) : '净债 ' + Math.abs(res.parentNetCash).toFixed(2)) + ' <span style="font-size:14px">亿</span>'}</div>
+      <div class="kpi-sub">${res.isFin ? '直接按市值 / OE 与 PB 定价' : `合 <strong>${res.netCashPs >= 0 ? '+' : ''}${res.netCashPs.toFixed(2)} ${UNIT}/股</strong> ｜ True EV <strong>${res.trueEv.toFixed(2)} 亿</strong>`}</div>
+    </div>
+    <div class="kpi" style="--accent:var(--amber)">
+      <div class="kpi-label">${isPlain ? '按这个价格买，每年真实回报与分红' : '现价隐含内生回报率 & 双轨股息率'}</div>
+      <div class="kpi-val">${res.steadyEvYield.toFixed(2)}% <span style="font-size:14px">${res.isFin ? '盈利回报' : 'EV回报'}</span></div>
+      <div class="kpi-sub">TTM实派息 <strong>${res.ttmDivNow.toFixed(2)}%</strong> ｜ 常态息 ${res.steadyDivNow.toFixed(2)}% ｜ 除权PB ${res.nowExPb.toFixed(2)}x</div>
+    </div>
+  `;
+
+  // SOTP Blocks
+  let sotpTotalYi = 0;
+  const activeBlocks = [];
+  document.getElementById('sotpBlocks').innerHTML = res.sotpBlocks.map(b => {
+    const on = !!state.sotpChecks[b.id];
+    if (on) { sotpTotalYi += b.yi; activeBlocks.push(b); }
+    return `
+      <label class="sotp-item ${on ? 'checked' : ''}" style="--blk-color:${b.color}">
+        <input type="checkbox" data-sotp="${b.id}" ${on ? 'checked' : ''}>
+        <div class="sotp-body">
+          <div class="sotp-name">${b.name}</div>
+          <div class="sotp-val">${b.yi >= 0 ? '+' : ''}${b.yi.toFixed(2)} 亿 <span style="font-size:12px;color:var(--muted)">（${b.ps >= 0 ? '+' : ''}${b.ps.toFixed(2)} ${UNIT}/股）</span></div>
+          <div class="sotp-desc">${b.plain}</div>
+        </div>
+      </label>
+    `;
+  }).join('');
+  document.querySelectorAll('#sotpBlocks input[type=checkbox]').forEach(el => {
+    el.addEventListener('change', e => { state.sotpChecks[e.target.dataset.sotp] = e.target.checked; renderAllDynamic(); });
+  });
+
+  const sotpPs = sotpTotalYi / res.shares;
+  const maxPs = Math.max(res.fairPrice, sotpPs, res.price, res.floorPs, 1) * 1.18;
+  const W = 540, H = 165, padL = 112, padR = 82, barW = W - padL - padR;
+  const xOf = v => padL + Math.max(0, v) / maxPs * barW;
+  const hasNegBlock = activeBlocks.some(b => b.yi < 0);
+  let sotpSegs = '', curX = padL;
+  if (hasNegBlock) {
+    const w = Math.max(2, (Math.max(0, sotpPs) / maxPs) * barW);
+    sotpSegs = `<rect x="${padL}" y="84" width="${w.toFixed(1)}" height="24" rx="4" fill="#1e3a8a" opacity="0.92"><title>已选拆骨净值: ${sotpPs.toFixed(2)}${UNIT}/股</title></rect>`;
+    curX = padL + w;
+  } else {
+    sotpSegs = activeBlocks.filter(b => b.yi > 0).map(b => {
+      const w = (b.ps / maxPs) * barW;
+      const rect = `<rect x="${curX.toFixed(1)}" y="84" width="${Math.max(2, w).toFixed(1)}" height="24" rx="3" fill="${b.color}" opacity="0.92"><title>${b.name}: ${b.ps.toFixed(2)}${UNIT}/股</title></rect>`;
+      curX += w; return rect;
+    }).join('');
+  }
+  const sotpDiffPct = sotpPs > 0 ? (res.price / sotpPs - 1) * 100 : 0;
+  document.getElementById('sotpSvgWrap').innerHTML = `
+    <svg viewBox="0 0 ${W} ${H}">
+      <text x="4" y="34" font-size="12" font-weight="700" fill="#334155">${res.floorLabel}</text>
+      <rect x="${padL}" y="18" width="${(xOf(res.floorPs)-padL).toFixed(1)}" height="22" rx="4" fill="#64748b"/>
+      <text x="${(xOf(res.floorPs)+6).toFixed(1)}" y="34" font-size="11.5" font-weight="800" fill="#334155">${res.floorPs.toFixed(2)}${UNIT} (${res.floorYi.toFixed(0)}亿)</text>
+
+      <text x="4" y="67" font-size="12" font-weight="700" fill="#0f172a">当前模拟股价</text>
+      <rect x="${padL}" y="51" width="${(xOf(res.price)-padL).toFixed(1)}" height="22" rx="4" fill="#f59e0b"/>
+      <text x="${(xOf(res.price)+6).toFixed(1)}" y="67" font-size="11.5" font-weight="800" fill="#b45309">${res.price.toFixed(2)}${UNIT} (${res.mcap.toFixed(0)}亿)</text>
+
+      <text x="4" y="100" font-size="12" font-weight="800" fill="#1e3a8a">已选拆骨总值</text>
+      ${sotpSegs}
+      <text x="${(curX+6).toFixed(1)}" y="100" font-size="11.5" font-weight="900" fill="#1e3a8a">${sotpPs.toFixed(2)}${UNIT} (${sotpTotalYi.toFixed(0)}亿)</text>
+
+      <text x="4" y="135" font-size="12" font-weight="700" fill="#0284c7">引擎公允中枢</text>
+      <rect x="${padL}" y="119" width="${(xOf(res.fairPrice)-padL).toFixed(1)}" height="22" rx="4" fill="#0284c7"/>
+      <text x="${(xOf(res.fairPrice)+6).toFixed(1)}" y="135" font-size="11.5" font-weight="800" fill="#0284c7">${res.fairPrice.toFixed(2)}${UNIT}</text>
+
+      <line x1="${xOf(res.price).toFixed(1)}" y1="10" x2="${xOf(res.price).toFixed(1)}" y2="148" stroke="#be123c" stroke-width="1.5" stroke-dasharray="4,3"/>
+    </svg>
+    <div style="font-size:12px;color:var(--ink-2);background:#f8fafc;padding:8px 12px;border-radius:8px;border:1px solid var(--border);margin-top:6px">
+      <strong>拆骨诊断：</strong>当前模拟股价 ${res.price.toFixed(2)} ${UNIT}较已选拆骨总值（${sotpPs.toFixed(2)} ${UNIT}）<strong>${sotpDiffPct <= 0 ? '折价便宜 ' + Math.abs(sotpDiffPct).toFixed(1) + '%' : '溢价 +' + sotpDiffPct.toFixed(1) + '%'}</strong>；托底标尺 <strong>${res.floorPs.toFixed(2)} ${UNIT}/股</strong>（${res.floorNote}）。
+    </div>
+  `;
+
+  // PB Gate & Ruler
+  const pbFloor = APP.facts.pb_history.pb_6y_floor;
+  document.getElementById('pbGateBadge').innerHTML = res.pbPass
+    ? `<span class="tag tag-green">✅ 5年PB铁底通过（重锤PB ${res.t1RepPb.toFixed(2)}x vs ${pbFloor}x，+${res.t1VsFloorPct.toFixed(1)}%）</span>`
+    : `<span class="tag tag-red">⚠️ 重锤PB偏高（${res.t1RepPb.toFixed(2)}x，超 ${pbFloor}x 铁底 +${res.t1VsFloorPct.toFixed(1)}%）</span>`;
+
+  const rMin = Math.max(0, Math.min(res.t1Max * 0.6, res.price * 0.6));
+  const rMax = Math.max(res.overPrice * 1.12, res.price * 1.08);
+  const pct = v => Math.max(0, Math.min(100, (v - rMin) / (rMax - rMin) * 100));
+  const w1 = pct(res.t1Max), w2 = Math.max(0, pct(res.t2Max) - w1), w3 = Math.max(0, pct(res.fairPrice) - pct(res.t2Max)), w4 = Math.max(0, pct(res.overPrice) - pct(res.fairPrice)), w5 = Math.max(0, 100 - pct(res.overPrice));
+  document.getElementById('rulerWrap').innerHTML = `
+    <div class="ruler-marker"><div class="marker-pin" style="left:${pct(res.price).toFixed(1)}%">📍 ${res.price.toFixed(2)}${UNIT}</div></div>
+    <div class="ruler-bar">
+      <div class="r-seg" style="width:${w1.toFixed(1)}%;background:#059669">重锤 ≤${res.t1Max.toFixed(2)}</div>
+      <div class="r-seg" style="width:${w2.toFixed(1)}%;background:#0284c7">买点 ≤${res.t2Max.toFixed(2)}</div>
+      <div class="r-seg" style="width:${w3.toFixed(1)}%;background:#d97706">公允 ${res.fairPrice.toFixed(2)}</div>
+      <div class="r-seg" style="width:${w4.toFixed(1)}%;background:#ea580c">溢价</div>
+      <div class="r-seg" style="width:${w5.toFixed(1)}%;background:#be123c">止盈 ≥${res.overPrice.toFixed(2)}</div>
+    </div>
+  `;
+
+  document.getElementById('zoneTableWrap').innerHTML = `
+    <table>
+      <thead><tr><th>档位</th><th class="num">股价区间</th><th class="num">EV/OE</th><th class="num">常态回报</th><th class="num">TTM股息</th></tr></thead>
+      <tbody>
+        <tr class="${res.price <= res.t1Max ? 'row-hl' : ''}"><td>🔥 一档重锤</td><td class="num">≤ ${res.t1Max.toFixed(2)} ${UNIT}</td><td class="num">≤ ${res.t1Mult.toFixed(2)}x</td><td class="num">≥ ${(100/res.t1Mult).toFixed(1)}%</td><td class="num">≥ ${(res.ttmDps/res.t1Max*100).toFixed(2)}%</td></tr>
+        <tr class="${res.price > res.t1Max && res.price <= res.t2Max ? 'row-hl' : ''}"><td>✅ 二档正常买点</td><td class="num">${res.t1Max.toFixed(2)}—${res.t2Max.toFixed(2)} ${UNIT}</td><td class="num">${res.t1Mult.toFixed(2)}—${res.t2Mult.toFixed(2)}x</td><td class="num">${(100/res.t2Mult).toFixed(1)}—${(100/res.t1Mult).toFixed(1)}%</td><td class="num">${(res.ttmDps/res.t2Max*100).toFixed(2)}%</td></tr>
+        <tr><td>⚖️ 公允价值中枢</td><td class="num">${res.fairPrice.toFixed(2)} ${UNIT}</td><td class="num">${res.fairMult.toFixed(2)}x</td><td class="num">${(100/res.fairMult).toFixed(2)}%</td><td class="num">${(res.ttmDps/res.fairPrice*100).toFixed(2)}%</td></tr>
+        <tr><td>🚨 高估止盈红线</td><td class="num">≥ ${res.overPrice.toFixed(2)} ${UNIT}</td><td class="num">1.25× 公允</td><td class="num">≤ ${(100/(res.fairMult*1.28)).toFixed(1)}%</td><td class="num">≤ ${(res.ttmDps/res.overPrice*100).toFixed(2)}%</td></tr>
+      </tbody>
+    </table>
+  `;
+
+  document.getElementById('stressTableWrap').innerHTML = `
+    <table>
+      <thead><tr><th>压力测试情景</th><th>关键假设</th><th class="num">归母净利润</th><th class="num">自由盈余 OE</th><th class="num">模拟价回报率</th><th class="num">常态股息率</th><th>买方意义</th></tr></thead>
+      <tbody>
+        ${res.stress.map(s => `
+          <tr class="${s.id === 'steady' ? 'row-hl' : ''}">
+            <td>${isPlain ? s.plain_name : s.name}</td>
+            <td style="font-size:12px;color:var(--muted)">${s.driver_summary}</td>
+            <td class="num">${s.np.toFixed(2)} 亿</td>
+            <td class="num"><strong>${s.oe.toFixed(2)} 亿</strong></td>
+            <td class="num"><strong style="color:${s.evYield >= 10 ? 'var(--green)' : (s.evYield >= 7 ? 'var(--blue)' : 'var(--amber)')}">${s.evYield.toFixed(2)}%</strong></td>
+            <td class="num">${s.divPct.toFixed(2)}%</td>
+            <td style="font-size:12px;color:var(--muted)">${s.note}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderWaterfallSvg(res) {
+  const items = res.waterfall;
+  const W = 580, H = 270, padL = 38, padR = 16, padT = 28, padB = 54;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const allVals = [0, ...items.map(i => i.val)];
+  const maxV = Math.max(...allVals, 10) * 1.12;
+  const minV = Math.min(...allVals, 0) * 1.12;
+  const span = Math.max(1, maxV - minV);
+  const yOf = v => padT + plotH * (maxV - v) / span;
+  const stepW = plotW / Math.max(1, items.length);
+  const barW = Math.min(54, stepW * 0.56);
+  let prev = 0;
+  const bars = items.map((it, idx) => {
+    const x = padL + idx * stepW + (stepW - barW) / 2;
+    let yTop, yBot, color;
+    if (it.type === 'pos') { yTop = yOf(it.val); yBot = yOf(0); color = '#0284c7'; }
+    else if (it.type === 'total') { yTop = yOf(it.val); yBot = yOf(0); color = it.val >= 0 ? '#059669' : '#be123c'; }
+    else { yTop = yOf(prev); yBot = yOf(it.val); color = '#e11d48'; }
+    const h = Math.max(2, Math.abs(yBot - yTop)), y = Math.min(yTop, yBot), cx = x + barW / 2;
+    const lblVal = it.type === 'neg' ? it.delta.toFixed(1) : it.val.toFixed(1);
+    const lblY = (it.type === 'total' && it.val < 0) || (it.type === 'neg' && it.val < 0) ? (y + h + 12) : (y - 5);
+    const prevLine = (idx > 0 && it.type !== 'total') ? `<line x1="${(x - stepW + barW).toFixed(1)}" y1="${yOf(prev).toFixed(1)}" x2="${x.toFixed(1)}" y2="${yOf(prev).toFixed(1)}" stroke="#cbd5e1" stroke-dasharray="3,2"/>` : '';
+    prev = it.val;
+    const dispLabel = (it.type === 'total' && it.val < 0) ? '归母净负债' : it.label;
+    return `${prevLine}<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="4" fill="${color}"/><text x="${cx.toFixed(1)}" y="${lblY.toFixed(1)}" text-anchor="middle" font-size="10.5" font-weight="800" fill="${color}">${lblVal}</text><text x="${cx.toFixed(1)}" y="${(H-26).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="700" fill="#334155">${dispLabel.slice(0,5)}</text><text x="${cx.toFixed(1)}" y="${(H-12).toFixed(1)}" text-anchor="middle" font-size="10" fill="#64748b">${dispLabel.slice(5)}</text>`;
+  }).join('');
+  document.getElementById('waterfallSvg').innerHTML = `<svg viewBox="0 0 ${W} ${H}"><line x1="${padL}" y1="${yOf(0).toFixed(1)}" x2="${W-padR}" y2="${yOf(0).toFixed(1)}" stroke="#64748b" stroke-width="1.2"/><text x="4" y="${(yOf(0)+4).toFixed(1)}" font-size="10" fill="#64748b">0亿</text>${bars}</svg>`;
+}
+
+function renderStaticCharts() {
+  const hist = APP.facts.history_5y || [];
+  if (hist.length) {
+    const W = 580, H = 270, padL = 42, padR = 40, padT = 28, padB = 34;
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+    const barVals = [0, ...hist.flatMap(d => [d.ocf || 0, d.fcf || 0, d.capex || 0])];
+    const maxBar = Math.max(...barVals, 10) * 1.18;
+    const minBar = Math.min(...barVals, 0) * 1.18;
+    const barSpan = Math.max(1, maxBar - minBar);
+    const maxLine = Math.max(...hist.map(d => d.debt_ratio || 0), 50) * 1.12;
+    const yBar = v => padT + plotH * (maxBar - v) / barSpan;
+    const yLine = v => padT + plotH * (1 - Math.max(0, v) / maxLine);
+    const y0 = yBar(0);
+    const step = plotW / hist.length;
+    let pts = [];
+    const elems = hist.map((d, i) => {
+      const cx = padL + i * step + step / 2, bw = Math.min(22, step * 0.24);
+      pts.push(`${cx.toFixed(1)},${yLine(d.debt_ratio).toFixed(1)}`);
+      function barRect(x, v, fill) {
+        const yv = yBar(v);
+        return `<rect x="${x.toFixed(1)}" y="${Math.min(y0, yv).toFixed(1)}" width="${bw}" height="${Math.max(2, Math.abs(y0 - yv)).toFixed(1)}" rx="3" fill="${fill}"/>`;
+      }
+      const fcfLblY = d.fcf >= 0 ? (yBar(d.fcf) - 4) : (yBar(d.fcf) + 11);
+      return `${barRect(cx-bw*1.4, d.ocf, '#1e3a8a')}${barRect(cx-bw*0.3, d.fcf, d.fcf>=0?'#059669':'#e11d48')}${barRect(cx+bw*0.8, d.capex, '#f59e0b')}
+              <text x="${cx.toFixed(1)}" y="${fcfLblY.toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="800" fill="${d.fcf>=0?'#059669':'#be123c'}">${d.fcf.toFixed(0)}</text>
+              <text x="${cx.toFixed(1)}" y="${(H-10).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">${d.period}</text>`;
+    }).join('');
+    const dots = hist.map((d, i) => {
+      const cx = padL + i * step + step / 2, cy = yLine(d.debt_ratio);
+      return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="4" fill="#be123c" stroke="#fff" stroke-width="1.5"/><text x="${cx.toFixed(1)}" y="${(cy-8).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#be123c">${d.debt_ratio.toFixed(1)}%</text>`;
+    }).join('');
+    document.getElementById('historySvg').innerHTML = `<svg viewBox="0 0 ${W} ${H}"><g font-size="10" font-weight="700"><rect x="42" y="6" width="10" height="10" rx="2" fill="#1e3a8a"/><text x="56" y="15" fill="#1e3a8a">经营现金流OCF</text><rect x="148" y="6" width="10" height="10" rx="2" fill="#059669"/><text x="162" y="15" fill="#059669">自由现金流FCF(亿)</text><rect x="268" y="6" width="10" height="10" rx="2" fill="#f59e0b"/><text x="282" y="15" fill="#b45309">资本开支CapEx</text><circle cx="378" cy="11" r="4" fill="#be123c"/><text x="386" y="15" fill="#be123c">负债率(%)</text></g><line x1="${padL}" y1="${y0.toFixed(1)}" x2="${W-padR}" y2="${y0.toFixed(1)}" stroke="#64748b" stroke-width="1.2"/><text x="6" y="${(y0+4).toFixed(1)}" font-size="9.5" fill="#64748b">0亿</text>${elems}<polyline fill="none" stroke="#be123c" stroke-width="2.2" points="${pts.join(' ')}"/>${dots}</svg>`;
+  } else {
+    document.getElementById('historySvg').innerHTML = '<div style="color:var(--muted);padding:20px">待填充 5 年现金流数据</div>';
+  }
+
+  const pc = APP.facts.peer_chart_config || {};
+  const peers = APP.facts.peers || [];
+  document.getElementById('peerDualTitle').textContent = pc.title || '⚡ 同行双维度对比';
+  document.getElementById('peerDualSub').textContent = pc.subtitle || '';
+  document.getElementById('peerDupontTitle').textContent = pc.dupont_title || '🏆 同行毛利率 vs ROE vs 负债率';
+  document.getElementById('peerDupontSub').textContent = pc.dupont_sub || '';
+
+  if (peers.length) {
+    const lMax = pc.left_max || Math.max(...peers.map(p => p.m1 || 0), 1) * 1.15;
+    const rMax = pc.right_max || Math.max(...peers.map(p => p.m2 || 0), 1) * 1.15;
+    const PH = 42 + peers.length * 36;
+    const rows = peers.map((p, i) => {
+      const y = 32 + i * 36, cW = (p.m1 || 0) / lMax * 170, pW = (p.m2 || 0) / rMax * 170, hl = p.highlight;
+      return `<text x="4" y="${y+15}" font-size="12" font-weight="${hl?900:600}" fill="${hl?'#059669':'#334155'}">${hl?'★ ':''}${p.name}</text>
+              <rect x="86" y="${y+2}" width="${Math.max(2,cW).toFixed(1)}" height="18" rx="4" fill="${hl?'#059669':'#94a3b8'}"/>
+              <text x="${(90+cW).toFixed(1)}" y="${y+15}" font-size="11" font-weight="800" fill="${hl?'#059669':'#475569'}">${p.m1}${pc.left_unit||''}</text>
+              <rect x="330" y="${y+2}" width="${Math.max(2,pW).toFixed(1)}" height="18" rx="4" fill="${hl?'#f59e0b':'#0284c7'}"/>
+              <text x="${(334+pW).toFixed(1)}" y="${y+15}" font-size="11" font-weight="800" fill="${hl?'#b45309':'#0369a1'}">${p.m2}${pc.right_unit||''}</text>`;
+    }).join('');
+    document.getElementById('peerDualSvg').innerHTML = `<svg viewBox="0 0 560 ${PH}"><text x="86" y="18" font-size="11.5" font-weight="800" fill="#059669">${pc.left_label||'指标一'}</text><text x="330" y="18" font-size="11.5" font-weight="800" fill="#0284c7">${pc.right_label||'指标二'}</text>${rows}</svg>`;
+
+    const p4 = peers.slice(0, 4), DW = 560, DH = 225, dPadL = 36, dPadB = 30, dPadT = 28;
+    const dStep = (DW - 72) / p4.length;
+    const maxPct = Math.max(...p4.map(p => Math.max(p.gm||0, p.roe||0, p.debt_ratio||0)), 50) * 1.15;
+    const dY = v => dPadT + (DH - dPadT - dPadB) * (1 - Math.max(0, v) / maxPct);
+    let dLine = [];
+    const dBars = p4.map((p, i) => {
+      const cx = dPadL + i * dStep + dStep / 2, bw = 24;
+      dLine.push(`${cx.toFixed(1)},${dY(p.debt_ratio).toFixed(1)}`);
+      return `<rect x="${(cx-bw-2).toFixed(1)}" y="${dY(p.gm).toFixed(1)}" width="${bw}" height="${(dY(0)-dY(p.gm)).toFixed(1)}" rx="3" fill="#1e3a8a"/>
+              <text x="${(cx-bw/2-2).toFixed(1)}" y="${(dY(p.gm)-4).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#1e3a8a">${p.gm.toFixed(1)}%</text>
+              <rect x="${(cx+2).toFixed(1)}" y="${dY(p.roe).toFixed(1)}" width="${bw}" height="${(dY(0)-dY(p.roe)).toFixed(1)}" rx="3" fill="#059669"/>
+              <text x="${(cx+bw/2+2).toFixed(1)}" y="${(dY(p.roe)-4).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#059669">${p.roe.toFixed(1)}%</text>
+              <text x="${cx.toFixed(1)}" y="${DH-8}" text-anchor="middle" font-size="11.5" font-weight="${p.highlight?900:700}" fill="${p.highlight?'#059669':'#334155'}">${p.name}</text>`;
+    }).join('');
+    const dDots = p4.map((p, i) => {
+      const cx = dPadL + i * dStep + dStep / 2;
+      return `<circle cx="${cx.toFixed(1)}" cy="${dY(p.debt_ratio).toFixed(1)}" r="4.5" fill="#be123c" stroke="#fff" stroke-width="1.5"/><text x="${cx.toFixed(1)}" y="${(dY(p.debt_ratio)-8).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#be123c">负债${p.debt_ratio.toFixed(1)}%</text>`;
+    }).join('');
+    document.getElementById('peerDupontSvg').innerHTML = `<svg viewBox="0 0 ${DW} ${DH}"><g font-size="10.5" font-weight="700"><rect x="40" y="6" width="10" height="10" rx="2" fill="#1e3a8a"/><text x="54" y="15" fill="#1e3a8a">毛利率</text><rect x="118" y="6" width="10" height="10" rx="2" fill="#059669"/><text x="132" y="15" fill="#059669">加权ROE</text><circle cx="215" cy="11" r="4" fill="#be123c"/><text x="223" y="15" fill="#be123c">资产负债率</text></g><line x1="${dPadL}" y1="${dY(0)}" x2="${DW-36}" y2="${dY(0)}" stroke="#94a3b8"/>${dBars}<polyline fill="none" stroke="#be123c" stroke-width="2" points="${dLine.join(' ')}"/>${dDots}</svg>`;
+
+    document.getElementById('peerTableWrap').innerHTML = `
+      <table>
+        <thead><tr><th>公司</th><th class="num">${pc.left_label||'指标1'}</th><th class="num">${pc.right_label||'指标2'}</th><th class="num">${pc.extra_col_label||'特征'}</th><th class="num">毛利率</th><th class="num">ROE</th><th class="num">四费率</th><th class="num">负债率</th><th>核心画像</th></tr></thead>
+        <tbody>${peers.map(p => `<tr class="${p.highlight?'row-hl':''}"><td>${p.highlight?'★ ':''}${p.name}</td><td class="num">${p.m1}${pc.left_unit||''}</td><td class="num">${p.m2}${pc.right_unit||''}</td><td class="num">${p.extra||'-'}</td><td class="num">${p.gm.toFixed(2)}%</td><td class="num"><strong>${p.roe.toFixed(2)}%</strong></td><td class="num">${p.expense_ratio.toFixed(2)}%</td><td class="num">${p.debt_ratio.toFixed(2)}%</td><td style="font-size:12px;color:var(--muted)">${p.note}</td></tr>`).join('')}</tbody>
+      </table>
+    `;
+  }
+}
+
+function renderTab4() {
+  const recon = APP.facts.audit_reconciliation;
+  document.getElementById('auditReconWrap').innerHTML = recon ? `
+    <div class="card">
+      <div class="card-title"><span>${recon.title}</span><span class="tag tag-green">${recon.badge || '终审校准'}</span></div>
+      <div class="grid-2">
+        <div class="callout-info" style="margin:0"><strong>${recon.left_title}</strong><br>${(recon.left_items||[]).join('<br>')}</div>
+        <div class="callout-munger" style="margin:0"><strong>${recon.right_title}</strong><br>${(recon.right_items||[]).join('<br>')}</div>
+      </div>
+    </div>
+  ` : '';
+
+  const sw = APP.swarm || {};
+  const isPlain = state.mode === 'plain';
+  if (!sw.messages || !sw.messages.length) {
+    document.getElementById('swarmSectionWrap').innerHTML = `
+      <div class="card">
+        <div class="card-title"><span>💬 投委会 Swarm 跨模型辩论剧场</span><span class="tag tag-blue">即插即用插槽</span></div>
+        <p style="font-size:13.5px;color:var(--muted)">该公司目前尚未发起 <code>/teamwork</code> 跨模型红蓝辩论会。未来拟重仓前只需跑一次 Swarm 辩论并将产物放入 <code>decisions/swarm_YYYYMMDD.json</code>，0.2 秒重编即可自动在此页挂载完整群聊剧场与三列对质卡！</p>
+      </div>
+    `;
+    return;
+  }
+  const clashHtml = (sw.clash_cards || []).map(c => `
+    <div class="clash-card">
+      <div class="clash-head"><span>${isPlain ? (c.title_plain || c.title) : c.title}</span><span class="tag tag-green">${c.verdictBadge || '终审裁决'}</span></div>
+      <div class="clash-cols">
+        <div class="clash-col" style="background:#fff1f2"><h4 style="color:#9f1239">🐻 空头（零信任审计）</h4><div>${isPlain ? (c.bear_plain || c.bear) : c.bear}</div></div>
+        <div class="clash-col" style="background:#f0fdf4"><h4 style="color:#166534">🐂 多头（买方猎手）</h4><div>${isPlain ? (c.bull_plain || c.bull) : c.bull}</div></div>
+        <div class="clash-col" style="background:#eff6ff"><h4 style="color:#1e3a8a">⚖️ 裁判终裁</h4><div>${isPlain ? (c.judge_plain || c.judge) : c.judge}</div></div>
+      </div>
+    </div>
+  `).join('');
+
+  const rawTopics = sw.topics || [];
+  const topics = rawTopics.some(t => t.id === 'all') ? rawTopics : [{ id: 'all', icon: '📋', name: '全部发言' }, ...rawTopics];
+  const msgs = (sw.messages || []).filter(m => state.activeTopic === 'all' || m.topic === state.activeTopic);
+  const roleColors = { host: '#475569', bull: '#059669', bear: '#be123c', judge: '#1e3a8a' };
+  const statColorMap = { host: '#0284c7', bull: '#059669', bear: '#be123c', judge: '#7c3aed', gold: '#d97706' };
+  const buildUnblindBlock = () => {
+    const ub = sw.unblind;
+    if (!ub) return '';
+    const stats = isPlain ? (ub.stats_plain || ub.stats || []) : (ub.stats || []);
+    const hdrs = isPlain ? (ub.grid_headers_plain || ub.grid_headers || []) : (ub.grid_headers || []);
+    const rows = isPlain ? (ub.grid_rows_plain || ub.grid_rows || []) : (ub.grid_rows || []);
+    const cardsHtml = stats.map(s => `<div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px"><div style="font-size:11.5px;color:#64748b">${s.k}</div><div style="font-size:15px;font-weight:800;margin-top:3px;color:${statColorMap[s.color]||'#0f172a'}">${s.v}</div></div>`).join('');
+    const tblHtml = (hdrs.length && rows.length)
+      ? `<div class="tbl-wrap" style="margin-top:12px"><table><thead><tr>${hdrs.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : '';
+    return `<div style="margin-top:12px;border-radius:12px;padding:14px;border:1.5px dashed #d97706;background:linear-gradient(135deg,rgba(251,191,36,0.10),rgba(56,189,248,0.08))">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+        <strong style="font-size:15px;color:#b45309">${ub.header_title||ub.sealed_title||'🔓 宿主揭盲开箱'}</strong>
+        ${ub.header_badge ? `<span class="tag tag-green">${ub.header_badge}</span>` : ''}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px">${cardsHtml}</div>
+      ${tblHtml}
+    </div>`;
+  };
+  const msgHtml = msgs.map(m => {
+    const r = (sw.roles && sw.roles[m.role]) || { name: m.role, avatar: '💬', model: '' };
+    const tbl = isPlain ? (m.table_plain || m.table) : m.table;
+    const tblHtml = tbl ? `<div class="tbl-wrap" style="margin-top:10px"><table><thead><tr>${tbl.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${tbl.rows.map(row=>`<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : '';
+    const ubHtml = m.isUnblindBox ? buildUnblindBlock() : '';
+    return `<div class="msg-row role-${m.role}"><div class="msg-avatar" style="background:${roleColors[m.role]||'#334155'}">${r.avatar||r.emoji||'💬'}</div><div class="msg-bubble"><div class="msg-meta"><span class="msg-name">${r.name}</span><span>${r.model||''}</span><span class="tag tag-blue">${isPlain?(m.round_plain||m.round):(m.round||'')}</span><span>${m.time||''}</span></div><div class="msg-text">${isPlain?(m.plain||m.text):m.text}${tblHtml}${ubHtml}</div></div></div>`;
+  }).join('');
+
+  document.getElementById('swarmSectionWrap').innerHTML = `
+    <div class="card"><div class="card-title"><span>⚔️ 核心争点「非黑即白」三列对质卡</span></div>${clashHtml}</div>
+    <div class="card">
+      <div class="card-title"><span>💬 投委会跨模型物理双盲群聊剧场实录</span><span class="card-sub">共 ${msgs.length} 条发言 · ${isPlain?'🐣 小白版':'🎓 专业版'}</span></div>
+      <div class="topic-pills">${topics.map(t => `<button class="topic-pill ${state.activeTopic===t.id?'active':''}" data-topic="${t.id}">${t.icon||''} ${t.name}</button>`).join('')}</div>
+      <div class="chat-stream">${msgHtml}</div>
+    </div>
+  `;
+  document.querySelectorAll('.topic-pill').forEach(btn => btn.addEventListener('click', () => { state.activeTopic = btn.dataset.topic; renderTab4(); }));
+}
+
+function renderTab5() {
+  const isPlain = state.mode === 'plain';
+  document.getElementById('milestonesWrap').innerHTML = (APP.facts.milestones || []).map(m => `
+    <div class="ms-card ${m.status || ''}">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px">
+        <strong style="font-size:14px">${m.id} · ${m.title}</strong>
+        <span class="tag ${m.status==='green'?'tag-green':(m.status==='watch'?'tag-purple':'tag-blue')}">${m.status_label||'跟踪中'}</span>
+      </div>
+      <div style="font-size:12.5px;color:var(--ink-2)"><strong>量化标尺：</strong>${m.metric}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">最新进度：${m.latest_note}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('redlinesWrap').innerHTML = (APP.facts.red_lines || []).map(r => `
+    <div class="redline-card">
+      <div style="font-size:14px;font-weight:800;color:#9f1239;margin-bottom:4px">🚨 ${r.id} · ${r.title}</div>
+      <div style="font-size:13px;color:#881337">${isPlain ? (r.plain || r.trigger) : r.trigger}</div>
+      ${isPlain && r.plain ? `<div style="font-size:11.5px;color:#9f1239;margin-top:4px;opacity:0.85">专业触发线：${r.trigger}</div>` : ''}
+    </div>
+  `).join('');
+
+  document.getElementById('changelogWrap').innerHTML = `
+    <table>
+      <thead><tr><th>日期</th><th>版本</th><th class="num">常态OE</th><th class="num">净现金偏移</th><th class="num">公允中枢</th><th class="num">两档买点</th><th>修订原因</th><th>联动</th></tr></thead>
+      <tbody>
+        ${(APP.facts.changelog || []).map(c => `
+          <tr class="${c.preset_key === APP.activePreset ? 'row-hl' : ''}">
+            <td style="white-space:nowrap">${c.date}</td>
+            <td style="white-space:nowrap"><strong>${c.version}</strong></td>
+            <td class="num">${c.oe}</td>
+            <td class="num">${c.ev_delta}</td>
+            <td class="num">${c.fair}</td>
+            <td class="num" style="white-space:nowrap">${c.buy_zone}</td>
+            <td style="font-size:12px;color:var(--ink-2)">${c.reason}</td>
+            <td>${c.preset_key && APP.presets[c.preset_key] ? `<button class="load-preset-btn" data-load-preset="${c.preset_key}">载入Tab1</button>` : '<span style="font-size:11px;color:var(--muted)">已归档</span>'}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+  document.querySelectorAll('[data-load-preset]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pk = btn.dataset.loadPreset;
+      document.getElementById('presetSelect').value = pk;
+      loadPresetParams(pk);
+      renderAllDynamic();
+      switchTab('tab1');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+}
+
+function renderGlossary(filter = '') {
+  const q = filter.trim().toLowerCase();
+  const list = (APP.glossary || []).filter(g => !q || (g.term + g.plain + g.usage).toLowerCase().includes(q));
+  document.getElementById('glossList').innerHTML = list.map(g => `
+    <div class="gloss-item">
+      <div class="gloss-term">${g.term}</div>
+      <div class="gloss-plain">${g.plain}</div>
+      <div class="gloss-use">💡 实战用法：${g.usage}</div>
+    </div>
+  `).join('') || '<div style="padding:20px;color:var(--muted);text-align:center">未找到匹配术语</div>';
+}
+
+function renderAllDynamic() {
+  updateSliderLabels();
+  const res = computeLive();
+  renderTab1(res);
+  renderWaterfallSvg(res);
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === id));
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+function selectChapter(cid) {
+  document.querySelectorAll('.chap-pill').forEach(b => b.classList.toggle('active', b.dataset.chap === cid));
+  document.querySelectorAll('.chap-btn').forEach(b => {
+    const on = b.dataset.chap === cid;
+    b.style.background = on ? '#e0f2fe' : 'transparent';
+    b.style.color = on ? '#0369a1' : '';
+    b.style.fontWeight = on ? '700' : '';
+  });
+  document.querySelectorAll('.thesis-chapter').forEach(ch => {
+    ch.style.display = (cid === 'all' || ch.dataset.chap === cid) ? 'block' : 'none';
+  });
+}
+document.querySelectorAll('.chap-pill, .chap-btn').forEach(btn => btn.addEventListener('click', () => {
+  selectChapter(btn.dataset.chap);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}));
+document.getElementById('presetSelect').addEventListener('change', e => { loadPresetParams(e.target.value); renderAllDynamic(); });
+document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', () => {
+  state.mode = btn.dataset.mode;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === state.mode));
+  renderAllDynamic(); renderTab4(); renderTab5();
+}));
+document.getElementById('slSotpRate').addEventListener('input', e => { state.sotpRatePct = parseFloat(e.target.value); renderAllDynamic(); });
+document.getElementById('resetSliders').addEventListener('click', () => { initSotpChecks(); loadPresetParams(state.presetKey); renderAllDynamic(); });
+
+function toggleDrawer(open) {
+  document.getElementById('drawerMask').classList.toggle('open', open);
+  document.getElementById('glossaryDrawer').classList.toggle('open', open);
+}
+document.getElementById('openGlossary').addEventListener('click', () => toggleDrawer(true));
+document.getElementById('closeGlossary').addEventListener('click', () => toggleDrawer(false));
+document.getElementById('drawerMask').addEventListener('click', () => toggleDrawer(false));
+document.getElementById('glossSearch').addEventListener('input', e => renderGlossary(e.target.value));
+
+initSotpChecks();
+loadPresetParams(APP.activePreset);
+renderAllDynamic();
+renderStaticCharts();
+renderTab4();
+renderTab5();
+renderGlossary();
+</script>
+</body>
+</html>
