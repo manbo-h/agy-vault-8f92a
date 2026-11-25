@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+<title>💬 宁德时代（300750.SZ）投委会群聊辩论剧场</title>
+<style>
+  :root {
+    --bg-app: #0b1120;
+    --bg-panel: #111827;
+    --bg-card: #1e293b;
+    --bg-card-hover: #273549;
+    --bg-bubble-host: #172554;
+    --bg-bubble-bull: #052e2b;
+    --bg-bubble-bear: #33131c;
+    --bg-bubble-judge: #251a3f;
+    --border-subtle: rgba(148, 163, 184, 0.16);
+    --border-strong: rgba(148, 163, 184, 0.30);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-host: #38bdf8;
+    --accent-bull: #34d399;
+    --accent-bear: #fb7185;
+    --accent-judge: #c084fc;
+    --accent-gold: #fbbf24;
+    --quote-bg: rgba(15, 23, 42, 0.55);
+    --pill-bg: rgba(30, 41, 59, 0.85);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.42);
+    --highlight-ring: #fbbf24;
+  }
+  [data-theme="light"] {
+    --bg-app: #f1f5f9;
+    --bg-panel: #ffffff;
+    --bg-card: #f8fafc;
+    --bg-card-hover: #eef2f7;
+    --bg-bubble-host: #eff6ff;
+    --bg-bubble-bull: #ecfdf5;
+    --bg-bubble-bear: #fff1f2;
+    --bg-bubble-judge: #faf5ff;
+    --border-subtle: rgba(15, 23, 42, 0.10);
+    --border-strong: rgba(15, 23, 42, 0.20);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --accent-host: #0284c7;
+    --accent-bull: #059669;
+    --accent-bear: #e11d48;
+    --accent-judge: #7c3aed;
+    --accent-gold: #d97706;
+    --quote-bg: rgba(15, 23, 42, 0.055);
+    --pill-bg: #e2e8f0;
+    --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --highlight-ring: #f59e0b;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-app); color: var(--text-primary);
+    line-height: 1.62; -webkit-font-smoothing: antialiased;
+  }
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg-panel); border-bottom: 1px solid var(--border-subtle);
+    backdrop-filter: blur(12px); padding: 12px 18px; box-shadow: var(--shadow-lg);
+  }
+  .topbar-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .group-title-wrap { display: flex; flex-direction: column; gap: 3px; }
+  .group-title { font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .group-badge {
+    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+    background: rgba(56, 189, 248, 0.16); color: var(--accent-host); border: 1px solid rgba(56, 189, 248, 0.35);
+  }
+  .group-sub { font-size: 12px; color: var(--text-secondary); }
+  .top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    border: 1px solid var(--border-strong); background: var(--bg-card); color: var(--text-primary);
+    padding: 6px 12px; border-radius: 9px; font-size: 12.5px; font-weight: 600;
+    cursor: pointer; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 5px;
+    text-decoration: none;
+  }
+  .btn:hover { background: var(--bg-card-hover); transform: translateY(-1px); }
+  .btn.active { background: var(--accent-host); color: #fff; border-color: var(--accent-host); }
+  .btn-gold { background: linear-gradient(135deg, #f59e0b, #ea580c); color: #fff; border-color: transparent; }
+  .btn-gold:hover { filter: brightness(1.08); }
+  .roster-strip {
+    max-width: 1280px; margin: 8px auto 0;
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    padding-top: 8px; border-top: 1px dashed var(--border-subtle);
+  }
+  .member-chip {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; padding: 3px 10px;
+    border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border-subtle);
+    color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  }
+  .member-chip:hover { border-color: var(--border-strong); color: var(--text-primary); }
+  .member-chip.selected { border-color: var(--accent-gold); color: var(--text-primary); box-shadow: 0 0 0 1px var(--accent-gold); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .dot-host { background: var(--accent-host); } .dot-bull { background: var(--accent-bull); }
+  .dot-bear { background: var(--accent-bear); } .dot-judge { background: var(--accent-judge); }
+  .layout {
+    max-width: 1280px; margin: 16px auto 40px; padding: 0 16px;
+    display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 18px; align-items: start;
+  }
+  @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static !important; } }
+  .sidebar {
+    position: sticky; top: 122px; background: var(--bg-panel); border: 1px solid var(--border-subtle);
+    border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 14px;
+  }
+  .side-title {
+    font-size: 12px; font-weight: 800; letter-spacing: 0.04em; color: var(--text-muted);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .topic-list { display: flex; flex-direction: column; gap: 6px; }
+  .topic-btn {
+    text-align: left; width: 100%; border: 1px solid transparent; background: transparent; color: var(--text-secondary);
+    padding: 8px 10px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600;
+    transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; gap: 6px;
+  }
+  .topic-btn > span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topic-btn:hover { background: var(--bg-card); color: var(--text-primary); }
+  .topic-btn.active { background: rgba(56, 189, 248, 0.14); color: var(--accent-host); border-color: rgba(56, 189, 248, 0.35); }
+  .topic-count { font-size: 11px; padding: 1px 6px; border-radius: 999px; background: var(--pill-bg); color: var(--text-secondary); font-weight: 700; }
+  .topic-status { font-size: 11px; white-space: nowrap; }
+  .convergence-box { background: var(--bg-card); border-radius: 11px; padding: 11px; border: 1px solid var(--border-subtle); font-size: 12px; }
+  .conv-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px dashed var(--border-subtle); gap: 6px; }
+  .conv-row:last-child { border-bottom: none; }
+  .conv-label { color: var(--text-secondary); white-space: nowrap; }
+  .conv-val { font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; }
+  .chat-stage { background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 18px 18px 28px; min-height: 75vh; }
+  .stage-banner {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    padding: 10px 14px; border-radius: 11px; margin-bottom: 18px;
+    background: var(--bg-card); border: 1px solid var(--border-subtle); font-size: 12.5px; color: var(--text-secondary);
+  }
+  .round-divider { display: flex; align-items: center; gap: 10px; margin: 24px 0 14px; color: var(--text-muted); font-size: 12px; font-weight: 700; }
+  .round-divider::before, .round-divider::after { content: ""; flex: 1; height: 1px; background: var(--border-subtle); }
+  .round-pill { padding: 3px 12px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border-strong); color: var(--text-primary); }
+  .msg-row { display: flex; gap: 11px; margin-bottom: 14px; align-items: flex-start; scroll-margin-top: 140px; }
+  .msg-row.side-right { flex-direction: row-reverse; }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 18px; user-select: none; border: 1px solid var(--border-strong);
+  }
+  .av-host { background: rgba(56, 189, 248, 0.16); } .av-bull { background: rgba(52, 211, 153, 0.16); }
+  .av-bear { background: rgba(251, 113, 133, 0.16); } .av-judge { background: rgba(192, 132, 252, 0.16); }
+  .msg-body-wrap { max-width: 82%; min-width: 240px; display: flex; flex-direction: column; gap: 4px; }
+  @media (max-width: 680px) { .msg-body-wrap { max-width: 88%; } }
+  .msg-row.side-right .msg-body-wrap { align-items: flex-end; }
+  .msg-meta { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; font-size: 11.5px; color: var(--text-secondary); padding: 0 2px; }
+  .msg-row.side-right .msg-meta { flex-direction: row-reverse; }
+  .sender-name { font-weight: 800; color: var(--text-primary); }
+  .model-tag { font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-muted); }
+  .msg-id { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10.5px; color: var(--text-muted); }
+  .act-tag { font-size: 10.5px; font-weight: 800; padding: 1.5px 7px; border-radius: 6px; }
+  .act-attack { background: rgba(244, 63, 94, 0.18); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.35); }
+  .act-defend { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+  .act-concede { background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+  .act-withdraw { background: rgba(56, 189, 248, 0.18); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
+  .act-verdict { background: rgba(168, 85, 247, 0.22); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.42); }
+  .act-system { background: rgba(148, 163, 184, 0.18); color: var(--text-secondary); }
+  [data-theme="light"] .act-attack { color: #be123c; } [data-theme="light"] .act-defend { color: #047857; }
+  [data-theme="light"] .act-concede { color: #b45309; } [data-theme="light"] .act-withdraw { color: #0369a1; }
+  [data-theme="light"] .act-verdict { color: #6d28d9; }
+  .bubble { padding: 11px 14px; border-radius: 14px; border: 1px solid var(--border-subtle); font-size: 14px; width: 100%; transition: box-shadow 0.25s, border-color 0.25s; }
+  .bubble-host { background: var(--bg-bubble-host); border-color: rgba(56, 189, 248, 0.28); }
+  .bubble-bull { background: var(--bg-bubble-bull); border-color: rgba(52, 211, 153, 0.28); border-top-left-radius: 4px; }
+  .bubble-bear { background: var(--bg-bubble-bear); border-color: rgba(251, 113, 133, 0.28); border-top-right-radius: 4px; }
+  .bubble-judge { background: var(--bg-bubble-judge); border-color: rgba(192, 132, 252, 0.34); }
+  .bubble.flash-highlight { box-shadow: 0 0 0 3px var(--highlight-ring), 0 0 24px rgba(251, 191, 36, 0.35); border-color: var(--highlight-ring); }
+  .quote-box { background: var(--quote-bg); border-left: 3px solid var(--accent-gold); border-radius: 7px; padding: 6px 9px; margin-bottom: 8px; font-size: 12px; color: var(--text-secondary); cursor: pointer; }
+  .quote-box:hover { filter: brightness(1.12); }
+  .quote-head { font-weight: 700; color: var(--text-primary); font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+  .quote-jump { font-size: 10.5px; color: var(--accent-host); font-weight: 600; }
+  .num { display: inline-block; padding: 0 5px; border-radius: 5px; background: rgba(251, 191, 36, 0.14); color: var(--accent-gold); font-weight: 800; font-variant-numeric: tabular-nums; font-size: 13px; }
+  [data-theme="light"] .num { background: rgba(217, 119, 6, 0.12); color: #b45309; }
+  .cite-row { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .cite-chip { font-size: 11px; padding: 2px 8px; border-radius: 6px; background: var(--quote-bg); border: 1px solid var(--border-subtle); color: var(--text-secondary); font-weight: 600; }
+  .impact-chip { font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 800; background: rgba(244, 63, 94, 0.16); color: #fb7185; }
+  .impact-chip.pos { background: rgba(16, 185, 129, 0.16); color: #34d399; }
+  [data-theme="light"] .impact-chip { color: #be123c; } [data-theme="light"] .impact-chip.pos { color: #047857; }
+  .topic-tag-mini { font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: rgba(56, 189, 248, 0.12); color: var(--accent-host); cursor: pointer; font-weight: 700; }
+  .mini-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; background: var(--quote-bg); border-radius: 8px; overflow: hidden; }
+  .mini-table th, .mini-table td { padding: 5px 8px; border-bottom: 1px solid var(--border-subtle); text-align: left; }
+  .mini-table th { color: var(--text-muted); font-weight: 700; font-size: 11px; }
+  .mini-table tr:last-child td { border-bottom: none; }
+  .unblind-box { margin-top: 10px; border-radius: 12px; padding: 14px; border: 1.5px dashed var(--accent-gold); background: linear-gradient(135deg, rgba(251, 191, 36, 0.10), rgba(56, 189, 248, 0.08)); }
+  .unblind-sealed { text-align: center; padding: 14px 10px; }
+  .unblind-content { display: none; } .unblind-content.open { display: block; animation: fadeIn 0.35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-top: 10px; }
+  .stat-card { background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: 9px; padding: 9px 10px; }
+  .stat-k { font-size: 11px; color: var(--text-muted); } .stat-v { font-size: 16px; font-weight: 800; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .matrix-view { display: none; flex-direction: column; gap: 16px; } .matrix-view.active { display: flex; }
+  .chat-view.hidden { display: none; }
+  .clash-card { background: var(--bg-card); border: 1px solid var(--border-strong); border-radius: 14px; overflow: hidden; }
+  .clash-header { padding: 12px 16px; background: var(--quote-bg); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .clash-title { font-weight: 800; font-size: 15px; }
+  .clash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 14px; }
+  @media (max-width: 820px) { .clash-grid { grid-template-columns: 1fr; } }
+  .clash-col { background: var(--bg-panel); border-radius: 10px; padding: 11px; border: 1px solid var(--border-subtle); font-size: 13px; }
+  .clash-col-head { font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+  .clash-verdict { margin: 0 14px 14px; padding: 10px 13px; border-radius: 10px; background: var(--bg-bubble-judge); border: 1px solid rgba(192, 132, 252, 0.35); font-size: 13px; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="group-title-wrap">
+      <div class="group-title">
+        <span>⚖️ 宁德时代（300750.SZ）投委会红蓝辩论群 (4)</span>
+        <span class="group-badge">V2.0 物理双盲 · 2+1 弹性加时</span>
+      </div>
+      <div class="group-sub">2026-11-25 ｜ 全程纯官方 2026Q3/H1/2025AR 巨潮底稿 ＋ 4家同行三表 ＋ Python 硬验算</div>
+    </div>
+    <div class="top-actions">
+      <a href="./index.html" class="btn" style="text-decoration:none;">← 书架</a>
+      
+      <button class="btn active" id="btnChatView" onclick="switchView('chat')">💬 群聊实景</button>
+      <button class="btn" id="btnMatrixView" onclick="switchView('matrix')">⚔️ 议题一一对质表</button>
+      <button class="btn btn-gold" onclick="jumpAndUnblind()">🔓 揭盲对照现价</button>
+      <button class="btn" id="btnTheme" onclick="toggleTheme()">☀️ 浅色</button>
+    </div>
+  </div>
+  <div class="roster-strip" id="rosterStrip"></div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div>
+      <div class="side-title">
+        <span>📌 按议题追踪（一一对应）</span>
+        <span style="font-weight:600;color:var(--accent-host);cursor:pointer;" onclick="filterTopic('all')">重置</span>
+      </div>
+      <div class="topic-list" id="topicList"></div>
+    </div>
+    <div class="convergence-box">
+      <div class="side-title" style="margin-bottom:8px;"><span>📊 盲定数字收敛轨迹</span></div>
+      <div id="convList"></div>
+    </div>
+  </aside>
+
+  <main class="chat-stage">
+    <div class="stage-banner">
+      <span>💡 <b>阅读小技巧</b>：点气泡顶部<b>「↩ 引用原话」</b>直跳高亮原发言；点左侧任一<b>议题</b>只看单点闭环！</span>
+      <span id="msgCounter" style="font-weight:700;color:var(--accent-host);"></span>
+    </div>
+    <div class="chat-view" id="chatView"></div>
+    <div class="matrix-view" id="matrixView"></div>
+  </main>
+</div>
+
+<script>
+const DATA = {"company": "宁德时代", "code": "300750.SZ", "date": "2026-11-25", "badge": "V2.0 物理双盲 · 2+1 弹性加时", "subtitle": "2026-11-25 ｜ 全程纯官方 2026Q3/H1/2025AR 巨潮底稿 ＋ 4家同行三表 ＋ Python 硬验算", "topics": [{"id": "all", "name": "全部群聊实录", "icon": "💬", "badge": ""}, {"id": "t0", "name": "双盲封箱与底座", "icon": "🔒", "badge": "0现价"}, {"id": "t1", "name": "Q3现金流与回款", "icon": "💧", "badge": "🛡️反杀"}, {"id": "t2", "name": "反向保理504亿", "icon": "⛓️", "badge": "🩸命中"}, {"id": "t3", "name": "质保金与少数股东", "icon": "🛡️", "badge": "撤2刺"}, {"id": "t4", "name": "2027退税与盈利锚", "icon": "⚡", "badge": "🩸命中"}, {"id": "t5", "name": "R2.5加时·DCF终极死结", "icon": "🔥", "badge": "加时神转折"}, {"id": "t6", "name": "终审落锤与揭盲", "icon": "⚖️", "badge": "重锤区"}], "roles": {"host": {"name": "主席 · 宿主 Coordinator", "model": "双盲主持", "avatar": "🏛️", "cls": "host", "side": "left"}, "bull": {"name": "多头猎手 · 林奇", "model": "Gemini 4 Neon", "avatar": "🐂", "cls": "bull", "side": "left"}, "bear": {"name": "零信任空头 · 法医", "model": "Claude Opus 5.5", "avatar": "🐻", "cls": "bear", "side": "right"}, "judge": {"name": "安全边际裁判 · 马克斯", "model": "Gemini 4 Neon", "avatar": "⚖️", "cls": "judge", "side": "left"}}, "convergence": [{"label": "steady_oe 收口", "value": "740 vs 696 → 725.0亿", "color": "judge"}, {"label": "ev_delta 收口", "value": "-1388 vs -1086 → -1267.8亿", "color": "judge"}, {"label": "fair_price (R1→R2→R2.5)", "value": "350/257 → 335/282 → 310.0元", "color": "bull"}, {"label": "第二档建仓区", "value": "230.00—272.00元", "color": "bull"}, {"label": "第一档左侧重锤", "value": "≤ 230.00元", "color": "bear"}, {"label": "宿主揭盲 A股现价", "value": "219.61元 (已破重锤线!)", "color": "bear"}], "messages": [{"id": "M01", "round": "第 0 幕 · 物理双盲封箱与纯官方底稿分发（0 现价 · 0 市值 · 0 旧买点）", "topic": "t0", "role": "host", "time": "10:26", "act": {"cls": "act-system", "text": "🔒 双盲封箱"}, "text": "宁德时代（<span class=\"num\">300750.SZ</span>）实时盘面与 A+H 历史走廊已物理封存！官方底稿目录通过正则 0 泄露审计。三席仅凭巨潮原版 26Q3/26H1/25AR 及 4 家同行三表盲审定价，严禁接触现价，纯 A 股人民币单轨核算，启用 <b>2+1 裁判触发式弹性加时制</b>！"}, {"id": "M02", "round": "第一轮（R1）· 盲审立论与法医亮刺", "topic": "t1", "role": "bear", "time": "10:32", "act": {"cls": "act-attack", "text": "🗡️ 刺 1 · 现金流断崖"}, "text": "先看利润和现金流背离：9M OCF <span class=\"num\">616.25亿</span>（同比 -23.6%），而 H1 已占 <span class=\"num\">602.17亿</span>，意味着 <b>Q3 单季 OCF 骤降至仅 <span class=\"num\">14.08亿</span></b>、FCF 更是 <span class=\"num\">-156.86亿</span>！2025 年 OCF 1,332 亿里 67.5% 靠应付账款扩张，如今应付+票据周转天数从 308 天缩回 232 天，浮存金开始倒流，严禁按 OCF ≫ 净利吹“现金奶牛”！", "cites": ["📄 26Q3 P1/P11", "📄 25AR P201"], "impact": {"text": "否决 2025 OCF 1.73x 外推，要求按扣非净利锚定", "pos": false}}, {"id": "M03", "topic": "t2", "role": "bear", "time": "10:32", "act": {"cls": "act-attack", "text": "🗡️ 刺 2 · 反向保理类债"}, "text": "翻开 26H1 附注：应付账款里的 <b>融单 <span class=\"num\">203.91亿</span> + 反向保理 <span class=\"num\">373.73亿</span> = <span class=\"num\">577.64亿</span></b>（半年暴增 +205亿），其中银行/融资方已经垫付给供应商 <b><span class=\"num\">504.06亿</span></b>！这本质就是变相短期银行债，必须全额从净现金里扣掉（绝不在分子双扣营运资金）。", "cites": ["📄 26H1 P158"], "impact": {"text": "对 ev_delta 冲击：净现金硬砍 -504.06 亿", "pos": false}}, {"id": "M04", "topic": "t3", "role": "bear", "time": "10:32", "act": {"cls": "act-attack", "text": "🗡️ 刺 3 · 质保+少数股东"}, "text": "两项隐藏大扣除：第一，预计负债 1,041 亿里，售后质保费 <span class=\"num\">591.31亿</span> 扣递延税后净额 <b><span class=\"num\">493.23亿</span></b> 是迟早要赔的真债，必须扣出 EV；第二，OE 是归母口径，净现金却是合并口径，必须把少数股东权益 <b><span class=\"num\">363.36亿</span></b> 全额扣减！", "cites": ["📄 26H1 P140/P148", "📄 26Q3 P8"], "impact": {"text": "两项合计再砍净现金 -856.59 亿", "pos": false}}, {"id": "M05", "topic": "t4", "role": "bear", "time": "10:32", "act": {"cls": "act-attack", "text": "🗡️ 刺 4 · 毛利滑坡+2027退税"}, "text": "Q3 毛利率已滑至 <span class=\"num\">20.69%</span>（25年 26.27%）、扣非净利率降至 <span class=\"num\">11.42%</span>；加上 <b>2027.1.1 电池出口退税 6%→0% 全面取消</b>（自上而下 107.7亿 / 自下而上 52.1亿取中 79.9亿，转嫁 40% 后税后归母 <span class=\"num\">-37.8亿/年</span>）及 5% 加计抵减到期。空头盲定：<code>ev_delta=-1,086亿</code>、<code>steady_oe=696.1亿</code>、公允 <b><span class=\"num\">257元</span></b>（一档 ≤175元）！", "cites": ["📄 财税2026年第2号", "📄 26Q3 P1", "📄 26H1 P123"], "impact": {"text": "空头 R1 盲定：fair 257元 / 二档 213元 / 一档 ≤175元", "pos": false}}, {"id": "M06", "topic": "t0", "role": "bull", "time": "10:35", "act": {"cls": "act-defend", "text": "🐂 多头 R1 · 垄断护城河"}, "text": "把 4 家同行 26Q1-Q3 官方三表摆一起就高下立判：宁德归母净利率 <span class=\"num\">14.60%</span>（扣非 <span class=\"num\">13.09%</span>），境外毛利率逆势升至 <b><span class=\"num\">29.97%</span></b>、储能 <span class=\"num\">23.96%</span>、产能利用率 <span class=\"num\">94.86%</span>；同期亿纬/国轩/中创新航/比亚迪 FCF 全线巨额失血（<span class=\"num\">-65亿 至 -329亿</span>）且全员净负债，唯独宁德扩产 422 亿后 FCF 仍 <b><span class=\"num\">+194.58亿</span></b>！", "cites": ["📄 26H1 P16-17", "📄 四家同行26Q3官方三表"], "impact": {"text": "降维打击同行 7–12 pct 净利率，全行业唯一正 FCF 庄家", "pos": true}}, {"id": "M07", "topic": "t0", "role": "bull", "time": "10:35", "act": {"cls": "act-defend", "text": "📐 多头 R1 盲定坐标"}, "text": "我方先手按严苛口径扣除营运底仓 350亿 + 反向保理 373.73亿，乘 92% 归母得 <code>ev_delta=-1,387.7亿</code>；764 GWh 扩产扣剩余净 CapEx 1,130亿得 <code>full_ev_delta=-257.7亿</code>（绝不现金双算）。锚定 <code>steady_oe=740.0亿</code>、<code>full_oe=1,010.0亿</code>，给 20x 对应公允 <b><span class=\"num\">350.0元</span></b>（二档 270—302元 / 一档 ≤254元）！", "cites": ["📄 26Q3 P6-12", "📄 26H1 P17/P147"], "impact": {"text": "多头 R1 盲定：fair 350元（与空头 257元相差 36%!）", "pos": true}}, {"id": "M08", "round": "第二轮（R2）· 逐刺铁证反杀、坦诚认账与空头致命补刀", "topic": "t2", "role": "bull", "time": "10:38", "replyTo": "M03", "act": {"cls": "act-concede", "text": "🩸 爽快认账刺 2"}, "text": "复核 26H1 P158 原文，融单 203.91亿与反向保理 373.73亿均承担“无条件不可撤销付款义务”，银行已垫付 <b><span class=\"num\">504.06亿</span></b>！我方绝不嘴硬，全额接受空头口径，将类债扣减从 373.73亿上调至 <b><span class=\"num\">504.06亿</span></b>，归母净现金下修至 <code>-1,267.8亿</code>；同时顺应 Q3 节奏把 <code>steady_oe</code> 微调至 <b><span class=\"num\">730.0亿</span></b>、<code>full_oe</code> 下修至 <b><span class=\"num\">980.0亿</span></b>！", "cites": ["📄 26H1 P158"], "impact": {"text": "双方 steady_oe 分歧骤降至 4.87%（730 vs 696）", "pos": false}}, {"id": "M09", "topic": "t1", "role": "bull", "time": "10:38", "replyTo": "M02", "act": {"cls": "act-defend", "text": "🛡️ 铁证反杀刺 1"}, "text": "说 Q3“现金不进门、借债填坑”完全看反了！查 26Q3 P11 减 26H1 P81：<b>Q3 单季销售收现高达 <span class=\"num\">1,448.01亿</span>（收现比 <span class=\"num\">87.64%</span>）</b>，广义应收还净降 <span class=\"num\">-19.61亿</span>！钱去哪了？Q3 主动净还应付账款 <b><span class=\"num\">220.67亿</span></b> + 旺季备货增存货 <span class=\"num\">139.51亿</span>，纯属响应 60 天账期的一次性付现规范化；发债则是 1.48%—1.70% 超低息科创债置换！", "cites": ["📄 26Q3 P11 - 26H1 P81", "📄 26H1 P147"], "impact": {"text": "证伪“回款恶化”与“借债填坑”指控", "pos": true}}, {"id": "M10", "topic": "t3", "role": "bull", "time": "10:38", "replyTo": "M04", "act": {"cls": "act-defend", "text": "🛡️ 连杀刺 3A / 3B"}, "text": "刺 3 两处硬伤：<b>① 质保金 493.23亿严禁分母再扣</b>——24→25→26H1 售后质保余额年净增 <span class=\"num\">120—158亿</span>，已 100% 进营业成本压低了扣非净利，分母再扣就是教科书式分子分母双扣！<b>② 少数股东 363.36亿全扣违反 EV 代数</b>——分子 OE 已是归母，分母凭什么把少数股东在子公司厂房设备的全部账面净资产从母公司现金里扣掉？只需扣少数股东占净现金的 ~8%，此项直接误杀约 <b><span class=\"num\">250亿</span></b>！", "cites": ["📄 25AR P192", "📄 26H1 P75/P148"], "impact": {"text": "揪出 493亿双扣 + 250亿代数误杀，累计平反 +743亿 EV", "pos": true}}, {"id": "M11", "topic": "t4", "role": "bull", "time": "10:38", "replyTo": "M05", "act": {"cls": "act-defend", "text": "🛡️ 实证反杀刺 4"}, "text": "两处漏算：第一，26Q1-Q3 财务费用 -14.47亿 vs 净利息收入 +48.84亿，<b>隐含汇兑损失高达 <span class=\"num\">-34.37亿</span></b>，你拿含汇兑损失的 Q3 年化还扣超额息，却不还原汇兑！第二，Q3 实收退税仅 <span class=\"num\">10.86亿</span>（旺季年化 52.13亿），按你 60% 未传导算正好 <b><span class=\"num\">-24.45亿/年</span></b>，直接自证我方 -25亿口径！修正后多头公允 <b><span class=\"num\">335.0元</span></b>（19.5x），请复核！", "cites": ["📄 26Q3 P9/P11", "📄 26H1 P77/P152"], "impact": {"text": "汇兑还原 +32亿，退税实证锁定 -25亿/年", "pos": true}}, {"id": "M12", "topic": "t3", "role": "bear", "time": "10:40", "replyTo": "M10", "act": {"cls": "act-withdraw", "text": "✅ 爽快撤回 3 刺"}, "text": "硬核证据面前绝不嘴硬，我方当场撤回 3 刺：<b>① 撤少数股东全扣</b>（改按损益占比 7.15% 扣净现金）；<b>② 撤质保 493亿分母扣除</b>（承认稳态浮存金不净清偿，再扣确系双扣）；<b>③ 撤 Q3 回款恶化</b>（认可 87.6% 收现比，仅保留 2026 净回购为负作分红约束）；同时认汇兑加回 +32.2亿与退税 -25.0亿！", "cites": ["📄 26H1 P152", "📄 26Q3 P11"], "impact": {"text": "财务底座惊人合拢：steady_oe 723.3 vs 730（差 0.9%），ev_delta -1279.5 vs -1267.8（差 0.9%）!", "pos": true}}, {"id": "M13", "topic": "t5", "role": "bear", "time": "10:40", "replyTo": "M11", "act": {"cls": "act-attack", "text": "🗡️ 致命补刀 · 漏扣再投资"}, "text": "但别高兴太早——<b>你的 19.5x/335 元公允倍数，用你自己报的 Ke=9%、g=3.5% 一算根本不成立！</b>永续增长要花钱再投资：<code>V/OE = (1+g)(1-g/RONIC)/(Ke-g)</code>，就算 RONIC 高达 30% 也只有 <b><span class=\"num\">16.06x—16.62x</span></b>！你一面在常态倍数里默认增长免费，一面又在 full 口径扣 1,130亿 CapEx，同一笔增长被重复计价！按纠错后的 16.3x，空头公允只给 <b><span class=\"num\">282.4元</span></b>（一档 ≤215.2元）！", "cites": ["📄 Gordon再投资公式", "📄 26H1 P173 资本承诺98.8亿"], "impact": {"text": "R2 末尾突发重磅新刀：fair_price 仍存 18.6% 撕裂（335 vs 282.4元）", "pos": false}}, {"id": "M14", "round": "加时赛（R2.5）· 裁判触发法庭限时质询（2+1 新制立奇功！）", "topic": "t5", "role": "judge", "time": "10:43", "replyTo": "M13", "act": {"cls": "act-verdict", "text": "🚨 触发 R2.5 加时"}, "text": "【中场收口闸门触发！】双方在 <code>steady_oe</code> 与 <code>ev_delta</code> 已收敛至 <span class=\"num\">&lt;1%</span>，但 R2 末尾冒出重磅倍数新刀致 <code>fair_price</code> 分歧高达 <span class=\"num\">18.6%</span>。现启动 <b>R2.5 法庭限时短答（严禁复读旧话）</b>，直击各自漏算的一半：<br>① <b>问多头</b>：你的 362.8元 DCF 终值是否漏扣了 <code>(1-g/RONIC)</code>？补扣后是多少？<br>② <b>问空头</b>：你的 16.3x 单阶段公式直接套在现有 723.3亿 OE 上，是不是把 <b>764 GWh 剩余 1,130亿 CapEx 换 +248亿 OE（增量回报 ~22%）的 Stage 1 超额 NPV 直接归零了</b>？显性算进两阶段 DCF 是多少？", "cites": ["📄 26H1 P137/P173", "📄 25AR P26 产销率"]}, {"id": "M15", "topic": "t5", "role": "bear", "time": "10:43", "replyTo": "M14", "act": {"cls": "act-concede", "text": "🩸 空头认错上修至 300元"}, "text": "<b>🩸 认！</b>我的 16.3x 单阶段确实把 764 GWh 扩产超额 NPV 算成了 0。现改用显性两阶段 DCF（Ke=9%、3–4年爬坡全扣 1,130亿 CapEx、终值保留 <code>1-3%/30%</code>）：3 年爬坡 <b><span class=\"num\">305.1元</span></b>、4 年爬坡 <b><span class=\"num\">296.3元</span></b>、零扩产纯现有产能值 <b><span class=\"num\">269.2元</span></b>！空头公允上修至 <b><span class=\"num\">≈300元</span></b>，并改用“扩产期权白送”定价：<b>二档 <span class=\"num\">251—269元</span>、一档 <span class=\"num\">≤231元</span></b>！同时撤回产量分母算法（按 88.4% 产销率推单 Wh 净利确为 0.075元）。", "cites": ["📄 25AR P26 产销比 0.884"], "impact": {"text": "Opus 5.5 极度坦诚：盲定一档重锤线上修至 ≤231元!", "pos": true}}, {"id": "M16", "topic": "t5", "role": "bull", "time": "10:43", "replyTo": "M14", "act": {"cls": "act-concede", "text": "🩸 多头认错下修至 322元"}, "text": "<b>🩸 认！</b>坦承 R2 的 362.8元 DCF 终值确实漏扣了 <code>(1-g/RONIC)</code>。现补扣终值再投资并全额扣 3 年 1,130亿 CapEx（Ke=9%、RONIC 25%–30%）：g=3.0% 对应 <span class=\"num\">302.1—307.7元</span>，g=3.5% 对应 <span class=\"num\">319.7—326.9元</span>。我方诚实将公允价从 335元下修至 <b><span class=\"num\">320—325元</span></b>（中枢 322元）。另查 26H1 P173，YE25 资本承诺仅 137亿而 9M26 实付 CapEx 422亿（3.07倍），证伪承诺额为 CapEx 上限！", "cites": ["📄 26H1 P130/P137/P173", "📄 25AR P26"], "impact": {"text": "R2.5 神收口：多空 fair_price 从 350 vs 257 收敛至 322 vs 300（仅差 7%）!", "pos": true}}, {"id": "M17", "round": "第三轮（R3）· 裁判物理双盲终审落锤（0 现价终极坐标）", "topic": "t6", "role": "judge", "time": "10:46", "act": {"cls": "act-verdict", "text": "⚖️ 物理双盲终审落锤"}, "text": "经 Python 独立核验巨潮原件，多空财务底座已收敛至 <span class=\"num\">&lt;1%</span>、公允中枢收口至 <span class=\"num\">300—322元</span>。按三道铁闸正式定标（法定股本 46.2725 亿股，纯 A 股人民币）：<br>• <code>ev_delta = -1,267.80亿</code>（含全额 504.06亿反向保理类债化、350亿底仓、92%归母）｜<code>full_ev_delta = -137.80亿</code>（全扣 1,130亿扩产净 CapEx）<br>• <code>steady_oe = 725.00亿/年</code>（扣联营平滑 -35.6亿、2027 退税 -25亿、剥息 -21.6亿、还原汇兑 +31.9亿）｜<code>full_oe = 973.00亿/年</code><br>• <b>公允中枢 <span class=\"num\">310.00元</span></b>（两阶段 DCF Ke=9%/g=3.25%/RONIC=28%）｜<b>二档建仓 <span class=\"num\">230—272元</span></b>（272元以下等于 764 GWh 扩产免费白送）｜<b>一档左侧重锤 <span class=\"num\">≤230.00元</span></b>｜定级 <b>T1</b>（上限 15%）！", "cites": ["📄 26Q3/26H1/25AR 巨潮原件", "📄 10Y国债 1.6%–1.9%"], "table": {"headers": ["终审盲定档位", "A股价格(元)", "EV/steady_oe(回报率)", "Full EV/full_oe(达产)", "核心拆骨安全垫"], "rows": [["公允价值中枢", "310.00 元", "18.04x (5.54%)", "14.60x (6.85%)", "两阶段DCF中枢 / 1.25×减仓线387.5元"], ["第二档正常建仓", "230.00—272.00 元", "12.93—15.61x (6.41%—7.73%)", "10.80—12.79x (7.82%—9.26%)", "272元以下=764GWh扩产+250亿股权全白送"], ["第一档左侧重锤", "≤ 230.00 元", "≤ 12.93x (≥ 7.73%)", "≤ 10.80x (≥ 9.26%)", "稳态50%分红股息≥3.41%(国债2倍)"]]}}, {"id": "M18", "round": "第四幕 · 宿主拆封实时股价信封（0 心理锚定震撼揭盲）", "topic": "t6", "role": "host", "time": "10:48", "act": {"cls": "act-system", "text": "🔓 宿主揭盲开箱"}, "text": "三席在完全不知现价下，连最严苛的 <b>Claude Opus 5.5 空头</b>都把左侧重锤线定在 <b><span class=\"num\">≤231.0元</span></b>、裁判定在 <b><span class=\"num\">≤230.0元</span></b>。点击下方封印按钮，立即拆开 2026-11-25 10:25 实时盘面与 A+H 历史走廊双尺对照！", "isUnblindBox": true}], "clash_cards": [{"topic": "t1", "title": "交锋一：26Q3 单季 OCF 骤降至 14 亿，是回款恶化还是主动压账期？", "verdictBadge": "🛡️ 刺1A反杀 / 🩸 刺1B命中", "bear": "9M OCF 616.25亿而 H1 已 602.17亿 → Q3 单季仅 14.08亿、FCF -156.86亿；2025年 OCF 67.5% 靠应付账款拉高，应付周转从 308天缩至 232天，浮存金倒流；且 2026 净回购为负（H股配售+1.39% > 注销0.24%）。", "bull": "26Q3 P11 实锤 Q3 销售收现高达 1,448.01亿（收现比 87.64%）、广义应收反降 -19.61亿！Q3 净还应付 220.67亿 + 旺季备货增存货 139.51亿属一次性压账期，发债系 1.48%–1.70% 低息置换。", "rebuttal": "空头 R2 核验后爽快撤回“回款恶化”指控，但坚持严禁外推 2025 OCF 1.73x 及严禁拿 200–400亿口头回购夸大即期股息率。", "judge": "【二元裁决】刺1A 🛡️证据反杀（回款极硬）；刺1B 🩸命中死穴（严禁外推 25年 OCF，股东回报仅认 50% 稳态现金分红，不计未落地口头回购）。"}, {"topic": "t2", "title": "交锋二：26H1 P158 反向保理 + 融单 577.64 亿（已融资 504.06 亿）是否类债化？", "verdictBadge": "🩸 命中死穴（-504.06亿）", "bear": "26H1 P158 显示融单 203.91亿 + 反向保理 373.73亿 = 577.64亿，银行已垫付给供应商 504.06亿，公司负无条件不可撤销付款义务，本质即短期银行债，须全额扣出净现金。", "bull": "R1 仅扣 373.73亿反向保理；R2 亲自复核 P158 原文后爽快认账，承认融单与反向保理法律性质一致，同意将类债扣减上调至 504.06亿全额。", "rebuttal": "双方一致严守铁闸一（绝不双扣）：分母一次性全额扣减 504.06亿后，分子常态 OE 严禁再重复扣除年度营运资金恶化。", "judge": "【二元裁决】🩸命中死穴！分母 ev_delta 全额类债扣减 504.06亿（归母净现金直降 463.7亿 / -10.0元/股），分子不双扣。"}, {"topic": "t3", "title": "交锋三：售后质保 493.23 亿 & 少数股东权益 363.36 亿能否全额扣出净现金？", "verdictBadge": "🛡️ 双双证据反杀（空头撤刺）", "bear": "R1 主张把预计负债中售后质保税后净额 493.23亿作真债扣除，并把少数股东权益 363.36亿全额从合并净现金中扣除（合计再砍 856.6亿）。", "bull": "铁证连杀：① 售后质保每年净计提 120–158亿已 100% 进成本压低扣非净利，分母再扣系教科书双扣；② 归母 OE 口径下只能扣少数股东在超额净现金里的份额（~8%），不能把子公司厂房设备账面资产从母公司现金里扣掉。", "rebuttal": "空头 R2 复核 EV 代数与永续浮存金逻辑后，当场爽快撤回刺 3A 与刺 3B，改按少数股东占比仅扣超额净现金份额，双方 ev_delta 瞬间收口至 <1%！", "judge": "【二元裁决】🛡️双双证据反杀！终审采用 92.0% 归母系数计算超额净现金，核定 ev_delta = -1,267.80亿，严守铁闸一绝不双扣。"}, {"topic": "t4", "title": "交锋四：2027 出口退税归零、Q3 汇兑损失与洛阳钼业联营收益怎么算常态 OE？", "verdictBadge": "🩸 精准扣减 · 收口至 <1%", "bear": "Q3 毛利率降至 20.69%，2027.1.1 出口退税 6%→0% 取消，5% 加计抵减到期；R1 扣退税 -37.8亿/年、锚定 steady_oe = 696.1亿。", "bull": "① 政府补助与 5% 加计抵减在扣非外已 100% 剔除；② 9M 隐含汇兑损失 34.37亿必须常态还原；③ Q3 实收退税仅 10.86亿，旺季年化 52.1亿按 60% 未传导恰好是 -24.5亿/年；④ 主动把洛阳钼业联营收益平滑 -35.6亿。", "rebuttal": "空头 R2 复核 26H1 P152 汇兑损失与 Q3 实收退税后，认可汇兑还原 +32.2亿与退税 -25.0亿，将 steady_oe 上修至 723.3亿（仅差多头 730亿 0.9%）。", "judge": "【二元裁决】🩸精准认领！自上而下 721.5亿 / 自下而上 730.0亿（单 Wh 0.074元），终审核定 steady_oe = 725.00亿/年、full_oe = 973.00亿/年。"}, {"topic": "t5", "title": "交锋五（R2.5 裁判加时赛）：19.5x 漏扣再投资 vs 16.3x 漏算 764 GWh 扩产 NPV", "verdictBadge": "🔥 R2.5 双方认错双修正", "bear": "R2 致命补刀戳穿多头 19.5x 漏扣 (1-g/RONIC) 再投资，把空头公允压在 282.4元；但 R2.5 被裁判点破：单阶段 16.3x 把 764 GWh 剩余 1,130亿换 +248亿 OE 的超额 NPV 归零了！", "bull": "R2.5 坦承 R2 的 362.8元 DCF 漏扣了 (1-g/RONIC)，补扣后主动将公允价从 335元下修至 320–325元（中枢 322元）；并以 25AR P26 产销率 88.37% 对齐单 Wh 净利 0.075元。", "rebuttal": "空头 R2.5 诚实重算两阶段 DCF 后，将公允价从 282.4元上修至 ≈300元（零扩产纯现有产能 269.2元），并亲自把一档重锤线提高到 ≤231元！", "judge": "【终审落锤】两阶段 DCF（Ke=9.0%, g=3.25%, RONIC=28%, 扣 1,130亿扩产）定标公允 310.00元；买在 ≤272元 = 764 GWh 扩产免费白送；≤230.00元为左侧重锤区！"}], "unblind": {"sealed_title": "🔒 宁德时代实时盘面与 A+H 走廊信封（2026-11-25 10:25 密封）", "sealed_desc": "三席在完全不知道股价的情况下，连最苛刻的 Claude Opus 5.5 空头都盲定一档重锤 ≤231元、裁判定 ≤230元、公允 310元。点击立即拆封今日实时盘面！", "header_title": "🔓 宿主揭盲：A股现价 219.61 元/股（-3.41%，总市值 10,161.90 亿）", "header_badge": "🔥 已击穿第一档左侧重锤区（公允 7.08 折！）", "stats": [{"k": "严苛归母 True EV", "v": "8,894.10 亿", "color": ""}, {"k": "常态 EV/OE (回报率)", "v": "12.27x (8.15%)", "color": "var(--accent-bull)"}, {"k": "达产 Full EV 回报率", "v": "10.30x (9.71%)", "color": "var(--accent-bull)"}, {"k": "距公允 310元 折价", "v": "-29.16% (7.08折)", "color": "var(--accent-gold)"}, {"k": "即期 TTM / 稳态股息", "v": "3.81% / 3.57%", "color": "var(--accent-bull)"}, {"k": "H股 03750.HK 状态", "v": "330.80港元 (+27.9%溢价·一票否决)", "color": "var(--accent-bear)"}], "grid_headers": ["击球档位", "A股价格区间（H股平价参考）", "常态 / 达产 EV 回报", "实操仓位纪律（T1 · 上限 15%）"], "grid_rows": [["🔥 当下实时盘面", "219.61 元（H股 330.80 港元禁买）", "8.15% / 9.71%（PE 11.59x / PB 2.63x）", "已深入第一档重锤区(-4.5%)，分批重锤建仓至 15% 上限"], ["💎 第一档左侧重锤", "≤ 230.00 元（H ≤ 270.97 港元）", "≥ 7.73% / ≥ 9.26%（TTM息 ≥ 3.64%）", "闭眼左侧加满弓（公允 ≤7.4折，稳态股息超国债 2 倍）"], ["✅ 第二档正常建仓", "230.00—272.00 元（H 270.97—320.45）", "6.41%—7.73% / 7.82%—9.26%", "252—272建底仓、230—252深折价加仓（764GWh 扩产白送）"], ["🎯 公允中枢 / 止盈线", "公允 310.00 元 ｜ 1.25× 减仓 387.50 元", "公允 5.54% / 6.85%", "310元持股观察；突破 387.50元（1.25×）分批止盈"]]}};
+const TOPICS = DATA.topics || [];
+const ROLES = DATA.roles || {};
+const MESSAGES = DATA.messages || [];
+const CLASH_CARDS = DATA.clash_cards || [];
+const UNBLIND = DATA.unblind || null;
+
+const COLOR_MAP = {
+  host: 'var(--accent-host)', bull: 'var(--accent-bull)',
+  bear: 'var(--accent-bear)', judge: 'var(--accent-judge)', gold: 'var(--accent-gold)'
+};
+
+let currentTopic = 'all';
+let currentRole = 'all';
+let isUnblinded = false;
+
+function renderRoster() {
+  const keys = Object.keys(ROLES);
+  const el = document.getElementById('rosterStrip');
+  el.innerHTML = `<span style="font-size:11.5px;color:var(--text-muted);font-weight:700;">群成员筛选：</span>`
+    + `<span class="member-chip ${currentRole==='all'?'selected':''}" data-role="all" onclick="filterRole('all')">👥 全部 (${keys.length})</span>`
+    + keys.map(k => {
+        const r = ROLES[k];
+        return `<span class="member-chip ${currentRole===k?'selected':''}" data-role="${k}" onclick="filterRole('${k}')"><i class="dot dot-${r.cls}"></i>${r.avatar} ${r.name} (${r.model})</span>`;
+      }).join('');
+}
+
+function renderConvergence() {
+  const el = document.getElementById('convList');
+  el.innerHTML = (DATA.convergence || []).map(item =>
+    `<div class="conv-row"><span class="conv-label">${item.label}</span><span class="conv-val" style="color:${COLOR_MAP[item.color]||'var(--text-primary)'};">${item.value}</span></div>`
+  ).join('');
+}
+
+function renderTopics() {
+  document.getElementById('topicList').innerHTML = TOPICS.map(t => {
+    const cnt = t.id === 'all' ? MESSAGES.length : MESSAGES.filter(m => m.topic === t.id).length;
+    return `<button class="topic-btn ${currentTopic===t.id?'active':''}" onclick="filterTopic('${t.id}')">
+      <span>${t.icon||''} ${t.name}</span>
+      <span style="display:flex;align-items:center;gap:4px;">
+        ${t.badge ? `<span class="topic-status">${t.badge}</span>` : ''}
+        <span class="topic-count">${cnt}</span>
+      </span>
+    </button>`;
+  }).join('');
+}
+
+function buildUnblindHTML() {
+  if (!UNBLIND) return '';
+  const statsHtml = (UNBLIND.stats || []).map(s =>
+    `<div class="stat-card"><div class="stat-k">${s.k}</div><div class="stat-v" style="color:${COLOR_MAP[s.color]||'var(--text-primary)'};">${s.v}</div></div>`
+  ).join('');
+  const tblHtml = (UNBLIND.grid_headers && UNBLIND.grid_rows)
+    ? `<table class="mini-table" style="margin-top:10px;"><thead><tr>${UNBLIND.grid_headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`
+      + UNBLIND.grid_rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')
+      + `</tbody></table>` : '';
+  return `<div class="unblind-box">
+    <div class="unblind-sealed" id="unblindSealed" style="display:${isUnblinded?'none':'block'};">
+      <div style="font-size:15px;font-weight:800;margin-bottom:6px;">${UNBLIND.sealed_title||'🔒 实时股价信封已封存'}</div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:12px;">${UNBLIND.sealed_desc||''}</div>
+      <button class="btn btn-gold" onclick="doUnblind()" style="padding:8px 18px;font-size:13.5px;">🔓 拆封现价 · 揭盲对照挂单网</button>
+    </div>
+    <div class="unblind-content ${isUnblinded?'open':''}" id="unblindContent">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+        <span style="font-weight:800;font-size:15px;color:var(--accent-gold);">${UNBLIND.header_title||''}</span>
+        ${UNBLIND.header_badge ? `<span class="act-tag act-concede">${UNBLIND.header_badge}</span>` : ''}
+      </div>
+      <div class="grid-cards">${statsHtml}</div>
+      ${tblHtml}
+    </div>
+  </div>`;
+}
+
+function renderChat() {
+  const container = document.getElementById('chatView');
+  const filtered = MESSAGES.filter(m =>
+    (currentTopic === 'all' || m.topic === currentTopic) &&
+    (currentRole === 'all' || m.role === currentRole)
+  );
+  document.getElementById('msgCounter').textContent = `当前显示 ${filtered.length} / ${MESSAGES.length} 条群聊消息`;
+  let out = '', lastRound = '';
+  filtered.forEach(m => {
+    if (m.round && m.round !== lastRound && currentTopic === 'all' && currentRole === 'all') {
+      out += `<div class="round-divider"><span class="round-pill">${m.round}</span></div>`;
+      lastRound = m.round;
+    }
+    const r = ROLES[m.role] || { name: m.role, model: '', avatar: '💬', cls: 'host', side: 'left' };
+    const tObj = TOPICS.find(t => t.id === m.topic);
+    let quoteHtml = '';
+    if (m.replyTo) {
+      const target = MESSAGES.find(x => x.id === m.replyTo);
+      if (target) {
+        const tr = ROLES[target.role] || { avatar: '', name: target.role };
+        const plain = (target.text || '').replace(/<[^>]+>/g, '');
+        const snippet = plain.length > 56 ? plain.slice(0, 56) + '…' : plain;
+        quoteHtml = `<div class="quote-box" onclick="jumpToMsg('${target.id}')"><div class="quote-head"><span>↩ 回复 ${tr.avatar} ${tr.name} (${target.id})</span><span class="quote-jump">定位原话 ↗</span></div><div>${snippet}</div></div>`;
+      }
+    }
+    let tableHtml = '';
+    if (m.table) {
+      tableHtml = `<table class="mini-table"><thead><tr>${m.table.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`
+        + m.table.rows.map(row=>`<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('') + `</tbody></table>`;
+    }
+    let citesHtml = '';
+    if ((m.cites && m.cites.length) || m.impact) {
+      citesHtml = `<div class="cite-row">`
+        + (m.cites || []).map(c => `<span class="cite-chip">${c}</span>`).join('')
+        + (m.impact ? `<span class="impact-chip ${m.impact.pos?'pos':''}">${m.impact.text}</span>` : '')
+        + `</div>`;
+    }
+    out += `<div class="msg-row ${r.side==='right'?'side-right':''}" id="msg-${m.id}">
+      <div class="avatar av-${r.cls}">${r.avatar}</div>
+      <div class="msg-body-wrap">
+        <div class="msg-meta">
+          <span class="sender-name">${r.name}</span>
+          <span class="model-tag">${r.model}</span>
+          ${m.act ? `<span class="act-tag ${m.act.cls}">${m.act.text}</span>` : ''}
+          ${tObj ? `<span class="topic-tag-mini" onclick="filterTopic('${m.topic}')">${tObj.icon||''} ${tObj.name.split('·')[0].trim()}</span>` : ''}
+          <span class="msg-id">${m.id} · ${m.time||''}</span>
+        </div>
+        <div class="bubble bubble-${r.cls}" id="bubble-${m.id}">
+          ${quoteHtml}<div>${m.text||''}</div>${tableHtml}${m.isUnblindBox?buildUnblindHTML():''}${citesHtml}
+        </div>
+      </div>
+    </div>`;
+  });
+  container.innerHTML = out || `<div style="text-align:center;padding:48px 16px;color:var(--text-muted);">当前筛选条件下暂无发言。</div>`;
+}
+
+function renderMatrix() {
+  const el = document.getElementById('matrixView');
+  const cards = (currentTopic === 'all' || !CLASH_CARDS.some(c => c.topic === currentTopic))
+    ? CLASH_CARDS : CLASH_CARDS.filter(c => c.topic === currentTopic);
+  el.innerHTML = cards.map(c => `<div class="clash-card">
+    <div class="clash-header">
+      <span class="clash-title">${c.title}</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="act-tag act-verdict">${c.verdictBadge}</span>
+        <button class="btn" style="padding:3px 9px;font-size:11.5px;" onclick="viewTopicInChat('${c.topic}')">💬 回群聊看原话</button>
+      </div>
+    </div>
+    <div class="clash-grid">
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-bear);">🐻 空头亮刺</div><div>${c.bear}</div></div>
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-bull);">🐂 多头反杀/认领</div><div>${c.bull}</div></div>
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-host);">🔄 R2 核验补刀 / 撤回</div><div>${c.rebuttal}</div></div>
+    </div>
+    <div class="clash-verdict">${c.judge}</div>
+  </div>`).join('');
+}
+
+function filterTopic(tid) { currentTopic = tid; renderTopics(); renderChat(); renderMatrix(); }
+function filterRole(role) { currentRole = role; renderRoster(); renderChat(); }
+function switchView(v) {
+  document.getElementById('btnChatView').classList.toggle('active', v === 'chat');
+  document.getElementById('btnMatrixView').classList.toggle('active', v === 'matrix');
+  document.getElementById('chatView').classList.toggle('hidden', v !== 'chat');
+  document.getElementById('matrixView').classList.toggle('active', v === 'matrix');
+}
+function viewTopicInChat(tid) { switchView('chat'); filterRole('all'); filterTopic(tid); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function jumpToMsg(id) {
+  let target = document.getElementById('msg-' + id);
+  if (!target) { currentTopic = 'all'; currentRole = 'all'; renderRoster(); renderTopics(); renderChat(); target = document.getElementById('msg-' + id); }
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const b = document.getElementById('bubble-' + id);
+    if (b) { b.classList.remove('flash-highlight'); void b.offsetWidth; b.classList.add('flash-highlight'); setTimeout(() => b.classList.remove('flash-highlight'), 2200); }
+  }
+}
+function doUnblind() { isUnblinded = true; const s = document.getElementById('unblindSealed'), c = document.getElementById('unblindContent'); if (s) s.style.display = 'none'; if (c) c.classList.add('open'); }
+function jumpAndUnblind() {
+  switchView('chat'); isUnblinded = true; currentTopic = 'all'; currentRole = 'all';
+  renderRoster(); renderTopics(); renderChat();
+  const ub = MESSAGES.find(m => m.isUnblindBox);
+  if (ub) setTimeout(() => jumpToMsg(ub.id), 60);
+}
+function toggleTheme() {
+  const h = document.documentElement, n = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  h.setAttribute('data-theme', n); document.getElementById('btnTheme').textContent = n === 'dark' ? '☀️ 浅色' : '🌙 深色';
+}
+renderRoster(); renderConvergence(); renderTopics(); renderChat(); renderMatrix();
+</script>
+</body>
+</html>
