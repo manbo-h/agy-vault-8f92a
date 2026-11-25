@@ -1780,12 +1780,35 @@ function renderTab4() {
     </div>
   `).join('');
 
-  const topics = [{ id: 'all', icon: '📋', name: '全部发言' }, ...(sw.topics || [])];
+  const rawTopics = sw.topics || [];
+  const topics = rawTopics.some(t => t.id === 'all') ? rawTopics : [{ id: 'all', icon: '📋', name: '全部发言' }, ...rawTopics];
   const msgs = (sw.messages || []).filter(m => state.activeTopic === 'all' || m.topic === state.activeTopic);
   const roleColors = { host: '#475569', bull: '#059669', bear: '#be123c', judge: '#1e3a8a' };
+  const statColorMap = { host: '#0284c7', bull: '#059669', bear: '#be123c', judge: '#7c3aed', gold: '#d97706' };
+  const buildUnblindBlock = () => {
+    const ub = sw.unblind;
+    if (!ub) return '';
+    const stats = isPlain ? (ub.stats_plain || ub.stats || []) : (ub.stats || []);
+    const hdrs = isPlain ? (ub.grid_headers_plain || ub.grid_headers || []) : (ub.grid_headers || []);
+    const rows = isPlain ? (ub.grid_rows_plain || ub.grid_rows || []) : (ub.grid_rows || []);
+    const cardsHtml = stats.map(s => `<div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px"><div style="font-size:11.5px;color:#64748b">${s.k}</div><div style="font-size:15px;font-weight:800;margin-top:3px;color:${statColorMap[s.color]||'#0f172a'}">${s.v}</div></div>`).join('');
+    const tblHtml = (hdrs.length && rows.length)
+      ? `<div class="tbl-wrap" style="margin-top:12px"><table><thead><tr>${hdrs.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : '';
+    return `<div style="margin-top:12px;border-radius:12px;padding:14px;border:1.5px dashed #d97706;background:linear-gradient(135deg,rgba(251,191,36,0.10),rgba(56,189,248,0.08))">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+        <strong style="font-size:15px;color:#b45309">${ub.header_title||ub.sealed_title||'🔓 宿主揭盲开箱'}</strong>
+        ${ub.header_badge ? `<span class="tag tag-green">${ub.header_badge}</span>` : ''}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px">${cardsHtml}</div>
+      ${tblHtml}
+    </div>`;
+  };
   const msgHtml = msgs.map(m => {
-    const r = (sw.roles && sw.roles[m.role]) || { name: m.role, emoji: '💬', model: '' };
-    return `<div class="msg-row role-${m.role}"><div class="msg-avatar" style="background:${roleColors[m.role]||'#334155'}">${r.emoji||'💬'}</div><div class="msg-bubble"><div class="msg-meta"><span class="msg-name">${r.name}</span><span>${r.model||''}</span><span class="tag tag-blue">${isPlain?(m.round_plain||m.round):(m.round||'')}</span><span>${m.time||''}</span></div><div class="msg-text">${isPlain?(m.plain||m.text):m.text}</div></div></div>`;
+    const r = (sw.roles && sw.roles[m.role]) || { name: m.role, avatar: '💬', model: '' };
+    const tbl = isPlain ? (m.table_plain || m.table) : m.table;
+    const tblHtml = tbl ? `<div class="tbl-wrap" style="margin-top:10px"><table><thead><tr>${tbl.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${tbl.rows.map(row=>`<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : '';
+    const ubHtml = m.isUnblindBox ? buildUnblindBlock() : '';
+    return `<div class="msg-row role-${m.role}"><div class="msg-avatar" style="background:${roleColors[m.role]||'#334155'}">${r.avatar||r.emoji||'💬'}</div><div class="msg-bubble"><div class="msg-meta"><span class="msg-name">${r.name}</span><span>${r.model||''}</span><span class="tag tag-blue">${isPlain?(m.round_plain||m.round):(m.round||'')}</span><span>${m.time||''}</span></div><div class="msg-text">${isPlain?(m.plain||m.text):m.text}${tblHtml}${ubHtml}</div></div></div>`;
   }).join('');
 
   document.getElementById('swarmSectionWrap').innerHTML = `
