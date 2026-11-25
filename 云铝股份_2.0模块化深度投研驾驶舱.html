@@ -1503,9 +1503,9 @@ function renderTab1(res) {
       <div class="kpi-sub">满血达产 <strong>${res.fullOe.toFixed(2)} 亿</strong> ｜ ${realityTag}</div>
     </div>
     <div class="kpi" style="--accent:var(--indigo)">
-      <div class="kpi-label">${res.isFin ? '金融股归母总市值（不扣存款）' : (isPlain ? '扣光债与分红后保险柜里真净现金' : '审慎归母净现金 / True EV')}</div>
-      <div class="kpi-val">${res.isFin ? res.mcap.toFixed(1) + ' <span style="font-size:14px">亿</span>' : (res.parentNetCash >= 0 ? '+' : '') + res.parentNetCash.toFixed(2) + ' <span style="font-size:14px">亿</span>'}</div>
-      <div class="kpi-sub">${res.isFin ? '直接按市值 / OE 与 PB 定价' : `合 <strong>${res.netCashPs.toFixed(2)} ${UNIT}/股</strong> ｜ True EV <strong>${res.trueEv.toFixed(2)} 亿</strong>`}</div>
+      <div class="kpi-label">${res.isFin ? '金融股归母总市值（不扣存款）' : (res.parentNetCash >= 0 ? (isPlain ? '扣光债与分红后保险柜里真净现金' : '审慎归母净现金 / True EV') : (isPlain ? '扣光可动现金后还背着多少真净负债' : '审慎归母净负债 / True EV'))}</div>
+      <div class="kpi-val" style="color:${!res.isFin && res.parentNetCash < 0 ? 'var(--red)' : 'var(--ink)'}">${res.isFin ? res.mcap.toFixed(1) + ' <span style="font-size:14px">亿</span>' : (res.parentNetCash >= 0 ? '+' + res.parentNetCash.toFixed(2) : '净债 ' + Math.abs(res.parentNetCash).toFixed(2)) + ' <span style="font-size:14px">亿</span>'}</div>
+      <div class="kpi-sub">${res.isFin ? '直接按市值 / OE 与 PB 定价' : `合 <strong>${res.netCashPs >= 0 ? '+' : ''}${res.netCashPs.toFixed(2)} ${UNIT}/股</strong> ｜ True EV <strong>${res.trueEv.toFixed(2)} 亿</strong>`}</div>
     </div>
     <div class="kpi" style="--accent:var(--amber)">
       <div class="kpi-label">${isPlain ? '按这个价格买，每年真实回报与分红' : '现价隐含内生回报率 & 双轨股息率'}</div>
@@ -1539,12 +1539,19 @@ function renderTab1(res) {
   const maxPs = Math.max(res.fairPrice, sotpPs, res.price, res.floorPs, 1) * 1.18;
   const W = 540, H = 165, padL = 112, padR = 82, barW = W - padL - padR;
   const xOf = v => padL + Math.max(0, v) / maxPs * barW;
-  let curX = padL;
-  const sotpSegs = activeBlocks.filter(b => b.yi > 0).map(b => {
-    const w = (b.ps / maxPs) * barW;
-    const rect = `<rect x="${curX.toFixed(1)}" y="84" width="${Math.max(2, w).toFixed(1)}" height="24" rx="3" fill="${b.color}" opacity="0.92"><title>${b.name}: ${b.ps.toFixed(2)}${UNIT}/股</title></rect>`;
-    curX += w; return rect;
-  }).join('');
+  const hasNegBlock = activeBlocks.some(b => b.yi < 0);
+  let sotpSegs = '', curX = padL;
+  if (hasNegBlock) {
+    const w = Math.max(2, (Math.max(0, sotpPs) / maxPs) * barW);
+    sotpSegs = `<rect x="${padL}" y="84" width="${w.toFixed(1)}" height="24" rx="4" fill="#1e3a8a" opacity="0.92"><title>已选拆骨净值: ${sotpPs.toFixed(2)}${UNIT}/股</title></rect>`;
+    curX = padL + w;
+  } else {
+    sotpSegs = activeBlocks.filter(b => b.yi > 0).map(b => {
+      const w = (b.ps / maxPs) * barW;
+      const rect = `<rect x="${curX.toFixed(1)}" y="84" width="${Math.max(2, w).toFixed(1)}" height="24" rx="3" fill="${b.color}" opacity="0.92"><title>${b.name}: ${b.ps.toFixed(2)}${UNIT}/股</title></rect>`;
+      curX += w; return rect;
+    }).join('');
+  }
   const sotpDiffPct = sotpPs > 0 ? (res.price / sotpPs - 1) * 100 : 0;
   document.getElementById('sotpSvgWrap').innerHTML = `
     <svg viewBox="0 0 ${W} ${H}">
@@ -1626,10 +1633,13 @@ function renderTab1(res) {
 
 function renderWaterfallSvg(res) {
   const items = res.waterfall;
-  const W = 580, H = 260, padL = 36, padR = 16, padT = 26, padB = 52;
+  const W = 580, H = 270, padL = 38, padR = 16, padT = 28, padB = 54;
   const plotW = W - padL - padR, plotH = H - padT - padB;
-  const maxVal = Math.max(...items.map(i => Math.abs(i.val)), 10) * 1.15;
-  const yOf = v => padT + plotH * (1 - Math.max(0, v) / maxVal);
+  const allVals = [0, ...items.map(i => i.val)];
+  const maxV = Math.max(...allVals, 10) * 1.12;
+  const minV = Math.min(...allVals, 0) * 1.12;
+  const span = Math.max(1, maxV - minV);
+  const yOf = v => padT + plotH * (maxV - v) / span;
   const stepW = plotW / Math.max(1, items.length);
   const barW = Math.min(54, stepW * 0.56);
   let prev = 0;
@@ -1641,38 +1651,47 @@ function renderWaterfallSvg(res) {
     else { yTop = yOf(prev); yBot = yOf(it.val); color = '#e11d48'; }
     const h = Math.max(2, Math.abs(yBot - yTop)), y = Math.min(yTop, yBot), cx = x + barW / 2;
     const lblVal = it.type === 'neg' ? it.delta.toFixed(1) : it.val.toFixed(1);
+    const lblY = (it.type === 'total' && it.val < 0) || (it.type === 'neg' && it.val < 0) ? (y + h + 12) : (y - 5);
     const prevLine = (idx > 0 && it.type !== 'total') ? `<line x1="${(x - stepW + barW).toFixed(1)}" y1="${yOf(prev).toFixed(1)}" x2="${x.toFixed(1)}" y2="${yOf(prev).toFixed(1)}" stroke="#cbd5e1" stroke-dasharray="3,2"/>` : '';
     prev = it.val;
-    return `${prevLine}<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="4" fill="${color}"/><text x="${cx.toFixed(1)}" y="${(y-5).toFixed(1)}" text-anchor="middle" font-size="10.5" font-weight="800" fill="${color}">${lblVal}</text><text x="${cx.toFixed(1)}" y="${(H-28).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="700" fill="#334155">${it.label.slice(0,5)}</text><text x="${cx.toFixed(1)}" y="${(H-14).toFixed(1)}" text-anchor="middle" font-size="10" fill="#64748b">${it.label.slice(5)}</text>`;
+    const dispLabel = (it.type === 'total' && it.val < 0) ? '归母净负债' : it.label;
+    return `${prevLine}<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="4" fill="${color}"/><text x="${cx.toFixed(1)}" y="${lblY.toFixed(1)}" text-anchor="middle" font-size="10.5" font-weight="800" fill="${color}">${lblVal}</text><text x="${cx.toFixed(1)}" y="${(H-26).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="700" fill="#334155">${dispLabel.slice(0,5)}</text><text x="${cx.toFixed(1)}" y="${(H-12).toFixed(1)}" text-anchor="middle" font-size="10" fill="#64748b">${dispLabel.slice(5)}</text>`;
   }).join('');
-  document.getElementById('waterfallSvg').innerHTML = `<svg viewBox="0 0 ${W} ${H}"><line x1="${padL}" y1="${yOf(0)}" x2="${W-padR}" y2="${yOf(0)}" stroke="#94a3b8"/>${bars}</svg>`;
+  document.getElementById('waterfallSvg').innerHTML = `<svg viewBox="0 0 ${W} ${H}"><line x1="${padL}" y1="${yOf(0).toFixed(1)}" x2="${W-padR}" y2="${yOf(0).toFixed(1)}" stroke="#64748b" stroke-width="1.2"/><text x="4" y="${(yOf(0)+4).toFixed(1)}" font-size="10" fill="#64748b">0亿</text>${bars}</svg>`;
 }
 
 function renderStaticCharts() {
   const hist = APP.facts.history_5y || [];
   if (hist.length) {
-    const W = 580, H = 260, padL = 40, padR = 40, padT = 26, padB = 34;
+    const W = 580, H = 270, padL = 42, padR = 40, padT = 28, padB = 34;
     const plotW = W - padL - padR, plotH = H - padT - padB;
-    const maxBar = Math.max(...hist.map(d => Math.max(d.ocf || 0, d.fcf || 0, d.capex || 0)), 10) * 1.15;
-    const maxLine = Math.max(...hist.map(d => d.debt_ratio || 0), 50) * 1.15;
-    const yBar = v => padT + plotH * (1 - Math.max(0, v) / maxBar);
+    const barVals = [0, ...hist.flatMap(d => [d.ocf || 0, d.fcf || 0, d.capex || 0])];
+    const maxBar = Math.max(...barVals, 10) * 1.18;
+    const minBar = Math.min(...barVals, 0) * 1.18;
+    const barSpan = Math.max(1, maxBar - minBar);
+    const maxLine = Math.max(...hist.map(d => d.debt_ratio || 0), 50) * 1.12;
+    const yBar = v => padT + plotH * (maxBar - v) / barSpan;
     const yLine = v => padT + plotH * (1 - Math.max(0, v) / maxLine);
+    const y0 = yBar(0);
     const step = plotW / hist.length;
     let pts = [];
     const elems = hist.map((d, i) => {
       const cx = padL + i * step + step / 2, bw = Math.min(22, step * 0.24);
       pts.push(`${cx.toFixed(1)},${yLine(d.debt_ratio).toFixed(1)}`);
-      return `<rect x="${(cx-bw*1.4).toFixed(1)}" y="${yBar(d.ocf).toFixed(1)}" width="${bw}" height="${(yBar(0)-yBar(d.ocf)).toFixed(1)}" rx="3" fill="#1e3a8a"/>
-              <rect x="${(cx-bw*0.3).toFixed(1)}" y="${yBar(d.fcf).toFixed(1)}" width="${bw}" height="${(yBar(0)-yBar(d.fcf)).toFixed(1)}" rx="3" fill="#059669"/>
-              <rect x="${(cx+bw*0.8).toFixed(1)}" y="${yBar(d.capex).toFixed(1)}" width="${bw}" height="${(yBar(0)-yBar(d.capex)).toFixed(1)}" rx="3" fill="#f59e0b"/>
-              <text x="${cx.toFixed(1)}" y="${(yBar(d.fcf)-4).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#059669">${d.fcf.toFixed(0)}</text>
+      function barRect(x, v, fill) {
+        const yv = yBar(v);
+        return `<rect x="${x.toFixed(1)}" y="${Math.min(y0, yv).toFixed(1)}" width="${bw}" height="${Math.max(2, Math.abs(y0 - yv)).toFixed(1)}" rx="3" fill="${fill}"/>`;
+      }
+      const fcfLblY = d.fcf >= 0 ? (yBar(d.fcf) - 4) : (yBar(d.fcf) + 11);
+      return `${barRect(cx-bw*1.4, d.ocf, '#1e3a8a')}${barRect(cx-bw*0.3, d.fcf, d.fcf>=0?'#059669':'#e11d48')}${barRect(cx+bw*0.8, d.capex, '#f59e0b')}
+              <text x="${cx.toFixed(1)}" y="${fcfLblY.toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="800" fill="${d.fcf>=0?'#059669':'#be123c'}">${d.fcf.toFixed(0)}</text>
               <text x="${cx.toFixed(1)}" y="${(H-10).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">${d.period}</text>`;
     }).join('');
     const dots = hist.map((d, i) => {
       const cx = padL + i * step + step / 2, cy = yLine(d.debt_ratio);
       return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="4" fill="#be123c" stroke="#fff" stroke-width="1.5"/><text x="${cx.toFixed(1)}" y="${(cy-8).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#be123c">${d.debt_ratio.toFixed(1)}%</text>`;
     }).join('');
-    document.getElementById('historySvg').innerHTML = `<svg viewBox="0 0 ${W} ${H}"><g font-size="10" font-weight="700"><rect x="42" y="6" width="10" height="10" rx="2" fill="#1e3a8a"/><text x="56" y="15" fill="#1e3a8a">经营现金流OCF</text><rect x="148" y="6" width="10" height="10" rx="2" fill="#059669"/><text x="162" y="15" fill="#059669">自由现金流FCF(亿)</text><rect x="268" y="6" width="10" height="10" rx="2" fill="#f59e0b"/><text x="282" y="15" fill="#b45309">资本开支CapEx</text><circle cx="378" cy="11" r="4" fill="#be123c"/><text x="386" y="15" fill="#be123c">负债率(%)</text></g><line x1="${padL}" y1="${yBar(0)}" x2="${W-padR}" y2="${yBar(0)}" stroke="#94a3b8"/>${elems}<polyline fill="none" stroke="#be123c" stroke-width="2.2" points="${pts.join(' ')}"/>${dots}</svg>`;
+    document.getElementById('historySvg').innerHTML = `<svg viewBox="0 0 ${W} ${H}"><g font-size="10" font-weight="700"><rect x="42" y="6" width="10" height="10" rx="2" fill="#1e3a8a"/><text x="56" y="15" fill="#1e3a8a">经营现金流OCF</text><rect x="148" y="6" width="10" height="10" rx="2" fill="#059669"/><text x="162" y="15" fill="#059669">自由现金流FCF(亿)</text><rect x="268" y="6" width="10" height="10" rx="2" fill="#f59e0b"/><text x="282" y="15" fill="#b45309">资本开支CapEx</text><circle cx="378" cy="11" r="4" fill="#be123c"/><text x="386" y="15" fill="#be123c">负债率(%)</text></g><line x1="${padL}" y1="${y0.toFixed(1)}" x2="${W-padR}" y2="${y0.toFixed(1)}" stroke="#64748b" stroke-width="1.2"/><text x="6" y="${(y0+4).toFixed(1)}" font-size="9.5" fill="#64748b">0亿</text>${elems}<polyline fill="none" stroke="#be123c" stroke-width="2.2" points="${pts.join(' ')}"/>${dots}</svg>`;
   } else {
     document.getElementById('historySvg').innerHTML = '<div style="color:var(--muted);padding:20px">待填充 5 年现金流数据</div>';
   }
