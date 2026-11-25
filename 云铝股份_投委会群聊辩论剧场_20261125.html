@@ -1,36 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
-<title>💬 云铝股份（000807.SZ）投委会群聊辩论剧场 · 物理双盲跨模型终审</title>
+<title>💬 云铝股份（000807.SZ）投委会群聊辩论剧场</title>
 <style>
   :root {
-    --bg-app: #0b1120;
-    --bg-panel: #111827;
-    --bg-card: #1e293b;
-    --bg-card-hover: #273549;
-    --bg-bubble-host: #172554;
-    --bg-bubble-bull: #052e2b;
-    --bg-bubble-bear: #33131c;
-    --bg-bubble-judge: #251a3f;
-    --border-subtle: rgba(148, 163, 184, 0.16);
-    --border-strong: rgba(148, 163, 184, 0.30);
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent-host: #38bdf8;
-    --accent-bull: #34d399;
-    --accent-bear: #fb7185;
-    --accent-judge: #c084fc;
-    --accent-gold: #fbbf24;
-    --quote-bg: rgba(15, 23, 42, 0.55);
-    --pill-bg: rgba(30, 41, 59, 0.85);
-    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.42);
-    --highlight-ring: #fbbf24;
-  }
-
-  [data-theme="light"] {
     --bg-app: #f1f5f9;
     --bg-panel: #ffffff;
     --bg-card: #f8fafc;
@@ -54,367 +29,278 @@
     --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.08);
     --highlight-ring: #f59e0b;
   }
-
+  [data-theme="dark"] {
+    --bg-app: #0b1120;
+    --bg-panel: #111827;
+    --bg-card: #1e293b;
+    --bg-card-hover: #273549;
+    --bg-bubble-host: #172554;
+    --bg-bubble-bull: #052e2b;
+    --bg-bubble-bear: #33131c;
+    --bg-bubble-judge: #251a3f;
+    --border-subtle: rgba(148, 163, 184, 0.16);
+    --border-strong: rgba(148, 163, 184, 0.30);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-host: #38bdf8;
+    --accent-bull: #34d399;
+    --accent-bear: #fb7185;
+    --accent-judge: #c084fc;
+    --accent-gold: #fbbf24;
+    --quote-bg: rgba(15, 23, 42, 0.55);
+    --pill-bg: rgba(30, 41, 59, 0.85);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.42);
+    --highlight-ring: #fbbf24;
+  }
   * { box-sizing: border-box; }
   html, body {
     margin: 0; padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: var(--bg-app);
-    color: var(--text-primary);
-    line-height: 1.62;
-    -webkit-font-smoothing: antialiased;
+    background: var(--bg-app); color: var(--text-primary);
+    line-height: 1.66; -webkit-font-smoothing: antialiased;
   }
-
-  /* 顶部群聊导航栏 */
   .topbar {
     position: sticky; top: 0; z-index: 100;
-    background: var(--bg-panel);
-    border-bottom: 1px solid var(--border-subtle);
-    backdrop-filter: blur(12px);
-    padding: 12px 18px;
-    box-shadow: var(--shadow-lg);
+    background: var(--bg-panel); border-bottom: 1px solid var(--border-subtle);
+    backdrop-filter: blur(12px); padding: 11px 18px; box-shadow: var(--shadow-lg);
   }
   .topbar-inner {
-    max-width: 1280px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; flex-wrap: wrap;
+    max-width: 1480px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
   }
-  .group-title-wrap { display: flex; flex-direction: column; gap: 3px; }
-  .group-title {
-    font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  }
+  .group-title-wrap { display: flex; flex-direction: column; gap: 2px; }
+  .group-title { font-size: 16.5px; font-weight: 800; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .group-badge {
     font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
-    background: rgba(56, 189, 248, 0.16); color: var(--accent-host); border: 1px solid rgba(56, 189, 248, 0.35);
+    background: rgba(2, 132, 199, 0.14); color: var(--accent-host); border: 1px solid rgba(2, 132, 199, 0.30);
   }
   .group-sub { font-size: 12px; color: var(--text-secondary); }
-  .top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .top-actions { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+
+  /* 双模式切换胶囊（核心亮点） */
+  .mode-switch {
+    display: inline-flex; padding: 3px; border-radius: 11px;
+    background: var(--bg-card); border: 1.5px solid var(--accent-host); gap: 2px;
+  }
+  .mode-btn {
+    border: none; background: transparent; color: var(--text-secondary);
+    padding: 5px 11px; border-radius: 8px; font-size: 12.5px; font-weight: 800;
+    cursor: pointer; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 4px;
+  }
+  .mode-btn.active-plain { background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.30); }
+  .mode-btn.active-pro { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.30); }
+
   .btn {
-    border: 1px solid var(--border-strong);
-    background: var(--bg-card); color: var(--text-primary);
-    padding: 6px 12px; border-radius: 9px; font-size: 12.5px; font-weight: 600;
+    border: 1px solid var(--border-strong); background: var(--bg-card); color: var(--text-primary);
+    padding: 6px 11px; border-radius: 9px; font-size: 12.5px; font-weight: 600;
     cursor: pointer; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 5px;
+    text-decoration: none;
   }
   .btn:hover { background: var(--bg-card-hover); transform: translateY(-1px); }
-  .btn.active {
-    background: var(--accent-host); color: #fff; border-color: var(--accent-host);
-  }
-  .btn-gold {
-    background: linear-gradient(135deg, #f59e0b, #ea580c);
-    color: #fff; border-color: transparent;
-  }
+  .btn.active { background: var(--accent-host); color: #fff; border-color: var(--accent-host); }
+  .btn-gold { background: linear-gradient(135deg, #f59e0b, #ea580c); color: #fff; border-color: transparent; }
   .btn-gold:hover { filter: brightness(1.08); }
 
-  /* 成员条 */
   .roster-strip {
-    max-width: 1280px; margin: 8px auto 0;
+    max-width: 1480px; margin: 8px auto 0;
     display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
     padding-top: 8px; border-top: 1px dashed var(--border-subtle);
   }
   .member-chip {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 11.5px; padding: 3px 10px; border-radius: 999px;
-    background: var(--bg-card); border: 1px solid var(--border-subtle);
+    display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; padding: 3px 10px;
+    border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border-subtle);
     color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
   }
   .member-chip:hover { border-color: var(--border-strong); color: var(--text-primary); }
   .member-chip.selected { border-color: var(--accent-gold); color: var(--text-primary); box-shadow: 0 0 0 1px var(--accent-gold); }
   .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-  .dot-host { background: var(--accent-host); }
-  .dot-bull { background: var(--accent-bull); }
-  .dot-bear { background: var(--accent-bear); }
-  .dot-judge { background: var(--accent-judge); }
+  .dot-host { background: var(--accent-host); } .dot-bull { background: var(--accent-bull); }
+  .dot-bear { background: var(--accent-bear); } .dot-judge { background: var(--accent-judge); }
 
-  /* 主体双栏布局 */
+  /* 三栏自适应布局：左导航 + 中间群聊 + 右侧术语白话栏 */
   .layout {
-    max-width: 1280px; margin: 16px auto 40px; padding: 0 16px;
-    display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 18px;
-    align-items: start;
+    max-width: 1480px; margin: 16px auto 40px; padding: 0 16px;
+    display: grid; grid-template-columns: 255px minmax(0, 1fr) 290px; gap: 16px; align-items: start;
   }
-  @media (max-width: 960px) {
-    .layout { grid-template-columns: 1fr; }
+  .layout.hide-glossary { grid-template-columns: 255px minmax(0, 1fr); }
+  .layout.hide-glossary .glossary-sidebar { display: none; }
+  @media (max-width: 1200px) {
+    .layout { grid-template-columns: 245px minmax(0, 1fr); }
+    .glossary-sidebar {
+      position: fixed !important; right: 16px; bottom: 16px; top: auto !important; z-index: 200;
+      width: min(360px, calc(100vw - 32px)); max-height: 70vh; box-shadow: 0 16px 48px rgba(0,0,0,0.32);
+      display: none;
+    }
+    .glossary-sidebar.drawer-open { display: flex !important; }
+  }
+  @media (max-width: 900px) {
+    .layout, .layout.hide-glossary { grid-template-columns: 1fr; }
     .sidebar { position: static !important; }
   }
 
-  /* 左侧议题栏 */
-  .sidebar {
-    position: sticky; top: 122px;
-    background: var(--bg-panel);
-    border: 1px solid var(--border-subtle);
-    border-radius: 14px; padding: 14px;
-    display: flex; flex-direction: column; gap: 14px;
+  .sidebar, .glossary-sidebar {
+    position: sticky; top: 118px; background: var(--bg-panel); border: 1px solid var(--border-subtle);
+    border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 12px;
+    max-height: calc(100vh - 134px); overflow-y: auto;
   }
   .side-title {
-    font-size: 12px; font-weight: 800; letter-spacing: 0.04em;
-    color: var(--text-muted); text-transform: uppercase;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .topic-list { display: flex; flex-direction: column; gap: 6px; }
-  .topic-btn {
-    text-align: left; width: 100%; border: 1px solid transparent;
-    background: transparent; color: var(--text-secondary);
-    padding: 8px 10px; border-radius: 10px; cursor: pointer;
-    font-size: 13px; font-weight: 600; transition: all 0.15s;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.03em; color: var(--text-muted);
     display: flex; justify-content: space-between; align-items: center; gap: 6px;
   }
-  .topic-btn:hover { background: var(--bg-card); color: var(--text-primary); }
-  .topic-btn.active {
-    background: rgba(56, 189, 248, 0.14); color: var(--accent-host);
-    border-color: rgba(56, 189, 248, 0.35);
+  .topic-list { display: flex; flex-direction: column; gap: 5px; }
+  .topic-btn {
+    text-align: left; width: 100%; border: 1px solid transparent; background: transparent; color: var(--text-secondary);
+    padding: 7px 9px; border-radius: 10px; cursor: pointer; font-size: 12.5px; font-weight: 600;
+    transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; gap: 6px;
   }
-  .topic-count {
-    font-size: 11px; padding: 1px 6px; border-radius: 999px;
-    background: var(--pill-bg); color: var(--text-secondary); font-weight: 700;
-  }
-  .topic-status { font-size: 11px; white-space: nowrap; }
   .topic-btn > span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-  /* 左侧收敛仪表盘 */
-  .convergence-box {
-    background: var(--bg-card); border-radius: 11px; padding: 11px;
-    border: 1px solid var(--border-subtle); font-size: 12px;
-  }
-  .conv-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 4px 0; border-bottom: 1px dashed var(--border-subtle);
-  }
+  .topic-btn:hover { background: var(--bg-card); color: var(--text-primary); }
+  .topic-btn.active { background: rgba(2, 132, 199, 0.12); color: var(--accent-host); border-color: rgba(2, 132, 199, 0.35); }
+  .topic-count { font-size: 10.5px; padding: 1px 6px; border-radius: 999px; background: var(--pill-bg); color: var(--text-secondary); font-weight: 700; }
+  .topic-status { font-size: 10.5px; white-space: nowrap; }
+  .convergence-box { background: var(--bg-card); border-radius: 11px; padding: 10px; border: 1px solid var(--border-subtle); font-size: 12px; }
+  .conv-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px dashed var(--border-subtle); gap: 6px; }
   .conv-row:last-child { border-bottom: none; }
-  .conv-label { color: var(--text-secondary); }
-  .conv-val { font-weight: 800; font-variant-numeric: tabular-nums; }
+  .conv-label { color: var(--text-secondary); font-size: 11.5px; }
+  .conv-val { font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; font-size: 11.5px; }
 
-  /* 群聊主窗口 */
-  .chat-stage {
-    background: var(--bg-panel);
-    border: 1px solid var(--border-subtle);
-    border-radius: 16px;
-    padding: 18px 18px 28px;
-    min-height: 75vh;
+  /* 术语注解侧边栏样式 */
+  .glossary-search {
+    width: 100%; padding: 7px 10px; border-radius: 9px; border: 1px solid var(--border-strong);
+    background: var(--bg-card); color: var(--text-primary); font-size: 12.5px; outline: none;
   }
+  .glossary-search:focus { border-color: var(--accent-host); }
+  .glossary-list { display: flex; flex-direction: column; gap: 8px; }
+  .g-card {
+    background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px;
+    padding: 9px 10px; font-size: 12px; transition: all 0.22s ease; cursor: pointer;
+  }
+  .g-card:hover { border-color: var(--accent-host); }
+  .g-card.flash-term { border-color: var(--accent-gold); box-shadow: 0 0 0 2.5px rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.10); }
+  .g-term { font-weight: 800; font-size: 12.5px; color: var(--accent-host); margin-bottom: 3px; }
+  .g-plain { color: var(--text-primary); line-height: 1.55; }
+  .g-usage { margin-top: 4px; font-size: 11px; color: var(--text-muted); border-top: 1px dashed var(--border-subtle); padding-top: 4px; }
+
+  /* 正文内联可点击术语胶囊 */
+  .term-link {
+    border-bottom: 1.5px dashed var(--accent-host); cursor: help; font-weight: 700;
+    color: inherit; padding: 0 1px; border-radius: 3px; transition: background 0.15s;
+  }
+  .term-link:hover { background: rgba(2, 132, 199, 0.14); }
+
+  .chat-stage { background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 16px 18px 28px; min-height: 75vh; }
   .stage-banner {
     display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
-    padding: 10px 14px; border-radius: 11px; margin-bottom: 18px;
-    background: var(--bg-card); border: 1px solid var(--border-subtle);
-    font-size: 12.5px; color: var(--text-secondary);
+    padding: 10px 13px; border-radius: 11px; margin-bottom: 16px;
+    background: var(--bg-card); border: 1px solid var(--border-subtle); font-size: 12.5px; color: var(--text-secondary);
   }
-  .round-divider {
-    display: flex; align-items: center; gap: 10px;
-    margin: 24px 0 14px; color: var(--text-muted); font-size: 12px; font-weight: 700;
+  .mode-pill-banner {
+    display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 800;
+    padding: 2px 9px; border-radius: 999px;
   }
-  .round-divider::before, .round-divider::after {
-    content: ""; flex: 1; height: 1px; background: var(--border-subtle);
-  }
-  .round-pill {
-    padding: 3px 12px; border-radius: 999px;
-    background: var(--bg-card); border: 1px solid var(--border-strong); color: var(--text-primary);
-  }
+  .mode-pill-banner.plain { background: rgba(16, 185, 129, 0.15); color: #059669; }
+  .mode-pill-banner.pro { background: rgba(99, 102, 241, 0.15); color: #4f46e5; }
+  [data-theme="dark"] .mode-pill-banner.plain { color: #34d399; }
+  [data-theme="dark"] .mode-pill-banner.pro { color: #a5b4fc; }
 
-  /* 单条群聊气泡 */
-  .msg-row {
-    display: flex; gap: 11px; margin-bottom: 14px; align-items: flex-start;
-    transition: transform 0.2s, box-shadow 0.2s;
-    scroll-margin-top: 140px;
-  }
+  .round-divider { display: flex; align-items: center; gap: 10px; margin: 22px 0 14px; color: var(--text-muted); font-size: 12px; font-weight: 700; }
+  .round-divider::before, .round-divider::after { content: ""; flex: 1; height: 1px; background: var(--border-subtle); }
+  .round-pill { padding: 3px 12px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border-strong); color: var(--text-primary); }
+  .msg-row { display: flex; gap: 11px; margin-bottom: 14px; align-items: flex-start; scroll-margin-top: 140px; }
   .msg-row.side-right { flex-direction: row-reverse; }
   .avatar {
     width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; font-weight: 800; user-select: none;
-    border: 1px solid var(--border-strong);
+    display: flex; align-items: center; justify-content: center; font-size: 18px; user-select: none; border: 1px solid var(--border-strong);
   }
-  .av-host { background: rgba(56, 189, 248, 0.16); color: var(--accent-host); }
-  .av-bull { background: rgba(52, 211, 153, 0.16); color: var(--accent-bull); }
-  .av-bear { background: rgba(251, 113, 133, 0.16); color: var(--accent-bear); }
-  .av-judge { background: rgba(192, 132, 252, 0.16); color: var(--accent-judge); }
-
-  .msg-body-wrap { max-width: 82%; min-width: 240px; display: flex; flex-direction: column; gap: 4px; }
-  @media (max-width: 680px) { .msg-body-wrap { max-width: 88%; } }
+  .av-host { background: rgba(56, 189, 248, 0.16); } .av-bull { background: rgba(52, 211, 153, 0.16); }
+  .av-bear { background: rgba(251, 113, 133, 0.16); } .av-judge { background: rgba(192, 132, 252, 0.16); }
+  .msg-body-wrap { max-width: 84%; min-width: 240px; display: flex; flex-direction: column; gap: 4px; }
+  @media (max-width: 680px) { .msg-body-wrap { max-width: 89%; } }
   .msg-row.side-right .msg-body-wrap { align-items: flex-end; }
-
-  .msg-meta {
-    display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
-    font-size: 11.5px; color: var(--text-secondary); padding: 0 2px;
-  }
+  .msg-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 11.5px; color: var(--text-secondary); padding: 0 2px; }
   .msg-row.side-right .msg-meta { flex-direction: row-reverse; }
   .sender-name { font-weight: 800; color: var(--text-primary); }
-  .model-tag {
-    font-size: 10.5px; padding: 1px 6px; border-radius: 5px;
-    background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-muted);
-  }
+  .model-tag { font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-muted); }
   .msg-id { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10.5px; color: var(--text-muted); }
-
-  /* 动作标签 */
-  .act-tag {
-    font-size: 10.5px; font-weight: 800; padding: 1.5px 7px; border-radius: 6px;
-  }
-  .act-attack { background: rgba(244, 63, 94, 0.18); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.35); }
-  .act-defend { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
-  .act-concede { background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
-  .act-withdraw { background: rgba(56, 189, 248, 0.18); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
-  .act-verdict { background: rgba(168, 85, 247, 0.22); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.42); }
-  .act-system { background: rgba(148, 163, 184, 0.18); color: var(--text-secondary); }
-  [data-theme="light"] .act-attack { color: #be123c; }
-  [data-theme="light"] .act-defend { color: #047857; }
-  [data-theme="light"] .act-concede { color: #b45309; }
-  [data-theme="light"] .act-withdraw { color: #0369a1; }
-  [data-theme="light"] .act-verdict { color: #6d28d9; }
-
-  .bubble {
-    padding: 11px 14px; border-radius: 14px;
-    border: 1px solid var(--border-subtle);
-    font-size: 14px; position: relative; width: 100%;
-    transition: box-shadow 0.25s ease, border-color 0.25s ease;
-  }
-  .bubble-host { background: var(--bg-bubble-host); border-color: rgba(56, 189, 248, 0.28); }
-  .bubble-bull { background: var(--bg-bubble-bull); border-color: rgba(52, 211, 153, 0.28); border-top-left-radius: 4px; }
-  .bubble-bear { background: var(--bg-bubble-bear); border-color: rgba(251, 113, 133, 0.28); border-top-right-radius: 4px; }
-  .bubble-judge { background: var(--bg-bubble-judge); border-color: rgba(192, 132, 252, 0.34); }
-
-  .bubble.flash-highlight {
-    box-shadow: 0 0 0 3px var(--highlight-ring), 0 0 24px rgba(251, 191, 36, 0.35);
-    border-color: var(--highlight-ring);
-  }
-
-  /* 微信式引用回复框（一一对应核心！） */
-  .quote-box {
-    background: var(--quote-bg);
-    border-left: 3px solid var(--accent-gold);
-    border-radius: 7px; padding: 6px 9px; margin-bottom: 8px;
-    font-size: 12px; color: var(--text-secondary);
-    cursor: pointer; transition: background 0.15s;
-  }
-  .quote-box:hover { filter: brightness(1.12); }
-  .quote-head {
-    font-weight: 700; color: var(--text-primary); font-size: 11.5px;
-    display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;
-  }
+  .act-tag { font-size: 10.5px; font-weight: 800; padding: 1.5px 7px; border-radius: 6px; }
+  .act-attack { background: rgba(244, 63, 94, 0.14); color: #be123c; border: 1px solid rgba(244, 63, 94, 0.30); }
+  .act-defend { background: rgba(16, 185, 129, 0.14); color: #047857; border: 1px solid rgba(16, 185, 129, 0.30); }
+  .act-concede { background: rgba(245, 158, 11, 0.14); color: #b45309; border: 1px solid rgba(245, 158, 11, 0.30); }
+  .act-withdraw { background: rgba(2, 132, 199, 0.14); color: #0369a1; border: 1px solid rgba(2, 132, 199, 0.30); }
+  .act-verdict { background: rgba(124, 58, 237, 0.14); color: #6d28d9; border: 1px solid rgba(124, 58, 237, 0.32); }
+  .act-system { background: rgba(100, 116, 139, 0.14); color: var(--text-secondary); }
+  [data-theme="dark"] .act-attack { color: #fb7185; } [data-theme="dark"] .act-defend { color: #34d399; }
+  [data-theme="dark"] .act-concede { color: #fbbf24; } [data-theme="dark"] .act-withdraw { color: #38bdf8; }
+  [data-theme="dark"] .act-verdict { color: #d8b4fe; }
+  .bubble { padding: 11px 14px; border-radius: 14px; border: 1px solid var(--border-subtle); font-size: 14px; width: 100%; transition: box-shadow 0.25s, border-color 0.25s; }
+  .bubble-host { background: var(--bg-bubble-host); border-color: rgba(2, 132, 199, 0.24); }
+  .bubble-bull { background: var(--bg-bubble-bull); border-color: rgba(5, 150, 105, 0.26); border-top-left-radius: 4px; }
+  .bubble-bear { background: var(--bg-bubble-bear); border-color: rgba(225, 29, 72, 0.24); border-top-right-radius: 4px; }
+  .bubble-judge { background: var(--bg-bubble-judge); border-color: rgba(124, 58, 237, 0.28); }
+  .bubble.flash-highlight { box-shadow: 0 0 0 3px var(--highlight-ring), 0 0 24px rgba(251, 191, 36, 0.35); border-color: var(--highlight-ring); }
+  .quote-box { background: var(--quote-bg); border-left: 3px solid var(--accent-gold); border-radius: 7px; padding: 6px 9px; margin-bottom: 8px; font-size: 12px; color: var(--text-secondary); cursor: pointer; }
+  .quote-box:hover { filter: brightness(0.96); }
+  .quote-head { font-weight: 700; color: var(--text-primary); font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
   .quote-jump { font-size: 10.5px; color: var(--accent-host); font-weight: 600; }
-
-  /* 气泡内数据药丸与附注标签 */
-  .num {
-    display: inline-block; padding: 0 5px; border-radius: 5px;
-    background: rgba(251, 191, 36, 0.14); color: var(--accent-gold);
-    font-weight: 800; font-variant-numeric: tabular-nums; font-size: 13px;
-  }
-  [data-theme="light"] .num { background: rgba(217, 119, 6, 0.12); color: #b45309; }
-  .cite-row {
-    margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
-  }
-  .cite-chip {
-    font-size: 11px; padding: 2px 8px; border-radius: 6px;
-    background: var(--quote-bg); border: 1px solid var(--border-subtle);
-    color: var(--text-secondary); font-weight: 600;
-  }
-  .impact-chip {
-    font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 800;
-    background: rgba(244, 63, 94, 0.16); color: #fb7185;
-  }
-  .impact-chip.pos { background: rgba(16, 185, 129, 0.16); color: #34d399; }
-  [data-theme="light"] .impact-chip { color: #be123c; }
-  [data-theme="light"] .impact-chip.pos { color: #047857; }
-
-  .topic-tag-mini {
-    font-size: 10.5px; padding: 1px 6px; border-radius: 5px;
-    background: rgba(56, 189, 248, 0.12); color: var(--accent-host);
-    cursor: pointer; font-weight: 700;
-  }
-
-  /* 迷你数据表（嵌入气泡） */
-  .mini-table {
-    width: 100%; border-collapse: collapse; margin-top: 8px;
-    font-size: 12px; background: var(--quote-bg); border-radius: 8px; overflow: hidden;
-  }
-  .mini-table th, .mini-table td {
-    padding: 5px 8px; border-bottom: 1px solid var(--border-subtle); text-align: left;
-  }
+  .num { display: inline-block; padding: 0 5px; border-radius: 5px; background: rgba(217, 119, 6, 0.12); color: #b45309; font-weight: 800; font-variant-numeric: tabular-nums; font-size: 13px; }
+  [data-theme="dark"] .num { background: rgba(251, 191, 36, 0.16); color: #fbbf24; }
+  .cite-row { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .cite-chip { font-size: 11px; padding: 2px 8px; border-radius: 6px; background: var(--quote-bg); border: 1px solid var(--border-subtle); color: var(--text-secondary); font-weight: 600; }
+  .impact-chip { font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 800; background: rgba(244, 63, 94, 0.14); color: #be123c; }
+  .impact-chip.pos { background: rgba(16, 185, 129, 0.14); color: #047857; }
+  [data-theme="dark"] .impact-chip { color: #fb7185; } [data-theme="dark"] .impact-chip.pos { color: #34d399; }
+  .topic-tag-mini { font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: rgba(2, 132, 199, 0.10); color: var(--accent-host); cursor: pointer; font-weight: 700; }
+  .mini-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; background: var(--quote-bg); border-radius: 8px; overflow: hidden; }
+  .mini-table th, .mini-table td { padding: 5px 8px; border-bottom: 1px solid var(--border-subtle); text-align: left; }
   .mini-table th { color: var(--text-muted); font-weight: 700; font-size: 11px; }
   .mini-table tr:last-child td { border-bottom: none; }
-
-  /* 揭盲开箱卡片 */
-  .unblind-box {
-    margin-top: 10px; border-radius: 12px; padding: 14px;
-    border: 1.5px dashed var(--accent-gold);
-    background: linear-gradient(135deg, rgba(251, 191, 36, 0.10), rgba(56, 189, 248, 0.08));
-  }
-  .unblind-sealed {
-    text-align: center; padding: 14px 10px;
-  }
-  .unblind-content { display: none; }
-  .unblind-content.open { display: block; animation: fadeIn 0.35s ease; }
+  .unblind-box { margin-top: 10px; border-radius: 12px; padding: 14px; border: 1.5px dashed var(--accent-gold); background: linear-gradient(135deg, rgba(251, 191, 36, 0.10), rgba(56, 189, 248, 0.08)); }
+  .unblind-sealed { text-align: center; padding: 14px 10px; }
+  .unblind-content { display: none; } .unblind-content.open { display: block; animation: fadeIn 0.35s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-  .grid-cards {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-top: 10px;
-  }
-  .stat-card {
-    background: var(--bg-panel); border: 1px solid var(--border-subtle);
-    border-radius: 9px; padding: 9px 10px;
-  }
-  .stat-k { font-size: 11px; color: var(--text-muted); }
-  .stat-v { font-size: 16px; font-weight: 800; margin-top: 2px; font-variant-numeric: tabular-nums; }
-
-  /* 议题对质矩阵模式（一一对应视图） */
-  .matrix-view { display: none; flex-direction: column; gap: 16px; }
-  .matrix-view.active { display: flex; }
+  .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-top: 10px; }
+  .stat-card { background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: 9px; padding: 9px 10px; }
+  .stat-k { font-size: 11px; color: var(--text-muted); } .stat-v { font-size: 15.5px; font-weight: 800; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .matrix-view { display: none; flex-direction: column; gap: 16px; } .matrix-view.active { display: flex; }
   .chat-view.hidden { display: none; }
-
-  .clash-card {
-    background: var(--bg-card); border: 1px solid var(--border-strong);
-    border-radius: 14px; overflow: hidden;
-  }
-  .clash-header {
-    padding: 12px 16px; background: var(--quote-bg);
-    border-bottom: 1px solid var(--border-subtle);
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
-  }
-  .clash-title { font-weight: 800; font-size: 15px; }
-  .clash-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 14px;
-  }
+  .clash-card { background: var(--bg-card); border: 1px solid var(--border-strong); border-radius: 14px; overflow: hidden; }
+  .clash-header { padding: 12px 16px; background: var(--quote-bg); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .clash-title { font-weight: 800; font-size: 14.5px; }
+  .clash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 14px; }
   @media (max-width: 820px) { .clash-grid { grid-template-columns: 1fr; } }
-  .clash-col {
-    background: var(--bg-panel); border-radius: 10px; padding: 11px;
-    border: 1px solid var(--border-subtle); font-size: 13px;
-  }
-  .clash-col-head { font-size: 12px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-  .clash-verdict {
-    margin: 0 14px 14px; padding: 10px 13px; border-radius: 10px;
-    background: var(--bg-bubble-judge); border: 1px solid rgba(192, 132, 252, 0.35);
-    font-size: 13px;
-  }
+  .clash-col { background: var(--bg-panel); border-radius: 10px; padding: 11px; border: 1px solid var(--border-subtle); font-size: 13px; }
+  .clash-col-head { font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+  .clash-verdict { margin: 0 14px 14px; padding: 10px 13px; border-radius: 10px; background: var(--bg-bubble-judge); border: 1px solid rgba(124, 58, 237, 0.30); font-size: 13px; }
 </style>
 </head>
 <body>
-
-<!-- 顶部群聊标题栏 -->
 <header class="topbar">
   <div class="topbar-inner">
     <div class="group-title-wrap">
       <div class="group-title">
         <span>⚖️ 云铝股份（000807.SZ）投委会红蓝辩论群 (4)</span>
-        <span class="group-badge">V2.0 物理双盲 · 0 现价盲定</span>
+        <span class="group-badge">V2.1 双模式 · 物理双盲 · 0 现价盲定</span>
       </div>
-      <div class="group-sub">2026-11-25 ｜ 全程纯官方 2026Q3/H1/2025AR 巨潮底稿 ＋ Python 硬验算 ｜ 点击任意“引用条”可直跳原话</div>
+      <div class="group-sub">2026-11-25 ｜ 全程 0 现价盲定 · 2026三季报/半年报/2025年报巨潮原件 ＋ 4家同行对照</div>
     </div>
     <div class="top-actions">
-      <a href="./index.html" class="btn" style="text-decoration:none;">← 书架</a>
+      <a href="./index.html" class="btn">← 书架</a>
+      <div class="mode-switch" title="一键切换大白话小白版与专业硬核版">
+        <button class="mode-btn" id="btnModePlain" onclick="switchMode('plain')">🐣 小白大白话</button>
+        <button class="mode-btn" id="btnModePro" onclick="switchMode('pro')">🎓 专业硬核版</button>
+      </div>
       <button class="btn active" id="btnChatView" onclick="switchView('chat')">💬 群聊实景</button>
-      <button class="btn" id="btnMatrixView" onclick="switchView('matrix')">⚔️ 议题一一对质表</button>
-      <button class="btn btn-gold" id="btnTopUnblind" onclick="jumpAndUnblind()">🔓 揭盲对照现价</button>
-      <button class="btn" id="btnTheme" onclick="toggleTheme()">☀️ 浅色</button>
+      <button class="btn" id="btnMatrixView" onclick="switchView('matrix')">⚔️ 议题对质表</button>
+      <button class="btn btn-gold" onclick="jumpAndUnblind()">🔓 揭盲看现价</button>
+      <button class="btn" id="btnGlossary" onclick="toggleGlossary()">📖 术语词典</button>
+      <button class="btn" id="btnTheme" onclick="toggleTheme()">🌙 深色</button>
     </div>
   </div>
-  <div class="roster-strip">
-    <span style="font-size:11.5px;color:var(--text-muted);font-weight:700;">群成员筛选：</span>
-    <span class="member-chip selected" data-role="all" onclick="filterRole('all')">👥 全部 (4)</span>
-    <span class="member-chip" data-role="host" onclick="filterRole('host')"><i class="dot dot-host"></i>🏛️ 主席·宿主</span>
-    <span class="member-chip" data-role="bull" onclick="filterRole('bull')"><i class="dot dot-bull"></i>🐂 多头·林奇 (Gemini 4 Neon)</span>
-    <span class="member-chip" data-role="bear" onclick="filterRole('bear')"><i class="dot dot-bear"></i>🐻 空头·法医 (Claude Opus 5.5)</span>
-    <span class="member-chip" data-role="judge" onclick="filterRole('judge')"><i class="dot dot-judge"></i>⚖️ 裁判·马克斯 (Gemini 4 Neon)</span>
-  </div>
+  <div class="roster-strip" id="rosterStrip"></div>
 </header>
 
-<div class="layout">
-  <!-- 左侧：议题线程导航 + 收敛轨迹 -->
+<div class="layout" id="mainLayout">
   <aside class="sidebar">
     <div>
       <div class="side-title">
@@ -423,317 +309,130 @@
       </div>
       <div class="topic-list" id="topicList"></div>
     </div>
-
     <div class="convergence-box">
       <div class="side-title" style="margin-bottom:8px;"><span>📊 盲定数字收敛轨迹</span></div>
-      <div class="conv-row"><span class="conv-label">多头 R1→R2 OE</span><span class="conv-val" style="color:var(--accent-bull);">63.21 → 57.03亿</span></div>
-      <div class="conv-row"><span class="conv-label">空头 R1→R2 OE</span><span class="conv-val" style="color:var(--accent-bear);">47.50 → 49.87亿</span></div>
-      <div class="conv-row"><span class="conv-label">⚖️ 终审 steady_oe</span><span class="conv-val" style="color:var(--accent-judge);">52.52亿 (达产59.33)</span></div>
-      <div class="conv-row"><span class="conv-label">净现金 ev_delta</span><span class="conv-val" style="color:var(--accent-gold);">-122.64亿 (差0.84)</span></div>
-      <div class="conv-row"><span class="conv-label">⚖️ 盲定公允中枢</span><span class="conv-val" style="color:var(--accent-judge);">21.71 元/股</span></div>
-      <div class="conv-row"><span class="conv-label">🟢 建仓 / 重锤</span><span class="conv-val" style="color:var(--accent-bull);">16.50—18.70 / ≤16.50</span></div>
+      <div id="convList"></div>
     </div>
   </aside>
 
-  <!-- 右侧主阅读区 -->
   <main class="chat-stage">
-    <div class="stage-banner" id="stageBanner">
-      <span>💡 <b>阅读小技巧</b>：每一条反驳气泡顶部都有<b>「↩ 引用原话」</b>卡片，点击直接高亮定位；点左侧任一<b>议题</b>，只看该争点的完整“亮刺→反杀→补刀→落锤”闭环！</span>
+    <div class="stage-banner">
+      <span id="stageTip"></span>
       <span id="msgCounter" style="font-weight:700;color:var(--accent-host);"></span>
     </div>
-
-    <!-- 视图一：群聊实景 -->
     <div class="chat-view" id="chatView"></div>
-
-    <!-- 视图二：议题一一对质矩阵 -->
     <div class="matrix-view" id="matrixView"></div>
   </main>
+
+  <aside class="glossary-sidebar" id="glossarySidebar">
+    <div class="side-title">
+      <span>📖 术语大白话小词典</span>
+      <span style="font-size:11px;cursor:pointer;color:var(--accent-host);" onclick="toggleGlossary()">收起 ✕</span>
+    </div>
+    <input class="glossary-search" id="glossarySearch" type="text" placeholder="🔍 搜缩写或中文（如 DCF、保理、OE）…" oninput="renderGlossary()">
+    <div class="glossary-list" id="glossaryList"></div>
+  </aside>
 </div>
 
 <script>
-// ========================
-// 1. 结构化群聊数据（真实还原 2026-11-25 云铝股份物理双盲 Swarm 辩论）
-// ========================
-const TOPICS = [
-  { id: 'all', name: '全部群聊实录', icon: '💬', badge: '' },
-  { id: 't0', name: '开场双盲封箱与多头立论', icon: '🔒', badge: '底座' },
-  { id: 't1', name: '刺1 · 氧化铝剪刀差', icon: '🧪', badge: '🩸命中' },
-  { id: 't2', name: '刺2 · CapEx大修潮', icon: '🔧', badge: '🩸命中' },
-  { id: 't3', name: '刺3 · 净现金大反转', icon: '💰', badge: '🔄双抓虫' },
-  { id: 't4', name: '补刀1 · 铝价85折锚', icon: '📏', badge: '🩸命中' },
-  { id: 't5', name: '补刀2 · 云南枯水考', icon: '⚡', badge: '🛡️1号路标' },
-  { id: 't6', name: '终审盲定 & 宿主揭盲', icon: '⚖️', badge: '🔓开箱' }
-];
+const DATA = {"company": "云铝股份", "code": "000807.SZ", "date": "2026-11-25", "default_mode": "plain", "badge": "V2.1 双模式 · 物理双盲 · 0 现价盲定", "subtitle": "2026-11-25 ｜ 全程 0 现价盲定 · 2026三季报/半年报/2025年报巨潮原件 ＋ 4家同行对照", "glossary": [{"key": "氧化铝剪刀差", "match": ["氧化铝", "剪刀差"], "term": "氧化铝外购剪刀差（原料便宜出来的暴利）", "plain": "生产 1 吨电解铝大约需要消耗 1.93 吨氧化铝当原料。云铝自己产的氧化铝不够用，近 78% 要在外面买。2026 年氧化铝跌到 2,641 元（已经跌穿行业成本线），原料超便宜让云铝账面利润暴涨，但这是借来的景气红利，不能当永续算。", "usage": "空头第一根核心之刺！双方最后一致把常态氧化铝成本抬回 3,000 元/吨进口矿成本线。"}, {"key": "水电绿铝", "match": ["水电铝", "绿铝", "4,500万吨", "双15%税盾"], "term": "4,500 万吨产能红线 & 云南水电绿铝", "plain": "国家给全国电解铝画了死天花板（4,500 万吨），谁都不能随便扩产，等于行业有了“特许经营牌照”。云铝在云南用水力发电炼铝，碳排放只有火电铝的 1/6，还享受西部大开发+高新企业双 15% 低所得税优惠。", "usage": "云铝最硬的护城河，也是为什么市场愿意给它高于普通周期股估值的原因。"}, {"key": "电解槽大修", "match": ["电解槽", "大修", "维持CapEx", "维持性开支"], "term": "电解槽大修周期（维持性资本开支）", "plain": "电解铝的大炉子（500kA 电解槽）用满 6–8 年就必须停产扒炉换新内衬大修，就像家里汽车开满 10 万公里得换大件一样。前两年设备还新所以花钱少，2026–2029 年会迎来大修潮。", "usage": "空头指出 2025 年只花 6.4 亿是在“吃老本”，最终双方把常态维持开支翻倍抬到 12 亿元/年。"}, {"key": "母公司资金池", "match": ["资金池", "其他应付款", "财司存款"], "term": "母公司资金池归集 & 集团财务公司存款", "plain": "集团母公司把下面各合资子公司的闲钱集中归集到母公司账上统一管（表现为母公司「其他应付款」高达 165.7 亿），同时有近 90 亿存在大股东中铝财务公司里。归集上来的钱里有 12.8% 是合资厂合作伙伴的，必须老实扣掉！", "usage": "本场神反转：多头自己翻出母公司报表 165.72 亿，反而抓出了空头漏扣的 17.8 亿少数股东现金份额！"}, {"key": "重置成本底盘", "match": ["重置成本", "除权PB"], "term": "实体重置成本底盘（重新建一个一样厂要多少钱）", "plain": "假设今天从零开始重新买指标、建 268.8 万吨绿色电解铝厂房设备，再加上账上 122.6 亿净现金，造价底线约 15.66—17.05 元/股。如果股市跌到这个价，就等于花“建厂砖头成本价”把整家成熟印钞机买回家。", "usage": "第一档左侧重锤区（≤16.50 元）直接砸进了实体重置成本底盘，安全垫极厚。"}, {"key": "MTM", "match": ["MTM", "现货口径"], "term": "当日现货即时利润口径（Mark-to-Market / MTM）", "plain": "直接拿今天市场上实时铝价和氧化铝价格算出来的年化利润（云铝高达 132.7 亿）。适合看“今年景气度有多爆”，但绝对不能拿景气高点当未来十年的永久常态来买股票！", "usage": "周期股估值铁律：现货 MTM 当参考，买卖定价必须锚定挤干周期泡沫后的常态利润（52.52 亿）。"}, {"key": "steady_oe", "term": "常态自由盈余（steady_oe / OE）", "plain": "扣掉每年修机器、换旧设备的必要花销后，这家公司正常年份「真正能装进股东口袋的纯现金利润」。就像开饭店，营业额扣掉房租水电食材和换新灶台的钱，年底能随便提现分红的那笔钱。", "usage": "买方估值最核心的分子，比账面净利润更真实，不怕会计做账粉饰。"}, {"key": "full_oe", "term": "达产自由盈余（full_oe）", "plain": "公司手里正在盖的新工厂、新产线全部建好并正常运转后，未来每年能装进股东口袋的纯现金利润。", "usage": "用来衡量公司未来 2–3 年扩产落地后的成长弹性，但必须同步扣除建厂还要花的钱（防白嫖）。"}, {"key": "ev_delta", "term": "净现金调整额（ev_delta）与真实企业价值（True EV）", "plain": "买下一整家公司的真实净成本 = 股票总市值 + 欠别人的真债 - 账上闲置可随便花的现金。如果账上闲钱比欠债多（净现金），ev_delta 就是负数，相当于你买房子发现屋里保险柜自带一箱现金，实际买价更便宜。", "usage": "估值核心分母；反向保理、少数股东份额、受限保证金全在这儿挤干水分。"}, {"key": "OCF", "term": "经营现金流（OCF）", "plain": "公司靠卖产品真正收进银行卡的现金，减去买原料发工资付出去的现金。利润表可能只是“打了白条”，经营现金流才是真金白银进账。", "usage": "检验利润含金量的照妖镜；若单季骤降要查是客户欠账（真恶化）还是主动给供应商提前结账（假警报）。"}, {"key": "FCF", "term": "自由现金流（FCF）", "plain": "经营赚进来的现金（OCF），再扣掉盖新厂、买新设备花的钱（CapEx）之后还剩的余钱。正数说明自己养活自己还有结余，负数说明还在烧钱或借钱扩张。", "usage": "判断企业是“印钞机”还是“吞金兽”的硬标准。"}, {"key": "CapEx", "term": "资本开支（CapEx）", "plain": "公司盖厂房、买生产线、买矿权这类大件固定资产花的钱。分为「维持性 CapEx」（给老产线修修补补保饭碗）和「扩张性 CapEx」（盖新厂抢增量）。", "usage": "算常态盈余必须扣维持性开支；算未来达产利润必须把剩余扩张开支从现金里扣干净。"}, {"key": "DCF", "term": "未来现金流折现估值（DCF）", "plain": "把公司未来十几年每年能赚到的真现金，按你要求的年化回报率（比如 9%）折算成今天的钱加总，算出这家公司“理论上今天值多少钱”。", "usage": "价值投资的锚定器；两阶段 DCF 会把前 3–4 年扩产爬坡期和后面的平稳永续期分开精算。"}, {"key": "RONIC", "term": "新投入资本回报率（RONIC）与再投资扣减（1 - g/RONIC）", "plain": "公司想让利润以后每年继续长 3%（g），就得每年从利润里留一部分钱继续买设备建新线，不能 100% 全分红！如果新砸 100 块每年能多赚 30 块（RONIC=30%），想每年多赚 3%，就得扣掉 3%÷30%=10% 的利润拿去再投资。", "usage": "防止估值拍高：如果忘了扣 (1 - g/RONIC)，就等于幻想公司“一分钱不投、利润凭空永续增长”。"}, {"key": "Ke", "term": "股东要求年化回报率（Ke）", "plain": "买这家公司股票，你心里要求的最低年化复合收益门槛（通常在无风险国债利率 1.6%–1.9% 上加 7% 左右风险补偿，定在 9% 左右）。", "usage": "门槛定得越高，算出来的公允股价就越保守、安全垫越厚。"}, {"key": "NPV", "term": "净现值（NPV）", "plain": "一个扩产项目未来所有赚回来的钱折算到今天，减去你要掏出去的建厂成本。NPV 大于 0 说明扩产是在给股东创造超额财富，不能当零价值忽略。", "usage": "检验高回报扩产项目（如 764 GWh 新产线）究竟值不值钱。"}, {"key": "反向保理", "term": "反向保理 / 融单（供应链金融类债）", "plain": "公司欠供应商货款先不直接付，开一张“无条件必须兑付的欠条”，供应商拿去银行提前变现拿走现金。到期时公司必须铁打不动还钱给银行，本质上就是披着应付账款外衣的“变相短期银行贷款”。", "usage": "做空法医必查科目！必须从账上净现金里扣掉，才不会把借来的钱误当成自家闲钱。"}, {"key": "少数股东权益", "term": "少数股东权益 / 归母口径", "plain": "上市公司旗下有些合资子公司不是 100% 独资（比如自己占 92%，合作伙伴占 8%）。报表合并时把 100% 的利润和现金都加进来了，但真正属于咱们买股票的小股东的只是「归母（归属母公司）」那 92%。", "usage": "分子算利润用了归母口径，分母算净现金也只能扣合作伙伴占现金的那 8%，不能胡乱全扣。"}, {"key": "质保预计负债", "term": "售后质保预计负债", "plain": "卖出去的电池承诺保修 8 年，公司提前每年从营业成本里计提一笔“保修准备金”存在账上。因为利润里已经每年扣过这笔钱了，只要公司正常持续卖货，这笔池子就不会一次性掏空。", "usage": "严守“绝不双扣”铁律：利润里已经每年扣过，就不能再当银行欠债在市值里重扣一遍。"}, {"key": "PE_PB", "term": "市盈率（PE）与市净率（PB）", "plain": "市盈率 PE = 买下公司要花几年净利润回本（如 11.6 倍就是约 11 年半回本）；市净率 PB = 股价是每股净资产（账面家底）的几倍。", "usage": "快速对比历史极值位置（比如对比 2024 年熊市大底），防止在周期底部过度恐慌。"}, {"key": "TTM", "term": "过去 12 个月滚动口径（TTM）", "plain": "Trailing Twelve Months 的缩写，就是把最近连续 4 个季度的数据加起来凑满整整一年，比如「TTM 股息率」就是过去一整年实打实发到你手里的现金分红除以今天股价。", "usage": "比看去年旧年报更及时，严禁把没落地的口头回购混进即期股息率。"}, {"key": "物理双盲", "term": "物理双盲定价（0 现价隔离）", "plain": "辩论和裁判定价期间，把今天股票实时价格彻底封在信封里，不让多头、空头、裁判偷看！逼着大家纯按公司一年赚多少钱、账上有多少净现金算出真实底价，最后由主持人拆信封对照今天现价。", "usage": "彻底杜绝人脑看到现价后“故意把买点压到现价下面一点装稳健”的心理锚定偏见。"}], "topics": [{"id": "all", "name": "全部群聊实录", "icon": "💬", "badge": ""}, {"id": "t0", "name": "双盲封箱与护城河", "icon": "🔒", "badge": "0现价"}, {"id": "t1", "name": "氧化铝剪刀差", "icon": "✂️", "badge": "🩸命中"}, {"id": "t2", "name": "电解槽大修开支", "icon": "🔧", "badge": "🩸命中"}, {"id": "t3", "name": "净现金双向抓虫", "icon": "🏦", "badge": "神反转"}, {"id": "t4", "name": "铝价锚与云南电价", "icon": "⚡", "badge": "路标1号"}, {"id": "t5", "name": "终审落锤与揭盲", "icon": "⚖️", "badge": "观察区"}], "roles": {"host": {"name": "主席 · 宿主主持", "model": "双盲封箱", "avatar": "🏛️", "cls": "host", "side": "left"}, "bull": {"name": "多头猎手 · 林奇", "model": "Gemini 4 Neon", "avatar": "🐂", "cls": "bull", "side": "left"}, "bear": {"name": "零信任空头 · 法医", "model": "Claude Opus 5.5", "avatar": "🐻", "cls": "bear", "side": "right"}, "judge": {"name": "安全边际裁判 · 马克斯", "model": "Gemini 4 Neon", "avatar": "⚖️", "cls": "judge", "side": "left"}}, "convergence": [{"label": "常态自由盈余（steady_oe）", "label_plain": "挤泡沫后每年稳赚的钱", "value": "63.2 vs 47.5 → 52.52亿", "color": "judge"}, {"label": "净现金抵扣（ev_delta）", "label_plain": "扣干水分后的净现金", "value": "120.8 vs 151.9 → 122.64亿", "color": "judge"}, {"label": "公允价值中枢", "label_plain": "盲定合理公道价", "value": "25.36 vs 20.81 → 21.71元", "color": "bull"}, {"label": "第二档正常建仓区", "label_plain": "划算建底仓区间", "value": "16.50—18.70元", "color": "bull"}, {"label": "第一档左侧重锤区", "label_plain": "砸进建厂成本重锤线", "value": "≤ 16.50元", "color": "bear"}, {"label": "宿主揭盲收盘价", "label_plain": "拆封真实收盘价", "value": "20.50元 (观察区不追买)", "color": "gold"}], "messages": [{"id": "Y01", "round": "第 0 幕 · 物理双盲封箱（0 现价 · 0 市值 · 0 旧买点）", "round_plain": "第 0 幕 · 封存云铝股价，三席蒙眼纯按财报和铝价算底价", "topic": "t0", "role": "host", "time": "00:16", "act": {"cls": "act-system", "text": "🔒 双盲封箱"}, "text": "云铝股份（<span class=\"num\">000807.SZ</span>）实时行情已物理封存！三席仅凭巨潮原版 2026三季报/半年报/2025年报 及 4 家电解铝同行三表，独立推导净现金抵扣（ev_delta）、常态自由盈余（steady_oe）与两档买点，终审后统一揭盲！", "plain": "各位注意！云铝股份今天的股价已经封进信封不给看。大家只能看最新官方财报，跟神火、天山、中铝、宏桥 4 家同行对比，算清楚：<b>去掉铝价暴涨的周期泡沫，它正常年份一年到底稳赚多少钱、值多少钱一股？</b>"}, {"id": "Y02", "round": "第一轮（R1）· 空头法医亮刺 & 多头立论", "round_plain": "第一轮 · 空头连甩三记重锤戳破暴利假象，多头亮出绿铝与现金堡垒", "topic": "t1", "role": "bear", "time": "00:21", "act": {"cls": "act-attack", "text": "🗡️ 刺 1 · 氧化铝剪刀差"}, "text": "2026前三季归母净利年化高达 <span class=\"num\">154.8亿</span>，但这是借来的红利！云铝 308 万吨铝产能里，自有氧化铝仅 140 万吨，<b>外购敞口高达 <span class=\"num\">467万吨</span>（依存度 78.2%）</b>，且中铝关联采购按市价无补贴。目前氧化铝现货 2,641 元已跌破进口矿成本线（2,900—3,000元），一旦回归 3,050 元中枢，将直接砍掉常态自由盈余 <b><span class=\"num\">-12.45亿/年</span></b>！", "plain": "别被今年年化赚 155 亿冲昏头！云铝用的原料「氧化铝」有近 <b><span class=\"num\">78%</span> 得靠外面买</b>。今年氧化铝价格跌到 2,641 元（卖家都在亏钱卖），原料太便宜才显得云铝暴利！等原料涨回 3,000 元正常成本线，云铝每年利润立马少掉 <b><span class=\"num\">12.5亿</span></b>！", "cites": ["📄 2026半年报 P31", "📄 2026三季报"], "impact": {"text": "对常态自由盈余（steady_oe）冲击：-12.45 亿/年", "plain": "原料涨回正常价，每年少赚 12.5 亿元！"}}, {"id": "Y03", "topic": "t2", "role": "bear", "time": "00:21", "act": {"cls": "act-attack", "text": "🗡️ 刺 2 · 大修吃老本"}, "text": "表观自由现金流（FCF）虚高：2025年资本开支（CapEx）仅 <span class=\"num\">6.41亿</span>（仅覆盖折旧 34.5%），2026年化仅 3.75亿，固定资产净值 5 年缩水 23%！2019—2021年投产的 200 万吨 500kA 电解槽将在 <b>2026—2029年迎来首轮大修潮</b>，常态维持开支必须翻倍抬至 <b><span class=\"num\">13亿元/年</span></b>！", "plain": "第二个坑：云铝这两年账面现金流特别好看，是因为它<b>在吃设备老本、几乎没怎么花钱修厂</b>（去年才花 6.4 亿）！它 2019–2021 年建的大批电解大炉子，马上到 6–8 年大修期了，以后平均每年起码得花 <b><span class=\"num\">12–13亿</span></b> 修设备保产能！", "cites": ["📄 2025年报 固资明细"], "impact": {"text": "常态维持性资本开支（CapEx）须翻倍上修至 12–13 亿/年", "plain": "设备大修潮要来了，每年得多预留一倍维修费！"}}, {"id": "Y04", "topic": "t3", "role": "bear", "time": "00:21", "act": {"cls": "act-attack", "text": "🗡️ 刺 3 · 净现金挤水分"}, "text": "账面广义现金+其他权益工具 240.17亿扣刚性债 20.20亿看似有 220亿净现金，但必须扣除：10月底已派中期分红 30.76亿、少数股东股利 2亿、受限资金 1.17亿、营运底仓 14.89亿、中铝财司存款 90亿打 9 折扣 9亿、旺季超额税薪 8.04亿等 → 空头盲定净现金抵扣 <code>-151.86亿</code>、常态自由盈余 <code>47.5亿</code>、公允 <b><span class=\"num\">20.81元</span></b>！", "plain": "第三个坑：别以为账上躺着 220 亿闲钱都是你的！10 月底刚分掉 30.8 亿现金，还有欠税务和员工的钱、日常周转底金、存在大股东财务公司里要打折的存款……全扣完只剩 <b><span class=\"num\">151.9亿</span></b>！按我算的常态利润 47.5 亿，合理价只值 <b><span class=\"num\">20.81元</span></b>！", "cites": ["📄 2026三季报", "📄 2026半年报 P121"], "impact": {"text": "空头 R1 盲定：公允 20.81元 / 10倍底线 18.07元", "plain": "空头第一轮出价：觉得合理价 20.81 元，底线 18.07 元"}}, {"id": "Y05", "topic": "t0", "role": "bull", "time": "00:23", "act": {"cls": "act-defend", "text": "🐂 多头 R1 · 绿铝印钞机"}, "text": "国家 4,500 万吨电解铝铁顶锁死新增供给，云铝手握 <b>308 万吨纯水电绿铝</b>（连续两年 97%+ 满产、碳排仅为火电铝 1/6、享双 15% 低税盾）。2021—2026前三季累计自由现金流高达 <b><span class=\"num\">447.06亿</span></b>，资产负债率仅 <b><span class=\"num\">15.27%</span></b>（四家同行全在 38%–43%），是全行业唯一净现金堡垒且分红率三级跳至 40% 的龙头！", "plain": "先看硬实力：全国电解铝产能被国家 4,500 万吨铁顶彻底锁死，云铝靠云南水电炼铝，碳排放只有煤电厂的六分之一，还享 15% 超低税率！近五年累计净赚进兜 <b><span class=\"num\">447亿</span></b> 自由现金流，负债率才 <b><span class=\"num\">15%</span></b>（竞争对手全在 40% 左右），还能靠账上现金继续把合资厂少数股权买回来增厚利润！", "cites": ["📄 2026半年报 P76", "📄 四家同行三季报"], "impact": {"text": "全行业负债率最低（15.27%），447亿累计自由现金流验证印钞机本色", "plain": "同行一身债，唯独云铝几乎无债还躺着大把现金！", "pos": true}}, {"id": "Y06", "round": "第二轮（R2）· 跨模型神反转：多头反抓空头两处漏扣，空头精准补刀铝价锚", "round_plain": "第二轮 · 名场面！多头居然帮空头抓出两笔漏扣的钱，空头直呼服气并精准补刀！", "topic": "t3", "role": "bull", "time": "00:26", "replyTo": "Y04", "act": {"cls": "act-defend", "text": "🛡️ 反向抓出空头两处虚增"}, "text": "氧化铝 3,000元与维持开支 12亿我方爽快认领！但空头你算净现金居然比我还宽松——<b>我反手抓出你两处虚增：</b><br>① 查 2026半年报 P87/P121：你按 8 折计入现金的 8.39亿其他权益工具里，<b><span class=\"num\">7.99亿</span> 是无流动性的非上市中铝高端制造股权</b>，必须 100% 剔除！<br>② 查 2026半年报 P46 母公司报表：<b>母公司「其他应付款」高达 <span class=\"num\">165.72亿</span></b>，铁证母公司 96% 现金是合资子公司资金池归集上来的，必须老实扣掉 12.7% 少数股东份额 <b><span class=\"num\">-17.92亿</span></b>！我方严苛算下来净现金只有 <b><span class=\"num\">123.08亿</span></b>（比空头少近 29亿）！", "plain": "原料 3,000 元和 12 亿维修费我爽快认账！但笑死，<b>我这个多头反而帮你抓出你多算了近 29 亿假现金！</b><br>① 你当现金算的那 8 亿股票，其实是没上市卖不掉的关联公司股权，一分都不能当现金！<br>② 翻母公司报表发现，母公司账上躺着的钱其实是把合资子公司的钱归集上来的（欠子公司 165.7 亿），这里面有 <b><span class=\"num\">17.9亿</span> 是合资厂合作伙伴的钱</b>，必须老实扣掉！扣完净现金只剩 <b><span class=\"num\">123.1亿</span></b>！", "cites": ["📄 2026半年报 P46/P87/P121"], "impact": {"text": "多头反手挤出空头漏扣的 28.78 亿水分，展现极致诚实！", "plain": "多头不护短，反手帮空头再挤出近 29 亿现金水分！", "pos": true}}, {"id": "Y07", "topic": "t4", "role": "bear", "time": "00:27", "replyTo": "Y06", "act": {"cls": "act-withdraw", "text": "✅ 核验撤刺 + 补刀铝价与电价"}, "text": "逐行核实 2026半年报原件第 3546 行（中铝高端制造已减值 3.42亿）与第 1838 行（165.72亿资金池）——<b>多头完全正确！我方全额撤回 6.71亿股权现金并补扣少数股东 17.8亿</b>，空头净现金精准收敛至 <b><span class=\"num\">-122.24亿</span></b>（与多头仅差 0.84亿！）。<br>但最后精准补两刀：① 铝价须严守当日现货 22,640 元的 85 折即 <b><span class=\"num\">19,244元/吨</span></b>（多头用 19,600 虚增了 7.69亿利润）；② 三季度是云南丰水期电价最低点，2026年3月电价新政真正大考在 <b>2026冬—2027春枯水期</b>！", "plain": "我亲自去翻了原文行号，<b>多头说得完全对，我服气！</b>立马删掉那笔卖不掉的股权、补扣合伙人的 17.8 亿，咱俩算的净现金现在只差 0.8 亿（<b><span class=\"num\">122.2亿 vs 123.1亿</span></b>）！<br>但我补最后两刀：① 铝价处于高位，按当时规则打 85 折是 <b><span class=\"num\">19,244元/吨</span></b>，你用 19,600 偏乐观了；② 三季度云南下大雨水电最便宜，电价新政真正考验在今年冬天枯水期！", "cites": ["📄 2026半年报 TXT L1838/L3546", "📄 2026-03-01云南电价新政"], "impact": {"text": "净现金分歧收窄至 0.84 亿（0.7%），终极分歧锁定在铝价锚与枯水期电价", "plain": "两人对净现金彻底达成一致，只剩铝价高低和枯水期电价！"}}, {"id": "Y08", "round": "第三轮（R3）· 裁判终审落锤 & 宿主揭盲开箱", "round_plain": "第三轮 · 裁判敲定唯一买点价目表，拆开信封看看今天股价划算吗", "topic": "t5", "role": "judge", "time": "00:33", "act": {"cls": "act-verdict", "text": "⚖️ 物理双盲终审落锤"}, "text": "双方净现金已收敛至仅差 0.84 亿，且一致认可 12.0倍合理倍数。终审正式定标：<br>• 净现金抵扣（ev_delta）= <code>-122.64亿</code> ｜ 达产净现金（扣 55亿收购海鑫/溢鑫现金）= <code>-67.64亿</code><br>• 常态自由盈余（steady_oe）= <code>52.52亿/年</code>（铝 19,250 / 氧化铝 3,000 / 维持开支 12亿）｜ 达产盈余 = <code>59.33亿/年</code><br>• <b>公允中枢 <span class=\"num\">21.71元</span></b>（12倍）｜<b>二档正常建仓 <span class=\"num\">16.50—18.70元</span></b>（上沿卡死 10% 双位数回报）｜<b>一档左侧重锤 <span class=\"num\">≤16.50元</span></b>（直接砸进 15.66—17.05元实体重置成本底盘）｜定级 <b>T1</b>（上限 15%），枯水期电价列为第 1 号证伪路标！", "plain": "太精彩了，两轮交锋已经把所有水分挤得干干净净！我一锤定音：<br>• <b>账上真正多余净现金</b>：<b><span class=\"num\">122.64亿元</span></b>（合每股 3.54 元现金垫底）；<br>• <b>去掉铝价泡沫后每年稳赚</b>：<b><span class=\"num\">52.52亿元</span></b>（收购剩余合资股权后每年稳赚 <b><span class=\"num\">59.33亿元</span></b>，同步把 55 亿收购款从现金里扣掉）；<br>• <b>终审买点</b>：<b>合理价 <span class=\"num\">21.71元</span></b>；跌到 <b><span class=\"num\">16.50—18.70元</span></b> 回报率上 10% 开始分批建仓；跌破 <b><span class=\"num\">16.50元</span></b> 直接跌到重新建厂的砖头成本价，闭眼重锤！", "cites": ["📄 实体重置成本底盘 15.66—17.05元", "📄 10Y国债 1.6%–1.9%"]}, {"id": "Y09", "topic": "t5", "role": "host", "time": "00:35", "act": {"cls": "act-system", "text": "🔓 宿主揭盲开箱"}, "text": "三席在完全不知现价下盲定公允 <b><span class=\"num\">21.71元</span></b>、二档起网线 <b><span class=\"num\">18.70元</span></b>、一档重锤线 <b><span class=\"num\">≤16.50元</span></b>。点击下方按钮拆封 2026-11-24 收盘现价，看看该追还是该等！", "plain": "现在拆开密封信封！看看今天云铝股份的真实股价，到底是已经便宜到可以捡漏，还是还没跌到位需要耐心等？", "isUnblindBox": true}], "clash_cards": [{"topic": "t1", "title": "交锋一：氧化铝现货 2,641 元暴利剪刀差能否外推永续？", "title_plain": "交锋一：今年原料氧化铝特别便宜，赚的暴利能一直持续吗？", "verdictBadge": "🩸 命中死穴（抬至 3,000元）", "bear": "外购氧化铝依存度高达 78.2%（467 万吨），中铝关联采购按市价无补贴；2,641 元已跌穿进口矿成本线，回归 3,050 元将扣减常态盈余 -12.45 亿/年。", "bear_plain": "云铝近 8 成原料靠外买，今年卖家亏本卖才显得云铝暴利，涨回正常价每年少赚 12.5 亿！", "bull": "核对 2026半年报 P31 确认无关联补贴，爽快认账将常态氧化铝成本抬回 3,000 元/吨。", "bull_plain": "翻财报确认没占大股东便宜，我爽快认账，把原料成本抬回 3,000 元正常线！", "rebuttal": "双方在 R2 对氧化铝 3,000 元/吨完全达成一致，彻底挤干周期暴利泡沫。", "rebuttal_plain": "两人直接握手达成共识：绝不把原料便宜出来的暴利当永久利润！", "judge": "【终审落锤】🩸命中死穴！常态氧化铝硬锁 3,000 元/吨（较现货 +359 元），确保盈利经得起原料涨价考验。", "judge_plain": "【裁判落锤】空头说得对！算账时把原料价格按 3,000 元正常线算，宁可算严一点也不留泡沫！"}, {"topic": "t2", "title": "交锋二：2025年资本开支仅 6.41 亿，电解槽大修潮会吃掉多少现金流？", "title_plain": "交锋二：大炉子快到大修期了，以后每年到底要花多少钱修设备？", "verdictBadge": "🩸 命中死穴（翻倍至 12亿）", "bear": "近两年资本开支远低于折旧，固定资产净值缩水 23%，200 万吨 500kA 大槽将在 2026–2029 迎来首轮大修，主张维持开支 13 亿/年。", "bear_plain": "这两年几乎没花钱修厂是在吃老本，大批电解大炉子马上到 6–8 年大修期，以后每年得花 13 亿！", "bull": "反杀同行天山铝业扩张期误比，引年报确认日常修理已进成本，但认领大修周期将维持开支抬至 12 亿/年。", "bull_plain": "平时小修早算进成本里了，但大炉子大修确实要花钱，我认领把维修预算翻倍提到每年 12 亿！", "rebuttal": "空头 R2 核验年报原文后同意 12 亿/年（同时保留折旧大于维修开支的 5.23 亿现金折旧盾，绝不双扣）。", "rebuttal_plain": "空头查完年报同意按每年 12 亿算，两人在维修费上彻底对齐！", "judge": "【终审落锤】🩸命中死穴！维持开支硬锁 12.00 亿元/年（2025 实际值的 1.87 倍），彻底挤干吃老本水分。", "judge_plain": "【裁判落锤】维修预算直接翻倍提到每年 12 亿，绝不拿吃设备老本虚高的现金流骗自己！"}, {"topic": "t3", "title": "交锋三：240 亿广义现金里有多少水分？（多头反向抓出空头两处漏扣）", "title_plain": "交锋三：神反转！账上 240 亿现金，多头反而帮空头抓出两笔假现金！", "verdictBadge": "🛡️ 双向抓虫 · 误差仅 0.84亿", "bear": "R1 扣完分红、受限资金、财司折价和旺季税薪后盲定净现金 151.86 亿，但误把 7.99 亿非上市股权打 8 折计入现金，且未扣母公司资金池里的少数股东份额。", "bear_plain": "空头第一轮挤出了一堆水分，算剩 151.9 亿现金，但漏看了两处暗账！", "bull": "R2 翻出半年报 P46（母公司其他应付款 165.72 亿铁证资金池）与 P87（7.99 亿非上市股权），主动补扣 28.8 亿，将净现金严压至 123.08 亿！", "bull_plain": "多头不护短，翻出母公司报表反手帮空头抓出：8 亿股权卖不掉不能算现金、资金池里还有 17.9 亿是合作伙伴的钱，把净现金压到 123.1 亿！", "rebuttal": "空头 R2 逐行核实原文（TXT L3546 已减值 3.42 亿、L1838 165.72 亿），爽快撤回并补扣，双方收敛至 122.24 vs 123.08 亿！", "rebuttal_plain": "空头查完原文直呼佩服，当场照改，两人算出的真实净现金误差不到 1 亿元！", "judge": "【终审落锤】核定净现金抵扣（ev_delta）= -122.64 亿元（每股净现金 3.54 元），收购海鑫/溢鑫扣 55 亿现金后达产口径 -67.64 亿元。", "judge_plain": "【裁判落锤】扣干全部水分后，云铝账上实打实还有 122.64 亿元纯净现金（相当于每股自带 3.54 元现金红包）！"}, {"topic": "t4", "title": "交锋四：铝价常态锚（19,250 vs 19,600）与云南枯水期电价新政大考", "title_plain": "交锋四：铝价按多少算合理？云南冬天枯水期涨电价怕不怕？", "verdictBadge": "🩸 锁 19,250元 / ⚡ 1号路标", "bear": "铝价须严守当日现货 22,640 的 85 折即 19,244 元/吨（当时高位挤泡沫）；且三季度丰水期电价最低，不能证明 2026 年 3 月电价新政无害，大考在枯水期。", "bear_plain": "现在铝价在高位，必须打 85 折按 19,244 元算；而且夏天雨水多电便宜，电价新政要等冬天枯水期才知道疼不疼！", "bull": "铝价按 19,600 算；三季度毛利率高达 32.4% 展现韧性，且水电绿铝碳溢价 0 元计入已留足远期期权。", "bull_plain": "铝价按 19,600 元已经比现货低一大截了，而且绿色水电铝以后收碳税还值大钱，我们一分都没加进去！", "rebuttal": "空头同意不把枯水期限电叠加进基准（遵守禁绝三重极寒铁律），但要求列为未来半年第 1 号跟踪红线。", "rebuttal_plain": "空头同意别把最惨情况全堆在一起吓自己，但坚持把今年冬天电价列为第一盯盘指标！", "judge": "【终审落锤】基准硬锁铝价 19,250 元/吨（常态盈余 52.52 亿、公允 21.71 元），不叠加限电末日剧本，将枯水期电价列为 1 号证伪路标。", "judge_plain": "【裁判落锤】按更稳妥的 19,250 元铝价算（合理价 21.71 元），冬天枯水期电价盯紧点，但绝不靠末日幻想胡乱杀价！"}], "unblind": {"sealed_title": "🔒 云铝股份实时股价信封（2026-11-24 收盘基准密封）", "sealed_desc": "三席在完全不知道股价下盲定公允 21.71元、二档建仓 16.50—18.70元、一档重锤 ≤16.50元。点击拆封看真实股价！", "sealed_desc_plain": "刚才全程蒙眼算账，敲定合理价 21.71 元、18.70 元以下才划算建仓、16.50 元以下闭眼重锤。点下面按钮看看真实股价！", "header_title": "🔓 宿主揭盲：2026-11-24 收盘价 20.50 元/股（总市值 710.93 亿）", "header_badge": "⏳ 合理偏贵观察区（高出建仓线 +9.6%，克制持币不追买！）", "stats": [{"k": "严苛归母企业价值（True EV）", "v": "588.29 亿", "color": ""}, {"k": "常态 EV/OE（内生回报率）", "v": "11.20倍 (8.93%)", "color": "gold"}, {"k": "达产 Full EV 回报率", "v": "10.84倍 (9.22%)", "color": "gold"}, {"k": "当日现货 MTM 回报率", "v": "22.56%（景气高位参考）", "color": "bull"}, {"k": "距公允 21.71元 折价", "v": "-5.57%（未入建仓区）", "color": "bear"}, {"k": "TTM 股息率 / 除权 PB", "v": "6.18% / 1.82倍", "color": "bull"}], "stats_plain": [{"k": "扣掉多余现金后的净买价", "v": "588.3 亿元", "color": ""}, {"k": "去掉铝价泡沫后的真实回报", "v": "8.93% / 年（还不够香）", "color": "gold"}, {"k": "如果按今天高铝价算的回报", "v": "22.56% / 年（别当常态！）", "color": "bull"}, {"k": "离划算建仓线 18.70元 还差", "v": "偏贵 +9.6%（耐心等回调）", "color": "bear"}, {"k": "过去一年实发股息率", "v": "6.18%（已持仓可安心吃息）", "color": "bull"}, {"k": "高估止盈警戒线", "v": "27.14 元（涨到这里分批卖）", "color": "judge"}], "grid_headers": ["挂单档位", "A股价格区间", "常态 / 达产企业价值回报", "实操仓位纪律（T1 · 上限 15%）"], "grid_headers_plain": ["买点档位", "价格区间", "去掉泡沫后的真实回报", "小白直接照着做的操作指南"], "grid_rows": [["⏳ 当下实时股价", "20.50 元（距二档上沿 +9.6%）", "8.93% / 9.22%（TTM 息 6.18%）", "克制持币不追买；已持仓可吃息持股，严禁加仓"], ["✅ 第二档正常建仓", "16.50 — 18.70 元", "10.0% — 11.7% / 10.2% — 11.8%", "跌破 18.70 起网建 4–5% 底仓，16.5–17.6 加至 9–10%"], ["💎 第一档左侧重锤", "≤ 16.50 元（触重置底盘）", "≥ 11.68% / ≥ 11.76%（息 ≥ 7.67%）", "砸进 15.66—17.05 元建厂重置底盘，重锤至 15% 上限"], ["🔴 1.25倍高估止盈", "≥ 27.14 元（公允 21.71 元）", "≤ 6.42%", "情绪过热，触发宪法 1.25倍分批减仓止盈纪律"]], "grid_rows_plain": [["⏳ 今天真实股价", "20.50 元", "8.9% / 年", "比 18.70 元建仓线还贵近 10%，管住手别追高！已有仓位的安心拿分红"], ["✅ 划算建底仓", "16.50 — 18.70 元", "10.0% — 11.7% / 年", "跌到 18.70 以下回报率破 10%，开始分批建底仓到 10%"], ["💎 闭眼重锤区", "16.50 元及以下", "≥ 11.7% / 年", "跌到重新建厂的砖头成本价了，股息近 8%，闭眼加满到 15%"], ["🔴 太贵了分批卖", "27.14 元及以上", "≤ 6.4% / 年", "比合理价 21.71 元贵出 25%，果断分批落袋为安"]]}};
+const TOPICS = DATA.topics || [];
+const ROLES = DATA.roles || {};
+const MESSAGES = DATA.messages || [];
+const CLASH_CARDS = DATA.clash_cards || [];
+const UNBLIND = DATA.unblind || null;
+const GLOSSARY = DATA.glossary || [];
 
-const ROLES = {
-  host:  { name: '主席 · 宿主 Coordinator', model: '双盲主持', avatar: '🏛️', cls: 'host', side: 'left' },
-  bull:  { name: '多头猎手 · 林奇', model: 'Gemini 4 Neon', avatar: '🐂', cls: 'bull', side: 'left' },
-  bear:  { name: '零信任空头 · 法医', model: 'Claude Opus 5.5', avatar: '🐻', cls: 'bear', side: 'right' },
-  judge: { name: '安全边际裁判 · 马克斯', model: 'Gemini 4 Neon', avatar: '⚖️', cls: 'judge', side: 'left' }
+const COLOR_MAP = {
+  host: 'var(--accent-host)', bull: 'var(--accent-bull)',
+  bear: 'var(--accent-bear)', judge: 'var(--accent-judge)', gold: 'var(--accent-gold)'
 };
 
-const MESSAGES = [
-  // === 序幕 ===
-  {
-    id: 'M01', round: '🎬 序幕 · 物理双盲封箱（0 现价隔离）', topic: 't0', role: 'host', time: '00:16',
-    act: { cls: 'act-system', text: '🔒 双盲封箱' },
-    text: '各位好，云铝股份（<code>000807.SZ</code>）跨模型投委会辩论正式开始！实时股价、总市值与旧排行榜买点已由我<b>物理封存</b>，三席全程零接触。唯一共享客观底座：有效总股本 <span class="num">34.6796 亿股</span>、2026Q3 官方三表与巨潮原版 PDF、当日 SMM 电解铝现货 <span class="num">22,600—22,680 元/吨</span>、氧化铝现货 <span class="num">2,641 元/吨</span>、10 年国债 <span class="num">1.58%</span>。空头 <b>Claude Opus 5.5</b> 实行双重隔离，不看任何多头研报。请 R1 亮剑！'
-  },
-
-  // === R1：多头立论 ===
-  {
-    id: 'M02', round: '⚔️ 第一轮（R1）· 多头立论 vs 空头独立亮刺', topic: 't0', role: 'bull', time: '00:23',
-    act: { cls: 'act-defend', text: '🏛️ 多头支柱 1/3' },
-    text: '我先亮底牌！云铝手握全国 4,500 万吨产能红线封印下的 <span class="num">308 万吨</span>纯水电绿铝牌照，26H1 年化产量 <span class="num">324.3 万吨</span>（连续两年 <span class="num">97%+</span> 满产），铝水就地合金化超 <span class="num">90%</span> 省掉重熔费。更硬的是 8 大主力子公司同时享高新+西部大开发<b>双 15% 税盾</b>，有效税率稳锁 <span class="num">15.59%</span>；至于碳溢价和 CBAM，我常态模型一分钱不提前算，全当 0 元免费期权！',
-    cites: ['📄 2026H1 P14 产能实绩', '📄 2026H1 P76 双15%税盾']
-  },
-  {
-    id: 'M03', topic: 't0', role: 'bull', time: '00:23',
-    act: { cls: 'act-defend', text: '🏛️ 多头支柱 2/3' },
-    text: '再看资产负债表，云铝在全行业是<b>断层第一的印钞机</b>：2021—2026Q3 累计 OCF <span class="num">492.57 亿</span>，同期 CapEx 才 <span class="num">45.51 亿</span>，沉淀 <span class="num">447.06 亿</span>真自由现金流！26Q3 资产负债率仅 <span class="num">15.27%</span>、短债归零，是五大铝企里唯一表观净现金超 200 亿且财务费用翻负（<span class="num">-0.19 亿</span>）的玩家。',
-    table: {
-      headers: ['同报告期同行 (26Q3)', '负债率', '刚性有息债', '表观净现金'],
-      rows: [
-        ['云铝股份', '15.27%', '20.20亿', '+211.58亿'],
-        ['神火股份', '40.79%', '121.22亿', '+27.30亿'],
-        ['天山铝业', '38.17%', '92.71亿', '-35.68亿 (净债)'],
-        ['中国铝业', '42.70%', '590.28亿', '-26.43亿 (净债)'],
-        ['中国宏桥 (26H1)', '40.49%', '685.26亿', '-134.63亿 (净债)']
-      ]
-    }
-  },
-  {
-    id: 'M04', topic: 't0', role: 'bull', time: '00:23',
-    act: { cls: 'act-defend', text: '🏛️ 多头支柱 3/3 + R1盲定' },
-    text: '第三根支柱是资本配置已经兑现：去年底花 <span class="num">22.67 亿</span>（单吨仅 1.47 万）收回涌鑫/润鑫/泓鑫少数股权后，少数股东损益占比从 <span class="num">17.60%</span> 骤降至 <span class="num">12.71%</span>，分红率也三级跳到 <span class="num">40.04%</span>；体外海鑫 25% + 溢鑫 40.03%（约 35.5 万吨权益产能）还能拿账面现金继续收回。我按铝 <span class="num">19,800</span> / 氧化铝 <span class="num">2,950</span> / 维持 CapEx <span class="num">11 亿</span>算出：<b>steady_oe = <span class="num">63.21 亿</span></b>、<b>ev_delta = <span class="num">-120.83 亿</span></b>，给 12x 盲定公允 <b><span class="num">25.36 元/股</span></b>！请 @空头 亮刺！',
-    cites: ['📄 2026H1 P112-113 重要非全资子公司', '🐍 Python R1 验算']
-  },
-
-  // === R1：空头亮刺（拆成逐刺短气泡）===
-  {
-    id: 'M05', topic: 't1', role: 'bear', time: '00:21',
-    act: { cls: 'act-attack', text: '🗡️ 刺 1 · 氧化铝剪刀差' },
-    text: '别被 26Q1-Q3 年化 <span class="num">154.8 亿</span>归母净利冲昏头！我拆了底账：25H1 到 26H1 营收涨 59 亿、成本反降 11.4 亿，暴利一半靠铝价、一半靠<b>氧化铝崩盘</b>。云铝 308 万吨铝只配 140 万吨氧化铝，外购约 <span class="num">467 万吨</span>（依存度 <span class="num">78.2%</span>），第一大供应商中铝集团采购 <span class="num">232.5 亿</span>（占 46.5%）全是按市价买！',
-    cites: ['📄 2025AR 前五大供应商', '📊 氧化铝每涨100元 → 归母-3.04亿']
-  },
-  {
-    id: 'M06', topic: 't1', role: 'bear', time: '00:21',
-    replyTo: 'M05',
-    act: { cls: 'act-attack', text: '🗡️ 刺 1 · 定量砍刀' },
-    text: '现在氧化铝现货 <span class="num">2,641 元/吨</span>已经砸穿进口矿氧化铝厂的完全成本线（<span class="num">2,900—3,000</span>），高成本产能减产后价格必回归！常态按剔除 24 年暴涨后的跨周期中枢 <span class="num">3,050 元/吨</span>算，比现货贵 409 元 → <b>steady_oe 精确扣减 <span class="num">-12.45 亿</span></b>！@多头 你模型里氧化铝到底给的多少？关联采购定价原文呢？',
-    impact: { text: '对 steady_oe 冲击：-12.45 亿', pos: false }
-  },
-  {
-    id: 'M07', topic: 't2', role: 'bear', time: '00:21',
-    replyTo: 'M03',
-    act: { cls: 'act-attack', text: '🗡️ 刺 2 · 维持CapEx吃老本' },
-    text: '多头吹 5 年只花 45 亿 CapEx 是印钞机，我却看到<b>吃老本</b>！2025 年折旧摊销 <span class="num">18.60 亿</span>，CapEx 仅 <span class="num">6.41 亿</span>（覆盖率 34.5%）；2026 年化更是掉到 <span class="num">3.75 亿</span>（覆盖 21%），结果产能没变，固定资产净值从 251.5 亿缩水到 192.5 亿（<span class="num">-23%</span>）！',
-    cites: ['📄 2021-2026Q3 资产负债表对比']
-  },
-  {
-    id: 'M08', topic: 't2', role: 'bear', time: '00:21',
-    replyTo: 'M07',
-    act: { cls: 'act-attack', text: '🗡️ 刺 2 · 大修窗口逼近' },
-    text: '海鑫、溢鑫、淯鑫、文山这批 200 万吨电解槽是 2019—2021 年投产的，正好在 <b>2026—2029 年进入首轮大修窗口</b>，叠加 13,300 度能效技改，隔壁天山铝业（140 万吨）年 CapEx 都 12.8—15.3 亿。我主张维持 CapEx 取 <span class="num">13 亿</span>（只把无形资产摊销差额加回，绝不双扣），比表观 4 亿口径多扣归母 <b><span class="num">-7.86 亿</span></b>！',
-    impact: { text: '对 steady_oe 冲击：-7.86 亿', pos: false }
-  },
-  {
-    id: 'M09', topic: 't3', role: 'bear', time: '00:21',
-    act: { cls: 'act-attack', text: '🗡️ 刺 3 · 净现金大挤水' },
-    text: '再拆账面净现金！粗算货币 <span class="num">193.71</span> + 理财 <span class="num">38.07</span> + 其他权益工具 <span class="num">8.39</span> − 有息债 <span class="num">20.20</span> = 219.97 亿。但你必须硬扣 8 笔钱：期后 10/30 要派的中期分红 <span class="num">30.76 亿</span>（Q3 账面还没付！）、少数股东应付股利 <span class="num">2.00 亿</span>、受限金 <span class="num">1.17 亿</span>、营运底仓 <span class="num">14.89 亿</span>、中铝财司按 90 亿上限打 9 折（<span class="num">-9.0 亿</span>）、旺季超额应交税费和薪酬 <span class="num">8.04 亿</span>、预计负债长薪 <span class="num">0.57 亿</span>、其他权益工具打 8 折（<span class="num">-1.68 亿</span>）！',
-    cites: ['📄 2026Q3 应付股利仅2.00亿', '📄 2026H1 财司存款61.41亿']
-  },
-  {
-    id: 'M10', topic: 't3', role: 'bear', time: '00:21',
-    replyTo: 'M09',
-    act: { cls: 'act-withdraw', text: '💡 主动排雷 + 空头R1盲定' },
-    text: '对了，我主动撤回“少数股东分现金”这根伪刺——我查到 H1 母公司单体货币资金 120.65 亿占合并 96%，说明钱都在母公司手里，不扣了。合计扣减 68.1 亿后我算得 <b>ev_delta = <span class="num">-151.86 亿</span></b>。加上铝价按现货 85 折 <span class="num">19,244</span>，我空头独立盲定：<b>steady_oe = <span class="num">47.5 亿</span></b>（收股达产 53.7 亿但必须同步扣 48.7 亿收购现金，严禁现金双算！），12x 中枢 <b><span class="num">20.81 元</span></b>、10x 底线 <b><span class="num">18.07 元</span></b>。',
-    impact: { text: '空头 R1 净现金：-151.86 亿（埋下反转伏笔）', pos: true }
-  },
-  {
-    id: 'M11', topic: 't5', role: 'bear', time: '00:21',
-    act: { cls: 'act-attack', text: '❓ 质询 · 云南枯水与同业竞争' },
-    text: '最后补两记质询请 @多头 正面作答：① 2023 年云南枯水限电让销量掉了 16.6%，且 2026-03-01 起云南取消固定分时电价、枯水期电价上浮，你怎么处理？（我拒绝三重极寒没压进基准，放尾部风险）；② 中铝集团既是第一大供应商（46.5%）又是第一大客户（32.2%），同业竞争承诺时间表在哪？',
-    cites: ['❓ 6条硬核质询已送达多头']
-  },
-
-  // === R2：多头逐刺反杀与反向抓虫 ===
-  {
-    id: 'M12', round: '🔥 第二轮（R2）· 多头逐刺反杀＋反向抓虫 vs 空头逐行核验＋精准补刀', topic: 't1', role: 'bull', time: '00:26',
-    replyTo: 'M06',
-    act: { cls: 'act-concede', text: '🩸 认领刺 1 · 对齐 3,000' },
-    text: '先向 @空头 致敬！把你参数代入我模型，咱俩底层引擎误差才 1.59 亿（3%），而且公允倍数都收敛在 <b>12.0x</b>！回应刺 1：我查了 <b>2026H1 附注第 31 页</b>，向中铝国贸（58.16 亿）和中铝物资（34.16 亿）采购确实白纸黑字写着<b>「公允定价 / 市场价格」</b>，没有内部补贴。我 R1 从没拿 2,641 现货当常态（当时给了 2,950），现在认同你的进口矿成本线，直接上调对齐至 <b><span class="num">3,000 元/吨</span></b>！',
-    cites: ['📄 2026H1 P31 重大关联交易'],
-    impact: { text: '常态氧化铝共识：3,000 元/吨', pos: false }
-  },
-  {
-    id: 'M13', topic: 't2', role: 'bull', time: '00:26',
-    replyTo: 'M08',
-    act: { cls: 'act-defend', text: '🛡️ 反杀天山误比 + 🩸认领12亿' },
-    text: '回应刺 2 分两层：第一，<b>🛡️ 反杀你拿天山铝业做类比</b>——天山在建工程高达 18.8—43.4 亿是在建印尼矿、氧化铝和电池铝箔，属扩张期；云铝在建工程才 3.1—4.7 亿！而且 <b>2025 年报第 98 页</b>写明不符合资本化的日常修理直接费用化进当期成本，房屋折旧和产能指标摊销也不需等额再投。',
-    cites: ['📄 天山铝业在建工程43.4亿', '📄 2025AR P98 固定资产后续支出']
-  },
-  {
-    id: 'M14', topic: 't2', role: 'bull', time: '00:26',
-    replyTo: 'M08',
-    act: { cls: 'act-concede', text: '🩸 认领大修周期 → 12亿' },
-    text: '第二，我<b>坦诚认领</b> 2026—2029 年 500kA 大槽首轮大修和能效技改确实高于近两年实际 6.4 亿的 CapEx，所以我把维持 CapEx 从 11 亿主动提到 <b><span class="num">12.00 亿元/年</span></b>（是 2025 实际值的 1.87 倍），归母折旧盾收窄至 <span class="num">+5.22 亿</span>！',
-    impact: { text: '维持 CapEx 共识：12.00 亿元/年', pos: false }
-  },
-  {
-    id: 'M15', topic: 't3', role: 'bull', time: '00:26',
-    replyTo: 'M09',
-    act: { cls: 'act-defend', text: '🛡️ 惊天反转 · 反抓空头虚增 1' },
-    text: '精彩来了！@空头 @裁判 你们重点核验刺 3——我认领你补扣预计负债/长薪 <span class="num">0.57 亿</span>并把财司折价提到 <span class="num">8 亿</span>、营运底仓取 <span class="num">20 亿</span>；<b>但我反而抓出你空头自己多算了两笔假现金！</b>第一笔：你把其他权益工具 <span class="num">8.39 亿</span>打 8 折（+6.71 亿）算进净现金，但 <b>2026H1 第 87/121 页</b>明写着其中 <span class="num">7.99 亿</span>是对<b>非上市企业“中铝高端制造”的第三层次战略股权</b>，根本变不了现，必须 100% 剔除！',
-    cites: ['📄 2026H1 P87 & P121 其他权益工具'],
-    impact: { text: '多头反杀剔除：-6.71 亿假现金', pos: false }
-  },
-  {
-    id: 'M16', topic: 't3', role: 'bull', time: '00:26',
-    replyTo: 'M10',
-    act: { cls: 'act-defend', text: '🛡️ 惊天反转 · 反抓空头虚增 2' },
-    text: '第二笔更狠！你刚才看母公司单体货币资金占 96%，就大方撤回了少数股东现金份额？快翻 <b>2026H1 第 46 页母公司资产负债表</b>！母公司单体<b>「其他应付款」高达 <span class="num">165.72 亿元</span></b>（合并报表才 8.47 亿）！这 157 亿就是子公司资金池归集到母公司的欠款，海鑫 25%、溢鑫 40.03% 少数股东全都有份！就算我是多头，也必须老实按 12.71% 扣掉 <span class="num">-17.92 亿</span>！所以我算出的 <b>ev_delta = <span class="num">-123.08 亿</span></b>，比你空头（-151.86 亿）反而严苛了 <b><span class="num">28.78 亿</span></b>！',
-    cites: ['📄 2026H1 P46 母公司其他应付款165.72亿'],
-    impact: { text: '多头主动硬扣少数股东份额：-17.92 亿', pos: false }
-  },
-  {
-    id: 'M17', topic: 't5', role: 'bull', time: '00:26',
-    replyTo: 'M11',
-    act: { cls: 'act-defend', text: '🛡️ 回应电价新政与同业承诺' },
-    text: '答你最后两问：① 云南 2026-03-01 取消固定分时电价已覆盖 26H1 和 Q3，结果云铝 H1 吨铝成本反从 15,488 降到 14,704 元，<b>Q3 单季毛利率还升到 <span class="num">32.44%</span></b>（高于 H1 的 31.84%），说明光伏直流直连+柔性调节稳住了电价；② <b>2025 年报第 36 页</b>白纸黑字写着中国铝业承诺在 <b><span class="num">2028 年 12 月 31 日前</span></b>解决同业竞争。',
-    cites: ['📄 2025AR P17 柔性调节', '📄 2025AR P36 同业竞争延期函']
-  },
-  {
-    id: 'M18', topic: 't4', role: 'bull', time: '00:26',
-    act: { cls: 'act-concede', text: '📐 多头 R2 修正报价' },
-    text: '综合以上认领，我把铝价锚从 19,800 温和下修到 <b><span class="num">19,600 元/吨</span></b>（落在 85 折参考带 19,200—19,900 正中，且比无战乱的 2025 年均价 20,650 还低 1,050 元）。修正后：<b>ev_delta = <span class="num">-123.08 亿</span></b>（收股扣 55 亿后 -68.08 亿）、<b>steady_oe = <span class="num">57.03 亿</span></b>（达产 64.57 亿）、12x 公允 <b><span class="num">23.28 元/股</span></b>。请 @空头 核验！'
-  },
-
-  // === R2：空头核验撤回与两记精准补刀 ===
-  {
-    id: 'M19', topic: 't3', role: 'bear', time: '00:27',
-    replyTo: 'M15',
-    act: { cls: 'act-withdraw', text: '🔄 核实 TXT 撤回假现金' },
-    text: '服气！我立刻回巨潮原文 TXT 逐行核验了你说的两处：<b>26H1 TXT 第 3546 行</b>白纸黑字写着中铝高端制造 7.99 亿是非上市三层次股权，<b>而且今年上半年已经减值了 <span class="num">3.42 亿</span></b>！我 R1 按 8 折计入的 +6.71 亿<b>全额撤回</b>！',
-    cites: ['📄 26H1 TXT L3546 实锤减值3.42亿']
-  },
-  {
-    id: 'M20', topic: 't3', role: 'bear', time: '00:27',
-    replyTo: 'M16',
-    act: { cls: 'act-concede', text: '🔄 认领 165.72 亿资金池！' },
-    text: '再查 <b>26H1 TXT 第 1838 行</b>，母公司其他应付款确实从年初 90.99 亿飙到 <b><span class="num">165.72 亿</span></b>，实锤子公司资金池归集！我 R1 撤回少数股东扣项是错的，现在<b>正式认领并扣减 <span class="num">-17.80 亿</span></b>！同时接受氧化铝 3,000、维持 CapEx 12 亿、营运底仓 20 亿。重算后我空头 <b>ev_delta = <span class="num">-122.24 亿</span></b>——咱俩净现金误差只剩 <b><span class="num">0.84 亿</span></b>，彻底对齐！',
-    cites: ['📄 26H1 TXT L1838', '📄 25AR TXT L4632 / L2380'],
-    impact: { text: '多空净现金误差收敛至 0.84 亿！', pos: true }
-  },
-  {
-    id: 'M21', topic: 't4', role: 'bear', time: '00:27',
-    replyTo: 'M18',
-    act: { cls: 'act-attack', text: '⚡ 补刀 1 · 抓出铝价锚漂移！' },
-    text: '前面全对齐了，但我要补<b>最致命的一刀</b>！@多头 你拿 <span class="num">19,600</span> 当铝价锚，这是偷换概念！铁律是“<b>当日现货 85 折</b>”：今天 SMM A00 现货 <span class="num">22,600—22,680</span>（中值 22,640）× 0.85 = <b><span class="num">19,244 元/吨</span></b>。你给的 19,600 实际是 86.6 折，多出来这 356 元/吨按同一套模型直接让<b>归母 OE 虚增 <span class="num">+7.69 亿</span></b>（19,600 算 57.50 亿 vs 19,244 算 49.87 亿）！双方 100% 的分歧就锁在这根锚上！',
-    impact: { text: '铝价锚漂移导致 OE 虚增：+7.69 亿', pos: false }
-  },
-  {
-    id: 'M22', topic: 't5', role: 'bear', time: '00:27',
-    replyTo: 'M17',
-    act: { cls: 'act-attack', text: '⚡ 补刀 2 · 戳破丰水期幻觉' },
-    text: '顺带戳破你电价反杀的<b>季节性谬误</b>：你拿 Q3 单季毛利率 <span class="num">32.44%</span> 证明 3 月电价新政无害，可 <b>7—9 月是云南丰水期，一年里电价最便宜！</b>取消固定分时电价的真正大考是 <b>2026 年 11 月—2027 年 4 月枯水期</b>！我恪守纪律不把它压进基准（拒绝三重极寒），但请 @裁判 把它列为<b>第一号证伪路标</b>！',
-    cites: ['📌 空头 R2 终极盲定：steady_oe 49.87亿 / 12x 20.78元 / 10x 17.91元']
-  },
-
-  // === R3：裁判落锤 ===
-  {
-    id: 'M23', round: '⚖️ 第三轮（R3）· 安全边际裁判二元裁决与物理双盲落锤', topic: 't6', role: 'judge', time: '00:33',
-    act: { cls: 'act-verdict', text: '⚖️ 裁判开锤 · 二元裁决' },
-    text: '教科书级两轮交锋！多空底层模型误差缩到 3% 以内、净现金误差只剩 0.84 亿、公允倍数共识锁定 <b>12.0x</b>。我已独立复核全部纯官方底稿并用双锚 Python 验算，现在拒绝和稀泥，逐条宣判<b>非黑即白二元裁决</b>：',
-    table: {
-      headers: ['争点 / 刺', '二元裁决', '定量落地'],
-      rows: [
-        ['刺1 · 氧化铝回归', '🩸 命中死穴', '硬锁 3,000 元/吨（+359 元）'],
-        ['刺2 · 维持CapEx', '🩸 命中死穴', '硬锁 12.00 亿/年（保留+5.23亿折旧盾）'],
-        ['刺3主 · 净现金穿透', '🩸 命中死穴', '挤水109亿 → ev_delta = -122.64亿'],
-        ['刺3子 · 其他权益工具', '🛡️ 证据反杀', '多头反杀成功，剔除7.99亿非上市减值股'],
-        ['补刀1 · 铝价85折锚', '🩸 命中死穴', '严守22,640×0.85 → 硬锁 19,250 元/吨'],
-        ['补刀2 · 云南枯水电价', '🛡️ 转1号路标', '守铁闸二禁三重极寒，紧盯26Q4-27Q1']
-      ]
-    }
-  },
-  {
-    id: 'M24', topic: 't4', role: 'judge', time: '00:33',
-    replyTo: 'M21',
-    act: { cls: 'act-verdict', text: '⚖️ 铝价双锚闭环精算' },
-    text: '针对唯一剩余分歧（铝价标尺），我判<b>空头补刀成立</b>，严守 85 折铁律锁死 <span class="num">19,250 元/吨</span> + 氧化铝 <span class="num">3,000 元/吨</span> + 维持 CapEx <span class="num">12.00 亿</span>。双底座交叉验算：从 2025 审计底座反推归母 OE = <span class="num">50.65 亿</span>，从 2026Q1-Q3 效率底座反推 = <span class="num">54.39 亿</span>，取均衡中枢锁定 <b>steady_oe = <span class="num">52.52 亿元</span></b>（极寒底线仍有 <span class="num">+20.95 亿</span>正向印钞，当日现货 MTM 高达 <span class="num">132.71 亿</span>）。',
-    cites: ['🐍 双锚误差闭环校验', '⚖️ 达产收股 full_oe = 59.33 亿（同步扣 55 亿现金）']
-  },
-  {
-    id: 'M25', topic: 't6', role: 'judge', time: '00:33',
-    act: { cls: 'act-verdict', text: '🎯 物理双盲唯一终审坐标' },
-    text: '锚定 10 年国债 <span class="num">1.58%</span>，采纳双方共识 <b>12.00x EV/steady_oe</b>（对应 8.33% 跨周期无杠杆回报，风险溢价 +660 bps，且未透支一分钱碳溢价），并交叉核验 268.8 万吨权益产能重置底盘（<span class="num">15.66—17.05 元/股</span>），落锤终审坐标：<br>• <b>⚖️ 盲定公允中枢：<span class="num">21.71 元/股</span></b>（12.00x EV/OE）<br>• <b>🟢 第二档正常建仓：<span class="num">16.50 — 18.70 元/股</span></b>（上沿卡死 10.0% 常态 EV 回报）<br>• <b>🎯 第一档左侧重锤：<span class="num">≤ 16.50 元/股</span></b>（直接砸进重置底盘，闭眼重锤）<br>• <b>🏆 定级：<span class="num">T1</span></b>（核心绿色资源现金牛，宪法单一标的仓位上限 <span class="num">15%</span>）。<br>终审结案！请 <b>@主席 揭盲对照现价</b>！'
-  },
-
-  // === 宿主揭盲 ===
-  {
-    id: 'M26', round: '🔓 第四步 · 宿主拆封现价（0 偏见揭盲对照与实战挂单网）', topic: 't6', role: 'host', time: '00:35',
-    replyTo: 'M25',
-    act: { cls: 'act-system', text: '🔓 宿主揭盲开箱' },
-    text: '感谢三席近乎完美的零现价盲审！现在由我拆开第 0 步物理封存的实时行情信封，看看市场先生当前到底报了个什么价——',
-    isUnblindBox: true
-  }
-];
-
-// 议题对质矩阵数据（视图二：一一对应卡片）
-const CLASH_CARDS = [
-  {
-    topic: 't1', title: '🧪 争点 1：氧化铝 78% 外购敞口与剪刀差可持续性', verdictBadge: '🩸 命中死穴',
-    bear: '308 万吨铝仅配 140 万吨氧化铝，外购 467 万吨（78.2%），中铝采购按市价无补贴；现货 2,641 跌破进口矿完全成本 2,900—3,000，常态应抬回 3,050（砍 OE -12.45 亿）。',
-    bull: '26H1 P31 确认关联采购按公允市价；我方从未拿 2,641 当常态（R1 给 2,950），坦诚认领进口矿成本线，主动上修对齐至 3,000 元/吨。',
-    rebuttal: '空头 R2 接受 3,000 元/吨（本就落在成本曲线内），双方彻底达成一致。',
-    judge: '⚖️ 终审硬锁 <b>3,000 元/吨</b>（较现货 +359 元/吨），坚决拒绝把上游过剩低谷外推为永续盈利。'
-  },
-  {
-    topic: 't2', title: '🔧 争点 2：维持性 CapEx 真实中枢 vs 2026-2029 电解槽大修潮', verdictBadge: '🩸 命中死穴',
-    bear: '25 年 CapEx 6.41 亿仅覆盖折旧 34.5%，固资净值缩水 23%；200 万吨槽进入大修窗口且天山铝业年花 13-15 亿，主张维持 CapEx 13 亿（砍 OE -7.86 亿）。',
-    bull: '🛡️ 反杀天山类比（天山在建 43 亿属扩张期）并引 25AR P98 证明日常修理已进成本；但 🩸 认领 500kA 大槽首轮大修与能效技改，主动将维持 CapEx 提至 12.00 亿/年。',
-    rebuttal: '空头核实 25AR TXT L4632 确认费用化政策，接受 12.00 亿（仍为实际 CapEx 的 1.87 倍）。',
-    judge: '⚖️ 终审硬锁 <b>12.00 亿元/年</b>，同时保留房屋与产能指标折旧盾 <b>+5.23 亿</b>，严守铁闸一绝不双扣。'
-  },
-  {
-    topic: 't3', title: '💰 争点 3：表观 211 亿净现金穿透（多头反向抓出空头两处漏扣！）', verdictBadge: '🩸主刺命中 / 🛡️子刺反杀',
-    bear: 'R1 扣分红 30.76、受限 1.17、底仓 14.89、财司 9.0、超额税薪 8.04 等得 -151.86 亿；但把其他权益工具 8.39 亿按 8 折算现金，且因母公司占 96% 现金撤回了少数股东份额。',
-    bull: '🩸 认领税薪/预计负债/财司折价；但 🛡️ 反向抓出两处硬伤：① 26H1 P87/121 证 7.99 亿为非上市关联方股权无流动性；② 26H1 P46 母公司其他应付款高达 165.72 亿系子公司资金池，必须硬扣少数股东份额 -17.92 亿！',
-    rebuttal: '空头查 26H1 TXT L3546（已减值 3.42 亿）与 L1838 后大方全额撤回假现金并认领 -17.80 亿扣减，双方 ev_delta 误差缩至 0.84 亿！',
-    judge: '⚖️ 终审锁定 <b>ev_delta = -122.64 亿元</b>（挤干 109.14 亿水分）；收股达产口径同步扣 55 亿现金得 <b>full_ev_delta = -67.64 亿</b>，杜绝双算。'
-  },
-  {
-    topic: 't4', title: '📏 争点 4：电解铝新常态标尺漂移（19,600 vs 19,250 元/吨）', verdictBadge: '🩸 命中死穴',
-    bear: 'R2 精准补刀：铁律是当日现货 85 折（22,640×0.85 = 19,244），多头 19,600 实为 86.6 折，多出的 356 元/吨让归母 OE 虚增 +7.69 亿！',
-    bull: '主张 19,600 落在 85 折参考带（19,200—19,900）正中，且已较无战乱的 2025 均价 20,650 低 1,050 元，对应 steady_oe 57.03 亿。',
-    rebuttal: '空头坚持按同模型锁 19,244，对应 steady_oe 49.87 亿，这是双方收敛后的唯一核心分歧。',
-    judge: '⚖️ 终审支持空头严守当日现货 85 折铁律，硬锁 <b>19,250 元/吨</b>，双锚校验（25 年底座 50.65 亿 & 26Q1-Q3 底座 54.39 亿）落锤 <b>steady_oe = 52.52 亿</b>。'
-  },
-  {
-    topic: 't5', title: '⚡ 争点 5：云南 2026-03-01 电价新政与枯水期限电风险', verdictBadge: '🛡️ 转列 1 号证伪路标',
-    bear: '2023 年枯水限电曾使销量少 16.6%；戳破多头拿 Q3 毛利率 32.44% 反杀的季节性谬误（7-9 月属丰水期电价最低），真正考验在 26.11—27.04 枯水期。',
-    bull: '2026-03-01 取消固定分时电价已覆盖 H1/Q3，吨铝成本反降至 14,704 元，且近两年凭借风光并网与柔性调节连续 97%+ 满产。',
-    rebuttal: '空头自律不将此项压进基准（拒绝三重极寒），建议列为第一核心证伪路标。',
-    judge: '⚖️ 恪守<b>铁闸二（禁绝多重悲观叠 buff）</b>，基准已同时压铝价/抬氧化铝/翻倍 CapEx，不再叠限电剧本，升级为 <b>1 号证伪路标</b>紧盯 26Q4-27Q1 实测电价与开工率。'
-  }
-];
-
-// ========================
-// 2. 状态与渲染逻辑
-// ========================
 let currentTopic = 'all';
 let currentRole = 'all';
-let currentView = 'chat';
+let currentMode = DATA.default_mode || 'plain';
 let isUnblinded = false;
 
+function getText(obj, proKey, plainKey) {
+  if (currentMode === 'plain' && obj && obj[plainKey]) return obj[plainKey];
+  return (obj && obj[proKey]) || '';
+}
+
+function linkifyTerms(htmlStr) {
+  if (!htmlStr || !GLOSSARY.length) return htmlStr;
+  // Highlight known abbreviations/keywords safely outside HTML tags
+  const rules = [];
+  GLOSSARY.forEach(g => {
+    const keys = (g.match || [g.key]).filter(k => k && k.length >= 2);
+    keys.forEach(k => rules.push({ k, key: g.key, tip: g.term + '：' + g.plain }));
+  });
+  rules.sort((a, b) => b.k.length - a.k.length);
+  const parts = htmlStr.split(/(<[^>]+>)/g);
+  for (let i = 0; i < parts.length; i += 2) {
+    let seg = parts[i];
+    if (!seg) continue;
+    const replaced = new Set();
+    for (const r of rules) {
+      if (replaced.has(r.key)) continue;
+      const esc = r.k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp(esc);
+      if (re.test(seg)) {
+        const safeTip = r.tip.replace(/"/g, '&quot;');
+        seg = seg.replace(re, `<span class="term-link" title="${safeTip}" onclick="jumpToTerm('${r.key}')">$&</span>`);
+        replaced.add(r.key);
+      }
+    }
+    parts[i] = seg;
+  }
+  return parts.join('');
+}
+
+function renderModeUI() {
+  const bp = document.getElementById('btnModePlain');
+  const bpro = document.getElementById('btnModePro');
+  bp.className = 'mode-btn' + (currentMode === 'plain' ? ' active-plain' : '');
+  bpro.className = 'mode-btn' + (currentMode === 'pro' ? ' active-pro' : '');
+  const tip = document.getElementById('stageTip');
+  if (currentMode === 'plain') {
+    tip.innerHTML = `<span class="mode-pill-banner plain">🐣 当前：小白大白话版</span> 零生僻英文缩写，像听投资老友开会一样秒懂！想看精确公式可随时点顶部切 <b>🎓 专业硬核版</b>，点虚线词秒查右侧词典。`;
+  } else {
+    tip.innerHTML = `<span class="mode-pill-banner pro">🎓 当前：专业硬核版</span> 保留完整财报科目、附注页码与 DCF/EV 算式（所有缩写已注中文）。点击气泡顶部<b>「↩ 引用原话」</b>直跳定位，点击虚线词秒查右侧词典！`;
+  }
+}
+
+function switchMode(mode) {
+  currentMode = mode;
+  renderModeUI();
+  renderConvergence();
+  renderChat();
+  renderMatrix();
+}
+
+function renderRoster() {
+  const keys = Object.keys(ROLES);
+  const el = document.getElementById('rosterStrip');
+  el.innerHTML = `<span style="font-size:11.5px;color:var(--text-muted);font-weight:700;">群成员筛选：</span>`
+    + `<span class="member-chip ${currentRole==='all'?'selected':''}" data-role="all" onclick="filterRole('all')">👥 全部 (${keys.length})</span>`
+    + keys.map(k => {
+        const r = ROLES[k];
+        return `<span class="member-chip ${currentRole===k?'selected':''}" data-role="${k}" onclick="filterRole('${k}')"><i class="dot dot-${r.cls}"></i>${r.avatar} ${r.name} (${r.model})</span>`;
+      }).join('');
+}
+
+function renderConvergence() {
+  const el = document.getElementById('convList');
+  el.innerHTML = (DATA.convergence || []).map(item => {
+    const lbl = (currentMode === 'plain' && item.label_plain) ? item.label_plain : item.label;
+    const val = (currentMode === 'plain' && item.value_plain) ? item.value_plain : item.value;
+    return `<div class="conv-row"><span class="conv-label">${lbl}</span><span class="conv-val" style="color:${COLOR_MAP[item.color]||'var(--text-primary)'};">${val}</span></div>`;
+  }).join('');
+}
+
 function renderTopics() {
-  const el = document.getElementById('topicList');
-  el.innerHTML = TOPICS.map(t => {
+  document.getElementById('topicList').innerHTML = TOPICS.map(t => {
     const cnt = t.id === 'all' ? MESSAGES.length : MESSAGES.filter(m => m.topic === t.id).length;
-    const active = currentTopic === t.id ? 'active' : '';
-    return `<button class="topic-btn ${active}" onclick="filterTopic('${t.id}')">
-      <span>${t.icon} ${t.name}</span>
+    return `<button class="topic-btn ${currentTopic===t.id?'active':''}" onclick="filterTopic('${t.id}')">
+      <span>${t.icon||''} ${t.name}</span>
       <span style="display:flex;align-items:center;gap:4px;">
         ${t.badge ? `<span class="topic-status">${t.badge}</span>` : ''}
         <span class="topic-count">${cnt}</span>
@@ -742,249 +441,191 @@ function renderTopics() {
   }).join('');
 }
 
+function renderGlossary() {
+  const q = (document.getElementById('glossarySearch').value || '').trim().toLowerCase();
+  const list = GLOSSARY.filter(g =>
+    !q || (g.term + ' ' + g.key + ' ' + g.plain + ' ' + (g.usage||'')).toLowerCase().includes(q)
+  );
+  document.getElementById('glossaryList').innerHTML = list.map(g => `
+    <div class="g-card" id="term-${g.key}">
+      <div class="g-term">📘 ${g.term}</div>
+      <div class="g-plain">${g.plain}</div>
+      ${g.usage ? `<div class="g-usage">🎯 实战用法：${g.usage}</div>` : ''}
+    </div>
+  `).join('') || `<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:16px;">未找到匹配术语</div>`;
+}
+
+function toggleGlossary() {
+  const layout = document.getElementById('mainLayout');
+  const side = document.getElementById('glossarySidebar');
+  if (window.innerWidth <= 1200) {
+    side.classList.toggle('drawer-open');
+  } else {
+    layout.classList.toggle('hide-glossary');
+  }
+}
+
+function jumpToTerm(key) {
+  const layout = document.getElementById('mainLayout');
+  const side = document.getElementById('glossarySidebar');
+  if (window.innerWidth <= 1200) {
+    side.classList.add('drawer-open');
+  } else {
+    layout.classList.remove('hide-glossary');
+  }
+  const search = document.getElementById('glossarySearch');
+  if (search && search.value) { search.value = ''; renderGlossary(); }
+  const card = document.getElementById('term-' + key);
+  if (card) {
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.remove('flash-term');
+    void card.offsetWidth;
+    card.classList.add('flash-term');
+    setTimeout(() => card.classList.remove('flash-term'), 2400);
+  }
+}
+
 function buildUnblindHTML() {
-  return `
-  <div class="unblind-box" id="unblindBox">
-    <div class="unblind-sealed" id="unblindSealed" style="display:${isUnblinded ? 'none' : 'block'};">
-      <div style="font-size:15px;font-weight:800;margin-bottom:6px;">🔒 实时股价信封已封存（2026-11-24 收盘基准）</div>
-      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:12px;">
-        以上全部 25 条群聊交锋与 <b>21.71 / 16.50—18.70 元</b> 坐标均在 <b>0 现价泄露</b> 下独立推演完成。点击下方按钮体验 0 偏见宿主揭盲！
-      </div>
+  if (!UNBLIND) return '';
+  const statsArr = (currentMode === 'plain' && UNBLIND.stats_plain) ? UNBLIND.stats_plain : (UNBLIND.stats || []);
+  const statsHtml = statsArr.map(s =>
+    `<div class="stat-card"><div class="stat-k">${s.k}</div><div class="stat-v" style="color:${COLOR_MAP[s.color]||'var(--text-primary)'};">${s.v}</div></div>`
+  ).join('');
+  const hdrs = (currentMode === 'plain' && UNBLIND.grid_headers_plain) ? UNBLIND.grid_headers_plain : UNBLIND.grid_headers;
+  const rows = (currentMode === 'plain' && UNBLIND.grid_rows_plain) ? UNBLIND.grid_rows_plain : UNBLIND.grid_rows;
+  const tblHtml = (hdrs && rows)
+    ? `<table class="mini-table" style="margin-top:10px;"><thead><tr>${hdrs.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`
+      + rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')
+      + `</tbody></table>` : '';
+  return `<div class="unblind-box">
+    <div class="unblind-sealed" id="unblindSealed" style="display:${isUnblinded?'none':'block'};">
+      <div style="font-size:15px;font-weight:800;margin-bottom:6px;">${UNBLIND.sealed_title||'🔒 实时股价信封已封存'}</div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:12px;">${getText(UNBLIND, 'sealed_desc', 'sealed_desc_plain')}</div>
       <button class="btn btn-gold" onclick="doUnblind()" style="padding:8px 18px;font-size:13.5px;">🔓 拆封现价 · 揭盲对照挂单网</button>
     </div>
-    <div class="unblind-content ${isUnblinded ? 'open' : ''}" id="unblindContent">
+    <div class="unblind-content ${isUnblinded?'open':''}" id="unblindContent">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
-        <span style="font-weight:800;font-size:15px;color:var(--accent-gold);">🔓 宿主揭盲结果：2026-11-24 收盘价 20.50 元/股（总市值 710.93 亿）</span>
-        <span class="act-tag act-concede">⏳ 合理偏贵观察区（未入击球区）</span>
+        <span style="font-weight:800;font-size:15px;color:var(--accent-gold);">${UNBLIND.header_title||''}</span>
+        ${UNBLIND.header_badge ? `<span class="act-tag act-concede">${UNBLIND.header_badge}</span>` : ''}
       </div>
-      <div class="grid-cards">
-        <div class="stat-card"><div class="stat-k">严苛归母 True EV</div><div class="stat-v">588.29 亿</div></div>
-        <div class="stat-card"><div class="stat-k">常态内生回报 (EV/OE)</div><div class="stat-v" style="color:var(--accent-host);">8.93% (11.20x)</div></div>
-        <div class="stat-card"><div class="stat-k">达产回报 (扣55亿现金)</div><div class="stat-v" style="color:var(--accent-bull);">9.22% (10.84x)</div></div>
-        <div class="stat-card"><div class="stat-k">距盲定公允 21.71 元</div><div class="stat-v" style="color:var(--accent-gold);">-5.57%</div></div>
-        <div class="stat-card"><div class="stat-k">高出建仓上沿 18.70 元</div><div class="stat-v" style="color:var(--accent-bear);">+9.63%</div></div>
-        <div class="stat-card"><div class="stat-k">现价 TTM 股息 / 除权PB</div><div class="stat-v">6.18% / 1.82x</div></div>
-      </div>
-      <table class="mini-table" style="margin-top:10px;">
-        <thead><tr><th>挂单档位</th><th>价格区间</th><th>常态 EV 回报</th><th>实操仓位纪律（T1 上限 15%）</th></tr></thead>
-        <tbody>
-          <tr><td><b>⏳ 当前观察区</b></td><td><b>&gt; 18.70 元（现价 20.50）</b></td><td>&lt; 10.0%（现 8.93%）</td><td>克制持币不追买；已有底仓可安心吃 6.18% 息</td></tr>
-          <tr><td><b>🟢 二档上半区</b></td><td><b>17.60 — 18.70 元</b></td><td>10.0% — 10.8%</td><td>破双位数回报起网建底仓 <b>4% — 5%</b></td></tr>
-          <tr><td><b>🟢 二档下半区</b></td><td><b>16.50 — 17.60 元</b></td><td>10.8% — 11.7%</td><td>分批加仓至 <b>9% — 10%</b></td></tr>
-          <tr><td><b>🎯 一档重锤区</b></td><td><b>≤ 16.50 元</b></td><td>≥ 11.68% (除权PB≤1.47x)</td><td>砸进 15.66—17.05 重置底盘，重锤封顶 <b>12%—15%</b></td></tr>
-          <tr><td><b>🔴 1.25× 止盈线</b></td><td><b>≥ 27.14 元</b></td><td>≤ 6.42%</td><td>触发组合经理高估减仓与高切低换马</td></tr>
-        </tbody>
-      </table>
+      <div class="grid-cards">${statsHtml}</div>
+      ${tblHtml}
     </div>
   </div>`;
 }
 
 function renderChat() {
   const container = document.getElementById('chatView');
-  const filtered = MESSAGES.filter(m => {
-    const matchTopic = currentTopic === 'all' || m.topic === currentTopic;
-    const matchRole = currentRole === 'all' || m.role === currentRole;
-    return matchTopic && matchRole;
-  });
-
-  document.getElementById('msgCounter').textContent = `当前显示 ${filtered.length} / ${MESSAGES.length} 条群聊消息`;
-
-  let html = '';
-  let lastRound = '';
-
+  const filtered = MESSAGES.filter(m =>
+    (currentTopic === 'all' || m.topic === currentTopic) &&
+    (currentRole === 'all' || m.role === currentRole)
+  );
+  document.getElementById('msgCounter').textContent = `当前显示 ${filtered.length} / ${MESSAGES.length} 条发言`;
+  let out = '', lastRound = '';
   filtered.forEach(m => {
-    if (m.round && m.round !== lastRound && currentTopic === 'all' && currentRole === 'all') {
-      html += `<div class="round-divider"><span class="round-pill">${m.round}</span></div>`;
-      lastRound = m.round;
+    const rTitle = getText(m, 'round', 'round_plain');
+    if (rTitle && rTitle !== lastRound && currentTopic === 'all' && currentRole === 'all') {
+      out += `<div class="round-divider"><span class="round-pill">${rTitle}</span></div>`;
+      lastRound = rTitle;
     }
-    const r = ROLES[m.role];
-    const sideCls = r.side === 'right' ? 'side-right' : '';
+    const r = ROLES[m.role] || { name: m.role, model: '', avatar: '💬', cls: 'host', side: 'left' };
     const tObj = TOPICS.find(t => t.id === m.topic);
-
-    // 微信引用条
     let quoteHtml = '';
     if (m.replyTo) {
       const target = MESSAGES.find(x => x.id === m.replyTo);
       if (target) {
-        const tr = ROLES[target.role];
-        const plain = target.text.replace(/<[^>]+>/g, '');
-        const snippet = plain.length > 54 ? plain.slice(0, 54) + '…' : plain;
-        quoteHtml = `
-          <div class="quote-box" onclick="jumpToMsg('${target.id}')" title="点击跳转并高亮定位被反驳的原发言">
-            <div class="quote-head">
-              <span>↩ 回复 ${tr.avatar} ${tr.name} (${target.id})</span>
-              <span class="quote-jump">定位原话 ↗</span>
-            </div>
-            <div>${snippet}</div>
-          </div>`;
+        const tr = ROLES[target.role] || { avatar: '', name: target.role };
+        const plain = getText(target, 'text', 'plain').replace(/<[^>]+>/g, '');
+        const snippet = plain.length > 56 ? plain.slice(0, 56) + '…' : plain;
+        quoteHtml = `<div class="quote-box" onclick="jumpToMsg('${target.id}')"><div class="quote-head"><span>↩ 回复 ${tr.avatar} ${tr.name} (${target.id})</span><span class="quote-jump">定位原话 ↗</span></div><div>${snippet}</div></div>`;
       }
     }
-
-    // 迷你表格
+    const tblObj = (currentMode === 'plain' && m.table_plain) ? m.table_plain : m.table;
     let tableHtml = '';
-    if (m.table) {
-      tableHtml = `<table class="mini-table"><thead><tr>${m.table.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>`
-        + m.table.rows.map(row => `<tr>${row.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')
-        + `</tbody></table>`;
+    if (tblObj) {
+      tableHtml = `<table class="mini-table"><thead><tr>${tblObj.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`
+        + tblObj.rows.map(row=>`<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('') + `</tbody></table>`;
     }
-
-    // 附注标签 & 财务冲击标签
     let citesHtml = '';
     if ((m.cites && m.cites.length) || m.impact) {
+      const impText = m.impact ? getText(m.impact, 'text', 'plain') : '';
       citesHtml = `<div class="cite-row">`
         + (m.cites || []).map(c => `<span class="cite-chip">${c}</span>`).join('')
-        + (m.impact ? `<span class="impact-chip ${m.impact.pos ? 'pos' : ''}">${m.impact.text}</span>` : '')
+        + (m.impact ? `<span class="impact-chip ${m.impact.pos?'pos':''}">${impText}</span>` : '')
         + `</div>`;
     }
-
-    html += `
-      <div class="msg-row ${sideCls}" id="msg-${m.id}">
-        <div class="avatar av-${r.cls}">${r.avatar}</div>
-        <div class="msg-body-wrap">
-          <div class="msg-meta">
-            <span class="sender-name">${r.name}</span>
-            <span class="model-tag">${r.model}</span>
-            <span class="act-tag ${m.act.cls}">${m.act.text}</span>
-            <span class="topic-tag-mini" onclick="filterTopic('${m.topic}')" title="只看此议题">${tObj ? tObj.icon + ' ' + tObj.name.split('·')[0].trim() : ''}</span>
-            <span class="msg-id">${m.id} · ${m.time}</span>
-          </div>
-          <div class="bubble bubble-${r.cls}" id="bubble-${m.id}">
-            ${quoteHtml}
-            <div>${m.text}</div>
-            ${tableHtml}
-            ${m.isUnblindBox ? buildUnblindHTML() : ''}
-            ${citesHtml}
-          </div>
+    const bodyHtml = linkifyTerms(getText(m, 'text', 'plain'));
+    out += `<div class="msg-row ${r.side==='right'?'side-right':''}" id="msg-${m.id}">
+      <div class="avatar av-${r.cls}">${r.avatar}</div>
+      <div class="msg-body-wrap">
+        <div class="msg-meta">
+          <span class="sender-name">${r.name}</span>
+          <span class="model-tag">${r.model}</span>
+          ${m.act ? `<span class="act-tag ${m.act.cls}">${m.act.text}</span>` : ''}
+          ${tObj ? `<span class="topic-tag-mini" onclick="filterTopic('${m.topic}')">${tObj.icon||''} ${tObj.name.split('·')[0].trim()}</span>` : ''}
+          <span class="msg-id">${m.id} · ${m.time||''}</span>
         </div>
-      </div>`;
+        <div class="bubble bubble-${r.cls}" id="bubble-${m.id}">
+          ${quoteHtml}<div>${bodyHtml}</div>${tableHtml}${m.isUnblindBox?buildUnblindHTML():''}${citesHtml}
+        </div>
+      </div>
+    </div>`;
   });
-
-  if (!filtered.length) {
-    html = `<div style="text-align:center;padding:48px 16px;color:var(--text-muted);">当前筛选条件下暂无发言，请点击左侧「重置」查看全部对话。</div>`;
-  }
-  container.innerHTML = html;
+  container.innerHTML = out || `<div style="text-align:center;padding:48px 16px;color:var(--text-muted);">当前筛选条件下暂无发言。</div>`;
 }
 
 function renderMatrix() {
   const el = document.getElementById('matrixView');
-  const cards = currentTopic === 'all' || currentTopic === 't0' || currentTopic === 't6'
-    ? CLASH_CARDS
-    : CLASH_CARDS.filter(c => c.topic === currentTopic);
-
-  el.innerHTML = cards.map(c => `
-    <div class="clash-card">
-      <div class="clash-header">
-        <span class="clash-title">${c.title}</span>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <span class="act-tag act-verdict">${c.verdictBadge}</span>
-          <button class="btn" style="padding:3px 9px;font-size:11.5px;" onclick="viewTopicInChat('${c.topic}')">💬 回群聊看原话</button>
-        </div>
+  const cards = (currentTopic === 'all' || !CLASH_CARDS.some(c => c.topic === currentTopic))
+    ? CLASH_CARDS : CLASH_CARDS.filter(c => c.topic === currentTopic);
+  el.innerHTML = cards.map(c => `<div class="clash-card">
+    <div class="clash-header">
+      <span class="clash-title">${getText(c, 'title', 'title_plain')}</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="act-tag act-verdict">${c.verdictBadge}</span>
+        <button class="btn" style="padding:3px 9px;font-size:11.5px;" onclick="viewTopicInChat('${c.topic}')">💬 回群聊看原话</button>
       </div>
-      <div class="clash-grid">
-        <div class="clash-col">
-          <div class="clash-col-head" style="color:var(--accent-bear);">🐻 空头亮刺 (Claude Opus 5.5)</div>
-          <div>${c.bear}</div>
-        </div>
-        <div class="clash-col">
-          <div class="clash-col-head" style="color:var(--accent-bull);">🐂 多头反杀/认领 (Gemini 4 Neon)</div>
-          <div>${c.bull}</div>
-        </div>
-        <div class="clash-col">
-          <div class="clash-col-head" style="color:var(--accent-host);">🔄 R2 核验补刀 / 撤回</div>
-          <div>${c.rebuttal}</div>
-        </div>
-      </div>
-      <div class="clash-verdict">${c.judge}</div>
     </div>
-  `).join('');
+    <div class="clash-grid">
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-bear);">🐻 空头亮刺</div><div>${linkifyTerms(getText(c, 'bear', 'bear_plain'))}</div></div>
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-bull);">🐂 多头反杀/认领</div><div>${linkifyTerms(getText(c, 'bull', 'bull_plain'))}</div></div>
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-host);">🔄 核验补刀 / 撤回</div><div>${linkifyTerms(getText(c, 'rebuttal', 'rebuttal_plain'))}</div></div>
+    </div>
+    <div class="clash-verdict">${linkifyTerms(getText(c, 'judge', 'judge_plain'))}</div>
+  </div>`).join('');
 }
 
-function filterTopic(tid) {
-  currentTopic = tid;
-  renderTopics();
-  renderChat();
-  renderMatrix();
-}
-
-function filterRole(role) {
-  currentRole = role;
-  document.querySelectorAll('.member-chip').forEach(el => {
-    el.classList.toggle('selected', el.dataset.role === role);
-  });
-  renderChat();
-}
-
+function filterTopic(tid) { currentTopic = tid; renderTopics(); renderChat(); renderMatrix(); }
+function filterRole(role) { currentRole = role; renderRoster(); renderChat(); }
 function switchView(v) {
-  currentView = v;
   document.getElementById('btnChatView').classList.toggle('active', v === 'chat');
   document.getElementById('btnMatrixView').classList.toggle('active', v === 'matrix');
   document.getElementById('chatView').classList.toggle('hidden', v !== 'chat');
   document.getElementById('matrixView').classList.toggle('active', v === 'matrix');
 }
-
-function viewTopicInChat(tid) {
-  switchView('chat');
-  currentRole = 'all';
-  document.querySelectorAll('.member-chip').forEach(el => el.classList.toggle('selected', el.dataset.role === 'all'));
-  filterTopic(tid);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
+function viewTopicInChat(tid) { switchView('chat'); filterRole('all'); filterTopic(tid); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 function jumpToMsg(id) {
   let target = document.getElementById('msg-' + id);
-  if (!target) {
-    // 若当前被筛选隐藏，自动切回全部并定位
-    currentTopic = 'all';
-    currentRole = 'all';
-    document.querySelectorAll('.member-chip').forEach(el => el.classList.toggle('selected', el.dataset.role === 'all'));
-    renderTopics();
-    renderChat();
-    target = document.getElementById('msg-' + id);
-  }
+  if (!target) { currentTopic = 'all'; currentRole = 'all'; renderRoster(); renderTopics(); renderChat(); target = document.getElementById('msg-' + id); }
   if (target) {
     target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     const b = document.getElementById('bubble-' + id);
-    if (b) {
-      b.classList.remove('flash-highlight');
-      void b.offsetWidth;
-      b.classList.add('flash-highlight');
-      setTimeout(() => b.classList.remove('flash-highlight'), 2200);
-    }
+    if (b) { b.classList.remove('flash-highlight'); void b.offsetWidth; b.classList.add('flash-highlight'); setTimeout(() => b.classList.remove('flash-highlight'), 2200); }
   }
 }
-
-function doUnblind() {
-  isUnblinded = true;
-  const s = document.getElementById('unblindSealed');
-  const c = document.getElementById('unblindContent');
-  if (s) s.style.display = 'none';
-  if (c) c.classList.add('open');
-}
-
+function doUnblind() { isUnblinded = true; const s = document.getElementById('unblindSealed'), c = document.getElementById('unblindContent'); if (s) s.style.display = 'none'; if (c) c.classList.add('open'); }
 function jumpAndUnblind() {
-  switchView('chat');
-  isUnblinded = true;
-  if (currentTopic !== 'all' && currentTopic !== 't6') {
-    currentTopic = 'all';
-    renderTopics();
-  }
-  currentRole = 'all';
-  document.querySelectorAll('.member-chip').forEach(el => el.classList.toggle('selected', el.dataset.role === 'all'));
-  renderChat();
-  setTimeout(() => jumpToMsg('M26'), 60);
+  switchView('chat'); isUnblinded = true; currentTopic = 'all'; currentRole = 'all';
+  renderRoster(); renderTopics(); renderChat();
+  const ub = MESSAGES.find(m => m.isUnblindBox);
+  if (ub) setTimeout(() => jumpToMsg(ub.id), 60);
 }
-
 function toggleTheme() {
-  const html = document.documentElement;
-  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  document.getElementById('btnTheme').textContent = next === 'dark' ? '☀️ 浅色' : '🌙 深色';
+  const h = document.documentElement, n = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  h.setAttribute('data-theme', n); document.getElementById('btnTheme').textContent = n === 'dark' ? '☀️ 浅色' : '🌙 深色';
 }
 
-// 初始化
-renderTopics();
-renderChat();
-renderMatrix();
+renderModeUI(); renderRoster(); renderConvergence(); renderTopics(); renderGlossary(); renderChat(); renderMatrix();
 </script>
 </body>
 </html>
