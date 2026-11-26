@@ -201,6 +201,323 @@ svg { max-width: 100%; height: auto; display: block; }
 .gloss-plain { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; }
 .gloss-use { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
 </style>
+<style>
+/* ====== 全文专业术语下划线与点击弹窗引擎 (agy-glossary) ====== */
+.agy-term {
+  border-bottom: 1.5px dotted var(--agy-term-line, #2563eb);
+  padding-bottom: 0.5px;
+  cursor: help;
+  border-radius: 2px;
+  transition: background-color 0.14s ease, color 0.14s ease, border-bottom-color 0.14s ease;
+  text-decoration: none;
+}
+.agy-term[data-cat="化工产品"], .agy-term[data-cat="行业产品"] { --agy-term-line: #0d9488; }
+.agy-term[data-cat="工艺设备"] { --agy-term-line: #4f46e5; }
+.agy-term[data-cat="财务会计"] { --agy-term-line: #2563eb; }
+.agy-term[data-cat="估值周期"] { --agy-term-line: #d97706; }
+.agy-term[data-cat="贸易政策"] { --agy-term-line: #e11d48; }
+.agy-term:hover, .agy-term.agy-term-active {
+  background-color: rgba(37, 99, 235, 0.11);
+  border-bottom-style: solid;
+}
+code .agy-term {
+  border-bottom-color: #be123c;
+}
+body.agy-glossary-off .agy-term {
+  border-bottom-color: transparent !important;
+  cursor: inherit;
+  background-color: transparent !important;
+}
+body.theme-dark .agy-term, html.theme-dark .agy-term {
+  --agy-term-line: #60a5fa;
+}
+body.theme-dark .agy-term[data-cat="化工产品"], body.theme-dark .agy-term[data-cat="行业产品"] { --agy-term-line: #2dd4bf; }
+body.theme-dark .agy-term[data-cat="工艺设备"] { --agy-term-line: #818cf8; }
+body.theme-dark .agy-term[data-cat="估值周期"] { --agy-term-line: #fbbf24; }
+body.theme-dark .agy-term[data-cat="贸易政策"] { --agy-term-line: #fb7185; }
+body.theme-dark .agy-term:hover, body.theme-dark .agy-term.agy-term-active {
+  background-color: rgba(96, 165, 250, 0.22);
+}
+
+#agy-term-popover {
+  position: fixed;
+  z-index: 99999;
+  display: none;
+  width: min(370px, calc(100vw - 24px));
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.22), 0 2px 8px rgba(15, 23, 42, 0.08);
+  padding: 13px 15px 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 13.5px;
+  line-height: 1.62;
+  animation: agyPopIn 0.14s ease-out;
+}
+@keyframes agyPopIn {
+  from { opacity: 0; transform: translateY(4px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+body.theme-dark #agy-term-popover, html.theme-dark #agy-term-popover {
+  background: #1e293b;
+  color: #f1f5f9;
+  border-color: #475569;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55);
+}
+#agy-term-popover .tp-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #e2e8f0;
+}
+body.theme-dark #agy-term-popover .tp-head { border-bottom-color: #334155; }
+#agy-term-popover .tp-title-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+#agy-term-popover .tp-term {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
+body.theme-dark #agy-term-popover .tp-term { color: #f8fafc; }
+#agy-term-popover .tp-cat {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+#agy-term-popover .tp-cat[data-cat="化工产品"], #agy-term-popover .tp-cat[data-cat="行业产品"] { background: #ccfbf1; color: #0f766e; }
+#agy-term-popover .tp-cat[data-cat="工艺设备"] { background: #e0e7ff; color: #4338ca; }
+#agy-term-popover .tp-cat[data-cat="估值周期"] { background: #fef3c7; color: #b45309; }
+#agy-term-popover .tp-cat[data-cat="贸易政策"] { background: #ffe4e6; color: #be123c; }
+#agy-term-popover .tp-close {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+#agy-term-popover .tp-close:hover { color: #0f172a; }
+body.theme-dark #agy-term-popover .tp-close:hover { color: #f8fafc; }
+#agy-term-popover .tp-plain {
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+body.theme-dark #agy-term-popover .tp-plain { color: #e2e8f0; }
+#agy-term-popover .tp-ctx {
+  background: #f8fafc;
+  border-left: 3px solid #2563eb;
+  padding: 6px 9px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: #334155;
+  margin-bottom: 8px;
+}
+body.theme-dark #agy-term-popover .tp-ctx {
+  background: #0f172a;
+  color: #cbd5e1;
+  border-left-color: #38bdf8;
+}
+#agy-term-popover .tp-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #64748b;
+}
+#agy-term-popover .tp-drawer-link {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#agy-term-popover .tp-drawer-link:hover { background: #dbeafe; }
+
+#agy-term-fab {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 99980;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.90);
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 999px;
+  padding: 5px 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.28);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+#agy-term-fab button {
+  background: transparent;
+  color: #e2e8f0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#agy-term-fab button:hover {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+}
+#agy-term-fab .fab-sep {
+  width: 1px;
+  height: 14px;
+  background: #334155;
+}
+
+#agy-term-drawer-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.42);
+  z-index: 99990;
+  display: none;
+}
+#agy-term-drawer-mask.open { display: block; }
+#agy-term-drawer {
+  position: fixed;
+  top: 0;
+  right: -440px;
+  width: min(420px, 92vw);
+  height: 100vh;
+  background: #ffffff;
+  color: #0f172a;
+  z-index: 99995;
+  box-shadow: -10px 0 32px rgba(15, 23, 42, 0.25);
+  transition: right 0.22s ease;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+#agy-term-drawer.open { right: 0; }
+body.theme-dark #agy-term-drawer { background: #0f172a; color: #f1f5f9; }
+#agy-term-drawer .td-head {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#agy-term-drawer .td-tools {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+body.theme-dark #agy-term-drawer .td-tools { border-bottom-color: #334155; }
+#agy-term-drawer .td-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+}
+body.theme-dark #agy-term-drawer .td-search {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #475569;
+}
+#agy-term-drawer .td-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#agy-term-drawer .td-cat-btn {
+  padding: 3px 8px;
+  font-size: 11.5px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  cursor: pointer;
+}
+#agy-term-drawer .td-cat-btn.active {
+  background: #1e3a8a;
+  color: #ffffff;
+  border-color: #1e3a8a;
+}
+#agy-term-drawer .td-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 14px 24px;
+}
+#agy-term-drawer .td-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  padding: 10px 12px;
+  margin-bottom: 9px;
+  background: #ffffff;
+}
+body.theme-dark #agy-term-drawer .td-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+#agy-term-drawer .td-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+#agy-term-drawer .td-card-term {
+  font-weight: 800;
+  font-size: 14px;
+}
+#agy-term-drawer .td-card-meta {
+  font-size: 11px;
+  color: #64748b;
+}
+#agy-term-drawer .td-card-plain {
+  font-size: 12.8px;
+  line-height: 1.58;
+  color: #334155;
+}
+body.theme-dark #agy-term-drawer .td-card-plain { color: #cbd5e1; }
+#agy-term-drawer .td-card-ctx {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #1d4ed8;
+}
+body.theme-dark #agy-term-drawer .td-card-ctx { color: #7dd3fc; }
+
+@media print {
+  .agy-term {
+    border-bottom: none !important;
+    background: transparent !important;
+  }
+  #agy-term-popover, #agy-term-fab, #agy-term-drawer, #agy-term-drawer-mask {
+    display: none !important;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -223,7 +540,7 @@ svg { max-width: 100%; height: auto; display: block; }
           <button class="mode-btn active" data-mode="plain">🐣 小白版</button>
           <button class="mode-btn" data-mode="pro">🎓 专业版</button>
         </div>
-        <button id="openGlossary" class="glossary-btn">📖 术语词典 (8)</button>
+        <button id="openGlossary" class="glossary-btn">📖 术语词典 (190)</button>
       </div>
     </div>
     <nav class="tabbar">
@@ -920,7 +1237,7 @@ svg { max-width: 100%; height: auto; display: block; }
 </aside>
 
 <script>
-const APP = {"facts": {"schema_version": "2.0", "archetype": "cyclical_commodity", "company": "盐湖股份", "code": "000792.SZ", "primary_code": "sz000792", "currency_unit": "元", "sector": "钾肥与盐湖提锂（基础化工/有色资源）", "macro_factor": "新能源锂周期 + 全球钾肥供需/农产品周期 + 国内10年期国债利率", "tier": "T2", "position_cap_pct": 15, "fin_period": "2026Q3", "updated_at": "2026-11-26", "active_preset": "v5.0_v4_blind", "one_liner": "依托察尔汗与一里坪全球最左端盐湖资源构建“国产65%+钾肥压舱石 + 归母6.97万吨低成本盐湖提锂”双印钞机，资本开支过峰后现金流极厚，但须严防五矿财司关联存款沉淀、母公司补亏前零分红及涉镁纪律风险。", "one_liner_plain": "守着青海两大聚宝盆盐湖，晒卤水同时挖出全国三分之二的国产钾肥和全球成本最低档的碳酸锂，新工厂建完后每年躺收几十亿真现金；缺点是大半现金存在大股东财务公司利息低，历史旧亏还没填平暂时分不了红，得等股价跌进便宜区间再下手。", "market": {"shares_yi": 52.9157, "price": 22.12, "price_date": "2026-11-26", "week52_low": 20.84, "week52_high": 41.6}, "h_market": null, "balance_sheet": {"cash": 401.23, "trading_financial_assets": 0.05, "restricted_cash": 1.45, "minority_div_payable": 11.56, "finance_co_deposit": 205.17, "post_period_parent_div": 0.0, "parent_rigid_debt": 35.1, "liquid_equity_investments_net": 6.3, "parent_equity_ratio": 0.9018, "parent_profit_ratio": 0.8542, "debt_ratio_pct": 13.47}, "dividends": {"ttm_dps": 0.0, "ttm_breakdown": "母公司2026年上半年未分配利润-40.16亿元暂锁死现金分红（拟以15—20亿元注销式回购替代）", "steady_payout_ratio": 0.5}, "pb_history": {"reported_bvps": 9.56, "ex_div_bvps": 9.56, "pb_6y_floor": 1.7, "pb_2y_floor": 1.7, "pb_5y_range": "1.70倍 — 14.22倍"}, "drivers": [{"id": "li_price", "label": "电池级碳酸锂含税常态价", "unit": "万元/吨", "min": 6.0, "max": 14.0, "step": 0.05, "anchor": 8.25, "current": 8.25, "decimals": 2, "np_sensitivity_per_unit": 4.639, "hint": "期现取严锚定8.25万（紧贴90分位成本8.0万，严禁打85折）；每变动1万元/吨，稳态归母净利变动±4.64亿元"}, {"id": "kcl_price", "label": "氯化钾含税到站常态价", "unit": "元/吨", "min": 2000, "max": 3300, "step": 10, "anchor": 2580, "current": 2580, "decimals": 0, "np_sensitivity_per_unit": 0.03458, "hint": "港口高库存与老挝扩产下温和挤泡沫至2,580元；每变动100元/吨，稳态归母净利变动±3.46亿元"}, {"id": "li_vol_wan", "label": "归母权益锂盐年销量", "unit": "万吨", "min": 5.5, "max": 7.2, "step": 0.05, "anchor": 6.6, "current": 6.6, "decimals": 2, "np_sensitivity_per_unit": 3.57, "hint": "严格按71.17%归母权益口径切割（稳态6.60万/满血6.97万吨）；每增减1万吨，归母净利变动约±3.57亿元"}], "operations": {"anchor_parent_net_profit": 57.27, "hist_5y_peak_bridged_np": 73.1, "maint_capex": 13.5, "dep_annual": 12.57, "capex_slider_min": 8.0, "capex_slider_max": 22.0, "capex_hint": "合并维持资本开支 13.5亿（含溶矿补水/采盐船更新/膜与吸附剂大修13.0亿 + 15年对比10年折旧拉齐补差0.5亿）", "stress_scenarios": [{"id": "bull", "name": "实时现货 Mark-to-Market 情景", "plain_name": "按今日即期现货价算的赚钱力", "driver_summary": "碳酸锂8.60万/吨 + 氯化钾2,850元/吨", "driver_overrides": {"li_price": 8.6, "kcl_price": 2850, "li_vol_wan": 6.6}, "note": "仅作即期景气参照，不把高库存现货溢价当永续常态"}, {"id": "steady", "name": "★ 跨周期常态主锚（方案B锁死）", "plain_name": "正常年份稳健赚钱力（估值基准）", "driver_summary": "锂8.25万 + 钾2,580元（随滑块实时联动）", "driver_overrides": {}, "note": "期现取严 × 成本曲线三段式，已剔除现金利息与DTA噪音"}, {"id": "bear", "name": "边际成本极寒底线压测", "plain_name": "锂钾双杀跌穿成本线时的保底赚钱力", "driver_summary": "碳酸锂6.50万/吨 + 氯化钾2,150元/吨", "driver_overrides": {"li_price": 6.5, "kcl_price": 2150, "li_vol_wan": 6.6}, "note": "全行业大面积亏损出清时仍录得32亿+自由盈余，绝不失血"}]}, "sotp_blocks": [{"id": "net_cash", "kind": "net_cash", "name": "积木① 审慎归母超额净现金与可售金融资产", "plain": "401.28亿广义现金（含货币345.28+交易金融0.05+1年内大额存单41.27+1年以上定存14.68）依次扣减受限1.45亿、应付股利11.56亿、21天营运底仓14.56亿、五矿财司205.17亿×30%治理折价61.55亿、少数股东9.82%份额30.66亿，再全额扣除归母刚性债与承诺35.10亿（显性有息债含租赁15.94+长期应付款采矿权分期13.34+其他应付款矿业权出让收益2.17+矿山环境预计负债0.65+涉镁中试承诺出资3.00），加回可售金融资产6.30亿×50%折价3.15亿，净得249.55亿元（4.72元/股）。", "default_on": true, "color": "#059669"}, {"id": "core_biz", "kind": "core_perpetuity", "name": "积木② 察尔汗钾肥 + 全球最左端盐湖提锂现金牛主业", "plain": "归母474.31万吨稳态氯化钾（国产65%+份额压舱石）叠加归母6.60万吨稳态锂盐（单吨营业成本仅2.37万元，含母公司100%持股4万吨项目+蓝科51.42%+五矿盐湖51%），按跨周期稳态自由盈余 55.02亿/年与永续要求回报率折现。", "default_on": true, "color": "#1e3a8a"}, {"id": "full_ramp", "kind": "buyout_net", "name": "积木③ 现有产能满产满销增量弹性（零新增资本开支）", "plain": "4万吨全资项目与五矿盐湖对价已全额付清，同价格锚下现有产能满产满销（锂权益至6.97万吨、钾权益至515.3万吨）可额外增厚稳态自由盈余 +2.68亿元/年（不含沉锂母液萃取技改+1.10亿）。", "default_on": false, "color": "#0284c7"}, {"id": "free_cushion", "kind": "fixed_yi", "value_yi": 9.88, "name": "积木④ 参股股权与物业冗余安全垫 + 原卤提锂免费期权", "plain": "未计入现金桥的长期股权投资4.90亿元与成本法投资性房地产4.98亿元（合计9.88亿元），外加察尔汗原卤直提与母液萃取技术迭代免费期权；盐湖比亚迪僵尸项目、固态电池、金属镁及海外远期钾矿一律计零。", "default_on": false, "color": "#7c3aed"}], "floor_benchmark": {"kind": "replacement", "label": "盐湖重置铁底", "operating_assets_floor_yi": 350.0, "note": "归母审慎净现金249.55亿元 + 察尔汗500万吨钾肥盐田与6.97万吨权益盐湖提锂保守物理重置底盘350亿元（远高于账面经营净资产256.50亿元）"}, "presets": {"v5.0_v4_blind": {"version": "v5.0", "name": "5.0版 方案B物理双盲终审标准（唯一生效）", "date": "2026-11-26", "badge": "唯一生效", "summary": "官方三表法医验真 × 红蓝对抗 × 方案B物理双盲独立推导（Ke_op-g=6.75%，五矿财司30%治理折价，严格归母权益产能切割）。", "ev_rules": {"ev_mode": "equity_ratio", "deduct_restricted_cash_pct": 1.0, "deduct_minority_div_payable_pct": 1.0, "operating_cash_floor": 14.56, "finance_co_discount_pct": 0.3, "deduct_parent_rigid_debt_pct": 1.0, "equity_inv_credit_pct": 0.5}, "oe_rules": {"drivers": {"li_price": 8.25, "kcl_price": 2580, "li_vol_wan": 6.6}, "maint_capex": 13.5, "dep_annual": 12.57, "growth_wc_yi": 1.46, "other_np_adj_yi": 0.0, "full_oe_ratio": 1.0, "full_oe_delta_yi": 2.68, "extra_carbon_or_opt_yi": 1.1, "full_cash_cost_yi": 0.0}, "sotp_rules": {"core_perpetuity_discount_rate": 0.07}, "zone_rules": {"fair_ev_oe_multiple": 14.8149, "tier2_max_ev_oe_multiple": 11.3333, "tier1_max_ev_oe_multiple": 9.4002}}}, "history_5y": [{"period": "2021", "rev": 147.78, "np": 44.78, "ocf": 47.69, "capex": 8.08, "fcf": 39.61, "debt_ratio": 53.89, "gm": 59.6}, {"period": "2022", "rev": 307.39, "np": 155.68, "ocf": 174.87, "capex": 7.02, "fcf": 167.85, "debt_ratio": 32.31, "gm": 79.1}, {"period": "2023", "rev": 215.79, "np": 79.14, "ocf": 121.05, "capex": 9.43, "fcf": 111.62, "debt_ratio": 25.25, "gm": 56.05}, {"period": "2024", "rev": 151.34, "np": 46.63, "ocf": 78.19, "capex": 12.22, "fcf": 65.97, "debt_ratio": 13.52, "gm": 51.86}, {"period": "2025", "rev": 155.01, "np": 84.76, "ocf": 101.61, "capex": 16.41, "fcf": 85.2, "debt_ratio": 17.49, "gm": 57.85}, {"period": "9M26", "rev": 189.85, "np": 89.4, "ocf": 98.39, "capex": 10.72, "fcf": 87.67, "debt_ratio": 13.47, "gm": 72.64}], "peer_chart_config": {"title": "⚡ 2026年前三季度 锂钾龙头「主业核心营业利润率 对比 期间四费率」手术刀对比", "subtitle": "全部严格对齐2026年三季度官方三表，剔除投资收益透视主业纯盈利效率", "left_label": "主业核心营业利润率", "left_unit": "%", "left_max": 75, "right_label": "期间四费率（越低越优）", "right_unit": "%", "right_max": 12, "extra_col_label": "资源禀赋与成本身位", "dupont_title": "🏆 2026年前三季度 锂钾四大龙头「毛利率 对比 净资产收益率 对比 资产负债率」杜邦透视", "dupont_sub": "盐湖以最低档成本、低负债率与极简费用率构筑全球左端护城河"}, "peers": [{"name": "盐湖股份", "highlight": true, "m1": 64.21, "m2": 2.26, "extra": "电碳成本2.37万/吨｜国产钾65%+", "gm": 72.64, "roe": 23.55, "debt_ratio": 13.47, "expense_ratio": 2.26, "note": "剔投资收益后主业营业利润率五家第一，全资4万吨投产拉升归母锂权益至71.17%，合同负债唯一双正增"}, {"name": "藏格矿业", "highlight": false, "m1": 54.06, "m2": 7.68, "extra": "电碳成本3.65万/吨｜参股巨龙铜矿", "gm": 67.5, "roe": 45.04, "debt_ratio": 7.52, "expense_ratio": 7.68, "note": "同处察尔汗但电碳成本高于盐湖1.28万/吨，表观净资产收益率与净利率受参股巨龙铜矿大额投资收益显著增厚"}, {"name": "亚钾国际", "highlight": false, "m1": 39.5, "m2": 10.51, "extra": "老挝钾矿137-152美元/吨｜扩产快", "gm": 59.93, "roe": 16.22, "debt_ratio": 26.89, "expense_ratio": 10.51, "note": "老挝低成本钾肥放量凶猛（2026年前三季度产量+44.2%），是压制国内钾肥远期天花板的头号扩张对手，期间费用较高"}, {"name": "赣锋锂业", "highlight": false, "m1": 17.82, "m2": 8.74, "extra": "外购锂矿占比高｜一体化与固态布局", "gm": 27.42, "roe": 13.89, "debt_ratio": 54.91, "expense_ratio": 8.74, "note": "外购辉石精矿拉低毛利率且在建工程/固资高达73.7%、负债率54.9%，周期底部抗压能力远弱于盐湖"}], "audit_reconciliation": {"title": "⚔️ 四审版 零信任红蓝对抗与物理双盲终审校准（方案B锁死）", "badge": "PASS_WITH_DISCOUNT · 终审生效", "left_title": "🔴 红队零信任命中真刺（实打实下砍/扣罚）", "left_items": ["1. 周期暴利回归死穴：2026年前三季度归母净利年化119.2亿受益于5月锂价脉冲与12.61万均价，11月底期现回落至8.26万且港口钾库存500万吨叠加老挝/BHP扩产，常态归母自由盈余狠砍至55.02亿元。", "2. 财务公司与合并现金水分死穴：205.17亿（占货币资金63.6%）存放五矿财司仅获1.14%低息且额度升至230亿，强制计提30%治理折价-61.55亿；叠加应付股利11.56亿、少数股东份额30.66亿及采矿权分期款，401亿广义现金挤出超151亿水分。", "3. 零分红锁死与涉镁警报：母公司2026年上半年未分配利润仍亏-40.16亿导致近12个月实派每股分红=0元，叠加重启3亿元涉镁中试与在建写字楼文旅占37.5%，全额扣除3亿承诺出资并在股权要求回报率保留+0.50%残余治理溢价；严格按71.17%归母锂权益切割防虚增29%。"], "right_title": "🛡️ 蓝方官方原表硬据反杀（守住底盘防错杀）", "right_items": ["1. 反杀“高价收购五矿盐湖抽血”：46.05亿现金对价2026年上半年已全额付清且零商誉，五矿盐湖单半年即录得净利6.89亿，已超全年业绩承诺6.68亿的103%，属实质性盈利增厚。", "2. 反杀“2026年前三季度所得税暴增138%盈利恶化”：系母公司补亏非现金转回递延所得税资产12.10亿元所致，零现金流出；2026年前三季度经营现金流高达98.39亿、研发100%费用化、商誉归零。", "3. 反杀“受限资金54.72亿与应收爆雷及锂利全归少数股东”：附注穿透53.29亿为未到期正常定存，真受限仅1.45亿；44.64亿广义应收95.9%为银行承兑汇票，纯应收仅1.54亿且合同负债8.54亿逆势正增；全资4万吨项目（节资超35%、毛利率88.02%）推动归母锂权益跃升至71.17%。"]}, "milestones": [{"id": "M1", "title": "母公司历史亏损清零与现金分红正式开闸", "status": "blue", "status_label": "2026年报/2027年一季度核心催化", "metric": "母公司单体未分配利润由2026年上半年的-40.16亿元转正，并宣布常态分红率≥40%—50%", "latest_note": "2026年上半年已较年初-85.08亿元收窄近半，随4万吨全资项目盈利与子公司分红上划，2026年底—2027年一季度有望彻底打通分红闸门。"}, {"id": "M2", "title": "4万吨全资锂盐满产稳运与母液萃取技改落地", "status": "green", "status_label": "已达产验证", "metric": "归母权益锂盐年销量稳站6.60—6.97万吨，碳酸锂单吨营业成本锁死在2.5万—3.0万元以内", "latest_note": "2026年前三季度合并锂盐产量7.96万吨（+151.7%），母公司4万吨项目实际节资35.8%—42.2%，2026年上半年毛利率高达88.02%。"}, {"id": "M3", "title": "察尔汗核心取水证平稳续期与氯化钾稳产守底", "status": "watch", "status_label": "2026-12-07关键节点", "metric": "母公司B632801S2021-0046取水证如期无附加苛刻条件续期；全年氯化钾合并产量稳守480—500万吨", "latest_note": "2026年前三季度氯化钾产量308.53万吨（同比-5.5%），须密切跟踪四季度补产进度与淡水配额约束。"}, {"id": "M4", "title": "15—20亿元注销式回购落地与财司存款压降", "status": "blue", "status_label": "治理折价修复锚", "metric": "股东会高票通过并全额执行15—20亿元注销式回购；五矿财司存款占比由63.6%逐步回落至50%以下", "latest_note": "2026-11-23董事会已审议通过回购预案，若叠加财司利率提升或存款收敛将直接释放61.55亿治理折价弹性。"}], "red_lines": [{"id": "R1", "title": "大股东关联资金占款或财务公司存款失控越线", "trigger": "五矿财务公司存款突破230亿元上限、发生无商业实质关联拆借/担保，或高溢价现金收购大股东低效资产（如青海汇信旧资产）。", "plain": "账上几百亿真现金一旦变成大股东的“免费提款机”或高价接盘大股东甩出来的烂摊子，投资逻辑当场破产，立刻清仓。"}, {"id": "R2", "title": "金属镁业务旧伤复燃升级为百亿级重资产吞金兽", "trigger": "涉镁投入从3亿元中试升级为超20亿元工业化扩产资本开支，或以任何形式反注历史破产剥离的镁业亏损资产。", "plain": "当年就是做金属镁亏掉四百多亿导致破产重整；花3亿做小实验能忍，要是敢重新砸几十上百亿大干快上，绝不陪葬。"}, {"id": "R3", "title": "察尔汗取水权受限或老卤贫化引发钾肥失血减产", "trigger": "核心取水证续期受阻导致产能强制压减，或察尔汗氯化钾连续两年年产跌破430万吨且单吨营业成本突破1,500元。", "plain": "钾肥是公司穿越锂价寒冬的绝对饭碗；如果没水晒卤或者卤水变稀导致钾肥大幅减产、成本暴涨，压舱石就会失效。"}], "changelog": [{"date": "2026-11-26", "version": "v5.0", "oe": "55.02亿", "ev_delta": "-249.55亿", "fair": "20.12元", "buy_zone": "≤14.49 / 16.50元", "reason": "2026年三季度官方原表法医验真 × 四审版红蓝对抗 × 方案B物理双盲独立建档：锁定锂8.25万/钾2,580元常态锚、五矿财司30%治理折价(-61.55亿)、严格71.17%归母锂权益切割与15年vs10年折旧补差，现价22.12元高于买点持币待回调。", "preset_key": "v5.0_v4_blind"}]}, "rules": {"schema_version": "2.0", "engine_version": "v5.0", "updated_at": "2026-11-25", "description": "买方投研 2.0 全局可热插拔估值宪法与四行业通用模板（改此处即全库 100% 统一口径重算）", "global_laws": {"risk_free_rate_pct": 1.75, "overvalued_fair_ratio": 1.25, "pb_floor_max_premium_pct": 15.0, "finance_co_discount_pct": 0.25, "ah_corridor_p50_weight": 0.65, "ah_corridor_live_weight": 0.35, "ah_corridor_min_floor_pct": 8.0, "ah_veto_premium_pct": 5.0}, "archetypes": {"cyclical_commodity": {"label": "⛏️ 大宗周期与资源（矿业/冶炼/油气/化工/煤）", "ev_mode": "equity_ratio", "default_fair_mult": 11.5, "default_t2_mult": 9.5, "default_t1_mult": 7.0, "default_sotp_rate_pct": 10.0, "use_true_ev": true, "reality_check_max_pct": 15.0, "notes": "采用成本曲线三段式（矿业>1.25x / 冶炼>1.12x）× 期现取严 × 5年历史实绩+15%双闸门 × 5年PB铁底双向校验"}, "quality_compounder": {"label": "🏆 优质白马与制造科技（消费/医药/高端制造/互联网）", "ev_mode": "equity_ratio", "default_fair_mult": 16.0, "default_t2_mult": 13.0, "default_t1_mult": 10.5, "default_sotp_rate_pct": 9.0, "use_true_ev": true, "reality_check_max_pct": 25.0, "notes": "常态 Owner Earnings = 常态归母净利 + 折旧摊销 - 维持性CapEx - 成长ΔWC；严格对齐无风险利率 1.75% 防止过度杀估值"}, "financial_insurer": {"label": "🏦 金融与保险（银行/险企/券商）", "ev_mode": "financial_no_ev", "default_fair_mult": 10.0, "default_t2_mult": 8.2, "default_t1_mult": 6.8, "default_sotp_rate_pct": 10.0, "use_true_ev": false, "reality_check_max_pct": 15.0, "notes": "金融股以归母市值直接锚定常态自由盈余/可分配利润与 PB/PEV，严禁把客户存款或准备金当超额现金冲减 EV"}, "sotp_conglomerate": {"label": "🧩 多业务平台与控股集团（SOTP 拆骨主导）", "ev_mode": "equity_ratio", "default_fair_mult": 14.0, "default_t2_mult": 11.2, "default_t1_mult": 9.0, "default_sotp_rate_pct": 9.5, "use_true_ev": true, "reality_check_max_pct": 20.0, "notes": "核心现金牛主业 + 净现金/上市股权包（按流动性折价）+ 新业务期权独立拼装，防核心资产与股权投资双算"}}}, "archetype": {"label": "⛏️ 大宗周期与资源（矿业/冶炼/油气/化工/煤）", "ev_mode": "equity_ratio", "default_fair_mult": 11.5, "default_t2_mult": 9.5, "default_t1_mult": 7.0, "default_sotp_rate_pct": 10.0, "use_true_ev": true, "reality_check_max_pct": 15.0, "notes": "采用成本曲线三段式（矿业>1.25x / 冶炼>1.12x）× 期现取严 × 5年历史实绩+15%双闸门 × 5年PB铁底双向校验"}, "presets": {"v5.0_v4_blind": {"version": "v5.0", "name": "5.0版 方案B物理双盲终审标准（唯一生效）", "date": "2026-11-26", "badge": "唯一生效", "summary": "官方三表法医验真 × 红蓝对抗 × 方案B物理双盲独立推导（Ke_op-g=6.75%，五矿财司30%治理折价，严格归母权益产能切割）。", "ev_rules": {"ev_mode": "equity_ratio", "deduct_restricted_cash_pct": 1.0, "deduct_minority_div_payable_pct": 1.0, "operating_cash_floor": 14.56, "finance_co_discount_pct": 0.3, "deduct_parent_rigid_debt_pct": 1.0, "equity_inv_credit_pct": 0.5}, "oe_rules": {"drivers": {"li_price": 8.25, "kcl_price": 2580, "li_vol_wan": 6.6}, "maint_capex": 13.5, "dep_annual": 12.57, "growth_wc_yi": 1.46, "other_np_adj_yi": 0.0, "full_oe_ratio": 1.0, "full_oe_delta_yi": 2.68, "extra_carbon_or_opt_yi": 1.1, "full_cash_cost_yi": 0.0}, "sotp_rules": {"core_perpetuity_discount_rate": 0.07}, "zone_rules": {"fair_ev_oe_multiple": 14.8149, "tier2_max_ev_oe_multiple": 11.3333, "tier1_max_ev_oe_multiple": 9.4002, "overvalued_fair_ratio": 1.25, "pb_floor_max_premium_pct": 15.0}}}, "activePreset": "v5.0_v4_blind", "evaluated": {"v5.0_v4_blind": {"preset_key": "v5.0_v4_blind", "preset_meta": {"version": "v5.0", "name": "5.0版 方案B物理双盲终审标准（唯一生效）", "date": "2026-11-26", "badge": "唯一生效", "summary": "官方三表法医验真 × 红蓝对抗 × 方案B物理双盲独立推导（Ke_op-g=6.75%，五矿财司30%治理折价，严格归母权益产能切割）。"}, "ev": {"price": 22.12, "shares_yi": 52.9157, "mcap": 1170.5, "gross_cash": 401.28, "fin_co_haircut": 61.55, "minority_share": 30.65, "parent_net_cash": 249.55, "net_cash_per_share": 4.72, "ev_delta": -249.55, "true_ev": 920.95, "is_financial": false, "waterfall": [{"step": "账面广义现金", "delta": 401.28, "cum": 401.28, "type": "pos"}, {"step": "受限与应付股利", "delta": -13.01, "cum": 388.27, "type": "neg"}, {"step": "营运周转底仓", "delta": -14.56, "cum": 373.71, "type": "neg"}, {"step": "财司30%折价", "delta": -61.55, "cum": 312.16, "type": "neg"}, {"step": "少数股东份额", "delta": -30.65, "cum": 281.5, "type": "neg"}, {"step": "母公司刚性债", "delta": -35.1, "cum": 246.4, "type": "neg"}, {"step": "可售金融资产", "delta": 3.15, "cum": 249.55, "type": "pos"}, {"step": "归母净现金", "delta": 249.55, "cum": 249.55, "type": "total"}]}, "oe": {"drivers": {"li_price": 8.25, "kcl_price": 2580, "li_vol_wan": 6.6}, "maint_capex": 13.5, "dep_annual": 12.57, "growth_wc_yi": 1.46, "steady_np": 57.27, "dep_shield_parent": -2.25, "steady_oe": 55.02, "steady_oe_per_share": 1.04, "full_oe": 58.8, "full_cash_cost_yi": 0.0, "full_ev_delta": -249.55, "full_true_ev": 920.95, "extra_opt": 1.1, "steady_ev_yield_pct": 5.97, "full_ev_yield_pct": 6.38, "steady_ev_oe": 16.74, "vs_bridge_pct": -21.66, "reality_pass": true, "stress_matrix": [{"id": "bull", "name": "实时现货 Mark-to-Market 情景", "plain_name": "按今日即期现货价算的赚钱力", "driver_summary": "碳酸锂8.60万/吨 + 氯化钾2,850元/吨", "parent_np": 68.23, "oe": 65.98, "ev_yield_pct": 7.16, "steady_div_pct": 2.91, "note": "仅作即期景气参照，不把高库存现货溢价当永续常态"}, {"id": "steady", "name": "★ 跨周期常态主锚（方案B锁死）", "plain_name": "正常年份稳健赚钱力（估值基准）", "driver_summary": "锂8.25万 + 钾2,580元（随滑块实时联动）", "parent_np": 57.27, "oe": 55.02, "ev_yield_pct": 5.97, "steady_div_pct": 2.45, "note": "期现取严 × 成本曲线三段式，已剔除现金利息与DTA噪音"}, {"id": "bear", "name": "边际成本极寒底线压测", "plain_name": "锂钾双杀跌穿成本线时的保底赚钱力", "driver_summary": "碳酸锂6.50万/吨 + 氯化钾2,150元/吨", "parent_np": 34.28, "oe": 32.03, "ev_yield_pct": 3.48, "steady_div_pct": 1.46, "note": "全行业大面积亏损出清时仍录得32亿+自由盈余，绝不失血"}]}, "sotp": {"discount_rate_pct": 7.0, "blocks": [{"id": "net_cash", "name": "积木① 审慎归母超额净现金与可售金融资产", "plain": "401.28亿广义现金（含货币345.28+交易金融0.05+1年内大额存单41.27+1年以上定存14.68）依次扣减受限1.45亿、应付股利11.56亿、21天营运底仓14.56亿、五矿财司205.17亿×30%治理折价61.55亿、少数股东9.82%份额30.66亿，再全额扣除归母刚性债与承诺35.10亿（显性有息债含租赁15.94+长期应付款采矿权分期13.34+其他应付款矿业权出让收益2.17+矿山环境预计负债0.65+涉镁中试承诺出资3.00），加回可售金融资产6.30亿×50%折价3.15亿，净得249.55亿元（4.72元/股）。", "kind": "net_cash", "value_yi": 249.55, "per_share": 4.72, "default_on": true, "color": "#059669"}, {"id": "core_biz", "name": "积木② 察尔汗钾肥 + 全球最左端盐湖提锂现金牛主业", "plain": "归母474.31万吨稳态氯化钾（国产65%+份额压舱石）叠加归母6.60万吨稳态锂盐（单吨营业成本仅2.37万元，含母公司100%持股4万吨项目+蓝科51.42%+五矿盐湖51%），按跨周期稳态自由盈余 55.02亿/年与永续要求回报率折现。", "kind": "core_perpetuity", "value_yi": 786.0, "per_share": 14.85, "default_on": true, "color": "#1e3a8a"}, {"id": "full_ramp", "name": "积木③ 现有产能满产满销增量弹性（零新增资本开支）", "plain": "4万吨全资项目与五矿盐湖对价已全额付清，同价格锚下现有产能满产满销（锂权益至6.97万吨、钾权益至515.3万吨）可额外增厚稳态自由盈余 +2.68亿元/年（不含沉锂母液萃取技改+1.10亿）。", "kind": "buyout_net", "value_yi": 38.29, "per_share": 0.72, "default_on": false, "color": "#0284c7"}, {"id": "free_cushion", "name": "积木④ 参股股权与物业冗余安全垫 + 原卤提锂免费期权", "plain": "未计入现金桥的长期股权投资4.90亿元与成本法投资性房地产4.98亿元（合计9.88亿元），外加察尔汗原卤直提与母液萃取技术迭代免费期权；盐湖比亚迪僵尸项目、固态电池、金属镁及海外远期钾矿一律计零。", "kind": "fixed_yi", "value_yi": 9.88, "per_share": 0.19, "default_on": false, "color": "#7c3aed"}], "sotp_base_total": 1035.55, "sotp_base_per_share": 19.57, "floor_label": "盐湖重置铁底", "floor_note": "归母审慎净现金249.55亿元 + 察尔汗500万吨钾肥盐田与6.97万吨权益盐湖提锂保守物理重置底盘350亿元（远高于账面经营净资产256.50亿元）", "floor_total_yi": 599.55, "floor_per_share": 11.33}, "zones": {"fair_price": 20.12, "tier2_max": 16.5, "tier1_max": 14.49, "overvalued_price": 25.15, "fair_mult": 14.8149, "tier2_max_mult": 11.3333, "tier1_max_mult": 9.4002, "ttm_dps": 0.0, "steady_dps": 0.541, "ttm_div_now_pct": 0.0, "steady_div_now_pct": 2.45, "pb_check": {"now_rep_pb": 2.31, "now_ex_pb": 2.31, "t1_rep_pb": 1.52, "t1_ex_pb": 1.52, "pb_6y_floor": 1.7, "t1_vs_floor_pct": -10.6, "pass": true}, "ah_corridor": null}}}, "swarm": {}, "glossary": [{"key": "steady_oe", "term": "常态自由盈余（steady_oe / OE）", "plain": "扣掉每年修机器、换旧设备的必要花销后，这家公司正常年份「真正能装进股东口袋的纯现金利润」。", "usage": "买方估值核心分子，比账面净利润更真实。"}, {"key": "full_oe", "term": "达产自由盈余（full_oe）", "plain": "手里在建的新工厂、新产线全部投产或少数股权收编后，未来正常年份每年能装进股东口袋的纯现金利润。", "usage": "衡量 2–3 年成长弹性，必须同步扣减所需新增资本开支/收购现金。"}, {"key": "true_ev", "term": "真实企业价值（True EV）与净现金偏移（ev_delta）", "plain": "买下整家公司的真实净成本 = 总市值 + 欠别人的真债 − 保险柜里可自由支配的闲置现金。账上净现金越多，实际买价越便宜。", "usage": "估值核心分母，金融保险股除外。"}, {"key": "sotp", "term": "拆骨法估值（Reverse SOTP）", "plain": "把公司拆成“保险柜净现金 + 成熟老主业 + 新业务期权”几块积木分别估价再相加，检验现价是不是已经白送新业务。", "usage": "在 Tab 1 积木区可以自由勾选/开关每块资产实时试算。"}, {"key": "pb_gate", "term": "5年真实 PB 铁底双向校验", "plain": "对照过去 5–6 年市场最恐慌时的最低市净率地板，既防买贵（重锤价不超过铁底 +15%），也防拍脑袋把买点定到一辈子买不到的价位。", "usage": "周期股与重资产龙头必过闸门。"}, {"key": "ah_corridor", "term": "A/H 股 5 年折价走廊", "plain": "A+H 双上市股票不搞 1:1 换算也不搞一刀切，按过去 5 年真实折价分布动态算出 H 股对应买点；若 H 股反比 A 股贵超 5% 直接一票否决锁 A 股。", "usage": "跨市场同股同权挑最便宜的席位。"}, {"key": "capex", "term": "维持性资本开支（Maint CapEx）", "plain": "为了保住现有饭碗每年必须花的设备大修、产线更新钱，不同于为了扩产能建新厂的扩张性开支。", "usage": "算常态自由盈余时必须扣干净。"}, {"key": "overvalued", "term": "1.25× 公允高估止盈红线", "plain": "组合宪法纪律：股价涨到合理公允价值的 1.25 倍以上进入狂热区，果断分批止盈换更便宜的标的。", "usage": "防止坐过山车，锁定复利收益。"}]};
+const APP = {"facts": {"schema_version": "2.0", "archetype": "cyclical_commodity", "company": "盐湖股份", "code": "000792.SZ", "primary_code": "sz000792", "currency_unit": "元", "sector": "钾肥与盐湖提锂（基础化工/有色资源）", "macro_factor": "新能源锂周期 + 全球钾肥供需/农产品周期 + 国内10年期国债利率", "tier": "T2", "position_cap_pct": 15, "fin_period": "2026Q3", "updated_at": "2026-11-26", "active_preset": "v5.0_v4_blind", "one_liner": "依托察尔汗与一里坪全球最左端盐湖资源构建“国产65%+钾肥压舱石 + 归母6.97万吨低成本盐湖提锂”双印钞机，资本开支过峰后现金流极厚，但须严防五矿财司关联存款沉淀、母公司补亏前零分红及涉镁纪律风险。", "one_liner_plain": "守着青海两大聚宝盆盐湖，晒卤水同时挖出全国三分之二的国产钾肥和全球成本最低档的碳酸锂，新工厂建完后每年躺收几十亿真现金；缺点是大半现金存在大股东财务公司利息低，历史旧亏还没填平暂时分不了红，得等股价跌进便宜区间再下手。", "market": {"shares_yi": 52.9157, "price": 22.12, "price_date": "2026-11-26", "week52_low": 20.84, "week52_high": 41.6}, "h_market": null, "balance_sheet": {"cash": 401.23, "trading_financial_assets": 0.05, "restricted_cash": 1.45, "minority_div_payable": 11.56, "finance_co_deposit": 205.17, "post_period_parent_div": 0.0, "parent_rigid_debt": 35.1, "liquid_equity_investments_net": 6.3, "parent_equity_ratio": 0.9018, "parent_profit_ratio": 0.8542, "debt_ratio_pct": 13.47}, "dividends": {"ttm_dps": 0.0, "ttm_breakdown": "母公司2026年上半年未分配利润-40.16亿元暂锁死现金分红（拟以15—20亿元注销式回购替代）", "steady_payout_ratio": 0.5}, "pb_history": {"reported_bvps": 9.56, "ex_div_bvps": 9.56, "pb_6y_floor": 1.7, "pb_2y_floor": 1.7, "pb_5y_range": "1.70倍 — 14.22倍"}, "drivers": [{"id": "li_price", "label": "电池级碳酸锂含税常态价", "unit": "万元/吨", "min": 6.0, "max": 14.0, "step": 0.05, "anchor": 8.25, "current": 8.25, "decimals": 2, "np_sensitivity_per_unit": 4.639, "hint": "期现取严锚定8.25万（紧贴90分位成本8.0万，严禁打85折）；每变动1万元/吨，稳态归母净利变动±4.64亿元"}, {"id": "kcl_price", "label": "氯化钾含税到站常态价", "unit": "元/吨", "min": 2000, "max": 3300, "step": 10, "anchor": 2580, "current": 2580, "decimals": 0, "np_sensitivity_per_unit": 0.03458, "hint": "港口高库存与老挝扩产下温和挤泡沫至2,580元；每变动100元/吨，稳态归母净利变动±3.46亿元"}, {"id": "li_vol_wan", "label": "归母权益锂盐年销量", "unit": "万吨", "min": 5.5, "max": 7.2, "step": 0.05, "anchor": 6.6, "current": 6.6, "decimals": 2, "np_sensitivity_per_unit": 3.57, "hint": "严格按71.17%归母权益口径切割（稳态6.60万/满血6.97万吨）；每增减1万吨，归母净利变动约±3.57亿元"}], "operations": {"anchor_parent_net_profit": 57.27, "hist_5y_peak_bridged_np": 73.1, "maint_capex": 13.5, "dep_annual": 12.57, "capex_slider_min": 8.0, "capex_slider_max": 22.0, "capex_hint": "合并维持资本开支 13.5亿（含溶矿补水/采盐船更新/膜与吸附剂大修13.0亿 + 15年对比10年折旧拉齐补差0.5亿）", "stress_scenarios": [{"id": "bull", "name": "实时现货 Mark-to-Market 情景", "plain_name": "按今日即期现货价算的赚钱力", "driver_summary": "碳酸锂8.60万/吨 + 氯化钾2,850元/吨", "driver_overrides": {"li_price": 8.6, "kcl_price": 2850, "li_vol_wan": 6.6}, "note": "仅作即期景气参照，不把高库存现货溢价当永续常态"}, {"id": "steady", "name": "★ 跨周期常态主锚（方案B锁死）", "plain_name": "正常年份稳健赚钱力（估值基准）", "driver_summary": "锂8.25万 + 钾2,580元（随滑块实时联动）", "driver_overrides": {}, "note": "期现取严 × 成本曲线三段式，已剔除现金利息与DTA噪音"}, {"id": "bear", "name": "边际成本极寒底线压测", "plain_name": "锂钾双杀跌穿成本线时的保底赚钱力", "driver_summary": "碳酸锂6.50万/吨 + 氯化钾2,150元/吨", "driver_overrides": {"li_price": 6.5, "kcl_price": 2150, "li_vol_wan": 6.6}, "note": "全行业大面积亏损出清时仍录得32亿+自由盈余，绝不失血"}]}, "sotp_blocks": [{"id": "net_cash", "kind": "net_cash", "name": "积木① 审慎归母超额净现金与可售金融资产", "plain": "401.28亿广义现金（含货币345.28+交易金融0.05+1年内大额存单41.27+1年以上定存14.68）依次扣减受限1.45亿、应付股利11.56亿、21天营运底仓14.56亿、五矿财司205.17亿×30%治理折价61.55亿、少数股东9.82%份额30.66亿，再全额扣除归母刚性债与承诺35.10亿（显性有息债含租赁15.94+长期应付款采矿权分期13.34+其他应付款矿业权出让收益2.17+矿山环境预计负债0.65+涉镁中试承诺出资3.00），加回可售金融资产6.30亿×50%折价3.15亿，净得249.55亿元（4.72元/股）。", "default_on": true, "color": "#059669"}, {"id": "core_biz", "kind": "core_perpetuity", "name": "积木② 察尔汗钾肥 + 全球最左端盐湖提锂现金牛主业", "plain": "归母474.31万吨稳态氯化钾（国产65%+份额压舱石）叠加归母6.60万吨稳态锂盐（单吨营业成本仅2.37万元，含母公司100%持股4万吨项目+蓝科51.42%+五矿盐湖51%），按跨周期稳态自由盈余 55.02亿/年与永续要求回报率折现。", "default_on": true, "color": "#1e3a8a"}, {"id": "full_ramp", "kind": "buyout_net", "name": "积木③ 现有产能满产满销增量弹性（零新增资本开支）", "plain": "4万吨全资项目与五矿盐湖对价已全额付清，同价格锚下现有产能满产满销（锂权益至6.97万吨、钾权益至515.3万吨）可额外增厚稳态自由盈余 +2.68亿元/年（不含沉锂母液萃取技改+1.10亿）。", "default_on": false, "color": "#0284c7"}, {"id": "free_cushion", "kind": "fixed_yi", "value_yi": 9.88, "name": "积木④ 参股股权与物业冗余安全垫 + 原卤提锂免费期权", "plain": "未计入现金桥的长期股权投资4.90亿元与成本法投资性房地产4.98亿元（合计9.88亿元），外加察尔汗原卤直提与母液萃取技术迭代免费期权；盐湖比亚迪僵尸项目、固态电池、金属镁及海外远期钾矿一律计零。", "default_on": false, "color": "#7c3aed"}], "floor_benchmark": {"kind": "replacement", "label": "盐湖重置铁底", "operating_assets_floor_yi": 350.0, "note": "归母审慎净现金249.55亿元 + 察尔汗500万吨钾肥盐田与6.97万吨权益盐湖提锂保守物理重置底盘350亿元（远高于账面经营净资产256.50亿元）"}, "presets": {"v5.0_v4_blind": {"version": "v5.0", "name": "5.0版 方案B物理双盲终审标准（唯一生效）", "date": "2026-11-26", "badge": "唯一生效", "summary": "官方三表法医验真 × 红蓝对抗 × 方案B物理双盲独立推导（Ke_op-g=6.75%，五矿财司30%治理折价，严格归母权益产能切割）。", "ev_rules": {"ev_mode": "equity_ratio", "deduct_restricted_cash_pct": 1.0, "deduct_minority_div_payable_pct": 1.0, "operating_cash_floor": 14.56, "finance_co_discount_pct": 0.3, "deduct_parent_rigid_debt_pct": 1.0, "equity_inv_credit_pct": 0.5}, "oe_rules": {"drivers": {"li_price": 8.25, "kcl_price": 2580, "li_vol_wan": 6.6}, "maint_capex": 13.5, "dep_annual": 12.57, "growth_wc_yi": 1.46, "other_np_adj_yi": 0.0, "full_oe_ratio": 1.0, "full_oe_delta_yi": 2.68, "extra_carbon_or_opt_yi": 1.1, "full_cash_cost_yi": 0.0}, "sotp_rules": {"core_perpetuity_discount_rate": 0.07}, "zone_rules": {"fair_ev_oe_multiple": 14.8149, "tier2_max_ev_oe_multiple": 11.3333, "tier1_max_ev_oe_multiple": 9.4002}}}, "history_5y": [{"period": "2021", "rev": 147.78, "np": 44.78, "ocf": 47.69, "capex": 8.08, "fcf": 39.61, "debt_ratio": 53.89, "gm": 59.6}, {"period": "2022", "rev": 307.39, "np": 155.68, "ocf": 174.87, "capex": 7.02, "fcf": 167.85, "debt_ratio": 32.31, "gm": 79.1}, {"period": "2023", "rev": 215.79, "np": 79.14, "ocf": 121.05, "capex": 9.43, "fcf": 111.62, "debt_ratio": 25.25, "gm": 56.05}, {"period": "2024", "rev": 151.34, "np": 46.63, "ocf": 78.19, "capex": 12.22, "fcf": 65.97, "debt_ratio": 13.52, "gm": 51.86}, {"period": "2025", "rev": 155.01, "np": 84.76, "ocf": 101.61, "capex": 16.41, "fcf": 85.2, "debt_ratio": 17.49, "gm": 57.85}, {"period": "9M26", "rev": 189.85, "np": 89.4, "ocf": 98.39, "capex": 10.72, "fcf": 87.67, "debt_ratio": 13.47, "gm": 72.64}], "peer_chart_config": {"title": "⚡ 2026年前三季度 锂钾龙头「主业核心营业利润率 对比 期间四费率」手术刀对比", "subtitle": "全部严格对齐2026年三季度官方三表，剔除投资收益透视主业纯盈利效率", "left_label": "主业核心营业利润率", "left_unit": "%", "left_max": 75, "right_label": "期间四费率（越低越优）", "right_unit": "%", "right_max": 12, "extra_col_label": "资源禀赋与成本身位", "dupont_title": "🏆 2026年前三季度 锂钾四大龙头「毛利率 对比 净资产收益率 对比 资产负债率」杜邦透视", "dupont_sub": "盐湖以最低档成本、低负债率与极简费用率构筑全球左端护城河"}, "peers": [{"name": "盐湖股份", "highlight": true, "m1": 64.21, "m2": 2.26, "extra": "电碳成本2.37万/吨｜国产钾65%+", "gm": 72.64, "roe": 23.55, "debt_ratio": 13.47, "expense_ratio": 2.26, "note": "剔投资收益后主业营业利润率五家第一，全资4万吨投产拉升归母锂权益至71.17%，合同负债唯一双正增"}, {"name": "藏格矿业", "highlight": false, "m1": 54.06, "m2": 7.68, "extra": "电碳成本3.65万/吨｜参股巨龙铜矿", "gm": 67.5, "roe": 45.04, "debt_ratio": 7.52, "expense_ratio": 7.68, "note": "同处察尔汗但电碳成本高于盐湖1.28万/吨，表观净资产收益率与净利率受参股巨龙铜矿大额投资收益显著增厚"}, {"name": "亚钾国际", "highlight": false, "m1": 39.5, "m2": 10.51, "extra": "老挝钾矿137-152美元/吨｜扩产快", "gm": 59.93, "roe": 16.22, "debt_ratio": 26.89, "expense_ratio": 10.51, "note": "老挝低成本钾肥放量凶猛（2026年前三季度产量+44.2%），是压制国内钾肥远期天花板的头号扩张对手，期间费用较高"}, {"name": "赣锋锂业", "highlight": false, "m1": 17.82, "m2": 8.74, "extra": "外购锂矿占比高｜一体化与固态布局", "gm": 27.42, "roe": 13.89, "debt_ratio": 54.91, "expense_ratio": 8.74, "note": "外购辉石精矿拉低毛利率且在建工程/固资高达73.7%、负债率54.9%，周期底部抗压能力远弱于盐湖"}], "audit_reconciliation": {"title": "⚔️ 四审版 零信任红蓝对抗与物理双盲终审校准（方案B锁死）", "badge": "PASS_WITH_DISCOUNT · 终审生效", "left_title": "🔴 红队零信任命中真刺（实打实下砍/扣罚）", "left_items": ["1. 周期暴利回归死穴：2026年前三季度归母净利年化119.2亿受益于5月锂价脉冲与12.61万均价，11月底期现回落至8.26万且港口钾库存500万吨叠加老挝/BHP扩产，常态归母自由盈余狠砍至55.02亿元。", "2. 财务公司与合并现金水分死穴：205.17亿（占货币资金63.6%）存放五矿财司仅获1.14%低息且额度升至230亿，强制计提30%治理折价-61.55亿；叠加应付股利11.56亿、少数股东份额30.66亿及采矿权分期款，401亿广义现金挤出超151亿水分。", "3. 零分红锁死与涉镁警报：母公司2026年上半年未分配利润仍亏-40.16亿导致近12个月实派每股分红=0元，叠加重启3亿元涉镁中试与在建写字楼文旅占37.5%，全额扣除3亿承诺出资并在股权要求回报率保留+0.50%残余治理溢价；严格按71.17%归母锂权益切割防虚增29%。"], "right_title": "🛡️ 蓝方官方原表硬据反杀（守住底盘防错杀）", "right_items": ["1. 反杀“高价收购五矿盐湖抽血”：46.05亿现金对价2026年上半年已全额付清且零商誉，五矿盐湖单半年即录得净利6.89亿，已超全年业绩承诺6.68亿的103%，属实质性盈利增厚。", "2. 反杀“2026年前三季度所得税暴增138%盈利恶化”：系母公司补亏非现金转回递延所得税资产12.10亿元所致，零现金流出；2026年前三季度经营现金流高达98.39亿、研发100%费用化、商誉归零。", "3. 反杀“受限资金54.72亿与应收爆雷及锂利全归少数股东”：附注穿透53.29亿为未到期正常定存，真受限仅1.45亿；44.64亿广义应收95.9%为银行承兑汇票，纯应收仅1.54亿且合同负债8.54亿逆势正增；全资4万吨项目（节资超35%、毛利率88.02%）推动归母锂权益跃升至71.17%。"]}, "milestones": [{"id": "M1", "title": "母公司历史亏损清零与现金分红正式开闸", "status": "blue", "status_label": "2026年报/2027年一季度核心催化", "metric": "母公司单体未分配利润由2026年上半年的-40.16亿元转正，并宣布常态分红率≥40%—50%", "latest_note": "2026年上半年已较年初-85.08亿元收窄近半，随4万吨全资项目盈利与子公司分红上划，2026年底—2027年一季度有望彻底打通分红闸门。"}, {"id": "M2", "title": "4万吨全资锂盐满产稳运与母液萃取技改落地", "status": "green", "status_label": "已达产验证", "metric": "归母权益锂盐年销量稳站6.60—6.97万吨，碳酸锂单吨营业成本锁死在2.5万—3.0万元以内", "latest_note": "2026年前三季度合并锂盐产量7.96万吨（+151.7%），母公司4万吨项目实际节资35.8%—42.2%，2026年上半年毛利率高达88.02%。"}, {"id": "M3", "title": "察尔汗核心取水证平稳续期与氯化钾稳产守底", "status": "watch", "status_label": "2026-12-07关键节点", "metric": "母公司B632801S2021-0046取水证如期无附加苛刻条件续期；全年氯化钾合并产量稳守480—500万吨", "latest_note": "2026年前三季度氯化钾产量308.53万吨（同比-5.5%），须密切跟踪四季度补产进度与淡水配额约束。"}, {"id": "M4", "title": "15—20亿元注销式回购落地与财司存款压降", "status": "blue", "status_label": "治理折价修复锚", "metric": "股东会高票通过并全额执行15—20亿元注销式回购；五矿财司存款占比由63.6%逐步回落至50%以下", "latest_note": "2026-11-23董事会已审议通过回购预案，若叠加财司利率提升或存款收敛将直接释放61.55亿治理折价弹性。"}], "red_lines": [{"id": "R1", "title": "大股东关联资金占款或财务公司存款失控越线", "trigger": "五矿财务公司存款突破230亿元上限、发生无商业实质关联拆借/担保，或高溢价现金收购大股东低效资产（如青海汇信旧资产）。", "plain": "账上几百亿真现金一旦变成大股东的“免费提款机”或高价接盘大股东甩出来的烂摊子，投资逻辑当场破产，立刻清仓。"}, {"id": "R2", "title": "金属镁业务旧伤复燃升级为百亿级重资产吞金兽", "trigger": "涉镁投入从3亿元中试升级为超20亿元工业化扩产资本开支，或以任何形式反注历史破产剥离的镁业亏损资产。", "plain": "当年就是做金属镁亏掉四百多亿导致破产重整；花3亿做小实验能忍，要是敢重新砸几十上百亿大干快上，绝不陪葬。"}, {"id": "R3", "title": "察尔汗取水权受限或老卤贫化引发钾肥失血减产", "trigger": "核心取水证续期受阻导致产能强制压减，或察尔汗氯化钾连续两年年产跌破430万吨且单吨营业成本突破1,500元。", "plain": "钾肥是公司穿越锂价寒冬的绝对饭碗；如果没水晒卤或者卤水变稀导致钾肥大幅减产、成本暴涨，压舱石就会失效。"}], "changelog": [{"date": "2026-11-26", "version": "v5.0", "oe": "55.02亿", "ev_delta": "-249.55亿", "fair": "20.12元", "buy_zone": "≤14.49 / 16.50元", "reason": "2026年三季度官方原表法医验真 × 四审版红蓝对抗 × 方案B物理双盲独立建档：锁定锂8.25万/钾2,580元常态锚、五矿财司30%治理折价(-61.55亿)、严格71.17%归母锂权益切割与15年vs10年折旧补差，现价22.12元高于买点持币待回调。", "preset_key": "v5.0_v4_blind"}]}, "rules": {"schema_version": "2.0", "engine_version": "v5.0", "updated_at": "2026-11-25", "description": "买方投研 2.0 全局可热插拔估值宪法与四行业通用模板（改此处即全库 100% 统一口径重算）", "global_laws": {"risk_free_rate_pct": 1.75, "overvalued_fair_ratio": 1.25, "pb_floor_max_premium_pct": 15.0, "finance_co_discount_pct": 0.25, "ah_corridor_p50_weight": 0.65, "ah_corridor_live_weight": 0.35, "ah_corridor_min_floor_pct": 8.0, "ah_veto_premium_pct": 5.0}, "archetypes": {"cyclical_commodity": {"label": "⛏️ 大宗周期与资源（矿业/冶炼/油气/化工/煤）", "ev_mode": "equity_ratio", "default_fair_mult": 11.5, "default_t2_mult": 9.5, "default_t1_mult": 7.0, "default_sotp_rate_pct": 10.0, "use_true_ev": true, "reality_check_max_pct": 15.0, "notes": "采用成本曲线三段式（矿业>1.25x / 冶炼>1.12x）× 期现取严 × 5年历史实绩+15%双闸门 × 5年PB铁底双向校验"}, "quality_compounder": {"label": "🏆 优质白马与制造科技（消费/医药/高端制造/互联网）", "ev_mode": "equity_ratio", "default_fair_mult": 16.0, "default_t2_mult": 13.0, "default_t1_mult": 10.5, "default_sotp_rate_pct": 9.0, "use_true_ev": true, "reality_check_max_pct": 25.0, "notes": "常态 Owner Earnings = 常态归母净利 + 折旧摊销 - 维持性CapEx - 成长ΔWC；严格对齐无风险利率 1.75% 防止过度杀估值"}, "financial_insurer": {"label": "🏦 金融与保险（银行/险企/券商）", "ev_mode": "financial_no_ev", "default_fair_mult": 10.0, "default_t2_mult": 8.2, "default_t1_mult": 6.8, "default_sotp_rate_pct": 10.0, "use_true_ev": false, "reality_check_max_pct": 15.0, "notes": "金融股以归母市值直接锚定常态自由盈余/可分配利润与 PB/PEV，严禁把客户存款或准备金当超额现金冲减 EV"}, "sotp_conglomerate": {"label": "🧩 多业务平台与控股集团（SOTP 拆骨主导）", "ev_mode": "equity_ratio", "default_fair_mult": 14.0, "default_t2_mult": 11.2, "default_t1_mult": 9.0, "default_sotp_rate_pct": 9.5, "use_true_ev": true, "reality_check_max_pct": 20.0, "notes": "核心现金牛主业 + 净现金/上市股权包（按流动性折价）+ 新业务期权独立拼装，防核心资产与股权投资双算"}}}, "archetype": {"label": "⛏️ 大宗周期与资源（矿业/冶炼/油气/化工/煤）", "ev_mode": "equity_ratio", "default_fair_mult": 11.5, "default_t2_mult": 9.5, "default_t1_mult": 7.0, "default_sotp_rate_pct": 10.0, "use_true_ev": true, "reality_check_max_pct": 15.0, "notes": "采用成本曲线三段式（矿业>1.25x / 冶炼>1.12x）× 期现取严 × 5年历史实绩+15%双闸门 × 5年PB铁底双向校验"}, "presets": {"v5.0_v4_blind": {"version": "v5.0", "name": "5.0版 方案B物理双盲终审标准（唯一生效）", "date": "2026-11-26", "badge": "唯一生效", "summary": "官方三表法医验真 × 红蓝对抗 × 方案B物理双盲独立推导（Ke_op-g=6.75%，五矿财司30%治理折价，严格归母权益产能切割）。", "ev_rules": {"ev_mode": "equity_ratio", "deduct_restricted_cash_pct": 1.0, "deduct_minority_div_payable_pct": 1.0, "operating_cash_floor": 14.56, "finance_co_discount_pct": 0.3, "deduct_parent_rigid_debt_pct": 1.0, "equity_inv_credit_pct": 0.5}, "oe_rules": {"drivers": {"li_price": 8.25, "kcl_price": 2580, "li_vol_wan": 6.6}, "maint_capex": 13.5, "dep_annual": 12.57, "growth_wc_yi": 1.46, "other_np_adj_yi": 0.0, "full_oe_ratio": 1.0, "full_oe_delta_yi": 2.68, "extra_carbon_or_opt_yi": 1.1, "full_cash_cost_yi": 0.0}, "sotp_rules": {"core_perpetuity_discount_rate": 0.07}, "zone_rules": {"fair_ev_oe_multiple": 14.8149, "tier2_max_ev_oe_multiple": 11.3333, "tier1_max_ev_oe_multiple": 9.4002, "overvalued_fair_ratio": 1.25, "pb_floor_max_premium_pct": 15.0}}}, "activePreset": "v5.0_v4_blind", "evaluated": {"v5.0_v4_blind": {"preset_key": "v5.0_v4_blind", "preset_meta": {"version": "v5.0", "name": "5.0版 方案B物理双盲终审标准（唯一生效）", "date": "2026-11-26", "badge": "唯一生效", "summary": "官方三表法医验真 × 红蓝对抗 × 方案B物理双盲独立推导（Ke_op-g=6.75%，五矿财司30%治理折价，严格归母权益产能切割）。"}, "ev": {"price": 22.12, "shares_yi": 52.9157, "mcap": 1170.5, "gross_cash": 401.28, "fin_co_haircut": 61.55, "minority_share": 30.65, "parent_net_cash": 249.55, "net_cash_per_share": 4.72, "ev_delta": -249.55, "true_ev": 920.95, "is_financial": false, "waterfall": [{"step": "账面广义现金", "delta": 401.28, "cum": 401.28, "type": "pos"}, {"step": "受限与应付股利", "delta": -13.01, "cum": 388.27, "type": "neg"}, {"step": "营运周转底仓", "delta": -14.56, "cum": 373.71, "type": "neg"}, {"step": "财司30%折价", "delta": -61.55, "cum": 312.16, "type": "neg"}, {"step": "少数股东份额", "delta": -30.65, "cum": 281.5, "type": "neg"}, {"step": "母公司刚性债", "delta": -35.1, "cum": 246.4, "type": "neg"}, {"step": "可售金融资产", "delta": 3.15, "cum": 249.55, "type": "pos"}, {"step": "归母净现金", "delta": 249.55, "cum": 249.55, "type": "total"}]}, "oe": {"drivers": {"li_price": 8.25, "kcl_price": 2580, "li_vol_wan": 6.6}, "maint_capex": 13.5, "dep_annual": 12.57, "growth_wc_yi": 1.46, "steady_np": 57.27, "dep_shield_parent": -2.25, "steady_oe": 55.02, "steady_oe_per_share": 1.04, "full_oe": 58.8, "full_cash_cost_yi": 0.0, "full_ev_delta": -249.55, "full_true_ev": 920.95, "extra_opt": 1.1, "steady_ev_yield_pct": 5.97, "full_ev_yield_pct": 6.38, "steady_ev_oe": 16.74, "vs_bridge_pct": -21.66, "reality_pass": true, "stress_matrix": [{"id": "bull", "name": "实时现货 Mark-to-Market 情景", "plain_name": "按今日即期现货价算的赚钱力", "driver_summary": "碳酸锂8.60万/吨 + 氯化钾2,850元/吨", "parent_np": 68.23, "oe": 65.98, "ev_yield_pct": 7.16, "steady_div_pct": 2.91, "note": "仅作即期景气参照，不把高库存现货溢价当永续常态"}, {"id": "steady", "name": "★ 跨周期常态主锚（方案B锁死）", "plain_name": "正常年份稳健赚钱力（估值基准）", "driver_summary": "锂8.25万 + 钾2,580元（随滑块实时联动）", "parent_np": 57.27, "oe": 55.02, "ev_yield_pct": 5.97, "steady_div_pct": 2.45, "note": "期现取严 × 成本曲线三段式，已剔除现金利息与DTA噪音"}, {"id": "bear", "name": "边际成本极寒底线压测", "plain_name": "锂钾双杀跌穿成本线时的保底赚钱力", "driver_summary": "碳酸锂6.50万/吨 + 氯化钾2,150元/吨", "parent_np": 34.28, "oe": 32.03, "ev_yield_pct": 3.48, "steady_div_pct": 1.46, "note": "全行业大面积亏损出清时仍录得32亿+自由盈余，绝不失血"}]}, "sotp": {"discount_rate_pct": 7.0, "blocks": [{"id": "net_cash", "name": "积木① 审慎归母超额净现金与可售金融资产", "plain": "401.28亿广义现金（含货币345.28+交易金融0.05+1年内大额存单41.27+1年以上定存14.68）依次扣减受限1.45亿、应付股利11.56亿、21天营运底仓14.56亿、五矿财司205.17亿×30%治理折价61.55亿、少数股东9.82%份额30.66亿，再全额扣除归母刚性债与承诺35.10亿（显性有息债含租赁15.94+长期应付款采矿权分期13.34+其他应付款矿业权出让收益2.17+矿山环境预计负债0.65+涉镁中试承诺出资3.00），加回可售金融资产6.30亿×50%折价3.15亿，净得249.55亿元（4.72元/股）。", "kind": "net_cash", "value_yi": 249.55, "per_share": 4.72, "default_on": true, "color": "#059669"}, {"id": "core_biz", "name": "积木② 察尔汗钾肥 + 全球最左端盐湖提锂现金牛主业", "plain": "归母474.31万吨稳态氯化钾（国产65%+份额压舱石）叠加归母6.60万吨稳态锂盐（单吨营业成本仅2.37万元，含母公司100%持股4万吨项目+蓝科51.42%+五矿盐湖51%），按跨周期稳态自由盈余 55.02亿/年与永续要求回报率折现。", "kind": "core_perpetuity", "value_yi": 786.0, "per_share": 14.85, "default_on": true, "color": "#1e3a8a"}, {"id": "full_ramp", "name": "积木③ 现有产能满产满销增量弹性（零新增资本开支）", "plain": "4万吨全资项目与五矿盐湖对价已全额付清，同价格锚下现有产能满产满销（锂权益至6.97万吨、钾权益至515.3万吨）可额外增厚稳态自由盈余 +2.68亿元/年（不含沉锂母液萃取技改+1.10亿）。", "kind": "buyout_net", "value_yi": 38.29, "per_share": 0.72, "default_on": false, "color": "#0284c7"}, {"id": "free_cushion", "name": "积木④ 参股股权与物业冗余安全垫 + 原卤提锂免费期权", "plain": "未计入现金桥的长期股权投资4.90亿元与成本法投资性房地产4.98亿元（合计9.88亿元），外加察尔汗原卤直提与母液萃取技术迭代免费期权；盐湖比亚迪僵尸项目、固态电池、金属镁及海外远期钾矿一律计零。", "kind": "fixed_yi", "value_yi": 9.88, "per_share": 0.19, "default_on": false, "color": "#7c3aed"}], "sotp_base_total": 1035.55, "sotp_base_per_share": 19.57, "floor_label": "盐湖重置铁底", "floor_note": "归母审慎净现金249.55亿元 + 察尔汗500万吨钾肥盐田与6.97万吨权益盐湖提锂保守物理重置底盘350亿元（远高于账面经营净资产256.50亿元）", "floor_total_yi": 599.55, "floor_per_share": 11.33}, "zones": {"fair_price": 20.12, "tier2_max": 16.5, "tier1_max": 14.49, "overvalued_price": 25.15, "fair_mult": 14.8149, "tier2_max_mult": 11.3333, "tier1_max_mult": 9.4002, "ttm_dps": 0.0, "steady_dps": 0.541, "ttm_div_now_pct": 0.0, "steady_div_now_pct": 2.45, "pb_check": {"now_rep_pb": 2.31, "now_ex_pb": 2.31, "t1_rep_pb": 1.52, "t1_ex_pb": 1.52, "pb_6y_floor": 1.7, "t1_vs_floor_pct": -10.6, "pass": true}, "ah_corridor": null}}}, "swarm": {}, "glossary": [{"key": "0", "term": "股东自由盈余", "plain": "巴菲特最看重的“真赚钱力”：扣掉每年修机器、换旧设备和维持运转必需的垫钱后，公司正常年份真正能装进股东口袋随便分红的纯现金利润。", "usage": "买方估值最核心的分子，比容易被会计调节的账面净利润更真实可靠。"}, {"key": "1", "term": "净债偏移", "plain": "真实企业价值与股票市值之间的差额（正数代表欠的真债比闲钱多，负数代表账上闲钱比债多）。算买下公司的真实总价时必须把这笔账加上或减去。", "usage": "穿透排查表外债、受限资金、少数股东份额和营运底仓后的最终净债（或净现金）调整额。"}, {"key": "2", "term": "经营现金流", "plain": "公司靠卖货真正收进银行卡的现金，减去买原料、发工资、交税付出去的现金。利润表可能只是“打了白条”，经营现金流才是真金白银落袋。", "usage": "检验利润含金量的照妖镜，正常好公司的经营现金流长期应大于等于净利润。"}, {"key": "3", "term": "自由现金流", "plain": "经营赚进来的现金（OCF），再扣掉盖新厂、买新设备花的钱（资本开支）后真正剩下的余钱。正数代表自己养活自己还有剩，负数代表还在借钱或吃老本扩张。", "usage": "判断一家企业究竟是“股东印钞机”还是“资本吞金兽”的终极标尺。"}, {"key": "4", "term": "资本开支", "plain": "公司盖厂房、买生产线、买地买船这类大件长期资产花的钱。通常在现金流量表里对应“购建固定资产、无形资产和其他长期资产支付的现金”。", "usage": "决定重资产企业有没有余钱分红的关键阀门，必须区分维持老厂和扩建新厂。"}, {"key": "5", "term": "维持性资本开支", "plain": "不扩大产能、仅仅为了让现有矿山和机器别老化停摆、维持当下赚钱水平，每年必须硬着头皮掏出去的修补换新钱。", "usage": "终审考虑盐湖化工设备10—15年大修及溶矿补水，在10.70亿归母维持性资本开支上再补提0.40亿缓冲，扣完才算真盈余。"}, {"key": "6", "term": "折旧摊销", "plain": "花 100 亿盖的工厂能用 10 年，会计上不会第一年把 100 亿全算成亏损，而是分摊到 10 年里每年记 10 亿费用。当年不用真掏现金，但会压低账面利润。", "usage": "重资产投产高峰期折旧暴增会压制账面利润，但现金流往往比账面利润好看得多。"}, {"key": "7", "term": "归母净利润", "plain": "把合资子公司里分给合作伙伴（少数股东）的那份利润剔除掉之后，真正归咱们买股票的上市公司全体股东所有的净利润。", "usage": "一切每股指标和估值计算必须死守归母口径，防止把合作伙伴赚的钱算成自己的。"}, {"key": "8", "term": "少数股东权益", "plain": "上市公司控股但没100%全资的子公司里，属于外面合伙人的那份家底和利润；估值必须按归母权益扣干净，绝不能把别人的算成自己的。", "usage": "盐湖合并锂产能9.80万吨中近29%归少数股东，归母满血仅6.97万吨；现金桥亦按9.82%占比剥离了30.66亿元少数股东现金。"}, {"key": "9", "term": "归母净资产", "plain": "总资产减去所有负债、再剔除合作伙伴（少数股东）份额后，真正归上市公司股东的“账面家底”。", "usage": "计算市净率（PB）和净资产收益率（ROE）的底盘分母。"}, {"key": "10", "term": "投入资本回报率", "plain": "拿新项目每年赚回的税后利润除以总共砸进去的建厂买矿本钱，专门检验管理层花钱扩产到底是在印钞还是在败家。", "usage": "盐湖4万吨锂盐项目底部稳态投入资本回报率高达27%—40%，收购五矿盐湖上半年年化达15.25%，验证资本配置大逆转。"}, {"key": "11", "term": "净资产收益率", "plain": "股东自己掏出的每 100 块钱家底，公司一年能帮股东赚回多少块净利润（净利润 ÷ 归母净资产）。注意借高债也能把 ROE 撬高，所以要结合负债率一起看。", "usage": "巴菲特最爱的长期复利标尺，重资产大扩张往往会先拉低短期 ROE，再看新产能能否爬坡修复。"}, {"key": "12", "term": "息税折旧摊销前利润", "plain": "在还没交利息、没交所得税、也没扣机器折旧费之前，主业干活实打实挣回来的原始现金毛利，常用来跨国比拼矿企造血力。", "usage": "终审测算盐湖常态归母息税折旧摊销前利润为77.26亿元，对应公允中枢10.55倍、重锤价6.69倍，横向对标清晰。"}, {"key": "13", "term": "安全边际", "plain": "好比修一座能承重30吨的桥却只让10吨卡车通过，买股票一定要比真实价值打折再买，留足防算错和抗黑天鹅的缓冲垫。", "usage": "面对强周期与央企治理约束，终审在20.12元公允价下打82折至16.50元建仓、打72折至14.49元才重锤。"}, {"key": "14", "term": "注销式回购", "plain": "公司拿真金白银从股市买回自家股票并彻底销毁，总股数变少后，剩下的每股能分到的蛋糕和利润永久变厚，堪比免税分红。", "usage": "在母公司暂不能现金分红的空窗期，盐湖2026年11月抛出15—20亿元100%注销式回购，绕过限制直接增厚每股收益。"}, {"key": "15", "term": "在建工程", "plain": "正在盖还没完工的工厂。一旦建好验收投产，账上就会从“在建工程”转成“固定资产”（简称转固），同时开始计提折旧、贷款利息也不再藏进资产而是直接扣当期利润。", "usage": "重资产扩产期结束的信号灯，但也意味着紧接着会迎来一轮“折旧+利息费用化”对账面利润的双重考验。"}, {"key": "16", "term": "研发费用化", "plain": "花钱搞研发，当年直接全额算进成本扣利润叫“费用化”（最老实、不藏雷）；如果把研发花销挂在账上当成无形资产分几年慢慢摊销叫“资本化”（容易虚增当年利润）。", "usage": "研发 100% 费用化且开发支出为 0，是 A 股极其稀缺的“极严会计诚实度”金字招牌。"}, {"key": "17", "term": "应付票据", "plain": "买原料时不直接付现金，而是开一张几个月后到期的欠条（汇票）。由银行担保一定兑付的叫银票，只靠企业自己信用担保的叫商票。", "usage": "龙头对上游开银票是强大的无息占款能力，但若存在大量银行贴现融资或逾期商票则暗藏流动性风险。"}, {"key": "18", "term": "合同负债", "plain": "客户先打钱订货、公司还没把货发出去，这笔提前收进腰包的定金在账上叫“合同负债”。名字里虽带“负债”，其实是产品抢手的甜蜜烦恼。", "usage": "观察行业真实景气度的先行温度计：合同负债上升说明下游抢货，骤降则可能需求转冷。"}, {"key": "19", "term": "短贷长投", "plain": "借一年内就得还的短期银行贷款，拿去盖十年才能回本的大工厂。虽然短贷利率更便宜能省利息，但一旦遇到金融紧缩银行抽贷，就会面临巨大的续贷周转压力。", "usage": "考验强周期龙头信用背书与现金流抗压能力的关键财务风险点。"}, {"key": "20", "term": "有息负债", "plain": "必须按期支付利息且到期必须拿真金白银还本的真债务（短期借款、长期借款、应付债券、一年内到期非流动负债、租赁负债等），区别于欠供应商的无息货款。", "usage": "衡量企业真实债务包袱和偿债红线的唯一核心口径。"}, {"key": "21", "term": "资产负债率", "plain": "总负债 ÷ 总资产，衡量公司全部家当里有多大比例是靠借钱或欠款撑起来的。但要注意里面既包含要还本付息的银行债，也包含欠上游的无息货款和客户预付款。", "usage": "需拆解其中的“有息负债率”，不能一刀切把无息占款当成高危债务。"}, {"key": "22", "term": "使用权资产", "plain": "新会计准则下，哪怕不是花钱买断、而是签了十几年长期租约的船队、厂房或码头，也要把未来租金折现记成资产（使用权资产）和债务（租赁负债）。", "usage": "防止企业通过“只租不买”把巨额固定资产和债务藏在表外，分析重资产和真债时必须合并穿透。"}, {"key": "23", "term": "预计负债", "plain": "还没真正掏钱、但八九不离十未来肯定躲不掉的赔款、诉讼、环保复垦或合同取消违约金，会计按谨慎原则提前预估出来记在负债里。", "usage": "算真实企业价值（True EV）时，未在经营利润里循环覆盖的一次性赔付/复垦类预计负债必须从严扣除。"}, {"key": "24", "term": "售后租回", "plain": "把自家建好的设备卖给金融租赁公司换回一笔现金，然后再长期租回来继续用、分期付租金。表面看是卖资产，实质上就是拿设备作抵押借一笔长期贷款。", "usage": "法医审计必查的隐性融资工具，需计入广义刚性有息债。"}, {"key": "25", "term": "受限资金", "plain": "账上虽有但这会儿被冻结抵押、不能随手取出来花的钱；查财报必须穿透附注，分清是真被查封还是普通未到期定期存款。", "usage": "盐湖中报54.72亿账面受限资金中53.29亿实为未到期正常大额定存，真正受限保证金仅1.45亿元，成功反杀爆雷鬼故事。"}, {"key": "26", "term": "营运资金", "plain": "维持工厂每天买原料、备库存、等客户回款所必须压在流水线上的周转钱。生意做得越大，通常需要额外垫进去更多周转资金。", "usage": "算可自由支配超额现金时要扣掉 18–21 天营收的保底运转现金；算稳态自由盈余时要扣成长新增垫资。"}, {"key": "27", "term": "存货跌价准备", "plain": "仓库里囤的原料或成品如果市场价跌穿了当初的成本价，会计必须把跌掉的那块差价提前算成亏损计提出来，不能按虚高原价挂账。", "usage": "周期下行期检验化工企业有没有硬撑着不提跌价、虚增利润的照妖镜。"}, {"key": "28", "term": "期间费用率", "plain": "公司除了直接生产原料和工人工资外，卖货（销售）、管人（管理）、搞技术（研发）、付利息（财务）四大开销占总营收的百分比。", "usage": "衡量巨头精细化运营与规模效应的硬指标，期间费用率越低说明把钱省到了骨子里。"}, {"key": "29", "term": "毛利率", "plain": "（卖货收入 − 直接生产成本）÷ 卖货收入。在化工行业更直观的指标是“单吨价差”，即每卖一吨产品赚的钱减去原料与能源成本后的毛利空间。", "usage": "行业周期冷暖与企业成本护城河最直接的体温计。"}, {"key": "30", "term": "净利率", "plain": "每卖出 100 块钱的货，扣完原料、人工、费用、利息和税之后，最后真能留下几块钱净利润。", "usage": "对比同行最终赚钱效率的核心指标，用来识破“只赚吆喝不赚钱”的伪成长板块。"}, {"key": "31", "term": "净营业周期", "plain": "从掏钱买原料进厂、生产卖出、到最后把货款现金收回银行卡，中间总共要垫资多少天。天数越短甚至为负，说明越能用别人的钱做生意。", "usage": "衡量产业链话语权与营运效率的核心运营指标。"}, {"key": "32", "term": "有效税率", "plain": "公司当年实际交的所得税费用 ÷ 税前利润总额。因为有高新技术企业 15% 优惠、研发加计扣除或海外子公司低税率，它常与 25% 标准税率不同。", "usage": "跨国企业在 OECD 全球最低税落地后，有效税率抬升会直接吃掉一部分常态净利润。"}, {"key": "33", "term": "保本稼动率", "plain": "稼动率就是工厂实际开工跑了满负荷产能的百分之几；“保本稼动率”是指开工率只要达到多少，赚的毛利就刚好够覆盖新厂新增的折旧费用不亏钱。", "usage": "保本稼动率越低（如 10% 以下），说明这套新装置造价极低、抗周期暴跌的生存力越变态。"}, {"key": "34", "term": "单位产能投资额", "plain": "盖一套工厂总花销 ÷ 年产能，也就是“每建出 1 吨年产能要花多少块钱建厂费”。直接决定了工厂投产后每年要背多少折旧。", "usage": "重化工行业最硬的先天基因：建厂比对手便宜一半，意味着全生命周期的折旧成本永久少一半。"}, {"key": "35", "term": "成本曲线", "plain": "把全球所有厂家的生产成本从低到高排成一条台阶曲线。排在最右侧最贵的那 10% 厂家的成本叫“90 分位边际成本”——产品跌破这条线，高成本老外工厂就得亏钱关门停产。", "usage": "周期股定价的物理地心引力：只要行业不消亡，商品价格很难长期死在 90 分位成本线之下。"}, {"key": "36", "term": "剪刀差", "plain": "两条指标走势像剪刀一样越张越开：比如产品卖价暴涨而上游原料暴跌（赚钱暴增），或者销量大涨但单吨毛利暴跌（增产不增收）。", "usage": "用来一眼看穿利润暴涨究竟是靠真本事还是靠短期外部价格错配。"}, {"key": "37", "term": "顺价权", "plain": "当上游石油、煤炭、电价涨价时，企业能不能顺理成章把涨出来的成本转嫁给下游客户、保住自家每吨赚的毛利。垄断龙头顺价极快，过剩大宗则只能自己硬扛。", "usage": "区分真护城河（如寡头聚氨酯）与苦力生意（如过剩大宗石化）的分水岭。"}, {"key": "38", "term": "期现取严", "plain": "定常态商品价时同时看现货和期货价，哪个更低就按哪个算，好比算自家收成时专按更保守的批发预售价来兜底。", "usage": "碳酸锂现货8.60万、主力期货8.262万，按期现取严选8.262万并微调至8.25万锚定，杜绝现货滞后高估盈利。"}, {"key": "39", "term": "强周期龙头股", "plain": "彼得·林奇六大股票分类之一：业绩跟着宏观经济和行业供需大起大落的工业巨头（化工、钢铁、有色等），核心赚的是行业低谷扩张、反转暴击的钱。", "usage": "投资这类股票必须看重资产重置成本、成本曲线身位和底部 PB，绝不能在景气高点看低 PE 冲进去。"}, {"key": "40", "term": "隐蔽资产型", "plain": "彼得·林奇六大股票分类之一：公司肚子里藏着账面还没体现出价值、市场目前几乎按 0 元白送的优质资产或高壁垒新业务，一旦变现或爆发就带来额外赔率。", "usage": "判断买方赔率不对称性的关键：成熟主业兜底、高壁垒新材料作为白送期权。"}, {"key": "41", "term": "永续债", "plain": "永续债是没有到期日、可以一直不还本但利率会越跳越高的“伪权益真债务”；可转债是可以按约定价格换成股票的债券，会稀释老股东持股比例。", "usage": "排查公司有没有把债藏在净资产里（永续债）或存在未来股本稀释压力（可转债）。"}, {"key": "42", "term": "财务公司", "plain": "大集团内部自设的“专属小银行”，专门归集旗下上市公司的闲钱；若存款占比太高、利息太低，小股东就怕钱被大股东廉价占用。", "usage": "盐湖有205.17亿元（占货币资金63.6%）存在五矿财务公司，存贷比266:1且年化利息仅1.14%，遭终审硬砍30%折价。"}, {"key": "43", "term": "商业模式", "plain": "护城河是别人学不会、抢不走的长期竞争优势；转换代价是指下游客户想换掉你的供应商时，重新测试认证、停产调试、承担良率报废风险所要付出的巨大成本。", "usage": "特种新材料和高规格异氰酸酯之所以利润率高，正是因为客户认证慢、导入后转换代价极高。"}, {"key": "44", "term": "物理双盲", "plain": "买东西前先蒙住眼不看价签，光凭用料和手艺自己估个公道价，估完再掀布看标价，彻底杜绝被今天股价牵着鼻子走。", "usage": "本文在完全隔离现价下先算出盐湖公允中枢20.12元与两档买点，最后揭盲对照22.12元现价，零事后反悔。"}, {"key": "45", "term": "常态自由盈余", "plain": "剔除短期暴利和账面噪音，扣完每年修设备、补周转的必要开销后，公司正常年景真正能放进股东口袋的纯现金。", "usage": "终审把盐湖三季报年化119.2亿净利挤水腰斩，锁死归母常态自由盈余55.02亿元/年，满血达产为58.80亿元。"}, {"key": "46", "term": "PASS_WITH_DISCOUNT", "plain": "审计裁判给企业贴的通行证标签，意思是核心家底和造血真实过关，但存在治理瑕疵，必须先扣一笔折价再给估值。", "usage": "盐湖主业现金流过硬但存在205亿财务公司低息存款与涉镁警报，终审定级为带治理折价通过。"}, {"key": "47", "term": "红蓝对抗", "plain": "像法庭控辩双方真刀真枪对质，红方专找硬伤挑刺、蓝方拿官方凭证反驳，裁判绝不和稀泥，要么证伪要么实打实扣估值。", "usage": "本次庭审红队命中锂脉冲回归与现金水分等四根真刺并实质砍数，蓝方凭附注反杀受限资金与税负等四大假鬼故事。"}, {"key": "48", "term": "治理折价", "plain": "老板或大股东花钱不太顾及小股东感受时，买方不会按原价买单，而是先主动打个折扣把潜在跑冒滴漏提前扣出来。", "usage": "终审对五矿财务公司205.17亿低息存款硬砍30%治理折价（-61.55亿），并在要求回报率保留+0.50%警报溢价。"}, {"key": "49", "term": "成本曲线三段式", "plain": "把全行业矿企按成本从低到高排队，盯住最贵那批刚能保本的90分位线，高位挤泡沫、中位用实价、底部严禁再打折。", "usage": "碳酸锂8.26万已贴近8万边际成本线1.03倍属底部不再打折（主锚8.25万）；钾肥2,850元超成本线1.27倍则温和挤泡沫至2,580元。"}, {"key": "50", "term": "Ke_op", "plain": "剥离账上现金后，你对纯经营主业要求的最低年化回报率，再减去永续微增率g后的倒数，就是主业该给的合理倍数。", "usage": "盐湖四因子合成纯经营资产Ke_op-g=6.75%，倒数精准对应14.81倍EV/OE，算出纯经营公允价值815.11亿元。"}, {"key": "51", "term": "拆骨分部估值", "plain": "把一家多业务公司拆成几块独立积木，每块按各自的赚钱硬度和行业公道价分别称重，再把净现金加总算出整家公司值多少钱。", "usage": "盐湖拆为钾肥519.26亿、提锂295.85亿与归母净现金249.55亿三块积木，合计数正好闭环锁定1,064.66亿元。"}, {"key": "52", "term": "免费期权", "plain": "估值时干脆按0元白送的额外彩蛋，没成你不亏一分钱，一旦成了就是白赚的大红包，专门用来拉厚赔率安全垫。", "usage": "终审将盐湖9.88亿参股物业、原卤技改迭代、锂价反转及海外钾矿全按0元计价，买进后全成免费上行期权。"}, {"key": "53", "term": "第二档正常建仓区", "plain": "性价比已经跨过及格线、值得开始分批下场买底仓的价格区间，好比好衣服打八折时先挑几件刚需入手。", "usage": "盐湖第二档为14.49—16.50元，对应内生回报8.82%起、市净率1.73倍紧贴近六年铁底，建议分批建仓8%—10%。"}, {"key": "54", "term": "第一档左侧重锤区", "plain": "市场极度恐慌乱甩卖时砸出的黄金坑价位，赔率厚到闭眼捡漏，只要基本面没坏就该果断打满单票上限仓位。", "usage": "盐湖第一档为≤14.49元，市净率1.52倍砸穿近六年1.70倍铁底，回报超10.64%，触发时可重锤加至12%—15%。"}, {"key": "55", "term": "Mark-to-Market", "plain": "盯市估值法，大白话就是不预测未来涨跌，直接按此时此刻市场上最新的现货成交价来照相算利润。", "usage": "即便按当前偏高现货钾2,850元、锂8.60万做Mark-to-Market测算，盐湖22.12元现价回报率也仅7.16%，谈不上低估。"}, {"key": "56", "term": "线性外推", "plain": "把眼前的顺风暴利或一时惨淡，简单粗暴地画条直线推演成永远如此，是投资周期股时最容易高位接盘的致命思维偷懒。", "usage": "红蓝裁决严禁拿盐湖三季报年化119.2亿元脉冲暴利做线性外推，强行将常态盈利锚砍半回归至55.02亿元。"}, {"key": "57", "term": "未分配利润", "plain": "公司历年赚的钱扣掉亏空和已发分红后剩下的账面积蓄；按《公司法》规定，合并和母公司两本账都必须为正才能发红利。", "usage": "盐湖2026Q3合并未分配利润已转正至+73.35亿，但母公司中报仍亏-40.16亿锁死分红，预计2026年末至2027Q1彻底清零。"}, {"key": "58", "term": "同一控制下企业合并", "plain": "同一个大老板把左手旗下的子公司卖给右手的上市公司；会计上不产生商誉，而是按原账面价值接手，差额直接冲减资本公积。", "usage": "盐湖花46.05亿现金收购控股股东旗下五矿盐湖51%股权虽增值352%，但零商誉且半年净利6.89亿已超全年承诺103%。"}, {"key": "59", "term": "商誉", "plain": "并购时多付给卖家的溢价彩礼，平时躺账上充胖子，一旦买来的公司业绩变脸就得一次性计提商誉减值炸穿当年利润。", "usage": "盐湖因收购五矿盐湖属同一控制合并，冲减资本公积而不新增一分钱商誉，目前账面商誉为0，彻底免疫商誉爆雷。"}, {"key": "60", "term": "递延所得税资产", "plain": "以前亏大钱攒下的合法“未来抵税代金券”；赚钱核销时账面所得税看着暴增，其实只是划掉代金券，一分真现金都没多交。", "usage": "盐湖2026前三季账面所得税大增138%实为母公司补亏非现金转回12.10亿元DTA，同期经营现金流高达98.39亿元。"}, {"key": "61", "term": "银行承兑汇票", "plain": "客户买货没给现金、开了一张由银行担保到期必付的欠条，信用远高于普通白条应收账款，但数量暴增也反映下游资金偏紧。", "usage": "盐湖44.64亿广义应收中95.9%（42.81亿）是银行承兑汇票，纯应收仅1.54亿，但票据大增78%且周转拉长至50.4天须警惕降温。"}, {"key": "62", "term": "广义类现金", "plain": "把活期银行存款、短期理财以及一年内和一年以上定期大额存单全打包加总，看清公司保险柜里真实的现金家底全貌。", "usage": "盐湖2026Q3合并广义类现金高达401.28亿元，经扣减受限金、应付股利、财司折价、少数股东及刚性债后净剩249.55亿。"}, {"key": "63", "term": "研发投入资本化率", "plain": "研发花掉的钱有多少被算成资产挂在账上（资本化）、有多少直接当期扣掉（费用化）；资本化率越低，利润水分就越少。", "usage": "盐湖研发费用100%直接费用化、资本化率为0.00%，叠加上商誉归零与94%净现比，财报洁净度创重整以来新高。"}, {"key": "64", "term": "每股分红", "plain": "最近连续十二个月里，公司实打实打进股东银行卡里的每一股现金红利，一分是一分，最检验企业是不是铁公鸡。", "usage": "因历史破产重整留下的母公司未弥补亏损尚未归零，盐湖当前近12个月实派每股分红为0.0000元，正处破冰前夜。"}, {"key": "65", "term": "应付股利", "plain": "已经宣布要分出去但还没真正把钱打到股东账上的待付红利，钱虽还在公司户头里，本质上早就不再归公司自己支配。", "usage": "盐湖2026Q3账面11.56亿元应付股利中11.48亿属子公司欠少数股东的历史股利，现金拆骨时必须100%先扣除。"}, {"key": "66", "term": "回报融资比", "plain": "把上市以来发给股东的分红和注销回购加起来，除以向股市伸手要过的融资总额，一眼看穿公司是奶牛还是抽血机。", "usage": "含881.74亿破产债转股盐湖回报融资比仅7.72%折射历史创伤；按纯现金募资52.63亿算则已达129.3%，正加速逆转。"}, {"key": "67", "term": "SMM", "plain": "上海有色网的英文简称，是国内金属与新能源电池材料行业公认的权威现货报价平台，相当于菜市场的每日官方行情牌。", "usage": "截至2026-11-26，SMM电池级碳酸锂现货报价8.60万元/吨，与广期所主力期货共同构成盐湖锂价定锚的双基准。"}, {"key": "68", "term": "LC2701", "plain": "广州期货交易所挂牌、2027年1月到期交割的碳酸锂主力期货合约代码，集中反映了全市场真金白银对未来锂价的预期。", "usage": "LC2701主力合约已跌至8.262万元/吨，较5月20万高点腰斩，倒逼终审把盐湖常态锂价铁锚下修锁死在8.25万元。"}, {"key": "69", "term": "LC2705", "plain": "广期所2027年5月交割的碳酸锂远期期货合约，拿它跟近月主力合约比价能看出市场对半年后价格的预期，若深度贴水说明大家看跌后市。", "usage": "2026年11月底LC2705报8.200万元/吨，仅较主力合约LC2701贴水0.75%，远未触发5%深度贴水警报，印证底部定价趋稳。"}, {"key": "70", "term": "SQM", "plain": "全球最顶级的盐湖提锂兼钾碘矿业巨头，手握智利阿塔卡马顶级盐湖，是全球资本市场给盐湖资源股定价的头号参照物。", "usage": "SQM跨周期EV/EBITDA中枢为7—11倍，盐湖公允中枢10.55倍契合其上沿且无海外国有化风险，重锤价6.69倍直接击穿其底部。"}, {"key": "71", "term": "BHP", "plain": "全球矿业巨无霸必和必拓的英文简称，正在加拿大豪掷重金建设超大型Jansen钾矿，是未来改写全球钾肥供需的大变量。", "usage": "BHP加拿大Jansen钾矿进度已达87%并将于2027年中投产，叠加老挝扩产压制，促使终审把盐湖钾肥主锚下压至2,580元。"}, {"key": "72", "term": "原卤直提", "plain": "不用把盐湖卤水先晒一两年盐田再慢慢折腾，直接把刚抽上来的原始卤水送进吸附膜装置短流程把锂捞出来的新工艺。", "usage": "收购五矿盐湖不仅带来一里坪资源，更让盐湖掌握国内唯一跑通的原卤直提成熟工艺，单吨全成本仅约2.9万元且收率翻倍。"}, {"key": "73", "term": "沉锂母液萃取", "plain": "提完一轮碳酸锂后，剩下的废水母液里其实还飘着不少漏网的锂离子，用萃取剂再“淘一遍金”就能低成本多捞一批锂。", "usage": "盐湖依托低资本开支的沉锂母液萃取技改提升收率，终审仅此一项就在满血达产自由盈余中温和计入+1.10亿元增量。"}, {"key": "74", "term": "老卤贫化", "plain": "盐湖抽了几十年后，天然卤水里的钾浓度会慢慢变淡变稀，必须往干盐层灌淡水把固态钾盐融化补水，否则产量会滑坡。", "usage": "察尔汗老卤贫化叠加2026前三季钾产同比-5.5%已亮黄灯，若演变为永久量缩本升并跌破430万吨将触发第二条死刑红线。"}, {"key": "75", "term": "金属镁中试", "plain": "大规模盖厂前的放大版试验线，用来验证拿晒完钾肥剩下的废卤水炼金属镁到底划不划算，属于盐湖历史伤疤的敏感试水。", "usage": "盐湖2026年8月公告出资3亿元重启金属镁中试，终审全额视作刚性债预先扣除，并划定扩至超20亿自投即触发死刑红线。"}, {"key": "76", "term": "CFR", "plain": "国际海运“成本加运费”报价，意思是海外卖家包运费把货送到中国港口船边，但不含海运保险和国内清关增值税。", "usage": "2027年中国钾肥进口大合同落地为CFR 355美元/吨，折算含税进口成本约2,701元/吨，成为压制国内钾价上限的风向标。"}, {"key": "77", "term": "从价资源税", "plain": "按矿产品卖出的总销售额比例抽成的矿产税，价高时多交、价跌时自动少交，就像行情不好时房东按流水降租的减震器。", "usage": "青海钾盐资源税8%、锂盐6%，在钾锂双杀压测中从价资源税自动降税减震，助盐湖极限寒冬仍稳守正自由现金流。"}, {"key": "78", "term": "氯化钾", "plain": "农作物生长离不开的“钾肥之王”，好比给庄稼补钙健骨的营养粉，能防倒伏、提甜度，是全球最核心的农业刚需化肥原料。", "usage": "盐湖股份压舱石主业，合并产能530万吨独占国内近七八成产量，2026前三季营收84.09亿、利润率近60%。"}, {"key": "79", "term": "电池级碳酸锂", "plain": "制造电动车与储能电池的“白色石油”：电池级纯度超99.5%可直接做动力电池正极，工业级杂质稍多需二次提纯。", "usage": "盐湖合并锂盐产能9.80万吨（归母6.97万吨），2026前三季营收88.81亿、毛利率高达86%，成为第一大利润引擎。"}, {"key": "80", "term": "碳酸锂当量", "plain": "锂行业统一的“度量衡换算尺”，把氯化锂、氢氧化锂等不同锂化合物按含锂量统一折算成碳酸锂重量，方便横向比较产能大小。", "usage": "公司9.80万吨合并锂盐实物产能折合9.52万吨LCE，剔除少数股东后归母权益LCE为6.71万吨，严防按实物高估。"}, {"key": "81", "term": "氯化锂", "plain": "盐湖提锂路线中的重要基础锂盐产品，既可直接用于金属锂冶炼和特殊化工，也能进一步加工成碳酸锂，每吨折合0.8715吨LCE。", "usage": "全资4万吨一体化项目原规划含2万吨氯化锂，一里坪盐湖保有氯化锂储量164.59万吨，拓展多元产品矩阵。"}, {"key": "82", "term": "氢氧化锂", "plain": "一种碱性更强的高端基础锂盐，主要喂给高能量密度的三元锂电池正极材料，就像给高端赛车特供的高标号汽油。", "usage": "并表五矿盐湖带来0.1万吨氢氧化锂产能，配合广期所2026年11月新挂牌的氢氧化锂期货，完善多品类锂盐布局。"}, {"key": "83", "term": "62% 白钾", "plain": "行业最通用的进口氯化钾现货基准规格，指外观呈白色结晶、氧化钾有效养分含量达62%的高纯度钾肥，是市场看价的风向标。", "usage": "2026年11月下旬港口62%白钾现货受500万吨高库存压制回落至2,750—2,850元/吨，终审将常态锚定在2,580元/吨。"}, {"key": "84", "term": "K2O", "plain": "氧化钾的化学式，国际钾肥行业专门用它来统一标定化肥里“有效钾营养”的含金量，就像用纯酒精折百吨来对比不同度数的白酒。", "usage": "全球钾肥产能预计由6,610万吨扩至7,740万吨（折K2O）；盐湖亦制得K2O≥40%的氯化钾镁协同肥。"}, {"key": "85", "term": "钾盐深加工", "plain": "把基础氯化钾再加工成不含氯或高附加值的特种钾产品，用于忌氯果蔬烟草施肥或工业化工原料，好比把原粮做成精制糕点。", "usage": "盐湖股份氯化钾下游有39.5%流向硫酸钾、硝酸钾、氢氧化钾等深加工领域，与47.5%复合肥共同托底刚性需求。"}, {"key": "86", "term": "察尔汗盐湖", "plain": "位于青海柴达木盆地的中国最大可溶性钾镁盐矿床，面积超5,800平方公里，就像大自然赐予中国的一座露天超级化肥与锂矿宝库。", "usage": "盐湖股份立足其3,700平方公里核心矿权，形成500万吨钾肥加8万吨合并锂盐产能，是全球成本曲线最左端的神湖。"}, {"key": "87", "term": "一里坪盐湖", "plain": "青海柴达木盆地另一座优质高品位富锂盐湖，镁锂比显著优于察尔汗，既产钾肥又适合用短流程技术直接高效提取碳酸锂。", "usage": "2026年1月公司斥资46.05亿元现金并表五矿盐湖51%股权将其收入囊中，带来1.8万吨锂盐与30万吨钾肥产能。"}, {"key": "88", "term": "锂辉石", "plain": "从澳大利亚等地坚硬石头矿里开采并选出的含锂矿石粉，需炸山挖矿、长途海运再高温焙烧冶炼，成本远高于优质盐湖。", "usage": "外购锂辉石的锂盐厂常被上游矿价挤压（如赣锋三季度毛利率仅20.17%），而盐湖复用免费老卤免疫精矿涨价卡脖子。"}, {"key": "89", "term": "锂云母", "plain": "主要产自江西宜春等地的含锂硬岩矿，含锂品位偏低、提炼渣土多且环保能耗高，相当于行业里最费油、成本最高的那批矿山。", "usage": "低品位锂云母构成全球约8万元/吨的90分位成本防线，当前8.25万锂价正倒逼其失血减产，反衬盐湖成本护城河。"}, {"key": "90", "term": "金属镁", "plain": "察尔汗晒钾肥会产生海量副产氯化镁，经脱水电解可炼成超轻结构金属镁，但高原高能耗工况下极难盈利，曾是吞金无底洞。", "usage": "公司2012—2019年豪赌金属镁一体化巨亏458亿破产，如今镁业仍在体外青海汇信，须高度警惕反注与3亿中试风险。"}, {"key": "91", "term": "正极材料", "plain": "锂电池内部决定电量与寿命的最核心部件（如磷酸铁锂、三元材料），占电池成本近半，也是碳酸锂最直接的下游采购买家。", "usage": "下游正极材料厂采购高度同质化且转换成本低，因此盐湖股份没有独立提价权，盈利护城河全靠全球最低成本身位。"}, {"key": "92", "term": "硝酸铷", "plain": "从盐湖卤水中微量伴生稀有金属“铷、铯”提炼出的高端化工品，可用于原子钟、特种玻璃等前沿小众领域。", "usage": "盐湖2025年报仅用10公斤吸附剂产出1公斤硝酸铷，即便未来突破百吨级，相对近200亿元主业营收弹性也不足1%。"}, {"key": "93", "term": "PVC", "plain": "聚氯乙烯塑料的英文简称，广泛用于建材管材与门窗，属于高耗能重化工基础材料，与盐湖主业协同差且周期波动剧烈。", "usage": "盐湖股份历史上盲目跨界上马海纳化工PVC项目导致长期巨亏，2020年司法重整将其打包剥离后才重获新生。"}, {"key": "94", "term": "Nutrien", "plain": "全球钾肥三大寡头巨头：加拿大Nutrien、白俄罗斯Belaruskali与俄罗斯Uralkali，联手掌握世界大部分出口供给与定价话语权。", "usage": "Nutrien矿山现金成本低于60美元/吨，但叠加海运到中国CFR成本达210—240美元，盐湖股份坐镇国内零跨境风险。"}, {"key": "95", "term": "格林布什", "plain": "位于澳大利亚的全球品位最高、规模最大的硬岩锂辉石神矿，开采成本极低，堪称锂矿石头界里的“中东大油田”。", "usage": "天齐锂业虽坐拥格林布什实现64%高毛利，却被洋股东切走46%净利；反观盐湖股份毛利率72.64%且少数股东占比仅14.58%。"}, {"key": "96", "term": "老卤", "plain": "盐湖卤水经过日晒提取出钾肥后剩下的浓缩“精华汤底”叫老卤，里面富集了大量锂离子；再提完锂后的尾卤还会回注湖区溶矿。", "usage": "察尔汗“提钾排老卤—老卤提锂—尾卤溶矿”闭环让提锂几乎白捡原料，造就单吨营业成本仅2.37万元的全球地板成本。"}, {"key": "97", "term": "晶间卤水", "plain": "藏在干涸盐湖地下固体盐层缝隙里的天然高浓度含盐液体，像海绵里吸满的浓盐水，是察尔汗液体矿床开采提取的核心源头。", "usage": "察尔汗依赖流域淡水补给维持晶间卤水动态平衡，因此受生态红线刚性约束，氯化钾500万吨/年已是不可逾越的物理上限。"}, {"key": "98", "term": "镁锂比", "plain": "盐湖卤水里镁离子与锂离子的重量比值。镁和锂长得极像很难分开，比值越高越像在几百斤沙子里挑几克金粉，提纯难度陡增。", "usage": "蓝科锂业独创吸附膜耦合技术将察尔汗500:1超高镁锂比降至6:1，新研发工艺甚至可攻克超1000:1极限低锂工况。"}, {"key": "99", "term": "盐田摊晒", "plain": "把地下抽出的卤水铺进一望无际的露天大盐池，纯靠高原强烈日照和干风自然蒸发水分、浓缩结晶，相当于免费借用太阳公公当锅炉。", "usage": "低成本摊晒奠定了察尔汗钾肥极低能耗优势，但耗时长达1—2年，如今正通过一里坪原卤直提技术加速向短流程升级。"}, {"key": "100", "term": "反浮选冷结晶", "plain": "盐湖提钾的两大核心分选绝活：用特制气泡把不需要的杂质盐浮走留下钾叫反浮选，反之浮起钾精矿叫正浮选，配合低温析出高纯氯化钾。", "usage": "盐湖股份早年自主攻克反浮选冷结晶，破解高钠低钾难题将产能推至500万吨，使95%以上高品位钾肥占比达85%。"}, {"key": "101", "term": "热熔结晶", "plain": "利用氯化钾和氯化钠在不同温度或不同浓度卤水里的溶解度差异，通过加热溶解冷却析出或勾兑卤水把纯钾分离出来的物理提纯法。", "usage": "公司掌握反浮选、正浮选、热熔结晶与兑卤法全套提钾工艺矩阵，灵活适配不同矿区卤水，单吨营业成本仅1,000—1,150元。"}, {"key": "102", "term": "连续离子交换移动床", "plain": "像自动化回转寿司流水线一样的巨型吸附装置，卤水与吸附剂24小时逆向连续接触抓锂与洗脱，比老式间歇生产省水省电得多。", "usage": "母公司全资4万吨一体化项目采用全球单套最大该类装置，将锂综合收率推高至82.4%，2026上半年毛利率达88.02%。"}, {"key": "103", "term": "膜耦合", "plain": "把多种孔径不同的工业级“超微滤水膜”串联组合，像多道粗细筛子依次拦下镁杂质、浓缩锂离子，大幅减少化学药剂与煤炭消耗。", "usage": "蓝科锂业与4万吨项目借吸附+膜耦合、五矿盐湖借梯度耦合膜分离，构筑起盐湖股份领先全球的三套梯次提锂护城河。"}, {"key": "104", "term": "铝系吸附剂", "plain": "盐湖吸附提锂的“心脏耗材”，其核心化学粉体LiAl-LDHs内部布满只认锂离子的微观小口袋，像磁铁只吸铁屑一样从卤水精准抓锂。", "usage": "公司正攻克微米级LiAl-LDHs自主造粒，目标磨损率<2%、成品率>98%，把提锂核心耗材供应链彻底攥在自己手里。"}, {"key": "105", "term": "非溶剂致相分离", "plain": "一种把微米级吸附剂粉末做成结实多孔圆球的先进造粒工艺，就像做内部松软、外皮耐摔的米花球，既能让卤水畅通进出又不怕冲刷磨碎。", "usage": "公司自研该球形造粒技术用于升级铝系锂吸附剂，直接破解吸附容量低与易磨损痛点，进一步压低长期耗材替换成本。"}, {"key": "106", "term": "RO", "plain": "反渗透膜技术（Reverse Osmosis）的英文缩写，原理和家里净水器最核心的RO滤芯一样，靠高压把纯水挤过去、把锂离子浓缩留下来。", "usage": "公司研发“RO—电渗析—树脂除硬/硼”前置原卤直提平台，助力察尔汗在超高镁锂比下直接产出99.8%纯度碳酸锂。"}, {"key": "107", "term": "电渗析", "plain": "给装满卤水的膜堆通上直流电，利用正负电荷异性相吸原理，让带电的钠、镁、锂离子按规定通道分开跑，实现高效除杂与浓缩。", "usage": "作为公司新一代原卤直提前置耦合平台的关键一环，协同将卤水钠离子浓度降45%、吸附效率推升至91.3%。"}, {"key": "108", "term": "纳滤", "plain": "孔径只有纳米级的精密筛膜，专门利用“一价锂离子个头小钻得过、二价镁离子个头大被挡住”的特性，把难缠的镁锂轻松筛分开。", "usage": "盐湖原卤直提新工艺实现单级纳滤98%截留镁离子，极大降低后续除镁药剂消耗，直接支撑公司全球成本最左端身位。"}, {"key": "109", "term": "锂综合收率", "plain": "从卤水进厂到产出成品碳酸锂，最终成功拿到手的锂占原始总含锂量的百分比，就像榨油出油率，收率每高几个点都是白捡的纯利润。", "usage": "全资4万吨项目锂综合收率高达82.4%，叠加五矿盐湖原卤直提使收率翻倍，成为盐湖股份不用狂买新矿也能增量的魔法。"}, {"key": "110", "term": "中试", "plain": "新技术从实验室小烧杯（小试）走向大型工业化工厂之前的“中型试产演练”，用来检验连续生产稳不稳定、算不算得过经济账。", "usage": "盐湖比亚迪3万吨项目近十年仍停留在中试阶段，以及3亿元金属镁中试，在估值时均严禁提前计入盈利预期。"}, {"key": "111", "term": "聚砜纺丝", "plain": "用耐高温耐酸碱的高性能特种塑料聚砜（PSF）拉成极细纤维丝并挂载吸附材料，做成专用抓捕器来提取卤水里的微量稀缺元素。", "usage": "盐湖股份已利用PSF基体制备10公斤吸附剂并产出1公斤硝酸铷，尚处实验室小试期，属长期观察项。"}, {"key": "112", "term": "进口大合同", "plain": "我国中化、中农等农资谈判联合体每年与加拿大、白俄等国际钾肥巨头签下的年度海运采购基准价，相当于全国钾肥市场的“官方指导锚”。", "usage": "2026年11月20日刚落地2027年大合同CFR 355美元/吨（涨7美元），折国内完税成本约2,701元/吨，焊死钾肥底部防线。"}, {"key": "113", "term": "广期所", "plain": "广州期货交易所的简称，专门推出碳酸锂与氢氧化锂等新能源金属期货品种，已成为全球锂盐定价最透明、反应最敏捷的公开市场风向标。", "usage": "盐湖股份碳酸锂销售依托广期所期货与长协随行就市，截至2026年11月下旬其主力合约LC2701已回落至8.262万元/吨底部区。"}, {"key": "114", "term": "双周定价", "plain": "公司营销委员会每两周根据港口现货与供需变化动态调整一次官方出厂报价的销售机制，既防价格滞后吃亏，又保持大客户采购平稳。", "usage": "盐湖股份借双周定价叠加先款后货，2026前三季营收189.85亿却仅1.54亿纯应收账款，几乎零赊销、现金回款极佳。"}, {"key": "115", "term": "长协", "plain": "买卖双方签订的长期供货协议，通常提前锁定量而不锁死价格（随现货或期货均价浮动），相当于饭店和大客户签下长期包桌合同。", "usage": "公司电池级碳酸锂通过长协随行就市直供正极与电池龙头，保证满产满销不积压，盈利弹性直接挂钩行业基准锂价。"}, {"key": "116", "term": "进口依存度", "plain": "某种资源每年净进口量占全国总消费量的比例，数值越高说明国内越缺货、越容易被海外卖家拿捏，本土矿山的战略压舱石价值就越贵。", "usage": "2026上半年我国氯化钾进口依存度高达78.54%，盐湖股份独供国产超六成产量，坐拥国家粮食安全赋予的绝对保供地位。"}, {"key": "117", "term": "金融套保", "plain": "套期保值的简称，企业在期货市场提前做反向单锁定未来卖价，就像农民趁秋收前先给粮食买份价格保险，用来熨平大宗商品暴涨暴跌。", "usage": "依托2026年广期所碳酸锂与氢氧化锂双期货矩阵，公司正逐步强化金融套保能力，平抑周期极端波动对业绩的冲击。"}, {"key": "118", "term": "四水四定", "plain": "国家在干旱缺水地区划定的刚性生态红线——以水定城、以水定地、以水定人、以水定产，有多少合法淡水配额才能开多大工厂产能。", "usage": "察尔汗地处极度干旱的柴达木盆地，四水四定直接将氯化钾年产能天花板锁死在500万吨，构成不可逾越的物理约束。"}, {"key": "119", "term": "取水许可证", "plain": "水利部门核发给矿山或工厂合法抽取河湖地下水的“准生证”，有明确年取水量上限与有效期，一旦断证或核减配额将直接限产。", "usage": "母公司核心取水许可证（B632801S2021-0046）有效期截至2026年12月7日，合规平稳续期是买方紧盯的临界硬路标。"}, {"key": "120", "term": "环评", "plain": "环境影响评价批复与合法排污执照的合称，是化工矿业项目合法建设与长期生产的环保通行证，没拿到手就属于违规超产。", "usage": "盐湖股份500万吨钾肥环评已获批、钾肥与蓝科排污许可证均续期至2030年，历史环保督察整改已落地消除停产雷区。"}, {"key": "121", "term": "走出钾", "plain": "中国钾肥企业为打破国内资源天花板，响应国家战略出海去非洲、东南亚等富钾区拿矿建厂的行业专有战略口号。", "usage": "背靠中国五矿，公司已成立毛里求斯与刚果（布）矿业子公司推进“走出钾”，属中期第二梯队布局，须严防海外盲目砸钱。"}, {"key": "122", "term": "资源民族主义", "plain": "南美、非洲等资源富集国政府通过强制收归国有、强行要求合资占大股、突然加征暴利税或禁止原矿出口来截留矿企利润的政策风险。", "usage": "津巴布韦禁矿、智利锂矿国有化冲击海外玩家，而盐湖股份矿权100%坐落青海境内，完全免疫海外地缘与矿权突袭。"}, {"key": "123", "term": "司法重整", "plain": "企业资不抵债濒临退市时，在法院主持下刮骨疗毒的“金融大手术”：砍掉巨亏烂资产、把债主变成股东，保住赚钱主业轻装重生。", "usage": "2019—2020年盐湖股份通过司法重整以30亿剥离镁业与海纳化工毒瘤，2021年恢复上市后彻底脱胎换骨为超级现金奶牛。"}, {"key": "124", "term": "债转股", "plain": "公司还不起银行和债主的欠款时，干脆多印新股票按约定价格抵给债主，债主从催债人变身公司股东，欠债一笔勾销不再付利息。", "usage": "2020年重整通过大规模债转股清偿巨额债务，工银投资、农行、中化等变身股东，帮助公司将资产负债率压低至13.47%。"}, {"key": "125", "term": "资本公积", "plain": "公司发行股票溢价等非经营赚来的“家底公积金”。新《公司法》已允许在符合条件时直接用它来一把填平历史亏损窟窿，加速解锁分红。", "usage": "母公司账面握有高达354.58亿元资本公积，除了靠内生利润填坑外，亦可依法启用资本公积补亏打破8年零派息魔咒。"}, {"key": "126", "term": "采矿权出让收益", "plain": "矿山企业合法开采国家矿产资源必须缴纳的“矿权买路钱”，通常获批分多年分期支付，在资产负债表里挂在长期应付款项下，视同刚性债务。", "usage": "公司2026三季末长期应付款13.34亿元叠加其他应付款2.17亿元即为此项，计算归母净现金时必须100%全额扣除。"}, {"key": "127", "term": "业绩承诺", "plain": "大股东往上市公司注入资产时立下的“利润军令状”，承诺未来三年至少赚多少钱，达不到就要真金白银赔钱，防高价卖烂资产抽血。", "usage": "五矿盐湖并表附带2026—2028年合计21.05亿元业绩承诺，2026单上半年就狂赚6.89亿元，提前超额完成全年承诺的103%。"}, {"key": "128", "term": "同业竞争", "plain": "大股东自己体外还握着和上市公司干一模一样生意的公司，容易出现抢客户、利益输送，监管要求大股东必须限期整合装入上市公司或卖掉。", "usage": "中国五矿入主11个月即闪电注入五矿盐湖兑现承诺，但须警惕未来借解决同业竞争名义把体外青海汇信亏损镁业高价反注。"}, {"key": "129", "term": "出表", "plain": "把某家子公司卖掉、注销或推入破产程序，让它的收入、亏损和债务彻底从上市公司合并财务报表里消失，就像把家里漏水旧房间切出去。", "usage": "公司2026年果断将历史亏损的青海盐湖机电装备推入破产重整出表，并注销4家低效子公司，使体内资产100%纯净。"}, {"key": "130", "term": "GDR", "plain": "全球存托凭证（Global Depositary Receipts），A股公司去欧洲（如瑞士、伦敦）股市发新股筹钱的融资工具，本质上同样会稀释老股东股权。", "usage": "盐湖股份自2021年恢复上市五年来定增、配股、可转债与GDR融资全部为0次，彻底告别外部抽血步入纯内生造血纪元。"}, {"key": "131", "term": "归母权益产能", "plain": "按上市公司对每家子公司的真实持股比例乘以产能算出的“真正属于咱小股东的产能”，踢掉合作伙伴分走的那份，防止看合并大数字自我陶醉。", "usage": "盐湖合并锂产能9.80万吨但归母权益产能仅6.97万吨（权益比71.17%），其中全资4万吨项目一己之力抵得上两个蓝科锂业。"}, {"key": "132", "term": "完全成本", "plain": "现金成本只算日常掏腰包的材料水电人工，像开餐馆只算买菜和工资；完全成本则把厂房折旧、矿权摊销和税费全算进去，才是真实盈亏生死线。", "usage": "盐湖股份锂盐单吨营业成本仅2.37万、完全成本约3.20万元/吨，即便锂价跌到8.25万元底部每吨仍稳赚丰厚毛利。"}, {"key": "133", "term": "绿地项目", "plain": "在一片荒地或未开发矿区从零开始勘探、修路、建厂、采矿的全流程重资产开发，好比自己买地从头盖大楼，通常耗时5—7年且极易超支。", "usage": "盐湖刚果（布）BMB海外绿地钾矿距出矿至少5—7年，对比之下现金并购已投产的五矿盐湖半年就赚6.89亿效率高得多。"}, {"key": "134", "term": "磷酸锂", "plain": "一种含锂和磷的中间化工产品，可直接作为合成磷酸铁锂正极的原料，相当于把两样常用调料提前配好的复合半成品。", "usage": "盐湖以46.05亿元收购51%股权的五矿盐湖，1.8万吨锂盐产能中包含0.2万吨磷酸锂，与碳酸锂形成多品种补充。"}, {"key": "135", "term": "光卤石", "plain": "一种同时含氯化钾和氯化镁的天然复合盐矿，把卤水放盐田里靠太阳暴晒就能结晶出来，是加工钾肥最核心的半成品粗粮。", "usage": "盐湖一方面回收尾矿大颗粒光卤石稳住钾肥产量，另一方面也在4.98亿元镁中试中测试钾光卤石全流程炼镁路线。"}, {"key": "136", "term": "金属锂负极", "plain": "把纯金属锂轧成比头发丝还薄的锂带做成下一代电池负极，能量密度极高，但加工和防氧化门槛极高，属于高端精密制造。", "usage": "赣锋与天齐已在千吨级金属锂及超薄锂带构筑高壁垒，盐湖既无工艺积累又无车企认证，该方向被买方严格定性为伪期权。"}, {"key": "137", "term": "硫化锂", "plain": "硫化物全固态电池最核心的上游电解质原料，对纯度要求高达99.9%且遇水易产生毒气，合成难度大、单价高昂。", "usage": "赣锋已实现99.9%硫化锂吨级出货、天齐在建50吨中试，而盐湖在固态电池领域零布局，仅适合做上游基础锂盐卖水人。"}, {"key": "138", "term": "固态电池", "plain": "用固体电解质替代传统易燃液态电解液的新一代电池，主打更高续航和不起火安全性，但目前仍处于从实验室向产业化爬坡的早期。", "usage": "盐湖股份在互动平台明确否认有任何固态电池终端布局，市场借其氯化锂规划炒作固态电池属于脱离财报的伪叙事。"}, {"key": "139", "term": "水氯镁石", "plain": "带着六个结晶水分子的氯化镁，是盐湖晒钾肥后堆积如山的廉价副产品；想用它炼金属镁，必须先把这六个水分子彻底脱干净。", "usage": "察尔汗副产水氯镁石原料近零成本，但脱除最后两分子结晶水极易水解腐蚀设备，曾直接拖垮盐湖400亿元旧镁业项目。"}, {"key": "140", "term": "无水氯化镁", "plain": "把水氯镁石里的结晶水彻底烤干脱净后的纯净氯化镁，是直接送进电解槽提炼金属镁的合格原料，极难做到不含杂质且不结块。", "usage": "2026年上半年盐湖在建工程出现551万元无水氯化镁制备新工艺项目，仍在千万级中试攻关期，距商业化盈利尚远。"}, {"key": "141", "term": "氯化氢", "plain": "一种具有极强腐蚀性的刺激性气体，遇水就变成强酸盐酸，在高温工业管道里一旦产生，很快就能把普通金属管道咬穿漏气。", "usage": "水氯镁石高温脱水时易发生水解生成氧化镁沉淀与强腐蚀氯化氢，是导致当年盐湖电解槽频繁穿孔停产的核心技术死结。"}, {"key": "142", "term": "白云岩", "plain": "一种天然富含碳酸镁和碳酸钙的常见岩石，是我国传统炼镁路线最核心的矿石原料，资源遍布山西、安徽等地且开采成熟。", "usage": "宿敌宝武镁业手握数亿至十余亿吨自有白云岩矿并打通竖罐低能耗炼镁，对盐湖尚未跑通的电解镁路线形成成本碾压。"}, {"key": "143", "term": "镁离子电池", "plain": "用廉价的镁离子替代锂离子来充放电的前沿概念电池；Ah是安时，用来衡量电池容量大小，数字越大装电越多。", "usage": "盐湖2025年报披露的5.5Ah镁离子电池仅能稳定循环200次，远低于商用储能6000次以上门槛，尚属早期科研探索。"}, {"key": "144", "term": "铯榴石", "plain": "目前全球最富集铯元素的稀有硬岩矿石，好比铯金属里的富金矿；氧化铯（Cs2O）含量越高，直接冶炼提取就越便宜划算。", "usage": "中矿资源垄断全球超80%高品位铯榴石（Cs2O品位达23%至36%），盐湖靠极低浓度卤水提铷铯的成本是硬岩数倍。"}, {"key": "145", "term": "光热熔盐储能", "plain": "用太阳能把特种盐加热化成几百度的滚烫液体存进大保温罐，天黑后再放热烧开水发电，相当于给电站配了一个超大号热汤保温壶。", "usage": "盐湖2025年报和2026半年报提及熔盐次数均为零，所谓受益只是下游买普通工业氯化钾做硝酸钾，属无独立产品的纯概念。"}, {"key": "146", "term": "吸附剂溶损", "plain": "提锂用的“抓锂海绵”长期泡在高盐或酸碱卤水里不断冲刷，会被慢慢泡烂溶解掉一块，需要定期花钱补新料，损耗越快单吨成本越高。", "usage": "察尔汗原卤提锂和卤水提铷铯从实验室放大到工业化装置时，吸附剂年溶损率与使用寿命是决定经济性能否过关的核心门槛。"}, {"key": "147", "term": "孤网综合能源", "plain": "矿区地处偏远无人区接不上国家大电网，只能自己花巨资建太阳能发电站加储能系统组成独立小电网自给自足，就像在荒岛自备发电机。", "usage": "西藏矿业扎布耶二期因被迫自建光热+光伏孤网，单吨投资飙至17.5万元；反观盐湖复用察尔汗现成电网，单吨仅8.79万元。"}, {"key": "148", "term": "熔融电解", "plain": "把彻底脱水的无水氯化镁加热到七百多度化成岩浆般的滚烫液体，再通入强大直流电把液态金属镁和氯气活生生劈分开的高难度冶炼法。", "usage": "盐湖2026年8月联合五矿等投4.98亿元做镁中试并包含1条熔融电解线，因高电耗高折旧，若长周期运转率不足90%极易亏损。"}, {"key": "149", "term": "硅热法", "plain": "目前全球最主流的炼镁工艺，用硅铁在高温真空罐里把白云岩里的镁还原出来；升级成大型底排竖罐后像自动卸料高炉，能耗大幅下降。", "usage": "霸主宝武镁业手握自有白云岩和大型底排竖罐硅热法，把原镁成本压到极低，让盐湖昂贵的电解镁路线几乎没有容错空间。"}, {"key": "150", "term": "一体化压铸", "plain": "用几千吨级超大压铸机把融化的轻金属液体一锤子压成整块大型汽车车身或电驱壳体，省去几十个零件焊接工序，是车企减重热门方向。", "usage": "盐湖旗下特立镁想切入新能源车电驱壳体与一体化压铸件，需熬过主机厂1.5至3年严苛耐蚀疲劳认证，目前体量仍极微小。"}, {"key": "151", "term": "ppm", "plain": "百万分之一的浓度单位，在液体里大致相当于每升水里只含1毫克目标物质，好比在一个标准游泳池里滴进几滴墨水，含量极低。", "usage": "察尔汗卤水中铷、铯浓度仅停留在ppm级，且与海量钾钠性质极像，导致卤水分离浓缩成本远高于高品位硬岩矿直接冶炼。"}, {"key": "152", "term": "追溯重述", "plain": "发生同一控制下收购子公司后，为了让今年和去年的数据能公平对比，财务报表必须假装这家子公司去年就已经在自家账上重新算一遍。", "usage": "并表五矿盐湖后，盐湖2026年三季报对年初存货、上年同期营收及折旧均作了追溯重述，重述后前三季度营收同比增58.37%。"}, {"key": "153", "term": "资产基础法", "plain": "给一家公司估价时，把厂房、矿权、现金等所有家当按现在市场价逐项重估再减去负债；重估总价高出原账面净值的幅度就是评估增值率。", "usage": "五矿盐湖按资产基础法评估增值率达352.42%，其中69亿元增值直指一里坪422.73平方公里独立采矿权，并非盲目虚高溢价。"}, {"key": "154", "term": "铺底流动资金", "plain": "新工厂刚建成准备开工时，必须提前揣在兜里用来买第一批原料、付电费和发工资的周转启动钱，通常一并算进项目立项总投资预算里。", "usage": "盐湖4万吨项目2022年立项预算70.98亿元包含税金与铺底流动资金，剔除后不含税建设预算60.83亿元，最终实付仅35.18亿元。"}, {"key": "155", "term": "边际贡献", "plain": "每多卖一吨货收进来的不含税售价，扣掉多生产这一吨必须多花的水电药剂等变动现金成本后剩下的钱，专门用来先填补折旧等固定开支。", "usage": "即便碳酸锂跌到6万元/吨行业惨案底，盐湖4万吨新线单吨边际贡献仍达3.20万元，靠极厚垫子轻松覆盖2亿元左右年折旧。"}, {"key": "156", "term": "广义应收", "plain": "把客户打的白条（应收账款）和给的商业汇票（应收票据）全加起来的总欠款，比单看应收账款更能反映下游资金松紧。", "usage": "受锂盐业务大幅收取票据影响，盐湖2026年三季度广义应收飙至44.64亿元、周转天数升至50.4天，显著高于纯钾肥时代。"}, {"key": "157", "term": "产销率", "plain": "一段时间内卖出去的货占生产出来的货的百分比。接近100%说明产多少卖多少；如果远低于90%，说明车间还在猛产但仓库里货越堆越高。", "usage": "2026年上半年盐湖碳酸锂产4.94万吨、仅销3.91万吨，产销率79.1%导致净累库1.03万吨，后续需核验产销率能否回归95%以上。"}, {"key": "158", "term": "ICF", "plain": "现金流量表里的“投资活动现金流”，买厂买矿算流出，而参股别人家公司拿回来的现金分红（股利收现）会计在这里，不算进经营现金流。", "usage": "藏格矿业和天齐锂业因巨龙铜业、SQM巨额投资收益分红计入ICF股利收现，导致表观经营现金流/净利偏低，对比时须剔除口径干扰。"}, {"key": "159", "term": "棕地红利", "plain": "在自己已经跑通的老工业园区里扩建新产线，直接白嫖现成的水、电、公路、铁路和原料管网，比跑到荒郊野外从零开荒省钱省时得多。", "usage": "盐湖4万吨项目尽享察尔汗棕地红利，免建盐田与电网，实付单吨投资低至8.79万元，较原预算省超四成并击穿全球投资底线。"}, {"key": "160", "term": "FS", "plain": "大型矿山或工程动工前由专业机构出具的终极体检报告，把资源储量、采矿工艺、要砸多少钱、能赚多少回报算得明明白白，没过关绝不贸然开工。", "usage": "盐湖刚果（布）BMB钾矿目前仅在钻探详勘期，尚未进入可行性研究（FS）阶段，后续须拿其到岸完全成本对标老挝基地检验经济性。"}, {"key": "161", "term": "FID", "plain": "大项目走完勘探、可研和环评等所有前期考察后，董事会正式拍板签字“真金白银拨款动工”的临门一脚，在此之前的规划都可能随时叫停。", "usage": "盐湖2025年实地尽调3个月后在FID前果断终止3亿美元西班牙Muga钾矿合作，证明新团队并未为凑产能指标盲目买烂矿。"}, {"key": "162", "term": "内部收益率", "plain": "衡量一个长期投资项目把未来十几年的现金流都折算回来后，实际相当于每年能拿到多少复利年化回报的标尺，算不清或太低的项目就不值得砸钱。", "usage": "买方要求严盯刚果（布）BMB钾矿未来可研中的预期内部收益率，防止央企海外保供战略任务凌驾于上市公司股东回报之上。"}, {"key": "163", "term": "Mosaic", "plain": "北美另一家全球头部磷肥和钾肥生产巨头，和Nutrien一起构成了北美钾肥双寡头，它的矿口成本和离岸报价是国际钾肥市场的重要参照。", "usage": "Mosaic三季度钾肥现金成本73美元/吨、矿口FOB售价276美元/吨，但运抵中国到岸成本达2,000—2,300元/吨，难敌盐湖本土优势。"}, {"key": "164", "term": "麻米错", "plain": "位于西藏高原的一座优质高品位锂盐湖矿区，卤水含锂浓度高、镁锂比低，开发条件优越，是国内继青海察尔汗之后备受瞩目的盐湖提锂新星。", "usage": "藏格矿业推进西藏麻米错一期5万吨项目并于2026年8月投料试车，正与盐湖、天齐联手把锂行业份额向左侧25%低成本巨头集中。"}, {"key": "165", "term": "高温焙烧", "plain": "矿石提锂必须经过的一道猛火工序，要把坚硬的锂辉石放进上千度的回转窑里用煤或天然气狠烧，改变晶体结构后才能酸浸提锂，既烧钱又费能源。", "usage": "天齐等硬岩矿巨头逃不过高温焙烧的刚性耗能成本，而盐湖靠柴达木盆地免费阳光晒卤浓缩，毛利率由此领先天齐约22个百分点。"}, {"key": "166", "term": "采盐船", "plain": "专门飘浮在盐湖晒盐池水面上作业的大型机械船，船头带着绞刀把池底结晶出来的光卤石等盐矿挖起来用管道抽进加工厂，是盐湖矿区的核心主力装备。", "usage": "采盐船的周期性迭代更新属于盐湖股份不可削减的刚性维护投入，被纳入防御性维持资本开支中以防高估长期自由现金流。"}, {"key": "167", "term": "副斜坡道", "plain": "地下深井矿山从地面斜着挖通到地底矿层的斜坡隧道，用来运送矿工、大型机械和物资，一旦遇到雨季渗水或地质塌方就得花大钱维修甚至减值。", "usage": "老挝扩产标杆亚钾国际2026年三季度因2#副斜坡道计提1.65亿元减值，凸显海外地下深井矿相较盐湖露天盐田的地质运维风险。"}, {"key": "168", "term": "FOB", "plain": "国际贸易里的装运港船上交货价，卖家只要把货送到自己国家港口装上船就完事了，后面的海运费、保险费和关税全归买家自己扛。", "usage": "全球90分位边际钾肥矿FOB成本超200—220美元/吨，加上远洋运费和9%增值税后，中国市场完税到站边际成本高达约2,250元/吨。"}, {"key": "169", "term": "矿权使用费", "plain": "海外矿业大国（如澳大利亚）向矿企征收的采矿地租，性质类似中国的资源税，但国际会计准则往往直接把它塞进营业成本里，而不单列在税金及附加中。", "usage": "天齐因澳洲矿权使用费计入营业成本，表内税金及附加率仅0.25%，剥离该口径差异后盐湖仍以64.21%主业核心营业利润率力压天齐。"}, {"key": "170", "term": "完税成本", "plain": "进口大宗商品从海外漂洋过海运到中国港口，把关税、增值税、卸船港杂费全部结清后真正落地可以卖的总成本，方便与国产货同口径比贵贱。", "usage": "按2026年11月汇率折算，2026—2027年钾肥大合同港口完税成本约2,695—2,746元/吨，锁定钾肥进口底部标尺。"}, {"key": "171", "term": "央企保供", "plain": "由央企龙头扛起国家粮食安全重任，在春耕秋播等关键农时优先稳定供应国内化肥且不搞恶意哄抬涨价，既换来稳定大客户直供，也自带稳价约束。", "usage": "盐湖依托央企保供直供中化、中农、新洋丰等大客户，钾肥单吨不含税售价比藏格高出377元/吨，但也意味着单价难再突破历史极端高点。"}, {"key": "172", "term": "送达成本", "plain": "商品不仅要算矿山挖出来的钱，还得把火车费、轮船海运费、港口装卸费和关税全加上，算清楚最终送到客户家门口的总成本，这才是竞争真底牌。", "usage": "北美巨头矿口现金成本虽低至60—73美元/吨，但算上铁路海运港杂后，在中国市场送达成本反不如察尔汗的盐湖与藏格有优势。"}, {"key": "173", "term": "四项期间费用率", "plain": "销售、管理、研发和财务这四项日常运营开销加起来占总营业收入的百分比，好比开店后交的房租、工资、广告费和贷款利息占比，越低越精干。", "usage": "盐湖2026年前三季度四项期间费用率仅2.26%（远低于藏格7.69%与亚钾10.50%），其中巨额现金生息更让财务费用率低至-1.25%。"}, {"key": "174", "term": "主业核心营业利润率", "plain": "把炒股、参股别人矿山分红、卖资产等非经营投资收益全剥干净后，单靠自己亲手干主业每卖100块钱能落袋多少营业利润，最能照出主业真功夫。", "usage": "剔除藏格巨龙铜业与天齐SQM投资收益干扰后，盐湖2026年前三季度以64.21%主业核心营业利润率力压四大同行，稳坐全行业头把交椅。"}, {"key": "175", "term": "联营投资收益", "plain": "公司参股了别家企业（通常持股20%—50%但不控股），按持股比例把对方赚的钱记到自己利润表里；注意这往往只是账面数字，对方不分红钱就进不了兜。", "usage": "藏格2026年前三季度靠参股巨龙铜业录得47.20亿投资收益，归母净利率飙至184%但净现比仅28.7%；盐湖仅2.79亿，主业成色最纯净。"}, {"key": "176", "term": "年限平均法", "plain": "把一台机器的买价扣掉报废能卖的废铁钱（残值率）后，按预计能用的年数每年平摊计入成本的折旧方式；年限设得越长，每年摊的折旧费越少。", "usage": "盐湖机器设备按15年折旧略宽于藏格10年，终审已额外扣减0.40亿元折旧拉齐补差，还原毛利率仍高达71.5%。"}, {"key": "177", "term": "成新率", "plain": "固定资产扣除历年折旧后的账面净值占最初买价原值的百分比，就像二手车开了几年还剩几成新，比例太低说明厂房设备老旧、未来可能面临大修潮。", "usage": "截至2026年上半年，盐湖合并固定资产原值227.36亿元、净值130.91亿元，综合成新率57.58%，整体设备状态健康无集中老化隐患。"}, {"key": "178", "term": "预转固", "plain": "新厂房已经盖好投产赚钱了，虽然施工账单还没最终核完（竣工决算）或房产证还没办下来，但按规矩必须先估个价从在建工程转成固定资产开始提折旧。", "usage": "4万吨项目转固后盐湖在建工程降至7.17亿元，但截至2026年上半年未办证预转固资产达23.64亿元（占固资18.06%），后续决算需防微调。"}, {"key": "179", "term": "预期信用损失", "plain": "会计上的未雨绸缪规则：不管客户现在赖没赖账，按欠款时间长短（账龄）或已知出险情况提前估计可能收不回来的钱，预先从利润里扣掉当坏账准备。", "usage": "盐湖1年内账龄坏账计提1%虽比天齐5%宽松，但纯应收仅1.54亿且对破产子公司单项计提90%，综合坏账计提率反高达28.05%。"}, {"key": "180", "term": "可变现净值", "plain": "仓库里囤的货按当下市价卖出去扣完销售费用后最多能换回多少现金；只要跌破当初生产成本，会计就必须强制计提存货跌价准备。", "usage": "盐湖2026年上半年存货跌价准备计提率仅3.24%，远低于外购矿石同行，根源在于其72.64%超高毛利率使存货极难跌破成本。"}, {"key": "181", "term": "净现比", "plain": "经营活动实际收进银行账户的现金净额除以利润表上的净利润，好比账本上说赚了100块、兜里实际摸到94块现金，越接近或超过100%说明利润越扎实。", "usage": "盐湖2021—2025年累计净现比高达108.8%，2026年前三季度净现比94.00%（对归母净利110.05%），现金含金量碾压赣锋与天齐。"}, {"key": "182", "term": "采矿权", "plain": "国家颁发的允许企业在划定矿区范围和期限内合法挖矿的专属通行证，在资产负债表里记在无形资产项下，早期拿到的世界级大矿往往账面极低、暗藏巨富。", "usage": "盐湖无形资产中采矿权账面净值仅6.42亿元，却承载着察尔汗与一里坪两大世界级盐湖资源，属于典型的财报隐蔽藏富资产。"}, {"key": "183", "term": "一致行动人", "plain": "签了协议或存在关联关系的几位大股东，在股东大会投票和重大决策上必须步调一致，监管层会把他们的持股加在一起算实际控制权，防止暗箱联手。", "usage": "2026年三季度中国五矿系联手一致行动人工银投资合计控股29.99%，且前十大股东零质押零冻结，央企掌舵控制权固若金汤。"}, {"key": "184", "term": "日常关联交易", "plain": "上市公司与大股东及其旗下兄弟企业之间长期发生的买原料、卖产品或租设备等内部生意，容易产生定价不公或暗中输血风险，必须接受中小股东监督。", "usage": "2026年上半年盐湖向五矿系采购11.07亿、向中化卖钾肥4.52亿具备商业实质，但与破产剥离的青海汇信仍有1.85亿关联销售需盯防。"}, {"key": "185", "term": "BMB", "plain": "位于非洲刚果（布）的一处大型海外钾盐绿地勘探项目，属于盐湖股份背靠中国五矿实施“走出钾”战略的重要海外资源储备选项。", "usage": "BMB钾矿目前仍处钻探详勘期、距出矿至少5—7年，买方终审对其估值严格计零，并严盯未来可研内部收益率防盲目砸钱。"}, {"key": "186", "term": "Muga", "plain": "由澳大利亚Highfield Resources主导开发的西班牙大型地下钾盐矿项目，曾一度作为盐湖股份海外扩张的潜在合作标的。", "usage": "盐湖2025年实地尽调3个月后在最终投资决策（FID）前果断叫停3亿美元Muga合作，成为新团队严守资本纪律的正面佐证。"}, {"key": "187", "term": "Tanco", "plain": "全球两座顶级稀有金属硬岩名矿：加拿大Tanco是全球品位最高的铯榴石矿山，津巴布韦Bikita是大型透锂长石与锂辉石矿山。", "usage": "中矿资源借Tanco与Bikita垄断全球超80%高品位铯资源，反衬盐湖察尔汗ppm级低浓度卤水提铷铯短期难具成本竞争力。"}, {"key": "188", "term": "Cauchari", "plain": "位于阿根廷“南美锂三角”的两座世界级高海拔盐湖提锂矿区（Cauchari-Olaroz与Mariana），均由中国锂业巨头赣锋锂业主导或参股开发。", "usage": "对比赣锋远赴南美开发Cauchari与Mariana面临高通胀、外汇管制与高资本开支，盐湖扎根青海境内棕地老卤优势极其稀缺。"}, {"key": "189", "term": "定增", "plain": "上市公司在股市里向机构或老股东增发新股票来筹钱的方式（定向增发、配股等），虽然能瞬间拿到现金，但会直接摊薄老股东原有的持股比例。", "usage": "盐湖股份2021年恢复上市五年来定增、配股、可转债与GDR融资全部为0次，全靠内生现金流完成扩产与并购，极其珍贵。"}]};
 const UNIT = APP.facts.currency_unit || '元';
 
 const state = {
@@ -1695,6 +2012,7 @@ document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('clic
   state.mode = btn.dataset.mode;
   document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === state.mode));
   renderAllDynamic(); renderTab4(); renderTab5();
+  if (typeof window.agyGlossaryRefresh === 'function') window.agyGlossaryRefresh();
 }));
 document.getElementById('slSotpRate').addEventListener('input', e => { state.sotpRatePct = parseFloat(e.target.value); renderAllDynamic(); });
 document.getElementById('resetSliders').addEventListener('click', () => { initSotpChecks(); loadPresetParams(state.presetKey); renderAllDynamic(); });
@@ -1703,7 +2021,10 @@ function toggleDrawer(open) {
   document.getElementById('drawerMask').classList.toggle('open', open);
   document.getElementById('glossaryDrawer').classList.toggle('open', open);
 }
-document.getElementById('openGlossary').addEventListener('click', () => toggleDrawer(true));
+document.getElementById('openGlossary').addEventListener('click', () => {
+  if (typeof window.agyGlossaryOpenDrawer === 'function') window.agyGlossaryOpenDrawer();
+  else toggleDrawer(true);
+});
 document.getElementById('closeGlossary').addEventListener('click', () => toggleDrawer(false));
 document.getElementById('drawerMask').addEventListener('click', () => toggleDrawer(false));
 document.getElementById('glossSearch').addEventListener('input', e => renderGlossary(e.target.value));
@@ -1716,5 +2037,379 @@ renderTab4();
 renderTab5();
 renderGlossary();
 </script>
+
+  <!-- 全文专业术语点击大白话弹窗与侧滑词典（打印 PDF 自动隐藏） -->
+  <div id="agy-term-popover" class="no-print no-glossary" role="dialog" aria-label="专业术语大白话解释">
+    <div class="tp-head">
+      <div class="tp-title-wrap">
+        <span class="tp-cat" id="agy-tp-cat"></span>
+        <span class="tp-term" id="agy-tp-term"></span>
+      </div>
+      <button type="button" class="tp-close" id="agy-tp-close" aria-label="关闭">&times;</button>
+    </div>
+    <div class="tp-plain" id="agy-tp-plain"></div>
+    <div class="tp-ctx" id="agy-tp-ctx"></div>
+    <div class="tp-foot">
+      <span id="agy-tp-meta"></span>
+      <button type="button" class="tp-drawer-link" id="agy-tp-open-all">📖 全部术语词典</button>
+    </div>
+  </div>
+
+  <div id="agy-term-fab" class="no-print no-glossary">
+    <button type="button" id="agy-term-mode-btn" title="切换正文术语下划线密度">📖 术语下划线: 智能去重</button>
+    <span class="fab-sep"></span>
+    <button type="button" id="agy-term-open-drawer" title="浏览并搜索本文全部专业术语">词典 (<span id="agy-term-total-num">190</span>)</button>
+  </div>
+
+  <div id="agy-term-drawer-mask" class="no-print no-glossary"></div>
+  <aside id="agy-term-drawer" class="no-print no-glossary">
+    <div class="td-head">
+      <strong>📖 本文全量专业术语大白话词典（190 词）</strong>
+      <button type="button" id="agy-td-close" style="background:none;border:none;color:#fff;font-size:21px;cursor:pointer;line-height:1;">&times;</button>
+    </div>
+    <div class="td-tools">
+      <input type="text" id="agy-td-search" class="td-search" placeholder="搜索化工、工艺、财务或估值术语（如 MDI、POE、净债、折旧...）" />
+      <div class="td-cats" id="agy-td-cats"></div>
+    </div>
+    <div class="td-list" id="agy-td-list"></div>
+  </aside>
+
+  <script class="no-print">
+  (function(){
+    var GLOSSARY = [{"id": 0, "t": "股东自由盈余", "f": ["稳态自由盈余"], "c": "估值周期", "p": "巴菲特最看重的“真赚钱力”：扣掉每年修机器、换旧设备和维持运转必需的垫钱后，公司正常年份真正能装进股东口袋随便分红的纯现金利润。", "x": "买方估值最核心的分子，比容易被会计调节的账面净利润更真实可靠。", "h": 2}, {"id": 1, "t": "净债偏移", "f": ["ev_delta"], "c": "估值周期", "p": "真实企业价值与股票市值之间的差额（正数代表欠的真债比闲钱多，负数代表账上闲钱比债多）。算买下公司的真实总价时必须把这笔账加上或减去。", "x": "穿透排查表外债、受限资金、少数股东份额和营运底仓后的最终净债（或净现金）调整额。", "h": 1}, {"id": 2, "t": "经营现金流", "f": ["经营活动现金流", "经营现金流"], "c": "财务会计", "p": "公司靠卖货真正收进银行卡的现金，减去买原料、发工资、交税付出去的现金。利润表可能只是“打了白条”，经营现金流才是真金白银落袋。", "x": "检验利润含金量的照妖镜，正常好公司的经营现金流长期应大于等于净利润。", "h": 29}, {"id": 3, "t": "自由现金流", "f": ["表观自由现金流", "自由现金流"], "c": "财务会计", "p": "经营赚进来的现金（OCF），再扣掉盖新厂、买新设备花的钱（资本开支）后真正剩下的余钱。正数代表自己养活自己还有剩，负数代表还在借钱或吃老本扩张。", "x": "判断一家企业究竟是“股东印钞机”还是“资本吞金兽”的终极标尺。", "h": 15}, {"id": 4, "t": "资本开支", "f": ["购建固定资产", "资本开支"], "c": "财务会计", "p": "公司盖厂房、买生产线、买地买船这类大件长期资产花的钱。通常在现金流量表里对应“购建固定资产、无形资产和其他长期资产支付的现金”。", "x": "决定重资产企业有没有余钱分红的关键阀门，必须区分维持老厂和扩建新厂。", "h": 49}, {"id": 5, "t": "维持性资本开支", "f": ["维持性资本开支"], "c": "财务会计", "p": "不扩大产能、仅仅为了让现有矿山和机器别老化停摆、维持当下赚钱水平，每年必须硬着头皮掏出去的修补换新钱。", "x": "终审考虑盐湖化工设备10—15年大修及溶矿补水，在10.70亿归母维持性资本开支上再补提0.40亿缓冲，扣完才算真盈余。", "h": 1}, {"id": 6, "t": "折旧摊销", "f": ["固定资产折旧", "折旧摊销"], "c": "财务会计", "p": "花 100 亿盖的工厂能用 10 年，会计上不会第一年把 100 亿全算成亏损，而是分摊到 10 年里每年记 10 亿费用。当年不用真掏现金，但会压低账面利润。", "x": "重资产投产高峰期折旧暴增会压制账面利润，但现金流往往比账面利润好看得多。", "h": 6}, {"id": 7, "t": "归母净利润", "f": ["归母净利润", "归母净利"], "c": "财务会计", "p": "把合资子公司里分给合作伙伴（少数股东）的那份利润剔除掉之后，真正归咱们买股票的上市公司全体股东所有的净利润。", "x": "一切每股指标和估值计算必须死守归母口径，防止把合作伙伴赚的钱算成自己的。", "h": 34}, {"id": 8, "t": "少数股东权益", "f": ["少数股东权益", "少数股东损益", "少数股东份额", "少数股东漏出", "归母权益"], "c": "财务会计", "p": "上市公司控股但没100%全资的子公司里，属于外面合伙人的那份家底和利润；估值必须按归母权益扣干净，绝不能把别人的算成自己的。", "x": "盐湖合并锂产能9.80万吨中近29%归少数股东，归母满血仅6.97万吨；现金桥亦按9.82%占比剥离了30.66亿元少数股东现金。", "h": 44}, {"id": 9, "t": "归母净资产", "f": ["归母净资产", "账面净资产", "净资产"], "c": "财务会计", "p": "总资产减去所有负债、再剔除合作伙伴（少数股东）份额后，真正归上市公司股东的“账面家底”。", "x": "计算市净率（PB）和净资产收益率（ROE）的底盘分母。", "h": 12}, {"id": 10, "t": "投入资本回报率", "f": ["投入资本回报率"], "c": "财务会计", "p": "拿新项目每年赚回的税后利润除以总共砸进去的建厂买矿本钱，专门检验管理层花钱扩产到底是在印钞还是在败家。", "x": "盐湖4万吨锂盐项目底部稳态投入资本回报率高达27%—40%，收购五矿盐湖上半年年化达15.25%，验证资本配置大逆转。", "h": 11}, {"id": 11, "t": "净资产收益率", "f": ["净资产收益率"], "c": "财务会计", "p": "股东自己掏出的每 100 块钱家底，公司一年能帮股东赚回多少块净利润（净利润 ÷ 归母净资产）。注意借高债也能把 ROE 撬高，所以要结合负债率一起看。", "x": "巴菲特最爱的长期复利标尺，重资产大扩张往往会先拉低短期 ROE，再看新产能能否爬坡修复。", "h": 2}, {"id": 12, "t": "息税折旧摊销前利润", "f": ["息税折旧摊销前利润"], "c": "财务会计", "p": "在还没交利息、没交所得税、也没扣机器折旧费之前，主业干活实打实挣回来的原始现金毛利，常用来跨国比拼矿企造血力。", "x": "终审测算盐湖常态归母息税折旧摊销前利润为77.26亿元，对应公允中枢10.55倍、重锤价6.69倍，横向对标清晰。", "h": 1}, {"id": 13, "t": "安全边际", "f": ["安全垫"], "c": "估值周期", "p": "好比修一座能承重30吨的桥却只让10吨卡车通过，买股票一定要比真实价值打折再买，留足防算错和抗黑天鹅的缓冲垫。", "x": "面对强周期与央企治理约束，终审在20.12元公允价下打82折至16.50元建仓、打72折至14.49元才重锤。", "h": 2}, {"id": 14, "t": "注销式回购", "f": ["100% 注销式回购", "注销式回购", "注销回购", "减资注销", "注销减资", "库存股"], "c": "财务会计", "p": "公司拿真金白银从股市买回自家股票并彻底销毁，总股数变少后，剩下的每股能分到的蛋糕和利润永久变厚，堪比免税分红。", "x": "在母公司暂不能现金分红的空窗期，盐湖2026年11月抛出15—20亿元100%注销式回购，绕过限制直接增厚每股收益。", "h": 28}, {"id": 15, "t": "在建工程", "f": ["在建工程", "转固"], "c": "财务会计", "p": "正在盖还没完工的工厂。一旦建好验收投产，账上就会从“在建工程”转成“固定资产”（简称转固），同时开始计提折旧、贷款利息也不再藏进资产而是直接扣当期利润。", "x": "重资产扩产期结束的信号灯，但也意味着紧接着会迎来一轮“折旧+利息费用化”对账面利润的双重考验。", "h": 46}, {"id": 16, "t": "研发费用化", "f": ["研发资本化", "开发支出"], "c": "财务会计", "p": "花钱搞研发，当年直接全额算进成本扣利润叫“费用化”（最老实、不藏雷）；如果把研发花销挂在账上当成无形资产分几年慢慢摊销叫“资本化”（容易虚增当年利润）。", "x": "研发 100% 费用化且开发支出为 0，是 A 股极其稀缺的“极严会计诚实度”金字招牌。", "h": 4}, {"id": 17, "t": "应付票据", "f": ["银行承兑汇票", "商业承兑汇票"], "c": "财务会计", "p": "买原料时不直接付现金，而是开一张几个月后到期的欠条（汇票）。由银行担保一定兑付的叫银票，只靠企业自己信用担保的叫商票。", "x": "龙头对上游开银票是强大的无息占款能力，但若存在大量银行贴现融资或逾期商票则暗藏流动性风险。", "h": 7}, {"id": 18, "t": "合同负债", "f": ["合同负债"], "c": "财务会计", "p": "客户先打钱订货、公司还没把货发出去，这笔提前收进腰包的定金在账上叫“合同负债”。名字里虽带“负债”，其实是产品抢手的甜蜜烦恼。", "x": "观察行业真实景气度的先行温度计：合同负债上升说明下游抢货，骤降则可能需求转冷。", "h": 9}, {"id": 19, "t": "短贷长投", "f": ["短期借款"], "c": "财务会计", "p": "借一年内就得还的短期银行贷款，拿去盖十年才能回本的大工厂。虽然短贷利率更便宜能省利息，但一旦遇到金融紧缩银行抽贷，就会面临巨大的续贷周转压力。", "x": "考验强周期龙头信用背书与现金流抗压能力的关键财务风险点。", "h": 1}, {"id": 20, "t": "有息负债", "f": ["显性有息债", "有息负债", "刚性债"], "c": "财务会计", "p": "必须按期支付利息且到期必须拿真金白银还本的真债务（短期借款、长期借款、应付债券、一年内到期非流动负债、租赁负债等），区别于欠供应商的无息货款。", "x": "衡量企业真实债务包袱和偿债红线的唯一核心口径。", "h": 7}, {"id": 21, "t": "资产负债率", "f": ["资产负债率"], "c": "财务会计", "p": "总负债 ÷ 总资产，衡量公司全部家当里有多大比例是靠借钱或欠款撑起来的。但要注意里面既包含要还本付息的银行债，也包含欠上游的无息货款和客户预付款。", "x": "需拆解其中的“有息负债率”，不能一刀切把无息占款当成高危债务。", "h": 5}, {"id": 22, "t": "使用权资产", "f": ["租赁负债"], "c": "财务会计", "p": "新会计准则下，哪怕不是花钱买断、而是签了十几年长期租约的船队、厂房或码头，也要把未来租金折现记成资产（使用权资产）和债务（租赁负债）。", "x": "防止企业通过“只租不买”把巨额固定资产和债务藏在表外，分析重资产和真债时必须合并穿透。", "h": 1}, {"id": 23, "t": "预计负债", "f": ["预计负债"], "c": "财务会计", "p": "还没真正掏钱、但八九不离十未来肯定躲不掉的赔款、诉讼、环保复垦或合同取消违约金，会计按谨慎原则提前预估出来记在负债里。", "x": "算真实企业价值（True EV）时，未在经营利润里循环覆盖的一次性赔付/复垦类预计负债必须从严扣除。", "h": 1}, {"id": 24, "t": "售后租回", "f": ["长期应付款"], "c": "财务会计", "p": "把自家建好的设备卖给金融租赁公司换回一笔现金，然后再长期租回来继续用、分期付租金。表面看是卖资产，实质上就是拿设备作抵押借一笔长期贷款。", "x": "法医审计必查的隐性融资工具，需计入广义刚性有息债。", "h": 4}, {"id": 25, "t": "受限资金", "f": ["受限资金", "保证金"], "c": "财务会计", "p": "账上虽有但这会儿被冻结抵押、不能随手取出来花的钱；查财报必须穿透附注，分清是真被查封还是普通未到期定期存款。", "x": "盐湖中报54.72亿账面受限资金中53.29亿实为未到期正常大额定存，真正受限保证金仅1.45亿元，成功反杀爆雷鬼故事。", "h": 4}, {"id": 26, "t": "营运资金", "f": ["营运底仓", "流动资金"], "c": "财务会计", "p": "维持工厂每天买原料、备库存、等客户回款所必须压在流水线上的周转钱。生意做得越大，通常需要额外垫进去更多周转资金。", "x": "算可自由支配超额现金时要扣掉 18–21 天营收的保底运转现金；算稳态自由盈余时要扣成长新增垫资。", "h": 3}, {"id": 27, "t": "存货跌价准备", "f": ["存货跌价准备", "存货减值"], "c": "财务会计", "p": "仓库里囤的原料或成品如果市场价跌穿了当初的成本价，会计必须把跌掉的那块差价提前算成亏损计提出来，不能按虚高原价挂账。", "x": "周期下行期检验化工企业有没有硬撑着不提跌价、虚增利润的照妖镜。", "h": 3}, {"id": 28, "t": "期间费用率", "f": ["期间费用率", "研发费用率", "财务费用率", "四费"], "c": "财务会计", "p": "公司除了直接生产原料和工人工资外，卖货（销售）、管人（管理）、搞技术（研发）、付利息（财务）四大开销占总营收的百分比。", "x": "衡量巨头精细化运营与规模效应的硬指标，期间费用率越低说明把钱省到了骨子里。", "h": 14}, {"id": 29, "t": "毛利率", "f": ["单吨毛利", "毛利率"], "c": "财务会计", "p": "（卖货收入 − 直接生产成本）÷ 卖货收入。在化工行业更直观的指标是“单吨价差”，即每卖一吨产品赚的钱减去原料与能源成本后的毛利空间。", "x": "行业周期冷暖与企业成本护城河最直接的体温计。", "h": 51}, {"id": 30, "t": "净利率", "f": ["归母净利率", "净利率"], "c": "财务会计", "p": "每卖出 100 块钱的货，扣完原料、人工、费用、利息和税之后，最后真能留下几块钱净利润。", "x": "对比同行最终赚钱效率的核心指标，用来识破“只赚吆喝不赚钱”的伪成长板块。", "h": 11}, {"id": 31, "t": "净营业周期", "f": ["应收账款周转天数", "存货周转天数"], "c": "财务会计", "p": "从掏钱买原料进厂、生产卖出、到最后把货款现金收回银行卡，中间总共要垫资多少天。天数越短甚至为负，说明越能用别人的钱做生意。", "x": "衡量产业链话语权与营运效率的核心运营指标。", "h": 5}, {"id": 32, "t": "有效税率", "f": ["有效税率"], "c": "财务会计", "p": "公司当年实际交的所得税费用 ÷ 税前利润总额。因为有高新技术企业 15% 优惠、研发加计扣除或海外子公司低税率，它常与 25% 标准税率不同。", "x": "跨国企业在 OECD 全球最低税落地后，有效税率抬升会直接吃掉一部分常态净利润。", "h": 1}, {"id": 33, "t": "保本稼动率", "f": ["盈亏平衡稼动率", "保本稼动率", "产能利用率", "稼动率"], "c": "估值周期", "p": "稼动率就是工厂实际开工跑了满负荷产能的百分之几；“保本稼动率”是指开工率只要达到多少，赚的毛利就刚好够覆盖新厂新增的折旧费用不亏钱。", "x": "保本稼动率越低（如 10% 以下），说明这套新装置造价极低、抗周期暴跌的生存力越变态。", "h": 15}, {"id": 34, "t": "单位产能投资额", "f": ["单位产能投资额"], "c": "估值周期", "p": "盖一套工厂总花销 ÷ 年产能，也就是“每建出 1 吨年产能要花多少块钱建厂费”。直接决定了工厂投产后每年要背多少折旧。", "x": "重化工行业最硬的先天基因：建厂比对手便宜一半，意味着全生命周期的折旧成本永久少一半。", "h": 1}, {"id": 35, "t": "成本曲线", "f": ["90分位边际成本", "边际成本线", "成本曲线"], "c": "估值周期", "p": "把全球所有厂家的生产成本从低到高排成一条台阶曲线。排在最右侧最贵的那 10% 厂家的成本叫“90 分位边际成本”——产品跌破这条线，高成本老外工厂就得亏钱关门停产。", "x": "周期股定价的物理地心引力：只要行业不消亡，商品价格很难长期死在 90 分位成本线之下。", "h": 13}, {"id": 36, "t": "剪刀差", "f": ["剪刀差"], "c": "估值周期", "p": "两条指标走势像剪刀一样越张越开：比如产品卖价暴涨而上游原料暴跌（赚钱暴增），或者销量大涨但单吨毛利暴跌（增产不增收）。", "x": "用来一眼看穿利润暴涨究竟是靠真本事还是靠短期外部价格错配。", "h": 1}, {"id": 37, "t": "顺价权", "f": ["顺价权", "定价权"], "c": "估值周期", "p": "当上游石油、煤炭、电价涨价时，企业能不能顺理成章把涨出来的成本转嫁给下游客户、保住自家每吨赚的毛利。垄断龙头顺价极快，过剩大宗则只能自己硬扛。", "x": "区分真护城河（如寡头聚氨酯）与苦力生意（如过剩大宗石化）的分水岭。", "h": 3}, {"id": 38, "t": "期现取严", "f": ["期现取严"], "c": "估值周期", "p": "定常态商品价时同时看现货和期货价，哪个更低就按哪个算，好比算自家收成时专按更保守的批发预售价来兜底。", "x": "碳酸锂现货8.60万、主力期货8.262万，按期现取严选8.262万并微调至8.25万锚定，杜绝现货滞后高估盈利。", "h": 6}, {"id": 39, "t": "强周期龙头股", "f": ["周期股"], "c": "估值周期", "p": "彼得·林奇六大股票分类之一：业绩跟着宏观经济和行业供需大起大落的工业巨头（化工、钢铁、有色等），核心赚的是行业低谷扩张、反转暴击的钱。", "x": "投资这类股票必须看重资产重置成本、成本曲线身位和底部 PB，绝不能在景气高点看低 PE 冲进去。", "h": 2}, {"id": 40, "t": "隐蔽资产型", "f": ["免费期权"], "c": "估值周期", "p": "彼得·林奇六大股票分类之一：公司肚子里藏着账面还没体现出价值、市场目前几乎按 0 元白送的优质资产或高壁垒新业务，一旦变现或爆发就带来额外赔率。", "x": "判断买方赔率不对称性的关键：成熟主业兜底、高壁垒新材料作为白送期权。", "h": 4}, {"id": 41, "t": "永续债", "f": ["可转债"], "c": "财务会计", "p": "永续债是没有到期日、可以一直不还本但利率会越跳越高的“伪权益真债务”；可转债是可以按约定价格换成股票的债券，会稀释老股东持股比例。", "x": "排查公司有没有把债藏在净资产里（永续债）或存在未来股本稀释压力（可转债）。", "h": 1}, {"id": 42, "t": "财务公司", "f": ["五矿集团财务有限责任公司", "五矿财务公司", "金融服务协议", "财务公司", "存贷双高", "五矿财司", "存贷比"], "c": "财务会计", "p": "大集团内部自设的“专属小银行”，专门归集旗下上市公司的闲钱；若存款占比太高、利息太低，小股东就怕钱被大股东廉价占用。", "x": "盐湖有205.17亿元（占货币资金63.6%）存在五矿财务公司，存贷比266:1且年化利息仅1.14%，遭终审硬砍30%折价。", "h": 33}, {"id": 43, "t": "商业模式", "f": ["商业模式", "转换代价", "转换成本", "护城河"], "c": "估值周期", "p": "护城河是别人学不会、抢不走的长期竞争优势；转换代价是指下游客户想换掉你的供应商时，重新测试认证、停产调试、承担良率报废风险所要付出的巨大成本。", "x": "特种新材料和高规格异氰酸酯之所以利润率高，正是因为客户认证慢、导入后转换代价极高。", "h": 13}, {"id": 44, "t": "物理双盲", "f": ["物理双盲"], "c": "估值周期", "p": "买东西前先蒙住眼不看价签，光凭用料和手艺自己估个公道价，估完再掀布看标价，彻底杜绝被今天股价牵着鼻子走。", "x": "本文在完全隔离现价下先算出盐湖公允中枢20.12元与两档买点，最后揭盲对照22.12元现价，零事后反悔。", "h": 6}, {"id": 45, "t": "常态自由盈余", "f": ["自由盈余"], "c": "估值周期", "p": "剔除短期暴利和账面噪音，扣完每年修设备、补周转的必要开销后，公司正常年景真正能放进股东口袋的纯现金。", "x": "终审把盐湖三季报年化119.2亿净利挤水腰斩，锁死归母常态自由盈余55.02亿元/年，满血达产为58.80亿元。", "h": 4}, {"id": 46, "t": "PASS_WITH_DISCOUNT", "f": ["PASS_WITH_DISCOUNT"], "c": "估值周期", "p": "审计裁判给企业贴的通行证标签，意思是核心家底和造血真实过关，但存在治理瑕疵，必须先扣一笔折价再给估值。", "x": "盐湖主业现金流过硬但存在205亿财务公司低息存款与涉镁警报，终审定级为带治理折价通过。", "h": 1}, {"id": 47, "t": "红蓝对抗", "f": ["红蓝对抗"], "c": "估值周期", "p": "像法庭控辩双方真刀真枪对质，红方专找硬伤挑刺、蓝方拿官方凭证反驳，裁判绝不和稀泥，要么证伪要么实打实扣估值。", "x": "本次庭审红队命中锂脉冲回归与现金水分等四根真刺并实质砍数，蓝方凭附注反杀受限资金与税负等四大假鬼故事。", "h": 3}, {"id": 48, "t": "治理折价", "f": ["治理折价"], "c": "估值周期", "p": "老板或大股东花钱不太顾及小股东感受时，买方不会按原价买单，而是先主动打个折扣把潜在跑冒滴漏提前扣出来。", "x": "终审对五矿财务公司205.17亿低息存款硬砍30%治理折价（-61.55亿），并在要求回报率保留+0.50%警报溢价。", "h": 6}, {"id": 49, "t": "成本曲线三段式", "f": ["成本曲线三段式", "成本曲线最左端", "90分位成本", "边际完全成本", "90分位"], "c": "估值周期", "p": "把全行业矿企按成本从低到高排队，盯住最贵那批刚能保本的90分位线，高位挤泡沫、中位用实价、底部严禁再打折。", "x": "碳酸锂8.26万已贴近8万边际成本线1.03倍属底部不再打折（主锚8.25万）；钾肥2,850元超成本线1.27倍则温和挤泡沫至2,580元。", "h": 19}, {"id": 50, "t": "Ke_op", "f": ["Ke_op-g", "股权要求回报率", "Ke_op"], "c": "估值周期", "p": "剥离账上现金后，你对纯经营主业要求的最低年化回报率，再减去永续微增率g后的倒数，就是主业该给的合理倍数。", "x": "盐湖四因子合成纯经营资产Ke_op-g=6.75%，倒数精准对应14.81倍EV/OE，算出纯经营公允价值815.11亿元。", "h": 3}, {"id": 51, "t": "拆骨分部估值", "f": ["拆骨分部估值"], "c": "估值周期", "p": "把一家多业务公司拆成几块独立积木，每块按各自的赚钱硬度和行业公道价分别称重，再把净现金加总算出整家公司值多少钱。", "x": "盐湖拆为钾肥519.26亿、提锂295.85亿与归母净现金249.55亿三块积木，合计数正好闭环锁定1,064.66亿元。", "h": 2}, {"id": 52, "t": "免费期权", "f": ["免费期权"], "c": "估值周期", "p": "估值时干脆按0元白送的额外彩蛋，没成你不亏一分钱，一旦成了就是白赚的大红包，专门用来拉厚赔率安全垫。", "x": "终审将盐湖9.88亿参股物业、原卤技改迭代、锂价反转及海外钾矿全按0元计价，买进后全成免费上行期权。", "h": 4}, {"id": 53, "t": "第二档正常建仓区", "f": ["正常建仓区"], "c": "估值周期", "p": "性价比已经跨过及格线、值得开始分批下场买底仓的价格区间，好比好衣服打八折时先挑几件刚需入手。", "x": "盐湖第二档为14.49—16.50元，对应内生回报8.82%起、市净率1.73倍紧贴近六年铁底，建议分批建仓8%—10%。", "h": 1}, {"id": 54, "t": "第一档左侧重锤区", "f": ["左侧重锤区"], "c": "估值周期", "p": "市场极度恐慌乱甩卖时砸出的黄金坑价位，赔率厚到闭眼捡漏，只要基本面没坏就该果断打满单票上限仓位。", "x": "盐湖第一档为≤14.49元，市净率1.52倍砸穿近六年1.70倍铁底，回报超10.64%，触发时可重锤加至12%—15%。", "h": 1}, {"id": 55, "t": "Mark-to-Market", "f": ["实时现货 Mark-to-Market", "Mark-to-Market"], "c": "估值周期", "p": "盯市估值法，大白话就是不预测未来涨跌，直接按此时此刻市场上最新的现货成交价来照相算利润。", "x": "即便按当前偏高现货钾2,850元、锂8.60万做Mark-to-Market测算，盐湖22.12元现价回报率也仅7.16%，谈不上低估。", "h": 2}, {"id": 56, "t": "线性外推", "f": ["线性外推"], "c": "估值周期", "p": "把眼前的顺风暴利或一时惨淡，简单粗暴地画条直线推演成永远如此，是投资周期股时最容易高位接盘的致命思维偷懒。", "x": "红蓝裁决严禁拿盐湖三季报年化119.2亿元脉冲暴利做线性外推，强行将常态盈利锚砍半回归至55.02亿元。", "h": 2}, {"id": 57, "t": "未分配利润", "f": ["母公司未分配利润", "母公司未弥补亏损", "可供分配利润", "未分配利润", "未弥补亏损"], "c": "财务会计", "p": "公司历年赚的钱扣掉亏空和已发分红后剩下的账面积蓄；按《公司法》规定，合并和母公司两本账都必须为正才能发红利。", "x": "盐湖2026Q3合并未分配利润已转正至+73.35亿，但母公司中报仍亏-40.16亿锁死分红，预计2026年末至2027Q1彻底清零。", "h": 43}, {"id": 58, "t": "同一控制下企业合并", "f": ["同一控制下企业合并", "同一控制下关联并购", "同一控制下现金收购", "同一控制下合并", "同一控制合并", "同控并表", "同控重述"], "c": "财务会计", "p": "同一个大老板把左手旗下的子公司卖给右手的上市公司；会计上不产生商誉，而是按原账面价值接手，差额直接冲减资本公积。", "x": "盐湖花46.05亿现金收购控股股东旗下五矿盐湖51%股权虽增值352%，但零商誉且半年净利6.89亿已超全年承诺103%。", "h": 10}, {"id": 59, "t": "商誉", "f": ["商誉减值", "商誉"], "c": "财务会计", "p": "并购时多付给卖家的溢价彩礼，平时躺账上充胖子，一旦买来的公司业绩变脸就得一次性计提商誉减值炸穿当年利润。", "x": "盐湖因收购五矿盐湖属同一控制合并，冲减资本公积而不新增一分钱商誉，目前账面商誉为0，彻底免疫商誉爆雷。", "h": 16}, {"id": 60, "t": "递延所得税资产", "f": ["递延所得税资产", "递延所得税费用", "税务可抵扣亏损", "可抵扣亏损", "亏损抵税", "DTA", "递延税"], "c": "财务会计", "p": "以前亏大钱攒下的合法“未来抵税代金券”；赚钱核销时账面所得税看着暴增，其实只是划掉代金券，一分真现金都没多交。", "x": "盐湖2026前三季账面所得税大增138%实为母公司补亏非现金转回12.10亿元DTA，同期经营现金流高达98.39亿元。", "h": 24}, {"id": 61, "t": "银行承兑汇票", "f": ["银行承兑汇票", "商业承兑汇票", "应收票据", "银行承兑"], "c": "财务会计", "p": "客户买货没给现金、开了一张由银行担保到期必付的欠条，信用远高于普通白条应收账款，但数量暴增也反映下游资金偏紧。", "x": "盐湖44.64亿广义应收中95.9%（42.81亿）是银行承兑汇票，纯应收仅1.54亿，但票据大增78%且周转拉长至50.4天须警惕降温。", "h": 20}, {"id": 62, "t": "广义类现金", "f": ["其他流动资产", "广义类现金", "广义现金", "大额存单"], "c": "财务会计", "p": "把活期银行存款、短期理财以及一年内和一年以上定期大额存单全打包加总，看清公司保险柜里真实的现金家底全貌。", "x": "盐湖2026Q3合并广义类现金高达401.28亿元，经扣减受限金、应付股利、财司折价、少数股东及刚性债后净剩249.55亿。", "h": 15}, {"id": 63, "t": "研发投入资本化率", "f": ["研发投入资本化率", "费用化研发费用", "资本化研发支出", "资本化率", "费用化"], "c": "财务会计", "p": "研发花掉的钱有多少被算成资产挂在账上（资本化）、有多少直接当期扣掉（费用化）；资本化率越低，利润水分就越少。", "x": "盐湖研发费用100%直接费用化、资本化率为0.00%，叠加上商誉归零与94%净现比，财报洁净度创重整以来新高。", "h": 14}, {"id": 64, "t": "每股分红", "f": ["近12个月 每股分红", "每股分红"], "c": "财务会计", "p": "最近连续十二个月里，公司实打实打进股东银行卡里的每一股现金红利，一分是一分，最检验企业是不是铁公鸡。", "x": "因历史破产重整留下的母公司未弥补亏损尚未归零，盐湖当前近12个月实派每股分红为0.0000元，正处破冰前夜。", "h": 5}, {"id": 65, "t": "应付股利", "f": ["应付股利"], "c": "财务会计", "p": "已经宣布要分出去但还没真正把钱打到股东账上的待付红利，钱虽还在公司户头里，本质上早就不再归公司自己支配。", "x": "盐湖2026Q3账面11.56亿元应付股利中11.48亿属子公司欠少数股东的历史股利，现金拆骨时必须100%先扣除。", "h": 7}, {"id": 66, "t": "回报融资比", "f": ["回报融资比", "圈钱分红比"], "c": "财务会计", "p": "把上市以来发给股东的分红和注销回购加起来，除以向股市伸手要过的融资总额，一眼看穿公司是奶牛还是抽血机。", "x": "含881.74亿破产债转股盐湖回报融资比仅7.72%折射历史创伤；按纯现金募资52.63亿算则已达129.3%，正加速逆转。", "h": 4}, {"id": 67, "t": "SMM", "f": ["SMM"], "c": "贸易政策", "p": "上海有色网的英文简称，是国内金属与新能源电池材料行业公认的权威现货报价平台，相当于菜市场的每日官方行情牌。", "x": "截至2026-11-26，SMM电池级碳酸锂现货报价8.60万元/吨，与广期所主力期货共同构成盐湖锂价定锚的双基准。", "h": 2}, {"id": 68, "t": "LC2701", "f": ["LC2701", "主力合约"], "c": "贸易政策", "p": "广州期货交易所挂牌、2027年1月到期交割的碳酸锂主力期货合约代码，集中反映了全市场真金白银对未来锂价的预期。", "x": "LC2701主力合约已跌至8.262万元/吨，较5月20万高点腰斩，倒逼终审把盐湖常态锂价铁锚下修锁死在8.25万元。", "h": 4}, {"id": 69, "t": "LC2705", "f": ["次远月合约"], "c": "贸易政策", "p": "广期所2027年5月交割的碳酸锂远期期货合约，拿它跟近月主力合约比价能看出市场对半年后价格的预期，若深度贴水说明大家看跌后市。", "x": "2026年11月底LC2705报8.200万元/吨，仅较主力合约LC2701贴水0.75%，远未触发5%深度贴水警报，印证底部定价趋稳。", "h": 2}, {"id": 70, "t": "SQM", "f": ["阿塔卡马盐湖", "SQM"], "c": "行业产品", "p": "全球最顶级的盐湖提锂兼钾碘矿业巨头，手握智利阿塔卡马顶级盐湖，是全球资本市场给盐湖资源股定价的头号参照物。", "x": "SQM跨周期EV/EBITDA中枢为7—11倍，盐湖公允中枢10.55倍契合其上沿且无海外国有化风险，重锤价6.69倍直接击穿其底部。", "h": 19}, {"id": 71, "t": "BHP", "f": ["BHP Jansen", "Jansen 一期", "Jansen", "必和必拓", "BHP"], "c": "行业产品", "p": "全球矿业巨无霸必和必拓的英文简称，正在加拿大豪掷重金建设超大型Jansen钾矿，是未来改写全球钾肥供需的大变量。", "x": "BHP加拿大Jansen钾矿进度已达87%并将于2027年中投产，叠加老挝扩产压制，促使终审把盐湖钾肥主锚下压至2,580元。", "h": 28}, {"id": 72, "t": "原卤直提", "f": ["原卤短流程直提", "原卤直接提锂", "短流程工艺", "原卤直提", "原卤提锂", "原卤直进", "原卤"], "c": "工艺设备", "p": "不用把盐湖卤水先晒一两年盐田再慢慢折腾，直接把刚抽上来的原始卤水送进吸附膜装置短流程把锂捞出来的新工艺。", "x": "收购五矿盐湖不仅带来一里坪资源，更让盐湖掌握国内唯一跑通的原卤直提成熟工艺，单吨全成本仅约2.9万元且收率翻倍。", "h": 58}, {"id": 73, "t": "沉锂母液萃取", "f": ["沉锂母液萃取", "沉锂母液", "母液萃取"], "c": "工艺设备", "p": "提完一轮碳酸锂后，剩下的废水母液里其实还飘着不少漏网的锂离子，用萃取剂再“淘一遍金”就能低成本多捞一批锂。", "x": "盐湖依托低资本开支的沉锂母液萃取技改提升收率，终审仅此一项就在满血达产自由盈余中温和计入+1.10亿元增量。", "h": 23}, {"id": 74, "t": "老卤贫化", "f": ["浸泡式溶解转化", "固液转化溶采", "老卤贫化", "溶矿补水", "溶矿"], "c": "工艺设备", "p": "盐湖抽了几十年后，天然卤水里的钾浓度会慢慢变淡变稀，必须往干盐层灌淡水把固态钾盐融化补水，否则产量会滑坡。", "x": "察尔汗老卤贫化叠加2026前三季钾产同比-5.5%已亮黄灯，若演变为永久量缩本升并跌破430万吨将触发第二条死刑红线。", "h": 9}, {"id": 75, "t": "金属镁中试", "f": ["金属镁中试"], "c": "工艺设备", "p": "大规模盖厂前的放大版试验线，用来验证拿晒完钾肥剩下的废卤水炼金属镁到底划不划算，属于盐湖历史伤疤的敏感试水。", "x": "盐湖2026年8月公告出资3亿元重启金属镁中试，终审全额视作刚性债预先扣除，并划定扩至超20亿自投即触发死刑红线。", "h": 2}, {"id": 76, "t": "CFR", "f": ["大合同 CFR", "到岸完全成本", "CFR"], "c": "贸易政策", "p": "国际海运“成本加运费”报价，意思是海外卖家包运费把货送到中国港口船边，但不含海运保险和国内清关增值税。", "x": "2027年中国钾肥进口大合同落地为CFR 355美元/吨，折算含税进口成本约2,701元/吨，成为压制国内钾价上限的风向标。", "h": 9}, {"id": 77, "t": "从价资源税", "f": ["税金及附加", "资源税"], "c": "贸易政策", "p": "按矿产品卖出的总销售额比例抽成的矿产税，价高时多交、价跌时自动少交，就像行情不好时房东按流水降租的减震器。", "x": "青海钾盐资源税8%、锂盐6%，在钾锂双杀压测中从价资源税自动降税减震，助盐湖极限寒冬仍稳守正自由现金流。", "h": 5}, {"id": 78, "t": "氯化钾", "f": ["氯化钾", "KCl"], "c": "行业产品", "p": "农作物生长离不开的“钾肥之王”，好比给庄稼补钙健骨的营养粉，能防倒伏、提甜度，是全球最核心的农业刚需化肥原料。", "x": "盐湖股份压舱石主业，合并产能530万吨独占国内近七八成产量，2026前三季营收84.09亿、利润率近60%。", "h": 39}, {"id": 79, "t": "电池级碳酸锂", "f": ["电池级碳酸锂", "工业级碳酸锂", "碳酸锂", "电碳"], "c": "行业产品", "p": "制造电动车与储能电池的“白色石油”：电池级纯度超99.5%可直接做动力电池正极，工业级杂质稍多需二次提纯。", "x": "盐湖合并锂盐产能9.80万吨（归母6.97万吨），2026前三季营收88.81亿、毛利率高达86%，成为第一大利润引擎。", "h": 75}, {"id": 80, "t": "碳酸锂当量", "f": ["碳酸锂当量", "LCE"], "c": "行业产品", "p": "锂行业统一的“度量衡换算尺”，把氯化锂、氢氧化锂等不同锂化合物按含锂量统一折算成碳酸锂重量，方便横向比较产能大小。", "x": "公司9.80万吨合并锂盐实物产能折合9.52万吨LCE，剔除少数股东后归母权益LCE为6.71万吨，严防按实物高估。", "h": 17}, {"id": 81, "t": "氯化锂", "f": ["LiCl", "基础锂盐", "氯化锂"], "c": "行业产品", "p": "盐湖提锂路线中的重要基础锂盐产品，既可直接用于金属锂冶炼和特殊化工，也能进一步加工成碳酸锂，每吨折合0.8715吨LCE。", "x": "全资4万吨一体化项目原规划含2万吨氯化锂，一里坪盐湖保有氯化锂储量164.59万吨，拓展多元产品矩阵。", "h": 32}, {"id": 82, "t": "氢氧化锂", "f": ["氢氧化锂"], "c": "行业产品", "p": "一种碱性更强的高端基础锂盐，主要喂给高能量密度的三元锂电池正极材料，就像给高端赛车特供的高标号汽油。", "x": "并表五矿盐湖带来0.1万吨氢氧化锂产能，配合广期所2026年11月新挂牌的氢氧化锂期货，完善多品类锂盐布局。", "h": 6}, {"id": 83, "t": "62% 白钾", "f": ["62% 白钾", "俄白钾", "农用钾", "工业钾"], "c": "行业产品", "p": "行业最通用的进口氯化钾现货基准规格，指外观呈白色结晶、氧化钾有效养分含量达62%的高纯度钾肥，是市场看价的风向标。", "x": "2026年11月下旬港口62%白钾现货受500万吨高库存压制回落至2,750—2,850元/吨，终审将常态锚定在2,580元/吨。", "h": 4}, {"id": 84, "t": "K2O", "f": ["K2O", "氧化钾"], "c": "行业产品", "p": "氧化钾的化学式，国际钾肥行业专门用它来统一标定化肥里“有效钾营养”的含金量，就像用纯酒精折百吨来对比不同度数的白酒。", "x": "全球钾肥产能预计由6,610万吨扩至7,740万吨（折K2O）；盐湖亦制得K2O≥40%的氯化钾镁协同肥。", "h": 3}, {"id": 85, "t": "钾盐深加工", "f": ["钾盐深加工", "氢氧化钾", "硫酸钾", "硝酸钾"], "c": "行业产品", "p": "把基础氯化钾再加工成不含氯或高附加值的特种钾产品，用于忌氯果蔬烟草施肥或工业化工原料，好比把原粮做成精制糕点。", "x": "盐湖股份氯化钾下游有39.5%流向硫酸钾、硝酸钾、氢氧化钾等深加工领域，与47.5%复合肥共同托底刚性需求。", "h": 5}, {"id": 86, "t": "察尔汗盐湖", "f": ["察尔汗盐湖", "察尔汗"], "c": "行业产品", "p": "位于青海柴达木盆地的中国最大可溶性钾镁盐矿床，面积超5,800平方公里，就像大自然赐予中国的一座露天超级化肥与锂矿宝库。", "x": "盐湖股份立足其3,700平方公里核心矿权，形成500万吨钾肥加8万吨合并锂盐产能，是全球成本曲线最左端的神湖。", "h": 97}, {"id": 87, "t": "一里坪盐湖", "f": ["一里坪盐湖", "一里坪"], "c": "行业产品", "p": "青海柴达木盆地另一座优质高品位富锂盐湖，镁锂比显著优于察尔汗，既产钾肥又适合用短流程技术直接高效提取碳酸锂。", "x": "2026年1月公司斥资46.05亿元现金并表五矿盐湖51%股权将其收入囊中，带来1.8万吨锂盐与30万吨钾肥产能。", "h": 37}, {"id": 88, "t": "锂辉石", "f": ["锂辉石精矿", "澳洲辉石矿", "锂辉石", "锂精矿", "硬岩矿"], "c": "行业产品", "p": "从澳大利亚等地坚硬石头矿里开采并选出的含锂矿石粉，需炸山挖矿、长途海运再高温焙烧冶炼，成本远高于优质盐湖。", "x": "外购锂辉石的锂盐厂常被上游矿价挤压（如赣锋三季度毛利率仅20.17%），而盐湖复用免费老卤免疫精矿涨价卡脖子。", "h": 15}, {"id": 89, "t": "锂云母", "f": ["非一体化云母厂", "江西云母矿", "云母大矿", "锂云母", "云母厂", "云母"], "c": "行业产品", "p": "主要产自江西宜春等地的含锂硬岩矿，含锂品位偏低、提炼渣土多且环保能耗高，相当于行业里最费油、成本最高的那批矿山。", "x": "低品位锂云母构成全球约8万元/吨的90分位成本防线，当前8.25万锂价正倒逼其失血减产，反衬盐湖成本护城河。", "h": 17}, {"id": 90, "t": "金属镁", "f": ["金属镁一体化", "金属镁", "电解镁", "氯化镁", "镁化工"], "c": "行业产品", "p": "察尔汗晒钾肥会产生海量副产氯化镁，经脱水电解可炼成超轻结构金属镁，但高原高能耗工况下极难盈利，曾是吞金无底洞。", "x": "公司2012—2019年豪赌金属镁一体化巨亏458亿破产，如今镁业仍在体外青海汇信，须高度警惕反注与3亿中试风险。", "h": 42}, {"id": 91, "t": "正极材料", "f": ["正极材料", "磷酸铁锂"], "c": "行业产品", "p": "锂电池内部决定电量与寿命的最核心部件（如磷酸铁锂、三元材料），占电池成本近半，也是碳酸锂最直接的下游采购买家。", "x": "下游正极材料厂采购高度同质化且转换成本低，因此盐湖股份没有独立提价权，盈利护城河全靠全球最低成本身位。", "h": 3}, {"id": 92, "t": "硝酸铷", "f": ["稀散元素", "稀散金属", "硝酸铷"], "c": "行业产品", "p": "从盐湖卤水中微量伴生稀有金属“铷、铯”提炼出的高端化工品，可用于原子钟、特种玻璃等前沿小众领域。", "x": "盐湖2025年报仅用10公斤吸附剂产出1公斤硝酸铷，即便未来突破百吨级，相对近200亿元主业营收弹性也不足1%。", "h": 7}, {"id": 93, "t": "PVC", "f": ["PVC"], "c": "行业产品", "p": "聚氯乙烯塑料的英文简称，广泛用于建材管材与门窗，属于高耗能重化工基础材料，与盐湖主业协同差且周期波动剧烈。", "x": "盐湖股份历史上盲目跨界上马海纳化工PVC项目导致长期巨亏，2020年司法重整将其打包剥离后才重获新生。", "h": 1}, {"id": 94, "t": "Nutrien", "f": ["Belaruskali", "Uralkali", "Nutrien", "加钾"], "c": "行业产品", "p": "全球钾肥三大寡头巨头：加拿大Nutrien、白俄罗斯Belaruskali与俄罗斯Uralkali，联手掌握世界大部分出口供给与定价话语权。", "x": "Nutrien矿山现金成本低于60美元/吨，但叠加海运到中国CFR成本达210—240美元，盐湖股份坐镇国内零跨境风险。", "h": 14}, {"id": 95, "t": "格林布什", "f": ["格林布什锂精矿", "格林布什"], "c": "行业产品", "p": "位于澳大利亚的全球品位最高、规模最大的硬岩锂辉石神矿，开采成本极低，堪称锂矿石头界里的“中东大油田”。", "x": "天齐锂业虽坐拥格林布什实现64%高毛利，却被洋股东切走46%净利；反观盐湖股份毛利率72.64%且少数股东占比仅14.58%。", "h": 10}, {"id": 96, "t": "老卤", "f": ["晒钾副产老卤", "察尔汗老卤", "富锂老卤", "排放老卤", "老卤", "尾卤"], "c": "工艺设备", "p": "盐湖卤水经过日晒提取出钾肥后剩下的浓缩“精华汤底”叫老卤，里面富集了大量锂离子；再提完锂后的尾卤还会回注湖区溶矿。", "x": "察尔汗“提钾排老卤—老卤提锂—尾卤溶矿”闭环让提锂几乎白捡原料，造就单吨营业成本仅2.37万元的全球地板成本。", "h": 47}, {"id": 97, "t": "晶间卤水", "f": ["湖表高浓度卤水", "晶间卤水"], "c": "工艺设备", "p": "藏在干涸盐湖地下固体盐层缝隙里的天然高浓度含盐液体，像海绵里吸满的浓盐水，是察尔汗液体矿床开采提取的核心源头。", "x": "察尔汗依赖流域淡水补给维持晶间卤水动态平衡，因此受生态红线刚性约束，氯化钾500万吨/年已是不可逾越的物理上限。", "h": 3}, {"id": 98, "t": "镁锂比", "f": ["超高镁锂比", "镁锂比"], "c": "工艺设备", "p": "盐湖卤水里镁离子与锂离子的重量比值。镁和锂长得极像很难分开，比值越高越像在几百斤沙子里挑几克金粉，提纯难度陡增。", "x": "蓝科锂业独创吸附膜耦合技术将察尔汗500:1超高镁锂比降至6:1，新研发工艺甚至可攻克超1000:1极限低锂工况。", "h": 15}, {"id": 99, "t": "盐田摊晒", "f": ["盐田摊晒", "晒卤"], "c": "工艺设备", "p": "把地下抽出的卤水铺进一望无际的露天大盐池，纯靠高原强烈日照和干风自然蒸发水分、浓缩结晶，相当于免费借用太阳公公当锅炉。", "x": "低成本摊晒奠定了察尔汗钾肥极低能耗优势，但耗时长达1—2年，如今正通过一里坪原卤直提技术加速向短流程升级。", "h": 6}, {"id": 100, "t": "反浮选冷结晶", "f": ["冷结晶-正浮选", "反浮选冷结晶", "正浮选"], "c": "工艺设备", "p": "盐湖提钾的两大核心分选绝活：用特制气泡把不需要的杂质盐浮走留下钾叫反浮选，反之浮起钾精矿叫正浮选，配合低温析出高纯氯化钾。", "x": "盐湖股份早年自主攻克反浮选冷结晶，破解高钠低钾难题将产能推至500万吨，使95%以上高品位钾肥占比达85%。", "h": 6}, {"id": 101, "t": "热熔结晶", "f": ["热熔结晶", "兑卤法"], "c": "工艺设备", "p": "利用氯化钾和氯化钠在不同温度或不同浓度卤水里的溶解度差异，通过加热溶解冷却析出或勾兑卤水把纯钾分离出来的物理提纯法。", "x": "公司掌握反浮选、正浮选、热熔结晶与兑卤法全套提钾工艺矩阵，灵活适配不同矿区卤水，单吨营业成本仅1,000—1,150元。", "h": 2}, {"id": 102, "t": "连续离子交换移动床", "f": ["连续离子交换移动床", "连续移动床", "连续离交"], "c": "工艺设备", "p": "像自动化回转寿司流水线一样的巨型吸附装置，卤水与吸附剂24小时逆向连续接触抓锂与洗脱，比老式间歇生产省水省电得多。", "x": "母公司全资4万吨一体化项目采用全球单套最大该类装置，将锂综合收率推高至82.4%，2026上半年毛利率达88.02%。", "h": 7}, {"id": 103, "t": "膜耦合", "f": ["纳滤反渗透膜耦合", "梯度耦合膜分离", "吸附+膜工艺", "膜耦合", "膜分离"], "c": "工艺设备", "p": "把多种孔径不同的工业级“超微滤水膜”串联组合，像多道粗细筛子依次拦下镁杂质、浓缩锂离子，大幅减少化学药剂与煤炭消耗。", "x": "蓝科锂业与4万吨项目借吸附+膜耦合、五矿盐湖借梯度耦合膜分离，构筑起盐湖股份领先全球的三套梯次提锂护城河。", "h": 12}, {"id": 104, "t": "铝系吸附剂", "f": ["LiAl-LDHs", "铝系吸附剂", "铝系吸附", "吸附塔群", "吸附法", "吸附剂"], "c": "工艺设备", "p": "盐湖吸附提锂的“心脏耗材”，其核心化学粉体LiAl-LDHs内部布满只认锂离子的微观小口袋，像磁铁只吸铁屑一样从卤水精准抓锂。", "x": "公司正攻克微米级LiAl-LDHs自主造粒，目标磨损率<2%、成品率>98%，把提锂核心耗材供应链彻底攥在自己手里。", "h": 13}, {"id": 105, "t": "非溶剂致相分离", "f": ["非溶剂致相分离"], "c": "工艺设备", "p": "一种把微米级吸附剂粉末做成结实多孔圆球的先进造粒工艺，就像做内部松软、外皮耐摔的米花球，既能让卤水畅通进出又不怕冲刷磨碎。", "x": "公司自研该球形造粒技术用于升级铝系锂吸附剂，直接破解吸附容量低与易磨损痛点，进一步压低长期耗材替换成本。", "h": 1}, {"id": 106, "t": "RO", "f": ["纳滤反渗透", "反渗透", "RO"], "c": "工艺设备", "p": "反渗透膜技术（Reverse Osmosis）的英文缩写，原理和家里净水器最核心的RO滤芯一样，靠高压把纯水挤过去、把锂离子浓缩留下来。", "x": "公司研发“RO—电渗析—树脂除硬/硼”前置原卤直提平台，助力察尔汗在超高镁锂比下直接产出99.8%纯度碳酸锂。", "h": 4}, {"id": 107, "t": "电渗析", "f": ["电渗析"], "c": "工艺设备", "p": "给装满卤水的膜堆通上直流电，利用正负电荷异性相吸原理，让带电的钠、镁、锂离子按规定通道分开跑，实现高效除杂与浓缩。", "x": "作为公司新一代原卤直提前置耦合平台的关键一环，协同将卤水钠离子浓度降45%、吸附效率推升至91.3%。", "h": 3}, {"id": 108, "t": "纳滤", "f": ["单级纳滤", "纳滤"], "c": "工艺设备", "p": "孔径只有纳米级的精密筛膜，专门利用“一价锂离子个头小钻得过、二价镁离子个头大被挡住”的特性，把难缠的镁锂轻松筛分开。", "x": "盐湖原卤直提新工艺实现单级纳滤98%截留镁离子，极大降低后续除镁药剂消耗，直接支撑公司全球成本最左端身位。", "h": 5}, {"id": 109, "t": "锂综合收率", "f": ["锂综合收率", "综合回收率", "收率"], "c": "工艺设备", "p": "从卤水进厂到产出成品碳酸锂，最终成功拿到手的锂占原始总含锂量的百分比，就像榨油出油率，收率每高几个点都是白捡的纯利润。", "x": "全资4万吨项目锂综合收率高达82.4%，叠加五矿盐湖原卤直提使收率翻倍，成为盐湖股份不用狂买新矿也能增量的魔法。", "h": 18}, {"id": 110, "t": "中试", "f": ["工程放大", "中试", "小试"], "c": "工艺设备", "p": "新技术从实验室小烧杯（小试）走向大型工业化工厂之前的“中型试产演练”，用来检验连续生产稳不稳定、算不算得过经济账。", "x": "盐湖比亚迪3万吨项目近十年仍停留在中试阶段，以及3亿元金属镁中试，在估值时均严禁提前计入盈利预期。", "h": 35}, {"id": 111, "t": "聚砜纺丝", "f": ["聚砜纺丝", "PSF", "聚砜"], "c": "工艺设备", "p": "用耐高温耐酸碱的高性能特种塑料聚砜（PSF）拉成极细纤维丝并挂载吸附材料，做成专用抓捕器来提取卤水里的微量稀缺元素。", "x": "盐湖股份已利用PSF基体制备10公斤吸附剂并产出1公斤硝酸铷，尚处实验室小试期，属长期观察项。", "h": 4}, {"id": 112, "t": "进口大合同", "f": ["进口大合同", "国际大合同", "大合同"], "c": "贸易政策", "p": "我国中化、中农等农资谈判联合体每年与加拿大、白俄等国际钾肥巨头签下的年度海运采购基准价，相当于全国钾肥市场的“官方指导锚”。", "x": "2026年11月20日刚落地2027年大合同CFR 355美元/吨（涨7美元），折国内完税成本约2,701元/吨，焊死钾肥底部防线。", "h": 15}, {"id": 113, "t": "广期所", "f": ["广期所"], "c": "贸易政策", "p": "广州期货交易所的简称，专门推出碳酸锂与氢氧化锂等新能源金属期货品种，已成为全球锂盐定价最透明、反应最敏捷的公开市场风向标。", "x": "盐湖股份碳酸锂销售依托广期所期货与长协随行就市，截至2026年11月下旬其主力合约LC2701已回落至8.262万元/吨底部区。", "h": 4}, {"id": 114, "t": "双周定价", "f": ["双周定价"], "c": "贸易政策", "p": "公司营销委员会每两周根据港口现货与供需变化动态调整一次官方出厂报价的销售机制，既防价格滞后吃亏，又保持大客户采购平稳。", "x": "盐湖股份借双周定价叠加先款后货，2026前三季营收189.85亿却仅1.54亿纯应收账款，几乎零赊销、现金回款极佳。", "h": 2}, {"id": 115, "t": "长协", "f": ["长协"], "c": "贸易政策", "p": "买卖双方签订的长期供货协议，通常提前锁定量而不锁死价格（随现货或期货均价浮动），相当于饭店和大客户签下长期包桌合同。", "x": "公司电池级碳酸锂通过长协随行就市直供正极与电池龙头，保证满产满销不积压，盈利弹性直接挂钩行业基准锂价。", "h": 1}, {"id": 116, "t": "进口依存度", "f": ["进口依存度"], "c": "贸易政策", "p": "某种资源每年净进口量占全国总消费量的比例，数值越高说明国内越缺货、越容易被海外卖家拿捏，本土矿山的战略压舱石价值就越贵。", "x": "2026上半年我国氯化钾进口依存度高达78.54%，盐湖股份独供国产超六成产量，坐拥国家粮食安全赋予的绝对保供地位。", "h": 4}, {"id": 117, "t": "金融套保", "f": ["金融套保", "套保"], "c": "贸易政策", "p": "套期保值的简称，企业在期货市场提前做反向单锁定未来卖价，就像农民趁秋收前先给粮食买份价格保险，用来熨平大宗商品暴涨暴跌。", "x": "依托2026年广期所碳酸锂与氢氧化锂双期货矩阵，公司正逐步强化金融套保能力，平抑周期极端波动对业绩的冲击。", "h": 2}, {"id": 118, "t": "四水四定", "f": ["四水四定", "以水定产", "生态红线"], "c": "贸易政策", "p": "国家在干旱缺水地区划定的刚性生态红线——以水定城、以水定地、以水定人、以水定产，有多少合法淡水配额才能开多大工厂产能。", "x": "察尔汗地处极度干旱的柴达木盆地，四水四定直接将氯化钾年产能天花板锁死在500万吨，构成不可逾越的物理约束。", "h": 9}, {"id": 119, "t": "取水许可证", "f": ["取水许可证", "淡水配额", "取水证"], "c": "贸易政策", "p": "水利部门核发给矿山或工厂合法抽取河湖地下水的“准生证”，有明确年取水量上限与有效期，一旦断证或核减配额将直接限产。", "x": "母公司核心取水许可证（B632801S2021-0046）有效期截至2026年12月7日，合规平稳续期是买方紧盯的临界硬路标。", "h": 12}, {"id": 120, "t": "环评", "f": ["排污许可证", "环评"], "c": "贸易政策", "p": "环境影响评价批复与合法排污执照的合称，是化工矿业项目合法建设与长期生产的环保通行证，没拿到手就属于违规超产。", "x": "盐湖股份500万吨钾肥环评已获批、钾肥与蓝科排污许可证均续期至2030年，历史环保督察整改已落地消除停产雷区。", "h": 4}, {"id": 121, "t": "走出钾", "f": ["走出钾"], "c": "贸易政策", "p": "中国钾肥企业为打破国内资源天花板，响应国家战略出海去非洲、东南亚等富钾区拿矿建厂的行业专有战略口号。", "x": "背靠中国五矿，公司已成立毛里求斯与刚果（布）矿业子公司推进“走出钾”，属中期第二梯队布局，须严防海外盲目砸钱。", "h": 6}, {"id": 122, "t": "资源民族主义", "f": ["资源民族主义", "海外主权风险", "锂矿国有化"], "c": "贸易政策", "p": "南美、非洲等资源富集国政府通过强制收归国有、强行要求合资占大股、突然加征暴利税或禁止原矿出口来截留矿企利润的政策风险。", "x": "津巴布韦禁矿、智利锂矿国有化冲击海外玩家，而盐湖股份矿权100%坐落青海境内，完全免疫海外地缘与矿权突袭。", "h": 4}, {"id": 123, "t": "司法重整", "f": ["司法重整", "破产重整"], "c": "财务会计", "p": "企业资不抵债濒临退市时，在法院主持下刮骨疗毒的“金融大手术”：砍掉巨亏烂资产、把债主变成股东，保住赚钱主业轻装重生。", "x": "2019—2020年盐湖股份通过司法重整以30亿剥离镁业与海纳化工毒瘤，2021年恢复上市后彻底脱胎换骨为超级现金奶牛。", "h": 22}, {"id": 124, "t": "债转股", "f": ["破产债转股", "以股抵债", "债转股"], "c": "财务会计", "p": "公司还不起银行和债主的欠款时，干脆多印新股票按约定价格抵给债主，债主从催债人变身公司股东，欠债一笔勾销不再付利息。", "x": "2020年重整通过大规模债转股清偿巨额债务，工银投资、农行、中化等变身股东，帮助公司将资产负债率压低至13.47%。", "h": 8}, {"id": 125, "t": "资本公积", "f": ["资本公积转增股本", "资本公积补亏", "资本公积"], "c": "财务会计", "p": "公司发行股票溢价等非经营赚来的“家底公积金”。新《公司法》已允许在符合条件时直接用它来一把填平历史亏损窟窿，加速解锁分红。", "x": "母公司账面握有高达354.58亿元资本公积，除了靠内生利润填坑外，亦可依法启用资本公积补亏打破8年零派息魔咒。", "h": 9}, {"id": 126, "t": "采矿权出让收益", "f": ["采矿权出让收益", "矿业权出让收益", "长期应付款"], "c": "财务会计", "p": "矿山企业合法开采国家矿产资源必须缴纳的“矿权买路钱”，通常获批分多年分期支付，在资产负债表里挂在长期应付款项下，视同刚性债务。", "x": "公司2026三季末长期应付款13.34亿元叠加其他应付款2.17亿元即为此项，计算归母净现金时必须100%全额扣除。", "h": 9}, {"id": 127, "t": "业绩承诺", "f": ["业绩承诺", "盈利承诺"], "c": "财务会计", "p": "大股东往上市公司注入资产时立下的“利润军令状”，承诺未来三年至少赚多少钱，达不到就要真金白银赔钱，防高价卖烂资产抽血。", "x": "五矿盐湖并表附带2026—2028年合计21.05亿元业绩承诺，2026单上半年就狂赚6.89亿元，提前超额完成全年承诺的103%。", "h": 9}, {"id": 128, "t": "同业竞争", "f": ["同业竞争"], "c": "贸易政策", "p": "大股东自己体外还握着和上市公司干一模一样生意的公司，容易出现抢客户、利益输送，监管要求大股东必须限期整合装入上市公司或卖掉。", "x": "中国五矿入主11个月即闪电注入五矿盐湖兑现承诺，但须警惕未来借解决同业竞争名义把体外青海汇信亏损镁业高价反注。", "h": 5}, {"id": 129, "t": "出表", "f": ["出表"], "c": "财务会计", "p": "把某家子公司卖掉、注销或推入破产程序，让它的收入、亏损和债务彻底从上市公司合并财务报表里消失，就像把家里漏水旧房间切出去。", "x": "公司2026年果断将历史亏损的青海盐湖机电装备推入破产重整出表，并注销4家低效子公司，使体内资产100%纯净。", "h": 4}, {"id": 130, "t": "GDR", "f": ["GDR"], "c": "财务会计", "p": "全球存托凭证（Global Depositary Receipts），A股公司去欧洲（如瑞士、伦敦）股市发新股筹钱的融资工具，本质上同样会稀释老股东股权。", "x": "盐湖股份自2021年恢复上市五年来定增、配股、可转债与GDR融资全部为0次，彻底告别外部抽血步入纯内生造血纪元。", "h": 1}, {"id": 131, "t": "归母权益产能", "f": ["归母权益锂盐产能", "归母权益产能", "合并产能幻觉", "权益产能", "权益口径"], "c": "估值周期", "p": "按上市公司对每家子公司的真实持股比例乘以产能算出的“真正属于咱小股东的产能”，踢掉合作伙伴分走的那份，防止看合并大数字自我陶醉。", "x": "盐湖合并锂产能9.80万吨但归母权益产能仅6.97万吨（权益比71.17%），其中全资4万吨项目一己之力抵得上两个蓝科锂业。", "h": 25}, {"id": 132, "t": "完全成本", "f": ["可控现金成本", "完全成本", "现金成本"], "c": "估值周期", "p": "现金成本只算日常掏腰包的材料水电人工，像开餐馆只算买菜和工资；完全成本则把厂房折旧、矿权摊销和税费全算进去，才是真实盈亏生死线。", "x": "盐湖股份锂盐单吨营业成本仅2.37万、完全成本约3.20万元/吨，即便锂价跌到8.25万元底部每吨仍稳赚丰厚毛利。", "h": 36}, {"id": 133, "t": "绿地项目", "f": ["高海拔绿地", "绿地项目", "绿地建矿", "海外绿地"], "c": "估值周期", "p": "在一片荒地或未开发矿区从零开始勘探、修路、建厂、采矿的全流程重资产开发，好比自己买地从头盖大楼，通常耗时5—7年且极易超支。", "x": "盐湖刚果（布）BMB海外绿地钾矿距出矿至少5—7年，对比之下现金并购已投产的五矿盐湖半年就赚6.89亿效率高得多。", "h": 8}, {"id": 134, "t": "磷酸锂", "f": ["磷酸锂"], "c": "行业产品", "p": "一种含锂和磷的中间化工产品，可直接作为合成磷酸铁锂正极的原料，相当于把两样常用调料提前配好的复合半成品。", "x": "盐湖以46.05亿元收购51%股权的五矿盐湖，1.8万吨锂盐产能中包含0.2万吨磷酸锂，与碳酸锂形成多品种补充。", "h": 3}, {"id": 135, "t": "光卤石", "f": ["钾光卤石", "光卤石"], "c": "行业产品", "p": "一种同时含氯化钾和氯化镁的天然复合盐矿，把卤水放盐田里靠太阳暴晒就能结晶出来，是加工钾肥最核心的半成品粗粮。", "x": "盐湖一方面回收尾矿大颗粒光卤石稳住钾肥产量，另一方面也在4.98亿元镁中试中测试钾光卤石全流程炼镁路线。", "h": 4}, {"id": 136, "t": "金属锂负极", "f": ["金属锂负极", "超薄锂带", "金属锂"], "c": "行业产品", "p": "把纯金属锂轧成比头发丝还薄的锂带做成下一代电池负极，能量密度极高，但加工和防氧化门槛极高，属于高端精密制造。", "x": "赣锋与天齐已在千吨级金属锂及超薄锂带构筑高壁垒，盐湖既无工艺积累又无车企认证，该方向被买方严格定性为伪期权。", "h": 14}, {"id": 137, "t": "硫化锂", "f": ["固态电池前驱体", "硫化锂"], "c": "行业产品", "p": "硫化物全固态电池最核心的上游电解质原料，对纯度要求高达99.9%且遇水易产生毒气，合成难度大、单价高昂。", "x": "赣锋已实现99.9%硫化锂吨级出货、天齐在建50吨中试，而盐湖在固态电池领域零布局，仅适合做上游基础锂盐卖水人。", "h": 6}, {"id": 138, "t": "固态电池", "f": ["固态电池"], "c": "行业产品", "p": "用固体电解质替代传统易燃液态电解液的新一代电池，主打更高续航和不起火安全性，但目前仍处于从实验室向产业化爬坡的早期。", "x": "盐湖股份在互动平台明确否认有任何固态电池终端布局，市场借其氯化锂规划炒作固态电池属于脱离财报的伪叙事。", "h": 11}, {"id": 139, "t": "水氯镁石", "f": ["MgCl2·6H2O", "MgCl2", "水氯镁石"], "c": "行业产品", "p": "带着六个结晶水分子的氯化镁，是盐湖晒钾肥后堆积如山的廉价副产品；想用它炼金属镁，必须先把这六个水分子彻底脱干净。", "x": "察尔汗副产水氯镁石原料近零成本，但脱除最后两分子结晶水极易水解腐蚀设备，曾直接拖垮盐湖400亿元旧镁业项目。", "h": 8}, {"id": 140, "t": "无水氯化镁", "f": ["无水氯化镁"], "c": "行业产品", "p": "把水氯镁石里的结晶水彻底烤干脱净后的纯净氯化镁，是直接送进电解槽提炼金属镁的合格原料，极难做到不含杂质且不结块。", "x": "2026年上半年盐湖在建工程出现551万元无水氯化镁制备新工艺项目，仍在千万级中试攻关期，距商业化盈利尚远。", "h": 2}, {"id": 141, "t": "氯化氢", "f": ["氯化氢", "HCl"], "c": "行业产品", "p": "一种具有极强腐蚀性的刺激性气体，遇水就变成强酸盐酸，在高温工业管道里一旦产生，很快就能把普通金属管道咬穿漏气。", "x": "水氯镁石高温脱水时易发生水解生成氧化镁沉淀与强腐蚀氯化氢，是导致当年盐湖电解槽频繁穿孔停产的核心技术死结。", "h": 2}, {"id": 142, "t": "白云岩", "f": ["白云岩"], "c": "行业产品", "p": "一种天然富含碳酸镁和碳酸钙的常见岩石，是我国传统炼镁路线最核心的矿石原料，资源遍布山西、安徽等地且开采成熟。", "x": "宿敌宝武镁业手握数亿至十余亿吨自有白云岩矿并打通竖罐低能耗炼镁，对盐湖尚未跑通的电解镁路线形成成本碾压。", "h": 3}, {"id": 143, "t": "镁离子电池", "f": ["镁离子电池", "5.5Ah"], "c": "行业产品", "p": "用廉价的镁离子替代锂离子来充放电的前沿概念电池；Ah是安时，用来衡量电池容量大小，数字越大装电越多。", "x": "盐湖2025年报披露的5.5Ah镁离子电池仅能稳定循环200次，远低于商用储能6000次以上门槛，尚属早期科研探索。", "h": 6}, {"id": 144, "t": "铯榴石", "f": ["Cs2O", "铯榴石", "氧化铯"], "c": "行业产品", "p": "目前全球最富集铯元素的稀有硬岩矿石，好比铯金属里的富金矿；氧化铯（Cs2O）含量越高，直接冶炼提取就越便宜划算。", "x": "中矿资源垄断全球超80%高品位铯榴石（Cs2O品位达23%至36%），盐湖靠极低浓度卤水提铷铯的成本是硬岩数倍。", "h": 6}, {"id": 145, "t": "光热熔盐储能", "f": ["光热熔盐储能", "熔盐储能"], "c": "行业产品", "p": "用太阳能把特种盐加热化成几百度的滚烫液体存进大保温罐，天黑后再放热烧开水发电，相当于给电站配了一个超大号热汤保温壶。", "x": "盐湖2025年报和2026半年报提及熔盐次数均为零，所谓受益只是下游买普通工业氯化钾做硝酸钾，属无独立产品的纯概念。", "h": 9}, {"id": 146, "t": "吸附剂溶损", "f": ["吸附剂年溶损率", "耐酸碱溶损寿命", "吸附剂溶损"], "c": "工艺设备", "p": "提锂用的“抓锂海绵”长期泡在高盐或酸碱卤水里不断冲刷，会被慢慢泡烂溶解掉一块，需要定期花钱补新料，损耗越快单吨成本越高。", "x": "察尔汗原卤提锂和卤水提铷铯从实验室放大到工业化装置时，吸附剂年溶损率与使用寿命是决定经济性能否过关的核心门槛。", "h": 3}, {"id": 147, "t": "孤网综合能源", "f": ["光热+光伏孤网", "孤网综合能源", "孤网高原"], "c": "工艺设备", "p": "矿区地处偏远无人区接不上国家大电网，只能自己花巨资建太阳能发电站加储能系统组成独立小电网自给自足，就像在荒岛自备发电机。", "x": "西藏矿业扎布耶二期因被迫自建光热+光伏孤网，单吨投资飙至17.5万元；反观盐湖复用察尔汗现成电网，单吨仅8.79万元。", "h": 3}, {"id": 148, "t": "熔融电解", "f": ["盐湖电解法", "熔融电解", "电解炼镁"], "c": "工艺设备", "p": "把彻底脱水的无水氯化镁加热到七百多度化成岩浆般的滚烫液体，再通入强大直流电把液态金属镁和氯气活生生劈分开的高难度冶炼法。", "x": "盐湖2026年8月联合五矿等投4.98亿元做镁中试并包含1条熔融电解线，因高电耗高折旧，若长周期运转率不足90%极易亏损。", "h": 3}, {"id": 149, "t": "硅热法", "f": ["底排竖罐硅热法", "大型底排竖罐", "硅热法"], "c": "工艺设备", "p": "目前全球最主流的炼镁工艺，用硅铁在高温真空罐里把白云岩里的镁还原出来；升级成大型底排竖罐后像自动卸料高炉，能耗大幅下降。", "x": "霸主宝武镁业手握自有白云岩和大型底排竖罐硅热法，把原镁成本压到极低，让盐湖昂贵的电解镁路线几乎没有容错空间。", "h": 5}, {"id": 150, "t": "一体化压铸", "f": ["一体化压铸", "压铸深加工"], "c": "工艺设备", "p": "用几千吨级超大压铸机把融化的轻金属液体一锤子压成整块大型汽车车身或电驱壳体，省去几十个零件焊接工序，是车企减重热门方向。", "x": "盐湖旗下特立镁想切入新能源车电驱壳体与一体化压铸件，需熬过主机厂1.5至3年严苛耐蚀疲劳认证，目前体量仍极微小。", "h": 3}, {"id": 151, "t": "ppm", "f": ["毫克/升", "ppm"], "c": "工艺设备", "p": "百万分之一的浓度单位，在液体里大致相当于每升水里只含1毫克目标物质，好比在一个标准游泳池里滴进几滴墨水，含量极低。", "x": "察尔汗卤水中铷、铯浓度仅停留在ppm级，且与海量钾钠性质极像，导致卤水分离浓缩成本远高于高品位硬岩矿直接冶炼。", "h": 3}, {"id": 152, "t": "追溯重述", "f": ["追溯重述"], "c": "财务会计", "p": "发生同一控制下收购子公司后，为了让今年和去年的数据能公平对比，财务报表必须假装这家子公司去年就已经在自家账上重新算一遍。", "x": "并表五矿盐湖后，盐湖2026年三季报对年初存货、上年同期营收及折旧均作了追溯重述，重述后前三季度营收同比增58.37%。", "h": 4}, {"id": 153, "t": "资产基础法", "f": ["资产基础法", "评估增值率"], "c": "财务会计", "p": "给一家公司估价时，把厂房、矿权、现金等所有家当按现在市场价逐项重估再减去负债；重估总价高出原账面净值的幅度就是评估增值率。", "x": "五矿盐湖按资产基础法评估增值率达352.42%，其中69亿元增值直指一里坪422.73平方公里独立采矿权，并非盲目虚高溢价。", "h": 2}, {"id": 154, "t": "铺底流动资金", "f": ["铺底流动资金"], "c": "财务会计", "p": "新工厂刚建成准备开工时，必须提前揣在兜里用来买第一批原料、付电费和发工资的周转启动钱，通常一并算进项目立项总投资预算里。", "x": "盐湖4万吨项目2022年立项预算70.98亿元包含税金与铺底流动资金，剔除后不含税建设预算60.83亿元，最终实付仅35.18亿元。", "h": 1}, {"id": 155, "t": "边际贡献", "f": ["变动现金成本", "边际贡献"], "c": "财务会计", "p": "每多卖一吨货收进来的不含税售价，扣掉多生产这一吨必须多花的水电药剂等变动现金成本后剩下的钱，专门用来先填补折旧等固定开支。", "x": "即便碳酸锂跌到6万元/吨行业惨案底，盐湖4万吨新线单吨边际贡献仍达3.20万元，靠极厚垫子轻松覆盖2亿元左右年折旧。", "h": 2}, {"id": 156, "t": "广义应收", "f": ["广义应收"], "c": "财务会计", "p": "把客户打的白条（应收账款）和给的商业汇票（应收票据）全加起来的总欠款，比单看应收账款更能反映下游资金松紧。", "x": "受锂盐业务大幅收取票据影响，盐湖2026年三季度广义应收飙至44.64亿元、周转天数升至50.4天，显著高于纯钾肥时代。", "h": 4}, {"id": 157, "t": "产销率", "f": ["产销率"], "c": "财务会计", "p": "一段时间内卖出去的货占生产出来的货的百分比。接近100%说明产多少卖多少；如果远低于90%，说明车间还在猛产但仓库里货越堆越高。", "x": "2026年上半年盐湖碳酸锂产4.94万吨、仅销3.91万吨，产销率79.1%导致净累库1.03万吨，后续需核验产销率能否回归95%以上。", "h": 3}, {"id": 158, "t": "ICF", "f": ["股利收现", "ICF"], "c": "财务会计", "p": "现金流量表里的“投资活动现金流”，买厂买矿算流出，而参股别人家公司拿回来的现金分红（股利收现）会计在这里，不算进经营现金流。", "x": "藏格矿业和天齐锂业因巨龙铜业、SQM巨额投资收益分红计入ICF股利收现，导致表观经营现金流/净利偏低，对比时须剔除口径干扰。", "h": 2}, {"id": 159, "t": "棕地红利", "f": ["棕地红利", "棕地老卤"], "c": "估值周期", "p": "在自己已经跑通的老工业园区里扩建新产线，直接白嫖现成的水、电、公路、铁路和原料管网，比跑到荒郊野外从零开荒省钱省时得多。", "x": "盐湖4万吨项目尽享察尔汗棕地红利，免建盐田与电网，实付单吨投资低至8.79万元，较原预算省超四成并击穿全球投资底线。", "h": 3}, {"id": 160, "t": "FS", "f": ["可行性研究", "FS", "可研"], "c": "估值周期", "p": "大型矿山或工程动工前由专业机构出具的终极体检报告，把资源储量、采矿工艺、要砸多少钱、能赚多少回报算得明明白白，没过关绝不贸然开工。", "x": "盐湖刚果（布）BMB钾矿目前仅在钻探详勘期，尚未进入可行性研究（FS）阶段，后续须拿其到岸完全成本对标老挝基地检验经济性。", "h": 7}, {"id": 161, "t": "FID", "f": ["最终投资决策", "FID"], "c": "估值周期", "p": "大项目走完勘探、可研和环评等所有前期考察后，董事会正式拍板签字“真金白银拨款动工”的临门一脚，在此之前的规划都可能随时叫停。", "x": "盐湖2025年实地尽调3个月后在FID前果断终止3亿美元西班牙Muga钾矿合作，证明新团队并未为凑产能指标盲目买烂矿。", "h": 2}, {"id": 162, "t": "内部收益率", "f": ["内部收益率"], "c": "估值周期", "p": "衡量一个长期投资项目把未来十几年的现金流都折算回来后，实际相当于每年能拿到多少复利年化回报的标尺，算不清或太低的项目就不值得砸钱。", "x": "买方要求严盯刚果（布）BMB钾矿未来可研中的预期内部收益率，防止央企海外保供战略任务凌驾于上市公司股东回报之上。", "h": 1}, {"id": 163, "t": "Mosaic", "f": ["Mosaic"], "c": "行业产品", "p": "北美另一家全球头部磷肥和钾肥生产巨头，和Nutrien一起构成了北美钾肥双寡头，它的矿口成本和离岸报价是国际钾肥市场的重要参照。", "x": "Mosaic三季度钾肥现金成本73美元/吨、矿口FOB售价276美元/吨，但运抵中国到岸成本达2,000—2,300元/吨，难敌盐湖本土优势。", "h": 2}, {"id": 164, "t": "麻米错", "f": ["西藏麻米错", "麻米错"], "c": "行业产品", "p": "位于西藏高原的一座优质高品位锂盐湖矿区，卤水含锂浓度高、镁锂比低，开发条件优越，是国内继青海察尔汗之后备受瞩目的盐湖提锂新星。", "x": "藏格矿业推进西藏麻米错一期5万吨项目并于2026年8月投料试车，正与盐湖、天齐联手把锂行业份额向左侧25%低成本巨头集中。", "h": 4}, {"id": 165, "t": "高温焙烧", "f": ["高温焙烧转化", "高温焙烧"], "c": "工艺设备", "p": "矿石提锂必须经过的一道猛火工序，要把坚硬的锂辉石放进上千度的回转窑里用煤或天然气狠烧，改变晶体结构后才能酸浸提锂，既烧钱又费能源。", "x": "天齐等硬岩矿巨头逃不过高温焙烧的刚性耗能成本，而盐湖靠柴达木盆地免费阳光晒卤浓缩，毛利率由此领先天齐约22个百分点。", "h": 2}, {"id": 166, "t": "采盐船", "f": ["采盐船"], "c": "工艺设备", "p": "专门飘浮在盐湖晒盐池水面上作业的大型机械船，船头带着绞刀把池底结晶出来的光卤石等盐矿挖起来用管道抽进加工厂，是盐湖矿区的核心主力装备。", "x": "采盐船的周期性迭代更新属于盐湖股份不可削减的刚性维护投入，被纳入防御性维持资本开支中以防高估长期自由现金流。", "h": 1}, {"id": 167, "t": "副斜坡道", "f": ["副斜坡道", "井下巷道"], "c": "工艺设备", "p": "地下深井矿山从地面斜着挖通到地底矿层的斜坡隧道，用来运送矿工、大型机械和物资，一旦遇到雨季渗水或地质塌方就得花大钱维修甚至减值。", "x": "老挝扩产标杆亚钾国际2026年三季度因2#副斜坡道计提1.65亿元减值，凸显海外地下深井矿相较盐湖露天盐田的地质运维风险。", "h": 3}, {"id": 168, "t": "FOB", "f": ["FOB"], "c": "贸易政策", "p": "国际贸易里的装运港船上交货价，卖家只要把货送到自己国家港口装上船就完事了，后面的海运费、保险费和关税全归买家自己扛。", "x": "全球90分位边际钾肥矿FOB成本超200—220美元/吨，加上远洋运费和9%增值税后，中国市场完税到站边际成本高达约2,250元/吨。", "h": 1}, {"id": 169, "t": "矿权使用费", "f": ["矿权使用费"], "c": "贸易政策", "p": "海外矿业大国（如澳大利亚）向矿企征收的采矿地租，性质类似中国的资源税，但国际会计准则往往直接把它塞进营业成本里，而不单列在税金及附加中。", "x": "天齐因澳洲矿权使用费计入营业成本，表内税金及附加率仅0.25%，剥离该口径差异后盐湖仍以64.21%主业核心营业利润率力压天齐。", "h": 1}, {"id": 170, "t": "完税成本", "f": ["含税到站"], "c": "贸易政策", "p": "进口大宗商品从海外漂洋过海运到中国港口，把关税、增值税、卸船港杂费全部结清后真正落地可以卖的总成本，方便与国产货同口径比贵贱。", "x": "按2026年11月汇率折算，2026—2027年钾肥大合同港口完税成本约2,695—2,746元/吨，锁定钾肥进口底部标尺。", "h": 1}, {"id": 171, "t": "央企保供", "f": ["粮食安全保供", "央企保供", "保供"], "c": "贸易政策", "p": "由央企龙头扛起国家粮食安全重任，在春耕秋播等关键农时优先稳定供应国内化肥且不搞恶意哄抬涨价，既换来稳定大客户直供，也自带稳价约束。", "x": "盐湖依托央企保供直供中化、中农、新洋丰等大客户，钾肥单吨不含税售价比藏格高出377元/吨，但也意味着单价难再突破历史极端高点。", "h": 9}, {"id": 172, "t": "送达成本", "f": ["送达成本"], "c": "估值周期", "p": "商品不仅要算矿山挖出来的钱，还得把火车费、轮船海运费、港口装卸费和关税全加上，算清楚最终送到客户家门口的总成本，这才是竞争真底牌。", "x": "北美巨头矿口现金成本虽低至60—73美元/吨，但算上铁路海运港杂后，在中国市场送达成本反不如察尔汗的盐湖与藏格有优势。", "h": 3}, {"id": 173, "t": "四项期间费用率", "f": ["四项期间费用率", "期间费用"], "c": "财务会计", "p": "销售、管理、研发和财务这四项日常运营开销加起来占总营业收入的百分比，好比开店后交的房租、工资、广告费和贷款利息占比，越低越精干。", "x": "盐湖2026年前三季度四项期间费用率仅2.26%（远低于藏格7.69%与亚钾10.50%），其中巨额现金生息更让财务费用率低至-1.25%。", "h": 7}, {"id": 174, "t": "主业核心营业利润率", "f": ["主业核心营业利润率", "核心营业利润率"], "c": "财务会计", "p": "把炒股、参股别人矿山分红、卖资产等非经营投资收益全剥干净后，单靠自己亲手干主业每卖100块钱能落袋多少营业利润，最能照出主业真功夫。", "x": "剔除藏格巨龙铜业与天齐SQM投资收益干扰后，盐湖2026年前三季度以64.21%主业核心营业利润率力压四大同行，稳坐全行业头把交椅。", "h": 10}, {"id": 175, "t": "联营投资收益", "f": ["联营/合营投资净收益", "联营投资收益", "投资收益", "权益法"], "c": "财务会计", "p": "公司参股了别家企业（通常持股20%—50%但不控股），按持股比例把对方赚的钱记到自己利润表里；注意这往往只是账面数字，对方不分红钱就进不了兜。", "x": "藏格2026年前三季度靠参股巨龙铜业录得47.20亿投资收益，归母净利率飙至184%但净现比仅28.7%；盐湖仅2.79亿，主业成色最纯净。", "h": 16}, {"id": 176, "t": "年限平均法", "f": ["年限平均法", "折旧年限", "工作量法", "加速折旧", "残值率"], "c": "财务会计", "p": "把一台机器的买价扣掉报废能卖的废铁钱（残值率）后，按预计能用的年数每年平摊计入成本的折旧方式；年限设得越长，每年摊的折旧费越少。", "x": "盐湖机器设备按15年折旧略宽于藏格10年，终审已额外扣减0.40亿元折旧拉齐补差，还原毛利率仍高达71.5%。", "h": 14}, {"id": 177, "t": "成新率", "f": ["综合成新率", "成新率"], "c": "财务会计", "p": "固定资产扣除历年折旧后的账面净值占最初买价原值的百分比，就像二手车开了几年还剩几成新，比例太低说明厂房设备老旧、未来可能面临大修潮。", "x": "截至2026年上半年，盐湖合并固定资产原值227.36亿元、净值130.91亿元，综合成新率57.58%，整体设备状态健康无集中老化隐患。", "h": 3}, {"id": 178, "t": "预转固", "f": ["未办证预转固", "竣工决算", "预转固"], "c": "财务会计", "p": "新厂房已经盖好投产赚钱了，虽然施工账单还没最终核完（竣工决算）或房产证还没办下来，但按规矩必须先估个价从在建工程转成固定资产开始提折旧。", "x": "4万吨项目转固后盐湖在建工程降至7.17亿元，但截至2026年上半年未办证预转固资产达23.64亿元（占固资18.06%），后续决算需防微调。", "h": 5}, {"id": 179, "t": "预期信用损失", "f": ["账龄坏账计提比例", "预期信用损失", "单项计提", "坏账计提"], "c": "财务会计", "p": "会计上的未雨绸缪规则：不管客户现在赖没赖账，按欠款时间长短（账龄）或已知出险情况提前估计可能收不回来的钱，预先从利润里扣掉当坏账准备。", "x": "盐湖1年内账龄坏账计提1%虽比天齐5%宽松，但纯应收仅1.54亿且对破产子公司单项计提90%，综合坏账计提率反高达28.05%。", "h": 11}, {"id": 180, "t": "可变现净值", "f": ["存货跌价转回", "可变现净值"], "c": "财务会计", "p": "仓库里囤的货按当下市价卖出去扣完销售费用后最多能换回多少现金；只要跌破当初生产成本，会计就必须强制计提存货跌价准备。", "x": "盐湖2026年上半年存货跌价准备计提率仅3.24%，远低于外购矿石同行，根源在于其72.64%超高毛利率使存货极难跌破成本。", "h": 2}, {"id": 181, "t": "净现比", "f": ["经营现金流/净利润", "净现比"], "c": "财务会计", "p": "经营活动实际收进银行账户的现金净额除以利润表上的净利润，好比账本上说赚了100块、兜里实际摸到94块现金，越接近或超过100%说明利润越扎实。", "x": "盐湖2021—2025年累计净现比高达108.8%，2026年前三季度净现比94.00%（对归母净利110.05%），现金含金量碾压赣锋与天齐。", "h": 7}, {"id": 182, "t": "采矿权", "f": ["无形资产", "采矿权"], "c": "财务会计", "p": "国家颁发的允许企业在划定矿区范围和期限内合法挖矿的专属通行证，在资产负债表里记在无形资产项下，早期拿到的世界级大矿往往账面极低、暗藏巨富。", "x": "盐湖无形资产中采矿权账面净值仅6.42亿元，却承载着察尔汗与一里坪两大世界级盐湖资源，属于典型的财报隐蔽藏富资产。", "h": 16}, {"id": 183, "t": "一致行动人", "f": ["一致行动人", "零质押", "零冻结"], "c": "财务会计", "p": "签了协议或存在关联关系的几位大股东，在股东大会投票和重大决策上必须步调一致，监管层会把他们的持股加在一起算实际控制权，防止暗箱联手。", "x": "2026年三季度中国五矿系联手一致行动人工银投资合计控股29.99%，且前十大股东零质押零冻结，央企掌舵控制权固若金汤。", "h": 9}, {"id": 184, "t": "日常关联交易", "f": ["日常关联交易", "关联销售"], "c": "财务会计", "p": "上市公司与大股东及其旗下兄弟企业之间长期发生的买原料、卖产品或租设备等内部生意，容易产生定价不公或暗中输血风险，必须接受中小股东监督。", "x": "2026年上半年盐湖向五矿系采购11.07亿、向中化卖钾肥4.52亿具备商业实质，但与破产剥离的青海汇信仍有1.85亿关联销售需盯防。", "h": 2}, {"id": 185, "t": "BMB", "f": ["BMB"], "c": "行业产品", "p": "位于非洲刚果（布）的一处大型海外钾盐绿地勘探项目，属于盐湖股份背靠中国五矿实施“走出钾”战略的重要海外资源储备选项。", "x": "BMB钾矿目前仍处钻探详勘期、距出矿至少5—7年，买方终审对其估值严格计零，并严盯未来可研内部收益率防盲目砸钱。", "h": 6}, {"id": 186, "t": "Muga", "f": ["Highfield", "Muga"], "c": "行业产品", "p": "由澳大利亚Highfield Resources主导开发的西班牙大型地下钾盐矿项目，曾一度作为盐湖股份海外扩张的潜在合作标的。", "x": "盐湖2025年实地尽调3个月后在最终投资决策（FID）前果断叫停3亿美元Muga合作，成为新团队严守资本纪律的正面佐证。", "h": 5}, {"id": 187, "t": "Tanco", "f": ["Bikita", "Tanco"], "c": "行业产品", "p": "全球两座顶级稀有金属硬岩名矿：加拿大Tanco是全球品位最高的铯榴石矿山，津巴布韦Bikita是大型透锂长石与锂辉石矿山。", "x": "中矿资源借Tanco与Bikita垄断全球超80%高品位铯资源，反衬盐湖察尔汗ppm级低浓度卤水提铷铯短期难具成本竞争力。", "h": 4}, {"id": 188, "t": "Cauchari", "f": ["Cauchari", "Mariana"], "c": "行业产品", "p": "位于阿根廷“南美锂三角”的两座世界级高海拔盐湖提锂矿区（Cauchari-Olaroz与Mariana），均由中国锂业巨头赣锋锂业主导或参股开发。", "x": "对比赣锋远赴南美开发Cauchari与Mariana面临高通胀、外汇管制与高资本开支，盐湖扎根青海境内棕地老卤优势极其稀缺。", "h": 2}, {"id": 189, "t": "定增", "f": ["首次公开募股", "换股吸并", "定增", "配股"], "c": "财务会计", "p": "上市公司在股市里向机构或老股东增发新股票来筹钱的方式（定向增发、配股等），虽然能瞬间拿到现金，但会直接摊薄老股东原有的持股比例。", "x": "盐湖股份2021年恢复上市五年来定增、配股、可转债与GDR融资全部为0次，全靠内生现金流完成扩产与并购，极其珍贵。", "h": 17}];
+    var SCOPE_SEL = ".thesis-doc, #tab4";
+    var STORAGE_MODE_KEY = 'agy_glossary_mode_v1';
+    var MODES = ['smart', 'all', 'off'];
+    var MODE_LABELS = { smart: '📖 术语下划线: 智能去重', all: '📖 术语下划线: 全部标出', off: '📖 术语下划线: 已隐藏' };
+    var curMode = "smart";
+    try {
+      var savedM = localStorage.getItem(STORAGE_MODE_KEY);
+      if (savedM && MODES.indexOf(savedM) !== -1) curMode = savedM;
+    } catch(e) {}
+
+    var byId = {};
+    var formToId = {};
+    var allForms = [];
+    GLOSSARY.forEach(function(item){
+      byId[item.id] = item;
+      (item.f || []).forEach(function(form){
+        if (!form || form.length < 2) return;
+        if (formToId[form] === undefined) {
+          formToId[form] = item.id;
+          allForms.push(form);
+        }
+      });
+    });
+    // Longest-match-first so e.g. "维持性资本开支" matches before "资本开支", "聚合MDI" before "MDI"
+    allForms.sort(function(a, b){ return b.length - a.length; });
+    if (!allForms.length) return;
+
+    function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+    var masterRe = new RegExp(allForms.map(escRe).join('|'), 'g');
+    var asciiRe = /[A-Za-z0-9_]/;
+
+    var SKIP_TAGS = {
+      SCRIPT:1, STYLE:1, SVG:1, TEXTAREA:1, INPUT:1, BUTTON:1, SELECT:1, OPTION:1,
+      A:1, H1:1, H2:1, H3:1, NOSCRIPT:1, IFRAME:1
+    };
+
+    function isSkippedNode(node) {
+      var el = node.parentElement;
+      while (el) {
+        if (SKIP_TAGS[el.tagName]) return true;
+        if (el.classList && (el.classList.contains('no-glossary') || el.classList.contains('agy-term') || el.classList.contains('agy-chart-card'))) return true;
+        el = el.parentElement;
+      }
+      return false;
+    }
+
+    function clearAnnotations(roots) {
+      roots.forEach(function(root){
+        var spans = root.querySelectorAll('span.agy-term');
+        for (var i = 0; i < spans.length; i++) {
+          var sp = spans[i];
+          var txt = document.createTextNode(sp.textContent || '');
+          if (sp.parentNode) sp.parentNode.replaceChild(txt, sp);
+        }
+        root.normalize();
+      });
+    }
+
+    function getSectionKey(el) {
+      var cur = el;
+      while (cur && cur !== document.body) {
+        if (cur.dataset && cur.dataset.chap) return cur.dataset.chap;
+        if (cur.tagName === 'SECTION' || cur.tagName === 'ARTICLE') return cur.id || 'sec';
+        cur = cur.parentElement;
+      }
+      // Fallback: find nearest preceding h2 inside report
+      var p = el;
+      while (p && p.parentElement && !p.parentElement.classList.contains('report-content')) {
+        p = p.parentElement;
+      }
+      if (p) {
+        var prev = p.previousElementSibling;
+        var steps = 0;
+        while (prev && steps < 40) {
+          if (prev.tagName === 'H2' || prev.tagName === 'H1') return prev.id || prev.textContent.slice(0, 20);
+          prev = prev.previousElementSibling;
+          steps++;
+        }
+      }
+      return 'root';
+    }
+
+    function annotateAll(mode) {
+      var roots = Array.prototype.slice.call(document.querySelectorAll(SCOPE_SEL));
+      if (!roots.length) return;
+      if (mode === 'off') {
+        document.body.classList.add('agy-glossary-off');
+        return;
+      }
+      document.body.classList.remove('agy-glossary-off');
+      clearAnnotations(roots);
+
+      var seenPerSection = {};
+      var blockCounter = 0;
+
+      roots.forEach(function(root){
+        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+        var textNodes = [];
+        var n;
+        while ((n = walker.nextNode())) {
+          if (!n.nodeValue || n.nodeValue.trim().length < 2) continue;
+          if (isSkippedNode(n)) continue;
+          textNodes.push(n);
+        }
+
+        textNodes.forEach(function(tNode){
+          var text = tNode.nodeValue;
+          masterRe.lastIndex = 0;
+          var matches = [];
+          var m;
+          while ((m = masterRe.exec(text)) !== null) {
+            var word = m[0];
+            var start = m.index;
+            var end = start + word.length;
+            // ASCII boundary guard (Safari-safe without lookbehind)
+            if (asciiRe.test(word.charAt(0)) && start > 0 && asciiRe.test(text.charAt(start - 1))) continue;
+            if (asciiRe.test(word.charAt(word.length - 1)) && end < text.length && asciiRe.test(text.charAt(end))) continue;
+            var gid = formToId[word];
+            if (gid === undefined) continue;
+            if (mode === 'smart') {
+              var secKey = getSectionKey(tNode.parentElement);
+              if (!seenPerSection[secKey]) seenPerSection[secKey] = {};
+              if (seenPerSection[secKey][gid]) continue;
+              seenPerSection[secKey][gid] = true;
+            }
+            matches.push({ start: start, end: end, word: word, gid: gid });
+          }
+          if (!matches.length) return;
+
+          var frag = document.createDocumentFragment();
+          var lastIdx = 0;
+          matches.forEach(function(mt){
+            if (mt.start > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, mt.start)));
+            var item = byId[mt.gid];
+            var sp = document.createElement('span');
+            sp.className = 'agy-term';
+            sp.setAttribute('data-gid', String(mt.gid));
+            sp.setAttribute('data-cat', item.c || '');
+            sp.setAttribute('tabindex', '0');
+            sp.setAttribute('role', 'button');
+            sp.setAttribute('title', '点击查看「' + item.t + '」通俗解释');
+            sp.textContent = mt.word;
+            frag.appendChild(sp);
+            lastIdx = mt.end;
+          });
+          if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+          if (tNode.parentNode) tNode.parentNode.replaceChild(frag, tNode);
+          blockCounter++;
+        });
+      });
+    }
+
+    // Popover controller
+    var pop = document.getElementById('agy-term-popover');
+    var tpCat = document.getElementById('agy-tp-cat');
+    var tpTerm = document.getElementById('agy-tp-term');
+    var tpPlain = document.getElementById('agy-tp-plain');
+    var tpCtx = document.getElementById('agy-tp-ctx');
+    var tpMeta = document.getElementById('agy-tp-meta');
+    var activeSpan = null;
+
+    function hidePop() {
+      if (pop) pop.style.display = 'none';
+      if (activeSpan) {
+        activeSpan.classList.remove('agy-term-active');
+        activeSpan = null;
+      }
+    }
+
+    function showPop(spanEl) {
+      if (document.body.classList.contains('agy-glossary-off')) return;
+      var gid = parseInt(spanEl.getAttribute('data-gid'), 10);
+      var item = byId[gid];
+      if (!item || !pop) return;
+
+      if (activeSpan && activeSpan !== spanEl) activeSpan.classList.remove('agy-term-active');
+      activeSpan = spanEl;
+      spanEl.classList.add('agy-term-active');
+
+      tpCat.textContent = item.c || '专业术语';
+      tpCat.setAttribute('data-cat', item.c || '');
+      tpTerm.textContent = item.t;
+      tpPlain.innerHTML = '<strong>🐣 大白话秒懂：</strong>' + item.p;
+      if (item.x) {
+        tpCtx.style.display = 'block';
+        tpCtx.innerHTML = '<strong>🎯 本文怎么看：</strong>' + item.x;
+      } else {
+        tpCtx.style.display = 'none';
+      }
+      var extraForms = (item.f || []).filter(function(x){ return x !== item.t; });
+      var aliasNote = extraForms.length ? (' · 别名: ' + extraForms.slice(0, 3).join('/')) : '';
+      tpMeta.textContent = '全文出现 ' + (item.h || 1) + ' 次' + aliasNote;
+
+      pop.style.display = 'block';
+      var rect = spanEl.getBoundingClientRect();
+      var pw = pop.offsetWidth || 350;
+      var ph = pop.offsetHeight || 190;
+      var left = Math.max(12, Math.min(rect.left, window.innerWidth - pw - 12));
+      var top = rect.bottom + 8;
+      if (top + ph > window.innerHeight - 12) {
+        top = Math.max(12, rect.top - ph - 8);
+      }
+      pop.style.left = left + 'px';
+      pop.style.top = top + 'px';
+    }
+
+    document.addEventListener('click', function(e){
+      var target = e.target;
+      if (pop && pop.contains(target)) return;
+      var termEl = target && target.closest ? target.closest('.agy-term') : null;
+      if (termEl) {
+        // Respect text selection for 划词提问!
+        var sel = window.getSelection ? window.getSelection().toString().trim() : '';
+        if (sel.length >= 2) return;
+        e.stopPropagation();
+        if (activeSpan === termEl && pop.style.display === 'block') {
+          hidePop();
+        } else {
+          showPop(termEl);
+        }
+        return;
+      }
+      hidePop();
+    });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        hidePop();
+        toggleDrawer(false);
+      }
+      if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.classList && e.target.classList.contains('agy-term')) {
+        e.preventDefault();
+        showPop(e.target);
+      }
+    });
+    window.addEventListener('scroll', function(){ if (pop && pop.style.display === 'block') hidePop(); }, { passive: true });
+
+    var closeBtn = document.getElementById('agy-tp-close');
+    if (closeBtn) closeBtn.addEventListener('click', hidePop);
+
+    // Drawer controller
+    var drawer = document.getElementById('agy-term-drawer');
+    var mask = document.getElementById('agy-term-drawer-mask');
+    var tdSearch = document.getElementById('agy-td-search');
+    var tdCats = document.getElementById('agy-td-cats');
+    var tdList = document.getElementById('agy-td-list');
+    var activeCat = '全部';
+
+    function toggleDrawer(open) {
+      if (!drawer || !mask) return;
+      drawer.classList.toggle('open', open);
+      mask.classList.toggle('open', open);
+      if (open) {
+        hidePop();
+        renderDrawerList();
+      }
+    }
+
+    var catCounts = { '全部': GLOSSARY.length };
+    GLOSSARY.forEach(function(g){
+      var c = g.c || '财务会计';
+      catCounts[c] = (catCounts[c] || 0) + 1;
+    });
+    if (tdCats) {
+      Object.keys(catCounts).forEach(function(cat){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'td-cat-btn' + (cat === activeCat ? ' active' : '');
+        b.textContent = cat + ' (' + catCounts[cat] + ')';
+        b.addEventListener('click', function(){
+          activeCat = cat;
+          tdCats.querySelectorAll('.td-cat-btn').forEach(function(x){ x.classList.remove('active'); });
+          b.classList.add('active');
+          renderDrawerList();
+        });
+        tdCats.appendChild(b);
+      });
+    }
+
+    function renderDrawerList() {
+      if (!tdList) return;
+      var q = (tdSearch ? tdSearch.value : '').trim().toLowerCase();
+      var rows = GLOSSARY.filter(function(g){
+        if (activeCat !== '全部' && (g.c || '财务会计') !== activeCat) return false;
+        if (!q) return true;
+        return (g.t + ' ' + (g.f || []).join(' ') + ' ' + g.p + ' ' + g.x).toLowerCase().indexOf(q) !== -1;
+      });
+      tdList.innerHTML = rows.map(function(g){
+        return '<div class="td-card">' +
+          '<div class="td-card-top"><span class="td-card-term">' + g.t + '</span><span class="td-card-meta">' + (g.c || '') + ' · ' + (g.h || 1) + '次</span></div>' +
+          '<div class="td-card-plain">' + g.p + '</div>' +
+          (g.x ? '<div class="td-card-ctx">🎯 ' + g.x + '</div>' : '') +
+        '</div>';
+      }).join('') || '<div style="padding:24px;text-align:center;color:#94a3b8;">未找到匹配的专业术语</div>';
+    }
+
+    if (tdSearch) tdSearch.addEventListener('input', renderDrawerList);
+    if (mask) mask.addEventListener('click', function(){ toggleDrawer(false); });
+    var tdClose = document.getElementById('agy-td-close');
+    if (tdClose) tdClose.addEventListener('click', function(){ toggleDrawer(false); });
+    var openAllBtn = document.getElementById('agy-tp-open-all');
+    if (openAllBtn) openAllBtn.addEventListener('click', function(){ toggleDrawer(true); });
+    var fabDrawerBtn = document.getElementById('agy-term-open-drawer');
+    if (fabDrawerBtn) fabDrawerBtn.addEventListener('click', function(){ toggleDrawer(true); });
+
+    // Mode switcher
+    var modeBtn = document.getElementById('agy-term-mode-btn');
+    function updateModeUI() {
+      if (modeBtn) modeBtn.textContent = MODE_LABELS[curMode] || MODE_LABELS.smart;
+    }
+    if (modeBtn) {
+      modeBtn.addEventListener('click', function(){
+        var nextIdx = (MODES.indexOf(curMode) + 1) % MODES.length;
+        curMode = MODES[nextIdx];
+        try { localStorage.setItem(STORAGE_MODE_KEY, curMode); } catch(e) {}
+        updateModeUI();
+        annotateAll(curMode);
+      });
+    }
+
+    // Expose global hook (useful for 2.0 Cockpit tab re-renders)
+    window.agyGlossaryRefresh = function(){ annotateAll(curMode); };
+    window.agyGlossaryOpenDrawer = function(){ toggleDrawer(true); };
+
+    // Initial run
+    updateModeUI();
+    if (curMode !== 'off') {
+      annotateAll(curMode);
+    } else {
+      document.body.classList.add('agy-glossary-off');
+    }
+  })();
+  </script>
+
 </body>
 </html>
