@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>腾讯控股(00700.HK) 深度投研全集</title>
+<title>腾讯控股 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -830,6 +830,29 @@
       border: 1px solid rgba(254, 243, 199, 0.55);
       box-shadow: 0 1px 6px rgba(217, 119, 6, 0.45);
     }
+    .agy-ab-badge.agy-v3-badge,
+    .agy-v3-badge {
+      background: linear-gradient(135deg, #059669 0%, #0d9488 52%, #0284c7 100%);
+      color: #ecfdf5;
+      border: 1px solid rgba(167, 243, 208, 0.55);
+      box-shadow: 0 1px 6px rgba(5, 150, 105, 0.40);
+    }
+    .agy-sort-btn.agy-v3-filter-btn {
+      border-color: #6ee7b7;
+      color: #065f46;
+      background: #ecfdf5;
+      font-weight: 700;
+    }
+    .agy-sort-btn.agy-v3-filter-btn:hover {
+      background: #d1fae5;
+      border-color: #10b981;
+    }
+    .agy-sort-btn.agy-v3-filter-btn.active {
+      background: linear-gradient(135deg, #059669 0%, #0d9488 55%, #0284c7 100%);
+      border-color: #065f46;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(5, 150, 105, 0.40);
+    }
     .agy-sort-btn.agy-swarm-filter-btn {
       border-color: #fcd34d;
       color: #92400e;
@@ -1461,12 +1484,329 @@
       color: #94a3b8;
     }
   }
+
+/* ====== 全文专业术语下划线与点击弹窗引擎 (agy-glossary) ====== */
+.agy-term {
+  border-bottom: 1.5px dotted var(--agy-term-line, #2563eb);
+  padding-bottom: 0.5px;
+  cursor: help;
+  border-radius: 2px;
+  transition: background-color 0.14s ease, color 0.14s ease, border-bottom-color 0.14s ease;
+  text-decoration: none;
+}
+.agy-term[data-cat="化工产品"], .agy-term[data-cat="行业产品"] { --agy-term-line: #0d9488; }
+.agy-term[data-cat="工艺设备"] { --agy-term-line: #4f46e5; }
+.agy-term[data-cat="财务会计"] { --agy-term-line: #2563eb; }
+.agy-term[data-cat="估值周期"] { --agy-term-line: #d97706; }
+.agy-term[data-cat="贸易政策"] { --agy-term-line: #e11d48; }
+.agy-term:hover, .agy-term.agy-term-active {
+  background-color: rgba(37, 99, 235, 0.11);
+  border-bottom-style: solid;
+}
+code .agy-term {
+  border-bottom-color: #be123c;
+}
+body.agy-glossary-off .agy-term {
+  border-bottom-color: transparent !important;
+  cursor: inherit;
+  background-color: transparent !important;
+}
+body.theme-dark .agy-term, html.theme-dark .agy-term {
+  --agy-term-line: #60a5fa;
+}
+body.theme-dark .agy-term[data-cat="化工产品"], body.theme-dark .agy-term[data-cat="行业产品"] { --agy-term-line: #2dd4bf; }
+body.theme-dark .agy-term[data-cat="工艺设备"] { --agy-term-line: #818cf8; }
+body.theme-dark .agy-term[data-cat="估值周期"] { --agy-term-line: #fbbf24; }
+body.theme-dark .agy-term[data-cat="贸易政策"] { --agy-term-line: #fb7185; }
+body.theme-dark .agy-term:hover, body.theme-dark .agy-term.agy-term-active {
+  background-color: rgba(96, 165, 250, 0.22);
+}
+
+#agy-term-popover {
+  position: fixed;
+  z-index: 99999;
+  display: none;
+  width: min(370px, calc(100vw - 24px));
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.22), 0 2px 8px rgba(15, 23, 42, 0.08);
+  padding: 13px 15px 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 13.5px;
+  line-height: 1.62;
+  animation: agyPopIn 0.14s ease-out;
+}
+@keyframes agyPopIn {
+  from { opacity: 0; transform: translateY(4px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+body.theme-dark #agy-term-popover, html.theme-dark #agy-term-popover {
+  background: #1e293b;
+  color: #f1f5f9;
+  border-color: #475569;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55);
+}
+#agy-term-popover .tp-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #e2e8f0;
+}
+body.theme-dark #agy-term-popover .tp-head { border-bottom-color: #334155; }
+#agy-term-popover .tp-title-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+#agy-term-popover .tp-term {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
+body.theme-dark #agy-term-popover .tp-term { color: #f8fafc; }
+#agy-term-popover .tp-cat {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+#agy-term-popover .tp-cat[data-cat="化工产品"], #agy-term-popover .tp-cat[data-cat="行业产品"] { background: #ccfbf1; color: #0f766e; }
+#agy-term-popover .tp-cat[data-cat="工艺设备"] { background: #e0e7ff; color: #4338ca; }
+#agy-term-popover .tp-cat[data-cat="估值周期"] { background: #fef3c7; color: #b45309; }
+#agy-term-popover .tp-cat[data-cat="贸易政策"] { background: #ffe4e6; color: #be123c; }
+#agy-term-popover .tp-close {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+#agy-term-popover .tp-close:hover { color: #0f172a; }
+body.theme-dark #agy-term-popover .tp-close:hover { color: #f8fafc; }
+#agy-term-popover .tp-plain {
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+body.theme-dark #agy-term-popover .tp-plain { color: #e2e8f0; }
+#agy-term-popover .tp-ctx {
+  background: #f8fafc;
+  border-left: 3px solid #2563eb;
+  padding: 6px 9px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: #334155;
+  margin-bottom: 8px;
+}
+body.theme-dark #agy-term-popover .tp-ctx {
+  background: #0f172a;
+  color: #cbd5e1;
+  border-left-color: #38bdf8;
+}
+#agy-term-popover .tp-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #64748b;
+}
+#agy-term-popover .tp-drawer-link {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#agy-term-popover .tp-drawer-link:hover { background: #dbeafe; }
+
+#agy-term-fab {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 99980;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.90);
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 999px;
+  padding: 5px 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.28);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+#agy-term-fab button {
+  background: transparent;
+  color: #e2e8f0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#agy-term-fab button:hover {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+}
+#agy-term-fab .fab-sep {
+  width: 1px;
+  height: 14px;
+  background: #334155;
+}
+
+#agy-term-drawer-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.42);
+  z-index: 99990;
+  display: none;
+}
+#agy-term-drawer-mask.open { display: block; }
+#agy-term-drawer {
+  position: fixed;
+  top: 0;
+  right: -440px;
+  width: min(420px, 92vw);
+  height: 100vh;
+  background: #ffffff;
+  color: #0f172a;
+  z-index: 99995;
+  box-shadow: -10px 0 32px rgba(15, 23, 42, 0.25);
+  transition: right 0.22s ease;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+#agy-term-drawer.open { right: 0; }
+body.theme-dark #agy-term-drawer { background: #0f172a; color: #f1f5f9; }
+#agy-term-drawer .td-head {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#agy-term-drawer .td-tools {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+body.theme-dark #agy-term-drawer .td-tools { border-bottom-color: #334155; }
+#agy-term-drawer .td-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+}
+body.theme-dark #agy-term-drawer .td-search {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #475569;
+}
+#agy-term-drawer .td-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#agy-term-drawer .td-cat-btn {
+  padding: 3px 8px;
+  font-size: 11.5px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  cursor: pointer;
+}
+#agy-term-drawer .td-cat-btn.active {
+  background: #1e3a8a;
+  color: #ffffff;
+  border-color: #1e3a8a;
+}
+#agy-term-drawer .td-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 14px 24px;
+}
+#agy-term-drawer .td-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  padding: 10px 12px;
+  margin-bottom: 9px;
+  background: #ffffff;
+}
+body.theme-dark #agy-term-drawer .td-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+#agy-term-drawer .td-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+#agy-term-drawer .td-card-term {
+  font-weight: 800;
+  font-size: 14px;
+}
+#agy-term-drawer .td-card-meta {
+  font-size: 11px;
+  color: #64748b;
+}
+#agy-term-drawer .td-card-plain {
+  font-size: 12.8px;
+  line-height: 1.58;
+  color: #334155;
+}
+body.theme-dark #agy-term-drawer .td-card-plain { color: #cbd5e1; }
+#agy-term-drawer .td-card-ctx {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #1d4ed8;
+}
+body.theme-dark #agy-term-drawer .td-card-ctx { color: #7dd3fc; }
+
+@media print {
+  .agy-term {
+    border-bottom: none !important;
+    background: transparent !important;
+  }
+  #agy-term-popover, #agy-term-fab, #agy-term-drawer, #agy-term-drawer-mask {
+    display: none !important;
+  }
+}
+
 </style>
 </head>
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">腾讯控股(00700.HK) 深度投研全集</div>
+    <div class="report-title">腾讯控股 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-26</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
@@ -5558,7 +5898,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《腾讯控股(00700.HK) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/腾讯控股(00700.HK) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
+          '针对报告《腾讯控股 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/腾讯控股 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -5860,7 +6200,7 @@
           var hasFullOe = false;
           var hasDiv = false;
           var hasObjScore = false;
-          var countA = 0, countH = 0, countAb = 0, countSwarm = 0;
+          var countA = 0, countH = 0, countAb = 0, countSwarm = 0, countV3Only = 0;
           var factorCounts = {};
           var knownFactors = [
             '⛏️ 大宗周期与资源',
@@ -5935,10 +6275,15 @@
             if (market === 'H') countH++; else countA++;
             tr.setAttribute('data-market', market);
             var isSwarm = !!tr.querySelector('.agy-swarm-badge');
-            var isAbTested = isSwarm || !!tr.querySelector('.agy-ab-badge');
+            var isV3Only = !!tr.querySelector('.agy-v3-badge');
+            var isAbTested = isSwarm || isV3Only || !!tr.querySelector('.agy-ab-badge');
             if (isSwarm) {
               countSwarm++;
               tr.setAttribute('data-swarm-debated', '1');
+            }
+            if (isV3Only) {
+              countV3Only++;
+              tr.setAttribute('data-v3-only', '1');
             }
             if (isAbTested) {
               countAb++;
@@ -5986,7 +6331,8 @@
               isHkOnly: market === 'H',
               isStale: isStale,
               isAbTested: isAbTested,
-              isSwarm: isSwarm
+              isSwarm: isSwarm,
+              isV3Only: isV3Only
             };
           });
 
@@ -5997,7 +6343,7 @@
             globalStats.maxH = countH;
           }
 
-          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL', abOnly: false, swarmOnly: false };
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL', abOnly: false, swarmOnly: false, v3Only: false };
           var inlineMarketBtns = {};
 
           function applyFilters() {
@@ -6012,14 +6358,15 @@
               var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
               var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
               var hideBySwarm = state.swarmOnly && !d.isSwarm;
+              var hideByV3 = state.v3Only && !d.isV3Only;
               var hideByAb = state.abOnly && !d.isAbTested;
-              var hidden = hideByMkt || hideByF || hideBySwarm || hideByAb;
+              var hidden = hideByMkt || hideByF || hideBySwarm || hideByV3 || hideByAb;
               d.tr.style.display = hidden ? 'none' : '';
               if (!hidden) {
                 visIdx++;
                 if (d.td0) {
                   var dynSpan = d.td0.querySelector('.agy-dyn-rank');
-                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.abOnly || state.swarmOnly || state.key !== 'rank') {
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.abOnly || state.swarmOnly || state.v3Only || state.key !== 'rank') {
                     if (!dynSpan) {
                       dynSpan = document.createElement('div');
                       dynSpan.className = 'agy-dyn-rank no-print';
@@ -6096,18 +6443,20 @@
             barBtns[def.key] = { el: b, baseLabel: def.label };
           });
 
-          // 挂载最新版双一键聚焦开关：👑 只看Swarm×B测（顶配终极版） & ✨ 只看最新版（Swarm+B测全覆盖）
-          var swarmBtn = null, abBtn = null;
+          // 挂载最新版三档一键聚焦开关：👑 只看Swarm×B测 | 🚀 只看v3新流程(待Swarm) | ✨ 只看最新版(全覆盖)
+          var swarmBtn = null, v3Btn = null, abBtn = null;
           if (countSwarm > 0) {
             swarmBtn = document.createElement('button');
             swarmBtn.type = 'button';
             swarmBtn.className = 'agy-sort-btn agy-swarm-filter-btn';
             swarmBtn.textContent = '👑 只看Swarm×B测 (' + countSwarm + ')';
-            swarmBtn.title = '一键聚焦：已跑完最新调研流程B双盲 + 跨模型Swarm投委会辩论终审的顶配最新版标的';
+            swarmBtn.title = '一键聚焦：已跑完跨模型Swarm投委会+流程B联合校准的顶配标的';
             swarmBtn.addEventListener('click', function(){
               state.swarmOnly = !state.swarmOnly;
               if (state.swarmOnly) {
+                state.v3Only = false;
                 state.abOnly = false;
+                if (v3Btn) v3Btn.classList.remove('active');
                 if (abBtn) abBtn.classList.remove('active');
               }
               swarmBtn.classList.toggle('active', state.swarmOnly);
@@ -6115,17 +6464,38 @@
             });
             bar.appendChild(swarmBtn);
           }
+          if (countV3Only > 0) {
+            v3Btn = document.createElement('button');
+            v3Btn.type = 'button';
+            v3Btn.className = 'agy-sort-btn agy-v3-filter-btn';
+            v3Btn.textContent = '🚀 v3新流程·待Swarm (' + countV3Only + ')';
+            v3Btn.title = '一键聚焦：由最新v3.0方案B调研流程产出、但尚未做Swarm+B测跨模型校准的标的';
+            v3Btn.addEventListener('click', function(){
+              state.v3Only = !state.v3Only;
+              if (state.v3Only) {
+                state.swarmOnly = false;
+                state.abOnly = false;
+                if (swarmBtn) swarmBtn.classList.remove('active');
+                if (abBtn) abBtn.classList.remove('active');
+              }
+              v3Btn.classList.toggle('active', state.v3Only);
+              applyFilters();
+            });
+            bar.appendChild(v3Btn);
+          }
           if (countAb > 0) {
             abBtn = document.createElement('button');
             abBtn.type = 'button';
             abBtn.className = 'agy-sort-btn agy-ab-filter-btn';
             abBtn.textContent = '✨ 只看最新版 (' + countAb + ')';
-            abBtn.title = '一键聚焦：全部最新版标的（含 👑 Swarm×B测 与 🧪 B测新版，隐藏早期老版）';
+            abBtn.title = '一键聚焦：全部新版标的（含 👑 Swarm×B测 + 🚀 v3新流程 + 🧪 B测重校，隐藏早期老版）';
             abBtn.addEventListener('click', function(){
               state.abOnly = !state.abOnly;
               if (state.abOnly) {
                 state.swarmOnly = false;
+                state.v3Only = false;
                 if (swarmBtn) swarmBtn.classList.remove('active');
+                if (v3Btn) v3Btn.classList.remove('active');
               }
               abBtn.classList.toggle('active', state.abOnly);
               applyFilters();
@@ -6479,5 +6849,379 @@
       })();
     })();
   </script>
+
+  <!-- 全文专业术语点击大白话弹窗与侧滑词典（打印 PDF 自动隐藏） -->
+  <div id="agy-term-popover" class="no-print no-glossary" role="dialog" aria-label="专业术语大白话解释">
+    <div class="tp-head">
+      <div class="tp-title-wrap">
+        <span class="tp-cat" id="agy-tp-cat"></span>
+        <span class="tp-term" id="agy-tp-term"></span>
+      </div>
+      <button type="button" class="tp-close" id="agy-tp-close" aria-label="关闭">&times;</button>
+    </div>
+    <div class="tp-plain" id="agy-tp-plain"></div>
+    <div class="tp-ctx" id="agy-tp-ctx"></div>
+    <div class="tp-foot">
+      <span id="agy-tp-meta"></span>
+      <button type="button" class="tp-drawer-link" id="agy-tp-open-all">📖 全部术语词典</button>
+    </div>
+  </div>
+
+  <div id="agy-term-fab" class="no-print no-glossary">
+    <button type="button" id="agy-term-mode-btn" title="切换正文术语下划线密度">📖 术语下划线: 智能去重</button>
+    <span class="fab-sep"></span>
+    <button type="button" id="agy-term-open-drawer" title="浏览并搜索本文全部专业术语">词典 (<span id="agy-term-total-num">120</span>)</button>
+  </div>
+
+  <div id="agy-term-drawer-mask" class="no-print no-glossary"></div>
+  <aside id="agy-term-drawer" class="no-print no-glossary">
+    <div class="td-head">
+      <strong>📖 本文全量专业术语大白话词典（120 词）</strong>
+      <button type="button" id="agy-td-close" style="background:none;border:none;color:#fff;font-size:21px;cursor:pointer;line-height:1;">&times;</button>
+    </div>
+    <div class="td-tools">
+      <input type="text" id="agy-td-search" class="td-search" placeholder="搜索化工、工艺、财务或估值术语（如 MDI、POE、净债、折旧...）" />
+      <div class="td-cats" id="agy-td-cats"></div>
+    </div>
+    <div class="td-list" id="agy-td-list"></div>
+  </aside>
+
+  <script class="no-print">
+  (function(){
+    var GLOSSARY = [{"id": 0, "t": "股东自由盈余", "f": ["股东自由盈余", "常态自由盈余", "稳态自由盈余", "达产自由盈余"], "c": "估值周期", "p": "巴菲特最看重的“真赚钱力”：扣掉每年修机器、换旧设备和维持运转必需的垫钱后，公司正常年份真正能装进股东口袋随便分红的纯现金利润。", "x": "买方估值最核心的分子，比容易被会计调节的账面净利润更真实可靠。", "h": 61}, {"id": 1, "t": "真实企业价值", "f": ["真实企业价值", "企业价值"], "c": "估值周期", "p": "把整家公司 100% 买下来并替它还清净债的真实总成本 = 股票总市值 + 欠别人的净有息债（如果账上闲钱比债多，则减去多余现金）。", "x": "比单纯看股票市值更公平，因为两家市值一样的公司，背 1000 亿债和躺 1000 亿现金的天差地别。", "h": 119}, {"id": 2, "t": "净债偏移", "f": ["净现金偏移"], "c": "估值周期", "p": "真实企业价值与股票市值之间的差额（正数代表欠的真债比闲钱多，负数代表账上闲钱比债多）。算买下公司的真实总价时必须把这笔账加上或减去。", "x": "穿透排查表外债、受限资金、少数股东份额和营运底仓后的最终净债（或净现金）调整额。", "h": 4}, {"id": 3, "t": "经营现金流", "f": ["经营活动现金流", "经营现金流"], "c": "财务会计", "p": "公司靠卖货真正收进银行卡的现金，减去买原料、发工资、交税付出去的现金。利润表可能只是“打了白条”，经营现金流才是真金白银落袋。", "x": "检验利润含金量的照妖镜，正常好公司的经营现金流长期应大于等于净利润。", "h": 36}, {"id": 4, "t": "自由现金流", "f": ["表观自由现金流", "自由现金流"], "c": "财务会计", "p": "经营赚进来的现金（OCF），再扣掉盖新厂、买新设备花的钱（资本开支）后真正剩下的余钱。正数代表自己养活自己还有剩，负数代表还在借钱或吃老本扩张。", "x": "判断一家企业究竟是“股东印钞机”还是“资本吞金兽”的终极标尺。", "h": 87}, {"id": 5, "t": "资本开支", "f": ["资本开支"], "c": "财务会计", "p": "公司盖厂房、买生产线、买地买船这类大件长期资产花的钱。通常在现金流量表里对应“购建固定资产、无形资产和其他长期资产支付的现金”。", "x": "决定重资产企业有没有余钱分红的关键阀门，必须区分维持老厂和扩建新厂。", "h": 152}, {"id": 6, "t": "折旧摊销", "f": ["固定资产折旧", "折旧与摊销", "折旧摊销"], "c": "财务会计", "p": "花 100 亿盖的工厂能用 10 年，会计上不会第一年把 100 亿全算成亏损，而是分摊到 10 年里每年记 10 亿费用。当年不用真掏现金，但会压低账面利润。", "x": "重资产投产高峰期折旧暴增会压制账面利润，但现金流往往比账面利润好看得多。", "h": 19}, {"id": 7, "t": "归母净利润", "f": ["归母净利润", "归母净利"], "c": "财务会计", "p": "把合资子公司里分给合作伙伴（少数股东）的那份利润剔除掉之后，真正归咱们买股票的上市公司全体股东所有的净利润。", "x": "一切每股指标和估值计算必须死守归母口径，防止把合作伙伴赚的钱算成自己的。", "h": 29}, {"id": 8, "t": "少数股东权益", "f": ["少数股东权益", "少数股东损益"], "c": "财务会计", "p": "上市公司旗下有合资子公司（比如自己占 80%，合资方占 20%）。报表合并时把 100% 都加进来了，但那 20% 属于合作伙伴的家底和利润，叫少数股东权益/损益。", "x": "如果赚钱的子公司少数股东占比很高，会分流归母利润；估值时须保持分子分母口径一致防双扣。", "h": 19}, {"id": 9, "t": "归母净资产", "f": ["归母净资产", "账面净资产", "净资产"], "c": "财务会计", "p": "总资产减去所有负债、再剔除合作伙伴（少数股东）份额后，真正归上市公司股东的“账面家底”。", "x": "计算市净率（PB）和净资产收益率（ROE）的底盘分母。", "h": 6}, {"id": 10, "t": "投入资本回报率", "f": ["投入资本回报率"], "c": "财务会计", "p": "公司不管这笔钱是股东出的还是银行借的，每往生意里砸进 100 块钱，一年能赚回多少块税后营业利润。这是衡量商业模式含金量的黄金指标。", "x": "如果 ROIC 长期高于融资成本，扩产就是在创造财富；反之扩得越大越毁灭价值。", "h": 4}, {"id": 11, "t": "息税折旧摊销前利润", "f": ["息税折旧摊销前利润"], "c": "财务会计", "p": "把净利润里的所得税、银行利息、固定资产折旧和无形资产摊销全加回来，还原出这家工厂在扣掉融资结构和会计折旧方法前的“纯经营毛造血力”。", "x": "跨国对比重资产化工巨头时最常用，因为各国税率、折旧年限和借债比例不同，EBITDA 能拉平起跑线。", "h": 8}, {"id": 12, "t": "加权平均资本成本", "f": ["加权平均资本成本"], "c": "估值周期", "p": "公司融资的综合“资金门槛”：按股本和借款的比例，把股东要求的回报率和银行贷款的税后利率加权平均。生意赚的钱必须跑赢它才算真正创造价值。", "x": "无杠杆企业价值估值法（DCF/EV法）里的核心折现率底线。", "h": 1}, {"id": 13, "t": "股权风险溢价", "f": ["股权风险溢价", "风险溢价"], "c": "估值周期", "p": "买股票比存国债担的风险大得多，投资者在国债无风险利率之外额外要求多赚的那部分补偿收益（通常在 4%—6% 左右）。", "x": "决定买方合理估值倍数的核心参数：商业模式越波动、风险越高，要求的风险溢价就越高。", "h": 5}, {"id": 14, "t": "无风险利率", "f": ["国债收益率"], "c": "估值周期", "p": "把钱买最安全的国家十年期国债躺着能拿到的年化利息。它是全市场所有资产估值的“地心引力锚”。", "x": "无风险利率越低，稳定印钞的优质资产合理估值倍数就越高。", "h": 3}, {"id": 15, "t": "市盈率", "f": ["市盈率"], "c": "估值周期", "p": "股价 ÷ 每股利润（或总市值 ÷ 净利润），直白说就是“按现在这赚钱速度，买下这家公司要几年回本”。", "x": "周期股看 PE 极易踩坑：行业景气高点利润暴增时 PE 看起来极低反而是卖点，寒冬亏钱时 PE 很高反而是买点。", "h": 18}, {"id": 16, "t": "市净率", "f": ["市净率铁底", "市净率"], "c": "估值周期", "p": "股价 ÷ 每股净资产（或总市值 ÷ 归母净资产），代表你愿意花几倍于公司账面家底的价格来买它。", "x": "周期与重资产龙头底部最硬的防护网，用来校验左侧重锤买点是否逼近历史极恐慌地板。", "h": 39}, {"id": 17, "t": "拆骨估值", "f": ["拆骨估值"], "c": "估值周期", "p": "像把一辆车拆成发动机、底盘、轮胎分开卖一样，把多元集团拆成几块独立业务分别估价再加总减去净债，用来检验当前股价有没有白送新业务。", "x": "避免把高壁垒垄断主业、强周期石化和未盈利新业务胡乱混在一起给同一个倍数。", "h": 15}, {"id": 18, "t": "安全边际", "f": ["安全边际", "安全垫"], "c": "估值周期", "p": "你买股票花的钱，比这家公司真实内在价值便宜出来的那一大截折扣。就像造承重 30 吨的桥只让 10 吨的车过，哪怕算错一半也不会塌。", "x": "价值投资的核心防线：所有估值假设都可能看走眼，只有足够低的买价才能兜底。", "h": 18}, {"id": 19, "t": "股息率", "f": ["股息率"], "c": "估值周期", "p": "过去一年每股实际分到手的现金红利 ÷ 当前股价，相当于把股票当成“存银行收利息”的年化现金回报率。", "x": "在市场不给估值修复的漫长等待期里，高股息是拿得住的真金白银底气。", "h": 6}, {"id": 20, "t": "注销式回购", "f": ["注销式回购", "回购并注销", "回购注销"], "c": "财税与治理", "p": "公司用真金白银从股市买回自家股票后直接销毁，让市场上流通的总股数变少，留下的股东每股含金量变高。", "x": "腾讯2025年花800亿港元注销1.56亿股，但2026年三季度因算力投入骤降至70亿港元。", "h": 26}, {"id": 21, "t": "在建工程", "f": ["在建工程", "转固"], "c": "财务会计", "p": "正在盖还没完工的工厂。一旦建好验收投产，账上就会从“在建工程”转成“固定资产”（简称转固），同时开始计提折旧、贷款利息也不再藏进资产而是直接扣当期利润。", "x": "重资产扩产期结束的信号灯，但也意味着紧接着会迎来一轮“折旧+利息费用化”对账面利润的双重考验。", "h": 23}, {"id": 22, "t": "研发费用化", "f": ["100%费用化", "研发资本化率", "研发费用化", "研发资本化", "当期费用化"], "c": "财税与治理", "p": "把搞研发花的钱当期一把全扣进成本里，不挂到资产账上分年慢慢摊销，虽然当期利润低但报表极扎实。", "x": "腾讯2025年857亿及2026年三季度324亿研发近乎零资本化，避免用会计财技虚增利润。", "h": 15}, {"id": 23, "t": "应付票据", "f": ["应付票据"], "c": "财务会计", "p": "买原料时不直接付现金，而是开一张几个月后到期的欠条（汇票）。由银行担保一定兑付的叫银票，只靠企业自己信用担保的叫商票。", "x": "龙头对上游开银票是强大的无息占款能力，但若存在大量银行贴现融资或逾期商票则暗藏流动性风险。", "h": 4}, {"id": 24, "t": "合同负债", "f": ["合同负债", "预收款"], "c": "财务会计", "p": "客户先打钱订货、公司还没把货发出去，这笔提前收进腰包的定金在账上叫“合同负债”。名字里虽带“负债”，其实是产品抢手的甜蜜烦恼。", "x": "观察行业真实景气度的先行温度计：合同负债上升说明下游抢货，骤降则可能需求转冷。", "h": 11}, {"id": 25, "t": "有息负债", "f": ["有息负债"], "c": "财务会计", "p": "必须按期支付利息且到期必须拿真金白银还本的真债务（短期借款、长期借款、应付债券、一年内到期非流动负债、租赁负债等），区别于欠供应商的无息货款。", "x": "衡量企业真实债务包袱和偿债红线的唯一核心口径。", "h": 1}, {"id": 26, "t": "使用权资产", "f": ["使用权资产", "租赁负债"], "c": "财务会计", "p": "新会计准则下，哪怕不是花钱买断、而是签了十几年长期租约的船队、厂房或码头，也要把未来租金折现记成资产（使用权资产）和债务（租赁负债）。", "x": "防止企业通过“只租不买”把巨额固定资产和债务藏在表外，分析重资产和真债时必须合并穿透。", "h": 18}, {"id": 27, "t": "受限资金", "f": ["受限资金", "保证金"], "c": "财务会计", "p": "账面银行存款里被银行冻结、不能随便拿出来花或分红的那部分钱（例如开银行承兑汇票压在银行的保证金、信用证保证金、司法冻结款等）。", "x": "算公司手头“可自由支配现金”时，受限资金必须一分不差全部扣掉。", "h": 5}, {"id": 28, "t": "营运资金", "f": ["营运资金", "营运底仓"], "c": "财务会计", "p": "维持工厂每天买原料、备库存、等客户回款所必须压在流水线上的周转钱。生意做得越大，通常需要额外垫进去更多周转资金。", "x": "算可自由支配超额现金时要扣掉 18–21 天营收的保底运转现金；算稳态自由盈余时要扣成长新增垫资。", "h": 9}, {"id": 29, "t": "坏账准备", "f": ["应收账款账龄", "坏账准备"], "c": "财务会计", "p": "客户买货打的白条（应收账款）里，提前按欠款时间长短（账龄）预估可能收不回来的烂账比例，预先从利润里扣掉作为缓冲垫。", "x": "连还没到期的正常应收款都照提 4% 以上坏账准备的公司，财务极其审慎，藏雷概率极低。", "h": 11}, {"id": 30, "t": "期间费用率", "f": ["期间费用率", "销售费用率", "管理费用率", "研发费用率", "三费"], "c": "财务会计", "p": "公司除了直接生产原料和工人工资外，卖货（销售）、管人（管理）、搞技术（研发）、付利息（财务）四大开销占总营收的百分比。", "x": "衡量巨头精细化运营与规模效应的硬指标，期间费用率越低说明把钱省到了骨子里。", "h": 22}, {"id": 31, "t": "毛利率", "f": ["毛利率"], "c": "财务会计", "p": "（卖货收入 − 直接生产成本）÷ 卖货收入。在化工行业更直观的指标是“单吨价差”，即每卖一吨产品赚的钱减去原料与能源成本后的毛利空间。", "x": "行业周期冷暖与企业成本护城河最直接的体温计。", "h": 108}, {"id": 32, "t": "净利率", "f": ["归母净利率", "净利率"], "c": "财务会计", "p": "每卖出 100 块钱的货，扣完原料、人工、费用、利息和税之后，最后真能留下几块钱净利润。", "x": "对比同行最终赚钱效率的核心指标，用来识破“只赚吆喝不赚钱”的伪成长板块。", "h": 15}, {"id": 33, "t": "净营业周期", "f": ["应收账款周转天数", "账龄结构"], "c": "财税与治理", "p": "公司把东西卖出去或者广告播出去以后，平均要等多少天才能把货款收回来，天数越短说明话语权越强。", "x": "腾讯全年应收账款周转天数仅23.8天，且93%欠款在90天内收回，近乎先款后货现金生意。", "h": 8}, {"id": 34, "t": "有效税率", "f": ["有效税率"], "c": "财务会计", "p": "公司当年实际交的所得税费用 ÷ 税前利润总额。因为有高新技术企业 15% 优惠、研发加计扣除或海外子公司低税率，它常与 25% 标准税率不同。", "x": "跨国企业在 OECD 全球最低税落地后，有效税率抬升会直接吃掉一部分常态净利润。", "h": 2}, {"id": 35, "t": "保本稼动率", "f": ["保本稼动率", "产能利用率", "稼动率"], "c": "估值周期", "p": "稼动率就是工厂实际开工跑了满负荷产能的百分之几；“保本稼动率”是指开工率只要达到多少，赚的毛利就刚好够覆盖新厂新增的折旧费用不亏钱。", "x": "保本稼动率越低（如 10% 以下），说明这套新装置造价极低、抗周期暴跌的生存力越变态。", "h": 22}, {"id": 36, "t": "剪刀差", "f": ["剪刀差"], "c": "估值周期", "p": "两条指标走势像剪刀一样越张越开：比如产品卖价暴涨而上游原料暴跌（赚钱暴增），或者销量大涨但单吨毛利暴跌（增产不增收）。", "x": "用来一眼看穿利润暴涨究竟是靠真本事还是靠短期外部价格错配。", "h": 4}, {"id": 37, "t": "顺价权", "f": ["顺价权", "定价权"], "c": "估值周期", "p": "当上游石油、煤炭、电价涨价时，企业能不能顺理成章把涨出来的成本转嫁给下游客户、保住自家每吨赚的毛利。垄断龙头顺价极快，过剩大宗则只能自己硬扛。", "x": "区分真护城河（如寡头聚氨酯）与苦力生意（如过剩大宗石化）的分水岭。", "h": 6}, {"id": 38, "t": "二阶导数", "f": ["二阶导数"], "c": "估值周期", "p": "德鲁肯米勒最核心的交易心法：市场炒的往往不是“现在有多好”，而是“变好的速度是在加快还是放慢”。哪怕业绩还在涨，但增速见顶放缓（二阶导数转负），股价也可能提前跌。", "x": "用来判断何时扣动右侧重仓扳机、何时警惕景气高点后的增速钝化。", "h": 13}, {"id": 39, "t": "多元化恶化", "f": ["多元恶化"], "c": "估值周期", "p": "彼得·林奇发明的毒舌词：很多好公司手里赚了大钱后闲不住，跨界去买或建自己不擅长、行业又内卷的新业务，结果把原本的好回报全拖垮了。", "x": "用来警示主业印钞机一旦把赚来的钱砸进低回报红海副业（如过剩电池材料），会严重拉低估值。", "h": 6}, {"id": 40, "t": "周期钟摆", "f": ["周期钟摆"], "c": "估值周期", "p": "霍华德·马克斯的名喻：行业景气和市场情绪像钟摆一样，绝不会停在中间，而是从极端狂热暴利摆向极端恐慌亏钱，跌到高成本对手大批停产后再摆回来。", "x": "周期投资的精髓：在钟摆荡向极度悲观的寒冬敢买，在狂热暴利时懂得挤泡沫。", "h": 1}, {"id": 41, "t": "隐蔽资产型", "f": ["Asset Play", "隐蔽资产型", "免费期权"], "c": "估值周期", "p": "彼得·林奇六大股票分类之一：公司肚子里藏着账面还没体现出价值、市场目前几乎按 0 元白送的优质资产或高壁垒新业务，一旦变现或爆发就带来额外赔率。", "x": "判断买方赔率不对称性的关键：成熟主业兜底、高壁垒新材料作为白送期权。", "h": 14}, {"id": 42, "t": "永续债", "f": ["永续债", "可转债"], "c": "财务会计", "p": "永续债是没有到期日、可以一直不还本但利率会越跳越高的“伪权益真债务”；可转债是可以按约定价格换成股票的债券，会稀释老股东持股比例。", "x": "排查公司有没有把债藏在净资产里（永续债）或存在未来股本稀释压力（可转债）。", "h": 2}, {"id": 43, "t": "财务公司", "f": ["财务公司", "存贷双高"], "c": "财务会计", "p": "大集团内部自建的“内部银行”叫财务公司。如果上市公司把大笔现金存在集团财务公司，同时自己又高息借外债（存贷双高），极易暗藏大股东挪用资金的暴雷风险。", "x": "A 股排雷头号红线：确认无关联财务公司且资金收益正常，可彻底排除此类治理大雷。", "h": 2}, {"id": 44, "t": "商业模式", "f": ["商业模式", "转换代价", "转换成本", "护城河"], "c": "估值周期", "p": "护城河是别人学不会、抢不走的长期竞争优势；转换代价是指下游客户想换掉你的供应商时，重新测试认证、停产调试、承担良率报废风险所要付出的巨大成本。", "x": "特种新材料和高规格异氰酸酯之所以利润率高，正是因为客户认证慢、导入后转换代价极高。", "h": 28}, {"id": 45, "t": "长青游戏 (Evergreen Games)", "f": ["Evergreen Games", "长青游戏", "长青大作"], "c": "核心业务", "p": "指运营多年依然人气极高、玩家粘性强且能持续稳定吸金的常青树游戏，就像数字世界里的摇钱树，靠长线服务赚钱而非一锤子买卖。", "x": "腾讯划定手游日活500万且年流水40亿硬门槛，目前已有15款以上，稳稳托起本土游戏基本盘。", "h": 24}, {"id": 46, "t": "Riot Games (拳头游戏)", "f": ["Riot Games", "拳头游戏"], "c": "核心业务", "p": "全球知名的头部游戏研发与发行商，《英雄联盟》和《无畏契约》的缔造者，擅长打造全球性长生命周期竞技网游及电竞生态。", "x": "腾讯100%全资子公司，《无畏契约》端手游助力2025年国际游戏破百亿美元，利润全归母公司。", "h": 3}, {"id": 47, "t": "Supercell", "f": ["Supercell"], "c": "核心业务", "p": "总部位于芬兰的全球顶级手游工作室，以小团队精品研发闻名，代表作有《部落冲突》《皇室战争》和《荒野乱斗》等长青大作。", "x": "腾讯控股并表海外核心工作室，是少数股东损益主要来源之一，协同助推腾讯国际游戏稳居全球第一。", "h": 8}, {"id": 48, "t": "微信小游戏", "f": ["微信小游戏", "小游戏"], "c": "核心业务", "p": "寄生在微信内部、无需下载安装包点开即玩的轻量级游戏生态，平台通过向游戏开发者抽取内购流水或广告分润获得高毛利收入。", "x": "微信社交网络核心增量引擎，苹果税降至12%后变现阳光化，助推三季度增值服务毛利率飙至64.1%。", "h": 55}, {"id": 49, "t": "微信小店", "f": ["小店与卡包", "视频号小店", "微信小店"], "c": "核心业务", "p": "微信生态内整合货架电商与社交送礼功能的官方交易闭环，把商品直接嵌入聊天、视频号和搜一搜里，让用户边聊边看边买单。", "x": "2026双11小店与卡包成交额暴增407%，综合货币化率达6%至6.7%，以零重资产履约撬动高毛利。", "h": 86}, {"id": 50, "t": "微信搜一搜", "f": ["微信搜一搜", "搜一搜"], "c": "核心业务", "p": "微信内置的全生态搜索引擎，既能搜索全网资讯和公众号文章，也能在用户主动找货比价时直接对接小程序和微信小店下单。", "x": "微信内循环广告核心增量入口，2026双11搜一搜成交额大增211%，经AI改造后变现潜力加速释放。", "h": 46}, {"id": 51, "t": "视频号", "f": ["微信视频号", "视频号"], "c": "核心业务", "p": "嵌套在微信一级入口内的短视频与直播平台，依靠朋友圈好友点赞的社交推荐叠加算法分发内容，无需外部烧钱买流量获客。", "x": "三季度使用时长仍增超20%，广告加载率仅4%至6%不足抖音三分之一，是广告高增头号引擎。", "h": 78}, {"id": 52, "t": "微信支付 (财付通)", "f": ["微信支付", "财付通"], "c": "核心业务", "p": "腾讯旗下的国民级第三方移动支付底座，连接线上线下商户与消费者，通过向商业支付收取低费率收单手续费获得稳定现金流。", "x": "腾讯金融科技核心基石且100%归母，坚持轻资本连接不做重资产放贷，以支付手续费托起低风险底座。", "h": 10}, {"id": 53, "t": "理财通与微粒贷", "f": ["理财通", "微粒贷", "分付"], "c": "核心业务", "p": "腾讯基于微信生态孵化的轻资本财富管理与消费信贷导流服务，自身不扛重资本放贷风险，主要靠代销金融产品和导流分润赚钱。", "x": "微信支付底座上的高毛利金融科技业务，共同推动金科企服毛利率在2025年跃升至50.8%。", "h": 6}, {"id": 54, "t": "腾讯云 (SaaS/PaaS/IaaS)", "f": ["基础设施即服务", "软件即服务", "PaaS", "CSIG", "腾讯云"], "c": "核心业务", "p": "腾讯面向政企和开发者提供的云计算服务品牌，涵盖从底层服务器租赁(IaaS)、开发平台(PaaS)到现成办公软件(SaaS)全栈。", "x": "砍掉低毛利集成转向自研PaaS/SaaS后于2025年扭亏，2026年三季度云收入暴增35%。", "h": 114}, {"id": 55, "t": "企业微信与腾讯会议", "f": ["企业微信", "腾讯会议", "腾讯文档", "企微"], "c": "核心业务", "p": "腾讯旗下的国民级企业协同办公矩阵，覆盖日常工作群聊、线上音视频会议和多人在线文档协作，深度绑定白领日常工作流。", "x": "构成零买量获客护城河，使WorkBuddy自然嵌入职场桌面，助推中国百强企业渗透率达60%。", "h": 44}, {"id": 56, "t": "WorkBuddy 与 CodeBuddy", "f": ["WorkBuddy", "CodeBuddy"], "c": "核心业务", "p": "腾讯推出的跨应用AI智能体协同办公与编程工作台，能自动读取聊天纪要和文档代人干活写代码，把AI直接装进职场桌面。", "x": "日活破1000万、日耗Token超100万亿居全国第一，上线8个月年化流水破5亿美元。", "h": 139}, {"id": 57, "t": "内循环电商广告", "f": ["内循环电商广告", "内循环广告", "闭环内循环"], "c": "核心业务", "p": "指平台上的商家为了给自己在本平台开设的店铺引流卖货而购买的竞价广告，广告流量不跳出外部App而在体系内直接成交。", "x": "微信小店商家每交1元佣金平均配套投1.8至2元内循环广告，强力拉动三季度营销服务大增19%。", "h": 10}, {"id": 58, "t": "混元大模型 (Hy4 / Hy4 flash)", "f": ["Hy4 flash", "混元大模型", "Hy4", "混元"], "c": "AI与技术", "p": "腾讯全栈自研的通用人工智能大语言与多模态模型家族，其中旗舰版专攻复杂办公任务，轻量flash版则把推理耗电成本压到极低。", "x": "Hy4登顶Agent Arena中国第一，轻量版Hy4 flash将综合推理调用成本暴降88%以上。", "h": 162}, {"id": 59, "t": "AI Agent (智能体) 与 Computer Use", "f": ["Computer Use", "Agent Arena", "Agent", "智能体"], "c": "AI与技术", "p": "不再只是陪人聊天的问答机器人，而是能看懂屏幕画面、自主拆解复杂多步任务并直接跨软件点击鼠标操作电脑干活的AI代理。", "x": "混元Hy4原生支持Computer Use功能，直接驱动WorkBuddy出现月耗4万元重度用户。", "h": 40}, {"id": 60, "t": "模型即服务 (MaaS)", "f": ["模型即服务"], "c": "AI与技术", "p": "云厂商把训练好的AI大模型直接打包成标准化API接口，按调用量和Token用量向企业客户按需计费，类似按度数卖电。", "x": "腾讯云摆脱低毛利集成后转型高毛利MaaS及GPU租赁，带动2026年三季度云收入同比暴增35%。", "h": 22}, {"id": 61, "t": "Token (词元)", "f": ["百万Token", "万亿Token", "Token"], "c": "AI与技术", "p": "大语言模型处理和生成文本时的最小计费与计量单位，大约相当于一两个汉字或英文单词，也是衡量AI算力消耗的工业标准。", "x": "WorkBuddy日耗Token超100万亿，经Hy4 flash混部后物理推理成本骤降至0.46元/百万。", "h": 107}, {"id": 62, "t": "RankUp 广告推荐大模型", "f": ["RankUp"], "c": "AI与技术", "p": "专门用于提升广告精准投放效率的多模态人工智能推荐算法模型，能读懂视频画面和用户意图，大幅提高广告点击率与转化率。", "x": "集群实际稼动率高达92.5%且已全面投产，是腾讯广告在宏观平淡期仍保持19%高增的核心引擎。", "h": 18}, {"id": 63, "t": "微信“小微”", "f": ["微信“小微”", "AI小微", "小微"], "c": "AI与技术", "p": "直接长在微信聊天和搜索界面里的原生个人AI小助手，能够听懂用户的消费与办事意图，一句话直接调起小程序和商品完成交易。", "x": "2026年6月起灰度测试并承担生态连接与导购职能，目前仍处于免费算力补贴孵化的投入阶段。", "h": 30}, {"id": 64, "t": "混合专家架构 (MoE / LatentMoE)", "f": ["LatentMoE", "混合专家", "MoE"], "c": "AI与技术", "p": "把超大模型拆分成很多个各有所长的专业小模块，每次回答问题只唤醒其中一两个相关专家干活，既保聪明又大幅节省算力与电费。", "x": "混元Hy4底层采用MoE架构，770B参数仅激活49B，flash版激活参数更低至12B。", "h": 4}, {"id": 65, "t": "KV Cache (键值缓存)", "f": ["KV Cache"], "c": "AI与技术", "p": "大模型在阅读长文档或连续对话时用来临时记忆上下文的显存缓存区，是吃掉显卡昂贵显存容量和带宽的最大瓶颈之一。", "x": "混元Hy4 flash通过稀疏框架将KV Cache压缩至Hy4的六分之一，大幅突破超长上下文显存墙。", "h": 6}, {"id": 66, "t": "有效算力利用率 (MFU)", "f": ["有效算力利用率", "MFU"], "c": "AI与技术", "p": "衡量AI芯片在真实跑模型时实际发挥出理论峰值算力几成水平的核心指标，百分比越高说明软硬件协同越好、越不浪费显卡。", "x": "腾讯借Angel框架将国产卡MFU从30%提至54%以上，2027年需推高至68%+以压穿成本红线。", "h": 4}, {"id": 67, "t": "燧原科技与云燧算力卡", "f": ["云燧i20", "燧原科技"], "c": "AI与技术", "p": "国内自主研发AI训练与推理芯片的领军企业及其算力加速卡产品，通过自研指令集与软件栈在推理环节实现国产芯片算力替代。", "x": "腾讯连续六年领投为其第一大股东及第一大客户，批量混部云燧i20卡破解境外高端GPU卡脖子瓶颈。", "h": 25}, {"id": 68, "t": "星脉网络 (X-Star) 与 RDMA/RoCE", "f": ["X-Star", "星脉网络", "星脉光网", "RDMA", "RoCE"], "c": "AI与技术", "p": "腾讯自研的超级高速智算中心网络交换系统，让上万张AI显卡之间能零延迟直接互传内存数据，避免显卡互相干等算力空转。", "x": "凭借星脉3.2T光交换矩阵，腾讯将万卡智算集群造价压至23.5至27.5亿元，较二线云厂省约20%。", "h": 20}, {"id": 69, "t": "T-block 智算中心与液冷 PUE", "f": ["T-block", "冷板液冷", "棕地扩容", "PUE"], "c": "AI与技术", "p": "把高功耗AI机房像搭乐高积木一样在工厂预制并用液体管道给芯片直接降温，PUE越接近1说明机房额外浪费的散热电费越少。", "x": "腾讯借T-block将机房交付缩短40%至80%，PUE压至1.12至1.20，单柜基建省三成以上。", "h": 19}, {"id": 70, "t": "DAU / MAU (日活与月活用户)", "f": ["日活用户", "月活用户", "日活", "月活"], "c": "互联网指标", "p": "分别统计产品每日与每月的独立活跃用户总数，两者结合既能看清生态总人口天花板，也能检验用户每天真实打开的刚需粘性。", "x": "微信合并月活达14.49亿且WorkBuddy日活破1000万，构筑了集团低销售费率的底层流量铁盘。", "h": 68}, {"id": 71, "t": "广告加载率 (Ad Load)", "f": ["广告加载率 (Ad Load)", "Ad Load", "广告加载率"], "c": "互联网指标", "p": "信息流里每刷出100条内容中夹杂着多少条付费广告的比例。比例越高短期赚得越多，但超过生理极限就会招致用户反感流失。", "x": "视频号三季度Ad Load仅4%至6%，不到抖音14%至16%的三分之一，留足翻倍变现空间。", "h": 37}, {"id": 72, "t": "eCPM 与 CTR (千次展示收入与点击率)", "f": ["点击转化率", "eCPM", "CTR"], "c": "互联网指标", "p": "CTR指用户看到广告后点击的比例，eCPM则是平台每展示一千次广告实际能收到的钱，共同决定了流量的单价含金量。", "x": "腾讯凭借RankUp算法在2026年三季度实现曝光量与eCPM双升，推动营销服务收入同比增19%。", "h": 7}, {"id": 73, "t": "GMV (商品交易总额)", "f": ["商品交易总额", "成交额"], "c": "互联网指标", "p": "电商平台在一段时间内促成的所有订单总金额，反映平台生意的总盘子流水规模而非净收入，需扣除退货后再乘佣金率才算营收。", "x": "2026双11微信小店卡包GMV暴增407%，搜一搜增211%，配合低退货率显著放大商家盈利。", "h": 57}, {"id": 74, "t": "货币化率 (Take Rate)", "f": ["Take Rate", "技术服务费率", "货币化率"], "c": "互联网指标", "p": "电商或交易平台从商家成交的总金额（GMV）里抽走多少百分比的佣金与广告费，相当于平台向交易过客收取的综合过路费率。", "x": "微信小店明线佣金约2.2%加内循环广告，综合Take Rate达6%至6.7%，且毛利率超75%。", "h": 15}, {"id": 75, "t": "CAC (获客成本) 与买量", "f": ["获客成本", "买量成本", "CAC", "买量"], "c": "互联网指标", "p": "企业为了拉来一个新玩家或新顾客所必须支付的广告推广费用。缺乏天然流量底座的公司只能靠高价买量求生，极易熬干现金流。", "x": "同行新游和AI应用靠高价买量烧钱，腾讯凭微信社交裂变零成本获客，销售费用率仅5.6%至5.9%。", "h": 66}, {"id": 76, "t": "递延收入 / 合同负债", "f": ["Contract Liabilities", "Deferred Revenue", "递延收入 / 合同负债", "递延收入", "合同负债"], "c": "互联网指标", "p": "玩家买点券或企业买云套餐提前打进账的预收款，因服务还没消费完按规定只能先挂在负债表上慢慢确认为收入，是业绩蓄水池。", "x": "2026年中腾讯递延收入飙至1358.03亿元创极值，体量达网易的7.04倍，牢牢托住本土游戏高增。", "h": 44}, {"id": 77, "t": "ARR (年化经常性收入) 与 ARPU", "f": ["单用户平均收入", "年化流水", "ARR"], "c": "互联网指标", "p": "ARR把近期高频订阅收入折算成全年总额以观察软件爆发斜率；ARPU则是平均每个付费或活跃用户贡献的月度或年度收入。", "x": "WorkBuddy的ARR已破5亿美元，按245元/月ARPU算，达570至620万席位即可盈亏平衡。", "h": 14}, {"id": 78, "t": "苹果税 (IAP / MAPP 小程序计划)", "f": ["小程序合作伙伴计划", "MAPP", "苹果税", "IAP"], "c": "政策与监管", "p": "苹果公司依托iOS系统封闭垄断地位对App内购强征的高额过路费（传统高达30%），长期挤压软件与游戏开发者的利润率。", "x": "凭借微信生态不可替代性，腾讯迫使苹果推出MAPP新政，将微信小游戏iOS抽成从30%砍至12%。", "h": 17}, {"id": 79, "t": "安卓硬核联盟与渠道联运税", "f": ["安卓硬核联盟", "硬核联盟", "渠道分成", "联运税"], "c": "政策与监管", "p": "国内主流手机厂商联合组建的自带应用商店分发联盟，过去习惯对上架手游强收高达50%的联运流水分成，游戏公司苦不堪言。", "x": "腾讯靠微信、WeGame直充及拒上高抽成渠道成功瓦解50%联运税，大幅拉高自研新游毛利率。", "h": 18}, {"id": 80, "t": "游戏版号审批", "f": ["游戏版号", "版号停发", "版号"], "c": "政策与监管", "p": "国家新闻出版署颁发的网络游戏商业化上线运营法定通行证，没有拿到版号的新游戏不得在国内开启充值收费，是行业核心监管阀。", "x": "历经2018与2021年两轮版号寒冬后，腾讯借长青游戏深挖和海外破百亿美元化解单一监管冲击。", "h": 7}, {"id": 81, "t": "美国 BIS 出口管制与 1260H 清单", "f": ["BIS"], "c": "政策与监管", "p": "BIS管制卡住高端AI芯片与高带宽内存的跨境供应命门；1260H清单则仅禁五角大楼采购，并不禁止股民买卖股票或断供。", "x": "1260H对腾讯业务零冲击，针对BIS算力封锁，腾讯以1629亿长单锁货及国产卡混部对冲。", "h": 3}, {"id": 82, "t": "注销式回购与实物分派", "f": ["注销式回购", "实物分派", "实物分红"], "c": "财税与治理", "p": "公司用真金白银买回自家股票后直接注销永久减少总股本，或把持有的其他上市公司股票直接当作红利派发给全体股东回馈价值。", "x": "腾讯五年累计注销回购3093亿港元缩股至90.93亿股，并曾实物分派2871亿港元京东美团股份。", "h": 22}, {"id": 83, "t": "全口径股权激励费用 (SBC)", "f": ["股权激励费用", "股份酬金计划"], "c": "财税与治理", "p": "互联网大厂为留住顶尖研发和AI人才而发放股票奖励所产生的用工成本，虽不直接付现金，但会实打实稀释原有股东权益。", "x": "腾讯终审全额硬扣除300亿/年全口径股权激励费用，绝不靠剔除SBC虚增自由盈余，审计口径极严。", "h": 89}, {"id": 84, "t": "服务器4—5年严苛折旧政策", "f": ["服务器折旧年限", "折旧洪峰", "直线折旧"], "c": "财税与治理", "p": "科技公司把买来的AI显卡和服务器分几年摊销进成本的会计规则，年限越短利润越显低但账本越扎实，反之则易虚增当期利润。", "x": "不同于Meta延寿至5.5年增利，腾讯面对千亿算力建仓仍坚守4至5年严苛折旧，会计底色极实。", "h": 21}, {"id": 85, "t": "Non-IFRS（非国际财务报告准则）", "f": ["非国际会计准则净利"], "c": "财税与治理", "p": "公司自己调整后的经营利润，把炒股浮盈浮亏和一次性并购摊销踢掉，专门用来反映主业到底赚了多少钱。", "x": "腾讯2025年Non-IFRS净利达2,596亿元，但买方需把加回的319亿股权激励再抠回来。", "h": 4}, {"id": 86, "t": "股份支付薪酬（SBC）", "f": ["股权激励费用", "股份酬金", "股权激励"], "c": "财税与治理", "p": "公司不发现金工资，而是发股票或期权留住员工，虽然没从银行卡掏钱，但实质上稀释了老股东的股份。", "x": "腾讯每年发放约300亿至320亿股权激励，买方在算真实自由盈余时必须当作真成本刚性扣除。", "h": 194}, {"id": 87, "t": "限制性股票单位（RSU）", "f": ["股份奖励计划", "雇员购股权", "RSU"], "c": "财税与治理", "p": "公司承诺送给员工的股票奖励，通常分三到四年解锁，只有业绩考核达标并干满年限才能真正拿到手。", "x": "腾讯2025年因期权和股份奖励新发5,166万股，未达游戏或AI考核指标的份额直接作废。", "h": 6}, {"id": 88, "t": "净缩股率", "f": ["回购注销覆盖倍数", "股本净缩减", "净缩股率"], "c": "财税与治理", "p": "把公司回购销毁的股数减去员工激励新发的股数，算出来的总股本真实减少比例，是检验股东稀释的铁尺。", "x": "腾讯总股本从2021年末96.08亿股缩至2026年10月90.93亿股，五年累计净缩股5.36%。", "h": 6}, {"id": 89, "t": "Prosus减持", "f": ["Prosus"], "c": "财税与治理", "p": "南非大股东通过旗下控股公司持续卖出腾讯股票套现去买自家股票，会在二级市场形成长期的日常卖压。", "x": "Prosus仍持股约22.4%，腾讯三季度回购降至70亿港元后，短期对冲大股东抛压火力减弱。", "h": 8}, {"id": 90, "t": "服务器折旧年限延寿", "f": ["AI服务器折旧", "折旧年限"], "c": "财税与治理", "p": "把服务器的使用寿命从四年拉长到六年，每年分摊进成本的钱就变少了，账面利润就会凭空变好看一点。", "x": "2025年1月起腾讯将部分服务器折旧从4年延至6年，买方按4年真寿命提高维持开支防虚胖。", "h": 17}, {"id": 91, "t": "长期算力预付款", "f": ["长期预付款、押金及其他资产", "长期算力预付款", "长期预付款"], "c": "财税与治理", "p": "为了抢购稀缺AI芯片提前塞给供应商的多年期买货定金，钱已经掏出去了，但货还没拉进自家机房。", "x": "2026年前三季度腾讯长期预付款暴增1,384亿至1,629亿元，直接砸出单季负自由现金流。", "h": 40}, {"id": 92, "t": "递延收入蓄水池", "f": ["递延收入蓄水池", "递延收入", "合同负债", "反向存货"], "c": "互联网指标", "p": "玩家充值买点券和会员的钱已经进了公司银行卡，但按规矩必须等玩家慢慢消耗完才能分期算成收入。", "x": "腾讯2026年中递延收入达1,358亿元，是网易的7倍，危机时能像蓄水池一样稳住利润表。", "h": 46}, {"id": 93, "t": "预期信用损失（ECL）", "f": ["预期信用损失（ECL）", "坏账准备", "减值拨备", "ECL"], "c": "财税与治理", "p": "财务预先估计客户可能赖账不还的比例，提前从利润里扣出来当缓冲垫，防止以后突然爆出大额坏账。", "x": "腾讯账面50.39亿坏账准备覆盖超90天应收款达144%，证明腾讯云高增绝无放宽账期注水。", "h": 15}, {"id": 94, "t": "媒体内容加速摊销", "f": ["收视模式加速摊销法", "媒体内容加速摊销", "媒体内容摊销", "版权摊销"], "c": "财税与治理", "p": "买来的热门剧集和综艺在刚开播最火的时候就把大头成本摊销掉，防止以后没人看了还留一堆僵尸资产。", "x": "腾讯2025年媒体内容摊销达303亿元，长视频首播期即摊掉六成至八成成本，严防存货积压。", "h": 6}, {"id": 95, "t": "联营及合营公司", "f": ["联营公司", "合营公司"], "c": "财税与治理", "p": "腾讯投了不少股份但还没控股的外部伙伴公司，不并入大账本，只在利润表里按持股比例记一笔分占盈亏。", "x": "腾讯联营与合营公司账面近3,500亿元，但2026年前三季度联营转亏18.9亿需严密剥离。", "h": 5}, {"id": 96, "t": "FVPL与FVOCI金融资产", "f": ["FVOCI", "FVPL"], "c": "财税与治理", "p": "公司买来投资的外部股权按两种篮子记账，前者股价涨跌直接进当期利润表，后者涨跌只进净资产科目。", "x": "腾讯2026年前三季度OCI金融资产浮亏637亿，成为终审把外部投资包再挤水分的关键诱因。", "h": 4}, {"id": 97, "t": "股票包流动性折价", "f": ["缺乏流通性折让", "投资包折价"], "c": "财税与治理", "p": "手里攥着几千亿外部公司股票时，真要大批量甩卖肯定得打折让利，算账时必须提前扣除交易摩擦成本。", "x": "腾讯9,026亿外部投资包在终审被狠砍至60.1折约5,426亿元，确保拆骨估值绝不虚高。", "h": 3}, {"id": 98, "t": "实物派股特别红利", "f": ["实物派股特别红利", "实物派股", "实物分派", "派京东", "派美团"], "c": "财税与治理", "p": "公司不直接分现金，而是把自己持有的其他上市公司股票按持股比例直接划到小股东的股票账户里分红。", "x": "腾讯2021至2022年派发京东和美团股票共2,871亿港元，直接证实表外股票包能真变现。", "h": 12}, {"id": 99, "t": "交叉货币利率互换（CCIRS）", "f": ["交叉货币利率互换（CCIRS）", "CCIRS", "利率互换"], "c": "财税与治理", "p": "一种金融对冲合约，把借来的高利息美元债务悄悄置换成低利息人民币债务，同时锁死汇率波动风险。", "x": "腾讯用CCIRS把高票息美元债实质换成2.4%至2.9%人民币负债，避开跨境分红预提税。", "h": 7}, {"id": 100, "t": "离岸点心债", "f": ["超长期点心债", "优先票据", "点心债"], "c": "财税与治理", "p": "中国企业在海外市场发行、用人民币计价和付息的债券，能以极低利率借到境外十年甚至三十年的长钱。", "x": "腾讯2026年10月发260亿点心债获4倍疯抢，10年期票息仅2.40%，戳破高息危机论。", "h": 16}, {"id": 101, "t": "少数股东权益（NCI）", "f": ["少数股东看跌赎回负债", "非控制性权益", "NCI"], "c": "财税与治理", "p": "合并报表里那些没有全资控股的子公司中，归属外部小股东的那部分家底和利润，不能全算成母公司的。", "x": "腾讯864亿少数股东权益主要来自TME与阅文外部股权，5.2版已统一纯归母口径消除错配。", "h": 9}, {"id": 102, "t": "使用权资产与租赁负债", "f": ["租赁负债"], "c": "财税与治理", "p": "长期租用机房和写字楼时，按准则必须把未来要交的房租折现记成表内资产和负债，还原真实债务负担。", "x": "腾讯2026年三季度全口径租赁负债202亿元，随AI液冷机房租约增加需全额计入表内债务。", "h": 15}, {"id": 103, "t": "苹果税与MAPP计划", "f": ["小程序合作伙伴计划", "iOS抽成", "MAPP", "苹果税"], "c": "核心业务", "p": "苹果公司对iPhone应用内充值强行抽取的渠道过路费，通常高达三成，只有顶级生态巨头才能逼它让步。", "x": "腾讯靠微信刚需与苹果达成MAPP，将小游戏iOS抽成从30%砍至12%，助推毛利率飙升。", "h": 17}, {"id": 104, "t": "长青游戏矩阵", "f": ["长青游戏矩阵", "跨端战术射击", "本土市场游戏", "长青游戏"], "c": "核心业务", "p": "像常青树一样连续好几年甚至十年都能让海量玩家反复充值的头部老游戏组合，不用每年赌新爆款续命。", "x": "腾讯手握王者、和平、三角洲行动等15款以上长青游戏，本土自研游戏真实毛利率站上70%大关。", "h": 25}, {"id": 105, "t": "微信小店与GMV", "f": ["商品交易总额", "小店与卡包", "微信小店"], "c": "核心业务", "p": "嵌在微信生态里的闭环电商体系，商品交易总额就是平台内所有商家成交的流水总盘子，代表交易规模。", "x": "2026双11微信小店与卡包GMV暴增407%，退货率比公域直播低15至25个百分点。", "h": 122}, {"id": 106, "t": "广告加载率（Ad Load）", "f": ["广告加载率（Ad Load）", "信息流广告加载率", "Ad Load"], "c": "互联网指标", "p": "用户在刷短视频或朋友圈时，平均每看一百条内容里夹杂了多少条广告的比例，越高越赚钱但也越招烦。", "x": "视频号Ad Load仅4%至6%不足抖音三分之一，每拧开1个百分点净增65亿自由盈余。", "h": 32}, {"id": 107, "t": "每次千次曝光成本（eCPM）", "f": ["点击转化率", "eCPM", "广告单价", "CTR"], "c": "互联网指标", "p": "广告主的广告在屏幕上每展示一千次需要付给平台的钱，直接决定流量平台每块屏幕能卖出多高的单价。", "x": "腾讯在压力测试中设定广告eCPM与游戏流水同步暴跌18%，检验极端寒冬下的抗压现金底线。", "h": 12}, {"id": 108, "t": "增值服务（VAS）", "f": ["增值服务", "社交网络"], "c": "核心业务", "p": "在免费聊天工具上卖给普通用户的收费娱乐和特权，包括游戏买皮肤、追剧视频会员和听歌绿钻等全部消费。", "x": "腾讯2026年三季度增值服务毛利率达64.09%创历史极值，贡献集团半壁江山营收与利润。", "h": 72}, {"id": 109, "t": "混元大模型与Hy4 Flash", "f": ["Hy4 Flash", "KV Cache", "混元Hy4", "激活参数"], "c": "AI与技术", "p": "腾讯自研的旗舰大模型及轻量化版本，通过压缩缓存记忆和只激活部分专家参数，用极低成本跑出顶级智能。", "x": "Hy4登顶Agent Arena中国第一，Flash版配合国产卡将单任务推理成本砍至十三分之一。", "h": 16}, {"id": 110, "t": "RankUp广告大模型", "f": ["RankUp", "AI推荐模型"], "c": "AI与技术", "p": "专门用来猜用户想看什么广告的AI推荐大脑，算得越准，商家投放回本越快，也就越愿意在平台多花钱。", "x": "RankUp推理集群稼动率高达92.5%，拉动2026年三季度腾讯广告在逆风下大增19%。", "h": 20}, {"id": 111, "t": "WorkBuddy与元宝", "f": ["WorkBuddy", "CodeBuddy", "元宝"], "c": "AI与技术", "p": "直接长在日常办公软件和微信里的AI生产力助手与对话应用，帮打工人自动写代码、改表格和总结会议。", "x": "WorkBuddy上线8个月日活破千万并覆盖六成百强企业，但三季度新AI净投入拖累利润152亿。", "h": 143}, {"id": 112, "t": "年化经常性收入（ARR）", "f": ["年化经常性收入（ARR）", "ARR"], "c": "互联网指标", "p": "把当前正在持续交钱的订阅客户收入折算成一整年的营收规模，专门用来衡量软件或AI产品赚长钱的势头。", "x": "WorkBuddy在2026年11月中旬7天年化流水ARR突破5亿美元，商业化拐点已现。", "h": 13}, {"id": 113, "t": "日活用户与日耗Token量", "f": ["Token消耗", "日活用户"], "c": "互联网指标", "p": "每天打开应用的活跃人数以及AI模型每天吞吐的文本计算单元总量，是检验AI是真刚需还是伪热度的铁尺。", "x": "WorkBuddy日活破1,000万且日耗Token超100万亿登顶全国第一，反超字节豆包。", "h": 12}, {"id": 114, "t": "单位Token物理推理成本", "f": ["国产推理卡混部", "推理成本"], "c": "AI与技术", "p": "AI每回答一百万个词条实际耗费的显卡折旧和电费账单，推理成本打下来了，海量免费用户才能转成暴利。", "x": "腾讯混部第一大持股企业燧原云燧i20后，将WorkBuddy混合推理成本腰斩至0.46元。", "h": 26}, {"id": 115, "t": "模型即服务（MaaS）", "f": ["向量数据库"], "c": "AI与技术", "p": "云厂商把大模型、算力和向量数据库打包成随用随付的标准接口卖给企业，就像自来水拧开龙头按吨收费。", "x": "受外部企业调用混元API和算力租赁拉动，2026年三季度腾讯云服务收入同比暴增35%。", "h": 2}, {"id": 116, "t": "星脉网络（Stella Network）", "f": ["星脉网络（Stella Network）", "X-Star", "高速光模块", "星脉网络"], "c": "AI与技术", "p": "腾讯云全栈自研的超高速AI机房内部神经网络，让几万张算力卡协同干活时不堵车丢包，替代高价进口方案。", "x": "腾讯自研星脉协议并交由锐捷网络与中际旭创等代工，支撑超十万卡级混元训练大集群。", "h": 18}, {"id": 117, "t": "T-block模块化数据中心与PUE", "f": ["T-block", "液冷机柜", "PUE"], "c": "AI与技术", "p": "像搭乐高积木一样预先拼装好的液冷算力机房，而PUE越接近1说明机房空调耗电越少，算力省电省钱。", "x": "腾讯T-block棕地液冷机柜成本比同行低三成，怀来基地PUE压低至1.12至1.15。", "h": 22}, {"id": 118, "t": "美国国防部1260H清单", "f": ["1260H", "芯片禁运"], "c": "政策与监管", "p": "美国防部发布的一份涉军企业名录，主要限制美国军方自身向名单内企业采购，并不直接冻结全球商业往来。", "x": "五角大楼本不买腾讯游戏点券，且药明康德胜诉除名在前，被判定为无实质杀伤的纸老虎。", "h": 10}, {"id": 119, "t": "财报回购静默期", "f": ["Blackout Period", "股份回购静默期", "静默期"], "c": "政策与监管", "p": "港交所规定公司发布财报前约一个月内，为了防止内部人抢跑交易，公司自己和董监高都禁止在市场买自家股票。", "x": "2026年10月中旬至11月18日季报前腾讯被锁手停买，解禁后方能重启百亿回购火炮。", "h": 6}];
+    var SCOPE_SEL = ".report-content";
+    var STORAGE_MODE_KEY = 'agy_glossary_mode_v1';
+    var MODES = ['smart', 'all', 'off'];
+    var MODE_LABELS = { smart: '📖 术语下划线: 智能去重', all: '📖 术语下划线: 全部标出', off: '📖 术语下划线: 已隐藏' };
+    var curMode = "smart";
+    try {
+      var savedM = localStorage.getItem(STORAGE_MODE_KEY);
+      if (savedM && MODES.indexOf(savedM) !== -1) curMode = savedM;
+    } catch(e) {}
+
+    var byId = {};
+    var formToId = {};
+    var allForms = [];
+    GLOSSARY.forEach(function(item){
+      byId[item.id] = item;
+      (item.f || []).forEach(function(form){
+        if (!form || form.length < 2) return;
+        if (formToId[form] === undefined) {
+          formToId[form] = item.id;
+          allForms.push(form);
+        }
+      });
+    });
+    // Longest-match-first so e.g. "维持性资本开支" matches before "资本开支", "聚合MDI" before "MDI"
+    allForms.sort(function(a, b){ return b.length - a.length; });
+    if (!allForms.length) return;
+
+    function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+    var masterRe = new RegExp(allForms.map(escRe).join('|'), 'g');
+    var asciiRe = /[A-Za-z0-9_]/;
+
+    var SKIP_TAGS = {
+      SCRIPT:1, STYLE:1, SVG:1, TEXTAREA:1, INPUT:1, BUTTON:1, SELECT:1, OPTION:1,
+      A:1, H1:1, H2:1, H3:1, NOSCRIPT:1, IFRAME:1
+    };
+
+    function isSkippedNode(node) {
+      var el = node.parentElement;
+      while (el) {
+        if (SKIP_TAGS[el.tagName]) return true;
+        if (el.classList && (el.classList.contains('no-glossary') || el.classList.contains('agy-term') || el.classList.contains('agy-chart-card'))) return true;
+        el = el.parentElement;
+      }
+      return false;
+    }
+
+    function clearAnnotations(roots) {
+      roots.forEach(function(root){
+        var spans = root.querySelectorAll('span.agy-term');
+        for (var i = 0; i < spans.length; i++) {
+          var sp = spans[i];
+          var txt = document.createTextNode(sp.textContent || '');
+          if (sp.parentNode) sp.parentNode.replaceChild(txt, sp);
+        }
+        root.normalize();
+      });
+    }
+
+    function getSectionKey(el) {
+      var cur = el;
+      while (cur && cur !== document.body) {
+        if (cur.dataset && cur.dataset.chap) return cur.dataset.chap;
+        if (cur.tagName === 'SECTION' || cur.tagName === 'ARTICLE') return cur.id || 'sec';
+        cur = cur.parentElement;
+      }
+      // Fallback: find nearest preceding h2 inside report
+      var p = el;
+      while (p && p.parentElement && !p.parentElement.classList.contains('report-content')) {
+        p = p.parentElement;
+      }
+      if (p) {
+        var prev = p.previousElementSibling;
+        var steps = 0;
+        while (prev && steps < 40) {
+          if (prev.tagName === 'H2' || prev.tagName === 'H1') return prev.id || prev.textContent.slice(0, 20);
+          prev = prev.previousElementSibling;
+          steps++;
+        }
+      }
+      return 'root';
+    }
+
+    function annotateAll(mode) {
+      var roots = Array.prototype.slice.call(document.querySelectorAll(SCOPE_SEL));
+      if (!roots.length) return;
+      if (mode === 'off') {
+        document.body.classList.add('agy-glossary-off');
+        return;
+      }
+      document.body.classList.remove('agy-glossary-off');
+      clearAnnotations(roots);
+
+      var seenPerSection = {};
+      var blockCounter = 0;
+
+      roots.forEach(function(root){
+        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+        var textNodes = [];
+        var n;
+        while ((n = walker.nextNode())) {
+          if (!n.nodeValue || n.nodeValue.trim().length < 2) continue;
+          if (isSkippedNode(n)) continue;
+          textNodes.push(n);
+        }
+
+        textNodes.forEach(function(tNode){
+          var text = tNode.nodeValue;
+          masterRe.lastIndex = 0;
+          var matches = [];
+          var m;
+          while ((m = masterRe.exec(text)) !== null) {
+            var word = m[0];
+            var start = m.index;
+            var end = start + word.length;
+            // ASCII boundary guard (Safari-safe without lookbehind)
+            if (asciiRe.test(word.charAt(0)) && start > 0 && asciiRe.test(text.charAt(start - 1))) continue;
+            if (asciiRe.test(word.charAt(word.length - 1)) && end < text.length && asciiRe.test(text.charAt(end))) continue;
+            var gid = formToId[word];
+            if (gid === undefined) continue;
+            if (mode === 'smart') {
+              var secKey = getSectionKey(tNode.parentElement);
+              if (!seenPerSection[secKey]) seenPerSection[secKey] = {};
+              if (seenPerSection[secKey][gid]) continue;
+              seenPerSection[secKey][gid] = true;
+            }
+            matches.push({ start: start, end: end, word: word, gid: gid });
+          }
+          if (!matches.length) return;
+
+          var frag = document.createDocumentFragment();
+          var lastIdx = 0;
+          matches.forEach(function(mt){
+            if (mt.start > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, mt.start)));
+            var item = byId[mt.gid];
+            var sp = document.createElement('span');
+            sp.className = 'agy-term';
+            sp.setAttribute('data-gid', String(mt.gid));
+            sp.setAttribute('data-cat', item.c || '');
+            sp.setAttribute('tabindex', '0');
+            sp.setAttribute('role', 'button');
+            sp.setAttribute('title', '点击查看「' + item.t + '」通俗解释');
+            sp.textContent = mt.word;
+            frag.appendChild(sp);
+            lastIdx = mt.end;
+          });
+          if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+          if (tNode.parentNode) tNode.parentNode.replaceChild(frag, tNode);
+          blockCounter++;
+        });
+      });
+    }
+
+    // Popover controller
+    var pop = document.getElementById('agy-term-popover');
+    var tpCat = document.getElementById('agy-tp-cat');
+    var tpTerm = document.getElementById('agy-tp-term');
+    var tpPlain = document.getElementById('agy-tp-plain');
+    var tpCtx = document.getElementById('agy-tp-ctx');
+    var tpMeta = document.getElementById('agy-tp-meta');
+    var activeSpan = null;
+
+    function hidePop() {
+      if (pop) pop.style.display = 'none';
+      if (activeSpan) {
+        activeSpan.classList.remove('agy-term-active');
+        activeSpan = null;
+      }
+    }
+
+    function showPop(spanEl) {
+      if (document.body.classList.contains('agy-glossary-off')) return;
+      var gid = parseInt(spanEl.getAttribute('data-gid'), 10);
+      var item = byId[gid];
+      if (!item || !pop) return;
+
+      if (activeSpan && activeSpan !== spanEl) activeSpan.classList.remove('agy-term-active');
+      activeSpan = spanEl;
+      spanEl.classList.add('agy-term-active');
+
+      tpCat.textContent = item.c || '专业术语';
+      tpCat.setAttribute('data-cat', item.c || '');
+      tpTerm.textContent = item.t;
+      tpPlain.innerHTML = '<strong>🐣 大白话秒懂：</strong>' + item.p;
+      if (item.x) {
+        tpCtx.style.display = 'block';
+        tpCtx.innerHTML = '<strong>🎯 本文怎么看：</strong>' + item.x;
+      } else {
+        tpCtx.style.display = 'none';
+      }
+      var extraForms = (item.f || []).filter(function(x){ return x !== item.t; });
+      var aliasNote = extraForms.length ? (' · 别名: ' + extraForms.slice(0, 3).join('/')) : '';
+      tpMeta.textContent = '全文出现 ' + (item.h || 1) + ' 次' + aliasNote;
+
+      pop.style.display = 'block';
+      var rect = spanEl.getBoundingClientRect();
+      var pw = pop.offsetWidth || 350;
+      var ph = pop.offsetHeight || 190;
+      var left = Math.max(12, Math.min(rect.left, window.innerWidth - pw - 12));
+      var top = rect.bottom + 8;
+      if (top + ph > window.innerHeight - 12) {
+        top = Math.max(12, rect.top - ph - 8);
+      }
+      pop.style.left = left + 'px';
+      pop.style.top = top + 'px';
+    }
+
+    document.addEventListener('click', function(e){
+      var target = e.target;
+      if (pop && pop.contains(target)) return;
+      var termEl = target && target.closest ? target.closest('.agy-term') : null;
+      if (termEl) {
+        // Respect text selection for 划词提问!
+        var sel = window.getSelection ? window.getSelection().toString().trim() : '';
+        if (sel.length >= 2) return;
+        e.stopPropagation();
+        if (activeSpan === termEl && pop.style.display === 'block') {
+          hidePop();
+        } else {
+          showPop(termEl);
+        }
+        return;
+      }
+      hidePop();
+    });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        hidePop();
+        toggleDrawer(false);
+      }
+      if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.classList && e.target.classList.contains('agy-term')) {
+        e.preventDefault();
+        showPop(e.target);
+      }
+    });
+    window.addEventListener('scroll', function(){ if (pop && pop.style.display === 'block') hidePop(); }, { passive: true });
+
+    var closeBtn = document.getElementById('agy-tp-close');
+    if (closeBtn) closeBtn.addEventListener('click', hidePop);
+
+    // Drawer controller
+    var drawer = document.getElementById('agy-term-drawer');
+    var mask = document.getElementById('agy-term-drawer-mask');
+    var tdSearch = document.getElementById('agy-td-search');
+    var tdCats = document.getElementById('agy-td-cats');
+    var tdList = document.getElementById('agy-td-list');
+    var activeCat = '全部';
+
+    function toggleDrawer(open) {
+      if (!drawer || !mask) return;
+      drawer.classList.toggle('open', open);
+      mask.classList.toggle('open', open);
+      if (open) {
+        hidePop();
+        renderDrawerList();
+      }
+    }
+
+    var catCounts = { '全部': GLOSSARY.length };
+    GLOSSARY.forEach(function(g){
+      var c = g.c || '财务会计';
+      catCounts[c] = (catCounts[c] || 0) + 1;
+    });
+    if (tdCats) {
+      Object.keys(catCounts).forEach(function(cat){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'td-cat-btn' + (cat === activeCat ? ' active' : '');
+        b.textContent = cat + ' (' + catCounts[cat] + ')';
+        b.addEventListener('click', function(){
+          activeCat = cat;
+          tdCats.querySelectorAll('.td-cat-btn').forEach(function(x){ x.classList.remove('active'); });
+          b.classList.add('active');
+          renderDrawerList();
+        });
+        tdCats.appendChild(b);
+      });
+    }
+
+    function renderDrawerList() {
+      if (!tdList) return;
+      var q = (tdSearch ? tdSearch.value : '').trim().toLowerCase();
+      var rows = GLOSSARY.filter(function(g){
+        if (activeCat !== '全部' && (g.c || '财务会计') !== activeCat) return false;
+        if (!q) return true;
+        return (g.t + ' ' + (g.f || []).join(' ') + ' ' + g.p + ' ' + g.x).toLowerCase().indexOf(q) !== -1;
+      });
+      tdList.innerHTML = rows.map(function(g){
+        return '<div class="td-card">' +
+          '<div class="td-card-top"><span class="td-card-term">' + g.t + '</span><span class="td-card-meta">' + (g.c || '') + ' · ' + (g.h || 1) + '次</span></div>' +
+          '<div class="td-card-plain">' + g.p + '</div>' +
+          (g.x ? '<div class="td-card-ctx">🎯 ' + g.x + '</div>' : '') +
+        '</div>';
+      }).join('') || '<div style="padding:24px;text-align:center;color:#94a3b8;">未找到匹配的专业术语</div>';
+    }
+
+    if (tdSearch) tdSearch.addEventListener('input', renderDrawerList);
+    if (mask) mask.addEventListener('click', function(){ toggleDrawer(false); });
+    var tdClose = document.getElementById('agy-td-close');
+    if (tdClose) tdClose.addEventListener('click', function(){ toggleDrawer(false); });
+    var openAllBtn = document.getElementById('agy-tp-open-all');
+    if (openAllBtn) openAllBtn.addEventListener('click', function(){ toggleDrawer(true); });
+    var fabDrawerBtn = document.getElementById('agy-term-open-drawer');
+    if (fabDrawerBtn) fabDrawerBtn.addEventListener('click', function(){ toggleDrawer(true); });
+
+    // Mode switcher
+    var modeBtn = document.getElementById('agy-term-mode-btn');
+    function updateModeUI() {
+      if (modeBtn) modeBtn.textContent = MODE_LABELS[curMode] || MODE_LABELS.smart;
+    }
+    if (modeBtn) {
+      modeBtn.addEventListener('click', function(){
+        var nextIdx = (MODES.indexOf(curMode) + 1) % MODES.length;
+        curMode = MODES[nextIdx];
+        try { localStorage.setItem(STORAGE_MODE_KEY, curMode); } catch(e) {}
+        updateModeUI();
+        annotateAll(curMode);
+      });
+    }
+
+    // Expose global hook (useful for 2.0 Cockpit tab re-renders)
+    window.agyGlossaryRefresh = function(){ annotateAll(curMode); };
+    window.agyGlossaryOpenDrawer = function(){ toggleDrawer(true); };
+
+    // Initial run
+    updateModeUI();
+    if (curMode !== 'off') {
+      annotateAll(curMode);
+    } else {
+      document.body.classList.add('agy-glossary-off');
+    }
+  })();
+  </script>
+
 </body>
 </html>

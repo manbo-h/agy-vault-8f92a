@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
-<title>中国海油(600938.SH) 深度投研全集</title>
+<title>中国海油 深度投研全集</title>
 <style>
   @page {
     size: A4 portrait;
@@ -830,6 +830,29 @@
       border: 1px solid rgba(254, 243, 199, 0.55);
       box-shadow: 0 1px 6px rgba(217, 119, 6, 0.45);
     }
+    .agy-ab-badge.agy-v3-badge,
+    .agy-v3-badge {
+      background: linear-gradient(135deg, #059669 0%, #0d9488 52%, #0284c7 100%);
+      color: #ecfdf5;
+      border: 1px solid rgba(167, 243, 208, 0.55);
+      box-shadow: 0 1px 6px rgba(5, 150, 105, 0.40);
+    }
+    .agy-sort-btn.agy-v3-filter-btn {
+      border-color: #6ee7b7;
+      color: #065f46;
+      background: #ecfdf5;
+      font-weight: 700;
+    }
+    .agy-sort-btn.agy-v3-filter-btn:hover {
+      background: #d1fae5;
+      border-color: #10b981;
+    }
+    .agy-sort-btn.agy-v3-filter-btn.active {
+      background: linear-gradient(135deg, #059669 0%, #0d9488 55%, #0284c7 100%);
+      border-color: #065f46;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(5, 150, 105, 0.40);
+    }
     .agy-sort-btn.agy-swarm-filter-btn {
       border-color: #fcd34d;
       color: #92400e;
@@ -1461,12 +1484,329 @@
       color: #94a3b8;
     }
   }
+
+/* ====== 全文专业术语下划线与点击弹窗引擎 (agy-glossary) ====== */
+.agy-term {
+  border-bottom: 1.5px dotted var(--agy-term-line, #2563eb);
+  padding-bottom: 0.5px;
+  cursor: help;
+  border-radius: 2px;
+  transition: background-color 0.14s ease, color 0.14s ease, border-bottom-color 0.14s ease;
+  text-decoration: none;
+}
+.agy-term[data-cat="化工产品"], .agy-term[data-cat="行业产品"] { --agy-term-line: #0d9488; }
+.agy-term[data-cat="工艺设备"] { --agy-term-line: #4f46e5; }
+.agy-term[data-cat="财务会计"] { --agy-term-line: #2563eb; }
+.agy-term[data-cat="估值周期"] { --agy-term-line: #d97706; }
+.agy-term[data-cat="贸易政策"] { --agy-term-line: #e11d48; }
+.agy-term:hover, .agy-term.agy-term-active {
+  background-color: rgba(37, 99, 235, 0.11);
+  border-bottom-style: solid;
+}
+code .agy-term {
+  border-bottom-color: #be123c;
+}
+body.agy-glossary-off .agy-term {
+  border-bottom-color: transparent !important;
+  cursor: inherit;
+  background-color: transparent !important;
+}
+body.theme-dark .agy-term, html.theme-dark .agy-term {
+  --agy-term-line: #60a5fa;
+}
+body.theme-dark .agy-term[data-cat="化工产品"], body.theme-dark .agy-term[data-cat="行业产品"] { --agy-term-line: #2dd4bf; }
+body.theme-dark .agy-term[data-cat="工艺设备"] { --agy-term-line: #818cf8; }
+body.theme-dark .agy-term[data-cat="估值周期"] { --agy-term-line: #fbbf24; }
+body.theme-dark .agy-term[data-cat="贸易政策"] { --agy-term-line: #fb7185; }
+body.theme-dark .agy-term:hover, body.theme-dark .agy-term.agy-term-active {
+  background-color: rgba(96, 165, 250, 0.22);
+}
+
+#agy-term-popover {
+  position: fixed;
+  z-index: 99999;
+  display: none;
+  width: min(370px, calc(100vw - 24px));
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.22), 0 2px 8px rgba(15, 23, 42, 0.08);
+  padding: 13px 15px 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 13.5px;
+  line-height: 1.62;
+  animation: agyPopIn 0.14s ease-out;
+}
+@keyframes agyPopIn {
+  from { opacity: 0; transform: translateY(4px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+body.theme-dark #agy-term-popover, html.theme-dark #agy-term-popover {
+  background: #1e293b;
+  color: #f1f5f9;
+  border-color: #475569;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55);
+}
+#agy-term-popover .tp-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #e2e8f0;
+}
+body.theme-dark #agy-term-popover .tp-head { border-bottom-color: #334155; }
+#agy-term-popover .tp-title-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+#agy-term-popover .tp-term {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
+body.theme-dark #agy-term-popover .tp-term { color: #f8fafc; }
+#agy-term-popover .tp-cat {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+#agy-term-popover .tp-cat[data-cat="化工产品"], #agy-term-popover .tp-cat[data-cat="行业产品"] { background: #ccfbf1; color: #0f766e; }
+#agy-term-popover .tp-cat[data-cat="工艺设备"] { background: #e0e7ff; color: #4338ca; }
+#agy-term-popover .tp-cat[data-cat="估值周期"] { background: #fef3c7; color: #b45309; }
+#agy-term-popover .tp-cat[data-cat="贸易政策"] { background: #ffe4e6; color: #be123c; }
+#agy-term-popover .tp-close {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+#agy-term-popover .tp-close:hover { color: #0f172a; }
+body.theme-dark #agy-term-popover .tp-close:hover { color: #f8fafc; }
+#agy-term-popover .tp-plain {
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+body.theme-dark #agy-term-popover .tp-plain { color: #e2e8f0; }
+#agy-term-popover .tp-ctx {
+  background: #f8fafc;
+  border-left: 3px solid #2563eb;
+  padding: 6px 9px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: #334155;
+  margin-bottom: 8px;
+}
+body.theme-dark #agy-term-popover .tp-ctx {
+  background: #0f172a;
+  color: #cbd5e1;
+  border-left-color: #38bdf8;
+}
+#agy-term-popover .tp-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #64748b;
+}
+#agy-term-popover .tp-drawer-link {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#agy-term-popover .tp-drawer-link:hover { background: #dbeafe; }
+
+#agy-term-fab {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 99980;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.90);
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 999px;
+  padding: 5px 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.28);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+#agy-term-fab button {
+  background: transparent;
+  color: #e2e8f0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#agy-term-fab button:hover {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+}
+#agy-term-fab .fab-sep {
+  width: 1px;
+  height: 14px;
+  background: #334155;
+}
+
+#agy-term-drawer-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.42);
+  z-index: 99990;
+  display: none;
+}
+#agy-term-drawer-mask.open { display: block; }
+#agy-term-drawer {
+  position: fixed;
+  top: 0;
+  right: -440px;
+  width: min(420px, 92vw);
+  height: 100vh;
+  background: #ffffff;
+  color: #0f172a;
+  z-index: 99995;
+  box-shadow: -10px 0 32px rgba(15, 23, 42, 0.25);
+  transition: right 0.22s ease;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+#agy-term-drawer.open { right: 0; }
+body.theme-dark #agy-term-drawer { background: #0f172a; color: #f1f5f9; }
+#agy-term-drawer .td-head {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#agy-term-drawer .td-tools {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+body.theme-dark #agy-term-drawer .td-tools { border-bottom-color: #334155; }
+#agy-term-drawer .td-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+}
+body.theme-dark #agy-term-drawer .td-search {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #475569;
+}
+#agy-term-drawer .td-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#agy-term-drawer .td-cat-btn {
+  padding: 3px 8px;
+  font-size: 11.5px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  cursor: pointer;
+}
+#agy-term-drawer .td-cat-btn.active {
+  background: #1e3a8a;
+  color: #ffffff;
+  border-color: #1e3a8a;
+}
+#agy-term-drawer .td-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 14px 24px;
+}
+#agy-term-drawer .td-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  padding: 10px 12px;
+  margin-bottom: 9px;
+  background: #ffffff;
+}
+body.theme-dark #agy-term-drawer .td-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+#agy-term-drawer .td-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+#agy-term-drawer .td-card-term {
+  font-weight: 800;
+  font-size: 14px;
+}
+#agy-term-drawer .td-card-meta {
+  font-size: 11px;
+  color: #64748b;
+}
+#agy-term-drawer .td-card-plain {
+  font-size: 12.8px;
+  line-height: 1.58;
+  color: #334155;
+}
+body.theme-dark #agy-term-drawer .td-card-plain { color: #cbd5e1; }
+#agy-term-drawer .td-card-ctx {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #1d4ed8;
+}
+body.theme-dark #agy-term-drawer .td-card-ctx { color: #7dd3fc; }
+
+@media print {
+  .agy-term {
+    border-bottom: none !important;
+    background: transparent !important;
+  }
+  #agy-term-popover, #agy-term-fab, #agy-term-drawer, #agy-term-drawer-mask {
+    display: none !important;
+  }
+}
+
 </style>
 </head>
 <body>
   <div class="report-header">
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
-    <div class="report-title">中国海油(600938.SH) 深度投研全集</div>
+    <div class="report-title">中国海油 深度投研全集</div>
     <div class="report-meta">
       <span>📅 导出日期：2026-11-26</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
@@ -5447,7 +5787,7 @@
       };
       function buildPrompt() {
         var lines = [
-          '针对报告《中国海油(600938.SH) 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国海油(600938.SH) 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
+          '针对报告《中国海油 深度投研全集》（本地原稿路径：`C:/Users/WINDOWS/Downloads/MD原稿/中国海油 深度投研全集.md`），我有以下划词追问（请结合原稿逐一解答，并将本轮问答自动追加归档至该报告末尾的【模块 I：💬 买方实战追问与深度答疑实录】章节，同步刷新 MD 原稿与 HTML 阅读版）：',
           ''
         ];
         basket.forEach(function(item, i){
@@ -5749,7 +6089,7 @@
           var hasFullOe = false;
           var hasDiv = false;
           var hasObjScore = false;
-          var countA = 0, countH = 0, countAb = 0, countSwarm = 0;
+          var countA = 0, countH = 0, countAb = 0, countSwarm = 0, countV3Only = 0;
           var factorCounts = {};
           var knownFactors = [
             '⛏️ 大宗周期与资源',
@@ -5824,10 +6164,15 @@
             if (market === 'H') countH++; else countA++;
             tr.setAttribute('data-market', market);
             var isSwarm = !!tr.querySelector('.agy-swarm-badge');
-            var isAbTested = isSwarm || !!tr.querySelector('.agy-ab-badge');
+            var isV3Only = !!tr.querySelector('.agy-v3-badge');
+            var isAbTested = isSwarm || isV3Only || !!tr.querySelector('.agy-ab-badge');
             if (isSwarm) {
               countSwarm++;
               tr.setAttribute('data-swarm-debated', '1');
+            }
+            if (isV3Only) {
+              countV3Only++;
+              tr.setAttribute('data-v3-only', '1');
             }
             if (isAbTested) {
               countAb++;
@@ -5875,7 +6220,8 @@
               isHkOnly: market === 'H',
               isStale: isStale,
               isAbTested: isAbTested,
-              isSwarm: isSwarm
+              isSwarm: isSwarm,
+              isV3Only: isV3Only
             };
           });
 
@@ -5886,7 +6232,7 @@
             globalStats.maxH = countH;
           }
 
-          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL', abOnly: false, swarmOnly: false };
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL', abOnly: false, swarmOnly: false, v3Only: false };
           var inlineMarketBtns = {};
 
           function applyFilters() {
@@ -5901,14 +6247,15 @@
               var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
               var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
               var hideBySwarm = state.swarmOnly && !d.isSwarm;
+              var hideByV3 = state.v3Only && !d.isV3Only;
               var hideByAb = state.abOnly && !d.isAbTested;
-              var hidden = hideByMkt || hideByF || hideBySwarm || hideByAb;
+              var hidden = hideByMkt || hideByF || hideBySwarm || hideByV3 || hideByAb;
               d.tr.style.display = hidden ? 'none' : '';
               if (!hidden) {
                 visIdx++;
                 if (d.td0) {
                   var dynSpan = d.td0.querySelector('.agy-dyn-rank');
-                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.abOnly || state.swarmOnly || state.key !== 'rank') {
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.abOnly || state.swarmOnly || state.v3Only || state.key !== 'rank') {
                     if (!dynSpan) {
                       dynSpan = document.createElement('div');
                       dynSpan.className = 'agy-dyn-rank no-print';
@@ -5985,18 +6332,20 @@
             barBtns[def.key] = { el: b, baseLabel: def.label };
           });
 
-          // 挂载最新版双一键聚焦开关：👑 只看Swarm×B测（顶配终极版） & ✨ 只看最新版（Swarm+B测全覆盖）
-          var swarmBtn = null, abBtn = null;
+          // 挂载最新版三档一键聚焦开关：👑 只看Swarm×B测 | 🚀 只看v3新流程(待Swarm) | ✨ 只看最新版(全覆盖)
+          var swarmBtn = null, v3Btn = null, abBtn = null;
           if (countSwarm > 0) {
             swarmBtn = document.createElement('button');
             swarmBtn.type = 'button';
             swarmBtn.className = 'agy-sort-btn agy-swarm-filter-btn';
             swarmBtn.textContent = '👑 只看Swarm×B测 (' + countSwarm + ')';
-            swarmBtn.title = '一键聚焦：已跑完最新调研流程B双盲 + 跨模型Swarm投委会辩论终审的顶配最新版标的';
+            swarmBtn.title = '一键聚焦：已跑完跨模型Swarm投委会+流程B联合校准的顶配标的';
             swarmBtn.addEventListener('click', function(){
               state.swarmOnly = !state.swarmOnly;
               if (state.swarmOnly) {
+                state.v3Only = false;
                 state.abOnly = false;
+                if (v3Btn) v3Btn.classList.remove('active');
                 if (abBtn) abBtn.classList.remove('active');
               }
               swarmBtn.classList.toggle('active', state.swarmOnly);
@@ -6004,17 +6353,38 @@
             });
             bar.appendChild(swarmBtn);
           }
+          if (countV3Only > 0) {
+            v3Btn = document.createElement('button');
+            v3Btn.type = 'button';
+            v3Btn.className = 'agy-sort-btn agy-v3-filter-btn';
+            v3Btn.textContent = '🚀 v3新流程·待Swarm (' + countV3Only + ')';
+            v3Btn.title = '一键聚焦：由最新v3.0方案B调研流程产出、但尚未做Swarm+B测跨模型校准的标的';
+            v3Btn.addEventListener('click', function(){
+              state.v3Only = !state.v3Only;
+              if (state.v3Only) {
+                state.swarmOnly = false;
+                state.abOnly = false;
+                if (swarmBtn) swarmBtn.classList.remove('active');
+                if (abBtn) abBtn.classList.remove('active');
+              }
+              v3Btn.classList.toggle('active', state.v3Only);
+              applyFilters();
+            });
+            bar.appendChild(v3Btn);
+          }
           if (countAb > 0) {
             abBtn = document.createElement('button');
             abBtn.type = 'button';
             abBtn.className = 'agy-sort-btn agy-ab-filter-btn';
             abBtn.textContent = '✨ 只看最新版 (' + countAb + ')';
-            abBtn.title = '一键聚焦：全部最新版标的（含 👑 Swarm×B测 与 🧪 B测新版，隐藏早期老版）';
+            abBtn.title = '一键聚焦：全部新版标的（含 👑 Swarm×B测 + 🚀 v3新流程 + 🧪 B测重校，隐藏早期老版）';
             abBtn.addEventListener('click', function(){
               state.abOnly = !state.abOnly;
               if (state.abOnly) {
                 state.swarmOnly = false;
+                state.v3Only = false;
                 if (swarmBtn) swarmBtn.classList.remove('active');
+                if (v3Btn) v3Btn.classList.remove('active');
               }
               abBtn.classList.toggle('active', state.abOnly);
               applyFilters();
@@ -6368,5 +6738,379 @@
       })();
     })();
   </script>
+
+  <!-- 全文专业术语点击大白话弹窗与侧滑词典（打印 PDF 自动隐藏） -->
+  <div id="agy-term-popover" class="no-print no-glossary" role="dialog" aria-label="专业术语大白话解释">
+    <div class="tp-head">
+      <div class="tp-title-wrap">
+        <span class="tp-cat" id="agy-tp-cat"></span>
+        <span class="tp-term" id="agy-tp-term"></span>
+      </div>
+      <button type="button" class="tp-close" id="agy-tp-close" aria-label="关闭">&times;</button>
+    </div>
+    <div class="tp-plain" id="agy-tp-plain"></div>
+    <div class="tp-ctx" id="agy-tp-ctx"></div>
+    <div class="tp-foot">
+      <span id="agy-tp-meta"></span>
+      <button type="button" class="tp-drawer-link" id="agy-tp-open-all">📖 全部术语词典</button>
+    </div>
+  </div>
+
+  <div id="agy-term-fab" class="no-print no-glossary">
+    <button type="button" id="agy-term-mode-btn" title="切换正文术语下划线密度">📖 术语下划线: 智能去重</button>
+    <span class="fab-sep"></span>
+    <button type="button" id="agy-term-open-drawer" title="浏览并搜索本文全部专业术语">词典 (<span id="agy-term-total-num">128</span>)</button>
+  </div>
+
+  <div id="agy-term-drawer-mask" class="no-print no-glossary"></div>
+  <aside id="agy-term-drawer" class="no-print no-glossary">
+    <div class="td-head">
+      <strong>📖 本文全量专业术语大白话词典（128 词）</strong>
+      <button type="button" id="agy-td-close" style="background:none;border:none;color:#fff;font-size:21px;cursor:pointer;line-height:1;">&times;</button>
+    </div>
+    <div class="td-tools">
+      <input type="text" id="agy-td-search" class="td-search" placeholder="搜索化工、工艺、财务或估值术语（如 MDI、POE、净债、折旧...）" />
+      <div class="td-cats" id="agy-td-cats"></div>
+    </div>
+    <div class="td-list" id="agy-td-list"></div>
+  </aside>
+
+  <script class="no-print">
+  (function(){
+    var GLOSSARY = [{"id": 0, "t": "股东自由盈余", "f": ["Owner Earnings", "常态自由盈余", "OE"], "c": "估值周期", "p": "巴菲特最看重的“真赚钱力”：扣掉每年修机器、换旧设备和维持运转必需的垫钱后，公司正常年份真正能装进股东口袋随便分红的纯现金利润。", "x": "买方估值最核心的分子，比容易被会计调节的账面净利润更真实可靠。", "h": 117}, {"id": 1, "t": "真实企业价值", "f": ["True EV", "真实企业价值", "企业价值", "EV"], "c": "估值周期", "p": "把整家公司 100% 买下来并替它还清净债的真实总成本 = 股票总市值 + 欠别人的净有息债（如果账上闲钱比债多，则减去多余现金）。", "x": "比单纯看股票市值更公平，因为两家市值一样的公司，背 1000 亿债和躺 1000 亿现金的天差地别。", "h": 214}, {"id": 2, "t": "净债偏移", "f": ["净现金偏移"], "c": "估值周期", "p": "真实企业价值与股票市值之间的差额（正数代表欠的真债比闲钱多，负数代表账上闲钱比债多）。算买下公司的真实总价时必须把这笔账加上或减去。", "x": "穿透排查表外债、受限资金、少数股东份额和营运底仓后的最终净债（或净现金）调整额。", "h": 6}, {"id": 3, "t": "经营现金流", "f": ["经营活动现金流", "经营现金流", "OCF"], "c": "财务会计", "p": "公司靠卖货真正收进银行卡的现金，减去买原料、发工资、交税付出去的现金。利润表可能只是“打了白条”，经营现金流才是真金白银落袋。", "x": "检验利润含金量的照妖镜，正常好公司的经营现金流长期应大于等于净利润。", "h": 64}, {"id": 4, "t": "自由现金流", "f": ["自由现金流", "FCF"], "c": "财务会计", "p": "经营赚进来的现金（OCF），再扣掉盖新厂、买新设备花的钱（资本开支）后真正剩下的余钱。正数代表自己养活自己还有剩，负数代表还在借钱或吃老本扩张。", "x": "判断一家企业究竟是“股东印钞机”还是“资本吞金兽”的终极标尺。", "h": 75}, {"id": 5, "t": "资本开支", "f": ["购建固定资产", "CapEx", "资本开支"], "c": "财务会计", "p": "公司盖厂房、买生产线、买地买船这类大件长期资产花的钱。通常在现金流量表里对应“购建固定资产、无形资产和其他长期资产支付的现金”。", "x": "决定重资产企业有没有余钱分红的关键阀门，必须区分维持老厂和扩建新厂。", "h": 166}, {"id": 6, "t": "维持性资本开支", "f": ["维持性CapEx", "维持性资本开支"], "c": "财务会计", "p": "哪怕一寸新产能都不扩，为了防止老机器生锈报废、保住现有饭碗和竞争力，每年必须掏出去的大修与设备更新钱。", "x": "计算股东自由盈余时必须扣除的硬成本；化工强腐蚀装置的维持性开支通常很高。", "h": 20}, {"id": 7, "t": "扩张性资本开支", "f": ["扩张性CapEx", "扩张性资本开支"], "c": "财务会计", "p": "为了盖新工厂、上新产线、抢新市场而额外砸进去的钱。这笔钱不是为了保底，而是为了搏未来的新增利润。", "x": "考验管理层资本配置能力：投在高护城河主业是聚宝盆，投在过剩红海就是烧钱陷阱。", "h": 4}, {"id": 8, "t": "折旧摊销", "f": ["折旧摊销"], "c": "财务会计", "p": "花 100 亿盖的工厂能用 10 年，会计上不会第一年把 100 亿全算成亏损，而是分摊到 10 年里每年记 10 亿费用。当年不用真掏现金，但会压低账面利润。", "x": "重资产投产高峰期折旧暴增会压制账面利润，但现金流往往比账面利润好看得多。", "h": 1}, {"id": 9, "t": "归母净利润", "f": ["归母净利润", "归母净利"], "c": "财务会计", "p": "把合资子公司里分给合作伙伴（少数股东）的那份利润剔除掉之后，真正归咱们买股票的上市公司全体股东所有的净利润。", "x": "一切每股指标和估值计算必须死守归母口径，防止把合作伙伴赚的钱算成自己的。", "h": 167}, {"id": 10, "t": "少数股东权益", "f": ["少数股东权益", "少数股东损益", "少数股东份额"], "c": "财务会计", "p": "上市公司旗下有合资子公司（比如自己占 80%，合资方占 20%）。报表合并时把 100% 都加进来了，但那 20% 属于合作伙伴的家底和利润，叫少数股东权益/损益。", "x": "如果赚钱的子公司少数股东占比很高，会分流归母利润；估值时须保持分子分母口径一致防双扣。", "h": 23}, {"id": 11, "t": "归母净资产", "f": ["归母净资产", "净资产"], "c": "财务会计", "p": "总资产减去所有负债、再剔除合作伙伴（少数股东）份额后，真正归上市公司股东的“账面家底”。", "x": "计算市净率（PB）和净资产收益率（ROE）的底盘分母。", "h": 31}, {"id": 12, "t": "每股净资产", "f": ["每股净资产", "BVPS"], "c": "财务会计", "p": "把公司归母账面家底平摊到每一股股票上值多少钱（归母净资产 ÷ 总股本）。", "x": "用来衡量股价相对账面家底贵不贵（股价 ÷ 每股净资产 = 市净率 PB）。", "h": 3}, {"id": 13, "t": "投入资本回报率", "f": ["ROIC"], "c": "财务会计", "p": "公司不管这笔钱是股东出的还是银行借的，每往生意里砸进 100 块钱，一年能赚回多少块税后营业利润。这是衡量商业模式含金量的黄金指标。", "x": "如果 ROIC 长期高于融资成本，扩产就是在创造财富；反之扩得越大越毁灭价值。", "h": 1}, {"id": 14, "t": "净资产收益率", "f": ["净资产收益率", "ROE"], "c": "财务会计", "p": "股东自己掏出的每 100 块钱家底，公司一年能帮股东赚回多少块净利润（净利润 ÷ 归母净资产）。注意借高债也能把 ROE 撬高，所以要结合负债率一起看。", "x": "巴菲特最爱的长期复利标尺，重资产大扩张往往会先拉低短期 ROE，再看新产能能否爬坡修复。", "h": 46}, {"id": 15, "t": "无风险利率", "f": ["无风险利率"], "c": "估值周期", "p": "把钱买最安全的国家十年期国债躺着能拿到的年化利息。它是全市场所有资产估值的“地心引力锚”。", "x": "无风险利率越低，稳定印钞的优质资产合理估值倍数就越高。", "h": 1}, {"id": 16, "t": "市盈率", "f": ["动态PE", "市盈率", "PE"], "c": "估值周期", "p": "股价 ÷ 每股利润（或总市值 ÷ 净利润），直白说就是“按现在这赚钱速度，买下这家公司要几年回本”。", "x": "周期股看 PE 极易踩坑：行业景气高点利润暴增时 PE 看起来极低反而是卖点，寒冬亏钱时 PE 很高反而是买点。", "h": 33}, {"id": 17, "t": "市净率", "f": ["市净率", "PB"], "c": "估值周期", "p": "股价 ÷ 每股净资产（或总市值 ÷ 归母净资产），代表你愿意花几倍于公司账面家底的价格来买它。", "x": "周期与重资产龙头底部最硬的防护网，用来校验左侧重锤买点是否逼近历史极恐慌地板。", "h": 42}, {"id": 18, "t": "拆骨估值", "f": ["Reverse SOTP", "分部拆骨", "SOTP"], "c": "估值周期", "p": "像把一辆车拆成发动机、底盘、轮胎分开卖一样，把多元集团拆成几块独立业务分别估价再加总减去净债，用来检验当前股价有没有白送新业务。", "x": "避免把高壁垒垄断主业、强周期石化和未盈利新业务胡乱混在一起给同一个倍数。", "h": 20}, {"id": 19, "t": "安全边际", "f": ["安全边际", "安全垫"], "c": "估值周期", "p": "你买股票花的钱，比这家公司真实内在价值便宜出来的那一大截折扣。就像造承重 30 吨的桥只让 10 吨的车过，哪怕算错一半也不会塌。", "x": "价值投资的核心防线：所有估值假设都可能看走眼，只有足够低的买价才能兜底。", "h": 15}, {"id": 20, "t": "股息率", "f": ["股息率"], "c": "估值周期", "p": "过去一年每股实际分到手的现金红利 ÷ 当前股价，相当于把股票当成“存银行收利息”的年化现金回报率。", "x": "在市场不给估值修复的漫长等待期里，高股息是拿得住的真金白银底气。", "h": 23}, {"id": 21, "t": "注销式回购", "f": ["注销式回购", "回购注销"], "c": "财务会计", "p": "公司掏真金白银在股市买回自家股票后直接销毁，让总股本变少。相当于一块大蛋糕切少了几块，留下来的股东手里每一股含金量永久变厚。", "x": "比单纯买来做员工奖励的“伪回购”硬核得多，是顶级股东回报的试金石。", "h": 4}, {"id": 22, "t": "在建工程", "f": ["在建工程转固", "在建工程", "转固"], "c": "财务会计", "p": "正在盖还没完工的工厂。一旦建好验收投产，账上就会从“在建工程”转成“固定资产”（简称转固），同时开始计提折旧、贷款利息也不再藏进资产而是直接扣当期利润。", "x": "重资产扩产期结束的信号灯，但也意味着紧接着会迎来一轮“折旧+利息费用化”对账面利润的双重考验。", "h": 42}, {"id": 23, "t": "研发费用化", "f": ["开发支出"], "c": "财务会计", "p": "花钱搞研发，当年直接全额算进成本扣利润叫“费用化”（最老实、不藏雷）；如果把研发花销挂在账上当成无形资产分几年慢慢摊销叫“资本化”（容易虚增当年利润）。", "x": "研发 100% 费用化且开发支出为 0，是 A 股极其稀缺的“极严会计诚实度”金字招牌。", "h": 7}, {"id": 24, "t": "合同负债", "f": ["合同负债"], "c": "财务会计", "p": "客户先打钱订货、公司还没把货发出去，这笔提前收进腰包的定金在账上叫“合同负债”。名字里虽带“负债”，其实是产品抢手的甜蜜烦恼。", "x": "观察行业真实景气度的先行温度计：合同负债上升说明下游抢货，骤降则可能需求转冷。", "h": 6}, {"id": 25, "t": "短贷长投", "f": ["短期借款"], "c": "财务会计", "p": "借一年内就得还的短期银行贷款，拿去盖十年才能回本的大工厂。虽然短贷利率更便宜能省利息，但一旦遇到金融紧缩银行抽贷，就会面临巨大的续贷周转压力。", "x": "考验强周期龙头信用背书与现金流抗压能力的关键财务风险点。", "h": 6}, {"id": 26, "t": "有息负债", "f": ["显性有息债", "有息负债", "刚性债"], "c": "财务会计", "p": "必须按期支付利息且到期必须拿真金白银还本的真债务（短期借款、长期借款、应付债券、一年内到期非流动负债、租赁负债等），区别于欠供应商的无息货款。", "x": "衡量企业真实债务包袱和偿债红线的唯一核心口径。", "h": 24}, {"id": 27, "t": "资产负债率", "f": ["资产负债率"], "c": "财务会计", "p": "总负债 ÷ 总资产，衡量公司全部家当里有多大比例是靠借钱或欠款撑起来的。但要注意里面既包含要还本付息的银行债，也包含欠上游的无息货款和客户预付款。", "x": "需拆解其中的“有息负债率”，不能一刀切把无息占款当成高危债务。", "h": 1}, {"id": 28, "t": "使用权资产", "f": ["使用权资产", "租赁负债", "融资租赁"], "c": "财务会计", "p": "新会计准则下，哪怕不是花钱买断、而是签了十几年长期租约的船队、厂房或码头，也要把未来租金折现记成资产（使用权资产）和债务（租赁负债）。", "x": "防止企业通过“只租不买”把巨额固定资产和债务藏在表外，分析重资产和真债时必须合并穿透。", "h": 11}, {"id": 29, "t": "预计负债", "f": ["预计负债", "弃置义务"], "c": "财务会计", "p": "还没真正掏钱、但八九不离十未来肯定躲不掉的赔款、诉讼、环保复垦或合同取消违约金，会计按谨慎原则提前预估出来记在负债里。", "x": "算真实企业价值（True EV）时，未在经营利润里循环覆盖的一次性赔付/复垦类预计负债必须从严扣除。", "h": 41}, {"id": 30, "t": "售后租回", "f": ["长期应付款"], "c": "财务会计", "p": "把自家建好的设备卖给金融租赁公司换回一笔现金，然后再长期租回来继续用、分期付租金。表面看是卖资产，实质上就是拿设备作抵押借一笔长期贷款。", "x": "法医审计必查的隐性融资工具，需计入广义刚性有息债。", "h": 13}, {"id": 31, "t": "营运资金", "f": ["营运资金", "营运底仓", "WC"], "c": "财务会计", "p": "维持工厂每天买原料、备库存、等客户回款所必须压在流水线上的周转钱。生意做得越大，通常需要额外垫进去更多周转资金。", "x": "算可自由支配超额现金时要扣掉 18–21 天营收的保底运转现金；算稳态自由盈余时要扣成长新增垫资。", "h": 24}, {"id": 32, "t": "坏账准备", "f": ["信用减值损失"], "c": "财务会计", "p": "客户买货打的白条（应收账款）里，提前按欠款时间长短（账龄）预估可能收不回来的烂账比例，预先从利润里扣掉作为缓冲垫。", "x": "连还没到期的正常应收款都照提 4% 以上坏账准备的公司，财务极其审慎，藏雷概率极低。", "h": 4}, {"id": 33, "t": "存货跌价准备", "f": ["资产减值损失"], "c": "财务会计", "p": "仓库里囤的原料或成品如果市场价跌穿了当初的成本价，会计必须把跌掉的那块差价提前算成亏损计提出来，不能按虚高原价挂账。", "x": "周期下行期检验化工企业有没有硬撑着不提跌价、虚增利润的照妖镜。", "h": 13}, {"id": 34, "t": "期间费用率", "f": ["期间费用率"], "c": "财务会计", "p": "公司除了直接生产原料和工人工资外，卖货（销售）、管人（管理）、搞技术（研发）、付利息（财务）四大开销占总营收的百分比。", "x": "衡量巨头精细化运营与规模效应的硬指标，期间费用率越低说明把钱省到了骨子里。", "h": 4}, {"id": 35, "t": "毛利率", "f": ["毛利率", "价差"], "c": "财务会计", "p": "（卖货收入 − 直接生产成本）÷ 卖货收入。在化工行业更直观的指标是“单吨价差”，即每卖一吨产品赚的钱减去原料与能源成本后的毛利空间。", "x": "行业周期冷暖与企业成本护城河最直接的体温计。", "h": 3}, {"id": 36, "t": "净利率", "f": ["归母净利率", "销售净利率", "净利率"], "c": "财务会计", "p": "每卖出 100 块钱的货，扣完原料、人工、费用、利息和税之后，最后真能留下几块钱净利润。", "x": "对比同行最终赚钱效率的核心指标，用来识破“只赚吆喝不赚钱”的伪成长板块。", "h": 67}, {"id": 37, "t": "净营业周期", "f": ["应收账款周转天数"], "c": "财务会计", "p": "从掏钱买原料进厂、生产卖出、到最后把货款现金收回银行卡，中间总共要垫资多少天。天数越短甚至为负，说明越能用别人的钱做生意。", "x": "衡量产业链话语权与营运效率的核心运营指标。", "h": 1}, {"id": 38, "t": "有效税率", "f": ["有效税率"], "c": "财务会计", "p": "公司当年实际交的所得税费用 ÷ 税前利润总额。因为有高新技术企业 15% 优惠、研发加计扣除或海外子公司低税率，它常与 25% 标准税率不同。", "x": "跨国企业在 OECD 全球最低税落地后，有效税率抬升会直接吃掉一部分常态净利润。", "h": 1}, {"id": 39, "t": "OECD支柱二", "f": ["支柱二"], "c": "贸易政策", "p": "经合组织（OECD）推行的全球跨国巨头税收新规：无论你在匈牙利、爱尔兰等低税洼地怎么避税，年营收超 7.5 亿欧元的巨头在全球各地的实际税率都必须至少补足到 15%。", "x": "直接封堵了中国出海化工巨头过去在欧洲低税区的避税红利，长期抬高有效税率中枢。", "h": 1}, {"id": 40, "t": "成本曲线", "f": ["成本曲线"], "c": "估值周期", "p": "把全球所有厂家的生产成本从低到高排成一条台阶曲线。排在最右侧最贵的那 10% 厂家的成本叫“90 分位边际成本”——产品跌破这条线，高成本老外工厂就得亏钱关门停产。", "x": "周期股定价的物理地心引力：只要行业不消亡，商品价格很难长期死在 90 分位成本线之下。", "h": 5}, {"id": 41, "t": "剪刀差", "f": ["剪刀差"], "c": "估值周期", "p": "两条指标走势像剪刀一样越张越开：比如产品卖价暴涨而上游原料暴跌（赚钱暴增），或者销量大涨但单吨毛利暴跌（增产不增收）。", "x": "用来一眼看穿利润暴涨究竟是靠真本事还是靠短期外部价格错配。", "h": 2}, {"id": 42, "t": "顺价权", "f": ["顺价权", "定价权"], "c": "估值周期", "p": "当上游石油、煤炭、电价涨价时，企业能不能顺理成章把涨出来的成本转嫁给下游客户、保住自家每吨赚的毛利。垄断龙头顺价极快，过剩大宗则只能自己硬扛。", "x": "区分真护城河（如寡头聚氨酯）与苦力生意（如过剩大宗石化）的分水岭。", "h": 2}, {"id": 43, "t": "二阶导数", "f": ["二阶导数", "边际变化"], "c": "估值周期", "p": "德鲁肯米勒最核心的交易心法：市场炒的往往不是“现在有多好”，而是“变好的速度是在加快还是放慢”。哪怕业绩还在涨，但增速见顶放缓（二阶导数转负），股价也可能提前跌。", "x": "用来判断何时扣动右侧重仓扳机、何时警惕景气高点后的增速钝化。", "h": 2}, {"id": 44, "t": "多元化恶化", "f": ["多元恶化"], "c": "估值周期", "p": "彼得·林奇发明的毒舌词：很多好公司手里赚了大钱后闲不住，跨界去买或建自己不擅长、行业又内卷的新业务，结果把原本的好回报全拖垮了。", "x": "用来警示主业印钞机一旦把赚来的钱砸进低回报红海副业（如过剩电池材料），会严重拉低估值。", "h": 4}, {"id": 45, "t": "期现取严", "f": ["远月贴水", "贴水"], "c": "估值周期", "p": "现货是今天立刻交货的价格，期货是几个月后交货的价格；期货比现货便宜叫“贴水”（说明市场预期后面会跌价）。估值时取现货和期货里更低更严的那个价，防把短期暴涨当常态。", "x": "周期股防追高买在山顶的纪律铁闸。", "h": 18}, {"id": 46, "t": "周期钟摆", "f": ["周期钟摆"], "c": "估值周期", "p": "霍华德·马克斯的名喻：行业景气和市场情绪像钟摆一样，绝不会停在中间，而是从极端狂热暴利摆向极端恐慌亏钱，跌到高成本对手大批停产后再摆回来。", "x": "周期投资的精髓：在钟摆荡向极度悲观的寒冬敢买，在狂热暴利时懂得挤泡沫。", "h": 5}, {"id": 47, "t": "强周期龙头股", "f": ["周期股"], "c": "估值周期", "p": "彼得·林奇六大股票分类之一：业绩跟着宏观经济和行业供需大起大落的工业巨头（化工、钢铁、有色等），核心赚的是行业低谷扩张、反转暴击的钱。", "x": "投资这类股票必须看重资产重置成本、成本曲线身位和底部 PB，绝不能在景气高点看低 PE 冲进去。", "h": 6}, {"id": 48, "t": "隐蔽资产型", "f": ["Asset Play", "免费期权"], "c": "估值周期", "p": "彼得·林奇六大股票分类之一：公司肚子里藏着账面还没体现出价值、市场目前几乎按 0 元白送的优质资产或高壁垒新业务，一旦变现或爆发就带来额外赔率。", "x": "判断买方赔率不对称性的关键：成熟主业兜底、高壁垒新材料作为白送期权。", "h": 8}, {"id": 49, "t": "CR5", "f": ["寡头垄断"], "c": "估值周期", "p": "行业里排名前五名巨头加起来的全球市场份额总和。CR5 超过 80% 意味着市场被极少数巨头牢牢把控，极难爆发毁灭性恶性价格战。", "x": "衡量聚氨酯（MDI/TDI）全球格局远优于普通大宗化工品的核心量化证据。", "h": 1}, {"id": 50, "t": "永续债", "f": ["永续债", "可转债"], "c": "财务会计", "p": "永续债是没有到期日、可以一直不还本但利率会越跳越高的“伪权益真债务”；可转债是可以按约定价格换成股票的债券，会稀释老股东持股比例。", "x": "排查公司有没有把债藏在净资产里（永续债）或存在未来股本稀释压力（可转债）。", "h": 2}, {"id": 51, "t": "财务公司", "f": ["财务公司"], "c": "财务会计", "p": "大集团内部自建的“内部银行”叫财务公司。如果上市公司把大笔现金存在集团财务公司，同时自己又高息借外债（存贷双高），极易暗藏大股东挪用资金的暴雷风险。", "x": "A 股排雷头号红线：确认无关联财务公司且资金收益正常，可彻底排除此类治理大雷。", "h": 34}, {"id": 52, "t": "商业模式", "f": ["商业模式", "转换代价", "护城河"], "c": "估值周期", "p": "护城河是别人学不会、抢不走的长期竞争优势；转换代价是指下游客户想换掉你的供应商时，重新测试认证、停产调试、承担良率报废风险所要付出的巨大成本。", "x": "特种新材料和高规格异氰酸酯之所以利润率高，正是因为客户认证慢、导入后转换代价极高。", "h": 12}, {"id": 53, "t": "油气勘探与生产（E&P）", "f": ["油气勘探与生产（E&P）", "勘探开发", "E&P"], "c": "行业产品", "p": "指专门在地下和海底找油找气并抽出来卖钱的纯上游业务，不碰炼油厂和加油站这些下游苦生意，靠低成本储量赚高毛利。", "x": "中国海油纯度极高，油气销售占总营收超84%并贡献近100%核心利润，纯上游净利率达33.52%。", "h": 16}, {"id": 54, "t": "油气当量（BOE）", "f": ["百万桶油当量", "BOE/d", "桶油当量", "BOE"], "c": "行业产品", "p": "把天然气按燃烧释放的热量折算成“相当于多少桶原油”的统一度量衡，方便把产油又产气的公司放在一起比规模、算单桶成本。", "x": "本文按6000立方英尺或约170立方米天然气折1桶油，2025年海油净产量达7.773亿桶油当量。", "h": 120}, {"id": 55, "t": "布伦特（Brent）原油与实现油价折价", "f": ["Brent", "布伦特原油", "实现油价", "贴水"], "c": "行业产品", "p": "布伦特是全球海运原油定价总锚；各油田油质轻重含硫不同，实际卖价相对布伦特会有小幅加减价，这就是实现油价折价或升水。", "x": "2026年前三季度布伦特均价88.86美元，海油实现油价86.32美元，贴水极窄、顺价极强。", "h": 93}, {"id": 56, "t": "凝析油与重质环烷基稠油", "f": ["环烷基稠油", "石油液体", "高酸重油", "API度", "凝析油"], "c": "行业产品", "p": "凝析油是气田伴生的高价值超轻质原油；环烷基稠油又黑又稠且酸值高，做汽油差却是铺高等级沥青和做特种润滑油的稀缺好料。", "x": "渤中19-6主产高价凝析油，绥中、垦利等渤海稠油则定向供给集团沥青厂与环渤海耐酸炼厂吃进。", "h": 21}, {"id": 57, "t": "海气与“照付不议（Take-or-Pay）”", "f": ["Take-or-Pay", "Henry Hub", "天然气顺价", "照付不议", "海气"], "c": "行业产品", "p": "海底管道上岸直供沿海城市的天然气叫海气；照付不议则是下游大客户签下长约，合同保底气量哪怕没提够也得按约掏钱买单。", "x": "海油海气零长途管输费直供粤港澳与环渤海，2026Q3实现气价逆势升至8.13美元/千立方英尺。", "h": 18}, {"id": 58, "t": "油气贸易过水业务与份额油", "f": ["Netback", "过水通道", "份额油", "净回值"], "c": "行业产品", "p": "中外合作采油时，外方分得的原油常交由中方代为转手包销，这类赚1%—2%微薄通道费的走量流水账，不能当成高毛利主业。", "x": "2025年海油贸易收入536.84亿元属微利过水账，分析真实盈利能力需剥离后紧盯油气销售主业。", "h": 4}, {"id": 59, "t": "桶油主要成本（All-in Cost）", "f": ["All-in Cost", "不含税桶油主要成本", "桶油当期付现成本", "桶油主要成本", "桶油完全成本"], "c": "油气工艺", "p": "每一桶油气从海底找矿、建平台、抽上来再到交完税（不含所得税）的全部综合成本，是决定油企寒冬抗压能力的终极底牌。", "x": "2025年海油桶油主要成本27.90美元，2026Q1-Q3因暴利税升至30.57美元仍属全球前10%。", "h": 55}, {"id": 60, "t": "桶油作业费（Lifting Cost）", "f": ["桶油作业费（Lifting Cost）", "Lifting Cost", "桶油现金作业费", "现金开采成本", "桶油作业费", "OpEx", "作业费"], "c": "油气工艺", "p": "油井和平台建好之后，每天抽油的人工、电费、维护和修井等真金白银现付开销，最能直观衡量老油田是不是“抽水多过抽油”。", "x": "2025年海油桶油作业费仅7.46美元（国内6.75美元），仅为中石油的62%、中石化的一半。", "h": 117}, {"id": 61, "t": "折旧、折耗及摊销（DD&A）与产量法", "f": ["Unit-of-Production", "产量法折耗", "DD&A", "UoP"], "c": "油气工艺", "p": "海洋油企不按固定年限直线折旧，而是按当期采出量占“证实已开发储量”的比例摊销前期建平台砸下的巨额工程投资。", "x": "2025年海油DD&A达797.71亿元（14.84美元/桶），高储量扩边使千亿转固后单桶折耗仍稳健。", "h": 65}, {"id": 62, "t": "油气资产弃置义务（ARO）", "f": ["预计负债", "拆解义务", "ARO", "弃置费"], "c": "油气工艺", "p": "油田几十年后枯竭停产，必须依法拆除海上钢架平台、封堵海底井口并恢复生态，这笔远期巨额拆迁费在投产首日就得折现预提。", "x": "截至2026Q3末海油预计负债达1209.75亿元，用3.25%—5.25%折现率足额锁定未来拆解责任。", "h": 76}, {"id": 63, "t": "单桶发现与开发成本（F&D Cost）", "f": ["Finding & Development Cost", "F&D Cost", "单桶开发投资"], "c": "油气工艺", "p": "为了在地下新找到一桶油并把它修好井、建好平台变成可随时开采的储量，平均每一桶需要提前砸进去的资本开支成本。", "x": "2025年海油开发支出除新增储量约10.91美元/桶，新项目F&D折耗比国际同行低20%以上。", "h": 3}, {"id": 64, "t": "FPSO（浮式生产储卸油装置）", "f": ["浮式生产储卸油船", "FPSO", "穿梭油轮", "VLCC"], "c": "油气工艺", "p": "停在深海油田正上方的巨型“海上移动采油炼厂+储油罐”，能直接把海底原油油水分离、储存，再靠穿梭油轮接驳运向全球码头。", "x": "圭亚那与巴西超深水全靠22万—25万桶/日级FPSO放量，彻底摆脱跨国陆上输油管线瓶颈。", "h": 41}, {"id": 65, "t": "深水半潜式平台与导管架平台（CEP）", "f": ["深水半潜式平台", "中心处理平台", "导管架平台", "CEP"], "c": "油气工艺", "p": "浅海用钢腿直接插进海底泥土的叫固定式导管架平台，成本低；超深海脚踩不到底，只能靠巨型浮筒漂在海面的叫半潜式平台。", "x": "“深海一号”一期造了十万吨级半潜式平台，而渤海20米浅水区广泛使用低造价标准化导管架平台。", "h": 9}, {"id": 66, "t": "区域中心化开发与棕地依托（Brownfield Tie-back）", "f": ["Hub-and-Spoke", "Greenfield", "Fast4Ward", "Topsides", "区域中心化开发", "棕地依托式开发", "绿地新建", "水下回接"], "c": "油气工艺", "p": "不再给每个小油田孤立造昂贵大平台（绿地），而是依托附近现成老平台与海管（棕地），用海底管道把周边卫星小油田串起来共用。", "x": "深海一号二期把深水气引到90米浅水崖城老平台处理，省掉40%—50%船体电站及外输干线投资。", "h": 22}, {"id": 67, "t": "水下生产系统与水下采油树", "f": ["Subsea Tree", "Umbilical", "水下采油树", "水下管汇", "SURF", "脐带缆"], "c": "油气工艺", "p": "装在千米深黑漆漆海底井口上的高压智能阀门组、管汇及供电控液“脐带缆”，让油井无需海面有人平台就能安全开井关井。", "x": "海油在2025年实现深水采油树及控制系统自主化阶段性突破，打破三大欧美巨头85%垄断。", "h": 14}, {"id": 68, "t": "“璇玑”旋转导向系统与超深大位移井（ERD）", "f": ["旋转导向钻井", "大位移井", "随钻测井", "ERD"], "c": "油气工艺", "p": "璇玑系统是能边钻井边实时探测地层拐弯的“地下高精度导航钻头”；大位移井则是从红线外斜着打进保护区下方数千米的水平井。", "x": "“璇玑”已应用超2000口井替代欧美垄断；万米级大位移井则帮海油绕开渤海生态红线精准采油。", "h": 7}, {"id": 69, "t": "稠油热采与 350℃ 高温电泵注采", "f": ["350℃高温电泵", "蒸汽吞吐", "SAGD"], "c": "油气工艺", "p": "稠油像冷掉的猪油在地下流不动，靠往井里打入350℃超高温蒸汽把油“化稀”，再用耐高温电潜泵抽上来的特种采油工艺。", "x": "2026H1海油在垦利10-2推广350℃高温电泵注采一体化，撬动渤海数亿吨稠油经济动用。", "h": 4}, {"id": 70, "t": "循环注气保压与反凝析控制", "f": ["循环注气保压", "露点压力", "反凝析"], "c": "油气工艺", "p": "深层凝析气田采气太猛会让地层降压，导致珍贵轻质油凝结粘死在石头缝里（反凝析），必须把干气抽回来再打回地下顶住压力。", "x": "渤中19-6千亿方凝析气田前期须执行循环注气保压以多采高毛利凝析油，并非下游气卖不掉。", "h": 3}, {"id": 71, "t": "自然递减率与加密调整井", "f": ["自然递减率", "含水上升率", "调整井加密", "生产资本化", "双控"], "c": "油气工艺", "p": "油田老了地层压力下降、含水增多，产量自然滑坡的速度叫自然递减率；在老平台补打新井眼、注水稳压就是用来保产量的调整井。", "x": "2026Q1-Q3海油生产资本化大增11.4%至195亿元，把国内老油田自然递减率压至9%极低水平。", "h": 18}, {"id": 72, "t": "海上风电融合与张力腿平台（TLP）", "f": ["海油观澜号", "海油安澜号", "海南CZ7", "TLP", "张力腿"], "c": "油气工艺", "p": "把深远海漂浮风机（半潜式或用高强筋腱垂直死拉在海底的张力腿TLP）直接接入海上油田微电网，替代平台昂贵的烧油烧气发电。", "x": "2026年8月16MW“安澜号”TLP并网，主攻油田微网省电，不跟电力央企卷低IRR陆上卖电。", "h": 42}, {"id": 73, "t": "海上岸电工程与绿电消纳", "f": ["渤海岸电", "绿电消纳", "岸电工程"], "c": "油气工艺", "p": "从陆上拉高压海底电缆给海上采油平台直接供电，省掉平台上又笨又费油气的自备燃气轮机电站，让新平台大幅“减肥降本”。", "x": "渤海980MW岸电覆盖150余座平台、2026H1消纳近5亿度绿电，省新平台电站造价15%—20%。", "h": 13}, {"id": 74, "t": "海上 CCUS-EOR（以碳驱油）vs 纯 CCS", "f": ["CCUS-EOR", "纯CCS", "以碳驱油", "寄生能耗", "CCER", "碳封存", "CEA"], "c": "油气工艺", "p": "把伴生二氧化碳打进海底咸水层纯埋起来叫CCS，花钱赔本；加压打进油层把石头缝里的死油“洗挤”出来增产卖钱叫CCUS-EOR。", "x": "恩平15-1 CCUS注5吨碳增产1吨原油每吨净赚450—600元，2026H1东方1-1新开工。", "h": 18}, {"id": 75, "t": "深层煤层气与“三气立体合采”", "f": ["极限体积压裂", "中联煤层气", "神府深煤层", "EUR"], "c": "油气工艺", "p": "2000米深部煤层含大量游离气，需像页岩气一样用长水平井加超大规模压裂把煤岩打碎，并一口井同时合采煤气、致密气和页岩气。", "x": "海油2019年花53.35亿收购中联煤层气，在鄂尔多斯东缘探明超2000亿方神府深煤层大气田。", "h": 21}, {"id": 76, "t": "海工模块化预制与 EPCI 总包", "f": ["模块陆地预制", "工程标准化", "EPCI"], "c": "油气工艺", "p": "像拼乐高一样把巨型海上平台拆成标准模块，在陆地船厂流水线焊好再整体吊装出海；EPCI即设计、采办、建造与安装交钥匙总包。", "x": "海油联合海油工程推行陆地预制，把36个月建产周期压至18—20个月，赋能大批鸡肋边际田盈利。", "h": 7}, {"id": 77, "t": "SEC 净证实储量与 PD 储量", "f": ["SEC证实储量", "探明已开发储量", "PD储量"], "c": "资源与区块", "p": "按美国证监会（SEC）最严苛标准评估、当下经济技术条件下确定能采出来的地下“粮仓”家底；其中已打井建好设施的叫PD储量。", "x": "2025年末海油SEC净证实储量77.7亿桶油当量（+6.9%），按PD储量算折耗使新田前端折旧偏高。", "h": 14}, {"id": 78, "t": "储量替代率（RRR）", "f": ["储量替代率（RRR）", "内生储量替代率", "RRR"], "c": "资源与区块", "p": "每年新探明增加的可采储量除以当年采掉的产量。大于100%代表“找的比挖的多、粮仓越吃越大”，低于100%则是坐吃山空。", "x": "海油零外延大并购下连续8年内生RRR超130%（2025年达164%），吊打高溢价买矿的欧美巨头。", "h": 19}, {"id": 79, "t": "储量寿命（R/P / 储采比）", "f": ["储量寿命", "R/P"], "c": "资源与区块", "p": "用年底剩下的总证实储量除以当年年产量，算出“按现在的抽油速度，不找新油还能稳稳挖多少年”，是资源股的生命线长度。", "x": "尽管年产量攀上7.77亿桶高基数，海油储量寿命仍稳守10.0年黄金线，显著优于中石化的6.7年。", "h": 16}, {"id": 80, "t": "圭亚那 Stabroek 区块", "f": ["圭亚那 Stabroek 区块", "圭亚那Stabroek", "Yellowtail", "Stabroek区块", "Stabroek", "Whiptail", "Payara", "ICC仲裁", "Uaru", "Liza", "ROFR"], "c": "资源与区块", "p": "位于南美圭亚那外海的世纪级超深水轻质油发现（超110亿桶资源量），单井日产数万桶、盈亏线不到30美元，由美油巨头埃克森作业。", "x": "海油持25%权益（约27.5亿桶），2026年四期Yellowtail满产成海外产量+4.3%头号引擎。", "h": 132}, {"id": 81, "t": "巴西盐下超深水区块（Mero / Buzios / Ametista）", "f": ["Ametista", "Buzios", "桑托斯盆地", "Mero", "盐下油田"], "c": "资源与区块", "p": "藏在巴西外海两千米深水加厚厚盐岩层底下的超大型碳酸盐岩油田，油层压力足、单船仅需十几口井就能日产20万桶油。", "x": "2026H1 Buzios 8投产，且海油首次在桑托斯盆地拿下自营作业者Ametista区块。", "h": 86}, {"id": 82, "t": "南海“深海一号”及南海油气田群", "f": ["陵水17-2", "陵水25-1", "陵水36-1", "东方1-1", "深海一号", "流花油田", "恩平油田"], "c": "资源与区块", "p": "中国首个自营1500米超深水大气田（陵水17-2）及二期高压气田集群，外加珠江口流花、恩平、惠州等主力油气基地。", "x": "深海一号二期依托崖城老管直供大湾区，陵水36-1、惠州19-6与番禺10-4接力撑起国内深水增量。", "h": 44}, {"id": 83, "t": "渤海亿吨级油气集群", "f": ["渤海亿吨级油气集群", "渤中19-6", "渤中26-6", "垦利10-2", "绥中36-1", "蓬莱19-3", "渤海油田"], "c": "资源与区块", "p": "我国第一大原油生产基地，平均水深仅20米左右的浅水富矿带，囊括太古界潜山轻质油、千亿方凝析气田与亿吨级大型稠油田群。", "x": "渤海国内作业费不到6.5美元/桶，2026Q3渤中26-6二期投产及垦利10-2放量稳固现金牛底座。", "h": 40}, {"id": 84, "t": "加拿大长湖（Long Lake）油砂", "f": ["加拿大长湖（Long Lake）油砂", "Long Lake", "Nexen", "尼克森"], "c": "资源与区块", "p": "2013年海油151亿美元高位收购尼克森遗留的极高成本非常规重油项目，需烧大量天然气造蒸汽把沥青砂蒸出油，抗跌能力极弱。", "x": "尼克森教训治好了高油价乱并购病，但顺手带回的深水团队意外拿下了圭亚那世纪大油田。", "h": 23}, {"id": 85, "t": "产品分成合同（PSC / PSA）", "f": ["Profit Oil", "Cost Oil", "PSC", "PSA", "成本油", "利润油"], "c": "政策与税制", "p": "国际油气合作主流分成合约：采出的油先拿出大比例“成本油”让投资方优先收回垫付资本，剩下的“利润油”再按约与资源国政府分成。", "x": "圭亚那Stabroek允最高75%产量作成本油加速回本，2026高油价下正为五六期垫付巨资。", "h": 23}, {"id": 86, "t": "石油特别收益金（暴利税）", "f": ["石油特别收益金（暴利税）", "石油特别收益金", "特别收益金", "暴利税"], "c": "政策与税制", "p": "国家对国内陆海采油企业征收的阶梯超额税：油价低于起征线时一分不交，高出越多税率越重，本质上是“油价跌时财政帮你扛”。", "x": "起征点65美元/桶，2025年几乎免征，2026Q1-Q3实现86.32美元触发暴利税推高税金42%。", "h": 59}, {"id": 87, "t": "从价计征资源税与减征优惠", "f": ["从价资源税", "资源税"], "c": "政策与税制", "p": "我国对境内采出的原油天然气按实际销售额（而非固定吨数）收取的6%矿产税，但国家对难采的稠油、深水及三次采油给予30%—40%减免。", "x": "与特别收益金共同构成顺周期减震垫，2026前三季度海油税金及附加随高油价升至193.20亿元。", "h": 25}, {"id": 88, "t": "中国近海专营权与作业者制度", "f": ["Non-Operator", "Operator", "近海专营权", "非作业者", "作业者"], "c": "政策与税制", "p": "国家赋予海油在中国近海排他性对外合作勘探开发专营权；作业者负责带队打井花钱，非作业者则按股比出钱分油不掌日常调度权。", "x": "海油在圭亚那属25%非作业者（埃克森作业），2026H1首次在巴西Ametista晋升深水自营作业者。", "h": 32}, {"id": 89, "t": "美国涉军制裁清单边界（1260H / NS-CMIC vs SDN）", "f": ["1260H清单", "NS-CMIC", "BIS实体清单"], "c": "政策与税制", "p": "1260H、NS-CMIC与BIS主要限制美资买卖股票或特定深水技术出口；唯有极限制裁SDN才会直接冻结美元资产与全球原油结算。", "x": "海油从未被列入SDN清单美元结算正常，且2025年4月20亿美元清仓美墨湾彻底拆除了人质隐患。", "h": 3}, {"id": 90, "t": "巴西本土化率与煤气矿权交叉", "f": ["Local Content", "煤气矿权交叉", "IBAMA"], "c": "政策与税制", "p": "巴西强制要求深水油气装备必须留一定比例在本国船厂造；国内陆上则是同一地层煤矿与煤层气分属不同主人，打井需双方签安全协议。", "x": "海油在巴西Buzios与自营Ametista须应对船厂及环评，陆上临兴神府则需协调煤矿安全互保。", "h": 6}, {"id": 91, "t": "成果法（Successful Efforts Method）", "f": ["成果法"], "c": "财税与治理", "p": "油企最严苛保守的记账规矩：地质物探费和没打出商业油流的“干井”花销当期直接核销扣利润，绝不挂在账上当虚胖资产。", "x": "海油2025年直接费用化核销153.65亿元勘探费，且A/H股两套准则核心财务数据100%零差异。", "h": 6}, {"id": 92, "t": "“大脑留上市公司、四肢剥离乙方”架构", "f": ["Joint Operation", "财务公司存款", "中海油服", "海油工程", "联合经营", "一利五率"], "c": "财税与治理", "p": "上市公司仅保留两万多掌控矿权和设计的中枢精英，把苦力打井、造平台外包给兄弟公司；并把90%以上现金锁在外部银行防母公司吸存。", "x": "海油2.2万员工2025年人均创利554万（中石化的63倍），且财务公司存款占广义现金不到7%。", "h": 51}, {"id": 93, "t": "从价计征资源税", "f": ["除所得税外其他税金", "从价资源税", "资源税"], "c": "政策与税制", "p": "按油气实际销售额而非开采吨数乘以固定比例征收的矿产税费，油价越贵交得越多，油价下跌时税额自动缩水。", "x": "中国海油国内原油按6%从价计征；油价跌至55美元时带动单桶税金大降，与暴利税共同护盘。", "h": 31}, {"id": 94, "t": "PSC产量分成合同与共享成本池", "f": ["Shared Cost Bank", "No Ring-Fencing", "共享成本池", "PSC", "PSA", "成本油", "利润油"], "c": "政策与税制", "p": "资源国政府与外资油企按约定比例分配油气产量的合作协议，油企先回收勘探开发成本油，再按比例分割利润油。", "x": "圭亚那区块已跨过550亿美元历史成本池，靠Uaru等新项目无隔离持续注资缓冲分成上移。", "h": 26}, {"id": 95, "t": "港股通红利税", "f": ["港股通20%税", "港股通税后"], "c": "政策与税制", "p": "内地个人投资者通过港股通渠道买入香港上市红筹或H股公司时，在获取现金股息环节被预扣20%的个人所得税。", "x": "00883.HK属红筹股须扣20%红利税，但因H股较A股深折价，税后股息率仍显著高于A股。", "h": 10}, {"id": 96, "t": "次级制裁与俄气项目敞口", "f": ["Arctic LNG 2", "俄气制裁敞口", "次级制裁", "或有对价"], "c": "政策与税制", "p": "欧美针对第三国企业与受制裁实体开展能源、金融往来施加的跨境处罚机制，可能导致海外资产冻结或回款受阻。", "x": "公司持有俄Arctic LNG 2约91.45亿股东贷款及29.22亿或有对价，审计已做全额剔除。", "h": 15}, {"id": 97, "t": "FID（最终投资决策）", "f": ["FID"], "c": "政策与税制", "p": "大型油气田开发前董事会拍板签字、正式批准大额资本开支进入建造钻井阶段的最高工程商业节点。", "x": "圭亚那Longtail项目于2026年11月获125亿美元FID，继续向共享成本池注资。", "h": 2}, {"id": 98, "t": "油气资产弃置义务现值（ARO）", "f": ["预计负债", "弃置义务", "弃置专户", "ARO"], "c": "财税与治理", "p": "按会计准则将未来数十年后海上油井退役封堵、拆除海底钢结构平台的预计花销折现到今天所计提的负债现值。", "x": "26Q3表内ARO达1209.75亿，扣81.22亿专户与25%税盾后净ARO为821.6亿。", "h": 95}, {"id": 99, "t": "成果法折耗与DD&A", "f": ["折旧折耗摊销", "成果法折耗", "DD&A"], "c": "财税与治理", "p": "油企把前期勘探打井的巨额投入按地下剩余储量逐年摊入成本的非付现科目，只有发现商业油田才转入资产折耗。", "x": "26H1年化全口径DD&A达847.7亿元，是公司在低油价期维持千亿经营现金流的护城河。", "h": 67}, {"id": 100, "t": "中海油服（COSL）", "f": ["中海油服"], "c": "财税与治理", "p": "中海油集团旗下专注海上钻井平台、物探勘察和油田技术服务的关联上市公司，承担重资产、低毛利的打井苦活。", "x": "中国海油将重资产打井外包给ROE仅6.8%的中海油服，低油价期其费率联动下调护盘。", "h": 16}, {"id": 101, "t": "海油工程", "f": ["海工油服费率", "海油工程"], "c": "财税与治理", "p": "中海油集团旗下负责海洋油气平台建造、海底管线铺设与海上安装调试的大型海洋工程总承包关联上市公司。", "x": "中国海油把ROE仅5.87%的焊平台建造外包给海油工程，自身只留高毛利油藏与矿权。", "h": 22}, {"id": 102, "t": "中海油财务公司", "f": ["财务公司存款上限", "中海油财务公司", "财司存款"], "c": "财税与治理", "p": "央企集团内部设立的非银行金融机构，集中归集成员企业闲置资金并提供结算信贷，但存在大股东资金占用隐忧。", "x": "26H1财司存款达372.65亿近373亿上限且息率1.19%，V4审计给予15%流动性折价。", "h": 5}, {"id": 103, "t": "H股折价走廊与AH溢价率", "f": ["5年真实走廊", "AH溢价率"], "c": "财税与治理", "p": "同一家A+H两地上市公司因资金环境与税制差异长期形成的价格差区间，常以过去五年历史分位数作为锚定。", "x": "本文以5年39.0%历史折价走廊映射H股买点，规避30元A股+63.26%的高溢价。", "h": 3}, {"id": 104, "t": "使用权资产（ROU）与租赁负债", "f": ["使用权资产", "租赁负债", "ROU"], "c": "财税与治理", "p": "新租赁准则下把长期租用的生产船只、钻井平台或办公楼按现值同时记入资产和负债，折旧与还本反映真实付现。", "x": "26Q3租赁负债75.43亿，年还本27至34亿匹配ROU折旧，验证无隐藏筹资黑洞。", "h": 11}, {"id": 105, "t": "ICC国际商会仲裁", "f": ["ICC国际商会仲裁", "国际商会仲裁", "ICC仲裁"], "c": "财税与治理", "p": "国际商业纠纷中由国际商会仲裁院依据合同条款作出的具法律约束力裁决，常用于解决跨国能源并购优先购买权争议。", "x": "雪佛龙2025年7月赢下ICC仲裁斥530亿美元收购赫斯，间接锚定海油圭亚那25%价值。", "h": 5}, {"id": 106, "t": "布伦特原油（Brent）", "f": ["Brent", "布伦特", "布油"], "c": "行业产品", "p": "产自英国北海地区、用作全球三分之二以上国际原油贸易定价基准的轻质低硫原油品种，也是海洋油企核心售价锚。", "x": "终审剥离92.57美元战时价差，结合远月贴水将跨周期常态布油主锚锁定74.0美元/桶。", "h": 99}, {"id": 107, "t": "WTI原油", "f": ["WTI"], "c": "行业产品", "p": "美国西德克萨斯州交割的轻质低硫原油期货基准价格，因内陆管道输送限制，常与海上交割的布伦特存在几美元价差。", "x": "美国页岩油新井盈亏线按WTI计已升至66美元/桶，折合布伦特约70至71美元支撑底线。", "h": 4}, {"id": 108, "t": "远月贴水（Backwardation）", "f": ["次远月深度贴水", "布油远月贴水"], "c": "行业产品", "p": "期货市场上近期交割合约价格高于远期合约的现象，通常反映当下现货偏紧或地缘脉冲，而市场预期远期供给修复。", "x": "ICE布油2027年末次远月深度贴水至76至77美元，促使终审把常态油价微调至74美元。", "h": 10}, {"id": 109, "t": "实现油价与实现气价", "f": ["实现油价", "实现气价"], "c": "行业产品", "p": "油企实际销售各品质原油和天然气最终到手的加权平均单价，因含重质油折价或地区升贴水，通常略低于布伦特基准。", "x": "26Q1-Q3实现油价86.32美元略低于布油88.86美元；实现气价达8.13美元创高。", "h": 68}, {"id": 110, "t": "照付不议长协天然气", "f": ["照付不议长协天然气", "长协天然气", "照付不议", "长协气"], "c": "行业产品", "p": "买卖双方签5至20年长期供气合同并锁定阶梯气价，买方即便少提气也须按约定最低量付款，抗油价波动极强。", "x": "公司558亿高价长协气价稳守7.6至8.1美元，油价暴跌时筑起旱涝保收现金流护盾。", "h": 14}, {"id": 111, "t": "千立方英尺（Mcf）", "f": ["千立方英尺", "千方英尺"], "c": "行业产品", "p": "国际天然气贸易和财报披露常用的体积计量单位，大约每6千立方英尺天然气的热值相当于1桶原油当量。", "x": "26Q3单季实现气价达8.41美元/千立方英尺，折合油当量约50美元/桶且免疫油价跌。", "h": 30}, {"id": 112, "t": "桶油当量（BOE / MBOE）", "f": ["百万桶油当量", "MBOE", "桶油当量", "BOE"], "c": "行业产品", "p": "将原油产量与天然气产量按热值换算比例统一加总的能源计量口径，MBOE代表百万桶油当量，便于跨公司对比。", "x": "2025年净产7.77亿桶油当量，随在建工程转固，2027至2028年将迈向8.5亿桶。", "h": 121}, {"id": 113, "t": "深煤层气", "f": ["深煤层气"], "c": "行业产品", "p": "赋存于地下1500米以下深部煤层中的非常规天然气资源，以往难动用，需靠水平井分段压裂技术实现商业开采。", "x": "神府两千亿方深煤层气在Reverse SOTP拆骨中被视为零元白送的陆上增储期权。", "h": 3}, {"id": 114, "t": "区域中心化开发与水下回接", "f": ["区域中心化开发", "水下生产系统", "水下回接", "卫星田"], "c": "油气工艺", "p": "先在海域建一座大型中心平台，周边中小卫星油田不再新建平台，直接从海底铺设水下管缆接入中心平台处理。", "x": "该模式将存量稳产单桶重置CapEx压至13至14美元，大幅低于新建绿地深水项目。", "h": 15}, {"id": 115, "t": "乐高积木预制与模块标准化", "f": ["模块标准化制造", "乐高积木预制"], "c": "油气工艺", "p": "把海上采油平台拆分成通用标准化工艺模块在陆上船厂批量预制，再拖运至海上吊装拼接，大幅缩短工期并降本。", "x": "配合区域中心化开发，支撑公司以极低维持成本与22%以上IRR推进海上油田连片开发。", "h": 3}, {"id": 116, "t": "张力腿浮式风电平台", "f": ["张力腿浮式风电", "张力腿平台", "海油安澜号", "海油观澜号"], "c": "油气工艺", "p": "用高强度垂直钢索绷紧锚固于海底的漂浮式海上风电基础，可在深远海强风浪中保持稳定，为海上平台供绿电。", "x": "16兆瓦海油安澜号与海油观澜号属海上风电绿电布局，在拆骨估值中按零元免费期权处理。", "h": 23}, {"id": 117, "t": "渤海浅水岸电工程", "f": ["浅水岸电", "岸电工程", "岸电"], "c": "油气工艺", "p": "从陆地电网铺设海底高压电缆直接向近海采油平台供电，替代过去平台自备燃气或柴油发电机的高成本供电方式。", "x": "980兆瓦渤海岸电覆盖150余座平台，节省逾35%发电成本并压低国内作业费至6.75美元。", "h": 26}, {"id": 118, "t": "海上CCUS（碳捕集封存与驱油）", "f": ["海上CCUS", "CCUS"], "c": "油气工艺", "p": "将油气开采伴生或工业捕集的二氧化碳加压注入海底枯竭或低渗油藏，既实现永久碳封存又能把缝隙残油挤出来。", "x": "恩平15-1与东方1-1项目每注5吨二氧化碳可多挤1吨原油，变环保减排为创收机器。", "h": 32}, {"id": 119, "t": "自然递减率与综合含水率", "f": ["自然递减率", "综合含水率", "自然递减", "含水率"], "c": "油气工艺", "p": "油田若不打新井调整，地层压力下降导致产量自然下滑的速度；含水率则是抽上来的液体中水占的体积百分比。", "x": "国内陆上老油田含水率达85%至92%，而海油靠年轻海域低含水将作业费砍半。", "h": 17}, {"id": 120, "t": "太古界潜山油藏", "f": ["太古界潜山"], "c": "资源与区块", "p": "埋藏在古生界或新生界沉积盖层之下、由几十亿年前太古界变质岩裂缝构成的深层基岩油气储集构造。", "x": "渤海渤中26-6二期等百亿级潜山油田陆续投产，成为国内近海高产稳产的重要接替阵地。", "h": 3}, {"id": 121, "t": "SEC证实储量与储量寿命", "f": ["SEC证实储量", "证实储量", "储量寿命"], "c": "资源与区块", "p": "按美国证监会严苛经济技术标准认定、在当前油价和成本下确定能商业采出的地下油气储量，除以年产量即储量寿命。", "x": "2025年末达77.7亿桶新高、寿命稳守10年；若寿命跌破8年将触发死刑红线。", "h": 39}, {"id": 122, "t": "内生储量替代率（Organic RRR）", "f": ["内生储量替代率（Organic RRR）", "Organic RRR", "内生储量替代率", "储量替代率"], "c": "资源与区块", "p": "不靠花钱外购矿权，纯靠自家勘探打井新发现的证实储量与当年开采消耗量的比值，高于100%代表越采越富。", "x": "公司连续8年内生RRR超130%（25年达164%），彻底反杀全额CapEx原地踏步论。", "h": 32}, {"id": 123, "t": "巴西盐下超深水油田", "f": ["巴西盐下超深水油田", "Buzios", "桑托斯盆地", "巴西盐下", "Mero"], "c": "资源与区块", "p": "埋藏在巴西近海两千米深海水下再加数千米厚岩盐层之下的巨型高产碳酸盐岩油藏，单井自喷能力与储量规模惊人。", "x": "海油参股Mero（9.65%）与Buzios（7.34%），现金成本7美元助推海外增量。", "h": 97}, {"id": 124, "t": "中国近海排他性专营权", "f": ["排他性海域合作专营权", "海域合作专营权"], "c": "资源与区块", "p": "中国政府依法授予中海油在渤海、南海、东海等中国管辖海域独占对外合作勘探开发海洋油气资源的法定专营资格。", "x": "该垄断专营权护航年产5.45亿桶国内基本盘，贡献约8500亿保守分部底盘价值。", "h": 2}, {"id": 125, "t": "美国页岩油盈亏平衡线", "f": ["页岩油新井盈亏线"], "c": "资源与区块", "p": "美国页岩油气商钻探新井并覆盖钻完井资本与运营支出、能够保本不亏钱的最低国际原油价格门槛，决定全球边际供给。", "x": "达拉斯联储26Q1显示新井盈亏线已升至WTI 66美元，强力封杀油价长跌至45美元空间。", "h": 3}, {"id": 126, "t": "OPEC+与EIA/IEA供需预测", "f": ["OPEC+", "STEO", "EIA", "IEA"], "c": "资源与区块", "p": "全球核心产油国联盟（OPEC+）的产量配额决议，以及美国能源信息署和国际能源署发布的权威油价与供需月报。", "x": "IEA预警2027年供给过剩，而EIA仍看86美元均值，成为油价震荡回踩买点的关键催化。", "h": 13}, {"id": 127, "t": "尼克森油砂（Nexen）", "f": ["Nexen", "尼克森油砂", "尼克森"], "c": "资源与区块", "p": "位于加拿大的高成本重质油砂及常规油气资产，中国海油2013年油价高位151亿美元收购后曾计提巨额减值。", "x": "虽是高溢价并购反面教训，但随行团队带回圭亚那25%原始权益，成就了三倍翻身之战。", "h": 27}];
+    var SCOPE_SEL = ".report-content";
+    var STORAGE_MODE_KEY = 'agy_glossary_mode_v1';
+    var MODES = ['smart', 'all', 'off'];
+    var MODE_LABELS = { smart: '📖 术语下划线: 智能去重', all: '📖 术语下划线: 全部标出', off: '📖 术语下划线: 已隐藏' };
+    var curMode = "smart";
+    try {
+      var savedM = localStorage.getItem(STORAGE_MODE_KEY);
+      if (savedM && MODES.indexOf(savedM) !== -1) curMode = savedM;
+    } catch(e) {}
+
+    var byId = {};
+    var formToId = {};
+    var allForms = [];
+    GLOSSARY.forEach(function(item){
+      byId[item.id] = item;
+      (item.f || []).forEach(function(form){
+        if (!form || form.length < 2) return;
+        if (formToId[form] === undefined) {
+          formToId[form] = item.id;
+          allForms.push(form);
+        }
+      });
+    });
+    // Longest-match-first so e.g. "维持性资本开支" matches before "资本开支", "聚合MDI" before "MDI"
+    allForms.sort(function(a, b){ return b.length - a.length; });
+    if (!allForms.length) return;
+
+    function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+    var masterRe = new RegExp(allForms.map(escRe).join('|'), 'g');
+    var asciiRe = /[A-Za-z0-9_]/;
+
+    var SKIP_TAGS = {
+      SCRIPT:1, STYLE:1, SVG:1, TEXTAREA:1, INPUT:1, BUTTON:1, SELECT:1, OPTION:1,
+      A:1, H1:1, H2:1, H3:1, NOSCRIPT:1, IFRAME:1
+    };
+
+    function isSkippedNode(node) {
+      var el = node.parentElement;
+      while (el) {
+        if (SKIP_TAGS[el.tagName]) return true;
+        if (el.classList && (el.classList.contains('no-glossary') || el.classList.contains('agy-term') || el.classList.contains('agy-chart-card'))) return true;
+        el = el.parentElement;
+      }
+      return false;
+    }
+
+    function clearAnnotations(roots) {
+      roots.forEach(function(root){
+        var spans = root.querySelectorAll('span.agy-term');
+        for (var i = 0; i < spans.length; i++) {
+          var sp = spans[i];
+          var txt = document.createTextNode(sp.textContent || '');
+          if (sp.parentNode) sp.parentNode.replaceChild(txt, sp);
+        }
+        root.normalize();
+      });
+    }
+
+    function getSectionKey(el) {
+      var cur = el;
+      while (cur && cur !== document.body) {
+        if (cur.dataset && cur.dataset.chap) return cur.dataset.chap;
+        if (cur.tagName === 'SECTION' || cur.tagName === 'ARTICLE') return cur.id || 'sec';
+        cur = cur.parentElement;
+      }
+      // Fallback: find nearest preceding h2 inside report
+      var p = el;
+      while (p && p.parentElement && !p.parentElement.classList.contains('report-content')) {
+        p = p.parentElement;
+      }
+      if (p) {
+        var prev = p.previousElementSibling;
+        var steps = 0;
+        while (prev && steps < 40) {
+          if (prev.tagName === 'H2' || prev.tagName === 'H1') return prev.id || prev.textContent.slice(0, 20);
+          prev = prev.previousElementSibling;
+          steps++;
+        }
+      }
+      return 'root';
+    }
+
+    function annotateAll(mode) {
+      var roots = Array.prototype.slice.call(document.querySelectorAll(SCOPE_SEL));
+      if (!roots.length) return;
+      if (mode === 'off') {
+        document.body.classList.add('agy-glossary-off');
+        return;
+      }
+      document.body.classList.remove('agy-glossary-off');
+      clearAnnotations(roots);
+
+      var seenPerSection = {};
+      var blockCounter = 0;
+
+      roots.forEach(function(root){
+        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+        var textNodes = [];
+        var n;
+        while ((n = walker.nextNode())) {
+          if (!n.nodeValue || n.nodeValue.trim().length < 2) continue;
+          if (isSkippedNode(n)) continue;
+          textNodes.push(n);
+        }
+
+        textNodes.forEach(function(tNode){
+          var text = tNode.nodeValue;
+          masterRe.lastIndex = 0;
+          var matches = [];
+          var m;
+          while ((m = masterRe.exec(text)) !== null) {
+            var word = m[0];
+            var start = m.index;
+            var end = start + word.length;
+            // ASCII boundary guard (Safari-safe without lookbehind)
+            if (asciiRe.test(word.charAt(0)) && start > 0 && asciiRe.test(text.charAt(start - 1))) continue;
+            if (asciiRe.test(word.charAt(word.length - 1)) && end < text.length && asciiRe.test(text.charAt(end))) continue;
+            var gid = formToId[word];
+            if (gid === undefined) continue;
+            if (mode === 'smart') {
+              var secKey = getSectionKey(tNode.parentElement);
+              if (!seenPerSection[secKey]) seenPerSection[secKey] = {};
+              if (seenPerSection[secKey][gid]) continue;
+              seenPerSection[secKey][gid] = true;
+            }
+            matches.push({ start: start, end: end, word: word, gid: gid });
+          }
+          if (!matches.length) return;
+
+          var frag = document.createDocumentFragment();
+          var lastIdx = 0;
+          matches.forEach(function(mt){
+            if (mt.start > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, mt.start)));
+            var item = byId[mt.gid];
+            var sp = document.createElement('span');
+            sp.className = 'agy-term';
+            sp.setAttribute('data-gid', String(mt.gid));
+            sp.setAttribute('data-cat', item.c || '');
+            sp.setAttribute('tabindex', '0');
+            sp.setAttribute('role', 'button');
+            sp.setAttribute('title', '点击查看「' + item.t + '」通俗解释');
+            sp.textContent = mt.word;
+            frag.appendChild(sp);
+            lastIdx = mt.end;
+          });
+          if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+          if (tNode.parentNode) tNode.parentNode.replaceChild(frag, tNode);
+          blockCounter++;
+        });
+      });
+    }
+
+    // Popover controller
+    var pop = document.getElementById('agy-term-popover');
+    var tpCat = document.getElementById('agy-tp-cat');
+    var tpTerm = document.getElementById('agy-tp-term');
+    var tpPlain = document.getElementById('agy-tp-plain');
+    var tpCtx = document.getElementById('agy-tp-ctx');
+    var tpMeta = document.getElementById('agy-tp-meta');
+    var activeSpan = null;
+
+    function hidePop() {
+      if (pop) pop.style.display = 'none';
+      if (activeSpan) {
+        activeSpan.classList.remove('agy-term-active');
+        activeSpan = null;
+      }
+    }
+
+    function showPop(spanEl) {
+      if (document.body.classList.contains('agy-glossary-off')) return;
+      var gid = parseInt(spanEl.getAttribute('data-gid'), 10);
+      var item = byId[gid];
+      if (!item || !pop) return;
+
+      if (activeSpan && activeSpan !== spanEl) activeSpan.classList.remove('agy-term-active');
+      activeSpan = spanEl;
+      spanEl.classList.add('agy-term-active');
+
+      tpCat.textContent = item.c || '专业术语';
+      tpCat.setAttribute('data-cat', item.c || '');
+      tpTerm.textContent = item.t;
+      tpPlain.innerHTML = '<strong>🐣 大白话秒懂：</strong>' + item.p;
+      if (item.x) {
+        tpCtx.style.display = 'block';
+        tpCtx.innerHTML = '<strong>🎯 本文怎么看：</strong>' + item.x;
+      } else {
+        tpCtx.style.display = 'none';
+      }
+      var extraForms = (item.f || []).filter(function(x){ return x !== item.t; });
+      var aliasNote = extraForms.length ? (' · 别名: ' + extraForms.slice(0, 3).join('/')) : '';
+      tpMeta.textContent = '全文出现 ' + (item.h || 1) + ' 次' + aliasNote;
+
+      pop.style.display = 'block';
+      var rect = spanEl.getBoundingClientRect();
+      var pw = pop.offsetWidth || 350;
+      var ph = pop.offsetHeight || 190;
+      var left = Math.max(12, Math.min(rect.left, window.innerWidth - pw - 12));
+      var top = rect.bottom + 8;
+      if (top + ph > window.innerHeight - 12) {
+        top = Math.max(12, rect.top - ph - 8);
+      }
+      pop.style.left = left + 'px';
+      pop.style.top = top + 'px';
+    }
+
+    document.addEventListener('click', function(e){
+      var target = e.target;
+      if (pop && pop.contains(target)) return;
+      var termEl = target && target.closest ? target.closest('.agy-term') : null;
+      if (termEl) {
+        // Respect text selection for 划词提问!
+        var sel = window.getSelection ? window.getSelection().toString().trim() : '';
+        if (sel.length >= 2) return;
+        e.stopPropagation();
+        if (activeSpan === termEl && pop.style.display === 'block') {
+          hidePop();
+        } else {
+          showPop(termEl);
+        }
+        return;
+      }
+      hidePop();
+    });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        hidePop();
+        toggleDrawer(false);
+      }
+      if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.classList && e.target.classList.contains('agy-term')) {
+        e.preventDefault();
+        showPop(e.target);
+      }
+    });
+    window.addEventListener('scroll', function(){ if (pop && pop.style.display === 'block') hidePop(); }, { passive: true });
+
+    var closeBtn = document.getElementById('agy-tp-close');
+    if (closeBtn) closeBtn.addEventListener('click', hidePop);
+
+    // Drawer controller
+    var drawer = document.getElementById('agy-term-drawer');
+    var mask = document.getElementById('agy-term-drawer-mask');
+    var tdSearch = document.getElementById('agy-td-search');
+    var tdCats = document.getElementById('agy-td-cats');
+    var tdList = document.getElementById('agy-td-list');
+    var activeCat = '全部';
+
+    function toggleDrawer(open) {
+      if (!drawer || !mask) return;
+      drawer.classList.toggle('open', open);
+      mask.classList.toggle('open', open);
+      if (open) {
+        hidePop();
+        renderDrawerList();
+      }
+    }
+
+    var catCounts = { '全部': GLOSSARY.length };
+    GLOSSARY.forEach(function(g){
+      var c = g.c || '财务会计';
+      catCounts[c] = (catCounts[c] || 0) + 1;
+    });
+    if (tdCats) {
+      Object.keys(catCounts).forEach(function(cat){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'td-cat-btn' + (cat === activeCat ? ' active' : '');
+        b.textContent = cat + ' (' + catCounts[cat] + ')';
+        b.addEventListener('click', function(){
+          activeCat = cat;
+          tdCats.querySelectorAll('.td-cat-btn').forEach(function(x){ x.classList.remove('active'); });
+          b.classList.add('active');
+          renderDrawerList();
+        });
+        tdCats.appendChild(b);
+      });
+    }
+
+    function renderDrawerList() {
+      if (!tdList) return;
+      var q = (tdSearch ? tdSearch.value : '').trim().toLowerCase();
+      var rows = GLOSSARY.filter(function(g){
+        if (activeCat !== '全部' && (g.c || '财务会计') !== activeCat) return false;
+        if (!q) return true;
+        return (g.t + ' ' + (g.f || []).join(' ') + ' ' + g.p + ' ' + g.x).toLowerCase().indexOf(q) !== -1;
+      });
+      tdList.innerHTML = rows.map(function(g){
+        return '<div class="td-card">' +
+          '<div class="td-card-top"><span class="td-card-term">' + g.t + '</span><span class="td-card-meta">' + (g.c || '') + ' · ' + (g.h || 1) + '次</span></div>' +
+          '<div class="td-card-plain">' + g.p + '</div>' +
+          (g.x ? '<div class="td-card-ctx">🎯 ' + g.x + '</div>' : '') +
+        '</div>';
+      }).join('') || '<div style="padding:24px;text-align:center;color:#94a3b8;">未找到匹配的专业术语</div>';
+    }
+
+    if (tdSearch) tdSearch.addEventListener('input', renderDrawerList);
+    if (mask) mask.addEventListener('click', function(){ toggleDrawer(false); });
+    var tdClose = document.getElementById('agy-td-close');
+    if (tdClose) tdClose.addEventListener('click', function(){ toggleDrawer(false); });
+    var openAllBtn = document.getElementById('agy-tp-open-all');
+    if (openAllBtn) openAllBtn.addEventListener('click', function(){ toggleDrawer(true); });
+    var fabDrawerBtn = document.getElementById('agy-term-open-drawer');
+    if (fabDrawerBtn) fabDrawerBtn.addEventListener('click', function(){ toggleDrawer(true); });
+
+    // Mode switcher
+    var modeBtn = document.getElementById('agy-term-mode-btn');
+    function updateModeUI() {
+      if (modeBtn) modeBtn.textContent = MODE_LABELS[curMode] || MODE_LABELS.smart;
+    }
+    if (modeBtn) {
+      modeBtn.addEventListener('click', function(){
+        var nextIdx = (MODES.indexOf(curMode) + 1) % MODES.length;
+        curMode = MODES[nextIdx];
+        try { localStorage.setItem(STORAGE_MODE_KEY, curMode); } catch(e) {}
+        updateModeUI();
+        annotateAll(curMode);
+      });
+    }
+
+    // Expose global hook (useful for 2.0 Cockpit tab re-renders)
+    window.agyGlossaryRefresh = function(){ annotateAll(curMode); };
+    window.agyGlossaryOpenDrawer = function(){ toggleDrawer(true); };
+
+    // Initial run
+    updateModeUI();
+    if (curMode !== 'off') {
+      annotateAll(curMode);
+    } else {
+      document.body.classList.add('agy-glossary-off');
+    }
+  })();
+  </script>
+
 </body>
 </html>
