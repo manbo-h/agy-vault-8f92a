@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+<title>💬 淮北矿业（600985.SH）投委会群聊辩论剧场</title>
+<style>
+  :root {
+    --bg-app: #f1f5f9;
+    --bg-panel: #ffffff;
+    --bg-card: #f8fafc;
+    --bg-card-hover: #eef2f7;
+    --bg-bubble-host: #eff6ff;
+    --bg-bubble-bull: #ecfdf5;
+    --bg-bubble-bear: #fff1f2;
+    --bg-bubble-judge: #faf5ff;
+    --border-subtle: rgba(15, 23, 42, 0.10);
+    --border-strong: rgba(15, 23, 42, 0.20);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --accent-host: #0284c7;
+    --accent-bull: #059669;
+    --accent-bear: #e11d48;
+    --accent-judge: #7c3aed;
+    --accent-gold: #d97706;
+    --quote-bg: rgba(15, 23, 42, 0.055);
+    --pill-bg: #e2e8f0;
+    --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --highlight-ring: #f59e0b;
+  }
+  [data-theme="dark"] {
+    --bg-app: #0b1120;
+    --bg-panel: #111827;
+    --bg-card: #1e293b;
+    --bg-card-hover: #273549;
+    --bg-bubble-host: #172554;
+    --bg-bubble-bull: #052e2b;
+    --bg-bubble-bear: #33131c;
+    --bg-bubble-judge: #251a3f;
+    --border-subtle: rgba(148, 163, 184, 0.16);
+    --border-strong: rgba(148, 163, 184, 0.30);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-host: #38bdf8;
+    --accent-bull: #34d399;
+    --accent-bear: #fb7185;
+    --accent-judge: #c084fc;
+    --accent-gold: #fbbf24;
+    --quote-bg: rgba(15, 23, 42, 0.55);
+    --pill-bg: rgba(30, 41, 59, 0.85);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.42);
+    --highlight-ring: #fbbf24;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-app); color: var(--text-primary);
+    line-height: 1.66; -webkit-font-smoothing: antialiased;
+  }
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg-panel); border-bottom: 1px solid var(--border-subtle);
+    backdrop-filter: blur(12px); padding: 11px 18px; box-shadow: var(--shadow-lg);
+  }
+  .topbar-inner {
+    max-width: 1480px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .group-title-wrap { display: flex; flex-direction: column; gap: 2px; }
+  .group-title { font-size: 16.5px; font-weight: 800; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .group-badge {
+    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+    background: rgba(2, 132, 199, 0.14); color: var(--accent-host); border: 1px solid rgba(2, 132, 199, 0.30);
+  }
+  .group-sub { font-size: 12px; color: var(--text-secondary); }
+  .top-actions { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+
+  /* 双模式切换胶囊（核心亮点） */
+  .mode-switch {
+    display: inline-flex; padding: 3px; border-radius: 11px;
+    background: var(--bg-card); border: 1.5px solid var(--accent-host); gap: 2px;
+  }
+  .mode-btn {
+    border: none; background: transparent; color: var(--text-secondary);
+    padding: 5px 11px; border-radius: 8px; font-size: 12.5px; font-weight: 800;
+    cursor: pointer; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 4px;
+  }
+  .mode-btn.active-plain { background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.30); }
+  .mode-btn.active-pro { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.30); }
+
+  .btn {
+    border: 1px solid var(--border-strong); background: var(--bg-card); color: var(--text-primary);
+    padding: 6px 11px; border-radius: 9px; font-size: 12.5px; font-weight: 600;
+    cursor: pointer; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 5px;
+    text-decoration: none;
+  }
+  .btn:hover { background: var(--bg-card-hover); transform: translateY(-1px); }
+  .btn.active { background: var(--accent-host); color: #fff; border-color: var(--accent-host); }
+  .btn-gold { background: linear-gradient(135deg, #f59e0b, #ea580c); color: #fff; border-color: transparent; }
+  .btn-gold:hover { filter: brightness(1.08); }
+
+  .roster-strip {
+    max-width: 1480px; margin: 8px auto 0;
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    padding-top: 8px; border-top: 1px dashed var(--border-subtle);
+  }
+  .member-chip {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; padding: 3px 10px;
+    border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border-subtle);
+    color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  }
+  .member-chip:hover { border-color: var(--border-strong); color: var(--text-primary); }
+  .member-chip.selected { border-color: var(--accent-gold); color: var(--text-primary); box-shadow: 0 0 0 1px var(--accent-gold); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .dot-host { background: var(--accent-host); } .dot-bull { background: var(--accent-bull); }
+  .dot-bear { background: var(--accent-bear); } .dot-judge { background: var(--accent-judge); }
+
+  /* 三栏自适应布局：左导航 + 中间群聊 + 右侧术语白话栏 */
+  .layout {
+    max-width: 1480px; margin: 16px auto 40px; padding: 0 16px;
+    display: grid; grid-template-columns: 255px minmax(0, 1fr) 290px; gap: 16px; align-items: start;
+  }
+  .layout.hide-glossary { grid-template-columns: 255px minmax(0, 1fr); }
+  .layout.hide-glossary .glossary-sidebar { display: none; }
+  @media (max-width: 1200px) {
+    .layout { grid-template-columns: 245px minmax(0, 1fr); }
+    .glossary-sidebar {
+      position: fixed !important; right: 16px; bottom: 16px; top: auto !important; z-index: 200;
+      width: min(360px, calc(100vw - 32px)); max-height: 70vh; box-shadow: 0 16px 48px rgba(0,0,0,0.32);
+      display: none;
+    }
+    .glossary-sidebar.drawer-open { display: flex !important; }
+  }
+  @media (max-width: 900px) {
+    .layout, .layout.hide-glossary { grid-template-columns: 1fr; }
+    .sidebar { position: static !important; }
+  }
+
+  .sidebar, .glossary-sidebar {
+    position: sticky; top: 118px; background: var(--bg-panel); border: 1px solid var(--border-subtle);
+    border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 12px;
+    max-height: calc(100vh - 134px); overflow-y: auto;
+  }
+  .side-title {
+    font-size: 12px; font-weight: 800; letter-spacing: 0.03em; color: var(--text-muted);
+    display: flex; justify-content: space-between; align-items: center; gap: 6px;
+  }
+  .topic-list { display: flex; flex-direction: column; gap: 5px; }
+  .topic-btn {
+    text-align: left; width: 100%; border: 1px solid transparent; background: transparent; color: var(--text-secondary);
+    padding: 7px 9px; border-radius: 10px; cursor: pointer; font-size: 12.5px; font-weight: 600;
+    transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; gap: 6px;
+  }
+  .topic-btn > span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topic-btn:hover { background: var(--bg-card); color: var(--text-primary); }
+  .topic-btn.active { background: rgba(2, 132, 199, 0.12); color: var(--accent-host); border-color: rgba(2, 132, 199, 0.35); }
+  .topic-count { font-size: 10.5px; padding: 1px 6px; border-radius: 999px; background: var(--pill-bg); color: var(--text-secondary); font-weight: 700; }
+  .topic-status { font-size: 10.5px; white-space: nowrap; }
+  .convergence-box { background: var(--bg-card); border-radius: 11px; padding: 10px; border: 1px solid var(--border-subtle); font-size: 12px; }
+  .conv-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px dashed var(--border-subtle); gap: 6px; }
+  .conv-row:last-child { border-bottom: none; }
+  .conv-label { color: var(--text-secondary); font-size: 11.5px; }
+  .conv-val { font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; font-size: 11.5px; }
+
+  /* 术语注解侧边栏样式 */
+  .glossary-search {
+    width: 100%; padding: 7px 10px; border-radius: 9px; border: 1px solid var(--border-strong);
+    background: var(--bg-card); color: var(--text-primary); font-size: 12.5px; outline: none;
+  }
+  .glossary-search:focus { border-color: var(--accent-host); }
+  .glossary-list { display: flex; flex-direction: column; gap: 8px; }
+  .g-card {
+    background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px;
+    padding: 9px 10px; font-size: 12px; transition: all 0.22s ease; cursor: pointer;
+  }
+  .g-card:hover { border-color: var(--accent-host); }
+  .g-card.flash-term { border-color: var(--accent-gold); box-shadow: 0 0 0 2.5px rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.10); }
+  .g-term { font-weight: 800; font-size: 12.5px; color: var(--accent-host); margin-bottom: 3px; }
+  .g-plain { color: var(--text-primary); line-height: 1.55; }
+  .g-usage { margin-top: 4px; font-size: 11px; color: var(--text-muted); border-top: 1px dashed var(--border-subtle); padding-top: 4px; }
+
+  /* 正文内联可点击术语胶囊 */
+  .term-link {
+    border-bottom: 1.5px dashed var(--accent-host); cursor: help; font-weight: 700;
+    color: inherit; padding: 0 1px; border-radius: 3px; transition: background 0.15s;
+  }
+  .term-link:hover { background: rgba(2, 132, 199, 0.14); }
+
+  .chat-stage { background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 16px 18px 28px; min-height: 75vh; }
+  .stage-banner {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    padding: 10px 13px; border-radius: 11px; margin-bottom: 16px;
+    background: var(--bg-card); border: 1px solid var(--border-subtle); font-size: 12.5px; color: var(--text-secondary);
+  }
+  .mode-pill-banner {
+    display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 800;
+    padding: 2px 9px; border-radius: 999px;
+  }
+  .mode-pill-banner.plain { background: rgba(16, 185, 129, 0.15); color: #059669; }
+  .mode-pill-banner.pro { background: rgba(99, 102, 241, 0.15); color: #4f46e5; }
+  [data-theme="dark"] .mode-pill-banner.plain { color: #34d399; }
+  [data-theme="dark"] .mode-pill-banner.pro { color: #a5b4fc; }
+
+  .round-divider { display: flex; align-items: center; gap: 10px; margin: 22px 0 14px; color: var(--text-muted); font-size: 12px; font-weight: 700; }
+  .round-divider::before, .round-divider::after { content: ""; flex: 1; height: 1px; background: var(--border-subtle); }
+  .round-pill { padding: 3px 12px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border-strong); color: var(--text-primary); }
+  .msg-row { display: flex; gap: 11px; margin-bottom: 14px; align-items: flex-start; scroll-margin-top: 140px; }
+  .msg-row.side-right { flex-direction: row-reverse; }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 18px; user-select: none; border: 1px solid var(--border-strong);
+  }
+  .av-host { background: rgba(56, 189, 248, 0.16); } .av-bull { background: rgba(52, 211, 153, 0.16); }
+  .av-bear { background: rgba(251, 113, 133, 0.16); } .av-judge { background: rgba(192, 132, 252, 0.16); }
+  .msg-body-wrap { max-width: 84%; min-width: 240px; display: flex; flex-direction: column; gap: 4px; }
+  @media (max-width: 680px) { .msg-body-wrap { max-width: 89%; } }
+  .msg-row.side-right .msg-body-wrap { align-items: flex-end; }
+  .msg-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 11.5px; color: var(--text-secondary); padding: 0 2px; }
+  .msg-row.side-right .msg-meta { flex-direction: row-reverse; }
+  .sender-name { font-weight: 800; color: var(--text-primary); }
+  .model-tag { font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-muted); }
+  .msg-id { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10.5px; color: var(--text-muted); }
+  .act-tag { font-size: 10.5px; font-weight: 800; padding: 1.5px 7px; border-radius: 6px; }
+  .act-attack { background: rgba(244, 63, 94, 0.14); color: #be123c; border: 1px solid rgba(244, 63, 94, 0.30); }
+  .act-defend { background: rgba(16, 185, 129, 0.14); color: #047857; border: 1px solid rgba(16, 185, 129, 0.30); }
+  .act-concede { background: rgba(245, 158, 11, 0.14); color: #b45309; border: 1px solid rgba(245, 158, 11, 0.30); }
+  .act-withdraw { background: rgba(2, 132, 199, 0.14); color: #0369a1; border: 1px solid rgba(2, 132, 199, 0.30); }
+  .act-verdict { background: rgba(124, 58, 237, 0.14); color: #6d28d9; border: 1px solid rgba(124, 58, 237, 0.32); }
+  .act-system { background: rgba(100, 116, 139, 0.14); color: var(--text-secondary); }
+  [data-theme="dark"] .act-attack { color: #fb7185; } [data-theme="dark"] .act-defend { color: #34d399; }
+  [data-theme="dark"] .act-concede { color: #fbbf24; } [data-theme="dark"] .act-withdraw { color: #38bdf8; }
+  [data-theme="dark"] .act-verdict { color: #d8b4fe; }
+  .bubble { padding: 11px 14px; border-radius: 14px; border: 1px solid var(--border-subtle); font-size: 14px; width: 100%; transition: box-shadow 0.25s, border-color 0.25s; }
+  .bubble-host { background: var(--bg-bubble-host); border-color: rgba(2, 132, 199, 0.24); }
+  .bubble-bull { background: var(--bg-bubble-bull); border-color: rgba(5, 150, 105, 0.26); border-top-left-radius: 4px; }
+  .bubble-bear { background: var(--bg-bubble-bear); border-color: rgba(225, 29, 72, 0.24); border-top-right-radius: 4px; }
+  .bubble-judge { background: var(--bg-bubble-judge); border-color: rgba(124, 58, 237, 0.28); }
+  .bubble.flash-highlight { box-shadow: 0 0 0 3px var(--highlight-ring), 0 0 24px rgba(251, 191, 36, 0.35); border-color: var(--highlight-ring); }
+  .quote-box { background: var(--quote-bg); border-left: 3px solid var(--accent-gold); border-radius: 7px; padding: 6px 9px; margin-bottom: 8px; font-size: 12px; color: var(--text-secondary); cursor: pointer; }
+  .quote-box:hover { filter: brightness(0.96); }
+  .quote-head { font-weight: 700; color: var(--text-primary); font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+  .quote-jump { font-size: 10.5px; color: var(--accent-host); font-weight: 600; }
+  .num { display: inline-block; padding: 0 5px; border-radius: 5px; background: rgba(217, 119, 6, 0.12); color: #b45309; font-weight: 800; font-variant-numeric: tabular-nums; font-size: 13px; }
+  [data-theme="dark"] .num { background: rgba(251, 191, 36, 0.16); color: #fbbf24; }
+  .cite-row { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .cite-chip { font-size: 11px; padding: 2px 8px; border-radius: 6px; background: var(--quote-bg); border: 1px solid var(--border-subtle); color: var(--text-secondary); font-weight: 600; }
+  .impact-chip { font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 800; background: rgba(244, 63, 94, 0.14); color: #be123c; }
+  .impact-chip.pos { background: rgba(16, 185, 129, 0.14); color: #047857; }
+  [data-theme="dark"] .impact-chip { color: #fb7185; } [data-theme="dark"] .impact-chip.pos { color: #34d399; }
+  .topic-tag-mini { font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: rgba(2, 132, 199, 0.10); color: var(--accent-host); cursor: pointer; font-weight: 700; }
+  .mini-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; background: var(--quote-bg); border-radius: 8px; overflow: hidden; }
+  .mini-table th, .mini-table td { padding: 5px 8px; border-bottom: 1px solid var(--border-subtle); text-align: left; }
+  .mini-table th { color: var(--text-muted); font-weight: 700; font-size: 11px; }
+  .mini-table tr:last-child td { border-bottom: none; }
+  .unblind-box { margin-top: 10px; border-radius: 12px; padding: 14px; border: 1.5px dashed var(--accent-gold); background: linear-gradient(135deg, rgba(251, 191, 36, 0.10), rgba(56, 189, 248, 0.08)); }
+  .unblind-sealed { text-align: center; padding: 14px 10px; }
+  .unblind-content { display: none; } .unblind-content.open { display: block; animation: fadeIn 0.35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-top: 10px; }
+  .stat-card { background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: 9px; padding: 9px 10px; }
+  .stat-k { font-size: 11px; color: var(--text-muted); } .stat-v { font-size: 15.5px; font-weight: 800; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .matrix-view { display: none; flex-direction: column; gap: 16px; } .matrix-view.active { display: flex; }
+  .chat-view.hidden { display: none; }
+  .clash-card { background: var(--bg-card); border: 1px solid var(--border-strong); border-radius: 14px; overflow: hidden; }
+  .clash-header { padding: 12px 16px; background: var(--quote-bg); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .clash-title { font-weight: 800; font-size: 14.5px; }
+  .clash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 14px; }
+  @media (max-width: 820px) { .clash-grid { grid-template-columns: 1fr; } }
+  .clash-col { background: var(--bg-panel); border-radius: 10px; padding: 11px; border: 1px solid var(--border-subtle); font-size: 13px; }
+  .clash-col-head { font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+  .clash-verdict { margin: 0 14px 14px; padding: 10px 13px; border-radius: 10px; background: var(--bg-bubble-judge); border: 1px solid rgba(124, 58, 237, 0.30); font-size: 13px; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="group-title-wrap">
+      <div class="group-title">
+        <span>⚖️ 淮北矿业（600985.SH）投委会红蓝辩论群 (4)</span>
+        <span class="group-badge">2.2版 跨模型物理双盲 · 2+1加时赛与煤价次远月大破案</span>
+      </div>
+      <div class="group-sub">Gemini 4 Neon（多头 &amp; 裁判）对比 Claude Opus 5.5（零信任空头）｜三轮直刺触发 R2.5 加时赛 × 揭穿三季报现货幻觉与信湖双算 × 穿透陶忽图 37.94% 扣税漏息 × 蒙眼锁死 10.20 元中枢</div>
+    </div>
+    <div class="top-actions">
+      <a href="./index.html" class="btn">← 书架</a>
+      <div class="mode-switch" title="一键切换大白话小白版与专业硬核版">
+        <button class="mode-btn" id="btnModePlain" onclick="switchMode('plain')">🐣 小白大白话</button>
+        <button class="mode-btn" id="btnModePro" onclick="switchMode('pro')">🎓 专业硬核版</button>
+      </div>
+      <button class="btn active" id="btnChatView" onclick="switchView('chat')">💬 群聊实景</button>
+      <button class="btn" id="btnMatrixView" onclick="switchView('matrix')">⚔️ 议题对质表</button>
+      <button class="btn btn-gold" onclick="jumpAndUnblind()">🔓 揭盲看现价</button>
+      <button class="btn" id="btnGlossary" onclick="toggleGlossary()">📖 术语词典</button>
+      <button class="btn" id="btnTheme" onclick="toggleTheme()">🌙 深色</button>
+    </div>
+  </div>
+  <div class="roster-strip" id="rosterStrip"></div>
+</header>
+
+<div class="layout" id="mainLayout">
+  <aside class="sidebar">
+    <div>
+      <div class="side-title">
+        <span>📌 按议题追踪（一一对应）</span>
+        <span style="font-weight:600;color:var(--accent-host);cursor:pointer;" onclick="filterTopic('all')">重置</span>
+      </div>
+      <div class="topic-list" id="topicList"></div>
+    </div>
+    <div class="convergence-box">
+      <div class="side-title" style="margin-bottom:8px;"><span>📊 盲定数字收敛轨迹</span></div>
+      <div id="convList"></div>
+    </div>
+  </aside>
+
+  <main class="chat-stage">
+    <div class="stage-banner">
+      <span id="stageTip"></span>
+      <span id="msgCounter" style="font-weight:700;color:var(--accent-host);"></span>
+    </div>
+    <div class="chat-view" id="chatView"></div>
+    <div class="matrix-view" id="matrixView"></div>
+  </main>
+
+  <aside class="glossary-sidebar" id="glossarySidebar">
+    <div class="side-title">
+      <span>📖 术语大白话小词典</span>
+      <span style="font-size:11px;cursor:pointer;color:var(--accent-host);" onclick="toggleGlossary()">收起 ✕</span>
+    </div>
+    <input class="glossary-search" id="glossarySearch" type="text" placeholder="🔍 搜缩写或中文（如 DCF、保理、OE）…" oninput="renderGlossary()">
+    <div class="glossary-list" id="glossaryList"></div>
+  </aside>
+</div>
+
+<script>
+const DATA = {"company": "淮北矿业", "code": "600985.SH", "date": "2026-11-26", "default_mode": "plain", "badge": "2.2版 跨模型物理双盲 · 2+1加时赛与煤价次远月大破案", "subtitle": "Gemini 4 Neon（多头 & 裁判）对比 Claude Opus 5.5（零信任空头）｜三轮直刺触发 R2.5 加时赛 × 揭穿三季报现货幻觉与信湖双算 × 穿透陶忽图 37.94% 扣税漏息 × 蒙眼锁死 10.20 元中枢", "roles": {"host": {"name": "投委会主席", "model": "宿主中枢", "avatar": "🎙️", "cls": "host", "side": "left"}, "bull": {"name": "多头猎手（林奇）", "model": "Gemini 4 Neon", "avatar": "🐂", "cls": "bull", "side": "left"}, "bear": {"name": "做空审计官", "model": "Claude Opus 5.5", "avatar": "🐻", "cls": "bear", "side": "right"}, "judge": {"name": "安全边际裁判（马克斯）", "model": "Gemini 4 Neon", "avatar": "⚖️", "cls": "judge", "side": "left"}}, "convergence": [{"label": "多头 第一轮 · 华东低成本立论 + 陶忽图 37.94% 权责对等", "label_plain": "多头第一轮高调出牌：纯煤成本碾压同行、信湖复产、聚能双投，蒙眼估 15.50 元！", "value": "常态自由盈余 37.00 亿｜净债 101.28 亿｜公允 15.50 元", "value_plain": "正常赚 37.0 亿｜归母净债 101 亿｜估 15.50 元（二档 13.20）", "color": "bull"}, {"label": "空头 第一轮 · 直刺焦煤次远月深度贴水与财司净占款", "label_plain": "空头第一轮挥出三把冷刀：三季报全是现货幻觉！次远月期货已判死刑，猛压至 7.22 元！", "value": "常态自由盈余 20.53 亿｜非息债 53.49 亿｜公允 7.22 元", "value_plain": "正常仅赚 20.5 亿｜只估 7.22 元（直接腰斩多头！）", "color": "bear"}, {"label": "多头 第二轮 · 铁证反杀 33% 税率、零担保与市净率铁底", "label_plain": "多头翻烂年报反杀三条：高企税率只要 15%、成达零担保，但主动下修煤价到 915 元！", "value": "常态自由盈余 32.80 亿｜净债 103.70 亿｜公允 13.70 元", "value_plain": "正常赚 32.8 亿｜估 13.70 元（主动挤水 1.8 元）", "color": "bull"}, {"label": "空头 第二轮 · 爽快撤回三误判，补刀“信湖双算 5.1 亿”", "label_plain": "空头真汉子当场认错撤回三条，但一刀捅中多头软肋：信湖复产你居然算了两遍！", "value": "常态自由盈余 22.48 亿｜分歧 31% 触发 R2.5 加时赛", "value_plain": "上调至 22.5 亿、估 8.60 元（两边仍差 31%，裁判吹哨加时！）", "color": "bear"}, {"label": "R2.5 加时质询 · 多头核销 -4.54 亿双算，空头拆穿 9M 现货泡沫", "label_plain": "加时赛白热化：多头认领结构双算猛砍 4.54 亿，空头再抓出陶忽图漏算 9% 内蒙资源税！", "value": "多头降至 27.75 亿（11.74 元）｜空头守 22.48 亿（8.60 元）", "value_plain": "多头压到 11.74 元，空头钉在 8.60 元，分歧大幅收拢！", "color": "host"}, {"label": "裁判 第三轮 · 三法严丝合缝收敛，六闸落锤终裁", "label_plain": "裁判独立查完巨潮原件一锤定音：锚定次远月煤价，三套方法严丝合缝全落在 10.20 元！", "value": "常态自由盈余 24.50 亿｜达产 28.02 亿｜公允 10.20 元（买点 ≤8.50）", "value_plain": "正常赚 24.5 亿｜达产 28.0 亿｜合理 10.20 元（8.50 以下才买！）", "color": "judge"}], "topics": [{"id": "all", "icon": "💬", "name": "全部发言", "badge": "16条"}, {"id": "price", "icon": "📉", "name": "焦煤次远月与溢价", "badge": "锚845元"}, {"id": "xinhu", "icon": "⛏️", "name": "信湖双算与税率反杀", "badge": "核销-4.5亿"}, {"id": "taohutu", "icon": "🏗️", "name": "陶忽图37.94%与漏税", "badge": "仅+3.52亿"}, {"id": "debt", "icon": "🏦", "name": "财司净占款与净债桥", "badge": "+126.3亿债"}, {"id": "verdict", "icon": "⚖️", "name": "盲定落锤与揭盲开箱", "badge": "溢价+39%!"}], "glossary": [{"key": "焦煤次远月深贴水", "match": ["JM2705", "JM2701", "次远月", "深度贴水", "期现取严", "1,328"], "term": "焦煤次远月深度贴水（JM2705 = 1,328 元/吨）", "plain": "眼下山西主焦煤现货还挂在 2,100 元高位，但大连商品交易所明年 5 月交割的远期期货（JM2705）已经砸到了 1,328 元，比明年 1 月主力合约（1,510 元）又便宜了 12%！买方规矩叫「期现取严」：远月大打折超过 5% 就必须按便宜的远月价算正常利润，绝不能把今天卖高价当成一辈子常态。", "usage": "本次辩论击穿多头 960 元高煤价幻想、将外销均价压到 845 元/吨的头号胜负手。"}, {"key": "信湖结构双算", "match": ["信湖", "亳州煤业", "双算", "815", "816", "49%→54%"], "term": "信湖矿复产「量价结构重复计算」陷阱", "plain": "信湖煤矿（300 万吨纯炼焦煤）停产两年多今年 4 月刚复产。多头算账时，一边把全公司外销均价拉高（理由是信湖拉高了高价精煤占比），另一边又单独加了一笔 6.7 亿「信湖复产扭亏增量」——等于一只羊薅了两遍羊毛！空头一眼揪出多算了 5 个亿，加时赛多头爽快认领并全额砍掉。", "usage": "触发 R2.5 加时赛的核心死结，也是跨模型对抗揪出隐藏算术漏洞的经典案例。"}, {"key": "陶忽图37.94%与内蒙资源税", "match": ["陶忽图", "成达矿业", "37.94%", "9%", "资源税", "一致行动"], "term": "陶忽图 800 万吨矿「37.94% 真实权益」与内蒙 9% 资源税", "plain": "很多人以为内蒙古陶忽图 800 万吨大矿全归上市公司，其实翻开年报附注，淮北矿业只占 37.94% 股份（靠跟二股东奇瑞控股签「一致行动协议」才把整座矿的收入和债务都装进报表）。而且安徽本地资源税只有 2%，但内蒙古煤炭资源税高达 9%（每吨近 40 元），还要扣 1.2 亿转固贷款利息，满产归母净利只有 3.52 亿！", "usage": "彻底击碎市场把陶忽图当成“十亿级暴利成长引擎”的美丽误会。"}, {"key": "高企15%税率与未确认递延税", "match": ["15%", "33%", "2.92亿", "递延所得税", "有效税率"], "term": "主力子公司 15% 高企税率 vs 2025 年 33% 假象税率", "plain": "2025 年报表看起来所得税率高达 33%，吓坏了空头。其实翻开年报 120 页和 171 页，淮矿核心煤矿全享受国家 15% 高新技术企业优惠税率！2025 年显得税率高，纯粹是因为两家亏钱的化工厂亏了 2.92 亿但税局不让立刻抵税，拉高了表面税率；正常年份实际税率只有 16.5% 左右。", "usage": "多头第二轮拿巨潮原件当场反杀空头、逼空头爽快撤回 33% 税率误判的经典回合。"}, {"key": "研发全费用化与专项储备防双扣", "match": ["17.73亿", "专项储备", "维持性资本开支", "0%资本化", "防双扣"], "term": "研发 0% 资本化（17.73 亿）+ 专项储备（22.8 亿）防双扣", "plain": "煤矿越挖越深，每年都要花大钱治瓦斯、修巷道。但淮北矿业把 17.73 亿研发费和 20 来亿安全生产费全都老老实实提前算进了当年的营业成本（直接扣掉利润了），所以算真赚钱能力时，只需按折旧等额扣维持开支即可，绝不能因为历史建新厂花钱多就再重复狠砍一遍。", "usage": "守住淮北矿业现金流底盘不被过度低估的关键护盾。"}, {"key": "控股财务公司净占款", "match": ["财务公司", "18.46", "23.09", "4.63", "信盛", "净占款"], "term": "控股财务公司「贷 23.09 亿 vs 存 18.46 亿」净输血 4.63 亿", "plain": "淮北矿业控股 51.01% 的集团财务公司，就像一家集团内部小银行。空头查出它放出去的 21—23 亿贷款 100% 借给了母公司淮矿集团和刚剥离的关联贸易公司，比集团存进来的 18.46 亿多出 4.63 亿！虽然收了利息，但终审为了防大股东抽血风险，对财务公司金融资产狠打 7 折，还额外扣除了这 4.63 亿净占款归母份额。", "usage": "空头精准命中的国企治理真实瑕疵，决定了淮北矿业拿不到高估值溢价。"}, {"key": "steady_oe", "term": "常态自由盈余（steady_oe / OE）", "plain": "扣掉每年修机器、换旧设备的必要花销后，这家公司正常年份「真正能装进股东口袋的纯现金利润」。就像开饭店，营业额扣掉房租水电食材和换新灶台的钱，年底能随便提现分红的那笔钱。", "usage": "买方估值最核心的分子，比账面净利润更真实，不怕会计做账粉饰。"}, {"key": "full_oe", "term": "达产自由盈余（full_oe）", "plain": "公司手里正在盖的新工厂、新产线全部建好并正常运转后，未来每年能装进股东口袋的纯现金利润。", "usage": "用来衡量公司未来 2–3 年扩产落地后的成长弹性，但必须同步扣除建厂还要花的钱（防白嫖）。"}, {"key": "ev_delta", "term": "净现金调整额（ev_delta）与真实企业价值（True EV）", "plain": "买下一整家公司的真实净成本 = 股票总市值 + 欠别人的真债 - 账上闲置可随便花的现金。如果账上闲钱比欠债多（净现金），ev_delta 就是负数，相当于你买房子发现屋里保险柜自带一箱现金，实际买价更便宜。", "usage": "估值核心分母；反向保理、少数股东份额、受限保证金全在这儿挤干水分。"}, {"key": "OCF", "term": "经营现金流（OCF）", "plain": "公司靠卖产品真正收进银行卡的现金，减去买原料发工资付出去的现金。利润表可能只是“打了白条”，经营现金流才是真金白银进账。", "usage": "检验利润含金量的照妖镜；若单季骤降要查是客户欠账（真恶化）还是主动给供应商提前结账（假警报）。"}, {"key": "FCF", "term": "自由现金流（FCF）", "plain": "经营赚进来的现金（OCF），再扣掉盖新厂、买新设备花的钱（CapEx）之后还剩的余钱。正数说明自己养活自己还有结余，负数说明还在烧钱或借钱扩张。", "usage": "判断企业是“印钞机”还是“吞金兽”的硬标准。"}, {"key": "CapEx", "term": "资本开支（CapEx）", "plain": "公司盖厂房、买生产线、买矿权这类大件固定资产花的钱。分为「维持性 CapEx」（给老产线修修补补保饭碗）和「扩张性 CapEx」（盖新厂抢增量）。", "usage": "算常态盈余必须扣维持性开支；算未来达产利润必须把剩余扩张开支从现金里扣干净。"}, {"key": "DCF", "term": "未来现金流折现估值（DCF）", "plain": "把公司未来十几年每年能赚到的真现金，按你要求的年化回报率（比如 9%）折算成今天的钱加总，算出这家公司“理论上今天值多少钱”。", "usage": "价值投资的锚定器；两阶段 DCF 会把前 3–4 年扩产爬坡期和后面的平稳永续期分开精算。"}, {"key": "RONIC", "term": "新投入资本回报率（RONIC）与再投资扣减（1 - g/RONIC）", "plain": "公司想让利润以后每年继续长 3%（g），就得每年从利润里留一部分钱继续买设备建新线，不能 100% 全分红！如果新砸 100 块每年能多赚 30 块（RONIC=30%），想每年多赚 3%，就得扣掉 3%÷30%=10% 的利润拿去再投资。", "usage": "防止估值拍高：如果忘了扣 (1 - g/RONIC)，就等于幻想公司“一分钱不投、利润凭空永续增长”。"}, {"key": "Ke", "term": "股东要求年化回报率（Ke）", "plain": "买这家公司股票，你心里要求的最低年化复合收益门槛（通常在无风险国债利率 1.6%–1.9% 上加 7% 左右风险补偿，定在 9% 左右）。", "usage": "门槛定得越高，算出来的公允股价就越保守、安全垫越厚。"}, {"key": "NPV", "term": "净现值（NPV）", "plain": "一个扩产项目未来所有赚回来的钱折算到今天，减去你要掏出去的建厂成本。NPV 大于 0 说明扩产是在给股东创造超额财富，不能当零价值忽略。", "usage": "检验高回报扩产项目（如 764 GWh 新产线）究竟值不值钱。"}, {"key": "反向保理", "term": "反向保理 / 融单（供应链金融类债）", "plain": "公司欠供应商货款先不直接付，开一张“无条件必须兑付的欠条”，供应商拿去银行提前变现拿走现金。到期时公司必须铁打不动还钱给银行，本质上就是披着应付账款外衣的“变相短期银行贷款”。", "usage": "做空法医必查科目！必须从账上净现金里扣掉，才不会把借来的钱误当成自家闲钱。"}, {"key": "少数股东权益", "term": "少数股东权益 / 归母口径", "plain": "上市公司旗下有些合资子公司不是 100% 独资（比如自己占 92%，合作伙伴占 8%）。报表合并时把 100% 的利润和现金都加进来了，但真正属于咱们买股票的小股东的只是「归母（归属母公司）」那 92%。", "usage": "分子算利润用了归母口径，分母算净现金也只能扣合作伙伴占现金的那 8%，不能胡乱全扣。"}, {"key": "质保预计负债", "term": "售后质保预计负债", "plain": "卖出去的电池承诺保修 8 年，公司提前每年从营业成本里计提一笔“保修准备金”存在账上。因为利润里已经每年扣过这笔钱了，只要公司正常持续卖货，这笔池子就不会一次性掏空。", "usage": "严守“绝不双扣”铁律：利润里已经每年扣过，就不能再当银行欠债在市值里重扣一遍。"}, {"key": "PE_PB", "term": "市盈率（PE）与市净率（PB）", "plain": "市盈率 PE = 买下公司要花几年净利润回本（如 11.6 倍就是约 11 年半回本）；市净率 PB = 股价是每股净资产（账面家底）的几倍。", "usage": "快速对比历史极值位置（比如对比 2024 年熊市大底），防止在周期底部过度恐慌。"}, {"key": "TTM", "term": "过去 12 个月滚动口径（TTM）", "plain": "Trailing Twelve Months 的缩写，就是把最近连续 4 个季度的数据加起来凑满整整一年，比如「TTM 股息率」就是过去一整年实打实发到你手里的现金分红除以今天股价。", "usage": "比看去年旧年报更及时，严禁把没落地的口头回购混进即期股息率。"}, {"key": "物理双盲", "term": "物理双盲定价（0 现价隔离）", "plain": "辩论和裁判定价期间，把今天股票实时价格彻底封在信封里，不让多头、空头、裁判偷看！逼着大家纯按公司一年赚多少钱、账上有多少净现金算出真实底价，最后由主持人拆信封对照今天现价。", "usage": "彻底杜绝人脑看到现价后“故意把买点压到现价下面一点装稳健”的心理锚定偏见。"}], "messages": [{"id": "M01", "role": "host", "topic": "all", "round": "🎙️ 物理双盲封箱开场 · 锁定五大必撕死结", "round_plain": "🎙️ 主席把今日股价锁进黑箱！宣布淮北矿业五大吵架题", "time": "19:02", "act": {"text": "🔒 物理双盲封箱 · 零现价泄露", "cls": "act-host"}, "text": "欢迎进入 <b>淮北矿业（600985.SH）</b> 2.2版跨模型物理双盲投委会辩论！实时股价与旧买点已封存至加密快照。基准锁死：<b>2026 年三季报</b>法定总股本 <b>26.9326 亿股</b>、归母净资产 <b>432.45 亿</b>（每股净资产 <b>16.06 元</b>，近 6 年真实市净率铁底 <b>0.69 倍</b>）；今日大商所焦煤主力 <b>JM2701 报 1,510 元</b>、次远月 <b>JM2705 报 1,328 元</b>（深贴水 -12%），中国 10 年期国债收益率 <b>1.59%</b>。请 <b>多头（Gemini 4 Neon）</b> 与 <b>空头（Claude Opus 5.5）</b> 围绕五大死结亮剑：<b>① 焦煤深贴水下的常态煤价；② 深井维持性资本开支（CapEx）防双扣；③ 陶忽图 37.94% 权益折现；④ 广义刚性债与财务公司归母穿透；⑤ 1.59% 利率下的公允与买点</b>！", "plain": "各位专家就位！今天咱们给华东焦煤龙头 <b>淮北矿业</b> 做一场蒙眼硬核辩论——谁也不许偷看今天股票多少钱！大家只看官方财报：每股净家底 <b>16.06 块</b>，过去 6 年最惨跌到过 <b>0.69 倍市净率</b>；现在市场上现货焦煤虽然贵，但明年 5 月交割的期货已经大打折跌到了 <b>1,328 元</b>，银行国债利息才 <b>1.59%</b>。多头和空头直接开撕五大核心问题：正常年份到底能赚多少钱？老矿修修补补要花多少？内蒙大新矿能分几毛钱？欠的债怎么算？值多少钱才能买？", "cites": ["2026三季报法定底稿", "近6年PB铁底 0.69x"]}, {"id": "M02", "role": "bull", "topic": "xinhu", "round": "第一轮 · 多头立论①：华东低成本王者 + 信湖聚能双拐点", "round_plain": "第一轮 · 多头开炮：挖煤成本吊打周边同行，停产大矿复产、大电厂投产全兑现！", "time": "19:08", "act": {"text": "🛡️ 支柱① · 吨成本505元 + 双子星拐点", "cls": "act-bull"}, "replyTo": "M01", "text": "<b>淮北矿业绝不是普通周期股，它是华东深部成本王者且刚跨过经营大拐点！</b>2026 前三季度公司对外吨煤成本仅 <b>505.5 元</b>（比同省恒源煤电低 102 元、比河南平煤低 202 元），精煤洗出率飙至 <b>48.63%</b>（2026半年报 P9），吨毛利 <b>441.7 元</b> 冠绝焦煤同行。更关键的是，拖累 2025 年巨亏 -8.35 亿的 <b>信湖 300 万吨焦煤矿已于 4 月复产</b>、持股 80% 的 <b>聚能 2×660MW 超超临界电厂已于 7 月双投</b>，带动三季度单季归母净利飙至 <b>9.07 亿</b>、单季经营现金流（OCF）高达 <b>33.94 亿</b>！", "plain": "<b>先把生意本质讲透：淮北是华东挖好焦煤最省钱的狠角色！</b>今年前 9 个月它挖一吨煤只要 <b>505 块</b>，比隔壁同省邻居便宜 100 多块、比河南同行便宜 200 多块，一吨煤净赚 <b>441 块毛利</b>！更爽的是去年最拖后腿的俩大事今年全翻篇了：淹水停产两年多的 <b>信湖主力焦煤矿 4 月已经复产</b>，新修的 <b>两台大发电机组 7 月也并网印钞了</b>，三季度单季利润猛冲到 <b>9.07 亿</b>，拐点明明白白摆在眼前！", "cites": ["2026半年报 P9(精煤产率48.63%)", "2026三季报单季OCF 33.94亿"]}, {"id": "M03", "role": "bull", "topic": "price", "round": "第一轮 · 多头立论②：资本开支见顶 + 盲定公允 15.50 元", "round_plain": "第一轮 · 多头报底价：花大钱高峰期结束，算上陶忽图新矿，蒙眼估 15.50 元！", "time": "19:08", "act": {"text": "🛡️ 支柱② · 盈余37→41.7亿 · 首轮估15.50元", "cls": "act-bull"}, "replyTo": "M01", "text": "<b>重资产扩产期即将收口，绝不能把研发和安全费重复扣两遍！</b>2025 年公司已 100% 费用化 <b>17.73 亿研发投入</b>（年报 P167）与 <b>19.09 亿专项储备</b>（26H1 年化 22.8 亿），聚能转固后归母折旧摊销 39.2 亿足以覆盖含租赁本金的维持性资本开支（CapEx）。按信湖复产后外销 <b>1,420 万吨</b>、外销不含税均价 <b>960 元/吨</b>、有效税率 <b>17.5%</b> 测算，存量常态自由盈余（steady_oe）达 <b>37.00 亿</b>；陶忽图按 37.94% 权益（坑口 440 元、全成本 245 元、20% 税率）增厚 <b>+4.73 亿</b>至达产 <b>41.73 亿</b>（扣归母余款 11.19 亿）。归母穿透净债 <b>101.28 亿</b>（达产 112.47 亿），三法收敛盲定 <b>公允 15.50 元</b>（二档 13.20 / 一档 11.30 元）！请空头亮刺！", "plain": "<b>过去几年花大钱建电厂建新矿的高峰期马上要结束了！</b>而且公司每年把 <b>17.7 亿研发费</b> 和 <b>20 来亿安全费</b> 全都提前扣在成本里了，所以以后修老矿不用额外多花折旧以外的钱。我按信湖复产后每年卖 <b>1,420 万吨煤</b>、均价 <b>960 块</b> 算，老家底正常一年能赚 <b>37 亿真金白银</b>，加上内蒙陶忽图新矿按 37.94% 股份分回 <b>4.73 亿</b>，满血能赚 <b>41.7 亿</b>！扣掉归母净债 101 亿，我首轮给出 <b>合理价 15.50 块</b>，跌到 <b>13.20 块买、11.30 块闭眼重锤</b>！空头来吧！", "cites": ["2025年报 P167(研发0%资本化)", "2026半年报 P135(成达持股37.94%)"]}, {"id": "M04", "role": "bear", "topic": "price", "round": "第一轮 · 空头亮刺①：三季报是现货幻觉，次远月已判死刑！", "round_plain": "第一轮 · 空头第一刀直接砍大动脉：三季报靠高现货撑面子，明年 5 月期货价只支持 841 元！", "time": "19:11", "act": {"text": "💣 亮刺① · 960元违反期现取严 · 砍掉12.5亿虚增", "cls": "act-bear"}, "replyTo": "M03", "text": "<b>第一刀直斩多头 960 元高煤价幻觉！</b>三季度单季赚 9.07 亿纯靠短期现货冲高，而 <b>次远月期货 JM2705（1,328 元）比主力（1,510 元）再贴水 -12%（超 5% 红线）</b>，铁律必须锚定次远月！翻开 <b>2025 年报第 18 页</b>：淮北全年焦煤实现含税价 <b>1,357 元</b>，当年期货均价 1,275 元，实际溢价仅 <b>6.5%</b>；按 1,328 元次远月推算，淮北焦煤含税仅 <b>1,425 元</b>、外销混合不含税均价仅 <b>841 元</b>（只比 2025 年 807 元高 34 元）！多头拍出 960 元相当于主焦卖 1,669 元，<b>凭空虚增归母利润 12.5 亿元</b>！我从 2025 扣非 13.53 亿逐项桥接并扣除前三季大涨 13.6% 的管理费用反弹，核定常态自由盈余（steady_oe）仅 <b>20.53 亿</b>！", "plain": "<b>别拿三季度的短期高价蒙人，期货市场已经判了死刑！</b>明年 5 月交割的焦煤期货（1,328 块）比近月又便宜了 12%，买方铁律必须按便宜的远月价算账！我查了 <b>2025 年报第 18 页</b>，淮北自己的焦煤平时只比期货贵 6.5%，按 1,328 块算下来，全公司外销煤均价只有 <b>841 块</b>！多头拍脑袋给 960 块，硬生生吹出了 <b>12.5 亿虚假利润</b>！挤干泡沫再扣掉今年猛涨的管理费，正常一年其实只赚 <b>20.5 亿</b>！", "cites": ["2025年报 P13-14/P18", "JM2705 1,328元(-12%贴水)"], "impact": {"text": "按 FY25 P18 实证溢价仅 6.5%，960元 vs 841元价差直接压降归母盈余 -12.5 亿元", "plain": "空头拿出年报 18 页实锤：多头煤价高估 119 块，直接砍掉 12.5 亿虚胖利润！", "pos": false}}, {"id": "M05", "role": "bear", "topic": "taohutu", "round": "第一轮 · 空头亮刺②：陶忽图背 100% 债、只分 37.94% 利？", "round_plain": "第一轮 · 空头第二刀：陶忽图靠协议强行并表，债务全扛、利润大头分给奇瑞，税率还高达 33%！", "time": "19:11", "act": {"text": "💣 亮刺② · 质疑33%税率与成达100%背债", "cls": "act-bear"}, "replyTo": "M03", "text": "<b>第二刀刺向陶忽图股权错配与有效税率！</b>查 <b>2025 年报第 179 页</b>，淮矿仅持股成达矿业 <b>37.94%</b>，全靠与奇瑞控股签署一致行动协议强行并表——账面 <b>34.21 亿采矿权长期应付款</b>（26H1 P119）与 33.79 亿剩余资本开支（CapEx）压在合并报表上，21 个月有息债暴涨 +80.7 亿至 <b>151.75 亿</b>！更扎心的是 <b>2025 年公司实际有效税率高达 33%</b>，多头竟按 17.5%—20% 轻税率测算，我按严苛口径核定陶忽图归母增量仅 <b>2.94 亿</b>，达产自由盈余（full_oe）仅 <b>23.47 亿</b>！请多头直答：奇瑞那 62% 出资淮矿有没有担保？33% 税率怎么解释？", "plain": "<b>第二刀戳穿陶忽图大饼！</b>这矿淮北只占 <b>37.94% 股份</b>，六成多利润要分给合伙人奇瑞和鄂尔多斯能投，却靠一纸协议把几十亿买矿欠款和借来的债全背在上市公司合并报表里，不到两年有息负债暴涨 80 多亿！而且 2025 年公司实际交了 <b>33% 的所得税</b>，多头凭啥按 17.5% 算？按我严苛算，陶忽图只能分回 <b>2.94 亿</b>！多头你必须交代：你有没有帮奇瑞担保借钱？", "cites": ["2025年报 P179(一致行动并表)", "2026半年报 P119(采矿权34.21亿)"]}, {"id": "M06", "role": "bear", "topic": "debt", "round": "第一轮 · 空头亮刺③：财务公司 100% 向集团输血，猛砸公允 7.22 元！", "round_plain": "第一轮 · 空头第三刀：财务公司借给母集团的钱比存进来的还多 4.6 亿！空头猛压至 7.22 元！", "time": "19:11", "act": {"text": "💣 亮刺③ · 财司净占款4.63亿 · 首轮砸至7.22元", "cls": "act-bear"}, "replyTo": "M03", "text": "<b>第三刀揭开控股财务公司关联输血灰幕！</b>翻开 <b>2025 年报第 65 页</b>：财务公司发放的 <b>21.31 亿贷款 100% 全部借给了关联方</b>（淮矿集团 10.81 亿、刚卖给集团的信盛国际 7.99 亿）！至 2026 年三季度贷款 <b>23.09 亿</b> 减去吸收存款 <b>18.46 亿</b>，形成 <b>4.63 亿净占款</b>，财务公司自由现金按零计！扣除采矿权、内退福利与净占款等非息债 <b>53.49 亿</b>（注：分子已扣债息不重复扣有息债）与陶余款 12.82 亿，按股东要求回报率（Ke）9.0%（含 0.8% 治理折价）直算，<b>公允仅 7.22 元（0.45 倍市净率）</b>，二档 5.6—6.1 元、一档 ≤5.0 元！", "plain": "<b>第三刀直指国企治理死穴！</b>翻开 <b>年报 65 页</b>，财务公司放出去的 21 亿贷款 <b>一分不剩全借给了母公司集团和关联方</b>！尤其是那个刚剥离卖给母公司的贸易子公司，刚卖出去转头就放给它 8 个亿贷款！截至三季度集团借走的钱比存进来的多 <b>4.63 亿</b>，这哪是存钱罐，分明是给大股东输血！扣掉所有硬债和治理折价，我首轮直接把合理价砸到 <b>7.22 块</b>（还不到半倍净资产），<b>6.1 块以下才看</b>！", "cites": ["2025年报 P65(关联方贷款21.31亿)", "26Q3 财司净占款 4.63亿"], "impact": {"text": "空头三刀联动将公允价从多头 15.50 元直接腰斩至 7.22 元，抛出四道必答题", "plain": "空头三刀连环爆破，直接把合理价从 15.50 块腰斩到 7.22 块！", "pos": false}}, {"id": "M07", "role": "bull", "topic": "xinhu", "round": "第二轮 · 多头铁证三连反杀：击碎 33% 税率、零担保与市净率铁底！", "round_plain": "第二轮 · 多头翻出三页年报铁证啪啪反杀：高企税率 15%、成达零担保、0.72 倍底部铁打事实！", "time": "19:14", "act": {"text": "⚔️ 反杀① · P120/P171税率 · P35零担保 · 25年PB底", "cls": "act-bull"}, "replyTo": "M05", "text": "<b>翻开巨潮原件，空头三条指控当场被物理推翻！</b>① <b>反杀 33% 税率</b>：<b>2025 年报 P120</b> 明载淮矿/亳州/焦化/碳鑫全享 <b>15% 高企税率</b>，<b>P171</b> 白纸黑字揭示 2025 年 33% 纯系亏损子公司 <b>+2.92 亿未确认递延所得税资产</b> 一次性扭曲！正常年份有效税率仅 14.6%—17.2%，拿 33% 算内蒙陶忽图纯属税法错配！② <b>反杀成达背债双标</b>：<b>2026 半年报 P35</b> 铁证对成达担保为 <b>0 元</b>，三季报 P12 少数股东还现汇注资 2.47 亿，空头只分 37.94% 利却扣 100% 矿权款严重双标！③ <b>反杀市净率铁底误判</b>：2025 年实际净资产收益率（ROE）仅 <b>3.59%</b> 时，真实市净率底部依然高达 <b>0.72 倍（11.56 元）</b>，彻底打脸“高回报才撑起 0.69 倍”的说法！", "plain": "<b>空头这回真看漏页码了，三条铁证当场打脸！</b>第一，翻开 <b>年报 120 页和 171 页</b>，主力煤矿全是国家 <b>15% 优惠税率</b>，去年 33% 是亏钱化工厂不给抵税闹的乌龙，正常年份就 16% 左右！第二，翻开 <b>半年报 35 页</b>，母公司给成达矿业担保金额是 <b>0 块钱</b>，奇瑞人家自己真金白银出钱，你不能只分 38% 利润却让我们扛 100% 欠款！第三，去年公司最惨净资产回报只有 <b>3.59%</b> 时，股市最低还给了 <b>0.72 倍市净率</b>，绝不是什么高景气才有地板价！", "cites": ["2025年报 P120/P171", "2026半年报 P35(对成达担保0元)"], "impact": {"text": "三项硬原件精准反杀：15%高企税率、成达0元担保、25年3.59% ROE仍守0.72x PB铁底", "plain": "多头甩出三页法定原件，直接打爆空头税率、担保和市净率三条指控！", "pos": true}}, {"id": "M08", "role": "bull", "topic": "price", "round": "第二轮 · 多头坦诚下修煤价至 915 元，重校公允 13.70 元", "round_plain": "第二轮 · 多头不死扛：承认 960 元偏近月、主动砍到 915 元，合理价下修到 13.70 元！", "time": "19:14", "act": {"text": "🤝 认领煤价偏高 · 盈余调至32.8亿 · 公允13.70元", "cls": "act-concede"}, "replyTo": "M04", "text": "<b>对煤价锚我方坦诚认账，不护短！</b>承认首轮 960 元偏向近月合约，但空头算 841 元漏了两件事：一是信湖 300 万吨纯焦煤复产会将外销精煤占比从 49% 拉升至 <b>54%</b>，二是淮北低硫主焦较蒙 5# 交割品具 <b>140—220 元</b> 华东运距与煤质溢价。我主动下修煤价 -45 元至 <b>915 元/吨</b>、认领管理费反弹 -2.72 亿并剔除财司 4.77 亿债投现金，同时纠偏空头漏算信湖止血（25 年亳州归母亏 -5.67 亿，扭亏加微盈应给 +6.7 亿）。采用空头同口径 <b>9.0% 折现率</b>，重校常态自由盈余（steady_oe）<b>32.80 亿</b>、达产 <b>37.53 亿</b>，<b>公允下调至 13.70 元</b>（二档 11.80 / 一档 10.50 元）！", "plain": "<b>煤价这块我老实认错！</b>第一轮 960 块确实偏高，但我觉得 841 块又太狠了：信湖复产会让高价焦精煤比例从 49% 升到 <b>54%</b>，而且华东好煤离钢厂近省一大截运费，理应比期货贵 140 到 220 块。所以我主动砍 45 块到 <b>915 块</b>，再扣掉管理费上涨，补回空头漏算的信湖扭亏大头，哪怕用空头要求的 9% 回报门槛，我也把合理价诚实下调到 <b>13.70 块</b>（正常买点 11.80 块）！", "cites": ["2025年报 P14/P26(亳州亏-8.35亿)", "主动下修煤价 -45元至915元"]}, {"id": "M09", "role": "bear", "topic": "xinhu", "round": "第二轮 · 空头真汉子认错撤回三项，转手一刀捅穿“信湖双算”！", "round_plain": "第二轮 · 空头爽快认错撤回三条！但眼神太毒：多头，信湖复产你居然偷偷算了两遍！", "time": "19:16", "act": {"text": "🤝 撤回三误判 + 🩸 补刀“信湖重复计算5.1亿”", "cls": "act-bear"}, "replyTo": "M08", "text": "<b>原件推翻的我绝不嘴硬，三条爽快撤回：</b>① 撤回 33% 税率改用 <b>16.5%</b>（陶忽图 20%）；② 撤回成达 100% 背债，采矿权改按 <b>60% 归母</b>；③ 撤回市净率铁底与旧预算两项误判！<b>但剩下两根致命硬刺我必须钉死：</b>第一，140—220 元溢价无原件支撑，公司自己 2025 年实绩只比期货溢价 <b>82 元（6.5%）</b>；第二，<b>多头把信湖算了两遍！</b>外销 1,420 万吨多出的 89 万吨是信湖、均价 915 元里精煤占比 49%→54% 也是信湖，结果信湖那一行你又单独加了 <b>+6.7 亿</b>，<b>硬生生重复计算了 5.1 亿</b>！且 2026 半年报 P13 显示亳州煤业复产后半年仍亏 <b>-2.99 亿</b>，P16 更写明半年度不分配，你的 2.69 亿中期分红哪来的？重算常态自由盈余 <b>22.48 亿</b>、<b>公允上调至 8.60 元</b>！", "plain": "<b>错了我认！税率、成达担保和市净率铁底三条原件打我脸，我全部爽快撤回！</b>但我翻出两根要命的真刺：第一，你说焦煤比期货贵 140—220 块没证据，公司去年真卖出来只贵了 <b>82 块</b>；第二，<b>你把信湖复产算了两遍！</b>你在卖煤单价里已经靠信湖把精煤比例拉高算了一笔大钱，底下又单独加了一笔 6.7 亿「信湖扭亏」，等于 <b>一头牛剥了两张皮，多算了整整 5.1 亿</b>！还有，半年报 16 页明写着不发中期分红，你那 2.69 亿分红哪来的？我重算常态赚 <b>22.5 亿</b>，合理价调到 <b>8.60 块</b>！", "cites": ["2026半年报 P13(亳州仍亏-2.99亿)", "2026半年报 P16(半年度不分配)"], "impact": {"text": "空头撤回三误判上调至 8.60 元，但精准抓获多头“信湖结构双算 ~5.1 亿”致分歧仍达 31%", "plain": "空头认错升到 8.60 块，同时反手抓获多头重复算账 5.1 亿，两边仍差 31%！", "pos": false}}, {"id": "M10", "role": "judge", "topic": "xinhu", "round": "🔔 裁判中场收口闸门：分歧 31% 触发 R2.5 法庭限时加时赛！", "round_plain": "🔔 裁判吹响加时哨！两边还差 31%，每人限时 500 字把两道死结算清楚！", "time": "19:18", "act": {"text": "⏱️ 触发 R2.5 加时 · 点名两道核心死结", "cls": "act-judge"}, "replyTo": "M09", "text": "<b>税率（16.5%）、成达零担保、股东要求回报率（9.0%）已全部收口，勿再复述！</b>但双方常态自由盈余（<b>32.80 亿 对比 22.48 亿</b>）分歧仍达 <b>31%（超 15% 红线）</b>，且冒出“信湖双算”重磅补刀，现启动 <b>R2.5 法庭限时质询</b>：① <b>问多头</b>：请用 Python 严格切分「不含信湖的老矿纯价差」与「信湖独立扭亏」，正面回应双算 5.1 亿、海孜闭坑及 2.69 亿分红出处；② <b>问空头</b>：三季报前三季扣非已达 <b>21.16 亿</b>（且上半年信湖仍亏、聚能 7 月才双投），你给全年仅 <b>22.48 亿</b>，请量化前 9 个月到底有多少现货泡沫，并报出陶忽图吨利拆解！", "plain": "<b>精彩！税率、担保和回报门槛已经谈拢，不许再炒冷饭！</b>但两边对正常赚钱能力还差着 <b>31%</b>，裁判正式吹响 <b>加时赛哨声</b>！只准答两道题：① <b>多头你老实切账</b>：把老矿涨价和信湖复产彻底分开算，承认到底双算了多少，顺便交代那 2.69 亿分红哪来的；② <b>空头你自证逻辑</b>：人家今年前 9 个月已经实打实赚了 <b>21.16 亿</b>，你凭啥说正常一整年只赚 <b>22.48 亿</b>？把现货泡沫一分一厘算出来，顺便把陶忽图每吨成本亮出来！", "cites": ["2+1 弹性加时制(>15%触发)", "9M26扣非实绩 21.16亿"]}, {"id": "M11", "role": "bear", "topic": "taohutu", "round": "加时赛 R2.5 · 空头硬算拆穿 9M 现货泡沫 -8.5 亿 + 陶忽图漏税！", "round_plain": "加时赛 · 空头闪电拆账：今年前 9 月靠高现货白捡了 8.5 亿！还抓出多头漏算内蒙 9% 资源税！", "time": "19:19", "act": {"text": "🔬 R2.5 亮证 · 拆穿9M泡沫8.5亿 + 陶忽图9%资源税", "cls": "act-bear"}, "replyTo": "M10", "text": "<b>① 9M 扣非 21.16 亿里藏着整整 8.50 亿现货泡沫！</b>按多头自报的 9M 外销价 947 元对比次远月锚 841 元，每吨多赚 <b>106 元</b> × 外销 1,048 万吨 × 税后归母系数 = <b>+8.50 亿现货超额利润</b>！挤掉后 9M 真实扣非仅 12.66 亿（年化 16.88 亿），补满聚能 +1.1 亿与信湖 816 面 +1.4 亿后全年仅 <b>19.38 亿</b>——我给 22.48 亿反倒已经宽松了 3.1 亿！<b>② 陶忽图吨利拆骨再捅一刀：</b>鄂尔多斯坑口不含税 425 元 − 全成本 273 元（井工现金 150 + <b>内蒙 9% 资源税 43 元</b> + 折旧 36 + 矿权摊销 14 + 期间费 30）= 吨利 150 元，再扣 60 亿项目贷 2.09% 转固利息 <b>1.25 亿</b>（FY25 P145）！多头 245 元全成本明显漏算了内蒙 9% 资源税和转固债息！", "plain": "<b>算给你看！今年前 9 个月赚 21.16 亿，全靠现货卖到 947 块的高价撑着！</b>比次远月正常价（841 块）每吨多卖 106 块，乘上 1,048 万吨销量，硬生生白捡了 <b>8.5 亿现货泡沫</b>！挤干泡沫再补上新电厂和信湖后，按正常价算今年其实只够赚 <b>19.4 亿</b>，我给 22.5 亿已经够客气了！<b>顺便再抓多头一个漏项：</b>内蒙挖煤要交 <b>9% 资源税</b>（比安徽 2% 贵一大截，一吨 43 块），建完矿还得每年掏 <b>1.25 亿贷款利息</b>，多头你 245 块成本里根本没算这两笔硬账！", "cites": ["9M现货泡沫 8.50亿", "内蒙9%资源税 & FY25 P145(2.09%利率)"], "impact": {"text": "空头精准量化 9M 现货泡沫 8.50 亿，并抓获多头陶忽图模型漏算内蒙 9% 资源税与转固利息", "plain": "空头一招封喉：量化 8.5 亿现货泡沫，还揪出陶忽图漏算 9% 内蒙资源税和贷款利息！", "pos": false}}, {"id": "M12", "role": "bull", "topic": "xinhu", "round": "加时赛 R2.5 · 多头痛快认领双算核销 -4.54 亿，公允直降 11.74 元！", "round_plain": "加时赛 · 多头坦诚认错：承认信湖算重了直接砍掉 4.54 亿！合理价一口气降到 11.74 元！", "time": "19:19", "act": {"text": "🩸 R2.5 认领 · 核销双算-4.54亿 · 公允降至11.74元", "cls": "act-concede"}, "replyTo": "M10", "text": "<b>实事求是，我方坦诚认领信湖结构双算并全额核销 -4.54 亿！</b>彻底切干净重算：① <b>老矿纯价差（固定 2025 结构，0 重叠）</b>：2025 年朱庄已关停，2026 年仅新关海孜 50 万吨，老矿外销基数 <b>1,296 万吨</b>，均价 866.5 元（+59.5 元）→ 归母纯价差 <b>+5.39 亿</b>；② <b>信湖独立项</b>：26H1 亳州亏 -2.99 亿纯粹因为 4 月 16 日才复产且 816 主力面 11 月底才投产（FY25 P28），双面达产止血归零加微盈 1 亿 = <b>+6.35 亿</b>；去重后 <b>常态自由盈余（steady_oe）大幅下修至 27.75 亿</b>（极严底线 25.96 亿）、达产 <b>32.48 亿</b>！同时因 26Q3 原件未载分配决议暂撤回 2.69 亿分红扣减，按 9% 折现率重算 <b>公允直降至 11.74 元（0.73 倍市净率）</b>、二档 10.00 元、一档 8.80 元！", "plain": "<b>咱做研究错了就认！我承认信湖确实在煤价里算重了，直接狠砍 4.54 亿！</b>现在把两笔账彻底切开：老矿按固定结构涨价多赚 <b>5.39 亿</b>；信湖上半年亏 2.99 亿是因为 4 月才复产、816 主力工作面 11 月才投，双面开满后把去年 5.67 亿大窟窿填平再小赚一点给 <b>+6.35 亿</b>！切完重复后，我把正常赚钱能力一口气从 32.8 亿压低到 <b>27.75 亿</b>，合理价也从 13.70 块直接砍到 <b>11.74 块</b>，正常买点 10 块、重锤 8.80 块！", "cites": ["FY25 P19/P28(海孜闭坑 & 816面11月投)", "去重核销 -4.54亿"], "impact": {"text": "多头核销结构双算后公允由 15.50 → 13.70 → 11.74 元，多空分歧大幅收拢", "plain": "多头连续认账核销双算，合理价三连降（15.50 → 13.70 → 11.74 元）！", "pos": true}}, {"id": "M13", "role": "judge", "topic": "price", "round": "第三轮 · 裁判二元裁决①：空头赢下煤价与陶忽图，多头守住税率与防双扣！", "round_plain": "第三轮 · 裁判逐条判案：煤价和陶忽图判空头赢！税率、信湖止血和维持开支判多头赢！", "time": "19:24", "act": {"text": "⚖️ 裁判破案① · 锚定常态盈余 24.50 → 达产 28.02 亿", "cls": "act-judge"}, "replyTo": "M11", "text": "<b>三轮交锋真刀真枪，现下达分子端非黑即白二元裁决：</b>① <b>煤价锚（🩸 空头胜）</b>：FY25 P18 铁证淮北焦煤仅溢价期货 +82 元（6.5%），拒多头无据 +170 元，锚次远月 JM2705=1,328 元折合老矿外销 1,296 万吨均价 <b>845 元</b>（纯价差 +3.77 亿）；② <b>信湖与税率（🛡️ 修正过悲）</b>：税率锁 <b>16.5%</b>；信湖上半年仅单面跑 2.5 个月不可年化，裁定双面止血弹性 <b>+5.00 亿</b>（留 -0.67 亿磨合垫）；③ <b>维持开支（🛡️ 反杀双扣）</b>：研发 17.73 亿与专项储备 22.8 亿已进成本，归母折旧覆盖防御开支，仅扣增量营运资金 0.30 亿 → <b>常态自由盈余（steady_oe）= 24.50 亿</b>（9M 剔现货泡沫年化同收于 ~24.5 亿，双向交叉严丝合缝！）；④ <b>陶忽图（🩸 空头胜）</b>：补回内蒙 9% 资源税 38 元与转固息 1.21 亿，20% 税率核定归母仅 <b>+3.52 亿</b> → <b>达产自由盈余（full_oe）= 28.02 亿</b>！", "plain": "<b>好一场高质量辩论！现在裁判挨个落锤算真账：</b>第一，<b>煤价判空头赢</b>，年报白纸黑字只比期货贵 82 块，老矿均价锁死 <b>845 块</b>；第二，<b>税率和信湖纠偏空头过悲</b>，税率定 16.5%，信湖两个面全开后止血弹性给 <b>+5.0 亿</b>；第三，<b>防双扣判多头赢</b>，研发安全费已经扣过成本了，不再重复砍维持开支 → 锁死老家底正常一年赚 <b>24.50 亿真钱</b>（拿今年前三季挤干现货泡沫倒推也是 24.5 亿，严丝合缝！）；第四，<b>陶忽图判空头赢</b>，补扣内蒙 9% 资源税和贷款利息后归母只增 <b>+3.52 亿</b>，满血总共 <b>28.02 亿</b>！", "cites": ["FY25 P18/P28/P167", "26H1 P107(项目贷利率2.09%)"], "impact": {"text": "常态盈余锁死 24.50 亿（达产 28.02 亿），2025 桥接法与 9M 挤泡沫法双向误差 <1%", "plain": "两套方法互相验算严丝合缝：正常赚 24.5 亿、满血赚 28.0 亿！", "pos": true}}, {"id": "M14", "role": "judge", "topic": "debt", "round": "第三轮 · 裁判二元裁决②：严扣营运底仓与财司折价，锁死净债 +126.32 亿！", "round_plain": "第三轮 · 裁判盘清金库和欠条：扣完底仓、财司打 7 折与内退养老账，归母净背债 126.3 亿！", "time": "19:24", "act": {"text": "⚖️ 裁判破案② · 现状净债+126.32亿 / 达产+137.82亿", "cls": "act-judge"}, "replyTo": "M06", "text": "<b>按铁闸一逐笔穿透 2026 三季报归母净负债桥：</b>① <b>归母超额自由现金 33.08 亿</b>：账面货币资金 62.46 亿 − 受限资金 10.53 亿 − 19 天刚性营运底仓 23.42 亿，乘 91.22% 归母权益比得 26.01 亿，叠加财务公司交易性金融资产按 30% 折价与 51.01% 持股计 +7.07 亿；② <b>归母刚性负债与包袱 159.40 亿</b>：纯有息债归母 123.65 亿（剔 1 年内复垦 3.23 亿与矿权 1.32 亿后按 84% 穿透）+ 采矿权归母 20.66 亿（34.44×60%）+ 历史内退税后现值 12.71 亿 + 应付股利 0.02 亿 + 财务公司净占款归母 <b>2.36 亿</b>（4.63×51.01%）！两相抵扣得 <b>存量净债偏移（ev_delta）= +126.32 亿</b>；配对扣除陶忽图归母剩余资本开支 11.50 亿，<b>达产净债偏移 = +137.82 亿</b>！", "plain": "<b>接着把保险柜和欠条一笔笔称重：</b>账上 62.5 亿现金，扣掉 10.5 亿冻结死钱和 23.4 亿日常做生意周转底仓，再算上财务公司理财狠打 7 折，真正归股东的自由现金只有 <b>33.08 亿</b>！反观欠债：银行贷款归母要扛 <b>123.65 亿</b>、分期买矿尾款 <b>20.66 亿</b>、老员工内退养老账 <b>12.71 亿</b>、再加上财务公司多借给集团的 <b>2.36 亿</b>，加起来 <b>159.4 亿</b>！一减下来，公司净背着 <b>126.32 亿净负债</b>（加上陶忽图还要掏的 11.5 亿建矿尾款，达产净债 <b>137.82 亿</b>）！", "cites": ["26Q3 归母现金 33.08亿", "26H1 P117-120(剔复垦与矿权重复)"]}, {"id": "M15", "role": "judge", "topic": "verdict", "round": "第三轮 · 🔨 裁判终审落锤：三法全收 10.20 元，二档 ≤8.50 / 一档 ≤7.20！", "round_plain": "第三轮 · 🔨 裁判一锤定音：三套公式算出来全是 10.20 块！8.50 以下建仓、7.20 闭眼重锤！", "time": "19:24", "act": {"text": "🔨 终审落锤 · 公允10.20 / 二档8.50 / 一档7.20元", "cls": "act-judge"}, "replyTo": "M14", "text": "<b>三套独立估值法严丝合缝收敛于 10.20 元，全程零现价泄露！</b>① <b>无杠杆企业价值法（防高净债双扣）</b>：达产无杠杆自由盈余 31.76 亿 ÷ 周期加权资本成本（WACC 7.7%，即 13.0×）− 达产净债 137.82 亿 = <b>10.21 元</b>；② <b>杠杆后直接股权法</b>（9.0% 要求回报率 + 陶忽图净现值）= <b>10.28 元</b>；③ <b>红利贴现校验</b>（47.5% 分红率 @ 4.9% 股息率）= <b>10.19 元</b>！<b>终审唯一坐标：</b>公允中枢 <b>10.20 元/股</b>（0.64 倍市净率），第二档正常建仓 <b>7.20—8.50 元</b>（83.3% 公允，达产无杠杆回报 8.66%），第一档左侧重锤 <b>≤7.20 元</b>（70.6% 公允，0.45 倍市净率远严于 6 年铁底 0.69 倍红线，回报 9.57%、常态息率 6.6%—7.3%），定级 <b>T2（宪法上限 10%）</b>！@投委会主席 请拆封揭盲！", "plain": "<b>最绝的时刻来了——三套完全不同的算法算出来一模一样！</b>用无杠杆买断法算值 <b>10.21 块</b>、直接算股权法值 <b>10.28 块</b>、按吃股息反推值 <b>10.19 块</b>！裁判一锤钉死：淮北矿业蒙眼 <b>合理价 10.20 块</b>（0.64 倍市净率）！想赚钱必须打折买：跌到 <b>7.20—8.50 块</b>（83 折）才建底仓，砸穿 <b>7.20 块</b>（还不到半倍净资产、吃近 7% 股息）闭眼重锤！定级 T2 周期标（仓位上限 10%）。主席，拆开今天股价信封吧！", "cites": ["WACC 7.7%(10.21元) / Ke 9%(10.28元) / 股息(10.19元)", "重锤 0.45x PB 严过 6年铁底校验"], "impact": {"text": "终审锁死：公允 10.20 元｜二档 7.20—8.50 元｜一档 ≤7.20 元（V4 PASS · T2 级）", "plain": "蒙眼终审出炉：合理 10.20 元｜正常买点 8.50 以下｜重锤 7.20 以下！", "pos": true}}, {"id": "M16", "role": "host", "topic": "verdict", "round": "🔓 宿主 0 偏见拆封揭盲：现价 14.15 元竟溢价 +38.7%，远超止盈红线！", "round_plain": "🔓 拆盲盒大震撼！今天股价居然 14.15 块，比合理价贵了快 40%，连止盈线都涨破了！", "time": "19:25", "act": {"text": "🚨 揭盲警报 · 现价14.15元(+38.7%溢价) · 严禁追高", "cls": "act-bear"}, "replyTo": "M15", "text": "<b>加密黑箱已拆封！</b>2026-11-26 收盘现价 <b>14.15 元/股</b>（今日 +3.06%，总市值 <b>381.10 亿</b>，实时市净率 0.88 倍）：对应真实企业价值（True EV）高达 <b>507.42 亿</b>（达产 518.92 亿），现价常态内生回报率仅 <b>4.83%</b>（20.71×）、实派股息率仅 <b>1.77%</b>（含 10 月 29 日上交所另行公告的 0.10 元拟派中期分红为 2.47%）！<b>现价 14.15 元不仅较盲定公允 10.20 元溢价高达 +38.73%，更已高出 1.25× 高估止盈红线（12.75 元）足足 +10.98%！</b>距二档建仓线 8.50 元需回撤 <b>-39.9%</b>！宿主同步补注：10 月 29 日确有 2.69 亿期后中期分红公告（仅微扰净债 -0.10 元/股），绝不动摇终裁——<b>现价处于严重高估透支区，零仓观望、严禁追高！</b>", "plain": "<b>黑信封撕开了，惊出一身冷汗！</b>今天淮北矿业收盘居然卖到 <b>14.15 块</b>（总市值 381 亿），比咱们蒙眼算出的 10.20 块合理价 <b>贵了整整 38.7%</b>，甚至比 12.75 块的「高估止盈红线」还高出一大截！按今天价格买，老板一年真实回报才 <b>4.8%</b>、过去一年实派股息才 <b>1.77%</b>（就算加上 10 月底刚宣布的 1 毛钱中期分红也才 2.47%），属于典型的<b>在现货反弹高潮里替别人站岗</b>！实战铁律：<b>一股不买、坚决空仓观望</b>，等哪天市场把现货泡沫挤干净再说！（注：若想把上午流程 B 的 13.80 元与今晚 10.20 元做最终融合对账，随时发「对齐 淮北矿业」即可！）", "cites": ["2026-11-26 收盘现价 14.15元", "上交所 2026-10-29 中期分红0.10元公告"], "impact": {"text": "揭盲终判：现价 14.15 元 > 1.25x 止盈线 12.75 元，零仓观望（严防现货脉冲接盘）", "plain": "现价 14.15 块连止盈红线 12.75 块都冲破了！严守纪律零仓观望，绝不追高！", "pos": false}}], "clash_cards": [{"topic": "price", "title": "死结 ①：焦煤次远月深度贴水（JM2705 = 1,328 元）与华东真实溢价", "title_plain": "死结 ①：现在焦煤现货这么贵，正常年份到底该按多少钱算煤价？", "verdictBadge": "🩸 命中死穴（空头完胜 · 锁死外销均价 845 元）", "bear": "JM2705（1,328 元）贴水主力 -12% 必锚次远月；<b>FY25 P18</b> 实锤淮北焦煤含税 1,357 元仅比期货溢价 <b>+82 元（6.5%）</b>，外销均价仅 <b>841 元</b>；量化 9M26 扣非 21.16 亿里含 <b>8.50 亿现货泡沫</b>！", "bear_plain": "明年 5 月期货跌到 1,328 块了！翻开去年年报 18 页，淮北焦煤本来就只比期货贵 82 块，外销均价撑死 841 块；今年前 9 个月赚 21 亿里有 8.5 亿是白捡的现货泡沫！", "bull": "R1 拍出 960 元偏近月，R2 主动砍至 915 元，R2.5 去重后仍主张华东运距+低硫应享 <b>+170 元溢价</b>（均价 866.5 元），认为 841 元低估华东区位红利。", "bull_plain": "我承认 960 块算高了，一路降到 915 又降到 866 块，但华东好煤离钢厂近省大把运费，理应比期货贵 170 块！", "rebuttal": "双方已达成「锚次远月 JM2705、且 1.06× 成本线不再打 85 折」共识，唯一分歧聚焦在华东溢价给 82 元（年报实绩）还是 170 元。", "rebuttal_plain": "两边都同意按明年 5 月期货价算、不再乱打折，就吵华东溢价该按去年真实卖出的 82 块算，还是按理论 170 块算。", "judge": "<b>⚖️ 终审落锤：</b>年报铁证重于理论推算！FY25 P19 显示淮北煤种含大量 1/3 焦与肥气煤，拉低了平均溢价至 6.5%（+82 元）。驳回无据 +170 元，锚定老矿外销 1,296 万吨均价 <b>845 元/吨</b>（纯价差 +3.77 亿）！", "judge_plain": "<b>⚖️ 裁判拍板：</b>信白纸黑字的年报，不信理论拍脑袋！淮北里头掺了不少中档肥气煤，历史实绩就是只贵 82 块，均价钉死 <b>845 块</b>！"}, {"topic": "xinhu", "title": "死结 ②：信湖矿复产是否双算 + 有效税率（16.5% vs 33%）与维持开支防双扣", "title_plain": "死结 ②：停产大矿复产算重了吗？到底交 16.5% 还是 33% 税？", "verdictBadge": "双算 🩸 核销 -4.54 亿 / 税率与防双扣 🛡️ 多头反杀", "bear": "R1 误用 2025 表观 33% 税率，R2 见原件后爽快撤回改 16.5%；同时精准抓获多头在 915 元均价里已吃信湖精煤占比提升又单列 +6.7 亿属<b>重复计算 5.1 亿</b>，且 26H1 亳州仍亏 -2.99 亿仅给 +3.0 亿。", "bear_plain": "33% 税率我看错了，爽快认错改回 16.5%！但多头你把信湖复产偷偷算了两遍，多算 5 个亿必须砍掉，而且上半年信湖还在亏钱！", "bull": "凭 <b>FY25 P120/P171</b> 铁证反杀 33% 税率，凭 <b>P167/26H1 P122</b> 证 17.73 亿研发 0% 资本化及 22.8 亿安全费防维持开支双扣；R2.5 痛快认领信湖双算核销 -4.54 亿，解释上半年仅 815 单面跑 2.5 个月、816 主力面 11 月投产（FY25 P28）。", "bull_plain": "年报 120 页证明主力只交 15% 税，研发安全费也全扣过成本了！信湖算重了我认错砍 4.54 亿，但上半年只开了一个工作面跑两月半，不能拿它当全年亏损！", "rebuttal": "极高质量交叉认账：空头撤回 33% 税率，多头核销 -4.54 亿双算，双方只剩信湖双面达产弹性（+3.0 亿 vs +6.35 亿）。", "rebuttal_plain": "双方互认硬错，把水分挤得干干净净，只剩信湖两个工作面全开后到底能帮母公司止血赚回多少钱！", "judge": "<b>⚖️ 终审落锤：</b>有效税率锁死 <b>16.5%</b>、归母折旧覆盖防御维持开支（仅扣 ΔWC 0.30 亿）；25 年亳州归母亏 -5.67 亿，双面达产止血留 -0.67 亿磨合垫裁定 <b>+5.00 亿</b> → 锁死 <b>常态自由盈余 24.50 亿</b>！", "judge_plain": "<b>⚖️ 裁判拍板：</b>税率按 16.5%，维持开支不双扣，信湖双面满产止血给 <b>+5.0 亿</b>，算完老家底一年稳赚 <b>24.50 亿真钱</b>！"}, {"topic": "taohutu", "title": "死结 ③：陶忽图 800 万吨矿（37.94% 权益）担保归属、内蒙 9% 资源税与转固利息", "title_plain": "死结 ③：内蒙陶忽图大新矿到底能给股东分回多少真钱？母公司有没有帮奇瑞担保？", "verdictBadge": "零担保 🛡️ 反杀 / 漏税漏息 🩸 空头胜（+3.52 亿）", "bear": "R2 见 <b>26H1 P35</b> 担保为 0 元后撤回 100% 背债指控；但 R2.5 精准拆骨指出多头 245 元全成本<b>漏算内蒙 9% 资源税（约 43 元/吨）与 60 亿项目贷 2.09% 转固利息（1.25 亿）</b>，核定归母仅 3.17 亿。", "bear_plain": "没给奇瑞担保我认撤回！但内蒙挖煤资源税高达 9%（一吨 40 多块），建完还要每年掏 1.25 亿贷款利息，多头漏算这两项，归母最多分回 3.17 亿！", "bull": "凭 <b>26H1 P35 & 26Q3 P12</b> 实锤对成达担保 0 元且少数股东现汇注资 2.47 亿，采矿权按归母穿透；坚持坑口 440 元 − 全成本 245 元算归母 +4.73 亿（归母余款 11.19 亿）。", "bull_plain": "半年报 35 页证明没替合伙人担保，大家按股份出钱扛债！我觉得大新矿效率高，归母能多赚 4.73 亿！", "rebuttal": "多头成功反杀“全额背债”指控，但在 R2.5 中未能推翻空头关于内蒙 9% 从价资源税与项目贷转固费用化利息的硬核扣项。", "rebuttal_plain": "多头洗清了“替合伙人白背债”的冤屈，但确实漏算了内蒙 9% 高资源税和贷款转固利息！", "judge": "<b>⚖️ 终审落锤：</b>坑口不含税 425 元 − 全成本 265 元（含 9% 资源税 38 元 + 折旧摊销 50 元）= 吨息税前利 160 元，扣项目贷转固息 1.21 亿（2.09%），20% 税率乘 37.94% 得归母 <b>+3.52 亿</b> → <b>达产 28.02 亿</b>，配对扣归母余款 <b>11.50 亿</b>！", "judge_plain": "<b>⚖️ 裁判拍板：</b>补齐内蒙 9% 资源税和 1.21 亿贷款利息后，这座大矿只给股东多赚 <b>3.52 亿</b>，还要再掏 11.5 亿尾款，绝非暴利引擎！"}, {"topic": "debt", "title": "死结 ④：财务公司 100% 关联放贷净占款 + 归母净负债穿透桥（+126.32 亿）", "title_plain": "死结 ④：财务公司是不是在给母集团输血？扣完所有账，公司净欠多少债？", "verdictBadge": "🩸 铁闸一全穿透 · 存量净债 +126.32 亿 / 达产 +137.82 亿", "bear": "<b>FY25 P65</b> 铁证财务公司 21.31 亿贷款 100% 借给集团与刚剥离的信盛贸易，26Q3 形成 <b>4.63 亿净占款</b>；并揪出 26H1 P16 半年度不分配，要求核销多头 2.69 亿分红扣减。", "bear_plain": "财务公司放的贷全是借给母公司和亲戚公司的，比人家存进来的还多借出 4.63 亿！必须惩罚打折！", "bull": "辩称财务公司系上市控股 51.01% 且收息合法，同时凭 <b>26H1 P117-118</b> 拆出一年内非流负债里混着 3.23 亿复垦预计负债与 1.32 亿矿权款，避免与采矿权重复扣减。", "bull_plain": "财务公司是咱们自己控股的、收了利息不算白占；而且银行短债里混着 4.5 亿复垦和矿权款，绝不能算两遍！", "rebuttal": "双方均认可剔除复垦/矿权重复、按归母穿透采矿权（60%）与税后内退福利（12.71 亿），分歧在于财务公司自由现金信用与营运底仓。", "rebuttal_plain": "两边把重复计算的债清理干净了，主要差在财务公司的钱打几折、要不要留够日常周转底仓。", "judge": "<b>⚖️ 终审落锤：</b>严守铁闸一！留足 19 天营运底仓 23.42 亿、财务公司交易金融打 7 折（+7.07 亿）且单扣 4.63 亿净占款归母份额 -2.36 亿，得 <b>存量净债 +126.32 亿</b>（达产 +137.82 亿）。<i>（宿主揭盲补注：10月29日另有2.69亿中期分红公告，仅微扰-0.10元/股）</i>", "judge_plain": "<b>⚖️ 裁判拍板：</b>严抠底仓和财务公司 7 折，再扣掉集团净占款，算清归母净欠债 <b>126.32 亿</b>（加新矿尾款 <b>137.82 亿</b>）！"}, {"topic": "verdict", "title": "终审定价：三法严丝合缝收敛 10.20 元 + 揭盲现价 14.15 元溢价警报", "title_plain": "终审定价：蒙眼算出 10.20 元合理价，拆开盲盒一看 14.15 元贵到离谱！", "verdictBadge": "🚨 现价 14.15 元 > 止盈红线 12.75 元 · 零仓观望", "bear": "按 9% 折现率直算杠杆后公允 <b>8.60 元（0.54× 市净率）</b>，二档 6.7—7.3 元、一档 ≤6.2 元。", "bear_plain": "我最严苛给合理价 <b>8.60 块</b>，跌到 7.3 块以下才看！", "bull": "R2.5 去重核销双算后，按 9% 折现率将公允一路下修至 <b>11.74 元（0.73× 市净率）</b>，二档 10.00 元、一档 8.80 元。", "bull_plain": "砍完重复算账后，我把合理价降到了 <b>11.74 块</b>，10 块以下买、8.80 块重锤！", "rebuttal": "戏剧性的一幕：经历加时赛核销双算后，哪怕最乐观的多头（11.74 元），事后拆盲盒也大幅低于今日收盘价 14.15 元！", "rebuttal_plain": "最震撼的结果：连多头最后算出来的合理价（11.74 块），都比今天的股价（14.15 块）便宜一大截！", "judge": "<b>🔨 终审落锤：</b>无杠杆加权资本成本法（10.21 元）、杠杆直接股权法（10.28 元）、股息贴现法（10.19 元）三法全收 <b>10.20 元</b>（0.64× 市净率）；二档 <b>7.20—8.50 元</b>、一档重锤 <b>≤7.20 元</b>（0.45× 市净率严过 6 年铁底检验）。揭盲现价 14.15 元溢价 +38.7%，<b>零仓观望、严禁追高</b>！", "judge_plain": "<b>🔨 裁判拍板：</b>三套算法全指向 <b>10.20 块</b>，8.50 以下建仓、7.20 以下重锤！拆开盲盒今天卖 14.15 块贵了快 40%，<b>老实空仓喝茶，一股不追</b>！"}], "unblind": {"sealed_title": "🔒 2026-11-26 淮北矿业实时股价信封已封存（2.2版 物理双盲终审）", "sealed_desc": "跨模型三轮激辩（含 R2.5 加时赛）全程 0 现价泄露：严锚次远月焦煤 JM2705=1,328 元、核销信湖结构双算、补扣陶忽图内蒙 9% 资源税与转固利息、严扣营运底仓与财务公司净占款后，锁死常态自由盈余 24.50 亿（达产 28.02 亿）、归母净债 +126.32 亿，三法严丝合缝盲定公允中枢 10.20 元、二档 7.20—8.50 元、一档重锤 ≤7.20 元。点击拆封今日真实股价：", "sealed_desc_plain": "三大高手蒙眼打了加时赛，挤干焦煤现货泡沫、揪出信湖双算和内蒙 9% 资源税后一锤定音：合理价 10.20 元、正常买点 7.20–8.50 元、闭眼重锤 7.20 元以下！点击金色按钮拆开今日股价黑信封：", "header_title": "🔓 揭盲开箱！今日现价 14.15 元（+3.06%｜总市值 381.10 亿）", "header_badge": "🚨 严重高估警报！现价 14.15 元较盲定公允 10.20 元溢价 +38.73%，更已冲破 1.25× 高估止盈红线（12.75 元），严禁追高、零仓观望！", "stats": [{"k": "今日现价 / 盲定公允 10.20 元", "v": "14.15 元（较公允溢价 +38.73% / 高出止盈红线 +1.40 元）", "color": "bear"}, {"k": "严苛真实企业价值（加 +126.32 亿净债）", "v": "507.42 亿元（达产含余款 518.92 亿元）", "color": "host"}, {"k": "现价常态 / 达产真实内生回报率", "v": "常态 4.83%（20.71×）｜达产无杠杆 6.12%（偏薄）", "color": "bear"}, {"k": "入网后无杠杆达产回报（8.50 元 / 7.20 元）", "v": "二档上限 8.66%（需回调 -39.9%）｜一档重锤 9.57%", "color": "bull"}, {"k": "即期实派股息 / 常态 45% 派息率", "v": "实派 1.77%（含拟派中期 2.47%）｜常态 2.93%（入网 5.2%—7.3%）", "color": "judge"}, {"k": "当前市净率 对比 近 6 年铁底 0.69×", "v": "0.88×（公允 0.64×｜重锤 7.20 元对应 0.45× 极寒底）", "color": "gold"}], "stats_plain": [{"k": "今天股票多少钱？现在能买吗？", "v": "14.15 元！比 10.20 元合理价贵了近 39%，连 12.75 元止盈红线都冲破了，绝对不能买！", "color": "bear"}, {"k": "要跌多少才够便宜进入买点？", "v": "得从今天跌掉约 -40% 回到 8.50 元以下才建底仓，砸穿 7.20 元才闭眼重锤！", "color": "gold"}, {"k": "按今天 14.15 元买，老板真实年化回报？", "v": "加上背着的 126 亿净债后，老板真实年化回报只有 4.83%，远不如存高息银行或等跌！", "color": "host"}, {"k": "现在买能吃多少现金分红？", "v": "过去一年实发股息才 1.77%（算上刚宣布的 1 毛钱中期分红也才 2.47%），安全垫太薄！", "color": "judge"}, {"k": "为什么多头连降三次后依然觉得现价贵？", "v": "因为三季度利润靠焦煤现货高价硬撑，明年 5 月期货已经大跌贴水，现价把好消息全透支光了！", "color": "bear"}, {"k": "接下来最该怎么处理这只股票？", "v": "零仓加入观察池喝茶等待！如想把上午流程 B（13.80元）与今晚辩论（10.20元）做终极融合对账，可随时发「对齐 淮北矿业」。", "color": "bull"}], "grid_headers": ["实战击球档位（2.2版 盲定终裁）", "目标股价（元/股）", "市净率 / 真实企业价值倍数", "常态回报 / 达产无杠杆回报", "实战挂单纪律（T2 级上限 10%）"], "grid_rows": [["<b>🔥 第一档 · 左侧重锤区</b>", "<b>≤ 7.20 元</b>", "≤ 0.45× / ≤ 13.07×", "≥ 7.65% / ≥ 9.57%", "极寒破净大坑，常态股息率高达 6.6%—7.3%，果断打满至 8%—10%"], ["<b>✅ 第二档 · 正常建仓区</b>", "<b>7.20 — 8.50 元</b>", "0.45—0.53× / 13.07—14.50×", "6.90—7.65% / 8.66—9.57%", "<b>🎯 左侧伏击区！</b>需距现价回调 -39.9% 入网，跌破 8.50 元分批建首仓 4%"], ["<b>⚖️ 盲定公允价值中枢</b>", "10.20 元", "0.64× / 16.37×", "6.11% / 7.70%", "三法收敛合理中枢（锚定 JM2705=1,328 元常态煤价），新资金不追"], ["<b>🚨 1.25× 止盈减仓红线</b>", "≥ 12.75 元", "≥ 0.79× / ≥ 19.17×", "≤ 5.22% / ≤ 6.60%", "触发买方宪法 1.25× 高估红线，老仓应果断分批高切低换马"], ["<b>⚠️ 当前身位 · 高估透支区</b>", "<b>14.15 元（现价）</b>", "0.88× / 20.71×", "4.83% / 6.12%", "<b>📍 较公允溢价 +38.7%（已冲破止盈红线）！</b>严守纪律零仓观望，严防现货脉冲接盘"]], "grid_headers_plain": ["买点档位（跨模型盲定终版）", "股价位置", "市净率有多低", "老板真回报 / 常态股息", "老百姓怎么挂单操作？（上限 10%）"], "grid_rows_plain": [["<b>🔥 左侧重锤抄底区</b>", "<b>7.20 元以下</b>", "0.45 倍以下", "达产回报 9.6%+ / 息 6.6%+", "跌到不到半倍净资产的恐慌大坑，吃近 7% 股息，果断把仓位打满到 8%—10%！"], ["<b>✅ 正常建底仓区</b>", "<b>7.20 — 8.50 元</b>", "0.45—0.53 倍", "达产回报 8.7%+ / 息 5.2%+", "<b>🎯 挂单等这里！</b>跌破 8.50 块才开始慢慢建 4% 底仓，没跌到绝不出手！"], ["<b>⚖️ 合理公允价</b>", "10.20 元", "0.64 倍", "达产回报 7.7% / 息 4.1%", "按期货正常煤价算就值这个价钱，手里有的拿着、没买的别在这儿追"], ["<b>🚨 偏贵止盈线</b>", "12.75 元以上", "0.79 倍以上", "不到 6.6% / 息 3.3%", "明显涨贵了，手里有货应该逢高分批落袋！"], ["<b>⚠️ 今天现价（严重偏贵）</b>", "<b>14.15 元（今日）</b>", "0.88 倍", "仅 4.8% / 实派息 1.77%", "<b>📍 连止盈红线都冲破了！</b>老老实实空仓喝茶，绝不替三季度现货脉冲买单！"]]}};
+const TOPICS = DATA.topics || [];
+const ROLES = DATA.roles || {};
+const MESSAGES = DATA.messages || [];
+const CLASH_CARDS = DATA.clash_cards || [];
+const UNBLIND = DATA.unblind || null;
+const GLOSSARY = DATA.glossary || [];
+
+const COLOR_MAP = {
+  host: 'var(--accent-host)', bull: 'var(--accent-bull)',
+  bear: 'var(--accent-bear)', judge: 'var(--accent-judge)', gold: 'var(--accent-gold)'
+};
+
+let currentTopic = 'all';
+let currentRole = 'all';
+let currentMode = DATA.default_mode || 'plain';
+let isUnblinded = false;
+
+function getText(obj, proKey, plainKey) {
+  if (currentMode === 'plain' && obj && obj[plainKey]) return obj[plainKey];
+  return (obj && obj[proKey]) || '';
+}
+
+function linkifyTerms(htmlStr) {
+  if (!htmlStr || !GLOSSARY.length) return htmlStr;
+  // Highlight known abbreviations/keywords safely outside HTML tags using placeholder tokens
+  // so later glossary rules NEVER match inside an earlier rule's title="..." attribute!
+  const rules = [];
+  GLOSSARY.forEach(g => {
+    const keys = (g.match || [g.key]).filter(k => k && k.length >= 2);
+    keys.forEach(k => rules.push({ k, key: g.key, tip: g.term + '：' + g.plain }));
+  });
+  rules.sort((a, b) => b.k.length - a.k.length);
+  const parts = htmlStr.split(/(<[^>]+>)/g);
+  for (let i = 0; i < parts.length; i += 2) {
+    let seg = parts[i];
+    if (!seg) continue;
+    const replaced = new Set();
+    const tokens = [];
+    for (const r of rules) {
+      if (replaced.has(r.key)) continue;
+      const esc = r.k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp(esc);
+      if (re.test(seg)) {
+        const safeTip = r.tip.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const safeKey = String(r.key).replace(/'/g, "\\'");
+        seg = seg.replace(re, (m) => {
+          const idx = tokens.length;
+          tokens.push(`<span class="term-link" title="${safeTip}" onclick="jumpToTerm('${safeKey}')">${m}</span>`);
+          return `\u0000T${idx}\u0000`;
+        });
+        replaced.add(r.key);
+      }
+    }
+    if (tokens.length) {
+      seg = seg.replace(/\u0000T(\d+)\u0000/g, (_, idx) => tokens[Number(idx)]);
+    }
+    parts[i] = seg;
+  }
+  return parts.join('');
+}
+
+function renderModeUI() {
+  const bp = document.getElementById('btnModePlain');
+  const bpro = document.getElementById('btnModePro');
+  bp.className = 'mode-btn' + (currentMode === 'plain' ? ' active-plain' : '');
+  bpro.className = 'mode-btn' + (currentMode === 'pro' ? ' active-pro' : '');
+  const tip = document.getElementById('stageTip');
+  if (currentMode === 'plain') {
+    tip.innerHTML = `<span class="mode-pill-banner plain">🐣 当前：小白大白话版</span> 零生僻英文缩写，像听投资老友开会一样秒懂！想看精确公式可随时点顶部切 <b>🎓 专业硬核版</b>，点虚线词秒查右侧词典。`;
+  } else {
+    tip.innerHTML = `<span class="mode-pill-banner pro">🎓 当前：专业硬核版</span> 保留完整财报科目、附注页码与 DCF/EV 算式（所有缩写已注中文）。点击气泡顶部<b>「↩ 引用原话」</b>直跳定位，点击虚线词秒查右侧词典！`;
+  }
+}
+
+function switchMode(mode) {
+  currentMode = mode;
+  renderModeUI();
+  renderConvergence();
+  renderChat();
+  renderMatrix();
+}
+
+function renderRoster() {
+  const keys = Object.keys(ROLES);
+  const el = document.getElementById('rosterStrip');
+  el.innerHTML = `<span style="font-size:11.5px;color:var(--text-muted);font-weight:700;">群成员筛选：</span>`
+    + `<span class="member-chip ${currentRole==='all'?'selected':''}" data-role="all" onclick="filterRole('all')">👥 全部 (${keys.length})</span>`
+    + keys.map(k => {
+        const r = ROLES[k];
+        return `<span class="member-chip ${currentRole===k?'selected':''}" data-role="${k}" onclick="filterRole('${k}')"><i class="dot dot-${r.cls}"></i>${r.avatar} ${r.name} (${r.model})</span>`;
+      }).join('');
+}
+
+function renderConvergence() {
+  const el = document.getElementById('convList');
+  el.innerHTML = (DATA.convergence || []).map(item => {
+    const lbl = (currentMode === 'plain' && item.label_plain) ? item.label_plain : item.label;
+    const val = (currentMode === 'plain' && item.value_plain) ? item.value_plain : item.value;
+    return `<div class="conv-row"><span class="conv-label">${lbl}</span><span class="conv-val" style="color:${COLOR_MAP[item.color]||'var(--text-primary)'};">${val}</span></div>`;
+  }).join('');
+}
+
+function renderTopics() {
+  document.getElementById('topicList').innerHTML = TOPICS.map(t => {
+    const cnt = t.id === 'all' ? MESSAGES.length : MESSAGES.filter(m => m.topic === t.id).length;
+    return `<button class="topic-btn ${currentTopic===t.id?'active':''}" onclick="filterTopic('${t.id}')">
+      <span>${t.icon||''} ${t.name}</span>
+      <span style="display:flex;align-items:center;gap:4px;">
+        ${t.badge ? `<span class="topic-status">${t.badge}</span>` : ''}
+        <span class="topic-count">${cnt}</span>
+      </span>
+    </button>`;
+  }).join('');
+}
+
+function renderGlossary() {
+  const q = (document.getElementById('glossarySearch').value || '').trim().toLowerCase();
+  const list = GLOSSARY.filter(g =>
+    !q || (g.term + ' ' + g.key + ' ' + g.plain + ' ' + (g.usage||'')).toLowerCase().includes(q)
+  );
+  document.getElementById('glossaryList').innerHTML = list.map(g => `
+    <div class="g-card" id="term-${g.key}">
+      <div class="g-term">📘 ${g.term}</div>
+      <div class="g-plain">${g.plain}</div>
+      ${g.usage ? `<div class="g-usage">🎯 实战用法：${g.usage}</div>` : ''}
+    </div>
+  `).join('') || `<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:16px;">未找到匹配术语</div>`;
+}
+
+function toggleGlossary() {
+  const layout = document.getElementById('mainLayout');
+  const side = document.getElementById('glossarySidebar');
+  if (window.innerWidth <= 1200) {
+    side.classList.toggle('drawer-open');
+  } else {
+    layout.classList.toggle('hide-glossary');
+  }
+}
+
+function jumpToTerm(key) {
+  const layout = document.getElementById('mainLayout');
+  const side = document.getElementById('glossarySidebar');
+  if (window.innerWidth <= 1200) {
+    side.classList.add('drawer-open');
+  } else {
+    layout.classList.remove('hide-glossary');
+  }
+  const search = document.getElementById('glossarySearch');
+  if (search && search.value) { search.value = ''; renderGlossary(); }
+  const card = document.getElementById('term-' + key);
+  if (card) {
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.remove('flash-term');
+    void card.offsetWidth;
+    card.classList.add('flash-term');
+    setTimeout(() => card.classList.remove('flash-term'), 2400);
+  }
+}
+
+function buildUnblindHTML() {
+  if (!UNBLIND) return '';
+  const statsArr = (currentMode === 'plain' && UNBLIND.stats_plain) ? UNBLIND.stats_plain : (UNBLIND.stats || []);
+  const statsHtml = statsArr.map(s =>
+    `<div class="stat-card"><div class="stat-k">${s.k}</div><div class="stat-v" style="color:${COLOR_MAP[s.color]||'var(--text-primary)'};">${s.v}</div></div>`
+  ).join('');
+  const hdrs = (currentMode === 'plain' && UNBLIND.grid_headers_plain) ? UNBLIND.grid_headers_plain : UNBLIND.grid_headers;
+  const rows = (currentMode === 'plain' && UNBLIND.grid_rows_plain) ? UNBLIND.grid_rows_plain : UNBLIND.grid_rows;
+  const tblHtml = (hdrs && rows)
+    ? `<table class="mini-table" style="margin-top:10px;"><thead><tr>${hdrs.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`
+      + rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')
+      + `</tbody></table>` : '';
+  return `<div class="unblind-box">
+    <div class="unblind-sealed" id="unblindSealed" style="display:${isUnblinded?'none':'block'};">
+      <div style="font-size:15px;font-weight:800;margin-bottom:6px;">${UNBLIND.sealed_title||'🔒 实时股价信封已封存'}</div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:12px;">${getText(UNBLIND, 'sealed_desc', 'sealed_desc_plain')}</div>
+      <button class="btn btn-gold" onclick="doUnblind()" style="padding:8px 18px;font-size:13.5px;">🔓 拆封现价 · 揭盲对照挂单网</button>
+    </div>
+    <div class="unblind-content ${isUnblinded?'open':''}" id="unblindContent">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+        <span style="font-weight:800;font-size:15px;color:var(--accent-gold);">${UNBLIND.header_title||''}</span>
+        ${UNBLIND.header_badge ? `<span class="act-tag act-concede">${UNBLIND.header_badge}</span>` : ''}
+      </div>
+      <div class="grid-cards">${statsHtml}</div>
+      ${tblHtml}
+    </div>
+  </div>`;
+}
+
+function renderChat() {
+  const container = document.getElementById('chatView');
+  const filtered = MESSAGES.filter(m =>
+    (currentTopic === 'all' || m.topic === currentTopic) &&
+    (currentRole === 'all' || m.role === currentRole)
+  );
+  document.getElementById('msgCounter').textContent = `当前显示 ${filtered.length} / ${MESSAGES.length} 条发言`;
+  let out = '', lastRound = '';
+  filtered.forEach(m => {
+    const rTitle = getText(m, 'round', 'round_plain');
+    if (rTitle && rTitle !== lastRound && currentTopic === 'all' && currentRole === 'all') {
+      out += `<div class="round-divider"><span class="round-pill">${rTitle}</span></div>`;
+      lastRound = rTitle;
+    }
+    const r = ROLES[m.role] || { name: m.role, model: '', avatar: '💬', cls: 'host', side: 'left' };
+    const tObj = TOPICS.find(t => t.id === m.topic);
+    let quoteHtml = '';
+    if (m.replyTo) {
+      const target = MESSAGES.find(x => x.id === m.replyTo);
+      if (target) {
+        const tr = ROLES[target.role] || { avatar: '', name: target.role };
+        const plain = getText(target, 'text', 'plain').replace(/<[^>]+>/g, '');
+        const snippet = plain.length > 56 ? plain.slice(0, 56) + '…' : plain;
+        quoteHtml = `<div class="quote-box" onclick="jumpToMsg('${target.id}')"><div class="quote-head"><span>↩ 回复 ${tr.avatar} ${tr.name} (${target.id})</span><span class="quote-jump">定位原话 ↗</span></div><div>${snippet}</div></div>`;
+      }
+    }
+    const tblObj = (currentMode === 'plain' && m.table_plain) ? m.table_plain : m.table;
+    let tableHtml = '';
+    if (tblObj) {
+      tableHtml = `<table class="mini-table"><thead><tr>${tblObj.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`
+        + tblObj.rows.map(row=>`<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('') + `</tbody></table>`;
+    }
+    let citesHtml = '';
+    if ((m.cites && m.cites.length) || m.impact) {
+      const impText = m.impact ? getText(m.impact, 'text', 'plain') : '';
+      citesHtml = `<div class="cite-row">`
+        + (m.cites || []).map(c => `<span class="cite-chip">${c}</span>`).join('')
+        + (m.impact ? `<span class="impact-chip ${m.impact.pos?'pos':''}">${impText}</span>` : '')
+        + `</div>`;
+    }
+    const bodyHtml = linkifyTerms(getText(m, 'text', 'plain'));
+    out += `<div class="msg-row ${r.side==='right'?'side-right':''}" id="msg-${m.id}">
+      <div class="avatar av-${r.cls}">${r.avatar}</div>
+      <div class="msg-body-wrap">
+        <div class="msg-meta">
+          <span class="sender-name">${r.name}</span>
+          <span class="model-tag">${r.model}</span>
+          ${m.act ? `<span class="act-tag ${m.act.cls}">${m.act.text}</span>` : ''}
+          ${tObj ? `<span class="topic-tag-mini" onclick="filterTopic('${m.topic}')">${tObj.icon||''} ${tObj.name.split('·')[0].trim()}</span>` : ''}
+          <span class="msg-id">${m.id} · ${m.time||''}</span>
+        </div>
+        <div class="bubble bubble-${r.cls}" id="bubble-${m.id}">
+          ${quoteHtml}<div>${bodyHtml}</div>${tableHtml}${m.isUnblindBox?buildUnblindHTML():''}${citesHtml}
+        </div>
+      </div>
+    </div>`;
+  });
+  container.innerHTML = out || `<div style="text-align:center;padding:48px 16px;color:var(--text-muted);">当前筛选条件下暂无发言。</div>`;
+}
+
+function renderMatrix() {
+  const el = document.getElementById('matrixView');
+  const cards = (currentTopic === 'all' || !CLASH_CARDS.some(c => c.topic === currentTopic))
+    ? CLASH_CARDS : CLASH_CARDS.filter(c => c.topic === currentTopic);
+  el.innerHTML = cards.map(c => `<div class="clash-card">
+    <div class="clash-header">
+      <span class="clash-title">${getText(c, 'title', 'title_plain')}</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="act-tag act-verdict">${c.verdictBadge}</span>
+        <button class="btn" style="padding:3px 9px;font-size:11.5px;" onclick="viewTopicInChat('${c.topic}')">💬 回群聊看原话</button>
+      </div>
+    </div>
+    <div class="clash-grid">
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-bear);">🐻 空头亮刺</div><div>${linkifyTerms(getText(c, 'bear', 'bear_plain'))}</div></div>
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-bull);">🐂 多头反杀/认领</div><div>${linkifyTerms(getText(c, 'bull', 'bull_plain'))}</div></div>
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-host);">🔄 核验补刀 / 撤回</div><div>${linkifyTerms(getText(c, 'rebuttal', 'rebuttal_plain'))}</div></div>
+    </div>
+    <div class="clash-verdict">${linkifyTerms(getText(c, 'judge', 'judge_plain'))}</div>
+  </div>`).join('');
+}
+
+function filterTopic(tid) { currentTopic = tid; renderTopics(); renderChat(); renderMatrix(); }
+function filterRole(role) { currentRole = role; renderRoster(); renderChat(); }
+function switchView(v) {
+  document.getElementById('btnChatView').classList.toggle('active', v === 'chat');
+  document.getElementById('btnMatrixView').classList.toggle('active', v === 'matrix');
+  document.getElementById('chatView').classList.toggle('hidden', v !== 'chat');
+  document.getElementById('matrixView').classList.toggle('active', v === 'matrix');
+}
+function viewTopicInChat(tid) { switchView('chat'); filterRole('all'); filterTopic(tid); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function jumpToMsg(id) {
+  let target = document.getElementById('msg-' + id);
+  if (!target) { currentTopic = 'all'; currentRole = 'all'; renderRoster(); renderTopics(); renderChat(); target = document.getElementById('msg-' + id); }
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const b = document.getElementById('bubble-' + id);
+    if (b) { b.classList.remove('flash-highlight'); void b.offsetWidth; b.classList.add('flash-highlight'); setTimeout(() => b.classList.remove('flash-highlight'), 2200); }
+  }
+}
+function doUnblind() { isUnblinded = true; const s = document.getElementById('unblindSealed'), c = document.getElementById('unblindContent'); if (s) s.style.display = 'none'; if (c) c.classList.add('open'); }
+function jumpAndUnblind() {
+  switchView('chat'); isUnblinded = true; currentTopic = 'all'; currentRole = 'all';
+  renderRoster(); renderTopics(); renderChat();
+  const ub = MESSAGES.find(m => m.isUnblindBox);
+  if (ub) setTimeout(() => jumpToMsg(ub.id), 60);
+}
+function toggleTheme() {
+  const h = document.documentElement, n = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  h.setAttribute('data-theme', n); document.getElementById('btnTheme').textContent = n === 'dark' ? '☀️ 浅色' : '🌙 深色';
+}
+
+renderModeUI(); renderRoster(); renderConvergence(); renderTopics(); renderGlossary(); renderChat(); renderMatrix();
+</script>
+</body>
+</html>
