@@ -882,7 +882,7 @@ body.theme-dark #agy-term-drawer .td-card-ctx { color: #7dd3fc; }
 <button class="toc-link chap-btn" data-chap="thesis-sec-6" style="width:100%;text-align:left;border:none;background:transparent;cursor:pointer">🔬 模块 E：会计成色、历史资本配置与治理显微镜</button>
         <hr class="thesis-hr" style="margin:12px 0">
         <div style="font-size:11.5px;color:var(--muted)">
-          ✅ <strong>2.0 无损动静分离</strong><br>
+          ✅ <strong>2.5 无损动静分离</strong><br>
           基本面 100% 满血保留；所有随标准变动的估值/买点由 <strong>Tab 1</strong> 实时计算，永不打架。
         </div>
       </aside>
@@ -2146,14 +2146,58 @@ document.getElementById('glossSearch').addEventListener('input', e => renderGlos
 
 // ==================== 2.5 全行业通用数据驱动 Bento + 播客 + 分层折叠引擎 ====================
 let v25AnatSelected = '';
+let _v25StaticReady = false;
+let _v25GlossTimer = null;
 
 function _esc(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+// 允许安全加粗标签 <strong>...</strong>，同时彻底转义裸写的 <3% 等数学符号防 HTML 吞字
+function _safeRich(s) {
+  const tokens = [];
+  const masked = String(s ?? '').replace(/<\/?strong(?:\s+style="[^"]*")?>/gi, m => {
+    tokens.push(m);
+    return `__SAFE_TAG_${tokens.length - 1}__`;
+  });
+  return _esc(masked).replace(/__SAFE_TAG_(\d+)__/g, (_, idx) => tokens[Number(idx)] || '');
 }
 function _fmtSec(sec) {
   if (!isFinite(sec) || sec < 0) return '0:00';
   const m = Math.floor(sec / 60), s = Math.floor(sec % 60);
   return m + ':' + (s < 10 ? '0' : '') + s;
+}
+function _debouncedGlossaryRefresh() {
+  if (typeof window.agyGlossaryRefresh !== 'function') return;
+  clearTimeout(_v25GlossTimer);
+  _v25GlossTimer = setTimeout(() => {
+    try { window.agyGlossaryRefresh(); } catch(e) {}
+  }, 180);
+}
+
+// 真实按线性比例计算的四档价格作战轨 SVG（保证现价气泡 100% 精准落在真实区间色块上方）
+function _buildProportionalRadarSvg(price, t1, t2, fv, ov) {
+  const W = 560, pad = 6, usable = W - pad * 2;
+  const rMin = Math.max(0.01, Math.min(t1 * 0.72, price * 0.88));
+  const rMax = Math.max(ov * 1.12, price * 1.08, rMin + 1);
+  const toX = v => pad + Math.max(0, Math.min(1, (v - rMin) / (rMax - rMin))) * usable;
+  const x0 = pad, x1 = toX(t1), x2 = toX(t2), x3 = toX(fv), x4 = toX(ov), x5 = W - pad;
+  const seg = (xa, xb, fill, lbl) => {
+    const w = Math.max(2, xb - xa - 2);
+    const txt = w >= 66 ? `<text x="${(xa + w/2).toFixed(1)}" y="43" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="900">${lbl}</text>` : '';
+    return `<rect x="${xa.toFixed(1)}" y="28" width="${w.toFixed(1)}" height="22" rx="5" fill="${fill}"/>${txt}`;
+  };
+  const pxX = Math.max(52, Math.min(W - 52, toX(price)));
+  const pinX = toX(price);
+  return `<svg viewBox="0 0 ${W} 62" style="width:100%;height:auto">
+    ${seg(x0, x1, '#059669', '🔥重锤 ≤' + t1.toFixed(2))}
+    ${seg(x1, x2, '#0284c7', '✅建仓 ≤' + t2.toFixed(2))}
+    ${seg(x2, x3, '#d97706', '⏳公允' + fv.toFixed(2))}
+    ${seg(x3, x4, '#64748b', '偏贵')}
+    ${seg(x4, x5, '#be123c', '🚨止盈≥' + ov.toFixed(2))}
+    <rect x="${(pxX - 48).toFixed(1)}" y="2" width="96" height="20" rx="10" fill="#f43f5e"/>
+    <text x="${pxX.toFixed(1)}" y="16" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">📍现价 ${price.toFixed(2)}</text>
+    <polygon points="${(pinX-4).toFixed(1)},22 ${(pinX+4).toFixed(1)},22 ${pinX.toFixed(1)},28" fill="#f43f5e"/>
+  </svg>`;
 }
 
 // 通用 8 种声明式 Bento SVG 卡片渲染器（读 briefing.bento_cards，100% 零硬编码）
@@ -2170,16 +2214,16 @@ function renderCustomBentoCard(card, liveRes) {
     const H = Math.max(120, items.length * 44 + 6);
     const rows = items.map((it, idx) => {
       const y = 12 + idx * 44;
-      const w = it.dashed ? 160 : Math.max(28, Math.round(Math.abs(it.pct || 0) / maxV * 335));
+      const w = it.dashed ? 135 : Math.max(26, Math.round(Math.abs(it.pct || 0) / maxV * 245));
       const fill = it.dashed ? 'none' : (it.highlight ? 'url(#gBentoHl)' : (it.color || '#e11d48'));
       const stroke = it.dashed ? ' stroke="#64748b" stroke-width="1.8" stroke-dasharray="5 4"' : '';
       const txtCol = it.highlight ? '#6ee7b7' : (it.text_color || '#fda4af');
       return `
-        <text x="8" y="${y+16}" fill="${it.highlight ? '#34d399' : '#cbd5e1'}" font-size="13" font-weight="${it.highlight ? 900 : 700}">${_esc(it.label)}</text>
-        <rect x="115" y="${y}" width="${w}" height="22" rx="6" fill="${fill}"${stroke}/>
-        <text x="${123 + w}" y="${y+16}" fill="${txtCol}" font-size="12.5" font-weight="${it.highlight ? 900 : 700}">${_esc(it.note)}</text>`;
+        <text x="6" y="${y+16}" fill="${it.highlight ? '#34d399' : '#cbd5e1'}" font-size="13" font-weight="${it.highlight ? 900 : 700}">${_esc(it.label)}</text>
+        <rect x="112" y="${y}" width="${w}" height="22" rx="6" fill="${fill}"${stroke}/>
+        <text x="${120 + w}" y="${y+16}" fill="${txtCol}" font-size="12.5" font-weight="${it.highlight ? 900 : 700}">${_esc(it.note)}</text>`;
     }).join('');
-    body = `<svg viewBox="0 0 600 ${H}" style="width:100%;height:auto">
+    body = `<svg viewBox="0 0 660 ${H}" style="width:100%;height:auto">
       <defs><linearGradient id="gBentoHl" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient></defs>
       ${rows}</svg>`;
   } else if (card.kind === 'waterfall_deal') {
@@ -2260,11 +2304,11 @@ function renderCustomBentoCard(card, liveRes) {
     body = `<div class="b-split-2">
       <div class="b-mini-box b-mini-green">
         <div style="font-size:12px;font-weight:900;margin-bottom:6px">${_esc(d.green_title)}</div>
-        ${(d.green_items || []).map(x => `<div style="font-size:12.5px;margin-bottom:5px">${x}</div>`).join('')}
+        ${(d.green_items || []).map(x => `<div style="font-size:12.5px;margin-bottom:5px">${_safeRich(x)}</div>`).join('')}
       </div>
       <div class="b-mini-box b-mini-red">
         <div style="font-size:12px;font-weight:900;margin-bottom:6px">${_esc(d.red_title)}</div>
-        ${(d.red_items || []).map(x => `<div style="font-size:12.5px;margin-bottom:5px">${x}</div>`).join('')}
+        ${(d.red_items || []).map(x => `<div style="font-size:12.5px;margin-bottom:5px">${_safeRich(x)}</div>`).join('')}
       </div>
     </div>`;
   } else if (card.kind === 'masters_radar') {
@@ -2274,8 +2318,6 @@ function renderCustomBentoCard(card, liveRes) {
     const t2 = liveRes ? liveRes.t2Max : 0;
     const fv = liveRes ? liveRes.fairPrice : 0;
     const ov = liveRes ? liveRes.overPrice : 0;
-    const rMin = t1 * 0.72, rMax = ov * 1.12;
-    const pxX = Math.max(48, Math.min(490, 6 + (price - rMin) / Math.max(0.01, rMax - rMin) * 528));
     body = `
       <div style="display:grid;grid-template-columns:repeat(${Math.max(1, ms.length)},1fr);gap:8px;margin-bottom:12px">
         ${ms.map(m => `<div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:8px 10px">
@@ -2283,19 +2325,7 @@ function renderCustomBentoCard(card, liveRes) {
           <div style="font-size:11.5px;color:#cbd5e1;margin-top:2px">${_esc(m.note)}</div>
         </div>`).join('')}
       </div>
-      <svg viewBox="0 0 540 62" style="width:100%;height:auto">
-        <rect x="6" y="28" width="125" height="22" rx="5" fill="#059669"/>
-        <text x="68" y="43" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">🔥重锤 ≤${t1.toFixed(2)}</text>
-        <rect x="135" y="28" width="115" height="22" rx="5" fill="#0284c7"/>
-        <text x="192" y="43" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">✅建仓 ≤${t2.toFixed(2)}</text>
-        <rect x="254" y="28" width="136" height="22" rx="5" fill="#d97706"/>
-        <text x="322" y="43" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">⏳观望 → 公允${fv.toFixed(2)}</text>
-        <rect x="394" y="28" width="140" height="22" rx="5" fill="#be123c"/>
-        <text x="464" y="43" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">🚨止盈 ≥${ov.toFixed(2)}</text>
-        <rect x="${(pxX - 48).toFixed(0)}" y="2" width="96" height="20" rx="10" fill="#f43f5e"/>
-        <text x="${pxX.toFixed(0)}" y="16" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">📍现价 ${price.toFixed(2)}</text>
-        <polygon points="${(pxX-4).toFixed(0)},22 ${(pxX+4).toFixed(0)},22 ${pxX.toFixed(0)},28" fill="#f43f5e"/>
-      </svg>`;
+      <div id="bentoLiveRadarMount">${_buildProportionalRadarSvg(price, t1, t2, fv, ov)}</div>`;
   } else if (card.kind === 'warning_wall') {
     const items = card.items || [];
     body = `<div class="b-wall-row">${items.map(it => `
@@ -2316,7 +2346,7 @@ function renderCustomBentoCard(card, liveRes) {
     </div>`;
 }
 
-// 0 Token 通用自动 Bento 引擎（所有已有老公司无需 briefing.json 直接秒享 2.5 一屏 Bento 视觉海报！）
+// 0 Token 通用自动 Bento 引擎（老公司无需 briefing.json 直接秒享 2.5 一屏动态 Bento）
 function renderAutoBentoFromFacts(liveRes) {
   const f = APP.facts;
   const peers = (f.peers || []).slice(0, 5);
@@ -2327,54 +2357,52 @@ function renderAutoBentoFromFacts(liveRes) {
   const stress = liveRes.stress || [];
   const sotp = (liveRes.sotpBlocks || []).filter(b => Math.abs(b.yi) > 0.01).slice(0, 5);
 
-  // 1) Peer GM comparison bars (span 7)
-  const maxGm = Math.max(10, ...peers.map(p => Number(p.gm) || 0));
+  const maxGm = Math.max(10, ...peers.map(p => Math.abs(Number(p.gm) || 0)));
   const pH = Math.max(125, peers.length * 36 + 10);
-  const peerSvg = peers.length ? `<svg viewBox="0 0 600 ${pH}" style="width:100%;height:auto">
+  const peerSvg = peers.length ? `<svg viewBox="0 0 660 ${pH}" style="width:100%;height:auto">
     <defs><linearGradient id="gAutoP" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient></defs>
     ${peers.map((p, i) => {
       const y = 8 + i * 36;
       const gm = Number(p.gm) || 0;
-      const w = Math.max(24, Math.round(gm / maxGm * 310));
+      const w = Math.max(22, Math.round(Math.max(0, gm) / maxGm * 245));
       return `<text x="6" y="${y+16}" fill="${p.highlight ? '#34d399' : '#cbd5e1'}" font-size="12.5" font-weight="${p.highlight ? 900 : 700}">${p.highlight ? '★ ' : ''}${_esc(p.name)}</text>
-        <rect x="115" y="${y+2}" width="${w}" height="20" rx="5" fill="${p.highlight ? 'url(#gAutoP)' : '#475569'}"/>
-        <text x="${123+w}" y="${y+16}" fill="${p.highlight ? '#6ee7b7' : '#cbd5e1'}" font-size="12" font-weight="800">毛利 ${gm.toFixed(1)}% · ROE ${(Number(p.roe)||0).toFixed(1)}%</text>`;
+        <rect x="122" y="${y+2}" width="${w}" height="20" rx="5" fill="${p.highlight ? 'url(#gAutoP)' : '#475569'}"/>
+        <text x="${130+w}" y="${y+16}" fill="${p.highlight ? '#6ee7b7' : '#cbd5e1'}" font-size="12" font-weight="800">毛利 ${gm.toFixed(1)}% · ROE ${(Number(p.roe)||0).toFixed(1)}%</text>`;
     }).join('')}</svg>` : '<div style="font-size:13px;opacity:.8">详见 Tab 3 同行对质矩阵</div>';
 
-  // 2) 5Y FCF & NP mini chart (span 5)
+  // 5Y FCF & NP mini chart（动态均分步长 + 负柱防碰撞留白）
   const maxFin = Math.max(1, ...hist.map(h => Math.max(Math.abs(h.np||0), Math.abs(h.fcf||0))));
-  const histSvg = hist.length ? `<svg viewBox="0 0 420 155" style="width:100%;height:auto">
+  const hStep = hist.length ? (396 / hist.length) : 66;
+  const histSvg = hist.length ? `<svg viewBox="0 0 420 166" style="width:100%;height:auto">
     ${hist.map((h, i) => {
-      const cx = 36 + i * 66;
-      const npH = Math.max(4, Math.round(Math.abs(h.np||0) / maxFin * 78));
-      const fcfH = Math.max(4, Math.round(Math.abs(h.fcf||0) / maxFin * 78));
-      const fcfPos = (h.fcf || 0) >= 0;
-      return `<rect x="${cx-18}" y="${108-npH}" width="16" height="${npH}" rx="3" fill="rgba(255,255,255,0.32)"/>
-        <rect x="${cx+1}" y="${fcfPos ? 108-fcfH : 108}" width="16" height="${Math.min(fcfH, fcfPos ? 88 : 24)}" rx="3" fill="${fcfPos ? '#fbbf24' : '#fb7185'}"/>
-        <text x="${cx}" y="144" text-anchor="middle" fill="#d1fae5" font-size="10.5" font-weight="700">${_esc(h.period)}</text>
-        <text x="${cx+9}" y="${fcfPos ? 103-fcfH : 134}" text-anchor="middle" fill="${fcfPos ? '#fde68a' : '#fda4af'}" font-size="9.5" font-weight="800">${(h.fcf||0).toFixed(1)}</text>`;
+      const cx = 12 + hStep * (i + 0.5);
+      const npV = Number(h.np) || 0, fcfV = Number(h.fcf) || 0;
+      const npH = Math.max(4, Math.min(72, Math.round(Math.abs(npV) / maxFin * 72)));
+      const fcfH = Math.max(4, Math.round(Math.abs(fcfV) / maxFin * 72));
+      const fcfPos = fcfV >= 0;
+      const negH = Math.min(20, fcfH);
+      return `<rect x="${(cx-17).toFixed(1)}" y="${(npV>=0 ? 102-npH : 102).toFixed(1)}" width="15" height="${(npV>=0 ? npH : Math.min(20, npH)).toFixed(1)}" rx="3" fill="rgba(255,255,255,0.32)"/>
+        <rect x="${(cx+1).toFixed(1)}" y="${(fcfPos ? 102-fcfH : 102).toFixed(1)}" width="15" height="${(fcfPos ? fcfH : negH).toFixed(1)}" rx="3" fill="${fcfPos ? '#fbbf24' : '#fb7185'}"/>
+        <text x="${(cx+8.5).toFixed(1)}" y="${(fcfPos ? 97-fcfH : 102+negH+11).toFixed(1)}" text-anchor="middle" fill="${fcfPos ? '#fde68a' : '#fda4af'}" font-size="9.5" font-weight="800">${fcfV.toFixed(1)}</text>
+        <text x="${cx.toFixed(1)}" y="156" text-anchor="middle" fill="#d1fae5" font-size="10.5" font-weight="700">${_esc(h.period)}</text>`;
     }).join('')}
-    <line x1="12" y1="108" x2="408" y2="108" stroke="rgba(255,255,255,0.35)"/>
+    <line x1="12" y1="102" x2="408" y2="102" stroke="rgba(255,255,255,0.35)"/>
     <text x="14" y="14" fill="#d1fae5" font-size="10.5">⬜ 归母净利   🟨/🟥 自由现金流 FCF（亿元）</text>
   </svg>` : '';
 
-  // 3) SOTP breakdown (span 4)
   const sotpHtml = sotp.map(b => `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:8px;background:#f8fafc;margin-bottom:6px;border-left:4px solid ${b.color||'#0284c7'}">
     <span style="font-size:12px;font-weight:700;color:var(--ink-2)">${_esc(b.name.split('（')[0])}</span>
     <strong style="font-size:13px;color:${b.yi>=0?'#059669':'#be123c'}">${b.yi>=0?'+':''}${b.yi.toFixed(1)}亿</strong>
   </div>`).join('');
 
-  // 4) Red lines & PB floor (span 4)
   const pb = f.pb_history || {};
   const rlHtml = rls.map(r => `<div style="font-size:12px;margin-bottom:6px;padding:6px 8px;background:rgba(255,255,255,0.72);border-radius:8px"><strong>🚨 ${_esc(r.title)}</strong></div>`).join('');
 
-  // 5) Stress scenarios (span 4)
   const stHtml = stress.map(s => `<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:8px;background:${s.id==='steady'?'#78350f':'rgba(255,255,255,0.75)'};color:${s.id==='steady'?'#fff':'#78350f'};margin-bottom:6px">
     <span style="font-size:12px;font-weight:800">${_esc(s.plain_name || s.name)}</span>
     <span style="font-size:12.5px;font-weight:900">OE ${s.oe.toFixed(1)}亿 (${s.evYield.toFixed(1)}%)</span>
   </div>`).join('');
 
-  // 6) Audit red/black (span 6)
   const leftI = (recon.left_items || []).slice(0, 2);
   const rightI = (recon.right_items || []).slice(0, 2);
   const splitHtml = `<div class="b-split-2">
@@ -2382,18 +2410,7 @@ function renderAutoBentoFromFacts(liveRes) {
     <div class="b-mini-box b-mini-green"><div style="font-size:12px;font-weight:900;margin-bottom:5px">🛡️ 蓝方硬据反杀</div>${rightI.map(x => `<div style="font-size:12px;margin-bottom:5px">${_esc(x.slice(0, 95))}${x.length>95?'…':''}</div>`).join('')}</div>
   </div>`;
 
-  // 7) Live Price Radar (span 6)
-  const price = liveRes.price, t1 = liveRes.t1Max, t2 = liveRes.t2Max, fv = liveRes.fairPrice, ov = liveRes.overPrice;
-  const rMin = t1 * 0.72, rMax = ov * 1.12;
-  const pxX = Math.max(48, Math.min(490, 6 + (price - rMin) / Math.max(0.01, rMax - rMin) * 528));
-  const radarSvg = `<svg viewBox="0 0 540 62" style="width:100%;height:auto">
-    <rect x="6" y="28" width="125" height="22" rx="5" fill="#059669"/><text x="68" y="43" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">🔥重锤 ≤${t1.toFixed(2)}</text>
-    <rect x="135" y="28" width="115" height="22" rx="5" fill="#0284c7"/><text x="192" y="43" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">✅建仓 ≤${t2.toFixed(2)}</text>
-    <rect x="254" y="28" width="136" height="22" rx="5" fill="#d97706"/><text x="322" y="43" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">⏳观望 → 公允${fv.toFixed(2)}</text>
-    <rect x="394" y="28" width="140" height="22" rx="5" fill="#be123c"/><text x="464" y="43" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">🚨止盈 ≥${ov.toFixed(2)}</text>
-    <rect x="${(pxX-48).toFixed(0)}" y="2" width="96" height="20" rx="10" fill="#f43f5e"/><text x="${pxX.toFixed(0)}" y="16" text-anchor="middle" fill="#fff" font-size="11" font-weight="900">📍现价 ${price.toFixed(2)}</text>
-    <polygon points="${(pxX-4).toFixed(0)},22 ${(pxX+4).toFixed(0)},22 ${pxX.toFixed(0)},28" fill="#f43f5e"/>
-  </svg>`;
+  const radarSvg = _buildProportionalRadarSvg(liveRes.price, liveRes.t1Max, liveRes.t2Max, liveRes.fairPrice, liveRes.overPrice);
 
   return `
     <div class="b-card b-dark b-span-7">
@@ -2430,7 +2447,7 @@ function renderAutoBentoFromFacts(liveRes) {
       <div><div class="b-eyebrow"><span>🎯 07 · 四档实战作战坐标</span><span style="color:#fde68a">${_esc(f.tier)} · 仓位上限 ${f.position_cap_pct}%</span></div>
       <h3 class="b-h">${_esc(liveRes.zoneLabel)}（EV 回报 ${liveRes.steadyEvYield.toFixed(2)}% / 股息 ${liveRes.ttmDivNow.toFixed(2)}%）</h3>
       <div style="font-size:12.5px;color:#cbd5e1;margin-bottom:12px">${_esc(liveRes.actionPlain)}</div>${radarSvg}</div>
-      <div class="b-foot-punch" style="color:#94a3b8">公允中枢 ${fv.toFixed(2)} ${UNIT} ｜ 1.25× 高估止盈红线 ${ov.toFixed(2)} ${UNIT}</div>
+      <div class="b-foot-punch" style="color:#94a3b8">公允中枢 ${liveRes.fairPrice.toFixed(2)} ${UNIT} ｜ 1.25× 高估止盈红线 ${liveRes.overPrice.toFixed(2)} ${UNIT}</div>
     </div>
     <div class="b-card b-dark b-span-12" style="padding:15px 20px">
       <div class="b-eyebrow" style="margin-bottom:8px"><span>🧭 08 · 未来 2–3 年财报季硬核打卡路标</span><span style="color:#fde68a">证伪清单</span></div>
@@ -2438,72 +2455,10 @@ function renderAutoBentoFromFacts(liveRes) {
     </div>`;
 }
 
-function renderBriefingTab(liveRes) {
+function _renderAnatomySection() {
   const b = (APP.briefing && typeof APP.briefing === 'object') ? APP.briefing : {};
-  const hl = b.headline || {};
-  const f = APP.facts;
-  const price = liveRes ? liveRes.price : f.market.price;
-  const fair = liveRes ? liveRes.fairPrice : 0;
-  const t2 = liveRes ? liveRes.t2Max : 0;
-  const t1 = liveRes ? liveRes.t1Max : 0;
-  const over = liveRes ? liveRes.overPrice : 0;
-  const distT2 = ((t2 / price - 1) * 100).toFixed(1);
-  const distT1 = ((t1 / price - 1) * 100).toFixed(1);
-  const hasPod = !!(b.podcast && b.podcast.audio_file);
-
-  document.getElementById('heroBriefWrap').innerHTML = `
-    <div class="hero-brief">
-      <div class="hero-left">
-        <span class="hero-badge">${_esc(hl.verdict_tag || (liveRes ? liveRes.zoneLabel : '投委会终审定调'))}</span>
-        <h2 class="hero-title">${_esc(f.company)}（${_esc(f.code)}）· 一屏 Bento 商业海报与无痛简报</h2>
-        <p class="hero-desc">${_esc(hl.summary_one_liner || f.one_liner_plain || f.one_liner)}</p>
-        <div class="hero-actions">
-          ${hasPod ? `<button type="button" class="hero-cta primary" onclick="playPodcastFromStart()">🎧 听 ${_esc(hl.read_time_audio || '8分钟双人播客')}</button>` : ''}
-          <button type="button" class="hero-cta ${hasPod ? '' : 'primary'}" onclick="switchTab('tab1')">🎛️ 拉滑块测估值</button>
-          <button type="button" class="hero-cta" onclick="switchTab('tab2')">📖 看分层底稿（精读↔法医）</button>
-          <button type="button" class="hero-cta" onclick="switchTab('tab3')">📈 看财务图谱</button>
-        </div>
-      </div>
-      <div class="hero-prices">
-        <div class="hp-box"><div class="hp-k">当前现价</div><div class="hp-v" style="color:#fde68a">${price.toFixed(2)}</div><div class="hp-s">公允 ${fair.toFixed(2)} ${UNIT}</div></div>
-        <div class="hp-box"><div class="hp-k">二档建仓线</div><div class="hp-v" style="color:#7dd3fc">≤${t2.toFixed(2)}</div><div class="hp-s">距现价 ${distT2}%</div></div>
-        <div class="hp-box"><div class="hp-k">一档重锤线</div><div class="hp-v" style="color:#6ee7b7">≤${t1.toFixed(2)}</div><div class="hp-s">距现价 ${distT1}%</div></div>
-      </div>
-    </div>`;
-
-  // Render C-position Bento 8-grid (custom briefing.bento_cards OR 0-token auto Bento from facts.json!)
-  const bentoMount = document.getElementById('bentoGridMount');
-  if (bentoMount) {
-    if (b.bento_cards && b.bento_cards.length) {
-      bentoMount.innerHTML = b.bento_cards.map(c => renderCustomBentoCard(c, liveRes)).join('');
-    } else {
-      bentoMount.innerHTML = renderAutoBentoFromFacts(liveRes);
-    }
-  }
-
-  // Price thermometer ruler (live synced with Tab 1)
-  const rMin = +(t1 * 0.72).toFixed(2), rMax = +(over * 1.15).toFixed(2);
-  const pct = v => Math.max(0, Math.min(100, (v - rMin) / Math.max(0.01, rMax - rMin) * 100));
-  const w1 = pct(t1), w2 = pct(t2) - w1, w3 = pct(fair) - pct(t2), w4 = pct(over) - pct(fair), w5 = 100 - pct(over);
-  const pPin = pct(price);
-  document.getElementById('briefRulerWrap').innerHTML = `
-    <div class="ruler-wrap" style="padding-top:10px">
-      <div class="ruler-marker"><div class="marker-pin" style="left:${pPin.toFixed(1)}%;background:#be123c">📍 现价 ${price.toFixed(2)} ${UNIT}</div></div>
-      <div class="ruler-bar" style="height:38px">
-        <div class="r-seg" style="width:${w1.toFixed(1)}%;background:#059669">🔥 重锤 ≤${t1.toFixed(2)}</div>
-        <div class="r-seg" style="width:${w2.toFixed(1)}%;background:#0284c7">✅ 建仓 ≤${t2.toFixed(2)}</div>
-        <div class="r-seg" style="width:${w3.toFixed(1)}%;background:#d97706">⏳ 观望至 ${fair.toFixed(2)}</div>
-        <div class="r-seg" style="width:${w4.toFixed(1)}%;background:#64748b">偏贵</div>
-        <div class="r-seg" style="width:${w5.toFixed(1)}%;background:#be123c">🚨 止盈 ≥${over.toFixed(2)}</div>
-      </div>
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:12px;color:var(--muted)">
-        <span>💡 稳态自由盈余 <strong>${liveRes.steadyOe.toFixed(2)} 亿</strong>｜EV 回报率 <strong>${liveRes.steadyEvYield.toFixed(2)}%</strong>｜股息率 <strong>${liveRes.ttmDivNow.toFixed(2)}%</strong></span>
-        <span>🛡️ 5年 PB 铁底：<strong>${(f.pb_history||{}).pb_6y_floor || '-'}x</strong>（重锤价对应 <strong>${liveRes.t1RepPb.toFixed(2)}x PB</strong>）</span>
-      </div>
-    </div>`;
-
-  // Optional rich sections when briefing.json exists
   const anatCard = document.getElementById('anatCardWrap');
+  if (!anatCard) return;
   if (b.anatomy_map && b.anatomy_map.columns && b.anatomy_map.columns.length) {
     anatCard.style.display = 'block';
     document.getElementById('anatSub').textContent = b.anatomy_map.subtitle || '';
@@ -2528,13 +2483,31 @@ function renderBriefingTab(liveRes) {
         <ul class="anat-detail-ul">${(selObj.detail||[]).map(d => `<li>${_esc(d)}</li>`).join('')}</ul>
       </div>`;
     }
-    document.querySelectorAll('[data-anat]').forEach(el => el.addEventListener('click', () => { v25AnatSelected = el.dataset.anat; renderBriefingTab(computeLive()); }));
-  } else if (anatCard) {
+    document.querySelectorAll('[data-anat]').forEach(el => el.addEventListener('click', () => {
+      v25AnatSelected = el.dataset.anat;
+      _renderAnatomySection();
+      _debouncedGlossaryRefresh();
+    }));
+  } else {
     anatCard.style.display = 'none';
   }
+}
+
+function renderBriefingStaticOnce(liveRes) {
+  if (_v25StaticReady) return;
+  _v25StaticReady = true;
+  const b = (APP.briefing && typeof APP.briefing === 'object') ? APP.briefing : {};
+
+  // 若有定制 Bento 卡片，一次性渲染全部 8 格（后续滑块拖动仅极轻量刷新其中的实时作战轨 SVG！）
+  const bentoMount = document.getElementById('bentoGridMount');
+  if (bentoMount && b.bento_cards && b.bento_cards.length) {
+    bentoMount.innerHTML = b.bento_cards.map(c => renderCustomBentoCard(c, liveRes)).join('');
+  }
+
+  _renderAnatomySection();
 
   const kqCard = document.getElementById('kqCardWrap');
-  if (b.key_questions && b.key_questions.length) {
+  if (kqCard && b.key_questions && b.key_questions.length) {
     kqCard.style.display = 'block';
     document.getElementById('kqGridWrap').innerHTML = b.key_questions.map(q => `
       <div class="kq-card light-${q.light||'blue'}">
@@ -2558,7 +2531,7 @@ function renderBriefingTab(liveRes) {
   }
 
   const clashCard = document.getElementById('clashCardWrap');
-  if (b.clash_highlights && b.clash_highlights.length) {
+  if (clashCard && b.clash_highlights && b.clash_highlights.length) {
     clashCard.style.display = 'block';
     document.getElementById('briefClashWrap').innerHTML = b.clash_highlights.map(c => `
       <div class="clash-card">
@@ -2572,8 +2545,76 @@ function renderBriefingTab(liveRes) {
   } else if (clashCard) {
     clashCard.style.display = 'none';
   }
+  _debouncedGlossaryRefresh();
+}
 
-  if (typeof window.agyGlossaryRefresh === 'function') window.agyGlossaryRefresh();
+function renderBriefingTab(liveRes) {
+  renderBriefingStaticOnce(liveRes);
+
+  const b = (APP.briefing && typeof APP.briefing === 'object') ? APP.briefing : {};
+  const hl = b.headline || {};
+  const f = APP.facts;
+  const price = liveRes ? liveRes.price : f.market.price;
+  const fair = liveRes ? liveRes.fairPrice : 0;
+  const t2 = liveRes ? liveRes.t2Max : 0;
+  const t1 = liveRes ? liveRes.t1Max : 0;
+  const over = liveRes ? liveRes.overPrice : 0;
+  const distT2 = ((t2 / Math.max(0.01, price) - 1) * 100).toFixed(1);
+  const distT1 = ((t1 / Math.max(0.01, price) - 1) * 100).toFixed(1);
+  const hasPod = !!(b.podcast && b.podcast.audio_file);
+
+  document.getElementById('heroBriefWrap').innerHTML = `
+    <div class="hero-brief">
+      <div class="hero-left">
+        <span class="hero-badge">${_esc(hl.verdict_tag || (liveRes ? liveRes.zoneLabel : '投委会终审定调'))}</span>
+        <h2 class="hero-title">${_esc(f.company)}（${_esc(f.code)}）· 一屏 Bento 商业海报与无痛简报</h2>
+        <p class="hero-desc">${_esc(hl.summary_one_liner || f.one_liner_plain || f.one_liner)}</p>
+        <div class="hero-actions">
+          ${hasPod ? `<button type="button" class="hero-cta primary" onclick="playPodcastFromStart()">🎧 听 ${_esc(hl.read_time_audio || '8分钟双人播客')}</button>` : ''}
+          <button type="button" class="hero-cta ${hasPod ? '' : 'primary'}" onclick="switchTab('tab1')">🎛️ 拉滑块测估值</button>
+          <button type="button" class="hero-cta" onclick="switchTab('tab2')">📖 看分层底稿（精读↔法医）</button>
+          <button type="button" class="hero-cta" onclick="switchTab('tab3')">📈 看财务图谱</button>
+        </div>
+      </div>
+      <div class="hero-prices">
+        <div class="hp-box"><div class="hp-k">当前现价</div><div class="hp-v" style="color:#fde68a">${price.toFixed(2)}</div><div class="hp-s">公允 ${fair.toFixed(2)} ${UNIT}</div></div>
+        <div class="hp-box"><div class="hp-k">二档建仓线</div><div class="hp-v" style="color:#7dd3fc">≤${t2.toFixed(2)}</div><div class="hp-s">距现价 ${distT2}%</div></div>
+        <div class="hp-box"><div class="hp-k">一档重锤线</div><div class="hp-v" style="color:#6ee7b7">≤${t1.toFixed(2)}</div><div class="hp-s">距现价 ${distT1}%</div></div>
+      </div>
+    </div>`;
+
+  // 动态区轻量更新：定制 Bento 只刷新作战轨 SVG；老公司无 briefing 时更新自动 Bento
+  const liveRadar = document.getElementById('bentoLiveRadarMount');
+  if (liveRadar) {
+    liveRadar.innerHTML = _buildProportionalRadarSvg(price, t1, t2, fair, over);
+  } else {
+    const bentoMount = document.getElementById('bentoGridMount');
+    if (bentoMount && !(b.bento_cards && b.bento_cards.length)) {
+      bentoMount.innerHTML = renderAutoBentoFromFacts(liveRes);
+    }
+  }
+
+  // Price thermometer ruler (live synced with Tab 1)
+  const rMin = Math.max(0.01, Math.min(t1 * 0.72, price * 0.88));
+  const rMax = Math.max(over * 1.15, price * 1.08, rMin + 1);
+  const pct = v => Math.max(0, Math.min(100, (v - rMin) / (rMax - rMin) * 100));
+  const w1 = pct(t1), w2 = pct(t2) - w1, w3 = pct(fair) - pct(t2), w4 = pct(over) - pct(fair), w5 = 100 - pct(over);
+  const pPin = pct(price);
+  document.getElementById('briefRulerWrap').innerHTML = `
+    <div class="ruler-wrap" style="padding-top:10px">
+      <div class="ruler-marker"><div class="marker-pin" style="left:${pPin.toFixed(1)}%;background:#be123c">📍 现价 ${price.toFixed(2)} ${UNIT}</div></div>
+      <div class="ruler-bar" style="height:38px">
+        <div class="r-seg" style="width:${w1.toFixed(1)}%;background:#059669">🔥 重锤 ≤${t1.toFixed(2)}</div>
+        <div class="r-seg" style="width:${w2.toFixed(1)}%;background:#0284c7">✅ 建仓 ≤${t2.toFixed(2)}</div>
+        <div class="r-seg" style="width:${w3.toFixed(1)}%;background:#d97706">⏳ 观望至 ${fair.toFixed(2)}</div>
+        <div class="r-seg" style="width:${w4.toFixed(1)}%;background:#64748b">偏贵</div>
+        <div class="r-seg" style="width:${w5.toFixed(1)}%;background:#be123c">🚨 止盈 ≥${over.toFixed(2)}</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:12px;color:var(--muted)">
+        <span>💡 稳态自由盈余 <strong>${liveRes.steadyOe.toFixed(2)} 亿</strong>｜EV 回报率 <strong>${liveRes.steadyEvYield.toFixed(2)}%</strong>｜股息率 <strong>${liveRes.ttmDivNow.toFixed(2)}%</strong></span>
+        <span>🛡️ 5年 PB 铁底：<strong>${(f.pb_history||{}).pb_6y_floor || '-'}x</strong>（重锤价对应 <strong>${liveRes.t1RepPb.toFixed(2)}x PB</strong>）</span>
+      </div>
+    </div>`;
 }
 
 // === Tab 2 渐进式折叠控制 ===
