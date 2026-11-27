@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+<title>💬 瑞丰新材（300910.SZ）投委会群聊辩论剧场</title>
+<style>
+  :root {
+    --bg-app: #f1f5f9;
+    --bg-panel: #ffffff;
+    --bg-card: #f8fafc;
+    --bg-card-hover: #eef2f7;
+    --bg-bubble-host: #eff6ff;
+    --bg-bubble-bull: #ecfdf5;
+    --bg-bubble-bear: #fff1f2;
+    --bg-bubble-judge: #faf5ff;
+    --border-subtle: rgba(15, 23, 42, 0.10);
+    --border-strong: rgba(15, 23, 42, 0.20);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --accent-host: #0284c7;
+    --accent-bull: #059669;
+    --accent-bear: #e11d48;
+    --accent-judge: #7c3aed;
+    --accent-gold: #d97706;
+    --quote-bg: rgba(15, 23, 42, 0.055);
+    --pill-bg: #e2e8f0;
+    --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --highlight-ring: #f59e0b;
+  }
+  [data-theme="dark"] {
+    --bg-app: #0b1120;
+    --bg-panel: #111827;
+    --bg-card: #1e293b;
+    --bg-card-hover: #273549;
+    --bg-bubble-host: #172554;
+    --bg-bubble-bull: #052e2b;
+    --bg-bubble-bear: #33131c;
+    --bg-bubble-judge: #251a3f;
+    --border-subtle: rgba(148, 163, 184, 0.16);
+    --border-strong: rgba(148, 163, 184, 0.30);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-host: #38bdf8;
+    --accent-bull: #34d399;
+    --accent-bear: #fb7185;
+    --accent-judge: #c084fc;
+    --accent-gold: #fbbf24;
+    --quote-bg: rgba(15, 23, 42, 0.55);
+    --pill-bg: rgba(30, 41, 59, 0.85);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.42);
+    --highlight-ring: #fbbf24;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-app); color: var(--text-primary);
+    line-height: 1.66; -webkit-font-smoothing: antialiased;
+  }
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg-panel); border-bottom: 1px solid var(--border-subtle);
+    backdrop-filter: blur(12px); padding: 11px 18px; box-shadow: var(--shadow-lg);
+  }
+  .topbar-inner {
+    max-width: 1480px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .group-title-wrap { display: flex; flex-direction: column; gap: 2px; }
+  .group-title { font-size: 16.5px; font-weight: 800; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .group-badge {
+    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+    background: rgba(2, 132, 199, 0.14); color: var(--accent-host); border: 1px solid rgba(2, 132, 199, 0.30);
+  }
+  .group-sub { font-size: 12px; color: var(--text-secondary); }
+  .top-actions { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+
+  /* 双模式切换胶囊（核心亮点） */
+  .mode-switch {
+    display: inline-flex; padding: 3px; border-radius: 11px;
+    background: var(--bg-card); border: 1.5px solid var(--accent-host); gap: 2px;
+  }
+  .mode-btn {
+    border: none; background: transparent; color: var(--text-secondary);
+    padding: 5px 11px; border-radius: 8px; font-size: 12.5px; font-weight: 800;
+    cursor: pointer; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 4px;
+  }
+  .mode-btn.active-plain { background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.30); }
+  .mode-btn.active-pro { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.30); }
+
+  .btn {
+    border: 1px solid var(--border-strong); background: var(--bg-card); color: var(--text-primary);
+    padding: 6px 11px; border-radius: 9px; font-size: 12.5px; font-weight: 600;
+    cursor: pointer; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 5px;
+    text-decoration: none;
+  }
+  .btn:hover { background: var(--bg-card-hover); transform: translateY(-1px); }
+  .btn.active { background: var(--accent-host); color: #fff; border-color: var(--accent-host); }
+  .btn-gold { background: linear-gradient(135deg, #f59e0b, #ea580c); color: #fff; border-color: transparent; }
+  .btn-gold:hover { filter: brightness(1.08); }
+
+  .roster-strip {
+    max-width: 1480px; margin: 8px auto 0;
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    padding-top: 8px; border-top: 1px dashed var(--border-subtle);
+  }
+  .member-chip {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; padding: 3px 10px;
+    border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border-subtle);
+    color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  }
+  .member-chip:hover { border-color: var(--border-strong); color: var(--text-primary); }
+  .member-chip.selected { border-color: var(--accent-gold); color: var(--text-primary); box-shadow: 0 0 0 1px var(--accent-gold); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .dot-host { background: var(--accent-host); } .dot-bull { background: var(--accent-bull); }
+  .dot-bear { background: var(--accent-bear); } .dot-judge { background: var(--accent-judge); }
+
+  /* 三栏自适应布局：左导航 + 中间群聊 + 右侧术语白话栏 */
+  .layout {
+    max-width: 1480px; margin: 16px auto 40px; padding: 0 16px;
+    display: grid; grid-template-columns: 255px minmax(0, 1fr) 290px; gap: 16px; align-items: start;
+  }
+  .layout.hide-glossary { grid-template-columns: 255px minmax(0, 1fr); }
+  .layout.hide-glossary .glossary-sidebar { display: none; }
+  @media (max-width: 1200px) {
+    .layout { grid-template-columns: 245px minmax(0, 1fr); }
+    .glossary-sidebar {
+      position: fixed !important; right: 16px; bottom: 16px; top: auto !important; z-index: 200;
+      width: min(360px, calc(100vw - 32px)); max-height: 70vh; box-shadow: 0 16px 48px rgba(0,0,0,0.32);
+      display: none;
+    }
+    .glossary-sidebar.drawer-open { display: flex !important; }
+  }
+  @media (max-width: 900px) {
+    .layout, .layout.hide-glossary { grid-template-columns: 1fr; }
+    .sidebar { position: static !important; }
+  }
+
+  .sidebar, .glossary-sidebar {
+    position: sticky; top: 118px; background: var(--bg-panel); border: 1px solid var(--border-subtle);
+    border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 12px;
+    max-height: calc(100vh - 134px); overflow-y: auto;
+  }
+  .side-title {
+    font-size: 12px; font-weight: 800; letter-spacing: 0.03em; color: var(--text-muted);
+    display: flex; justify-content: space-between; align-items: center; gap: 6px;
+  }
+  .topic-list { display: flex; flex-direction: column; gap: 5px; }
+  .topic-btn {
+    text-align: left; width: 100%; border: 1px solid transparent; background: transparent; color: var(--text-secondary);
+    padding: 7px 9px; border-radius: 10px; cursor: pointer; font-size: 12.5px; font-weight: 600;
+    transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; gap: 6px;
+  }
+  .topic-btn > span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topic-btn:hover { background: var(--bg-card); color: var(--text-primary); }
+  .topic-btn.active { background: rgba(2, 132, 199, 0.12); color: var(--accent-host); border-color: rgba(2, 132, 199, 0.35); }
+  .topic-count { font-size: 10.5px; padding: 1px 6px; border-radius: 999px; background: var(--pill-bg); color: var(--text-secondary); font-weight: 700; }
+  .topic-status { font-size: 10.5px; white-space: nowrap; }
+  .convergence-box { background: var(--bg-card); border-radius: 11px; padding: 10px; border: 1px solid var(--border-subtle); font-size: 12px; }
+  .conv-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px dashed var(--border-subtle); gap: 6px; }
+  .conv-row:last-child { border-bottom: none; }
+  .conv-label { color: var(--text-secondary); font-size: 11.5px; }
+  .conv-val { font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; font-size: 11.5px; }
+
+  /* 术语注解侧边栏样式 */
+  .glossary-search {
+    width: 100%; padding: 7px 10px; border-radius: 9px; border: 1px solid var(--border-strong);
+    background: var(--bg-card); color: var(--text-primary); font-size: 12.5px; outline: none;
+  }
+  .glossary-search:focus { border-color: var(--accent-host); }
+  .glossary-list { display: flex; flex-direction: column; gap: 8px; }
+  .g-card {
+    background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px;
+    padding: 9px 10px; font-size: 12px; transition: all 0.22s ease; cursor: pointer;
+  }
+  .g-card:hover { border-color: var(--accent-host); }
+  .g-card.flash-term { border-color: var(--accent-gold); box-shadow: 0 0 0 2.5px rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.10); }
+  .g-term { font-weight: 800; font-size: 12.5px; color: var(--accent-host); margin-bottom: 3px; }
+  .g-plain { color: var(--text-primary); line-height: 1.55; }
+  .g-usage { margin-top: 4px; font-size: 11px; color: var(--text-muted); border-top: 1px dashed var(--border-subtle); padding-top: 4px; }
+
+  /* 正文内联可点击术语胶囊 */
+  .term-link {
+    border-bottom: 1.5px dashed var(--accent-host); cursor: help; font-weight: 700;
+    color: inherit; padding: 0 1px; border-radius: 3px; transition: background 0.15s;
+  }
+  .term-link:hover { background: rgba(2, 132, 199, 0.14); }
+
+  .chat-stage { background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 16px 18px 28px; min-height: 75vh; }
+  .stage-banner {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    padding: 10px 13px; border-radius: 11px; margin-bottom: 16px;
+    background: var(--bg-card); border: 1px solid var(--border-subtle); font-size: 12.5px; color: var(--text-secondary);
+  }
+  .mode-pill-banner {
+    display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 800;
+    padding: 2px 9px; border-radius: 999px;
+  }
+  .mode-pill-banner.plain { background: rgba(16, 185, 129, 0.15); color: #059669; }
+  .mode-pill-banner.pro { background: rgba(99, 102, 241, 0.15); color: #4f46e5; }
+  [data-theme="dark"] .mode-pill-banner.plain { color: #34d399; }
+  [data-theme="dark"] .mode-pill-banner.pro { color: #a5b4fc; }
+
+  .round-divider { display: flex; align-items: center; gap: 10px; margin: 22px 0 14px; color: var(--text-muted); font-size: 12px; font-weight: 700; }
+  .round-divider::before, .round-divider::after { content: ""; flex: 1; height: 1px; background: var(--border-subtle); }
+  .round-pill { padding: 3px 12px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border-strong); color: var(--text-primary); }
+  .msg-row { display: flex; gap: 11px; margin-bottom: 14px; align-items: flex-start; scroll-margin-top: 140px; }
+  .msg-row.side-right { flex-direction: row-reverse; }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 18px; user-select: none; border: 1px solid var(--border-strong);
+  }
+  .av-host { background: rgba(56, 189, 248, 0.16); } .av-bull { background: rgba(52, 211, 153, 0.16); }
+  .av-bear { background: rgba(251, 113, 133, 0.16); } .av-judge { background: rgba(192, 132, 252, 0.16); }
+  .msg-body-wrap { max-width: 84%; min-width: 240px; display: flex; flex-direction: column; gap: 4px; }
+  @media (max-width: 680px) { .msg-body-wrap { max-width: 89%; } }
+  .msg-row.side-right .msg-body-wrap { align-items: flex-end; }
+  .msg-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 11.5px; color: var(--text-secondary); padding: 0 2px; }
+  .msg-row.side-right .msg-meta { flex-direction: row-reverse; }
+  .sender-name { font-weight: 800; color: var(--text-primary); }
+  .model-tag { font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-muted); }
+  .msg-id { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10.5px; color: var(--text-muted); }
+  .act-tag { font-size: 10.5px; font-weight: 800; padding: 1.5px 7px; border-radius: 6px; }
+  .act-attack { background: rgba(244, 63, 94, 0.14); color: #be123c; border: 1px solid rgba(244, 63, 94, 0.30); }
+  .act-defend { background: rgba(16, 185, 129, 0.14); color: #047857; border: 1px solid rgba(16, 185, 129, 0.30); }
+  .act-concede { background: rgba(245, 158, 11, 0.14); color: #b45309; border: 1px solid rgba(245, 158, 11, 0.30); }
+  .act-withdraw { background: rgba(2, 132, 199, 0.14); color: #0369a1; border: 1px solid rgba(2, 132, 199, 0.30); }
+  .act-verdict { background: rgba(124, 58, 237, 0.14); color: #6d28d9; border: 1px solid rgba(124, 58, 237, 0.32); }
+  .act-system { background: rgba(100, 116, 139, 0.14); color: var(--text-secondary); }
+  [data-theme="dark"] .act-attack { color: #fb7185; } [data-theme="dark"] .act-defend { color: #34d399; }
+  [data-theme="dark"] .act-concede { color: #fbbf24; } [data-theme="dark"] .act-withdraw { color: #38bdf8; }
+  [data-theme="dark"] .act-verdict { color: #d8b4fe; }
+  .bubble { padding: 11px 14px; border-radius: 14px; border: 1px solid var(--border-subtle); font-size: 14px; width: 100%; transition: box-shadow 0.25s, border-color 0.25s; }
+  .bubble-host { background: var(--bg-bubble-host); border-color: rgba(2, 132, 199, 0.24); }
+  .bubble-bull { background: var(--bg-bubble-bull); border-color: rgba(5, 150, 105, 0.26); border-top-left-radius: 4px; }
+  .bubble-bear { background: var(--bg-bubble-bear); border-color: rgba(225, 29, 72, 0.24); border-top-right-radius: 4px; }
+  .bubble-judge { background: var(--bg-bubble-judge); border-color: rgba(124, 58, 237, 0.28); }
+  .bubble.flash-highlight { box-shadow: 0 0 0 3px var(--highlight-ring), 0 0 24px rgba(251, 191, 36, 0.35); border-color: var(--highlight-ring); }
+  .quote-box { background: var(--quote-bg); border-left: 3px solid var(--accent-gold); border-radius: 7px; padding: 6px 9px; margin-bottom: 8px; font-size: 12px; color: var(--text-secondary); cursor: pointer; }
+  .quote-box:hover { filter: brightness(0.96); }
+  .quote-head { font-weight: 700; color: var(--text-primary); font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+  .quote-jump { font-size: 10.5px; color: var(--accent-host); font-weight: 600; }
+  .num { display: inline-block; padding: 0 5px; border-radius: 5px; background: rgba(217, 119, 6, 0.12); color: #b45309; font-weight: 800; font-variant-numeric: tabular-nums; font-size: 13px; }
+  [data-theme="dark"] .num { background: rgba(251, 191, 36, 0.16); color: #fbbf24; }
+  .cite-row { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .cite-chip { font-size: 11px; padding: 2px 8px; border-radius: 6px; background: var(--quote-bg); border: 1px solid var(--border-subtle); color: var(--text-secondary); font-weight: 600; }
+  .impact-chip { font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 800; background: rgba(244, 63, 94, 0.14); color: #be123c; }
+  .impact-chip.pos { background: rgba(16, 185, 129, 0.14); color: #047857; }
+  [data-theme="dark"] .impact-chip { color: #fb7185; } [data-theme="dark"] .impact-chip.pos { color: #34d399; }
+  .topic-tag-mini { font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: rgba(2, 132, 199, 0.10); color: var(--accent-host); cursor: pointer; font-weight: 700; }
+  .mini-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; background: var(--quote-bg); border-radius: 8px; overflow: hidden; }
+  .mini-table th, .mini-table td { padding: 5px 8px; border-bottom: 1px solid var(--border-subtle); text-align: left; }
+  .mini-table th { color: var(--text-muted); font-weight: 700; font-size: 11px; }
+  .mini-table tr:last-child td { border-bottom: none; }
+  .unblind-box { margin-top: 10px; border-radius: 12px; padding: 14px; border: 1.5px dashed var(--accent-gold); background: linear-gradient(135deg, rgba(251, 191, 36, 0.10), rgba(56, 189, 248, 0.08)); }
+  .unblind-sealed { text-align: center; padding: 14px 10px; }
+  .unblind-content { display: none; } .unblind-content.open { display: block; animation: fadeIn 0.35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-top: 10px; }
+  .stat-card { background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: 9px; padding: 9px 10px; }
+  .stat-k { font-size: 11px; color: var(--text-muted); } .stat-v { font-size: 15.5px; font-weight: 800; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .matrix-view { display: none; flex-direction: column; gap: 16px; } .matrix-view.active { display: flex; }
+  .chat-view.hidden { display: none; }
+  .clash-card { background: var(--bg-card); border: 1px solid var(--border-strong); border-radius: 14px; overflow: hidden; }
+  .clash-header { padding: 12px 16px; background: var(--quote-bg); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .clash-title { font-weight: 800; font-size: 14.5px; }
+  .clash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 14px; }
+  @media (max-width: 820px) { .clash-grid { grid-template-columns: 1fr; } }
+  .clash-col { background: var(--bg-panel); border-radius: 10px; padding: 11px; border: 1px solid var(--border-subtle); font-size: 13px; }
+  .clash-col-head { font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+  .clash-verdict { margin: 0 14px 14px; padding: 10px 13px; border-radius: 10px; background: var(--bg-bubble-judge); border: 1px solid rgba(124, 58, 237, 0.30); font-size: 13px; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="group-title-wrap">
+      <div class="group-title">
+        <span>⚖️ 瑞丰新材（300910.SZ）投委会红蓝辩论群 (4)</span>
+        <span class="group-badge">2.2版 跨模型物理双盲 · 创投浮盈排毒与欧盟制裁毛利大对决</span>
+      </div>
+      <div class="group-sub">Gemini 4 Neon（多头）对比 Claude Opus 5.5（零信任空头）× Gemini 4 Carbon（旗舰终审裁判）｜两轮直刺收口至 9.2% 盈利分歧 × 拆穿 0.97 亿未扣非创投浮盈 × 数学反杀 26.28% 谷底毛利与 Q3 现金流 304% 反转 × 锁死 15.00—17.60 元击球区</div>
+    </div>
+    <div class="top-actions">
+      <a href="./index.html" class="btn">← 书架</a>
+      <div class="mode-switch" title="一键切换大白话小白版与专业硬核版">
+        <button class="mode-btn" id="btnModePlain" onclick="switchMode('plain')">🐣 小白大白话</button>
+        <button class="mode-btn" id="btnModePro" onclick="switchMode('pro')">🎓 专业硬核版</button>
+      </div>
+      <button class="btn active" id="btnChatView" onclick="switchView('chat')">💬 群聊实景</button>
+      <button class="btn" id="btnMatrixView" onclick="switchView('matrix')">⚔️ 议题对质表</button>
+      <button class="btn btn-gold" onclick="jumpAndUnblind()">🔓 揭盲看现价</button>
+      <button class="btn" id="btnGlossary" onclick="toggleGlossary()">📖 术语词典</button>
+      <button class="btn" id="btnTheme" onclick="toggleTheme()">🌙 深色</button>
+    </div>
+  </div>
+  <div class="roster-strip" id="rosterStrip"></div>
+</header>
+
+<div class="layout" id="mainLayout">
+  <aside class="sidebar">
+    <div>
+      <div class="side-title">
+        <span>📌 按议题追踪（一一对应）</span>
+        <span style="font-weight:600;color:var(--accent-host);cursor:pointer;" onclick="filterTopic('all')">重置</span>
+      </div>
+      <div class="topic-list" id="topicList"></div>
+    </div>
+    <div class="convergence-box">
+      <div class="side-title" style="margin-bottom:8px;"><span>📊 盲定数字收敛轨迹</span></div>
+      <div id="convList"></div>
+    </div>
+  </aside>
+
+  <main class="chat-stage">
+    <div class="stage-banner">
+      <span id="stageTip"></span>
+      <span id="msgCounter" style="font-weight:700;color:var(--accent-host);"></span>
+    </div>
+    <div class="chat-view" id="chatView"></div>
+    <div class="matrix-view" id="matrixView"></div>
+  </main>
+
+  <aside class="glossary-sidebar" id="glossarySidebar">
+    <div class="side-title">
+      <span>📖 术语大白话小词典</span>
+      <span style="font-size:11px;cursor:pointer;color:var(--accent-host);" onclick="toggleGlossary()">收起 ✕</span>
+    </div>
+    <input class="glossary-search" id="glossarySearch" type="text" placeholder="🔍 搜缩写或中文（如 DCF、保理、OE）…" oninput="renderGlossary()">
+    <div class="glossary-list" id="glossaryList"></div>
+  </aside>
+</div>
+
+<script>
+const DATA = {"company": "瑞丰新材", "code": "300910.SZ", "date": "2026-11-27", "default_mode": "plain", "badge": "2.2版 跨模型物理双盲 · 创投浮盈排毒与欧盟制裁毛利大对决", "subtitle": "Gemini 4 Neon（多头）对比 Claude Opus 5.5（零信任空头）× Gemini 4 Carbon（旗舰终审裁判）｜两轮直刺收口至 9.2% 盈利分歧 × 拆穿 0.97 亿未扣非创投浮盈 × 数学反杀 26.28% 谷底毛利与 Q3 现金流 304% 反转 × 锁死 15.00—17.60 元击球区", "roles": {"host": {"name": "投委会主席", "model": "宿主中枢", "avatar": "🎙️", "cls": "host", "side": "left"}, "bull": {"name": "多头猎手（林奇）", "model": "Gemini 4 Neon", "avatar": "🐂", "cls": "bull", "side": "left"}, "bear": {"name": "做空审计官", "model": "Claude Opus 5.5", "avatar": "🐻", "cls": "bear", "side": "right"}, "judge": {"name": "安全边际裁判（马克斯）", "model": "Gemini 4 Carbon", "avatar": "⚖️", "cls": "judge", "side": "left"}}, "convergence": [{"label": "空头 第一轮 · 独立法医连亮三刺", "label_plain": "空头第一轮连亮三刀（创投假扣非 + 欧盟制裁毛利塌方 + 借债分红投创投）", "value": "常态自由盈余 4.62 亿｜14.3×｜公允 19.70 元", "value_plain": "正常赚 4.62 亿｜给 14.3 倍｜合理价 19.70 元", "color": "bear"}, {"label": "多头 第一轮 · 三支柱立论 + 主动剔创投", "label_plain": "多头亮底牌：主动把创投浮盈全剔掉！靠 2.13 倍吨毛利 + 台架研发过峰 + 沙特出海估 24.70 元", "value": "常态 5.48 亿 / 达产 7.38 亿｜16.0×｜公允 24.70 元", "value_plain": "正常赚 5.48 亿 / 扩产 7.38 亿｜给 16 倍｜合理价 24.70 元", "color": "bull"}, {"label": "空头 第二轮 · 认账研发过峰 + 死咬 30% 毛利与沙特分红分流", "label_plain": "空头爽快认账研发过峰、下调研发到 1.9 亿，但反手补刀沙特要砸 5.2 亿会挤占分红！", "value": "常态 4.77 亿｜14.8×｜公允 20.71 元（法定股本 20.4 元）", "value_plain": "正常赚 4.77 亿｜上调至 20.71 元（买点 ≤17.2 元）", "color": "bear"}, {"label": "多头 第二轮 · 数学证伪 26.3% 谷底 + Q3 现金流 +2.74 亿神反杀", "label_plain": "多头用纯内销 28.9% 反杀 26.3% 不是常态，晒出三季度现金流狂赚 2.74 亿，同时诚实下修至 22.85 元！", "value": "常态 5.20 亿 / 达产 6.90 亿｜15.5×｜公允 22.85 元", "value_plain": "正常赚 5.20 亿｜主动降到 22.85 元（双方分歧收窄至 9%）", "color": "bull"}, {"label": "裁判 第三轮 · 跳过加时 × 双向纠偏 × 15.0× 铁面落锤", "label_plain": "裁判跳过加时一锤定音：打回剔库存股、扣足 20 天周转底钱、锁死 30.8% 毛利率定出 21.37 元！", "value": "常态 5.01 亿 / 达产 6.31 亿｜公允 21.37 元（买点 ≤17.60）", "value_plain": "正常赚 5.01 亿 / 扩产 6.31 亿｜合理 21.37 元（17.60 元以下开买）", "color": "judge"}], "topics": [{"id": "all", "icon": "💬", "name": "全部发言", "badge": "16条"}, {"id": "vc_fake", "icon": "🎭", "name": "创投浮盈假扣非", "badge": "100%清零"}, {"id": "sanction_gm", "icon": "📉", "name": "欧盟制裁与毛利", "badge": "定锚30.8%"}, {"id": "cash_saudi", "icon": "🏦", "name": "现金流与沙特分流", "badge": "净现金+6.7亿"}, {"id": "rd_shares", "icon": "🔬", "name": "台架研发与股本", "badge": "3.83亿股"}, {"id": "verdict", "icon": "🔓", "name": "落锤与揭盲开箱", "badge": "现价偏贵+7%"}], "glossary": [{"key": "创投浮盈进扣非", "match": ["常州信金瑞盈", "创投基金浮盈", "0.97亿", "0.966亿", "权益法", "假扣非"], "term": "创投基金浮盈混进扣非净利润（排毒核心）", "plain": "瑞丰新材投了 4.69 亿元买私募创投基金「常州信金瑞盈」（占股 97.32% 却因合伙架构不并表）。会计上按「权益法」把基金底层股票涨出来的 0.97 亿账面浮盈算进了投资收益，但非经常性损益表没把它扣掉！结果表观扣非 4.59 亿里混了近两成炒股浮盈，三季度股票一回调又吐回去 0.28 亿。真正做主业赚的钱必须把这部分 100% 剔干净！", "usage": "空头第一轮一剑封喉的实锤死穴，多空与裁判三方 100% 一致同意从常态盈利中清零。"}, {"key": "欧盟涉俄制裁", "match": ["欧盟制裁", "对俄业务", "26.28%", "26.3%", "36.89%", "28.89%"], "term": "欧盟涉俄制裁与内外销 8 个点毛利鸿沟", "plain": "2026 年 6 月 15 日瑞丰被列入欧盟涉俄制裁清单，公司主动停掉了原本暴利（36.9% 毛利）的对俄外销业务，转头把货加倍卖给国内大油企（内销暴涨 75.6%，但毛利只有 28.9%）。不过三季度单季毛利率跌到 26.3% 甚至比纯内销还低，是因为当时上游高价基础油库存刚好结转 + 人民币升值撞在一起，并不是以后永远只能赚 26%！", "usage": "全场最核心的分歧焦点：既要认账砍掉过去 35% 的暴利红利，又不能把 26.3% 极端共振底当永久常态，裁判最终锁死 30.8%。"}, {"key": "发动机台架认证", "match": ["台架", "检验及试验费", "1.11亿", "API SQ", "GF-7", "CK-4", "OEM"], "term": "发动机全尺寸台架认证（化工界的高考驾照）", "plain": "润滑油添加剂被称为发动机的「化学芯片」，要卖给高端车企和跨国油企，必须花上百万美元把配方倒进真实发动机里连续跑几百小时做破坏性测试（台架试验），拿到 API SQ、GF-7、CK-4 和车企原厂认证（OEM）。瑞丰上半年砸了 1.11 亿试验费（100% 直接记入当期费用不藏资产），三季度研发费已回落到 0.39 亿，说明集中考证高峰已经跨过！", "usage": "解释 2026 年上半年研发费用暴增 140% 的真相，也是多头成功打掉空头“永久高研发”指控的硬证据。"}, {"key": "单季现金流反转", "match": ["单季经营现金流", "+2.74亿", "净现比", "304%", "存贷双高"], "term": "三季度单季现金流 +2.74 亿大反转（击碎失血假象）", "plain": "单看前 9 个月累计经营现金流只有 1.81 亿（净现比 36%），乍一看像卖货收不回钱；但把上半年（-0.93 亿）一减，发现三季度单季其实净回流了 +2.74 亿元真现金，是当季利润的 3 倍多（净现比 304%）！同时应收账款、存货和有息借款都在三季度环比下降，说明上半年是集中备货与切客导致的短期阵痛。", "usage": "多头第二轮最漂亮的原表反杀，逼得 Claude 空头主动撤回“现金流持续失血”指控。"}, {"key": "沙特延布合资基地", "match": ["沙特延布", "瑞丰法拉比", "1.27亿美元", "5.30亿", "分红分流"], "term": "沙特延布一期合资厂（出海破局 vs 资本开支分流）", "plain": "2026 年 2 月瑞丰和沙特化工巨头法拉比合资建厂（瑞丰占 60%），一期总投资 1.27 亿美元，折合瑞丰按股权大概要掏 5.3 亿人民币。好处是能就地拿便宜原料、换上“沙特原产地”身份绕开欧洲地缘壁垒；坏处是这两年要掏真金白银建厂，可能会挤占公司过去每年发 4.36 亿高分红的现金空间！", "usage": "空头第二轮精准补刀的核心新刺，促使裁判在达产估值里配对扣足 7.5 亿现金投入并取消高分红永续溢价。"}, {"key": "库存股不剔除铁律", "match": ["库存股", "558万股", "3.8304亿股", "3.7746亿", "法定总股本"], "term": "回购库存股若用于员工激励（非注销），绝不能剔除总股本", "plain": "瑞丰之前花钱回购了 558 万股库存股。空头算每股价值时顺手把这 558 万股扣掉了（显得每股贵几毛钱），但裁判一查 2025 年报第 88 页，写明这批股票是留着给员工发股权激励的，并不是注销销毁！以后还是要折价发出去摊薄老股东的，所以必须死守 3.8304 亿法定总股本一分不减。", "usage": "裁判第三轮双向纠偏的教科书级细节，保证估值底座绝对严谨不留水分。"}, {"key": "润滑油添加剂", "aliases": ["油品添加剂", "石油添加剂", "化学芯片", "添加剂"], "cat": "行业产品", "plain": "加进机油里的特效营养包，虽然只占一桶油一两成，却像厨师的秘制调料一样决定发动机能不能抗磨、防积碳、少生锈并延长换油周期。"}, {"key": "基础油", "aliases": ["II类150N", "I/II/III类", "PAO", "二类 150N 基础油", "150N"], "cat": "行业产品", "plain": "成品机油里占七到九成的底汤，多由原油精炼或化学合成而来，不同等级决定油品底子，必须兑入添加剂才能承受发动机高温高压。"}, {"key": "单剂", "aliases": ["核心单剂", "通用单剂", "化学合成单剂", "主力单剂"], "cat": "行业产品", "plain": "只干一种活的单项化学药水，比如专门去油泥的或专门抗氧化的，就像中药里的单味药材，需要高温高压化工反应合成出来。"}, {"key": "十二烷基酚", "aliases": ["DDP"], "cat": "行业产品", "plain": "制造硫化烷基酚钙清净剂最关键的上游化工中间体，过去长期依赖进口，谁能低成本高纯度自产，谁就卡住了清净剂的利润命门。"}, {"key": "检验及试验费", "aliases": ["研发检验费", "台架检验费"], "cat": "财务会计", "plain": "研发费用附注里的具体明细项，专指委托国内外权威第三方实验室做发动机台架测试和理化检测支付的真金白银外包检测账单。"}, {"key": "资本开支", "aliases": ["CapEx", "购建长期资产"], "cat": "财务会计", "plain": "企业为了盖新厂、买新设备、扩产能或买土地实打实掏出去的长期投资现金，代表公司是在烧钱铺摊子还是已经进入躺着收钱阶段。"}, {"key": "净现比", "aliases": ["OCF/NP", "经营净现比"], "cat": "财务会计", "plain": "经营现金流除以净利润的比值，越接近或大于100%说明每赚1元账面利润就真收回1元现金，如果长期远低于70%就要警惕利润只是纸面富贵。"}, {"key": "营运资金", "aliases": ["营运资金占用"], "cat": "财务会计", "plain": "做生意日常垫在货架存货和客户赊账里、扣除欠供应商货款后的周转垫资，生意转得慢时就像吸水海绵一样把账面现金全吸干。"}, {"key": "商誉", "aliases": ["零商誉"], "cat": "财务会计", "plain": "花高价并购别的公司时，超出对方实际净资产多付出去的那笔溢价，如果买回来的公司业绩变脸，商誉就得大额减值直接砸穿利润表。"}, {"key": "台架认证", "aliases": ["发动机台架", "台架试验", "台架检验费", "台架测试"], "cat": "工艺设备", "plain": "添加剂行业的“地狱级高考”，把配好的机油倒进真发动机里连续极限暴力运转上百小时，拆机验磨损过关才发通行证。"}, {"key": "API SQ", "aliases": ["API", "API SP", "API CL-4", "CI-4/CK-4", "SN/SP/SQ", "CK-4"], "cat": "工艺设备", "plain": "美国石油学会（API）定的机油“段位等级”，S开头管汽油车（SQ是最新最高段位），C开头管重型柴油车（如CK-4、CL-4）。"}, {"key": "烷基化", "aliases": ["磺化"], "cat": "工艺设备", "plain": "化工厂里的两道核心前端合成反应工序，相当于自己种麦子磨面粉，把大宗石化原料加工成制造清净剂必需的中间体。"}, {"key": "广义应收", "aliases": ["应收账款", "纯应收", "应收周转天数", "广义应收周转天数"], "cat": "财务会计", "plain": "公司把货卖出去后还没拿到真现金的所有欠条总和，包括白条欠款（应收账款）和客户给的银行或商业汇票。"}, {"key": "经营现金流", "aliases": ["OCF", "经营现金流净额"], "cat": "财务会计", "plain": "公司靠日常卖货真正流进银行账户的净现金，扣除买原料、发工资、交税后的实打实结余，是最难造假的“体检仪”。"}, {"key": "折旧摊销", "aliases": ["折旧与摊销", "D&A", "折旧摊销"], "cat": "财务会计", "plain": "厂房机器越用越旧、土地专利逐年消耗，会计按年分摊进成本里的“损耗费”，它扣减利润但当期并不真的往外掏现金。"}, {"key": "库存股", "aliases": ["注销式回购"], "cat": "财务会计", "plain": "公司花钱从股市买回自家股票；如果直接烧掉缩减总股本叫“注销式回购”（真提升每股含金量），留在账上待发员工叫库存股。"}, {"key": "财务公司存款", "aliases": [], "cat": "财务会计", "plain": "上市公司把钱存进控股集团自己开的内部“财务公司”而非外部独立银行，容易产生资金被大股东暗中挪用的治理隐患。"}, {"key": "真实企业价值", "aliases": ["True EV", "ev_delta", "EV/OE"], "cat": "估值周期", "plain": "真实企业价值：把整家公司全买下来要花的实付总价（市值加上债务、减去可自由支配的净现金及变现资产，ev_delta即调整项）。"}, {"key": "内生回报率", "aliases": ["OE/True EV", "steady_oe / True EV"], "cat": "估值周期", "plain": "把买下公司生意的真实净出价（True EV）当本金，每年常态股东盈余（OE）当利息算出来的“实业真实年化收益率”。"}, {"key": "每股净资产", "aliases": ["BVPS", "PB", "PE", "PB/PE 双轨"], "cat": "估值周期", "plain": "BVPS是每股归母净资产（拆家底每股值多少）；PB是股价除以净资产，PE是股价除以每股利润，双轨对照可防止在周期顶点买贵。"}, {"key": "steady_oe", "term": "常态自由盈余（steady_oe / OE）", "plain": "扣掉每年修机器、换旧设备的必要花销后，这家公司正常年份「真正能装进股东口袋的纯现金利润」。就像开饭店，营业额扣掉房租水电食材和换新灶台的钱，年底能随便提现分红的那笔钱。", "usage": "买方估值最核心的分子，比账面净利润更真实，不怕会计做账粉饰。"}, {"key": "full_oe", "term": "达产自由盈余（full_oe）", "plain": "公司手里正在盖的新工厂、新产线全部建好并正常运转后，未来每年能装进股东口袋的纯现金利润。", "usage": "用来衡量公司未来 2–3 年扩产落地后的成长弹性，但必须同步扣除建厂还要花的钱（防白嫖）。"}, {"key": "ev_delta", "term": "净现金调整额（ev_delta）与真实企业价值（True EV）", "plain": "买下一整家公司的真实净成本 = 股票总市值 + 欠别人的真债 - 账上闲置可随便花的现金。如果账上闲钱比欠债多（净现金），ev_delta 就是负数，相当于你买房子发现屋里保险柜自带一箱现金，实际买价更便宜。", "usage": "估值核心分母；反向保理、少数股东份额、受限保证金全在这儿挤干水分。"}, {"key": "OCF", "term": "经营现金流（OCF）", "plain": "公司靠卖产品真正收进银行卡的现金，减去买原料发工资付出去的现金。利润表可能只是“打了白条”，经营现金流才是真金白银进账。", "usage": "检验利润含金量的照妖镜；若单季骤降要查是客户欠账（真恶化）还是主动给供应商提前结账（假警报）。"}, {"key": "FCF", "term": "自由现金流（FCF）", "plain": "经营赚进来的现金（OCF），再扣掉盖新厂、买新设备花的钱（CapEx）之后还剩的余钱。正数说明自己养活自己还有结余，负数说明还在烧钱或借钱扩张。", "usage": "判断企业是“印钞机”还是“吞金兽”的硬标准。"}, {"key": "CapEx", "term": "资本开支（CapEx）", "plain": "公司盖厂房、买生产线、买矿权这类大件固定资产花的钱。分为「维持性 CapEx」（给老产线修修补补保饭碗）和「扩张性 CapEx」（盖新厂抢增量）。", "usage": "算常态盈余必须扣维持性开支；算未来达产利润必须把剩余扩张开支从现金里扣干净。"}, {"key": "DCF", "term": "未来现金流折现估值（DCF）", "plain": "把公司未来十几年每年能赚到的真现金，按你要求的年化回报率（比如 9%）折算成今天的钱加总，算出这家公司“理论上今天值多少钱”。", "usage": "价值投资的锚定器；两阶段 DCF 会把前 3–4 年扩产爬坡期和后面的平稳永续期分开精算。"}, {"key": "RONIC", "term": "新投入资本回报率（RONIC）与再投资扣减（1 - g/RONIC）", "plain": "公司想让利润以后每年继续长 3%（g），就得每年从利润里留一部分钱继续买设备建新线，不能 100% 全分红！如果新砸 100 块每年能多赚 30 块（RONIC=30%），想每年多赚 3%，就得扣掉 3%÷30%=10% 的利润拿去再投资。", "usage": "防止估值拍高：如果忘了扣 (1 - g/RONIC)，就等于幻想公司“一分钱不投、利润凭空永续增长”。"}, {"key": "Ke", "term": "股东要求年化回报率（Ke）", "plain": "买这家公司股票，你心里要求的最低年化复合收益门槛（通常在无风险国债利率 1.6%–1.9% 上加 7% 左右风险补偿，定在 9% 左右）。", "usage": "门槛定得越高，算出来的公允股价就越保守、安全垫越厚。"}, {"key": "NPV", "term": "净现值（NPV）", "plain": "一个扩产项目未来所有赚回来的钱折算到今天，减去你要掏出去的建厂成本。NPV 大于 0 说明扩产是在给股东创造超额财富，不能当零价值忽略。", "usage": "检验高回报扩产项目（如 764 GWh 新产线）究竟值不值钱。"}, {"key": "反向保理", "term": "反向保理 / 融单（供应链金融类债）", "plain": "公司欠供应商货款先不直接付，开一张“无条件必须兑付的欠条”，供应商拿去银行提前变现拿走现金。到期时公司必须铁打不动还钱给银行，本质上就是披着应付账款外衣的“变相短期银行贷款”。", "usage": "做空法医必查科目！必须从账上净现金里扣掉，才不会把借来的钱误当成自家闲钱。"}, {"key": "少数股东权益", "term": "少数股东权益 / 归母口径", "plain": "上市公司旗下有些合资子公司不是 100% 独资（比如自己占 92%，合作伙伴占 8%）。报表合并时把 100% 的利润和现金都加进来了，但真正属于咱们买股票的小股东的只是「归母（归属母公司）」那 92%。", "usage": "分子算利润用了归母口径，分母算净现金也只能扣合作伙伴占现金的那 8%，不能胡乱全扣。"}, {"key": "质保预计负债", "term": "售后质保预计负债", "plain": "卖出去的电池承诺保修 8 年，公司提前每年从营业成本里计提一笔“保修准备金”存在账上。因为利润里已经每年扣过这笔钱了，只要公司正常持续卖货，这笔池子就不会一次性掏空。", "usage": "严守“绝不双扣”铁律：利润里已经每年扣过，就不能再当银行欠债在市值里重扣一遍。"}, {"key": "PE_PB", "term": "市盈率（PE）与市净率（PB）", "plain": "市盈率 PE = 买下公司要花几年净利润回本（如 11.6 倍就是约 11 年半回本）；市净率 PB = 股价是每股净资产（账面家底）的几倍。", "usage": "快速对比历史极值位置（比如对比 2024 年熊市大底），防止在周期底部过度恐慌。"}, {"key": "TTM", "term": "过去 12 个月滚动口径（TTM）", "plain": "Trailing Twelve Months 的缩写，就是把最近连续 4 个季度的数据加起来凑满整整一年，比如「TTM 股息率」就是过去一整年实打实发到你手里的现金分红除以今天股价。", "usage": "比看去年旧年报更及时，严禁把没落地的口头回购混进即期股息率。"}, {"key": "物理双盲", "term": "物理双盲定价（0 现价隔离）", "plain": "辩论和裁判定价期间，把今天股票实时价格彻底封在信封里，不让多头、空头、裁判偷看！逼着大家纯按公司一年赚多少钱、账上有多少净现金算出真实底价，最后由主持人拆信封对照今天现价。", "usage": "彻底杜绝人脑看到现价后“故意把买点压到现价下面一点装稳健”的心理锚定偏见。"}], "messages": [{"id": "M01", "role": "host", "topic": "vc_fake", "round": "开场封箱 · 物理双盲交底（0 现价泄露）", "round_plain": "开场封箱 · 股价锁进黑信封，三模型铁三角蒙眼开审！", "time": "11:19", "act": {"text": "🔒 物理封箱 · 法定 3.8304 亿股 + 6 年铁底", "cls": "act-host"}, "text": "欢迎进入 <b>瑞丰新材（300910.SZ）</b> 2.2 版跨模型物理双盲投委会！今日实时股价与总市值已物理封箱，做空审计官 <b>Claude Opus 5.5</b> 实行双重隔离（禁读多头业务简本），裁判由 <b>Gemini 4 Carbon</b> 坐镇。共享官方底座（2026 三季报）：法定总股本 <b>3.830423 亿股</b>，归母净资产 38.83 亿元（每股净资产 <b>10.14 元</b>）；宿主实测近 6 年真实最低市净率铁底 <b>2.04 倍</b>（2026 年，2022 年为 2.12 倍）、最低市盈率铁底 <b>9.9 倍</b>（近 2 年 11.8 倍）；当前中国 10 年期国债无风险利率 1.7%—1.8%。请围绕创投浮盈假扣非、欧盟制裁后毛利率崩塌、存贷双高与现金流、台架研发费与沙特出海五大死结展开两轮对决！", "plain": "瑞丰新材投委会正式开锣！为了防大家看着今天股价拍脑袋，实时股价和总市值已经彻底锁进黑信封！先统一硬家底：瑞丰总股本 <b>3.83 亿股</b>，每股净资产 <b>10.14 元</b>；过去 6 年市场最恐慌时最低跌到过 <b>2.04 倍市净率</b>、<b>9.9 倍市盈率</b>；现在国债无风险利率约 1.75%。下面请 Claude 空头与 Gemini 多头蒙眼亮剑！", "cites": ["2026三季报官方三表", "宿主实测6年PB/PE铁底"]}, {"id": "M02", "role": "bear", "topic": "vc_fake", "round": "第一轮 · 空头亮刺①：扣非里暗藏 0.97 亿创投基金浮盈", "round_plain": "第一轮 · 空头第一刀：扣非利润掺了近两成炒股浮盈，主业其实暴跌三成！", "time": "11:22", "act": {"text": "💣 亮刺① · 剥离创投浮盈，主业净利实跌 -30.1%", "cls": "act-bear"}, "replyTo": "M01", "text": "<b>第一刀直戳表观扣非净利润的遮羞布！</b>翻开 <b>2026 三季报 P11</b> 与 <b>半年报 P142</b>：前 9 个月对合营企业投资收益高达 <b>0.966 亿元</b>，全部来自公司出资占比 97.32% 却不并表的私募创投基金「常州信金瑞盈」！可 <b>三季报 P2 非经常性损益表</b> 只剔除了理财与中原前海的 0.454 亿元，这笔 0.966 亿纸面浮盈竟<b>整笔留在了 4.59 亿扣非净利润里</b>（占比近 18%）！更讽刺的是，公司在 <b>半年报 P15</b> 自己写明该收益<b>“是否具有可持续性：否”</b>，9 个月实际分回现金仅 0.19 亿、三季度单季还反亏 -0.28 亿！挤掉这层创投水分后，前 9 个月核心主业扣非仅约 <b>3.77 亿元</b>，同比实质暴跌 <b>-30.1%</b>（三季度单季同比 <b>-45%</b>）！", "plain": "<b>别被账面 4.59 亿扣非利润骗了，里面掺了快两成炒一级市场股票的纸面浮盈！</b>瑞丰投了个叫「常州信金瑞盈」的私募基金，占股 97% 却不并表，今年前 9 个月账面浮盈 <b>0.97 亿元</b>，结果公司没把它从扣非利润里扣掉！可半年报 15 页自己都承认这钱「不可持续」，实际到手的现金才 1,900 万，三季度股市一晃立马倒亏 2,800 万。把炒股浮盈剥干净，瑞丰主业前 9 个月其实只赚了 <b>3.77 亿</b>，同比大跌三成！", "cites": ["2026三季报 P2 / P11", "2026半年报 P15 / P142"], "impact": {"text": "剥离 0.97 亿未扣非创投浮盈 → 9M26 真实主业净利降至 3.77 亿（-30.1%）", "plain": "撕掉假扣非外衣，主业利润其实同比暴跌三成！", "pos": false}}, {"id": "M03", "role": "bear", "topic": "sanction_gm", "round": "第一轮 · 空头亮刺②：欧盟制裁打断外销腿，毛利陡降至 26.3%", "round_plain": "第一轮 · 空头第二刀：欧盟制裁断了最肥的外销生意，三季度毛利率直接雪崩！", "time": "11:22", "act": {"text": "💣 亮刺② · 毛利率连降三季探底 26.3%", "cls": "act-bear"}, "replyTo": "M01", "text": "<b>第二刀直击护城河最致命的外伤！</b>查 <b>2026 半年报 P29《关于欧盟制裁的说明》</b>：2026 年 6 月 15 日瑞丰被列入欧盟对俄制裁名单，公司被迫“主动终止对俄业务”，且明确预警对涉欧连接点业务产生阶段性冲击。翻看 <b>2025 年报 P19</b> 与 <b>半年报 P15</b>：过去瑞丰近七成收入靠高毛利外销（毛利率 <b>36.9%</b>），上半年外销已掉头下滑 <b>-9.3%</b>，全靠毛利率低整整 8 个点的内销（28.9%）暴涨 +75.6% 硬撑规模！制裁后首个完整季度（26Q3）立刻原形毕露：单季毛利率从一季度 33.8% → 二季度 32.6% 断崖跌至 <b>26.3%</b>，营收增速熄火至 +1.1%，叠加人民币升值令前 9 月财务费用暴增至 0.40 亿元！", "plain": "<b>瑞丰过去赚钱爽，是因为七成货都高价卖到国外（毛利率高达 36.9%）！</b>可今年 6 月 15 日被欧盟拉进对俄制裁黑名单后，最肥的俄语区订单被迫一刀切停，公司只能跑回国内跟同行卷低价单子（毛利直接矮了 8 个点）。三季度是制裁后的第一个完整季度，成绩单立马惨不忍睹：单季毛利率一路从 33.8% 跌穿到 <b>26.3%</b>，营收几乎零增长，出口红利已经彻底打折！", "cites": ["2026半年报 P15 / P29", "2025年报 P19"], "impact": {"text": "高毛利外销受制裁收缩，单季毛利率从 33.8% 骤降至 26.3%", "plain": "高价出口大单受阻改抢低价内销，利润率直接掉进坑里！", "pos": false}}, {"id": "M04", "role": "bear", "topic": "cash_saudi", "round": "第一轮 · 空头亮刺③：借钱分红 + 借钱投创投，给出 19.70 元底线", "round_plain": "第一轮 · 空头第三刀：前 9 月现金流含金量只有 36%，借钱分红加仓私募！先给 19.70 元", "time": "11:22", "act": {"text": "💣 亮刺③ · 净现比 36% + 空头首轮锚定 19.70 元", "cls": "act-bear"}, "replyTo": "M01", "text": "<b>第三刀审视现金流与资本配置恶化！</b>前 9 个月经营现金流仅 1.81 亿元，占净利润 5.06 亿的 <b>36%</b>；广义应收账款年初至今暴增 +2.23 亿（<b>三季报 P3</b> 承认回款周期延长）、存货增 +1.41 亿。同一时间，公司却大手笔现金分红 4.48 亿、又往创投基金追加了 +2.37 亿元，窟窿全靠短期借款猛增 +2.67 亿、应付票据增 +1.51 亿硬顶，有息债飙至 <b>9.51 亿元</b>！我核查了附注确认并非造假（受限资金仅 0.13 亿，财务公司无关联存款），但资本配置明显走样！按不叠三重极寒原则：常态营收 36 亿、毛利率 30%、研发 2.1 亿 → 常态自由盈余 <b>4.62 亿元</b>、净现金偏移 +8.32 亿、14.3 倍（剔库存股 3.7746 亿股）→ <b>公允中枢 19.70 元</b>（二档 16.7 / 重锤 13.8 元）！请多头正面回应五问！", "plain": "<b>今年前 9 个月公司账面赚了 5 亿多，口袋里真收回来的经营现金却只有 1.81 亿！</b>客户欠账多了 2 个多亿、仓库囤货多了 1.4 亿，可老板一边继续派发 4.48 亿分红、一边往私募创投里再塞 2.37 亿，不够的钱全靠找银行多借短贷、开承兑汇票来补，有息债务飙到了 <b>9.51 亿</b>！我查过附注不是财务造假，但花钱太乱！我不往死里压，按 30% 毛利率、正常赚 <b>4.62 亿</b>、给 14.3 倍算，合理价只有 <b>19.70 元</b>，13.8 元以下才重锤！", "cites": ["2026三季报 P3 / 现金流量表", "有息负债 9.51 亿元"], "impact": {"text": "空头首轮盲定：常态自由盈余 4.62 亿｜公允 19.70 元｜重锤 ≤13.80 元", "plain": "空头先手亮出底牌：合理价 19.70 元，16.7 元以下才考虑买！", "pos": false}}, {"id": "M05", "role": "bull", "topic": "sanction_gm", "round": "第一轮 · 多头支柱①：2.13 倍单吨毛利护城河，主动剔净创投浮盈", "round_plain": "第一轮 · 多头第一张牌：我主动把创投浮盈清零！瑞丰每吨多赚老二一倍多的硬底盘根本没坏！", "time": "11:24", "act": {"text": "🛡️ 支柱① · 2.13 倍吨毛利利差 + 100% 剔创投", "cls": "act-bull"}, "replyTo": "M02", "text": "<b>先爽快对齐共识：我方模型同样 100% 剔除创投基金浮盈与理财收益！</b>正因为剔除了三季度创投反亏的 -0.28 亿，瑞丰三季度单季真实主业扣非其实是 <b>1.02 亿元</b>（反而比表观 0.78 亿高出三成）！再看真正的护城河底色：2025 年瑞丰润滑油添加剂单吨毛利高达 <b>6,600 元/吨</b>（毛利率 34.98%），而国内最直接对手利安隆康泰 2026 上半年单吨毛利只有 <b>3,095 元/吨</b>（15.67%）——瑞丰每卖一吨多赚整整 3,500 元、是老二的 <b>2.13 倍</b>！这源于 20 年全谱系单剂自给 + 十二烷基酚自产 + 延津 12 万吨烷基化与 7 万吨磺化已 <b>100% 完工</b>（实际花钱仅预算 53.5%，四季度起降本）。即便在三季度四重夹击谷底，26.28% 的毛利率仍狠狠甩开康泰超过 10 个百分点！", "plain": "<b>创投浮盈我压根不打算算进主业，咱俩在这点上直接对齐！</b>其实去掉创投三季度倒亏的 2,800 万，主业三季度还赚了 1.02 亿呢！更重要的是，瑞丰卖一吨添加剂赚 <b>6,600 元毛利</b>，国内二号对手利安隆康泰卖同价的货却只赚 <b>3,095 元</b>——瑞丰靠全系列核心单剂和上游原料自产，每吨凭空多赚 3,500 块！就算三季度遇上欧盟制裁、内销暴增、原料涨价四重夹击，26.28% 的谷底毛利率照样甩开老二 10 个点，底盘硬得很！", "cites": ["2025年报单吨成本拆解", "延津上游项目100%完工"], "impact": {"text": "多头主动 100% 剔除创投浮盈，聚焦 2.13 倍国内单吨成本安全垫", "plain": "不拿炒股浮盈充数，用实打实的成本碾压对手说话！", "pos": true}}, {"id": "M06", "role": "bull", "topic": "rd_shares", "round": "第一轮 · 多头支柱②：1.82 亿研发费已跨过峰值 + 沙特延布破局出海", "round_plain": "第一轮 · 多头第二张牌：1.8 亿研发费全是考高端驾照的一次性冲刺，三季度已经掉头大降！", "time": "11:24", "act": {"text": "🛡️ 支柱② · Q3 研发腰斩过峰 + 沙特合资绕开欧障", "cls": "act-bull"}, "replyTo": "M03", "text": "<b>空头按 2.1 亿永久高研发压利润，明显没翻 2026 半年报 P128—129 附注！</b>上半年研发费飙至 1.43 亿元，其中<b>「检验及试验费」一项就烧掉 1.11 亿</b>（同比 +223%），全额 100% 费用化砸向最新最高级汽油机油 API SQ、节能标准 GF-7、重卡 CK-4、中国自主 D1 及首批柴机油车企原厂认证（OEM 0→1 突破）！最硬拐点已在三季报兑现：<b>26Q3 单季研发费已从 Q2 脉冲高点 0.87 亿腰斩回落至 0.39 亿元</b>（仅占营收 4.4%），集中拿证高峰已过！同时 <b>2025 年报 P79</b> 披露 2026 年 2 月已与沙特化工巨头法拉比设立合资厂（持股 60%，一期 1.27 亿美元），拿当地低价原料与中东原产地身份直攻中东非印，精准绕开欧盟地缘壁垒！", "plain": "<b>空头把今年翻倍的研发费当成以后每年都要烧 2.1 亿，这账算错了！</b>翻开半年报 128 页，上半年 1.43 亿研发里光<b>「检验试验费」就占了 1.11 亿</b>，全是集中冲刺国际顶级台架认证的“考证学费”——而且 100% 直接进了当期费用一分没藏！三季度研发费已经从二季度的 8,700 万骤降到 <b>3,900 万</b>，考证最高峰已经过去！再加上跟沙特巨头建合资厂换个“中东产地身份”，正好绕开欧洲的贸易绊脚石！", "cites": ["2026半年报 P128—129", "2025年报 P79 沙特合资"], "impact": {"text": "26Q3 单季研发从 0.87 亿回落至 0.39 亿，证伪永久高研发脉冲", "plain": "最烧钱的考证高峰已经过去，三季度研发费立减一半多！", "pos": true}}, {"id": "M07", "role": "bull", "topic": "cash_saudi", "round": "第一轮 · 多头支柱③：零再融资低息套利，盲定 24.70 元", "round_plain": "第一轮 · 多头第三张牌：上市六年一分钱没增发，借低息债买高息理财，合理价 24.70 元！", "time": "11:24", "act": {"text": "🛡️ 支柱③ · 0 再融资 0 质押 + 多头首轮 24.70 元", "cls": "act-bull"}, "replyTo": "M04", "text": "<b>回答空头第五问：账上 14.3 亿现金理财却借 9.5 亿债，核心是 2.5% 低息利差安排，绝非资金链危机！</b>瑞丰上市 6 年 0 定增 0 可转债、0 商誉、实控人及二股东中石化 0 质押，26H1 已实派 4.36 亿红利且无期后未付分红（<b>半年报 P31</b>），受限货币仅 0.057 亿（<b>三季报 P9/14</b>）、关联财务公司存款为 0（<b>半年报 P39</b>），前 9 月利息支出仅 0.153 亿（年化利率约 2.5%）。我方独立定价：后俄稳态营收 38 亿 × 31.8% 常态毛利率（已较 24—25 年自砍 3—4 个点）、常态研发 1.90 亿 → 常态自由盈余 <b>5.48 亿元</b>（达产 <b>7.38 亿</b>）；净现金偏移 <b>+6.95 亿</b>（创投按 0.65 折，达产配对扣 8 亿增量资本开支）；按 16.0 倍及 3.8304 亿法定股本 → <b>公允中枢 24.70 元</b>（二档 21.0 / 重锤 18.0 元）！反问空头：为何把沙特+高端达产增量压到仅 0.2 亿？", "plain": "<b>为什么账上躺着 14 亿现金和理财还要借 9.5 亿银行贷款？</b>算一下利息就懂了：前 9 个月利息才花 1,500 万，年化借款利率才 2.5% 左右，借便宜银行钱吃理财利差而已！瑞丰上市 6 年没问股民要过一分再融资、零商誉、大股东零质押。我按 31.8% 常态毛利（已经自砍三四个点）算出正常年赚 <b>5.48 亿</b>、给 16 倍合理价 <b>24.70 元</b>（18 元以下重锤）！空头你把沙特建厂和高端认证的未来增量压到只剩 2,000 万，太离谱了吧！", "cites": ["2026半年报 P31 / P39", "2026三季报 P9 / P14"], "impact": {"text": "多头首轮盲定：常态 5.48 亿 / 达产 7.38 亿｜公允 24.70 元｜重锤 ≤18.00 元", "plain": "多头亮底牌：合理价 24.70 元，比空头高出整整 5 块钱！", "pos": true}}, {"id": "M08", "role": "bear", "topic": "rd_shares", "round": "第二轮 · 空头核验与大方撤回：认账研发过峰，统一创投 0.65 折", "round_plain": "第二轮 · 空头大方认账：核对了三季报，研发确实过峰降到 1.9 亿，创投也统一打 6.5 折！", "time": "11:25", "act": {"text": "🏳️ 核验撤回 · 研发降回 1.90 亿 + 对齐创投折价", "cls": "act-bear"}, "replyTo": "M06", "text": "<b>逐页核验多头引用的官方原件，全部属实，我方大方撤回并同步修正三处口径：</b>① <b>半年报 P129</b> 确载明检验及试验费 1.11 亿（去年同期 0.34 亿），26Q3 单季研发 0.39 亿无误，集中台架认证脉冲确实过峰——常态研发由 2.10 亿<b>下调至 1.90 亿元</b>，与多头完全一致；② 创投浮盈 100% 剔出自由盈余双方已成共识，且创投基金与中原前海统一对齐多头的 <b>0.65 倍</b>折价；③ 营收由 36 亿上调至 <b>37 亿元</b>，同时上半年营运资金吞掉 4.6 亿（<b>半年报 P134</b>），我原扣 0.20 亿偏松，主动上调常态增量营运资金占用至 <b>0.40 亿元</b>！", "plain": "<b>我翻了巨潮原件逐条核对，多头没瞎编，该认的账我痛快认！</b>三季度研发费确实大降到 3,900 万，考证高峰过了，我把常态研发从 2.1 亿降到 <b>1.9 亿</b>跟你拉齐；私募创投也按你的 <b>6.5 折</b>统一算；营收我也上调到 <b>37 亿</b>。但上半年营运资金确实多占了 4.6 亿，我把每年新增周转占款扣减从 2,000 万提高到 4,000 万。", "cites": ["2026半年报 P129 / P134", "2026三季报利润表"], "impact": {"text": "研发共识锁死 1.90 亿、创投折价统一 0.65×，分歧快速向毛利率收拢", "plain": "研发和创投折价彻底谈拢，全场焦点瞬间收窄！", "pos": true}}, {"id": "M09", "role": "bear", "topic": "cash_saudi", "round": "第二轮 · 空头补刀：坚守 30% 毛利 + 新刺「沙特 5.2 亿资本黑洞挤占分红」", "round_plain": "第二轮 · 空头致命补刀：内销暴涨是结构性降级，且沙特一期要掏 5.2 亿，高分红根本保不住！", "time": "11:25", "act": {"text": "🩸 补刀 · 沙特掏 5.2 亿挤占分红 + 修正 20.71 元", "cls": "act-bear"}, "replyTo": "M07", "text": "<b>但两把刀我寸步不让，再补一记沙特资本开支新刺！</b>① <b>死守 30% 常态毛利率</b>：多头 31.8% 是拿上半年数据做的“拼图假设”，可 26Q3 制裁后首个完整季真实毛利只有 <b>26.3%</b>！内销 +75.6% 是丢掉高毛利俄单后的结构性替代，人民币升值也非一季能逆转。我取 30% 已在 9M 实绩（31.0%）与 Q3 谷底（26.3%）之间偏上，绝非三重极寒。② <b>新刺·沙特分红分流</b>：<b>2025 年报 P79</b> 沙特一期瑞丰 60% 权益出资约 <b>5.19 亿元</b>、全期 10.05 亿元！前 9 月经营现金流才 1.81 亿、分红就发了 4.48 亿，若沙特按期砸钱，<b>未来要么砍分红、要么有息债再加 5 亿</b>，绝不能再拿 4.36 亿高分红当永续安全垫！修正后常态自由盈余 <b>4.77 亿</b>、净现金 +7.57 亿、14.8 倍 → <b>公允 20.71 元</b>（二档 17.2 / 重锤 14.5 元）！", "plain": "<b>但毛利率和分红这两刀我绝不松口！</b>三季度制裁后真实毛利掉到 26.3%，内销顶替高价俄单是实打实的降级，我给 30% 毛利已经很客气了！更要命的是我新算出一个窟窿：沙特一期按 60% 持股瑞丰得掏 <b>5.2 亿真金白银</b>（全期 10 亿）！今年前 9 月现金流才 1.8 亿却发了 4.5 亿分红，后面建沙特厂<b>要么砍分红、要么继续大借债</b>，别指望每年还拿 4.36 亿高分红养老！我小幅调高合理价到 <b>20.71 元</b>，买点 17.2 元以下！", "cites": ["2025年报 P79 沙特投资额", "2026Q3单季毛利率26.3%"], "impact": {"text": "空头修正常态 4.77 亿 / 公允 20.71 元，并精准击中沙特期分红分流软肋", "plain": "空头亮出沙特资金黑洞新刺，警告高分红难以为继！", "pos": false}}, {"id": "M10", "role": "bull", "topic": "sanction_gm", "round": "第二轮 · 多头神反杀①：纯内销毛利 28.89%，数学证伪 26.28% 是结构切换", "round_plain": "第二轮 · 多头数学反杀：就算 100% 全卖国内毛利都有 28.9%，三季度 26.3% 绝不是常态！", "time": "11:27", "act": {"text": "🛡️ 数学反杀 · 26.28% 低于纯内销 2.61pct！", "cls": "act-bull"}, "replyTo": "M09", "text": "<b>第一记数学铁证反杀：26Q3 单季 26.28% 绝不可能由内外销结构切换造成！</b>翻开 <b>2026 半年报 P15</b> 官方分地区毛利率：外销 <b>36.89%</b>、内销 <b>28.89%</b>。哪怕最极端悲观假设外销从 69% 腰斩至 45%、内销飙至 55%，纯结构毛利率底板仍高达 <b>32.49%</b>！退一万步讲，就算瑞丰出口归零、100% 全卖国内，毛利率底板也有 <b>28.89%</b>——而 26Q3 的 26.28% 居然比纯内销还低 2.61 个百分点！这在数学上铁板钉钉证明：砸穿底板的是三大短期共振——① 上游 II 类基础油冲高至 13,550 元/吨滞后顺价（11 月下旬已回落 -6.6% 至 12,650 元，原料占成本 90.8%）；② 上半年末暴增 78.7% 的 4.28 亿高价库存在三季度集中结转叠加汇率波动；③ 延津新装置刚转固提折旧尚未满产摊薄！", "plain": "<b>空头你算道小学数学题就露馅了！</b>半年报 15 页白纸黑字写着：外销毛利 <b>36.89%</b>，内销毛利 <b>28.89%</b>。就算瑞丰一吨货都不出口、100% 全卖国内，毛利率底板都有 <b>28.89%</b>！可三季度却跌到了 26.28%，比纯卖国内还低 2.6 个点——说明绝不是“转内销”把毛利干塌的！真正把它砸穿的是三件事撞车：基础油冲到 1.35 万高价（11 月底已经跌回 1.26 万了）、高价旧库存三季度集中消化、以及延津新厂刚转固开始提折旧！把一次性撞车当永久常态，太冤枉人了！", "cites": ["2026半年报 P15 分地区毛利", "11月下旬基础油回落-6.6%"], "impact": {"text": "数学证伪 26.28% 为结构常态：纯内销底板 28.89%，叠加原料已回落 -6.6%", "plain": "一道算术题直接打穿空头“毛利永久崩盘”论点！", "pos": true}}, {"id": "M11", "role": "bull", "topic": "cash_saudi", "round": "第二轮 · 多头神反杀②：空头漏拆 Q3 单季，经营现金流已暴力反转 +2.74 亿", "round_plain": "第二轮 · 多头第二记反杀：空头漏算了三季度单季！现金流已经狂赚 +2.74 亿，全面去杠杆！", "time": "11:27", "act": {"text": "🛡️ 原表反杀 · Q3 单季 OCF +2.74 亿（净现比 304%）", "cls": "act-bull"}, "replyTo": "M04", "text": "<b>第二记原表反杀：空头只看前 9 月累计 1.81 亿，彻底漏拆了三季度单季的大反转！</b>直接拿官方现金流量表相减：<b>26Q3 单季经营现金流 = 前 9 月（1.81 亿） − 上半年（-0.93 亿）= +2.74 亿元</b>！对比三季度单季 0.90 亿净利润，<b>单季净现比高达惊人的 304%</b>！同时三季度资产负债表全面健康去杠杆：应收账款环比降 <b>-0.39 亿</b>（6.72→6.33）、存货环比去库 <b>-0.87 亿</b>（7.64→6.77）、有息债自半年报峰值 10.26 亿主动压降 <b>-0.75 亿</b>至 9.51 亿！上半年失血纯粹是年度集中派息 + 切客备货的一次性谷底，三季度已彻底证伪失血失控！", "plain": "<b>空头只盯着前 9 个月累计 1.81 亿喊“失血”，怎么不减一下上半年呢？</b>上半年是 -0.93 亿，前 9 个月是 +1.81 亿，一减就发现<b>三季度单季狂收回来 +2.74 亿真现金</b>，是当季净利润的整整 3 倍多！而且三季度应收账款少了 3,900 万、仓库库存消化了 8,700 万、银行借款主动还了 7,500 万，全面好转！上半年纯粹是发完年度大红包加临时囤货，三季度已经满血造血了！", "cites": ["2026三季报 & 半年报现金流量表", "三季度应收/存货/有息债环比全降"], "impact": {"text": "26Q3 单季 OCF +2.74 亿（净现比 304%），应收/存货/有息债全面环比回落", "plain": "三季度真金白银狂回流，彻底击碎“现金流失血”指控！", "pos": true}}, {"id": "M12", "role": "bull", "topic": "rd_shares", "round": "第二轮 · 多头两处诚实认领 + 口径纠偏，终版收敛至 22.85 元", "round_plain": "第二轮 · 多头爽快认错两处（认领沙特分流 + 降毛利到 31.2%），同时抓出空头两处算术偏差！", "time": "11:27", "act": {"text": "🤝 诚实认领 · 多头终版 5.20 亿 / 公允 22.85 元", "cls": "act-bull"}, "replyTo": "M09", "text": "<b>同时我方坦诚认领空头打中的两处要害，并提醒裁判核查空头两处口径偏差：</b>① 认领对俄高毛利红利清零，将常态毛利率由 31.8% 下调至 <b>31.2%</b>、稳态营收微调至 37.5 亿、达产增量下修至 +1.70 亿；② <b>认领沙特分红分流</b>：沙特一期投资期确实难兼顾高派息与零举债，不再把 4.36 亿当永续铁尺，将要求回报率上调至 8.4%（15.5 倍）。③ <b>提示裁判纠偏空头</b>：空头用剔库存股的 3.7746 亿股算股价不严谨，应锁死法定总股本 <b>3.8304 亿股</b>；且空头在常态盈利里算了 0.25 亿政府补助（我方仅计 0.05 亿法定进项加计）。多头终版：常态自由盈余 <b>5.20 亿</b>（与空头仅差 8.9%）→ <b>公允 22.85 元</b>（二档 19.20 / 重锤 16.50 元）！", "plain": "<b>空头打得准的地方我也绝不嘴硬！</b>对俄暴利没了，我把毛利率主动降到 <b>31.2%</b>；沙特建厂确实会分流分红钱，我把估值倍数从 16 倍降到 15.5 倍，合理价下调到 <b>22.85 元</b>！顺便提醒裁判两处：空头私自把 558 万库存股减掉了算股价（偏高估），而且还顺手多算了 2,000 万政府补助！现在咱俩正常盈利只差不到 9%，请裁判落锤！", "cites": ["法定总股本 3.830423 亿股", "非经常性政府补助剔除"], "impact": {"text": "多头终版常态 5.20 亿 / 公允 22.85 元，与空头盈利分歧收口至 8.9%", "plain": "多头主动降价认领沙特分流，双方盈利分歧瞬间缩到 9% 以内！", "pos": true}}, {"id": "M13", "role": "bear", "topic": "cash_saudi", "round": "第二轮补充 · 空头核验认账：撤回失血指控、上调毛利至 30.5%", "round_plain": "第二轮补充 · 空头爽快认账：三季度现金流 2.74 亿全属实！撤回失血刺，毛利上调至 30.5%", "time": "11:27", "act": {"text": "🏳️ 核验认账 · 撤回失血刺 + 终版 4.76 亿 / 20.4 元", "cls": "act-bear"}, "replyTo": "M11", "text": "<b>快速核验多头 #10—#12，事实面前绝不死扛：</b>① 26Q3 单季经营现金流 <b>+2.74 亿</b>、应收 -0.39 亿 / 存货 -0.87 亿 / 有息债 -0.75 亿<b>全部属实</b>，原刺三“失血”降级为“上半年一次性占款 + 沙特期分红分流”，撤回盈利扣减；② <b>三季报 P2</b> 证实前 9 月其他收益 0.176 亿中 0.146 亿为非经常性政府补助，多头说得对，常态只计 0.05 亿；③ 接受多头“纯内销 28.89% 证伪结构论”的数学论证，将常态毛利率由 30.0% <b>上调至 30.5%</b>！两项对冲后空头终版锁定：常态自由盈余 <b>4.76 亿</b>（与多头差约 9%，已过收口闸门），按 3.8304 亿法定股本公允 <b>20.4 元</b>（二档 17.2 / 重锤 14.5 元），静候裁判定案！", "plain": "<b>刚核完原表，多头说的全是真的，绝不硬杠！</b>三季度确实净收了 <b>2.74 亿现金</b>还降了借款，我撤回“持续失血”指控；政府补助也确实是一次性的，听你的只算 500 万；而且你的小学算术题说服我了，我把毛利率调高到 <b>30.5%</b>！一增一减我这边正常赚 <b>4.76 亿</b>，按 3.83 亿股算合理价 <b>20.4 元</b>，两边只差 9%，直接交给裁判拍板！", "cites": ["2026三季报 P2 非经常补助", "26Q3 单季 OCF +2.74 亿"], "impact": {"text": "多空两轮后核心盈利收敛至 4.76 亿 对比 5.20 亿（差 9.2% < 15%），达标跳过加时", "plain": "空头心服口服撤回失血刺、上调毛利，两边彻底收口！", "pos": true}}, {"id": "M14", "role": "judge", "topic": "rd_shares", "round": "第三轮 · 裁判破案①：跳过加时 × 五大争点二元裁决 + 双向纠偏", "round_plain": "第三轮 · 裁判先破三件案：踢飞创投浮盈、打回空头扣库存股、把周转底钱从 1.5 亿加严到 2.04 亿！", "time": "11:37", "act": {"text": "⚖️ 裁判破案 · 驳回剔库存股 + 刚性扣足 20 天底仓", "cls": "act-judge"}, "replyTo": "M13", "text": "<b>收口闸门验核通过：多空核心盈利分歧已缩至 9.2%（远低于 15% 阈值），无未核验新冲突，跳过加时赛直接终审！</b>先对五大死结逐一二元破案与双向纠偏：① <b>创投浮盈 🩸 命中死穴</b>：100% 剔出常态利润，账面 6.145 亿私募创投按含 0.203 亿递延税及二级退出折价统一按 <b>0.65 倍</b>认账（+3.99 亿）；② <b>欧盟制裁与毛利</b>：砍除 23—25 年 35%+ 对俄红利，同时反杀 26.28% 谷底永续化，锁死常态毛利率 <b>30.8%</b>（外销 50%×33.6% + 内销 50%×28.0%）；③ <b>现金流与研发 🛡️ 反杀</b>：认可 Q3 单季现金流 +2.74 亿与研发过峰，定锚常态研发 <b>1.90 亿</b>，但认领沙特分流上调折现率；④ <b>双向会计纠偏 ⚖️</b>：查 <b>2025 年报 P88</b> 确认 557.86 万股库存股用于员工激励而非注销，<b>驳回空头剔股本</b>、锁死 <b>3.830423 亿股</b>；同时纠偏双方 1.50 亿营运底仓偏松，按铁闸刚性扣足 <b>20 天营收 = 2.04 亿元</b>！", "plain": "<b>多空两边差不到 10%，干干净净跳过加时赛，我直接一锤定音！</b>先破几处硬案：① 创投炒股浮盈 <b>100% 踢出利润</b>，账面 6.15 亿私募基金打 6.5 折算资产；② 砍掉昔日对俄暴利，也不把三季度撞车谷底当永久，毛利率钉死 <b>30.8%</b>；③ 研发过峰定 1.9 亿、三季度现金流好转属实，但沙特要花大钱确实得压分红预期；④ <b>两边各纠偏一处</b>：年报 88 页写明回购股是发员工不是销毁，空头不能少算股本，死守 <b>3.83 亿股</b>；同时两边留的 1.5 亿日常周转底钱太少，按规矩扣足 20 天生意款 <b>2.04 亿</b>！", "cites": ["2025年报 P88 库存股用途", "20天刚性营运底仓 2.04 亿"], "impact": {"text": "锁死 3.8304 亿股 + 2.04 亿底仓 + 30.8% 常态毛利 + 1.90 亿研发", "plain": "裁判用巨潮原件双向纠偏，把每一分钱的水分都挤干净！", "pos": true}}, {"id": "M15", "role": "judge", "topic": "verdict", "round": "第三轮 · 裁判总落锤：常态 5.01 亿 / 净现金 +6.70 亿 → 公允 21.37 元", "round_plain": "第三轮 · 裁判终审落锤：正常赚 5.01 亿、给 15 倍合理价 21.37 元，17.60 元以下才开买！", "time": "11:37", "act": {"text": "🔨 终审落锤 · 公允 21.37 元｜买点 ≤17.60 / 重锤 ≤15.00", "cls": "act-judge"}, "replyTo": "M14", "text": "<b>六道硬保险丝独立精算落锤（全程 0 现价）：</b><br>1. <b>审慎归母净现金</b>：现金理财 14.31 亿 − 受限 0.06 亿 − 20 天底仓 2.04 亿 − 全部有息债 9.51 亿 + 创投 0.65 折 3.99 亿 = <b>+6.70 亿元</b>（达产配对扣沙特一期 5.30 亿 + 国内收尾 2.20 亿 = 净债偏移 +0.80 亿）。<br>2. <b>盈利与 5 年实绩闸门</b>：常态营收 37.20 亿 × 30.8% 毛利 → 无杠杆经营利润 6.34 亿 → 常态归母主业净利 <b>5.46 亿元</b>（较 24—25 年纯主业峰值 6.69 亿实砍 -18.4%，完美通过 5 年实绩闸门）；+ 折旧摊销 1.45 − 维持开支 1.55 − 增量营运资金 0.35 = <b>常态自由盈余 5.01 亿元</b>（达产 <b>6.31 亿元</b>）。<br>3. <b>国债锚与 6 年铁底校验</b>：国债 1.75% + 基础溢价 5.50% + 制裁摩擦 0.75% + 电动化压制 0.67% = 8.67%，永续增长 2.0% → 稳态 <b>15.0 倍</b>！(5.01 × 15.0 + 6.70) ÷ 3.8304 = <b>公允中枢 21.37 元</b>（表观市净率 2.11×）。锁死安全边际击球区：<b>第二档正常建仓 15.00—17.60 元</b>（公允 82.4%，常态回报 8.25%，经营市盈率 11.1× 贴合近 2 年铁底 11.8×）；<b>第一档左侧重锤 ≤ 15.00 元</b>（公允 70.2%，市净率 <b>1.48×</b> 低于 6 年铁底 2.04× 达 -27.5%，经营市盈率 9.3× 咬合全期铁底 9.9×），定级 <b>T1 级细分制造白马（实战建议上限 ≤12%）</b>！请主席拆封现价！", "plain": "<b>蒙眼终审总账正式拍板！</b><br>① <b>手里余钱</b>：14.31 亿现金理财扣掉周转底钱、9.51 亿借款、加上打 6.5 折的私募基金，手里实打实余下 <b>+6.70 亿净现金</b>（算上沙特和国内后续 7.5 亿扩产开支，达产略微净欠 0.8 亿）。<br>② <b>真实赚钱力</b>：正常年景做主业赚 <b>5.46 亿纯利</b>，扣完修补设备和周转占款，每年净落袋 <b>5.01 亿真现金</b>（沙特+高端扩产后 <b>6.31 亿</b>）。<br>③ <b>合理价与买点</b>：给 <b>15 倍</b>合理估值，算出来 <b>公允价 21.37 元</b>！留足安全垫：<b>15.00—17.60 元正常建底仓</b>（每年内生回报 8.25%+），<b>15.00 元以下闭眼重锤</b>（市净率只有 1.48 倍，比过去 6 年最惨大底还便宜 27%，经营市盈率 9.3 倍卡死历史极值）！请主席立刻拆开黑信封揭晓今天股价！", "cites": ["5年历史实绩Reality Check通过", "6年PB 2.04× / PE 9.9×双铁底校验"], "impact": {"text": "盲定落锤：常态 5.01 亿｜净现金 +6.70 亿｜公允 21.37 元｜买点 ≤17.60 / ≤15.00 元", "plain": "裁判一锤定音：合理价 21.37 元，17.60 元以下才进买点！", "pos": true}}, {"id": "M16", "role": "host", "topic": "verdict", "round": "第四步 · 宿主零偏见揭盲开箱：现价 22.85 元（溢价 +6.9%）", "round_plain": "第四步 · 黑信封当场拆封！今天现价 22.85 元，偏贵 7% 还没进买点，管住手喝茶等回调！", "time": "11:38", "act": {"text": "🔓 揭盲开箱 · 现价 22.85 元｜⏳ 持币静待回调", "cls": "act-host"}, "replyTo": "M15", "text": "<b>历史性揭盲时刻！拆封 2026-11-27 11:18 封存实时行情：</b>瑞丰新材最新股价 <b>22.85 元/股</b>（今日 +0.75%），对应法定总市值 <b>87.53 亿元</b>，严苛真实企业价值 <b>80.83 亿元</b>！对照三模型物理双盲锁死的 <b>21.37 元公允中枢</b>，现价仍小幅溢价 <b>+6.93%</b>，当前常态内生回报率仅 <b>6.20%</b>（16.13×）、达产回报率 7.14%，距第二档正常买入上限 <b>17.60 元</b> 高出 +29.83%（需回调 <b>-22.98%</b> 方可入网），距第一档左侧重锤 <b>15.00 元</b> 需回调 -34.35%！且本次跨模型盲定（21.37 元）与前期单轨初审（22.19 元）高度收敛（仅差 -3.7%）。<b>终极实操指令：⏳ 纪律持币观望，绝不追高！</b>紧盯 26Q4—27H1 单季毛利率重返 30.5%+ 与沙特开工路标，挂单静待跌破 17.60 元分批建仓！", "plain": "<b>拆封今日股价黑信封！</b>瑞丰新材今天股价 <b>22.85 元</b>，比三大高手蒙眼算出的 <b>21.37 元合理价</b> 还贵了将近 7%，离 <b>17.60 元</b> 的安全建仓线还差着 <b>-23%</b> 的跌幅！算下来现在买每年内生回报只有 6.2%，性价比还不够香。<b>实战结论就一句话：好公司但价钱还没跌到位，稳稳拿着现金喝茶等回调！</b>等它什么时候跌到 17.60 元以下再出手建底仓，跌破 15 元闭眼重锤！", "cites": ["2026-11-27 11:18 封箱行情", "与初审 22.19 元仅差 -3.7%"], "impact": {"text": "现价 22.85 元溢价 +6.93%，距二档上限 17.60 元需回调 -22.98% → 持币等待", "plain": "点下方金色按钮拆开完整揭盲战报和分批挂单网！", "pos": true}}], "clash_cards": [{"topic": "vc_fake", "title": "死结 ①：0.97 亿创投基金浮盈混入扣非净利润", "title_plain": "死结 ①：扣非利润里掺了近两成炒股浮盈，主业到底赚了多少？", "verdictBadge": "🩸 空头完胜（100% 清零创投浮盈）", "bear": "揭露 <b>三季报 P11 / P2</b> 中「常州信金瑞盈」0.966 亿纸面浮盈（分现仅 0.19 亿）未入非经常性损益表，公司半年报自承不可持续；挤掉后 9M 主业扣非实跌 <b>-30.1%</b> 至 3.77 亿。", "bear_plain": "4.59 亿扣非里藏了近 1 亿炒一级市场股票的纸面浮盈，分回现金才 1,900 万！挤掉后主业其实暴跌三成！", "bull": "第一轮即主动 <b>100% 剔除</b>全部创投及理财收益，指出剔除三季度创投反亏 -0.28 亿后，Q3 单季主业扣非实为 <b>1.02 亿</b>（高于表观 0.78 亿），拒绝拿浮盈粉饰主业。", "bull_plain": "多头根本不护短，直接把炒股浮盈清零，还顺手证明三季度主业其实赚了 1.02 亿（比表面多三成）！", "rebuttal": "双方第一轮即在“分子 100% 清零创投浮盈、分母按 0.65× 折价认账”上彻底达成零分歧共识。", "rebuttal_plain": "两边第一回合就达成共识：炒股收益绝不算进正常盈利！", "judge": "<b>🩸 终审落锤：</b>完全采纳空头排毒结论！分子常态自由盈余 <b>100% 清零</b>全部创投及理财损益；分母将 6.145 亿私募创投按含递延税及二级退出折价刚性打 <b>0.65 折</b>（+3.99 亿），绝不双算。", "judge_plain": "<b>🩸 裁判拍板：</b>创投炒股收益从利润里 <b>彻底清零</b>！账上 6.15 亿私募基金打 6.5 折算家底，干干净净不掺水！"}, {"topic": "sanction_gm", "title": "死结 ②：欧盟涉俄制裁与 26Q3 毛利率 26.28% 崩塌定性", "title_plain": "死结 ②：被欧盟制裁后三季度毛利率跌穿 26.3%，是永久塌方还是短期撞车？", "verdictBadge": "🩸 砍除对俄暴利 / 🛡️ 反杀谷底永续化 → 锁死 30.8%", "bear": "亮出 <b>半年报 P29</b> 证实主动终止对俄业务，外销毛利 36.9% 远高于内销 28.9%，内销 +75.6% 属结构降级；第二轮被多头纯内销底板论证说服，将常态毛利率上调至 <b>30.5%</b>。", "bear_plain": "丢了高毛利俄单改卷国内低价单是真伤！但算完多头的数学题，我把常态毛利从 30% 上调到 <b>30.5%</b>。", "bull": "亮出 <b>半年报 P15</b> 数学铁证：100% 纯内销毛利底板都有 <b>28.89%</b>，Q3 的 26.28% 必属高价基础油库存结转（11 月底原料已跌 -6.6%）+ 汇兑 + 延津刚转固折旧共振底；主动认领后俄降级下修至 <b>31.2%</b>。", "bull_plain": "全卖国内都有 28.9% 毛利，跌到 26.3% 明显是高价油库存和汇率撞车！我也诚实砍掉俄单暴利降到 <b>31.2%</b>。", "rebuttal": "多空围绕毛利率的世纪争执经两轮数学对质，迅速收窄至仅差 <b>0.7 个百分点</b>（30.5% 对比 31.2%）！", "rebuttal_plain": "两边经过一轮数学硬算，毛利率分歧缩到只差 0.7 个百分点！", "judge": "<b>⚖️ 终审落锤：</b>坚决砍去 23—25 年 35%+ 地缘超额红利，也坚决拒绝把 26Q3 共振谷底永久化，按外销 50%×33.6% + 内销 50%×28.0% 锁死常态毛利率 <b>30.8%</b>，常态归母主业净利 <b>5.46 亿</b>（较峰值实砍 -18.4%）。", "judge_plain": "<b>⚖️ 裁判拍板：</b>既砍掉过去靠卖俄罗斯多赚的 4 个点暴利，也不冤枉三季度短期撞车，毛利率钉死 <b>30.8%</b>，正常纯主业赚 <b>5.46 亿</b>！"}, {"topic": "cash_saudi", "title": "死结 ③：存贷双高现金流含金量 & 沙特延布 5.3 亿资本开支分流", "title_plain": "死结 ③：公司是不是在借钱撑场面？沙特建厂会不会把高分红吃掉？", "verdictBadge": "失血指控 🛡️ 多头反杀 / 沙特分流 🩸 空头补刀成功", "bear": "首轮揭露前 9 月净现比仅 36%、有息债飙至 9.51 亿；第二轮核验 Q3 现金流大反转后大方撤回失血刺，但精准补刀沙特一期 <b>5.2 亿权益出资</b>将挤占 4.36 亿高分红！", "bear_plain": "查完三季度现金流我撤回“失血”指控！但我抓住新死穴：沙特建厂要掏 5.2 亿，以后每年 4.36 亿高分红保不住了！", "bull": "拆出 <b>26Q3 单季经营现金流 +2.74 亿（净现比 304%）</b> 且应收/存货/有息债环比全面下降，彻底击碎失血指控；同时诚实认领沙特资本期分红分流，主动上调折现率至 8.4%。", "bull_plain": "三季度单季狂赚 2.74 亿真现金、借款和库存都在降，彻底洗清失血冤案！沙特分流分红我认账，主动降低估值倍数！", "rebuttal": "多头靠三季度单季拆表打赢现金流反杀，空头靠沙特一期投资额精准打掉“高股息永续光环”，双方互有攻防！", "rebuttal_plain": "多头打赢现金流反杀，空头打赢分红分流补刀，精彩绝伦！", "judge": "<b>⚖️ 终审落锤：</b>确认无造假与失血风险（受限仅 0.06 亿、财务公司 0 存款），刚性扣足 <b>20 天底仓 2.04 亿</b>锁死净现金 <b>+6.70 亿</b>；达产配对实扣 <b>-7.50 亿</b>权益扩产现金并上调折现率至 <b>8.67%</b>！", "judge_plain": "<b>⚖️ 裁判拍板：</b>绝非财务造假！扣足 2.04 亿日常底钱后还有 <b>+6.70 亿净现金</b>；把沙特建厂 5.3 亿全扣在达产账上，不拿过去高分红画大饼！"}, {"topic": "rd_shares", "title": "死结 ④：台架研发费是否过峰 & 558 万库存股股本口径之争", "title_plain": "死结 ④：翻倍的研发费以后每年都要烧吗？回购的 558 万股能不能扣掉？", "verdictBadge": "研发过峰 🛡️ 多头胜 / 股本锁 3.83 亿 ⚖️ 裁判纠偏", "bear": "首轮按 2.1 亿永久高研发扣利润，且扣除 558 万库存股按 3.7746 亿股算每股价值；第二轮核验 Q3 研发已降回 0.39 亿后大方撤回并对齐 <b>1.90 亿</b>，但坚持剔库存股。", "bear_plain": "核对了三季报，考证研发高峰确实过了，我降到 1.9 亿跟你对齐！但回购的库存股没分红权，我还是想扣掉。", "bull": "亮出 <b>半年报 P129</b> 1.11 亿试验费与 Q3 单季研发腰斩至 0.39 亿，打赢研发反杀；并提醒裁判 558 万库存股非注销、不能私自缩股本，还顺手纠偏了空头多算 0.20 亿政府补助。", "bull_plain": "三季度研发费直接腰斩，考证高峰实锤过了！而且回购股是发员工的不是注销，不能少算总股本！", "rebuttal": "双方研发费 100% 收敛至 1.90 亿，剩余 558 万库存股与政府补助交由裁判按会计准则一锤定音。", "rebuttal_plain": "研发费彻底谈妥 1.9 亿，股本和政府补助交裁判按铁律拍板！", "judge": "<b>⚖️ 终审落锤：</b>采纳常态研发 <b>1.90 亿</b>（占收 5.11%）与 0.05 亿法定加计抵减（剔净政府补助）；查 <b>2025 年报 P88</b> 确认库存股用于股权激励具摊薄性，<b>驳回空头剔股本</b>，死守 <b>3.830423 亿股</b>！", "judge_plain": "<b>⚖️ 裁判拍板：</b>研发锁死 <b>1.9 亿</b>、剔掉非经常补助；年报 88 页证实库存股要发员工，绝不能减股本，死守 <b>3.83 亿股</b>！"}, {"topic": "verdict", "title": "终审定价：21.37 元公允中枢与 6 年 PB/PE 铁底双向校验", "title_plain": "终审定价：蒙眼算出合理价 21.37 元，揭盲今天 22.85 元该怎么操作？", "verdictBadge": "🔨 T1 制造白马 · 买点 15.00—17.60 元｜⏳ 现价持币", "bear": "终版常态自由盈余 <b>4.76 亿</b>、公允 <b>20.40 元</b>（法定股本口径），二档 17.20 元 / 重锤 14.50 元。", "bear_plain": "空头最终认账调高到 <b>20.4 元</b>，17.2 元以下开买、14.5 元重锤！", "bull": "终版常态自由盈余 <b>5.20 亿</b>、公允 <b>22.85 元</b>，二档 19.20 元 / 重锤 16.50 元。", "bull_plain": "多头诚实下修到 <b>22.85 元</b>，19.2 元以下开买、16.5 元重锤！", "rebuttal": "两轮交锋后多空合理价从相差 5.00 元迅速收窄至仅差 <b>2.45 元</b>（20.40—22.85 元），裁判居中偏严一锤定音！", "rebuttal_plain": "多空合理价从差 5 块钱收窄到只差 2 块半，裁判精准落刀！", "judge": "<b>🔨 终审落锤：</b>锁死常态 <b>5.01 亿</b> / 达产 <b>6.31 亿</b> / 净现金 <b>+6.70 亿</b>，15.0× 盲定公允 <b>21.37 元</b>、二档 <b>15.00—17.60 元</b>（82.4% 公允，回报 8.25%）、一档重锤 <b>≤ 15.00 元</b>（1.48× 市净率低于 6 年铁底 2.04× 达 -27.5%）！宿主揭盲现价 <b>22.85 元</b>（溢价 +6.9%），纪律持币等回调！", "judge_plain": "<b>🔨 裁判拍板：</b>合理价 <b>21.37 元</b>，<b>17.60 元以下</b>建底仓，<b>15.00 元以下</b>砸穿 6 年大底闭眼重锤！今天现价 22.85 元略贵，稳稳拿钱等它跌进网里！"}], "unblind": {"sealed_title": "🔒 2026-11-27 瑞丰新材（300910.SZ）实时股价信封已封存（2.2版 物理双盲终审）", "sealed_desc": "跨模型三巨头两轮激辩全程 0 现价泄露：100% 剔除 0.97 亿创投纸面浮盈，锁死后俄常态毛利率 30.8% 与常态自由盈余 5.01 亿（达产 6.31 亿），扣足 20 天营运底仓得归母净现金 +6.70 亿，按 15.0× 盲定公允中枢 21.37 元、第二档正常建仓 15.00—17.60 元、第一档左侧重锤 ≤ 15.00 元（1.48× 市净率严守 6 年 2.04× 铁底下方 -27.5%）。点击拆封今日真实股价：", "sealed_desc_plain": "三大高手蒙眼激辩完毕，把创投炒股水分挤干、砍掉对俄暴利后锁死：合理价 21.37 元，17.60 元以下开买，15.00 元以下闭眼重锤！点击下方金色按钮立刻拆开今日股价黑信封：", "header_title": "🔓 揭盲开箱！今日 A 股现价 22.85 元（+0.75%｜总市值 87.53 亿元）", "header_badge": "⏳ 纪律持币！现价较盲定公允 21.37 元溢价 +6.93%（距 17.60 元正常买点需回调 -22.98%），管住手绝不追高！", "stats": [{"k": "今日现价 对比 盲定公允 21.37 元", "v": "22.85 元（溢价 +6.93% / 距二档上限 17.60 元高 +5.25 元）", "color": "bear"}, {"k": "现价严苛真实企业价值（扣 6.70 亿净现金）", "v": "80.83 亿元（达产配对扣除 7.5 亿扩产后 Full EV = 88.33 亿）", "color": "host"}, {"k": "现价常态 / 达产真实内生回报率", "v": "常态 6.20%（16.13×）｜ 达产 7.14%（14.00×）", "color": "gold"}, {"k": "近 12 个月实派股息率（1.137 元/股）", "v": "现价 4.98%（入网二档 6.46%—7.58%，注：沙特建设期有分流风险）", "color": "judge"}, {"k": "当前市净率 对比 近 6 年铁底 2.04×", "v": "2.25×（6 年铁底 20.69 元｜重锤 15.00 元对应 1.48× 折让 -27.5%）", "color": "bear"}, {"k": "跨模型 Swarm 终审 对比 流程 B 初审", "v": "21.37 元 对比 22.19 元（仅差 -3.7%，两套独立引擎高度互印！）", "color": "bull"}], "stats_plain": [{"k": "今天股票多少钱？现在能买吗？", "v": "22.85 元！比 21.37 元合理价贵了约 7%，离 17.60 元建仓线还高出 5 块多，稳住别追高！", "color": "bear"}, {"k": "要跌多少才算便宜进入买点？", "v": "需要从今天再回调约 -23% 跌破 17.60 元才进正常买点；跌破 15.00 元（再跌 -34%）进入闭眼重锤区！", "color": "gold"}, {"k": "现在买每年真实赚钱回报率够香吗？", "v": "扣掉净现金算下来，现在买每年主业内生回报只有 6.2%（等跌到 17.60 元以下就能升到 8.25%—9.87%！）", "color": "host"}, {"k": "看股息快 5% 了，不能冲着分红买吗？", "v": "小心陷阱！过去一年发 1.137 元股息确实高，但空头算清楚了：接下来建沙特工厂要掏 5.3 亿，高分红可能阶段性打折！", "color": "judge"}, {"k": "今天 2.25 倍市净率贵不贵？", "v": "不算地板价！过去 6 年大底是 2.04 倍，而且现在盈利能力比过去降了一个台阶，所以我们把重锤线压严到 1.48 倍（15 元）！", "color": "bear"}, {"k": "这次三模型吵出来的结果靠谱吗？", "v": "极其靠谱！跟之前另一套盲审系统算的 22.19 元只差不到 4%，两套完全隔离的大脑算出了几乎一样的合理价！", "color": "bull"}], "grid_headers": ["实战击球档位（2.2版 跨模型终裁）", "A 股目标价（300910.SZ）", "常态回报 / 市净率", "表观 TTM 股息率", "实战挂单纪律（T1 级建议上限 ≤12%）"], "grid_rows": [["<b>🔥 第一档 · 左侧重锤区</b>", "<b>≤ 15.00 元</b>（距现价 -34.4%）", "≥ 9.87% / ≤ 1.48×", "≥ 7.58% *(常态派息约 4.7%+)*", "经营性 PE 9.30× 咬合全期铁底 9.9×，PB 较 6 年铁底折让 -27.5%，果断打满至 10%—12%"], ["<b>✅ 第二档 · 正常建仓区</b>", "<b>15.00 — 17.60 元</b>（-23.0%）", "8.25%—9.87% / 1.48—1.74×", "6.46%—7.58%", "<b>🎯 纪律入网区！</b>跌破 17.60 元（经营 PE 11.1× 贴近 2 年铁底）先建 5% 底仓，随毛利修复验证加仓"], ["<b>⚖️ 盲定公允价值中枢</b>", "21.37 元", "6.67% / 2.11×", "5.32%", "剥离创投浮盈、砍除对俄红利后的理性价值中枢（稳态 15.0×），老仓观察，新钱不追"], ["<b>⏳ 当前身位 · 纪律观察区</b>", "<b>22.85 元（溢价 +6.93%）</b>", "6.20% / 2.25×", "4.98%", "<b>📍 持币喝茶等回调！</b>静盯 26Q4—27H1 单季毛利率重返 30.5%+ 与沙特开工路标，绝不追高"], ["<b>🚨 1.25× 止盈减仓红线</b>", "≥ 26.71 元", "≤ 5.24% / ≥ 2.63×", "≤ 4.26%", "触发买方宪法 1.25× 高估红线，果断分批止盈高切低换马"]], "grid_headers_plain": ["买点档位（跨模型盲定终版）", "A 股股价（人民币）", "每年内生回报 / 市净率", "参考现金股息", "老百姓怎么挂单操作？（上限 12%）"], "grid_rows_plain": [["<b>🔥 左侧重锤抄底区</b>", "<b>15.00 元以下</b>", "回报 9.9%+ / 1.48 倍", "过去股息 7.6%+", "砸穿过去 6 年最惨大底一大截，捡精细化工冠军的大便宜，直接打满到 10%—12%！"], ["<b>✅ 正常建底仓区</b>", "<b>15.00 — 17.60 元</b>", "回报 8.3%—9.9% / 1.5—1.7 倍", "过去股息 6.5%—7.6%", "<b>🎯 跌进这里才开始买！</b>跌破 17.60 元先买 5% 底仓，边盯毛利率回到 30.5% 以上边加仓！"], ["<b>⚖️ 合理公允价</b>", "21.37 元", "回报 6.7% / 2.11 倍", "过去股息 5.3%", "公司剔掉泡沫后的合理身价，手里有的可以拿着，没买的别在这儿追高"], ["<b>⏳ 今天现价（喝茶等回调）</b>", "<b>22.85 元（偏贵 +7%）</b>", "回报 6.2% / 2.25 倍", "过去股息 5.0%（小心分流）", "<b>📍 管住手看戏！</b>离 17.60 元买点还差 23% 跌幅，先把现金握紧等市场给打折机会！"], ["<b>🚨 偏贵止盈线</b>", "26.71 元以上", "回报不到 5.2% / 2.6 倍+", "不到 4.3%", "涨得明显透支未来了，果断分批卖掉换更便宜的好公司！"]]}};
+const TOPICS = DATA.topics || [];
+const ROLES = DATA.roles || {};
+const MESSAGES = DATA.messages || [];
+const CLASH_CARDS = DATA.clash_cards || [];
+const UNBLIND = DATA.unblind || null;
+const GLOSSARY = DATA.glossary || [];
+
+const COLOR_MAP = {
+  host: 'var(--accent-host)', bull: 'var(--accent-bull)',
+  bear: 'var(--accent-bear)', judge: 'var(--accent-judge)', gold: 'var(--accent-gold)'
+};
+
+let currentTopic = 'all';
+let currentRole = 'all';
+let currentMode = DATA.default_mode || 'plain';
+let isUnblinded = false;
+
+function getText(obj, proKey, plainKey) {
+  if (currentMode === 'plain' && obj && obj[plainKey]) return obj[plainKey];
+  return (obj && obj[proKey]) || '';
+}
+
+function linkifyTerms(htmlStr) {
+  if (!htmlStr || !GLOSSARY.length) return htmlStr;
+  // Highlight known abbreviations/keywords safely outside HTML tags using placeholder tokens
+  // so later glossary rules NEVER match inside an earlier rule's title="..." attribute!
+  const rules = [];
+  GLOSSARY.forEach(g => {
+    const keys = (g.match || [g.key]).filter(k => k && k.length >= 2);
+    keys.forEach(k => rules.push({ k, key: g.key, tip: g.term + '：' + g.plain }));
+  });
+  rules.sort((a, b) => b.k.length - a.k.length);
+  const parts = htmlStr.split(/(<[^>]+>)/g);
+  for (let i = 0; i < parts.length; i += 2) {
+    let seg = parts[i];
+    if (!seg) continue;
+    const replaced = new Set();
+    const tokens = [];
+    for (const r of rules) {
+      if (replaced.has(r.key)) continue;
+      const esc = r.k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp(esc);
+      if (re.test(seg)) {
+        const safeTip = r.tip.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const safeKey = String(r.key).replace(/'/g, "\\'");
+        seg = seg.replace(re, (m) => {
+          const idx = tokens.length;
+          tokens.push(`<span class="term-link" title="${safeTip}" onclick="jumpToTerm('${safeKey}')">${m}</span>`);
+          return `\u0000T${idx}\u0000`;
+        });
+        replaced.add(r.key);
+      }
+    }
+    if (tokens.length) {
+      seg = seg.replace(/\u0000T(\d+)\u0000/g, (_, idx) => tokens[Number(idx)]);
+    }
+    parts[i] = seg;
+  }
+  return parts.join('');
+}
+
+function renderModeUI() {
+  const bp = document.getElementById('btnModePlain');
+  const bpro = document.getElementById('btnModePro');
+  bp.className = 'mode-btn' + (currentMode === 'plain' ? ' active-plain' : '');
+  bpro.className = 'mode-btn' + (currentMode === 'pro' ? ' active-pro' : '');
+  const tip = document.getElementById('stageTip');
+  if (currentMode === 'plain') {
+    tip.innerHTML = `<span class="mode-pill-banner plain">🐣 当前：小白大白话版</span> 零生僻英文缩写，像听投资老友开会一样秒懂！想看精确公式可随时点顶部切 <b>🎓 专业硬核版</b>，点虚线词秒查右侧词典。`;
+  } else {
+    tip.innerHTML = `<span class="mode-pill-banner pro">🎓 当前：专业硬核版</span> 保留完整财报科目、附注页码与 DCF/EV 算式（所有缩写已注中文）。点击气泡顶部<b>「↩ 引用原话」</b>直跳定位，点击虚线词秒查右侧词典！`;
+  }
+}
+
+function switchMode(mode) {
+  currentMode = mode;
+  renderModeUI();
+  renderConvergence();
+  renderChat();
+  renderMatrix();
+}
+
+function renderRoster() {
+  const keys = Object.keys(ROLES);
+  const el = document.getElementById('rosterStrip');
+  el.innerHTML = `<span style="font-size:11.5px;color:var(--text-muted);font-weight:700;">群成员筛选：</span>`
+    + `<span class="member-chip ${currentRole==='all'?'selected':''}" data-role="all" onclick="filterRole('all')">👥 全部 (${keys.length})</span>`
+    + keys.map(k => {
+        const r = ROLES[k];
+        return `<span class="member-chip ${currentRole===k?'selected':''}" data-role="${k}" onclick="filterRole('${k}')"><i class="dot dot-${r.cls}"></i>${r.avatar} ${r.name} (${r.model})</span>`;
+      }).join('');
+}
+
+function renderConvergence() {
+  const el = document.getElementById('convList');
+  el.innerHTML = (DATA.convergence || []).map(item => {
+    const lbl = (currentMode === 'plain' && item.label_plain) ? item.label_plain : item.label;
+    const val = (currentMode === 'plain' && item.value_plain) ? item.value_plain : item.value;
+    return `<div class="conv-row"><span class="conv-label">${lbl}</span><span class="conv-val" style="color:${COLOR_MAP[item.color]||'var(--text-primary)'};">${val}</span></div>`;
+  }).join('');
+}
+
+function renderTopics() {
+  document.getElementById('topicList').innerHTML = TOPICS.map(t => {
+    const cnt = t.id === 'all' ? MESSAGES.length : MESSAGES.filter(m => m.topic === t.id).length;
+    return `<button class="topic-btn ${currentTopic===t.id?'active':''}" onclick="filterTopic('${t.id}')">
+      <span>${t.icon||''} ${t.name}</span>
+      <span style="display:flex;align-items:center;gap:4px;">
+        ${t.badge ? `<span class="topic-status">${t.badge}</span>` : ''}
+        <span class="topic-count">${cnt}</span>
+      </span>
+    </button>`;
+  }).join('');
+}
+
+function renderGlossary() {
+  const q = (document.getElementById('glossarySearch').value || '').trim().toLowerCase();
+  const list = GLOSSARY.filter(g =>
+    !q || (g.term + ' ' + g.key + ' ' + g.plain + ' ' + (g.usage||'')).toLowerCase().includes(q)
+  );
+  document.getElementById('glossaryList').innerHTML = list.map(g => `
+    <div class="g-card" id="term-${g.key}">
+      <div class="g-term">📘 ${g.term}</div>
+      <div class="g-plain">${g.plain}</div>
+      ${g.usage ? `<div class="g-usage">🎯 实战用法：${g.usage}</div>` : ''}
+    </div>
+  `).join('') || `<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:16px;">未找到匹配术语</div>`;
+}
+
+function toggleGlossary() {
+  const layout = document.getElementById('mainLayout');
+  const side = document.getElementById('glossarySidebar');
+  if (window.innerWidth <= 1200) {
+    side.classList.toggle('drawer-open');
+  } else {
+    layout.classList.toggle('hide-glossary');
+  }
+}
+
+function jumpToTerm(key) {
+  const layout = document.getElementById('mainLayout');
+  const side = document.getElementById('glossarySidebar');
+  if (window.innerWidth <= 1200) {
+    side.classList.add('drawer-open');
+  } else {
+    layout.classList.remove('hide-glossary');
+  }
+  const search = document.getElementById('glossarySearch');
+  if (search && search.value) { search.value = ''; renderGlossary(); }
+  const card = document.getElementById('term-' + key);
+  if (card) {
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.remove('flash-term');
+    void card.offsetWidth;
+    card.classList.add('flash-term');
+    setTimeout(() => card.classList.remove('flash-term'), 2400);
+  }
+}
+
+function buildUnblindHTML() {
+  if (!UNBLIND) return '';
+  const statsArr = (currentMode === 'plain' && UNBLIND.stats_plain) ? UNBLIND.stats_plain : (UNBLIND.stats || []);
+  const statsHtml = statsArr.map(s =>
+    `<div class="stat-card"><div class="stat-k">${s.k}</div><div class="stat-v" style="color:${COLOR_MAP[s.color]||'var(--text-primary)'};">${s.v}</div></div>`
+  ).join('');
+  const hdrs = (currentMode === 'plain' && UNBLIND.grid_headers_plain) ? UNBLIND.grid_headers_plain : UNBLIND.grid_headers;
+  const rows = (currentMode === 'plain' && UNBLIND.grid_rows_plain) ? UNBLIND.grid_rows_plain : UNBLIND.grid_rows;
+  const tblHtml = (hdrs && rows)
+    ? `<table class="mini-table" style="margin-top:10px;"><thead><tr>${hdrs.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`
+      + rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')
+      + `</tbody></table>` : '';
+  return `<div class="unblind-box">
+    <div class="unblind-sealed" id="unblindSealed" style="display:${isUnblinded?'none':'block'};">
+      <div style="font-size:15px;font-weight:800;margin-bottom:6px;">${UNBLIND.sealed_title||'🔒 实时股价信封已封存'}</div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:12px;">${getText(UNBLIND, 'sealed_desc', 'sealed_desc_plain')}</div>
+      <button class="btn btn-gold" onclick="doUnblind()" style="padding:8px 18px;font-size:13.5px;">🔓 拆封现价 · 揭盲对照挂单网</button>
+    </div>
+    <div class="unblind-content ${isUnblinded?'open':''}" id="unblindContent">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+        <span style="font-weight:800;font-size:15px;color:var(--accent-gold);">${UNBLIND.header_title||''}</span>
+        ${UNBLIND.header_badge ? `<span class="act-tag act-concede">${UNBLIND.header_badge}</span>` : ''}
+      </div>
+      <div class="grid-cards">${statsHtml}</div>
+      ${tblHtml}
+    </div>
+  </div>`;
+}
+
+function renderChat() {
+  const container = document.getElementById('chatView');
+  const filtered = MESSAGES.filter(m =>
+    (currentTopic === 'all' || m.topic === currentTopic) &&
+    (currentRole === 'all' || m.role === currentRole)
+  );
+  document.getElementById('msgCounter').textContent = `当前显示 ${filtered.length} / ${MESSAGES.length} 条发言`;
+  let out = '', lastRound = '';
+  filtered.forEach(m => {
+    const rTitle = getText(m, 'round', 'round_plain');
+    if (rTitle && rTitle !== lastRound && currentTopic === 'all' && currentRole === 'all') {
+      out += `<div class="round-divider"><span class="round-pill">${rTitle}</span></div>`;
+      lastRound = rTitle;
+    }
+    const r = ROLES[m.role] || { name: m.role, model: '', avatar: '💬', cls: 'host', side: 'left' };
+    const tObj = TOPICS.find(t => t.id === m.topic);
+    let quoteHtml = '';
+    if (m.replyTo) {
+      const target = MESSAGES.find(x => x.id === m.replyTo);
+      if (target) {
+        const tr = ROLES[target.role] || { avatar: '', name: target.role };
+        const plain = getText(target, 'text', 'plain').replace(/<[^>]+>/g, '');
+        const snippet = plain.length > 56 ? plain.slice(0, 56) + '…' : plain;
+        quoteHtml = `<div class="quote-box" onclick="jumpToMsg('${target.id}')"><div class="quote-head"><span>↩ 回复 ${tr.avatar} ${tr.name} (${target.id})</span><span class="quote-jump">定位原话 ↗</span></div><div>${snippet}</div></div>`;
+      }
+    }
+    const tblObj = (currentMode === 'plain' && m.table_plain) ? m.table_plain : m.table;
+    let tableHtml = '';
+    if (tblObj) {
+      tableHtml = `<table class="mini-table"><thead><tr>${tblObj.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`
+        + tblObj.rows.map(row=>`<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('') + `</tbody></table>`;
+    }
+    let citesHtml = '';
+    if ((m.cites && m.cites.length) || m.impact) {
+      const impText = m.impact ? getText(m.impact, 'text', 'plain') : '';
+      citesHtml = `<div class="cite-row">`
+        + (m.cites || []).map(c => `<span class="cite-chip">${c}</span>`).join('')
+        + (m.impact ? `<span class="impact-chip ${m.impact.pos?'pos':''}">${impText}</span>` : '')
+        + `</div>`;
+    }
+    const bodyHtml = linkifyTerms(getText(m, 'text', 'plain'));
+    out += `<div class="msg-row ${r.side==='right'?'side-right':''}" id="msg-${m.id}">
+      <div class="avatar av-${r.cls}">${r.avatar}</div>
+      <div class="msg-body-wrap">
+        <div class="msg-meta">
+          <span class="sender-name">${r.name}</span>
+          <span class="model-tag">${r.model}</span>
+          ${m.act ? `<span class="act-tag ${m.act.cls}">${m.act.text}</span>` : ''}
+          ${tObj ? `<span class="topic-tag-mini" onclick="filterTopic('${m.topic}')">${tObj.icon||''} ${tObj.name.split('·')[0].trim()}</span>` : ''}
+          <span class="msg-id">${m.id} · ${m.time||''}</span>
+        </div>
+        <div class="bubble bubble-${r.cls}" id="bubble-${m.id}">
+          ${quoteHtml}<div>${bodyHtml}</div>${tableHtml}${m.isUnblindBox?buildUnblindHTML():''}${citesHtml}
+        </div>
+      </div>
+    </div>`;
+  });
+  container.innerHTML = out || `<div style="text-align:center;padding:48px 16px;color:var(--text-muted);">当前筛选条件下暂无发言。</div>`;
+}
+
+function renderMatrix() {
+  const el = document.getElementById('matrixView');
+  const cards = (currentTopic === 'all' || !CLASH_CARDS.some(c => c.topic === currentTopic))
+    ? CLASH_CARDS : CLASH_CARDS.filter(c => c.topic === currentTopic);
+  el.innerHTML = cards.map(c => `<div class="clash-card">
+    <div class="clash-header">
+      <span class="clash-title">${getText(c, 'title', 'title_plain')}</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="act-tag act-verdict">${c.verdictBadge}</span>
+        <button class="btn" style="padding:3px 9px;font-size:11.5px;" onclick="viewTopicInChat('${c.topic}')">💬 回群聊看原话</button>
+      </div>
+    </div>
+    <div class="clash-grid">
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-bear);">🐻 空头亮刺</div><div>${linkifyTerms(getText(c, 'bear', 'bear_plain'))}</div></div>
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-bull);">🐂 多头反杀/认领</div><div>${linkifyTerms(getText(c, 'bull', 'bull_plain'))}</div></div>
+      <div class="clash-col"><div class="clash-col-head" style="color:var(--accent-host);">🔄 核验补刀 / 撤回</div><div>${linkifyTerms(getText(c, 'rebuttal', 'rebuttal_plain'))}</div></div>
+    </div>
+    <div class="clash-verdict">${linkifyTerms(getText(c, 'judge', 'judge_plain'))}</div>
+  </div>`).join('');
+}
+
+function filterTopic(tid) { currentTopic = tid; renderTopics(); renderChat(); renderMatrix(); }
+function filterRole(role) { currentRole = role; renderRoster(); renderChat(); }
+function switchView(v) {
+  document.getElementById('btnChatView').classList.toggle('active', v === 'chat');
+  document.getElementById('btnMatrixView').classList.toggle('active', v === 'matrix');
+  document.getElementById('chatView').classList.toggle('hidden', v !== 'chat');
+  document.getElementById('matrixView').classList.toggle('active', v === 'matrix');
+}
+function viewTopicInChat(tid) { switchView('chat'); filterRole('all'); filterTopic(tid); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function jumpToMsg(id) {
+  let target = document.getElementById('msg-' + id);
+  if (!target) { currentTopic = 'all'; currentRole = 'all'; renderRoster(); renderTopics(); renderChat(); target = document.getElementById('msg-' + id); }
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const b = document.getElementById('bubble-' + id);
+    if (b) { b.classList.remove('flash-highlight'); void b.offsetWidth; b.classList.add('flash-highlight'); setTimeout(() => b.classList.remove('flash-highlight'), 2200); }
+  }
+}
+function doUnblind() { isUnblinded = true; const s = document.getElementById('unblindSealed'), c = document.getElementById('unblindContent'); if (s) s.style.display = 'none'; if (c) c.classList.add('open'); }
+function jumpAndUnblind() {
+  switchView('chat'); isUnblinded = true; currentTopic = 'all'; currentRole = 'all';
+  renderRoster(); renderTopics(); renderChat();
+  const ub = MESSAGES.find(m => m.isUnblindBox);
+  if (ub) setTimeout(() => jumpToMsg(ub.id), 60);
+}
+function toggleTheme() {
+  const h = document.documentElement, n = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  h.setAttribute('data-theme', n); document.getElementById('btnTheme').textContent = n === 'dark' ? '☀️ 浅色' : '🌙 深色';
+}
+
+renderModeUI(); renderRoster(); renderConvergence(); renderTopics(); renderGlossary(); renderChat(); renderMatrix();
+</script>
+</body>
+</html>
