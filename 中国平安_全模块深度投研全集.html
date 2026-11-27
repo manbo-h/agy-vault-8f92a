@@ -804,7 +804,7 @@
       border-color: #b45309;
       color: #ffffff;
     }
-    /* 流程B零泄露 AB 对照实测认证徽章 & 一键筛选按钮 */
+    /* 流程B零泄露物理双盲（🧪 B测新版）& 跨模型Swarm终审（👑 Swarm×B测）勋章与一键筛选 */
     .agy-ab-badge {
       display: inline-flex;
       align-items: center;
@@ -822,6 +822,52 @@
       box-shadow: 0 1px 4px rgba(99, 102, 241, 0.35);
       white-space: nowrap;
       cursor: help;
+    }
+    .agy-ab-badge.agy-swarm-badge,
+    .agy-swarm-badge {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 48%, #9a3412 100%);
+      color: #fffbeb;
+      border: 1px solid rgba(254, 243, 199, 0.55);
+      box-shadow: 0 1px 6px rgba(217, 119, 6, 0.45);
+    }
+    .agy-ab-badge.agy-v3-badge,
+    .agy-v3-badge {
+      background: linear-gradient(135deg, #059669 0%, #0d9488 52%, #0284c7 100%);
+      color: #ecfdf5;
+      border: 1px solid rgba(167, 243, 208, 0.55);
+      box-shadow: 0 1px 6px rgba(5, 150, 105, 0.40);
+    }
+    .agy-sort-btn.agy-v3-filter-btn {
+      border-color: #6ee7b7;
+      color: #065f46;
+      background: #ecfdf5;
+      font-weight: 700;
+    }
+    .agy-sort-btn.agy-v3-filter-btn:hover {
+      background: #d1fae5;
+      border-color: #10b981;
+    }
+    .agy-sort-btn.agy-v3-filter-btn.active {
+      background: linear-gradient(135deg, #059669 0%, #0d9488 55%, #0284c7 100%);
+      border-color: #065f46;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(5, 150, 105, 0.40);
+    }
+    .agy-sort-btn.agy-swarm-filter-btn {
+      border-color: #fcd34d;
+      color: #92400e;
+      background: #fffbeb;
+      font-weight: 700;
+    }
+    .agy-sort-btn.agy-swarm-filter-btn:hover {
+      background: #fef3c7;
+      border-color: #f59e0b;
+    }
+    .agy-sort-btn.agy-swarm-filter-btn.active {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 55%, #b45309 100%);
+      border-color: #92400e;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.40);
     }
     .agy-sort-btn.agy-ab-filter-btn {
       border-color: #c4b5fd;
@@ -1438,6 +1484,323 @@
       color: #94a3b8;
     }
   }
+
+/* ====== 全文专业术语下划线与点击弹窗引擎 (agy-glossary) ====== */
+.agy-term {
+  border-bottom: 1.5px dotted var(--agy-term-line, #2563eb);
+  padding-bottom: 0.5px;
+  cursor: help;
+  border-radius: 2px;
+  transition: background-color 0.14s ease, color 0.14s ease, border-bottom-color 0.14s ease;
+  text-decoration: none;
+}
+.agy-term[data-cat="化工产品"], .agy-term[data-cat="行业产品"] { --agy-term-line: #0d9488; }
+.agy-term[data-cat="工艺设备"] { --agy-term-line: #4f46e5; }
+.agy-term[data-cat="财务会计"] { --agy-term-line: #2563eb; }
+.agy-term[data-cat="估值周期"] { --agy-term-line: #d97706; }
+.agy-term[data-cat="贸易政策"] { --agy-term-line: #e11d48; }
+.agy-term:hover, .agy-term.agy-term-active {
+  background-color: rgba(37, 99, 235, 0.11);
+  border-bottom-style: solid;
+}
+code .agy-term {
+  border-bottom-color: #be123c;
+}
+body.agy-glossary-off .agy-term {
+  border-bottom-color: transparent !important;
+  cursor: inherit;
+  background-color: transparent !important;
+}
+body.theme-dark .agy-term, html.theme-dark .agy-term {
+  --agy-term-line: #60a5fa;
+}
+body.theme-dark .agy-term[data-cat="化工产品"], body.theme-dark .agy-term[data-cat="行业产品"] { --agy-term-line: #2dd4bf; }
+body.theme-dark .agy-term[data-cat="工艺设备"] { --agy-term-line: #818cf8; }
+body.theme-dark .agy-term[data-cat="估值周期"] { --agy-term-line: #fbbf24; }
+body.theme-dark .agy-term[data-cat="贸易政策"] { --agy-term-line: #fb7185; }
+body.theme-dark .agy-term:hover, body.theme-dark .agy-term.agy-term-active {
+  background-color: rgba(96, 165, 250, 0.22);
+}
+
+#agy-term-popover {
+  position: fixed;
+  z-index: 99999;
+  display: none;
+  width: min(370px, calc(100vw - 24px));
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.22), 0 2px 8px rgba(15, 23, 42, 0.08);
+  padding: 13px 15px 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 13.5px;
+  line-height: 1.62;
+  animation: agyPopIn 0.14s ease-out;
+}
+@keyframes agyPopIn {
+  from { opacity: 0; transform: translateY(4px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+body.theme-dark #agy-term-popover, html.theme-dark #agy-term-popover {
+  background: #1e293b;
+  color: #f1f5f9;
+  border-color: #475569;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55);
+}
+#agy-term-popover .tp-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #e2e8f0;
+}
+body.theme-dark #agy-term-popover .tp-head { border-bottom-color: #334155; }
+#agy-term-popover .tp-title-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+#agy-term-popover .tp-term {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
+body.theme-dark #agy-term-popover .tp-term { color: #f8fafc; }
+#agy-term-popover .tp-cat {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+#agy-term-popover .tp-cat[data-cat="化工产品"], #agy-term-popover .tp-cat[data-cat="行业产品"] { background: #ccfbf1; color: #0f766e; }
+#agy-term-popover .tp-cat[data-cat="工艺设备"] { background: #e0e7ff; color: #4338ca; }
+#agy-term-popover .tp-cat[data-cat="估值周期"] { background: #fef3c7; color: #b45309; }
+#agy-term-popover .tp-cat[data-cat="贸易政策"] { background: #ffe4e6; color: #be123c; }
+#agy-term-popover .tp-close {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+#agy-term-popover .tp-close:hover { color: #0f172a; }
+body.theme-dark #agy-term-popover .tp-close:hover { color: #f8fafc; }
+#agy-term-popover .tp-plain {
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+body.theme-dark #agy-term-popover .tp-plain { color: #e2e8f0; }
+#agy-term-popover .tp-ctx {
+  background: #f8fafc;
+  border-left: 3px solid #2563eb;
+  padding: 6px 9px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: #334155;
+  margin-bottom: 8px;
+}
+body.theme-dark #agy-term-popover .tp-ctx {
+  background: #0f172a;
+  color: #cbd5e1;
+  border-left-color: #38bdf8;
+}
+#agy-term-popover .tp-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #64748b;
+}
+#agy-term-popover .tp-drawer-link {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#agy-term-popover .tp-drawer-link:hover { background: #dbeafe; }
+
+#agy-term-fab {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 99980;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.90);
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 999px;
+  padding: 5px 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.28);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+#agy-term-fab button {
+  background: transparent;
+  color: #e2e8f0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#agy-term-fab button:hover {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+}
+#agy-term-fab .fab-sep {
+  width: 1px;
+  height: 14px;
+  background: #334155;
+}
+
+#agy-term-drawer-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.42);
+  z-index: 99990;
+  display: none;
+}
+#agy-term-drawer-mask.open { display: block; }
+#agy-term-drawer {
+  position: fixed;
+  top: 0;
+  right: -440px;
+  width: min(420px, 92vw);
+  height: 100vh;
+  background: #ffffff;
+  color: #0f172a;
+  z-index: 99995;
+  box-shadow: -10px 0 32px rgba(15, 23, 42, 0.25);
+  transition: right 0.22s ease;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+#agy-term-drawer.open { right: 0; }
+body.theme-dark #agy-term-drawer { background: #0f172a; color: #f1f5f9; }
+#agy-term-drawer .td-head {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#agy-term-drawer .td-tools {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+body.theme-dark #agy-term-drawer .td-tools { border-bottom-color: #334155; }
+#agy-term-drawer .td-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+}
+body.theme-dark #agy-term-drawer .td-search {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #475569;
+}
+#agy-term-drawer .td-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#agy-term-drawer .td-cat-btn {
+  padding: 3px 8px;
+  font-size: 11.5px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  cursor: pointer;
+}
+#agy-term-drawer .td-cat-btn.active {
+  background: #1e3a8a;
+  color: #ffffff;
+  border-color: #1e3a8a;
+}
+#agy-term-drawer .td-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 14px 24px;
+}
+#agy-term-drawer .td-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  padding: 10px 12px;
+  margin-bottom: 9px;
+  background: #ffffff;
+}
+body.theme-dark #agy-term-drawer .td-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+#agy-term-drawer .td-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+#agy-term-drawer .td-card-term {
+  font-weight: 800;
+  font-size: 14px;
+}
+#agy-term-drawer .td-card-meta {
+  font-size: 11px;
+  color: #64748b;
+}
+#agy-term-drawer .td-card-plain {
+  font-size: 12.8px;
+  line-height: 1.58;
+  color: #334155;
+}
+body.theme-dark #agy-term-drawer .td-card-plain { color: #cbd5e1; }
+#agy-term-drawer .td-card-ctx {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #1d4ed8;
+}
+body.theme-dark #agy-term-drawer .td-card-ctx { color: #7dd3fc; }
+
+@media print {
+  .agy-term {
+    border-bottom: none !important;
+    background: transparent !important;
+  }
+  #agy-term-popover, #agy-term-fab, #agy-term-drawer, #agy-term-drawer-mask {
+    display: none !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1445,7 +1808,7 @@
     <div class="report-badge">DEEP STOCK RESEARCH · 企业长期价值深度投研终极档案</div>
     <div class="report-title">中国平安(601318.SH) 深度投研全集</div>
     <div class="report-meta">
-      <span>📅 导出日期：2026-11-25</span>
+      <span>📅 导出日期：2026-11-27</span>
       <span>🧭 框架体系：全景基本面八步底座 + 追问模块 A—G（含芒格旁批 & 大师圆桌会）</span>
       <span>💡 交互提示：用鼠标或手指滑动选中任意文字即可弹出提问框</span>
     </div>
@@ -1471,13 +1834,13 @@
     <h1 id="601318sh-02318hk2026-11-22">中国平安（601318.SH / 02318.HK）企业基本面、产品硬实力、动态进化能力、治理可靠度与长期商业价值深度研究（全集·2026-11-22 三道铁闸终审重校版）</h1>
 <!--V4_AUDIT_BANNER_START-->
 <blockquote>
-<p><strong>⚔️ 2026-11-25 V4 官方原表验真 × 物理双盲独立重校终审声明（<code>PASSED</code> · ✅ 唯一生效口径）</strong>：
-- <strong>🎯 终审核心估值锚</strong>：常态 OE <strong><code>1110.00亿/年</code></strong> → 达产 <strong><code>1420.00亿/年</code></strong> ｜ 唯一生效买点：<strong><code>A股 ≤46.00元 / 46.00—53.00元（公允 65.00元）；H股(02318.HK)双尺 ≤45.10港元 / 45.10—51.96港元</code></strong>（对比：初稿 流程A A:45.0—52.0元 / H:44.0—52.0港元）
-- <strong>🔴 空头命中硬约束（实打实认领）</strong>：🩸 命中死穴（已单次实打实扣入分子 steady_oe 与每股稀释，绝不双扣）：1) 4.0% 非 VFA 寿险长期投资回报假设在 1.6%—1.9% 国债低利率新常态下偏乐观（9M26 折年化净/综合投资收益率 3.33%/3.07%，寿险一般模型累计负 OCI 达 -1,114.56亿，FVOCI 股票增至 7,967.83亿放大净资产权益弹性）→ 分子 steady_oe 已将非 VFA 投资回报假设下修 55bps 至 3.45%，实扣 -139.1亿元/年（同时 GAAP BVPS 57.68元已实扣 -555.17亿负 OCI）；2) 9M26 信用减值反弹至 554.21亿（+31.4%）且联营合营连亏三年（9M26 -40.32亿），资管 9M26 OPAT +194.23亿含较强股市周期兑现不宜线性外推 → 分子 steady_oe 在 2025 资管亏损 -37.85亿基础上再扣 -55.0亿元/年跨周期信用与联营摩擦缓冲；3) 长期服务计划（SBC）每年在筹资现金流真金白银二级市场买股约 40亿元 → 分子 steady_oe 刚性实扣 -40.0亿元/年；4) 两笔低息境外可转债存在最大 +5.08% 股本摊薄（同步化债 346.6亿）→ 每股公允中枢已隐含 ~1.5% 净期权稀释。
-- <strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：🛡️ 证据反杀（绝不重复扣减）：1) 反杀“借债分红论”：2025子公司现金分红上缴 530.22亿（覆盖派息 113.9%），9M26 投资收益收现 440.24亿（覆盖股利偿息 103.0%），母公司高流动性金融资产 783.38亿 &gt; 刚性有息债 573.27亿，稳居净现金 +210.11亿（衍生负债 109.02亿属非现金转股权重估）；2) 反杀“地产黑洞论”与 +167.2亿 EV 加罚：不动产仅占险资 3.0%（2,048.27亿）且 83.9% 为核心收租实物物业，2025年报附注八.16 官方披露成本法投资性房地产公允价值达 2,026.27亿，反藏 +512.16亿表外浮盈；3) 反杀“盈利结构性崩塌与资本抽血论”：26Q3 单季净利 40.60亿主因 IFRS 9 下权益公允波动（-900.59亿）而非经营崩盘，新单已切换至≤2.0%分红险/≤2.5%传统险、7,378亿 CSM 稳增、产险 COR 降至 95.6%、寿险综合偿付能力 187.6%、归母净资产零永续债、A股上市19年零定增且注销回购 1.726亿股；4) 反杀“+619.7亿 EV 重复加罚”：商誉仅占净资产 3.64%（379.71亿），信用与可转债成本已按金融直算在分子盈利与每股估值中单次反映，严禁在分母重复杀伤。
-- <strong>👁️‍🗨️ 物理双盲独立推导（100% 物理隔离现价与旧买点）</strong>：【V4 物理双盲终审裁决（中国平安 601318.SH · A股人民币主定价）】 一、红蓝二元裁决与零双扣铁闸： 1) 分子 steady_oe 锁定 1,110.0 亿元人民币（较 2025 归母 OPAT 1,344.15亿下修 -17.4%），full_oe 锁定 1,420.0 亿元（利率与资管常态化后扣减 SBC）： - 自上而下：2025 OPAT 1,344.15亿 - 寿险非 VFA 投资回报假设由 4.0% 下修至低利率稳态 3.45%（-55bps，3.1万亿×0.55%×85%×96% = -139.1亿） - 跨周期信用减值与联营摩擦增量缓冲（在 2025 资管已亏 -37.85亿基础上再扣 -55.0亿） - 长期服务计划 SBC 刚性现金买股（-40.0亿） = 1,110.0亿元。 - 自下而上：寿险稳态 860.9亿（1,000亿-139.1亿利率下修） + 产险稳态 155.0亿（COR 95.6%） + 平安银行归母 222.4亿（247.11亿扣10%资本留存） - 资管/赋能/总部/跨周期信用与 SBC 净拖累 129.7亿 = 1,108.6亿元。双路径严丝合缝，且与 2021–2025 五年 GAAP 归母净利均值（1,119.35亿，已含华夏幸福432亿计提）完全对齐；对应 2026Q3 归母净资产（10,443.66亿，已实扣 -555.17亿负 OCI）的常态 ROE 为 10.63%，TTM 派息 494.34亿仅占常态 OE 的 44.5%。 2) 分母 ev_delta 锁定 0.0 亿元（金融保险普通股归母直算口径）：严拒红队 +619.7亿重复加罚——投资性房地产附注披露公允价值 2,026.27亿反藏 +512.16亿表外浮盈，商誉仅占净资产 3.64%，银行与资管信用折耗已在损益与分子 steady_oe 中单次扣足，绝不双扣；两笔低息境外可转债（全转股 +5.08% 股本同步化债 346.6亿）的净期权稀释已直接折算进每股估值中枢（不重复压入 ev_delta）。 二、低利率（10Y国债 1.6%—1.9%）理性定价与十年极底 PB/PE Reality Check： - 核定总股本 181.0764 亿股，2026Q3 归母普通股净资产 10,443.66 亿元（永续债为 0），GAAP BVPS = 57.68 元/股（营运 BVPS 62.93 元/股，集团 EVPS 86.58 元/股，ANWPS 64.46 元/股），TTM 现金分红 DPS = 2.73 元/股（连续 14 年正增长）。 - 无偏公允价值中枢 fair_value = 65.00 元/股（总市值 11,770.0 亿元）：对应 GAAP PB 1.13x（营运 PB 1.03x、P/ANW 1.01x）、P/EV 0.75x、扣息后常态 P/OE 10.60x（内生回报率 9.43%，可转债全摊薄口径 10.83x）、2025 P/OPAT 8.76x、股息率 4.20%（较10Y国债利差 +245bps）；完全契合低利率下 GGM（Ke=9.5%、常态ROE 10.63%、g=2.5% 推得 1.16x PB=66.9元，扣可转债净期权稀释约 1.5% 后即 ~65.9元）与 SOTP 交叉验证。 - 二档正常买入区 [46.00, 53.00] 元/股：上限 53.00 元（公允 81.5%）对应 GAAP PB 0.92x（营运 PB 0.84x）、P/EV 0.61x、常态 P/OE 8.65x（内生回报率 11.57%，摊薄 8.77x）、2025 P/OPAT 7.14x、股息率 5.15%。 - 一档左侧重锤线 tier1_max = 46.00 元/股（公允 70.8%）：对应 GAAP PB 0.80x（营运 PB 0.73x）、P/EV 0.53x、常态 P/OE 7.50x（内生回报率 13.33%，摊薄 7.57x）、2025 P/OPAT 6.20x、股息率 5.93%。 - 🚨 十年极底 PB/PE Reality Check 通过：A股近 5—10 年熊市历史最低 PB 为 0.72x—0.78x（2024年初十年绝对恐慌铁底约 0.76x PB = 43.83 元/股；2022/2023 低点 0.78x—0.79x PB；PE 极底 6.0x—7.5x）。鉴于平安核心偿付能力 137.7%/综合 187.6%、7,378亿 CSM 稳增、产险 COR 95.6%、无任何结构性一票否决（veto=false），一档重锤线 46.00 元（0.80x PB / 6.20x OPAT）精准锚定在近十年铁底 43.83 元（0.76x PB）上方安全护城河处，严守不无理砸穿历史铁底纪律。
-- <strong>📋 V4 官方对账附注</strong>：✅ 流程B满血双盲终审升级（4份巨潮原版PDF附注+零泄露双盲）：公允中枢稳锚65.00元不变，常态OE透明拆骨为1,110亿（已单次实扣55bp低利率利差损-139.1亿、跨周期信用摩擦-55亿、长期服务计划SBC-40亿及可转债稀释），25AR附注八.16原表反杀地产黑洞（表外浮盈+512.16亿），A股买点46.00—53.00元、H股同源双尺45.10—51.96港元！
-- <strong>🗳️ 揭盲最新主榜票决</strong>：<strong>⏳ 👁️‍🗨️ 流程B满血双盲：A股现价54.88元高于二档买点上沿+3.5%(46.00—53.00元，公允65.00元)，不追高静候回调或优先看高折价H股</strong> ｜ 🇭🇰 H股：🌟 👁️‍🗨️ 流程B满血双盲：H股现价50.20港元处于第二档正常买入区(45.10—51.96港元，公允63.72港元)，分批左侧建底仓并留子弹防重锤</p>
+<p><strong>⚔️ 2026-11-27 V4 官方原表验真 × 流程B物理双盲独立重校终审声明（<code>PASSED</code> · ✅ 唯一生效口径）</strong>：
+- <strong>🎯 终审核心估值锚</strong>：常态 OE <strong><code>1300.00亿/年</code></strong> → 达产 <strong><code>1465.00亿/年</code></strong> ｜ 唯一生效买点：<strong><code>A股 ≤46.00元 / 49.00—53.50元（公允 65.00元）；H股(02318.HK)双尺 ≤46.39港元 / 49.42—53.96港元</code></strong>（对比：旧版 流程B A:≤46.00 / 46.00—53.00元(公允65.00)；H:≤45.10 / 45.10—51.96港元）
+- <strong>🔴 空头命中硬约束（实打实认领）</strong>：🩸 命中死穴（单次扣入分子与每股摊薄，绝不双扣）：1) 非VFA 4.0%回报假设偏高（24—9M26累计短期投资波动-288.18亿/年均归母-99亿）→ 寿险分子实扣-95亿/年对齐3.5%回报；2) 资管9M26暴增+194.23亿含股市顺风弹性不可外推 → 大幅砍峰至跨周期+35亿；3) 长期服务计划与核心持股(25AR P300/P303-304)每年真金白银购股44.8—46.7亿而利润表仅摊11.6亿（空头R2自我纠错实锤）→ 分子刚性实扣-33亿/年；4) 戳穿多头伪GGM 88%派息率悖论（实际分红率36.4%/5年综合收益真实ROE 10.64%），逼退75—78元虚高锚；5) 两笔境外可转债(39.29/52.30港元)按190.28亿股全面摊薄配对355亿未用募资回补单次扣减-2.0%净稀释。
+- <strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：🛡️ 证据反杀（绝不重复扣减）：1) 产险Q3账面OPAT降为46.96亿（单季-40.76亿）纯系26Q3 P9规则下不剔除FVTPL权益浮亏误杀，实绩COR优化1.4pct至95.6%（9M承保利润115.7亿），还原常态+165亿；2) 彻底反杀“发债分红/无底洞注资”：25年199.84亿增资系偿二代过渡期一次性补足，26Q3寿险核心偿付率137.7%（监管线2.75倍），26H1 P83对子公司注资为0、实缴分红+340.55亿、母公司净现金+210.11亿，且26H1 P102明示两笔可转债355亿净募资100%尚未动用；3) 投资性房地产25AR P270评估公允2,026.27亿（含306.4亿土地）较账面1,514.11亿存+512.16亿安全垫（不计溢价但绝非黑洞）；4) 纠正空头零增长双杀（年派息~460亿后21→26Q3归母净资产仍真实年化+5.43%）。
+- <strong>👁️‍🗨️ 物理双盲独立推导（100% 物理隔离现价与旧买点）</strong>：【⚖️ Swarm V2.2 跨模型物理双盲终审裁决（Neon×Opus×Carbon 2+1加时｜中国平安 601318.SH）】 1. 分子拆骨（多空分歧收敛至1.7%）：常态归母OE = 1,300.0亿/年（寿险945亿[1,040亿实扣-95亿3.5%低利率缺口] + 产险165亿[平反FVTPL会计误杀] + 银行可分配223亿[扣-29亿CET1缓冲] + 资管砍峰35亿 - 总部35亿 - 员工持股未入表购股净差33亿）；达产达产自由盈余 = 1,465.0亿/年；分母归母有效净现金偏移 = 0.0亿（金融归母直算，母公司净现金+210.11亿，转债按190.28亿股+355亿未用募资在每股定价单次摊薄）。 2. 三尺合一验证公允65.00元（误差仅0.12元）：3.5%极寒SOTP(0x NBV) = 65.07元；5年真实综合收益ROE 10.64%自洽GGM(g=3.0%/Ke=9.70%/摊薄BVPS 57.05元) = 65.05元；两阶段自洽DDM(前10年39%派息4.5%增→成熟60%派息2.5%增/Ke=9.05%) = 64.95元 → 铁面锁死A股公允65.00元/股（与流程B初审65.00元达成0.00元零误差共振！）。 3. 带宽与6年铁底校验：二档正常建仓49.00—53.50元（公允75.4%—82.3%）；一档左侧重锤≤46.00元（公允70.8%/法定PB 0.80x·摊薄PB 0.81x精准咬合近2年0.81x铁底、仅高6年极底0.74x约+7.8%/TTM息5.93%），定级T1核心收息复利基石（仓位上限15%，veto=false）。
+- <strong>📋 V4 官方对账附注</strong>：✅ 🐝 Swarm V2.2 跨模型物理双盲(Neon×Opus×Carbon 2+1加时)与流程B零误差共振：A股公允65.00元/重锤≤46.00元零分偏差，三尺合一(3.5% SOTP 65.07/真实综合ROE GGM 65.05/两阶段DDM 64.95)误差仅0.12元；常态OE拆骨锁死1,300亿(已实扣-95亿低利率缺口/资管砍峰回+35亿/银行资本留存-29亿/SBC购股净差-33亿)；H股按5年(232周)真实折价走廊(14.3%)映射49.42—53.96港元，现价50.55港元(实折20.0%)稳落二档黄金建仓区！
+- <strong>🗳️ 揭盲最新主榜票决</strong>：<strong>🟡 🐝Swarm V2.2跨模型双盲(Neon×Opus×Carbon 2+1加时与流程B零误差共振65.00元)：A股现价53.69元距二档上限53.50元仅差+0.19元(+0.36%/PB 0.93x/常态回报13.37%/TTM息5.08%)临门一脚可挂单接；同股同权优先买已入网的高折价H股(50.55港元实折20.0%)！</strong> ｜ 🇭🇰 H股：🔥 🐝Swarm V2.2跨模型双盲：H股现价50.55港元(实时折价20.0%击穿5年P75=18.3%极值)已稳稳扎进二档黄金建仓区(49.42—53.96港元，公允65.55港元，PB 0.745x/常态回报16.71%/港股通税后息5.08%追平A股税前但本金打8折)，首选左侧分批建底仓并留重兵等≤46.39港元满弓(上限15%)！</p>
 </blockquote>
 <!--V4_AUDIT_BANNER_END-->
 <blockquote>
@@ -3902,7 +4265,7 @@
 <h3 id="v4-v4">⚖️ 《V4 终审裁决实录（✅ V4 官方原表验真通过 · 单一真相区）》</h3>
 <blockquote>
 <p><strong>终审基准日</strong>：<code>2026-11-22</code> ｜ <strong>验真状态</strong>：<strong><code>✅ PASSED（官方原表 35 项核心指标 Python 硬对账最大偏差 0.22% ≤ 2%，全面保留 V3 终审估值与买点结论）</code></strong>
-<strong>实时行情基准</strong>：A 股 <code>601318.SH</code> <strong><code>55.46 元</code></strong>（总市值 <code>10,042.50 亿</code> / PE-TTM <code>10.19x</code> / PB <code>0.962x</code>）；H 股 <code>02318.HK</code> <strong><code>49.70 港元</code></strong>（汇率 <code>0.855</code> 折 <strong><code>42.4935 元</code></strong>，总市值 <code>7,694.57 亿</code> / PB <code>0.737x</code>；<strong>A/H 溢价 <code>+30.51%</code> / H 股折价 <code>-23.38%</code></strong>）；保守设定 <code>ev_delta = 0.0</code>，HoldCo True EV = 普通股总市值。</p>
+<strong>实时行情基准</strong>：A 股 <code>601318.SH</code> <strong><code>55.46 元</code></strong>（总市值 <code>10,042.50 亿</code> / PE-TTM <code>10.19x</code> / PB <code>0.962x</code>）；H 股 <code>02318.HK</code> <strong><code>49.70 港元</code></strong>（汇率 <code>0.855</code> 折 <strong><code>42.4935 元</code></strong>，总市值 <code>7,694.57 亿</code> / PB <code>0.737x</code>；<strong>A/H 溢价 <code>+30.51%</code> / H 股折价 <code>-23.38%</code></strong>）；保守设定 <code>归母有效净现金偏移 = 0.0</code>，HoldCo True EV = 普通股总市值。</p>
 </blockquote>
 <h4 id="1-v4-26q326h125ar-pdf">1. V4 官方原表法医验真核心对账表（交易所三表 + 巨潮 26Q3/26H1/25AR 原版 PDF 附注）</h4>
 <div class="table-scroll-wrap"><table class="wide-table">
@@ -4074,7 +4437,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>普通股总市值 / 保守 HoldCo True EV</strong> <em>(<code>ev_delta = 0.0</code>)</em></td>
+<td style="text-align: left;"><strong>普通股总市值 / 保守 HoldCo True EV</strong> <em>(<code>归母有效净现金偏移 = 0.0</code>)</em></td>
 <td style="text-align: center;"><strong><code>10,042.50</code></strong></td>
 <td style="text-align: center;"><strong><code>7,694.57</code></strong></td>
 <td style="text-align: center;"><strong><code>9,076.81</code></strong></td>
@@ -4715,7 +5078,7 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>V4 法医验真</strong><br/><em>(2026-11-22 ✅ PASSED)</em></td>
-<td style="text-align: left;"><strong>维持不变</strong> <em>(ev_delta=0；官表 3.5% 全摊薄 EVPS <code>76.16元</code> vs V3 <code>76.06元</code>)</em></td>
+<td style="text-align: left;"><strong>维持不变</strong> <em>(归母有效净现金偏移=0；官表 3.5% 全摊薄 EVPS <code>76.16元</code> vs V3 <code>76.06元</code>)</em></td>
 <td style="text-align: center;"><strong>维持 <code>975 → 1,080亿</code></strong></td>
 <td style="text-align: center;">维持 A: <code>45—52元 (≤45)</code><br/>维持 H: <code>45—56港元 (≤45)</code></td>
 <td style="text-align: left;">直抓交易所三表+巨潮 26Q3/26H1/25AR 原版 PDF，35 项硬对账最大偏差 <code>0.22% ≤ 2%</code>；新证 AC 债浮盈 <code>+629亿</code>、投资性房地产评估浮盈 <code>+512亿</code>、归母零永续债，原值全面验真通过！</td>
@@ -4731,7 +5094,7 @@
 </table></div>
 <!--BLIND_AUDIT_FOOTER_START-->
 <hr/>
-<h2 id="2026-11-25-v4">⚔️ 【终审校准附录：2026-11-25 V4 官方红蓝审计 × 物理双盲独立重校终极口径（✅ 唯一生效）】</h2>
+<h2 id="2026-11-27-v4">⚔️ 【终审校准附录：2026-11-27 V4 官方红蓝审计 × 物理双盲独立重校终极口径（✅ 唯一生效）】</h2>
 <blockquote>
 <p><strong>📌 阅读指引</strong>：前文模块 D / F / G / H 完整保留了原始研究推演脉络供溯源对照；凡涉及常态 OE、True EV、公允价值与两档买入击球区，<strong>实战一律以本终审附录及文首终审声明为唯一生效口径</strong>（与主榜 <code>leaderboard_buy_zones.json</code> 100% 锁定一致）。</p>
 </blockquote>
@@ -4746,12 +5109,12 @@
 <tbody>
 <tr>
 <td style="text-align: left;"><strong>常态 / 达产 Owner Earnings</strong></td>
-<td style="text-align: left;">流程A 975.0→1080.0亿 → 流程B满血双盲 1110.0→1420.0亿</td>
-<td style="text-align: left;"><strong><code>1110.00 亿元/年</code> → 达产 <code>1420.00 亿元/年</code></strong></td>
+<td style="text-align: left;">流程B 1,110→1,420亿 → Swarm V2.2 跨模型拆骨 1,300→1,465亿</td>
+<td style="text-align: left;"><strong><code>1300.00 亿元/年</code> → 达产 <code>1465.00 亿元/年</code></strong></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>True EV 法医重校口径</strong></td>
-<td style="text-align: left;">流程A 10042.5亿(A) → 流程B满血双盲 9937.47亿(A) / 7721.98亿(H)</td>
+<td style="text-align: left;">流程B 9,937.47亿(A) → Swarm V2.2 9,721.99亿(A) / 7,781.32亿(H)</td>
 <td style="text-align: left;">以 V4 官方原表及最新实时市值动态挂钩（详见主榜）</td>
 </tr>
 <tr>
@@ -4761,38 +5124,38 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🎯 第一档：左侧重锤区（A股）</strong></td>
-<td style="text-align: left;">初稿 流程A A:45.0—52.0元 / H:44.0—52.0港元</td>
-<td style="text-align: left;"><strong><code>≤ 46.00 元/股</code></strong> — ≤46.00元 (公允65.00元约71%/常态OE÷EV≥13.33%/TTM息≥5.93%)【👁️‍🗨️物理双盲V4终审·流程B满血】</td>
+<td style="text-align: left;">旧版 流程B A:≤46.00 / 46.00—53.00元(公允65.00)；H:≤45.10 / 45.10—51.96港元</td>
+<td style="text-align: left;"><strong><code>≤ 46.00 元/股</code></strong> — ≤46.00元 (公允65.00元打7.08折/法定PB 0.80x·摊薄0.81x精准咬合近2年0.81x铁底/常态OE÷EV≥15.61%/TTM息≥5.93%)【🐝Swarm V2.2跨模型双盲】</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🟢 第二档：正常建仓区（A股）</strong></td>
-<td style="text-align: left;">初稿 流程A A:45.0—52.0元 / H:44.0—52.0港元</td>
-<td style="text-align: left;"><strong><code>46.00 — 53.00 元/股</code></strong> — 46.00—53.00元 (公允65.00元约71%—82%/常态OE÷EV 11.57%—13.33%/TTM息 5.15%—5.93%)【👁️‍🗨️物理双盲V4终审·流程B满血】</td>
+<td style="text-align: left;">旧版 流程B A:≤46.00 / 46.00—53.00元(公允65.00)；H:≤45.10 / 45.10—51.96港元</td>
+<td style="text-align: left;"><strong><code>49.00 — 53.50 元/股</code></strong> — 49.00—53.50元 (公允65.00元打7.54—8.23折/法定PB 0.85—0.93x/常态OE÷EV 13.42%—14.65%/TTM息 5.10%—5.57%，46—49元深度加仓带)【🐝Swarm V2.2跨模型双盲】</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🇭🇰 港股双尺取严买点（02318.HK）</strong></td>
 <td style="text-align: left;">港股通 20% 红利税与真实 AH 折价双尺约束</td>
-<td style="text-align: left;"><strong>一档 <code>≤ 45.10 港元</code> ｜ 二档 <code>45.10 — 51.96 港元</code></strong>（🌟 👁️‍🗨️ 流程B满血双盲：H股现价50.20港元处于第二档正常买入区(45.10—51.96港元，公允63.72港元)，分批左侧建底仓并留子弹防重锤）</td>
+<td style="text-align: left;"><strong>一档 <code>≤ 46.39 港元</code> ｜ 二档 <code>49.42 — 53.96 港元</code></strong>（🔥 🐝Swarm V2.2跨模型双盲：H股现价50.55港元(实时折价20.0%击穿5年P75=18.3%极值)已稳稳扎进二档黄金建仓区(49.42—53.96港元，公允65.55港元，PB 0.745x/常态回报16.71%/港股通税后息5.08%追平A股税前但本金打8折)，首选左侧分批建底仓并留重兵等≤46.39港元满弓(上限15%)！）</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>🗳️ 揭盲最新终审票决</strong></td>
 <td style="text-align: left;">原稿旧投票已作废</td>
-<td style="text-align: left;"><strong>⏳ 👁️‍🗨️ 流程B满血双盲：A股现价54.88元高于二档买点上沿+3.5%(46.00—53.00元，公允65.00元)，不追高静候回调或优先看高折价H股</strong></td>
+<td style="text-align: left;"><strong>🟡 🐝Swarm V2.2跨模型双盲(Neon×Opus×Carbon 2+1加时与流程B零误差共振65.00元)：A股现价53.69元距二档上限53.50元仅差+0.19元(+0.36%/PB 0.93x/常态回报13.37%/TTM息5.08%)临门一脚可挂单接；同股同权优先买已入网的高折价H股(50.55港元实折20.0%)！</strong></td>
 </tr>
 </tbody>
 </table></div>
 <ul>
 <li>
-<p><strong>👁️‍🗨️ 物理双盲独立核心推导</strong>：【V4 物理双盲终审裁决（中国平安 601318.SH · A股人民币主定价）】 一、红蓝二元裁决与零双扣铁闸： 1) 分子 steady_oe 锁定 1,110.0 亿元人民币（较 2025 归母 OPAT 1,344.15亿下修 -17.4%），full_oe 锁定 1,420.0 亿元（利率与资管常态化后扣减 SBC）： - 自上而下：2025 OPAT 1,344.15亿 - 寿险非 VFA 投资回报假设由 4.0% 下修至低利率稳态 3.45%（-55bps，3.1万亿×0.55%×85%×96% = -139.1亿） - 跨周期信用减值与联营摩擦增量缓冲（在 2025 资管已亏 -37.85亿基础上再扣 -55.0亿） - 长期服务计划 SBC 刚性现金买股（-40.0亿） = 1,110.0亿元。 - 自下而上：寿险稳态 860.9亿（1,000亿-139.1亿利率下修） + 产险稳态 155.0亿（COR 95.6%） + 平安银行归母 222.4亿（247.11亿扣10%资本留存） - 资管/赋能/总部/跨周期信用与 SBC 净拖累 129.7亿 = 1,108.6亿元。双路径严丝合缝，且与 2021–2025 五年 GAAP 归母净利均值（1,119.35亿，已含华夏幸福432亿计提）完全对齐；对应 2026Q3 归母净资产（10,443.66亿，已实扣 -555.17亿负 OCI）的常态 ROE 为 10.63%，TTM 派息 494.34亿仅占常态 OE 的 44.5%。 2) 分母 ev_delta 锁定 0.0 亿元（金融保险普通股归母直算口径）：严拒红队 +619.7亿重复加罚——投资性房地产附注披露公允价值 2,026.27亿反藏 +512.16亿表外浮盈，商誉仅占净资产 3.64%，银行与资管信用折耗已在损益与分子 steady_oe 中单次扣足，绝不双扣；两笔低息境外可转债（全转股 +5.08% 股本同步化债 346.6亿）的净期权稀释已直接折算进每股估值中枢（不重复压入 ev_delta）。 二、低利率（10Y国债 1.6%—1.9%）理性定价与十年极底 PB/PE Reality Check： - 核定总股本 181.0764 亿股，2026Q3 归母普通股净资产 10,443.66 亿元（永续债为 0），GAAP BVPS = 57.68 元/股（营运 BVPS 62.93 元/股，集团 EVPS 86.58 元/股，ANWPS 64.46 元/股），TTM 现金分红 DPS = 2.73 元/股（连续 14 年正增长）。 - 无偏公允价值中枢 fair_value = 65.00 元/股（总市值 11,770.0 亿元）：对应 GAAP PB 1.13x（营运 PB 1.03x、P/ANW 1.01x）、P/EV 0.75x、扣息后常态 P/OE 10.60x（内生回报率 9.43%，可转债全摊薄口径 10.83x）、2025 P/OPAT 8.76x、股息率 4.20%（较10Y国债利差 +245bps）；完全契合低利率下 GGM（Ke=9.5%、常态ROE 10.63%、g=2.5% 推得 1.16x PB=66.9元，扣可转债净期权稀释约 1.5% 后即 ~65.9元）与 SOTP 交叉验证。 - 二档正常买入区 [46.00, 53.00] 元/股：上限 53.00 元（公允 81.5%）对应 GAAP PB 0.92x（营运 PB 0.84x）、P/EV 0.61x、常态 P/OE 8.65x（内生回报率 11.57%，摊薄 8.77x）、2025 P/OPAT 7.14x、股息率 5.15%。 - 一档左侧重锤线 tier1_max = 46.00 元/股（公允 70.8%）：对应 GAAP PB 0.80x（营运 PB 0.73x）、P/EV 0.53x、常态 P/OE 7.50x（内生回报率 13.33%，摊薄 7.57x）、2025 P/OPAT 6.20x、股息率 5.93%。 - 🚨 十年极底 PB/PE Reality Check 通过：A股近 5—10 年熊市历史最低 PB 为 0.72x—0.78x（2024年初十年绝对恐慌铁底约 0.76x PB = 43.83 元/股；2022/2023 低点 0.78x—0.79x PB；PE 极底 6.0x—7.5x）。鉴于平安核心偿付能力 137.7%/综合 187.6%、7,378亿 CSM 稳增、产险 COR 95.6%、无任何结构性一票否决（veto=false），一档重锤线 46.00 元（0.80x PB / 6.20x OPAT）精准锚定在近十年铁底 43.83 元（0.76x PB）上方安全护城河处，严守不无理砸穿历史铁底纪律。</p>
+<p><strong>👁️‍🗨️ 物理双盲独立核心推导</strong>：【⚖️ Swarm V2.2 跨模型物理双盲终审裁决（Neon×Opus×Carbon 2+1加时｜中国平安 601318.SH）】 1. 分子拆骨（多空分歧收敛至1.7%）：常态归母OE = 1,300.0亿/年（寿险945亿[1,040亿实扣-95亿3.5%低利率缺口] + 产险165亿[平反FVTPL会计误杀] + 银行可分配223亿[扣-29亿CET1缓冲] + 资管砍峰35亿 - 总部35亿 - 员工持股未入表购股净差33亿）；达产达产自由盈余 = 1,465.0亿/年；分母归母有效净现金偏移 = 0.0亿（金融归母直算，母公司净现金+210.11亿，转债按190.28亿股+355亿未用募资在每股定价单次摊薄）。 2. 三尺合一验证公允65.00元（误差仅0.12元）：3.5%极寒SOTP(0x NBV) = 65.07元；5年真实综合收益ROE 10.64%自洽GGM(g=3.0%/Ke=9.70%/摊薄BVPS 57.05元) = 65.05元；两阶段自洽DDM(前10年39%派息4.5%增→成熟60%派息2.5%增/Ke=9.05%) = 64.95元 → 铁面锁死A股公允65.00元/股（与流程B初审65.00元达成0.00元零误差共振！）。 3. 带宽与6年铁底校验：二档正常建仓49.00—53.50元（公允75.4%—82.3%）；一档左侧重锤≤46.00元（公允70.8%/法定PB 0.80x·摊薄PB 0.81x精准咬合近2年0.81x铁底、仅高6年极底0.74x约+7.8%/TTM息5.93%），定级T1核心收息复利基石（仓位上限15%，veto=false）。</p>
 </li>
 <li>
-<p><strong>🔴 空头命中硬约束（实打实认领）</strong>：🩸 命中死穴（已单次实打实扣入分子 steady_oe 与每股稀释，绝不双扣）：1) 4.0% 非 VFA 寿险长期投资回报假设在 1.6%—1.9% 国债低利率新常态下偏乐观（9M26 折年化净/综合投资收益率 3.33%/3.07%，寿险一般模型累计负 OCI 达 -1,114.56亿，FVOCI 股票增至 7,967.83亿放大净资产权益弹性）→ 分子 steady_oe 已将非 VFA 投资回报假设下修 55bps 至 3.45%，实扣 -139.1亿元/年（同时 GAAP BVPS 57.68元已实扣 -555.17亿负 OCI）；2) 9M26 信用减值反弹至 554.21亿（+31.4%）且联营合营连亏三年（9M26 -40.32亿），资管 9M26 OPAT +194.23亿含较强股市周期兑现不宜线性外推 → 分子 steady_oe 在 2025 资管亏损 -37.85亿基础上再扣 -55.0亿元/年跨周期信用与联营摩擦缓冲；3) 长期服务计划（SBC）每年在筹资现金流真金白银二级市场买股约 40亿元 → 分子 steady_oe 刚性实扣 -40.0亿元/年；4) 两笔低息境外可转债存在最大 +5.08% 股本摊薄（同步化债 346.6亿）→ 每股公允中枢已隐含 ~1.5% 净期权稀释。</p>
+<p><strong>🔴 空头命中硬约束（实打实认领）</strong>：🩸 命中死穴（单次扣入分子与每股摊薄，绝不双扣）：1) 非VFA 4.0%回报假设偏高（24—9M26累计短期投资波动-288.18亿/年均归母-99亿）→ 寿险分子实扣-95亿/年对齐3.5%回报；2) 资管9M26暴增+194.23亿含股市顺风弹性不可外推 → 大幅砍峰至跨周期+35亿；3) 长期服务计划与核心持股(25AR P300/P303-304)每年真金白银购股44.8—46.7亿而利润表仅摊11.6亿（空头R2自我纠错实锤）→ 分子刚性实扣-33亿/年；4) 戳穿多头伪GGM 88%派息率悖论（实际分红率36.4%/5年综合收益真实ROE 10.64%），逼退75—78元虚高锚；5) 两笔境外可转债(39.29/52.30港元)按190.28亿股全面摊薄配对355亿未用募资回补单次扣减-2.0%净稀释。</p>
 </li>
 <li>
-<p><strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：🛡️ 证据反杀（绝不重复扣减）：1) 反杀“借债分红论”：2025子公司现金分红上缴 530.22亿（覆盖派息 113.9%），9M26 投资收益收现 440.24亿（覆盖股利偿息 103.0%），母公司高流动性金融资产 783.38亿 &gt; 刚性有息债 573.27亿，稳居净现金 +210.11亿（衍生负债 109.02亿属非现金转股权重估）；2) 反杀“地产黑洞论”与 +167.2亿 EV 加罚：不动产仅占险资 3.0%（2,048.27亿）且 83.9% 为核心收租实物物业，2025年报附注八.16 官方披露成本法投资性房地产公允价值达 2,026.27亿，反藏 +512.16亿表外浮盈；3) 反杀“盈利结构性崩塌与资本抽血论”：26Q3 单季净利 40.60亿主因 IFRS 9 下权益公允波动（-900.59亿）而非经营崩盘，新单已切换至≤2.0%分红险/≤2.5%传统险、7,378亿 CSM 稳增、产险 COR 降至 95.6%、寿险综合偿付能力 187.6%、归母净资产零永续债、A股上市19年零定增且注销回购 1.726亿股；4) 反杀“+619.7亿 EV 重复加罚”：商誉仅占净资产 3.64%（379.71亿），信用与可转债成本已按金融直算在分子盈利与每股估值中单次反映，严禁在分母重复杀伤。</p>
+<p><strong>🛡️ 蓝方硬证据反杀（驳回误判）</strong>：🛡️ 证据反杀（绝不重复扣减）：1) 产险Q3账面OPAT降为46.96亿（单季-40.76亿）纯系26Q3 P9规则下不剔除FVTPL权益浮亏误杀，实绩COR优化1.4pct至95.6%（9M承保利润115.7亿），还原常态+165亿；2) 彻底反杀“发债分红/无底洞注资”：25年199.84亿增资系偿二代过渡期一次性补足，26Q3寿险核心偿付率137.7%（监管线2.75倍），26H1 P83对子公司注资为0、实缴分红+340.55亿、母公司净现金+210.11亿，且26H1 P102明示两笔可转债355亿净募资100%尚未动用；3) 投资性房地产25AR P270评估公允2,026.27亿（含306.4亿土地）较账面1,514.11亿存+512.16亿安全垫（不计溢价但绝非黑洞）；4) 纠正空头零增长双杀（年派息~460亿后21→26Q3归母净资产仍真实年化+5.43%）。</p>
 </li>
 <li>
-<p><strong>📋 V4 官方对账附注</strong>：✅ 流程B满血双盲终审升级（4份巨潮原版PDF附注+零泄露双盲）：公允中枢稳锚65.00元不变，常态OE透明拆骨为1,110亿（已单次实扣55bp低利率利差损-139.1亿、跨周期信用摩擦-55亿、长期服务计划SBC-40亿及可转债稀释），25AR附注八.16原表反杀地产黑洞（表外浮盈+512.16亿），A股买点46.00—53.00元、H股同源双尺45.10—51.96港元！</p>
+<p><strong>📋 V4 官方对账附注</strong>：✅ 🐝 Swarm V2.2 跨模型物理双盲(Neon×Opus×Carbon 2+1加时)与流程B零误差共振：A股公允65.00元/重锤≤46.00元零分偏差，三尺合一(3.5% SOTP 65.07/真实综合ROE GGM 65.05/两阶段DDM 64.95)误差仅0.12元；常态OE拆骨锁死1,300亿(已实扣-95亿低利率缺口/资管砍峰回+35亿/银行资本留存-29亿/SBC购股净差-33亿)；H股按5年(232周)真实折价走廊(14.3%)映射49.42—53.96港元，现价50.55港元(实折20.0%)稳落二档黄金建仓区！</p>
 </li>
 </ul>
 <!--BLIND_AUDIT_FOOTER_END-->
@@ -5289,7 +5652,7 @@
           var hasFullOe = false;
           var hasDiv = false;
           var hasObjScore = false;
-          var countA = 0, countH = 0, countAb = 0;
+          var countA = 0, countH = 0, countAb = 0, countSwarm = 0, countV3Only = 0;
           var factorCounts = {};
           var knownFactors = [
             '⛏️ 大宗周期与资源',
@@ -5363,7 +5726,17 @@
 
             if (market === 'H') countH++; else countA++;
             tr.setAttribute('data-market', market);
-            var isAbTested = !!tr.querySelector('.agy-ab-badge');
+            var isSwarm = !!tr.querySelector('.agy-swarm-badge');
+            var isV3Only = !!tr.querySelector('.agy-v3-badge');
+            var isAbTested = isSwarm || isV3Only || !!tr.querySelector('.agy-ab-badge');
+            if (isSwarm) {
+              countSwarm++;
+              tr.setAttribute('data-swarm-debated', '1');
+            }
+            if (isV3Only) {
+              countV3Only++;
+              tr.setAttribute('data-v3-only', '1');
+            }
             if (isAbTested) {
               countAb++;
               tr.setAttribute('data-ab-tested', '1');
@@ -5409,7 +5782,9 @@
               market: market,
               isHkOnly: market === 'H',
               isStale: isStale,
-              isAbTested: isAbTested
+              isAbTested: isAbTested,
+              isSwarm: isSwarm,
+              isV3Only: isV3Only
             };
           });
 
@@ -5420,7 +5795,7 @@
             globalStats.maxH = countH;
           }
 
-          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL', abOnly: false };
+          var state = { key: 'rank', dir: 'asc', market: 'ALL', factor: 'ALL', abOnly: false, swarmOnly: false, v3Only: false };
           var inlineMarketBtns = {};
 
           function applyFilters() {
@@ -5434,14 +5809,16 @@
               if (!d) return;
               var hideByMkt = (state.market === 'A' && d.market !== 'A') || (state.market === 'H' && d.market !== 'H');
               var hideByF = (state.factor !== 'ALL') && (d.macroFactor !== state.factor);
+              var hideBySwarm = state.swarmOnly && !d.isSwarm;
+              var hideByV3 = state.v3Only && !d.isV3Only;
               var hideByAb = state.abOnly && !d.isAbTested;
-              var hidden = hideByMkt || hideByF || hideByAb;
+              var hidden = hideByMkt || hideByF || hideBySwarm || hideByV3 || hideByAb;
               d.tr.style.display = hidden ? 'none' : '';
               if (!hidden) {
                 visIdx++;
                 if (d.td0) {
                   var dynSpan = d.td0.querySelector('.agy-dyn-rank');
-                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.abOnly || state.key !== 'rank') {
+                  if (state.market !== 'ALL' || state.factor !== 'ALL' || state.abOnly || state.swarmOnly || state.v3Only || state.key !== 'rank') {
                     if (!dynSpan) {
                       dynSpan = document.createElement('div');
                       dynSpan.className = 'agy-dyn-rank no-print';
@@ -5518,15 +5895,60 @@
             barBtns[def.key] = { el: b, baseLabel: def.label };
           });
 
-          // 若表格包含 AB 已测认证标的，挂载一键聚焦开关（🧪 只看AB已测）
+          // 挂载最新版三档一键聚焦开关：👑 只看Swarm×B测 | 🚀 只看v3新流程(待Swarm) | ✨ 只看最新版(全覆盖)
+          var swarmBtn = null, v3Btn = null, abBtn = null;
+          if (countSwarm > 0) {
+            swarmBtn = document.createElement('button');
+            swarmBtn.type = 'button';
+            swarmBtn.className = 'agy-sort-btn agy-swarm-filter-btn';
+            swarmBtn.textContent = '👑 只看Swarm×B测 (' + countSwarm + ')';
+            swarmBtn.title = '一键聚焦：已跑完跨模型Swarm投委会+流程B联合校准的顶配标的';
+            swarmBtn.addEventListener('click', function(){
+              state.swarmOnly = !state.swarmOnly;
+              if (state.swarmOnly) {
+                state.v3Only = false;
+                state.abOnly = false;
+                if (v3Btn) v3Btn.classList.remove('active');
+                if (abBtn) abBtn.classList.remove('active');
+              }
+              swarmBtn.classList.toggle('active', state.swarmOnly);
+              applyFilters();
+            });
+            bar.appendChild(swarmBtn);
+          }
+          if (countV3Only > 0) {
+            v3Btn = document.createElement('button');
+            v3Btn.type = 'button';
+            v3Btn.className = 'agy-sort-btn agy-v3-filter-btn';
+            v3Btn.textContent = '🚀 v3新流程·待Swarm (' + countV3Only + ')';
+            v3Btn.title = '一键聚焦：由最新v3.0方案B调研流程产出、但尚未做Swarm+B测跨模型校准的标的';
+            v3Btn.addEventListener('click', function(){
+              state.v3Only = !state.v3Only;
+              if (state.v3Only) {
+                state.swarmOnly = false;
+                state.abOnly = false;
+                if (swarmBtn) swarmBtn.classList.remove('active');
+                if (abBtn) abBtn.classList.remove('active');
+              }
+              v3Btn.classList.toggle('active', state.v3Only);
+              applyFilters();
+            });
+            bar.appendChild(v3Btn);
+          }
           if (countAb > 0) {
-            var abBtn = document.createElement('button');
+            abBtn = document.createElement('button');
             abBtn.type = 'button';
             abBtn.className = 'agy-sort-btn agy-ab-filter-btn';
-            abBtn.textContent = '🧪 只看AB已测 (' + countAb + ')';
-            abBtn.title = '一键筛选已完成零泄露流程A/B对照实测（补丁流程B认证）的标的';
+            abBtn.textContent = '✨ 只看最新版 (' + countAb + ')';
+            abBtn.title = '一键聚焦：全部新版标的（含 👑 Swarm×B测 + 🚀 v3新流程 + 🧪 B测重校，隐藏早期老版）';
             abBtn.addEventListener('click', function(){
               state.abOnly = !state.abOnly;
+              if (state.abOnly) {
+                state.swarmOnly = false;
+                state.v3Only = false;
+                if (swarmBtn) swarmBtn.classList.remove('active');
+                if (v3Btn) v3Btn.classList.remove('active');
+              }
               abBtn.classList.toggle('active', state.abOnly);
               applyFilters();
             });
@@ -5879,5 +6301,379 @@
       })();
     })();
   </script>
+
+  <!-- 全文专业术语点击大白话弹窗与侧滑词典（打印 PDF 自动隐藏） -->
+  <div id="agy-term-popover" class="no-print no-glossary" role="dialog" aria-label="专业术语大白话解释">
+    <div class="tp-head">
+      <div class="tp-title-wrap">
+        <span class="tp-cat" id="agy-tp-cat"></span>
+        <span class="tp-term" id="agy-tp-term"></span>
+      </div>
+      <button type="button" class="tp-close" id="agy-tp-close" aria-label="关闭">&times;</button>
+    </div>
+    <div class="tp-plain" id="agy-tp-plain"></div>
+    <div class="tp-ctx" id="agy-tp-ctx"></div>
+    <div class="tp-foot">
+      <span id="agy-tp-meta"></span>
+      <button type="button" class="tp-drawer-link" id="agy-tp-open-all">📖 全部术语词典</button>
+    </div>
+  </div>
+
+  <div id="agy-term-fab" class="no-print no-glossary">
+    <button type="button" id="agy-term-mode-btn" title="切换正文术语下划线密度">📖 术语下划线: 智能去重</button>
+    <span class="fab-sep"></span>
+    <button type="button" id="agy-term-open-drawer" title="浏览并搜索本文全部专业术语">词典 (<span id="agy-term-total-num">37</span>)</button>
+  </div>
+
+  <div id="agy-term-drawer-mask" class="no-print no-glossary"></div>
+  <aside id="agy-term-drawer" class="no-print no-glossary">
+    <div class="td-head">
+      <strong>📖 本文全量专业术语大白话词典（37 词）</strong>
+      <button type="button" id="agy-td-close" style="background:none;border:none;color:#fff;font-size:21px;cursor:pointer;line-height:1;">&times;</button>
+    </div>
+    <div class="td-tools">
+      <input type="text" id="agy-td-search" class="td-search" placeholder="搜索化工、工艺、财务或估值术语（如 MDI、POE、净债、折旧...）" />
+      <div class="td-cats" id="agy-td-cats"></div>
+    </div>
+    <div class="td-list" id="agy-td-list"></div>
+  </aside>
+
+  <script class="no-print">
+  (function(){
+    var GLOSSARY = [{"id": 0, "t": "股东自由盈余", "f": ["Owner Earnings", "常态自由盈余", "达产自由盈余", "OE"], "c": "估值周期", "p": "巴菲特最看重的“真赚钱力”：扣掉每年修机器、换旧设备和维持运转必需的垫钱后，公司正常年份真正能装进股东口袋随便分红的纯现金利润。", "x": "买方估值最核心的分子，比容易被会计调节的账面净利润更真实可靠。", "h": 45}, {"id": 1, "t": "真实企业价值", "f": ["True EV", "真实企业价值", "企业价值", "EV"], "c": "估值周期", "p": "把整家公司 100% 买下来并替它还清净债的真实总成本 = 股票总市值 + 欠别人的净有息债（如果账上闲钱比债多，则减去多余现金）。", "x": "比单纯看股票市值更公平，因为两家市值一样的公司，背 1000 亿债和躺 1000 亿现金的天差地别。", "h": 113}, {"id": 2, "t": "净债偏移", "f": ["净现金偏移"], "c": "估值周期", "p": "真实企业价值与股票市值之间的差额（正数代表欠的真债比闲钱多，负数代表账上闲钱比债多）。算买下公司的真实总价时必须把这笔账加上或减去。", "x": "穿透排查表外债、受限资金、少数股东份额和营运底仓后的最终净债（或净现金）调整额。", "h": 5}, {"id": 3, "t": "经营现金流", "f": ["经营活动现金流", "经营现金流", "OCF"], "c": "财务会计", "p": "公司靠卖货真正收进银行卡的现金，减去买原料、发工资、交税付出去的现金。利润表可能只是“打了白条”，经营现金流才是真金白银落袋。", "x": "检验利润含金量的照妖镜，正常好公司的经营现金流长期应大于等于净利润。", "h": 8}, {"id": 4, "t": "自由现金流", "f": ["自由现金流"], "c": "财务会计", "p": "经营赚进来的现金（OCF），再扣掉盖新厂、买新设备花的钱（资本开支）后真正剩下的余钱。正数代表自己养活自己还有剩，负数代表还在借钱或吃老本扩张。", "x": "判断一家企业究竟是“股东印钞机”还是“资本吞金兽”的终极标尺。", "h": 1}, {"id": 5, "t": "资本开支", "f": ["购建固定资产", "CapEx", "资本开支"], "c": "财务会计", "p": "公司盖厂房、买生产线、买地买船这类大件长期资产花的钱。通常在现金流量表里对应“购建固定资产、无形资产和其他长期资产支付的现金”。", "x": "决定重资产企业有没有余钱分红的关键阀门，必须区分维持老厂和扩建新厂。", "h": 19}, {"id": 6, "t": "维持性资本开支", "f": ["维持性资本开支"], "c": "财务会计", "p": "哪怕一寸新产能都不扩，为了防止老机器生锈报废、保住现有饭碗和竞争力，每年必须掏出去的大修与设备更新钱。", "x": "计算股东自由盈余时必须扣除的硬成本；化工强腐蚀装置的维持性开支通常很高。", "h": 1}, {"id": 7, "t": "折旧摊销", "f": ["固定资产折旧", "折旧与摊销", "折旧摊销"], "c": "财务会计", "p": "花 100 亿盖的工厂能用 10 年，会计上不会第一年把 100 亿全算成亏损，而是分摊到 10 年里每年记 10 亿费用。当年不用真掏现金，但会压低账面利润。", "x": "重资产投产高峰期折旧暴增会压制账面利润，但现金流往往比账面利润好看得多。", "h": 12}, {"id": 8, "t": "归母净利润", "f": ["归母净利润", "归母净利"], "c": "财务会计", "p": "把合资子公司里分给合作伙伴（少数股东）的那份利润剔除掉之后，真正归咱们买股票的上市公司全体股东所有的净利润。", "x": "一切每股指标和估值计算必须死守归母口径，防止把合作伙伴赚的钱算成自己的。", "h": 66}, {"id": 9, "t": "少数股东权益", "f": ["少数股东权益", "少数股东损益", "少数股东份额"], "c": "财务会计", "p": "上市公司旗下有合资子公司（比如自己占 80%，合资方占 20%）。报表合并时把 100% 都加进来了，但那 20% 属于合作伙伴的家底和利润，叫少数股东权益/损益。", "x": "如果赚钱的子公司少数股东占比很高，会分流归母利润；估值时须保持分子分母口径一致防双扣。", "h": 14}, {"id": 10, "t": "归母净资产", "f": ["归母净资产", "净资产"], "c": "财务会计", "p": "总资产减去所有负债、再剔除合作伙伴（少数股东）份额后，真正归上市公司股东的“账面家底”。", "x": "计算市净率（PB）和净资产收益率（ROE）的底盘分母。", "h": 131}, {"id": 11, "t": "每股净资产", "f": ["每股净资产", "BVPS"], "c": "财务会计", "p": "把公司归母账面家底平摊到每一股股票上值多少钱（归母净资产 ÷ 总股本）。", "x": "用来衡量股价相对账面家底贵不贵（股价 ÷ 每股净资产 = 市净率 PB）。", "h": 12}, {"id": 12, "t": "净资产收益率", "f": ["ROE"], "c": "财务会计", "p": "股东自己掏出的每 100 块钱家底，公司一年能帮股东赚回多少块净利润（净利润 ÷ 归母净资产）。注意借高债也能把 ROE 撬高，所以要结合负债率一起看。", "x": "巴菲特最爱的长期复利标尺，重资产大扩张往往会先拉低短期 ROE，再看新产能能否爬坡修复。", "h": 25}, {"id": 13, "t": "息税折旧摊销前利润", "f": ["EBITDA"], "c": "财务会计", "p": "把净利润里的所得税、银行利息、固定资产折旧和无形资产摊销全加回来，还原出这家工厂在扣掉融资结构和会计折旧方法前的“纯经营毛造血力”。", "x": "跨国对比重资产化工巨头时最常用，因为各国税率、折旧年限和借债比例不同，EBITDA 能拉平起跑线。", "h": 3}, {"id": 14, "t": "无风险利率", "f": ["10年期国债收益率", "无风险利率", "国债收益率"], "c": "估值周期", "p": "把钱买最安全的国家十年期国债躺着能拿到的年化利息。它是全市场所有资产估值的“地心引力锚”。", "x": "无风险利率越低，稳定印钞的优质资产合理估值倍数就越高。", "h": 19}, {"id": 15, "t": "市盈率", "f": ["市盈率", "PE"], "c": "估值周期", "p": "股价 ÷ 每股利润（或总市值 ÷ 净利润），直白说就是“按现在这赚钱速度，买下这家公司要几年回本”。", "x": "周期股看 PE 极易踩坑：行业景气高点利润暴增时 PE 看起来极低反而是卖点，寒冬亏钱时 PE 很高反而是买点。", "h": 10}, {"id": 16, "t": "市净率", "f": ["市净率", "PB"], "c": "估值周期", "p": "股价 ÷ 每股净资产（或总市值 ÷ 归母净资产），代表你愿意花几倍于公司账面家底的价格来买它。", "x": "周期与重资产龙头底部最硬的防护网，用来校验左侧重锤买点是否逼近历史极恐慌地板。", "h": 90}, {"id": 17, "t": "拆骨估值", "f": ["Reverse SOTP", "拆骨估值", "SOTP"], "c": "估值周期", "p": "像把一辆车拆成发动机、底盘、轮胎分开卖一样，把多元集团拆成几块独立业务分别估价再加总减去净债，用来检验当前股价有没有白送新业务。", "x": "避免把高壁垒垄断主业、强周期石化和未盈利新业务胡乱混在一起给同一个倍数。", "h": 24}, {"id": 18, "t": "安全边际", "f": ["安全边际", "安全垫"], "c": "估值周期", "p": "你买股票花的钱，比这家公司真实内在价值便宜出来的那一大截折扣。就像造承重 30 吨的桥只让 10 吨的车过，哪怕算错一半也不会塌。", "x": "价值投资的核心防线：所有估值假设都可能看走眼，只有足够低的买价才能兜底。", "h": 15}, {"id": 19, "t": "股息率", "f": ["现金分红率", "股息率"], "c": "估值周期", "p": "过去一年每股实际分到手的现金红利 ÷ 当前股价，相当于把股票当成“存银行收利息”的年化现金回报率。", "x": "在市场不给估值修复的漫长等待期里，高股息是拿得住的真金白银底气。", "h": 23}, {"id": 20, "t": "注销式回购", "f": ["注销式回购", "回购注销"], "c": "财务会计", "p": "公司掏真金白银在股市买回自家股票后直接销毁，让总股本变少。相当于一块大蛋糕切少了几块，留下来的股东手里每一股含金量永久变厚。", "x": "比单纯买来做员工奖励的“伪回购”硬核得多，是顶级股东回报的试金石。", "h": 4}, {"id": 21, "t": "在建工程", "f": ["在建工程"], "c": "财务会计", "p": "正在盖还没完工的工厂。一旦建好验收投产，账上就会从“在建工程”转成“固定资产”（简称转固），同时开始计提折旧、贷款利息也不再藏进资产而是直接扣当期利润。", "x": "重资产扩产期结束的信号灯，但也意味着紧接着会迎来一轮“折旧+利息费用化”对账面利润的双重考验。", "h": 1}, {"id": 22, "t": "合同负债", "f": ["合同负债"], "c": "财务会计", "p": "客户先打钱订货、公司还没把货发出去，这笔提前收进腰包的定金在账上叫“合同负债”。名字里虽带“负债”，其实是产品抢手的甜蜜烦恼。", "x": "观察行业真实景气度的先行温度计：合同负债上升说明下游抢货，骤降则可能需求转冷。", "h": 1}, {"id": 23, "t": "短贷长投", "f": ["短期借款"], "c": "财务会计", "p": "借一年内就得还的短期银行贷款，拿去盖十年才能回本的大工厂。虽然短贷利率更便宜能省利息，但一旦遇到金融紧缩银行抽贷，就会面临巨大的续贷周转压力。", "x": "考验强周期龙头信用背书与现金流抗压能力的关键财务风险点。", "h": 3}, {"id": 24, "t": "有息负债", "f": ["有息负债"], "c": "财务会计", "p": "必须按期支付利息且到期必须拿真金白银还本的真债务（短期借款、长期借款、应付债券、一年内到期非流动负债、租赁负债等），区别于欠供应商的无息货款。", "x": "衡量企业真实债务包袱和偿债红线的唯一核心口径。", "h": 2}, {"id": 25, "t": "使用权资产", "f": ["使用权资产", "租赁负债", "融资租赁"], "c": "财务会计", "p": "新会计准则下，哪怕不是花钱买断、而是签了十几年长期租约的船队、厂房或码头，也要把未来租金折现记成资产（使用权资产）和债务（租赁负债）。", "x": "防止企业通过“只租不买”把巨额固定资产和债务藏在表外，分析重资产和真债时必须合并穿透。", "h": 7}, {"id": 26, "t": "受限资金", "f": ["受限资金"], "c": "财务会计", "p": "账面银行存款里被银行冻结、不能随便拿出来花或分红的那部分钱（例如开银行承兑汇票压在银行的保证金、信用证保证金、司法冻结款等）。", "x": "算公司手头“可自由支配现金”时，受限资金必须一分不差全部扣掉。", "h": 1}, {"id": 27, "t": "营运资金", "f": ["流动资金"], "c": "财务会计", "p": "维持工厂每天买原料、备库存、等客户回款所必须压在流水线上的周转钱。生意做得越大，通常需要额外垫进去更多周转资金。", "x": "算可自由支配超额现金时要扣掉 18–21 天营收的保底运转现金；算稳态自由盈余时要扣成长新增垫资。", "h": 3}, {"id": 28, "t": "坏账准备", "f": ["信用减值损失"], "c": "财务会计", "p": "客户买货打的白条（应收账款）里，提前按欠款时间长短（账龄）预估可能收不回来的烂账比例，预先从利润里扣掉作为缓冲垫。", "x": "连还没到期的正常应收款都照提 4% 以上坏账准备的公司，财务极其审慎，藏雷概率极低。", "h": 1}, {"id": 29, "t": "毛利率", "f": ["价差"], "c": "财务会计", "p": "（卖货收入 − 直接生产成本）÷ 卖货收入。在化工行业更直观的指标是“单吨价差”，即每卖一吨产品赚的钱减去原料与能源成本后的毛利空间。", "x": "行业周期冷暖与企业成本护城河最直接的体温计。", "h": 1}, {"id": 30, "t": "净利率", "f": ["净利率"], "c": "财务会计", "p": "每卖出 100 块钱的货，扣完原料、人工、费用、利息和税之后，最后真能留下几块钱净利润。", "x": "对比同行最终赚钱效率的核心指标，用来识破“只赚吆喝不赚钱”的伪成长板块。", "h": 3}, {"id": 31, "t": "顺价权", "f": ["顺价权", "定价权"], "c": "估值周期", "p": "当上游石油、煤炭、电价涨价时，企业能不能顺理成章把涨出来的成本转嫁给下游客户、保住自家每吨赚的毛利。垄断龙头顺价极快，过剩大宗则只能自己硬扛。", "x": "区分真护城河（如寡头聚氨酯）与苦力生意（如过剩大宗石化）的分水岭。", "h": 2}, {"id": 32, "t": "多元化恶化", "f": ["多元恶化"], "c": "估值周期", "p": "彼得·林奇发明的毒舌词：很多好公司手里赚了大钱后闲不住，跨界去买或建自己不擅长、行业又内卷的新业务，结果把原本的好回报全拖垮了。", "x": "用来警示主业印钞机一旦把赚来的钱砸进低回报红海副业（如过剩电池材料），会严重拉低估值。", "h": 5}, {"id": 33, "t": "隐蔽资产型", "f": ["Asset Play", "隐蔽资产型", "免费期权"], "c": "估值周期", "p": "彼得·林奇六大股票分类之一：公司肚子里藏着账面还没体现出价值、市场目前几乎按 0 元白送的优质资产或高壁垒新业务，一旦变现或爆发就带来额外赔率。", "x": "判断买方赔率不对称性的关键：成熟主业兜底、高壁垒新材料作为白送期权。", "h": 3}, {"id": 34, "t": "永续债", "f": ["永续债", "可转债"], "c": "财务会计", "p": "永续债是没有到期日、可以一直不还本但利率会越跳越高的“伪权益真债务”；可转债是可以按约定价格换成股票的债券，会稀释老股东持股比例。", "x": "排查公司有没有把债藏在净资产里（永续债）或存在未来股本稀释压力（可转债）。", "h": 50}, {"id": 35, "t": "财务公司", "f": ["财务公司", "存贷双高"], "c": "财务会计", "p": "大集团内部自建的“内部银行”叫财务公司。如果上市公司把大笔现金存在集团财务公司，同时自己又高息借外债（存贷双高），极易暗藏大股东挪用资金的暴雷风险。", "x": "A 股排雷头号红线：确认无关联财务公司且资金收益正常，可彻底排除此类治理大雷。", "h": 2}, {"id": 36, "t": "商业模式", "f": ["商业模式", "转换代价", "转换成本", "护城河"], "c": "估值周期", "p": "护城河是别人学不会、抢不走的长期竞争优势；转换代价是指下游客户想换掉你的供应商时，重新测试认证、停产调试、承担良率报废风险所要付出的巨大成本。", "x": "特种新材料和高规格异氰酸酯之所以利润率高，正是因为客户认证慢、导入后转换代价极高。", "h": 20}];
+    var SCOPE_SEL = ".report-content";
+    var STORAGE_MODE_KEY = 'agy_glossary_mode_v1';
+    var MODES = ['smart', 'all', 'off'];
+    var MODE_LABELS = { smart: '📖 术语下划线: 智能去重', all: '📖 术语下划线: 全部标出', off: '📖 术语下划线: 已隐藏' };
+    var curMode = "smart";
+    try {
+      var savedM = localStorage.getItem(STORAGE_MODE_KEY);
+      if (savedM && MODES.indexOf(savedM) !== -1) curMode = savedM;
+    } catch(e) {}
+
+    var byId = {};
+    var formToId = {};
+    var allForms = [];
+    GLOSSARY.forEach(function(item){
+      byId[item.id] = item;
+      (item.f || []).forEach(function(form){
+        if (!form || form.length < 2) return;
+        if (formToId[form] === undefined) {
+          formToId[form] = item.id;
+          allForms.push(form);
+        }
+      });
+    });
+    // Longest-match-first so e.g. "维持性资本开支" matches before "资本开支", "聚合MDI" before "MDI"
+    allForms.sort(function(a, b){ return b.length - a.length; });
+    if (!allForms.length) return;
+
+    function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+    var masterRe = new RegExp(allForms.map(escRe).join('|'), 'g');
+    var asciiRe = /[A-Za-z0-9_]/;
+
+    var SKIP_TAGS = {
+      SCRIPT:1, STYLE:1, SVG:1, TEXTAREA:1, INPUT:1, BUTTON:1, SELECT:1, OPTION:1,
+      A:1, H1:1, H2:1, H3:1, NOSCRIPT:1, IFRAME:1
+    };
+
+    function isSkippedNode(node) {
+      var el = node.parentElement;
+      while (el) {
+        if (SKIP_TAGS[el.tagName]) return true;
+        if (el.classList && (el.classList.contains('no-glossary') || el.classList.contains('agy-term') || el.classList.contains('agy-chart-card'))) return true;
+        el = el.parentElement;
+      }
+      return false;
+    }
+
+    function clearAnnotations(roots) {
+      roots.forEach(function(root){
+        var spans = root.querySelectorAll('span.agy-term');
+        for (var i = 0; i < spans.length; i++) {
+          var sp = spans[i];
+          var txt = document.createTextNode(sp.textContent || '');
+          if (sp.parentNode) sp.parentNode.replaceChild(txt, sp);
+        }
+        root.normalize();
+      });
+    }
+
+    function getSectionKey(el) {
+      var cur = el;
+      while (cur && cur !== document.body) {
+        if (cur.dataset && cur.dataset.chap) return cur.dataset.chap;
+        if (cur.tagName === 'SECTION' || cur.tagName === 'ARTICLE') return cur.id || 'sec';
+        cur = cur.parentElement;
+      }
+      // Fallback: find nearest preceding h2 inside report
+      var p = el;
+      while (p && p.parentElement && !p.parentElement.classList.contains('report-content')) {
+        p = p.parentElement;
+      }
+      if (p) {
+        var prev = p.previousElementSibling;
+        var steps = 0;
+        while (prev && steps < 40) {
+          if (prev.tagName === 'H2' || prev.tagName === 'H1') return prev.id || prev.textContent.slice(0, 20);
+          prev = prev.previousElementSibling;
+          steps++;
+        }
+      }
+      return 'root';
+    }
+
+    function annotateAll(mode) {
+      var roots = Array.prototype.slice.call(document.querySelectorAll(SCOPE_SEL));
+      if (!roots.length) return;
+      if (mode === 'off') {
+        document.body.classList.add('agy-glossary-off');
+        return;
+      }
+      document.body.classList.remove('agy-glossary-off');
+      clearAnnotations(roots);
+
+      var seenPerSection = {};
+      var blockCounter = 0;
+
+      roots.forEach(function(root){
+        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+        var textNodes = [];
+        var n;
+        while ((n = walker.nextNode())) {
+          if (!n.nodeValue || n.nodeValue.trim().length < 2) continue;
+          if (isSkippedNode(n)) continue;
+          textNodes.push(n);
+        }
+
+        textNodes.forEach(function(tNode){
+          var text = tNode.nodeValue;
+          masterRe.lastIndex = 0;
+          var matches = [];
+          var m;
+          while ((m = masterRe.exec(text)) !== null) {
+            var word = m[0];
+            var start = m.index;
+            var end = start + word.length;
+            // ASCII boundary guard (Safari-safe without lookbehind)
+            if (asciiRe.test(word.charAt(0)) && start > 0 && asciiRe.test(text.charAt(start - 1))) continue;
+            if (asciiRe.test(word.charAt(word.length - 1)) && end < text.length && asciiRe.test(text.charAt(end))) continue;
+            var gid = formToId[word];
+            if (gid === undefined) continue;
+            if (mode === 'smart') {
+              var secKey = getSectionKey(tNode.parentElement);
+              if (!seenPerSection[secKey]) seenPerSection[secKey] = {};
+              if (seenPerSection[secKey][gid]) continue;
+              seenPerSection[secKey][gid] = true;
+            }
+            matches.push({ start: start, end: end, word: word, gid: gid });
+          }
+          if (!matches.length) return;
+
+          var frag = document.createDocumentFragment();
+          var lastIdx = 0;
+          matches.forEach(function(mt){
+            if (mt.start > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, mt.start)));
+            var item = byId[mt.gid];
+            var sp = document.createElement('span');
+            sp.className = 'agy-term';
+            sp.setAttribute('data-gid', String(mt.gid));
+            sp.setAttribute('data-cat', item.c || '');
+            sp.setAttribute('tabindex', '0');
+            sp.setAttribute('role', 'button');
+            sp.setAttribute('title', '点击查看「' + item.t + '」通俗解释');
+            sp.textContent = mt.word;
+            frag.appendChild(sp);
+            lastIdx = mt.end;
+          });
+          if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+          if (tNode.parentNode) tNode.parentNode.replaceChild(frag, tNode);
+          blockCounter++;
+        });
+      });
+    }
+
+    // Popover controller
+    var pop = document.getElementById('agy-term-popover');
+    var tpCat = document.getElementById('agy-tp-cat');
+    var tpTerm = document.getElementById('agy-tp-term');
+    var tpPlain = document.getElementById('agy-tp-plain');
+    var tpCtx = document.getElementById('agy-tp-ctx');
+    var tpMeta = document.getElementById('agy-tp-meta');
+    var activeSpan = null;
+
+    function hidePop() {
+      if (pop) pop.style.display = 'none';
+      if (activeSpan) {
+        activeSpan.classList.remove('agy-term-active');
+        activeSpan = null;
+      }
+    }
+
+    function showPop(spanEl) {
+      if (document.body.classList.contains('agy-glossary-off')) return;
+      var gid = parseInt(spanEl.getAttribute('data-gid'), 10);
+      var item = byId[gid];
+      if (!item || !pop) return;
+
+      if (activeSpan && activeSpan !== spanEl) activeSpan.classList.remove('agy-term-active');
+      activeSpan = spanEl;
+      spanEl.classList.add('agy-term-active');
+
+      tpCat.textContent = item.c || '专业术语';
+      tpCat.setAttribute('data-cat', item.c || '');
+      tpTerm.textContent = item.t;
+      tpPlain.innerHTML = '<strong>🐣 大白话秒懂：</strong>' + item.p;
+      if (item.x) {
+        tpCtx.style.display = 'block';
+        tpCtx.innerHTML = '<strong>🎯 本文怎么看：</strong>' + item.x;
+      } else {
+        tpCtx.style.display = 'none';
+      }
+      var extraForms = (item.f || []).filter(function(x){ return x !== item.t; });
+      var aliasNote = extraForms.length ? (' · 别名: ' + extraForms.slice(0, 3).join('/')) : '';
+      tpMeta.textContent = '全文出现 ' + (item.h || 1) + ' 次' + aliasNote;
+
+      pop.style.display = 'block';
+      var rect = spanEl.getBoundingClientRect();
+      var pw = pop.offsetWidth || 350;
+      var ph = pop.offsetHeight || 190;
+      var left = Math.max(12, Math.min(rect.left, window.innerWidth - pw - 12));
+      var top = rect.bottom + 8;
+      if (top + ph > window.innerHeight - 12) {
+        top = Math.max(12, rect.top - ph - 8);
+      }
+      pop.style.left = left + 'px';
+      pop.style.top = top + 'px';
+    }
+
+    document.addEventListener('click', function(e){
+      var target = e.target;
+      if (pop && pop.contains(target)) return;
+      var termEl = target && target.closest ? target.closest('.agy-term') : null;
+      if (termEl) {
+        // Respect text selection for 划词提问!
+        var sel = window.getSelection ? window.getSelection().toString().trim() : '';
+        if (sel.length >= 2) return;
+        e.stopPropagation();
+        if (activeSpan === termEl && pop.style.display === 'block') {
+          hidePop();
+        } else {
+          showPop(termEl);
+        }
+        return;
+      }
+      hidePop();
+    });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        hidePop();
+        toggleDrawer(false);
+      }
+      if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.classList && e.target.classList.contains('agy-term')) {
+        e.preventDefault();
+        showPop(e.target);
+      }
+    });
+    window.addEventListener('scroll', function(){ if (pop && pop.style.display === 'block') hidePop(); }, { passive: true });
+
+    var closeBtn = document.getElementById('agy-tp-close');
+    if (closeBtn) closeBtn.addEventListener('click', hidePop);
+
+    // Drawer controller
+    var drawer = document.getElementById('agy-term-drawer');
+    var mask = document.getElementById('agy-term-drawer-mask');
+    var tdSearch = document.getElementById('agy-td-search');
+    var tdCats = document.getElementById('agy-td-cats');
+    var tdList = document.getElementById('agy-td-list');
+    var activeCat = '全部';
+
+    function toggleDrawer(open) {
+      if (!drawer || !mask) return;
+      drawer.classList.toggle('open', open);
+      mask.classList.toggle('open', open);
+      if (open) {
+        hidePop();
+        renderDrawerList();
+      }
+    }
+
+    var catCounts = { '全部': GLOSSARY.length };
+    GLOSSARY.forEach(function(g){
+      var c = g.c || '财务会计';
+      catCounts[c] = (catCounts[c] || 0) + 1;
+    });
+    if (tdCats) {
+      Object.keys(catCounts).forEach(function(cat){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'td-cat-btn' + (cat === activeCat ? ' active' : '');
+        b.textContent = cat + ' (' + catCounts[cat] + ')';
+        b.addEventListener('click', function(){
+          activeCat = cat;
+          tdCats.querySelectorAll('.td-cat-btn').forEach(function(x){ x.classList.remove('active'); });
+          b.classList.add('active');
+          renderDrawerList();
+        });
+        tdCats.appendChild(b);
+      });
+    }
+
+    function renderDrawerList() {
+      if (!tdList) return;
+      var q = (tdSearch ? tdSearch.value : '').trim().toLowerCase();
+      var rows = GLOSSARY.filter(function(g){
+        if (activeCat !== '全部' && (g.c || '财务会计') !== activeCat) return false;
+        if (!q) return true;
+        return (g.t + ' ' + (g.f || []).join(' ') + ' ' + g.p + ' ' + g.x).toLowerCase().indexOf(q) !== -1;
+      });
+      tdList.innerHTML = rows.map(function(g){
+        return '<div class="td-card">' +
+          '<div class="td-card-top"><span class="td-card-term">' + g.t + '</span><span class="td-card-meta">' + (g.c || '') + ' · ' + (g.h || 1) + '次</span></div>' +
+          '<div class="td-card-plain">' + g.p + '</div>' +
+          (g.x ? '<div class="td-card-ctx">🎯 ' + g.x + '</div>' : '') +
+        '</div>';
+      }).join('') || '<div style="padding:24px;text-align:center;color:#94a3b8;">未找到匹配的专业术语</div>';
+    }
+
+    if (tdSearch) tdSearch.addEventListener('input', renderDrawerList);
+    if (mask) mask.addEventListener('click', function(){ toggleDrawer(false); });
+    var tdClose = document.getElementById('agy-td-close');
+    if (tdClose) tdClose.addEventListener('click', function(){ toggleDrawer(false); });
+    var openAllBtn = document.getElementById('agy-tp-open-all');
+    if (openAllBtn) openAllBtn.addEventListener('click', function(){ toggleDrawer(true); });
+    var fabDrawerBtn = document.getElementById('agy-term-open-drawer');
+    if (fabDrawerBtn) fabDrawerBtn.addEventListener('click', function(){ toggleDrawer(true); });
+
+    // Mode switcher
+    var modeBtn = document.getElementById('agy-term-mode-btn');
+    function updateModeUI() {
+      if (modeBtn) modeBtn.textContent = MODE_LABELS[curMode] || MODE_LABELS.smart;
+    }
+    if (modeBtn) {
+      modeBtn.addEventListener('click', function(){
+        var nextIdx = (MODES.indexOf(curMode) + 1) % MODES.length;
+        curMode = MODES[nextIdx];
+        try { localStorage.setItem(STORAGE_MODE_KEY, curMode); } catch(e) {}
+        updateModeUI();
+        annotateAll(curMode);
+      });
+    }
+
+    // Expose global hook (useful for 2.0 Cockpit tab re-renders)
+    window.agyGlossaryRefresh = function(){ annotateAll(curMode); };
+    window.agyGlossaryOpenDrawer = function(){ toggleDrawer(true); };
+
+    // Initial run
+    updateModeUI();
+    if (curMode !== 'off') {
+      annotateAll(curMode);
+    } else {
+      document.body.classList.add('agy-glossary-off');
+    }
+  })();
+  </script>
+
 </body>
 </html>
