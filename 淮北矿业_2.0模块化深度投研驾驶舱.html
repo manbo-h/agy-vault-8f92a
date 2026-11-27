@@ -1904,11 +1904,23 @@ function renderStaticCharts() {
   document.getElementById('peerDupontSub').textContent = pc.dupont_sub || '';
 
   if (peers.length) {
-    const lMax = pc.left_max || Math.max(...peers.map(p => p.m1 || 0), 1) * 1.15;
-    const rMax = pc.right_max || Math.max(...peers.map(p => p.m2 || 0), 1) * 1.15;
-    const PH = 42 + peers.length * 36;
-    const rows = peers.map((p, i) => {
-      const y = 32 + i * 36, cW = (p.m1 || 0) / lMax * 170, pW = (p.m2 || 0) / rMax * 170, hl = p.highlight;
+    const pNorm = peers.map(p => ({
+      ...p,
+      m1: p.m1 ?? p.left_val ?? 0,
+      m2: p.m2 ?? p.right_val ?? 0,
+      highlight: Boolean(p.highlight ?? p.is_target),
+      gm: typeof p.gm === 'number' ? p.gm : null,
+      roe: typeof p.roe === 'number' ? p.roe : null,
+      expense_ratio: typeof p.expense_ratio === 'number' ? p.expense_ratio : null,
+      debt_ratio: typeof p.debt_ratio === 'number' ? p.debt_ratio : null,
+      note: p.note ?? p.extra ?? ''
+    }));
+    const fmtP = (v, d = 2, suf = '%') => (typeof v === 'number' && !isNaN(v)) ? (v.toFixed(d) + suf) : '—';
+    const lMax = pc.left_max || Math.max(...pNorm.map(p => p.m1 || 0), 1) * 1.15;
+    const rMax = pc.right_max || Math.max(...pNorm.map(p => p.m2 || 0), 1) * 1.15;
+    const PH = 42 + pNorm.length * 36;
+    const rows = pNorm.map((p, i) => {
+      const y = 32 + i * 36, cW = Math.max(0, p.m1 || 0) / lMax * 170, pW = Math.max(0, p.m2 || 0) / rMax * 170, hl = p.highlight;
       return `<text x="4" y="${y+15}" font-size="12" font-weight="${hl?900:600}" fill="${hl?'#059669':'#334155'}">${hl?'★ ':''}${p.name}</text>
               <rect x="86" y="${y+2}" width="${Math.max(2,cW).toFixed(1)}" height="18" rx="4" fill="${hl?'#059669':'#94a3b8'}"/>
               <text x="${(90+cW).toFixed(1)}" y="${y+15}" font-size="11" font-weight="800" fill="${hl?'#059669':'#475569'}">${p.m1}${pc.left_unit||''}</text>
@@ -1917,30 +1929,31 @@ function renderStaticCharts() {
     }).join('');
     document.getElementById('peerDualSvg').innerHTML = `<svg viewBox="0 0 560 ${PH}"><text x="86" y="18" font-size="11.5" font-weight="800" fill="#059669">${pc.left_label||'指标一'}</text><text x="330" y="18" font-size="11.5" font-weight="800" fill="#0284c7">${pc.right_label||'指标二'}</text>${rows}</svg>`;
 
-    const p4 = peers.slice(0, 4), DW = 560, DH = 225, dPadL = 36, dPadB = 30, dPadT = 28;
+    const p4 = pNorm.slice(0, 4), DW = 560, DH = 225, dPadL = 36, dPadB = 30, dPadT = 28;
     const dStep = (DW - 72) / p4.length;
     const maxPct = Math.max(...p4.map(p => Math.max(p.gm||0, p.roe||0, p.debt_ratio||0)), 50) * 1.15;
-    const dY = v => dPadT + (DH - dPadT - dPadB) * (1 - Math.max(0, v) / maxPct);
+    const dY = v => dPadT + (DH - dPadT - dPadB) * (1 - Math.max(0, v || 0) / maxPct);
     let dLine = [];
     const dBars = p4.map((p, i) => {
       const cx = dPadL + i * dStep + dStep / 2, bw = 24;
-      dLine.push(`${cx.toFixed(1)},${dY(p.debt_ratio).toFixed(1)}`);
-      return `<rect x="${(cx-bw-2).toFixed(1)}" y="${dY(p.gm).toFixed(1)}" width="${bw}" height="${(dY(0)-dY(p.gm)).toFixed(1)}" rx="3" fill="#1e3a8a"/>
-              <text x="${(cx-bw/2-2).toFixed(1)}" y="${(dY(p.gm)-4).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#1e3a8a">${p.gm.toFixed(1)}%</text>
-              <rect x="${(cx+2).toFixed(1)}" y="${dY(p.roe).toFixed(1)}" width="${bw}" height="${(dY(0)-dY(p.roe)).toFixed(1)}" rx="3" fill="#059669"/>
-              <text x="${(cx+bw/2+2).toFixed(1)}" y="${(dY(p.roe)-4).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#059669">${p.roe.toFixed(1)}%</text>
+      const gmV = p.gm || 0, roeV = p.roe || 0, drV = p.debt_ratio || 0;
+      dLine.push(`${cx.toFixed(1)},${dY(drV).toFixed(1)}`);
+      return `<rect x="${(cx-bw-2).toFixed(1)}" y="${dY(gmV).toFixed(1)}" width="${bw}" height="${Math.max(1, dY(0)-dY(gmV)).toFixed(1)}" rx="3" fill="#1e3a8a"/>
+              <text x="${(cx-bw/2-2).toFixed(1)}" y="${(dY(gmV)-4).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#1e3a8a">${fmtP(p.gm, 1)}</text>
+              <rect x="${(cx+2).toFixed(1)}" y="${dY(roeV).toFixed(1)}" width="${bw}" height="${Math.max(1, dY(0)-dY(roeV)).toFixed(1)}" rx="3" fill="#059669"/>
+              <text x="${(cx+bw/2+2).toFixed(1)}" y="${(dY(roeV)-4).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#059669">${fmtP(p.roe, 1)}</text>
               <text x="${cx.toFixed(1)}" y="${DH-8}" text-anchor="middle" font-size="11.5" font-weight="${p.highlight?900:700}" fill="${p.highlight?'#059669':'#334155'}">${p.name}</text>`;
     }).join('');
     const dDots = p4.map((p, i) => {
-      const cx = dPadL + i * dStep + dStep / 2;
-      return `<circle cx="${cx.toFixed(1)}" cy="${dY(p.debt_ratio).toFixed(1)}" r="4.5" fill="#be123c" stroke="#fff" stroke-width="1.5"/><text x="${cx.toFixed(1)}" y="${(dY(p.debt_ratio)-8).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#be123c">负债${p.debt_ratio.toFixed(1)}%</text>`;
+      const cx = dPadL + i * dStep + dStep / 2, drV = p.debt_ratio || 0;
+      return `<circle cx="${cx.toFixed(1)}" cy="${dY(drV).toFixed(1)}" r="4.5" fill="#be123c" stroke="#fff" stroke-width="1.5"/><text x="${cx.toFixed(1)}" y="${(dY(drV)-8).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="800" fill="#be123c">负债${fmtP(p.debt_ratio, 1)}</text>`;
     }).join('');
     document.getElementById('peerDupontSvg').innerHTML = `<svg viewBox="0 0 ${DW} ${DH}"><g font-size="10.5" font-weight="700"><rect x="40" y="6" width="10" height="10" rx="2" fill="#1e3a8a"/><text x="54" y="15" fill="#1e3a8a">毛利率</text><rect x="118" y="6" width="10" height="10" rx="2" fill="#059669"/><text x="132" y="15" fill="#059669">加权ROE</text><circle cx="215" cy="11" r="4" fill="#be123c"/><text x="223" y="15" fill="#be123c">资产负债率</text></g><line x1="${dPadL}" y1="${dY(0)}" x2="${DW-36}" y2="${dY(0)}" stroke="#94a3b8"/>${dBars}<polyline fill="none" stroke="#be123c" stroke-width="2" points="${dLine.join(' ')}"/>${dDots}</svg>`;
 
     document.getElementById('peerTableWrap').innerHTML = `
       <table>
         <thead><tr><th>公司</th><th class="num">${pc.left_label||'指标1'}</th><th class="num">${pc.right_label||'指标2'}</th><th class="num">${pc.extra_col_label||'特征'}</th><th class="num">毛利率</th><th class="num">ROE</th><th class="num">四费率</th><th class="num">负债率</th><th>核心画像</th></tr></thead>
-        <tbody>${peers.map(p => `<tr class="${p.highlight?'row-hl':''}"><td>${p.highlight?'★ ':''}${p.name}</td><td class="num">${p.m1}${pc.left_unit||''}</td><td class="num">${p.m2}${pc.right_unit||''}</td><td class="num">${p.extra||'-'}</td><td class="num">${p.gm.toFixed(2)}%</td><td class="num"><strong>${p.roe.toFixed(2)}%</strong></td><td class="num">${p.expense_ratio.toFixed(2)}%</td><td class="num">${p.debt_ratio.toFixed(2)}%</td><td style="font-size:12px;color:var(--muted)">${p.note}</td></tr>`).join('')}</tbody>
+        <tbody>${pNorm.map(p => `<tr class="${p.highlight?'row-hl':''}"><td>${p.highlight?'★ ':''}${p.name}</td><td class="num">${p.m1}${pc.left_unit||''}</td><td class="num">${p.m2}${pc.right_unit||''}</td><td class="num">${p.extra||'-'}</td><td class="num">${fmtP(p.gm)}</td><td class="num"><strong>${fmtP(p.roe)}</strong></td><td class="num">${fmtP(p.expense_ratio)}</td><td class="num">${fmtP(p.debt_ratio)}</td><td style="font-size:12px;color:var(--muted)">${p.note}</td></tr>`).join('')}</tbody>
       </table>
     `;
   }
@@ -1948,15 +1961,35 @@ function renderStaticCharts() {
 
 function renderTab4() {
   const recon = APP.facts.audit_reconciliation;
-  document.getElementById('auditReconWrap').innerHTML = recon ? `
-    <div class="card">
-      <div class="card-title"><span>${recon.title}</span><span class="tag tag-green">${recon.badge || '终审校准'}</span></div>
-      <div class="grid-2">
-        <div class="callout-info" style="margin:0"><strong>${recon.left_title}</strong><br>${(recon.left_items||[]).join('<br>')}</div>
-        <div class="callout-munger" style="margin:0"><strong>${recon.right_title}</strong><br>${(recon.right_items||[]).join('<br>')}</div>
+  let reconHtml = '';
+  if (recon) {
+    let bodyHtml = '';
+    if (Array.isArray(recon.columns) && recon.columns.length && Array.isArray(recon.rows) && recon.rows.length) {
+      bodyHtml = `
+        ${recon.subtitle ? `<div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">${recon.subtitle}</div>` : ''}
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>${recon.columns.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+            <tbody>${recon.rows.map(r => `<tr>${r.map((cell, ci) => `<td style="${ci === 0 ? 'font-weight:700;white-space:nowrap' : (ci === 3 ? 'font-weight:700;color:#065f46;background:#f0fdf4' : 'font-size:12.5px')}">${cell}</td>`).join('')}</tr>`).join('')}</tbody>
+          </table>
+        </div>
+      `;
+    } else if (recon.left_title || recon.right_title || (recon.left_items && recon.left_items.length) || (recon.right_items && recon.right_items.length)) {
+      bodyHtml = `
+        <div class="grid-2">
+          <div class="callout-info" style="margin:0"><strong>${recon.left_title || '校准前 / 历史口径'}</strong><br>${(recon.left_items||[]).join('<br>')}</div>
+          <div class="callout-munger" style="margin:0"><strong>${recon.right_title || '终审校准结论'}</strong><br>${(recon.right_items||[]).join('<br>')}</div>
+        </div>
+      `;
+    }
+    reconHtml = `
+      <div class="card">
+        <div class="card-title"><span>${recon.title || '⚖️ 终审颗粒度对账表'}</span><span class="tag tag-green">${recon.badge || '终审校准'}</span></div>
+        ${bodyHtml}
       </div>
-    </div>
-  ` : '';
+    `;
+  }
+  document.getElementById('auditReconWrap').innerHTML = reconHtml;
 
   const sw = APP.swarm || {};
   const isPlain = state.mode === 'plain';
@@ -2006,9 +2039,12 @@ function renderTab4() {
   const msgHtml = msgs.map(m => {
     const r = (sw.roles && sw.roles[m.role]) || { name: m.role, avatar: '💬', model: '' };
     const tbl = isPlain ? (m.table_plain || m.table) : m.table;
-    const tblHtml = tbl ? `<div class="tbl-wrap" style="margin-top:10px"><table><thead><tr>${tbl.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${tbl.rows.map(row=>`<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : '';
+    const tblHtml = tbl ? `<div class="tbl-wrap" style="margin-top:10px"><table><thead><tr>${(tbl.headers||[]).map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${(tbl.rows||[]).map(row=>`<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : '';
     const ubHtml = m.isUnblindBox ? buildUnblindBlock() : '';
-    return `<div class="msg-row role-${m.role}"><div class="msg-avatar" style="background:${roleColors[m.role]||'#334155'}">${r.avatar||r.emoji||'💬'}</div><div class="msg-bubble"><div class="msg-meta"><span class="msg-name">${r.name}</span><span>${r.model||''}</span><span class="tag tag-blue">${isPlain?(m.round_plain||m.round):(m.round||'')}</span><span>${m.time||''}</span></div><div class="msg-text">${isPlain?(m.plain||m.text):m.text}${tblHtml}${ubHtml}</div></div></div>`;
+    const roundTxt = (isPlain ? (m.round_plain || m.round) : m.round) || '';
+    const roundTag = roundTxt ? `<span class="tag tag-blue">${roundTxt}</span>` : '';
+    const msgBody = (isPlain ? (m.plain || m.text) : (m.text || m.plain)) || '';
+    return `<div class="msg-row role-${m.role}"><div class="msg-avatar" style="background:${roleColors[m.role]||'#334155'}">${r.avatar||r.emoji||'💬'}</div><div class="msg-bubble"><div class="msg-meta"><span class="msg-name">${r.name||m.role}</span><span>${r.model||''}</span>${roundTag}<span>${m.time||''}</span></div><div class="msg-text">${msgBody}${tblHtml}${ubHtml}</div></div></div>`;
   }).join('');
 
   document.getElementById('swarmSectionWrap').innerHTML = `
@@ -2024,16 +2060,22 @@ function renderTab4() {
 
 function renderTab5() {
   const isPlain = state.mode === 'plain';
-  document.getElementById('milestonesWrap').innerHTML = (APP.facts.milestones || []).map(m => `
-    <div class="ms-card ${m.status || ''}">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px">
-        <strong style="font-size:14px">${m.id} · ${m.title}</strong>
-        <span class="tag ${m.status==='green'?'tag-green':(m.status==='watch'?'tag-purple':'tag-blue')}">${m.status_label||'跟踪中'}</span>
+  document.getElementById('milestonesWrap').innerHTML = (APP.facts.milestones || []).map(m => {
+    const metricTxt = m.metric || m.target || '—';
+    const noteLbl = m.latest_note ? '最新进度' : '大白话解读';
+    const noteTxt = m.latest_note || m.plain || '';
+    const stLbl = m.status_label || m.quarter || '跟踪中';
+    return `
+      <div class="ms-card ${m.status || ''}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px">
+          <strong style="font-size:14px">${m.id} · ${m.title}</strong>
+          <span class="tag ${m.status==='green'?'tag-green':(m.status==='watch'?'tag-purple':'tag-blue')}">${stLbl}</span>
+        </div>
+        <div style="font-size:12.5px;color:var(--ink-2)"><strong>量化标尺：</strong>${metricTxt}</div>
+        ${noteTxt ? `<div style="font-size:12px;color:var(--muted);margin-top:4px">${noteLbl}：${noteTxt}</div>` : ''}
       </div>
-      <div style="font-size:12.5px;color:var(--ink-2)"><strong>量化标尺：</strong>${m.metric}</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">最新进度：${m.latest_note}</div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 
   document.getElementById('redlinesWrap').innerHTML = (APP.facts.red_lines || []).map(r => `
     <div class="redline-card">
@@ -2729,14 +2771,17 @@ function playPodcastFromStart() {
   if (audio) { if (audio.paused) audio.play().catch(() => {}); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 }
 
-initSotpChecks();
-loadPresetParams(APP.activePreset);
-renderAllDynamic();
-renderStaticCharts();
-renderTab4();
-renderTab5();
-renderGlossary();
-initPodcastPlayer();
+function _safeRun(name, fn) {
+  try { fn(); } catch (err) { console.error('[DossierV25:' + name + ']', err); }
+}
+_safeRun('initSotpChecks', initSotpChecks);
+_safeRun('loadPresetParams', () => loadPresetParams(APP.activePreset));
+_safeRun('renderAllDynamic', renderAllDynamic);
+_safeRun('renderStaticCharts', renderStaticCharts);
+_safeRun('renderTab4', renderTab4);
+_safeRun('renderTab5', renderTab5);
+_safeRun('renderGlossary', () => renderGlossary());
+_safeRun('initPodcastPlayer', initPodcastPlayer);
 </script>
 
   <!-- 全文专业术语点击大白话弹窗与侧滑词典（打印 PDF 自动隐藏） -->
