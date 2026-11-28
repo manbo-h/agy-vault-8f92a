@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🦋 春风动力 · 上市跃迁图谱与市值蜕变解剖</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --bg-nav: rgba(17, 26, 46, 0.92);
+      --bg-elev: #111a2e;
+      --card: #162036;
+      --card-hover: #1c2945;
+      --border: #263554;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --purple: #a78bfa;
+      --emerald: #34d399;
+      --amber: #fbbf24;
+      --rose: #fb7185;
+      --cyan: #22d3ee;
+      --tint-accent: rgba(56, 189, 248, 0.14);
+      --bdr-accent: rgba(56, 189, 248, 0.45);
+      --tint-emerald: rgba(52, 211, 153, 0.13);
+      --bdr-emerald: rgba(52, 211, 153, 0.42);
+      --tint-amber: rgba(251, 191, 36, 0.11);
+      --bdr-amber: rgba(251, 191, 36, 0.42);
+      --tint-rose: rgba(251, 113, 133, 0.11);
+      --bdr-rose: rgba(251, 113, 133, 0.42);
+      --tint-purple: rgba(167, 139, 250, 0.14);
+      --bdr-purple: rgba(167, 139, 250, 0.45);
+      --tint-cyan: rgba(34, 211, 238, 0.11);
+      --thesis-bg: linear-gradient(135deg, rgba(167, 139, 250, 0.16) 0%, rgba(56, 189, 248, 0.10) 100%);
+      --row-hover: rgba(56, 189, 248, 0.07);
+      --shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+    html.light {
+      --bg: #f4f7fb;
+      --bg-nav: rgba(255, 255, 255, 0.94);
+      --bg-elev: #f8fafc;
+      --card: #ffffff;
+      --card-hover: #f1f5f9;
+      --border: #cbd5e1;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #0284c7;
+      --purple: #7c3aed;
+      --emerald: #059669;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --cyan: #0891b2;
+      --tint-accent: rgba(2, 132, 199, 0.10);
+      --bdr-accent: rgba(2, 132, 199, 0.38);
+      --tint-emerald: rgba(5, 150, 105, 0.10);
+      --bdr-emerald: rgba(5, 150, 105, 0.36);
+      --tint-amber: rgba(217, 119, 6, 0.09);
+      --bdr-amber: rgba(217, 119, 6, 0.38);
+      --tint-rose: rgba(225, 29, 72, 0.08);
+      --bdr-rose: rgba(225, 29, 72, 0.35);
+      --tint-purple: rgba(124, 58, 237, 0.10);
+      --bdr-purple: rgba(124, 58, 237, 0.38);
+      --tint-cyan: rgba(8, 145, 178, 0.09);
+      --thesis-bg: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(2, 132, 199, 0.07) 100%);
+      --row-hover: rgba(2, 132, 199, 0.05);
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .num { font-variant-numeric: tabular-nums; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .topbar {
+      position: sticky; top: 0; z-index: 60;
+      background: var(--bg-nav); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 12px 20px;
+    }
+    .topbar-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .brand { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .brand h1 { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px;
+      font-size: 11.5px; font-weight: 700; border: 1px solid var(--border); background: var(--card); color: var(--muted); white-space: nowrap;
+    }
+    .pill.accent { border-color: var(--bdr-accent); color: var(--accent); background: var(--tint-accent); }
+    .pill.emerald { border-color: var(--bdr-emerald); color: var(--emerald); background: var(--tint-emerald); }
+    .pill.amber { border-color: var(--bdr-amber); color: var(--amber); background: var(--tint-amber); }
+    .pill.rose { border-color: var(--bdr-rose); color: var(--rose); background: var(--tint-rose); }
+    .pill.purple { border-color: var(--bdr-purple); color: var(--purple); background: var(--tint-purple); }
+    .actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+      padding: 6px 11px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.15s ease;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+    .btn.active { background: var(--accent); color: #ffffff; border-color: var(--accent); }
+    .btn.mini { padding: 4px 9px; font-size: 11.5px; border-radius: 7px; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 20px 20px 64px; }
+    .thesis-banner {
+      background: var(--thesis-bg); border: 1px solid var(--bdr-purple); border-radius: 14px;
+      padding: 16px 20px; margin-bottom: 18px; box-shadow: var(--shadow);
+    }
+    .thesis-title { font-size: 12px; font-weight: 800; color: var(--purple); letter-spacing: 0.04em; margin-bottom: 6px; }
+    .thesis-text { font-size: 14.5px; font-weight: 600; color: var(--text); margin: 0; line-height: 1.65; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .kpi-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow); }
+    .kpi-label { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+    .kpi-main { font-size: 19px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .kpi-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .kpi-extra { font-size: 11.5px; color: var(--amber); margin-top: 4px; font-weight: 600; }
+    .panel { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; margin-bottom: 22px; box-shadow: var(--shadow); }
+    .panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .panel-head h2 { margin: 0; font-size: 16.5px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+    .panel-sub { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+    .seg-controls { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .svg-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .svg-box svg { display: block; width: 100%; min-width: 780px; height: auto; user-select: none; }
+    .legend-bar { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--muted); margin: 6px 0 10px; align-items: center; }
+    .leg-item { display: inline-flex; align-items: center; gap: 6px; }
+    .leg-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; flex-shrink: 0; }
+    .pre-details { background: var(--tint-amber); border: 1px dashed var(--bdr-amber); border-radius: 12px; padding: 10px 16px; margin-bottom: 18px; }
+    .pre-details summary { cursor: pointer; font-weight: 800; font-size: 13.5px; color: var(--amber); padding: 2px 0; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .pre-details summary::-webkit-details-marker { display: none; }
+    .pre-details[open] summary { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed var(--bdr-amber); }
+    .pre-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin-top: 10px; }
+    .pre-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; font-size: 12.5px; }
+
+    /* 10-Second Causal Storyboard Strip */
+    .causal-overview { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; box-shadow: var(--shadow); }
+    .causal-overview-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+    .causal-overview-head h2 { margin: 0; font-size: 15.5px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+    .causal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 10px; }
+    .causal-card {
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px;
+      cursor: pointer; transition: all 0.16s ease; display: flex; flex-direction: column; gap: 6px; position: relative;
+    }
+    .causal-card:hover { border-color: var(--amber); transform: translateY(-2px); background: var(--card-hover); }
+    .causal-card.down { border-left: 3px solid var(--rose); background: var(--tint-rose); }
+    .causal-card.down:hover { border-color: var(--rose); filter: brightness(1.06); }
+    .causal-card-top { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; }
+    .causal-card-tag { font-size: 11.5px; font-weight: 800; color: var(--accent); }
+    .causal-card.down .causal-card-tag { color: var(--rose); }
+    .causal-card-mult { font-size: 12px; font-weight: 800; color: var(--amber); background: var(--tint-amber); border: 1px solid var(--bdr-amber); padding: 1px 8px; border-radius: 999px; }
+    .causal-card.down .causal-card-mult { color: var(--rose); background: rgba(251, 113, 133, 0.18); border-color: var(--bdr-rose); }
+    .causal-card-why { font-size: 12.8px; color: var(--text); font-weight: 600; line-height: 1.52; }
+    .causal-card-foot { font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 4px; gap: 6px; }
+    .stage-tab.down-tab { border-color: var(--bdr-rose); color: var(--rose); background: var(--tint-rose); padding: 7px 11px; font-size: 12px; }
+    .stage-tab.down-tab:hover { border-color: var(--rose); }
+    .stage-tab.down-tab.active { background: linear-gradient(135deg, #e11d48, #f43f5e); color: #ffffff; border-color: transparent; box-shadow: 0 6px 16px rgba(244, 63, 94, 0.28); }
+    .why-banner.down-banner {
+      background: linear-gradient(135deg, rgba(251, 113, 133, 0.16) 0%, rgba(251, 191, 36, 0.08) 100%);
+      border-color: var(--bdr-rose);
+    }
+    .trap-card.flash { box-shadow: 0 0 0 2px var(--rose), var(--shadow); }
+
+    /* Stage Top Golden Why-Banner */
+    .why-banner {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(167, 139, 250, 0.12) 100%);
+      border: 1.5px solid var(--bdr-amber); border-radius: 14px; padding: 15px 18px; margin-bottom: 14px;
+    }
+    html.light .why-banner {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.13) 0%, rgba(124, 58, 237, 0.07) 100%);
+    }
+    .why-label { font-size: 12px; font-weight: 800; color: var(--amber); letter-spacing: 0.03em; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .why-main { font-size: 15.5px; font-weight: 800; color: var(--text); line-height: 1.62; margin: 0 0 12px; }
+    .causal-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 8px; align-items: stretch; }
+    .cf-step { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; }
+    .cf-k { font-size: 11px; font-weight: 800; margin-bottom: 3px; }
+    .cf-v { font-size: 12.5px; color: var(--text); font-weight: 600; line-height: 1.45; }
+    .cf-arrow { display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; color: var(--amber); }
+
+    /* Progressive Forensic Drawer */
+    .forensic-drawer {
+      background: var(--card); border: 1px dashed var(--border); border-radius: 12px; padding: 10px 14px; margin-top: 12px;
+    }
+    .forensic-drawer[open] { border-style: solid; border-color: var(--bdr-accent); padding: 14px 16px; }
+    .forensic-drawer > summary {
+      cursor: pointer; font-weight: 800; font-size: 13px; color: var(--accent);
+      list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; padding: 2px 0;
+    }
+    .forensic-drawer > summary::-webkit-details-marker { display: none; }
+    .forensic-drawer[open] > summary { margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .forensic-hint { font-size: 11.5px; font-weight: 600; color: var(--muted); }
+    .biz-wrap { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-top: 14px; }
+    .biz-row { display: grid; grid-template-columns: 58px minmax(260px, 1fr) minmax(240px, 360px); gap: 12px; align-items: center; padding: 6px 0; }
+    .biz-yr { font-weight: 800; font-size: 13px; color: var(--text); text-align: right; }
+    .biz-bar { display: flex; height: 24px; border-radius: 6px; overflow: hidden; background: var(--card); border: 1px solid var(--border); }
+    .biz-seg { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #0f172a; cursor: pointer; transition: filter 0.15s ease; overflow: hidden; white-space: nowrap; }
+    .biz-seg:hover { filter: brightness(1.12); }
+    .biz-note { font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+    /* Davis Double-Play Attribution Strip */
+    .davis-box {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px 14px; margin-bottom: 16px;
+    }
+    .davis-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; font-size: 12.5px; }
+    .davis-bar { display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: var(--bg-elev); border: 1px solid var(--border); }
+    .davis-e { background: linear-gradient(90deg, #10b981, #34d399); }
+    .davis-v { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .davis-neg { background: linear-gradient(90deg, #f43f5e, #fb7185); }
+
+    .stage-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .stage-tab {
+      border: 1px solid var(--border); background: var(--bg-elev); color: var(--muted);
+      padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.15s ease;
+    }
+    .stage-tab:hover { border-color: var(--accent); color: var(--text); }
+    .stage-tab.active { background: linear-gradient(135deg, #0284c7, #7c3aed); color: #ffffff; border-color: transparent; box-shadow: 0 6px 16px rgba(56, 189, 248, 0.25); }
+    .stage-card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 18px; }
+    .stage-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+    .stage-title { font-size: 17.5px; font-weight: 800; margin: 0 0 8px; }
+    .stage-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .sm-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+    .sm-k { font-size: 11.5px; color: var(--muted); }
+    .sm-v { font-size: 14px; font-weight: 800; margin-top: 3px; }
+    .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .sub-box { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+    .sub-box h4 { margin: 0 0 12px; font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+    .clue-item { border-left: 3px solid var(--cyan); padding-left: 10px; margin-bottom: 12px; }
+    .clue-item.cat { border-left-color: var(--rose); }
+    .clue-head { font-weight: 700; font-size: 13px; color: var(--text); }
+    .clue-body { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+    .clue-filing { margin-top: 6px; padding: 7px 10px; border-radius: 8px; background: var(--tint-cyan); font-size: 12px; color: var(--text); }
+    .skeptic-box { margin-top: 10px; padding: 9px 12px; border-radius: 8px; background: var(--tint-amber); border: 1px solid var(--bdr-amber); font-size: 12.5px; }
+    .microscope-box { background: var(--card); border: 1px solid var(--bdr-purple); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+    .micro-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .entry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin-top: 12px; }
+    .entry-box { border-radius: 10px; padding: 10px 12px; font-size: 12.5px; border: 1px solid var(--border); background: var(--bg-elev); }
+    .pattern-strip { display: flex; flex-direction: column; gap: 8px; background: var(--tint-emerald); border: 1px solid var(--bdr-emerald); border-radius: 12px; padding: 12px 14px; }
+    .trap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+    .trap-card { background: var(--tint-rose); border: 1px solid var(--bdr-rose); border-radius: 12px; padding: 14px 16px; }
+    .trap-card h4 { margin: 0 0 10px; font-size: 14.5px; color: var(--rose); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th, td { padding: 9px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+    th { background: var(--bg-elev); color: var(--muted); font-weight: 700; white-space: nowrap; }
+    tr:hover td { background: var(--row-hover); }
+    .table-wrap { overflow-x: auto; }
+    #tooltip {
+      position: fixed; z-index: 9999; pointer-events: none; opacity: 0; transition: opacity 0.1s ease; max-width: 360px;
+      background: #0f172a; color: #f8fafc; border: 1px solid #38bdf8; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      border-radius: 10px; padding: 10px 12px; font-size: 12px; line-height: 1.55;
+    }
+    [data-tip] { cursor: pointer; }
+    .ev-pin:hover circle.pin-head { filter: brightness(1.18); }
+    details summary { cursor: pointer; font-weight: 700; color: var(--accent); padding: 6px 0; }
+    @media (max-width: 820px) {
+      .biz-row { grid-template-columns: 52px 1fr; }
+      .biz-note { grid-column: 2 / 3; margin-top: -6px; padding-bottom: 4px; }
+      .causal-flow { grid-template-columns: 1fr; gap: 6px; }
+      .cf-arrow { transform: rotate(90deg); font-size: 13px; }
+    }
+    @media (max-width: 680px) {
+      .wrap { padding: 14px 12px 48px; }
+      .panel { padding: 14px; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="tooltip"></div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <h1>🦋 <span id="hdr-company"></span> · 上市跃迁图谱</h1>
+        <span class="pill accent num" id="hdr-code"></span>
+        <span class="pill purple" id="hdr-period"></span>
+      </div>
+      <div class="actions">
+        <a href="./index.html" class="btn">← 书架</a>
+        <a href="./00_%E5%B0%8F%E5%B8%82%E5%80%BC%E8%B7%83%E8%BF%81%E6%A8%A1%E5%BC%8F%E5%BA%93%E6%80%BB%E8%A7%88.html" class="btn">🧬 模式库总览</a>
+        <button class="btn" id="btn-theme" onclick="toggleTheme()">☀️ 浅色 / 🌙 深色</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="thesis-banner">
+      <div class="thesis-title">🧭 买方跃迁核心定调 · 从小市值到大巨头的进化主轴</div>
+      <p class="thesis-text" id="exec-thesis"></p>
+    </div>
+
+    <div class="kpi-grid" id="hero-kpis"></div>
+
+    <div id="causal-overview-wrap"></div>
+
+    <div id="pre-listing-wrap"></div>
+
+    <!-- PANEL 1: FULL-HISTORY 4-AXIS INTERACTIVE SVG TIMELINE -->
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>📈 上市全史「四线同步」全景交互图谱（市值 × 营收 × 利润 × 估值分位 × 大盘对照）</h2>
+          <div class="panel-sub">支持对数坐标（看清早期小市值起跳）、同期大盘 α 剥离、PE 历史 20%/80% 温度带与财报前置雷达切换；点击阶段胶囊直达下方解剖。</div>
+        </div>
+        <div class="seg-controls">
+          <button class="btn" id="btn-pred" style="display:none" onclick="togglePredHistory()">🕰️ 含前身全史</button>
+          <button class="btn" id="btn-log" onclick="toggleLogScale()">📏 对数坐标 (Log)</button>
+          <button class="btn active" id="btn-pe" onclick="togglePE()">PE &amp; 分位线</button>
+          <button class="btn" id="btn-bench" onclick="toggleBench()">📈 叠加同期大盘</button>
+          <button class="btn active" id="btn-mode-rev" onclick="setLowerMode('rev')">下轨：营收/净利</button>
+          <button class="btn" id="btn-mode-radar" onclick="setLowerMode('radar')">下轨：前置雷达</button>
+        </div>
+      </div>
+      <div class="legend-bar" id="main-legend"></div>
+      <div class="svg-box" id="main-timeline-svg"></div>
+
+      <div class="biz-wrap" id="biz-evolution-box">
+        <div style="font-size:13px; font-weight:800; color:var(--text); margin-bottom:8px;">🧩 主营业务结构演进轨迹（直观观察从单品小厂 → 多品类 / 全球化 / B2B 平台切换）</div>
+        <div class="legend-bar" id="biz-legend" style="margin:4px 0 10px;"></div>
+        <div id="biz-rows"></div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: STAGE-BY-STAGE METAMORPHOSIS ANATOMY + QUARTERLY LEAD-LAG MICROSCOPE -->
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>🔬 逐级「蜕变台阶」因果解剖 &amp; 季度级「业绩 vs 股价」时差显微镜</h2>
+          <div class="panel-sub">先看顶部「💡 一句话看懂为什么翻倍」与季度显微镜，需要深挖财报暗线/买卖点时点击下方抽屉或右上角一键展开全部细节。</div>
+        </div>
+        <div class="seg-controls">
+          <button class="btn" id="btn-forensic" onclick="toggleForensicDetails()">📖 展开全部深度证据</button>
+          <button class="btn" id="btn-show-all" onclick="toggleShowAllStages()">展开全部台阶</button>
+        </div>
+      </div>
+      <div class="stage-nav" id="stage-nav"></div>
+      <div id="stages-container"></div>
+    </div>
+
+    <!-- PANEL 3: FALSE LEAPS & DRAWDOWNS -->
+    <div class="panel" id="traps-panel">
+      <div class="panel-head">
+        <div>
+          <h2>⚠️ 假跃迁 / 弯路与大回撤复盘（小市值避坑校准）</h2>
+          <div class="panel-sub">没有一家巨头是直线涨上来的——复盘当年铺垫落空、并购阵痛或估值透支导致的深度回撤，避免把“伪蜕变”当真主升浪。</div>
+        </div>
+      </div>
+      <div class="trap-grid" id="traps-grid"></div>
+    </div>
+
+    <!-- PANEL 4: SMALL-CAP PLAYBOOK -->
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>🧭 历史照进未来：从这家巨头反推的「小市值牛股早期识别清单」</h2>
+          <div class="panel-sub">全部模式已自动汇总至 <a href="./00_%E5%B0%8F%E5%B8%82%E5%80%BC%E8%B7%83%E8%BF%81%E6%A8%A1%E5%BC%8F%E5%BA%93%E6%80%BB%E8%A7%88.html" style="color:var(--accent);font-weight:700">🧬 跨公司小市值跃迁模式库总览</a>，可供后续扫描 50–200 亿小市值公司直接比对。</div>
+        </div>
+      </div>
+      <div class="table-wrap" id="playbook-table"></div>
+    </div>
+
+    <!-- PANEL 5: FULL DATA APPENDIX (ANNUAL + QUARTERLY EXPLOSION TABLE) -->
+    <div class="panel">
+      <div class="panel-head" style="margin-bottom:10px">
+        <div>
+          <h2>📋 上市以来完整核心硬数据总表（支持按年度 / 按季度切换定位爆发点）</h2>
+          <div class="panel-sub">切到「🔬 按季度查看」可逐季核对单季营收、净利、毛利率与同期市值涨跌，自动高亮单季同比 ≥ +25% 的「🔥 业绩爆发季」。</div>
+        </div>
+        <div class="seg-controls">
+          <button class="btn active" id="btn-tbl-ann" onclick="setAppendixMode('annual')">📅 按年度</button>
+          <button class="btn" id="btn-tbl-qtr" onclick="setAppendixMode('quarterly')">🔬 按季度（定位爆发季）</button>
+          <button class="btn" id="btn-tbl-boom" style="display:none" onclick="toggleBoomOnly()">🔥 仅看爆发季 (≥+25%)</button>
+          <button class="btn" id="btn-tbl-order" style="display:none" onclick="toggleQOrder()">↕️ 最新在前</button>
+        </div>
+      </div>
+      <div class="table-wrap" id="appendix-table"></div>
+    </div>
+  </div>
+
+  <script>
+    const RAW = {"meta": {"company": "春风动力", "code": "603129.SH", "market": "A", "currency": "CNY", "unit": "亿元人民币", "fetched_at": "2026-11-29 00:08", "mktcap_start_date": "2017-08-27", "mktcap_start_yi": 42.15, "mktcap_latest_date": "2026-11-23", "mktcap_latest_yi": 497.59, "mktcap_peak_date": "2026-11-23", "mktcap_peak_yi": 497.59, "mktcap_trough_date": "2018-10-11", "mktcap_trough_yi": 20.59, "mktcap_multiple_start_to_latest": 11.81, "mktcap_multiple_trough_to_peak": 24.17, "hfq_return_multiple": 6.94, "pe_percentiles": {"p20": 20.94, "p50": 26.32, "p80": 42.57}, "predecessor_code": ""}, "annual": [{"year": 2013, "report_date": "2013-12-31", "notice_date": "2016-04-22", "revenue_yi": 10.98, "revenue_yoy": null, "net_profit_yi": 0.43, "net_profit_yoy": null, "deduct_np_yi": 0.37, "gross_margin_pct": 24.18, "net_margin_pct": 3.91, "roe_pct": -91.17, "cip_yi": 0.05, "fixed_asset_yi": 2.27, "cip_to_fa_pct": 2.41, "rd_yi": null, "rd_pct": null, "goodwill_yi": null, "inventory_yi": 2.35, "contract_liab_yi": 0.24, "ocf_yi": 1.07, "capex_yi": 0.2, "fcf_yi": 0.86, "mktcap_yearend_yi": null, "mktcap_high_yi": null, "mktcap_low_yi": null, "pe_ttm_yearend": null, "pe_ttm_high": null, "pe_ttm_low": null, "mktcap_source": ""}, {"year": 2014, "report_date": "2014-12-31", "notice_date": "2016-04-22", "revenue_yi": 13.39, "revenue_yoy": 21.91, "net_profit_yi": 0.91, "net_profit_yoy": 111.87, "deduct_np_yi": 0.89, "gross_margin_pct": 25.99, "net_margin_pct": 6.79, "roe_pct": 208.61, "cip_yi": 0.11, "fixed_asset_yi": 2.31, "cip_to_fa_pct": 4.57, "rd_yi": null, "rd_pct": null, "goodwill_yi": null, "inventory_yi": 2.5, "contract_liab_yi": 0.49, "ocf_yi": 0.51, "capex_yi": 0.44, "fcf_yi": 0.07, "mktcap_yearend_yi": null, "mktcap_high_yi": null, "mktcap_low_yi": null, "pe_ttm_yearend": null, "pe_ttm_high": null, "pe_ttm_low": null, "mktcap_source": ""}, {"year": 2015, "report_date": "2015-12-31", "notice_date": "2016-04-22", "revenue_yi": 12.0, "revenue_yoy": -10.35, "net_profit_yi": 0.59, "net_profit_yoy": -34.78, "deduct_np_yi": 0.44, "gross_margin_pct": 28.79, "net_margin_pct": 4.94, "roe_pct": 19.31, "cip_yi": 0.11, "fixed_asset_yi": 2.29, "cip_to_fa_pct": 5.01, "rd_yi": null, "rd_pct": null, "goodwill_yi": null, "inventory_yi": 2.21, "contract_liab_yi": 0.17, "ocf_yi": 1.2, "capex_yi": 0.23, "fcf_yi": 0.98, "mktcap_yearend_yi": null, "mktcap_high_yi": null, "mktcap_low_yi": null, "pe_ttm_yearend": null, "pe_ttm_high": null, "pe_ttm_low": null, "mktcap_source": ""}, {"year": 2016, "report_date": "2016-12-31", "notice_date": "2017-05-25", "revenue_yi": 14.01, "revenue_yoy": 16.74, "net_profit_yi": 0.88, "net_profit_yoy": 48.89, "deduct_np_yi": 0.79, "gross_margin_pct": 33.09, "net_margin_pct": 6.3, "roe_pct": 22.78, "cip_yi": 0.17, "fixed_asset_yi": 2.17, "cip_to_fa_pct": 7.77, "rd_yi": null, "rd_pct": null, "goodwill_yi": null, "inventory_yi": 2.08, "contract_liab_yi": 0.3, "ocf_yi": 2.47, "capex_yi": 0.26, "fcf_yi": 2.21, "mktcap_yearend_yi": null, "mktcap_high_yi": null, "mktcap_low_yi": null, "pe_ttm_yearend": null, "pe_ttm_high": null, "pe_ttm_low": null, "mktcap_source": ""}, {"year": 2017, "report_date": "2017-12-31", "notice_date": "2018-04-24", "revenue_yi": 18.18, "revenue_yoy": 29.75, "net_profit_yi": 0.97, "net_profit_yoy": 10.35, "deduct_np_yi": 0.8, "gross_margin_pct": 32.66, "net_margin_pct": 5.36, "roe_pct": 10.82, "cip_yi": 0.31, "fixed_asset_yi": 2.07, "cip_to_fa_pct": 15.11, "rd_yi": 0.85, "rd_pct": 4.66, "goodwill_yi": null, "inventory_yi": 2.77, "contract_liab_yi": 0.5, "ocf_yi": 1.88, "capex_yi": 0.85, "fcf_yi": 1.02, "mktcap_yearend_yi": 35.55, "mktcap_high_yi": 67.89, "mktcap_low_yi": 31.67, "pe_ttm_yearend": 32.23, "pe_ttm_high": 62.6, "pe_ttm_low": 29.2, "mktcap_source": ""}, {"year": 2018, "report_date": "2018-12-31", "notice_date": "2019-04-10", "revenue_yi": 25.45, "revenue_yoy": 40.03, "net_profit_yi": 1.2, "net_profit_yoy": 23.45, "deduct_np_yi": 1.31, "gross_margin_pct": 30.54, "net_margin_pct": 4.72, "roe_pct": 12.47, "cip_yi": 0.86, "fixed_asset_yi": 2.09, "cip_to_fa_pct": 41.06, "rd_yi": 1.63, "rd_pct": 6.39, "goodwill_yi": null, "inventory_yi": 3.51, "contract_liab_yi": 0.73, "ocf_yi": 2.13, "capex_yi": 1.31, "fcf_yi": 0.82, "mktcap_yearend_yi": 21.51, "mktcap_high_yi": 36.56, "mktcap_low_yi": 20.59, "pe_ttm_yearend": 19.53, "pe_ttm_high": 41.8, "pe_ttm_low": 18.92, "mktcap_source": ""}, {"year": 2019, "report_date": "2019-12-31", "notice_date": "2020-04-21", "revenue_yi": 32.42, "revenue_yoy": 27.37, "net_profit_yi": 1.81, "net_profit_yoy": 50.57, "deduct_np_yi": 1.6, "gross_margin_pct": 32.24, "net_margin_pct": 5.58, "roe_pct": 17.4, "cip_yi": 1.59, "fixed_asset_yi": 2.6, "cip_to_fa_pct": 60.96, "rd_yi": 1.83, "rd_pct": 5.64, "goodwill_yi": null, "inventory_yi": 4.29, "contract_liab_yi": 0.84, "ocf_yi": 4.24, "capex_yi": 1.69, "fcf_yi": 2.54, "mktcap_yearend_yi": 55.0, "mktcap_high_yi": 55.88, "mktcap_low_yi": 22.09, "pe_ttm_yearend": 33.48, "pe_ttm_high": 34.01, "pe_ttm_low": 19.56, "mktcap_source": ""}, {"year": 2020, "report_date": "2020-12-31", "notice_date": "2021-04-13", "revenue_yi": 45.26, "revenue_yoy": 39.58, "net_profit_yi": 3.65, "net_profit_yoy": 101.54, "deduct_np_yi": 3.11, "gross_margin_pct": 29.32, "net_margin_pct": 8.06, "roe_pct": 24.4, "cip_yi": 1.91, "fixed_asset_yi": 3.66, "cip_to_fa_pct": 52.27, "rd_yi": 2.36, "rd_pct": 5.22, "goodwill_yi": null, "inventory_yi": 9.13, "contract_liab_yi": 0.91, "ocf_yi": 7.74, "capex_yi": 1.79, "fcf_yi": 5.95, "mktcap_yearend_yi": 224.55, "mktcap_high_yi": 244.94, "mktcap_low_yi": 42.63, "pe_ttm_yearend": 66.75, "pe_ttm_high": 86.84, "pe_ttm_low": 23.21, "mktcap_source": ""}, {"year": 2021, "report_date": "2021-12-31", "notice_date": "2022-04-15", "revenue_yi": 78.61, "revenue_yoy": 73.71, "net_profit_yi": 4.12, "net_profit_yoy": 12.78, "deduct_np_yi": 3.55, "gross_margin_pct": 21.53, "net_margin_pct": 5.23, "roe_pct": 11.32, "cip_yi": 4.44, "fixed_asset_yi": 4.32, "cip_to_fa_pct": 102.95, "rd_yi": 3.79, "rd_pct": 4.82, "goodwill_yi": null, "inventory_yi": 15.58, "contract_liab_yi": 1.45, "ocf_yi": 2.64, "capex_yi": 3.86, "fcf_yi": -1.23, "mktcap_yearend_yi": 255.88, "mktcap_high_yi": 276.62, "mktcap_low_yi": 138.5, "pe_ttm_yearend": 65.89, "pe_ttm_high": 75.42, "pe_ttm_low": 34.39, "mktcap_source": ""}, {"year": 2022, "report_date": "2022-12-31", "notice_date": "2023-04-12", "revenue_yi": 113.78, "revenue_yoy": 44.73, "net_profit_yi": 7.01, "net_profit_yoy": 70.43, "deduct_np_yi": 7.97, "gross_margin_pct": 25.37, "net_margin_pct": 6.16, "roe_pct": 16.65, "cip_yi": 2.74, "fixed_asset_yi": 9.57, "cip_to_fa_pct": 28.65, "rd_yi": 7.52, "rd_pct": 6.61, "goodwill_yi": null, "inventory_yi": 20.67, "contract_liab_yi": 1.5, "ocf_yi": 16.98, "capex_yi": 4.48, "fcf_yi": 12.5, "mktcap_yearend_yi": 169.7, "mktcap_high_yi": 262.8, "mktcap_low_yi": 142.03, "pe_ttm_yearend": 25.64, "pe_ttm_high": 67.68, "pe_ttm_low": 25.2, "mktcap_source": ""}, {"year": 2023, "report_date": "2023-12-31", "notice_date": "2024-04-16", "revenue_yi": 121.1, "revenue_yoy": 6.44, "net_profit_yi": 10.08, "net_profit_yoy": 43.65, "deduct_np_yi": 9.71, "gross_margin_pct": 32.73, "net_margin_pct": 8.32, "roe_pct": 20.0, "cip_yi": 3.1, "fixed_asset_yi": 13.34, "cip_to_fa_pct": 23.24, "rd_yi": 9.24, "rd_pct": 7.63, "goodwill_yi": null, "inventory_yi": 16.63, "contract_liab_yi": 1.59, "ocf_yi": 13.85, "capex_yi": 4.88, "fcf_yi": 8.96, "mktcap_yearend_yi": 153.82, "mktcap_high_yi": 250.34, "mktcap_low_yi": 130.55, "pe_ttm_yearend": 16.49, "pe_ttm_high": 32.94, "pe_ttm_low": 14.0, "mktcap_source": ""}, {"year": 2024, "report_date": "2024-12-31", "notice_date": "2025-04-16", "revenue_yi": 150.38, "revenue_yoy": 24.18, "net_profit_yi": 14.72, "net_profit_yoy": 46.08, "deduct_np_yi": 14.42, "gross_margin_pct": 30.06, "net_margin_pct": 9.79, "roe_pct": 23.76, "cip_yi": 1.44, "fixed_asset_yi": 18.05, "cip_to_fa_pct": 7.96, "rd_yi": 10.26, "rd_pct": 6.82, "goodwill_yi": 0.09, "inventory_yi": 25.3, "contract_liab_yi": 2.92, "ocf_yi": 29.73, "capex_yi": 5.02, "fcf_yi": 24.7, "mktcap_yearend_yi": 233.21, "mktcap_high_yi": 248.17, "mktcap_low_yi": 129.09, "pe_ttm_yearend": 18.12, "pe_ttm_high": 22.9, "pe_ttm_low": 13.84, "mktcap_source": ""}, {"year": 2025, "report_date": "2025-12-31", "notice_date": "2026-04-16", "revenue_yi": 197.46, "revenue_yoy": 31.3, "net_profit_yi": 16.75, "net_profit_yoy": 13.83, "deduct_np_yi": 15.81, "gross_margin_pct": 26.94, "net_margin_pct": 8.48, "roe_pct": 22.33, "cip_yi": 5.08, "fixed_asset_yi": 18.72, "cip_to_fa_pct": 27.14, "rd_yi": 12.2, "rd_pct": 6.18, "goodwill_yi": 0.32, "inventory_yi": 28.73, "contract_liab_yi": 4.65, "ocf_yi": 39.66, "capex_yi": 7.59, "fcf_yi": 32.07, "mktcap_yearend_yi": 424.68, "mktcap_high_yi": 446.44, "mktcap_low_yi": 227.04, "pe_ttm_yearend": 23.52, "pe_ttm_high": 24.94, "pe_ttm_low": 14.11, "mktcap_source": ""}], "quarterly": [{"quarter": "2013Q4", "year": 2013, "q": 4, "report_date": "2013-12-31", "notice_date": "2016-04-22", "q_rev_yi": null, "q_rev_yoy": null, "q_np_yi": null, "q_np_yoy": null, "q_gm_pct": null, "ytd_rev_yi": 10.98, "ytd_np_yi": 0.43, "cip_yi": 0.05, "goodwill_yi": null, "mktcap_end_yi": null, "mktcap_notice_yi": null, "pe_ttm_end": null}, {"quarter": "2014Q4", "year": 2014, "q": 4, "report_date": "2014-12-31", "notice_date": "2016-04-22", "q_rev_yi": null, "q_rev_yoy": null, "q_np_yi": null, "q_np_yoy": null, "q_gm_pct": null, "ytd_rev_yi": 13.39, "ytd_np_yi": 0.91, "cip_yi": 0.11, "goodwill_yi": null, "mktcap_end_yi": null, "mktcap_notice_yi": null, "pe_ttm_end": null, "mktcap_q_chg_pct": null}, {"quarter": "2015Q4", "year": 2015, "q": 4, "report_date": "2015-12-31", "notice_date": "2016-04-22", "q_rev_yi": null, "q_rev_yoy": null, "q_np_yi": null, "q_np_yoy": null, "q_gm_pct": null, "ytd_rev_yi": 12.0, "ytd_np_yi": 0.59, "cip_yi": 0.11, "goodwill_yi": null, "mktcap_end_yi": null, "mktcap_notice_yi": null, "pe_ttm_end": null, "mktcap_q_chg_pct": null}, {"quarter": "2016Q1", "year": 2016, "q": 1, "report_date": "2016-03-31", "notice_date": "2017-07-31", "q_rev_yi": 2.45, "q_rev_yoy": null, "q_np_yi": 0.16, "q_np_yoy": null, "q_gm_pct": 31.53, "ytd_rev_yi": 2.45, "ytd_np_yi": 0.16, "cip_yi": null, "goodwill_yi": null, "mktcap_end_yi": null, "mktcap_notice_yi": null, "pe_ttm_end": null, "mktcap_q_chg_pct": null}, {"quarter": "2016Q2", "year": 2016, "q": 2, "report_date": "2016-06-30", "notice_date": "2017-08-17", "q_rev_yi": 3.96, "q_rev_yoy": null, "q_np_yi": 0.25, "q_np_yoy": null, "q_gm_pct": 31.29, "ytd_rev_yi": 6.41, "ytd_np_yi": 0.4, "cip_yi": null, "goodwill_yi": null, "mktcap_end_yi": null, "mktcap_notice_yi": 31.67, "pe_ttm_end": null, "mktcap_q_chg_pct": null}, {"quarter": "2016Q3", "year": 2016, "q": 3, "report_date": "2016-09-30", "notice_date": "2017-10-27", "q_rev_yi": 3.12, "q_rev_yoy": null, "q_np_yi": 0.22, "q_np_yoy": null, "q_gm_pct": 28.01, "ytd_rev_yi": 9.53, "ytd_np_yi": 0.62, "cip_yi": null, "goodwill_yi": null, "mktcap_end_yi": null, "mktcap_notice_yi": 46.75, "pe_ttm_end": null, "mktcap_q_chg_pct": null}, {"quarter": "2016Q4", "year": 2016, "q": 4, "report_date": "2016-12-31", "notice_date": "2017-05-25", "q_rev_yi": 4.48, "q_rev_yoy": null, "q_np_yi": 0.26, "q_np_yoy": null, "q_gm_pct": 39.07, "ytd_rev_yi": 14.01, "ytd_np_yi": 0.88, "cip_yi": 0.17, "goodwill_yi": null, "mktcap_end_yi": null, "mktcap_notice_yi": null, "pe_ttm_end": null, "mktcap_q_chg_pct": null}, {"quarter": "2017Q1", "year": 2017, "q": 1, "report_date": "2017-03-31", "notice_date": "2017-07-31", "q_rev_yi": 3.39, "q_rev_yoy": 38.37, "q_np_yi": 0.3, "q_np_yoy": 87.5, "q_gm_pct": 35.48, "ytd_rev_yi": 3.39, "ytd_np_yi": 0.3, "cip_yi": 0.21, "goodwill_yi": null, "mktcap_end_yi": null, "mktcap_notice_yi": null, "pe_ttm_end": null, "mktcap_q_chg_pct": null}, {"quarter": "2017Q2", "year": 2017, "q": 2, "report_date": "2017-06-30", "notice_date": "2017-08-17", "q_rev_yi": 4.89, "q_rev_yoy": 23.48, "q_np_yi": 0.31, "q_np_yoy": 24.0, "q_gm_pct": 33.02, "ytd_rev_yi": 8.28, "ytd_np_yi": 0.61, "cip_yi": 0.21, "goodwill_yi": null, "mktcap_end_yi": null, "mktcap_notice_yi": 31.67, "pe_ttm_end": null, "mktcap_q_chg_pct": null}, {"quarter": "2017Q3", "year": 2017, "q": 3, "report_date": "2017-09-30", "notice_date": "2017-10-27", "q_rev_yi": 4.92, "q_rev_yoy": 57.69, "q_np_yi": 0.24, "q_np_yoy": 9.09, "q_gm_pct": 31.39, "ytd_rev_yi": 13.21, "ytd_np_yi": 0.84, "cip_yi": 0.19, "goodwill_yi": null, "mktcap_end_yi": 46.75, "mktcap_notice_yi": 46.75, "pe_ttm_end": 43.1, "mktcap_q_chg_pct": null}, {"quarter": "2017Q4", "year": 2017, "q": 4, "report_date": "2017-12-31", "notice_date": "2018-04-24", "q_rev_yi": 4.97, "q_rev_yoy": 10.94, "q_np_yi": 0.13, "q_np_yoy": -50.0, "q_gm_pct": 31.65, "ytd_rev_yi": 18.18, "ytd_np_yi": 0.97, "cip_yi": 0.31, "goodwill_yi": null, "mktcap_end_yi": 35.55, "mktcap_notice_yi": 34.49, "pe_ttm_end": 32.23, "mktcap_q_chg_pct": -23.96}, {"quarter": "2018Q1", "year": 2018, "q": 1, "report_date": "2018-03-31", "notice_date": "2018-04-27", "q_rev_yi": 4.3, "q_rev_yoy": 26.84, "q_np_yi": 0.16, "q_np_yoy": -46.67, "q_gm_pct": 24.51, "ytd_rev_yi": 4.3, "ytd_np_yi": 0.16, "cip_yi": 0.33, "goodwill_yi": null, "mktcap_end_yi": 35.59, "mktcap_notice_yi": 30.76, "pe_ttm_end": 32.27, "mktcap_q_chg_pct": 0.11}, {"quarter": "2018Q2", "year": 2018, "q": 2, "report_date": "2018-06-30", "notice_date": "2018-08-24", "q_rev_yi": 7.65, "q_rev_yoy": 56.44, "q_np_yi": 0.57, "q_np_yoy": 83.87, "q_gm_pct": 30.9, "ytd_rev_yi": 11.95, "ytd_np_yi": 0.72, "cip_yi": 0.26, "goodwill_yi": null, "mktcap_end_yi": 27.26, "mktcap_notice_yi": 22.06, "pe_ttm_end": 32.73, "mktcap_q_chg_pct": -23.41}, {"quarter": "2018Q3", "year": 2018, "q": 3, "report_date": "2018-09-30", "notice_date": "2018-10-25", "q_rev_yi": 6.7, "q_rev_yoy": 36.18, "q_np_yi": 0.25, "q_np_yoy": 4.17, "q_gm_pct": 26.15, "ytd_rev_yi": 18.65, "ytd_np_yi": 0.97, "cip_yi": 0.38, "goodwill_yi": null, "mktcap_end_yi": 22.15, "mktcap_notice_yi": 21.2, "pe_ttm_end": 20.35, "mktcap_q_chg_pct": -18.75}, {"quarter": "2018Q4", "year": 2018, "q": 4, "report_date": "2018-12-31", "notice_date": "2019-04-10", "q_rev_yi": 6.81, "q_rev_yoy": 37.02, "q_np_yi": 0.23, "q_np_yoy": 76.92, "q_gm_pct": 38.27, "ytd_rev_yi": 25.45, "ytd_np_yi": 1.2, "cip_yi": 0.86, "goodwill_yi": null, "mktcap_end_yi": 21.51, "mktcap_notice_yi": 31.17, "pe_ttm_end": 19.53, "mktcap_q_chg_pct": -2.89}, {"quarter": "2019Q1", "year": 2019, "q": 1, "report_date": "2019-03-31", "notice_date": "2019-04-25", "q_rev_yi": 6.03, "q_rev_yoy": 40.23, "q_np_yi": 0.21, "q_np_yoy": 31.25, "q_gm_pct": 28.62, "ytd_rev_yi": 6.03, "ytd_np_yi": 0.21, "cip_yi": 0.88, "goodwill_yi": null, "mktcap_end_yi": 30.55, "mktcap_notice_yi": 29.6, "pe_ttm_end": 27.74, "mktcap_q_chg_pct": 42.03}, {"quarter": "2019Q2", "year": 2019, "q": 2, "report_date": "2019-06-30", "notice_date": "2019-08-23", "q_rev_yi": 10.32, "q_rev_yoy": 34.9, "q_np_yi": 0.82, "q_np_yoy": 43.86, "q_gm_pct": 32.87, "ytd_rev_yi": 16.35, "ytd_np_yi": 1.04, "cip_yi": 1.03, "goodwill_yi": null, "mktcap_end_yi": 27.99, "mktcap_notice_yi": 26.14, "pe_ttm_end": 22.18, "mktcap_q_chg_pct": -8.38}, {"quarter": "2019Q3", "year": 2019, "q": 3, "report_date": "2019-09-30", "notice_date": "2019-10-25", "q_rev_yi": 7.57, "q_rev_yoy": 12.99, "q_np_yi": 0.37, "q_np_yoy": 48.0, "q_gm_pct": 30.17, "ytd_rev_yi": 23.92, "ytd_np_yi": 1.41, "cip_yi": 0.93, "goodwill_yi": null, "mktcap_end_yi": 44.75, "mktcap_notice_yi": 40.11, "pe_ttm_end": 29.44, "mktcap_q_chg_pct": 59.88}, {"quarter": "2019Q4", "year": 2019, "q": 4, "report_date": "2019-12-31", "notice_date": "2020-04-21", "q_rev_yi": 8.5, "q_rev_yoy": 24.82, "q_np_yi": 0.4, "q_np_yoy": 73.91, "q_gm_pct": 35.89, "ytd_rev_yi": 32.42, "ytd_np_yi": 1.81, "cip_yi": 1.59, "goodwill_yi": null, "mktcap_end_yi": 55.0, "mktcap_notice_yi": 48.5, "pe_ttm_end": 33.48, "mktcap_q_chg_pct": 22.91}, {"quarter": "2020Q1", "year": 2020, "q": 1, "report_date": "2020-03-31", "notice_date": "2020-04-24", "q_rev_yi": 6.23, "q_rev_yoy": 3.32, "q_np_yi": 0.58, "q_np_yoy": 176.19, "q_gm_pct": 32.56, "ytd_rev_yi": 6.23, "ytd_np_yi": 0.58, "cip_yi": 1.58, "goodwill_yi": null, "mktcap_end_yi": 43.27, "mktcap_notice_yi": 48.5, "pe_ttm_end": 26.34, "mktcap_q_chg_pct": -21.33}, {"quarter": "2020Q2", "year": 2020, "q": 2, "report_date": "2020-06-30", "notice_date": "2020-08-27", "q_rev_yi": 11.59, "q_rev_yoy": 12.31, "q_np_yi": 1.16, "q_np_yoy": 41.46, "q_gm_pct": 33.35, "ytd_rev_yi": 17.82, "ytd_np_yi": 1.74, "cip_yi": 1.71, "goodwill_yi": null, "mktcap_end_yi": 93.84, "mktcap_notice_yi": 147.82, "pe_ttm_end": 43.16, "mktcap_q_chg_pct": 116.87}, {"quarter": "2020Q3", "year": 2020, "q": 3, "report_date": "2020-09-30", "notice_date": "2020-10-23", "q_rev_yi": 13.65, "q_rev_yoy": 80.32, "q_np_yi": 1.23, "q_np_yoy": 232.43, "q_gm_pct": 32.33, "ytd_rev_yi": 31.47, "ytd_np_yi": 2.97, "cip_yi": 2.08, "goodwill_yi": null, "mktcap_end_yi": 177.51, "mktcap_notice_yi": 204.93, "pe_ttm_end": 70.67, "mktcap_q_chg_pct": 89.16}, {"quarter": "2020Q4", "year": 2020, "q": 4, "report_date": "2020-12-31", "notice_date": "2021-04-13", "q_rev_yi": 13.79, "q_rev_yoy": 62.24, "q_np_yi": 0.68, "q_np_yoy": 70.0, "q_gm_pct": 21.49, "ytd_rev_yi": 45.26, "ytd_np_yi": 3.65, "cip_yi": 1.91, "goodwill_yi": null, "mktcap_end_yi": 224.55, "mktcap_notice_yi": 192.43, "pe_ttm_end": 66.75, "mktcap_q_chg_pct": 26.5}, {"quarter": "2021Q1", "year": 2021, "q": 1, "report_date": "2021-03-31", "notice_date": "2021-04-13", "q_rev_yi": 15.61, "q_rev_yoy": 150.56, "q_np_yi": 0.96, "q_np_yoy": 65.52, "q_gm_pct": 22.53, "ytd_rev_yi": 15.61, "ytd_np_yi": 0.96, "cip_yi": 2.3, "goodwill_yi": null, "mktcap_end_yi": 167.93, "mktcap_notice_yi": 192.43, "pe_ttm_end": 49.92, "mktcap_q_chg_pct": -25.21}, {"quarter": "2021Q2", "year": 2021, "q": 2, "report_date": "2021-06-30", "notice_date": "2021-08-20", "q_rev_yi": 20.46, "q_rev_yoy": 76.53, "q_np_yi": 1.25, "q_np_yoy": 7.76, "q_gm_pct": 22.48, "ytd_rev_yi": 36.07, "ytd_np_yi": 2.21, "cip_yi": 3.14, "goodwill_yi": null, "mktcap_end_yi": 163.34, "mktcap_notice_yi": 162.82, "pe_ttm_end": 40.56, "mktcap_q_chg_pct": -2.73}, {"quarter": "2021Q3", "year": 2021, "q": 3, "report_date": "2021-09-30", "notice_date": "2021-10-29", "q_rev_yi": 20.81, "q_rev_yoy": 52.45, "q_np_yi": 0.99, "q_np_yoy": -19.51, "q_gm_pct": 22.1, "ytd_rev_yi": 56.88, "ytd_np_yi": 3.2, "cip_yi": 3.86, "goodwill_yi": null, "mktcap_end_yi": 193.6, "mktcap_notice_yi": 241.62, "pe_ttm_end": 46.99, "mktcap_q_chg_pct": 18.53}, {"quarter": "2021Q4", "year": 2021, "q": 4, "report_date": "2021-12-31", "notice_date": "2022-04-15", "q_rev_yi": 21.73, "q_rev_yoy": 57.58, "q_np_yi": 0.91, "q_np_yoy": 33.82, "q_gm_pct": 19.37, "ytd_rev_yi": 78.61, "ytd_np_yi": 4.12, "cip_yi": 4.44, "goodwill_yi": null, "mktcap_end_yi": 255.88, "mktcap_notice_yi": 142.03, "pe_ttm_end": 65.89, "mktcap_q_chg_pct": 32.17}, {"quarter": "2022Q1", "year": 2022, "q": 1, "report_date": "2022-03-31", "notice_date": "2022-04-15", "q_rev_yi": 22.62, "q_rev_yoy": 44.91, "q_np_yi": 1.05, "q_np_yoy": 9.38, "q_gm_pct": 19.57, "ytd_rev_yi": 22.62, "ytd_np_yi": 1.05, "cip_yi": 5.21, "goodwill_yi": null, "mktcap_end_yi": 159.76, "mktcap_notice_yi": 142.03, "pe_ttm_end": 41.14, "mktcap_q_chg_pct": -37.56}, {"quarter": "2022Q2", "year": 2022, "q": 2, "report_date": "2022-06-30", "notice_date": "2022-08-23", "q_rev_yi": 26.42, "q_rev_yoy": 29.13, "q_np_yi": 2.0, "q_np_yoy": 60.0, "q_gm_pct": 23.15, "ytd_rev_yi": 49.04, "ytd_np_yi": 3.06, "cip_yi": 5.22, "goodwill_yi": null, "mktcap_end_yi": 168.09, "mktcap_notice_yi": 218.33, "pe_ttm_end": 39.9, "mktcap_q_chg_pct": 5.21}, {"quarter": "2022Q3", "year": 2022, "q": 3, "report_date": "2022-09-30", "notice_date": "2022-10-21", "q_rev_yi": 37.26, "q_rev_yoy": 79.05, "q_np_yi": 2.65, "q_np_yoy": 167.68, "q_gm_pct": 26.39, "ytd_rev_yi": 86.29, "ytd_np_yi": 5.7, "cip_yi": 5.57, "goodwill_yi": null, "mktcap_end_yi": 201.85, "mktcap_notice_yi": 210.45, "pe_ttm_end": 40.68, "mktcap_q_chg_pct": 20.08}, {"quarter": "2022Q4", "year": 2022, "q": 4, "report_date": "2022-12-31", "notice_date": "2023-04-12", "q_rev_yi": 27.49, "q_rev_yoy": 26.51, "q_np_yi": 1.31, "q_np_yoy": 43.96, "q_gm_pct": 30.92, "ytd_rev_yi": 113.78, "ytd_np_yi": 7.01, "cip_yi": 2.74, "goodwill_yi": null, "mktcap_end_yi": 169.7, "mktcap_notice_yi": 206.12, "pe_ttm_end": 25.64, "mktcap_q_chg_pct": -15.93}, {"quarter": "2023Q1", "year": 2023, "q": 1, "report_date": "2023-03-31", "notice_date": "2023-04-12", "q_rev_yi": 28.79, "q_rev_yoy": 27.28, "q_np_yi": 2.1, "q_np_yoy": 100.0, "q_gm_pct": 34.16, "ytd_rev_yi": 28.79, "ytd_np_yi": 2.1, "cip_yi": 3.51, "goodwill_yi": null, "mktcap_end_yi": 186.55, "mktcap_notice_yi": 206.12, "pe_ttm_end": 28.19, "mktcap_q_chg_pct": 9.93}, {"quarter": "2023Q2", "year": 2023, "q": 2, "report_date": "2023-06-30", "notice_date": "2023-08-18", "q_rev_yi": 36.26, "q_rev_yoy": 37.24, "q_np_yi": 3.41, "q_np_yoy": 70.5, "q_gm_pct": 31.34, "ytd_rev_yi": 65.06, "ytd_np_yi": 5.52, "cip_yi": 4.04, "goodwill_yi": null, "mktcap_end_yi": 243.59, "mktcap_notice_yi": 219.89, "pe_ttm_end": 30.21, "mktcap_q_chg_pct": 30.58}, {"quarter": "2023Q3", "year": 2023, "q": 3, "report_date": "2023-09-30", "notice_date": "2023-10-18", "q_rev_yi": 28.81, "q_rev_yoy": -22.68, "q_np_yi": 2.5, "q_np_yoy": -5.66, "q_gm_pct": 33.67, "ytd_rev_yi": 93.86, "ytd_np_yi": 8.02, "cip_yi": 4.62, "goodwill_yi": null, "mktcap_end_yi": 210.94, "mktcap_notice_yi": 167.11, "pe_ttm_end": 22.27, "mktcap_q_chg_pct": -13.4}, {"quarter": "2023Q4", "year": 2023, "q": 4, "report_date": "2023-12-31", "notice_date": "2024-04-16", "q_rev_yi": 27.24, "q_rev_yoy": -0.91, "q_np_yi": 2.06, "q_np_yoy": 57.25, "q_gm_pct": 32.08, "ytd_rev_yi": 121.1, "ytd_np_yi": 10.08, "cip_yi": 3.1, "goodwill_yi": null, "mktcap_end_yi": 153.82, "mktcap_notice_yi": 214.98, "pe_ttm_end": 16.49, "mktcap_q_chg_pct": -27.08}, {"quarter": "2024Q1", "year": 2024, "q": 1, "report_date": "2024-03-31", "notice_date": "2024-04-16", "q_rev_yi": 30.61, "q_rev_yoy": 6.32, "q_np_yi": 2.78, "q_np_yoy": 32.38, "q_gm_pct": 31.52, "ytd_rev_yi": 30.61, "ytd_np_yi": 2.78, "cip_yi": 3.29, "goodwill_yi": null, "mktcap_end_yi": 195.29, "mktcap_notice_yi": 214.98, "pe_ttm_end": 20.94, "mktcap_q_chg_pct": 26.96}, {"quarter": "2024Q2", "year": 2024, "q": 2, "report_date": "2024-06-30", "notice_date": "2024-08-16", "q_rev_yi": 44.68, "q_rev_yoy": 23.22, "q_np_yi": 4.31, "q_np_yoy": 26.39, "q_gm_pct": 29.39, "ytd_rev_yi": 75.29, "ytd_np_yi": 7.09, "cip_yi": 2.85, "goodwill_yi": null, "mktcap_end_yi": 210.99, "mktcap_notice_yi": 204.42, "pe_ttm_end": 19.63, "mktcap_q_chg_pct": 8.04}, {"quarter": "2024Q3", "year": 2024, "q": 3, "report_date": "2024-09-30", "notice_date": "2024-10-18", "q_rev_yi": 39.21, "q_rev_yoy": 36.1, "q_np_yi": 3.73, "q_np_yoy": 49.2, "q_gm_pct": 30.85, "ytd_rev_yi": 114.5, "ytd_np_yi": 10.81, "cip_yi": 3.58, "goodwill_yi": null, "mktcap_end_yi": 228.36, "mktcap_notice_yi": 235.29, "pe_ttm_end": 19.61, "mktcap_q_chg_pct": 8.23}, {"quarter": "2024Q4", "year": 2024, "q": 4, "report_date": "2024-12-31", "notice_date": "2025-04-16", "q_rev_yi": 35.88, "q_rev_yoy": 31.72, "q_np_yi": 3.9, "q_np_yoy": 89.32, "q_gm_pct": 28.79, "ytd_rev_yi": 150.38, "ytd_np_yi": 14.72, "cip_yi": 1.44, "goodwill_yi": 0.09, "mktcap_end_yi": 229.12, "mktcap_notice_yi": 227.04, "pe_ttm_end": 17.8, "mktcap_q_chg_pct": 0.33}, {"quarter": "2025Q1", "year": 2025, "q": 1, "report_date": "2025-03-31", "notice_date": "2025-04-16", "q_rev_yi": 42.5, "q_rev_yoy": 38.84, "q_np_yi": 4.15, "q_np_yoy": 49.28, "q_gm_pct": 29.73, "ytd_rev_yi": 42.5, "ytd_np_yi": 4.15, "cip_yi": 1.64, "goodwill_yi": 0.09, "mktcap_end_yi": 291.88, "mktcap_notice_yi": 227.04, "pe_ttm_end": 22.68, "mktcap_q_chg_pct": 27.39}, {"quarter": "2025Q2", "year": 2025, "q": 2, "report_date": "2025-06-30", "notice_date": "2025-08-12", "q_rev_yi": 56.05, "q_rev_yoy": 25.45, "q_np_yi": 5.87, "q_np_yoy": 36.19, "q_gm_pct": 27.35, "ytd_rev_yi": 98.55, "ytd_np_yi": 10.02, "cip_yi": 1.84, "goodwill_yi": 0.09, "mktcap_end_yi": 341.0, "mktcap_notice_yi": 388.81, "pe_ttm_end": 21.19, "mktcap_q_chg_pct": 16.83}, {"quarter": "2025Q3", "year": 2025, "q": 3, "report_date": "2025-09-30", "notice_date": "2025-10-17", "q_rev_yi": 50.41, "q_rev_yoy": 28.56, "q_np_yi": 4.13, "q_np_yoy": 10.72, "q_gm_pct": 26.14, "ytd_rev_yi": 148.96, "ytd_np_yi": 14.15, "cip_yi": 3.15, "goodwill_yi": 0.09, "mktcap_end_yi": 401.1, "mktcap_notice_yi": 355.64, "pe_ttm_end": 22.73, "mktcap_q_chg_pct": 17.62}, {"quarter": "2025Q4", "year": 2025, "q": 4, "report_date": "2025-12-31", "notice_date": "2026-04-16", "q_rev_yi": 48.49, "q_rev_yoy": 35.14, "q_np_yi": 2.6, "q_np_yoy": -33.33, "q_gm_pct": 24.84, "ytd_rev_yi": 197.46, "ytd_np_yi": 16.75, "cip_yi": 5.08, "goodwill_yi": 0.32, "mktcap_end_yi": 425.2, "mktcap_notice_yi": 426.7, "pe_ttm_end": 23.55, "mktcap_q_chg_pct": 6.01}, {"quarter": "2026Q1", "year": 2026, "q": 1, "report_date": "2026-03-31", "notice_date": "2026-04-16", "q_rev_yi": 53.59, "q_rev_yoy": 26.09, "q_np_yi": 4.23, "q_np_yoy": 1.93, "q_gm_pct": 28.7, "ytd_rev_yi": 53.59, "ytd_np_yi": 4.23, "cip_yi": 7.39, "goodwill_yi": 0.32, "mktcap_end_yi": 371.15, "mktcap_notice_yi": 426.7, "pe_ttm_end": 20.55, "mktcap_q_chg_pct": -12.71}, {"quarter": "2026Q2", "year": 2026, "q": 2, "report_date": "2026-06-30", "notice_date": "2026-08-18", "q_rev_yi": 80.27, "q_rev_yoy": 43.21, "q_np_yi": 6.42, "q_np_yoy": 9.37, "q_gm_pct": 26.29, "ytd_rev_yi": 133.86, "ytd_np_yi": 10.65, "cip_yi": 7.95, "goodwill_yi": 0.32, "mktcap_end_yi": 392.46, "mktcap_notice_yi": 485.59, "pe_ttm_end": 23.32, "mktcap_q_chg_pct": 5.74}, {"quarter": "2026Q3", "year": 2026, "q": 3, "report_date": "2026-09-30", "notice_date": "2026-10-21", "q_rev_yi": 75.56, "q_rev_yoy": 49.89, "q_np_yi": 9.56, "q_np_yoy": 131.48, "q_gm_pct": 33.48, "ytd_rev_yi": 209.42, "ytd_np_yi": 20.21, "cip_yi": 9.02, "goodwill_yi": 0.32, "mktcap_end_yi": 435.89, "mktcap_notice_yi": 420.7, "pe_ttm_end": 25.08, "mktcap_q_chg_pct": 11.07}], "mktcap_monthly": [{"date": "2017-08-27", "ym": "2017-08", "mktcap_yi": 42.15, "pe_ttm": 38.86}, {"date": "2017-09-26", "ym": "2017-09", "mktcap_yi": 48.61, "pe_ttm": 44.82}, {"date": "2017-10-31", "ym": "2017-10", "mktcap_yi": 44.16, "pe_ttm": 40.04}, {"date": "2017-11-30", "ym": "2017-11", "mktcap_yi": 38.05, "pe_ttm": 34.5}, {"date": "2017-12-30", "ym": "2017-12", "mktcap_yi": 35.55, "pe_ttm": 32.23}, {"date": "2018-01-29", "ym": "2018-01", "mktcap_yi": 34.59, "pe_ttm": 31.36}, {"date": "2018-02-28", "ym": "2018-02", "mktcap_yi": 30.23, "pe_ttm": 27.41}, {"date": "2018-03-30", "ym": "2018-03", "mktcap_yi": 35.59, "pe_ttm": 32.27}, {"date": "2018-04-29", "ym": "2018-04", "mktcap_yi": 30.76, "pe_ttm": 36.94}, {"date": "2018-05-29", "ym": "2018-05", "mktcap_yi": 34.81, "pe_ttm": 41.8}, {"date": "2018-06-28", "ym": "2018-06", "mktcap_yi": 27.26, "pe_ttm": 32.73}, {"date": "2018-07-28", "ym": "2018-07", "mktcap_yi": 25.8, "pe_ttm": 30.99}, {"date": "2018-08-27", "ym": "2018-08", "mktcap_yi": 23.24, "pe_ttm": 21.36}, {"date": "2018-09-26", "ym": "2018-09", "mktcap_yi": 22.77, "pe_ttm": 20.92}, {"date": "2018-10-11", "ym": "2018-10", "mktcap_yi": 20.59, "pe_ttm": 18.92}, {"date": "2018-11-30", "ym": "2018-11", "mktcap_yi": 22.64, "pe_ttm": 20.55}, {"date": "2018-12-30", "ym": "2018-12", "mktcap_yi": 21.51, "pe_ttm": 19.53}, {"date": "2019-01-29", "ym": "2019-01", "mktcap_yi": 23.97, "pe_ttm": 21.76}, {"date": "2019-02-28", "ym": "2019-02", "mktcap_yi": 25.63, "pe_ttm": 23.27}, {"date": "2019-03-30", "ym": "2019-03", "mktcap_yi": 30.55, "pe_ttm": 27.74}, {"date": "2019-04-29", "ym": "2019-04", "mktcap_yi": 30.34, "pe_ttm": 24.04}, {"date": "2019-05-29", "ym": "2019-05", "mktcap_yi": 27.7, "pe_ttm": 21.95}, {"date": "2019-06-28", "ym": "2019-06", "mktcap_yi": 27.99, "pe_ttm": 22.18}, {"date": "2019-07-28", "ym": "2019-07", "mktcap_yi": 27.13, "pe_ttm": 21.5}, {"date": "2019-08-27", "ym": "2019-08", "mktcap_yi": 33.93, "pe_ttm": 22.32}, {"date": "2019-09-26", "ym": "2019-09", "mktcap_yi": 41.39, "pe_ttm": 27.23}, {"date": "2019-10-31", "ym": "2019-10", "mktcap_yi": 39.68, "pe_ttm": 24.15}, {"date": "2019-11-30", "ym": "2019-11", "mktcap_yi": 48.94, "pe_ttm": 29.79}, {"date": "2019-12-30", "ym": "2019-12", "mktcap_yi": 55.0, "pe_ttm": 33.48}, {"date": "2020-01-29", "ym": "2020-01", "mktcap_yi": 61.82, "pe_ttm": 37.62}, {"date": "2020-02-28", "ym": "2020-02", "mktcap_yi": 53.12, "pe_ttm": 32.33}, {"date": "2020-03-29", "ym": "2020-03", "mktcap_yi": 43.27, "pe_ttm": 26.34}, {"date": "2020-04-28", "ym": "2020-04", "mktcap_yi": 50.47, "pe_ttm": 23.21}, {"date": "2020-05-28", "ym": "2020-05", "mktcap_yi": 64.76, "pe_ttm": 29.78}, {"date": "2020-06-27", "ym": "2020-06", "mktcap_yi": 89.9, "pe_ttm": 41.35}, {"date": "2020-07-27", "ym": "2020-07", "mktcap_yi": 117.14, "pe_ttm": 53.87}, {"date": "2020-08-31", "ym": "2020-08", "mktcap_yi": 166.16, "pe_ttm": 66.15}, {"date": "2020-09-30", "ym": "2020-09", "mktcap_yi": 177.51, "pe_ttm": 70.67}, {"date": "2020-10-30", "ym": "2020-10", "mktcap_yi": 227.77, "pe_ttm": 67.71}, {"date": "2020-11-29", "ym": "2020-11", "mktcap_yi": 198.88, "pe_ttm": 59.12}, {"date": "2020-12-29", "ym": "2020-12", "mktcap_yi": 224.55, "pe_ttm": 66.75}, {"date": "2021-01-28", "ym": "2021-01", "mktcap_yi": 217.63, "pe_ttm": 64.69}, {"date": "2021-02-27", "ym": "2021-02", "mktcap_yi": 201.58, "pe_ttm": 59.92}, {"date": "2021-03-29", "ym": "2021-03", "mktcap_yi": 167.93, "pe_ttm": 49.92}, {"date": "2021-04-28", "ym": "2021-04", "mktcap_yi": 199.63, "pe_ttm": 49.57}, {"date": "2021-05-28", "ym": "2021-05", "mktcap_yi": 183.63, "pe_ttm": 45.6}, {"date": "2021-06-27", "ym": "2021-06", "mktcap_yi": 170.39, "pe_ttm": 42.31}, {"date": "2021-07-27", "ym": "2021-07", "mktcap_yi": 145.8, "pe_ttm": 36.21}, {"date": "2021-08-31", "ym": "2021-08", "mktcap_yi": 177.4, "pe_ttm": 43.06}, {"date": "2021-09-30", "ym": "2021-09", "mktcap_yi": 193.6, "pe_ttm": 46.99}, {"date": "2021-10-30", "ym": "2021-10", "mktcap_yi": 241.62, "pe_ttm": 62.22}, {"date": "2021-11-29", "ym": "2021-11", "mktcap_yi": 264.14, "pe_ttm": 68.02}, {"date": "2021-12-29", "ym": "2021-12", "mktcap_yi": 255.88, "pe_ttm": 65.89}, {"date": "2022-01-28", "ym": "2022-01", "mktcap_yi": 211.34, "pe_ttm": 54.42}, {"date": "2022-02-27", "ym": "2022-02", "mktcap_yi": 195.51, "pe_ttm": 50.35}, {"date": "2022-03-29", "ym": "2022-03", "mktcap_yi": 159.76, "pe_ttm": 41.14}, {"date": "2022-04-28", "ym": "2022-04", "mktcap_yi": 163.06, "pe_ttm": 38.7}, {"date": "2022-05-28", "ym": "2022-05", "mktcap_yi": 179.64, "pe_ttm": 42.64}, {"date": "2022-06-27", "ym": "2022-06", "mktcap_yi": 180.83, "pe_ttm": 42.92}, {"date": "2022-07-27", "ym": "2022-07", "mktcap_yi": 209.69, "pe_ttm": 49.77}, {"date": "2022-08-31", "ym": "2022-08", "mktcap_yi": 236.97, "pe_ttm": 47.76}, {"date": "2022-09-30", "ym": "2022-09", "mktcap_yi": 201.85, "pe_ttm": 40.68}, {"date": "2022-10-30", "ym": "2022-10", "mktcap_yi": 199.56, "pe_ttm": 30.15}, {"date": "2022-11-29", "ym": "2022-11", "mktcap_yi": 195.34, "pe_ttm": 29.52}, {"date": "2022-12-29", "ym": "2022-12", "mktcap_yi": 169.7, "pe_ttm": 25.64}, {"date": "2023-01-28", "ym": "2023-01", "mktcap_yi": 177.45, "pe_ttm": 26.81}, {"date": "2023-02-27", "ym": "2023-02", "mktcap_yi": 210.92, "pe_ttm": 31.87}, {"date": "2023-03-29", "ym": "2023-03", "mktcap_yi": 186.55, "pe_ttm": 28.19}, {"date": "2023-04-28", "ym": "2023-04", "mktcap_yi": 204.87, "pe_ttm": 25.41}, {"date": "2023-05-28", "ym": "2023-05", "mktcap_yi": 211.39, "pe_ttm": 26.22}, {"date": "2023-06-27", "ym": "2023-06", "mktcap_yi": 238.38, "pe_ttm": 29.56}, {"date": "2023-07-27", "ym": "2023-07", "mktcap_yi": 227.19, "pe_ttm": 28.18}, {"date": "2023-08-31", "ym": "2023-08", "mktcap_yi": 211.4, "pe_ttm": 22.32}, {"date": "2023-09-30", "ym": "2023-09", "mktcap_yi": 210.94, "pe_ttm": 22.27}, {"date": "2023-10-30", "ym": "2023-10", "mktcap_yi": 153.18, "pe_ttm": 16.42}, {"date": "2023-11-29", "ym": "2023-11", "mktcap_yi": 146.81, "pe_ttm": 15.74}, {"date": "2023-12-29", "ym": "2023-12", "mktcap_yi": 153.82, "pe_ttm": 16.49}, {"date": "2024-01-28", "ym": "2024-01", "mktcap_yi": 142.33, "pe_ttm": 15.26}, {"date": "2024-02-27", "ym": "2024-02", "mktcap_yi": 156.46, "pe_ttm": 16.77}, {"date": "2024-03-28", "ym": "2024-03", "mktcap_yi": 179.01, "pe_ttm": 19.19}, {"date": "2024-04-27", "ym": "2024-04", "mktcap_yi": 209.81, "pe_ttm": 19.52}, {"date": "2024-05-27", "ym": "2024-05", "mktcap_yi": 231.33, "pe_ttm": 21.52}, {"date": "2024-06-26", "ym": "2024-06", "mktcap_yi": 222.57, "pe_ttm": 20.71}, {"date": "2024-07-31", "ym": "2024-07", "mktcap_yi": 202.65, "pe_ttm": 18.86}, {"date": "2024-08-30", "ym": "2024-08", "mktcap_yi": 208.29, "pe_ttm": 17.88}, {"date": "2024-09-29", "ym": "2024-09", "mktcap_yi": 228.36, "pe_ttm": 19.61}, {"date": "2024-10-29", "ym": "2024-10", "mktcap_yi": 239.57, "pe_ttm": 18.61}, {"date": "2024-11-28", "ym": "2024-11", "mktcap_yi": 220.48, "pe_ttm": 17.13}, {"date": "2024-12-28", "ym": "2024-12", "mktcap_yi": 233.21, "pe_ttm": 18.12}, {"date": "2025-01-27", "ym": "2025-01", "mktcap_yi": 312.53, "pe_ttm": 24.28}, {"date": "2025-02-26", "ym": "2025-02", "mktcap_yi": 281.68, "pe_ttm": 21.88}, {"date": "2025-03-28", "ym": "2025-03", "mktcap_yi": 279.95, "pe_ttm": 21.75}, {"date": "2025-04-27", "ym": "2025-04", "mktcap_yi": 256.07, "pe_ttm": 15.91}, {"date": "2025-05-27", "ym": "2025-05", "mktcap_yi": 262.22, "pe_ttm": 16.29}, {"date": "2025-06-26", "ym": "2025-06", "mktcap_yi": 317.67, "pe_ttm": 19.74}, {"date": "2025-07-31", "ym": "2025-07", "mktcap_yi": 341.61, "pe_ttm": 21.23}, {"date": "2025-08-30", "ym": "2025-08", "mktcap_yi": 406.91, "pe_ttm": 23.06}, {"date": "2025-09-29", "ym": "2025-09", "mktcap_yi": 401.1, "pe_ttm": 22.73}, {"date": "2025-10-29", "ym": "2025-10", "mktcap_yi": 391.96, "pe_ttm": 21.71}, {"date": "2025-11-28", "ym": "2025-11", "mktcap_yi": 403.57, "pe_ttm": 22.35}, {"date": "2025-12-28", "ym": "2025-12", "mktcap_yi": 424.68, "pe_ttm": 23.52}, {"date": "2026-01-27", "ym": "2026-01", "mktcap_yi": 418.06, "pe_ttm": 23.15}, {"date": "2026-02-26", "ym": "2026-02", "mktcap_yi": 379.25, "pe_ttm": 21.0}, {"date": "2026-03-28", "ym": "2026-03", "mktcap_yi": 347.79, "pe_ttm": 19.26}, {"date": "2026-04-27", "ym": "2026-04", "mktcap_yi": 421.14, "pe_ttm": 25.03}, {"date": "2026-05-27", "ym": "2026-05", "mktcap_yi": 366.04, "pe_ttm": 21.75}, {"date": "2026-06-26", "ym": "2026-06", "mktcap_yi": 374.5, "pe_ttm": 22.25}, {"date": "2026-07-31", "ym": "2026-07", "mktcap_yi": 469.99, "pe_ttm": 27.93}, {"date": "2026-08-30", "ym": "2026-08", "mktcap_yi": 457.36, "pe_ttm": 26.31}, {"date": "2026-09-29", "ym": "2026-09", "mktcap_yi": 435.89, "pe_ttm": 25.08}, {"date": "2026-10-29", "ym": "2026-10", "mktcap_yi": 444.75, "pe_ttm": 19.5}, {"date": "2026-11-23", "ym": "2026-11", "mktcap_yi": 497.59, "pe_ttm": 21.82}], "pred_mktcap_monthly": [], "benchmark": {"name": "沪深300", "code": "000300.SH", "monthly": [{"date": "2017-08-31", "ym": "2017-08", "value": 3822.09}, {"date": "2017-09-29", "ym": "2017-09", "value": 3836.5}, {"date": "2017-10-31", "ym": "2017-10", "value": 4006.72}, {"date": "2017-11-30", "ym": "2017-11", "value": 4006.1}, {"date": "2017-12-29", "ym": "2017-12", "value": 4030.85}, {"date": "2018-01-31", "ym": "2018-01", "value": 4275.9}, {"date": "2018-02-28", "ym": "2018-02", "value": 4023.64}, {"date": "2018-03-30", "ym": "2018-03", "value": 3898.5}, {"date": "2018-04-27", "ym": "2018-04", "value": 3756.88}, {"date": "2018-05-31", "ym": "2018-05", "value": 3802.38}, {"date": "2018-06-29", "ym": "2018-06", "value": 3510.98}, {"date": "2018-07-31", "ym": "2018-07", "value": 3517.66}, {"date": "2018-08-31", "ym": "2018-08", "value": 3334.5}, {"date": "2018-09-28", "ym": "2018-09", "value": 3438.86}, {"date": "2018-10-31", "ym": "2018-10", "value": 3153.82}, {"date": "2018-11-30", "ym": "2018-11", "value": 3172.69}, {"date": "2018-12-28", "ym": "2018-12", "value": 3010.65}, {"date": "2019-01-31", "ym": "2019-01", "value": 3201.63}, {"date": "2019-02-28", "ym": "2019-02", "value": 3669.37}, {"date": "2019-03-29", "ym": "2019-03", "value": 3872.34}, {"date": "2019-04-30", "ym": "2019-04", "value": 3913.21}, {"date": "2019-05-31", "ym": "2019-05", "value": 3629.79}, {"date": "2019-06-28", "ym": "2019-06", "value": 3825.59}, {"date": "2019-07-31", "ym": "2019-07", "value": 3835.36}, {"date": "2019-08-30", "ym": "2019-08", "value": 3799.59}, {"date": "2019-09-30", "ym": "2019-09", "value": 3814.53}, {"date": "2019-10-31", "ym": "2019-10", "value": 3886.75}, {"date": "2019-11-29", "ym": "2019-11", "value": 3828.67}, {"date": "2019-12-31", "ym": "2019-12", "value": 4096.58}, {"date": "2020-01-23", "ym": "2020-01", "value": 4003.9}, {"date": "2020-02-28", "ym": "2020-02", "value": 3940.05}, {"date": "2020-03-31", "ym": "2020-03", "value": 3686.16}, {"date": "2020-04-30", "ym": "2020-04", "value": 3912.58}, {"date": "2020-05-29", "ym": "2020-05", "value": 3867.02}, {"date": "2020-06-30", "ym": "2020-06", "value": 4163.96}, {"date": "2020-07-31", "ym": "2020-07", "value": 4695.05}, {"date": "2020-08-31", "ym": "2020-08", "value": 4816.22}, {"date": "2020-09-30", "ym": "2020-09", "value": 4587.4}, {"date": "2020-10-30", "ym": "2020-10", "value": 4695.33}, {"date": "2020-11-30", "ym": "2020-11", "value": 4960.25}, {"date": "2020-12-31", "ym": "2020-12", "value": 5211.29}, {"date": "2021-01-29", "ym": "2021-01", "value": 5351.96}, {"date": "2021-02-26", "ym": "2021-02", "value": 5336.76}, {"date": "2021-03-31", "ym": "2021-03", "value": 5048.36}, {"date": "2021-04-30", "ym": "2021-04", "value": 5123.49}, {"date": "2021-05-31", "ym": "2021-05", "value": 5331.57}, {"date": "2021-06-30", "ym": "2021-06", "value": 5224.04}, {"date": "2021-07-30", "ym": "2021-07", "value": 4811.17}, {"date": "2021-08-31", "ym": "2021-08", "value": 4805.61}, {"date": "2021-09-30", "ym": "2021-09", "value": 4866.38}, {"date": "2021-10-29", "ym": "2021-10", "value": 4908.77}, {"date": "2021-11-30", "ym": "2021-11", "value": 4832.03}, {"date": "2021-12-31", "ym": "2021-12", "value": 4940.37}, {"date": "2022-01-28", "ym": "2022-01", "value": 4563.77}, {"date": "2022-02-28", "ym": "2022-02", "value": 4581.65}, {"date": "2022-03-31", "ym": "2022-03", "value": 4222.6}, {"date": "2022-04-29", "ym": "2022-04", "value": 4016.24}, {"date": "2022-05-31", "ym": "2022-05", "value": 4091.52}, {"date": "2022-06-30", "ym": "2022-06", "value": 4485.01}, {"date": "2022-07-29", "ym": "2022-07", "value": 4170.1}, {"date": "2022-08-31", "ym": "2022-08", "value": 4078.84}, {"date": "2022-09-30", "ym": "2022-09", "value": 3804.89}, {"date": "2022-10-31", "ym": "2022-10", "value": 3508.7}, {"date": "2022-11-30", "ym": "2022-11", "value": 3853.04}, {"date": "2022-12-30", "ym": "2022-12", "value": 3871.63}, {"date": "2023-01-31", "ym": "2023-01", "value": 4156.86}, {"date": "2023-02-28", "ym": "2023-02", "value": 4069.46}, {"date": "2023-03-31", "ym": "2023-03", "value": 4050.93}, {"date": "2023-04-28", "ym": "2023-04", "value": 4029.09}, {"date": "2023-05-31", "ym": "2023-05", "value": 3798.54}, {"date": "2023-06-30", "ym": "2023-06", "value": 3842.45}, {"date": "2023-07-31", "ym": "2023-07", "value": 4014.63}, {"date": "2023-08-31", "ym": "2023-08", "value": 3765.27}, {"date": "2023-09-28", "ym": "2023-09", "value": 3689.52}, {"date": "2023-10-31", "ym": "2023-10", "value": 3572.51}, {"date": "2023-11-30", "ym": "2023-11", "value": 3496.2}, {"date": "2023-12-29", "ym": "2023-12", "value": 3431.11}, {"date": "2024-01-31", "ym": "2024-01", "value": 3215.35}, {"date": "2024-02-29", "ym": "2024-02", "value": 3516.08}, {"date": "2024-03-29", "ym": "2024-03", "value": 3537.48}, {"date": "2024-04-30", "ym": "2024-04", "value": 3604.39}, {"date": "2024-05-31", "ym": "2024-05", "value": 3579.92}, {"date": "2024-06-28", "ym": "2024-06", "value": 3461.66}, {"date": "2024-07-31", "ym": "2024-07", "value": 3442.08}, {"date": "2024-08-30", "ym": "2024-08", "value": 3321.43}, {"date": "2024-09-30", "ym": "2024-09", "value": 4017.85}, {"date": "2024-10-31", "ym": "2024-10", "value": 3891.04}, {"date": "2024-11-29", "ym": "2024-11", "value": 3916.58}, {"date": "2024-12-31", "ym": "2024-12", "value": 3934.91}, {"date": "2025-01-27", "ym": "2025-01", "value": 3817.08}, {"date": "2025-02-28", "ym": "2025-02", "value": 3890.05}, {"date": "2025-03-31", "ym": "2025-03", "value": 3887.31}, {"date": "2025-04-30", "ym": "2025-04", "value": 3770.57}, {"date": "2025-05-30", "ym": "2025-05", "value": 3840.23}, {"date": "2025-06-30", "ym": "2025-06", "value": 3936.08}, {"date": "2025-07-31", "ym": "2025-07", "value": 4075.59}, {"date": "2025-08-29", "ym": "2025-08", "value": 4496.76}, {"date": "2025-09-30", "ym": "2025-09", "value": 4640.69}, {"date": "2025-10-31", "ym": "2025-10", "value": 4640.67}, {"date": "2025-11-28", "ym": "2025-11", "value": 4526.66}, {"date": "2025-12-31", "ym": "2025-12", "value": 4629.94}, {"date": "2026-01-30", "ym": "2026-01", "value": 4706.34}, {"date": "2026-02-27", "ym": "2026-02", "value": 4710.65}, {"date": "2026-03-31", "ym": "2026-03", "value": 4450.05}, {"date": "2026-04-30", "ym": "2026-04", "value": 4807.31}, {"date": "2026-05-29", "ym": "2026-05", "value": 4892.12}, {"date": "2026-06-30", "ym": "2026-06", "value": 4979.43}, {"date": "2026-07-31", "ym": "2026-07", "value": 4588.2}, {"date": "2026-08-31", "ym": "2026-08", "value": 4625.09}, {"date": "2026-09-30", "ym": "2026-09", "value": 4357.62}, {"date": "2026-10-30", "ym": "2026-10", "value": 3985.5}, {"date": "2026-11-27", "ym": "2026-11", "value": 4063.06}]}};
+    const ANALYSIS = {"company": "春风动力", "code": "603129.SH", "subtitle": "从20亿浙江小机车厂到500亿全球动力运动龙头的24倍蜕变史（2017—2026）", "timeline_span": "2017.08上市—2026.11（含1989—2017温州创业与国宾车/KTM前传）", "chart_start_year": 2017, "executive_thesis": "A股最教科书的「小市值隐形冠军全球出海24倍股」样本：上市次年跌穿20.6亿绝底后，凭「四轮全地形车抢占欧美份额（出口占全国70%+）× 牵手KTM引爆250SR/450SR/675SR国产大排量爆款 × 极核ZEEHO电动两轮年销破50万辆第三曲线 × 墨西哥/泰国海外建厂抗关税」，9年营收连年正增暴涨11倍（18亿→197亿，2026前三季已破209亿）、归母净利暴涨超20倍（0.97亿→2026前三季20.2亿），在仅21.8倍低泡沫PE下创498亿历史新高！", "hero_kpis": [{"label": "总市值跃迁（2017上市至今）", "start": "42.2亿 (2017.08)", "peak": "497.6亿 (2026.11)", "latest": "497.6亿", "multiple": "11.8倍 (谷底起24.2倍)"}, {"label": "年度营业总收入", "start": "18.2亿 (2017)", "peak": "197.5亿 (2025·26Q3已209亿)", "latest": "197.5亿 (2025)", "multiple": "10.9倍"}, {"label": "年度归母净利润", "start": "0.97亿 (2017)", "peak": "16.75亿 (2025·26Q3已20.2亿)", "latest": "16.75亿 (2025)", "multiple": "17.3倍"}, {"label": "归母净利率进化", "start": "5.36% (2017)", "peak": "9.79% (2024)", "latest": "8.48% (2025)", "multiple": "+3.12pct"}], "pre_listing_context": {"title": "1989—2017「从温州乐清汽配作坊到国宾护卫车与KTM合资」上市前28年磨剑", "summary": "在2017年8月登陆上交所前，创始人赖国贵已深耕水冷发动机与大排量机车28年：从造出中国第一台水冷摩托车发动机，到2006年切入欧美全地形车市场，再到2013年同时拿下「中央国宾护卫车」与奥地利顶级车企「KTM深度合作」两张王牌，奠定了上市后十年24倍爆发的硬核技术底座。", "milestones": [{"year": "1989—1998 · 温州起步攻克水冷发动机", "desc": "赖国贵在温州乐清创立前身企业，攻克气缸头空白并自主研制出国内首台水冷摩托车发动机，1998年推出水冷踏板车进军整车制造。"}, {"year": "2003—2006 · 迁址杭州出海全地形车", "desc": "制造与研发中心整体迁至杭州；2006年推出首款四轮全地形车（ATV）成功打入欧美市场，打开高毛利非道路动力运动赛道。"}, {"year": "2013—2014 · 国宾护卫车 + 牵手奥地利KTM", "desc": "中标中央国宾护卫专用车（CF650G）打破进口垄断；同年成为世界顶级越野车企KTM中国独家代理与CKD伙伴，吸收欧洲顶级动力调校技术。"}, {"year": "2017.08 · 登陆上交所主板（603129.SH）", "desc": "正式挂牌A股，上市初市值约42亿、全年营收18.2亿、归母净利仅0.97亿，随后借资本平台开启全球扩产与爆款跃迁。"}]}, "timeline_events": [{"date": "2018-10-11", "kind": "foreshadowing", "title": "贸易战砸出20.6亿绝底，研发暴增92%+KTM合资工厂奠基", "detail": "次新杀估值+301关税恐慌把市值砸至20.59亿（PE 18.9x）；同年研发费用翻倍至1.63亿，在建工程占固资飙至41%—61%，250NK热销破圈。"}, {"date": "2020-03-29", "kind": "catalyst", "title": "250SR仿赛封神 + 北美疫情户外井喷，7个月暴涨5.3倍", "detail": "2020Q1/Q3单季净利狂飙+176%/+232%，全年净利翻倍至3.65亿，市值从43亿一路飙升至228亿（PE 67.7x）。"}, {"date": "2021-07-27", "kind": "trap", "title": "海运费暴涨+301关税豁免到期砸穿毛利率，回撤-36%", "detail": "2021年毛利率从33%断崖跌至21.5%，21Q3单季净利转负-19.5%，市值回撤至146亿；同期逆势定增17.3亿+在建工程占固资飙至103%！"}, {"date": "2021-11-29", "kind": "trap", "title": "68倍PE高估值冲顶264亿，随后两年利润涨1.5倍市值反跌46%", "detail": "2021年底PE高达68x透支未来，叠加2023下半年北美渠道去库存，尽管2021—2023净利从4.1亿涨至10.1亿，市值却回撤至2024年1月的142亿（PE 15.3x）。"}, {"date": "2023-07-15", "kind": "foreshadowing", "title": "墨西哥蒙特雷工厂投产 + 2024.01收购法国GOES品牌", "detail": "提前建成墨西哥/泰国双海外基地对冲美国关税，全资收购法国GOES巩固欧洲全地形车第一阵营，同时450SR/450MT全球爆卖。"}, {"date": "2025-12-28", "kind": "catalyst", "title": "极核ZEEHO年交付首破50万辆（营收19亿）+ 26Q3单季暴赚9.56亿创498亿新高", "detail": "第三曲线极核电动两轮爆发占近10%营收，四轮高端U10/Z10热销，2026前三季净利破20.2亿，在仅21.8倍PE下登顶497.6亿历史巅峰。"}], "business_evolution": [{"year": "2014", "mix": [{"name": "四轮全地形车(ATV/UTV)", "pct": 82.9, "rev_yi": 11.1}, {"name": "两轮燃油摩托车", "pct": 11.6, "rev_yi": 1.6}, {"name": "极核电动两轮车(ZEEHO)", "pct": 0.0, "rev_yi": 0.0}, {"name": "配件及其他", "pct": 5.5, "rev_yi": 0.7}], "note": "上市前以全地形车出口为主（海外占86%，其中俄罗斯一家独大占40%），两轮尚处萌芽"}, {"year": "2018", "mix": [{"name": "四轮全地形车(ATV/UTV)", "pct": 60.4, "rev_yi": 15.4}, {"name": "两轮燃油摩托车", "pct": 31.0, "rev_yi": 7.9}, {"name": "极核电动两轮车(ZEEHO)", "pct": 0.0, "rev_yi": 0.0}, {"name": "配件及其他", "pct": 8.6, "rev_yi": 2.2}], "note": "250NK热销打开国内玩乐大排量市场（两轮占比跃至31%），北美与欧洲均衡各占27%"}, {"year": "2020", "mix": [{"name": "四轮全地形车(ATV/UTV)", "pct": 49.7, "rev_yi": 22.5}, {"name": "两轮燃油摩托车", "pct": 41.1, "rev_yi": 18.6}, {"name": "极核电动两轮车(ZEEHO)", "pct": 0.0, "rev_yi": 0.0}, {"name": "配件及其他", "pct": 9.2, "rev_yi": 4.2}], "note": "现象级爆款250SR封神，两轮占比首破41%，四轮与两轮形成双擎驱动"}, {"year": "2022", "mix": [{"name": "四轮全地形车(ATV/UTV)", "pct": 60.1, "rev_yi": 68.4}, {"name": "两轮燃油摩托车", "pct": 29.6, "rev_yi": 33.7}, {"name": "极核电动两轮车(ZEEHO)", "pct": 0.0, "rev_yi": 0.0}, {"name": "配件及其他", "pct": 10.3, "rev_yi": 11.7}], "note": "营收首破百亿（113.8亿），北美市场井喷至49亿（占43%），450SR接棒爆款"}, {"year": "2024", "mix": [{"name": "四轮全地形车(ATV/UTV)", "pct": 48.0, "rev_yi": 72.1}, {"name": "两轮燃油摩托车(含极核初起)", "pct": 42.8, "rev_yi": 64.4}, {"name": "极核电动两轮车(ZEEHO)", "pct": 0.0, "rev_yi": 0.0}, {"name": "配件及其他", "pct": 9.2, "rev_yi": 13.9}], "note": "营收破150亿、净利率达9.8%峰值，收购法国GOES+墨西哥工厂投产，两轮出口大爆发"}, {"year": "2025", "mix": [{"name": "四轮全地形车(ATV/UTV)", "pct": 48.7, "rev_yi": 96.1}, {"name": "两轮燃油摩托车", "pct": 32.8, "rev_yi": 64.7}, {"name": "极核电动两轮车(ZEEHO)", "pct": 9.7, "rev_yi": 19.1}, {"name": "配件及其他", "pct": 8.8, "rev_yi": 17.5}], "note": "「四轮+油摩+电摩」三极成型！极核首年单列即达19.1亿（年交付破50万辆），总营收近200亿"}], "stages": [{"name": "第一跃迁：250NK爆款破圈 × KTM合资建厂（20.6亿 → 61.8亿首轮突围）", "short_name": "250NK破圈首跃", "period": "2018.10—2020.01", "start_date": "2018-10-11", "end_date": "2020-01-29", "mktcap_leap": "20.6亿 → 61.8亿（3.00倍）", "revenue_leap": "25.5亿(18) → 32.4亿(19)（+27%）", "profit_leap": "1.20亿(18) → 1.81亿(19)（+51%）", "valuation_shift": "PE-TTM 从 18.9x 谷底修复至 37.6x", "business_shift": "不再只是出口四轮小厂，凭250NK打开中国年轻人的玩乐大排量摩托车蓝海，两轮占比飙升至35.5%", "why_short": "因为「贸易战砸出20亿绝底时研发翻倍+KTM合资建厂，250NK神车引爆国内玩乐大排量市场」，2019净利大增51%，市值15个月翻3倍！", "one_line_why": "这一波 20 亿小盘股翻 3 倍，核心是「贸易战错杀底 + 爆款新品类破圈」：2018 年市场因中美贸易战把春风砸到 20.6 亿（PE 18.9 倍），但公司反手把研发翻倍、奠基 KTM 合资工厂，并用 250NK 炸开中国年轻人的第一台玩乐大排量摩托蓝海！2019 年四个季度净利连续大增 +31% 到 +74%，市值一口气翻 3 倍至 62 亿！", "causal_chain": {"cause": "2018低谷研发暴增+92%(研发率6.4%)+KTM合资工厂奠基(在建工程占固资飙至41%→61%)", "trigger": "250NK街车成爆款+北美市占逆势提升，2019Q1—Q4单季净利连续大增+31%/+44%/+48%/+74%", "result": "盈利×1.51倍 × 估值从18.9x重估至37.6x(×1.99倍) ＝ 小市值首轮 3.00 倍突围"}, "microscope_start_q": "2018Q1", "microscope_end_q": "2020Q2", "microscope_markers": [{"quarter": "2018Q4", "kind": "foreshadowing", "label": "市值21亿绝底但净利+77%"}, {"quarter": "2019Q2", "kind": "foreshadowing", "label": "单季净利+44%市值仍横28亿"}, {"quarter": "2019Q3", "kind": "catalyst", "label": "业绩连续验证引爆翻倍行情"}], "foreshadowing": [{"date": "2018—2019", "category": "重研发 + 合资建厂前置信号", "title": "股价腰斩至20亿期间，研发费用翻倍（+91.8%）+ 春风凯特摩合资工厂奠基", "detail": "2018年与世界顶级车企KTM合资建厂启动年产5万台高端机车项目，同时将研发费用率一口气推高至6.4%，集中攻坚250cc水冷运动平台与大排量四轮发动机。", "filing_clue": "财报前置雷达极度耀眼：在建工程占固定资产比从2017年不足20%骤飙至2018年41.1%、2019年61.0%；研发费用同比狂增+91.8%至1.63亿！"}], "market_skepticism": "2018年次新股估值泡沫破裂叠加中美贸易战301关税开打，市场担心出口美国的全地形车彻底完蛋，完全无视其2018年营收逆势大增+40%的硬实力，将其砸到20.6亿微盘估值。", "catalysts": [{"date": "2019-08 — 2019-10", "title": "2019中报与三季报彻底打穿关税悲观论（连续4季净利+31%~+74%）", "detail": "250NK热销叠加欧洲+北美全地形车放量，2019年两轮车营收大增+46%至11.5亿，毛利率反而提升至32.2%，市场突然意识到这是一家「内销爆款+全球出海」双强小巨人。"}], "lead_lag": {"verdict_type": "🐢 业绩抢跑型", "verdict_badge": "🐢 业绩抢跑型（业绩连爆3个季度后，2019Q3才启动主升浪）", "verdict_summary": "从2018Q4(+77%)到2019Q2(+44%)单季净利已连爆三季，可市值在2019年7月仍趴在27亿；2019Q3起才一口气飙至62亿。", "detail": "2018Q4单季净利+76.9%、2019Q1 +31.3%、2019Q2 +43.9%（单季赚0.82亿创历史新高），但直到2019年7月底市值仍在27.1亿（PE 21.5x）。2019年8月中报落地后资金抢筹，半年内市值翻倍至61.8亿。", "left_entry": "2018年10月—2019年7月（市值20.6亿—28亿，PE 19x—22x）：在建工程占固资超40%+研发翻倍+业绩连续高增但无人问津的小盘黄金左侧。", "right_entry": "2019年8月底中报确认250NK与出口双高增，放量突破30亿平台时右侧介入。"}, "reusable_patterns": [{"archetype": "技术破壁与产能扩张型", "small_cap_rule": "20—50亿小市值制造业若在熊市跌破20倍PE，但「研发费用同比翻倍 + 在建工程/固资跃超40% + 傍上全球顶级巨头合资吸收技术 + 推出年轻人爆款大单品」，往往是十倍股第一棒起跑信号！"}]}, {"name": "第二跃迁：250SR仿赛封神 × 北美疫情户外井喷（43.3亿 → 227.8亿·7个月暴涨5.3倍！）", "short_name": "250SR+北美井喷", "period": "2020.03—2020.10", "start_date": "2020-03-29", "end_date": "2020-10-30", "mktcap_leap": "43.3亿 → 227.8亿（5.26倍！）", "revenue_leap": "32.4亿(19) → 45.3亿(20)（+40%）", "profit_leap": "1.81亿(19) → 3.65亿(20)（2.02倍！）", "valuation_shift": "PE-TTM 从 26.3x 史诗级飙升至 67.7x—70.7x", "business_shift": "250SR横扫国内仿赛市场（两轮占比飙至41%），同时欧美疫情引爆全地形车户外刚需，订单排到明年", "why_short": "因为「现象级神车250SR引爆国内仿赛狂潮 + 北美疫情居家令催生户外全地形车一车难求」，2020Q3单季净利狂飙+232%，7个月市值暴翻5.3倍！", "one_line_why": "这一波 7 个月狂飙 5.26 倍是「海内外双线核爆」的史诗戴维斯双击：国内刚上市的 250SR 成为 Z 世代仿赛顶流神车（两轮收入狂飙 +62%），海外北美民众因疫情不敢出国旅游、拿财政补贴疯抢全地形车户外撒野，叠加中国供应链独家复工！2020Q3 单季净利炸出 +232%、全年净利翻倍，PE 从 26 倍一路飙到 70 倍！", "causal_chain": {"cause": "250SR仿赛精准卡位年轻玩乐市场 + 欧美疫情催生户外动力运动爆发 + 中国供应链独家复工", "trigger": "2020Q1(+176%)抗疫反转，2020Q3单季营收飙+80%、净利核爆+232%，全年净利翻倍至3.65亿", "result": "盈利(TTM)×2.05倍 × 估值(PE 26x→68x)×2.57倍 ＝ 7个月市值狂翻 5.26 倍迈入两百亿俱乐部"}, "microscope_start_q": "2019Q4", "microscope_end_q": "2021Q2", "microscope_markers": [{"quarter": "2020Q1", "kind": "foreshadowing", "label": "疫情下净利反增+176%惊艳全场"}, {"quarter": "2020Q2", "kind": "catalyst", "label": "250SR放量+北美抢货市值翻倍至94亿"}, {"quarter": "2020Q3", "kind": "catalyst", "label": "单季净利核爆+232%冲顶228亿"}], "foreshadowing": [{"date": "2020.02 — 2020.04", "category": "现象级爆品 + 疫情危机错配", "title": "250SR仿赛横空出世一车难求 + 2020Q1疫情封控期净利反增+176%", "detail": "当全市场因疫情恐慌把市值从62亿砸回43亿时，春风2020Q1财报却交出单季净利+176.2%的逆天答卷；紧接着欧美财政大发钱+户外娱乐爆发，海外竞争对手停工断供，春风抢下海量北美渠道订单。", "filing_clue": "2020Q2—Q3单季毛利率稳居33.4%/32.3%高位，净利率一路跳升至8.06%创当时历史纪录，现金流爆棚。"}], "market_skepticism": "2020年3月全球疫情恐慌爆发时，市场担心欧美封城会导致可选消费品（全地形车与玩乐摩托）订单归零，一个月内将市值砸跌-30%至43.3亿。", "catalysts": [{"date": "2020-08 / 2020-10", "title": "2020Q3营收飙+80%、净利狂飙+232%，机构疯抢「中国版北极星+杜卡迪」", "detail": "两轮与四轮双线排产满负荷，机构蜂拥调研并给出消费+科技双标签重估，市值7个月内从43亿直线拉升至228亿（PE 67.7x—70.7x）。"}], "lead_lag": {"verdict_type": "⚡ 双击共振型", "verdict_badge": "⚡ 极致戴维斯双击（业绩翻倍 × 估值飙升2.6倍同步引爆）", "verdict_summary": "2020Q1逆势暴增+176%打破疫情鬼故事，随后Q2/Q3单季盈利与估值逐季同步核爆，成就小市值向中盘成长股的跨越。", "detail": "2020年3月底市值43.3亿（PE 26.3x），4月下旬一季报暴增+176%直接引爆行情，Q2季末已飙至93.8亿（PE 43x），Q3业绩核爆+232%推动10月底摸高227.8亿（PE 67.7x）。", "left_entry": "2020年3月底疫情恐慌砸坑（43.3亿，PE 26x），或4月底一季报确认净利逆势暴增+176%时。", "right_entry": "2020年5—8月确认250SR国内爆卖+北美订单井喷时；但当2020年10月PE突破65x—70x时，已进入短期情绪透支区。"}, "reusable_patterns": [{"archetype": "大客户绑定与品类扩张型", "small_cap_rule": "当一家小盘制造龙头同时具备「国内Z世代现象级大单品破圈」+「海外突发供需错配抢占欧美巨头份额」，且危机首季利润不降反增时，极易在6—12个月内走出3—5倍暴力戴维斯双击！"}]}, {"name": "第三跃迁：营收暴增74%破78亿 × 17亿定增与关税博弈反弹（145.8亿 → 264.1亿）", "short_name": "营收狂飙+定增冲顶", "period": "2021.07—2021.11", "start_date": "2021-07-27", "end_date": "2021-11-29", "mktcap_leap": "145.8亿 → 264.1亿（1.81倍，年内高点276.6亿）", "revenue_leap": "45.3亿(20) → 78.6亿(21)（+73.7%！）", "profit_leap": "3.65亿(20) → 4.12亿(21)（+12.8%，受海运关税挤压）", "valuation_shift": "PE-TTM 从 36.2x 再度冲回 68.0x 极端高位", "business_shift": "四轮车北美疯狂放量翻倍至48.8亿（全球市占大跃升），但成本风暴令增收不增利，为随后2年消化埋下伏笔", "why_short": "因为「北美全地形车疯狂卖爆带动全年营收暴增+74% + 17.3亿定增落地扩产 + 资金博弈海运费见顶与301关税豁免恢复」，4个月急弹81%冲顶264亿（PE再破68倍）！", "one_line_why": "这一波 4 个月大涨 +81% 属于典型的「营收高增 + 困境反转预期抢跑」：虽然海运费和关税把 2021 年毛利率砸到 21.5%（导致全年净利只增 13%），但北美订单实在太猛——全年营收狂飙 +74% 到 78.6 亿，加上 110 元高价成功定增 17.3 亿大扩产、市场提前博弈关税豁免恢复，股价硬是在低利润下被拉上 68 倍高 PE（随后果然引发两年估值消化）！", "causal_chain": {"cause": "北美全地形车供不应求（2021四轮营收翻倍+117%至48.8亿）+ 在建工程占固资飙至103%", "trigger": "2021.09以110元/股完成17.27亿机构定增 + 市场博弈美国301关税豁免与海运费拐点", "result": "盈利几乎持平(×0.96)，纯靠PE从36x重拉至68x(×1.88倍) ＝ 股价抢跑反弹 1.81 倍冲顶264亿"}, "microscope_start_q": "2020Q4", "microscope_end_q": "2022Q3", "microscope_markers": [{"quarter": "2021Q1", "kind": "foreshadowing", "label": "营收飙+151%但毛利跌至22.5%"}, {"quarter": "2021Q3", "kind": "catalyst", "label": "净利-20%但17亿定增+抢跑冲顶264亿"}, {"quarter": "2022Q2", "kind": "catalyst", "label": "关税豁免+海运回落净利暴增+60%"}], "foreshadowing": [{"date": "2021.01 — 2021.09", "category": "逆势定增扩产抢份额", "title": "海运成本重压下以110元/股定增募资17.27亿，在建工程占固定资产飙破103%", "detail": "尽管海运费与关税吞噬了当年超3亿利润，但春风坚持逆周期扩建智能工厂与研发中心（2021在建工程飙至4.44亿），趁机把北美全地形车收入翻倍做到48.8亿，抢下了原本属于欧美巨头的渠道货架。", "filing_clue": "2021Q1—Q4单季营收分别暴增+151%、+77%、+52%、+58%，份额扩张极其凶猛；但在建工程占固资103%和研发+61%才是为2023—2025准备的真正弹药。"}], "market_skepticism": "2021上半年市场盯着断崖下跌的毛利率（33%→22%），担心高海运与关税永久摧毁盈利能力，将市值从228亿砸至146亿。", "catalysts": [{"date": "2021-09 — 2021-11", "title": "17.27亿顶流机构定增落地 + 预期2022海运/301关税反转", "detail": "顶级公募与券商以110元高价认购定增，叠加美国重启301关税豁免征求意见，资金提前两个季度抢跑，将市值推上264亿阶段巅峰（PE 68x）。"}], "lead_lag": {"verdict_type": "🏃 股价抢跑型", "verdict_badge": "🏃 典型股价抢跑型（业绩底在2021Q3—Q4，股价却已飙至68倍PE提前透支！）", "verdict_summary": "2021Q3单季净利实际大跌-19.5%、毛利率仍在19.4%筑底，但股价借定增与豁免预期抢跑飙至68倍PE，结果等2022Q2/Q3利润真正暴增+60%/+168%时，股价反而再也没能有效突破前高。", "detail": "极其宝贵的反面节奏教材：2021年11月底PE冲上68x、市值264亿，提前把2022年海运降价和关税豁免的利好全部兑现；2022Q2(+60%)、Q3(+168%)利润真正兑现爆发时，市场反而借利好出货消化高估值。", "left_entry": "2021年7月底（145.8亿，毛利底+营收高增+70%），仅适合做波段修复，绝不宜在PE重破60x后格局死拿。", "right_entry": "该波段属于典型高估值抢跑，PE突破50x—65x区间应坚决兑现止盈，静待后续估值回归20x以内。"}, "reusable_patterns": [{"archetype": "逆周期并购与全球出海型", "small_cap_rule": "出海制造业遭遇「海运/关税/汇率」外部成本冲击时，若营收仍在+50%高增（说明份额还在狂抢），成本缓解确实会带来利润暴弹；但切忌在市场抢跑把PE炒回60x以上时追高，往往利好真落地时反而是漫长杀估值的开始！"}]}, {"name": "第四跃迁：墨西哥/泰国出海抗关税 × 极核破50万辆 × 零泡沫站上500亿巅峰（142.3亿 → 497.6亿）", "short_name": "全球化+极核爆发", "period": "2024.01—2026.11", "start_date": "2024-01-28", "end_date": "2026-11-23", "mktcap_leap": "142.3亿 → 497.6亿（3.50倍，较18底24.2倍！）", "revenue_leap": "121.1亿(23) → 197.5亿(25)（26Q3已209亿！）", "profit_leap": "10.08亿(23) → 16.75亿(25)（26Q3已20.2亿！）", "valuation_shift": "PE-TTM 从 15.3x 历史绝底温和修复至 21.8x（零泡沫扎实主升浪！）", "business_shift": "从「两轮+四轮」升级为「四轮高端U/Z系 + 燃油大排量全球领先 + 极核ZEEHO电动两轮年销50万+」三驾马车，墨西哥/泰国基地跑通抗关税护城河", "why_short": "因为「15倍PE把两年泡沫挤干 + 墨西哥/泰国工厂投产+收购法国GOES打穿关税封锁 + 第三曲线极核电摩年销破50万辆」，利润从10亿狂飙至2026前三季20.2亿，零泡沫3.5倍冲上498亿历史新高！", "one_line_why": "这一波从 142 亿昂首冲上 498 亿历史新高，含金量远超 2020 年：经过两年把 PE 从 68 倍硬生生挤干到 15.3 倍绝底后，前期埋下的三大暗线同时开闸——墨西哥与泰国工厂投产对冲美国关税、收购法国 GOES 称霸欧洲、极核 ZEEHO 电动两轮爆发年交付破 50 万辆！结果 2024—2026 利润从 10 亿一路翻倍狂飙至 2026 前三季已达 20.2 亿（26Q3 单季暴赚 9.56 亿），在仅 21.8 倍低估值下创下 24 倍股传奇！", "causal_chain": {"cause": "2021—2023狂砸研发(1.8→9.2亿)+墨西哥/泰国工厂落地+2024.01收购法国GOES+孵化极核电摩", "trigger": "北美去库结束+极核年销破50万(营收19亿)+高端U10/Z10热销，2026Q3单季暴赚9.56亿(+131%)", "result": "盈利(TTM)暴涨×2.45倍 × 估值从15.3x温和修复至21.8x(×1.43倍) ＝ 零泡沫飙升 3.50 倍创498亿新高"}, "microscope_start_q": "2023Q3", "microscope_end_q": "2026Q3", "microscope_markers": [{"quarter": "2023Q4", "kind": "foreshadowing", "label": "PE砸至15.3x绝底+净利+57%"}, {"quarter": "2024Q3", "kind": "catalyst", "label": "去库结束净利+49%重回230亿"}, {"quarter": "2025Q2", "kind": "catalyst", "label": "顶住关税单季赚5.9亿破340亿"}, {"quarter": "2026Q3", "kind": "catalyst", "label": "单季暴赚9.56亿(+131%)冲顶498亿"}], "foreshadowing": [{"date": "2022—2024.01", "category": "全球制造基地 + 欧洲双品牌并购", "title": "墨西哥工厂投产（2023.07）+ 泰国罗勇基地升级 + 全资收购法国GOES（2024.01）", "detail": "当市场还在担心美国关税和北美去库存时，春风已悄然在北美后院墨西哥蒙特雷与东南亚泰国落子总装厂，并于2024年1月100%收购法国老牌全地形车GOES，在欧洲形成CFMOTO+GOES双品牌统治格局。", "filing_clue": "2022—2024年研发费用从3.8亿一路猛砸至7.5亿→9.2亿→10.3亿（2025再破12.2亿），研发率稳居6%—7.6%；2023年毛利率暴力修复至32.73%创上市新高！"}, {"date": "2024—2025", "category": "第三曲线极核ZEEHO爆发 + 300万台超级基地", "title": "极核高端电摩年交付首破50万辆（营收19.1亿占9.7%），桐乡投建300万台基地", "detail": "借春风在年轻骑手圈的品牌光环降维打击高端两轮电动车赛道，极核ZEEHO从零起量在2025年突破50万辆交付、首次单列营收即达19.1亿；同步四轮车推出U10 PRO/Z10三缸高端新品大幅拉升单车均价。", "filing_clue": "2025年在建工程再次跳升至5.08亿（桐乡基地扩产），2024—2025营收从121亿飙升至150亿→197.5亿，2026年前三季直接冲破209.4亿、归母净利20.2亿！"}], "market_skepticism": "2023下半年北美渠道去库存导致23Q3营收突降-22.7%，叠加2024—2025美国大选与加征关税鬼故事反复冲击，市场一度把一家利润破10亿且年增45%的全球隐形冠军砸到15.3倍PE（142亿），2025年4月又因关税恐慌回踩过15.9倍PE。", "catalysts": [{"date": "2024-04 — 2024-10", "title": "北美去库存彻底结束 + 2024Q3/Q4净利狂飙+49%/+89%", "detail": "2024全年归母净利大增+46.1%至14.72亿、归母净利率创下9.79%历史纪录，彻底打碎成长停滞质疑。"}, {"date": "2025-08 — 2026-10", "title": "穿越2025关税压力测试 + 极核爆发 + 2026Q3单季暴赚9.56亿(+131.5%)", "detail": "凭墨西哥/泰国产能切换与高端新品溢价扛过关税扰动，2026Q3毛利率奇迹般重返33.48%、单季狂赚9.56亿，推动市值突破497.6亿创历史新高且PE仅21.8倍！"}], "lead_lag": {"verdict_type": "🐢 业绩抢跑型", "verdict_badge": "🐢 扎实业绩驱动型（盈利翻2.5倍主导七成涨幅，估值零泡沫）", "verdict_summary": "2024Q1—Q4利润一路高增+26%~+89%，但PE长期被压在17x—20x低位；直到2025—2026证伪关税鬼故事且极核与高端四轮全面爆发，市值稳步翻3.5倍创历史新高。", "detail": "2023Q4单季净利已恢复+57%但2024年1月市值砸到142亿（PE 15.3x）；2024全年大赚14.7亿(+46%)年底市值才233亿（PE 18.1x）。2025年4月关税恐慌再次砸出15.9x PE（256亿）绝佳二次上车坑，随后2025Q2(+36%)到2026Q3单季9.56亿(+131%)一路推升至498亿。", "left_entry": "2024年1月（142亿，PE 15.3x历史绝底，毛利率已修复至32.7%+墨西哥工厂落地）或2025年4月关税恐慌坑（256亿，PE 15.9x）。", "right_entry": "2024年8—10月确认北美去库结束、单季净利重回+49%高增（市值210—230亿，PE不足20x），随后斩获超一倍零泡沫主升浪。"}, "reusable_patterns": [{"archetype": "第二曲线与B2B平台跃迁型", "small_cap_rule": "当出海隐形冠军经历「60倍泡沫杀回15倍绝底」后，若发现其研发连年翻倍、海外本土化工厂（墨西哥/泰国）已投产、且第三曲线新品类从0突破10%营收临界点（极核ZEEHO 19亿），属于极高赔率的「零泡沫二次腾飞」！ "}]}], "false_leaps": [{"title": "下台阶①：次新股高估值出清 + 2018中美贸易战301关税恐慌（砸出20.6亿绝底）", "short_name": "次新杀跌+贸易战", "period": "2017.08—2018.10", "start_date": "2017-08-27", "end_date": "2018-10-11", "mktcap_drop": "42.2亿 → 20.6亿（较盘中高点-70%）", "drawdown": "-51.2%", "why_short": "因为「次新股上市炒作退潮 + 2018中美贸易战加征301关税恐慌」，PE从45倍砸至18.9倍，但当年营收反增+40%砸出24倍股历史绝底！", "trap_setup": "2017年8月上市后次新股情绪高涨，盘中市值一度冲至67.9亿（PE超60x），但2017Q4和2018Q1单季净利受汇兑与研发投入影响骤降-50%/-47%。", "real_cause": "次新股高估值叠加2018年中美贸易摩擦全面升级，市场恐慌依赖出口的全地形车业务受损，一路把市值腰斩至20.6亿；但实际上2018全年营收逆势暴增+40%、净利+23%，且研发翻倍、KTM合资落地，成为典型的「杀情绪不杀成长」黄金坑。", "lesson": "盯紧上市1—2年后被熊市和外部恐慌砸回20倍以内、但营收保持+30%高增且研发/在建工程逆势大增的次新隐形冠军——20亿到500亿的起点往往就藏在这里。"}, {"title": "下台阶②：2020年初新冠疫情黑天鹅流动性踩踏（两月急杀-30%）", "short_name": "疫情黑天鹅砸坑", "period": "2020.01—2020.03", "start_date": "2020-01-29", "end_date": "2020-03-29", "mktcap_drop": "61.8亿 → 43.3亿", "drawdown": "-30.0%", "why_short": "因为「全球新冠疫情突发引发欧美封城担忧，市场误以为玩乐摩托与全地形车订单会归零」，两个月急杀-30%砸出随后5倍行情的黄金起跳坑！", "trap_setup": "2020年1月刚借250NK业绩翻3倍创下61.8亿新高，突发全球疫情冲击。", "real_cause": "市场本能地把动力运动装备当成「疫情受损可选消费」抛售；结果疫情反而催生了北美户外隔离娱乐需求井喷+中国独家复工替代，2020Q1净利逆势暴增+176%，随即开启7个月5.3倍史诗主升浪。", "lesson": "突发宏观黑天鹅导致的急跌，第一时间核对「产品真实使用场景有没有变坏」——很多时候大众直觉以为的利空，反而是供应链龙头的超级利好。"}, {"title": "下台阶③：海运费暴涨 + 301关税豁免到期 + 原材料涨价（毛利率断崖跌12pct）", "short_name": "海运+关税成本杀", "period": "2020.10—2021.07", "start_date": "2020-10-30", "end_date": "2021-07-27", "mktcap_drop": "227.8亿 → 145.8亿", "drawdown": "-36.0%", "why_short": "因为「70倍超高PE撞上集装箱海运费暴涨10倍 + 301关税豁免到期」，毛利率从33%断崖砸穿至21.5%，陷入增收不增利的成本暴击！", "trap_setup": "2020年10月市值7个月飙涨5.3倍至228亿、PE高达70.7倍，市场按33%高毛利率线性外推。", "real_cause": "2020Q4起集装箱海运费飙涨叠加美国301关税豁免到期与大宗钢铝涨价，春风单季毛利率从32.3%骤降至21.5%→19.4%，尽管2021Q1营收狂飙+151%，但利润增速大幅掉队（Q2 +7.8%、Q3 -19.5%），高PE被迫剧烈回吐。", "lesson": "出海高成长股一旦PE冲上60x—70x，只要上游海运/关税/原材料出现单季毛利率骤降超过5个百分点，就会立即触发剧烈杀估值——盯紧季度显微镜里的「单季毛利率%」就是最好的逃顶预警雷达！"}, {"title": "下台阶④：68倍高PE消化 + 北美渠道去库存（两年利润涨145%市值反跌46%！）", "short_name": "68倍泡沫+北美去库", "period": "2021.11—2024.01", "start_date": "2021-11-29", "end_date": "2024-01-28", "mktcap_drop": "264.1亿 → 142.3亿", "drawdown": "-46.1%", "why_short": "因为「2021年底68倍PE提前透支了两年盈利恢复，叠加2023下半年北美高利率导致渠道去库存（23Q3营收突降-23%）」，两年利润暴涨145%却依然腰斩把PE杀到15.3倍！", "trap_setup": "2021年底借定增与关税豁免预期把市值冲回264亿（PE 68x）；随后2022—2023海运暴跌+豁免落地，归母净利果然从4.1亿狂涨至7.0亿→10.1亿（+145%），但持股两年的高位追涨者反而亏掉近一半！", "real_cause": "①估值严重透支（68倍PE向15—20倍制造龙头常态回归，光杀估值就吞掉-75%涨幅）；②2023年美联储高利率下北美经销商主动去库存，2023Q3单季营收罕见转负-22.7%、净利-5.7%，叠加小盘成长股熊市彻底击碎市场信心，砸出15.3倍PE黄金绝底。", "lesson": "成长股最深刻的一课：哪怕你精准猜中了未来两年利润暴涨145%，只要买在68倍PE高点依然要亏46%！耐心等估值杀回15x—20x历史20%分位、且海外去库进入尾声时出手，才能稳吃后面3.5倍主升浪。"}], "small_cap_playbook": [{"archetype": "技术破壁与产能扩张型", "early_signal": "20—50亿小市值制造业在熊市估值跌回20x以下时，出现「研发费用同比翻倍 + 在建工程/固定资产>40% + 与海外顶级技术巨头合资 + 推出年轻人爆款大单品」，往往锁定首轮3—5倍跃迁。", "timing_rule": "【🐢 业绩抢跑型】：前2—3季利润已高增+40%以上但市值横盘在20x附近时果断左侧重仓。", "red_flag": "重研发和扩产后新品叫好不叫座、毛利率持续下滑、库存积压。"}, {"archetype": "逆周期并购与全球出海型", "early_signal": "出海龙头遭遇海运/关税/去库冲击估值杀回15x—20x绝底，但期间「海外本土化工厂（墨西哥/泰国等）落地投产 + 低位并购欧洲/北美老牌渠道品牌 + 研发持续加码」，份额不降反升。", "timing_rule": "严禁在PE飙破60x时博弈成本反转（易被杀估值两年）；等估值洗回15x—20x且海外去库尾声（营收增速由负转正）时重锤出击。", "red_flag": "面对关税壁垒毫无海外产能转移能力、产品缺乏高端化升级只能靠低价内卷。"}, {"archetype": "第二曲线与B2B平台跃迁型", "early_signal": "借老主业在核心圈层的品牌势能切入更大空间的新品类（如春风借玩乐摩托势能孵化极核ZEEHO高端电摩），新业务从0放量并在年报中首次单列接近10%营收临界点。", "timing_rule": "当主业稳健+新曲线跨过年销几十万台/10亿—20亿规模拐点、且整体PE仍在20x—25x合理带时，往往开启零泡沫二次主升浪。", "red_flag": "新曲线长期靠巨额补贴烧钱换量、拖垮公司整体毛利率与自由现金流。"}]};
+
+    const HAS_PRED = Array.isArray(RAW.pred_mktcap_monthly) && RAW.pred_mktcap_monthly.length > 6;
+    const HAS_BENCH = RAW.benchmark && Array.isArray(RAW.benchmark.monthly) && RAW.benchmark.monthly.length > 6;
+
+    // Auto-enable Log scale when price span >= 25x (e.g. 20亿 -> 2000亿)
+    const _baseMc = (RAW.mktcap_monthly || []).map(x => x.mktcap_yi).filter(v => v > 0);
+    let useLogScale = _baseMc.length > 2 && (Math.max(..._baseMc) / Math.min(..._baseMc) >= 25);
+    let showPredHistory = false;
+    let showPE = true;
+    let showBench = true;
+    let lowerMode = 'rev';
+    let activeStageIdx = 0;
+    let activeDownIdx = -1; // >=0 when viewing an intermediate drawdown step in Panel 2
+    let storyFilter = 'all'; // 'all' | 'up' | 'down'
+    let showAllStages = false;
+    let showForensic = false; // default: clean executive view; click to expand deep forensic drawers
+    let appendixMode = 'annual'; // 'annual' | 'quarterly'
+    let qBoomOnly = false;
+    let qDescOrder = false;
+    const stageMicroMode = {}; // stageIdx -> 'np' | 'rev' | 'gm'
+
+    const STAGE_COLORS = ['#38bdf8', '#a78bfa', '#34d399', '#fbbf24', '#fb7185', '#22d3ee'];
+    const BIZ_COLORS = ['#38bdf8', '#818cf8', '#34d399', '#fbbf24', '#fb7185', '#2dd4bf', '#94a3b8'];
+
+    let _tipSeq = 0;
+    const _TIP_MAP = new Map();
+    function regTip(htmlStr) {
+      const id = ++_tipSeq;
+      _TIP_MAP.set(id, htmlStr);
+      return id;
+    }
+
+    const tipEl = document.getElementById('tooltip');
+    function moveTip(evt) {
+      const pad = 14;
+      let x = evt.clientX + pad, y = evt.clientY + pad;
+      const r = tipEl.getBoundingClientRect();
+      if (x + r.width > window.innerWidth - 10) x = evt.clientX - r.width - pad;
+      if (y + r.height > window.innerHeight - 10) y = evt.clientY - r.height - pad;
+      tipEl.style.left = Math.max(8, x) + 'px';
+      tipEl.style.top = Math.max(8, y) + 'px';
+    }
+    if (document.addEventListener) {
+      document.addEventListener('mouseover', function(evt) {
+        const t = evt.target && evt.target.closest ? evt.target.closest('[data-tip]') : null;
+        if (!t) return;
+        const content = _TIP_MAP.get(Number(t.getAttribute('data-tip')));
+        if (content) { tipEl.innerHTML = content; tipEl.style.opacity = '1'; moveTip(evt); }
+      });
+      document.addEventListener('mousemove', function(evt) { if (tipEl.style.opacity === '1') moveTip(evt); });
+      document.addEventListener('mouseout', function(evt) {
+        const t = evt.target && evt.target.closest ? evt.target.closest('[data-tip]') : null;
+        if (!t) return;
+        const rel = evt.relatedTarget && evt.relatedTarget.closest ? evt.relatedTarget.closest('[data-tip]') : null;
+        if (rel !== t) tipEl.style.opacity = '0';
+      });
+    }
+
+    function getPal() {
+      const isLight = document.documentElement.classList && document.documentElement.classList.contains('light');
+      return isLight ? {
+        bg: '#ffffff', grid: '#e2e8f0', vgrid: '#f1f5f9', muted: '#475569', text: '#0f172a',
+        purple: '#7c3aed', amber: '#d97706', blue: '#0284c7', emerald: '#059669', rose: '#e11d48', cyan: '#0891b2', bench: '#64748b'
+      } : {
+        bg: '#162036', grid: '#263554', vgrid: '#1c2945', muted: '#94a3b8', text: '#f1f5f9',
+        purple: '#a78bfa', amber: '#fbbf24', blue: '#38bdf8', emerald: '#34d399', rose: '#fb7185', cyan: '#22d3ee', bench: '#94a3b8'
+      };
+    }
+
+    function toggleTheme() { document.documentElement.classList.toggle('light'); renderMainTimeline(); renderStages(); }
+    function toggleLogScale() {
+      useLogScale = !useLogScale;
+      document.getElementById('btn-log').classList.toggle('active', useLogScale);
+      renderMainTimeline();
+    }
+    function togglePredHistory() {
+      showPredHistory = !showPredHistory;
+      document.getElementById('btn-pred').classList.toggle('active', showPredHistory);
+      if (showPredHistory && !useLogScale) {
+        useLogScale = true;
+        document.getElementById('btn-log').classList.add('active');
+      }
+      renderMainTimeline();
+    }
+    function togglePE() {
+      showPE = !showPE;
+      document.getElementById('btn-pe').classList.toggle('active', showPE);
+      renderMainTimeline();
+    }
+    function toggleBench() {
+      showBench = !showBench;
+      document.getElementById('btn-bench').classList.toggle('active', showBench);
+      renderMainTimeline();
+    }
+    function setLowerMode(m) {
+      lowerMode = m;
+      document.getElementById('btn-mode-rev').classList.toggle('active', m === 'rev');
+      document.getElementById('btn-mode-radar').classList.toggle('active', m === 'radar');
+      renderMainTimeline();
+    }
+    function toggleShowAllStages() {
+      showAllStages = !showAllStages;
+      document.getElementById('btn-show-all').classList.toggle('active', showAllStages);
+      document.getElementById('btn-show-all').textContent = showAllStages ? '切回单台阶聚焦' : '展开全部台阶';
+      renderStages();
+    }
+    function toggleForensicDetails() {
+      showForensic = !showForensic;
+      const b = document.getElementById('btn-forensic');
+      if (b) {
+        b.classList.toggle('active', showForensic);
+        b.textContent = showForensic ? '⚡ 切回极速精读' : '📖 展开全部深度证据';
+      }
+      renderStages();
+    }
+    function selectStage(idx, scrollToIt) {
+      activeStageIdx = idx;
+      activeDownIdx = -1;
+      if (showAllStages) {
+        showAllStages = false;
+        const b = document.getElementById('btn-show-all');
+        if (b) { b.classList.remove('active'); b.textContent = '展开全部台阶'; }
+      }
+      renderStages();
+      if (scrollToIt) {
+        const el = document.getElementById('stage-nav');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    function selectTrap(idx, scrollToIt) {
+      activeDownIdx = idx;
+      if (showAllStages) {
+        showAllStages = false;
+        const b = document.getElementById('btn-show-all');
+        if (b) { b.classList.remove('active'); b.textContent = '展开全部台阶'; }
+      }
+      renderStages();
+      if (scrollToIt) {
+        const el = document.getElementById('stage-nav');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    function setStoryFilter(f) {
+      storyFilter = f;
+      renderCausalOverview();
+    }
+    function parseStepStartFrac(obj) {
+      if (obj.start_date) return dateToFrac(obj.start_date);
+      const m = String(obj.period || '').match(/(\d{4})[.\-/]?(\d{2})?/);
+      if (!m) return 9999;
+      return Number(m[1]) + ((Number(m[2] || 1) - 1) / 12);
+    }
+    function getChronoTimeline() {
+      const items = [];
+      (ANALYSIS.stages || []).forEach((s, idx) => items.push({ kind: 'up', idx, sFrac: parseStepStartFrac(s), data: s }));
+      (ANALYSIS.false_leaps || []).forEach((t, idx) => items.push({ kind: 'down', idx, sFrac: parseStepStartFrac(t), data: t }));
+      items.sort((a, b) => a.sFrac - b.sFrac);
+      return items;
+    }
+    function setStageMicroMode(stageIdx, mode) {
+      stageMicroMode[stageIdx] = mode;
+      const st = (ANALYSIS.stages || [])[stageIdx];
+      if (!st) return;
+      const wrap = document.getElementById(`micro-svg-${stageIdx}`);
+      if (wrap) wrap.innerHTML = renderQuarterlyMicroscopeSVG(st, mode);
+      ['np', 'rev', 'gm'].forEach(m => {
+        const b = document.getElementById(`mbtn-${stageIdx}-${m}`);
+        if (b) b.classList.toggle('active', m === mode);
+      });
+    }
+
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function fmtNum(v, suf='') { return (v === null || v === undefined || isNaN(v)) ? '—' : Number(v).toLocaleString('zh-CN', { maximumFractionDigits: 2 }) + suf; }
+    function dateToFrac(dStr) {
+      if (!dStr) return 0;
+      const parts = String(dStr).split('-').map(Number);
+      return (parts[0] || 2013) + ((parts[1] || 1) - 1) / 12 + ((parts[2] || 15) - 1) / 365;
+    }
+
+    function computeBenchMultiple(startDate) {
+      if (!HAS_BENCH || !startDate) return null;
+      const bm = RAW.benchmark.monthly;
+      const sPt = bm.find(x => x.date >= startDate.slice(0, 7)) || bm[0];
+      const ePt = bm[bm.length - 1];
+      if (!sPt || !ePt || !sPt.value) return null;
+      return { name: RAW.benchmark.name, mult: ePt.value / sPt.value, startVal: sPt.value, endVal: ePt.value };
+    }
+
+    function initHeader() {
+      const m = RAW.meta || {};
+      document.getElementById('hdr-company').textContent = ANALYSIS.company || m.company || '';
+      document.getElementById('hdr-code').textContent = (ANALYSIS.code || m.code || '') + ' · ' + (m.market || 'A');
+      document.getElementById('hdr-period').textContent = (ANALYSIS.timeline_span || ((m.mktcap_start_date||'').slice(0,4) + '—' + (m.mktcap_latest_date||'').slice(0,4))) + ' · ' + (m.unit || '亿元');
+      document.getElementById('exec-thesis').textContent = ANALYSIS.executive_thesis || '';
+
+      if (HAS_PRED) {
+        const bp = document.getElementById('btn-pred');
+        const pYr = (RAW.pred_mktcap_monthly[0].date || '').slice(0, 4);
+        bp.style.display = 'inline-block';
+        bp.textContent = `🕰️ 含前身全史 (${pYr}—${(m.mktcap_latest_date||'2026').slice(0,4)})`;
+      }
+      document.getElementById('btn-log').classList.toggle('active', useLogScale);
+      if (!HAS_BENCH) {
+        showBench = false;
+        document.getElementById('btn-bench').style.display = 'none';
+      } else {
+        document.getElementById('btn-bench').classList.toggle('active', showBench);
+        document.getElementById('btn-bench').textContent = `📈 叠加${RAW.benchmark.name}`;
+      }
+
+      const bInfo = computeBenchMultiple(m.mktcap_start_date);
+      const kpiHtml = (ANALYSIS.hero_kpis || []).map((k, idx) => {
+        let extra = '';
+        if (idx === 0) {
+          const parts = [];
+          if (m.hfq_return_multiple) parts.push(`后复权含分红回报 ${m.hfq_return_multiple}x`);
+          if (bInfo) parts.push(`同期${bInfo.name}仅 ${bInfo.mult.toFixed(2)}x`);
+          if (parts.length) extra = `<div class="kpi-extra num">💎 ${esc(parts.join(' ｜ '))}</div>`;
+        }
+        return `
+          <div class="kpi-card">
+            <div class="kpi-label">${esc(k.label)}</div>
+            <div class="kpi-main num">
+              <span>${esc(k.latest)}</span>
+              <span class="pill emerald">${esc(k.multiple)}</span>
+            </div>
+            <div class="kpi-sub">起跑：${esc(k.start)}${k.peak ? ' ｜ 峰值：' + esc(k.peak) : ''}</div>
+            ${extra}
+          </div>
+        `;
+      }).join('');
+      document.getElementById('hero-kpis').innerHTML = kpiHtml;
+
+      renderCausalOverview();
+
+      if (ANALYSIS.pre_listing_context) {
+        const pre = ANALYSIS.pre_listing_context;
+        const ms = (pre.milestones || []).map(x => `
+          <div class="pre-item"><strong class="num" style="color:var(--amber)">${esc(x.year)}</strong><div style="margin-top:3px;color:var(--muted)">${esc(x.desc)}</div></div>
+        `).join('');
+        document.getElementById('pre-listing-wrap').innerHTML = `
+          <details class="pre-details">
+            <summary>
+              <span>🕰️ ${esc(pre.title || '上市前史 / 整体上市前铺垫')}</span>
+              <span style="font-size:11.5px;font-weight:600;color:var(--muted)">点击展开 ${(pre.milestones||[]).length} 个前传里程碑 ▾</span>
+            </summary>
+            <div style="font-size:13px;color:var(--text)">${esc(pre.summary)}</div>
+            <div class="pre-grid">${ms}</div>
+          </details>
+        `;
+      }
+    }
+
+    function renderCausalOverview() {
+      const allItems = getChronoTimeline();
+      if (!allItems.length) return;
+      const upCnt = allItems.filter(x => x.kind === 'up').length;
+      const downCnt = allItems.filter(x => x.kind === 'down').length;
+      const shown = storyFilter === 'all' ? allItems : allItems.filter(x => x.kind === storyFilter);
+      const cards = shown.map(item => {
+        if (item.kind === 'up') {
+          const st = item.data, idx = item.idx;
+          const multM = String(st.mktcap_leap || '').match(/[0-9.]+倍/);
+          const multTxt = multM ? '+' + multM[0] : (st.mktcap_leap || '');
+          const shortWhy = st.why_short || st.one_line_why || st.business_shift || '';
+          const llType = (st.lead_lag && st.lead_lag.verdict_type) ? st.lead_lag.verdict_type : '';
+          return `
+            <div class="causal-card" onclick="selectStage(${idx}, true)">
+              <div class="causal-card-top">
+                <span class="causal-card-tag num">📈 上台阶 S${idx+1} · ${esc(st.period || '')}</span>
+                <span class="causal-card-mult num">${esc(multTxt)}</span>
+              </div>
+              <div class="causal-card-why">${esc(shortWhy)}</div>
+              <div class="causal-card-foot">
+                <span class="num">${esc(st.mktcap_leap || llType)}</span>
+                <span style="color:var(--accent);font-weight:700;flex-shrink:0">看解剖 →</span>
+              </div>
+            </div>
+          `;
+        } else {
+          const t = item.data, idx = item.idx;
+          const shortWhy = t.why_short || t.real_cause || t.trap_setup || '';
+          const dropNum = String(t.drawdown || '').match(/-[0-9.]+%/);
+          const dropBadge = dropNum ? dropNum[0] : (t.drawdown || '回撤');
+          return `
+            <div class="causal-card down" onclick="selectTrap(${idx}, true)">
+              <div class="causal-card-top">
+                <span class="causal-card-tag num">📉 下台阶 · ${esc(t.period || '')}</span>
+                <span class="causal-card-mult num">${esc(dropBadge)}</span>
+              </div>
+              <div class="causal-card-why">${esc(shortWhy)}</div>
+              <div class="causal-card-foot">
+                <span class="num">${esc(t.mktcap_drop || t.short_name || t.title)}</span>
+                <span style="color:var(--rose);font-weight:700;flex-shrink:0">看跌因 →</span>
+              </div>
+            </div>
+          `;
+        }
+      }).join('');
+
+      document.getElementById('causal-overview-wrap').innerHTML = `
+        <div class="causal-overview">
+          <div class="causal-overview-head">
+            <div>
+              <h2>⚡ 10 秒看懂全史：每一次「上台阶 ↗」与「下台阶 ↘」到底因为什么？</h2>
+              <div style="font-size:12px;color:var(--muted);margin-top:2px">按真实时间顺序把每一次狂涨与中途大回撤串成一条线；点击任意卡片直接展开该段复盘</div>
+            </div>
+            <div class="seg-controls">
+              <button class="btn mini ${storyFilter==='all'?'active':''}" onclick="setStoryFilter('all')">全部 (${upCnt+downCnt})</button>
+              <button class="btn mini ${storyFilter==='up'?'active':''}" onclick="setStoryFilter('up')">📈 仅看上台阶 (${upCnt})</button>
+              <button class="btn mini ${storyFilter==='down'?'active':''}" onclick="setStoryFilter('down')">📉 仅看下台阶 (${downCnt})</button>
+            </div>
+          </div>
+          <div class="causal-grid">${cards}</div>
+        </div>
+      `;
+    }
+
+    function renderMainTimeline() {
+      const P = getPal();
+      const mainMc = (RAW.mktcap_monthly || []).filter(p => p.mktcap_yi > 0);
+      const predMc = (showPredHistory && HAS_PRED)
+        ? RAW.pred_mktcap_monthly.filter(p => p.mktcap_yi > 0 && (!mainMc.length || p.date < mainMc[0].date))
+        : [];
+      const mcPts = predMc.concat(mainMc);
+
+      const minYear = showPredHistory && predMc.length
+        ? Math.floor(dateToFrac(predMc[0].date))
+        : (ANALYSIS.chart_start_year || (mcPts.length ? Math.floor(dateToFrac(mcPts[0].date)) : 2013));
+      const annual = (RAW.annual || []).filter(a => a.year >= minYear);
+      const lastAnnualYr = annual.length ? annual[annual.length - 1].year : minYear;
+      const latestMcYr = mcPts.length ? Math.floor(dateToFrac(mcPts[mcPts.length - 1].date)) : lastAnnualYr;
+      const maxDisplayYr = Math.max(lastAnnualYr, latestMcYr);
+      const maxYear = maxDisplayYr + 1;
+      const yrSpan = Math.max(1, maxYear - minYear);
+
+      let partialAnnual = null;
+      const qNewer = (RAW.quarterly || []).filter(q => q.year > lastAnnualYr && q.ytd_rev_yi != null);
+      if (qNewer.length) {
+        const lastQ = qNewer[qNewer.length - 1];
+        partialAnnual = {
+          year: lastQ.year, quarter: lastQ.quarter,
+          revenue_yi: lastQ.ytd_rev_yi, net_profit_yi: lastQ.ytd_np_yi
+        };
+      }
+
+      const W = 1160, H = 576;
+      const padL = 70, padR = 70;
+      const plotW = W - padL - padR;
+      const uTop = 64, uBot = 282, uH = uBot - uTop;
+      const lTop = 338, lBot = 528, lH = lBot - lTop;
+
+      const xScale = frac => padL + ((frac - minYear) / yrSpan) * plotW;
+
+      const mcVals = mcPts.map(p => p.mktcap_yi);
+      const maxMC = Math.max(...mcVals, 100) * 1.15;
+      const minPosMC = Math.max(1, Math.min(...mcVals, 10) * 0.85);
+      const yMC = v => {
+        if (!useLogScale) return uBot - (v / maxMC) * uH;
+        const lv = Math.log10(Math.max(minPosMC, v));
+        const lMin = Math.log10(minPosMC), lMax = Math.log10(maxMC);
+        return uBot - ((lv - lMin) / Math.max(0.01, lMax - lMin)) * uH;
+      };
+
+      const peVals = mcPts.map(p => p.pe_ttm).filter(v => v && v > 0 && v < 120);
+      const maxPE = peVals.length ? Math.max(...peVals, 30) * 1.15 : 40;
+      const yPE = v => uBot - (Math.min(v, maxPE) / maxPE) * uH;
+
+      let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="mcGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="${P.purple}" stop-opacity="0.34"/>
+            <stop offset="100%" stop-color="${P.purple}" stop-opacity="0.02"/>
+          </linearGradient>
+        </defs>`;
+
+      // Vertical year guides & labels (thin step if span > 18 years)
+      const yrStep = yrSpan > 22 ? 2 : 1;
+      for (let yr = minYear; yr <= maxDisplayYr; yr++) {
+        const vx = xScale(yr);
+        const cx = xScale(yr + 0.5);
+        svg += `<line x1="${vx.toFixed(1)}" y1="${uTop}" x2="${vx.toFixed(1)}" y2="${uBot}" stroke="${P.vgrid}" stroke-width="1"/>`;
+        svg += `<line x1="${vx.toFixed(1)}" y1="${lTop}" x2="${vx.toFixed(1)}" y2="${lBot}" stroke="${P.vgrid}" stroke-width="1"/>`;
+        if ((yr - minYear) % yrStep === 0 || yr === maxDisplayYr) {
+          svg += `<text x="${cx.toFixed(1)}" y="550" text-anchor="middle" fill="${P.muted}" font-size="${yrSpan>20?9.8:11}" font-weight="600">${yr}</text>`;
+        }
+      }
+
+      // Upper axis headers
+      svg += `<text x="${padL}" y="18" fill="${P.purple}" font-size="11.5" font-weight="700">▲ 总市值轨迹 [${useLogScale ? '对数 Log' : '线性'}] (${esc(RAW.meta.unit || '亿元')})</text>`;
+      if (showPE && peVals.length) {
+        svg += `<text x="${W-padR}" y="18" text-anchor="end" fill="${P.amber}" font-size="11.5" font-weight="700">PE-TTM 与历史分位带 ▲</text>`;
+      }
+
+      // Stage bands & clickable headers
+      (ANALYSIS.stages || []).forEach((st, idx) => {
+        const sFrac = dateToFrac(st.start_date || (st.period.slice(0,4) + '-01-01'));
+        const eFrac = dateToFrac(st.end_date || (st.period.slice(-4) + '-12-31'));
+        const x1 = Math.max(padL, xScale(sFrac));
+        const x2 = Math.min(W - padR, xScale(eFrac));
+        const bw = x2 - x1;
+        const col = STAGE_COLORS[idx % STAGE_COLORS.length];
+        if (bw > 8) {
+          const rawLbl = `S${idx+1} · ${st.short_name || st.name}`;
+          let accW = 0, cutIdx = rawLbl.length;
+          for (let ci = 0; ci < rawLbl.length; ci++) {
+            accW += rawLbl.charCodeAt(ci) > 127 ? 10.6 : 6.0;
+            if (accW > bw - 10) { cutIdx = ci; break; }
+          }
+          const lbl = rawLbl.slice(0, Math.max(2, cutIdx));
+          const tid = regTip(`<strong>台阶 ${idx+1}：${esc(st.name)}</strong><br/>区间：${esc(st.period)}<br/>市值跃迁：<b style="color:#a78bfa">${esc(st.mktcap_leap)}</b><br/><span style="color:#38bdf8">点击直达下方该台阶深度解剖 ↓</span>`);
+          svg += `<g data-tip="${tid}" onclick="selectStage(${idx}, true)">
+            <rect x="${x1.toFixed(1)}" y="${uTop}" width="${bw.toFixed(1)}" height="${uH}" fill="${col}" fill-opacity="0.08" stroke="${col}" stroke-opacity="0.24" stroke-dasharray="3,3"/>
+            <rect x="${x1.toFixed(1)}" y="27" width="${bw.toFixed(1)}" height="22" rx="6" fill="${col}" fill-opacity="0.20" stroke="${col}" stroke-opacity="0.45"/>
+            <text x="${((x1+x2)/2).toFixed(1)}" y="41.5" text-anchor="middle" fill="${col}" font-size="10.5" font-weight="800">${esc(lbl)}</text>
+          </g>`;
+        }
+      });
+
+      // Downward drawdown bands (rose translucent shading + clickable header)
+      (ANALYSIS.false_leaps || []).forEach((fl, idx) => {
+        if (!fl.start_date || !fl.end_date) return;
+        const sFrac = dateToFrac(fl.start_date);
+        const eFrac = dateToFrac(fl.end_date);
+        const x1 = Math.max(padL, xScale(sFrac));
+        const x2 = Math.min(W - padR, xScale(eFrac));
+        const bw = x2 - x1;
+        if (bw > 6) {
+          const dropM = String(fl.drawdown || '').match(/-[0-9.]+%/);
+          const dropShort = dropM ? dropM[0] : (fl.drawdown || '回撤');
+          const lbl = bw >= 52 ? `↘ ${dropShort}` : (bw >= 30 ? dropShort : '↘');
+          const tid = regTip(`<strong style="color:#fb7185">📉 下台阶：${esc(fl.title)}</strong><br/>区间：${esc(fl.period)} ｜ 回撤：<b style="color:#fb7185">${esc(fl.drawdown)}</b>${fl.mktcap_drop ? `<br/>市值：${esc(fl.mktcap_drop)}` : ''}${fl.why_short ? `<br/>原因：${esc(fl.why_short)}` : ''}<br/><span style="color:#38bdf8">点击查看该次大回撤完整原因 ↓</span>`);
+          svg += `<g data-tip="${tid}" onclick="selectTrap(${idx}, true)">
+            <rect x="${x1.toFixed(1)}" y="${uTop}" width="${bw.toFixed(1)}" height="${uH}" fill="${P.rose}" fill-opacity="0.075" stroke="${P.rose}" stroke-opacity="0.22" stroke-dasharray="2,3"/>
+            <rect x="${x1.toFixed(1)}" y="27" width="${bw.toFixed(1)}" height="22" rx="6" fill="${P.rose}" fill-opacity="0.18" stroke="${P.rose}" stroke-opacity="0.50"/>
+            <text x="${((x1+x2)/2).toFixed(1)}" y="41.5" text-anchor="middle" fill="${P.rose}" font-size="10" font-weight="800">${esc(lbl)}</text>
+          </g>`;
+        }
+      });
+
+      // Predecessor boundary marker if viewing full stitched history
+      if (showPredHistory && predMc.length && mainMc.length) {
+        const bx = xScale(dateToFrac(mainMc[0].date));
+        svg += `<line x1="${bx.toFixed(1)}" y1="${uTop}" x2="${bx.toFixed(1)}" y2="${lBot}" stroke="${P.amber}" stroke-width="1.6" stroke-dasharray="5,4"/>`;
+        svg += `<rect x="${(bx-54).toFixed(1)}" y="${uTop+4}" width="108" height="18" rx="4" fill="${P.amber}"/>`;
+        svg += `<text x="${bx.toFixed(1)}" y="${uTop+16.5}" text-anchor="middle" fill="#0f172a" font-size="9.5" font-weight="800">整体上市分界线</text>`;
+      }
+
+      // Upper horizontal grid lines (Linear vs Log ticks)
+      const mcTicks = [];
+      if (!useLogScale) {
+        for (let i = 0; i <= 4; i++) mcTicks.push((maxMC / 4) * i);
+      } else {
+        const lMin = Math.log10(minPosMC), lMax = Math.log10(maxMC);
+        for (let i = 0; i <= 4; i++) mcTicks.push(Math.pow(10, lMin + ((lMax - lMin) / 4) * i));
+      }
+      mcTicks.forEach((val, i) => {
+        const y = yMC(val);
+        svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="${P.grid}" stroke-width="1" stroke-dasharray="${i===0?'none':'3,4'}"/>`;
+        svg += `<text x="${padL-8}" y="${(y+4).toFixed(1)}" text-anchor="end" fill="${P.muted}" font-size="10.5">${val>=100?Math.round(val):val.toFixed(1)}亿</text>`;
+        if (showPE && peVals.length) {
+          const pv = (maxPE / 4) * i;
+          svg += `<text x="${W-padR+8}" y="${(y+4).toFixed(1)}" text-anchor="start" fill="${P.amber}" font-size="10.5">${Math.round(pv)}x</text>`;
+        }
+      });
+
+      // PE-TTM 20% / 80% historical percentile reference lines
+      const pePcts = (RAW.meta && RAW.meta.pe_percentiles) || {};
+      if (showPE && pePcts.p20 && pePcts.p80 && peVals.length > 10) {
+        const y20 = yPE(pePcts.p20), y80 = yPE(pePcts.p80);
+        svg += `<line x1="${padL}" y1="${y20.toFixed(1)}" x2="${W-padR}" y2="${y20.toFixed(1)}" stroke="${P.emerald}" stroke-width="1.1" stroke-dasharray="6,4" opacity="0.72"/>`;
+        svg += `<text x="${W-padR-4}" y="${(y20-4).toFixed(1)}" text-anchor="end" fill="${P.emerald}" font-size="9.5" font-weight="700">PE 20%便宜线 (${pePcts.p20}x)</text>`;
+        svg += `<line x1="${padL}" y1="${y80.toFixed(1)}" x2="${W-padR}" y2="${y80.toFixed(1)}" stroke="${P.rose}" stroke-width="1.1" stroke-dasharray="6,4" opacity="0.72"/>`;
+        svg += `<text x="${W-padR-4}" y="${(y80-4).toFixed(1)}" text-anchor="end" fill="${P.rose}" font-size="9.5" font-weight="700">PE 80%警惕线 (${pePcts.p80}x)</text>`;
+      }
+
+      // Benchmark normalized curve (same start baseline as mcPts[0])
+      let benchAlphaStr = '';
+      if (showBench && HAS_BENCH && mcPts.length > 2) {
+        const startDt = mcPts[0].date;
+        const baseMC = mcPts[0].mktcap_yi;
+        const bPts = RAW.benchmark.monthly.filter(x => x.date >= startDt.slice(0, 7) && x.value > 0);
+        if (bPts.length > 2) {
+          const b0 = bPts[0].value;
+          const normStr = bPts.map(p => {
+            const normMC = baseMC * (p.value / b0);
+            return `${xScale(dateToFrac(p.date)).toFixed(1)},${yMC(Math.min(maxMC, Math.max(minPosMC, normMC))).toFixed(1)}`;
+          }).join(' ');
+          svg += `<polyline points="${normStr}" fill="none" stroke="${P.bench}" stroke-width="1.8" stroke-dasharray="6,4" opacity="0.82"/>`;
+          const bMult = bPts[bPts.length - 1].value / b0;
+          const sMult = mcPts[mcPts.length - 1].mktcap_yi / baseMC;
+          benchAlphaStr = `${RAW.benchmark.name}同期 ${bMult.toFixed(2)}x vs 公司 ${sMult.toFixed(2)}x（跑赢 ${(sMult/bMult).toFixed(1)} 倍）`;
+        }
+      }
+
+      // Market Cap area & line
+      if (mcPts.length > 1) {
+        const ptsStr = mcPts.map(p => `${xScale(dateToFrac(p.date)).toFixed(1)},${yMC(p.mktcap_yi).toFixed(1)}`).join(' ');
+        const firstX = xScale(dateToFrac(mcPts[0].date)).toFixed(1);
+        const lastX = xScale(dateToFrac(mcPts[mcPts.length - 1].date)).toFixed(1);
+        svg += `<polygon points="${firstX},${uBot} ${ptsStr} ${lastX},${uBot}" fill="url(#mcGrad)"/>`;
+        svg += `<polyline points="${ptsStr}" fill="none" stroke="${P.purple}" stroke-width="2.6" stroke-linejoin="round"/>`;
+      }
+
+      // PE-TTM line
+      if (showPE && peVals.length > 1) {
+        const pePts = mcPts.filter(p => p.pe_ttm && p.pe_ttm > 0 && p.pe_ttm < 120);
+        const peStr = pePts.map(p => `${xScale(dateToFrac(p.date)).toFixed(1)},${yPE(p.pe_ttm).toFixed(1)}`).join(' ');
+        svg += `<polyline points="${peStr}" fill="none" stroke="${P.amber}" stroke-width="1.6" stroke-dasharray="4,3" opacity="0.88"/>`;
+      }
+
+      // Hover targets along Market Cap curve
+      const mcStep = mcPts.length > 220 ? 2 : 1;
+      mcPts.forEach((p, i) => {
+        if (i % mcStep !== 0 && i !== mcPts.length - 1) return;
+        const cx = xScale(dateToFrac(p.date));
+        const cy = yMC(p.mktcap_yi);
+        const isPred = showPredHistory && mainMc.length && p.date < mainMc[0].date;
+        const tid = regTip(`<strong>${esc(p.date)}</strong>${isPred ? ' <span style="color:#fbbf24">(前身主体)</span>' : ''}<br/>总市值：<b style="color:#a78bfa">${fmtNum(p.mktcap_yi, '亿')}</b>${p.pe_ttm ? `<br/>PE-TTM：<b style="color:#fbbf24">${fmtNum(p.pe_ttm, 'x')}</b>` : ''}`);
+        svg += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="5" fill="transparent" data-tip="${tid}"/>`;
+      });
+
+      // Timeline Event Pins with 2D Collision Avoidance
+      const placedPins = [];
+      const events = (ANALYSIS.timeline_events || []).slice().sort((a, b) => dateToFrac(a.date) - dateToFrac(b.date));
+      events.forEach(ev => {
+        const frac = dateToFrac(ev.date);
+        if (frac < minYear) return;
+        const ex = Math.min(W - padR - 12, Math.max(padL + 12, xScale(frac)));
+        let nearest = mcPts[0], bestD = 9999;
+        for (const p of mcPts) {
+          const d = Math.abs(dateToFrac(p.date) - frac);
+          if (d < bestD) { bestD = d; nearest = p; }
+        }
+        const ey = nearest ? yMC(nearest.mktcap_yi) : (uTop + uH / 2);
+        const isCat = ev.kind === 'catalyst', isTrap = ev.kind === 'trap';
+        const col = isCat ? '#f43f5e' : (isTrap ? '#f97316' : '#06b6d4');
+        const badgeChar = isCat ? '爆' : (isTrap ? '撤' : '铺');
+        const kindLbl = isCat ? '⚡ 引爆事件' : (isTrap ? '⚠️ 弯路/大回撤' : '🔍 暗线铺垫');
+        const candidates = [-26, -48, 28, -68, 48, -88];
+        let chosenY = Math.max(uTop + 13, Math.min(uBot - 13, ey - 26));
+        for (const dy of candidates) {
+          const cy = ey + dy;
+          if (cy < uTop + 13 || cy > uBot - 13) continue;
+          if (!placedPins.some(q => Math.hypot(q.x - ex, q.y - cy) < 23)) { chosenY = cy; break; }
+        }
+        placedPins.push({ x: ex, y: chosenY });
+        const tid = regTip(`<span style="color:${col};font-weight:800">${kindLbl}</span> · <strong>${esc(ev.date)}</strong><br/><b>${esc(ev.title)}</b><br/><span style="color:#cbd5e1">${esc(ev.detail || '')}</span>`);
+        svg += `<g class="ev-pin" data-tip="${tid}">
+          <line x1="${ex.toFixed(1)}" y1="${ey.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${chosenY.toFixed(1)}" stroke="${col}" stroke-width="1.5" stroke-dasharray="2,2"/>
+          <circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="3.8" fill="${col}" stroke="${P.bg}" stroke-width="1.4"/>
+          <circle class="pin-head" cx="${ex.toFixed(1)}" cy="${chosenY.toFixed(1)}" r="10" fill="${col}" stroke="${P.bg}" stroke-width="1.5"/>
+          <text x="${ex.toFixed(1)}" y="${(chosenY+3.8).toFixed(1)}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">${badgeChar}</text>
+        </g>`;
+      });
+
+      // Lower Chart
+      const barW = Math.min(30, Math.max(9, (plotW / yrSpan) * 0.56));
+      if (lowerMode === 'rev') {
+        const revPool = annual.map(a => a.revenue_yi || 0).concat(partialAnnual ? [partialAnnual.revenue_yi || 0] : []);
+        const npPool = annual.map(a => a.net_profit_yi || 0).concat(partialAnnual ? [partialAnnual.net_profit_yi || 0] : []);
+        const maxRev = Math.max(...revPool, 10) * 1.16;
+        const maxNP = Math.max(...npPool, 10) * 1.25;
+        const yRev = v => lBot - (Math.max(0, v) / maxRev) * lH;
+        const yNP = v => lBot - (Math.max(0, v) / maxNP) * lH;
+
+        for (let i = 0; i <= 4; i++) {
+          const rv = (maxRev / 4) * i, nv = (maxNP / 4) * i, y = yRev(rv);
+          svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="${P.grid}" stroke-width="1" stroke-dasharray="${i===0?'none':'3,4'}"/>`;
+          svg += `<text x="${padL-8}" y="${(y+4).toFixed(1)}" text-anchor="end" fill="${P.blue}" font-size="10.5">${Math.round(rv)}亿</text>`;
+          svg += `<text x="${W-padR+8}" y="${(y+4).toFixed(1)}" text-anchor="start" fill="${P.emerald}" font-size="10.5">${Math.round(nv)}亿</text>`;
+        }
+        svg += `<text x="${padL}" y="${lTop-10}" fill="${P.blue}" font-size="11.5" font-weight="700">▼ 年度营业总收入柱状图${partialAnnual ? '（末根虚线框为最新前三季累计）' : ''}</text>`;
+        svg += `<text x="${W-padR}" y="${lTop-10}" text-anchor="end" fill="${P.emerald}" font-size="11.5" font-weight="700">年度归母净利润折线 ▼</text>`;
+
+        const npPts = [];
+        annual.forEach(a => {
+          const cx = xScale(a.year + 0.5);
+          const ry = yRev(a.revenue_yi || 0), ny = yNP(a.net_profit_yi || 0);
+          if (a.net_profit_yi != null) npPts.push({ x: cx, y: ny, a });
+          const tid = regTip(`<strong>${a.year} 年度财报</strong><br/>营业总收入：<b style="color:#38bdf8">${fmtNum(a.revenue_yi,'亿')}</b> (YoY ${fmtNum(a.revenue_yoy,'%')})<br/>归母净利润：<b style="color:#34d399">${fmtNum(a.net_profit_yi,'亿')}</b> (YoY ${fmtNum(a.net_profit_yoy,'%')})<br/>毛利率：${fmtNum(a.gross_margin_pct,'%')} ｜ 净利率：${fmtNum(a.net_margin_pct,'%')}<br/>年末总市值：<b style="color:#a78bfa">${fmtNum(a.mktcap_yearend_yi,'亿')}</b>`);
+          svg += `<rect x="${(cx - barW/2).toFixed(1)}" y="${ry.toFixed(1)}" width="${barW.toFixed(1)}" height="${(lBot-ry).toFixed(1)}" rx="3" fill="${P.blue}" fill-opacity="0.72" data-tip="${tid}"/>`;
+        });
+        if (partialAnnual) {
+          const cx = xScale(partialAnnual.year + 0.5);
+          const ry = yRev(partialAnnual.revenue_yi || 0), ny = yNP(partialAnnual.net_profit_yi || 0);
+          const tid = regTip(`<strong>${esc(partialAnnual.quarter)} 累计（未满全年）</strong><br/>累计营收：<b style="color:#38bdf8">${fmtNum(partialAnnual.revenue_yi,'亿')}</b><br/>累计归母净利：<b style="color:#34d399">${fmtNum(partialAnnual.net_profit_yi,'亿')}</b>`);
+          svg += `<rect x="${(cx - barW/2).toFixed(1)}" y="${ry.toFixed(1)}" width="${barW.toFixed(1)}" height="${(lBot-ry).toFixed(1)}" rx="3" fill="${P.blue}" fill-opacity="0.28" stroke="${P.blue}" stroke-width="1.5" stroke-dasharray="4,3" data-tip="${tid}"/>`;
+          if (partialAnnual.net_profit_yi != null && npPts.length) {
+            const lastP = npPts[npPts.length - 1];
+            svg += `<line x1="${lastP.x.toFixed(1)}" y1="${lastP.y.toFixed(1)}" x2="${cx.toFixed(1)}" y2="${ny.toFixed(1)}" stroke="${P.emerald}" stroke-width="2" stroke-dasharray="4,3"/>`;
+            svg += `<circle cx="${cx.toFixed(1)}" cy="${ny.toFixed(1)}" r="4" fill="${P.bg}" stroke="${P.emerald}" stroke-width="2" data-tip="${tid}"/>`;
+          }
+        }
+        if (npPts.length > 1) {
+          svg += `<polyline points="${npPts.map(p => p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ')}" fill="none" stroke="${P.emerald}" stroke-width="2.6"/>`;
+          npPts.forEach(p => {
+            const tid = regTip(`<strong>${p.a.year} 归母净利</strong>：<b style="color:#34d399">${fmtNum(p.a.net_profit_yi,'亿')}</b> (YoY ${fmtNum(p.a.net_profit_yoy,'%')})`);
+            svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.8" fill="${P.emerald}" stroke="${P.bg}" stroke-width="1.4" data-tip="${tid}"/>`;
+          });
+        }
+      } else {
+        const maxRadar = Math.max(...annual.map(a => Math.max(a.cip_yi || 0, a.rd_yi || 0, a.goodwill_yi || 0)), 10) * 1.18;
+        const yRad = v => lBot - (Math.max(0, v) / maxRadar) * lH;
+        for (let i = 0; i <= 4; i++) {
+          const v = (maxRadar / 4) * i, y = yRad(v);
+          svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="${P.grid}" stroke-width="1" stroke-dasharray="${i===0?'none':'3,4'}"/>`;
+          svg += `<text x="${padL-8}" y="${(y+4).toFixed(1)}" text-anchor="end" fill="${P.muted}" font-size="10.5">${Math.round(v)}亿</text>`;
+        }
+        svg += `<text x="${padL}" y="${lTop-10}" fill="${P.cyan}" font-size="11.5" font-weight="700">▼ 财报前置信号雷达：研发费用(青柱) · 商誉/并购(紫线) · 在建工程/扩产(橙线)</text>`;
+        const gwPts = [], cipPts = [];
+        annual.forEach(a => {
+          const cx = xScale(a.year + 0.5);
+          const tid = regTip(`<strong>${a.year} 前置信号雷达</strong><br/>研发费用：<b style="color:#22d3ee">${fmtNum(a.rd_yi,'亿')}</b> (${fmtNum(a.rd_pct,'%')})<br/>商誉(并购)：<b style="color:#a78bfa">${fmtNum(a.goodwill_yi,'亿')}</b><br/>在建工程(扩产)：<b style="color:#fbbf24">${fmtNum(a.cip_yi,'亿')}</b> (占固资 ${fmtNum(a.cip_to_fa_pct,'%')})`);
+          if (a.rd_yi != null) {
+            const ry = yRad(a.rd_yi);
+            svg += `<rect x="${(cx-barW/2).toFixed(1)}" y="${ry.toFixed(1)}" width="${barW.toFixed(1)}" height="${(lBot-ry).toFixed(1)}" rx="3" fill="${P.cyan}" fill-opacity="0.65" data-tip="${tid}"/>`;
+          }
+          if (a.goodwill_yi != null) gwPts.push({ x: cx, y: yRad(a.goodwill_yi), tid });
+          if (a.cip_yi != null) cipPts.push({ x: cx, y: yRad(a.cip_yi), tid });
+        });
+        if (gwPts.length > 1) {
+          svg += `<polyline points="${gwPts.map(p => p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ')}" fill="none" stroke="${P.purple}" stroke-width="2.4"/>`;
+          gwPts.forEach(p => { svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.4" fill="${P.purple}" data-tip="${p.tid}"/>`; });
+        }
+        if (cipPts.length > 1) {
+          svg += `<polyline points="${cipPts.map(p => p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ')}" fill="none" stroke="${P.amber}" stroke-width="2.4"/>`;
+          cipPts.forEach(p => { svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.4" fill="${P.amber}" data-tip="${p.tid}"/>`; });
+        }
+      }
+
+      svg += `</svg>`;
+      document.getElementById('main-timeline-svg').innerHTML = svg;
+
+      document.getElementById('main-legend').innerHTML = `
+        <span class="leg-item"><span class="leg-dot" style="background:#a78bfa"></span>真实总市值</span>
+        ${showPE ? '<span class="leg-item"><span class="leg-dot" style="background:#fbbf24"></span>PE-TTM</span>' : ''}
+        ${benchAlphaStr ? `<span class="leg-item" style="color:var(--accent);font-weight:700"><span class="leg-dot" style="background:#94a3b8"></span>${esc(benchAlphaStr)}</span>` : ''}
+        <span class="leg-item"><span class="leg-dot" style="background:#06b6d4;border-radius:50%"></span>铺：暗线铺垫</span>
+        <span class="leg-item"><span class="leg-dot" style="background:#f43f5e;border-radius:50%"></span>爆：引爆事件</span>
+        <span class="leg-item"><span class="leg-dot" style="background:#f97316;border-radius:50%"></span>撤：弯路/大回撤</span>
+        ${lowerMode==='rev'
+          ? '<span class="leg-item"><span class="leg-dot" style="background:#38bdf8"></span>年度营收</span><span class="leg-item"><span class="leg-dot" style="background:#34d399"></span>归母净利</span>'
+          : '<span class="leg-item"><span class="leg-dot" style="background:#22d3ee"></span>研发费用</span><span class="leg-item"><span class="leg-dot" style="background:#a78bfa"></span>商誉(并购)</span><span class="leg-item"><span class="leg-dot" style="background:#fbbf24"></span>在建工程(扩产)</span>'}
+      `;
+    }
+
+    function renderBizEvolution() {
+      const snaps = ANALYSIS.business_evolution || [];
+      const box = document.getElementById('biz-evolution-box');
+      if (!snaps.length) { box.style.display = 'none'; return; }
+      box.style.display = 'block';
+      const keys = [];
+      snaps.forEach(s => (s.mix || []).forEach(m => { if (m.pct > 0 && !keys.includes(m.name)) keys.push(m.name); }));
+      document.getElementById('biz-legend').innerHTML = keys.map((k, i) => `
+        <span class="leg-item"><span class="leg-dot" style="background:${BIZ_COLORS[i % BIZ_COLORS.length]}"></span>${esc(k)}</span>
+      `).join('');
+      document.getElementById('biz-rows').innerHTML = snaps.map(s => {
+        const segs = (s.mix || []).filter(m => m.pct > 0).map(m => {
+          const col = BIZ_COLORS[keys.indexOf(m.name) % BIZ_COLORS.length];
+          const tid = regTip(`<strong>${esc(s.year)} · ${esc(m.name)}</strong><br/>营收占比：<b>${m.pct}%</b>${m.rev_yi ? `（约 ${fmtNum(m.rev_yi, '亿')}）` : ''}`);
+          return `<div class="biz-seg num" style="width:${m.pct}%;background:${col}" data-tip="${tid}">${m.pct >= 9 ? m.pct + '%' : ''}</div>`;
+        }).join('');
+        return `<div class="biz-row"><div class="biz-yr num">${esc(s.year)}</div><div class="biz-bar">${segs}</div><div class="biz-note">${esc(s.note || '')}</div></div>`;
+      }).join('');
+    }
+
+    function computeDavisAttribution(stage) {
+      const mcPts = (RAW.mktcap_monthly || []).filter(p => p.mktcap_yi > 0 && p.pe_ttm > 0);
+      if (!mcPts.length || !stage.start_date || !stage.end_date) return null;
+      const inWin = mcPts.filter(p => p.date >= stage.start_date.slice(0, 7) && p.date <= stage.end_date.slice(0, 7) + '-31');
+      if (inWin.length < 2) return null;
+      const p0 = inWin[0];
+      const p1 = inWin.reduce((best, cur) => cur.mktcap_yi > best.mktcap_yi ? cur : best, inWin[0]);
+      if (!p0 || !p1 || p1.mktcap_yi <= p0.mktcap_yi) return null;
+      const mcMult = p1.mktcap_yi / p0.mktcap_yi;
+      const peMult = p1.pe_ttm / p0.pe_ttm;
+      const epsMult = mcMult / peMult;
+      const lnTot = Math.log(mcMult);
+      const lnE = Math.log(epsMult), lnV = Math.log(peMult);
+      const ePct = Math.round((lnE / lnTot) * 100);
+      const vPct = 100 - ePct;
+      let verdict = '';
+      if (peMult < 0.98) verdict = '纯盈利硬拉型（估值反杀，含金量极高！）';
+      else if (ePct >= 60) verdict = '盈利主导 + 温和重估（扎实复利）';
+      else if (vPct >= 60) verdict = '估值重塑主导（高弹性，须紧盯估值天花板）';
+      else verdict = '盈利与估值均衡戴维斯双击';
+      return {
+        startDate: p0.date, peakDate: p1.date,
+        mc0: p0.mktcap_yi, mc1: p1.mktcap_yi,
+        pe0: p0.pe_ttm, pe1: p1.pe_ttm,
+        mcMult, epsMult, peMult, ePct, vPct, verdict
+      };
+    }
+
+    function renderDavisBox(stage) {
+      const d = computeDavisAttribution(stage);
+      if (!d) return '';
+      const barE = Math.max(0, Math.min(100, d.ePct));
+      const barV = Math.max(0, Math.min(100, d.vPct));
+      const normSum = Math.max(1, barE + barV);
+      const wE = (barE / normSum) * 100, wV = (barV / normSum) * 100;
+      return `
+        <div class="davis-box">
+          <div class="davis-top">
+            <div>
+              <strong>⚖️ 戴维斯双击归因拆解</strong>
+              <span style="color:var(--muted);margin-left:6px">(${esc(d.startDate)} → 峰 ${esc(d.peakDate)})</span>
+            </div>
+            <div class="num" style="font-weight:800">
+              <span style="color:var(--purple)">市值 ${d.mcMult.toFixed(2)}×</span> ＝
+              <span style="color:var(--emerald)">盈利(TTM) ${d.epsMult.toFixed(2)}× (${d.ePct>0?'+':''}${d.ePct}%)</span> ×
+              <span style="color:${d.peMult>=1?'var(--amber)':'var(--rose)'}">估值(PE) ${d.peMult.toFixed(2)}× (${d.vPct>0?'+':''}${d.vPct}%)</span>
+            </div>
+          </div>
+          <div class="davis-bar">
+            <div class="davis-e" style="width:${wE.toFixed(1)}%" title="盈利(TTM)贡献"></div>
+            <div class="${d.peMult>=1?'davis-v':'davis-neg'}" style="width:${wV.toFixed(1)}%" title="估值(PE)贡献"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:6px;flex-wrap:wrap;gap:6px">
+            <span>定性：<strong style="color:var(--text)">${esc(d.verdict)}</strong></span>
+            <span class="num">PE 路径：${d.pe0.toFixed(1)}x → ${d.pe1.toFixed(1)}x</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderQuarterlyMicroscopeSVG(stage, mode) {
+      mode = mode || 'np';
+      const P = getPal();
+      const qStart = stage.microscope_start_q, qEnd = stage.microscope_end_q;
+      const slice = (RAW.quarterly || []).filter(q => (!qStart || q.quarter >= qStart) && (!qEnd || q.quarter <= qEnd));
+      if (!slice.length) return '<div style="color:var(--muted);font-size:12px">该阶段暂无单季拆解序列（如港股半年度披露制）</div>';
+
+      const markers = stage.microscope_markers || [];
+      const W = 1020, H = markers.length ? 292 : 254;
+      const padL = 58, padR = 58, topP = markers.length ? 68 : 34, botP = 36;
+      const pW = W - padL - padR, pH = H - topP - botP;
+
+      const mcVals = slice.map(q => q.mktcap_end_yi).filter(v => v != null && v > 0);
+      const maxMC = mcVals.length ? Math.max(...mcVals) * 1.12 : 100;
+      const minMC = mcVals.length ? Math.min(...mcVals) * 0.85 : 0;
+
+      const isGM = mode === 'gm';
+      const isRev = mode === 'rev';
+      const vals = slice.map(q => isGM ? q.q_gm_pct : (isRev ? q.q_rev_yi : q.q_np_yi)).filter(v => v != null);
+      const maxV = vals.length ? (isGM ? Math.max(...vals) + 3.5 : Math.max(...vals, 1) * 1.28) : 10;
+      const minV = vals.length ? (isGM ? Math.max(0, Math.min(...vals) - 4.0) : Math.min(0, ...vals) * 1.2) : 0;
+      const vSpan = Math.max(1, maxV - minV);
+
+      const xPos = i => padL + (i + 0.5) * (pW / slice.length);
+      const yMC = v => topP + pH - ((v - minMC) / Math.max(1, maxMC - minMC)) * pH;
+      const yVal = v => topP + pH - ((v - minV) / vSpan) * pH;
+      const yZero = yVal(Math.max(minV, 0));
+      const barW = Math.min(34, Math.max(12, (pW / slice.length) * 0.50));
+      const qFontSize = slice.length > 14 ? 9.2 : 10;
+      const leftCol = isGM ? P.amber : (isRev ? P.blue : P.emerald);
+      const leftTitle = isGM ? '▌ 单季毛利率 (%) 拐点' : (isRev ? '▌ 单季营业收入柱 &amp; 同比增速(YoY)' : '▌ 单季归母净利润柱 &amp; 同比增速(YoY)');
+
+      let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+      svg += `<text x="${padL}" y="16" fill="${leftCol}" font-size="11.5" font-weight="700">${leftTitle}</text>`;
+      svg += `<text x="${W-padR}" y="16" text-anchor="end" fill="${P.purple}" font-size="11.5" font-weight="700">● 季末总市值走势 ▲</text>`;
+
+      for (let i = 0; i <= 3; i++) {
+        const y = topP + (pH / 3) * i;
+        const mcTick = maxMC - ((maxMC - minMC) / 3) * i;
+        const vTick = maxV - (vSpan / 3) * i;
+        svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="${P.grid}" stroke-dasharray="3,3"/>`;
+        svg += `<text x="${padL-6}" y="${(y+4).toFixed(1)}" text-anchor="end" fill="${leftCol}" font-size="10">${isGM ? vTick.toFixed(1)+'%' : Math.round(vTick)+'亿'}</text>`;
+        svg += `<text x="${W-padR+6}" y="${(y+4).toFixed(1)}" text-anchor="start" fill="${P.purple}" font-size="10">${Math.round(mcTick)}亿</text>`;
+      }
+
+      const mcPts = [];
+      slice.forEach((q, i) => {
+        const cx = xPos(i);
+        const tid = regTip(`<strong>${esc(q.quarter)}</strong> (公告日: ${esc(q.notice_date || '—')})<br/>单季营收：<b style="color:#38bdf8">${fmtNum(q.q_rev_yi,'亿')}</b> (YoY ${fmtNum(q.q_rev_yoy,'%')})<br/>单季净利：<b style="color:#34d399">${fmtNum(q.q_np_yi,'亿')}</b> (YoY ${fmtNum(q.q_np_yoy,'%')})<br/>单季毛利率：<b style="color:#fbbf24">${fmtNum(q.q_gm_pct,'%')}</b><br/>季末总市值：<b style="color:#a78bfa">${fmtNum(q.mktcap_end_yi,'亿')}</b>${q.pe_ttm_end ? ` ｜ PE ${fmtNum(q.pe_ttm_end,'x')}` : ''}`);
+        const mcYVal = (q.mktcap_end_yi != null && q.mktcap_end_yi > 0) ? yMC(q.mktcap_end_yi) : null;
+        const curV = isGM ? q.q_gm_pct : (isRev ? q.q_rev_yi : q.q_np_yi);
+        const curYoY = isGM ? null : (isRev ? q.q_rev_yoy : q.q_np_yoy);
+
+        if (curV != null) {
+          const valY = yVal(curV);
+          const bTop = Math.min(valY, yZero);
+          const bH = Math.max(2, Math.abs(yZero - valY));
+          const bCol = (!isGM && curV < 0) ? P.rose : leftCol;
+          svg += `<rect x="${(cx-barW/2).toFixed(1)}" y="${bTop.toFixed(1)}" width="${barW.toFixed(1)}" height="${bH.toFixed(1)}" rx="3" fill="${bCol}" fill-opacity="0.56" data-tip="${tid}"/>`;
+
+          const lblTxt = isGM ? `${curV.toFixed(1)}%` : (curYoY != null ? `${curYoY>0?'+':''}${Math.round(curYoY)}%` : '');
+          if (lblTxt) {
+            let lblCol = isGM ? P.amber : (curYoY >= 20 ? leftCol : (curYoY < 0 ? P.rose : P.muted));
+            let lblY = Math.max(topP + 11, bTop - 5);
+            if (mcYVal !== null && Math.abs(mcYVal - lblY) < 13) {
+              if (bH >= 20) { lblY = bTop + 13; lblCol = '#ffffff'; }
+              else { lblY = Math.max(topP + 11, mcYVal - 11); }
+            }
+            svg += `<text x="${cx.toFixed(1)}" y="${lblY.toFixed(1)}" text-anchor="middle" fill="${lblCol}" font-size="9.5" font-weight="700">${lblTxt}</text>`;
+          }
+        }
+        if (mcYVal !== null) mcPts.push({ x: cx, y: mcYVal, tid });
+        svg += `<text x="${cx.toFixed(1)}" y="${H-13}" text-anchor="middle" fill="${P.muted}" font-size="${qFontSize}">${esc(q.quarter)}</text>`;
+      });
+
+      if (mcPts.length > 1) {
+        svg += `<polyline points="${mcPts.map(p => p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ')}" fill="none" stroke="${P.purple}" stroke-width="2.6"/>`;
+        mcPts.forEach(p => {
+          svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.2" fill="${P.purple}" stroke="${P.bg}" stroke-width="1.5" data-tip="${p.tid}"/>`;
+        });
+      }
+
+      const laneBoxes = [[], []];
+      markers.forEach(mk => {
+        const idx = slice.findIndex(q => q.quarter === mk.quarter);
+        if (idx < 0) return;
+        const cx = xPos(idx);
+        const col = mk.kind === 'catalyst' ? '#f43f5e' : '#06b6d4';
+        const bw = Math.max(96, String(mk.label || '').length * 10.8 + 18);
+        const bx = Math.min(W - padR - bw, Math.max(padL, cx - bw / 2));
+        let lane = 0;
+        if (laneBoxes[0].some(b => !(bx + bw + 6 < b.x || bx > b.x + b.w + 6))) lane = 1;
+        laneBoxes[lane].push({ x: bx, w: bw });
+        const by = lane === 0 ? 24 : 45;
+        svg += `<line x1="${cx.toFixed(1)}" y1="${by + 18}" x2="${cx.toFixed(1)}" y2="${topP + pH}" stroke="${col}" stroke-width="1.5" stroke-dasharray="4,3"/>`;
+        svg += `<rect x="${bx.toFixed(1)}" y="${by}" width="${bw.toFixed(1)}" height="18" rx="4" fill="${col}"/>`;
+        svg += `<text x="${(bx + bw/2).toFixed(1)}" y="${by + 13}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">${esc(mk.label)}</text>`;
+      });
+
+      svg += `</svg>`;
+      return svg;
+    }
+
+    function renderStages() {
+      const stages = ANALYSIS.stages || [];
+      const traps = ANALYSIS.false_leaps || [];
+      const chrono = getChronoTimeline();
+
+      document.getElementById('stage-nav').innerHTML = chrono.map(item => {
+        if (item.kind === 'up') {
+          const st = item.data, idx = item.idx;
+          const isAct = !showAllStages && activeDownIdx < 0 && idx === activeStageIdx;
+          return `
+            <button class="stage-tab ${isAct ? 'active' : ''}" onclick="selectStage(${idx}, false)">
+              📈 S${idx+1} · ${esc(st.short_name || st.name)} (${esc(st.period)})
+            </button>
+          `;
+        } else {
+          const t = item.data, idx = item.idx;
+          const isAct = !showAllStages && activeDownIdx === idx;
+          const dropM = String(t.drawdown || '').match(/-[0-9.]+%/);
+          const dropShort = dropM ? dropM[0] : (t.drawdown || '回撤');
+          return `
+            <button class="stage-tab down-tab ${isAct ? 'active' : ''}" onclick="selectTrap(${idx}, false)" title="${esc(t.title)}">
+              ↘ ${esc(dropShort)}${t.short_name ? ' ' + esc(t.short_name) : ''}
+            </button>
+          `;
+        }
+      }).join('');
+
+      if (!showAllStages && activeDownIdx >= 0 && traps[activeDownIdx]) {
+        const t = traps[activeDownIdx];
+        const dropWhy = t.why_short || t.real_cause || '';
+        document.getElementById('stages-container').innerHTML = `
+          <div class="stage-card" style="border-color:var(--bdr-rose)">
+            <div class="stage-header">
+              <div>
+                <div class="stage-title" style="color:var(--rose)">📉 中间下台阶：${esc(t.title)}</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                  <span class="pill rose num">${esc(t.period)}</span>
+                  <span class="pill rose num">最大回撤 ${esc(t.drawdown)}</span>
+                  ${t.mktcap_drop ? `<span class="pill accent num">${esc(t.mktcap_drop)}</span>` : ''}
+                </div>
+              </div>
+              <div style="font-size:12px;color:var(--muted)">点击上方任意 <strong style="color:var(--accent)">📈 S1–S${stages.length}</strong> 切回上台阶显微镜</div>
+            </div>
+
+            <div class="why-banner down-banner">
+              <div class="why-label" style="color:var(--rose)">💡 一句话看懂：这一波为什么大跌 ${esc(t.drawdown)}？</div>
+              <p class="why-main" style="margin-bottom:0">${esc(dropWhy)}</p>
+            </div>
+
+            <div class="two-col" style="margin-bottom:12px">
+              <div class="sub-box">
+                <h4 style="color:var(--amber)">🎭 表面诱因 / 下跌前市场状态</h4>
+                <div style="font-size:13px;color:var(--text);line-height:1.65">${esc(t.trap_setup)}</div>
+              </div>
+              <div class="sub-box">
+                <h4 style="color:var(--rose)">🩸 真实杀伤逻辑（为什么跌这么狠）</h4>
+                <div style="font-size:13px;color:var(--text);line-height:1.65">${esc(t.real_cause)}</div>
+              </div>
+            </div>
+
+            <div class="pattern-strip" style="background:var(--tint-rose);border-color:var(--bdr-rose)">
+              <div style="font-size:12px;font-weight:800;color:var(--rose)">🛡️ 买方避坑与抄底铁律</div>
+              <div style="font-size:13px;color:var(--text);line-height:1.6">${esc(t.lesson)}</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const list = showAllStages ? stages.map((s, i) => ({ s, i })) : [{ s: stages[activeStageIdx], i: activeStageIdx }].filter(x => x.s);
+
+      document.getElementById('stages-container').innerHTML = list.map(({ s, i }) => {
+        const ll = s.lead_lag || {};
+        const mode = stageMicroMode[i] || 'np';
+        const llClass = (ll.verdict_type || '').includes('股价') ? 'rose' : ((ll.verdict_type || '').includes('业绩') ? 'emerald' : 'purple');
+        const fsHtml = (s.foreshadowing || []).map(f => `
+          <div class="clue-item">
+            <div class="clue-head"><span class="num" style="color:var(--cyan)">${esc(f.date)}</span> · [${esc(f.category)}] ${esc(f.title)}</div>
+            <div class="clue-body">${esc(f.detail)}</div>
+            ${f.filing_clue ? `<div class="clue-filing">🔎 <b>财报/公告早期指纹：</b>${esc(f.filing_clue)}</div>` : ''}
+          </div>
+        `).join('');
+        const catHtml = (s.catalysts || []).map(c => `
+          <div class="clue-item cat">
+            <div class="clue-head"><span class="num" style="color:var(--rose)">${esc(c.date)}</span> · ${esc(c.title)}</div>
+            <div class="clue-body">${esc(c.detail)}</div>
+          </div>
+        `).join('');
+        const rpHtml = (s.reusable_patterns || []).map(p => `
+          <div style="font-size:13px;line-height:1.6"><span class="pill emerald" style="margin-right:6px">🧬 ${esc(p.archetype)}</span>${esc(p.small_cap_rule)}</div>
+        `).join('');
+
+        const cc = s.causal_chain || {};
+        const whyCause = cc.cause || ((s.foreshadowing && s.foreshadowing[0]) ? s.foreshadowing[0].title : s.business_shift || '');
+        const whyTrig = cc.trigger || ((s.catalysts && s.catalysts[0]) ? s.catalysts[0].title : '');
+        const whyRes = cc.result || `${s.mktcap_leap || ''}（${s.valuation_shift || ''}）`;
+        const oneLineWhy = s.one_line_why || `核心逻辑：${s.business_shift || ''}，最终推动市值完成 ${s.mktcap_leap || ''} 跃迁。`;
+        const multM = String(s.mktcap_leap || '').match(/[0-9.]+倍/);
+        const whyBadge = multM ? `这一波为什么能涨 ${multM[0]}？` : '这一波为什么能实现市值跃迁？';
+
+        return `
+          <div class="stage-card">
+            <div class="stage-header">
+              <div>
+                <div class="stage-title">台阶 ${i+1}：${esc(s.name)}</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                  <span class="pill accent num">${esc(s.period)}</span>
+                  <span class="pill ${llClass}">${esc(ll.verdict_badge || ll.verdict_type || '')}</span>
+                </div>
+              </div>
+              <div style="max-width:440px;font-size:12.5px;color:var(--muted)"><strong>业务质变：</strong>${esc(s.business_shift)}</div>
+            </div>
+
+            <div class="why-banner">
+              <div class="why-label">💡 一句话看懂：${esc(whyBadge)}</div>
+              <p class="why-main">${esc(oneLineWhy)}</p>
+              <div class="causal-flow">
+                <div class="cf-step">
+                  <div class="cf-k" style="color:var(--cyan)">🧱 因为（提前铺垫）</div>
+                  <div class="cf-v">${esc(whyCause)}</div>
+                </div>
+                <div class="cf-arrow">➔</div>
+                <div class="cf-step">
+                  <div class="cf-k" style="color:var(--rose)">🔥 引爆（临门一脚）</div>
+                  <div class="cf-v">${esc(whyTrig)}</div>
+                </div>
+                <div class="cf-arrow">➔</div>
+                <div class="cf-step">
+                  <div class="cf-k" style="color:var(--emerald)">🚀 所以（股价结果）</div>
+                  <div class="cf-v">${esc(whyRes)}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="stage-metrics">
+              <div class="sm-box"><div class="sm-k">市值跃迁</div><div class="sm-v num" style="color:var(--purple)">${esc(s.mktcap_leap)}</div></div>
+              <div class="sm-box"><div class="sm-k">营收跨越</div><div class="sm-v num" style="color:var(--accent)">${esc(s.revenue_leap)}</div></div>
+              <div class="sm-box"><div class="sm-k">归母净利跨越</div><div class="sm-v num" style="color:var(--emerald)">${esc(s.profit_leap)}</div></div>
+              <div class="sm-box"><div class="sm-k">估值中枢切换</div><div class="sm-v num" style="color:var(--amber)">${esc(s.valuation_shift)}</div></div>
+            </div>
+
+            ${renderDavisBox(s)}
+
+            <div class="microscope-box">
+              <div class="micro-head">
+                <h4 style="margin:0;font-size:14px;color:var(--purple)">🔬 季度级「业绩 vs 股价」时差显微镜（${esc(s.microscope_start_q || '')} — ${esc(s.microscope_end_q || '')}）</h4>
+                <div class="seg-controls">
+                  <button class="btn mini ${mode==='np'?'active':''}" id="mbtn-${i}-np" onclick="setStageMicroMode(${i},'np')">单季净利</button>
+                  <button class="btn mini ${mode==='rev'?'active':''}" id="mbtn-${i}-rev" onclick="setStageMicroMode(${i},'rev')">单季营收</button>
+                  <button class="btn mini ${mode==='gm'?'active':''}" id="mbtn-${i}-gm" onclick="setStageMicroMode(${i},'gm')">单季毛利率%</button>
+                </div>
+              </div>
+              <div style="font-size:13px;margin-bottom:10px"><strong>一句话时差定性：</strong>${esc(ll.verdict_summary || '')}</div>
+              <div class="svg-box" id="micro-svg-${i}">${renderQuarterlyMicroscopeSVG(s, mode)}</div>
+            </div>
+
+            <details class="forensic-drawer" ${showForensic ? 'open' : ''}>
+              <summary>
+                <span>🔍 展开本阶段深度证据（1–3 年财报暗线指纹 · 破局事件 · 左右侧买点 · 小市值口诀）</span>
+                <span class="forensic-hint">含 ${(s.foreshadowing||[]).length} 条暗线 + ${(s.catalysts||[]).length} 条催化 ▾</span>
+              </summary>
+
+              <div class="two-col">
+                <div class="sub-box">
+                  <h4 style="color:var(--cyan)">🔍 暗线铺垫（蜕变前 1–3 年的草蛇灰线）</h4>
+                  ${fsHtml}
+                  ${s.market_skepticism ? `<div class="skeptic-box">🤔 <strong>当年市场为何迟疑/没给估值：</strong>${esc(s.market_skepticism)}</div>` : ''}
+                </div>
+                <div class="sub-box">
+                  <h4 style="color:var(--rose)">⚡ 引爆催化剂（打破天花板的临门一脚）</h4>
+                  ${catHtml}
+                </div>
+              </div>
+
+              ${ll.detail ? `<div style="font-size:12.5px;color:var(--muted);margin-bottom:10px;padding:10px 12px;border-radius:10px;background:var(--bg-elev);border:1px solid var(--border)"><strong style="color:var(--text)">🔬 逐季时差复盘明细：</strong>${esc(ll.detail)}</div>` : ''}
+
+              <div class="entry-grid" style="margin-bottom:14px">
+                <div class="entry-box"><strong style="color:var(--cyan)">🎯 最早可看懂的左侧埋伏点：</strong><div style="margin-top:4px;color:var(--muted)">${esc(ll.left_entry || '')}</div></div>
+                <div class="entry-box"><strong style="color:var(--emerald)">🚀 最稳健的右侧确认点：</strong><div style="margin-top:4px;color:var(--muted)">${esc(ll.right_entry || '')}</div></div>
+              </div>
+
+              <div class="pattern-strip">
+                <div style="font-size:12px;font-weight:800;color:var(--emerald)">🧬 可迁移的小市值实战口诀（已自动归档至跨公司模式库）</div>
+                ${rpHtml}
+              </div>
+            </details>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setAppendixMode(m) {
+      appendixMode = m;
+      document.getElementById('btn-tbl-ann').classList.toggle('active', m === 'annual');
+      document.getElementById('btn-tbl-qtr').classList.toggle('active', m === 'quarterly');
+      document.getElementById('btn-tbl-boom').style.display = m === 'quarterly' ? 'inline-block' : 'none';
+      document.getElementById('btn-tbl-order').style.display = m === 'quarterly' ? 'inline-block' : 'none';
+      renderAppendixTable();
+    }
+    function toggleBoomOnly() {
+      qBoomOnly = !qBoomOnly;
+      document.getElementById('btn-tbl-boom').classList.toggle('active', qBoomOnly);
+      renderAppendixTable();
+    }
+    function toggleQOrder() {
+      qDescOrder = !qDescOrder;
+      const b = document.getElementById('btn-tbl-order');
+      b.classList.toggle('active', qDescOrder);
+      b.textContent = qDescOrder ? '↕️ 时间正序' : '↕️ 最新在前';
+      renderAppendixTable();
+    }
+
+    function renderAppendixTable() {
+      const yoyColor = v => v == null ? 'var(--muted)' : (v >= 0 ? 'var(--emerald)' : 'var(--rose)');
+      if (appendixMode === 'annual') {
+        const ann = (RAW.annual || []).filter(r => r.mktcap_yearend_yi != null);
+        const hasPred = ann.some(r => r.mktcap_source);
+        const predNote = hasPred
+          ? `<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">注：标有 <span class="pill amber" style="padding:1px 6px;font-size:10.5px">前身</span> 的年份（整体上市前），年末市值、年内峰值市值与 PE-TTM 均取自原挂牌上市公司主体真实历史行情；点击右上角「🔬 按季度」可下钻查看每一季业绩与市值爆发节奏。</div>`
+          : `<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">注：仅展示正式上市有真实交易市值的完整年度；点击右上角「🔬 按季度」可逐季排查业绩爆发拐点。</div>`;
+        document.getElementById('appendix-table').innerHTML = predNote + `
+          <table>
+            <thead><tr><th>年份</th><th>营收(亿)</th><th>营收YoY</th><th>归母净利(亿)</th><th>净利YoY</th><th>毛利率</th><th>净利率</th><th>年末市值(亿)</th><th>年内峰值市值(亿)</th><th>PE-TTM</th></tr></thead>
+            <tbody class="num">
+              ${ann.map(r => `<tr>
+                <td><strong>${r.year}</strong>${r.mktcap_source ? ` <span class="pill amber" style="padding:1px 6px;font-size:10px" title="整体上市前原上市公司代码">前身 ${esc(r.mktcap_source)}</span>` : ''}</td>
+                <td>${fmtNum(r.revenue_yi)}</td>
+                <td style="color:${yoyColor(r.revenue_yoy)}">${fmtNum(r.revenue_yoy,'%')}</td>
+                <td><strong>${fmtNum(r.net_profit_yi)}</strong></td>
+                <td style="color:${yoyColor(r.net_profit_yoy)}">${fmtNum(r.net_profit_yoy,'%')}</td>
+                <td>${fmtNum(r.gross_margin_pct,'%')}</td>
+                <td>${fmtNum(r.net_margin_pct,'%')}</td>
+                <td style="color:var(--purple);font-weight:700">${fmtNum(r.mktcap_yearend_yi)}</td>
+                <td style="color:var(--accent);font-weight:700">${fmtNum(r.mktcap_high_yi)}</td>
+                <td style="color:var(--amber);font-weight:700">${fmtNum(r.pe_ttm_yearend,'x')}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        `;
+      } else {
+        const allQ = (RAW.quarterly || []).filter(q => q.mktcap_end_yi != null || q.year >= (ANALYSIS.chart_start_year || 2013));
+        if (!allQ.length) {
+          document.getElementById('appendix-table').innerHTML = '<div style="color:var(--muted);padding:16px">该公司暂无单季拆解数据（如港股半年度披露制）</div>';
+          return;
+        }
+        // Compute quarter-over-quarter market cap change %
+        const enriched = allQ.map((q, idx) => {
+          const prevMc = idx > 0 ? allQ[idx - 1].mktcap_end_yi : null;
+          const qMcChg = (q.mktcap_end_yi != null && prevMc && prevMc > 0) ? ((q.mktcap_end_yi - prevMc) / prevMc * 100) : null;
+          const isBoom = ((q.q_np_yoy != null && q.q_np_yoy >= 25) || (q.q_rev_yoy != null && q.q_rev_yoy >= 25));
+          return Object.assign({}, q, { qMcChg, isBoom });
+        });
+        let rows = qBoomOnly ? enriched.filter(x => x.isBoom) : enriched.slice();
+        if (qDescOrder) rows.reverse();
+        const boomCnt = enriched.filter(x => x.isBoom).length;
+        const note = `<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">共 <strong>${enriched.length}</strong> 个交易季度，其中 <span class="pill emerald" style="padding:1px 7px;font-size:10.5px">🔥 爆发季 ${boomCnt} 个</span>（单季营收或净利同比 ≥ +25% 自动高亮底色），可将「净利YoY」与右侧「当季市值涨跌」同行对照，一眼看清哪一季业绩先爆、哪一季股价抢跑！</div>`;
+        document.getElementById('appendix-table').innerHTML = note + `
+          <table>
+            <thead><tr><th>季度</th><th>财报公告日</th><th>单季营收(亿)</th><th>营收YoY</th><th>单季净利(亿)</th><th>净利YoY</th><th>单季毛利率</th><th>季末市值(亿)</th><th>当季市值涨跌</th><th>季末PE-TTM</th></tr></thead>
+            <tbody class="num">
+              ${rows.map(r => `<tr style="${r.isBoom ? 'background:var(--tint-emerald)' : ''}">
+                <td><strong>${esc(r.quarter)}</strong>${r.isBoom ? ' <span class="pill emerald" style="padding:1px 5px;font-size:9.5px">🔥爆发</span>' : ''}</td>
+                <td style="color:var(--muted)">${esc(r.notice_date || '—')}</td>
+                <td>${fmtNum(r.q_rev_yi)}</td>
+                <td style="color:${yoyColor(r.q_rev_yoy)};font-weight:${(r.q_rev_yoy||0)>=25?'800':'500'}">${fmtNum(r.q_rev_yoy,'%')}</td>
+                <td><strong>${fmtNum(r.q_np_yi)}</strong></td>
+                <td style="color:${yoyColor(r.q_np_yoy)};font-weight:${(r.q_np_yoy||0)>=25?'800':'500'}">${fmtNum(r.q_np_yoy,'%')}</td>
+                <td>${fmtNum(r.q_gm_pct,'%')}</td>
+                <td style="color:var(--purple);font-weight:700">${fmtNum(r.mktcap_end_yi)}</td>
+                <td style="color:${yoyColor(r.qMcChg)};font-weight:700">${r.qMcChg!=null?(r.qMcChg>0?'+':'')+r.qMcChg.toFixed(1)+'%':'—'}</td>
+                <td style="color:var(--amber);font-weight:700">${fmtNum(r.pe_ttm_end,'x')}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        `;
+      }
+    }
+
+    function renderTrapsAndPlaybook() {
+      const traps = ANALYSIS.false_leaps || [];
+      document.getElementById('traps-grid').innerHTML = traps.map((t, idx) => `
+        <div class="trap-card" id="trap-card-${idx}">
+          <h4><span>📉 ${esc(t.title)}</span> <span class="pill rose num">${esc(t.period)} ｜ ${esc(t.drawdown)}</span>${t.mktcap_drop ? ` <span class="pill accent num">${esc(t.mktcap_drop)}</span>` : ''}</h4>
+          ${t.why_short ? `<div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;padding:7px 10px;border-radius:8px;background:var(--card);border-left:3px solid var(--rose)">💡 一句话跌因：${esc(t.why_short)}</div>` : ''}
+          <div style="font-size:12.5px;margin-bottom:6px"><strong>表面诱因：</strong><span style="color:var(--muted)">${esc(t.trap_setup)}</span></div>
+          <div style="font-size:12.5px;margin-bottom:8px"><strong>真实杀伤：</strong><span style="color:var(--muted)">${esc(t.real_cause)}</span></div>
+          <div style="font-size:12.5px;padding:8px 10px;border-radius:8px;background:var(--card);border:1px solid var(--border)"><strong>🛡️ 避坑铁律：</strong>${esc(t.lesson)}</div>
+        </div>
+      `).join('');
+
+      const pb = ANALYSIS.small_cap_playbook || [];
+      document.getElementById('playbook-table').innerHTML = `
+        <table>
+          <thead><tr><th>跃迁原型</th><th>财报/公告前置指纹（提前 1–2 年）</th><th>市场定价节奏（左侧 vs 右侧）</th><th>证伪红线</th></tr></thead>
+          <tbody>
+            ${pb.map(r => `<tr>
+              <td><span class="pill emerald">${esc(r.archetype)}</span></td>
+              <td>${esc(r.early_signal)}</td>
+              <td>${esc(r.timing_rule)}</td>
+              <td style="color:var(--rose)">${esc(r.red_flag)}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      `;
+
+      renderAppendixTable();
+    }
+
+    initHeader();
+    renderMainTimeline();
+    renderBizEvolution();
+    renderStages();
+    renderTrapsAndPlaybook();
+  </script>
+</body>
+</html>
