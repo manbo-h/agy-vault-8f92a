@@ -292,12 +292,21 @@
       <div class="table-wrap" id="playbook-table"></div>
     </div>
 
-    <!-- PANEL 5: FULL DATA APPENDIX -->
+    <!-- PANEL 5: FULL DATA APPENDIX (ANNUAL + QUARTERLY EXPLOSION TABLE) -->
     <div class="panel">
-      <details>
-        <summary>📋 展开查看：上市以来完整年度核心四线硬数据总表（零空白精简版）</summary>
-        <div class="table-wrap" style="margin-top:12px;" id="appendix-table"></div>
-      </details>
+      <div class="panel-head" style="margin-bottom:10px">
+        <div>
+          <h2>📋 上市以来完整核心硬数据总表（支持按年度 / 按季度切换定位爆发点）</h2>
+          <div class="panel-sub">切到「🔬 按季度查看」可逐季核对单季营收、净利、毛利率与同期市值涨跌，自动高亮单季同比 ≥ +25% 的「🔥 业绩爆发季」。</div>
+        </div>
+        <div class="seg-controls">
+          <button class="btn active" id="btn-tbl-ann" onclick="setAppendixMode('annual')">📅 按年度</button>
+          <button class="btn" id="btn-tbl-qtr" onclick="setAppendixMode('quarterly')">🔬 按季度（定位爆发季）</button>
+          <button class="btn" id="btn-tbl-boom" style="display:none" onclick="toggleBoomOnly()">🔥 仅看爆发季 (≥+25%)</button>
+          <button class="btn" id="btn-tbl-order" style="display:none" onclick="toggleQOrder()">↕️ 最新在前</button>
+        </div>
+      </div>
+      <div class="table-wrap" id="appendix-table"></div>
     </div>
   </div>
 
@@ -317,6 +326,9 @@
     let lowerMode = 'rev';
     let activeStageIdx = 0;
     let showAllStages = false;
+    let appendixMode = 'annual'; // 'annual' | 'quarterly'
+    let qBoomOnly = false;
+    let qDescOrder = false;
     const stageMicroMode = {}; // stageIdx -> 'np' | 'rev' | 'gm'
 
     const STAGE_COLORS = ['#38bdf8', '#a78bfa', '#34d399', '#fbbf24', '#fb7185', '#22d3ee'];
@@ -1083,6 +1095,93 @@
       }).join('');
     }
 
+    function setAppendixMode(m) {
+      appendixMode = m;
+      document.getElementById('btn-tbl-ann').classList.toggle('active', m === 'annual');
+      document.getElementById('btn-tbl-qtr').classList.toggle('active', m === 'quarterly');
+      document.getElementById('btn-tbl-boom').style.display = m === 'quarterly' ? 'inline-block' : 'none';
+      document.getElementById('btn-tbl-order').style.display = m === 'quarterly' ? 'inline-block' : 'none';
+      renderAppendixTable();
+    }
+    function toggleBoomOnly() {
+      qBoomOnly = !qBoomOnly;
+      document.getElementById('btn-tbl-boom').classList.toggle('active', qBoomOnly);
+      renderAppendixTable();
+    }
+    function toggleQOrder() {
+      qDescOrder = !qDescOrder;
+      const b = document.getElementById('btn-tbl-order');
+      b.classList.toggle('active', qDescOrder);
+      b.textContent = qDescOrder ? '↕️ 时间正序' : '↕️ 最新在前';
+      renderAppendixTable();
+    }
+
+    function renderAppendixTable() {
+      const yoyColor = v => v == null ? 'var(--muted)' : (v >= 0 ? 'var(--emerald)' : 'var(--rose)');
+      if (appendixMode === 'annual') {
+        const ann = (RAW.annual || []).filter(r => r.mktcap_yearend_yi != null);
+        const hasPred = ann.some(r => r.mktcap_source);
+        const predNote = hasPred
+          ? `<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">注：标有 <span class="pill amber" style="padding:1px 6px;font-size:10.5px">前身</span> 的年份（整体上市前），年末市值、年内峰值市值与 PE-TTM 均取自原挂牌上市公司主体真实历史行情；点击右上角「🔬 按季度」可下钻查看每一季业绩与市值爆发节奏。</div>`
+          : `<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">注：仅展示正式上市有真实交易市值的完整年度；点击右上角「🔬 按季度」可逐季排查业绩爆发拐点。</div>`;
+        document.getElementById('appendix-table').innerHTML = predNote + `
+          <table>
+            <thead><tr><th>年份</th><th>营收(亿)</th><th>营收YoY</th><th>归母净利(亿)</th><th>净利YoY</th><th>毛利率</th><th>净利率</th><th>年末市值(亿)</th><th>年内峰值市值(亿)</th><th>PE-TTM</th></tr></thead>
+            <tbody class="num">
+              ${ann.map(r => `<tr>
+                <td><strong>${r.year}</strong>${r.mktcap_source ? ` <span class="pill amber" style="padding:1px 6px;font-size:10px" title="整体上市前原上市公司代码">前身 ${esc(r.mktcap_source)}</span>` : ''}</td>
+                <td>${fmtNum(r.revenue_yi)}</td>
+                <td style="color:${yoyColor(r.revenue_yoy)}">${fmtNum(r.revenue_yoy,'%')}</td>
+                <td><strong>${fmtNum(r.net_profit_yi)}</strong></td>
+                <td style="color:${yoyColor(r.net_profit_yoy)}">${fmtNum(r.net_profit_yoy,'%')}</td>
+                <td>${fmtNum(r.gross_margin_pct,'%')}</td>
+                <td>${fmtNum(r.net_margin_pct,'%')}</td>
+                <td style="color:var(--purple);font-weight:700">${fmtNum(r.mktcap_yearend_yi)}</td>
+                <td style="color:var(--accent);font-weight:700">${fmtNum(r.mktcap_high_yi)}</td>
+                <td style="color:var(--amber);font-weight:700">${fmtNum(r.pe_ttm_yearend,'x')}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        `;
+      } else {
+        const allQ = (RAW.quarterly || []).filter(q => q.mktcap_end_yi != null || q.year >= (ANALYSIS.chart_start_year || 2013));
+        if (!allQ.length) {
+          document.getElementById('appendix-table').innerHTML = '<div style="color:var(--muted);padding:16px">该公司暂无单季拆解数据（如港股半年度披露制）</div>';
+          return;
+        }
+        // Compute quarter-over-quarter market cap change %
+        const enriched = allQ.map((q, idx) => {
+          const prevMc = idx > 0 ? allQ[idx - 1].mktcap_end_yi : null;
+          const qMcChg = (q.mktcap_end_yi != null && prevMc && prevMc > 0) ? ((q.mktcap_end_yi - prevMc) / prevMc * 100) : null;
+          const isBoom = ((q.q_np_yoy != null && q.q_np_yoy >= 25) || (q.q_rev_yoy != null && q.q_rev_yoy >= 25));
+          return Object.assign({}, q, { qMcChg, isBoom });
+        });
+        let rows = qBoomOnly ? enriched.filter(x => x.isBoom) : enriched.slice();
+        if (qDescOrder) rows.reverse();
+        const boomCnt = enriched.filter(x => x.isBoom).length;
+        const note = `<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">共 <strong>${enriched.length}</strong> 个交易季度，其中 <span class="pill emerald" style="padding:1px 7px;font-size:10.5px">🔥 爆发季 ${boomCnt} 个</span>（单季营收或净利同比 ≥ +25% 自动高亮底色），可将「净利YoY」与右侧「当季市值涨跌」同行对照，一眼看清哪一季业绩先爆、哪一季股价抢跑！</div>`;
+        document.getElementById('appendix-table').innerHTML = note + `
+          <table>
+            <thead><tr><th>季度</th><th>财报公告日</th><th>单季营收(亿)</th><th>营收YoY</th><th>单季净利(亿)</th><th>净利YoY</th><th>单季毛利率</th><th>季末市值(亿)</th><th>当季市值涨跌</th><th>季末PE-TTM</th></tr></thead>
+            <tbody class="num">
+              ${rows.map(r => `<tr style="${r.isBoom ? 'background:var(--tint-emerald)' : ''}">
+                <td><strong>${esc(r.quarter)}</strong>${r.isBoom ? ' <span class="pill emerald" style="padding:1px 5px;font-size:9.5px">🔥爆发</span>' : ''}</td>
+                <td style="color:var(--muted)">${esc(r.notice_date || '—')}</td>
+                <td>${fmtNum(r.q_rev_yi)}</td>
+                <td style="color:${yoyColor(r.q_rev_yoy)};font-weight:${(r.q_rev_yoy||0)>=25?'800':'500'}">${fmtNum(r.q_rev_yoy,'%')}</td>
+                <td><strong>${fmtNum(r.q_np_yi)}</strong></td>
+                <td style="color:${yoyColor(r.q_np_yoy)};font-weight:${(r.q_np_yoy||0)>=25?'800':'500'}">${fmtNum(r.q_np_yoy,'%')}</td>
+                <td>${fmtNum(r.q_gm_pct,'%')}</td>
+                <td style="color:var(--purple);font-weight:700">${fmtNum(r.mktcap_end_yi)}</td>
+                <td style="color:${yoyColor(r.qMcChg)};font-weight:700">${r.qMcChg!=null?(r.qMcChg>0?'+':'')+r.qMcChg.toFixed(1)+'%':'—'}</td>
+                <td style="color:var(--amber);font-weight:700">${fmtNum(r.pe_ttm_end,'x')}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        `;
+      }
+    }
+
     function renderTrapsAndPlaybook() {
       const traps = ANALYSIS.false_leaps || [];
       document.getElementById('traps-grid').innerHTML = traps.map(t => `
@@ -1109,31 +1208,7 @@
         </table>
       `;
 
-      const ann = (RAW.annual || []).filter(r => r.mktcap_yearend_yi != null);
-      const hasPred = ann.some(r => r.mktcap_source);
-      const yoyColor = v => v == null ? 'var(--muted)' : (v >= 0 ? 'var(--emerald)' : 'var(--rose)');
-      const predNote = hasPred
-        ? `<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">注：标有 <span class="pill amber" style="padding:1px 6px;font-size:10.5px">前身</span> 的年份（整体上市前），年末市值、年内峰值市值与 PE-TTM 均取自原挂牌上市公司主体真实历史行情；已自动隐藏早期高缺失率辅助列（研发/在建/商誉可在上方主图「前置雷达」按需查看）。</div>`
-        : `<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">注：仅展示正式上市有真实交易市值的完整年度；已隐藏早期大面积缺失的辅助列（在建工程/研发/商誉可在上方主图「下轨：前置雷达」查看）。</div>`;
-      document.getElementById('appendix-table').innerHTML = predNote + `
-        <table>
-          <thead><tr><th>年份</th><th>营收(亿)</th><th>营收YoY</th><th>归母净利(亿)</th><th>净利YoY</th><th>毛利率</th><th>净利率</th><th>年末市值(亿)</th><th>年内峰值市值(亿)</th><th>PE-TTM</th></tr></thead>
-          <tbody class="num">
-            ${ann.map(r => `<tr>
-              <td><strong>${r.year}</strong>${r.mktcap_source ? ` <span class="pill amber" style="padding:1px 6px;font-size:10px" title="整体上市前原上市公司代码">前身 ${esc(r.mktcap_source)}</span>` : ''}</td>
-              <td>${fmtNum(r.revenue_yi)}</td>
-              <td style="color:${yoyColor(r.revenue_yoy)}">${fmtNum(r.revenue_yoy,'%')}</td>
-              <td><strong>${fmtNum(r.net_profit_yi)}</strong></td>
-              <td style="color:${yoyColor(r.net_profit_yoy)}">${fmtNum(r.net_profit_yoy,'%')}</td>
-              <td>${fmtNum(r.gross_margin_pct,'%')}</td>
-              <td>${fmtNum(r.net_margin_pct,'%')}</td>
-              <td style="color:var(--purple);font-weight:700">${fmtNum(r.mktcap_yearend_yi)}</td>
-              <td style="color:var(--accent);font-weight:700">${fmtNum(r.mktcap_high_yi)}</td>
-              <td style="color:var(--amber);font-weight:700">${fmtNum(r.pe_ttm_yearend,'x')}</td>
-            </tr>`).join('')}
-          </tbody>
-        </table>
-      `;
+      renderAppendixTable();
     }
 
     initHeader();

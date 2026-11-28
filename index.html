@@ -6,480 +6,474 @@
   <meta name="robots" content="noindex, nofollow">
   <title>📚 私人深度投研数字书架</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#0b1120">
   <style>
+    :root {
+      --bg: #0b1120;
+      --bg-hdr: rgba(15, 23, 42, 0.94);
+      --card: #131d31;
+      --card-hover: #1b2944;
+      --border: #24324d;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --emerald: #34d399;
+      --amber: #fbbf24;
+      --purple: #a78bfa;
+      --rose: #fb7185;
+    }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      background: #0f172a;
-      color: #f8fafc;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13.5px;
+      line-height: 1.5;
       min-height: 100vh;
     }
+    .num { font-variant-numeric: tabular-nums; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
     .header {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      border-bottom: 1px solid #334155;
-      padding: 24px 20px 18px 20px;
+      background: var(--bg-hdr);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 18px 12px;
       position: sticky;
       top: 0;
       z-index: 100;
       box-shadow: 0 4px 20px rgba(0,0,0,0.35);
     }
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-    .title-row {
+    .container { max-width: 1180px; margin: 0 auto; }
+    .top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
-    .title-row h1 {
+    .top-row h1 {
       margin: 0;
-      font-size: 21px;
+      font-size: 18px;
       font-weight: 800;
-      color: #38bdf8;
+      color: var(--accent);
       display: flex;
       align-items: center;
       gap: 8px;
     }
     .badge-count {
-      background: #0284c7;
-      color: #fff;
-      font-size: 12px;
-      padding: 3px 10px;
+      background: rgba(56,189,248,0.16);
+      color: var(--accent);
+      border: 1px solid rgba(56,189,248,0.38);
+      font-size: 11.5px;
+      padding: 2px 9px;
       border-radius: 999px;
-      font-weight: 600;
+      font-weight: 700;
     }
-    .controls {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .search-box {
-      flex: 1;
-      min-width: 220px;
-      background: #1e293b;
-      border: 1px solid #475569;
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 14px;
-      outline: none;
-    }
-    .search-box:focus {
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 2px rgba(56,189,248,0.25);
-    }
-    .tabs {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .tab-btn {
-      background: #1e293b;
-      color: #cbd5e1;
-      border: 1px solid #334155;
-      padding: 8px 13px;
-      border-radius: 8px;
-      font-size: 13px;
+    .top-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .ctrl-btn {
+      background: var(--card);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 7px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.14s ease;
     }
-    .tab-btn.active {
-      background: #0284c7;
-      color: #fff;
-      border-color: #38bdf8;
-    }
+    .ctrl-btn:hover { border-color: var(--accent); color: var(--text); }
+    .ctrl-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
     .offline-btn {
       background: #059669;
       color: #fff;
       border: none;
-      padding: 8px 13px;
-      border-radius: 8px;
-      font-size: 12.5px;
+      padding: 6px 11px;
+      border-radius: 7px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
     }
-    .main {
-      padding: 22px 20px 60px 20px;
-    }
-    .section-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #94a3b8;
-      margin: 20px 0 12px 0;
+    .search-row {
       display: flex;
+      gap: 8px;
       align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .search-box {
+      flex: 1;
+      min-width: 220px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+    }
+    .search-box:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(56,189,248,0.2); }
+    .tabs {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: var(--card);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.14s ease;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text); border-color: #475569; }
+    .tab-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
+    .tab-btn.tab-recent { border-color: rgba(251,191,36,0.45); color: #fcd34d; }
+    .tab-btn.tab-recent.active { background: linear-gradient(90deg, #d97706, #ea580c); color: #fff; border-color: #fbbf24; }
+    .tab-btn.tab-meta { border-color: rgba(167,139,250,0.45); color: #c4b5fd; }
+    .tab-btn.tab-meta.active { background: linear-gradient(90deg, #7c3aed, #0284c7); color: #fff; border-color: #a78bfa; }
+
+    .main { padding: 16px 18px 60px; }
+
+    /* Recent Updates Spotlight Strip */
+    .recent-box {
+      background: linear-gradient(135deg, rgba(14, 116, 144, 0.14) 0%, rgba(124, 58, 237, 0.12) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.32);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+    .recent-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .recent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 8px;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 14px;
+    .recent-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.14s ease;
     }
-    .card {
-      background: #1e293b;
-      border: 1px solid #334155;
+    .recent-pill:hover { border-color: var(--accent); background: var(--card-hover); transform: translateY(-1px); }
+    .recent-left { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+    .recent-title { font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .recent-sub { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .fresh-dot {
+      display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 10.5px; font-weight: 800;
+      background: rgba(52,211,153,0.18); color: #34d399; border: 1px solid rgba(52,211,153,0.4); white-space: nowrap;
+    }
+    .fresh-dot.today { background: rgba(251,191,36,0.18); color: #fbbf24; border-color: rgba(251,191,36,0.45); }
+
+    .list-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Compact List View (Default) */
+    .report-list {
+      display: flex;
+      flex-direction: column;
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 16px;
+      overflow: hidden;
+    }
+    .row-item {
+      display: grid;
+      grid-template-columns: 118px minmax(220px, 1fr) auto 124px 62px;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-bottom: 1px solid rgba(36, 50, 77, 0.7);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.12s ease;
+    }
+    .row-item:last-child { border-bottom: none; }
+    .row-item:hover { background: var(--card-hover); }
+    .row-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .row-badges { display: flex; gap: 4px; flex-wrap: nowrap; align-items: center; }
+    .row-time { font-size: 12px; color: var(--muted); text-align: right; white-space: nowrap; }
+    .row-size { font-size: 11.5px; color: #64748b; text-align: right; white-space: nowrap; }
+
+    /* Compact Grid View (Optional Toggle) */
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+    }
+    .gcard {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 13px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      gap: 8px;
+      transition: all 0.14s ease;
     }
-    .card:hover, .card:active {
-      transform: translateY(-2px);
-      border-color: #38bdf8;
-      box-shadow: 0 8px 24px rgba(2,132,199,0.22);
-    }
-    .card.leaderboard {
-      background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);
-      border-color: #6366f1;
-    }
-    .card.industry {
-      background: linear-gradient(135deg, #064e3b 0%, #1e293b 100%);
-      border-color: #10b981;
-    }
-    .card.dashboard {
-      background: linear-gradient(135deg, #0c4a6e 0%, #1e1b4b 100%);
-      border-color: #38bdf8;
-    }
-    .card.chronicle {
-      background: linear-gradient(135deg, #451a03 0%, #1e293b 100%);
-      border-color: #f59e0b;
-    }
-    .card.metamorphosis {
-      background: linear-gradient(135deg, #2e1065 0%, #0f2942 60%, #1e293b 100%);
-      border-color: #a78bfa;
-    }
-    .card.debate {
-      background: linear-gradient(135deg, #3b0764 0%, #1e293b 100%);
-      border-color: #c084fc;
-    }
-    .card.v2cockpit {
-      background: linear-gradient(135deg, #064e3b 0%, #0c4a6e 55%, #1e1b4b 100%);
-      border-color: #34d399;
-    }
-    .card.v3new {
-      background: linear-gradient(135deg, #063b36 0%, #0f2942 60%, #1e293b 100%);
-      border: 1.5px solid #10b981;
-      box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.22), 0 4px 14px rgba(5, 150, 105, 0.16);
-    }
-    .card-tag {
-      display: inline-block;
+    .gcard:hover { border-color: var(--accent); background: var(--card-hover); transform: translateY(-1px); }
+    .gcard-title { font-size: 13.5px; font-weight: 700; color: var(--text); line-height: 1.35; }
+    .gcard-meta { font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; padding-top: 6px; border-top: 1px dashed var(--border); }
+
+    /* Compact Category Badges */
+    .cat-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       font-size: 11px;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 5px;
-      margin-bottom: 8px;
+      white-space: nowrap;
       width: fit-content;
     }
-    .tag-lb { background: #4f46e5; color: #fff; }
-    .tag-v2 { background: linear-gradient(90deg, #10b981, #0284c7); color: #fff; }
-    .tag-v3new {
-      background: linear-gradient(90deg, #059669 0%, #10b981 55%, #06b6d4 100%);
-      color: #ecfdf5;
-      margin-left: 5px;
-      border: 1px solid rgba(167, 243, 208, 0.45);
-      box-shadow: 0 1px 6px rgba(16, 185, 129, 0.35);
-    }
-    .tag-swarm {
-      background: linear-gradient(90deg, #f59e0b 0%, #d97706 60%, #b45309 100%);
-      color: #fffbeb;
-      margin-left: 5px;
-      border: 1px solid rgba(254, 243, 199, 0.45);
-      box-shadow: 0 1px 6px rgba(217, 119, 6, 0.38);
-    }
-    .tab-btn.tab-v3new {
-      border-color: #10b981;
-      color: #6ee7b7;
-      background: rgba(6, 78, 59, 0.55);
-    }
-    .tab-btn.tab-v3new.active {
-      background: linear-gradient(90deg, #059669, #0284c7);
-      color: #fff;
-      border-color: #34d399;
-    }
-    .tag-dash { background: #0ea5e9; color: #0f172a; }
-    .tag-debate { background: #a855f7; color: #fff; }
-    .tag-ind { background: #059669; color: #fff; }
-    .tag-chron { background: #d97706; color: #fff; }
-    .tag-meta { background: linear-gradient(90deg, #8b5cf6, #06b6d4); color: #fff; }
-    .tag-stock { background: #0284c7; color: #fff; }
-    .tag-h { background: #f59e0b; color: #0f172a; margin-left: 5px; }
-    .tag-svg { background: #a855f7; color: #fff; margin-left: 5px; }
-    .card-title {
-      font-size: 16.5px;
+    .c-leaderboard { background: rgba(99,102,241,0.22); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.45); }
+    .c-v2cockpit   { background: rgba(16,185,129,0.20); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.42); }
+    .c-metamorphosis { background: rgba(139,92,246,0.22); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.48); }
+    .c-debate      { background: rgba(192,132,252,0.18); color: #d8b4fe; border: 1px solid rgba(192,132,252,0.4); }
+    .c-dashboard   { background: rgba(14,165,233,0.20); color: #7dd3fc; border: 1px solid rgba(14,165,233,0.4); }
+    .c-industry    { background: rgba(5,150,105,0.20); color: #6ee7b7; border: 1px solid rgba(5,150,105,0.4); }
+    .c-chronicle   { background: rgba(217,119,6,0.20); color: #fcd34d; border: 1px solid rgba(217,119,6,0.4); }
+    .c-stock       { background: rgba(56,189,248,0.14); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.32); }
+
+    .mini-b {
+      font-size: 10.5px;
       font-weight: 700;
-      color: #f8fafc;
-      margin-bottom: 8px;
-      line-height: 1.35;
+      padding: 1px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
     }
-    .card-meta {
-      font-size: 12px;
-      color: #94a3b8;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px dashed #334155;
-    }
-    #cache-status {
-      font-size: 12px;
-      color: #34d399;
-      margin-top: 8px;
-      display: none;
+    .mb-v3    { background: rgba(16,185,129,0.16); color: #34d399; border: 1px solid rgba(16,185,129,0.35); }
+    .mb-swarm { background: rgba(245,158,11,0.16); color: #fbbf24; border: 1px solid rgba(245,158,11,0.38); }
+    .mb-pod   { background: rgba(168,85,247,0.16); color: #c084fc; border: 1px solid rgba(168,85,247,0.38); }
+
+    #cache-status { font-size: 12px; color: var(--emerald); margin-top: 6px; display: none; }
+
+    @media (max-width: 780px) {
+      .row-item {
+        grid-template-columns: 96px 1fr auto;
+        gap: 6px;
+        padding: 9px 10px;
+      }
+      .row-badges, .row-size { display: none; }
+      .row-title { white-space: normal; font-size: 13px; }
     }
   </style>
 </head>
 <body>
   <div class="header">
     <div class="container">
-      <div class="title-row">
-        <h1>📚 私人深度投研数字书架 <span class="badge-count">共 186 份精装报告</span></h1>
-        <button class="offline-btn" onclick="cacheAllReports()" id="btn-cache">📥 一键缓存全部到平板（无VPN/断网也能看）</button>
-      </div>
-      <div class="controls">
-        <input type="text" id="searchInput" class="search-box" placeholder="🔍 搜索公司名称、行业或关键词（如：茅台、宁德、有色、煤炭）..." oninput="filterCards()" />
-        <div class="tabs">
-          <button class="tab-btn active" onclick="setTab('all', this)">全部 (186)</button>
-          <button class="tab-btn tab-v3new" onclick="setTab('v3new', this)">✨ 最新调研流程 (55)</button>
-          <button class="tab-btn" onclick="setTab('leaderboard', this)">👑 排行榜 (1)</button>
-          <button class="tab-btn" onclick="setTab('v2cockpit', this)">🚀 2.5 全感官驾驶舱 (31)</button>
-          <button class="tab-btn" onclick="setTab('debate', this)">💬 投委会辩论 (18)</button>
-          <button class="tab-btn" onclick="setTab('dashboard', this)">📊 可视化图谱 (5)</button>
-          <button class="tab-btn" onclick="setTab('industry', this)">🌍 产业沙盘 (4)</button>
-          <button class="tab-btn" onclick="setTab('metamorphosis', this)">🦋 上市跃迁图谱 (2)</button>
-          <button class="tab-btn" onclick="setTab('chronicle', this)">📜 商业发家史 (2)</button>
-          <button class="tab-btn" onclick="setTab('stock', this)">🏢 个股投研 (123)</button>
+      <div class="top-row">
+        <h1>📚 私人深度投研数字书架 <span class="badge-count num">共 186 份</span></h1>
+        <div class="top-actions">
+          <button class="ctrl-btn active" id="btn-view-list" onclick="setView('list')">📋 紧凑列表</button>
+          <button class="ctrl-btn" id="btn-view-grid" onclick="setView('grid')">🗂️ 紧凑卡片</button>
+          <button class="ctrl-btn active" id="btn-sort-time" onclick="setSort('time')">🕒 最新更新优先</button>
+          <button class="ctrl-btn" id="btn-sort-cat" onclick="setSort('cat')">📂 按分类排序</button>
+          <button class="offline-btn" onclick="cacheAllReports()" id="btn-cache">📥 离线缓存</button>
         </div>
       </div>
+
+      <div class="search-row">
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 搜索公司、行业或关键词（如：美的、万华、双汇、播客、跃迁、排行榜）..." oninput="renderMain()" />
+      </div>
+
+      <div class="tabs" id="tabBar"></div>
       <div id="cache-status"></div>
     </div>
   </div>
 
   <div class="main container">
-    <div class="grid" id="reportGrid">
-      <a class="card leaderboard" href="./企业深度投研性价比排行榜_最新全集.html" target="_blank" rel="noopener noreferrer" data-kind="leaderboard" data-v3="0" data-title="企业深度投研性价比排行榜_最新全集" data-tags=""><div><span class="card-tag tag-lb">👑 全市场总榜</span><div class="card-title">企业深度投研性价比排行榜（最新全集）</div></div><div class="card-meta"><span>📅 2026-11-28 10:58</span><span>📦 883 KB</span></div></a>
-      <a class="card v2cockpit" href="./山西汾酒_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="山西汾酒_2.0模块化深度投研驾驶舱" data-tags="播客 双人播客 音频 Bento 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-svg" title="内置 8 分钟双人买方播客 MP3 + 同步台词本">🎧 含双人播客</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">山西汾酒 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-28 10:58</span><span>📦 671 KB</span></div></a>
-      <a class="card v2cockpit" href="./伯特利_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="伯特利_2.0模块化深度投研驾驶舱" data-tags="播客 双人播客 音频 Bento 最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-svg" title="内置 8 分钟双人买方播客 MP3 + 同步台词本">🎧 含双人播客</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">伯特利 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-28 03:00</span><span>📦 766 KB</span></div></a>
-      <a class="card v2cockpit" href="./招商银行_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="招商银行_2.0模块化深度投研驾驶舱" data-tags="播客 双人播客 音频 Bento 最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-svg" title="内置 8 分钟双人买方播客 MP3 + 同步台词本">🎧 含双人播客</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">招商银行 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 19:48</span><span>📦 763 KB</span></div></a>
-      <a class="card v2cockpit" href="./双汇发展_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="双汇发展_2.0模块化深度投研驾驶舱" data-tags="播客 双人播客 音频 Bento 最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-svg" title="内置 8 分钟双人买方播客 MP3 + 同步台词本">🎧 含双人播客</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">双汇发展 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 18:11</span><span>📦 737 KB</span></div></a>
-      <a class="card v2cockpit" href="./中国平安_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="0" data-title="中国平安_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">中国平安 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 13:37</span><span>📦 498 KB</span></div></a>
-      <a class="card v2cockpit" href="./中原内配_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="中原内配_2.0模块化深度投研驾驶舱" data-tags="播客 双人播客 音频 Bento 最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-svg" title="内置 8 分钟双人买方播客 MP3 + 同步台词本">🎧 含双人播客</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">中原内配 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 13:27</span><span>📦 742 KB</span></div></a>
-      <a class="card v2cockpit" href="./瑞丰新材_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="瑞丰新材_2.0模块化深度投研驾驶舱" data-tags="播客 双人播客 音频 Bento 最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-svg" title="内置 8 分钟双人买方播客 MP3 + 同步台词本">🎧 含双人播客</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">瑞丰新材 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 12:03</span><span>📦 765 KB</span></div></a>
-      <a class="card v2cockpit" href="./中芯国际_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="中芯国际_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">中芯国际 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 656 KB</span></div></a>
-      <a class="card v2cockpit" href="./紫金矿业_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="紫金矿业_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">紫金矿业 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 735 KB</span></div></a>
-      <a class="card v2cockpit" href="./潞安环能_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="潞安环能_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">潞安环能 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 632 KB</span></div></a>
-      <a class="card v2cockpit" href="./淮北矿业_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="淮北矿业_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">淮北矿业 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 717 KB</span></div></a>
-      <a class="card v2cockpit" href="./恒源煤电_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="恒源煤电_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">恒源煤电 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 537 KB</span></div></a>
-      <a class="card v2cockpit" href="./中国海油_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="0" data-title="中国海油_2.0模块化深度投研驾驶舱" data-tags="播客 双人播客 音频 Bento Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-svg" title="内置 8 分钟双人买方播客 MP3 + 同步台词本">🎧 含双人播客</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">中国海油 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 664 KB</span></div></a>
-      <a class="card v2cockpit" href="./华域汽车_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="0" data-title="华域汽车_2.0模块化深度投研驾驶舱" data-tags="播客 双人播客 音频 Bento Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-svg" title="内置 8 分钟双人买方播客 MP3 + 同步台词本">🎧 含双人播客</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">华域汽车 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 704 KB</span></div></a>
-      <a class="card v2cockpit" href="./海螺水泥_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="海螺水泥_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">海螺水泥 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 636 KB</span></div></a>
-      <a class="card v2cockpit" href="./山东黄金_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="山东黄金_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">山东黄金 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 630 KB</span></div></a>
-      <a class="card v2cockpit" href="./万华化学_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="万华化学_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">万华化学 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 714 KB</span></div></a>
-      <a class="card v2cockpit" href="./上汽集团_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="0" data-title="上汽集团_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-h">Bento海报 · 分层折叠</span><div class="card-title">上汽集团 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 572 KB</span></div></a>
-      <a class="card v2cockpit" href="./中国联通_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="中国联通_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">中国联通 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 618 KB</span></div></a>
-      <a class="card v2cockpit" href="./宁德时代_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="0" data-title="宁德时代_2.0模块化深度投研驾驶舱" data-tags="播客 双人播客 音频 Bento Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-svg" title="内置 8 分钟双人买方播客 MP3 + 同步台词本">🎧 含双人播客</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">宁德时代 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 688 KB</span></div></a>
-      <a class="card v2cockpit" href="./欣旺达_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="欣旺达_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">欣旺达 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 543 KB</span></div></a>
-      <a class="card v2cockpit" href="./腾讯控股_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="0" data-title="腾讯控股_2.0模块化深度投研驾驶舱" data-tags="播客 双人播客 音频 Bento Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-svg" title="内置 8 分钟双人买方播客 MP3 + 同步台词本">🎧 含双人播客</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">腾讯控股 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 654 KB</span></div></a>
-      <a class="card v2cockpit" href="./天赐材料_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="0" data-title="天赐材料_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-h">Bento海报 · 分层折叠</span><div class="card-title">天赐材料 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 546 KB</span></div></a>
-      <a class="card v2cockpit" href="./天山铝业_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="天山铝业_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">天山铝业 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 538 KB</span></div></a>
-      <a class="card v2cockpit" href="./四川黄金_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="四川黄金_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">四川黄金 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 619 KB</span></div></a>
-      <a class="card v2cockpit" href="./铖昌科技_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="铖昌科技_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">铖昌科技 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 619 KB</span></div></a>
-      <a class="card v2cockpit" href="./山金国际_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="山金国际_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">山金国际 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 627 KB</span></div></a>
-      <a class="card v2cockpit" href="./紫光股份_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="0" data-title="紫光股份_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">紫光股份 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 611 KB</span></div></a>
-      <a class="card v2cockpit" href="./神火股份_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="神火股份_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><div class="card-title">神火股份 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 558 KB</span></div></a>
-      <a class="card v2cockpit" href="./云铝股份_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="0" data-title="云铝股份_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">云铝股份 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 572 KB</span></div></a>
-      <a class="card v2cockpit" href="./盐湖股份_2.0模块化深度投研驾驶舱.html" target="_blank" rel="noopener noreferrer" data-kind="v2cockpit" data-v3="1" data-title="盐湖股份_2.0模块化深度投研驾驶舱" data-tags="Bento 2.5驾驶舱 最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-v2">🚀 2.5 全感官驾驶舱</span><span class="card-tag tag-v3new" title="由最新v3.0方案B调研流程直出">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">盐湖股份 · 2.5 全感官投研驾驶舱</div></div><div class="card-meta"><span>📅 2026-11-27 11:38</span><span>📦 729 KB</span></div></a>
-      <a class="card debate" href="./伯特利_投委会群聊辩论剧场_20261128.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="1" data-title="伯特利_投委会群聊辩论剧场_20261128" data-tags="最新调研流程 v3新流程 Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><span class="card-tag tag-v3new">✨ 最新调研流程</span><div class="card-title">伯特利 · 投委会群聊辩论（20261128）</div></div><div class="card-meta"><span>📅 2026-11-28 02:59</span><span>📦 110 KB</span></div></a>
-      <a class="card debate" href="./招商银行_投委会群聊辩论剧场_20261127.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="1" data-title="招商银行_投委会群聊辩论剧场_20261127" data-tags="最新调研流程 v3新流程 Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><span class="card-tag tag-v3new">✨ 最新调研流程</span><div class="card-title">招商银行 · 投委会群聊辩论（20261127）</div></div><div class="card-meta"><span>📅 2026-11-27 19:45</span><span>📦 109 KB</span></div></a>
-      <a class="card debate" href="./双汇发展_投委会群聊辩论剧场_20261127.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="1" data-title="双汇发展_投委会群聊辩论剧场_20261127" data-tags="最新调研流程 v3新流程 Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><span class="card-tag tag-v3new">✨ 最新调研流程</span><div class="card-title">双汇发展 · 投委会群聊辩论（20261127）</div></div><div class="card-meta"><span>📅 2026-11-27 16:28</span><span>📦 106 KB</span></div></a>
-      <a class="card debate" href="./中国平安_投委会群聊辩论剧场_20261127.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="0" data-title="中国平安_投委会群聊辩论剧场_20261127" data-tags="Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><div class="card-title">中国平安 · 投委会群聊辩论（20261127）</div></div><div class="card-meta"><span>📅 2026-11-27 13:38</span><span>📦 105 KB</span></div></a>
-      <a class="card debate" href="./中原内配_投委会群聊辩论剧场_20261127.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="1" data-title="中原内配_投委会群聊辩论剧场_20261127" data-tags="最新调研流程 v3新流程 Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><span class="card-tag tag-v3new">✨ 最新调研流程</span><div class="card-title">中原内配 · 投委会群聊辩论（20261127）</div></div><div class="card-meta"><span>📅 2026-11-27 13:06</span><span>📦 107 KB</span></div></a>
-      <a class="card debate" href="./瑞丰新材_投委会群聊辩论剧场_20261127.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="1" data-title="瑞丰新材_投委会群聊辩论剧场_20261127" data-tags="最新调研流程 v3新流程 Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><span class="card-tag tag-v3new">✨ 最新调研流程</span><div class="card-title">瑞丰新材 · 投委会群聊辩论（20261127）</div></div><div class="card-meta"><span>📅 2026-11-27 11:44</span><span>📦 104 KB</span></div></a>
-      <a class="card debate" href="./紫金矿业_投委会群聊辩论剧场_20261126.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="1" data-title="紫金矿业_投委会群聊辩论剧场_20261126" data-tags="最新调研流程 v3新流程 Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><span class="card-tag tag-v3new">✨ 最新调研流程</span><div class="card-title">紫金矿业 · 投委会群聊辩论（20261126）</div></div><div class="card-meta"><span>📅 2026-11-26 19:59</span><span>📦 97 KB</span></div></a>
-      <a class="card debate" href="./淮北矿业_投委会群聊辩论剧场_20261126.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="1" data-title="淮北矿业_投委会群聊辩论剧场_20261126" data-tags="最新调研流程 v3新流程 Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><span class="card-tag tag-v3new">✨ 最新调研流程</span><div class="card-title">淮北矿业 · 投委会群聊辩论（20261126）</div></div><div class="card-meta"><span>📅 2026-11-26 19:31</span><span>📦 98 KB</span></div></a>
-      <a class="card debate" href="./盐湖股份_投委会群聊辩论剧场_20261126.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="1" data-title="盐湖股份_投委会群聊辩论剧场_20261126" data-tags="最新调研流程 v3新流程 Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><span class="card-tag tag-v3new">✨ 最新调研流程</span><div class="card-title">盐湖股份 · 投委会群聊辩论（20261126）</div></div><div class="card-meta"><span>📅 2026-11-26 13:57</span><span>📦 99 KB</span></div></a>
-      <a class="card debate" href="./万华化学_投委会群聊辩论剧场_20261126.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="1" data-title="万华化学_投委会群聊辩论剧场_20261126" data-tags="最新调研流程 v3新流程 Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><span class="card-tag tag-v3new">✨ 最新调研流程</span><div class="card-title">万华化学 · 投委会群聊辩论（20261126）</div></div><div class="card-meta"><span>📅 2026-11-26 13:17</span><span>📦 97 KB</span></div></a>
-      <a class="card debate" href="./中国海油_投委会群聊辩论剧场_20261125.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="0" data-title="中国海油_投委会群聊辩论剧场_20261125" data-tags="Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><div class="card-title">中国海油 · 投委会群聊辩论（20261125）</div></div><div class="card-meta"><span>📅 2026-11-26 11:16</span><span>📦 88 KB</span></div></a>
-      <a class="card debate" href="./海螺水泥_投委会群聊辩论剧场_20261125.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="1" data-title="海螺水泥_投委会群聊辩论剧场_20261125" data-tags="最新调研流程 v3新流程 Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><span class="card-tag tag-v3new">✨ 最新调研流程</span><div class="card-title">海螺水泥 · 投委会群聊辩论（20261125）</div></div><div class="card-meta"><span>📅 2026-11-26 00:13</span><span>📦 96 KB</span></div></a>
-      <a class="card debate" href="./腾讯控股_投委会群聊辩论剧场_20261125.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="0" data-title="腾讯控股_投委会群聊辩论剧场_20261125" data-tags="Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><div class="card-title">腾讯控股 · 投委会群聊辩论（20261125）</div></div><div class="card-meta"><span>📅 2026-11-25 21:28</span><span>📦 96 KB</span></div></a>
-      <a class="card debate" href="./华域汽车_投委会群聊辩论剧场_20261125.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="0" data-title="华域汽车_投委会群聊辩论剧场_20261125" data-tags="Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><div class="card-title">华域汽车 · 投委会群聊辩论（20261125）</div></div><div class="card-meta"><span>📅 2026-11-25 20:46</span><span>📦 88 KB</span></div></a>
-      <a class="card debate" href="./紫光股份_投委会群聊辩论剧场_20261125.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="0" data-title="紫光股份_投委会群聊辩论剧场_20261125" data-tags="Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><div class="card-title">紫光股份 · 投委会群聊辩论（20261125）</div></div><div class="card-meta"><span>📅 2026-11-25 15:34</span><span>📦 89 KB</span></div></a>
-      <a class="card debate" href="./云铝股份_投委会群聊辩论剧场_20261125.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="0" data-title="云铝股份_投委会群聊辩论剧场_20261125" data-tags="Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><div class="card-title">云铝股份 · 投委会群聊辩论（20261125）</div></div><div class="card-meta"><span>📅 2026-11-25 13:13</span><span>📦 78 KB</span></div></a>
-      <a class="card debate" href="./海尔智家_投委会群聊辩论剧场_20261125.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="0" data-title="海尔智家_投委会群聊辩论剧场_20261125" data-tags="Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><div class="card-title">海尔智家 · 投委会群聊辩论（20261125）</div></div><div class="card-meta"><span>📅 2026-11-25 13:13</span><span>📦 86 KB</span></div></a>
-      <a class="card debate" href="./宁德时代_投委会群聊辩论剧场_20261125.html" target="_blank" rel="noopener noreferrer" data-kind="debate" data-v3="0" data-title="宁德时代_投委会群聊辩论剧场_20261125" data-tags="Swarm 辩论"><div><span class="card-tag tag-debate">💬 投委会群聊剧场</span><span class="card-tag tag-swarm">👑 Swarm×B测</span><div class="card-title">宁德时代 · 投委会群聊辩论（20261125）</div></div><div class="card-meta"><span>📅 2026-11-25 11:15</span><span>📦 90 KB</span></div></a>
-      <a class="card dashboard" href="./中国海油_可视化全景图谱看板.html" target="_blank" rel="noopener noreferrer" data-kind="dashboard" data-v3="0" data-title="中国海油_可视化全景图谱看板" data-tags=""><div><span class="card-tag tag-dash">📊 可视化图谱看板</span><span class="card-tag tag-svg">7-Tab 交互SVG</span><div class="card-title">中国海油 · 全景可视化图谱看板</div></div><div class="card-meta"><span>📅 2026-11-24 23:21</span><span>📦 188 KB</span></div></a>
-      <a class="card dashboard" href="./腾讯控股_可视化全景图谱看板.html" target="_blank" rel="noopener noreferrer" data-kind="dashboard" data-v3="0" data-title="腾讯控股_可视化全景图谱看板" data-tags=""><div><span class="card-tag tag-dash">📊 可视化图谱看板</span><span class="card-tag tag-svg">7-Tab 交互SVG</span><div class="card-title">腾讯控股 · 全景可视化图谱看板</div></div><div class="card-meta"><span>📅 2026-11-24 23:21</span><span>📦 193 KB</span></div></a>
-      <a class="card dashboard" href="./宏观与大宗周期仪_可视化全景图谱看板.html" target="_blank" rel="noopener noreferrer" data-kind="dashboard" data-v3="0" data-title="宏观与大宗周期仪_可视化全景图谱看板" data-tags=""><div><span class="card-tag tag-dash">📊 可视化图谱看板</span><span class="card-tag tag-svg">7-Tab 交互SVG</span><div class="card-title">宏观与大宗周期仪 · 全景可视化图谱看板</div></div><div class="card-meta"><span>📅 2026-11-24 12:39</span><span>📦 75 KB</span></div></a>
-      <a class="card dashboard" href="./海尔智家_可视化全景图谱看板.html" target="_blank" rel="noopener noreferrer" data-kind="dashboard" data-v3="0" data-title="海尔智家_可视化全景图谱看板" data-tags=""><div><span class="card-tag tag-dash">📊 可视化图谱看板</span><span class="card-tag tag-svg">7-Tab 交互SVG</span><div class="card-title">海尔智家 · 全景可视化图谱看板</div></div><div class="card-meta"><span>📅 2026-11-23 12:00</span><span>📦 171 KB</span></div></a>
-      <a class="card dashboard" href="./京东方A_可视化全景图谱看板.html" target="_blank" rel="noopener noreferrer" data-kind="dashboard" data-v3="0" data-title="京东方A_可视化全景图谱看板" data-tags=""><div><span class="card-tag tag-dash">📊 可视化图谱看板</span><span class="card-tag tag-svg">7-Tab 交互SVG</span><div class="card-title">京东方A · 全景可视化图谱看板</div></div><div class="card-meta"><span>📅 2026-11-23 11:14</span><span>📦 172 KB</span></div></a>
-      <a class="card industry" href="./黄金_全球产业全景沙盘.html" target="_blank" rel="noopener noreferrer" data-kind="industry" data-v3="0" data-title="黄金_全球产业全景沙盘" data-tags=""><div><span class="card-tag tag-ind">🌍 全球产业沙盘</span><div class="card-title">黄金 · 全球产业全景沙盘</div></div><div class="card-meta"><span>📅 2026-11-20 22:00</span><span>📦 268 KB</span></div></a>
-      <a class="card industry" href="./有色金属_全球产业全景沙盘.html" target="_blank" rel="noopener noreferrer" data-kind="industry" data-v3="0" data-title="有色金属_全球产业全景沙盘" data-tags=""><div><span class="card-tag tag-ind">🌍 全球产业沙盘</span><div class="card-title">有色金属 · 全球产业全景沙盘</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 311 KB</span></div></a>
-      <a class="card industry" href="./医疗研发外包产业链_全球产业全景沙盘.html" target="_blank" rel="noopener noreferrer" data-kind="industry" data-v3="0" data-title="医疗研发外包产业链_全球产业全景沙盘" data-tags=""><div><span class="card-tag tag-ind">🌍 全球产业沙盘</span><div class="card-title">医疗研发外包产业链 · 全球产业全景沙盘</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 269 KB</span></div></a>
-      <a class="card industry" href="./创新药产业_全球产业全景沙盘.html" target="_blank" rel="noopener noreferrer" data-kind="industry" data-v3="0" data-title="创新药产业_全球产业全景沙盘" data-tags=""><div><span class="card-tag tag-ind">🌍 全球产业沙盘</span><div class="card-title">创新药产业 · 全球产业全景沙盘</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 295 KB</span></div></a>
-      <a class="card metamorphosis" href="./00_小市值跃迁模式库总览.html" target="_blank" rel="noopener noreferrer" data-kind="metamorphosis" data-v3="0" data-title="00_小市值跃迁模式库总览" data-tags="小市值跃迁模式库 跨公司 模式总览 选股模板"><div><span class="card-tag tag-meta">🧬 跨公司跃迁模式库总览</span><span class="card-tag tag-h">小市值对照检索</span><div class="card-title">00 · 跨公司「小市值跃迁模式库」可视化总览看板</div></div><div class="card-meta"><span>📅 2026-11-28 11:08</span><span>📦 19 KB</span></div></a>
-      <a class="card metamorphosis" href="./美的集团_上市跃迁图谱.html" target="_blank" rel="noopener noreferrer" data-kind="metamorphosis" data-v3="0" data-title="美的集团_上市跃迁图谱" data-tags="上市跃迁图谱 蜕变 市值进化 小市值模式库"><div><span class="card-tag tag-meta">🦋 上市跃迁图谱</span><span class="card-tag tag-svg">四线同步 · 时差显微镜</span><div class="card-title">美的集团 · 上市跃迁图谱（市值×业绩×业务）</div></div><div class="card-meta"><span>📅 2026-11-28 11:08</span><span>📦 192 KB</span></div></a>
-      <a class="card chronicle" href="./中国神华_商业发家史与管理层功过录.html" target="_blank" rel="noopener noreferrer" data-kind="chronicle" data-v3="0" data-title="中国神华_商业发家史与管理层功过录" data-tags=""><div><span class="card-tag tag-chron">📜 商业发家史 · 管理层功过录</span><div class="card-title">中国神华 · 商业发家史与管理层功过录</div></div><div class="card-meta"><span>📅 2026-11-24 14:28</span><span>📦 183 KB</span></div></a>
-      <a class="card chronicle" href="./美的集团_商业发家史与管理层功过录.html" target="_blank" rel="noopener noreferrer" data-kind="chronicle" data-v3="0" data-title="美的集团_商业发家史与管理层功过录" data-tags=""><div><span class="card-tag tag-chron">📜 商业发家史 · 管理层功过录</span><div class="card-title">美的集团 · 商业发家史与管理层功过录</div></div><div class="card-meta"><span>📅 2026-11-24 13:47</span><span>📦 202 KB</span></div></a>
-      <a class="card v3new" href="./山西汾酒_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="山西汾酒_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">山西汾酒 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-28 10:58</span><span>📦 697 KB</span></div></a>
-      <a class="card v3new" href="./伯特利_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="伯特利_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">伯特利 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-28 03:00</span><span>📦 709 KB</span></div></a>
-      <a class="card v3new" href="./招商银行_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="招商银行_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">招商银行 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 19:47</span><span>📦 718 KB</span></div></a>
-      <a class="card v3new" href="./双汇发展_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="双汇发展_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">双汇发展 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 18:11</span><span>📦 705 KB</span></div></a>
-      <a class="card" href="./中国平安_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中国平安_全模块深度投研全集" data-tags="Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">中国平安 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 13:37</span><span>📦 549 KB</span></div></a>
-      <a class="card v3new" href="./中原内配_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="中原内配_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">中原内配 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 13:27</span><span>📦 712 KB</span></div></a>
-      <a class="card v3new" href="./瑞丰新材_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="瑞丰新材_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">瑞丰新材 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 12:03</span><span>📦 738 KB</span></div></a>
-      <a class="card" href="./青岛啤酒_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="青岛啤酒_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">青岛啤酒 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 10:48</span><span>📦 650 KB</span></div></a>
-      <a class="card" href="./赛轮轮胎_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="赛轮轮胎_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">赛轮轮胎 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 10:48</span><span>📦 466 KB</span></div></a>
-      <a class="card v3new" href="./紫金矿业_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="紫金矿业_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">紫金矿业 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 10:48</span><span>📦 700 KB</span></div></a>
-      <a class="card" href="./福耀玻璃_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="福耀玻璃_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">福耀玻璃 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 10:48</span><span>📦 717 KB</span></div></a>
-      <a class="card v3new" href="./淮北矿业_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="淮北矿业_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">淮北矿业 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 10:48</span><span>📦 720 KB</span></div></a>
-      <a class="card" href="./海尔智家_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="海尔智家_全模块深度投研全集" data-tags="Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">海尔智家 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 10:48</span><span>📦 557 KB</span></div></a>
-      <a class="card" href="./宝丰能源_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="宝丰能源_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">宝丰能源 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 10:48</span><span>📦 655 KB</span></div></a>
-      <a class="card" href="./中远海控_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中远海控_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中远海控 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 10:48</span><span>📦 469 KB</span></div></a>
-      <a class="card" href="./中国太保_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中国太保_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中国太保 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 10:48</span><span>📦 662 KB</span></div></a>
-      <a class="card" href="./中国移动·2026年06月30日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中国移动·2026年06月30日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">中国移动·2026年06月30日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 10:43</span><span>📦 245 KB</span></div></a>
-      <a class="card v3new" href="./山金国际_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="山金国际_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">山金国际 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 09:59</span><span>📦 704 KB</span></div></a>
-      <a class="card v3new" href="./四川黄金_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="四川黄金_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">四川黄金 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-27 00:10</span><span>📦 692 KB</span></div></a>
-      <a class="card" href="./思源电气·2025年04月07日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="思源电气·2025年04月07日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">思源电气·2025年04月07日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 23:44</span><span>📦 239 KB</span></div></a>
-      <a class="card v3new" href="./山东黄金_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="山东黄金_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">山东黄金 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 23:37</span><span>📦 705 KB</span></div></a>
-      <a class="card v3new" href="./中国联通_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="中国联通_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">中国联通 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 23:33</span><span>📦 698 KB</span></div></a>
-      <a class="card" href="./紫金矿业·2025年04月07日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="紫金矿业·2025年04月07日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">紫金矿业·2025年04月07日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 21:30</span><span>📦 261 KB</span></div></a>
-      <a class="card" href="./腾讯控股_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="腾讯控股_全模块深度投研全集" data-tags="Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">腾讯控股 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 20:35</span><span>📦 735 KB</span></div></a>
-      <a class="card" href="./中国海油_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中国海油_全模块深度投研全集" data-tags="Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">中国海油 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 20:34</span><span>📦 657 KB</span></div></a>
-      <a class="card" href="./华域汽车_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="华域汽车_全模块深度投研全集" data-tags="Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">华域汽车 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 20:34</span><span>📦 701 KB</span></div></a>
-      <a class="card" href="./宁德时代_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="宁德时代_全模块深度投研全集" data-tags="Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">宁德时代 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 20:19</span><span>📦 618 KB</span></div></a>
-      <a class="card v3new" href="./铖昌科技_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="铖昌科技_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">铖昌科技 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 18:33</span><span>📦 682 KB</span></div></a>
-      <a class="card v3new" href="./潞安环能_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="潞安环能_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">潞安环能 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 18:10</span><span>📦 708 KB</span></div></a>
-      <a class="card v3new" href="./中芯国际_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="中芯国际_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">中芯国际 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 17:47</span><span>📦 700 KB</span></div></a>
-      <a class="card v3new" href="./盐湖股份_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="盐湖股份_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">盐湖股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 15:56</span><span>📦 732 KB</span></div></a>
-      <a class="card v3new" href="./万华化学_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="万华化学_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">万华化学 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 13:22</span><span>📦 712 KB</span></div></a>
-      <a class="card" href="./云铝股份_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="云铝股份_全模块深度投研全集" data-tags="Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">云铝股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 10:55</span><span>📦 541 KB</span></div></a>
-      <a class="card v3new" href="./恒源煤电_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="恒源煤电_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">恒源煤电 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 10:54</span><span>📦 618 KB</span></div></a>
-      <a class="card v3new" href="./海螺水泥_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="海螺水泥_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">海螺水泥 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 10:54</span><span>📦 650 KB</span></div></a>
-      <a class="card" href="./上汽集团_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="上汽集团_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">上汽集团 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 10:54</span><span>📦 605 KB</span></div></a>
-      <a class="card v3new" href="./欣旺达_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="欣旺达_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">欣旺达 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 10:54</span><span>📦 645 KB</span></div></a>
-      <a class="card" href="./天赐材料_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="天赐材料_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">天赐材料 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 10:53</span><span>📦 593 KB</span></div></a>
-      <a class="card v3new" href="./天山铝业_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="天山铝业_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">天山铝业 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 10:53</span><span>📦 607 KB</span></div></a>
-      <a class="card" href="./紫光股份_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="紫光股份_全模块深度投研全集" data-tags="Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">紫光股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 10:53</span><span>📦 582 KB</span></div></a>
-      <a class="card v3new" href="./神火股份_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="神火股份_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><div class="card-title">神火股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-26 10:53</span><span>📦 605 KB</span></div></a>
-      <a class="card" href="./兖矿能源_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="兖矿能源_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">兖矿能源 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-25 01:34</span><span>📦 599 KB</span></div></a>
-      <a class="card" href="./通威股份_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="通威股份_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">通威股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-25 01:19</span><span>📦 605 KB</span></div></a>
-      <a class="card" href="./洛阳钼业_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="洛阳钼业_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">洛阳钼业 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-25 00:44</span><span>📦 517 KB</span></div></a>
-      <a class="card" href="./中国石油·2026年06月30日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中国石油·2026年06月30日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">中国石油·2026年06月30日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 23:22</span><span>📦 167 KB</span></div></a>
-      <a class="card" href="./天齐锂业·2025年04月09日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="天齐锂业·2025年04月09日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">天齐锂业·2025年04月09日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 21:54</span><span>📦 185 KB</span></div></a>
-      <a class="card" href="./阳光电源_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="阳光电源_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">阳光电源 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 413 KB</span></div></a>
-      <a class="card" href="./铜陵有色_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="铜陵有色_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">铜陵有色 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 645 KB</span></div></a>
-      <a class="card" href="./藏格矿业_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="藏格矿业_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">藏格矿业 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 599 KB</span></div></a>
-      <a class="card" href="./立讯精密_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="立讯精密_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">立讯精密 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 510 KB</span></div></a>
-      <a class="card" href="./牧原股份_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="牧原股份_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">牧原股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 263 KB</span></div></a>
-      <a class="card" href="./海底捞_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="海底捞_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">海底捞 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 576 KB</span></div></a>
-      <a class="card" href="./海天味业_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="海天味业_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">海天味业 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 548 KB</span></div></a>
-      <a class="card" href="./沪电股份_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="沪电股份_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">沪电股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 645 KB</span></div></a>
-      <a class="card" href="./比亚迪_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="比亚迪_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">比亚迪 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 428 KB</span></div></a>
-      <a class="card" href="./新华保险_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="新华保险_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">新华保险 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 595 KB</span></div></a>
-      <a class="card" href="./招商证券_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="招商证券_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">招商证券 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 604 KB</span></div></a>
-      <a class="card" href="./影石创新_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="影石创新_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">影石创新 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 584 KB</span></div></a>
-      <a class="card" href="./工商银行_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="工商银行_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">工商银行 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 590 KB</span></div></a>
-      <a class="card" href="./工业富联_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="工业富联_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">工业富联 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 556 KB</span></div></a>
-      <a class="card" href="./安琪酵母_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="安琪酵母_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">安琪酵母 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 337 KB</span></div></a>
-      <a class="card" href="./安克创新_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="安克创新_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">安克创新 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 373 KB</span></div></a>
-      <a class="card" href="./大参林_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="大参林_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">大参林 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 439 KB</span></div></a>
-      <a class="card" href="./乖宝宠物_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="乖宝宠物_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">乖宝宠物 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 556 KB</span></div></a>
-      <a class="card" href="./中际旭创_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中际旭创_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中际旭创 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 407 KB</span></div></a>
-      <a class="card" href="./中国船舶_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中国船舶_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中国船舶 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:45</span><span>📦 565 KB</span></div></a>
-      <a class="card" href="./洪城环境_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="洪城环境_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">洪城环境 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:29</span><span>📦 645 KB</span></div></a>
-      <a class="card" href="./贵州茅台_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="贵州茅台_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">贵州茅台 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:29</span><span>📦 357 KB</span></div></a>
-      <a class="card" href="./东鹏饮料_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="东鹏饮料_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">东鹏饮料 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:29</span><span>📦 560 KB</span></div></a>
-      <a class="card" href="./中国中免_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中国中免_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中国中免 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:29</span><span>📦 403 KB</span></div></a>
-      <a class="card" href="./藏格矿业·2023年06月29日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="藏格矿业·2023年06月29日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">藏格矿业·2023年06月29日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 16:07</span><span>📦 154 KB</span></div></a>
-      <a class="card" href="./比亚迪·2023年08月25日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="比亚迪·2023年08月25日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">比亚迪·2023年08月25日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 14:39</span><span>📦 177 KB</span></div></a>
-      <a class="card" href="./艾力斯_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="艾力斯_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">艾力斯 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 14:28</span><span>📦 659 KB</span></div></a>
-      <a class="card" href="./特宝生物_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="特宝生物_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">特宝生物 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 270 KB</span></div></a>
-      <a class="card" href="./中国石油_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中国石油_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中国石油 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 374 KB</span></div></a>
-      <a class="card" href="./中科曙光_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中科曙光_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中科曙光 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 545 KB</span></div></a>
-      <a class="card" href="./美团-W_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="美团-W_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">美团-W 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 617 KB</span></div></a>
-      <a class="card" href="./博源化工_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="博源化工_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">博源化工 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 614 KB</span></div></a>
-      <a class="card" href="./平安银行_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="平安银行_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">平安银行 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 635 KB</span></div></a>
-      <a class="card" href="./海康威视_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="海康威视_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">海康威视 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 492 KB</span></div></a>
-      <a class="card" href="./伊之密_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="伊之密_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">伊之密 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 433 KB</span></div></a>
-      <a class="card" href="./华东医药_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="华东医药_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">华东医药 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 221 KB</span></div></a>
-      <a class="card" href="./圆通速递_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="圆通速递_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">圆通速递 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 499 KB</span></div></a>
-      <a class="card" href="./正泰电器_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="正泰电器_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">正泰电器 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 12:30</span><span>📦 861 KB</span></div></a>
-      <a class="card" href="./东方电气_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="东方电气_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">东方电气 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 11:41</span><span>📦 678 KB</span></div></a>
-      <a class="card" href="./新华保险H·2021年07月30日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="新华保险H·2021年07月30日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">新华保险H·2021年07月30日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-24 09:56</span><span>📦 184 KB</span></div></a>
-      <a class="card" href="./中信特钢_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中信特钢_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中信特钢 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-23 22:33</span><span>📦 686 KB</span></div></a>
-      <a class="card" href="./春秋航空_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="春秋航空_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">春秋航空 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-23 22:04</span><span>📦 674 KB</span></div></a>
-      <a class="card" href="./国信证券_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="国信证券_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">国信证券 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-23 21:36</span><span>📦 676 KB</span></div></a>
-      <a class="card" href="./恒瑞医药·2025年09月08日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="恒瑞医药·2025年09月08日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">恒瑞医药·2025年09月08日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-23 17:29</span><span>📦 172 KB</span></div></a>
-      <a class="card" href="./百济神州·2026年03月23日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="百济神州·2026年03月23日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">百济神州·2026年03月23日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-23 17:15</span><span>📦 183 KB</span></div></a>
-      <a class="card" href="./中国平安·2022年10月31日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中国平安·2022年10月31日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><div class="card-title">中国平安·2022年10月31日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-23 16:36</span><span>📦 184 KB</span></div></a>
-      <a class="card" href="./五粮液·2021年02月18日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="五粮液·2021年02月18日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">五粮液·2021年02月18日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-23 10:56</span><span>📦 529 KB</span></div></a>
-      <a class="card" href="./乐鑫科技_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="乐鑫科技_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">乐鑫科技 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-23 00:20</span><span>📦 565 KB</span></div></a>
-      <a class="card" href="./宁德时代·2024年1月30日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="宁德时代·2024年1月30日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">宁德时代·2024年1月30日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-22 22:01</span><span>📦 551 KB</span></div></a>
-      <a class="card" href="./腾讯控股·2022年10月25日历史回测版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="腾讯控股·2022年10月25日历史回测版_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">腾讯控股·2022年10月25日历史回测版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-22 19:20</span><span>📦 568 KB</span></div></a>
-      <a class="card v3new" href="./万华化学_20261120重研版_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="1" data-title="万华化学_20261120重研版_全模块深度投研全集" data-tags="最新调研流程 v3新流程 方案B Swarm B测校准"><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-v3new" title="最新v3.0方案B调研流程产出（8路齐发+唯一物理双盲+2.0驾驶舱+术语词典）">✨ 最新调研流程</span><span class="card-tag tag-swarm" title="已通过跨模型Swarm+流程B联合校准">👑 Swarm×B测</span><div class="card-title">万华化学_20261120重研版 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-20 21:19</span><span>📦 525 KB</span></div></a>
-      <a class="card" href="./东方财富_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="东方财富_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">东方财富 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-19 13:58</span><span>📦 515 KB</span></div></a>
-      <a class="card" href="./京东方A_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="京东方A_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">京东方A 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-19 13:02</span><span>📦 507 KB</span></div></a>
-      <a class="card" href="./长鑫科技_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="长鑫科技_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">长鑫科技 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-19 11:31</span><span>📦 485 KB</span></div></a>
-      <a class="card" href="./浪潮信息_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="浪潮信息_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">浪潮信息 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-18 22:00</span><span>📦 530 KB</span></div></a>
-      <a class="card" href="./西部超导_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="西部超导_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">西部超导 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-18 19:40</span><span>📦 554 KB</span></div></a>
-      <a class="card" href="./汇川技术_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="汇川技术_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">汇川技术 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-18 00:16</span><span>📦 884 KB</span></div></a>
-      <a class="card" href="./海光信息_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="海光信息_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">海光信息 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-18 00:05</span><span>📦 921 KB</span></div></a>
-      <a class="card" href="./鼎龙股份_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="鼎龙股份_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">鼎龙股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 461 KB</span></div></a>
-      <a class="card" href="./赛分科技_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="赛分科技_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">赛分科技 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 311 KB</span></div></a>
-      <a class="card" href="./药明康德_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="药明康德_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">药明康德 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 316 KB</span></div></a>
-      <a class="card" href="./英集芯_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="英集芯_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">英集芯 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 307 KB</span></div></a>
-      <a class="card" href="./纳微科技_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="纳微科技_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">纳微科技 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 316 KB</span></div></a>
-      <a class="card" href="./盛弘股份_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="盛弘股份_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">盛弘股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 316 KB</span></div></a>
-      <a class="card" href="./爱旭股份_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="爱旭股份_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">爱旭股份 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 300 KB</span></div></a>
-      <a class="card" href="./澜起科技_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="澜起科技_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">澜起科技 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 349 KB</span></div></a>
-      <a class="card" href="./法拉电子_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="法拉电子_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">法拉电子 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 323 KB</span></div></a>
-      <a class="card" href="./柏楚电子_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="柏楚电子_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">柏楚电子 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 438 KB</span></div></a>
-      <a class="card" href="./新集能源_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="新集能源_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">新集能源 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 325 KB</span></div></a>
-      <a class="card" href="./恒瑞医药_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="恒瑞医药_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">恒瑞医药 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 360 KB</span></div></a>
-      <a class="card" href="./巨力索具_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="巨力索具_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">巨力索具 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 301 KB</span></div></a>
-      <a class="card" href="./北方华创_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="北方华创_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">北方华创 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 341 KB</span></div></a>
-      <a class="card" href="./凯莱英_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="凯莱英_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">凯莱英 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 302 KB</span></div></a>
-      <a class="card" href="./兆易创新_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="兆易创新_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">兆易创新 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 319 KB</span></div></a>
-      <a class="card" href="./亿纬锂能_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="亿纬锂能_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">亿纬锂能 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 325 KB</span></div></a>
-      <a class="card" href="./中国神华_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="中国神华_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">中国神华 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 301 KB</span></div></a>
-      <a class="card" href="./东山精密_全模块深度投研全集.html" target="_blank" rel="noopener noreferrer" data-kind="stock" data-v3="0" data-title="东山精密_全模块深度投研全集" data-tags=""><div><span class="card-tag tag-stock">🏢 个股深度投研</span><span class="card-tag tag-h">⚡ 含模块H速览</span><div class="card-title">东山精密 深度投研全集</div></div><div class="card-meta"><span>📅 2026-11-17 23:49</span><span>📦 325 KB</span></div></a>
+    <div class="recent-box" id="recentBox">
+      <div class="recent-head">
+        <span>⚡ 最近刚生成 / 更新（一眼直达最新成果）</span>
+        <span class="num" style="font-weight:600;color:var(--muted)">书架构建于 2026-11-28 11:23</span>
+      </div>
+      <div class="recent-grid" id="recentGrid"></div>
     </div>
+
+    <div class="list-bar">
+      <span id="resultCount"></span>
+      <span style="font-size:11.5px">提示：点击上方分类标签可秒切专区，默认按最新更新时间倒序排列</span>
+    </div>
+
+    <div id="reportMount"></div>
   </div>
 
   <script>
-    var currentTab = 'all';
-    var reportUrls = ["./index.html", "./企业深度投研性价比排行榜_最新全集.html", "./山西汾酒_2.0模块化深度投研驾驶舱.html", "./伯特利_2.0模块化深度投研驾驶舱.html", "./招商银行_2.0模块化深度投研驾驶舱.html", "./双汇发展_2.0模块化深度投研驾驶舱.html", "./中国平安_2.0模块化深度投研驾驶舱.html", "./中原内配_2.0模块化深度投研驾驶舱.html", "./瑞丰新材_2.0模块化深度投研驾驶舱.html", "./中芯国际_2.0模块化深度投研驾驶舱.html", "./紫金矿业_2.0模块化深度投研驾驶舱.html", "./潞安环能_2.0模块化深度投研驾驶舱.html", "./淮北矿业_2.0模块化深度投研驾驶舱.html", "./恒源煤电_2.0模块化深度投研驾驶舱.html", "./中国海油_2.0模块化深度投研驾驶舱.html", "./华域汽车_2.0模块化深度投研驾驶舱.html", "./海螺水泥_2.0模块化深度投研驾驶舱.html", "./山东黄金_2.0模块化深度投研驾驶舱.html", "./万华化学_2.0模块化深度投研驾驶舱.html", "./上汽集团_2.0模块化深度投研驾驶舱.html", "./中国联通_2.0模块化深度投研驾驶舱.html", "./宁德时代_2.0模块化深度投研驾驶舱.html", "./欣旺达_2.0模块化深度投研驾驶舱.html", "./腾讯控股_2.0模块化深度投研驾驶舱.html", "./天赐材料_2.0模块化深度投研驾驶舱.html", "./天山铝业_2.0模块化深度投研驾驶舱.html", "./四川黄金_2.0模块化深度投研驾驶舱.html", "./铖昌科技_2.0模块化深度投研驾驶舱.html", "./山金国际_2.0模块化深度投研驾驶舱.html", "./紫光股份_2.0模块化深度投研驾驶舱.html", "./神火股份_2.0模块化深度投研驾驶舱.html", "./云铝股份_2.0模块化深度投研驾驶舱.html", "./盐湖股份_2.0模块化深度投研驾驶舱.html", "./伯特利_投委会群聊辩论剧场_20261128.html", "./招商银行_投委会群聊辩论剧场_20261127.html", "./双汇发展_投委会群聊辩论剧场_20261127.html", "./中国平安_投委会群聊辩论剧场_20261127.html", "./中原内配_投委会群聊辩论剧场_20261127.html", "./瑞丰新材_投委会群聊辩论剧场_20261127.html", "./紫金矿业_投委会群聊辩论剧场_20261126.html", "./淮北矿业_投委会群聊辩论剧场_20261126.html", "./盐湖股份_投委会群聊辩论剧场_20261126.html", "./万华化学_投委会群聊辩论剧场_20261126.html", "./中国海油_投委会群聊辩论剧场_20261125.html", "./海螺水泥_投委会群聊辩论剧场_20261125.html", "./腾讯控股_投委会群聊辩论剧场_20261125.html", "./华域汽车_投委会群聊辩论剧场_20261125.html", "./紫光股份_投委会群聊辩论剧场_20261125.html", "./云铝股份_投委会群聊辩论剧场_20261125.html", "./海尔智家_投委会群聊辩论剧场_20261125.html", "./宁德时代_投委会群聊辩论剧场_20261125.html", "./中国海油_可视化全景图谱看板.html", "./腾讯控股_可视化全景图谱看板.html", "./宏观与大宗周期仪_可视化全景图谱看板.html", "./海尔智家_可视化全景图谱看板.html", "./京东方A_可视化全景图谱看板.html", "./黄金_全球产业全景沙盘.html", "./有色金属_全球产业全景沙盘.html", "./医疗研发外包产业链_全球产业全景沙盘.html", "./创新药产业_全球产业全景沙盘.html", "./00_小市值跃迁模式库总览.html", "./美的集团_上市跃迁图谱.html", "./中国神华_商业发家史与管理层功过录.html", "./美的集团_商业发家史与管理层功过录.html", "./山西汾酒_全模块深度投研全集.html", "./伯特利_全模块深度投研全集.html", "./招商银行_全模块深度投研全集.html", "./双汇发展_全模块深度投研全集.html", "./中国平安_全模块深度投研全集.html", "./中原内配_全模块深度投研全集.html", "./瑞丰新材_全模块深度投研全集.html", "./青岛啤酒_全模块深度投研全集.html", "./赛轮轮胎_全模块深度投研全集.html", "./紫金矿业_全模块深度投研全集.html", "./福耀玻璃_全模块深度投研全集.html", "./淮北矿业_全模块深度投研全集.html", "./海尔智家_全模块深度投研全集.html", "./宝丰能源_全模块深度投研全集.html", "./中远海控_全模块深度投研全集.html", "./中国太保_全模块深度投研全集.html", "./中国移动·2026年06月30日历史回测版_全模块深度投研全集.html", "./山金国际_全模块深度投研全集.html", "./四川黄金_全模块深度投研全集.html", "./思源电气·2025年04月07日历史回测版_全模块深度投研全集.html", "./山东黄金_全模块深度投研全集.html", "./中国联通_全模块深度投研全集.html", "./紫金矿业·2025年04月07日历史回测版_全模块深度投研全集.html", "./腾讯控股_全模块深度投研全集.html", "./中国海油_全模块深度投研全集.html", "./华域汽车_全模块深度投研全集.html", "./宁德时代_全模块深度投研全集.html", "./铖昌科技_全模块深度投研全集.html", "./潞安环能_全模块深度投研全集.html", "./中芯国际_全模块深度投研全集.html", "./盐湖股份_全模块深度投研全集.html", "./万华化学_全模块深度投研全集.html", "./云铝股份_全模块深度投研全集.html", "./恒源煤电_全模块深度投研全集.html", "./海螺水泥_全模块深度投研全集.html", "./上汽集团_全模块深度投研全集.html", "./欣旺达_全模块深度投研全集.html", "./天赐材料_全模块深度投研全集.html", "./天山铝业_全模块深度投研全集.html", "./紫光股份_全模块深度投研全集.html", "./神火股份_全模块深度投研全集.html", "./兖矿能源_全模块深度投研全集.html", "./通威股份_全模块深度投研全集.html", "./洛阳钼业_全模块深度投研全集.html", "./中国石油·2026年06月30日历史回测版_全模块深度投研全集.html", "./天齐锂业·2025年04月09日历史回测版_全模块深度投研全集.html", "./阳光电源_全模块深度投研全集.html", "./铜陵有色_全模块深度投研全集.html", "./藏格矿业_全模块深度投研全集.html", "./立讯精密_全模块深度投研全集.html", "./牧原股份_全模块深度投研全集.html", "./海底捞_全模块深度投研全集.html", "./海天味业_全模块深度投研全集.html", "./沪电股份_全模块深度投研全集.html", "./比亚迪_全模块深度投研全集.html", "./新华保险_全模块深度投研全集.html", "./招商证券_全模块深度投研全集.html", "./影石创新_全模块深度投研全集.html", "./工商银行_全模块深度投研全集.html", "./工业富联_全模块深度投研全集.html", "./安琪酵母_全模块深度投研全集.html", "./安克创新_全模块深度投研全集.html", "./大参林_全模块深度投研全集.html", "./乖宝宠物_全模块深度投研全集.html", "./中际旭创_全模块深度投研全集.html", "./中国船舶_全模块深度投研全集.html", "./洪城环境_全模块深度投研全集.html", "./贵州茅台_全模块深度投研全集.html", "./东鹏饮料_全模块深度投研全集.html", "./中国中免_全模块深度投研全集.html", "./藏格矿业·2023年06月29日历史回测版_全模块深度投研全集.html", "./比亚迪·2023年08月25日历史回测版_全模块深度投研全集.html", "./艾力斯_全模块深度投研全集.html", "./特宝生物_全模块深度投研全集.html", "./中国石油_全模块深度投研全集.html", "./中科曙光_全模块深度投研全集.html", "./美团-W_全模块深度投研全集.html", "./博源化工_全模块深度投研全集.html", "./平安银行_全模块深度投研全集.html", "./海康威视_全模块深度投研全集.html", "./伊之密_全模块深度投研全集.html", "./华东医药_全模块深度投研全集.html", "./圆通速递_全模块深度投研全集.html", "./正泰电器_全模块深度投研全集.html", "./东方电气_全模块深度投研全集.html", "./新华保险H·2021年07月30日历史回测版_全模块深度投研全集.html", "./中信特钢_全模块深度投研全集.html", "./春秋航空_全模块深度投研全集.html", "./国信证券_全模块深度投研全集.html", "./恒瑞医药·2025年09月08日历史回测版_全模块深度投研全集.html", "./百济神州·2026年03月23日历史回测版_全模块深度投研全集.html", "./中国平安·2022年10月31日历史回测版_全模块深度投研全集.html", "./五粮液·2021年02月18日历史回测版_全模块深度投研全集.html", "./乐鑫科技_全模块深度投研全集.html", "./宁德时代·2024年1月30日历史回测版_全模块深度投研全集.html", "./腾讯控股·2022年10月25日历史回测版_全模块深度投研全集.html", "./万华化学_20261120重研版_全模块深度投研全集.html", "./东方财富_全模块深度投研全集.html", "./京东方A_全模块深度投研全集.html", "./长鑫科技_全模块深度投研全集.html", "./浪潮信息_全模块深度投研全集.html", "./西部超导_全模块深度投研全集.html", "./汇川技术_全模块深度投研全集.html", "./海光信息_全模块深度投研全集.html", "./鼎龙股份_全模块深度投研全集.html", "./赛分科技_全模块深度投研全集.html", "./药明康德_全模块深度投研全集.html", "./英集芯_全模块深度投研全集.html", "./纳微科技_全模块深度投研全集.html", "./盛弘股份_全模块深度投研全集.html", "./爱旭股份_全模块深度投研全集.html", "./澜起科技_全模块深度投研全集.html", "./法拉电子_全模块深度投研全集.html", "./柏楚电子_全模块深度投研全集.html", "./新集能源_全模块深度投研全集.html", "./恒瑞医药_全模块深度投研全集.html", "./巨力索具_全模块深度投研全集.html", "./北方华创_全模块深度投研全集.html", "./凯莱英_全模块深度投研全集.html", "./兆易创新_全模块深度投研全集.html", "./亿纬锂能_全模块深度投研全集.html", "./中国神华_全模块深度投研全集.html", "./东山精密_全模块深度投研全集.html"];
+    const ITEMS = [{"fname": "00_小市值跃迁模式库总览.html", "title": "跨公司「小市值跃迁模式库」可视化总览", "kind": "metamorphosis", "cat_label": "🧬 模式库总览", "cat_order": 1, "pin_order": 0, "mtime": 1795836233, "mtime_str": "2026-11-28 11:23", "mtime_short": "11-28 11:23", "size_kb": 19, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": "小市值 跃迁 模式库 选股模板"}, {"fname": "美的集团_上市跃迁图谱.html", "title": "美的集团 · 上市跃迁图谱", "kind": "metamorphosis", "cat_label": "🦋 跃迁图谱", "cat_order": 1, "pin_order": 10, "mtime": 1795836233, "mtime_str": "2026-11-28 11:23", "mtime_short": "11-28 11:23", "size_kb": 197, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": "跃迁 蜕变 市值进化 四线同步"}, {"fname": "企业深度投研性价比排行榜_最新全集.html", "title": "企业深度投研性价比排行榜（最新全集）", "kind": "leaderboard", "cat_label": "👑 排行榜", "cat_order": 0, "pin_order": 0, "mtime": 1795834711, "mtime_str": "2026-11-28 10:58", "mtime_short": "11-28 10:58", "size_kb": 883, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "山西汾酒_2.0模块化深度投研驾驶舱.html", "title": "山西汾酒 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795834706, "mtime_str": "2026-11-28 10:58", "mtime_short": "11-28 10:58", "size_kb": 671, "is_v3": true, "is_swarm": false, "has_pod": true, "tags": "播客 双人播客 音频 Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "山西汾酒_全模块深度投研全集.html", "title": "山西汾酒 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795834689, "mtime_str": "2026-11-28 10:58", "mtime_short": "11-28 10:58", "size_kb": 697, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "伯特利_2.0模块化深度投研驾驶舱.html", "title": "伯特利 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795806047, "mtime_str": "2026-11-28 03:00", "mtime_short": "11-28 03:00", "size_kb": 766, "is_v3": true, "is_swarm": true, "has_pod": true, "tags": "播客 双人播客 音频 Bento 驾驶舱 最新流程 方案B v3 Swarm B测"}, {"fname": "伯特利_全模块深度投研全集.html", "title": "伯特利 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795806040, "mtime_str": "2026-11-28 03:00", "mtime_short": "11-28 03:00", "size_kb": 709, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "伯特利_投委会群聊辩论剧场_20261128.html", "title": "伯特利 · 投委会辩论（20261128）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795805960, "mtime_str": "2026-11-28 02:59", "mtime_short": "11-28 02:59", "size_kb": 110, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 最新流程 方案B v3 Swarm B测"}, {"fname": "招商银行_2.0模块化深度投研驾驶舱.html", "title": "招商银行 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795780085, "mtime_str": "2026-11-27 19:48", "mtime_short": "11-27 19:48", "size_kb": 763, "is_v3": true, "is_swarm": true, "has_pod": true, "tags": "播客 双人播客 音频 Bento 驾驶舱 最新流程 方案B v3 Swarm B测"}, {"fname": "招商银行_全模块深度投研全集.html", "title": "招商银行 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795780078, "mtime_str": "2026-11-27 19:47", "mtime_short": "11-27 19:47", "size_kb": 718, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "招商银行_投委会群聊辩论剧场_20261127.html", "title": "招商银行 · 投委会辩论（20261127）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795779949, "mtime_str": "2026-11-27 19:45", "mtime_short": "11-27 19:45", "size_kb": 109, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 最新流程 方案B v3 Swarm B测"}, {"fname": "双汇发展_2.0模块化深度投研驾驶舱.html", "title": "双汇发展 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795774278, "mtime_str": "2026-11-27 18:11", "mtime_short": "11-27 18:11", "size_kb": 737, "is_v3": true, "is_swarm": true, "has_pod": true, "tags": "播客 双人播客 音频 Bento 驾驶舱 最新流程 方案B v3 Swarm B测"}, {"fname": "双汇发展_全模块深度投研全集.html", "title": "双汇发展 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795774266, "mtime_str": "2026-11-27 18:11", "mtime_short": "11-27 18:11", "size_kb": 705, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "双汇发展_投委会群聊辩论剧场_20261127.html", "title": "双汇发展 · 投委会辩论（20261127）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795768107, "mtime_str": "2026-11-27 16:28", "mtime_short": "11-27 16:28", "size_kb": 106, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 最新流程 方案B v3 Swarm B测"}, {"fname": "中国平安_投委会群聊辩论剧场_20261127.html", "title": "中国平安 · 投委会辩论（20261127）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795757886, "mtime_str": "2026-11-27 13:38", "mtime_short": "11-27 13:38", "size_kb": 105, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 Swarm B测"}, {"fname": "中国平安_2.0模块化深度投研驾驶舱.html", "title": "中国平安 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795757848, "mtime_str": "2026-11-27 13:37", "mtime_short": "11-27 13:37", "size_kb": 498, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Bento 驾驶舱 Swarm B测"}, {"fname": "中国平安_全模块深度投研全集.html", "title": "中国平安 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795757833, "mtime_str": "2026-11-27 13:37", "mtime_short": "11-27 13:37", "size_kb": 549, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm B测"}, {"fname": "中原内配_2.0模块化深度投研驾驶舱.html", "title": "中原内配 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795757235, "mtime_str": "2026-11-27 13:27", "mtime_short": "11-27 13:27", "size_kb": 742, "is_v3": true, "is_swarm": true, "has_pod": true, "tags": "播客 双人播客 音频 Bento 驾驶舱 最新流程 方案B v3 Swarm B测"}, {"fname": "中原内配_全模块深度投研全集.html", "title": "中原内配 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795757227, "mtime_str": "2026-11-27 13:27", "mtime_short": "11-27 13:27", "size_kb": 712, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "中原内配_投委会群聊辩论剧场_20261127.html", "title": "中原内配 · 投委会辩论（20261127）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795756013, "mtime_str": "2026-11-27 13:06", "mtime_short": "11-27 13:06", "size_kb": 107, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 最新流程 方案B v3 Swarm B测"}, {"fname": "瑞丰新材_2.0模块化深度投研驾驶舱.html", "title": "瑞丰新材 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795752203, "mtime_str": "2026-11-27 12:03", "mtime_short": "11-27 12:03", "size_kb": 765, "is_v3": true, "is_swarm": true, "has_pod": true, "tags": "播客 双人播客 音频 Bento 驾驶舱 最新流程 方案B v3 Swarm B测"}, {"fname": "瑞丰新材_全模块深度投研全集.html", "title": "瑞丰新材 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795752198, "mtime_str": "2026-11-27 12:03", "mtime_short": "11-27 12:03", "size_kb": 738, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "瑞丰新材_投委会群聊辩论剧场_20261127.html", "title": "瑞丰新材 · 投委会辩论（20261127）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795751069, "mtime_str": "2026-11-27 11:44", "mtime_short": "11-27 11:44", "size_kb": 104, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 最新流程 方案B v3 Swarm B测"}, {"fname": "中国海油_2.0模块化深度投研驾驶舱.html", "title": "中国海油 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750701, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 664, "is_v3": false, "is_swarm": true, "has_pod": true, "tags": "播客 双人播客 音频 Bento 驾驶舱 Swarm B测"}, {"fname": "中芯国际_2.0模块化深度投研驾驶舱.html", "title": "中芯国际 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750701, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 656, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "恒源煤电_2.0模块化深度投研驾驶舱.html", "title": "恒源煤电 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750701, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 537, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "淮北矿业_2.0模块化深度投研驾驶舱.html", "title": "淮北矿业 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750701, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 717, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3 Swarm B测"}, {"fname": "潞安环能_2.0模块化深度投研驾驶舱.html", "title": "潞安环能 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750701, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 632, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "紫金矿业_2.0模块化深度投研驾驶舱.html", "title": "紫金矿业 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750701, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 735, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3 Swarm B测"}, {"fname": "万华化学_2.0模块化深度投研驾驶舱.html", "title": "万华化学 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750700, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 714, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3 Swarm B测"}, {"fname": "上汽集团_2.0模块化深度投研驾驶舱.html", "title": "上汽集团 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750700, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 572, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱"}, {"fname": "中国联通_2.0模块化深度投研驾驶舱.html", "title": "中国联通 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750700, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 618, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "华域汽车_2.0模块化深度投研驾驶舱.html", "title": "华域汽车 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750700, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 704, "is_v3": false, "is_swarm": true, "has_pod": true, "tags": "播客 双人播客 音频 Bento 驾驶舱 Swarm B测"}, {"fname": "山东黄金_2.0模块化深度投研驾驶舱.html", "title": "山东黄金 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750700, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 630, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "海螺水泥_2.0模块化深度投研驾驶舱.html", "title": "海螺水泥 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750700, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 636, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3 Swarm B测"}, {"fname": "四川黄金_2.0模块化深度投研驾驶舱.html", "title": "四川黄金 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750699, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 619, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "天山铝业_2.0模块化深度投研驾驶舱.html", "title": "天山铝业 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750699, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 538, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "天赐材料_2.0模块化深度投研驾驶舱.html", "title": "天赐材料 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750699, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 546, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱"}, {"fname": "宁德时代_2.0模块化深度投研驾驶舱.html", "title": "宁德时代 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750699, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 688, "is_v3": false, "is_swarm": true, "has_pod": true, "tags": "播客 双人播客 音频 Bento 驾驶舱 Swarm B测"}, {"fname": "欣旺达_2.0模块化深度投研驾驶舱.html", "title": "欣旺达 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750699, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 543, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "腾讯控股_2.0模块化深度投研驾驶舱.html", "title": "腾讯控股 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750699, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 654, "is_v3": false, "is_swarm": true, "has_pod": true, "tags": "播客 双人播客 音频 Bento 驾驶舱 Swarm B测"}, {"fname": "铖昌科技_2.0模块化深度投研驾驶舱.html", "title": "铖昌科技 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750699, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 619, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "云铝股份_2.0模块化深度投研驾驶舱.html", "title": "云铝股份 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750698, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 572, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Bento 驾驶舱 Swarm B测"}, {"fname": "山金国际_2.0模块化深度投研驾驶舱.html", "title": "山金国际 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750698, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 627, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "盐湖股份_2.0模块化深度投研驾驶舱.html", "title": "盐湖股份 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750698, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 729, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3 Swarm B测"}, {"fname": "神火股份_2.0模块化深度投研驾驶舱.html", "title": "神火股份 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750698, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 558, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "Bento 驾驶舱 最新流程 方案B v3"}, {"fname": "紫光股份_2.0模块化深度投研驾驶舱.html", "title": "紫光股份 · 2.5 全感官驾驶舱", "kind": "v2cockpit", "cat_label": "🚀 2.5驾驶舱", "cat_order": 2, "pin_order": 10, "mtime": 1795750698, "mtime_str": "2026-11-27 11:38", "mtime_short": "11-27 11:38", "size_kb": 611, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Bento 驾驶舱 Swarm B测"}, {"fname": "青岛啤酒_全模块深度投研全集.html", "title": "青岛啤酒 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795747718, "mtime_str": "2026-11-27 10:48", "mtime_short": "11-27 10:48", "size_kb": 650, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "紫金矿业_全模块深度投研全集.html", "title": "紫金矿业 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795747717, "mtime_str": "2026-11-27 10:48", "mtime_short": "11-27 10:48", "size_kb": 700, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "赛轮轮胎_全模块深度投研全集.html", "title": "赛轮轮胎 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795747717, "mtime_str": "2026-11-27 10:48", "mtime_short": "11-27 10:48", "size_kb": 466, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "福耀玻璃_全模块深度投研全集.html", "title": "福耀玻璃 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795747716, "mtime_str": "2026-11-27 10:48", "mtime_short": "11-27 10:48", "size_kb": 717, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "淮北矿业_全模块深度投研全集.html", "title": "淮北矿业 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795747714, "mtime_str": "2026-11-27 10:48", "mtime_short": "11-27 10:48", "size_kb": 720, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "宝丰能源_全模块深度投研全集.html", "title": "宝丰能源 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795747713, "mtime_str": "2026-11-27 10:48", "mtime_short": "11-27 10:48", "size_kb": 655, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "海尔智家_全模块深度投研全集.html", "title": "海尔智家 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795747713, "mtime_str": "2026-11-27 10:48", "mtime_short": "11-27 10:48", "size_kb": 557, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm B测"}, {"fname": "中远海控_全模块深度投研全集.html", "title": "中远海控 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795747712, "mtime_str": "2026-11-27 10:48", "mtime_short": "11-27 10:48", "size_kb": 469, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中国太保_全模块深度投研全集.html", "title": "中国太保 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795747711, "mtime_str": "2026-11-27 10:48", "mtime_short": "11-27 10:48", "size_kb": 662, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中国移动·2026年06月30日历史回测版_全模块深度投研全集.html", "title": "中国移动·2026年06月30日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795747393, "mtime_str": "2026-11-27 10:43", "mtime_short": "11-27 10:43", "size_kb": 245, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "山金国际_全模块深度投研全集.html", "title": "山金国际 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795744785, "mtime_str": "2026-11-27 09:59", "mtime_short": "11-27 09:59", "size_kb": 704, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "四川黄金_全模块深度投研全集.html", "title": "四川黄金 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795709406, "mtime_str": "2026-11-27 00:10", "mtime_short": "11-27 00:10", "size_kb": 692, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "思源电气·2025年04月07日历史回测版_全模块深度投研全集.html", "title": "思源电气·2025年04月07日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795707883, "mtime_str": "2026-11-26 23:44", "mtime_short": "11-26 23:44", "size_kb": 239, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "山东黄金_全模块深度投研全集.html", "title": "山东黄金 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795707451, "mtime_str": "2026-11-26 23:37", "mtime_short": "11-26 23:37", "size_kb": 705, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "中国联通_全模块深度投研全集.html", "title": "中国联通 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795707184, "mtime_str": "2026-11-26 23:33", "mtime_short": "11-26 23:33", "size_kb": 698, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "紫金矿业·2025年04月07日历史回测版_全模块深度投研全集.html", "title": "紫金矿业·2025年04月07日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795699857, "mtime_str": "2026-11-26 21:30", "mtime_short": "11-26 21:30", "size_kb": 261, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "腾讯控股_全模块深度投研全集.html", "title": "腾讯控股 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795696527, "mtime_str": "2026-11-26 20:35", "mtime_short": "11-26 20:35", "size_kb": 735, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm B测"}, {"fname": "中国海油_全模块深度投研全集.html", "title": "中国海油 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795696460, "mtime_str": "2026-11-26 20:34", "mtime_short": "11-26 20:34", "size_kb": 657, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm B测"}, {"fname": "华域汽车_全模块深度投研全集.html", "title": "华域汽车 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795696459, "mtime_str": "2026-11-26 20:34", "mtime_short": "11-26 20:34", "size_kb": 701, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm B测"}, {"fname": "宁德时代_全模块深度投研全集.html", "title": "宁德时代 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795695559, "mtime_str": "2026-11-26 20:19", "mtime_short": "11-26 20:19", "size_kb": 618, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm B测"}, {"fname": "紫金矿业_投委会群聊辩论剧场_20261126.html", "title": "紫金矿业 · 投委会辩论（20261126）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795694385, "mtime_str": "2026-11-26 19:59", "mtime_short": "11-26 19:59", "size_kb": 97, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 最新流程 方案B v3 Swarm B测"}, {"fname": "淮北矿业_投委会群聊辩论剧场_20261126.html", "title": "淮北矿业 · 投委会辩论（20261126）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795692688, "mtime_str": "2026-11-26 19:31", "mtime_short": "11-26 19:31", "size_kb": 98, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 最新流程 方案B v3 Swarm B测"}, {"fname": "铖昌科技_全模块深度投研全集.html", "title": "铖昌科技 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795689222, "mtime_str": "2026-11-26 18:33", "mtime_short": "11-26 18:33", "size_kb": 682, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "潞安环能_全模块深度投研全集.html", "title": "潞安环能 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795687852, "mtime_str": "2026-11-26 18:10", "mtime_short": "11-26 18:10", "size_kb": 708, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "中芯国际_全模块深度投研全集.html", "title": "中芯国际 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795686437, "mtime_str": "2026-11-26 17:47", "mtime_short": "11-26 17:47", "size_kb": 700, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "盐湖股份_全模块深度投研全集.html", "title": "盐湖股份 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795679795, "mtime_str": "2026-11-26 15:56", "mtime_short": "11-26 15:56", "size_kb": 732, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "盐湖股份_投委会群聊辩论剧场_20261126.html", "title": "盐湖股份 · 投委会辩论（20261126）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795672637, "mtime_str": "2026-11-26 13:57", "mtime_short": "11-26 13:57", "size_kb": 99, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 最新流程 方案B v3 Swarm B测"}, {"fname": "万华化学_全模块深度投研全集.html", "title": "万华化学 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795670569, "mtime_str": "2026-11-26 13:22", "mtime_short": "11-26 13:22", "size_kb": 712, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "万华化学_投委会群聊辩论剧场_20261126.html", "title": "万华化学 · 投委会辩论（20261126）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795670279, "mtime_str": "2026-11-26 13:17", "mtime_short": "11-26 13:17", "size_kb": 97, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 最新流程 方案B v3 Swarm B测"}, {"fname": "中国海油_投委会群聊辩论剧场_20261125.html", "title": "中国海油 · 投委会辩论（20261125）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795663017, "mtime_str": "2026-11-26 11:16", "mtime_short": "11-26 11:16", "size_kb": 88, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 Swarm B测"}, {"fname": "云铝股份_全模块深度投研全集.html", "title": "云铝股份 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795661708, "mtime_str": "2026-11-26 10:55", "mtime_short": "11-26 10:55", "size_kb": 541, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm B测"}, {"fname": "恒源煤电_全模块深度投研全集.html", "title": "恒源煤电 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795661646, "mtime_str": "2026-11-26 10:54", "mtime_short": "11-26 10:54", "size_kb": 618, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "海螺水泥_全模块深度投研全集.html", "title": "海螺水泥 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795661644, "mtime_str": "2026-11-26 10:54", "mtime_short": "11-26 10:54", "size_kb": 650, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "上汽集团_全模块深度投研全集.html", "title": "上汽集团 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795661642, "mtime_str": "2026-11-26 10:54", "mtime_short": "11-26 10:54", "size_kb": 605, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "欣旺达_全模块深度投研全集.html", "title": "欣旺达 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795661641, "mtime_str": "2026-11-26 10:54", "mtime_short": "11-26 10:54", "size_kb": 645, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "天赐材料_全模块深度投研全集.html", "title": "天赐材料 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795661639, "mtime_str": "2026-11-26 10:53", "mtime_short": "11-26 10:53", "size_kb": 593, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "天山铝业_全模块深度投研全集.html", "title": "天山铝业 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795661638, "mtime_str": "2026-11-26 10:53", "mtime_short": "11-26 10:53", "size_kb": 607, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "紫光股份_全模块深度投研全集.html", "title": "紫光股份 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795661637, "mtime_str": "2026-11-26 10:53", "mtime_short": "11-26 10:53", "size_kb": 582, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm B测"}, {"fname": "神火股份_全模块深度投研全集.html", "title": "神火股份 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795661636, "mtime_str": "2026-11-26 10:53", "mtime_short": "11-26 10:53", "size_kb": 605, "is_v3": true, "is_swarm": false, "has_pod": false, "tags": "最新流程 方案B v3"}, {"fname": "海螺水泥_投委会群聊辩论剧场_20261125.html", "title": "海螺水泥 · 投委会辩论（20261125）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795623209, "mtime_str": "2026-11-26 00:13", "mtime_short": "11-26 00:13", "size_kb": 96, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 最新流程 方案B v3 Swarm B测"}, {"fname": "腾讯控股_投委会群聊辩论剧场_20261125.html", "title": "腾讯控股 · 投委会辩论（20261125）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795613334, "mtime_str": "2026-11-25 21:28", "mtime_short": "11-25 21:28", "size_kb": 96, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 Swarm B测"}, {"fname": "华域汽车_投委会群聊辩论剧场_20261125.html", "title": "华域汽车 · 投委会辩论（20261125）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795610778, "mtime_str": "2026-11-25 20:46", "mtime_short": "11-25 20:46", "size_kb": 88, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 Swarm B测"}, {"fname": "紫光股份_投委会群聊辩论剧场_20261125.html", "title": "紫光股份 · 投委会辩论（20261125）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795592086, "mtime_str": "2026-11-25 15:34", "mtime_short": "11-25 15:34", "size_kb": 89, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 Swarm B测"}, {"fname": "云铝股份_投委会群聊辩论剧场_20261125.html", "title": "云铝股份 · 投委会辩论（20261125）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795583612, "mtime_str": "2026-11-25 13:13", "mtime_short": "11-25 13:13", "size_kb": 78, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 Swarm B测"}, {"fname": "海尔智家_投委会群聊辩论剧场_20261125.html", "title": "海尔智家 · 投委会辩论（20261125）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795583605, "mtime_str": "2026-11-25 13:13", "mtime_short": "11-25 13:13", "size_kb": 86, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 Swarm B测"}, {"fname": "宁德时代_投委会群聊辩论剧场_20261125.html", "title": "宁德时代 · 投委会辩论（20261125）", "kind": "debate", "cat_label": "💬 投委会辩论", "cat_order": 3, "pin_order": 10, "mtime": 1795576542, "mtime_str": "2026-11-25 11:15", "mtime_short": "11-25 11:15", "size_kb": 90, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "Swarm 辩论 群聊 Swarm B测"}, {"fname": "兖矿能源_全模块深度投研全集.html", "title": "兖矿能源 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795541658, "mtime_str": "2026-11-25 01:34", "mtime_short": "11-25 01:34", "size_kb": 599, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "通威股份_全模块深度投研全集.html", "title": "通威股份 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795540747, "mtime_str": "2026-11-25 01:19", "mtime_short": "11-25 01:19", "size_kb": 605, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "洛阳钼业_全模块深度投研全集.html", "title": "洛阳钼业 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795538646, "mtime_str": "2026-11-25 00:44", "mtime_short": "11-25 00:44", "size_kb": 517, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中国石油·2026年06月30日历史回测版_全模块深度投研全集.html", "title": "中国石油·2026年06月30日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795533745, "mtime_str": "2026-11-24 23:22", "mtime_short": "11-24 23:22", "size_kb": 167, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中国海油_可视化全景图谱看板.html", "title": "中国海油 · 可视化全景看板", "kind": "dashboard", "cat_label": "📊 可视化看板", "cat_order": 4, "pin_order": 10, "mtime": 1795533708, "mtime_str": "2026-11-24 23:21", "mtime_short": "11-24 23:21", "size_kb": 188, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "SVG 可视化 看板 Swarm B测"}, {"fname": "腾讯控股_可视化全景图谱看板.html", "title": "腾讯控股 · 可视化全景看板", "kind": "dashboard", "cat_label": "📊 可视化看板", "cat_order": 4, "pin_order": 10, "mtime": 1795533703, "mtime_str": "2026-11-24 23:21", "mtime_short": "11-24 23:21", "size_kb": 193, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "SVG 可视化 看板 Swarm B测"}, {"fname": "天齐锂业·2025年04月09日历史回测版_全模块深度投研全集.html", "title": "天齐锂业·2025年04月09日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795528484, "mtime_str": "2026-11-24 21:54", "mtime_short": "11-24 21:54", "size_kb": 185, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "阳光电源_全模块深度投研全集.html", "title": "阳光电源 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509919, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 413, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "铜陵有色_全模块深度投研全集.html", "title": "铜陵有色 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509918, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 645, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "藏格矿业_全模块深度投研全集.html", "title": "藏格矿业 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509917, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 599, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "立讯精密_全模块深度投研全集.html", "title": "立讯精密 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509916, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 510, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "牧原股份_全模块深度投研全集.html", "title": "牧原股份 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509915, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 263, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "海底捞_全模块深度投研全集.html", "title": "海底捞 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509914, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 576, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "海天味业_全模块深度投研全集.html", "title": "海天味业 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509913, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 548, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "沪电股份_全模块深度投研全集.html", "title": "沪电股份 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509912, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 645, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "新华保险_全模块深度投研全集.html", "title": "新华保险 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509911, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 595, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "比亚迪_全模块深度投研全集.html", "title": "比亚迪 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509911, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 428, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "招商证券_全模块深度投研全集.html", "title": "招商证券 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509910, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 604, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "影石创新_全模块深度投研全集.html", "title": "影石创新 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509909, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 584, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "工商银行_全模块深度投研全集.html", "title": "工商银行 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509908, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 590, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "工业富联_全模块深度投研全集.html", "title": "工业富联 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509906, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 556, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "安克创新_全模块深度投研全集.html", "title": "安克创新 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509904, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 373, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "安琪酵母_全模块深度投研全集.html", "title": "安琪酵母 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509904, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 337, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "乖宝宠物_全模块深度投研全集.html", "title": "乖宝宠物 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509903, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 556, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "大参林_全模块深度投研全集.html", "title": "大参林 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509903, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 439, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中际旭创_全模块深度投研全集.html", "title": "中际旭创 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509902, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 407, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中国船舶_全模块深度投研全集.html", "title": "中国船舶 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795509901, "mtime_str": "2026-11-24 16:45", "mtime_short": "11-24 16:45", "size_kb": 565, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "洪城环境_全模块深度投研全集.html", "title": "洪城环境 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795508979, "mtime_str": "2026-11-24 16:29", "mtime_short": "11-24 16:29", "size_kb": 645, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "贵州茅台_全模块深度投研全集.html", "title": "贵州茅台 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795508974, "mtime_str": "2026-11-24 16:29", "mtime_short": "11-24 16:29", "size_kb": 357, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "东鹏饮料_全模块深度投研全集.html", "title": "东鹏饮料 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795508973, "mtime_str": "2026-11-24 16:29", "mtime_short": "11-24 16:29", "size_kb": 560, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中国中免_全模块深度投研全集.html", "title": "中国中免 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795508972, "mtime_str": "2026-11-24 16:29", "mtime_short": "11-24 16:29", "size_kb": 403, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "藏格矿业·2023年06月29日历史回测版_全模块深度投研全集.html", "title": "藏格矿业·2023年06月29日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795507679, "mtime_str": "2026-11-24 16:07", "mtime_short": "11-24 16:07", "size_kb": 154, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "比亚迪·2023年08月25日历史回测版_全模块深度投研全集.html", "title": "比亚迪·2023年08月25日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795502361, "mtime_str": "2026-11-24 14:39", "mtime_short": "11-24 14:39", "size_kb": 177, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中国神华_商业发家史与管理层功过录.html", "title": "中国神华 · 商业发家史与管理层功过录", "kind": "chronicle", "cat_label": "📜 商业发家史", "cat_order": 6, "pin_order": 10, "mtime": 1795501734, "mtime_str": "2026-11-24 14:28", "mtime_short": "11-24 14:28", "size_kb": 183, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "艾力斯_全模块深度投研全集.html", "title": "艾力斯 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795501730, "mtime_str": "2026-11-24 14:28", "mtime_short": "11-24 14:28", "size_kb": 659, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "美的集团_商业发家史与管理层功过录.html", "title": "美的集团 · 商业发家史与管理层功过录", "kind": "chronicle", "cat_label": "📜 商业发家史", "cat_order": 6, "pin_order": 10, "mtime": 1795499248, "mtime_str": "2026-11-24 13:47", "mtime_short": "11-24 13:47", "size_kb": 202, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "宏观与大宗周期仪_可视化全景图谱看板.html", "title": "宏观与大宗周期仪 · 可视化全景看板", "kind": "dashboard", "cat_label": "📊 可视化看板", "cat_order": 4, "pin_order": 10, "mtime": 1795495188, "mtime_str": "2026-11-24 12:39", "mtime_short": "11-24 12:39", "size_kb": 75, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": "SVG 可视化 看板"}, {"fname": "特宝生物_全模块深度投研全集.html", "title": "特宝生物 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494619, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 270, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中国石油_全模块深度投研全集.html", "title": "中国石油 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494618, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 374, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中科曙光_全模块深度投研全集.html", "title": "中科曙光 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494618, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 545, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "美团-W_全模块深度投研全集.html", "title": "美团-W · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494616, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 617, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "博源化工_全模块深度投研全集.html", "title": "博源化工 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494609, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 614, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "平安银行_全模块深度投研全集.html", "title": "平安银行 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494608, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 635, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "伊之密_全模块深度投研全集.html", "title": "伊之密 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494605, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 433, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "海康威视_全模块深度投研全集.html", "title": "海康威视 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494605, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 492, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "华东医药_全模块深度投研全集.html", "title": "华东医药 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494602, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 221, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "圆通速递_全模块深度投研全集.html", "title": "圆通速递 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494601, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 499, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "正泰电器_全模块深度投研全集.html", "title": "正泰电器 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795494600, "mtime_str": "2026-11-24 12:30", "mtime_short": "11-24 12:30", "size_kb": 861, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "东方电气_全模块深度投研全集.html", "title": "东方电气 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795491717, "mtime_str": "2026-11-24 11:41", "mtime_short": "11-24 11:41", "size_kb": 678, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "新华保险H·2021年07月30日历史回测版_全模块深度投研全集.html", "title": "新华保险H·2021年07月30日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795485396, "mtime_str": "2026-11-24 09:56", "mtime_short": "11-24 09:56", "size_kb": 184, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中信特钢_全模块深度投研全集.html", "title": "中信特钢 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795444429, "mtime_str": "2026-11-23 22:33", "mtime_short": "11-23 22:33", "size_kb": 686, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "春秋航空_全模块深度投研全集.html", "title": "春秋航空 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795442658, "mtime_str": "2026-11-23 22:04", "mtime_short": "11-23 22:04", "size_kb": 674, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "国信证券_全模块深度投研全集.html", "title": "国信证券 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795441016, "mtime_str": "2026-11-23 21:36", "mtime_short": "11-23 21:36", "size_kb": 676, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "恒瑞医药·2025年09月08日历史回测版_全模块深度投研全集.html", "title": "恒瑞医药·2025年09月08日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795426170, "mtime_str": "2026-11-23 17:29", "mtime_short": "11-23 17:29", "size_kb": 172, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "百济神州·2026年03月23日历史回测版_全模块深度投研全集.html", "title": "百济神州·2026年03月23日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795425332, "mtime_str": "2026-11-23 17:15", "mtime_short": "11-23 17:15", "size_kb": 183, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中国平安·2022年10月31日历史回测版_全模块深度投研全集.html", "title": "中国平安·2022年10月31日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795423004, "mtime_str": "2026-11-23 16:36", "mtime_short": "11-23 16:36", "size_kb": 184, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "海尔智家_可视化全景图谱看板.html", "title": "海尔智家 · 可视化全景看板", "kind": "dashboard", "cat_label": "📊 可视化看板", "cat_order": 4, "pin_order": 10, "mtime": 1795406446, "mtime_str": "2026-11-23 12:00", "mtime_short": "11-23 12:00", "size_kb": 171, "is_v3": false, "is_swarm": true, "has_pod": false, "tags": "SVG 可视化 看板 Swarm B测"}, {"fname": "京东方A_可视化全景图谱看板.html", "title": "京东方A · 可视化全景看板", "kind": "dashboard", "cat_label": "📊 可视化看板", "cat_order": 4, "pin_order": 10, "mtime": 1795403653, "mtime_str": "2026-11-23 11:14", "mtime_short": "11-23 11:14", "size_kb": 172, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": "SVG 可视化 看板"}, {"fname": "五粮液·2021年02月18日历史回测版_全模块深度投研全集.html", "title": "五粮液·2021年02月18日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795402605, "mtime_str": "2026-11-23 10:56", "mtime_short": "11-23 10:56", "size_kb": 529, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "乐鑫科技_全模块深度投研全集.html", "title": "乐鑫科技 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795364433, "mtime_str": "2026-11-23 00:20", "mtime_short": "11-23 00:20", "size_kb": 565, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "宁德时代·2024年1月30日历史回测版_全模块深度投研全集.html", "title": "宁德时代·2024年1月30日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795356101, "mtime_str": "2026-11-22 22:01", "mtime_short": "11-22 22:01", "size_kb": 551, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "腾讯控股·2022年10月25日历史回测版_全模块深度投研全集.html", "title": "腾讯控股·2022年10月25日历史回测版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795346448, "mtime_str": "2026-11-22 19:20", "mtime_short": "11-22 19:20", "size_kb": 568, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "黄金_全球产业全景沙盘.html", "title": "黄金 · 全球产业全景沙盘", "kind": "industry", "cat_label": "🌍 产业沙盘", "cat_order": 5, "pin_order": 10, "mtime": 1795183214, "mtime_str": "2026-11-20 22:00", "mtime_short": "11-20 22:00", "size_kb": 268, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "万华化学_20261120重研版_全模块深度投研全集.html", "title": "万华化学_20261120重研版 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795180749, "mtime_str": "2026-11-20 21:19", "mtime_short": "11-20 21:19", "size_kb": 525, "is_v3": true, "is_swarm": true, "has_pod": false, "tags": "最新流程 方案B v3 Swarm B测"}, {"fname": "东方财富_全模块深度投研全集.html", "title": "东方财富 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795067883, "mtime_str": "2026-11-19 13:58", "mtime_short": "11-19 13:58", "size_kb": 515, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "京东方A_全模块深度投研全集.html", "title": "京东方A · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795064569, "mtime_str": "2026-11-19 13:02", "mtime_short": "11-19 13:02", "size_kb": 507, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "长鑫科技_全模块深度投研全集.html", "title": "长鑫科技 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795059109, "mtime_str": "2026-11-19 11:31", "mtime_short": "11-19 11:31", "size_kb": 485, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "浪潮信息_全模块深度投研全集.html", "title": "浪潮信息 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795010449, "mtime_str": "2026-11-18 22:00", "mtime_short": "11-18 22:00", "size_kb": 530, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "西部超导_全模块深度投研全集.html", "title": "西部超导 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1795002053, "mtime_str": "2026-11-18 19:40", "mtime_short": "11-18 19:40", "size_kb": 554, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "汇川技术_全模块深度投研全集.html", "title": "汇川技术 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794932191, "mtime_str": "2026-11-18 00:16", "mtime_short": "11-18 00:16", "size_kb": 884, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "海光信息_全模块深度投研全集.html", "title": "海光信息 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794931539, "mtime_str": "2026-11-18 00:05", "mtime_short": "11-18 00:05", "size_kb": 921, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "鼎龙股份_全模块深度投研全集.html", "title": "鼎龙股份 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930576, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 461, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "药明康德_全模块深度投研全集.html", "title": "药明康德 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930575, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 316, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "赛分科技_全模块深度投研全集.html", "title": "赛分科技 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930575, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 311, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "盛弘股份_全模块深度投研全集.html", "title": "盛弘股份 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930574, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 316, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "纳微科技_全模块深度投研全集.html", "title": "纳微科技 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930574, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 316, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "英集芯_全模块深度投研全集.html", "title": "英集芯 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930574, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 307, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "澜起科技_全模块深度投研全集.html", "title": "澜起科技 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930573, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 349, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "爱旭股份_全模块深度投研全集.html", "title": "爱旭股份 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930573, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 300, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "法拉电子_全模块深度投研全集.html", "title": "法拉电子 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930570, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 323, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "巨力索具_全模块深度投研全集.html", "title": "巨力索具 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930568, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 301, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "恒瑞医药_全模块深度投研全集.html", "title": "恒瑞医药 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930568, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 360, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "新集能源_全模块深度投研全集.html", "title": "新集能源 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930568, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 325, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "有色金属_全球产业全景沙盘.html", "title": "有色金属 · 全球产业全景沙盘", "kind": "industry", "cat_label": "🌍 产业沙盘", "cat_order": 5, "pin_order": 10, "mtime": 1794930568, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 311, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "柏楚电子_全模块深度投研全集.html", "title": "柏楚电子 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930568, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 438, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "凯莱英_全模块深度投研全集.html", "title": "凯莱英 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930566, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 302, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "创新药产业_全球产业全景沙盘.html", "title": "创新药产业 · 全球产业全景沙盘", "kind": "industry", "cat_label": "🌍 产业沙盘", "cat_order": 5, "pin_order": 10, "mtime": 1794930566, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 295, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "北方华创_全模块深度投研全集.html", "title": "北方华创 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930566, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 341, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "医疗研发外包产业链_全球产业全景沙盘.html", "title": "医疗研发外包产业链 · 全球产业全景沙盘", "kind": "industry", "cat_label": "🌍 产业沙盘", "cat_order": 5, "pin_order": 10, "mtime": 1794930566, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 269, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "兆易创新_全模块深度投研全集.html", "title": "兆易创新 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930565, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 319, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "亿纬锂能_全模块深度投研全集.html", "title": "亿纬锂能 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930564, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 325, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "中国神华_全模块深度投研全集.html", "title": "中国神华 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930563, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 301, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}, {"fname": "东山精密_全模块深度投研全集.html", "title": "东山精密 · 深度投研全集", "kind": "stock", "cat_label": "🏢 个股研报", "cat_order": 7, "pin_order": 10, "mtime": 1794930562, "mtime_str": "2026-11-17 23:49", "mtime_short": "11-17 23:49", "size_kb": 325, "is_v3": false, "is_swarm": false, "has_pod": false, "tags": ""}];
+    const REPORT_URLS = ["./index.html", "./00_小市值跃迁模式库总览.html", "./万华化学_2.0模块化深度投研驾驶舱.html", "./万华化学_20261120重研版_全模块深度投研全集.html", "./万华化学_全模块深度投研全集.html", "./万华化学_投委会群聊辩论剧场_20261126.html", "./上汽集团_2.0模块化深度投研驾驶舱.html", "./上汽集团_全模块深度投研全集.html", "./东山精密_全模块深度投研全集.html", "./东方电气_全模块深度投研全集.html", "./东方财富_全模块深度投研全集.html", "./东鹏饮料_全模块深度投研全集.html", "./中信特钢_全模块深度投研全集.html", "./中原内配_2.0模块化深度投研驾驶舱.html", "./中原内配_全模块深度投研全集.html", "./中原内配_投委会群聊辩论剧场_20261127.html", "./中国中免_全模块深度投研全集.html", "./中国太保_全模块深度投研全集.html", "./中国平安_2.0模块化深度投研驾驶舱.html", "./中国平安_全模块深度投研全集.html", "./中国平安_投委会群聊辩论剧场_20261127.html", "./中国平安·2022年10月31日历史回测版_全模块深度投研全集.html", "./中国海油_2.0模块化深度投研驾驶舱.html", "./中国海油_全模块深度投研全集.html", "./中国海油_可视化全景图谱看板.html", "./中国海油_投委会群聊辩论剧场_20261125.html", "./中国石油_全模块深度投研全集.html", "./中国石油·2026年06月30日历史回测版_全模块深度投研全集.html", "./中国神华_全模块深度投研全集.html", "./中国神华_商业发家史与管理层功过录.html", "./中国移动·2026年06月30日历史回测版_全模块深度投研全集.html", "./中国联通_2.0模块化深度投研驾驶舱.html", "./中国联通_全模块深度投研全集.html", "./中国船舶_全模块深度投研全集.html", "./中科曙光_全模块深度投研全集.html", "./中芯国际_2.0模块化深度投研驾驶舱.html", "./中芯国际_全模块深度投研全集.html", "./中远海控_全模块深度投研全集.html", "./中际旭创_全模块深度投研全集.html", "./乐鑫科技_全模块深度投研全集.html", "./乖宝宠物_全模块深度投研全集.html", "./云铝股份_2.0模块化深度投研驾驶舱.html", "./云铝股份_全模块深度投研全集.html", "./云铝股份_投委会群聊辩论剧场_20261125.html", "./五粮液·2021年02月18日历史回测版_全模块深度投研全集.html", "./京东方A_全模块深度投研全集.html", "./京东方A_可视化全景图谱看板.html", "./亿纬锂能_全模块深度投研全集.html", "./企业深度投研性价比排行榜_最新全集.html", "./伊之密_全模块深度投研全集.html", "./伯特利_2.0模块化深度投研驾驶舱.html", "./伯特利_全模块深度投研全集.html", "./伯特利_投委会群聊辩论剧场_20261128.html", "./兆易创新_全模块深度投研全集.html", "./兖矿能源_全模块深度投研全集.html", "./凯莱英_全模块深度投研全集.html", "./创新药产业_全球产业全景沙盘.html", "./北方华创_全模块深度投研全集.html", "./医疗研发外包产业链_全球产业全景沙盘.html", "./华东医药_全模块深度投研全集.html", "./华域汽车_2.0模块化深度投研驾驶舱.html", "./华域汽车_全模块深度投研全集.html", "./华域汽车_投委会群聊辩论剧场_20261125.html", "./博源化工_全模块深度投研全集.html", "./双汇发展_2.0模块化深度投研驾驶舱.html", "./双汇发展_全模块深度投研全集.html", "./双汇发展_投委会群聊辩论剧场_20261127.html", "./四川黄金_2.0模块化深度投研驾驶舱.html", "./四川黄金_全模块深度投研全集.html", "./国信证券_全模块深度投研全集.html", "./圆通速递_全模块深度投研全集.html", "./大参林_全模块深度投研全集.html", "./天山铝业_2.0模块化深度投研驾驶舱.html", "./天山铝业_全模块深度投研全集.html", "./天赐材料_2.0模块化深度投研驾驶舱.html", "./天赐材料_全模块深度投研全集.html", "./天齐锂业·2025年04月09日历史回测版_全模块深度投研全集.html", "./宁德时代_2.0模块化深度投研驾驶舱.html", "./宁德时代_全模块深度投研全集.html", "./宁德时代_投委会群聊辩论剧场_20261125.html", "./宁德时代·2024年1月30日历史回测版_全模块深度投研全集.html", "./安克创新_全模块深度投研全集.html", "./安琪酵母_全模块深度投研全集.html", "./宏观与大宗周期仪_可视化全景图谱看板.html", "./宝丰能源_全模块深度投研全集.html", "./山东黄金_2.0模块化深度投研驾驶舱.html", "./山东黄金_全模块深度投研全集.html", "./山西汾酒_2.0模块化深度投研驾驶舱.html", "./山西汾酒_全模块深度投研全集.html", "./山金国际_2.0模块化深度投研驾驶舱.html", "./山金国际_全模块深度投研全集.html", "./工业富联_全模块深度投研全集.html", "./工商银行_全模块深度投研全集.html", "./巨力索具_全模块深度投研全集.html", "./平安银行_全模块深度投研全集.html", "./影石创新_全模块深度投研全集.html", "./思源电气·2025年04月07日历史回测版_全模块深度投研全集.html", "./恒源煤电_2.0模块化深度投研驾驶舱.html", "./恒源煤电_全模块深度投研全集.html", "./恒瑞医药_全模块深度投研全集.html", "./恒瑞医药·2025年09月08日历史回测版_全模块深度投研全集.html", "./招商证券_全模块深度投研全集.html", "./招商银行_2.0模块化深度投研驾驶舱.html", "./招商银行_全模块深度投研全集.html", "./招商银行_投委会群聊辩论剧场_20261127.html", "./新华保险_全模块深度投研全集.html", "./新华保险H·2021年07月30日历史回测版_全模块深度投研全集.html", "./新集能源_全模块深度投研全集.html", "./春秋航空_全模块深度投研全集.html", "./有色金属_全球产业全景沙盘.html", "./柏楚电子_全模块深度投研全集.html", "./欣旺达_2.0模块化深度投研驾驶舱.html", "./欣旺达_全模块深度投研全集.html", "./正泰电器_全模块深度投研全集.html", "./比亚迪_全模块深度投研全集.html", "./比亚迪·2023年08月25日历史回测版_全模块深度投研全集.html", "./汇川技术_全模块深度投研全集.html", "./沪电股份_全模块深度投研全集.html", "./法拉电子_全模块深度投研全集.html", "./洛阳钼业_全模块深度投研全集.html", "./洪城环境_全模块深度投研全集.html", "./浪潮信息_全模块深度投研全集.html", "./海光信息_全模块深度投研全集.html", "./海天味业_全模块深度投研全集.html", "./海尔智家_全模块深度投研全集.html", "./海尔智家_可视化全景图谱看板.html", "./海尔智家_投委会群聊辩论剧场_20261125.html", "./海底捞_全模块深度投研全集.html", "./海康威视_全模块深度投研全集.html", "./海螺水泥_2.0模块化深度投研驾驶舱.html", "./海螺水泥_全模块深度投研全集.html", "./海螺水泥_投委会群聊辩论剧场_20261125.html", "./淮北矿业_2.0模块化深度投研驾驶舱.html", "./淮北矿业_全模块深度投研全集.html", "./淮北矿业_投委会群聊辩论剧场_20261126.html", "./潞安环能_2.0模块化深度投研驾驶舱.html", "./潞安环能_全模块深度投研全集.html", "./澜起科技_全模块深度投研全集.html", "./爱旭股份_全模块深度投研全集.html", "./牧原股份_全模块深度投研全集.html", "./特宝生物_全模块深度投研全集.html", "./瑞丰新材_2.0模块化深度投研驾驶舱.html", "./瑞丰新材_全模块深度投研全集.html", "./瑞丰新材_投委会群聊辩论剧场_20261127.html", "./百济神州·2026年03月23日历史回测版_全模块深度投研全集.html", "./盐湖股份_2.0模块化深度投研驾驶舱.html", "./盐湖股份_全模块深度投研全集.html", "./盐湖股份_投委会群聊辩论剧场_20261126.html", "./盛弘股份_全模块深度投研全集.html", "./神火股份_2.0模块化深度投研驾驶舱.html", "./神火股份_全模块深度投研全集.html", "./福耀玻璃_全模块深度投研全集.html", "./立讯精密_全模块深度投研全集.html", "./紫光股份_2.0模块化深度投研驾驶舱.html", "./紫光股份_全模块深度投研全集.html", "./紫光股份_投委会群聊辩论剧场_20261125.html", "./紫金矿业_2.0模块化深度投研驾驶舱.html", "./紫金矿业_全模块深度投研全集.html", "./紫金矿业_投委会群聊辩论剧场_20261126.html", "./紫金矿业·2025年04月07日历史回测版_全模块深度投研全集.html", "./纳微科技_全模块深度投研全集.html", "./美团-W_全模块深度投研全集.html", "./美的集团_上市跃迁图谱.html", "./美的集团_商业发家史与管理层功过录.html", "./腾讯控股_2.0模块化深度投研驾驶舱.html", "./腾讯控股_全模块深度投研全集.html", "./腾讯控股_可视化全景图谱看板.html", "./腾讯控股_投委会群聊辩论剧场_20261125.html", "./腾讯控股·2022年10月25日历史回测版_全模块深度投研全集.html", "./艾力斯_全模块深度投研全集.html", "./英集芯_全模块深度投研全集.html", "./药明康德_全模块深度投研全集.html", "./藏格矿业_全模块深度投研全集.html", "./藏格矿业·2023年06月29日历史回测版_全模块深度投研全集.html", "./西部超导_全模块深度投研全集.html", "./贵州茅台_全模块深度投研全集.html", "./赛分科技_全模块深度投研全集.html", "./赛轮轮胎_全模块深度投研全集.html", "./通威股份_全模块深度投研全集.html", "./铖昌科技_2.0模块化深度投研驾驶舱.html", "./铖昌科技_全模块深度投研全集.html", "./铜陵有色_全模块深度投研全集.html", "./长鑫科技_全模块深度投研全集.html", "./阳光电源_全模块深度投研全集.html", "./青岛啤酒_全模块深度投研全集.html", "./黄金_全球产业全景沙盘.html", "./鼎龙股份_全模块深度投研全集.html"];
+    const BUILT_TS = 1795836233;
 
-    function setTab(tab, btn) {
-      currentTab = tab;
-      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      filterCards();
+    let currentTab = 'all';
+    let currentView = 'list'; // 'list' | 'grid'
+    let currentSort = 'time'; // 'time' | 'cat'
+
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    function relTimeBadge(ts) {
+      const diffSec = Math.max(0, BUILT_TS - ts);
+      if (diffSec < 3600) return '<span class="fresh-dot today">刚刚更新</span>';
+      if (diffSec < 24 * 3600) return `<span class="fresh-dot today">${Math.floor(diffSec/3600)}h前</span>`;
+      if (diffSec < 3 * 86400) return `<span class="fresh-dot">${Math.floor(diffSec/86400)}天前</span>`;
+      return '';
     }
 
-    function filterCards() {
-      var q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
-      document.querySelectorAll('.card').forEach(function(c){
-        var kind = c.getAttribute('data-kind');
-        var isV3 = c.getAttribute('data-v3') === '1';
-        var title = (c.getAttribute('data-title') || '').toLowerCase();
-        var tags = (c.getAttribute('data-tags') || '').toLowerCase();
-        var matchTab = (currentTab === 'all') || (currentTab === 'v3new' ? isV3 : (kind === currentTab));
-        var matchQ = (!q || title.indexOf(q) !== -1 || tags.indexOf(q) !== -1);
-        c.style.display = (matchTab && matchQ) ? 'flex' : 'none';
+    const TABS = [
+      { id: 'all', label: '🕒 全部最新', cls: 'tab-recent', filter: () => true },
+      { id: 'metamorphosis', label: '🦋 上市跃迁图谱', cls: 'tab-meta', filter: x => x.kind === 'metamorphosis' },
+      { id: 'v2cockpit', label: '🚀 2.5驾驶舱', cls: '', filter: x => x.kind === 'v2cockpit' },
+      { id: 'leaderboard', label: '👑 排行榜', cls: '', filter: x => x.kind === 'leaderboard' },
+      { id: 'v3new', label: '✨ 最新流程', cls: '', filter: x => x.is_v3 },
+      { id: 'debate', label: '💬 投委会辩论', cls: '', filter: x => x.kind === 'debate' },
+      { id: 'dashboard', label: '📊 可视化图谱', cls: '', filter: x => x.kind === 'dashboard' },
+      { id: 'industry', label: '🌍 产业沙盘', cls: '', filter: x => x.kind === 'industry' },
+      { id: 'chronicle', label: '📜 商业发家史', cls: '', filter: x => x.kind === 'chronicle' },
+      { id: 'stock', label: '🏢 个股研报', cls: '', filter: x => x.kind === 'stock' },
+    ];
+
+    function renderTabs() {
+      document.getElementById('tabBar').innerHTML = TABS.map(t => {
+        const cnt = ITEMS.filter(t.filter).length;
+        return `<button class="tab-btn ${t.cls} ${currentTab===t.id?'active':''}" onclick="setTab('${t.id}')">${t.label} <span class="num" style="opacity:0.8">(${cnt})</span></button>`;
+      }).join('');
+    }
+
+    function renderRecentSpotlight() {
+      const top = ITEMS.slice().sort((a, b) => b.mtime - a.mtime).slice(0, 8);
+      document.getElementById('recentGrid').innerHTML = top.map(x => `
+        <a class="recent-pill" href="./${encodeURIComponent(x.fname)}" target="_blank" rel="noopener noreferrer">
+          <div class="recent-left">
+            <div class="recent-title">${esc(x.title)}</div>
+            <div class="recent-sub">
+              <span class="cat-tag c-${x.kind}" style="padding:1px 5px;font-size:10px">${esc(x.cat_label)}</span>
+              <span class="num">${esc(x.mtime_short)}</span>
+            </div>
+          </div>
+          ${relTimeBadge(x.mtime)}
+        </a>
+      `).join('');
+    }
+
+    function setTab(id) {
+      currentTab = id;
+      renderTabs();
+      renderMain();
+    }
+    function setView(v) {
+      currentView = v;
+      document.getElementById('btn-view-list').classList.toggle('active', v === 'list');
+      document.getElementById('btn-view-grid').classList.toggle('active', v === 'grid');
+      renderMain();
+    }
+    function setSort(s) {
+      currentSort = s;
+      document.getElementById('btn-sort-time').classList.toggle('active', s === 'time');
+      document.getElementById('btn-sort-cat').classList.toggle('active', s === 'cat');
+      renderMain();
+    }
+
+    function badgesHtml(x) {
+      let h = '';
+      if (x.has_pod) h += '<span class="mini-b mb-pod">🎧播客</span>';
+      if (x.is_v3) h += '<span class="mini-b mb-v3">✨新流程</span>';
+      if (x.is_swarm) h += '<span class="mini-b mb-swarm">👑Swarm</span>';
+      return h;
+    }
+
+    function renderMain() {
+      const q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+      const tabObj = TABS.find(t => t.id === currentTab) || TABS[0];
+      document.getElementById('recentBox').style.display = (!q && currentTab === 'all') ? 'block' : 'none';
+
+      let list = ITEMS.filter(x => {
+        if (!tabObj.filter(x)) return false;
+        if (q) {
+          const hay = (x.title + ' ' + x.fname + ' ' + x.tags + ' ' + x.cat_label).toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
       });
+
+      if (currentSort === 'time') {
+        list.sort((a, b) => {
+          if (currentTab === 'metamorphosis' && a.pin_order !== b.pin_order) return a.pin_order - b.pin_order;
+          return b.mtime - a.mtime;
+        });
+      } else {
+        list.sort((a, b) => (a.cat_order - b.cat_order) || (a.pin_order - b.pin_order) || (b.mtime - a.mtime));
+      }
+
+      document.getElementById('resultCount').textContent = `当前显示 ${list.length} 份报告（${currentSort==='time'?'按最新更新时间倒序':'按类别分组排序'}）`;
+      const mount = document.getElementById('reportMount');
+
+      if (!list.length) {
+        mount.innerHTML = '<div style="padding:36px;text-align:center;color:var(--muted)">未找到匹配的报告</div>';
+        return;
+      }
+
+      if (currentView === 'list') {
+        mount.innerHTML = `<div class="report-list">${list.map(x => `
+          <a class="row-item" href="./${encodeURIComponent(x.fname)}" target="_blank" rel="noopener noreferrer">
+            <span class="cat-tag c-${x.kind}">${esc(x.cat_label)}</span>
+            <span class="row-title" title="${esc(x.title)}">${esc(x.title)} ${relTimeBadge(x.mtime)}</span>
+            <span class="row-badges">${badgesHtml(x)}</span>
+            <span class="row-time num">${esc(x.mtime_str)}</span>
+            <span class="row-size num">${x.size_kb} KB</span>
+          </a>
+        `).join('')}</div>`;
+      } else {
+        mount.innerHTML = `<div class="report-grid">${list.map(x => `
+          <a class="gcard" href="./${encodeURIComponent(x.fname)}" target="_blank" rel="noopener noreferrer">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="cat-tag c-${x.kind}">${esc(x.cat_label)}</span>
+              ${relTimeBadge(x.mtime)}
+            </div>
+            <div class="gcard-title">${esc(x.title)}</div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap">${badgesHtml(x)}</div>
+            <div class="gcard-meta num"><span>🕒 ${esc(x.mtime_str)}</span><span>${x.size_kb} KB</span></div>
+          </a>
+        `).join('')}</div>`;
+      }
     }
 
     if ('serviceWorker' in navigator) {
@@ -492,19 +486,23 @@
       st.style.display = 'block';
       btn.disabled = true;
       try {
-        var cache = await caches.open('agy-reports-v4');
+        var cache = await caches.open('agy-reports-v6');
         var done = 0;
-        for (var i = 0; i < reportUrls.length; i++) {
-          st.textContent = '⏳ 正在离线缓存到平板本地 (' + (i+1) + '/' + reportUrls.length + ')：' + decodeURIComponent(reportUrls[i]);
-          try { await cache.add(new Request(reportUrls[i], { cache: 'reload' })); done++; } catch(e) {}
+        for (var i = 0; i < REPORT_URLS.length; i++) {
+          st.textContent = '⏳ 正在离线缓存到平板本地 (' + (i+1) + '/' + REPORT_URLS.length + ')...';
+          try { await cache.add(new Request(REPORT_URLS[i], { cache: 'reload' })); done++; } catch(e) {}
         }
-        st.textContent = '✅ 已成功将全部 ' + done + ' 份报告缓存到您的平板本地！现在去健身房哪怕不开 VPN、甚至断网也能秒开阅读！';
-        btn.textContent = '✅ 已全部离线缓存';
+        st.textContent = '✅ 已成功将全部 ' + done + ' 份报告缓存到本地！断网也能秒开阅读！';
+        btn.textContent = '✅ 已离线缓存';
       } catch(e) {
         st.textContent = '⚠️ 当前浏览器环境使用自动阅读缓存（点开过的报告会自动保存）。';
         btn.disabled = false;
       }
     }
+
+    renderTabs();
+    renderRecentSpotlight();
+    renderMain();
   </script>
 </body>
 </html>
