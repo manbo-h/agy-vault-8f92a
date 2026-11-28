@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧬 跨公司「小市值跃迁模式库」可视化总览</title>
+  <style>
+    :root {
+      --bg: #0b1120; --bg-nav: rgba(17, 26, 46, 0.94); --bg-elev: #111a2e;
+      --card: #162036; --border: #263554; --text: #f1f5f9; --muted: #94a3b8;
+      --accent: #38bdf8; --purple: #a78bfa; --emerald: #34d399; --amber: #fbbf24; --rose: #fb7185; --cyan: #22d3ee;
+      --tint-accent: rgba(56,189,248,0.14); --tint-emerald: rgba(52,211,153,0.13);
+      --tint-purple: rgba(167,139,250,0.14); --tint-rose: rgba(251,113,133,0.12); --tint-cyan: rgba(34,211,238,0.10);
+      --shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+    html.light {
+      --bg: #f4f7fb; --bg-nav: rgba(255,255,255,0.94); --bg-elev: #f8fafc;
+      --card: #ffffff; --border: #cbd5e1; --text: #0f172a; --muted: #475569;
+      --accent: #0284c7; --purple: #7c3aed; --emerald: #059669; --amber: #d97706; --rose: #e11d48; --cyan: #0891b2;
+      --tint-accent: rgba(2,132,199,0.10); --tint-emerald: rgba(5,150,105,0.10);
+      --tint-purple: rgba(124,58,237,0.10); --tint-rose: rgba(225,29,72,0.09); --tint-cyan: rgba(8,145,178,0.08);
+      --shadow: 0 8px 22px rgba(15,23,42,0.07);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 14px; line-height: 1.65; }
+    .num { font-variant-numeric: tabular-nums; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .topbar { position: sticky; top: 0; z-index: 50; background: var(--bg-nav); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 12px 20px; }
+    .topbar-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .topbar h1 { margin: 0; font-size: 18px; font-weight: 800; }
+    .btn { border: 1px solid var(--border); background: var(--card); color: var(--text); padding: 6px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-decoration: none; }
+    .btn:hover, .btn.active { border-color: var(--accent); color: #fff; background: var(--accent); }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 20px 20px 60px; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 18px; }
+    .kpi { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow); }
+    .kpi-k { font-size: 12px; color: var(--muted); }
+    .kpi-v { font-size: 22px; font-weight: 800; margin-top: 4px; }
+    .filter-panel { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 18px; box-shadow: var(--shadow); }
+    .search { width: 100%; background: var(--bg-elev); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 10px; font-size: 13.5px; outline: none; margin-bottom: 12px; }
+    .search:focus { border-color: var(--accent); }
+    .filter-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+    .filter-lbl { font-size: 12px; color: var(--muted); font-weight: 700; margin-right: 4px; }
+    .chip { border: 1px solid var(--border); background: var(--bg-elev); color: var(--muted); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    .chip.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 14px; }
+    .pcard { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px; }
+    .pill { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+    .pill.em { background: var(--tint-emerald); color: var(--emerald); }
+    .pill.pu { background: var(--tint-purple); color: var(--purple); }
+    .pill.ro { background: var(--tint-rose); color: var(--rose); }
+    .pill.ac { background: var(--tint-accent); color: var(--accent); }
+    .box-clue { background: var(--tint-cyan); border-left: 3px solid var(--cyan); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; }
+    .box-rule { background: var(--tint-emerald); border-left: 3px solid var(--emerald); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; }
+    .card-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px dashed var(--border); font-size: 12px; color: var(--muted); }
+    a.link { color: var(--accent); text-decoration: none; font-weight: 700; }
+    a.link:hover { text-decoration: underline; }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <h1>🧬 跨公司「小市值跃迁模式库」可视化总览</h1>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a href="./index.html" class="btn">← 书架</a>
+        <button class="btn" onclick="document.documentElement.classList.toggle('light')">☀️ 浅色 / 🌙 深色</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="kpi-grid" id="hub-kpis"></div>
+    <div class="filter-panel">
+      <input type="text" id="q" class="search" placeholder="🔍 搜索跃迁原型、财报前置指纹、公司名或关键词（如：在建工程、并购、T+3、毛利率、B2B）..." oninput="renderCards()" />
+      <div class="filter-row" id="f-arch"></div>
+      <div class="filter-row" id="f-ll"></div>
+      <div class="filter-row" id="f-comp"></div>
+    </div>
+    <div class="grid" id="cards"></div>
+  </div>
+  <script>
+    const LIB = {"updated_at": "2026-11-28 11:08", "companies_indexed": [{"company": "美的集团", "code": "000333.SZ", "market": "A", "stages_count": 4, "updated_at": "2026-11-28 11:08"}], "patterns": [{"pattern_id": "000333.SZ_S1_经营效率与渠道革命型", "company": "美的集团", "code": "000333.SZ", "stage_name": "整体上市治理红利 + T+3 效率爆发（利润率翻倍首跃）", "period": "2013.09 — 2015.06", "mktcap_leap": "712亿 → 1,607亿 (2.26倍)", "archetype": "经营效率与渠道革命型", "lead_lag_type": "🐢 业绩抢跑型", "early_filing_clues": ["2012 年年报出现极其罕见的「量缩价升」背离：营收暴跌 -23.4%，但毛利率逆势暴涨 +3.44 个百分点（19.12% → 22.56%），净利率逆势回升！这是制造企业脱胎换骨的最硬前置指纹。", "资产注入消除了大量关联交易，归母净利润占全合并净利润的比例大幅跃升——同样的经营利润，流进上市公司股东口袋的份额凭空多出一大块。"], "trigger_mechanism": "2014 中报与三季报彻底打服空头；小米科技 12.66 亿元战略入股美的集团", "small_cap_playbook": "在小市值制造/消费股中，若发现公司「主动砍低效营收、存货下降，但毛利率逆势大涨 +2~3pct」，往往意味着内部改革已见血见效；这类盈利质量跃升市场通常慢半拍，前 2—3 季业绩暴增而估值被压缩时，恰是胜率极高的黄金窗口。"}, {"pattern_id": "000333.SZ_S1_治理整合与整体上市型", "company": "美的集团", "code": "000333.SZ", "stage_name": "整体上市治理红利 + T+3 效率爆发（利润率翻倍首跃）", "period": "2013.09 — 2015.06", "mktcap_leap": "712亿 → 1,607亿 (2.26倍)", "archetype": "治理整合与整体上市型", "lead_lag_type": "🐢 业绩抢跑型", "early_filing_clues": ["2012 年年报出现极其罕见的「量缩价升」背离：营收暴跌 -23.4%，但毛利率逆势暴涨 +3.44 个百分点（19.12% → 22.56%），净利率逆势回升！这是制造企业脱胎换骨的最硬前置指纹。", "资产注入消除了大量关联交易，归母净利润占全合并净利润的比例大幅跃升——同样的经营利润，流进上市公司股东口袋的份额凭空多出一大块。"], "trigger_mechanism": "2014 中报与三季报彻底打服空头；小米科技 12.66 亿元战略入股美的集团", "small_cap_playbook": "重点紧盯集团优质体外资产注入、消除同业竞争或核心管理层高比例绑定股权激励的节点——治理理顺带来的「净利率上台阶」往往比单纯靠行业风口涨价更持久。"}, {"pattern_id": "000333.SZ_S2_逆周期并购与全球出海型", "company": "美的集团", "code": "000333.SZ", "stage_name": "逆周期全球扫货（东芝+库卡）× 外资估值重构（千亿→四千亿戴维斯双击）", "period": "2015.09 — 2018.01", "mktcap_leap": "1,071亿 → 4,060亿 (3.79倍)", "archetype": "逆周期并购与全球出海型", "lead_lag_type": "⚡ 双击共振型", "early_filing_clues": ["在行业最差时账面现金充沛、毛利率不降反升（2016 年升至 27.31%），证明公司具备了「趁行业低谷逆周期收割全球资产」的现金子弹与抗压底座。", "资产负债表「商誉」发出核弹级跃升信号：从 2015 年末 23.9 亿 → 2016 年末 57.3 亿（东芝并表）→ 2017Q1 瞬间跳涨至 273.2 亿（库卡并表），同期研发费用开始单列披露并直冲 72.7 亿。"], "trigger_mechanism": "2016Q3 营收突然暴增 +34.0%，国内空调去库存彻底反转；深港通开通引爆外资定价权 + 库卡正式交割并表", "small_cap_playbook": "当一家内功扎实、现金充沛的小/中市值龙头，在自身行业低谷期出手并购「海外落难名牌或上游硬核技术资产」时，别被短期的商誉担忧吓跑——只要主业基本面迎来拐点，这类并购会瞬间打开「第二天花板」并触发估值体系切换（从 10 倍传统制造切到 20 倍全球科技）。"}, {"pattern_id": "000333.SZ_S3_大客户绑定与品类扩张型", "company": "美的集团", "code": "000333.SZ", "stage_name": "小天鹅整合 + 疫情全球供应链独占 × 机构抱团冲顶（2,454亿→7,540亿）", "period": "2018.12 — 2021.02", "mktcap_leap": "2,454亿 → 7,540亿 (3.07倍)", "archetype": "大客户绑定与品类扩张型", "lead_lag_type": "🏃 股价抢跑型", "early_filing_clues": ["2019 年营收增速仅 +6.7%，但毛利率逆势冲上历史高点 28.86%，归母净利大增 +19.7% 至 242 亿，研发费用连年加码至 96.4 亿。", "2020 年研发费用首次突破百亿大关（101.2 亿），且首次在年报体系中确立商业及工业解决方案占比（18.5%）。"], "trigger_mechanism": "疫情「供应链替代」超级红利兑现：2020Q3 净利 +32%，Q4 暴增 +80%；公募「核心资产 / 茅指数」流动性狂欢 + B2B 科技叙事加持", "small_cap_playbook": "当突发黑天鹅（如疫情/海外断供）重创行业时，重点观察「谁第一个恢复正增长」——供应链最完整的龙头往往能在危中抢下全球份额。但切记：一旦股价抢跑把传统制造龙头推上历史 95% 分位高 PE，哪怕下季财报再炸裂，也往往是利好出尽的逃顶信号！"}, {"pattern_id": "000333.SZ_S4_第二曲线与B2B平台跃迁型", "company": "美的集团", "code": "000333.SZ", "stage_name": "B2B 破千亿第二曲线 + 港股 A+H 全球化重估（用实打实利润填平泡沫大坑）", "period": "2022.10 — 2026.11", "mktcap_leap": "2,851亿 → 7,095亿 (2.49倍，周峰7,235亿)", "archetype": "第二曲线与B2B平台跃迁型", "lead_lag_type": "🐢 业绩抢跑型", "early_filing_clues": ["财报前置雷达极度耀眼：在建工程从 2020 年末 14.8 亿 → 2021 年 26.9 亿 → 2022 年 38.4 亿 → 2023Q3 峰值 60.2 亿（翻 4 倍！）；研发费用从 101 亿一路拉升至 2025 年 177.9 亿。", "2023 年商誉从 285 亿增至 309 亿；更重要的是，B2B 收入占比静悄悄从 2020 年 18.5% 爬升至 2023 年近 25%，不再是 PPT 概念。", "2023Q1—2024Q2 连续 6 个季度归母净利稳健双位数增长（+12% 至 +18%），毛利率从 2021 年低谷 22.5% 一路修复至 26.4%。"], "trigger_mechanism": "港股主板成功上市（00300.HK）+ 国内「以旧换新」国补落地；欧洲连续交割 Arbonia Climate（7.6 亿欧元）与百年厨卫 Teka + 2025Q1 净利暴增 +38%", "small_cap_playbook": "寻找「主业被宏观偏见杀成白菜价，但在建工程+研发却逆势暴涨 2—4 倍、且新业务占比悄悄跨过 15%—25% 临界点」的小/中市值公司——只要老主业现金流不死，一旦新曲线跨过盈亏/规模拐点，就是极其暴力的双击机会。"}, {"pattern_id": "000333.SZ_S4_高息分红与港股/全球定价重估型", "company": "美的集团", "code": "000333.SZ", "stage_name": "B2B 破千亿第二曲线 + 港股 A+H 全球化重估（用实打实利润填平泡沫大坑）", "period": "2022.10 — 2026.11", "mktcap_leap": "2,851亿 → 7,095亿 (2.49倍，周峰7,235亿)", "archetype": "高息分红与港股/全球定价重估型", "lead_lag_type": "🐢 业绩抢跑型", "early_filing_clues": ["财报前置雷达极度耀眼：在建工程从 2020 年末 14.8 亿 → 2021 年 26.9 亿 → 2022 年 38.4 亿 → 2023Q3 峰值 60.2 亿（翻 4 倍！）；研发费用从 101 亿一路拉升至 2025 年 177.9 亿。", "2023 年商誉从 285 亿增至 309 亿；更重要的是，B2B 收入占比静悄悄从 2020 年 18.5% 爬升至 2023 年近 25%，不再是 PPT 概念。", "2023Q1—2024Q2 连续 6 个季度归母净利稳健双位数增长（+12% 至 +18%），毛利率从 2021 年低谷 22.5% 一路修复至 26.4%。"], "trigger_mechanism": "港股主板成功上市（00300.HK）+ 国内「以旧换新」国补落地；欧洲连续交割 Arbonia Climate（7.6 亿欧元）与百年厨卫 Teka + 2025Q1 净利暴增 +38%", "small_cap_playbook": "业绩抢跑 3—6 个季度但市场死活不给涨时，只要公司高分红+高 ROE 护体，千万别在黎明前被磨下车——时间站在你这边，静待催化点燃重估。"}]};
+    let curArch = 'ALL', curLL = 'ALL', curComp = 'ALL';
+    function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    const pats = LIB.patterns || [];
+    const comps = LIB.companies_indexed || [];
+    const cntPerf = pats.filter(p => (p.lead_lag_type||'').includes('业绩')).length;
+    const cntPrice = pats.filter(p => (p.lead_lag_type||'').includes('股价')).length;
+    const cntBoth = pats.filter(p => (p.lead_lag_type||'').includes('双击')).length;
+
+    document.getElementById('hub-kpis').innerHTML = `
+      <div class="kpi"><div class="kpi-k">已解剖巨头样板</div><div class="kpi-v num" style="color:var(--accent)">${comps.length} 家</div></div>
+      <div class="kpi"><div class="kpi-k">沉淀可复用跃迁原型</div><div class="kpi-v num" style="color:var(--purple)">${pats.length} 条</div></div>
+      <div class="kpi"><div class="kpi-k">🐢 业绩抢跑型（可等右侧）</div><div class="kpi-v num" style="color:var(--emerald)">${cntPerf} 条</div></div>
+      <div class="kpi"><div class="kpi-k">⚡ 双击 / 🏃 股价抢跑型</div><div class="kpi-v num" style="color:var(--rose)">${cntBoth + cntPrice} 条</div></div>
+    `;
+
+    const uniq = arr => Array.from(new Set(arr.filter(Boolean)));
+    const archs = uniq(pats.map(p => p.archetype));
+    const lls = uniq(pats.map(p => p.lead_lag_type));
+    const cnames = uniq(pats.map(p => p.company));
+
+    function renderFilters() {
+      document.getElementById('f-arch').innerHTML = `<span class="filter-lbl">跃迁原型：</span>` +
+        `<button class="chip ${curArch==='ALL'?'active':''}" onclick="curArch='ALL';renderFilters();renderCards()">全部</button>` +
+        archs.map(a => `<button class="chip ${curArch===a?'active':''}" onclick="curArch='${esc(a)}';renderFilters();renderCards()">${esc(a)}</button>`).join('');
+      document.getElementById('f-ll').innerHTML = `<span class="filter-lbl">业绩/股价节奏：</span>` +
+        `<button class="chip ${curLL==='ALL'?'active':''}" onclick="curLL='ALL';renderFilters();renderCards()">全部</button>` +
+        lls.map(x => `<button class="chip ${curLL===x?'active':''}" onclick="curLL='${esc(x)}';renderFilters();renderCards()">${esc(x)}</button>`).join('');
+      document.getElementById('f-comp').innerHTML = `<span class="filter-lbl">来源巨头：</span>` +
+        `<button class="chip ${curComp==='ALL'?'active':''}" onclick="curComp='ALL';renderFilters();renderCards()">全部</button>` +
+        cnames.map(c => `<button class="chip ${curComp===c?'active':''}" onclick="curComp='${esc(c)}';renderFilters();renderCards()">${esc(c)}</button>`).join('');
+    }
+
+    function renderCards() {
+      const q = (document.getElementById('q').value || '').trim().toLowerCase();
+      const filtered = pats.filter(p => {
+        if (curArch !== 'ALL' && p.archetype !== curArch) return false;
+        if (curLL !== 'ALL' && p.lead_lag_type !== curLL) return false;
+        if (curComp !== 'ALL' && p.company !== curComp) return false;
+        if (q) {
+          const hay = JSON.stringify(p).toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+      document.getElementById('cards').innerHTML = filtered.length ? filtered.map(p => {
+        const llCls = (p.lead_lag_type||'').includes('业绩') ? 'em' : ((p.lead_lag_type||'').includes('股价') ? 'ro' : 'pu');
+        const clues = (p.early_filing_clues || []).map(c => `<div>• ${esc(c)}</div>`).join('');
+        return `
+          <div class="pcard">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+              <span class="pill em">🧬 ${esc(p.archetype)}</span>
+              <span class="pill ${llCls}">${esc(p.lead_lag_type || '')}</span>
+            </div>
+            <div>
+              <div style="font-size:15.5px;font-weight:800">${esc(p.company)} · ${esc(p.stage_name)}</div>
+              <div class="num" style="font-size:12px;color:var(--purple);margin-top:2px">${esc(p.period)} ｜ 市值跃迁：${esc(p.mktcap_leap)}</div>
+            </div>
+            ${clues ? `<div class="box-clue"><strong>🔎 提前 1–2 年财报/公告指纹：</strong>${clues}</div>` : ''}
+            <div style="font-size:12.5px;color:var(--muted)"><strong>⚡ 引爆机制：</strong>${esc(p.trigger_mechanism)}</div>
+            <div class="box-rule"><strong>🧭 小市值实战复用口诀：</strong>${esc(p.small_cap_playbook)}</div>
+            <div class="card-foot">
+              <span class="num">${esc(p.code)}</span>
+              <a class="link" href="./${encodeURIComponent(p.company + '_上市跃迁图谱.html')}">查看该巨头完整跃迁图谱 →</a>
+            </div>
+          </div>
+        `;
+      }).join('') : '<div style="color:var(--muted);padding:24px">未匹配到符合条件的跃迁模式</div>';
+    }
+    renderFilters();
+    renderCards();
+  </script>
+</body>
+</html>
